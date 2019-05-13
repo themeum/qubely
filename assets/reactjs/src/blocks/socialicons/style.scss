@@ -1,0 +1,766 @@
+.qubely-block-social-icons {
+
+	.qubely-action-social-icon-apply,
+	.qubely-action-social-icon-remove {
+		width: 100%;
+		justify-content: center;
+		margin-top: 10px;
+	}
+	.qubely-action-social-icon-remove {
+		color: #c92c2c;
+		&:hover {
+			color: #a72525;
+		}
+	}
+
+	ul.qubely-ul {
+		list-style: none;
+		padding: 0;
+		font-size: 0;
+		li.qubely-li {
+			display: inline-block;
+			font-size: initial;
+			position: relative;
+			a {
+				text-align: center;
+				display: flex;
+				align-items: center;
+				color: inherit;
+				text-decoration: none !important;
+				font-style: normal;
+				transition: color 300ms, background-color 300ms, border-color 300ms, border-radius 300ms;
+				&:hover,
+				&:active,
+				&:focus {
+					box-shadow: none;
+					outline: 0;
+					text-decoration: none;
+					font-style: normal;
+				}
+			}
+		}
+	}
+
+	.qubely-social-icon-insert {
+		margin-left: 10px;
+		color: #0085ba;
+		padding: 10px;
+		font-size: 14px;
+		border-radius: 4px;
+		background: #f8f8f8;
+		border: 1px solid #efefef;
+		cursor: pointer;
+	}
+
+	&.qubely-style-default {
+		// Fill Style
+		&.qubely-layout-fill {
+			ul {
+				li {
+					position: relative;
+					a {
+						background: #333;
+						color: #fff;
+						&:hover,
+						&:active,
+						&:focus {
+							color: #fff;
+						}
+					}
+	
+					&.qubely-social-facebook {
+						a {
+							background: #3b5998;
+							&:hover {
+								background: #2f477c;
+							}
+						}
+					}
+					&.qubely-social-twitter {
+						a {
+							background: #1da1f2;
+							&:hover {
+								background: #1a93df;
+							}
+						}
+					}
+					&.qubely-social-youtube {
+						a {
+							background: #ff0000;
+							&:hover {
+								background: #e40000;
+							}
+						}
+					}
+					&.qubely-social-vimeo {
+						a {
+							background: #1ab7ea;
+							&:hover {
+								background: #17a4d3;
+							}
+						}
+					}
+					&.qubely-social-dribbble {
+						a {
+							background: #ea4c89;
+							&:hover {
+								background: #d3437a;
+							}
+						}
+					}
+					&.qubely-social-behance {
+						a {
+							background: #1769ff;
+							&:hover {
+								background: #135add;
+							}
+						}
+					}
+					&.qubely-social-github {
+						a {
+							background: #333;
+							&:hover {
+								background: rgb(24, 24, 24);
+							}
+						}
+					}
+					&.qubely-social-amazon {
+						a {
+							background: #ff9900;
+							&:hover {
+								background: #e68a00;
+							}
+						}
+					}
+					&.qubely-social-codepen {
+						a {
+							background: #0ebeff;
+							&:hover {
+								background: #0ba6df;
+							}
+						}
+					}
+					&.qubely-social-flickr {
+						a {
+							background: #ff0084;
+							&:hover {
+								background: #e60077;
+							}
+						}
+					}
+					&.qubely-social-foursquare {
+						a {
+							background: #2d5be3;
+							&:hover {
+								background: #264ec7;
+							}
+						}
+					}
+					&.qubely-social-gitlab {
+						a {
+							background: #fc6d26;
+							&:hover {
+								background: #dd6021;
+							}
+						}
+					}
+					&.qubely-social-linux {
+						a {
+							background: #0b57a4;
+							&:hover {
+								background: #094886;
+							}
+						}
+					}
+					&.qubely-social-whatsapp {
+						a {
+							background: #075e54;
+							&:hover {
+								background: #053d37;
+							}
+						}
+					}
+					&.qubely-social-tumblr {
+						a {
+							background: #35465c;
+							&:hover {
+								background: #253141;
+							}
+						}
+					}
+					&.qubely-social-trello {
+						a {
+							background: #0079bf;
+							&:hover {
+								background: #00639c;
+							}
+						}
+					}
+					&.qubely-social-soundcloud {
+						a {
+							background: #ff3300;
+							&:hover {
+								background: #df2d00;
+							}
+						}
+					}
+					&.qubely-social-spotify {
+						a {
+							background: #1db954;
+							&:hover {
+								background: #1ba34a;
+							}
+						}
+					}
+					&.qubely-social-skype {
+						a {
+							background: #00aff0;
+							&:hover {
+								background: #009fd8;
+							}
+						}
+					}
+					&.qubely-social-slack {
+						a {
+							background: #e01563;
+							&:hover {
+								background: #c01154;
+							}
+						}
+					}
+					&.qubely-social-reddit {
+						a {
+							background: #5f99cf;
+							&:hover {
+								background: #4f7fac;
+							}
+						}
+					}
+					&.qubely-social-tripadvisor {
+						a {
+							background: #00af87;
+							&:hover {
+								background: #018f6e;
+							}
+						}
+					}
+					&.qubely-social-pinterest {
+						a {
+							background: #bd081c;
+							&:hover {
+								background: #9c0718;
+							}
+						}
+					}
+					&.qubely-social-product-hunt {
+						a {
+							background: #da552f;
+							&:hover {
+								background: #b34426;
+							}
+						}
+					}
+					&.qubely-social-medium {
+						a {
+							background: #00ab6c;
+							&:hover {
+								background: #018a57;
+							}
+						}
+					}
+					&.qubely-social-instagram {
+						a {
+							background: #e1306c;
+							&:hover {
+								background: #c0275a;
+							}
+						}
+					}
+					&.qubely-social-linkedin {
+						a {
+							background: #0077b5;
+							&:hover {
+								background: #005f92;
+							}
+						}
+					}
+					&.qubely-social-digg {
+						a {
+							background: #005be2;
+							&:hover {
+								background: #004dc0;
+							}
+						}
+					}
+					&.qubely-social-dropbox {
+						a {
+							background: #007ee5;
+							&:hover {
+								background: #016fc9;
+							}
+						}
+					}
+					&.qubely-social-slideshare {
+						a {
+							background: #0077b5;
+							&:hover {
+								background: #006196;
+							}
+						}
+					}
+					&.qubely-social-stack-overflow {
+						a {
+							background: #f48024;
+							&:hover {
+								background: #d67220;
+							}
+						}
+					}
+					&.qubely-social-stumbleupon {
+						a {
+							background: #eb4924;
+							&:hover {
+								background: #c93e1e;
+							}
+						}
+					}
+					&.qubely-social-wordpress {
+						a {
+							background: #21759b;
+							&:hover {
+								background: #1b5e7e;
+							}
+						}
+					}
+					&.qubely-social-xing {
+						a {
+							background: #026466;
+							&:hover {
+								background: #014849;
+							}
+						}
+					}
+					&.qubely-social-yahoo {
+						a {
+							background: #410093;
+							&:hover {
+								background: #32016e;
+							}
+						}
+					}
+					&.qubely-social-bitbucket {
+						a {
+							background: #205081;
+							&:hover {
+								background: #17395c;
+							}
+						}
+					}
+					&.qubely-social-jsfiddle {
+						a {
+							background: #0084ff;
+							&:hover {
+								background: #0173dd;
+							}
+						}
+					}
+					&.qubely-social-imdb {
+						a {
+							background: #EAB700;
+							color: #333;
+							&:hover {
+								background: rgb(194, 152, 1);
+							}
+						}
+					}
+					&.qubely-social-snapchat {
+						a {
+							background: #fffc00;
+							color: #333;
+							&:hover {
+								background: #dbd801;
+							}
+						}
+					}
+					&.qubely-social-telegram {
+						a {
+							background: #0088cc;
+							&:hover {
+								background: #0074ad;
+							}
+						}
+					}
+					&.qubely-social-twitch {
+						a {
+							background: #6441a5;
+							&:hover {
+								background: #513486;
+							}
+						}
+					}
+					&.qubely-social-joomla {
+						a {
+							background: #f9a541;
+							&:hover {
+								background: #d38c36;
+							}
+						}
+					}
+				}
+			}
+		}
+
+		&.qubely-layout-normal {
+			ul {
+				li {
+					position: relative;
+					a {
+						color: #333;
+						&:hover,
+						&:active,
+						&:focus {
+							color: #333;
+						}
+					}
+	
+					&.qubely-social-facebook {
+						a {
+							color: #3b5998;
+							&:hover {
+								color: #2f477c;
+							}
+						}
+					}
+					&.qubely-social-twitter {
+						a {
+							color: #1da1f2;
+							&:hover {
+								color: #1a93df;
+							}
+						}
+					}
+					&.qubely-social-youtube {
+						a {
+							color: #ff0000;
+							&:hover {
+								color: #e40000;
+							}
+						}
+					}
+					&.qubely-social-vimeo {
+						a {
+							color: #1ab7ea;
+							&:hover {
+								color: #17a4d3;
+							}
+						}
+					}
+					&.qubely-social-dribbble {
+						a {
+							color: #ea4c89;
+							&:hover {
+								color: #d3437a;
+							}
+						}
+					}
+					&.qubely-social-behance {
+						a {
+							color: #1769ff;
+							&:hover {
+								color: #135add;
+							}
+						}
+					}
+					&.qubely-social-github {
+						a {
+							color: #333;
+							&:hover {
+								color: rgb(24, 24, 24);
+							}
+						}
+					}
+					&.qubely-social-amazon {
+						a {
+							color: #ff9900;
+							&:hover {
+								color: #e68a00;
+							}
+						}
+					}
+					&.qubely-social-codepen {
+						a {
+							color: #0ebeff;
+							&:hover {
+								color: #0ba6df;
+							}
+						}
+					}
+					&.qubely-social-flickr {
+						a {
+							color: #ff0084;
+							&:hover {
+								color: #e60077;
+							}
+						}
+					}
+					&.qubely-social-foursquare {
+						a {
+							color: #2d5be3;
+							&:hover {
+								color: #264ec7;
+							}
+						}
+					}
+					&.qubely-social-gitlab {
+						a {
+							color: #fc6d26;
+							&:hover {
+								color: #dd6021;
+							}
+						}
+					}
+					&.qubely-social-linux {
+						a {
+							color: #0b57a4;
+							&:hover {
+								color: #094886;
+							}
+						}
+					}
+					&.qubely-social-whatsapp {
+						a {
+							color: #075e54;
+							&:hover {
+								color: #053d37;
+							}
+						}
+					}
+					&.qubely-social-tumblr {
+						a {
+							color: #35465c;
+							&:hover {
+								color: #253141;
+							}
+						}
+					}
+					&.qubely-social-trello {
+						a {
+							color: #0079bf;
+							&:hover {
+								color: #00639c;
+							}
+						}
+					}
+					&.qubely-social-soundcloud {
+						a {
+							color: #ff3300;
+							&:hover {
+								color: #df2d00;
+							}
+						}
+					}
+					&.qubely-social-spotify {
+						a {
+							color: #1db954;
+							&:hover {
+								color: #1ba34a;
+							}
+						}
+					}
+					&.qubely-social-skype {
+						a {
+							color: #00aff0;
+							&:hover {
+								color: #009fd8;
+							}
+						}
+					}
+					&.qubely-social-slack {
+						a {
+							color: #e01563;
+							&:hover {
+								color: #c01154;
+							}
+						}
+					}
+					&.qubely-social-reddit {
+						a {
+							color: #5f99cf;
+							&:hover {
+								color: #4f7fac;
+							}
+						}
+					}
+					&.qubely-social-tripadvisor {
+						a {
+							color: #00af87;
+							&:hover {
+								color: #018f6e;
+							}
+						}
+					}
+					&.qubely-social-pinterest {
+						a {
+							color: #bd081c;
+							&:hover {
+								color: #9c0718;
+							}
+						}
+					}
+					&.qubely-social-product-hunt {
+						a {
+							color: #da552f;
+							&:hover {
+								color: #b34426;
+							}
+						}
+					}
+					&.qubely-social-medium {
+						a {
+							color: #00ab6c;
+							&:hover {
+								color: #018a57;
+							}
+						}
+					}
+					&.qubely-social-instagram {
+						a {
+							color: #e1306c;
+							&:hover {
+								color: #c0275a;
+							}
+						}
+					}
+					&.qubely-social-linkedin {
+						a {
+							color: #0077b5;
+							&:hover {
+								color: #005f92;
+							}
+						}
+					}
+					&.qubely-social-digg {
+						a {
+							color: #005be2;
+							&:hover {
+								color: #004dc0;
+							}
+						}
+					}
+					&.qubely-social-dropbox {
+						a {
+							color: #007ee5;
+							&:hover {
+								color: #016fc9;
+							}
+						}
+					}
+					&.qubely-social-slideshare {
+						a {
+							color: #0077b5;
+							&:hover {
+								color: #006196;
+							}
+						}
+					}
+					&.qubely-social-stack-overflow {
+						a {
+							color: #f48024;
+							&:hover {
+								color: #d67220;
+							}
+						}
+					}
+					&.qubely-social-stumbleupon {
+						a {
+							color: #eb4924;
+							&:hover {
+								color: #c93e1e;
+							}
+						}
+					}
+					&.qubely-social-wordpress {
+						a {
+							color: #21759b;
+							&:hover {
+								color: #1b5e7e;
+							}
+						}
+					}
+					&.qubely-social-xing {
+						a {
+							color: #026466;
+							&:hover {
+								color: #014849;
+							}
+						}
+					}
+					&.qubely-social-yahoo {
+						a {
+							color: #410093;
+							&:hover {
+								color: #32016e;
+							}
+						}
+					}
+					&.qubely-social-bitbucket {
+						a {
+							color: #205081;
+							&:hover {
+								color: #17395c;
+							}
+						}
+					}
+					&.qubely-social-jsfiddle {
+						a {
+							color: #0084ff;
+							&:hover {
+								color: #0173dd;
+							}
+						}
+					}
+					&.qubely-social-imdb {
+						a {
+							color: #EAB700;
+							&:hover {
+								color: rgb(202, 159, 3);
+							}
+						}
+					}
+					&.qubely-social-snapchat {
+						a {
+							color: #FEFC00;
+							&:hover {
+								color: rgb(211, 211, 1);
+							}
+						}
+					}
+					&.qubely-social-telegram {
+						a {
+							color: #0088cc;
+							&:hover {
+								color: #0074ad;
+							}
+						}
+					}
+					&.qubely-social-twitch {
+						a {
+							color: #6441a5;
+							&:hover {
+								color: #513486;
+							}
+						}
+					}
+					&.qubely-social-joomla {
+						a {
+							color: #f9a541;
+							&:hover {
+								color: #d38c36;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

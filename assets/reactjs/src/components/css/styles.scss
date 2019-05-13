@@ -1,0 +1,75 @@
+.qubely-field-styles {
+    .qubely-field-style-list{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        >div {
+            text-align: center;
+            margin: 4px 0;
+            flex-shrink: 0;
+            cursor: pointer;
+            overflow: hidden;
+            padding: 0;
+            margin-bottom: 10px;
+            .qubely-layout-style {
+                display: block;
+                border: 1px solid #DFE1E3;
+                border-radius: 4px;
+                transition: border-color 400ms;
+                img {
+                    display: block;
+                    width: 100%;
+                    border-radius: 4px;
+                }
+            }
+
+            .qubely-field-style-icon,
+            .qubely-field-style-svg,
+            .qubely-field-style-label {
+                display: block;
+                text-align: center;
+            }
+
+            .qubely-field-style-label {
+                margin-top: 5px;
+                transition: color 400ms;
+            }
+
+            &:hover {
+                .qubely-layout-style {
+                    border-color: #666;
+                }
+            }
+            
+            &.qubely-active {
+                .qubely-layout-style {
+                    border-color: #2184F9;
+                }
+                .qubely-field-style-label {
+                    color: #2184F9;
+                }
+            }
+        }
+
+        &.qubely-field-style-columns-2 {
+            >div {
+                width: calc(50% - 4px);
+            }
+        }
+
+        &.qubely-field-style-columns-21 {
+            >div {
+                width: calc(50% - 4px);
+                &:last-child {
+                    width: calc(100% - 4px);
+                }
+            }
+        }
+
+        &.qubely-field-style-columns-3 {
+            >div {
+                width: calc(33.33% - 4px);
+            }
+        }
+    }
+}

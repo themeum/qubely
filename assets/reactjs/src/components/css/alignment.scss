@@ -1,0 +1,10 @@
+.qubely-field-button-list {
+    &.qubely-field-button-list-fluid {
+        display: flex;
+        justify-content: space-between;
+        .qubely-button {
+            width: 100%;
+            justify-content: center;
+        }
+    }
+}

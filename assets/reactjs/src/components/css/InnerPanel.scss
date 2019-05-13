@@ -1,0 +1,26 @@
+.qubely-field {
+    &.qubely-field-inner-panel {
+        border: 1px solid #e2e4e7;
+        margin: -1px 0 0 0;
+        .qubely-field-inner-panel-title {
+            background: #f8f9f9;
+            padding: 12px 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            -webkit-user-select: none; 
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none; 
+            cursor: pointer;
+            &:hover {
+                background: #f0f1f1;
+            }
+        }
+    
+        .qubely-field-inner-panel-body {
+            border-top: 1px solid #e2e4e7;
+            padding: 10px 16px;
+        }
+    }
+}

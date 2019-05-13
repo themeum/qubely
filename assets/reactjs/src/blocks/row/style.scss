@@ -1,0 +1,98 @@
+.qubely-section {
+    position: relative;
+    &.alignfull {
+        margin: 0 !important;
+    }
+    .qubely-container{
+        position: relative;
+        @media only screen and (max-width: 991px) {
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+    }
+    .qubely-row {
+        display: flex;
+        flex-wrap: wrap;
+        position: relative;
+        &.qubely-row-height-window {
+            min-height: 100vh;
+        }
+
+        .editor-inner-blocks {
+            width: 100%;
+        }
+    }
+
+    // Overlay
+    .qubely-row-overlay {
+        top: 0;
+        bottom: 0;
+        position: absolute;
+        left: 0;
+        right: 0;
+    }
+
+    // Video Background
+    .qubely-video-bg-wrap {
+        position: absolute;
+        top: 0px;
+        bottom: 0px;
+        right: 0px;
+        left: 0px;
+        overflow: hidden;
+        iframe{
+            height: 1300px;
+            position: absolute;
+            left: 50%;
+            width: 200%;
+            transform: translateX(-50%) translateY(-50%);
+            top: 50%;
+    
+        }
+        .qubely-video-bg {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            -webkit-transform: translateX(-50%) translateY(-50%);
+            transform: translateX(-50%) translateY(-50%);
+            background-size: cover;
+            -webkit-transition: 1s opacity;
+            transition: 1s opacity;
+        }
+    }
+
+    // Shape Divider
+    .qubely-shape-divider {
+        overflow: hidden;
+        position: absolute;
+        left: 0px;
+        right: 0px;
+        line-height: 0;
+        > svg{
+            display: block;
+            width: 100%;
+            position: relative;
+            left: 50%;
+            -webkit-transform: translateX(-50%) scale(1.01);
+            -ms-transform: translateX(-50%) scale(1.01);
+            transform: translateX(-50%) scale(1.01);
+        }
+
+        &.qubely-bottom-shape {
+            bottom: 0px;
+            top: auto;
+            > svg {
+                transform: rotateX(180deg) translateX(-50%);
+            }
+        }
+
+        &.qubely-top-shape {
+            top: 0px;
+            bottom: auto;
+        }
+    }
+}

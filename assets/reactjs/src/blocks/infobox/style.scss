@@ -1,0 +1,92 @@
+.qubely-block-info-box {
+    transition: border-color 400ms, background-color 400ms, box-shadow 400ms;
+    h1, h2, h3, h4, h5, h6 {
+        padding: 0;
+        margin: 0;
+        line-height: 1;
+        position: relative;
+        &::before,
+        &::after {
+            display: none !important;
+        }
+
+        .qubely-text-has-bgcolor {
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+    }
+
+    .qubely-info-box-media {
+        display: inline-block;
+        line-height: 1;
+        text-align: center;
+        i,
+        span,
+        img {
+            position: relative;
+            display: block;
+            transition: 400ms;
+        }
+        i {
+            width: 1em;
+            height: 1em;
+            &:before {
+                position: absolute;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+        }
+    }
+
+    .qubely-info-box-title {
+        margin: 0;
+    }
+
+    .qubely-info-box-media,
+    .qubely-info-box-title,
+    .qubely-info-box-text {
+        transition: color 400ms, border-color 400ms, background-color 400ms, box-shadow 400ms;
+    }
+    
+    &.qubely-info-box-layout-2,
+    &.qubely-info-box-layout-3 {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-align: start;
+        align-items: flex-start;
+
+        .qubely-info-box-body {
+            -ms-flex: 1;
+            flex: 1;
+        }
+    }
+
+    &.qubely-info-box-layout-3 {
+        flex-direction: row-reverse;
+        .qubely-info-box-body {
+            text-align: right;
+        }
+    }
+
+    .qubely-separator {
+        font-size: 0;
+        .qubely-separator-type-css,
+        .qubely-separator-type-svg {
+            display: inline-block;
+        }
+    }
+
+    .qubely-separator-position-left,
+    .qubely-separator-position-right,
+    .qubely-separator-position-leftright {
+        .qubely-info-box-title-inner {
+            display: inline-flex;
+            align-items: center;
+
+            .qubely-info-box-title,
+            .qubely-separator {
+                display: inline-flex;
+            }
+        }
+    }
+}

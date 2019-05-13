@@ -1,0 +1,12 @@
+.qubely-block-button-group{
+    display: flex;
+    .editor-inner-blocks .editor-block-list__layout{
+        display: flex;
+    }
+    .qubely-add-new{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: fit-content;
+    }
+}

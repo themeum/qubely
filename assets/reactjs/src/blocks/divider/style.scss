@@ -1,0 +1,23 @@
+.qubely-block-divider {
+  .qubely-block-divider-style-fill {
+    border-top-style: solid;
+  }
+  .qubely-block-divider-style-dot {
+    border-top-style: dotted;
+  }
+  .qubely-block-divider-style-dash {
+    border-top-style: dashed;
+  }
+  > div {
+    margin: 0 auto;
+    display: inline-block;
+  }
+}
+.qubely-divider-picker-options{
+  max-height: 300px
+}
+
+.qubely-divider-picker-option:hover{
+  background: #e8eaeb;;
+  border-radius: 5px;
+}

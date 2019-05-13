@@ -1,0 +1,52 @@
+.qubely-toolber-field{
+    button:focus{
+        outline: none;
+    }
+}
+.qubely-selector-popup-toolbar{
+    & .components-popover__content{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 150px !important;
+        padding-bottom: 8px;
+        padding-top: 8px;
+        border-radius: 5px;
+    }
+}
+.qubely-selector-toolber-popup{
+    width: 100%;
+}
+.qubely-field-selector{
+    .qubely-field-child{
+        display: flex;
+        flex-wrap: wrap;
+        flex-basis: auto;
+        .qubely-selector-button-group{
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            padding-left: 2%;
+            padding-right: 2%;
+            .qubely-button{
+                display: flex;
+                padding: 5px 0px 5px 0px;
+                margin: 0px 0px 2px 0px;
+                justify-content: space-evenly;
+                background: transparent;
+                border: none;
+            }
+            .qubely-button.active{
+                background: #007eb1;
+                border-color: #00435d;
+                border-radius: 3px;
+                color: #fff;
+                box-shadow: inset 0 -1px 0 #00435d;
+                border: none;
+            }
+            .qubely-button:focus{
+                outline:none
+            }
+        }
+    }
+}
