@@ -15,10 +15,11 @@ class Edit extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
+			device: 'md',
 			initialRender: true,
 			activeTab: 1,
 			spacer: true,
-			showIconPicker:false,
+			showIconPicker: false,
 		}
 	}
 
@@ -57,14 +58,14 @@ class Edit extends Component {
 	renderTabTitles = () => {
 		const { attributes: { tabTitles, iconPosition }, block, clientId } = this.props
 		let currentTabBlock = $(`#block-${clientId}`)
-		const {activeTab,showIconPicker}=this.state
+		const { activeTab, showIconPicker } = this.state
 		return tabTitles.map((title, index) =>
 			<span className={`qubely-tab-item ${(this.state.activeTab == index + 1) ? 'qubely-active' : ''}`}>
 				<span class={`qubely-tab-title ${title.iconName ? 'qubely-has-icon-' + iconPosition : ''}`} onClick={() => {
 					let activeTab = $(`#block-${block.innerBlocks[index].clientId}`, currentTabBlock)
 					$('.qubely-tab-content.qubely-active', currentTabBlock).removeClass('qubely-active')
 					activeTab.addClass("qubely-active")
-					this.setState({ activeTab: index + 1, initialRender: false ,showIconPicker:!showIconPicker})
+					this.setState({ activeTab: index + 1, initialRender: false, showIconPicker: !showIconPicker })
 				}}
 					role="button"
 				>
@@ -83,7 +84,7 @@ class Edit extends Component {
 						<i class="fas fa-times" />
 					</span>
 				</Tooltip>
-				{( activeTab == index + 1 && showIconPicker) &&
+				{(activeTab == index + 1 && showIconPicker) &&
 					<Wrapper inline>
 						<IconList
 							label={__('Icon')}
@@ -146,7 +147,7 @@ class Edit extends Component {
 
 		} = this.props.attributes
 		const { setAttributes } = this.props
-		const { activeTab } = this.state
+		const { activeTab, device } = this.state
 		if (uniqueId) { CssGenerator(this.props.attributes, 'tabs', uniqueId); }
 		let iterator = [], index = 0
 		while (index < tabs) {
@@ -181,25 +182,25 @@ class Edit extends Component {
 
 						{navSize == 'custom' &&
 							<Fragment>
-								<Range label={<span className="dashicons dashicons-sort" title="X Spacing" />} value={navPaddingY} onChange={(value) => setAttributes({ navPaddingY: value })} unit={['px', 'em', '%']} max={100} min={0} responsive />
-								<Range label={<span className="dashicons dashicons-leftright" title="Y Spacing" />} value={navPaddingX} onChange={(value) => setAttributes({ navPaddingX: value })} unit={['px', 'em', '%']} max={100} min={0} responsive />
+								<Range label={<span className="dashicons dashicons-sort" title="X Spacing" />} value={navPaddingY} onChange={(value) => setAttributes({ navPaddingY: value })} unit={['px', 'em', '%']} max={100} min={0} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
+								<Range label={<span className="dashicons dashicons-leftright" title="Y Spacing" />} value={navPaddingX} onChange={(value) => setAttributes({ navPaddingX: value })} unit={['px', 'em', '%']} max={100} min={0} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
 							</Fragment>
 						}
 
-						<Range label={__('Gap')} value={navSpacing} onChange={(value) => setAttributes({ navSpacing: value })} max={50} min={0} unit={['px', 'em', '%']} responsive />
+						<Range label={__('Gap')} value={navSpacing} onChange={(value) => setAttributes({ navSpacing: value })} max={50} min={0} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
 
 						{tabStyle == 'tabs' &&
 							<Fragment>
-								<BorderRadius label={__('Radius')} value={navBorderRadiusTabs} onChange={(value) => setAttributes({ navBorderRadiusTabs: value })} min={0} max={100} unit={['px', 'em', '%']} responsive />
+								<BorderRadius label={__('Radius')} value={navBorderRadiusTabs} onChange={(value) => setAttributes({ navBorderRadiusTabs: value })} min={0} max={100} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
 							</Fragment>
 						}
 						{tabStyle == 'pills' &&
 							<Fragment>
-								<BorderRadius label={__('Radius')} value={navBorderRadiusPills} onChange={(value) => setAttributes({ navBorderRadiusPills: value })} min={0} max={100} unit={['px', 'em', '%']} responsive />
+								<BorderRadius label={__('Radius')} value={navBorderRadiusPills} onChange={(value) => setAttributes({ navBorderRadiusPills: value })} min={0} max={100} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
 							</Fragment>
 						}
 						{tabStyle == 'underline' &&
-							<Range label={__('Underline Height')} value={navUnderlineBorderWidth} onChange={(value) => setAttributes({ navUnderlineBorderWidth: value })} min={1} max={10} unit={['px', 'em', '%']} responsive />
+							<Range label={__('Underline Height')} value={navUnderlineBorderWidth} onChange={(value) => setAttributes({ navUnderlineBorderWidth: value })} min={1} max={10} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
 						}
 
 						<Tabs>
@@ -208,7 +209,7 @@ class Edit extends Component {
 								{tabStyle != 'underline' &&
 									<Fragment>
 										<Color label={__('Background')} value={navBg} onChange={(value) => setAttributes({ navBg: value })} />
-										<Border label={__('Border')} value={navBorder} onChange={(value) => setAttributes({ navBorder: value })} min={0} max={100} unit={['px', 'em', '%']} responsive />
+										<Border label={__('Border')} value={navBorder} onChange={(value) => setAttributes({ navBorder: value })} min={0} max={100} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
 									</Fragment>
 								}
 								{tabStyle == 'underline' &&
@@ -222,7 +223,7 @@ class Edit extends Component {
 								{tabStyle != 'underline' &&
 									<Fragment>
 										<Color label={__('Background')} value={navBgActive} onChange={(value) => setAttributes({ navBgActive: value })} />
-										<Border label={__('Border')} value={navBorderActive} onChange={(value) => setAttributes({ navBorderActive: value })} min={0} max={100} unit={['px', 'em', '%']} responsive />
+										<Border label={__('Border')} value={navBorderActive} onChange={(value) => setAttributes({ navBorderActive: value })} min={0} max={100} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
 									</Fragment>
 								}
 
@@ -233,7 +234,7 @@ class Edit extends Component {
 								}
 							</Tab>
 						</Tabs>
-						<Typography label={__('Typography')} value={typography} onChange={(value) => setAttributes({ typography: value })} disableLineHeight />
+						<Typography label={__('Typography')} value={typography} onChange={(value) => setAttributes({ typography: value })} disableLineHeight device={device} onDeviceChange={value => this.setState({ device: value })}/>
 					</PanelBody>
 					<PanelBody title={__('Icon')} initialOpen={false}>
 						<Select
@@ -248,7 +249,9 @@ class Edit extends Component {
 							unit={['px', 'em', '%']}
 							min={5}
 							max={48}
-							responsive />
+							responsive
+							device={device}
+							onDeviceChange={value => this.setState({ device: value })} />
 						<Range
 							label={__('Icon Gap')}
 							value={iconGap}
@@ -256,18 +259,20 @@ class Edit extends Component {
 							unit={['px', 'em', '%']}
 							min={0}
 							max={64}
-							responsive />
+							responsive
+							device={device}
+							onDeviceChange={value => this.setState({ device: value })} />
 					</PanelBody>
 					<PanelBody title={__('Body')} initialOpen={false}>
 						{tabStyle == 'tabs' &&
 							<Fragment>
 								<Color label={__('Background Color')} value={bodyBg} onChange={(value) => setAttributes({ bodyBg: value })} />
-								<Padding label={__('Padding')} value={bodyPadding} onChange={(value) => setAttributes({ bodyPadding: value })} unit={['px', 'em', '%']} max={100} min={0} responsive />
+								<Padding label={__('Padding')} value={bodyPadding} onChange={(value) => setAttributes({ bodyPadding: value })} unit={['px', 'em', '%']} max={100} min={0} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
 							</Fragment>
 						}
 						{tabStyle == 'underline' &&
 							<Fragment>
-								<Range label={__('Separator Height')} value={bodySeparatorHeight} onChange={(value) => setAttributes({ bodySeparatorHeight: value })} min={0} max={5} unit={['px', 'em', '%']} responsive />
+								<Range label={__('Separator Height')} value={bodySeparatorHeight} onChange={(value) => setAttributes({ bodySeparatorHeight: value })} min={0} max={5} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
 								{bodySeparatorHeight.md > 0 &&
 									<Color label={__('Separator Color')} value={bodySeparatorColor} onChange={(value) => setAttributes({ bodySeparatorColor: value })} />
 								}
@@ -275,14 +280,14 @@ class Edit extends Component {
 							</Fragment>
 						}
 						{tabStyle != 'tabs' &&
-							<Range label={__('Spacing')} value={bodyTopSpacing} onChange={(value) => setAttributes({ bodyTopSpacing: value })} unit={['px', 'em', '%']} max={100} min={0} responsive />
+							<Range label={__('Spacing')} value={bodyTopSpacing} onChange={(value) => setAttributes({ bodyTopSpacing: value })} unit={['px', 'em', '%']} max={100} min={0} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
 						}
 
 						{tabStyle == 'tabs' &&
 							<Fragment>
-								<Border label={__('Border')} separator value={bodyBorder} onChange={(value) => setAttributes({ bodyBorder: value })} unit={['px', 'em', '%']} max={100} min={0} responsive />
+								<Border label={__('Border')} separator value={bodyBorder} onChange={(value) => setAttributes({ bodyBorder: value })} unit={['px', 'em', '%']} max={100} min={0} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
 								<BoxShadow label={__('Box-Shadow')} value={bodyShadow} onChange={(value) => setAttributes({ bodyShadow: value })} />
-								<BorderRadius label={__('Radius')} separator value={bodyBorderRadius} onChange={(value) => setAttributes({ bodyBorderRadius: value })} unit={['px', 'em', '%']} max={100} min={0} responsive />
+								<BorderRadius label={__('Radius')} separator value={bodyBorderRadius} onChange={(value) => setAttributes({ bodyBorderRadius: value })} unit={['px', 'em', '%']} max={100} min={0} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
 							</Fragment>
 						}
 					</PanelBody>

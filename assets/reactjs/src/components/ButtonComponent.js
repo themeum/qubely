@@ -3,7 +3,7 @@ const { createHigherOrderComponent } = wp.compose
 const { Component, Fragment } = wp.element
 const { InspectorControls } = wp.editor
 const { PanelBody } = wp.components
-import { Typography, Color, ColorAdvanced, IconList, Select, Styles, Tabs, Tab, Range, Url, BoxShadow, RadioAdvanced, Separator, Border, InnerPanel, Alignment, Toggle, BorderRadius } from './FieldRender'
+import { Typography, Color, ColorAdvanced, Padding, IconList, Select, Styles, Tabs, Tab, Range, Url, BoxShadow, RadioAdvanced, Separator, Border, InnerPanel, Alignment, Toggle, BorderRadius } from './FieldRender'
 import icons from '../helpers/icons';
 import { CssGenerator } from './CssGenerator'
 
@@ -15,6 +15,24 @@ const addAttribute = (settings) => {
             buttonTag: { type: 'string', default: 'a' },
             buttonUrl: { type: 'object', default: { url: '#' } },
             buttonSize: { type: 'string', default: 'medium' },
+            buttonPadding: {
+                type: 'object',
+                default: {
+                    openPadding: 1,
+                    paddingType: 'global',
+                    global: { md: 18 },
+                    custom: { md: '10 10 10 10' },
+                    unit: 'px'
+                },
+                style: [
+                    {
+                        condition: [
+                            { key: 'buttonSize', relation: '==', value: 'custom' }
+                        ],
+                        selector: '{{QUBELY}} .qubely-block-btn-anchor'
+                    }
+                ]
+            },
             buttonTypography: { type: 'object', default: {}, style: [{ selector: '{{QUBELY}} .qubely-block-btn-anchor' }] },
             buttonColor: {
                 type: 'string', default: '#fff',
@@ -155,13 +173,15 @@ const withInspectorControls = createHigherOrderComponent(OriginalComponent => {
         constructor(props) {
             super(props)
             this.state = {
+                device: 'md',
                 showPostTextTypography: false
             }
         }
 
         renderButtonControls = () => {
             const { setAttributes,
-                attributes: { enableButtonAlignment, buttonAlignment,buttonGap, buttonTag, buttonFillType, buttonSize, buttonTypography, buttonUrl, buttonBorderRadius, buttonIconName, buttonIconPosition, buttonIconSize, buttonIconGap, buttonBorder, buttonBorderHoverColor, buttonColor, buttonHoverColor, buttonBgColor, buttonBgHoverColor, buttonShadow, buttonHoverShadow } } = this.props
+                attributes: { enableButtonAlignment, buttonAlignment, buttonGap, buttonTag, buttonFillType, buttonSize, buttonTypography, buttonPadding, buttonUrl, buttonBorderRadius, buttonIconName, buttonIconPosition, buttonIconSize, buttonIconGap, buttonBorder, buttonBorderHoverColor, buttonColor, buttonHoverColor, buttonBgColor, buttonBgHoverColor, buttonShadow, buttonHoverShadow } } = this.props
+            const { device } = this.state
             return (
                 <Fragment>
                     <Styles value={buttonFillType}
@@ -192,25 +212,16 @@ const withInspectorControls = createHigherOrderComponent(OriginalComponent => {
                             onChange={(value) => setAttributes({ buttonSize: value })}
                         />
                         {buttonSize == 'custom' &&
-                            <Fragment device wide>
-                                <Range
-                                    label={<span className="dashicons dashicons-sort" title="X Spacing" />}
-                                    value={buttonPaddingY}
-                                    onChange={(value) => setAttributes({ buttonPaddingY: value })}
-                                    unit={['px', 'em', '%']}
-                                    max={150}
-                                    min={0}
-                                    responsive
-                                />
-                                <Range
-                                    label={<span className="dashicons dashicons-leftright" title="Y Spacing" />}
-                                    value={buttonPaddingX}
-                                    onChange={(value) => setAttributes({ buttonPaddingX: value })}
-                                    unit={['px', 'em', '%']}
-                                    max={150}
-                                    min={0}
-                                    responsive />
-                            </Fragment>
+                            <Padding
+                                label={__('Padding')}
+                                value={buttonPadding}
+                                onChange={(value) => setAttributes({ buttonPadding: value })}
+                                unit={['px', 'em', '%']}
+                                max={150}
+                                min={0}
+                                responsive
+                                device={device}
+                                onDeviceChange={value => this.setState({ device: value })} />
 
                         }
                     </InnerPanel>

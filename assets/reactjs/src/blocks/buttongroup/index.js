@@ -14,7 +14,11 @@ registerBlockType('qubely/buttongroup', {
     attributes: {
         uniqueId: { type: 'string', default: '' },
         buttons: { type: 'number', default: 2 },
-        spacing: { type: 'object', default: { unit: "px", md: "40" }, style: [{ selector: '{{QUBELY}} .qubely-block-button-group {margin: 0 -{{spacing}};} {{QUBELY}} .qubely-block-button-group .qubely-group-button, .qubely-block-button-group >div {margin: 0 {{spacing}};}' }] },
+        spacing: {
+            type: 'object',
+            default: { unit: "px", md: "5" },
+            style: [{ selector: '{{QUBELY}} .qubely-block-button-group {margin: 0 -{{spacing}};} {{QUBELY}} .qubely-block-button-group .wp-block.qubely-group-button {margin: 0 {{spacing}};} {{QUBELY}} .qubely-block-button-group >div {margin: 0 calc(14px + {{spacing}});}' }]
+        },
         padding: {
             type: 'object',
             default: {

@@ -21,7 +21,7 @@ registerBlockType('qubely/carouselitem', {
     },
     getEditWrapperProps(attributes) {
         const { id, customClassName } = attributes
-        return { 'data-carouselitem': id, className: `wp-block editor-block-list__block ${customClassName}${id === 1 ? ' qubely-active' : ''}` }
+        return { 'data-carouselitem': id, className: `wp-block editor-block-list__block block-editor-block-list__block ${customClassName}${id === 1 ? ' qubely-active' : ''}` }
     },
     edit: Edit,
     save: Save

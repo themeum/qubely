@@ -180,7 +180,7 @@ registerBlockType('qubely/button', {
     },
     getEditWrapperProps(attributes) {
         if (attributes.customClassName != '') {
-            return { className: `wp-block editor-block-list__block ${attributes.customClassName}` }
+            return { className: `wp-block editor-block-list__block block-editor-block-list__block ${attributes.customClassName}` }
         }
     },
     edit: Edit,

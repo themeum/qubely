@@ -11,7 +11,7 @@ class Edit extends Component {
 
     constructor(props) {
         super(props)
-        this.state = { selector: true, spacer: true, openPanelSetting: '' };
+        this.state = {device: 'md', selector: true, spacer: true, openPanelSetting: '' };
     }
 
     componentDidMount() {
@@ -121,7 +121,7 @@ class Edit extends Component {
         } = this.props.attributes
 
         const { setAttributes } = this.props
-        const { openPanelSetting } = this.state
+        const { openPanelSetting, device } = this.state
 
         const nameTagName = 'h' + nameLevel;
 
@@ -138,17 +138,17 @@ class Edit extends Component {
                                 { value: 3, svg: icons.team_3, label: __('Side by Side') }
                             ]}
                         />
-                        <Alignment label={__('Alignment')} value={alignment} alignmentType="content" onChange={val => setAttributes({ alignment: val })} disableJustify responsive />
+                        <Alignment label={__('Alignment')} value={alignment} alignmentType="content" onChange={val => setAttributes({ alignment: val })} disableJustify responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
                     </PanelBody>
 
                     <PanelBody title={__('Image')} opened={'Image' === openPanelSetting} onToggle={() => this.handlePanelOpenings(openPanelSetting !== 'Image' ? 'Image' : '')}>
                         <Media label={__('Team Member Image')} multiple={false} type={['image']} panel={true} value={image} onChange={val => setAttributes({ image: val })} />
                         {layout != 2 &&
                             <Fragment>
-                                <Range label={__('Image Width')} value={imageWidth} onChange={val => setAttributes({ imageWidth: val })} min={32} max={500} unit={['px', 'em']} responsive />
-                                <BorderRadius label={__('Radius')} value={imageBorderRadius} onChange={val => setAttributes({ imageBorderRadius: val })} min={0} max={100} unit={['px', 'em', '%']} responsive />
+                                <Range label={__('Image Width')} value={imageWidth} onChange={val => setAttributes({ imageWidth: val })} min={32} max={500} unit={['px', 'em']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
+                                <BorderRadius label={__('Radius')} value={imageBorderRadius} onChange={val => setAttributes({ imageBorderRadius: val })} min={0} max={100} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
                                 {layout == 1 &&
-                                    <Range label={__('Image Spacing')} value={imageSpacing} onChange={val => setAttributes({ imageSpacing: val })} min={0} max={500} unit={['px', 'em', '%']} responsive />
+                                    <Range label={__('Image Spacing')} value={imageSpacing} onChange={val => setAttributes({ imageSpacing: val })} min={0} max={500} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
                                 }
                             </Fragment>
                         }
@@ -156,10 +156,10 @@ class Edit extends Component {
 
                     <PanelBody title={__('Name')} opened={'Name' === openPanelSetting} onToggle={() => this.handlePanelOpenings(openPanelSetting !== 'Name' ? 'Name' : '')}>
                         <Headings selectedLevel={ nameLevel } onChange={(value) => setAttributes({ nameLevel: value })} />
-                        <Typography label="Typography" value={nameTypo} onChange={(value) => setAttributes({ nameTypo: value })} />
+                        <Typography label="Typography" value={nameTypo} onChange={(value) => setAttributes({ nameTypo: value })} device={device} onDeviceChange={value => this.setState({ device: value })} />
                         <Separator />
                         <Color label={__('Color')} value={nameColor} onChange={(value) => setAttributes({ nameColor: value })} />
-                        <Range label={__('Spacing')} value={nameSpacing} onChange={val => setAttributes({ nameSpacing: val })} min={0} max={60} unit={['px', 'em', '%']} responsive />
+                        <Range label={__('Spacing')} value={nameSpacing} onChange={val => setAttributes({ nameSpacing: val })} min={0} max={60} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
                     </PanelBody>
 
                     <PanelBody title={__('Designation')} opened={'Designation' === openPanelSetting} onToggle={() => this.handlePanelOpenings(openPanelSetting !== 'Designation' ? 'Designation' : '')}>
@@ -167,10 +167,10 @@ class Edit extends Component {
                         {enableDesignation == 1 &&
                             <Fragment>
                                 <Separator />
-                                <Typography label="Typography" value={designationTypo} onChange={(value) => setAttributes({ designationTypo: value })} />
+                                <Typography label="Typography" value={designationTypo} onChange={(value) => setAttributes({ designationTypo: value })} device={device} onDeviceChange={value => this.setState({ device: value })}  />
                                 <Separator />
                                 <Color label={__('Color')} value={designationColor} onChange={(value) => setAttributes({ designationColor: value })} />
-                                <Range label={__('Spacing')} value={designationSpacing} onChange={val => setAttributes({ designationSpacing: val })} min={0} max={60} unit={['px', 'em', '%']} responsive />
+                                <Range label={__('Spacing')} value={designationSpacing} onChange={val => setAttributes({ designationSpacing: val })} min={0} max={60} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
                             </Fragment>
                         }
                     </PanelBody>
@@ -179,9 +179,9 @@ class Edit extends Component {
                         <Toggle label={__('Enable')} value={enableDescription} onChange={val => setAttributes({ enableDescription: val })} />
                         {enableDescription == 1 &&
                             <Fragment>
-                                <Typography label="Typography" value={descriptionTypo} onChange={(value) => setAttributes({ descriptionTypo: value })} />
+                                <Typography label="Typography" value={descriptionTypo} onChange={(value) => setAttributes({ descriptionTypo: value })} device={device} onDeviceChange={value => this.setState({ device: value })} />
                                 <Color label={__('Color')} value={descriptionColor} onChange={(value) => setAttributes({ descriptionColor: value })} />
-                                <Range label={__('Spacing')} value={descriptionSpacing} onChange={val => setAttributes({ descriptionSpacing: val })} min={0} max={60} unit={['px', 'em', '%']} responsive />
+                                <Range label={__('Spacing')} value={descriptionSpacing} onChange={val => setAttributes({ descriptionSpacing: val })} min={0} max={60} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
                             </Fragment>
                         }
                     </PanelBody>
@@ -192,9 +192,9 @@ class Edit extends Component {
                         <TextControl label={__('Website')} value={website} onChange={val => setAttributes({ website: val })} />
                         { (phone || email || website) &&
                             <Fragment>
-                                <Typography label="Typography" value={infoTypo} onChange={(value) => setAttributes({ infoTypo: value })} />
+                                <Typography label="Typography" value={infoTypo} onChange={(value) => setAttributes({ infoTypo: value })} device={device} onDeviceChange={value => this.setState({ device: value })} />
                                 <Color label={__('Color')} value={infoColor} onChange={(value) => setAttributes({ infoColor: value })} />
-                                <Range label={__('Spacing')} value={infoSpacing} onChange={val => setAttributes({ infoSpacing: val })} min={0} max={60} unit={['px', 'em', '%']} responsive />
+                                <Range label={__('Spacing')} value={infoSpacing} onChange={val => setAttributes({ infoSpacing: val })} min={0} max={60} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
                                 <Separator />
                                 <Toggle label={__('Use Icon')} value={useInfoIcon} onChange={val => setAttributes({ useInfoIcon: val })} />
                                 {useInfoIcon == 1 &&
@@ -208,10 +208,10 @@ class Edit extends Component {
                                             ]}
                                         />
                                         {infoIconSize == 'custom' &&
-                                            <Range label={__('Custom Size')} value={infoIconSizeCustom} onChange={val => setAttributes({ infoIconSizeCustom: val })} min={12} max={300} unit={['px', 'em', '%']} responsive />
+                                            <Range label={__('Custom Size')} value={infoIconSizeCustom} onChange={val => setAttributes({ infoIconSizeCustom: val })} min={12} max={300} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
                                         }
                                         <Color label={__('Color')} value={infoIconColor} onChange={(value) => setAttributes({ infoIconColor: value })} />
-                                        <Range label={__('Icon Spacing')} value={infoIconSpacing} onChange={val => setAttributes({ infoIconSpacing: val })} min={0} max={60} unit={['px', 'em', '%']} responsive />
+                                        <Range label={__('Icon Spacing')} value={infoIconSpacing} onChange={val => setAttributes({ infoIconSpacing: val })} min={0} max={60} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
                                     </Fragment>
                                 }
                             </Fragment>
@@ -245,7 +245,7 @@ class Edit extends Component {
                             ]}
                         />
                         {iconSize == 'custom' &&
-                            <Range label={__('Custom Size')} value={iconSizeCustom} onChange={val => setAttributes({ iconSizeCustom: val })} min={12} max={300} unit={['px', 'em', '%']} responsive />
+                            <Range label={__('Custom Size')} value={iconSizeCustom} onChange={val => setAttributes({ iconSizeCustom: val })} min={12} max={300} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
                         }
 
                         {iconStyle == 'fill' && 
@@ -255,11 +255,13 @@ class Edit extends Component {
                                 onChange={(value) => setAttributes({ iconBorderRadius: value })}
                                 min={0}
                                 max={100} unit={['px', 'em', '%']}
-                                responsive />
+                                responsive
+                                device={device} 
+                                onDeviceChange={value => this.setState({ device: value })}  />
                         }
 
-                        <Range label={__('Gutter')} value={iconGutter} onChange={val => setAttributes({ iconGutter: val })} min={0} max={40} unit={['px', 'em']} responsive />
-                        <Range label={__('Spacing')} value={iconSpacing} onChange={val => setAttributes({ iconSpacing: val })} min={0} max={60} unit={['px', 'em', '%']} responsive />
+                        <Range label={__('Gutter')} value={iconGutter} onChange={val => setAttributes({ iconGutter: val })} min={0} max={40} unit={['px', 'em']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
+                        <Range label={__('Spacing')} value={iconSpacing} onChange={val => setAttributes({ iconSpacing: val })} min={0} max={60} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
                         
                         <Toggle label={__('Default Styles')} value={iconUseDefaultStyle} onChange={val => setAttributes({ iconUseDefaultStyle: val })} />
 
@@ -306,8 +308,8 @@ class Edit extends Component {
                                     />
                                 }
                                 <ColorAdvanced label={__('Background')} value={overlayBg} onChange={(value) => setAttributes({ overlayBg: value })} />
-                                <Range label={<span className="dashicons dashicons-leftright" title="X Padding" />} value={overlayPaddingX} onChange={val => setAttributes({ overlayPaddingX: val })} min={0} max={200} unit={['px', 'em', '%']} responsive />
-                                <Range label={<span className="dashicons dashicons-sort" title="Y Padding" />} value={overlayPaddingY} onChange={val => setAttributes({ overlayPaddingY: val })} min={0} max={200} unit={['px', 'em', '%']} responsive />
+                                <Range label={<span className="dashicons dashicons-leftright" title="X Padding" />} value={overlayPaddingX} onChange={val => setAttributes({ overlayPaddingX: val })} min={0} max={200} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })}  />
+                                <Range label={<span className="dashicons dashicons-sort" title="Y Padding" />} value={overlayPaddingY} onChange={val => setAttributes({ overlayPaddingY: val })} min={0} max={200} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
                             </PanelBody>
                         </Fragment>
                     }
@@ -329,8 +331,8 @@ class Edit extends Component {
                                     ]}
                                 />
                                 <ColorAdvanced label={__('Background')} value={contentBg} onChange={(value) => setAttributes({ contentBg: value })} />
-                                <Range label={<span className="dashicons dashicons-leftright" title="X Padding" />} value={contentPaddingX} onChange={val => setAttributes({ contentPaddingX: val })} min={0} max={200} unit={['px', 'em', '%']} responsive />
-                                <Range label={<span className="dashicons dashicons-sort" title="Y Padding" />} value={contentPaddingY} onChange={val => setAttributes({ contentPaddingY: val })} min={0} max={200} unit={['px', 'em', '%']} responsive />
+                                <Range label={<span className="dashicons dashicons-leftright" title="X Padding" />} value={contentPaddingX} onChange={val => setAttributes({ contentPaddingX: val })} min={0} max={200} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
+                                <Range label={<span className="dashicons dashicons-sort" title="Y Padding" />} value={contentPaddingY} onChange={val => setAttributes({ contentPaddingY: val })} min={0} max={200} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
                                 <Border label={__('Border')} value={contentBorder} onChange={val => setAttributes({ contentBorder: val })} />
                             </PanelBody>
                         </Fragment>
@@ -338,9 +340,9 @@ class Edit extends Component {
 
                     <PanelBody title={__('Background')} initialOpen={false}>
                         <ColorAdvanced label={__('Background')} value={bodyBg} onChange={(value) => setAttributes({ bodyBg: value })} />
-                        <Padding label={__('Padding')} value={bodyPadding} onChange={val => setAttributes({ bodyPadding: val })} min={0} max={200} unit={['px', 'em', '%']} responsive />
-                        <Border label={__('Border')} separator value={bodyBorder} onChange={(value) => setAttributes({ bodyBorder: value })} unit={['px', 'em', '%']} responsive />
-                        <BorderRadius label={__('Radius')} value={bodyBorderRadius} onChange={val => setAttributes({ bodyBorderRadius: val })} min={0} max={100} unit={['px', 'em', '%']} responsive />
+                        <Padding label={__('Padding')} value={bodyPadding} onChange={val => setAttributes({ bodyPadding: val })} min={0} max={200} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
+                        <Border label={__('Border')} separator value={bodyBorder} onChange={(value) => setAttributes({ bodyBorder: value })} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
+                        <BorderRadius label={__('Radius')} value={bodyBorderRadius} onChange={val => setAttributes({ bodyBorderRadius: val })} min={0} max={100} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
                         <BoxShadow label={__('Box-Shadow')} value={bodyBoxShadow} onChange={(value) => setAttributes({ bodyBoxShadow: value })} />
                        </PanelBody>
                 </InspectorControls>

@@ -475,7 +475,7 @@ registerBlockType('qubely/pricing', {
         controlledButtonPanel: { type: 'boolean', default: true },
         showButtonPanel: { type: 'boolean', default: false },
         buttonText: { type: 'string', default: 'Subscribe Now' },
-        buttonPadding: { type: 'boolean', default: true },
+
         buttonPaddingTop: { type: 'object', default: { md: 30, unit: 'px' }, style: [{ selector: '{{QUBELY}} .qubely-pricing-button{ padding-top: {{buttonPaddingTop}};}' }] },
         buttonPaddingBottom: { type: 'object', default: { md: 10, unit: 'px' }, style: [{ selector: '{{QUBELY}} .qubely-pricing-button{ padding-bottom: {{buttonPaddingBottom}};}' }] },
         enableButtonAlignment: { type: 'boolean', default: false },

@@ -125,7 +125,7 @@ class Gradient extends Component {
                     />
                     :
                     <Fragment>
-                        <Range
+                        {/* <Range
                             label={__('Gradient Angle')}
                             value={value.direction || 90}
                             onChange={direction => this.setSettings(direction, 'direction')}
@@ -134,7 +134,7 @@ class Gradient extends Component {
                             step={1}
                             beforeIcon="image-rotate"
                             allowReset
-                        />
+                        /> */}
                         <GradientAngle
                             label={__('Gradient Angle')}
                             value={value.direction || 90}
