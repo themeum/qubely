@@ -64,7 +64,6 @@ registerBlockType ( 'qubely/team', {
 
         // Name
         name: { type: 'string', default: 'John Doe' },
-        nameLevel: { type: 'number', default: 3 },
         nameTypo: { type: 'object', default:{openTypography: 1, size: {md: 28, unit: 'px'}, height: {md: 32, unit: 'px'}}, style: [{ selector: '{{QUBELY}} .qubely-team-name' }] },
         nameColor: { type: 'string', default: '', style: [{ selector: '{{QUBELY}} .qubely-team-name {color: {{nameColor}};}' }] },
         nameSpacing: { type: 'object', default: {md: 5, unit: 'px'}, style: [{ selector: '{{QUBELY}} .qubely-team-name {margin-bottom: {{nameSpacing}};}' }] },

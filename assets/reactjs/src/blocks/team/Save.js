@@ -4,9 +4,7 @@ import { animationAttr } from '../../components/HelperFunction';
 
 class Save extends Component {
 	render() {
-		const { uniqueId, layout, image, name, nameLevel, designation, description, useInfoIcon, phone, email, website, facebook, twitter, instagram, linkedin, youtube, github, flickr, pinterest, dribbble, behance, iconStyle, iconUseDefaultStyle, enableDesignation, enableDescription, animation } = this.props.attributes
-
-		const nameTagName = 'h' + nameLevel;
+		const { uniqueId, layout, image, name, designation, description, useInfoIcon, phone, email, website, facebook, twitter, instagram, linkedin, youtube, github, flickr, pinterest, dribbble, behance, iconStyle, iconUseDefaultStyle, enableDesignation, enableDescription, animation } = this.props.attributes
 
 		return (
 			<div className={`qubely-block-${uniqueId}`} {...animationAttr(animation)}>
@@ -20,7 +18,7 @@ class Save extends Component {
 					</div>
 					<div className="qubely-team-content">
 						<div className="qubely-team-content-inner">
-							<RichText.Content tagName={nameTagName} className="qubely-team-name" value={name} />
+							<RichText.Content tagName='span' className="qubely-team-name" value={name} />
 							{enableDesignation == 1 &&
 								<div className="qubely-team-designation-container">
 									<RichText.Content tagName="span" className="qubely-team-designation" value={designation} />

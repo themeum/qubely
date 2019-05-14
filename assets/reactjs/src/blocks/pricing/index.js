@@ -153,12 +153,10 @@ registerBlockType('qubely/pricing', {
             ]
         },
         priceColor: { type: 'string', default: '#ccc', style: [{ selector: '{{QUBELY}} .qubely-pricing-price{color: {{priceColor}};}' }] },
-        priceHoverColor: { type: 'string', default: '#ccc', style: [{ selector: '{{QUBELY}}:hover .qubely-pricing-price{color: {{priceHoverColor}};}' }] },
         priceTypography: { type: 'object', default: { openTypography: 1, height: { md: 70, unit: 'px' }, size: { md: 70, unit: 'px' } }, style: [{ selector: '{{QUBELY}} .qubely-pricing-price' }] },
         discount: { type: 'boolean', default: false },
         discountPrice: { type: 'string', default: '69' },
         discountColor: { type: 'string', default: '#ccc', style: [{ selector: '{{QUBELY}} .qubely-pricing-price strike{color: {{discountColor}};}' }] },
-        discountHoverColor: { type: 'string', default: '#ccc', style: [{ selector: '{{QUBELY}}:hover .qubely-pricing-price strike{color: {{discountHoverColor}};}' }] },
         discountTypography: { type: 'object', default: { openTypography: 1, size: { md: 20, unit: 'px' } }, style: [{ selector: '{{QUBELY}} .qubely-pricing-price strike' }] },
         pricingSpacing: {
             type: 'object',
@@ -238,7 +236,6 @@ registerBlockType('qubely/pricing', {
         currencyPosition: { type: 'string', default: 'before' },
         currencyAlign: { type: 'string', default: '10', style: [{ selector: '{{QUBELY}} .qubely-pricing-currency{ display: inline-block; transform: translateY({{currencyAlign}}px); }' }] },
         currencyColor: { type: 'string', default: '#CACCCE', style: [{ selector: '{{QUBELY}} .qubely-pricing-currency{color: {{currencyColor}}; }' }] },
-        currencyHoverColor: { type: 'string', default: '', style: [{ selector: '{{QUBELY}}:hover .qubely-pricing-currency{color: {{currencyHoverColor}};}' }] },
         currencyTypography: { type: 'object', default: { openTypography: 1, size: { md: 34, unit: 'px' } }, style: [{ selector: '{{QUBELY}} .qubely-pricing-currency' }] },
 
         // Duration__
@@ -246,7 +243,6 @@ registerBlockType('qubely/pricing', {
         duration: { type: 'string', default: '/Month' },
         durationPosition: { type: 'string', default: 'side' },
         durationColor: { type: 'string', default: '#CACCCE', style: [{ selector: '{{QUBELY}} .qubely-pricing-duration{color: {{durationColor}};}' }] },
-        durationHoverColor: { type: 'string', default: '', style: [{ selector: '{{QUBELY}}:hover .qubely-pricing-duration{color: {{durationHoverColor}};}' }] },
         durationAlign: { type: 'string', default: '10', style: [{ condition: [{ key: 'durationPosition', relation: '==', value: 'side' }], selector: '{{QUBELY}} .qubely-pricing-duration{transform: translateY({{durationAlign}}px); display: inline-block; }' }, { condition: [{ key: 'durationPosition', relation: '==', value: 'bottom' }], selector: '{{QUBELY}} .qubely-pricing-duration{ display: block; }' }] },
         durationTypography: { type: 'object', default: { openTypography: 1, size: { md: 21, unit: 'px' } }, style: [{ selector: '{{QUBELY}} .qubely-pricing-duration' }] },
         // durationPaddingTop: { type: 'object', default: {}, style: [{ selector: '{{QUBELY}} .qubely-pricing-duration{ padding-top: {{durationPaddingTop}};}' }] },
@@ -277,8 +273,6 @@ registerBlockType('qubely/pricing', {
         },
         badgeColor: { type: 'string', default: '#FF494A', style: [{ selector: '{{QUBELY}} .qubely-pricing-badge{background-color: {{badgeColor}};}' }] },
         badgeTextColor: { type: 'string', default: '#ffffff', style: [{ selector: '{{QUBELY}} .qubely-pricing-badge{color: {{badgeTextColor}};}' }] },
-        badgeHoverColor: { type: 'string', default: '', style: [{ selector: '{{QUBELY}}:hover .qubely-pricing-badge:hover{background-color: {{badgeHoverColor}};}' }] },
-        badgeTextHoverColor: { type: 'string', default: '', style: [{ selector: '{{QUBELY}}:hover .qubely-pricing-badge:hover{color: {{badgeTextHoverColor}};}' }] },
         badgeTypography: { type: 'object', default: { openTypography: 1, size: { md: 12, unit: 'px' } }, style: [{ selector: '{{QUBELY}} .qubely-pricing-badge' }] },
         badgeRadius: {
             type: 'string',
@@ -515,16 +509,6 @@ registerBlockType('qubely/pricing', {
                     { key: 'enablePostButtonText', relation: '==', value: true },
                 ],
                 selector: '{{QUBELY}} .qubely-pricing-postbutton-text{ color: {{postButtonTextColor}};}'
-            }]
-        },
-        postButtonTextHoverColor: {
-            type: 'string',
-            default: '',
-            style: [{
-                condition: [
-                    { key: 'enablePostButtonText', relation: '==', value: true },
-                ],
-                selector: '{{QUBELY}} .qubely-pricing-postbutton-text:hover{ color: {{postButtonTextHoverColor}};}'
             }]
         },
         postButtonTextPaddingTop: {

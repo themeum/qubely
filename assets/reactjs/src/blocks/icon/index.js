@@ -49,8 +49,32 @@ registerBlockType('qubely/icon', {
 			}]
 		},
 
-		iconShadow: { type: 'object', default: {}, style: [{ condition: [{ key: 'iconStyle', relation: '==', value: 'nofill' }], selector: '{{QUBELY}} .qubely-block-icon' }] },
-		iconHoverShadow: { type: 'object', default: {}, style: [{ condition: [{ key: 'iconStyle', relation: '==', value: 'nofill' }], selector: '{{QUBELY}} .qubely-block-icon:hover' }] },
+		iconShadow: {
+			type: 'object',
+			default: {},
+			style: [
+				{
+					condition:
+					[
+						{ key: 'iconStyle', relation: '!=', value: 'nofill' }
+					],
+					selector: '{{QUBELY}} .qubely-block-icon'
+				}
+			]
+		},
+		iconHoverShadow: {
+			type: 'object',
+			default: {},
+			style: [
+				{
+					condition:
+					[
+						{ key: 'iconStyle', relation: '!=', value: 'nofill' }
+					],
+					selector: '{{QUBELY}} .qubely-block-icon:hover'
+				}
+			]
+		},
 		showGlobalSettings: { type: 'boolean', default: true }, // Global Settings
 	},
 	edit: Edit,
