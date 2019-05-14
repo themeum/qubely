@@ -59,3 +59,17 @@ typings/
 
 # next.js build output
 .next
+
+
+# Add any directories, files, or patterns you don't want to be tracked by version control
+.history/
+assets/js/blocks.build.js
+assets/css/style.min.css
+assets/js/blocks.build.min.js
+assets/js/blocks.build.js.map
+assets/reactjs/node_modules/
+assets/reactjs/package-lock.json
+.idea/
+.vscode/
+.DS_Store
+assets/reactjs/yarn.lock
