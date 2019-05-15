@@ -17,6 +17,7 @@
     border: 1px solid transparent;
     position: relative;
     z-index: 1;
+    overflow: hidden;
     transition: color 200ms ease-in-out, background-color 200ms ease-in-out, border-color 200ms ease-in-out, box-shadow 200ms ease-in-out;
     &.is-small {
         padding: 5px 10px;

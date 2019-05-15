@@ -111,7 +111,7 @@ const addAttribute = (settings) => {
                 },
                 style: [
                     {
-                        selector: '{{QUBELY}} .qubely-block-btn-anchor, {{QUBELY}} .qubely-block-btn-anchor:before'
+                        selector: '{{QUBELY}} .qubely-block-btn-anchor'
                     }
                 ]
             },

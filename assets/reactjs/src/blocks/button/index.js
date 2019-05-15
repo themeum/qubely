@@ -126,7 +126,7 @@ registerBlockType('qubely/button', {
                 unit: 'px',
 
             },
-            style: [{ selector: '{{QUBELY}} .qubely-block-btn-anchor, {{QUBELY}} .qubely-block-btn-anchor:before' }]
+            style: [{ selector: '{{QUBELY}} .qubely-block-btn-anchor' }]
         },
         buttonShadow: {
             type: 'object', default: {},
