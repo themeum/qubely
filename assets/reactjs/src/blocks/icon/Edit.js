@@ -64,7 +64,7 @@ class Edit extends Component {
 						<Alignment
 							label={__('Alignment')}
 							value={alignment}
-							onChange={val => setAttributes({ alignment: val })} alignmentType="content" disableJustify responsive />
+							onChange={val => setAttributes({ alignment: val })} alignmentType="content" disableJustify responsive device={this.state.device} onDeviceChange={value => this.setState({ device: value })} />
 					</PanelBody>
 
 					<PanelBody title={__('Icon')} initialOpen={false}>
@@ -89,7 +89,7 @@ class Edit extends Component {
 								min={12}
 								max={300}
 								unit={['px', 'em', '%']}
-								responsive 
+								responsive
 								device={this.state.device}
 								onDeviceChange={value => this.setState({ device: value })} />
 						}
@@ -143,7 +143,7 @@ class Edit extends Component {
 										onChange={val => setAttributes({ borderHoverColor: val })} />
 								</Tab>
 							</Tabs>
-							
+
 							<Range
 								label={__('Background Size')}
 								value={iconBackgroundSize}
@@ -152,7 +152,7 @@ class Edit extends Component {
 								unit={['px', 'em', '%']}
 								responsive
 								device={this.state.device}
-								onDeviceChange={value => this.setState({ device: value })} 
+								onDeviceChange={value => this.setState({ device: value })}
 								onChange={val => setAttributes({ iconBackgroundSize: val })}
 							/>
 							<BorderRadius

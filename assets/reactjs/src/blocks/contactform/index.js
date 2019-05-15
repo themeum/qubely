@@ -4,200 +4,223 @@ import Save from './Save';
 const { __ } = wp.i18n
 const { registerBlockType } = wp.blocks
 
-const formItems = [ 
+const formItems = [
     { type: 'text', label: 'Full Name', name: 'full-name ', placeholder: 'Full Name', width: { md: 50 }, required: true, hideLabel: false },
-    { type: 'email', label: 'Email', name: 'email', placeholder: 'Email', width: { md: 50 }, required: true , hideLabel: false},
-    { type: 'text', label: 'Subject', name: 'subject', placeholder: 'Subject', width: { md: 100 }, required: true , hideLabel: false},
-    { type: 'textarea', label: 'Message', name: 'message', placeholder: 'Message', width: { md: 100 },  required: true, hideLabel: false }
+    { type: 'email', label: 'Email', name: 'email', placeholder: 'Email', width: { md: 50 }, required: true, hideLabel: false },
+    { type: 'text', label: 'Subject', name: 'subject', placeholder: 'Subject', width: { md: 100 }, required: true, hideLabel: false },
+    { type: 'textarea', label: 'Message', name: 'message', placeholder: 'Message', width: { md: 100 }, required: true, hideLabel: false }
 ]
 
-registerBlockType ( 'qubely/contactform', {
-    title: __( 'Contact Form' ),
-    description: __( 'Encourage site visitor interactions with Qubely Contact Form List' ),
+registerBlockType('qubely/contactform', {
+    title: __('Contact Form'),
+    description: __('Encourage site visitor interactions with Qubely Contact Form List'),
     category: 'qubely',
-    icon: <img src={qubely_admin.plugin+'assets/img/blocks/block-contact-form.svg'} alt={__('Contact Form')} />,
-    keywords: [ __( 'Form' ) ],
+    icon: <img src={qubely_admin.plugin + 'assets/img/blocks/block-contact-form.svg'} alt={__('Contact Form')} />,
+    keywords: [__('Form')],
     attributes: {
         uniqueId: { type: 'string', default: '' },
         layout: { type: 'string', default: 'classic' },
         useDefaultStyle: { type: 'boolean', default: true },
-        spacer: { type: 'object', default:{spaceTop: { md: '10', unit: "px"}, spaceBottom: { md: '10', unit: "px"}}, style: [{ selector: '{{QUBELY}}' }] },
+        spacer: { type: 'object', default: { spaceTop: { md: '10', unit: "px" }, spaceBottom: { md: '10', unit: "px" } }, style: [{ selector: '{{QUBELY}}' }] },
         buttonComponent: { type: 'boolean', default: true },
         enableButton: { type: 'boolean', default: true },
         buttonTag: { type: 'string', default: 'button' },
         buttonText: { type: 'string', default: 'Submit' },
         formItems: { type: 'array', default: formItems },
 
-        spacing: { type: 'object', default: {md: 30, unit: 'px'},
+        spacing: {
+            type: 'object', default: { md: 30, unit: 'px' },
             style: [
                 {
-                    selector: '{{QUBELY}} .qubely-form .qubely-form-group:not(:last-child) {margin-bottom: {{spacing}};}' 
+                    selector: '{{QUBELY}} .qubely-form .qubely-form-group:not(:last-child) {margin-bottom: {{spacing}};}'
                 }
             ]
         },
 
-        gutter: { type: 'object', default: {md: 30, unit: 'px'},
+        gutter: {
+            type: 'object', default: { md: 30, unit: 'px' },
             style: [
                 {
-                    selector: '{{QUBELY}} .qubely-form {margin: 0 calc(-{{gutter}}/2);} {{QUBELY}} .qubely-form .qubely-form-group {padding: 0 calc({{gutter}}/2);}' 
+                    selector: '{{QUBELY}} .qubely-form {margin: 0 calc(-{{gutter}}/2);} {{QUBELY}} .qubely-form .qubely-form-group {padding: 0 calc({{gutter}}/2);}'
                 }
             ]
         },
 
-        labelTypography: { type: 'obejct', default: {openTypography: 1, size: {md: 16, unit: 'px'} },
+        labelTypography: {
+            type: 'obejct', default: { openTypography: 1, size: { md: 16, unit: 'px' } },
             style: [
                 {
-                    condition:[
+                    condition: [
                         { key: 'layout', relation: '==', value: 'classic' }
                     ],
-                    selector: '{{QUBELY}} .qubely-form .qubely-form-label' 
+                    selector: '{{QUBELY}} .qubely-form .qubely-form-label'
                 },
                 {
-                    condition:[
+                    condition: [
                         { key: 'layout', relation: '==', value: 'material' }
                     ],
-                    selector: '{{QUBELY}} .qubely-form .qubely-form-label' 
+                    selector: '{{QUBELY}} .qubely-form .qubely-form-label'
                 }
             ]
         },
 
-        labelColor: { type: 'string', default: "",
+        labelColor: {
+            type: 'string', default: "",
             style: [
                 {
-                    condition:[
+                    condition: [
                         { key: 'layout', relation: '==', value: 'classic' }
                     ],
-                    selector: '{{QUBELY}} .qubely-form .qubely-form-label {color: {{labelColor}};}' 
+                    selector: '{{QUBELY}} .qubely-form .qubely-form-label {color: {{labelColor}};}'
                 },
                 {
-                    condition:[
+                    condition: [
                         { key: 'layout', relation: '==', value: 'material' }
                     ],
-                    selector: '{{QUBELY}} .qubely-form .qubely-form-label {color: {{labelColor}};}' 
+                    selector: '{{QUBELY}} .qubely-form .qubely-form-label {color: {{labelColor}};}'
                 }
             ]
         },
-        
-        labelColorFocus: { type: 'string', default: "",
+
+        labelColorFocus: {
+            type: 'string', default: "",
             style: [
                 {
-                    condition:[
+                    condition: [
                         { key: 'layout', relation: '==', value: 'material' }
                     ],
-                    selector: '{{QUBELY}} .qubely-form-control:focus ~ .qubely-form-label, {{QUBELY}} .qubely-form-control:valid ~ .qubely-form-label {color: {{labelColorFocus}};}' 
+                    selector: '{{QUBELY}} .qubely-form-control:focus ~ .qubely-form-label, {{QUBELY}} .qubely-form-control:valid ~ .qubely-form-label {color: {{labelColorFocus}};}'
                 }
             ]
         },
 
-        inputTypography: { type: 'obejct', default: {openTypography: 1, size: {md: 14, unit: 'px'} },
+        inputTypography: {
+            type: 'obejct', default: { openTypography: 1, size: { md: 14, unit: 'px' } },
             style: [
                 {
-                    selector: '{{QUBELY}} .qubely-form .qubely-form-control, {{QUBELY}} .qubely-form .qubely-form-control::placeholder' 
+                    selector: '{{QUBELY}} .qubely-form .qubely-form-control, {{QUBELY}} .qubely-form .qubely-form-control::placeholder'
                 }
             ]
         },
 
-        inputColor: { type: 'string', default: "#495057", style: [{ selector: '{{QUBELY}} .qubely-form .qubely-form-control {color: {{inputColor}};}' }]},
-        inputColorHover: { type: 'string', default: "#495057", style: [{ selector: '{{QUBELY}} .qubely-form .qubely-form-control:Hover {color: {{inputColorHover}};}' }]},
-        inputColorFocus: { type: 'string', default: "#495057", style: [{ selector: '{{QUBELY}} .qubely-form .qubely-form-control:focus {color: {{inputColorFocus}};}' }]},
+        inputColor: { type: 'string', default: "#495057", style: [{ selector: '{{QUBELY}} .qubely-form .qubely-form-control {color: {{inputColor}};}' }] },
+        inputColorHover: { type: 'string', default: "#495057", style: [{ selector: '{{QUBELY}} .qubely-form .qubely-form-control:Hover {color: {{inputColorHover}};}' }] },
+        inputColorFocus: { type: 'string', default: "#495057", style: [{ selector: '{{QUBELY}} .qubely-form .qubely-form-control:focus {color: {{inputColorFocus}};}' }] },
 
-        placeholderColor: { type: 'string', default: "#818181", style: [{ selector: '{{QUBELY}} .qubely-form .qubely-form-control::placeholder {color: {{placeholderColor}};}' }]},
-        placeholderColorHover: { type: 'string', default: "", style: [{ selector: '{{QUBELY}} .qubely-form .qubely-form-control::placeholder:Hover {color: {{placeholderColorHover}};}' }]},
-        placeholderColorFocus: { type: 'string', default: "", style: [{ selector: '{{QUBELY}} .qubely-form .qubely-form-control::placeholder:focus {color: {{placeholderColorFocus}};}' }]},
+        placeholderColor: { type: 'string', default: "#818181", style: [{ selector: '{{QUBELY}} .qubely-form .qubely-form-control::placeholder {color: {{placeholderColor}};}' }] },
+        placeholderColorHover: { type: 'string', default: "", style: [{ selector: '{{QUBELY}} .qubely-form .qubely-form-control::placeholder:Hover {color: {{placeholderColorHover}};}' }] },
+        placeholderColorFocus: { type: 'string', default: "", style: [{ selector: '{{QUBELY}} .qubely-form .qubely-form-control::placeholder:focus {color: {{placeholderColorFocus}};}' }] },
 
-        inputBg: { type: 'string', default: "#fff",
+        inputBg: {
+            type: 'string', default: "#fff",
             style: [
                 {
-                    condition:[
+                    condition: [
                         { key: 'layout', relation: '==', value: 'classic' },
                     ],
-                    selector: '{{QUBELY}} .qubely-form .qubely-form-control {background-color: {{inputBg}};}' 
+                    selector: '{{QUBELY}} .qubely-form .qubely-form-control {background-color: {{inputBg}};}'
                 }
             ]
         },
 
-        inputBgHover: { type: 'string', default: '',
+        inputBgHover: {
+            type: 'string', default: '',
             style: [
                 {
-                    condition:[
+                    condition: [
                         { key: 'layout', relation: '==', value: 'classic' },
                     ],
-                    selector: '{{QUBELY}} .qubely-form .qubely-form-control:hover {background-color: {{inputBgHover}};}' 
+                    selector: '{{QUBELY}} .qubely-form .qubely-form-control:hover {background-color: {{inputBgHover}};}'
                 }
             ]
         },
 
-        inputBgFocus: { type: 'string', default: "#fff",
+        inputBgFocus: {
+            type: 'string', default: "#fff",
             style: [
                 {
-                    condition:[
+                    condition: [
                         { key: 'layout', relation: '==', value: 'classic' },
                     ],
-                    selector: '{{QUBELY}} .qubely-form .qubely-form-control:focus {background-color: {{inputBgFocus}};}' 
+                    selector: '{{QUBELY}} .qubely-form .qubely-form-control:focus {background-color: {{inputBgFocus}};}'
                 }
             ]
         },
 
-        inputBorder: { type: 'object', default: {openBorder: 1, type: 'solid', widthType: 'global', width: { global: 1 }, color: '#ced4da'},
+        inputBorder: {
+            type: 'object',
+            default: {
+                openBorder: 1,
+                type: 'solid',
+                widthType: 'global',
+                global: { md: 1 },
+                custom: { md: '1 1 1 1' },
+                color: '#ced4da'
+            },
             style: [
                 {
-                    condition:[
+                    condition: [
                         { key: 'layout', relation: '==', value: 'classic' },
                     ],
-                    selector: '{{QUBELY}} .qubely-form .qubely-form-control' 
+                    selector: '{{QUBELY}} .qubely-form .qubely-form-control'
                 }
             ]
         },
-        
-        inputBorderMaterial: { type: 'object', default: {openBorder: 1, type: 'solid', widthType: 'custom', custom: '0 0 2 0', color: '#ced4da'},
+
+        inputBorderMaterial: {
+            type: 'object',
+            default: { openBorder: 1, type: 'solid', widthType: 'custom', custom: { md: '0 0 2 0' }, color: '#ced4da' },
             style: [
                 {
-                    condition:[
+                    condition: [
                         { key: 'layout', relation: '==', value: 'material' },
                     ],
-                    selector: '{{QUBELY}} .qubely-form .qubely-form-control' 
+                    selector: '{{QUBELY}} .qubely-form .qubely-form-control'
                 }
             ]
         },
 
-        inputBorderColorHover: { type: 'string', default: '',
+        inputBorderColorHover: {
+            type: 'string', default: '',
             style: [
                 {
-                    condition:[
+                    condition: [
                         { key: 'layout', relation: '==', value: 'classic' },
                     ],
-                    selector: '{{QUBELY}} .qubely-form .qubely-form-control:hover {border-color: {{inputBorderColorHover}};}' 
+                    selector: '{{QUBELY}} .qubely-form .qubely-form-control:hover {border-color: {{inputBorderColorHover}};}'
                 },
                 {
-                    condition:[
+                    condition: [
                         { key: 'layout', relation: '==', value: 'material' },
                     ],
-                    selector: '{{QUBELY}} .qubely-form .qubely-form-control:hover {border-bottom-color: {{inputBorderColorHover}};}' 
+                    selector: '{{QUBELY}} .qubely-form .qubely-form-control:hover {border-bottom-color: {{inputBorderColorHover}};}'
                 }
             ]
         },
 
-        inputBorderColorFocus: { type: 'string', default: '',
+        inputBorderColorFocus: {
+            type: 'string', default: '',
             style: [
                 {
-                    condition:[
+                    condition: [
                         { key: 'layout', relation: '==', value: 'classic' },
                     ],
-                    selector: '{{QUBELY}} .qubely-form .qubely-form-control:focus {border-color: {{inputBorderColorFocus}}; box-shadow: 0 0 0 2px {{inputBorderColorFocus}};}' 
+                    selector: '{{QUBELY}} .qubely-form .qubely-form-control:focus {border-color: {{inputBorderColorFocus}}; box-shadow: 0 0 0 2px {{inputBorderColorFocus}};}'
                 },
                 {
-                    condition:[
+                    condition: [
                         { key: 'layout', relation: '==', value: 'material' },
                     ],
-                    selector: '{{QUBELY}} .qubely-form .qubely-form-control:focus {border-bottom-color: {{inputBorderColorFocus}};}' 
+                    selector: '{{QUBELY}} .qubely-form .qubely-form-control:focus {border-bottom-color: {{inputBorderColorFocus}};}'
                 }
             ]
         },
 
-        inputColorHover: { type: 'string', default: '',
+        inputColorHover: {
+            type: 'string', default: '',
             style: [
                 {
-                    selector: '{{QUBELY}} .qubely-form .qubely-form-control:hover {color: {{inputColorHover}};}' 
+                    selector: '{{QUBELY}} .qubely-form .qubely-form-control:hover {color: {{inputColorHover}};}'
                 }
             ]
         },
@@ -206,58 +229,61 @@ registerBlockType ( 'qubely/contactform', {
             type: 'object',
             default: {
                 openBorderRadius: 1,
-                    radiusType: 'global',
-                    global: {
-                        md: 5
-                    },
-                    unit: 'px'
+                radiusType: 'global',
+                global: {
+                    md: 5
+                },
+                unit: 'px'
             },
             style: [
                 {
-                    condition:[
+                    condition: [
                         { key: 'layout', relation: '==', value: 'classic' }
                     ],
-                    selector: '{{QUBELY}} .qubely-form .qubely-form-control' 
+                    selector: '{{QUBELY}} .qubely-form .qubely-form-control'
                 }
             ]
         },
 
-        inputSize: {type: 'string', default: 'medium'},
-        inputPaddingY: {type: 'object', default: {md: 10, unit: 'px'},
+        inputSize: { type: 'string', default: 'medium' },
+        inputPaddingY: {
+            type: 'object', default: { md: 10, unit: 'px' },
             style: [
                 {
-                    condition:[
+                    condition: [
                         { key: 'layout', relation: '==', value: 'classic' },
                         { key: 'inputSize', relation: '==', value: 'custom' }
                     ],
-                    selector: '{{QUBELY}} .qubely-form .qubely-form-control {padding-top: {{inputPaddingY}}; padding-bottom: {{inputPaddingY}};}' 
+                    selector: '{{QUBELY}} .qubely-form .qubely-form-control {padding-top: {{inputPaddingY}}; padding-bottom: {{inputPaddingY}};}'
                 },
                 {
-                    condition:[
+                    condition: [
                         { key: 'layout', relation: '==', value: 'material' },
                         { key: 'inputSize', relation: '==', value: 'custom' }
                     ],
-                    selector: '{{QUBELY}} .qubely-form .qubely-form-control {padding-top: {{inputPaddingY}}; padding-bottom: {{inputPaddingY}};}' 
+                    selector: '{{QUBELY}} .qubely-form .qubely-form-control {padding-top: {{inputPaddingY}}; padding-bottom: {{inputPaddingY}};}'
                 }
-            ] 
+            ]
         },
-        inputPaddingX: {type: 'object', default: {md: 15, unit: 'px'},
+        inputPaddingX: {
+            type: 'object', default: { md: 15, unit: 'px' },
             style: [
                 {
-                    condition:[
+                    condition: [
                         { key: 'layout', relation: '==', value: 'classic' },
                         { key: 'inputSize', relation: '==', value: 'custom' }
                     ],
-                    selector: '{{QUBELY}} .qubely-form .qubely-form-control {padding-left: {{inputPaddingX}}; padding-right: {{inputPaddingX}};}' 
+                    selector: '{{QUBELY}} .qubely-form .qubely-form-control {padding-left: {{inputPaddingX}}; padding-right: {{inputPaddingX}};}'
                 }
-            ] 
+            ]
         },
-        textareaHeight: {type: 'object', default: {md: 200, unit: 'px'},
+        textareaHeight: {
+            type: 'object', default: { md: 200, unit: 'px' },
             style: [
                 {
-                    selector: '{{QUBELY}} .qubely-form .qubely-form-group textarea.qubely-form-control {height: {{textareaHeight}};}' 
+                    selector: '{{QUBELY}} .qubely-form .qubely-form-group textarea.qubely-form-control {height: {{textareaHeight}};}'
                 }
-            ]    
+            ]
         },
 
         fieldErrorMessage: { type: 'string', default: 'Please fill the required field.' },

@@ -1,7 +1,6 @@
 #  Qubely Blocks - Full-fledged Gutenberg Toolkit 
 Contributors: **themeum**
-
-Donate link:<a href=" https://www.themeum.com">https://www.themeum.com</a>  
+Donate link: <a href=" https://www.themeum.com">https://www.themeum.com</a>  
 Tags: Qubely, website builder, gutenberg block, gutenberg, page builder, drag and drop editor, responsive, site editor, editor, drag-and-drop, visual editor, landing page, frontend editor, wordpress page builder, free page builder, layout builder  
 Requires at least: 5.0  
 Tested up to: 5.2  
@@ -103,7 +102,7 @@ regardless of the device type and align them flexibly (Left/Center/Right). Color
 - **Icon List:** Qubely Icon List comes with the Classic and Fill predefined layouts that you can customize to make outstanding lists. Choose from hundreds of icons to find the perfect ones for the icon lists on your site. Define icon list alignment and personalize the icon size, position, spacing and colour. Modify design flexibly with colour, spacing and border options. The typography settings comes with options to change font size, spacing, height and more!
 
 
-##Some exciting Qubely features in details
+## Some exciting Qubely features in details
 
 Let’s dig deep into the exciting features of this advanced Gutenberg block plugin.
 
