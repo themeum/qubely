@@ -2,7 +2,7 @@ const { __ } = wp.i18n
 const { Fragment, Component } = wp.element;
 const { PanelBody, SelectControl, TextControl, Toolbar } = wp.components
 const { RichText, InspectorControls, BlockControls } = wp.editor
-import { Media, Tabs, Tab, Range, BoxShadow, Separator, RadioAdvanced, Typography, Toggle, Styles, Wrapper, Alignment, IconList, ColorAdvanced, Color, Headings, Border, BorderRadius } from "../../components/FieldRender"
+import { Media, Tabs, Tab, Range, BoxShadow, Separator, RadioAdvanced, Typography, Toggle, Styles, Wrapper, Alignment, IconList, ColorAdvanced, Color, Headings, Border, BorderRadius, Padding } from "../../components/FieldRender"
 import InlineToolbar from '../../components/fields/inline/InlineToolbar'
 import { CssGenerator } from '../../components/CssGenerator'
 import icons from '../../helpers/icons';
@@ -103,11 +103,8 @@ class Edit extends Component {
             bgColor,
             bgColorHover,
             bgBorder,
-            bgBorderColor,
             bgBorderColorHover,
-            bgPaddingX,
-            bgPaddingY,
-            bgCorner,
+            bgPadding,
             bgBorderRadius,
             bgShadow,
             bgShadowHover,
@@ -360,8 +357,7 @@ class Edit extends Component {
                         <Tabs>
                             <Tab tabTitle={__('Normal')}>
                                 <ColorAdvanced label={__('Background Color')} value={bgColor} onChange={val => setAttributes({ bgColor: val })} />
-                                <Range label={<span className="dashicons dashicons-leftright" title="X Padding" />} value={bgPaddingX} onChange={val => setAttributes({ bgPaddingX: val })} min={0} max={200} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })}/>
-                                <Range label={<span className="dashicons dashicons-sort" title="Y Padding" />} value={bgPaddingY} onChange={val => setAttributes({ bgPaddingY: val })} min={0} max={200} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })}/>
+                                <Padding label={__('Padding')} value={bgPadding} onChange={val => setAttributes({ bgPadding: val })} min={0} max={200} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
                                 <Border label={__('Border')} value={bgBorder} onChange={val => setAttributes({ bgBorder: val })} min={0} max={10} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })}/>
                                 <BoxShadow label={__('Box-Shadow')} value={bgShadow} onChange={(value) => setAttributes({ bgShadow: value })} />
                                 <BorderRadius label={__('Radius')} value={bgBorderRadius} onChange={(value) => setAttributes({ bgBorderRadius: value })} min={0} max={100} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })}/>

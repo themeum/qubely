@@ -29,9 +29,6 @@ icons.tab_underline = <img src={`${img_path}/tab/underline.svg`} alt={__('Underl
 icons.social_normal = <img src={`${img_path}//socialicon/normal.svg`} alt={__('Normal')} />;
 icons.social_fill = <img src={`${img_path}//socialicon/fill.svg`} alt={__('Fill')} />;
 
-icons.avatar_top = <img src={`${img_path}/testimonial/avatars/1.svg`} alt={__('Left')} />;
-icons.avatar_left = <img src={`${img_path}/testimonial/avatars/2.svg`} alt={__('Top')} />;
-
 icons.accordion_fill = <img src={`${img_path}/accordion/fill.svg`} alt={__('Fill')} />;
 icons.accordion_classic = <img src={`${img_path}/accordion/classic.svg`} alt={__('Classic')} />;
 
@@ -39,6 +36,13 @@ icons.infobox_1 = <img src={`${img_path}/infobox/1.svg`} alt={__('Layout 1')} />
 icons.infobox_2 = <img src={`${img_path}/infobox/2.svg`} alt={__('Layout 2')} />;
 icons.infobox_3 = <img src={`${img_path}/infobox/3.svg`} alt={__('Layout 3')} />;
 icons.infobox_4 = <img src={`${img_path}/infobox/4.svg`} alt={__('Layout 4')} />;
+
+icons.testimonial_1 = <img src={`${img_path}/testimonial/1.svg`} alt={__('Testimonial 1')} />;
+icons.testimonial_2 = <img src={`${img_path}/testimonial/2.svg`} alt={__('Testimonial 2')} />;
+icons.avatar_left = <img src={`${img_path}/testimonial/avatars/1.svg`} alt={__('Avatar Left')} />;
+icons.avatar_right = <img src={`${img_path}/testimonial/avatars/2.svg`} alt={__('Avatar Right')} />;
+icons.avatar_top = <img src={`${img_path}/testimonial/avatars/3.svg`} alt={__('Avatar Top')} />;
+icons.avatar_bottom = <img src={`${img_path}/testimonial/avatars/4.svg`} alt={__('Avatar Bottom')} />;
 
 icons.team_1 = <img src={`${img_path}/team/1.svg`} alt={__('Layout 1')} />;
 icons.team_2 = <img src={`${img_path}/team/2.svg`} alt={__('Layout 2')} />;

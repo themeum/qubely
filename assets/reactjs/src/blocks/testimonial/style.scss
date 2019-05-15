@@ -5,45 +5,42 @@
             line-height: inherit;
         }
     }
+    
     .qubely-testimonial-quote {
         .qubely-quote-icon {
             line-height: 1;
             width: auto;
             height: auto;
         }
+
         &.qubely-position-bottom {
             .qubely-quote-icon {
                 transform: scaleY(-1);
             }
         }
     }
+
+    .qubely-testimonial-avatar {
+        &.qubely-image-placeholder i {
+            font-size: .5em;
+        }
+    }
     
-    .qubely-testimonial-avatar-layout-left {
-        display: flex;
+    .qubely-testimonial-avatar-layout-left,
+    .qubely-testimonial-avatar-layout-right {
+        display: inline-flex;
         align-items: center;
         .qubely-testimonial-author-info {
-            text-align: initial;
+            text-align: left;
         }
     }
 
-    &.qubely-alignment-center {
-        .qubely-testimonial-avatar-layout-left {
-            justify-content: center;
+    .qubely-testimonial-avatar-layout-right {
+        .qubely-testimonial-author-info {
+            text-align: right;
         }
     }
 
-    &.qubely-alignment-right {
-        .qubely-testimonial-avatar-layout-left {
-            flex-direction: row-reverse;
-            .qubely-testimonial-author-info {
-                text-align: right;
-            }
-        }
-    }
-    
-    .qubely-testimonial-author-name {
-        font-weight: 700;
-    }
     //rating
     .qubely-testimonial-ratings {
         unicode-bidi: bidi-override;

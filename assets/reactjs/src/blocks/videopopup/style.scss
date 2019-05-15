@@ -3,6 +3,7 @@
     z-index: 1;
     display: flex;
     align-items: center;
+    transition: 400ms;
     &.qubely-alignment-left {
         justify-content: flex-start;
     }
@@ -29,7 +30,7 @@
             align-items: center;
             justify-content: center;
             position: relative;
-            transition: 400ms ease-in-out;
+            transition: 400ms;
             span.qubely-ripple {
                 position: absolute;
                 height: 100%;
@@ -59,14 +60,14 @@
         }
     }
 
-    .qubely-block-videopopup-overlay{
+    .qubely-block-videopopup-overlay {
         position: absolute;
         z-index: -1;
         height: 100%;
         width: 100%;
         left: 0;
         top: 0;
-        transition: 300ms;
+        transition: 400ms;
     }
 }
 

@@ -430,8 +430,17 @@ registerBlockType ( 'qubely/infobox', {
         // Body
         bgColor: { type: 'object', default: {}, style: [{ selector: '{{QUBELY}} .qubely-block-info-box' }] },
         bgColorHover: { type: 'object', default: {}, style: [{ selector: '{{QUBELY}} .qubely-block-info-box:hover' }] },
-        bgPaddingX: { type: 'object', default: {}, style: [{ selector: '{{QUBELY}} .qubely-block-info-box {padding-left: {{bgPaddingX}}; padding-right: {{bgPaddingX}};}' }] },
-        bgPaddingY: { type: 'object', default: {}, style: [{ selector: '{{QUBELY}} .qubely-block-info-box {padding-top: {{bgPaddingY}}; padding-bottom: {{bgPaddingY}};}' }] },
+        bgPadding: {
+            type: 'object',
+            default: {
+                paddingType: 'global'
+            },
+            style: [
+                {
+                    selector: '{{QUBELY}} .qubely-block-info-box'
+                }
+            ]
+        },
         bgBorderRadius: {
             type: 'object',
             default: {
