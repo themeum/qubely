@@ -44,8 +44,16 @@ registerBlockType('qubely/videopopup', {
 			]
 		},
 		
-		iconBgColor: { type: 'string', default: '#2476CA', style: [{ condition: [{ key: 'iconCorner', relation: '!=', value: '' }], selector: '{{QUBELY}} .qubely-block-videopopup .qubely-video-popup .qubely-btn-icon{ background-color:{{iconBgColor}}; }' }] },
-		iconHoverBgColor: { type: 'string', default: '', style: [{ condition: [{ key: 'iconCorner', relation: '!=', value: '' }], selector: '{{QUBELY}} .qubely-block-videopopup .qubely-video-popup .qubely-btn-icon:hover{ background-color:{{iconHoverBgColor}}; }' }] },
+		iconBgColor: {
+			type: 'string',
+			default: '#2476CA',
+			style: [
+				{
+					selector: '{{QUBELY}} .qubely-block-videopopup .qubely-video-popup .qubely-btn-icon{ background-color:{{iconBgColor}}; }'
+				}
+			]
+		},
+		iconHoverBgColor: { type: 'string', default: '', style: [{ selector: '{{QUBELY}} .qubely-block-videopopup .qubely-video-popup .qubely-btn-icon:hover{ background-color:{{iconHoverBgColor}}; }' }] },
 		
 		border: { type: 'object', default: {}, style: [{ selector: '{{QUBELY}} .qubely-btn-icon' }] },
 		borderColorHover: { type: 'string', default: '', style: [{ selector: '{{QUBELY}} .qubely-btn-icon:hover {border-color: {{borderColorHover}};}' }] },
