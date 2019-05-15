@@ -1,12 +1,13 @@
 #  Qubely Blocks - Full-fledged Gutenberg Toolkit 
-Contributors: themeum
-Donate link:<a href=" https://www.themeum.com">https://www.themeum.com</a>
-Tags: Qubely, website builder, gutenberg block, gutenberg, page builder, drag and drop editor, responsive, site editor, editor, drag-and-drop, visual editor, landing page, frontend editor, wordpress page builder, free page builder, layout builder
-Requires at least: 5.0
-Tested up to: 5.2
-Stable tag: 1.0.0-beta
-Requires PHP: 5.4.0
-License: GPL-2.0+
+Contributors: **themeum**
+
+Donate link:<a href=" https://www.themeum.com">https://www.themeum.com</a>  
+Tags: Qubely, website builder, gutenberg block, gutenberg, page builder, drag and drop editor, responsive, site editor, editor, drag-and-drop, visual editor, landing page, frontend editor, wordpress page builder, free page builder, layout builder  
+Requires at least: 5.0  
+Tested up to: 5.2  
+Stable tag: 1.0.0-beta  
+Requires PHP: 5.4.0  
+License: GPL-2.0+  
 License URI: http://www.gnu.org/licenses/gpl-2.0.txt
 
 The one and only Gutenberg block plugin you will ever need
@@ -102,33 +103,33 @@ regardless of the device type and align them flexibly (Left/Center/Right). Color
 - **Icon List:** Qubely Icon List comes with the Classic and Fill predefined layouts that you can customize to make outstanding lists. Choose from hundreds of icons to find the perfect ones for the icon lists on your site. Define icon list alignment and personalize the icon size, position, spacing and colour. Modify design flexibly with colour, spacing and border options. The typography settings comes with options to change font size, spacing, height and more!
 
 
- = Some exciting Qubely features in details =
+##Some exciting Qubely features in details
 
 Let’s dig deep into the exciting features of this advanced Gutenberg block plugin.
 
-= Predefined sections =
+**Predefined sections**
 
 To help you build websites fast, Qubely has a rich library of predefined sections those can be imported and used as blocks on the Gutenberg editor. You no longer need to style them from scratch. Also, you can modify their look if you ever want to. The predefined sections inside Qubely come in different categories so that you can navigate through them easily and find the one you need.
 
-= Row-column structure =
+**Row-column structure**
 
 With the default Column block of the Gutenberg editor, you can’t take more than two columns at a time. On the other hand, the Row block of Qubely lets you take 1 to as many as 6 columns in a single row at a time. There are multiple combinations of columns of different numbers and sizes. You just have to pick what you need. Most importantly, you can adjust the column size by flexibly dragging the columns.
 
 Build a complex web page layout with row-column structure right on the Gutenberg editor. The widely used row-column layout building concept of major page builders is with Gutenberg editor now with the blessing of Qubely.
 
-= Advanced row-column Settings =
+**Advanced row-column Settings**
 
 Alongside applying padding and margin to columns you can also set column background and hover background with single color, image, and gradient. Give column border, apply border-radius, and animate each column individually. Also, go beyond these column styling options by adding custom CSS to columns.
 
-= Visual inline styling =
+**Visual inline styling**
 
 The rich and functional blocks inside this Gutenberg page builder offers visual inline editing and styling options. You can edit, modify, and style most of the blocks’ content staying on the blocks. Like all other Gutenberg blocks, the options to edit and modify block content are on left top of each block. So, you don’t have to go away from the block to create, edit, and modify block contents.
 
-= Device specific responsive controls =
+**Device specific responsive controls**
 
 Everything you create on Gutenberg editor with the help of Qubely’s custom Gutenberg blocks becomes responsive and fits well on devices of all sizes. Additionally, you can control the entire responsiveness by defining the breakpoint for small screens. If required, you can also hide blocks on different devices.
 
-= Custom typography controls =
+**Custom typography controls**
 
 This Gutenberg page builder gives you full control over the typography of the blocks. You can choose the font, apply font weight, font transform, set font size, line height, letter spacing in px, em, and percentage on the basis of the devices they will be displayed on.
 
