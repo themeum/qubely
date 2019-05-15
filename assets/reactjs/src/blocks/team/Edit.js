@@ -41,7 +41,6 @@ class Edit extends Component {
             uniqueId,
             layout,
             alignment,
-            nameLevel,
             name,
             nameTypo,
             nameColor,
@@ -123,8 +122,6 @@ class Edit extends Component {
         const { setAttributes } = this.props
         const { openPanelSetting, device } = this.state
 
-        const nameTagName = 'h' + nameLevel;
-
         if (uniqueId) { CssGenerator(this.props.attributes, 'team', uniqueId); }
 
         return (
@@ -155,7 +152,6 @@ class Edit extends Component {
                     </PanelBody>
 
                     <PanelBody title={__('Name')} opened={'Name' === openPanelSetting} onToggle={() => this.handlePanelOpenings(openPanelSetting !== 'Name' ? 'Name' : '')}>
-                        <Headings selectedLevel={ nameLevel } onChange={(value) => setAttributes({ nameLevel: value })} />
                         <Typography label="Typography" value={nameTypo} onChange={(value) => setAttributes({ nameTypo: value })} device={device} onDeviceChange={value => this.setState({ device: value })} />
                         <Separator />
                         <Color label={__('Color')} value={nameColor} onChange={(value) => setAttributes({ nameColor: value })} />
@@ -371,7 +367,7 @@ class Edit extends Component {
                                 <div onClick={() => this.handlePanelOpenings('Name')}>
                                     <RichText
                                         key="editable"
-                                        tagName={nameTagName}
+                                        tagName='span'
                                         className="qubely-team-name"
                                         keepPlaceholderOnFocus
                                         placeholder={__('Add Name...')}
