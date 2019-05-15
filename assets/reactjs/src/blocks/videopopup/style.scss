@@ -29,7 +29,7 @@
             align-items: center;
             justify-content: center;
             position: relative;
-            transition: 400ms;
+            transition: 400ms ease-in-out;
             span.qubely-ripple {
                 position: absolute;
                 height: 100%;

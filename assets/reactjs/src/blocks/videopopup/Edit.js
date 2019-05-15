@@ -36,7 +36,7 @@ class Edit extends Component {
     }
     
     render() {
-        const { uniqueId, videoSource, bgVideo, url, icon, height, iconColor, iconHoverColor, iconSize, iconSizeCustom, background, enableBackgroundOverlay, borderRadius, layout, shadow, shadowHover, postfix, prefix, typography, textGap, overlayBackground, overlayBlend, overlayOpacity, overlayHoverOpacity, iconBorderRadius, iconCorner, iconBgColor, isRipple, iconHoverBgColor, border, prePostColor, prePostHoverColor, borderColorHover, alignment } = this.props.attributes
+        const { uniqueId, videoSource, bgVideo, url, icon, height, iconColor, iconHoverColor, iconSize, iconSizeCustom, background, enableBackgroundOverlay, borderRadius, layout, shadow, shadowHover, postfix, prefix, typography, textGap, overlayBackground, overlayBlend, overlayOpacity, overlayHoverOpacity, iconBorderRadius, iconBgColor, isRipple, iconHoverBgColor, border, prePostColor, prePostHoverColor, borderColorHover, alignment } = this.props.attributes
         const { setAttributes } = this.props
         
         if( uniqueId ){ CssGenerator( this.props.attributes, 'videopopup', uniqueId ); }
@@ -114,7 +114,7 @@ class Edit extends Component {
                             </Tab>
                         </Tabs>
                         
-                        {iconCorner && iconBgColor &&
+                        { iconBgColor &&
                             <Toggle label={__('Ripple Effect')} value={isRipple} onChange={val=>setAttributes({isRipple:val})} />
                         }
                     </PanelBody>
@@ -195,10 +195,10 @@ class Edit extends Component {
                                 { icon &&
                                     <span className="qubely-btn-icon-wrapper">
                                         <i className={`qubely-btn-icon ${icon}`}>
-                                            { (iconCorner && iconBgColor && isRipple) && <span
+                                            { ( iconBgColor && isRipple) && <span
                                                 className="qubely-ripple"
                                                 style={{
-                                                    '--qubely-ripple-radius' : iconCorner != 'custom' ? iconCorner : iconBorderRadius
+                                                    '--qubely-ripple-radius' : iconBorderRadius
                                                 }}
                                             ></span> }
                                         </i>
