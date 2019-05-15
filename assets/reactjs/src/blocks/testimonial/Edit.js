@@ -82,6 +82,7 @@ class Edit extends Component {
                         <div className="qubely-testimonial-author-name" onClick={() => this.handlePanelOpenings('Name')}>{testimonialTitle}</div>
                         <div className="qubely-testimonial-author-designation" onClick={() => this.handlePanelOpenings('Designation')}>{testimonialDesignation}</div>
                     </div>
+
                     {(avatarLayout == 'right' || avatarLayout == 'bottom') &&
                         <Fragment>
                             {avatar.url != undefined ?
@@ -372,7 +373,7 @@ class Edit extends Component {
                 </BlockControls>
 
                 <div className={`qubely-block-${uniqueId}`}>
-                    <div className={`qubely-block-testimonial qubely-alignment-${alignment}`}>
+                    <div className={`qubely-block-testimonial`}>
 
                         { layout == 2 && authorInfo }
 
