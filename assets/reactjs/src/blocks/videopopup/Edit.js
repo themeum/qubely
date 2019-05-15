@@ -113,11 +113,10 @@ class Edit extends Component {
                                 <Color label={__('Color')} value={borderColorHover} onChange={val => setAttributes({ borderColorHover: val })} />
                             </Tab>
                         </Tabs>
-
                         
-                        {/* {iconCorner && iconBgColor &&
+                        {iconCorner && iconBgColor &&
                             <Toggle label={__('Ripple Effect')} value={isRipple} onChange={val=>setAttributes({isRipple:val})} />
-                        } */}
+                        }
                     </PanelBody>
 
                     <PanelBody title={ __( 'Prefix & Postfix' ) } initialOpen={false}>
