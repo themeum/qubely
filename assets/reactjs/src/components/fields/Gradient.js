@@ -49,7 +49,7 @@ class Gradient extends Component {
     render() {
         const { value } = this.props
         let gradientColors = [['color1', __('Color 1'), '#cccccc', 'left'], ['color2', __('Color 2'), '#1f91f3', 'right']]
-        
+        let test = $(`.qubely-field-gradient-preview`).width() / 2
         return (
             <div className={"qubely-gradient qubely-field inline"}>
 
@@ -59,6 +59,9 @@ class Gradient extends Component {
                             let [color, label, defaultColor, customClassName] = gradientColor
                             return (
                                 <Dropdown
+                                    position="bottom left"
+                                    className={`qubely-gradient-color gradient-color-position-${customClassName}`}
+                                    contentClassName="qubely-gradient-color-picker"
                                     renderToggle={({ isOpen, onToggle }) => (
                                         <span className={`qubely-color-picker-container qubely-position-${customClassName}`}>
                                             <Tooltip text={label}>
@@ -66,6 +69,7 @@ class Gradient extends Component {
                                             </Tooltip>
                                         </span>
                                     )}
+
                                     renderContent={() => this.renderColorPicker(color, defaultColor)}
                                 />
                             )
