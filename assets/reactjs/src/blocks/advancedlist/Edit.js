@@ -335,10 +335,7 @@ class Edit extends Component {
 
                 <div className={`qubely-block-${uniqueId}`}>
                     <div className={`qubely-block-advanced-list qubely-alignment-${alignment}`}>
-                        <div className={`qubely-block-advanced-list qubely-alignment-${alignment}`}>
-                            {this.renderListItems()}
-                        </div>
-
+                        {this.renderListItems()}
                     </div>
                 </div>
             </Fragment>

@@ -19,40 +19,15 @@ registerBlockType('qubely/pricing', {
         },
 
         defaultItems: { type: 'number', default: 2 },
-        alignment: { type: 'string', default: 'center' },
+        alignment: { type: 'object', default: {md: 'center'}, style: [{ selector: '{{QUBELY}} .qubely-block-pricing {text-align: {{alignment}};}' }] },
         spacer: { type: 'object', default: { spaceTop: { md: '10', unit: "px" }, spaceBottom: { md: '10', unit: "px" } }, style: [{ selector: '{{QUBELY}}' }] },
 
-        navAlignment: { type: 'string', default: 'left' },
         copyStyle: { type: 'boolean', default: false },
 
         // Title__
         title: { type: 'string', default: 'PERSONAL' },
         titleColor: { type: 'string', default: '#2184F9', style: [{ selector: '{{QUBELY}} .qubely-pricing-title{color: {{titleColor}};}' }] },
         titleTypography: { type: 'object', default: { openTypography: 1, size: { md: 20, unit: 'px' } }, style: [{ selector: '{{QUBELY}} .qubely-pricing-title' }] },
-
-        titleAlignment: {
-            type: 'string', default: 'center',
-            style: [
-                {
-                    condition: [
-                        { key: 'titleAlignment', relation: '==', value: 'left' },
-                    ],
-                    selector: '{{QUBELY}} .qubely-pricing-title {justify-content: flex-start;}'
-                },
-                {
-                    condition: [
-                        { key: 'titleAlignment', relation: '==', value: 'center' },
-                    ],
-                    selector: '{{QUBELY}} .qubely-pricing-title {justify-content: center;}'
-                },
-                {
-                    condition: [
-                        { key: 'titleAlignment', relation: '==', value: 'right' },
-                    ],
-                    selector: '{{QUBELY}} .qubely-pricing-title {justify-content: flex-end;}'
-                }
-            ]
-        },
 
         titleSpacing: {
             type: 'object',
@@ -74,30 +49,6 @@ registerBlockType('qubely/pricing', {
             style: [
                 {
                     selector: '{{QUBELY}} .qubely-sub-title-wrapper {margin-bottom: {{subTitleSpacing}};}'
-                }
-            ]
-        },
-
-        subTitleAlignment: {
-            type: 'string', default: 'center',
-            style: [
-                {
-                    condition: [
-                        { key: 'subTitleAlignment', relation: '==', value: 'left' },
-                    ],
-                    selector: '{{QUBELY}} .qubely-sub-title-wrapper {justify-content: flex-start;}'
-                },
-                {
-                    condition: [
-                        { key: 'subTitleAlignment', relation: '==', value: 'center' },
-                    ],
-                    selector: '{{QUBELY}} .qubely-sub-title-wrapper {justify-content: center;}'
-                },
-                {
-                    condition: [
-                        { key: 'subTitleAlignment', relation: '==', value: 'right' },
-                    ],
-                    selector: '{{QUBELY}} .qubely-sub-title-wrapper {justify-content: flex-end;}'
                 }
             ]
         },
@@ -472,30 +423,6 @@ registerBlockType('qubely/pricing', {
 
         buttonPaddingTop: { type: 'object', default: { md: 30, unit: 'px' }, style: [{ selector: '{{QUBELY}} .qubely-pricing-button{ padding-top: {{buttonPaddingTop}};}' }] },
         buttonPaddingBottom: { type: 'object', default: { md: 10, unit: 'px' }, style: [{ selector: '{{QUBELY}} .qubely-pricing-button{ padding-bottom: {{buttonPaddingBottom}};}' }] },
-        enableButtonAlignment: { type: 'boolean', default: false },
-        buttonAlignment: {
-            type: 'string', default: 'center',
-            style: [
-                {
-                    condition: [
-                        { key: 'buttonAlignment', relation: '==', value: 'left' },
-                    ],
-                    selector: '{{QUBELY}} .qubely-block-btn-wrapper {justify-content: flex-start;} {{QUBELY}} .qubely-pricing-postbutton-text{text-align: left;}'
-                },
-                {
-                    condition: [
-                        { key: 'buttonAlignment', relation: '==', value: 'center' },
-                    ],
-                    selector: '{{QUBELY}} .qubely-block-btn-wrapper {justify-content: center;} {{QUBELY}} .qubely-pricing-postbutton-text{text-align: center;}'
-                },
-                {
-                    condition: [
-                        { key: 'buttonAlignment', relation: '==', value: 'right' },
-                    ],
-                    selector: '{{QUBELY}} .qubely-block-btn-wrapper {justify-content: flex-end;} {{QUBELY}} .qubely-pricing-postbutton-text{text-align: right;}'
-                }
-            ]
-        },
 
         //postButtonText
         enablePostButtonText: { type: 'boolean', default: false },
@@ -567,31 +494,6 @@ registerBlockType('qubely/pricing', {
         listComponent: { type: 'boolean', default: true },
         listType: { type: 'string', default: 'unordered' },
         bulletStyle: { type: 'string', default: 'check-circle-outline' },
-        enableListAlignment: { type: 'boolean', default: false },
-        listAlignment: {
-            type: 'string',
-            default: 'center',
-            style: [
-                {
-                    condition: [
-                        { key: 'listAlignment', relation: '==', value: 'left' },
-                    ],
-                    selector: '{{QUBELY}} .qubely-pricing-features {align-items: flex-start;}'
-                },
-                {
-                    condition: [
-                        { key: 'listAlignment', relation: '==', value: 'center' },
-                    ],
-                    selector: '{{QUBELY}} .qubely-pricing-features {align-items: center;}'
-                },
-                {
-                    condition: [
-                        { key: 'listAlignment', relation: '==', value: 'right' },
-                    ],
-                    selector: '{{QUBELY}} .qubely-pricing-features {align-items: flex-end;}'
-                }
-            ]
-        },
         showGlobalSettings: { type: 'boolean', default: true },
         showContextMenu: { type: 'boolean', default: true },
 

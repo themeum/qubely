@@ -15,6 +15,18 @@ const addAttribute = (settings) => {
             buttonTag: { type: 'string', default: 'a' },
             buttonUrl: { type: 'object', default: { url: '#' } },
             buttonSize: { type: 'string', default: 'medium' },
+            buttonBlock: {
+                type: 'boolean',
+                 default: false,
+                 style: [
+                    {
+                        condition: [
+                            { key: 'buttonBlock', relation: '==', value: true }
+                        ],
+                        selector: '{{QUBELY}} .qubely-block-btn-anchor {display: -webkit-box; display: -ms-flexbox; display: flex;}'
+                    }
+                ]
+            },
             buttonPadding: {
                 type: 'object',
                 default: {
@@ -180,7 +192,7 @@ const withInspectorControls = createHigherOrderComponent(OriginalComponent => {
 
         renderButtonControls = () => {
             const { setAttributes,
-                attributes: { enableButtonAlignment, buttonAlignment, buttonGap, buttonTag, buttonFillType, buttonSize, buttonTypography, buttonPadding, buttonUrl, buttonBorderRadius, buttonIconName, buttonIconPosition, buttonIconSize, buttonIconGap, buttonBorder, buttonBorderHoverColor, buttonColor, buttonHoverColor, buttonBgColor, buttonBgHoverColor, buttonShadow, buttonHoverShadow } } = this.props
+                attributes: { enableButtonAlignment, buttonAlignment, buttonGap, buttonBlock, buttonTag, buttonFillType, buttonSize, buttonTypography, buttonPadding, buttonUrl, buttonBorderRadius, buttonIconName, buttonIconPosition, buttonIconSize, buttonIconGap, buttonBorder, buttonBorderHoverColor, buttonColor, buttonHoverColor, buttonBgColor, buttonBgHoverColor, buttonShadow, buttonHoverShadow } } = this.props
             const { device } = this.state
             return (
                 <Fragment>
@@ -224,6 +236,7 @@ const withInspectorControls = createHigherOrderComponent(OriginalComponent => {
                                 onDeviceChange={value => this.setState({ device: value })} />
 
                         }
+                        <Toggle label={__('Full Width')} value={buttonBlock} onChange={val => setAttributes({ buttonBlock: val })} />
                     </InnerPanel>
 
                     <InnerPanel title={__('Design')} initialOpen={false}>

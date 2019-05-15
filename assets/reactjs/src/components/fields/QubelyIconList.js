@@ -67,8 +67,8 @@ class QubelyIconListEdit extends Component {
         return listItems.map((item, index) => {
             return (
                 <li className={`qubely-list-li qubely-list-li-editor qubely-icon-position-${iconPosition}`}>
-                    {iconPosition == 'right' && item.text.length > 0 && this.renderDeleteIcon(index)}
                     <div ref="avoidOnClick" className={`qubely-list-item qubely-list-item-${index}`} onClick={() => this.setState({ currentListItemIndex: index })}>
+                        {iconPosition == 'right' && item.text.length > 0 && this.renderDeleteIcon(index)}
                         {enableListIcons && iconPosition == 'left' && <span className={`qubely-list-item-icon ${item.icon} fa-fw`} style={item.customColor ? { color: item.customColor } : {}} onClick={() => this.setState({ openIconPopUp: this.state.currentListItemIndex == index ? !this.state.openIconPopUp : true })} />}
                         <div
                             className={`qubely-list-item-text-${index} qubely-text `}
@@ -97,24 +97,24 @@ class QubelyIconListEdit extends Component {
                             {item.text}
                         </div>
                         {enableListIcons && iconPosition == 'right' && <span className={`qubely-list-item-icon ${item.icon} fa-fw`} style={item.customColor ? { color: item.customColor } : {}} onClick={() => this.setState({ openIconPopUp: this.state.currentListItemIndex == index ? !this.state.openIconPopUp : true })} />}
+                        {iconPosition == 'left' && item.text.length > 0 && this.renderDeleteIcon(index)}
+                        {(this.state.currentListItemIndex == index && this.state.openIconPopUp) &&
+                            <Wrapper inline
+                                domNodetobeAvoided={this.refs.avoidOnClick}
+                                onClickOutside={() => {
+                                    this.setState({
+                                        openIconPopUp: false
+                                    })
+                                }}
+                                customClass="">
+                                <Color label={__(' Color')} value={item.customColor ? item.customColor : '#ccc'} onChange={(color) => this.modifySpecificItem({ customColor: color }, index)} />
+                                <IconList
+                                    disableToggle={true}
+                                    value={listItems.length > 0 && listItems[index].icon}
+                                    onChange={(value) => this.modifySpecificItem({ icon: value }, index)} />
+                            </Wrapper>
+                        }
                     </div>
-                    {iconPosition == 'left' && item.text.length > 0 && this.renderDeleteIcon(index)}
-                    {(this.state.currentListItemIndex == index && this.state.openIconPopUp) &&
-                        <Wrapper inline
-                            domNodetobeAvoided={this.refs.avoidOnClick}
-                            onClickOutside={() => {
-                                this.setState({
-                                    openIconPopUp: false
-                                })
-                            }}
-                            customClass="">
-                            <Color label={__(' Color')} value={item.customColor ? item.customColor : '#ccc'} onChange={(color) => this.modifySpecificItem({ customColor: color }, index)} />
-                            <IconList
-                                disableToggle={true}
-                                value={listItems.length > 0 && listItems[index].icon}
-                                onChange={(value) => this.modifySpecificItem({ icon: value }, index)} />
-                        </Wrapper>
-                    }
                 </li>
             )
         })

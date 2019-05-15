@@ -20,6 +20,18 @@ registerBlockType('qubely/button', {
         customClassName: { type: 'string', default: '' },
         spacer: { type: 'object', default: { spaceTop: { md: '10', unit: "px" }, spaceBottom: { md: '10', unit: "px" } }, style: [{ selector: '{{QUBELY}}' }] },
         textField: { type: 'string', default: '' },
+        btnBlock: {
+            type: 'boolean',
+             default: false,
+             style: [
+                {
+                    condition: [
+                        { key: 'btnBlock', relation: '==', value: true }
+                    ],
+                    selector: '{{QUBELY}} .qubely-block-btn-anchor {display: -webkit-box; display: -ms-flexbox; display: flex;}'
+                }
+            ]
+        },
         alignment: {
             type: 'object', default: { md: 'center' },
             style: [

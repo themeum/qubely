@@ -2,30 +2,57 @@
     .qubely-list {
         list-style: none;
         padding: 0;
-        margin: 0;
+		margin: 0;
+		[contenteditable=true]:empty:before {
+			content: attr(placeholder);
+			color: gray;
+			padding: 0px 5px 0px 5px;
+			display: block;
+		}
         .qubely-list-li {
             position: relative;
             margin: 0;
             display: block;
             transition: color 400ms, background-color 400ms, border-color 400ms, box-shadow 400ms;
-            display: flex;
-			align-items: center;
 			.qubely-list-item-icon {
 				transition: color 400ms;
 			}
 			.qubely-list-item {
-				display: inline-flex;
-				align-items: center;
-				.qubely-list-item-text{
-					min-width: 20px;
-					padding: 0px 5px 0px 5px;
+				display: inline-block;
+				position: relative;
+				>span,
+				>div {
+					display: inline-block;
 				}
-				[contenteditable=true]:empty:before {
-					content: attr(placeholder);
-					color: gray;
-					padding: 0px 5px 0px 5px;
-					display: block; /* For Firefox */
-				  }
+
+				.qubely-action-remove {
+					display: none;
+					font-size: 12px;
+					width: 18px;
+					height: 18px;
+					line-height: 20px;
+					text-align: center;
+					background: rgba(0, 0, 0, .8);
+					color: #fff;
+					border-radius: 10px;
+					position: absolute;
+					right: -30px;
+					top: 50%;
+					transform: translateY(-50%);
+					cursor: pointer;
+				}
+			}
+
+			&.qubely-list-li-editor {
+				.qubely-list-item-icon {
+					cursor: cell;
+				}
+			}
+
+			&:hover {
+				.qubely-action-remove {
+					display: block;
+				}
 			}
 
 			&.qubely-list-li-editor {
@@ -35,29 +62,4 @@
 			}
 		}
 	}
-
-	.qubely-action-remove {
-		display: none;
-		font-size: 12px;
-		width: 18px;
-		height: 18px;
-		line-height: 20px;
-		text-align: center;
-		background: rgba(0, 0, 0, .8);
-		color: #fff;
-		border-radius: 10px;
-		margin-left: 10px;
-		cursor: pointer;
-	}
-
-	.qubely-list-li:hover {
-		.qubely-action-remove {
-			display: inline-block;
-		}
-	}
-
-	.qubely-action-button {
-		margin-top: 15px;
-	}
 }
-

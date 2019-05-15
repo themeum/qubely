@@ -106,37 +106,37 @@ class Edit extends Component {
                             {item.text}
                         </div>
                         {iconPosition == 'right' && <span className={`qubely-list-item-icon ${item.icon} fa-fw`} onClick={() => this.setState({ openIconPopUp: this.state.currentListItemIndex == index ? !this.state.openIconPopUp : true })} />}
-                    </div>
-                    {
-                        item.text.length > 0 &&
-                        <Tooltip text={__('Delete this item')}>
-                            <span className="qubely-action-remove" role="button"
-                                onClick={() => {
-                                    this.updateListItems(index, 'delete')
-                                    index == focusedItem ? this.setState({ focusedItem: index > 0 ? index - 1 : index })
-                                        :
-                                        this.setState({ focusedItem: focusedItem > 0 ? focusedItem - 1 : focusedItem })
+                        {
+                            item.text.length > 0 &&
+                            <Tooltip text={__('Delete this item')}>
+                                <span className="qubely-action-remove" role="button"
+                                    onClick={() => {
+                                        this.updateListItems(index, 'delete')
+                                        index == focusedItem ? this.setState({ focusedItem: index > 0 ? index - 1 : index })
+                                            :
+                                            this.setState({ focusedItem: focusedItem > 0 ? focusedItem - 1 : focusedItem })
 
-                                }}>
-                                <i class="fas fa-times" />
-                            </span>
-                        </Tooltip>
-                    }
-                    {(this.state.currentListItemIndex == index && this.state.openIconPopUp && isSelected) &&
-                        <Wrapper inline
-                            domNodetobeAvoided={this.refs.avoidOnClick}
-                            onClickOutside={() => {
-                                this.setState({
-                                    openIconPopUp: false
-                                })
-                            }}
-                            customClass="qubely-padding-0">
-                            <IconList
-                                disableToggle={true}
-                                value={listItems.length > 0 && listItems[index].icon}
-                                onChange={(value) => this.modifySpecificItem({ icon: value }, index)} />
-                        </Wrapper>
-                    }
+                                    }}>
+                                    <i class="fas fa-times" />
+                                </span>
+                            </Tooltip>
+                        }
+                        {(this.state.currentListItemIndex == index && this.state.openIconPopUp && isSelected) &&
+                            <Wrapper inline
+                                domNodetobeAvoided={this.refs.avoidOnClick}
+                                onClickOutside={() => {
+                                    this.setState({
+                                        openIconPopUp: false
+                                    })
+                                }}
+                                customClass="qubely-padding-0">
+                                <IconList
+                                    disableToggle={true}
+                                    value={listItems.length > 0 && listItems[index].icon}
+                                    onChange={(value) => this.modifySpecificItem({ icon: value }, index)} />
+                            </Wrapper>
+                        }
+                    </div>
                 </li>
             )
         })
@@ -147,7 +147,7 @@ class Edit extends Component {
         const { setAttributes, attributes: { uniqueId,
             iconSize, iconSizeCustom, iconSpacing, layout, iconPosition,
             listItems, typography, alignment, iconColor, iconHoverColor,
-            spacing, color, colorHover,padding, backgroundSizeX, backgroundSizeY, background, backgroundHover, border, borderRadius, borderColorHover, shadow, shadowHover,
+            spacing, color, colorHover,padding, background, backgroundHover, border, borderRadius, borderColorHover, shadow, shadowHover,
         } } = this.props
         
         const { device } = this.state
@@ -164,7 +164,7 @@ class Edit extends Component {
                                 { value: 'classic', svg: icons.list_classic, label: __('Classic') }
                             ]}
                         />
-                        <Alignment label={__('Alignment')} value={alignment} alignmentType="content" onChange={val => setAttributes({ alignment: val })} disableJustify />
+                        <Alignment label={__('Alignment')} value={alignment} alignmentType="content" onChange={val => setAttributes({ alignment: val })} disableJustify responsive />
                     </PanelBody>
 
                     <PanelBody title={__('Typography')} initialOpen={false}>

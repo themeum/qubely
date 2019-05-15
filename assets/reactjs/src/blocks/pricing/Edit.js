@@ -1,11 +1,10 @@
 const { __ } = wp.i18n
-const { PanelBody, Toolbar, SelectControl, TextControl, ColorPalette, Button, ButtonGroup, Popover } = wp.components
+const { PanelBody, Toolbar, SelectControl, TextControl } = wp.components
 const { compose } = wp.compose
 const { select, withSelect, withDispatch } = wp.data
 const { Component, Fragment } = wp.element
-const { createBlock } = wp.blocks
 const { getBlock } = select('core/editor')
-const { InnerBlocks, RichText, InspectorControls, BlockControls } = wp.editor
+const { RichText, InspectorControls, BlockControls } = wp.editor
 import { Color, Toggle, Border, Padding, Alignment, Typography, QubelyButtonEdit, Select, ColorAdvanced, Range, RadioAdvanced, Tabs, Tab, Separator, QubelyIconListEdit, BoxShadow, Styles, BorderRadius } from "../../components/FieldRender"
 import InlineToolbar from '../../components/fields/inline/InlineToolbar'
 import { CssGenerator } from '../../components/CssGenerator'
@@ -196,11 +195,11 @@ class Edit extends Component {
 			attributes: {
 				uniqueId, pricings, alignment, titleSpacing, layout,
 				// Title 
-				title, titleColor, titleTypography, titleAlignment,
+				title, titleColor, titleTypography,
 				//sub title 
-				subTitleAlignment, subTitleSpacing, subTitleColor, subTitleTypography,
+			 	subTitleSpacing, subTitleColor, subTitleTypography,
 				// Price
-				price, priceAlignment, priceColor, priceTypography, discount, discountPrice, discountColor, discountTypography, pricingSpacing,
+				price, priceColor, priceTypography, discount, discountPrice, discountColor, discountTypography, pricingSpacing,
 				// Currency
 				currency, currencyCustom, currencyPosition, currencyAlign, currencyColor, currencyTypography,
 				// Duration
@@ -210,7 +209,7 @@ class Edit extends Component {
 				// Background
 				bgColor, bgPadding, bgBorderRadius, bgBorder, bgColorHover, bgBorderColorHover, bgShadow, bgShadowHover,
 				// features
-				enableFeatures, blockFeatures, listAlignment, iconPosition, iconColor, enableListIcons,
+				enableFeatures, blockFeatures, iconPosition, iconColor, enableListIcons,
 				//Header
 				headerBg, headerBorder, headerPadding,
 				//postButton text
@@ -219,7 +218,7 @@ class Edit extends Component {
 
 		} = this.props
 
-		const { device, openPanelSetting, showpriceTypography, showDurationTypography, showBadgeTypography, showTitleTypography, showSubTitleTypography } = this.state
+		const { device, openPanelSetting } = this.state
 		if (uniqueId) { CssGenerator(this.props.attributes, 'pricing', uniqueId) }
 
 		return (
@@ -250,13 +249,9 @@ class Edit extends Component {
 
 						<Alignment label={__('Alignment')} alignmentType="content" value={alignment} disableJustify
 							onChange={val => setAttributes({
-								alignment: val,
-								titleAlignment: val,
-								subTitleAlignment: val,
-								priceAlignment: val,
-								listAlignment: val,
-								buttonAlignment: val,
-							})} />
+								alignment: val
+							})}
+							responsive />
 					</PanelBody>
 
 					<PanelBody title={__('Title')} opened={'Title' === openPanelSetting} onToggle={() => this.handlePanelOpenings(openPanelSetting !== 'Title' ? 'Title' : '')}>
@@ -700,7 +695,7 @@ class Edit extends Component {
 
 						{
 							enableFeatures &&
-							<div ref={this.contextRef} className={`qubely-pricing-features qubely-alignment-${listAlignment}`} onClick={() => this.handlePanelOpenings('Features')}>
+							<div ref={this.contextRef} className={`qubely-pricing-features`} onClick={() => this.handlePanelOpenings('Features')}>
 								<QubelyIconListEdit
 									parentBlock={`qubely-block-${uniqueId}`}
 									disableButton={blockFeatures.length > 0 ? true : false}
@@ -722,7 +717,6 @@ class Edit extends Component {
 						}
 
 						{enableBadge && <span className={`qubely-pricing-badge`} contenteditable="true" onBlur={(e) => setAttributes({ 'badge': e.target.innerText })} onClick={() => this.handlePanelOpenings('Badge')}> {badge} </span>}
-
 					</div>
 				</div>
 			</Fragment>

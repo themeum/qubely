@@ -1,25 +1,6 @@
 .qubely-block-pricing { 
-	overflow: hidden;
-	padding-left: 10px;
-	padding-right: 10px;
-	transition: background-color 400ms, border-color 400ms, border-width 400ms, box-shadow 400ms;
-	.qubely-pricing-title{
-		display: flex;
-		align-items: center;
-	}
-	.qubely-sub-title-wrapper{
-		display: flex;
-		align-items: center;
-	}
-    .qubely-pricing-wrapper{
-        display: flex; 
-        align-items: flex-end;
-	}
-	.qubely-pricing-features{
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-	}
+	transition: 400ms;
+
     .qubely-list {
         list-style: none;
         padding: 0;
@@ -28,22 +9,40 @@
 			content: attr(placeholder);
 			color: gray;
 			padding: 0px 5px 0px 5px;
-			display: block; /* For Firefox */
-		  }
+			display: block;
+		}
         .qubely-list-li {
-			width: fit-content;
             position: relative;
             margin: 0;
             display: block;
             transition: color 400ms, background-color 400ms, border-color 400ms, box-shadow 400ms;
-            display: flex;
-			align-items: center;
 			.qubely-list-item-icon {
 				transition: color 400ms;
 			}
 			.qubely-list-item {
-				display: inline-flex;
-				align-items: center;
+				display: inline-block;
+				position: relative;
+				>span,
+				>div {
+					display: inline-block;
+				}
+
+				.qubely-action-remove {
+					display: none;
+					font-size: 12px;
+					width: 18px;
+					height: 18px;
+					line-height: 20px;
+					text-align: center;
+					background: rgba(0, 0, 0, .8);
+					color: #fff;
+					border-radius: 10px;
+					position: absolute;
+					right: -30px;
+					top: 50%;
+					transform: translateY(-50%);
+					cursor: pointer;
+				}
 			}
 
 			&.qubely-list-li-editor {
@@ -51,70 +50,18 @@
 					cursor: cell;
 				}
 			}
+
+			&:hover {
+				.qubely-action-remove {
+					display: block;
+				}
+			}
 		}
-
-		.qubely-list-li.qubely-list-li-editor.qubely-icon-position-left .qubely-list-item{
-			padding-right: 23px;
-		} 
-
-
 	}
-	.qubely-list.icon-position-right{
-		display: flex;
-		flex-direction: column;
-		align-items: flex-end;
-	}
-	.qubely-list-li.qubely-list-li-editor.qubely-icon-position-right{
-		.qubely-list-item{
-			padding-left: 23px;
-		}
 
-	}
 	.qubely-pricing-badge{
 		display: flex;
 		align-items: center;
 		justify-content: center;
 	}
-
-	.qubely-action-remove {
-		display: none;
-		font-size: 12px;
-		width: 18px;
-		height: 18px;
-		line-height: 20px;
-		text-align: center;
-		background: rgba(0, 0, 0, .8);
-		color: #fff;
-		border-radius: 10px;
-		// margin-left: 10px;
-		cursor: pointer;
-	}
-
-	.qubely-list-li.qubely-list-li-editor.qubely-icon-position-left:hover {
-		.qubely-list-item {
-			padding-right: 5px;
-		}
-		.qubely-action-remove {
-			display: inline-block;
-		}
-	}
-	.qubely-list-li.qubely-list-li-editor.qubely-icon-position-right:hover {
-		.qubely-list-item {
-			padding-left: 5px;
-		}
-		.qubely-action-remove {
-			display: inline-block;
-		}
-	}
-
-	.qubely-action-button {
-		margin-top: 15px;
-	}
-	.qubely-pricing-button{
-		.qubely-block-btn-wrapper{
-			display: flex;
-			align-items: center;
-		}
-	}
-
 }

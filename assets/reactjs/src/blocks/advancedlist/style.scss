@@ -8,47 +8,52 @@
             margin: 0;
             display: block;
             transition: color 400ms, background-color 400ms, border-color 400ms, box-shadow 400ms;
-            display: flex;
-            align-items: center;
             &::before,
             &::after {
                 font-family: "Font Awesome 5 Free";
                 font-weight: 900;
                 transition: color 400ms, background-color 400ms;
             }
-        }
-        .qubely-list-item {
-            [contenteditable=true]:empty:before {
-                content: attr(placeholder);
-                color: gray;
-                padding: 0px 5px 0px 5px;
-                display: block; /* For Firefox */
-              }
-        }
-        .qubely-action-remove {
-            display: none;
-            font-size: 12px;
-            width: 18px;
-            height: 18px;
-            line-height: 20px;
-            text-align: center;
-            background: rgba(0, 0, 0, .8);
-            color: #fff;
-            border-radius: 10px;
-            cursor: pointer;
-        }
-        .qubely-action-remove.alignment-right{
-            margin-left: 10px;
-        }
-        .qubely-action-remove.alignment-left{
-            margin-right: 10px;
-        }
-    
-        .qubely-list-item:hover {
-            .qubely-action-remove {
+            >span,
+            >div {
                 display: inline-block;
             }
+
+            .qubely-action-remove {
+                display: none;
+                font-size: 12px;
+                width: 18px;
+                height: 18px;
+                line-height: 20px;
+                text-align: center;
+                background: rgba(0, 0, 0, .8);
+                color: #fff;
+                border-radius: 10px;
+                position: absolute;
+                right: 0px;
+                top: 50%;
+                transform: translateY(-50%);
+                cursor: pointer;
+                &.alignment-left {
+                    right: auto;
+                    left: 0;
+                }
+            }
+
+            &:hover {
+                .qubely-action-remove {
+                    display: block;
+                }
+            }
         }
+
+        [contenteditable=true]:empty:before {
+            content: attr(placeholder);
+            color: gray;
+            padding: 0px 5px 0px 5px;
+            display: block; /* For Firefox */
+        }
+        
         .qubely-action-button {
             margin-top: 15px;
         }

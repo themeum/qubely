@@ -15,28 +15,14 @@ registerBlockType('qubely/iconlist', {
         listStyle: { type: 'string', default: 'ordered' },
         ordered: { type: 'boolean', default: false, },
         alignment: {
-            type: 'string', default: 'left',
+            type: 'object', default: {md: 'left'},
             style: [
                 {
-                    condition: [
-                        { key: 'alignment', relation: '==', value: 'left' },
-                    ],
-                    selector: '{{QUBELY}} .qubely-list-li {-webkit-box-pack: start;-ms-flex-pack: start;justify-content: flex-start;}'
-                },
-                {
-                    condition: [
-                        { key: 'alignment', relation: '==', value: 'center' },
-                    ],
-                    selector: '{{QUBELY}} .qubely-list-li {-webkit-box-pack: center;-ms-flex-pack: center;justify-content: center;}'
-                },
-                {
-                    condition: [
-                        { key: 'alignment', relation: '==', value: 'right' },
-                    ],
-                    selector: '{{QUBELY}} .qubely-list-li {-webkit-box-pack: end;-ms-flex-pack: end;justify-content: flex-end;}'
+                    selector: '{{QUBELY}} .qubely-block-icon-list {text-align: {{alignment}};}'
                 }
             ]
         },
+        
         layout: { type: 'string', default: 'classic' },
 
         listItems: {

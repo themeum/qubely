@@ -14,7 +14,7 @@ registerBlockType('qubely/advancedlist', {
         uniqueId: { type: 'string', default: '' },
         listType: { type: 'string', default: 'unordered' },
         spacer: { type: 'object', default: { spaceTop: { md: '10', unit: "px" }, spaceBottom: { md: '10', unit: "px" } }, style: [{ selector: '{{QUBELY}}' }] },
-        alignment: { type: 'string', default: 'left' },
+        alignment: { type: 'string', default: 'left', style: [{ selector: '{{QUBELY}} .qubely-block-advanced-list {text-align: {{alignment}};}' }] },
         layout: { type: 'string', default: 'fill' },
 
         listItems: {

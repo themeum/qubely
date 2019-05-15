@@ -4,7 +4,7 @@ const { compose } = wp.compose
 const { withSelect, withDispatch } = wp.data
 const { PanelBody, Toolbar, Tooltip } = wp.components
 const { RichText, InspectorControls, BlockControls } = wp.editor
-import { Alignment, Typography, Color, ColorAdvanced, IconList, Select, Styles, Tabs, Tab, Range, Url, BoxShadow, RadioAdvanced, Separator, Border, BorderRadius, Padding } from "../../components/FieldRender"
+import { Alignment, Typography, Color, ColorAdvanced, IconList, Select, Styles, Tabs, Tab, Range, Url, BoxShadow, RadioAdvanced, Separator, Border, BorderRadius, Padding, Toggle } from "../../components/FieldRender"
 import { CssGenerator } from '../../components/CssGenerator'
 import InlineToolbar from '../../components/fields/inline/InlineToolbar'
 import '../../components/GlobalSettings';
@@ -27,7 +27,7 @@ class Edit extends Component {
     }
 
     render() {
-        const { uniqueId, parentClientId, buttonGroup, fillType, buttonSize, buttonPadding, typography, textField, url, enableAlignment, alignment, buttonCorner, buttonBorderRadius, iconName, iconPosition, iconSize, iconGap, buttonBorder, borderHoverColor, buttonColor, buttonColor2, buttonHoverColor, bgColor, bgHoverColor, buttonShadow, buttonHoverShadow } = this.props.attributes
+        const { uniqueId, parentClientId, buttonGroup, fillType, buttonSize, buttonPadding, typography, textField, url, enableAlignment, alignment, btnBlock, buttonBorderRadius, iconName, iconPosition, iconSize, iconGap, buttonBorder, borderHoverColor, buttonColor, buttonColor2, buttonHoverColor, bgColor, bgHoverColor, buttonShadow, buttonHoverShadow } = this.props.attributes
         const { clientId, removeBlock, updateBlockAttributes, buttonGroupAttributes, setAttributes } = this.props
         const {device}=this.state
 
@@ -73,6 +73,7 @@ class Edit extends Component {
                                 device={device}
                                 onDeviceChange={value => this.setState({ device: value })} />
                         }
+                        <Toggle label={__('Full Width')} value={btnBlock} onChange={val => setAttributes({ btnBlock: val })} />
                     </PanelBody>
 
                     <PanelBody title={__('Design')} initialOpen={false}>
@@ -164,7 +165,7 @@ class Edit extends Component {
 
                 <div className={`qubely-block-${uniqueId}`}>
                     <div className="qubely-block-btn-wrapper">
-                        <div className={`qubely-block-btn qubely-block-btn-type-${fillType}`}>
+                        <div className={`qubely-block-btn`}>
                             <span className={`qubely-block-btn-anchor is-${buttonSize}`}>
                                 { (iconName.trim() != "") && (iconPosition == 'left') && (<i className={`qubely-btn-icon ${iconName}`} />)}
                                 <RichText
