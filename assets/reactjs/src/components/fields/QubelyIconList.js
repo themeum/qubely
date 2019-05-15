@@ -71,7 +71,7 @@ class QubelyIconListEdit extends Component {
                     <div ref="avoidOnClick" className={`qubely-list-item qubely-list-item-${index}`} onClick={() => this.setState({ currentListItemIndex: index })}>
                         {enableListIcons && iconPosition == 'left' && <span className={`qubely-list-item-icon ${item.icon} fa-fw`} style={item.customColor ? { color: item.customColor } : {}} onClick={() => this.setState({ openIconPopUp: this.state.currentListItemIndex == index ? !this.state.openIconPopUp : true })} />}
                         <div
-                            className={`qubely-list-item-text-${index}`}
+                            className={`qubely-list-item-text-${index} qubely-text `}
                             id={`qubely-list-item-text-${index}`}
                             contenteditable="true"
                             placeholder={newListItemPlaceHolder}
@@ -175,7 +175,7 @@ class QubelyIconListSave extends Component {
                                     <div className={`qubely-list-item qubely-list-item-${index}`} >
                                         {enableListIcons && iconPosition == 'left' && <span className={`qubely-list-item-icon ${item.icon} fa-fw`} style={item.customColor ? { color: item.customColor } : {}} />}
                                         <div
-                                            className={`qubely-list-item-text-${index}`}
+                                            className={`qubely-list-item-text-${index} qubely-text `}
                                             id={`qubely-list-item-text-${index}`}
                                         >
                                             {item.text}

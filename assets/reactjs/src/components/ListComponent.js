@@ -104,7 +104,7 @@ const addAttribute = (settings) => {
 
                 iconColor: { type: 'string', default: '#5D7FEB', style: [{ selector: '{{QUBELY}} .qubely-list .qubely-list-li .qubely-list-item-icon {color: {{iconColor}};}' }] },
 
-                color: { type: 'string', default: '#333', style: [{ selector: '{{QUBELY}} .qubely-list .qubely-list-li {color: {{color}};}' }] },
+                color: { type: 'string', default: '#333', style: [{ selector: '{{QUBELY}} .qubely-list .qubely-list-li .qubely-text{color: {{color}};}' }] },
                 spacing: { type: 'string', default: '5', style: [{ selector: '{{QUBELY}} .qubely-list .qubely-list-li:not(:last-child) {margin-bottom: {{spacing}}px;}' }] },
                 featuresPadding: {
                     type: 'object',
@@ -127,11 +127,12 @@ const withInspectorControls = createHigherOrderComponent(OriginalComponent => {
     class QubelyWrappedComponent extends Component {
         renderListControls = () => {
             const { setAttributes,
-                attributes: { enableListIcons, iconSize, iconSizeCustom, iconSpacing, iconPosition,
+                attributes: { enableListIcons, iconSize, iconSizeCustom, iconSpacing, iconPosition, color,
                     typography, enableListAlignment, listAlignment, iconColor, spacing, featuresPadding }
             } = this.props
             return (
                 <Fragment>
+                    <Color label={__('Color')} value={color} onChange={val => setAttributes({ color: val })} />
                     <Typography label={__('Typography')} value={typography} onChange={val => setAttributes({ typography: val })} />
                     <Range label={__('Spacing')} value={spacing} onChange={val => setAttributes({ spacing: val })} min={0} max={60} />
                     <Padding
@@ -142,7 +143,7 @@ const withInspectorControls = createHigherOrderComponent(OriginalComponent => {
                         unit={['px', 'em', '%']}
                         label={"Padding"}
                         onChange={val => setAttributes({ featuresPadding: val })} />
-                    { enableListAlignment &&
+                    {enableListAlignment &&
                         <Alignment label={__('Alignment')} value={listAlignment} onChange={val => setAttributes({ listAlignment: val })} disableJustify />
                     }
                     <Separator />
@@ -150,7 +151,7 @@ const withInspectorControls = createHigherOrderComponent(OriginalComponent => {
                         value={enableListIcons}
                         label={__('Icons')}
                         onChange={val => setAttributes({ enableListIcons: val })} />
-                    { enableListIcons &&
+                    {enableListIcons &&
                         <Fragment>
                             <Color label={__('Icon Color')} value={iconColor} onChange={value => setAttributes({ iconColor: value })} />
                             <RadioAdvanced label={__('Icon Size')} value={iconSize} onChange={val => setAttributes({ iconSize: val })}
