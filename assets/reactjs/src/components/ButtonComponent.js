@@ -233,7 +233,13 @@ const withInspectorControls = createHigherOrderComponent(OriginalComponent => {
                                 {buttonFillType == 'fill' &&
                                     <ColorAdvanced label={__('Background')} value={buttonBgColor} onChange={(value) => setAttributes({ buttonBgColor: value })} />
                                 }
-                                <Border label={__('Border')} separator value={buttonBorder} onChange={val => setAttributes({ buttonBorder: val })} min={0} max={10} />
+                                <Border
+                                    label={__('Border')}
+                                    separator
+                                    value={buttonBorder}
+                                    min={0} max={10}
+                                    onChange={val => setAttributes({ buttonBorder: val })}
+                                />
                                 <BoxShadow
                                     label={__('Box-Shadow')}
                                     value={buttonShadow}
@@ -256,7 +262,9 @@ const withInspectorControls = createHigherOrderComponent(OriginalComponent => {
                             onChange={(value) => setAttributes({ buttonBorderRadius: value })}
                             min={0}
                             max={100} unit={['px', 'em', '%']}
-                            responsive />
+                            responsive
+                            device={device}
+                            onDeviceChange={value => this.setState({ device: value })} />
                         <Range
                             label={__('Gap')}
                             value={buttonGap}
@@ -265,6 +273,8 @@ const withInspectorControls = createHigherOrderComponent(OriginalComponent => {
                             responsive
                             unit={['px', 'em', '%']}
                             onChange={(value) => setAttributes({ buttonGap: value })}
+                            device={device}
+                            onDeviceChange={value => this.setState({ device: value })}
                         />
                     </InnerPanel>
 
@@ -287,7 +297,9 @@ const withInspectorControls = createHigherOrderComponent(OriginalComponent => {
                                     unit={['px', 'em', '%']}
                                     min={5}
                                     max={48}
-                                    responsive />
+                                    responsive
+                                    device={device}
+                                    onDeviceChange={value => this.setState({ device: value })} />
                                 <Range
                                     label={__('Gap')}
                                     value={buttonIconGap}
@@ -295,7 +307,9 @@ const withInspectorControls = createHigherOrderComponent(OriginalComponent => {
                                     unit={['px', 'em', '%']}
                                     min={0}
                                     max={64}
-                                    responsive />
+                                    responsive
+                                    device={device}
+                                    onDeviceChange={value => this.setState({ device: value })} />
                             </Fragment>
                         }
                     </InnerPanel>
@@ -304,7 +318,9 @@ const withInspectorControls = createHigherOrderComponent(OriginalComponent => {
                         <Typography
                             value={buttonTypography}
                             onChange={(value) => setAttributes({ buttonTypography: value })}
-                            disableLineHeight />
+                            disableLineHeight
+                            device={device}
+                            onDeviceChange={value => this.setState({ device: value })} />
                     </InnerPanel>
                 </Fragment>
             )
@@ -365,7 +381,9 @@ const withInspectorControls = createHigherOrderComponent(OriginalComponent => {
                                         showPostTextTypography &&
                                         <Typography
                                             value={postButtonTextTypography}
-                                            onChange={val => setAttributes({ postButtonTextTypography: val })} />
+                                            onChange={val => setAttributes({ postButtonTextTypography: val })}
+                                            device={device}
+                                            onDeviceChange={value => this.setState({ device: value })} />
                                     }
                                     <Range
                                         min={-50}
@@ -374,7 +392,9 @@ const withInspectorControls = createHigherOrderComponent(OriginalComponent => {
                                         value={postButtonTextPaddingTop}
                                         unit={['px', 'em', '%']}
                                         label={"Top"}
-                                        onChange={val => setAttributes({ postButtonTextPaddingTop: val })} />
+                                        onChange={val => setAttributes({ postButtonTextPaddingTop: val })}
+                                        device={device}
+                                        onDeviceChange={value => this.setState({ device: value })} />
                                     <Range
                                         min={-50}
                                         max={200}
@@ -382,7 +402,9 @@ const withInspectorControls = createHigherOrderComponent(OriginalComponent => {
                                         value={postButtonTextPaddingBottom}
                                         unit={['px', 'em', '%']}
                                         label={"Bottom"}
-                                        onChange={val => setAttributes({ postButtonTextPaddingBottom: val })} />
+                                        onChange={val => setAttributes({ postButtonTextPaddingBottom: val })}
+                                        device={device}
+                                        onDeviceChange={value => this.setState({ device: value })} />
 
                                 </PanelBody>
                             }

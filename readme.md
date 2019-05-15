@@ -1,9 +1,9 @@
-=== Qubely Blocks - Full-fledged Gutenberg Toolkit ===
+#  Qubely Blocks - Full-fledged Gutenberg Toolkit 
 Contributors: themeum
-Donate link: https://www.themeum.com
+Donate link:<a href=" https://www.themeum.com">https://www.themeum.com</a>
 Tags: Qubely, website builder, gutenberg block, gutenberg, page builder, drag and drop editor, responsive, site editor, editor, drag-and-drop, visual editor, landing page, frontend editor, wordpress page builder, free page builder, layout builder
 Requires at least: 5.0
-Tested up to: 5.1
+Tested up to: 5.2
 Stable tag: 1.0.0-beta
 Requires PHP: 5.4.0
 License: GPL-2.0+
@@ -11,7 +11,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.txt
 
 The one and only Gutenberg block plugin you will ever need
 
-== Description ==
+## Description
 
 Qubely is a full-fledged Gutenberg toolkit with plenty of predefined sections and modern layout packs to create beautiful pages and posts on the Gutenberg editor. It offers a whole new experience that minimizes all limitations of the Gutenberg editor and opens unlimited possibilities to create any simple to complex content on a WordPress website. This user-friendly tool has been developed with all necessary customization features to achieve any possible layout.
 
@@ -19,7 +19,7 @@ Qubely extends Gutenberg with many custom blocks that are missing in the editor.
 
 [youtube https://www.youtube.com/watch?v=oLFeWSS9HhU]
 
-= Qubely core features at a glance =
+## Qubely core features at a glance 
 
 * Predefined sections
 * Modern layout packs
@@ -35,7 +35,7 @@ Qubely extends Gutenberg with many custom blocks that are missing in the editor.
 * Font Awesome 5 Icons and line icons
 * Custom CSS
 
-= Advanced Gutenberg blocks inside Qubely =
+## Advanced Gutenberg blocks inside Qubely 
 
 Qubely adds numerous custom Gutenberg blocks to the WordPress block editor and takes site building to the next level. The available custom advanced Gutenberg blocks inside Qubely are:
 
@@ -60,7 +60,7 @@ Qubely adds numerous custom Gutenberg blocks to the WordPress block editor and t
 * Info Box
 * More advanced Gutenberg blocks coming
 
- = Qubely Gutenberg blocks features and functionalities in details =
+## Qubely Gutenberg blocks features and functionalities in details
 
 - **Row:** Create an amazingly functional row from a variety of column variations. Resize columns using mouse drag to achieve the desired layout. Control spacing, add video, image, color, gradient or blend to the row background. Adjust the height and place the content at top, center or the bottom position. Add additional custom CSS code in case necessary.
 
@@ -135,62 +135,52 @@ This Gutenberg page builder gives you full control over the typography of the bl
 > You may find the documentation here
 > [Documentation](https://www.themeum.com/docs/qubely-introduction/)
 
-== Installation ==
+## Installation 
 
-= Minimum Requirements =
+**Minimum Requirements**
 
 * PHP version 5.6.0 or greater (PHP 7.1 or greater is recommended)
 * MySQL version 5.0 or greater (MySQL 5.6 or greater is recommended)
 
-= Automatic installation =
+**Automatic installation**
 
 The automatic installation is the easiest way to install any plugin in WordPress. You can perform an automatic installation of Qubely by logging in to your WordPress dashboard, navigating to the “Plugins” menu and click on the “Add New” button.
 
 This will open up a page showing all the available plugins in WordPress. In the search field, type Qubely. The search result will show you our Qubely plugin, you can then see the detailed info by clicking on “More Details” and to install just click on the “Install Now” button.
 
-= Manual installation =
+**Manual installation**
 
 To install Qubely manually, you need to download the plugin and upload it to your webserver via any FTP application.
 
 The WordPress codex contains [instructions on how to do this here](https://codex.wordpress.org/Managing_Plugins#Manual_Plugin_Installation).
 
 
-== Frequently Asked Questions ==
+#Frequently Asked Questions
 
-=  Is Qubely free? =
+**Is Qubely free?**
 
 Yes, Qubely is a free WordPress Gutenberg block plugin. There can be a premium version as well. But there will always be a free version.
 
-= Can I use Qubely with any WordPress theme? =
+**Can I use Qubely with any WordPress theme?**
 
 Yes, you can use Qubely with any Gutenberg compatible WordPress theme.
 
-= Do I need Gutenberg to use Qubely? =
+**Do I need Gutenberg to use Qubely?**
 
 Yes, Qubely is built based on the Gutenberg editor. You must need Gutenberg to make this plugin work.
 
-= Where can I get support? =
+**Where can I get support?**
 
 You can get support by posting on the support section of this plugin on the WordPress plugin directory, or on the Themeum support forums: https://www.themeum.com/support/ 🙂
 
-= Where can I report a bug? =
+**Where can I report a bug?**
 
 Found a bug? Please let us know by posting on the support section of this plugin on the WordPress plugin directory or directly on our support forum. https://www.themeum.com/support/
 
-== Screenshots ==
 
-1. Qubely Block List
-2. Qubely Blocks
-3. Qubely Layout
-4. Qubely Shape
-5. Qubely Row
-6. Qubely Column
-7. Advanced Type
+#Changelog
 
-
-== Changelog ==
-
-= 1.0.0-alpha-4 - 28 March, 2019 =
+**1.0.0-alpha-4 - 28 March, 2019**
 
 New: Contact Form Block
 New: Icon List Block
@@ -203,12 +193,12 @@ Fix: Link open in new tab issue
 Fix: Button Alignment issue
 Fix: Video Popup youtube short link issue
 
-= 1.0.0-alpha-3 - 11 March, 2019 =
+**1.0.0-alpha-3 - 11 March, 2019**
 
 Update: Tab Improvement
 Fix: Social icon blocks dropdown issue
 
-= 1.0.0-alpha-2 - 08 March, 2019 =
+**1.0.0-alpha-2 - 08 March, 2019**
 
 New: Tabs block
 New: Social Icons block
@@ -218,11 +208,11 @@ Fix: Select field issue
 Fix: Responsive device issue
 Fix: Map block address issue
 
-= 1.0.0-alpha - 01 March, 2019 =
+**1.0.0-alpha - 01 March, 2019**
 
 * Initial Alpha Release :)
 
 
-== Upgrade Notice ==
+# Upgrade Notice
 
 Nothing here
