@@ -97,7 +97,7 @@ registerBlockType('qubely/button', {
             type: 'object', default: { type: 'color', openColor: 1, color: '#1066CC', gradient: { color1: '#2184F9', color2: '#1066CC', direction: 0, start: 0, stop: 100 } },
             style: [
                 {
-                    selector: '{{QUBELY}} .qubely-block-btn-anchor:hover'
+                    selector: '{{QUBELY}} .qubely-block-btn-anchor:before'
                 }
             ]
         },
