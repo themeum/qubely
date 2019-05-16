@@ -408,8 +408,7 @@ registerBlockType ( 'qubely/infobox', {
         contentTypography: { type: 'object', default:{openTypography: 1, size: {md: 16, unit: 'px'}}, style: [{ selector: '{{QUBELY}} .qubely-info-box-text' }] },
         contentColor: { type: 'string', default: '', style: [{ selector: '{{QUBELY}} .qubely-info-box-text {color: {{contentColor}};}' }] },
         contentColorHover: { type: 'string', default: '', style: [{ selector: '{{QUBELY}} .qubely-block-info-box:hover .qubely-info-box-text {color: {{contentColorHover}};}' }] },
-        contentPaddingX: { type: 'object', default: {}, style: [{ selector: '{{QUBELY}} .qubely-info-box-body {padding-left: {{contentPaddingX}}; padding-right: {{contentPaddingX}};}' }] },
-        contentPaddingY: { type: 'object', default: {}, style: [{ selector: '{{QUBELY}} .qubely-info-box-body {padding-top: {{contentPaddingY}}; padding-bottom: {{contentPaddingY}};}' }] },
+        contentPadding: { type: 'object', default: {}, style: [{ selector: '{{QUBELY}} .qubely-info-box-body' }] },
         contentSpacing: { type: 'object', default: {md: 10, unit: 'px'},
             style: [
                 {
