@@ -17,8 +17,8 @@ const addAttribute = (settings) => {
             buttonSize: { type: 'string', default: 'medium' },
             buttonBlock: {
                 type: 'boolean',
-                 default: false,
-                 style: [
+                default: false,
+                style: [
                     {
                         condition: [
                             { key: 'buttonBlock', relation: '==', value: true }
@@ -342,7 +342,7 @@ const withInspectorControls = createHigherOrderComponent(OriginalComponent => {
             const { setAttributes,
                 attributes: { uniqueId, buttonComponent, controlledButtonPanel, showButtonPanel, enableButton, enablePostButtonText, postButtonTextTypography, postButtonTextColor, postButtonTextHoverColor, postButtonTextPaddingBottom, postButtonTextPaddingTop }
             } = this.props
-            const { showPostTextTypography } = this.state
+            const { showPostTextTypography, device } = this.state
             let type = this.props.name.split("/")[0]
             let blockName = this.props.name.split("/")[1]
             if (uniqueId) { CssGenerator(this.props.attributes, blockName, uniqueId); }

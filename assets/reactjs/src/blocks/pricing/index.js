@@ -19,7 +19,7 @@ registerBlockType('qubely/pricing', {
         },
 
         defaultItems: { type: 'number', default: 2 },
-        alignment: { type: 'object', default: {md: 'center'}, style: [{ selector: '{{QUBELY}} .qubely-block-pricing {text-align: {{alignment}};}' }] },
+        alignment: { type: 'object', default: { md: 'center' }, style: [{ selector: '{{QUBELY}} .qubely-block-pricing {text-align: {{alignment}};}' }] },
         spacer: { type: 'object', default: { spaceTop: { md: '10', unit: "px" }, spaceBottom: { md: '10', unit: "px" } }, style: [{ selector: '{{QUBELY}}' }] },
 
         copyStyle: { type: 'boolean', default: false },
@@ -211,7 +211,7 @@ registerBlockType('qubely/pricing', {
             default: true,
             style: [{
                 condition: [{ key: 'enableBadgeOverflow', relation: '==', value: true }],
-                selector: '{{QUBELY}} .qubely-block-pricing{ position:relative; }'
+                selector: '{{QUBELY}} .qubely-block-pricing{  overflow:hidden;}'
             },
             ]
         },
@@ -247,28 +247,39 @@ registerBlockType('qubely/pricing', {
                     selector: '{{QUBELY}} .qubely-pricing-badge{transform: rotate({{badgeCircleRotation}}deg);}'
                 }]
         },
-        badgePaddingX: {
+        badgePadding: {
             type: 'object',
-            default: { md: 15, unit: 'px' },
-            style: [
-                {
-                    condition: [
-                        { key: 'enableBadgeOverflow', relation: '==', value: false }
-                    ],
-                    selector: '{{QUBELY}} .qubely-pricing-badge{padding-left: {{badgePaddingX}}; padding-right: {{badgePaddingX}};}'
-                }]
+            default: {
+                openPadding: 1,
+                paddingType: 'custom',
+                global: { md: 10 },
+                custom: { md: '3 15 3 15' },
+                unit: 'px'
+            },
+            style: [{
+                condition: [
+                    { key: 'enableBadgeOverflow', relation: '==', value: false }
+                ],
+                selector: '{{QUBELY}} .qubely-pricing-badge'
+            }],
         },
-        badgePaddingY: {
+        badgeOverflowPadding: {
             type: 'object',
-            default: { md: 3, unit: 'px' },
-            style: [
-                {
-                    condition: [
-                        { key: 'enableBadgeOverflow', relation: '==', value: false }
-                    ],
-                    selector: '{{QUBELY}} .qubely-pricing-badge{padding-top: {{badgePaddingY}}; padding-bottom: {{badgePaddingY}};}'
-                }]
+            default: {
+                openPadding: 1,
+                paddingType: 'custom',
+                global: { md: 10 },
+                custom: { md: '5 35 5 35' },
+                unit: 'px'
+            },
+            style: [{
+                condition: [
+                    { key: 'enableBadgeOverflow', relation: '==', value: true }
+                ],
+                selector: '{{QUBELY}} .qubely-pricing-badge'
+            }],
         },
+      
         badgeTop: {
             type: 'string',
             default: '20',
@@ -302,27 +313,7 @@ registerBlockType('qubely/pricing', {
                     selector: '{{QUBELY}} .qubely-pricing-badge { right: {{badgeLeft}}px;}'
                 }]
         },
-        //badge with overflow
-        badgeOverflowPaddingX: {
-            type: 'object',
-            default: { md: 35, unit: 'px' },
-            style: [{
-                condition: [
-                    { key: 'enableBadgeOverflow', relation: '==', value: true }
-                ],
-                selector: '{{QUBELY}} .qubely-pricing-badge{padding-left: {{badgeOverflowPaddingX}}; padding-right: {{badgeOverflowPaddingX}};}'
-            }]
-        },
-        badgeOverflowPaddingY: {
-            type: 'object',
-            default: { md: 5, unit: 'px' },
-            style: [{
-                condition: [
-                    { key: 'enableBadgeOverflow', relation: '==', value: true }
-                ],
-                selector: '{{QUBELY}} .qubely-pricing-badge{padding-top: {{badgeOverflowPaddingY}}; padding-bottom: {{badgeOverflowPaddingY}};}'
-            }]
-        },
+       
         badgeOverflowTop: {
             type: 'string',
             default: '10',
@@ -408,7 +399,7 @@ registerBlockType('qubely/pricing', {
 
         //button
         buttonComponent: { type: 'boolean', default: true },
-        buttonGap:    {
+        buttonGap: {
             type: 'object',
             default: {
                 md: 0,

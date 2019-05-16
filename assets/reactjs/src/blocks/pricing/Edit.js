@@ -197,7 +197,7 @@ class Edit extends Component {
 				// Title 
 				title, titleColor, titleTypography,
 				//sub title 
-			 	subTitleSpacing, subTitleColor, subTitleTypography,
+				subTitleSpacing, subTitleColor, subTitleTypography,
 				// Price
 				price, priceColor, priceTypography, discount, discountPrice, discountColor, discountTypography, pricingSpacing,
 				// Currency
@@ -205,7 +205,7 @@ class Edit extends Component {
 				// Duration
 				enableDuration, duration, durationPosition, durationColor, durationTypography, durationAlign, durationPaddingTop, durationPaddingBottom,
 				// Badge
-				enableBadge, badge, badgeStyle, enableBadgeOverflow, badgeCircleRotation, badgePosition, badgeColor, badgeTextColor, badgeHoverColor, badgeTextHoverColor, badgeTypography, badgeRadius, badgeTop, badgeRight, badgeLeft, badgePaddingY, badgePaddingX, badgeOverflowTop, badgeOverflowLeft, badgeOverflowRight, badgeOverflowPaddingX, badgeOverflowPaddingY,
+				enableBadge, badge, badgeStyle, enableBadgeOverflow, badgeCircleRotation, badgePosition, badgeColor, badgeTextColor, badgeHoverColor, badgeTextHoverColor, badgeTypography, badgeRadius, badgeTop, badgeRight, badgeLeft, badgePadding, badgeOverflowPadding, badgePaddingY, badgePaddingX, badgeOverflowTop, badgeOverflowLeft, badgeOverflowRight, badgeOverflowPaddingX, badgeOverflowPaddingY,
 				// Background
 				bgColor, bgPadding, bgBorderRadius, bgBorder, bgColorHover, bgBorderColorHover, bgShadow, bgShadowHover,
 				// features
@@ -553,6 +553,47 @@ class Edit extends Component {
 								value={enableBadgeOverflow}
 								label={__('Overflow')}
 								onChange={val => setAttributes({ enableBadgeOverflow: val })} />
+							<RadioAdvanced
+								label={__('Badge Position')}
+								options={[
+									{ label: __('Left'), value: 'left', title: __('Left') },
+									{ label: __('Right'), value: 'right', title: __('Right') },
+								]}
+								value={badgePosition}
+								onChange={val => setAttributes({ badgePosition: val })} />
+
+							<Range
+								min={-200}
+								max={200}
+								value={enableBadgeOverflow ? badgeOverflowTop : badgeTop}
+								label={__('Position Top')}
+								onChange={val => setAttributes(enableBadgeOverflow ? { badgeOverflowTop: val } : { badgeTop: val })} />
+							{badgePosition == 'left' ?
+								<Range
+									min={-200}
+									max={200}
+									value={enableBadgeOverflow ? badgeOverflowRight : badgeRight}
+									label={__('Right')}
+									onChange={val => setAttributes(enableBadgeOverflow ? { badgeOverflowRight: val } : { badgeRight: val })} />
+								:
+								<Range
+									min={-200}
+									max={200}
+									value={enableBadgeOverflow ? badgeOverflowLeft : badgeLeft}
+									label={__('Left')}
+									onChange={val => setAttributes(enableBadgeOverflow ? { badgeOverflowLeft: val } : { badgeLeft: val })} />
+							}
+							<Padding
+								label={__('Padding')}
+								value={enableBadgeOverflow ? badgeOverflowPadding : badgePadding}
+								onChange={val => setAttributes(enableBadgeOverflow ? { badgeOverflowPadding: val } : { badgePadding: val })}
+								unit={['px', 'em', '%']}
+								max={100}
+								min={0}
+								responsive
+								device={device}
+								onDeviceChange={value => this.setState({ device: value })}
+							/>
 							<Tabs>
 								<Tab tabTitle={__('Normal')}>
 									<Color
@@ -575,37 +616,6 @@ class Edit extends Component {
 										onChange={val => setAttributes({ badgeTextHoverColor: val })} />
 								</Tab>
 							</Tabs>
-							<RadioAdvanced
-								label={__('Badge Position')}
-								options={[
-									{ label: __('Left'), value: 'left', title: __('Left') },
-									{ label: __('Right'), value: 'right', title: __('Right') },
-								]}
-								value={badgePosition}
-								onChange={val => setAttributes({ badgePosition: val })} />
-							<Separator label={__('Custom Alignment')} />
-							<Range
-								min={-200}
-								max={200}
-								value={enableBadgeOverflow ? badgeOverflowTop : badgeTop}
-								label={__('Position Top')}
-								onChange={val => setAttributes(enableBadgeOverflow ? { badgeOverflowTop: val } : { badgeTop: val })} />
-							{badgePosition == 'left' ?
-								<Range
-									min={-200}
-									max={200}
-									value={enableBadgeOverflow ? badgeOverflowRight : badgeRight}
-									label={__('Right')}
-									onChange={val => setAttributes(enableBadgeOverflow ? { badgeOverflowRight: val } : { badgeRight: val })} />
-								:
-								<Range
-									min={-200}
-									max={200}
-									value={enableBadgeOverflow ? badgeOverflowLeft : badgeLeft}
-									label={__('Left')}
-									onChange={val => setAttributes(enableBadgeOverflow ? { badgeOverflowLeft: val } : { badgeLeft: val })} />
-							}
-
 							<Typography
 								value={badgeTypography}
 								disableLineHeight
@@ -613,26 +623,6 @@ class Edit extends Component {
 								device={device}
 								onDeviceChange={value => this.setState({ device: value })} />
 
-							<Range
-								min={0}
-								max={150}
-								value={enableBadgeOverflow ? badgeOverflowPaddingY : badgePaddingY}
-								unit={['px', 'em', '%']}
-								label={<span className="dashicons dashicons-sort" title="X Spacing" />}
-								onChange={val => setAttributes(enableBadgeOverflow ? { badgeOverflowPaddingY: val } : { badgePaddingY: val })}
-								responsive
-								device={device}
-								onDeviceChange={value => this.setState({ device: value })} />
-							<Range
-								min={0}
-								max={150}
-								value={enableBadgeOverflow ? badgeOverflowPaddingX : badgePaddingX}
-								unit={['px', 'em', '%']}
-								label={<span className="dashicons dashicons-leftright" title="Y Spacing" />}
-								onChange={val => setAttributes(enableBadgeOverflow ? { badgeOverflowPaddingX: val } : { badgePaddingX: val })}
-								responsive
-								device={device}
-								onDeviceChange={value => this.setState({ device: value })} />
 						</PanelBody>
 					}
 
@@ -676,20 +666,20 @@ class Edit extends Component {
 					<div className={`qubely-block-pricing`}>
 						<div className="qubely-block-pricing-header">
 							{this.renderPricingTitle()}
-							
-							{ (layout == 3 || layout == 4) &&
+
+							{(layout == 3 || layout == 4) &&
 								this.renderPricingSubTitle()
 							}
 
 							{this.renderPricingPrice()}
 							{enableDuration && durationPosition == 'bottom' && this.renderDuration()}
 
-							{ (layout == 2) &&
+							{(layout == 2) &&
 								this.renderPricingSubTitle()
 							}
 						</div>
 
-						{ (layout == 4) &&
+						{(layout == 4) &&
 							this.renderPricingButton()
 						}
 
@@ -712,7 +702,7 @@ class Edit extends Component {
 							</div>
 						}
 
-						{ (layout == 1 || layout == 2 || layout == 3 || layout == 5) &&
+						{(layout == 1 || layout == 2 || layout == 3 || layout == 5) &&
 							this.renderPricingButton()
 						}
 
