@@ -3,7 +3,7 @@ const { createHigherOrderComponent } = wp.compose
 const { Component, Fragment } = wp.element
 const { InspectorControls } = wp.editor
 const { PanelBody } = wp.components
-import { Typography, Color, Alignment, Toggle, Range, Padding, RadioAdvanced, Separator } from './FieldRender'
+import { Typography, Color, Alignment, Toggle, Range, Padding, RadioAdvanced, Separator, IconList } from './FieldRender'
 import { CssGenerator } from './CssGenerator'
 
 const addAttribute = (settings) => {
@@ -125,11 +125,23 @@ const addAttribute = (settings) => {
 
 const withInspectorControls = createHigherOrderComponent(OriginalComponent => {
     class QubelyWrappedComponent extends Component {
+
+        modifySpecificItem = (value, index) => {
+            const { setAttributes, attributes: { listItems } } = this.props;
+            const modifiedListItems = listItems.map((listItem, currentIndex) => {
+                if (index === currentIndex) {
+                    listItem = { ...listItem, ...value }
+                }
+                return listItem
+            })
+            setAttributes({ listItems: modifiedListItems })
+        }
         renderListControls = () => {
             const { setAttributes,
-                attributes: { enableListIcons, iconSize, iconSizeCustom, iconSpacing, iconPosition, color,
+                attributes: { listItems, enableListIcons, clickedListItem, iconSize, iconSizeCustom, iconSpacing, iconPosition, color,
                     typography, enableListAlignment, listAlignment, iconColor, spacing, featuresPadding }
             } = this.props
+
             return (
                 <Fragment>
                     <Color label={__('Color')} value={color} onChange={val => setAttributes({ color: val })} />
@@ -143,7 +155,8 @@ const withInspectorControls = createHigherOrderComponent(OriginalComponent => {
                         unit={['px', 'em', '%']}
                         label={"Padding"}
                         onChange={val => setAttributes({ featuresPadding: val })} />
-                    {enableListAlignment &&
+                    {
+                        enableListAlignment &&
                         <Alignment label={__('Alignment')} value={listAlignment} onChange={val => setAttributes({ listAlignment: val })} disableJustify />
                     }
                     <Separator />
@@ -153,6 +166,15 @@ const withInspectorControls = createHigherOrderComponent(OriginalComponent => {
                         onChange={val => setAttributes({ enableListIcons: val })} />
                     {enableListIcons &&
                         <Fragment>
+                            <IconList
+                                disableToggle={true}
+                                value={listItems.length > 0 && listItems[clickedListItem].icon}
+                                onChange={(value) => this.modifySpecificItem({ icon: value }, clickedListItem)}
+                                colorSettings
+                                iconColor={listItems.length > 0 && (listItems[clickedListItem].customColor || '#5D7FEB')}
+                                onColorChange={(color) => this.modifySpecificItem({ customColor: color }, clickedListItem)}
+                            />
+                            <Separator label={__('Common Settings')} customClassName="qubely-separtor-extra-margin" />
                             <Color label={__('Icon Color')} value={iconColor} onChange={value => setAttributes({ iconColor: value })} />
                             <RadioAdvanced label={__('Icon Size')} value={iconSize} onChange={val => setAttributes({ iconSize: val })}
                                 options={[

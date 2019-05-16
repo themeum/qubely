@@ -279,7 +279,7 @@ registerBlockType('qubely/pricing', {
                 selector: '{{QUBELY}} .qubely-pricing-badge'
             }],
         },
-      
+
         badgeTop: {
             type: 'string',
             default: '20',
@@ -313,7 +313,7 @@ registerBlockType('qubely/pricing', {
                     selector: '{{QUBELY}} .qubely-pricing-badge { right: {{badgeLeft}}px;}'
                 }]
         },
-       
+
         badgeOverflowTop: {
             type: 'string',
             default: '10',
@@ -455,7 +455,7 @@ registerBlockType('qubely/pricing', {
         enableFeatures: { type: 'boolean', default: true },
         controlledFeaturesPanel: { type: 'boolean', default: true },
         showFeaturesPanel: { type: 'boolean', default: false },
-        blockFeatures: {
+        listItems: {
             type: 'array',
             default: [
                 {
@@ -481,7 +481,7 @@ registerBlockType('qubely/pricing', {
             ]
 
         },
-
+        clickedListItem: { type: 'number', default: 0 },
         listComponent: { type: 'boolean', default: true },
         listType: { type: 'string', default: 'unordered' },
         bulletStyle: { type: 'string', default: 'check-circle-outline' },

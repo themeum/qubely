@@ -97,7 +97,7 @@ class Save extends Component {
     }
 
     render() {
-        const { uniqueId, pricings, id, title, desc, listType, listAlignment, bulletStyle, blockFeatures, layout,
+        const { uniqueId, pricings, id, title, desc, listType, listAlignment, bulletStyle, listItems, layout,
             currencyPosition,
             price, defaulPricePosition,
             discount, discountPrice,
@@ -134,7 +134,7 @@ class Save extends Component {
                         enableFeatures &&
                         <div className={`qubely-pricing-features qubely-alignment-${listAlignment}`} >
                             <QubelyIconListSave
-                                listItems={blockFeatures}
+                                listItems={listItems}
                                 enableListIcons={enableListIcons}
                                 iconColor={iconColor}
                                 iconPosition={iconPosition}

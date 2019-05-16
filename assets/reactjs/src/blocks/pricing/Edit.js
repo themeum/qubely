@@ -205,11 +205,11 @@ class Edit extends Component {
 				// Duration
 				enableDuration, duration, durationPosition, durationColor, durationTypography, durationAlign, durationPaddingTop, durationPaddingBottom,
 				// Badge
-				enableBadge, badge, badgeStyle, enableBadgeOverflow, badgeCircleRotation, badgePosition, badgeColor, badgeTextColor, badgeHoverColor, badgeTextHoverColor, badgeTypography, badgeRadius, badgeTop, badgeRight, badgeLeft, badgePadding, badgeOverflowPadding, badgePaddingY, badgePaddingX, badgeOverflowTop, badgeOverflowLeft, badgeOverflowRight, badgeOverflowPaddingX, badgeOverflowPaddingY,
+				enableBadge, badge, badgeStyle, enableBadgeOverflow, badgeCircleRotation, badgePosition, badgeColor, badgeTextColor, badgeHoverColor, badgeTextHoverColor, badgeTypography, badgeRadius, badgeTop, badgeRight, badgeLeft, badgePadding, badgeOverflowPadding, badgeOverflowTop, badgeOverflowLeft, badgeOverflowRight,
 				// Background
 				bgColor, bgPadding, bgBorderRadius, bgBorder, bgColorHover, bgBorderColorHover, bgShadow, bgShadowHover,
 				// features
-				enableFeatures, blockFeatures, iconPosition, iconColor, enableListIcons,
+				enableFeatures, listItems, iconPosition, iconColor, enableListIcons,
 				//Header
 				headerBg, headerBorder, headerPadding,
 				//postButton text
@@ -688,15 +688,16 @@ class Edit extends Component {
 							<div ref={this.contextRef} className={`qubely-pricing-features`} onClick={() => this.handlePanelOpenings('Features')}>
 								<QubelyIconListEdit
 									parentBlock={`qubely-block-${uniqueId}`}
-									disableButton={blockFeatures.length > 0 ? true : false}
+									disableButton={listItems.length > 0 ? true : false}
 									buttonText={__('Add New Feature')}
 									enableListIcons={enableListIcons}
-									listItems={blockFeatures}
+									listItems={listItems}
 									iconColor={iconColor}
 									iconPosition={iconPosition}
 									listWrapperClassName={`qubely-list icon-position-${iconPosition}`}
 									newListItemPlaceHolder={__('Add New Feature')}
-									onListItemModification={newValues => setAttributes({ blockFeatures: newValues })}
+									onListItemModification={newValues => setAttributes({ listItems: newValues })}
+									onChange={(key, value) => setAttributes({ [key]: value })}
 									onIconColorChange={(color, currentListItemIndex) => setAttributes({ iconColor: color })}
 								/>
 							</div>

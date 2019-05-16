@@ -10,7 +10,6 @@ class QubelyIconListEdit extends Component {
         super(props)
         this.state = {
             currentListItemIndex: 0,
-            openIconPopUp: false,
             removeItemViaBackSpace: 999,
             focusedItem: this.props.listItems.length - 1,
         }
@@ -62,14 +61,14 @@ class QubelyIconListEdit extends Component {
     }
 
     renderListItems = () => {
-        const { enableListIcons, iconPosition, listItems, newListItemPlaceHolder, disableButton, iconColor, onIconColorChange } = this.props
+        const { enableListIcons, iconPosition, listItems, newListItemPlaceHolder, disableButton, iconColor, onIconColorChange, onChange } = this.props
         const { focusedItem, removeItemViaBackSpace } = this.state
         return listItems.map((item, index) => {
             return (
                 <li className={`qubely-list-li qubely-list-li-editor qubely-icon-position-${iconPosition}`}>
                     <div ref="avoidOnClick" className={`qubely-list-item qubely-list-item-${index}`} onClick={() => this.setState({ currentListItemIndex: index })}>
                         {iconPosition == 'right' && item.text.length > 0 && this.renderDeleteIcon(index)}
-                        {enableListIcons && iconPosition == 'left' && <span className={`qubely-list-item-icon ${item.icon} fa-fw`} style={item.customColor ? { color: item.customColor } : {}} onClick={() => this.setState({ openIconPopUp: this.state.currentListItemIndex == index ? !this.state.openIconPopUp : true })} />}
+                        {enableListIcons && iconPosition == 'left' && <span className={`qubely-list-item-icon ${item.icon} fa-fw`} style={item.customColor ? { color: item.customColor } : {}} />}
                         <div
                             className={`qubely-list-item-text-${index} qubely-text `}
                             id={`qubely-list-item-text-${index}`}
@@ -96,24 +95,9 @@ class QubelyIconListEdit extends Component {
                             onClick={() => this.setState({ focusedItem: index })}>
                             {item.text}
                         </div>
-                        {enableListIcons && iconPosition == 'right' && <span className={`qubely-list-item-icon ${item.icon} fa-fw`} style={item.customColor ? { color: item.customColor } : {}} onClick={() => this.setState({ openIconPopUp: this.state.currentListItemIndex == index ? !this.state.openIconPopUp : true })} />}
+                        {enableListIcons && iconPosition == 'right' && <span className={`qubely-list-item-icon ${item.icon} fa-fw`} style={item.customColor ? { color: item.customColor } : {}} />}
                         {iconPosition == 'left' && item.text.length > 0 && this.renderDeleteIcon(index)}
-                        {(this.state.currentListItemIndex == index && this.state.openIconPopUp) &&
-                            <Wrapper inline
-                                domNodetobeAvoided={this.refs.avoidOnClick}
-                                onClickOutside={() => {
-                                    this.setState({
-                                        openIconPopUp: false
-                                    })
-                                }}
-                                customClass="">
-                                <Color label={__(' Color')} value={item.customColor ? item.customColor : '#ccc'} onChange={(color) => this.modifySpecificItem({ customColor: color }, index)} />
-                                <IconList
-                                    disableToggle={true}
-                                    value={listItems.length > 0 && listItems[index].icon}
-                                    onChange={(value) => this.modifySpecificItem({ icon: value }, index)} />
-                            </Wrapper>
-                        }
+                        {this.state.currentListItemIndex == index && onChange('clickedListItem', index)}
                     </div>
                 </li>
             )
@@ -135,7 +119,6 @@ class QubelyIconListEdit extends Component {
         let newList = JSON.parse(JSON.stringify(listItems))
         operation == 'add' ? newList.splice(index + 1, 0, { icon: 'fas fa-check', text: '', customColor: false }) : newList.splice(index, 1)
 
-        this.setState({ openIconPopUp: false })
         onListItemModification(newList)
     }
     render() {
