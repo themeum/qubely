@@ -207,7 +207,7 @@ class Edit extends Component {
 				// Badge
 				enableBadge, badge, badgeStyle, enableBadgeOverflow, badgeCircleRotation, badgePosition, badgeColor, badgeTextColor, badgeHoverColor, badgeTextHoverColor, badgeTypography, badgeRadius, badgeTop, badgeRight, badgeLeft, badgePadding, badgeOverflowPadding, badgeOverflowTop, badgeOverflowLeft, badgeOverflowRight,
 				// Background
-				bgColor, bgPadding, bgBorderRadius, bgBorder, bgColorHover, bgBorderColorHover, bgShadow, bgShadowHover,
+				bgColor, bgPadding, bgBorderRadius, bgBorder, bgShadow,
 				// features
 				enableFeatures, listItems, iconPosition, iconColor, enableListIcons,
 				//Header
@@ -627,18 +627,9 @@ class Edit extends Component {
 					}
 
 					<PanelBody title={__('Background')} initialOpen={false}>
-						<Tabs>
-							<Tab tabTitle={__('Normal')}>
-								<ColorAdvanced label={__('Background Color')} value={bgColor} onChange={val => setAttributes({ bgColor: val })} />
-								<Border label={__('Border')} value={bgBorder} onChange={val => setAttributes({ bgBorder: val })} min={0} max={10} />
-								<BoxShadow label={__('Box-Shadow')} value={bgShadow} onChange={(value) => setAttributes({ bgShadow: value })} />
-							</Tab>
-							<Tab tabTitle={__('Hover')}>
-								<ColorAdvanced label={__('Background Color')} value={bgColorHover} onChange={val => setAttributes({ bgColorHover: val })} />
-								<Color label={__('Border Color')} value={bgBorderColorHover} onChange={(value) => setAttributes({ bgBorderColorHover: value })} />
-								<BoxShadow label={__('Box-Shadow')} value={bgShadowHover} onChange={(value) => setAttributes({ bgShadowHover: value })} />
-							</Tab>
-						</Tabs>
+						<ColorAdvanced label={__('Background Color')} value={bgColor} onChange={val => setAttributes({ bgColor: val })} />
+						<Border label={__('Border')} value={bgBorder} onChange={val => setAttributes({ bgBorder: val })} min={0} max={10} />
+						<BoxShadow label={__('Box-Shadow')} value={bgShadow} onChange={(value) => setAttributes({ bgShadow: value })} />
 						<Padding
 							label={__('Padding')}
 							value={bgPadding}

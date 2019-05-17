@@ -391,10 +391,8 @@ registerBlockType('qubely/pricing', {
                 }
             ]
         },
-        bgColorHover: { type: 'object', default: {}, style: [{ selector: '{{QUBELY}} .qubely-block-pricing:hover' }] },
-        bgBorderColorHover: { type: 'string', default: '#e5e5e5', style: [{ selector: '{{QUBELY}} .qubely-block-pricing:hover { border-color: {{bgBorderColorHover}}; }' }] },
         bgShadow: { type: 'object', default: {}, style: [{ selector: '{{QUBELY}} .qubely-block-pricing' }] },
-        bgShadowHover: { type: 'object', default: { color: '' }, style: [{ selector: '{{QUBELY}} .qubely-block-pricing:hover' }] },
+
 
 
         //button
