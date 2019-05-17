@@ -5,7 +5,7 @@ Donate link: <a href=" https://www.themeum.com">https://www.themeum.com</a>
 Tags: Qubely, website builder, gutenberg block, gutenberg, page builder, drag and drop editor, responsive, site editor, editor, drag-and-drop, visual editor, landing page, frontend editor, wordpress page builder, free page builder, layout builder  
 Requires at least: 5.0  
 Tested up to: 5.2  
-Stable tag: 1.0.0-beta  
+Stable tag: 1.0.0-beta-2 
 Requires PHP: 5.4.0  
 License: GPL-2.0+  
 License URI: http://www.gnu.org/licenses/gpl-2.0.txt
@@ -179,7 +179,31 @@ You can get support by posting on the support section of this plugin on the Word
 Found a bug? Please let us know by posting on the support section of this plugin on the WordPress plugin directory or directly on our support forum. https://www.themeum.com/support/
 
 
-#Changelog
+# Changelog
+
+**1.0.0-beta-2 - 16 May, 2019**
+
+Update: Gradient field color picker position
+Update: Redesigned Testimonial Block's layout
+Update: Responsive device setting
+Update: Changed icon updating option in Pricing Block's features
+Fix: Button Size issue in Pricing Block
+Fix: Transition issue in Video Popup block,  Button Block
+
+**1.0.0-beta-1 - 10 May, 2019**
+
+New: Pricing Block
+New: Wrapper Block
+New: Team Block
+New: Redesigned user interface
+New: Radically Redesigned user experience
+New: Added Responsive settings to the Shape Divider
+Update: Improved padding, margin, Radius, Box Shadow, Background, Color and border options
+Update: Improved typography settings
+Update: Restructured Advanced List block
+Fix: Icon size in the icon list
+Fix: Autofocus in the icon list
+Fix: Video Popup SVG
 
 **1.0.0-alpha-4 - 28 March, 2019**
 
