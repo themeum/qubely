@@ -1,6 +1,7 @@
 #  Qubely Blocks - Full-fledged Gutenberg Toolkit 
 
 Contributors: **themeum**
+
 Donate link: <a href=" https://www.themeum.com">https://www.themeum.com</a>  
 Tags: Qubely, website builder, gutenberg block, gutenberg, page builder, drag and drop editor, responsive, site editor, editor, drag-and-drop, visual editor, landing page, frontend editor, wordpress page builder, free page builder, layout builder  
 Requires at least: 5.0  

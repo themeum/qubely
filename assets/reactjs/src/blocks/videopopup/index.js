@@ -56,8 +56,8 @@ registerBlockType('qubely/videopopup', {
 		iconHoverBgColor: { type: 'string', default: '', style: [{ selector: '{{QUBELY}} .qubely-block-videopopup .qubely-video-popup .qubely-btn-icon:hover{ background-color:{{iconHoverBgColor}}; }' }] },
 		
 		border: { type: 'object', default: {}, style: [{ selector: '{{QUBELY}} .qubely-btn-icon' }] },
-		borderColorHover: { type: 'string', default: '', style: [{ selector: '{{QUBELY}} .qubely-btn-icon:hover {border-color: {{borderColorHover}};}' }] },
-
+		hoverBorder: { type: 'object', default: {}, style: [{ selector: '{{QUBELY}} .qubely-btn-icon:hover' }] },
+		
 		borderRadius: {
 			type: 'object',
 			default: {
