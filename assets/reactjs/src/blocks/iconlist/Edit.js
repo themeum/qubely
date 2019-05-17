@@ -234,14 +234,14 @@ class Edit extends Component {
 
                         <Tabs>
                             <Tab tabTitle={__('Normal')}>
-                                <Color label={__('Color')} value={color} onChange={val => setAttributes({ color: val })} />
+                                <Color label={__('Text Color')} value={color} onChange={val => setAttributes({ color: val })} />
                                 {layout == 'fill' &&
                                     <Color label={__('Background Color')} value={background} onChange={val => setAttributes({ background: val })} />
                                 }
                                 <Border label={__('Border')} value={border} onChange={val => setAttributes({ border: val })} min={0} max={10} responsive device={device} onDeviceChange={value => this.setState({ device: value })}/>
                             </Tab>
                             <Tab tabTitle={__('Hover')}>
-                                <Color label={__('Color')} value={colorHover} onChange={val => setAttributes({ colorHover: val })} />
+                                <Color label={__('Text Color')} value={colorHover} onChange={val => setAttributes({ colorHover: val })} />
                                 {layout == 'fill' &&
                                     <Color label={__('Background Color')} value={backgroundHover} onChange={val => setAttributes({ backgroundHover: val })} />
                                 }
