@@ -8,7 +8,7 @@ import Range from "./Range"
 
 const defaultState = { color1: '#16d03e', color2: '#1f91f3', type: 'linear', direction: '90', start: 5, stop: 80, radial: 'center', clip: false };
 
-const colors = ['#30ac3d', '#fa9200', '#006fbf', '#ff1818', '#941f90']
+const colors = ['#456BED', '#30ac3d', '#fa9200', '#006fbf', '#ff1818', '#941f90'];
 
 
 class Gradient extends Component {

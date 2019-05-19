@@ -3,7 +3,7 @@ import '../css/color.scss'
 const { Component, Fragment } = wp.element
 const { Dropdown, ColorPicker, Tooltip } = wp.components;
 
-const colors = ['#30ac3d', '#fa9200', '#006fbf', '#ff1818', '#941f90']
+const colors = ['#456BED', '#30ac3d', '#fa9200', '#006fbf', '#ff1818', '#941f90'];
 
 class Color extends Component {
     constructor(props) {
@@ -32,7 +32,6 @@ class Color extends Component {
                                 if( val.rgb ){ this.props.onChange( val.rgb.a != 1 ? 'rgba('+val.rgb.r+','+val.rgb.g+','+val.rgb.b+','+val.rgb.a+')' : val.hex ) }
                              }}/>
                             <div className="qubely-rgba-palette" style={{padding:'0px 0px 15px 15px'}}>
-                                <button onClick={() => this.props.onChange('')} className="clear" />
                                 {colors.map(
                                     color => <button style={{ color: color }} onClick={() => this.props.onChange(color)}/> 
                                 )}

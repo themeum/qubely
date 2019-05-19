@@ -10,7 +10,7 @@ registerBlockType('qubely/pricing', {
     category: 'qubely',
     icon: <img src={qubely_admin.plugin + 'assets/img/blocks/block-pricing.svg'} alt={__('Pricing Block')} />,
 
-    keywords: [__('Pricing'), __('Pricing table')],
+    keywords: [__('Pricing'), __('Pricing Table')],
     attributes: {
         uniqueId: { type: 'string', default: '' },
         layout: {
@@ -25,7 +25,7 @@ registerBlockType('qubely/pricing', {
         copyStyle: { type: 'boolean', default: false },
 
         // Title__
-        title: { type: 'string', default: 'PERSONAL' },
+        title: { type: 'string', default: 'Basic' },
         titleColor: { type: 'string', default: '#2184F9', style: [{ selector: '{{QUBELY}} .qubely-pricing-title{color: {{titleColor}};}' }] },
         titleTypography: { type: 'object', default: { openTypography: 1, size: { md: 20, unit: 'px' } }, style: [{ selector: '{{QUBELY}} .qubely-pricing-title' }] },
 
