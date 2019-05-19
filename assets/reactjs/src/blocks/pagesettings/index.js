@@ -3,16 +3,15 @@ const { registerBlockType } = wp.blocks
 
 const blockAttrs = {
 	uniqueId:{type: 'string',default:''},
-	body: {type: 'object',default:{}, style: [{ selector: 'body' }] },
-	p: {type: 'object',default:{}, style: [{ selector: '.editor-styles-wrapper p' }] },
-	h1: {type: 'object',default:{}, style: [{ selector: '.editor-styles-wrapper h1' }] },
-	h2: {type: 'object',default:{}, style: [{ selector: '.editor-styles-wrapper h2' }] },
-	h3: {type: 'object',default:{}, style: [{ selector: '.editor-styles-wrapper h3' }] },
-	h4: {type: 'object',default:{}, style: [{ selector: '.editor-styles-wrapper h4' }] },
-	h5: {type: 'object',default:{}, style: [{ selector: '.editor-styles-wrapper h5' }] },
-	h6: {type: 'object',default:{}, style: [{ selector: '.editor-styles-wrapper h6' }] },
-	a_typography: {type: 'object',default:{}, style: [{ selector: '.editor-styles-wrapper a' }] },
-	a_color: {type: 'string', default: "" , style: [{ selector: '.editor-styles-wrapper a {color: {{a_color}} }' }] },
+	body: {type: 'object',default:{}, style: [{ selector: 'body:not(.wp-admin), .editor-styles-wrapper' }] },
+	p: {type: 'object',default:{}, style: [{ selector: 'body:not(.wp-admin) p, .editor-styles-wrapper p' }] },
+	h1: {type: 'object',default:{}, style: [{ selector: 'body:not(.wp-admin) h1, .editor-styles-wrapper h1' }] },
+	h2: {type: 'object',default:{}, style: [{ selector: 'body:not(.wp-admin) h2, .editor-styles-wrapper h2' }] },
+	h3: {type: 'object',default:{}, style: [{ selector: 'body:not(.wp-admin) h3, .editor-styles-wrapper h3' }] },
+	h4: {type: 'object',default:{}, style: [{ selector: 'body:not(.wp-admin) h4, .editor-styles-wrapper h4' }] },
+	h5: {type: 'object',default:{}, style: [{ selector: 'body:not(.wp-admin) h5, .editor-styles-wrapper h5' }] },
+	h6: {type: 'object',default:{}, style: [{ selector: 'body:not(.wp-admin) h6, .editor-styles-wrapper h6' }] },
+	button: {type: 'object',default:{}, style: [{ selector: '.editor-styles-wrapper .quebly-button' }] },
 }
 
 /**

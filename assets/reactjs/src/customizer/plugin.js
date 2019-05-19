@@ -5,7 +5,7 @@ const { PanelBody } = wp.components
 const { withDispatch, select } = wp.data;
 import { _equal } from '../components/HelperFunction'
 import { CssGenerator } from '../components/CssGenerator'
-import { Typography, Color } from '../components/FieldRender'
+import { Typography, Color, Separator } from '../components/FieldRender'
 const { PluginSidebar, PluginSidebarMoreMenuItem } = wp.editPost;
 import { getInitialSettings, updateGlobalData, saveGlobalData } from './action'
 
@@ -50,41 +50,28 @@ class Plugin extends Component {
     }
 
     renderFields(){
-        const { body, p, h1, h2, h3, h4, h5, h6, a_color, a_typography } = this.state.globalSettings
+        const { body, p, h1, h2, h3, h4, h5, h6, button } = this.state.globalSettings
         
         return (
             <Fragment>
-                {/* Body ( Font+Color )
-                Heading ( Font + Color )
-                Link ( Color + Hover Color )
-                Button (  ) feb-29 */}
-                <PanelBody initialOpen={false} title={__('body Style')}>
+                <PanelBody title={__('Typography')} initialOpen={false}>
                     <Typography label={__('Body')} color value={body} onChange={ val => this.updateField({ body: val }) } />
-                </PanelBody>
-                <PanelBody initialOpen={false} title={__('P Style')}>
-                    <Typography label={__('P')} color value={p} onChange={ val => this.updateField({ p: val }) } />
-                </PanelBody>
-                <PanelBody initialOpen={false} title={__('H1 Style')}>
-                    <Typography label={__('H1')} color value={h1} onChange={ val => this.updateField({ h1: val }) } />
-                </PanelBody>
-                <PanelBody initialOpen={false} title={__('H2 Style')}>
-                    <Typography label={__('H2')} color value={h2} onChange={ val => this.updateField({ h2: val }) } />
-                </PanelBody>
-                <PanelBody initialOpen={false} title={__('H3 Style')}>
-                    <Typography label={__('H3')} color value={h3} onChange={ val => this.updateField({ h3: val }) } />
-                </PanelBody>
-                <PanelBody initialOpen={false} title={__('H4 Style')}>
-                    <Typography label={__('H4')} color value={h4} onChange={ val => this.updateField({ h4: val }) } />
-                </PanelBody>
-                <PanelBody initialOpen={false} title={__('H5 Style')}>
-                    <Typography label={__('H5')} color value={h5} onChange={ val => this.updateField({ h5: val }) } />
-                </PanelBody>
-                <PanelBody initialOpen={false} title={__('H6 Style')}>
-                    <Typography label={__('H6')} color value={h6} onChange={ val => this.updateField({ h6: val }) } />
-                </PanelBody>
-                <PanelBody initialOpen={false} title={__('Link Style')}>
-                    <Typography label={__('Link')} color value={a_typography} onChange={ val => this.updateField({ a_typography: val }) } />
-                    <Color label={__('Hover Color')} value={a_color}  onChange={ val => this.updateField({ a_color: val }) } />
+                    <Separator />
+                    <Typography label={__('Paragraph')} color value={p} onChange={ val => this.updateField({ p: val }) } />
+                    <Separator />
+                    <Typography label={__('Heading 1')} color value={h1} onChange={ val => this.updateField({ h1: val }) } />
+                    <Separator />
+                    <Typography label={__('Heading 2')} color value={h2} onChange={ val => this.updateField({ h2: val }) } />
+                    <Separator />
+                    <Typography label={__('Heading 3')} color value={h3} onChange={ val => this.updateField({ h3: val }) } />
+                    <Separator />
+                    <Typography label={__('Heading 4')} color value={h4} onChange={ val => this.updateField({ h4: val }) } />
+                    <Separator />
+                    <Typography label={__('Heading 5')} color value={h5} onChange={ val => this.updateField({ h5: val }) } />
+                    <Separator />
+                    <Typography label={__('Heading 6')} color value={h6} onChange={ val => this.updateField({ h6: val }) } />
+                    <Separator />
+                    <Typography label={__('Button')} color value={button} onChange={ val => this.updateField({ button: val }) } />
                 </PanelBody>
             </Fragment>
         )
