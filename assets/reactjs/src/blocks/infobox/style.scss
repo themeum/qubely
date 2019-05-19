@@ -20,6 +20,7 @@
         display: inline-block;
         line-height: 1;
         text-align: center;
+        overflow: hidden;
         i,
         span,
         img {
@@ -27,13 +28,17 @@
             display: block;
             transition: 400ms;
         }
-        i {
-            width: 1em;
-            height: 1em;
-            &:before {
-                position: absolute;
-                left: 50%;
-                transform: translateX(-50%);
+    
+        &.qubely-media-has-bg {
+            i,
+            .qubely-info-box-number {
+                width: 1em;
+                height: 1em;
+                &:before {
+                    position: absolute;
+                    left: 50%;
+                    transform: translateX(-50%);
+                }
             }
         }
     }

@@ -85,15 +85,20 @@ registerBlockType ( 'qubely/infobox', {
         },
        
         // Image
-        image: { type: 'object', default: {url: 'https://via.placeholder.com/300'} },
-        imageHeight: { type: 'object', default: {md: 48, unit: 'px'},
+        image: { type: 'object', default: {} },
+        imageHeight: {
+            type: 'object',
+            default: {
+                md: 86,
+                unit: 'px'
+            },
             style: [
                 {
                     condition:[
                         {key:'layout', relation:'!=', value: 4},
                         {key:'mediaType', relation:'==', value:'image'}
                     ],
-                    selector: '{{QUBELY}} .qubely-info-box-media img {height: {{imageHeight}};}' 
+                    selector: '{{QUBELY}} .qubely-info-box-media img {height: {{imageHeight}};} {{QUBELY}} .qubely-info-box-media .qubely-image-placeholder {height: {{imageHeight}}; width: {{imageHeight}};}' 
                 }
             ]
         },
@@ -122,14 +127,22 @@ registerBlockType ( 'qubely/infobox', {
                 }
             ]
         },
-        numberTypography: { type: 'object', default:{openTypography: 1, size: {md: 48, unit: 'px'}},
+        numberTypography: {
+            type: 'object',
+            default: {
+                openTypography: 1,
+                size: {
+                    md: 48,
+                    unit: 'px'
+                }
+            },
             style: [
                 {
                     condition:[
                         {key:'layout', relation:'!=', value: 4},
                         {key:'mediaType', relation:'==', value:'number'}
                     ],
-                    selector: '{{QUBELY}} .qubely-info-box-number' 
+                    selector: '{{QUBELY}} .qubely-info-box-media' 
                 }
             ]
         },
@@ -141,7 +154,6 @@ registerBlockType ( 'qubely/infobox', {
                 {
                     condition:[
                         {key:'layout', relation:'!=', value: 4},
-                        {key:'mediaType', relation:'!=', value: 'number'},
                         {key:'useMediaBg', relation:'==', value: 1}
                     ],
                     selector: '{{QUBELY}} .qubely-info-box-media' 
@@ -153,7 +165,6 @@ registerBlockType ( 'qubely/infobox', {
                 {
                     condition:[
                         {key:'layout', relation:'!=', value: 4},
-                        {key:'mediaType', relation:'!=', value: 'number'},
                         {key:'useMediaBg', relation:'==', value: 1}
                     ],
                     selector: '{{QUBELY}} .qubely-block-info-box:hover .qubely-info-box-media' 
@@ -165,7 +176,6 @@ registerBlockType ( 'qubely/infobox', {
                 {
                     condition:[
                         {key:'layout', relation:'!=', value: 4},
-                        {key:'mediaType', relation:'!=', value: 'number'},
                         {key:'useMediaBg', relation:'==', value: 1}
                     ],
                     selector: '{{QUBELY}} .qubely-info-box-media { padding: {{mediaBackgroundSize}};}' 
@@ -185,7 +195,6 @@ registerBlockType ( 'qubely/infobox', {
                 {
                     condition:[
                         {key:'layout', relation:'!=', value: 4},
-                        {key:'mediaType', relation:'!=', value: 'number'},
                         {key: 'useMediaBg', relation:'==', value: 1}
                     ],
                     selector: '{{QUBELY}} .qubely-info-box-media, {{QUBELY}} .qubely-info-box-media img' 
@@ -199,7 +208,6 @@ registerBlockType ( 'qubely/infobox', {
                 {
                     condition:[
                         {key:'layout', relation:'!=', value: 4},
-                        {key:'mediaType', relation:'!=', value: 'number'},
                         {key:'useMediaBg', relation:'==', value: 1}
                     ],
                     selector: '{{QUBELY}} .qubely-info-box-media' 
@@ -211,7 +219,6 @@ registerBlockType ( 'qubely/infobox', {
                 {
                     condition:[
                         {key:'layout', relation:'!=', value: 4},
-                        {key:'mediaType', relation:'!=', value: 'number'},
                         {key:'useMediaBg', relation:'==', value: 1}
                     ],
                     selector: '{{QUBELY}} .qubely-block-info-box:hover .qubely-info-box-media { border-color: {{mediaBorderColorHover}};}' 
@@ -225,7 +232,6 @@ registerBlockType ( 'qubely/infobox', {
                 {
                     condition:[
                         {key:'layout', relation:'!=', value: 4},
-                        {key:'mediaType', relation:'!=', value: 'number'}
                     ],
                     selector: '{{QUBELY}} .qubely-info-box-media' 
                 }
@@ -236,7 +242,6 @@ registerBlockType ( 'qubely/infobox', {
                 {
                     condition:[
                         {key:'layout', relation:'!=', value: 4},
-                        {key:'mediaType', relation:'!=', value: 'number'},
                         {key:'useMediaShadow', relation:'==', value: 1}
                     ],
                     selector: '{{QUBELY}} .qubely-block-info-box:hover .qubely-info-box-media' 

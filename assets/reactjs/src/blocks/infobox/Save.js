@@ -6,7 +6,7 @@ import { animationAttr } from '../../components/HelperFunction';
 
 class Save extends Component {
 	render() {
-		const { uniqueId, layout, mediaType, titleLevel, title, separatorStyle, separatorPosition, content, iconName, image, number, enableButton, animation, subTitle, subTitleLevel, subTitleContent, buttonFillType, buttonSize, buttonText, buttonUrl, buttonIconName, buttonIconPosition } = this.props.attributes
+		const { uniqueId, layout, mediaType, titleLevel, title, separatorStyle, separatorPosition, content, iconName, image, number, enableButton, animation, subTitle, subTitleLevel, subTitleContent, buttonFillType, buttonSize, buttonText, buttonUrl, buttonIconName, buttonIconPosition, useMediaBg } = this.props.attributes
 
 		const separators = {
 			solid: { type: 'css', separator: 'solid', width: 300, stroke: 10 },
@@ -39,12 +39,18 @@ class Save extends Component {
 			<div className={`qubely-block-${uniqueId}`} {...animationAttr(animation)}>
 				<div className={`qubely-block-info-box qubely-info-box-layout-${layout}`}>
 					{(layout != 4 && mediaType) &&
-						<div className="qubely-info-box-media">
+						<div className={`qubely-info-box-media${ useMediaBg ? ' qubely-media-has-bg' : '' }`}>
 							{(mediaType == 'icon' && iconName) &&
 								<i className={"qubely-info-box-icon " + iconName} />
 							}
-							{(mediaType == 'image' && image) &&
-								<img className="qubely-info-box-image" src={image.url} alt="" />
+							{(mediaType == 'image') &&
+								<Fragment>
+									{image.url != undefined ?
+										<img className="qubely-info-box-image" src={image.url} alt="" />
+										:
+										<div className="qubely-info-box-image qubely-image-placeholder"><i className="far fa-image"></i></div>
+									}
+								</Fragment>
 							}
 							{(mediaType == 'number' && number) &&
 								<span className="qubely-info-box-number">{number}</span>
