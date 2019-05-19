@@ -73,7 +73,7 @@ class Border extends Component {
     }
 
     render() {
-        const { value, unit, label, responsive, device, onDeviceChange, responsiveGroup } = this.props
+        const { value, unit, label, min, max, responsive, device, onDeviceChange, responsiveGroup } = this.props
         const { defaultUnit, defaultWidthType } = this.state
         let responsiveDevice = responsive ? device ? device : this.state.device : window.qubelyDevice
         const values = responsive || responsiveGroup ? value.custom && value.custom[responsiveDevice] ? value.custom[responsiveDevice].split(" ") : ['', '', '', ''] : value.custom ? value.custom.split(" ") : ['', '', '', '']
@@ -91,10 +91,10 @@ class Border extends Component {
                     </div>
                     <div className="qubely-field-button-list qubely-ml-auto">
                         {
-                            [ ['solid', __('Solid')], ['dotted', __('Dotted')], ['dashed', __('Dashed')], ['double', __('Double')]].map((data, index) => {
+                            [['solid', __('Solid')], ['dotted', __('Dotted')], ['dashed', __('Dashed')], ['double', __('Double')]].map((data, index) => {
                                 return (
                                     <Tooltip text={data[1]}>
-                                        <button className={(value.type == data[0] ? 'active' : '') + ' qubely-button'} key={index} onClick={() => this.setSettings('type', data[0] )}>
+                                        <button className={(value.type == data[0] ? 'active' : '') + ' qubely-button'} key={index} onClick={() => this.setSettings('type', data[0])}>
                                             <span className={`qubely-field-border-type qubely-field-border-type-${data[0]}`} />
                                         </button>
                                     </Tooltip>
@@ -157,8 +157,8 @@ class Border extends Component {
                                         value={global}
                                         // onChange={val => this.setWidth('all', val)}
                                         onChange={val => this.updateBorder('global', val)}
-                                        min={1}
-                                        max={20}
+                                        min={min}
+                                        max={max}
                                         step={1}
                                     />
                                 </div>
@@ -175,11 +175,9 @@ class Border extends Component {
                                                 <div className="qubely-w-100">
                                                     <Range
                                                         value={values[index] || ''}
-                                                        // value={value.width[iterator[index]] || ''}
-                                                        // onChange={val => this.setWidth(iterator[index], val)}
                                                         onChange={val => this.updateBorder(iterator[index], val)}
-                                                        min={0}
-                                                        max={20}
+                                                        min={min}
+                                                        max={max}
                                                         step={1}
                                                     />
                                                 </div>

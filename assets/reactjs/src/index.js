@@ -19,7 +19,7 @@ import './blocks/counter'       // counter
 import './blocks/tabs'          // Tabs
 import './blocks/tabs/tab'      // Inner Tabs
 import './blocks/socialicons'   // Social Icons
-import './blocks/form'          // Form
+// import './blocks/form'          // Form
 import './blocks/contactform'   // Contact Form
 import './blocks/buttongroup'   // Button Group
 import './blocks/advancedlist'  // Advanced List
