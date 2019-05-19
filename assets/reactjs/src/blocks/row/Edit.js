@@ -277,7 +277,7 @@ class Edit extends Component {
                         <div className="qubely-shape-divider qubely-bottom-shape" dangerouslySetInnerHTML={{ __html: qubely_admin.shapes[shapeBottom.style] }} />
                     }
                     <div className="qubely-row-overlay"></div>
-                    <div className="qubely-container">
+                    <div className={`${align == 'full' ? 'qubely-container' : 'qubely-container-fluid' }`}>
                         <div className={`qubely-row qubely-backend-row ${(heightOptions == 'window') ? 'qubely-row-height-window' : ''}`}>
                             <InnerBlocks template={this.getTemplate(columns)} templateLock="all" allowedBlocks={['qubely/column']} />
                         </div>

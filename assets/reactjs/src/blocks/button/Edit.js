@@ -27,7 +27,7 @@ class Edit extends Component {
     }
 
     render() {
-        const { uniqueId, parentClientId, buttonGroup, fillType, buttonSize, buttonPadding, typography, textField, url, enableAlignment, alignment, btnBlock, buttonBorderRadius, iconName, iconPosition, iconSize, iconGap, buttonBorder, borderHoverColor, buttonColor, buttonColor2, buttonHoverColor, bgColor, bgHoverColor, buttonShadow, buttonHoverShadow } = this.props.attributes
+        const { uniqueId, parentClientId, buttonGroup, fillType, buttonSize, buttonWidthType, buttonWidth, buttonPadding, typography, textField, url, enableAlignment, alignment, buttonBorderRadius, iconName, iconPosition, iconSize, iconGap, buttonBorder, borderHoverColor, buttonColor, buttonColor2, buttonHoverColor, bgColor, bgHoverColor, buttonShadow, buttonHoverShadow } = this.props.attributes
         const { clientId, removeBlock, updateBlockAttributes, buttonGroupAttributes, setAttributes } = this.props
         const {device}=this.state
 
@@ -73,7 +73,27 @@ class Edit extends Component {
                                 device={device}
                                 onDeviceChange={value => this.setState({ device: value })} />
                         }
-                        <Toggle label={__('Full Width')} value={btnBlock} onChange={val => setAttributes({ btnBlock: val })} />
+                        <RadioAdvanced
+                            label={__('Button Width')}
+                            options={[
+                                { label: __('Auto'), value: 'auto', title: __('Auto') },
+                                { label: __('Full'), value: 'block', title: __('Full') },
+                                { label: __('Fixed'), value: 'fixed', title: __('Fixed') }
+                            ]}
+                            value={buttonWidthType}
+                            onChange={(value) => setAttributes({ buttonWidthType: value })} />
+                        {buttonWidthType == 'fixed' &&
+                            <Range
+                                label={__('Fixed Width')}
+                                value={buttonWidth}
+                                onChange={(value) => setAttributes({ buttonWidth: value })}
+                                unit={['px', 'em', '%']}
+                                min={30}
+                                max={800}
+                                responsive 
+                                device={device}
+                                onDeviceChange={value => this.setState({ device: value })} />
+                        }
                     </PanelBody>
 
                     <PanelBody title={__('Design')} initialOpen={false}>

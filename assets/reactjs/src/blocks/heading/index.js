@@ -81,7 +81,7 @@ registerBlockType('qubely/heading', {
 
 		subHeading: { type: 'boolean', default: 0 },
 		subHeadingLevel: { type: 'number', default: 3 },
-		subHeadingContent: { type: 'string', default: 'Pre Heading' },
+		subHeadingContent: { type: 'string', default: 'Sub Heading' },
 		subHeadingTypography: {
 			type: 'object',
 			default: { openTypography: 1, size: { md: 16, unit: 'px' } },
@@ -93,19 +93,37 @@ registerBlockType('qubely/heading', {
 		},
 		subHeadingColor: {
 			type: 'string', default: '#333',
-			condition: [{ key: 'subHeading', condition: '==', value: 1 }],
 			style: [
 				{
+					condition: [{ key: 'subHeading', relation: '==', value: 1 }],
 					selector: '{{QUBELY}} .qubely-block-heading .qubely-sub-heading-selector {color: {{subHeadingColor}};}'
 				}
 			],
 		},
+		subHeadingPosition: {
+			type: 'string',
+			default: 'after_title',
+		},
 		subHeadingSpacing: {
-			type: 'object', default: { md: 10, unit: 'px' },
-			condition: [{ key: 'subHeading', condition: '==', value: 1 }],
+			type: 'object',
+			default: {
+				md: 10,
+				unit: 'px'
+			},
 			style: [
 				{
+					condition: [
+						{ key: 'subHeading', relation: '==', value: 1 },
+						{ key: 'subHeadingPosition', relation: '==', value: 'after_title' }
+					],
 					selector: '{{QUBELY}} .qubely-block-heading .qubely-sub-heading-selector {margin-top: {{subHeadingSpacing}};}'
+				},
+				{
+					condition: [
+						{ key: 'subHeading', relation: '==', value: 1 },
+						{ key: 'subHeadingPosition', relation: '==', value: 'before_title' }
+					],
+					selector: '{{QUBELY}} .qubely-block-heading .qubely-sub-heading-selector {margin-bottom: {{subHeadingSpacing}};}'
 				}
 			],
 		},

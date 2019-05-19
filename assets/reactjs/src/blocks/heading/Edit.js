@@ -2,7 +2,7 @@ const { __ } = wp.i18n
 const { Fragment, Component } = wp.element;
 const { PanelBody, Toolbar, SelectControl} = wp.components
 const { RichText, InspectorControls, BlockControls } = wp.editor
-import { Color, Typography, Alignment, Range, Toggle, Headings } from "../../components/FieldRender"
+import { Color, Typography, Alignment, Range, Toggle, Headings, RadioAdvanced } from "../../components/FieldRender"
 import { CssGenerator } from '../../components/CssGenerator'
 import '../../components/GlobalSettings'
 import '../../components/fields/inline/editorInline'
@@ -28,7 +28,7 @@ class Edit extends Component {
     }
 
     render() {
-        const { uniqueId, content, typography, alignment, selector, textColor, separatorStyle, separatorColor, separatorStroke, separatorPosition, separatorWidth, separatorSpacing, subHeading, subHeadingLevel, subHeadingContent, subHeadingTypography, subHeadingColor, subHeadingSpacing } = this.props.attributes
+        const { uniqueId, content, typography, alignment, selector, textColor, separatorStyle, separatorColor, separatorStroke, separatorPosition, separatorWidth, separatorSpacing, subHeading, subHeadingLevel, subHeadingContent, subHeadingTypography, subHeadingColor, subHeadingSpacing, subHeadingPosition } = this.props.attributes
         const { setAttributes } = this.props
         const { device } = this.state
         const separators = {
@@ -77,6 +77,12 @@ class Edit extends Component {
                                 <Typography label={__('Typography')} value={subHeadingTypography} onChange={ val => setAttributes({ subHeadingTypography:val })} device={device} onDeviceChange={value => this.setState({ device: value })}/>
                                 <Color label={__('Color')} value={subHeadingColor} onChange={val => setAttributes({ subHeadingColor: val })} />
                                 <Range label={__('Spacing')} value={subHeadingSpacing} onChange={(value) => setAttributes({ subHeadingSpacing: value })} unit={['px', 'em', '%']} min={0} max={60} responsive device={device} onDeviceChange={value => this.setState({ device: value })}/>
+                                <RadioAdvanced label={__('Position')} value={subHeadingPosition} onChange={val => setAttributes({ subHeadingPosition: val })}
+                                    options={[
+                                        { label: __('After Title'), value: 'after_title', title: __('After Title') },
+                                        { label: __('Before Title'), value: 'before_title', title: __('Before Title') }
+                                    ]}
+                                />
                             </Fragment>
                         }
                     </PanelBody>
@@ -145,6 +151,16 @@ class Edit extends Component {
 
                 <div className={`qubely-block-${uniqueId}`}>
                     <div className={`qubely-block-heading ${ separatorStyle ? 'qubely-has-separator qubely-separator-position-' + separatorPosition : ''}`}>
+                        { (subHeading == 1 && subHeadingPosition == 'before_title') &&
+                            <RichText
+                                key="editable"
+                                tagName={subHeadingTagName}
+                                className="qubely-sub-heading-selector"
+                                keepPlaceholderOnFocus
+                                placeholder={__('Add Text...')}
+                                onChange={value => setAttributes({ subHeadingContent: value })}
+                                value={subHeadingContent} />
+                        }
                         <div className="qubely-heading-container">
                             {separatorStyle && ( separatorPosition == 'left' || separatorPosition == 'top' || separatorPosition == 'leftright' ) ? <div className="qubely-separator qubely-separator-before">{renderSeparators}</div> : ''}
                             <RichText
@@ -157,7 +173,7 @@ class Edit extends Component {
                                 value={content} />
                             {separatorStyle != '' && ( separatorPosition == 'right' || separatorPosition == 'bottom' || separatorPosition == 'leftright' ) ? <div className="qubely-separator qubely-separator-after">{renderSeparators}</div> : ''}
                         </div>
-                        {subHeading == 1 &&
+                        { (subHeading == 1 && subHeadingPosition == 'after_title') &&
                             <RichText
                                 key="editable"
                                 tagName={subHeadingTagName}

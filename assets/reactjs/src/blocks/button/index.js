@@ -20,15 +20,30 @@ registerBlockType('qubely/button', {
         customClassName: { type: 'string', default: '' },
         spacer: { type: 'object', default: { spaceTop: { md: '10', unit: "px" }, spaceBottom: { md: '10', unit: "px" } }, style: [{ selector: '{{QUBELY}}' }] },
         textField: { type: 'string', default: '' },
-        btnBlock: {
-            type: 'boolean',
-             default: false,
+        buttonWidthType: {
+            type: 'string',
+             default: 'auto',
              style: [
                 {
                     condition: [
-                        { key: 'btnBlock', relation: '==', value: true }
+                        { key: 'buttonWidthType', relation: '==', value: 'block' }
                     ],
                     selector: '{{QUBELY}} .qubely-block-btn-anchor {display: -webkit-box; display: -ms-flexbox; display: flex;}'
+                }
+            ]
+        },
+        buttonWidth: {
+            type: 'object',
+             default: {
+                md: 260,
+                unit: 'px'
+             },
+             style: [
+                {
+                    condition: [
+                        { key: 'buttonWidthType', relation: '==', value: 'fixed' }
+                    ],
+                    selector: '{{QUBELY}} .qubely-block-btn-anchor {width: {{buttonWidth}};}'
                 }
             ]
         },

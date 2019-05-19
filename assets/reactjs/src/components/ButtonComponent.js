@@ -15,15 +15,30 @@ const addAttribute = (settings) => {
             buttonTag: { type: 'string', default: 'a' },
             buttonUrl: { type: 'object', default: { url: '#' } },
             buttonSize: { type: 'string', default: 'medium' },
-            buttonBlock: {
-                type: 'boolean',
-                default: false,
-                style: [
+            buttonWidthType: {
+                type: 'string',
+                 default: 'auto',
+                 style: [
                     {
                         condition: [
-                            { key: 'buttonBlock', relation: '==', value: true }
+                            { key: 'buttonWidthType', relation: '==', value: 'block' }
                         ],
                         selector: '{{QUBELY}} .qubely-block-btn-anchor {display: -webkit-box; display: -ms-flexbox; display: flex;}'
+                    }
+                ]
+            },
+            buttonWidth: {
+                type: 'object',
+                 default: {
+                    md: 260,
+                    unit: 'px'
+                 },
+                 style: [
+                    {
+                        condition: [
+                            { key: 'buttonWidthType', relation: '==', value: 'fixed' }
+                        ],
+                        selector: '{{QUBELY}} .qubely-block-btn-anchor {width: {{buttonWidth}};}'
                     }
                 ]
             },
@@ -192,7 +207,7 @@ const withInspectorControls = createHigherOrderComponent(OriginalComponent => {
 
         renderButtonControls = () => {
             const { setAttributes,
-                attributes: { enableButtonAlignment, buttonAlignment, buttonGap, buttonBlock, buttonTag, buttonFillType, buttonSize, buttonTypography, buttonPadding, buttonUrl, buttonBorderRadius, buttonIconName, buttonIconPosition, buttonIconSize, buttonIconGap, buttonBorder, buttonBorderHoverColor, buttonColor, buttonHoverColor, buttonBgColor, buttonBgHoverColor, buttonShadow, buttonHoverShadow } } = this.props
+                attributes: { enableButtonAlignment, buttonAlignment, buttonGap, buttonWidthType, buttonWidth, buttonTag, buttonFillType, buttonSize, buttonTypography, buttonPadding, buttonUrl, buttonBorderRadius, buttonIconName, buttonIconPosition, buttonIconSize, buttonIconGap, buttonBorder, buttonBorderHoverColor, buttonColor, buttonHoverColor, buttonBgColor, buttonBgHoverColor, buttonShadow, buttonHoverShadow } } = this.props
             const { device } = this.state
             return (
                 <Fragment>
@@ -236,7 +251,27 @@ const withInspectorControls = createHigherOrderComponent(OriginalComponent => {
                                 onDeviceChange={value => this.setState({ device: value })} />
 
                         }
-                        <Toggle label={__('Full Width')} value={buttonBlock} onChange={val => setAttributes({ buttonBlock: val })} />
+                        <RadioAdvanced
+                            label={__('Button Width')}
+                            options={[
+                                { label: __('Auto'), value: 'auto', title: __('Auto') },
+                                { label: __('Full'), value: 'block', title: __('Full') },
+                                { label: __('Fixed'), value: 'fixed', title: __('Fixed') }
+                            ]}
+                            value={buttonWidthType}
+                            onChange={(value) => setAttributes({ buttonWidthType: value })} />
+                        {buttonWidthType == 'fixed' &&
+                            <Range
+                                label={__('Fixed Width')}
+                                value={buttonWidth}
+                                onChange={(value) => setAttributes({ buttonWidth: value })}
+                                unit={['px', 'em', '%']}
+                                min={30}
+                                max={800}
+                                responsive 
+                                device={device}
+                                onDeviceChange={value => this.setState({ device: value })} />
+                        }
                     </InnerPanel>
 
                     <InnerPanel title={__('Design')} initialOpen={false}>

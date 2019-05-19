@@ -5,7 +5,7 @@ import { animationAttr } from '../../components/HelperFunction'
 
 class Save extends Component {
     render() {
-		const { uniqueId, content, selector, separatorStyle, separatorPosition, subHeading, subHeadingLevel, subHeadingContent, animation } = this.props.attributes
+		const { uniqueId, content, selector, separatorStyle, separatorPosition, subHeading, subHeadingLevel, subHeadingContent, subHeadingPosition, animation } = this.props.attributes
 
 		const separators = {
             solid: {type: 'css', separator: 'solid', width: 300, stroke: 10},
@@ -36,12 +36,15 @@ class Save extends Component {
 		return (
 			<div className={`qubely-block-${uniqueId}`} { ...animationAttr(animation) } >
                 <div className={`qubely-block-heading ${ separatorStyle ? 'qubely-has-separator qubely-separator-position-' + separatorPosition : ''}`}>
+                    { (subHeading == 1 && subHeadingPosition == 'before_title') &&
+                        <RichText.Content tagName={subSubTagName} className="qubely-sub-heading-selector" value={subHeadingContent} />
+                    }
                     <div className="qubely-heading-container">
                         {separatorStyle && ( separatorPosition == 'left' || separatorPosition == 'top' || separatorPosition == 'leftright' ) ? <div className="qubely-separator qubely-separator-before">{renderSeparators}</div> : ''}
                         <RichText.Content tagName={selector} className="qubely-heading-selector" value={content} />
                         {separatorStyle != '' && ( separatorPosition == 'right' || separatorPosition == 'bottom' || separatorPosition == 'leftright' ) ? <div className="qubely-separator qubely-separator-after">{renderSeparators}</div> : ''}
                     </div>
-                    {subHeading == 1 &&
+                    { (subHeading == 1 && subHeadingPosition == 'after_title') &&
                         <RichText.Content tagName={subSubTagName} className="qubely-sub-heading-selector" value={subHeadingContent} />
                     }
                 </div>
