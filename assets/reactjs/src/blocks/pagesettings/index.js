@@ -3,15 +3,15 @@ const { registerBlockType } = wp.blocks
 
 const blockAttrs = {
 	uniqueId:{type: 'string',default:''},
-	body: {type: 'object',default:{}, style: [{ selector: 'body:not(.wp-admin), .editor-styles-wrapper' }] },
-	p: {type: 'object',default:{}, style: [{ selector: 'body:not(.wp-admin) p, .editor-styles-wrapper p' }] },
-	h1: {type: 'object',default:{}, style: [{ selector: 'body:not(.wp-admin) h1, .editor-styles-wrapper h1' }] },
-	h2: {type: 'object',default:{}, style: [{ selector: 'body:not(.wp-admin) h2, .editor-styles-wrapper h2' }] },
-	h3: {type: 'object',default:{}, style: [{ selector: 'body:not(.wp-admin) h3, .editor-styles-wrapper h3' }] },
-	h4: {type: 'object',default:{}, style: [{ selector: 'body:not(.wp-admin) h4, .editor-styles-wrapper h4' }] },
-	h5: {type: 'object',default:{}, style: [{ selector: 'body:not(.wp-admin) h5, .editor-styles-wrapper h5' }] },
-	h6: {type: 'object',default:{}, style: [{ selector: 'body:not(.wp-admin) h6, .editor-styles-wrapper h6' }] },
-	button: {type: 'object',default:{}, style: [{ selector: '.editor-styles-wrapper .quebly-button' }] },
+	body: {type: 'object',default:{}, style: [{ selector: 'body:not(.wp-admin), .editor-styles-wrapper .editor-writing-flow *' }] },
+	p: {type: 'object',default:{}, style: [{ selector: 'body:not(.wp-admin) p, .editor-styles-wrapper .editor-writing-flow p' }] },
+	h1: {type: 'object',default:{}, style: [{ selector: 'body:not(.wp-admin) h1, .edit-post-visual-editor h1' }] },
+	h2: {type: 'object',default:{}, style: [{ selector: 'body:not(.wp-admin) h2, .edit-post-visual-editor h2' }] },
+	h3: {type: 'object',default:{}, style: [{ selector: 'body:not(.wp-admin) h3, .edit-post-visual-editor h3' }] },
+	h4: {type: 'object',default:{}, style: [{ selector: 'body:not(.wp-admin) h4, .edit-post-visual-editor h4' }] },
+	h5: {type: 'object',default:{}, style: [{ selector: 'body:not(.wp-admin) h5, .edit-post-visual-editor h5' }] },
+	h6: {type: 'object',default:{}, style: [{ selector: 'body:not(.wp-admin) h6, .edit-post-visual-editor h6' }] },
+	button: {type: 'object',default:{}, style: [{ selector: '.edit-post-visual-editor .quebly-button' }] },
 }
 
 /**
