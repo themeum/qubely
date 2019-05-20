@@ -36,15 +36,13 @@ function innerBlocks( blocks, type = false ){
 const ParseCss = () => {
     window.bindCss = true
     const { getBlocks, getCurrentPostId } = select('core/editor')
-    let __blocks = innerBlocks( getBlocks(), true )
+    let __blocks = '';
+    if( typeof window.globalData != 'undefined' ){
+        __blocks += CssGenerator( window.globalData.settings, 'pagesettings', '8282882', true )
+    }
+    __blocks += innerBlocks( getBlocks(), true )
     if( __blocks !== '' ){
-        API_fetch(getCurrentPostId(), __blocks).then( data => {
-            // if( data.success ){
-            //     console.info(data.message)
-            // }else{
-            //     console.warn(data.message)
-            // }
-        })
+        API_fetch(getCurrentPostId(), __blocks).then( data => {} )
     }
     setTimeout(()=>{
         window.bindCss = false
