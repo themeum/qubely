@@ -42,11 +42,13 @@ class Color extends Component {
                             <ColorPicker color={this.props.value || ''} onChangeComplete={ val => {
                                 if( val.rgb ){ this.props.onChange( val.rgb.a != 1 ? 'rgba('+val.rgb.r+','+val.rgb.g+','+val.rgb.b+','+val.rgb.a+')' : val.hex ) }
                              }}/>
-                            <div className="qubely-rgba-palette" style={{padding:'0px 0px 15px 15px'}}>
-                                {this.defColors().map(
-                                    color => <button style={{ color: color }} onClick={() => this.props.onChange(color)}/> 
-                                )}
-                            </div>
+                            { !this.props.disablePalette &&
+                                <div className="qubely-rgba-palette" style={{padding:'0px 0px 15px 15px'}}>
+                                    {this.defColors().map(
+                                        color => <button style={{ color: color }} onClick={() => this.props.onChange(color)}/> 
+                                    )}
+                                </div>
+                            }
                         </span>
                     )}
                 />

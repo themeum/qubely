@@ -112,12 +112,12 @@ class Plugin extends Component {
                     <Typography label={__('Button')} value={button} onChange={ val => this.updateField({ button: val }) } />
                 </PanelBody>
                 <PanelBody title={__('Color Palette')} initialOpen={false}>
-                    <Color label={__('Preset Color 1')} disableClear value={colorPreset1} onChange={ val => this.updateField({ colorPreset1: val }) } /><Separator />
-                    <Color label={__('Preset Color 2')} disableClear value={colorPreset2} onChange={ val => this.updateField({ colorPreset2: val }) } /><Separator />
-                    <Color label={__('Preset Color 2')} disableClear value={colorPreset3} onChange={ val => this.updateField({ colorPreset3: val }) } /><Separator />
-                    <Color label={__('Preset Color 4')} disableClear value={colorPreset4} onChange={ val => this.updateField({ colorPreset4: val }) } /><Separator />
-                    <Color label={__('Preset Color 5')} disableClear value={colorPreset5} onChange={ val => this.updateField({ colorPreset5: val }) } /><Separator />
-                    <Color label={__('Preset Color 6')} disableClear value={colorPreset6} onChange={ val => this.updateField({ colorPreset6: val }) } /><Separator />
+                    <Color label={__('Preset Color 1')} disableClear disablePalette value={colorPreset1} onChange={ val => this.updateField({ colorPreset1: val }) } /><Separator />
+                    <Color label={__('Preset Color 2')} disableClear disablePalette value={colorPreset2} onChange={ val => this.updateField({ colorPreset2: val }) } /><Separator />
+                    <Color label={__('Preset Color 2')} disableClear disablePalette value={colorPreset3} onChange={ val => this.updateField({ colorPreset3: val }) } /><Separator />
+                    <Color label={__('Preset Color 4')} disableClear disablePalette value={colorPreset4} onChange={ val => this.updateField({ colorPreset4: val }) } /><Separator />
+                    <Color label={__('Preset Color 5')} disableClear disablePalette value={colorPreset5} onChange={ val => this.updateField({ colorPreset5: val }) } /><Separator />
+                    <Color label={__('Preset Color 6')} disableClear disablePalette value={colorPreset6} onChange={ val => this.updateField({ colorPreset6: val }) } /><Separator />
                 </PanelBody>
             </Fragment>
         )
