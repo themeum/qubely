@@ -36,7 +36,16 @@ import './customizer'
 
 window.qubelyDevice = 'md'
 window.bindCss = false
-window.globalData = {}
+window.globalData = { 
+                    settings:{ 
+                        colorPreset1:'#456bed',
+                        colorPreset2:'#30ac3d',
+                        colorPreset3:'#fa9200',
+                        colorPreset4:'#006fbf',
+                        colorPreset5:'#ff1818',
+                        colorPreset6:'#941f90',
+                    }
+                };
 window.globalSaving = false
 
 // Save CSS in Database/File

@@ -74,7 +74,7 @@ class Background extends Component {
                     {(value && (value.openBg == 1 && value.bgType != 'color')) &&
                         <div className="qubely-ml-10">
                             <Tooltip text={ __( 'Clear' )  }>
-                                <a className="qubely-border-clear" href="javascript:;" onClick={() => this.setSettings( 'color', 'bgType' ) } role="button"><i className="fas fa-undo"></i></a>
+                                <span className="qubely-border-clear" onClick={() => this.setSettings( 'color', 'bgType' ) } role="button"><i className="fas fa-undo"></i></span>
                             </Tooltip>
                         </div>
                     }
