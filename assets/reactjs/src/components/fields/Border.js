@@ -157,8 +157,8 @@ class Border extends Component {
                                         value={global}
                                         // onChange={val => this.setWidth('all', val)}
                                         onChange={val => this.updateBorder('global', val)}
-                                        min={min}
-                                        max={max}
+                                        min={min || '0'}
+                                        max={max || '10'}
                                         step={1}
                                     />
                                 </div>
@@ -176,8 +176,8 @@ class Border extends Component {
                                                     <Range
                                                         value={values[index] || ''}
                                                         onChange={val => this.updateBorder(iterator[index], val)}
-                                                        min={min}
-                                                        max={max}
+                                                        min={min || '0'}
+                                                        max={max || '10'}
                                                         step={1}
                                                     />
                                                 </div>

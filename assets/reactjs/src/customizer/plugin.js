@@ -111,7 +111,7 @@ class Plugin extends Component {
                     <Typography label={__('Heading 6')} value={h6} onChange={ val => this.updateField({ h6: val }) } /><Separator />
                     <Typography label={__('Button')} value={button} onChange={ val => this.updateField({ button: val }) } />
                 </PanelBody>
-                <PanelBody title={__('Color Plate')} initialOpen={false}>
+                <PanelBody title={__('Color Palette')} initialOpen={false}>
                     <Color label={__('Preset Color 1')} disableClear value={colorPreset1} onChange={ val => this.updateField({ colorPreset1: val }) } /><Separator />
                     <Color label={__('Preset Color 2')} disableClear value={colorPreset2} onChange={ val => this.updateField({ colorPreset2: val }) } /><Separator />
                     <Color label={__('Preset Color 2')} disableClear value={colorPreset3} onChange={ val => this.updateField({ colorPreset3: val }) } /><Separator />

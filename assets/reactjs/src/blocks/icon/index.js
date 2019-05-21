@@ -55,9 +55,9 @@ registerBlockType('qubely/icon', {
 			style: [
 				{
 					condition:
-					[
-						{ key: 'iconStyle', relation: '!=', value: 'nofill' }
-					],
+						[
+							{ key: 'iconStyle', relation: '!=', value: 'nofill' }
+						],
 					selector: '{{QUBELY}} .qubely-block-icon'
 				}
 			]
@@ -68,9 +68,9 @@ registerBlockType('qubely/icon', {
 			style: [
 				{
 					condition:
-					[
-						{ key: 'iconStyle', relation: '!=', value: 'nofill' }
-					],
+						[
+							{ key: 'iconStyle', relation: '!=', value: 'nofill' }
+						],
 					selector: '{{QUBELY}} .qubely-block-icon:hover'
 				}
 			]
