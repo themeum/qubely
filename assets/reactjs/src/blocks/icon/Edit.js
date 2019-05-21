@@ -41,7 +41,7 @@ class Edit extends Component {
 		setAttributes({ iconStyle: newStyle, border: newBorder })
 	}
 	render() {
-		const { uniqueId, name, url, alignment, iconSize, iconSizeCustom, iconBorderRadius, iconBackgroundSize, iconColor, iconHoverColor, bgColor, bgHoverColor, borderWidth, border, borderHoverColor, iconShadow, iconHoverShadow, iconStyle } = this.props.attributes
+		const { uniqueId, name, url, alignment, iconSize, iconSizeCustom, iconBorderRadius, iconBackgroundSize, iconColor, iconHoverColor, bgColor, bgHoverColor, border, borderHoverColor, iconShadow, iconHoverShadow, iconStyle } = this.props.attributes
 		const { setAttributes } = this.props
 
 		if (uniqueId) { CssGenerator(this.props.attributes, 'icon', uniqueId); }
@@ -128,8 +128,9 @@ class Edit extends Component {
 										value={border}
 										unit={['px', 'em']}
 										responsive
-										device={this.state.device}
+										min={0} max={10}
 										onChange={val => setAttributes({ border: val })}
+										device={this.state.device}
 										onDeviceChange={value => this.setState({ device: value })} />
 								</Tab>
 								<Tab tabTitle={__('Hover')}>
