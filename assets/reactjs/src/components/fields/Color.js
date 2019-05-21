@@ -11,14 +11,13 @@ class Color extends Component {
         this.state = { current: 'date' }
     }
     defColors(){
-        const colors = []; //['#456BED', '#30ac3d', '#fa9200', '#006fbf', '#ff1818', '#941f90'];
-        const set = window.globalData.settings
-        if( set.colorPreset1 ){ colors.push( set.colorPreset1 ); }
-        if( set.colorPreset2 ){ colors.push( set.colorPreset2 ); }
-        if( set.colorPreset3 ){ colors.push( set.colorPreset3 ); }
-        if( set.colorPreset4 ){ colors.push( set.colorPreset4 ); }
-        if( set.colorPreset5 ){ colors.push( set.colorPreset5 ); }
-        if( set.colorPreset6 ){ colors.push( set.colorPreset6 ); }
+        const colors = window.globalData.settings;
+        if( colors.colorPreset1 ){ colors.push( '#456BED' ); }
+        if( set.colorPreset2 ){ colors.push( '#30ac3d' ); }
+        if( set.colorPreset3 ){ colors.push( '#fa9200' ); }
+        if( set.colorPreset4 ){ colors.push( '#006fbf' ); }
+        if( set.colorPreset5 ){ colors.push( '#ff1818' ); }
+        if( set.colorPreset6 ){ colors.push( '#941f90' ); }
         return colors;
     }
     render() {
