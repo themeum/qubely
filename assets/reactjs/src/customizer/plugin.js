@@ -41,37 +41,83 @@ class Plugin extends Component {
         }
     }
 
+    setPresetColor( blocks, prev, next ){
+        const { updateBlockAttributes } = wp.data.dispatch('core/editor')
+        if( prev && next ){
+            blocks.map( row => {
+                const { attributes, name, clientId } = row
+                const blockName = name.split('/')
+                if( blockName[0] === 'qubely' && attributes.uniqueId ){
+                    Object.keys(attributes).forEach(function(key) {
+                        if( typeof attributes[key] == 'string' ){
+                            if( attributes[key] == prev ){
+                                updateBlockAttributes( clientId, { [key]: next } )
+                            }
+                        }else if( typeof attributes[key] == 'object' ){
+                            if( attributes[key].color && attributes[key].color == prev ){
+                                updateBlockAttributes( clientId, { [key]: Object.assign( {}, attributes[key], { color: next } ) } )
+                            }
+                        }
+                    });
+                }
+                if( row.innerBlocks && (row.innerBlocks).length > 0 ){
+                    this.setPresetColor(row.innerBlocks)
+                }
+            })
+        }
+    }
+
     updateField( attrValue ){
         const {  setAttributes } = this.props 
         const { globalSettings } = this.state
         const newSettings = {...globalSettings, ...attrValue }
+        
+        if( attrValue.colorPreset1 ){
+            this.setPresetColor( wp.data.select('core/editor').getBlocks(), globalSettings.colorPreset1, attrValue.colorPreset1 )
+        }
+        if( attrValue.colorPreset2 ){
+            this.setPresetColor( wp.data.select('core/editor').getBlocks(), globalSettings.colorPreset2, attrValue.colorPreset2 )
+        }
+        if( attrValue.colorPreset3 ){
+            this.setPresetColor( wp.data.select('core/editor').getBlocks(), globalSettings.colorPreset3, attrValue.colorPreset3 )
+        }
+        if( attrValue.colorPreset4 ){
+            this.setPresetColor( wp.data.select('core/editor').getBlocks(), globalSettings.colorPreset4, attrValue.colorPreset4 )
+        }
+        if( attrValue.colorPreset5 ){
+            this.setPresetColor( wp.data.select('core/editor').getBlocks(), globalSettings.colorPreset5, attrValue.colorPreset5 )
+        }
+        if( attrValue.colorPreset6 ){
+            this.setPresetColor( wp.data.select('core/editor').getBlocks(), globalSettings.colorPreset6, attrValue.colorPreset6 )
+        }
+
         setAttributes( attrValue )
         this.setState({globalSettings : {...newSettings}, fetched: false })
     }
 
     renderFields(){
-        const { body, p, h1, h2, h3, h4, h5, h6, button } = this.state.globalSettings
+        const { body, p, h1, h2, h3, h4, h5, h6, button, colorPreset1, colorPreset2, colorPreset3, colorPreset4, colorPreset5, colorPreset6 } = this.state.globalSettings
         
         return (
             <Fragment>
                 <PanelBody title={__('Typography')} initialOpen={false}>
-                    <Typography label={__('Body')} color value={body} onChange={ val => this.updateField({ body: val }) } />
-                    <Separator />
-                    <Typography label={__('Paragraph')} color value={p} onChange={ val => this.updateField({ p: val }) } />
-                    <Separator />
-                    <Typography label={__('Heading 1')} color value={h1} onChange={ val => this.updateField({ h1: val }) } />
-                    <Separator />
-                    <Typography label={__('Heading 2')} color value={h2} onChange={ val => this.updateField({ h2: val }) } />
-                    <Separator />
-                    <Typography label={__('Heading 3')} color value={h3} onChange={ val => this.updateField({ h3: val }) } />
-                    <Separator />
-                    <Typography label={__('Heading 4')} color value={h4} onChange={ val => this.updateField({ h4: val }) } />
-                    <Separator />
-                    <Typography label={__('Heading 5')} color value={h5} onChange={ val => this.updateField({ h5: val }) } />
-                    <Separator />
-                    <Typography label={__('Heading 6')} color value={h6} onChange={ val => this.updateField({ h6: val }) } />
-                    <Separator />
-                    <Typography label={__('Button')} color value={button} onChange={ val => this.updateField({ button: val }) } />
+                    <Typography label={__('Body')} value={body} onChange={ val => this.updateField({ body: val }) } /><Separator />
+                    <Typography label={__('Paragraph')} value={p} onChange={ val => this.updateField({ p: val }) } /><Separator />
+                    <Typography label={__('Heading 1')} value={h1} onChange={ val => this.updateField({ h1: val }) } /><Separator />
+                    <Typography label={__('Heading 2')} value={h2} onChange={ val => this.updateField({ h2: val }) } /><Separator />
+                    <Typography label={__('Heading 3')} value={h3} onChange={ val => this.updateField({ h3: val }) } /><Separator />
+                    <Typography label={__('Heading 4')} value={h4} onChange={ val => this.updateField({ h4: val }) } /><Separator />
+                    <Typography label={__('Heading 5')} value={h5} onChange={ val => this.updateField({ h5: val }) } /><Separator />
+                    <Typography label={__('Heading 6')} value={h6} onChange={ val => this.updateField({ h6: val }) } /><Separator />
+                    <Typography label={__('Button')} value={button} onChange={ val => this.updateField({ button: val }) } />
+                </PanelBody>
+                <PanelBody title={__('Color Plate')} initialOpen={false}>
+                    <Color label={__('Preset Color 1')} disableClear value={colorPreset1} onChange={ val => this.updateField({ colorPreset1: val }) } /><Separator />
+                    <Color label={__('Preset Color 2')} disableClear value={colorPreset2} onChange={ val => this.updateField({ colorPreset2: val }) } /><Separator />
+                    <Color label={__('Preset Color 2')} disableClear value={colorPreset3} onChange={ val => this.updateField({ colorPreset3: val }) } /><Separator />
+                    <Color label={__('Preset Color 4')} disableClear value={colorPreset4} onChange={ val => this.updateField({ colorPreset4: val }) } /><Separator />
+                    <Color label={__('Preset Color 5')} disableClear value={colorPreset5} onChange={ val => this.updateField({ colorPreset5: val }) } /><Separator />
+                    <Color label={__('Preset Color 6')} disableClear value={colorPreset6} onChange={ val => this.updateField({ colorPreset6: val }) } /><Separator />
                 </PanelBody>
             </Fragment>
         )

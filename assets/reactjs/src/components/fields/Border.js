@@ -105,7 +105,7 @@ class Border extends Component {
                     {(value.type) &&
                         <Tooltip text={__('Clear')}>
                             <div className="qubely-ml-10">
-                                <a className="qubely-border-clear" href="javascript:;" onClick={() => this.setSettings('type', '')} role="button"><i className="fas fa-undo"></i></a>
+                                <span className="qubely-border-clear" onClick={() => this.setSettings('type', '')} role="button"><i className="fas fa-undo"></i></span>
                             </div>
                         </Tooltip>
                     }

@@ -38,7 +38,7 @@ class Spacing extends Component {
                     </div>
                     {(value && value.type != '') &&
                         <div className="qubely-ml-10">
-                            <a className="qubely-border-clear" href="javascript:;" onClick={() => this.setSettings('type', '')} title={__('Clear')} role="button"><i className="fas fa-undo"></i></a>
+                            <span className="qubely-border-clear" onClick={() => this.setSettings('type', '')} title={__('Clear')} role="button"><i className="fas fa-undo"></i></span>
                         </div>
                     }
                 </div>

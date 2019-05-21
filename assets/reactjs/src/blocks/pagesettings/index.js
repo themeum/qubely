@@ -12,6 +12,13 @@ const blockAttrs = {
 	h5: {type: 'object',default:{}, style: [{ selector: 'body:not(.wp-admin) h5, .editor-styles-wrapper h5' }] },
 	h6: {type: 'object',default:{}, style: [{ selector: 'body:not(.wp-admin) h6, .editor-styles-wrapper h6' }] },
 	button: {type: 'object',default:{}, style: [{ selector: '.editor-styles-wrapper .quebly-button' }] },
+
+	colorPreset1: {type: 'string', default: '#456bed' },
+	colorPreset2: {type: 'string', default: '#30ac3d' },
+	colorPreset3: {type: 'string', default: '#fa9200' },
+	colorPreset4: {type: 'string', default: '#006fbf' },
+	colorPreset5: {type: 'string', default: '#ff1818' },
+	colorPreset6: {type: 'string', default: '#941f90' },
 }
 
 /**
