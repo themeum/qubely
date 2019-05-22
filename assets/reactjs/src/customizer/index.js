@@ -6,6 +6,6 @@ import icons from '../helpers/icons';
 
 
 registerPlugin( 'qubely-customizer', {
-    icon: icons.solid,
+    icon: icons.qubely,
     render: Plugin,
 } );
