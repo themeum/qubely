@@ -100,9 +100,18 @@ class Plugin extends Component {
         
         return (
             <Fragment>
+                <PanelBody title={__('Color Palette')} initialOpen={true}>
+                    <div className="qubely-d-flex qubely-align-justified">
+                        <Color disableClear disablePalette value={colorPreset1} onChange={ val => this.updateField({ colorPreset1: val }) } />
+                        <Color disableClear disablePalette value={colorPreset2} onChange={ val => this.updateField({ colorPreset2: val }) } />
+                        <Color disableClear disablePalette value={colorPreset3} onChange={ val => this.updateField({ colorPreset3: val }) } />
+                        <Color disableClear disablePalette value={colorPreset4} onChange={ val => this.updateField({ colorPreset4: val }) } />
+                        <Color disableClear disablePalette value={colorPreset5} onChange={ val => this.updateField({ colorPreset5: val }) } />
+                        <Color disableClear disablePalette value={colorPreset6} onChange={ val => this.updateField({ colorPreset6: val }) } />
+                    </div>
+                </PanelBody>
                 <PanelBody title={__('Typography')} initialOpen={false}>
                     <Typography label={__('Body')} value={body} onChange={ val => this.updateField({ body: val }) } /><Separator />
-                    <Typography label={__('Paragraph')} value={p} onChange={ val => this.updateField({ p: val }) } /><Separator />
                     <Typography label={__('Heading 1')} value={h1} onChange={ val => this.updateField({ h1: val }) } /><Separator />
                     <Typography label={__('Heading 2')} value={h2} onChange={ val => this.updateField({ h2: val }) } /><Separator />
                     <Typography label={__('Heading 3')} value={h3} onChange={ val => this.updateField({ h3: val }) } /><Separator />
@@ -110,14 +119,6 @@ class Plugin extends Component {
                     <Typography label={__('Heading 5')} value={h5} onChange={ val => this.updateField({ h5: val }) } /><Separator />
                     <Typography label={__('Heading 6')} value={h6} onChange={ val => this.updateField({ h6: val }) } /><Separator />
                     <Typography label={__('Button')} value={button} onChange={ val => this.updateField({ button: val }) } />
-                </PanelBody>
-                <PanelBody title={__('Color Palette')} initialOpen={false}>
-                    <Color label={__('Preset Color 1')} disableClear disablePalette value={colorPreset1} onChange={ val => this.updateField({ colorPreset1: val }) } /><Separator />
-                    <Color label={__('Preset Color 2')} disableClear disablePalette value={colorPreset2} onChange={ val => this.updateField({ colorPreset2: val }) } /><Separator />
-                    <Color label={__('Preset Color 2')} disableClear disablePalette value={colorPreset3} onChange={ val => this.updateField({ colorPreset3: val }) } /><Separator />
-                    <Color label={__('Preset Color 4')} disableClear disablePalette value={colorPreset4} onChange={ val => this.updateField({ colorPreset4: val }) } /><Separator />
-                    <Color label={__('Preset Color 5')} disableClear disablePalette value={colorPreset5} onChange={ val => this.updateField({ colorPreset5: val }) } /><Separator />
-                    <Color label={__('Preset Color 6')} disableClear disablePalette value={colorPreset6} onChange={ val => this.updateField({ colorPreset6: val }) } /><Separator />
                 </PanelBody>
             </Fragment>
         )
