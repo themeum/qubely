@@ -39,7 +39,7 @@ const withInspectorControls = createHigherOrderComponent(OriginalComponent => {
                             <PanelBody title={__('Animation')} initialOpen={false}>
                                 <Animation
                                     uniqueId={uniqueId}
-                                    label="Animation"
+                                    label={__('Animation')}
                                     value={animation}
                                     onChange={(value) => setAttributes({ animation: value })} />
                             </PanelBody>

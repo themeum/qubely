@@ -2,6 +2,8 @@ const { __ } = wp.i18n;
 const icons = {};
 const img_path = qubely_admin.plugin + 'assets/img/blocks';
 
+icons.qubely = <svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M15.8 8c0-2.2-.8-4-2.3-5.5-1.5-1.5-3.4-2.3-5.5-2.3s-4 .8-5.5 2.3c-1.5 1.5-2.3 3.3-2.3 5.5s.8 4 2.3 5.5c1.5 1.5 3.3 2.3 5.5 2.3.9 0 1.8-.1 2.6-.4l-2.2-2.3c-.1-.1-.3-.2-.4-.2-1.4 0-2.5-.5-3.4-1.4-1-.9-1.4-2.1-1.4-3.5s.5-2.6 1.4-3.5c.9-.9 2-1.4 3.4-1.4s2.5.5 3.4 1.4c.9.9 1.4 2.1 1.4 3.5 0 .7-.1 1.4-.4 2-.2.5-.8.6-1.2.2-1.1-1.1-2.8-1.2-4-.2l2.5 2.6 2.1 2.2c.9.9 2.4 1 3.4.1l.3-.3-1.3-1.3c-.2-.2-.2-.4 0-.6 1-1.3 1.6-2.9 1.6-4.7z" /></svg>;
+
 icons.solid = <svg xmlns="http://www.w3.org/2000/svg" width="19" height="2"><switch><g><path d="M0 0h19v2H0z" /></g></switch></svg>;
 icons.dot = <svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" width="18" height="2"><switch><g><g><g transform="translate(-1378 -121)"><g transform="translate(1229 110)"><g transform="translate(149 11)"><circle class="st0" cx="1" cy="1" r="1" /><circle class="st0" cx="17" cy="1" r="1" /><circle class="st0" cx="5" cy="1" r="1" /><circle class="st0" cx="13" cy="1" r="1" /><circle class="st0" cx="9" cy="1" r="1" /></g></g></g></g></g></switch></svg>;
 icons.dash = <svg xmlns="http://www.w3.org/2000/svg" width="18" height="2"><switch><g><path d="M18 2h-2V0h2v2zm-4 0h-2V0h2v2zm-4 0H8V0h2v2zM6 2H4V0h2v2zM2 2H0V0h2v2z" /></g></switch></svg>;
