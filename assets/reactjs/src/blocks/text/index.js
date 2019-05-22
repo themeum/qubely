@@ -45,7 +45,7 @@ registerBlockType('qubely/text', {
 
 		
 		typography: { type: 'object', default: {}, style: [{ selector: '{{QUBELY}} .qubely-block-text, {{QUBELY}} .qubely-block-text .editor-rich-text p' }] },
-		textColor: { type: 'string', default: '', style: [{ selector: '{{QUBELY}} .qubely-block-text { color:{{textColor}}; }' }] },
+		textColor: { type: 'string', default: '', style: [{ selector: '{{QUBELY}} .qubely-block-text-content { color:{{textColor}}; }' }] },
 		
 		
 		// Title

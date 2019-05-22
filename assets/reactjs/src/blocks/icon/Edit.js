@@ -138,10 +138,14 @@ class Edit extends Component {
 										label={__('Background Color')}
 										value={bgHoverColor}
 										onChange={val => setAttributes({ bgHoverColor: val })} />
-									<Color
-										label={__('Border Color')}
-										value={borderHoverColor}
-										onChange={val => setAttributes({ borderHoverColor: val })} />
+									{
+										border.type &&
+										<Color
+											label={__('Border Color')}
+											value={borderHoverColor}
+											onChange={val => setAttributes({ borderHoverColor: val })} />
+									}
+
 								</Tab>
 							</Tabs>
 

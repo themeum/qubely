@@ -52,7 +52,7 @@ class Save extends Component {
 						</div>
                     }
 
-					<RichText.Content tagName={selector} value={content} />
+					<RichText.Content tagName={selector} className="qubely-block-text-content" value={content} />
 				</div>
 			</div>
 		)
