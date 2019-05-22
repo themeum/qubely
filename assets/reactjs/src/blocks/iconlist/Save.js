@@ -1,6 +1,5 @@
 const { Component } = wp.element;
 const { RichText } = wp.editor
-import { QubelyButtonSave } from '../../components/FieldRender'
 
 class Save extends Component {
 

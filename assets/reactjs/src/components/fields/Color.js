@@ -13,12 +13,12 @@ class Color extends Component {
     defColors(){
         let val = [];
         const colors = window.globalData.settings;
-        val.push( colors.colorPreset1 || '#456BED' )
-        val.push( colors.colorPreset2 || '#30ac3d' )
-        val.push( colors.colorPreset3 || '#fa9200' )
-        val.push( colors.colorPreset4 || '#006fbf' )
-        val.push( colors.colorPreset5 || '#ff1818' )
-        val.push( colors.colorPreset6 || '#941f90' )
+        val.push( colors.colorPreset1 || '#062040' )
+        val.push( colors.colorPreset2 || '#566372' )
+        val.push( colors.colorPreset3 || '#2084F9' )
+        val.push( colors.colorPreset4 || '#F3F3F3' )
+        val.push( colors.colorPreset5 || '#EEEEEE' )
+        val.push( colors.colorPreset6 || '#FFFFFF' )
         return val;
     }
     render() {

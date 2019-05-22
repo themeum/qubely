@@ -3,7 +3,7 @@ const { createHigherOrderComponent } = wp.compose
 const { Component, Fragment } = wp.element
 const { InspectorControls } = wp.editor
 const { PanelBody } = wp.components
-import { Typography, Color, ColorAdvanced, Padding, IconList, Select, Styles, Tabs, Tab, Range, Url, BoxShadow, RadioAdvanced, Separator, Border, InnerPanel, Alignment, Toggle, BorderRadius } from './FieldRender'
+import { Typography, Color, ColorAdvanced, Padding, IconList, Select, Styles, Tabs, Tab, Range, Url, BoxShadow, RadioAdvanced, Border, InnerPanel, Alignment, Toggle, BorderRadius } from './FieldRender'
 import icons from '../helpers/icons';
 import { CssGenerator } from './CssGenerator'
 

@@ -1,7 +1,5 @@
 const { __ } = wp.i18n
-const { Component, Fragment } = wp.element
-const { TextControl } = wp.components
-import { Typography, Alignment, Styles, Range, Tabs, Tab, Border, RadioAdvanced, Color, Wrapper, BoxShadow, CustomIcons, Toggle, Separator } from '../../components/FieldRender'
+const { Component } = wp.element
 import '../css/gradientangle.scss'
 const LABEL = "Gradient Angle"
 class GradientAngle extends Component {
@@ -24,8 +22,6 @@ class GradientAngle extends Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        // if (prevProps.value === this.props.value) return
-        // this.updateSelectorPostion(this.props.value)
         if (prevState.deg === this.state.deg) return
         this.updateSelectorPostion(this.state.deg)
     }
@@ -60,7 +56,6 @@ class GradientAngle extends Component {
             const { onChange } = this.props
             $('.qubely-gradient-angle').css({ 'cursor': 'auto' })
             this.setState({ isDragging: false })
-            // onChange(Math.round(this.state.deg))
         }
     }
     spinning = (event) => {

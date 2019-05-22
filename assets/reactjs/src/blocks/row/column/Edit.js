@@ -1,11 +1,11 @@
 
 const { __ } = wp.i18n;
-const { PanelBody, Toolbar, ResizableBox, IconButton, Tooltip } = wp.components
+const { PanelBody, Toolbar, ResizableBox, IconButton } = wp.components
 const { Component, Fragment } = wp.element
 const { InnerBlocks, InspectorControls, BlockControls } = wp.editor
 const { createBlock } = wp.blocks
 const { select, dispatch } = wp.data
-import { Dimension, Background, Border, BorderRadius, BoxShadow, Range, Separator, DragDimension, RadioAdvanced } from '../../../components/FieldRender'
+import { Background, Border, BorderRadius, BoxShadow, Range, Separator, DragDimension } from '../../../components/FieldRender'
 import { CssGenerator } from '../../../components/CssGenerator'
 import '../../../components/GlobalSettings';
 import icons from '../../../helpers/icons';

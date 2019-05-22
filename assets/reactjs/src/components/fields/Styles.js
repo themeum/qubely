@@ -1,13 +1,10 @@
 import '../css/styles.scss'
-const { Button, Tooltip } = wp.components
 const { Component } = wp.element
 
 class Styles extends Component {
-
     setSettings(val){
         this.props.onChange( val )
     }
-
     render() {
         const { value, options, columns = 2 } = this.props
         return(

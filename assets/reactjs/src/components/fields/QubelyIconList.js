@@ -1,9 +1,7 @@
 const { __ } = wp.i18n
 const { Component, Fragment } = wp.element
-const { RichText } = wp.editor
-const { Tooltip, ColorPalette } = wp.components;
-import { Wrapper, IconList, Color } from '../FieldRender'
-const listWraperGlobalClassName = 'qubely-list', listItemGloblaPlaceHolder = 'Enter new list item'
+const { Tooltip } = wp.components;
+const listWraperGlobalClassName = 'qubely-list'
 
 class QubelyIconListEdit extends Component {
     constructor(props) {

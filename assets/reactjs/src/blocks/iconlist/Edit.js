@@ -2,7 +2,7 @@ const { __ } = wp.i18n;
 const { InspectorControls } = wp.editor
 const { Component, Fragment } = wp.element;
 const { PanelBody, Tooltip } = wp.components;
-import { Typography, Alignment, Wrapper,Padding, Styles, Range, Tabs, Tab, IconList, Color, RadioAdvanced, Border, BorderRadius, BoxShadow, Spacing, Separator } from '../../components/FieldRender'
+import { Typography, Alignment, Wrapper,Padding, Styles, Range, Tabs, Tab, IconList, Color, RadioAdvanced, Border, BorderRadius, BoxShadow, Separator } from '../../components/FieldRender'
 import { CssGenerator } from '../../components/CssGenerator'
 import icons from '../../helpers/icons'
 class Edit extends Component {

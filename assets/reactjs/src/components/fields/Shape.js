@@ -2,7 +2,6 @@ const { __ } = wp.i18n
 import '../css/shape.scss'
 import Range from "./Range"
 import Select from "./Select"
-import Device from '../Device'
 const { Component, Fragment } = wp.element
 import Color from "./Color"
 const { CheckboxControl } = wp.components

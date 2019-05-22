@@ -2,7 +2,7 @@ const { __ } = wp.i18n
 const { Fragment, Component } = wp.element;
 const { PanelBody, SelectControl, TextControl, Toolbar } = wp.components
 const { RichText, InspectorControls, BlockControls } = wp.editor
-import { Media, Tabs, Tab, Range, BoxShadow, Separator, RadioAdvanced, Typography, Toggle, Styles, Wrapper, Alignment, IconList, ColorAdvanced, Color, Headings, Border, BorderRadius, Padding } from "../../components/FieldRender"
+import { Media, Tabs, Tab, Range, BoxShadow, RadioAdvanced, Typography, Toggle, Styles, Alignment, IconList, ColorAdvanced, Color, Headings, Border, BorderRadius, Padding } from "../../components/FieldRender"
 import InlineToolbar from '../../components/fields/inline/InlineToolbar'
 import { CssGenerator } from '../../components/CssGenerator'
 import icons from '../../helpers/icons';

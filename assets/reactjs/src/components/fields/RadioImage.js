@@ -1,5 +1,5 @@
 import '../css/radioimage.scss'
-const { Button, Tooltip } = wp.components
+const { Button } = wp.components
 const { Component } = wp.element
 
 class RadioImage extends Component {

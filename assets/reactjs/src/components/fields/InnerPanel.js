@@ -1,5 +1,5 @@
 import '../css/InnerPanel.scss'
-const { Component, Fragment } = wp.element
+const { Component } = wp.element
 class InnerPanel extends Component {
 
     constructor(props) {

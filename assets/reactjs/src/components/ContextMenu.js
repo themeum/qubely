@@ -1,12 +1,7 @@
 const { __ } = wp.i18n
-const { compose } = wp.compose
-const { select, dispatch, withSelect, withDispatch } = wp.data
+const { select, dispatch } = wp.data
 const { createHigherOrderComponent } = wp.compose
 const { Component, Fragment } = wp.element
-const { InspectorAdvancedControls, InspectorControls } = wp.editor
-const { PanelBody } = wp.components
-const { RichText, BlockControls } = wp.editor
-import { Typography, Color, Alignment, CustomIcons, Toggle, Select, Styles, Tabs, Tab, Range, Url, BoxShadow, RadioAdvanced, InnerPanel } from './FieldRender'
 import './css/contextmenu.scss'
 import icons from '../helpers/icons'
 import { CssGenerator } from './CssGenerator'
@@ -44,8 +39,7 @@ const withContextMenu = createHigherOrderComponent(OriginalComponent => {
             document.removeEventListener('mousedown', this.handleClickOutside);
         }
         renderContextMenu = () => {
-            const { clientId, attributes: { sourceOfCopiedStyle } } = this.props
-            let qubelyCopiedStyles = JSON.parse(localStorage.getItem('qubelyCopiedStyles'))
+            const { attributes: { sourceOfCopiedStyle } } = this.props
             return (
                 <div ref="qubelyContextMenu" className={`qubely-context-menu-wraper`} >
                     <div className="qubely-context-menu">
@@ -53,12 +47,10 @@ const withContextMenu = createHigherOrderComponent(OriginalComponent => {
                             <div className="qubely-context-menu-item qubely-context-menu-item-copy" onClick={() => this.copyStyles()} >
                                 <div class="qubely-context-menu-item-icon"> <i className="fas fa-copy"></i></div>
                                 <div class="qubely-context-menu-item-title">Copy Style</div>
-                                {/* <div class="qubely-context-menu-item-shortcut">⌘+⇧+C</div> */}
                             </div>
                             <div className={`qubely-context-menu-item qubely-context-menu-item-paste disable-${sourceOfCopiedStyle}`} onClick={() => this.pasteStyle()} aria-disabled={sourceOfCopiedStyle} >
                                 <div class="qubely-context-menu-item-icon"> <i className="fas fa-paste"></i></div>
                                 <div class="qubely-context-menu-item-title">Paste Style</div>
-                                {/* <div class="qubely-context-menu-item-shortcut">⌘+⇧+V</div> */}
                             </div>
                         </div>
                         <div className="qubely-context-menu-group">

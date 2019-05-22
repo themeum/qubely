@@ -3,9 +3,8 @@ const { Tooltip, PanelBody, Toolbar, TextControl } = wp.components;
 const { compose } = wp.compose
 const { withSelect, withDispatch } = wp.data
 const { Component, Fragment } = wp.element;
-const { InnerBlocks, RichText, InspectorControls, BlockControls } = wp.editor
-import { Toggle, Color, IconList, Select, Styles, Typography, Range, RadioAdvanced, Wrapper, BoxShadow, Alignment, Tabs, Tab, Separator } from "../../components/FieldRender"
-// import '../../components/GlobalSettings'
+const { InnerBlocks, InspectorControls } = wp.editor
+import { Toggle, Range } from "../../components/FieldRender"
 import { CssGenerator } from '../../components/CssGenerator'
 class Edit extends Component {
 

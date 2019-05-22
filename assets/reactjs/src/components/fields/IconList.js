@@ -18,7 +18,7 @@ class IconList extends Component {
 
     render() {
         const { value, disableToggle, colorSettings, iconColor, onColorChange } = this.props
-        const { filterText, showIcons } = this.state
+        const { filterText } = this.state
         var finalData = [];
         if (filterText.length > 2) {
             IconListData.forEach(name => {
