@@ -183,6 +183,18 @@ if ( ! class_exists('QUBELY_Options')){
                     'desc'  => __( 'Create stylist list items using this block.', 'qubely' ),
 				    'image' => QUBELY_DIR_URL . 'assets/img/blocks/block-advanced-list.svg',
                 ),
+                'qubely/text'   => array (
+                    'slug'  => 'qubely/text',
+                    'name'  => __( 'Advanced Text', 'qubely' ),
+                    'desc'  => __( 'Apply texts and tweak designs with Qubely Advanced Text.', 'qubely' ),
+				    'image' => QUBELY_DIR_URL . 'assets/img/blocks/block-text.svg',
+                ),
+                'qubely/wrapper'   => array (
+                    'slug'  => 'qubely/wrapper',
+                    'name'  => __( 'Block Wrapper', 'qubely' ),
+                    'desc'  => __( 'Place icons of various preset styles with Qubely icons.', 'qubely' ),
+				    'image' => QUBELY_DIR_URL . 'assets/img/blocks/block-wrapper.svg',
+                ),
                 'qubely/button'   => array (
                     'slug'  => 'qubely/button',
                     'name'  => __( 'Button', 'qubely' ),
@@ -243,6 +255,12 @@ if ( ! class_exists('QUBELY_Options')){
                     'desc'  => __( 'Embed Google Maps easily with Qubely Google Maps.', 'qubely' ),
 				    'image' => QUBELY_DIR_URL . 'assets/img/blocks/block-map.svg',
                 ),
+                'qubely/pricing'   => array (
+                    'slug'  => 'qubely/pricing',
+                    'name'  => __( 'Pricing', 'qubely' ),
+                    'desc'  => __( 'Showcase Pricing in beautiful pre-designed Pricing Table with Qubely Pricing.', 'qubely' ),
+				    'image' => QUBELY_DIR_URL . 'assets/img/blocks/block-pricing.svg',
+                ),
                 'qubely/progressbar'   => array (
                     'slug'  => 'qubely/progressbar',
                     'name'  => __( 'Progress Bar', 'qubely' ),
@@ -267,17 +285,17 @@ if ( ! class_exists('QUBELY_Options')){
                     'desc'  => __( 'Showcase features in beautiful pre-designed tabs with Qubely Tabs.', 'qubely' ),
 				    'image' => QUBELY_DIR_URL . 'assets/img/blocks/block-tabs.svg',
                 ),
+                'qubely/team'   => array (
+                    'slug'  => 'qubely/team',
+                    'name'  => __( 'Team', 'qubely' ),
+                    'desc'  => __( 'Display team member with social profiles.', 'qubely' ),
+				    'image' => QUBELY_DIR_URL . 'assets/img/blocks/block-team.svg',
+                ),
                 'qubely/testimonial'   => array (
                     'slug'  => 'qubely/testimonial',
                     'name'  => __( 'Testimonial', 'qubely' ),
                     'desc'  => __( 'Display testimonials from clients with Qubely Testimonials.', 'qubely' ),
 				    'image' => QUBELY_DIR_URL . 'assets/img/blocks/block-testimonial.svg',
-                ),
-                'qubely/text'   => array (
-                    'slug'  => 'qubely/text',
-                    'name'  => __( 'Advanced Text', 'qubely' ),
-                    'desc'  => __( 'Apply texts and tweak designs with Qubely Advanced Text.', 'qubely' ),
-				    'image' => QUBELY_DIR_URL . 'assets/img/blocks/block-text.svg',
                 ),
                 'qubely/videopopup'   => array (
                     'slug'  => 'qubely/videopopup',
@@ -285,12 +303,7 @@ if ( ! class_exists('QUBELY_Options')){
                     'desc'  => __( 'Engage your audience with videos with Qubely Video Popup.', 'qubely' ),
 				    'image' => QUBELY_DIR_URL . 'assets/img/blocks/block-videopopup.svg',
                 ),
-                'qubely/wrapper'   => array (
-                    'slug'  => 'qubely/wrapper',
-                    'name'  => __( 'Block Wrapper', 'qubely' ),
-                    'desc'  => __( 'Place icons of various preset styles with Qubely icons.', 'qubely' ),
-				    'image' => QUBELY_DIR_URL . 'assets/img/blocks/block-wrapper.svg',
-                ),
+            
             );
             return apply_filters( 'qubely_blocks_enable_disable_array', $blocks );
         }
