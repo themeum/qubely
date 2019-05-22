@@ -88,7 +88,6 @@ function registerFormat() {
                                     <Fragment>
                                         <span
                                             classname="qubely-inline qubely-inline-color"
-                                            onClick={() => !activeColor && this.setState({ showColorPicker: !showColorPicker })}
                                             style={{ marginRight: '4px' }}>
                                             {icons.inlineColorIcon}
                                             <hr
@@ -103,8 +102,9 @@ function registerFormat() {
                                         </span>
                                     </Fragment>
                                 }
-                                title={<span onClick={() => !activeColor && this.setState({ showColorPicker: !showColorPicker })}>{__('Color')}</span>}
+                                title={__('Color')}
                                 onClick={() => {
+                                    !activeColor && this.setState({ showColorPicker: !showColorPicker })
                                     if (activeColor == '#fff' || value.start === value.end) {
                                         onChange(toggleFormat(value, {
                                             type: 'qubely/inlinecolor',
@@ -185,7 +185,6 @@ function registerFormat() {
                                         <span
                                             classname="qubely-inline qubely-inline-color"
                                             style={{ marginRight: '4px' }}
-                                            onClick={() => !activeBackgroundColor && this.setState({ showColorPicker: !showColorPicker })}
                                         >
                                             {icons.highlighterIcon}
                                             <hr
@@ -201,8 +200,9 @@ function registerFormat() {
                                     </Fragment>
 
                                 }
-                                title={<span onClick={() => !activeBackgroundColor && this.setState({ showColorPicker: !showColorPicker })}>{__('Background Color')}</span>}
+                                title={__('Background Color')}
                                 onClick={() => {
+                                    !activeBackgroundColor && this.setState({ showColorPicker: !showColorPicker })
                                     if (activeBackgroundColor == '#fff' || value.start === value.end) {
                                         onChange(toggleFormat(value, {
                                             type: 'qubely/backgroundcolor',
@@ -210,7 +210,6 @@ function registerFormat() {
                                     }
                                 }}
                                 isActive={isActive}
-                                className={`toolbar-button-with-text toolbar-button__faisal`}
                             />
                         }
                         {
