@@ -53,12 +53,12 @@ const withContextMenu = createHigherOrderComponent(OriginalComponent => {
                             <div className="qubely-context-menu-item qubely-context-menu-item-copy" onClick={() => this.copyStyles()} >
                                 <div class="qubely-context-menu-item-icon"> <i className="fas fa-copy"></i></div>
                                 <div class="qubely-context-menu-item-title">Copy Style</div>
-                                <div class="qubely-context-menu-item-shortcut">⌘+⇧+C</div>
+                                {/* <div class="qubely-context-menu-item-shortcut">⌘+⇧+C</div> */}
                             </div>
                             <div className={`qubely-context-menu-item qubely-context-menu-item-paste disable-${sourceOfCopiedStyle}`} onClick={() => this.pasteStyle()} aria-disabled={sourceOfCopiedStyle} >
                                 <div class="qubely-context-menu-item-icon"> <i className="fas fa-paste"></i></div>
                                 <div class="qubely-context-menu-item-title">Paste Style</div>
-                                <div class="qubely-context-menu-item-shortcut">⌘+⇧+V</div>
+                                {/* <div class="qubely-context-menu-item-shortcut">⌘+⇧+V</div> */}
                             </div>
                         </div>
                         <div className="qubely-context-menu-group">
@@ -194,8 +194,8 @@ const withContextMenu = createHigherOrderComponent(OriginalComponent => {
                         }
                         <div className={`qubely-${blockName}-block`}
                             onContextMenu={event => this.handleContextMenu(event)}
-                            onKeyDown={event => this.handleKeyDown(event)}
-                            onKeyUp={event => this.handleKeyUp(event)}
+                            // onKeyDown={event => this.handleKeyDown(event)}
+                            // onKeyUp={event => this.handleKeyUp(event)}
                         >
                             <OriginalComponent {...this.props} />
                         </div>

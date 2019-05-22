@@ -112,7 +112,7 @@ registerBlockType('qubely/pricing', {
         pricingSpacing: {
             type: 'object',
             default: {
-                md: 30,
+                md: 20,
                 unit: 'px'
             },
             style: [{ selector: '{{QUBELY}} .qubely-pricing-wrapper {margin-bottom: {{pricingSpacing}};}' }]
@@ -196,12 +196,16 @@ registerBlockType('qubely/pricing', {
         durationColor: { type: 'string', default: '#CACCCE', style: [{ selector: '{{QUBELY}} .qubely-pricing-duration{color: {{durationColor}};}' }] },
         durationAlign: { type: 'string', default: '10', style: [{ condition: [{ key: 'durationPosition', relation: '==', value: 'side' }], selector: '{{QUBELY}} .qubely-pricing-duration{transform: translateY({{durationAlign}}px); display: inline-block; }' }, { condition: [{ key: 'durationPosition', relation: '==', value: 'bottom' }], selector: '{{QUBELY}} .qubely-pricing-duration{ display: block; }' }] },
         durationTypography: { type: 'object', default: { openTypography: 1, size: { md: 21, unit: 'px' } }, style: [{ selector: '{{QUBELY}} .qubely-pricing-duration' }] },
-        // durationPaddingTop: { type: 'object', default: {}, style: [{ selector: '{{QUBELY}} .qubely-pricing-duration{ padding-top: {{durationPaddingTop}};}' }] },
-        // durationPaddingBottom: { type: 'object', default: {}, style: [{ selector: '{{QUBELY}} .qubely-pricing-duration{ padding-bottom: {{durationPaddingBottom}};}' }] },
-        durationPaddingTop: { type: 'object', default: {}, style: [{ condition: [{ key: 'durationPosition', relation: '==', value: 'bottom' }], selector: '{{QUBELY}} .qubely-pricing-duration{ padding-top: {{durationPaddingTop}};}' }] },
-        durationPaddingBottom: { type: 'object', default: {}, style: [{ condition: [{ key: 'durationPosition', relation: '==', value: 'bottom' }], selector: '{{QUBELY}} .qubely-pricing-duration{ padding-bottom: {{durationPaddingBottom}};}' }] },
 
-
+        durationPadding: {
+            type: 'object',
+            default: {
+                openPadding: 1,
+                paddingType: 'custom',
+                custom:{md:'10 0 10 0'}
+            },
+            style: [{ condition: [{ key: 'durationPosition', relation: '==', value: 'bottom' }], selector: '{{QUBELY}} .qubely-pricing-duration' }]
+        },
         // Badge__
         enableBadge: { type: 'boolean', default: false },
         badge: { type: 'string', default: 'SALE', style: [{ selector: '{{QUBELY}} .qubely-pricing-badge{text-align:center;position:absolute;overflow:hidden; top:0; }' }] },

@@ -203,7 +203,7 @@ class Edit extends Component {
 				// Currency
 				currency, currencyCustom, currencyPosition, currencyAlign, currencyColor, currencyTypography,
 				// Duration
-				enableDuration, duration, durationPosition, durationColor, durationTypography, durationAlign, durationPaddingTop, durationPaddingBottom,
+				enableDuration, duration, durationPosition, durationColor, durationTypography, durationAlign, durationPadding, durationPaddingTop, durationPaddingBottom,
 				// Badge
 				enableBadge, badge, badgeStyle, enableBadgeOverflow, badgeCircleRotation, badgePosition, badgeColor, badgeTextColor, badgeHoverColor, badgeTextHoverColor, badgeTypography, badgeRadius, badgeTop, badgeRight, badgeLeft, badgePadding, badgeOverflowPadding, badgeOverflowTop, badgeOverflowLeft, badgeOverflowRight,
 				// Background
@@ -247,11 +247,15 @@ class Edit extends Component {
 							label={__('Show PostButtonText')}
 							onChange={val => setAttributes({ enablePostButtonText: val })} />
 
-						<Alignment label={__('Alignment')} alignmentType="content" value={alignment} disableJustify
-							onChange={val => setAttributes({
-								alignment: val
-							})}
-							responsive />
+						<Alignment
+							label={__('Alignment')}
+							alignmentType="content"
+							value={alignment}
+							disableJustify
+							onChange={val => setAttributes({ alignment: val })}
+							responsive
+							device={device}
+							onDeviceChange={value => this.setState({ device: value })} />
 					</PanelBody>
 
 					<PanelBody title={__('Title')} opened={'Title' === openPanelSetting} onToggle={() => this.handlePanelOpenings(openPanelSetting !== 'Title' ? 'Title' : '')}>
@@ -464,26 +468,17 @@ class Edit extends Component {
 										onChange={val => setAttributes({ durationAlign: val })} />
 									:
 									<Fragment>
-										<Range
+										<Padding
 											min={0}
-											max={200}
+											max={100}
+											value={durationPadding}
+											label={__('Padding')}
+											onChange={val => setAttributes({ durationPadding: val })}
+											unit={['px', 'em', '%']}
 											responsive
 											device={device}
 											onDeviceChange={value => this.setState({ device: value })}
-											value={durationPaddingTop}
-											unit={['px', 'em', '%']}
-											label={<span className="dashicons dashicons-sort" title="Padding Top" />}
-											onChange={val => setAttributes({ durationPaddingTop: val })} />
-										<Range
-											min={0}
-											max={200}
-											responsive
-											device={device}
-											onDeviceChange={value => this.setState({ device: value })}
-											unit={['px', 'em', '%']}
-											value={durationPaddingBottom}
-											label={<span className="dashicons dashicons-leftright" title="Padding Bottom" />}
-											onChange={val => setAttributes({ durationPaddingBottom: val })} />
+										/>
 									</Fragment>
 								}
 
@@ -510,6 +505,8 @@ class Edit extends Component {
 								onChange={val => setAttributes({ headerBorder: val })}
 								unit={['px', 'em', '%']}
 								responsive
+								device={device}
+								onDeviceChange={value => this.setState({ device: value })}
 							/>
 							<Padding
 								min={30}
@@ -519,6 +516,8 @@ class Edit extends Component {
 								onChange={val => setAttributes({ headerPadding: val })}
 								unit={['px', 'em', '%']}
 								responsive
+								device={device}
+								onDeviceChange={value => this.setState({ device: value })}
 							/>
 						</PanelBody>
 					}
