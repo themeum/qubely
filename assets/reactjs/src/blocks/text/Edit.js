@@ -225,7 +225,6 @@ class Edit extends Component {
 
                         <RichText
                             key="editable"
-                            className="qubely-block-text-content"
                             tagName={selector}
                             keepPlaceholderOnFocus
                             placeholder={__('Add Text...')}
