@@ -1,7 +1,6 @@
 const { __ } = wp.i18n
 const { Component } = wp.element
 import '../css/gradientangle.scss'
-const LABEL = "Gradient Angle"
 class GradientAngle extends Component {
 
     constructor(props) {
@@ -89,7 +88,7 @@ class GradientAngle extends Component {
         const { value, label, onChange } = this.props
         return (
             <div className="qubely-gradient-angle-wraper" >
-                <span className="qubely-gradient-angle-label">  {label ? label : LABEL}   </span>
+                <span className="qubely-gradient-angle-label">  {label ? label : `Gradient Angle`}   </span>
                 <div className="qubely-gradient-angle" onMouseLeave={() => this.dragEnd(event)} onMouseUp={event => this.dragEnd(event)} >
                     <span className="qubely-gradient-angle-circle">
                         <svg width="60" data-svg-spinner="true" height="60" xmlns="http://www.w3.org/2000/svg">

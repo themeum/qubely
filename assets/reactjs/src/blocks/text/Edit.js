@@ -177,7 +177,7 @@ class Edit extends Component {
                 </InspectorControls>
 
                 <BlockControls>
-                    <InlineSelector options={[['p', 'Paragraph'], ['span', 'span'], ['div', 'div']]} icons={icons} selector={selector} setAttributes={setAttributes} />
+                    <InlineSelector options={[['p', 'Paragraph'], ['span', 'span'], ['div', 'div']]} selector={selector} setAttributes={setAttributes} />
                     <Toolbar>
                         <InlineToolbar
                             data={[{ name: 'InlineSpacer', key: 'spacer', responsive: true, unit: ['px', 'em', '%'] }]}
@@ -225,7 +225,6 @@ class Edit extends Component {
 
                         <RichText
                             key="editable"
-                            className="qubely-block-text-content"
                             tagName={selector}
                             keepPlaceholderOnFocus
                             placeholder={__('Add Text...')}

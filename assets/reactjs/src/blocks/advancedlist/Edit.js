@@ -28,7 +28,7 @@ class Edit extends Component {
         } else if (uniqueId && uniqueId != _client) {
             setAttributes({ uniqueId: _client });
         }
-        this.placeCaretAtEnd(document.querySelector(`.qubely-list-item-text-${this.state.focusedItem}`))
+        this.placeCaretAtEnd(document.querySelector(`.qubely-block-${uniqueId} .qubely-list-item-text-${this.state.focusedItem}`))
     }
     componentDidUpdate(prevProps, prevState) {
         if (this.props.attributes.listItems.length > prevProps.attributes.listItems.length) {
@@ -36,7 +36,7 @@ class Edit extends Component {
             focusedListItem.focus()
         } else if (this.props.attributes.listItems.length < prevProps.attributes.listItems.length) {
             const { focusedItem } = this.state
-            let focusedListItem = document.querySelector(`.qubely-list-item-text-${focusedItem}`)
+            let focusedListItem = document.querySelector(`.qubely-block-${prevProps.attributes.uniqueId} .qubely-list-item-text-${focusedItem}`)
             focusedListItem && this.placeCaretAtEnd(focusedListItem)
         }
     }
