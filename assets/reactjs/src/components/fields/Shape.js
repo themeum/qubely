@@ -1,5 +1,4 @@
 const { __ } = wp.i18n
-import '../css/shape.scss'
 import Range from "./Range"
 import Select from "./Select"
 const { Component, Fragment } = wp.element

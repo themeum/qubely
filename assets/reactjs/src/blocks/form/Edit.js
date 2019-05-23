@@ -302,29 +302,17 @@ class Edit extends Component {
                                 <Color label={__('Placeholder Color')} value={placeholderColorHover} onChange={val => setAttributes({ placeholderColorHover: val })} />
                             </Tab>
                         </Tabs>
-                        <RadioAdvanced
-                            label={__('Corner')}
-                            options={[
-                                { svg: icons.corner_square, value: '0px', title: __('Square') },
-                                { svg: icons.corner_rounded, value: '4px', title: __('Rounded') },
-                                { svg: icons.corner_round, value: '50px', title: __('Round') },
-                                { icon: 'fas fa-cog', value: 'custom', title: __('Custom') }
-                            ]}
-                            value={inputCorner}
-                            onChange={val => setAttributes({ inputCorner: val })}
-                        />
 
-                        {inputCorner == 'custom' &&
-                            <Range
-                                label={__('Corner Radius')}
-                                value={inputCornerRadius}
-                                onChange={(value) => setAttributes({ inputCornerRadius: value })}
-                                min={0}
-                                max={100} unit={['px', 'em', '%']}
-                                device={device}
-                                onDeviceChange={value => this.setState({ device: value })}
-                            />
-                        }
+                        <Range
+                            label={__('Corner Radius')}
+                            value={inputCornerRadius}
+                            onChange={(value) => setAttributes({ inputCornerRadius: value })}
+                            min={0}
+                            max={100} unit={['px', 'em', '%']}
+                            device={device}
+                            onDeviceChange={value => this.setState({ device: value })}
+                        />
+                        
                         <Typography value={inputTypography} onChange={val => setAttributes({ inputTypography: val })} device={device} onDeviceChange={value => this.setState({ device: value })} />
                     </PanelBody>
 

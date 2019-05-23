@@ -1,4 +1,3 @@
-import '../css/number.scss'
 import Device from '../Device'
 const { Component, Fragment } = wp.element
 

@@ -19,16 +19,13 @@ import './blocks/counter'       // counter
 import './blocks/tabs'          // Tabs
 import './blocks/tabs/tab'      // Inner Tabs
 import './blocks/socialicons'   // Social Icons
-// import './blocks/form'          // Form
 import './blocks/contactform'   // Contact Form
 import './blocks/buttongroup'   // Button Group
 import './blocks/advancedlist'  // Advanced List
 import './blocks/iconlist'      // Icon List
 import './blocks/wrapper'       // Wrapper
 import './blocks/team'          // Team
-import './blocks/pricing'       // pricing 
-// import './blocks/carousel'      //carousel
-// import './blocks/carousel/carouselitem' //carousel item
+import './blocks/pricing'       // pricing
 
 // Global Settings
 import './blocks/pagesettings'

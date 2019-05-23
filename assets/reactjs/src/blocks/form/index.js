@@ -206,24 +206,11 @@ registerBlockType ( 'qubely/form', {
             ]
         },
 
-        inputCorner: { type: 'string', default: '4px',
-            style: [
-                {
-                    condition:[
-                        { key: 'layout', relation: '==', value: 'classic' },
-                        { key: 'inputCorner', relation: '!=', value: 'custom' },
-                    ],
-                    selector: '{{QUBELY}} .qubely-form .qubely-form-control {border-radius: {{inputCorner}};}' 
-                }
-            ]
-        },
-
         inputCornerRadius: { type: 'object', default: {md: 5, unit: 'px'},
             style: [
                 {
                     condition:[
                         { key: 'layout', relation: '==', value: 'classic' },
-                        { key: 'inputCorner', relation: '==', value: 'custom' },
                     ],
                     selector: '{{QUBELY}} .qubely-form .qubely-form-control {border-radius: {{inputCornerRadius}};}' 
                 }

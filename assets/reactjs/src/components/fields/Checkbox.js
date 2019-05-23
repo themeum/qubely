@@ -1,4 +1,3 @@
-import '../css/checkbox.scss'
 const { Component } = wp.element
 
 class Checkbox extends Component {

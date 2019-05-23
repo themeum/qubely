@@ -238,20 +238,14 @@ class Edit extends Component {
                                 }
                             </Fragment>
                         }
-                        {listType == 'ordered' &&
+                        { listType == 'ordered' &&
                             <Fragment>
                                 <Range label={__('Font Size')} value={numberFontSize} onChange={(value) => setAttributes({ numberFontSize: value })} min={10} max={100} />
                                 <Toggle label={__('Use Background')} value={useNumberBg} onChange={val => setAttributes({ useNumberBg: val })} />
-                                {useNumberBg == 1 &&
+                                { useNumberBg == 1 &&
                                     <Fragment>
                                         <Range label={__('Background Size')} value={numberBgSize} onChange={(value) => setAttributes({ numberBgSize: value })} min={14} max={100} />
-                                        <RadioAdvanced label={__('Corner')} value={numberCorner} onChange={val => setAttributes({ numberCorner: val })}
-                                            options={[
-                                                { svg: icons.corner_square, value: '0px', title: __('Square') },
-                                                { svg: icons.corner_rounded, value: '5px', title: __('Rounded') },
-                                                { svg: icons.corner_round, value: '50px', title: __('Round') }
-                                            ]}
-                                        />
+                                        <Range label={__('Corner')} value={numberCorner} onChange={(value) => setAttributes({ numberCorner: value })} min={0} max={50} />
                                     </Fragment>
                                 }
                             </Fragment>

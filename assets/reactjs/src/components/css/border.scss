@@ -13,6 +13,18 @@
     }
     &.qubely-field-border-type-double {
         border-top: 6px double #8D96A0;
+    }  
+}
+
+.qubely-field-border,
+.qubely-field-border-radius{
+    .qubely-button{
+        -webkit-filter: grayscale(100%);
+        filter: grayscale(100%);
+        &.active{
+            -webkit-filter: grayscale(0%);
+            filter: grayscale(0%);
+        }
     }
 }
 
