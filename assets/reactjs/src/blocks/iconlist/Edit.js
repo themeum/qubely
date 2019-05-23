@@ -2,7 +2,7 @@ const { __ } = wp.i18n;
 const { InspectorControls } = wp.editor
 const { Component, Fragment } = wp.element;
 const { PanelBody, Tooltip } = wp.components;
-import { Typography, Alignment, Wrapper,Padding, Styles, Range, Tabs, Tab, IconList, Color, RadioAdvanced, Border, BorderRadius, BoxShadow, Separator } from '../../components/FieldRender'
+import { Typography, Alignment, Wrapper, Padding, Styles, Range, Tabs, Tab, IconList, Color, RadioAdvanced, Border, BorderRadius, BoxShadow, Separator } from '../../components/FieldRender'
 import { CssGenerator } from '../../components/CssGenerator'
 import icons from '../../helpers/icons'
 class Edit extends Component {
@@ -25,7 +25,7 @@ class Edit extends Component {
         } else if (uniqueId && uniqueId != _client) {
             setAttributes({ uniqueId: _client });
         }
-        this.placeCaretAtEnd(document.querySelector(`.qubely-list-item-text-${this.state.focusedItem}`))
+        this.placeCaretAtEnd(document.querySelector(`.qubely-block-${uniqueId} .qubely-list-item-text-${this.state.focusedItem}`))
     }
     componentDidUpdate(prevProps, prevState) {
         if (this.props.attributes.listItems.length > prevProps.attributes.listItems.length) {
@@ -33,7 +33,7 @@ class Edit extends Component {
             focusedListItem.focus();
         } else if (this.props.attributes.listItems.length < prevProps.attributes.listItems.length) {
             const { focusedItem } = this.state
-            let focusedListItem = document.querySelector(`.qubely-list-item-text-${focusedItem}`)
+            let focusedListItem = document.querySelector(`.qubely-block-${prevProps.attributes.uniqueId} .qubely-list-item-text-${focusedItem}`)
             focusedListItem && this.placeCaretAtEnd(focusedListItem)
         }
     }
@@ -147,13 +147,13 @@ class Edit extends Component {
         const { setAttributes, attributes: { uniqueId,
             iconSize, iconSizeCustom, iconSpacing, layout, iconPosition,
             listItems, typography, alignment, iconColor, iconHoverColor,
-            spacing, color, colorHover,padding, background, backgroundHover, border, borderRadius, borderColorHover, shadow, shadowHover,
+            spacing, color, colorHover, padding, background, backgroundHover, border, borderRadius, borderColorHover, shadow, shadowHover,
         } } = this.props
-        
+
         const { device } = this.state
 
         if (uniqueId) { CssGenerator(this.props.attributes, 'iconlist', uniqueId) }
-        
+
         return (
             <Fragment>
                 <InspectorControls key="inspector">
@@ -168,7 +168,7 @@ class Edit extends Component {
                     </PanelBody>
 
                     <PanelBody title={__('Typography')} initialOpen={false}>
-                        <Typography label={__('Typography')} value={typography} onChange={val => setAttributes({ typography: val })} device={device} onDeviceChange={value => this.setState({ device: value })}/>
+                        <Typography label={__('Typography')} value={typography} onChange={val => setAttributes({ typography: val })} device={device} onDeviceChange={value => this.setState({ device: value })} />
                     </PanelBody>
 
 
@@ -183,7 +183,7 @@ class Edit extends Component {
                             ]}
                         />
                         {iconSize == 'custom' &&
-                            <Range label={__('Custom Size')} value={iconSizeCustom} onChange={(value) => setAttributes({ iconSizeCustom: value })} min={0} max={100} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })}/>
+                            <Range label={__('Custom Size')} value={iconSizeCustom} onChange={(value) => setAttributes({ iconSizeCustom: value })} min={0} max={100} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
                         }
                         <RadioAdvanced label={__('Position')} value={iconPosition} onChange={val => setAttributes({ iconPosition: val })}
                             options={[
@@ -191,7 +191,7 @@ class Edit extends Component {
                                 { label: 'Right', value: 'right', title: __('Right') }
                             ]}
                         />
-                        <Range label={__('Spacing')} value={iconSpacing} onChange={val => setAttributes({ iconSpacing: val })} min={0} max={60} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })}/>
+                        <Range label={__('Spacing')} value={iconSpacing} onChange={val => setAttributes({ iconSpacing: val })} min={0} max={60} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
                         <Tabs>
                             <Tab tabTitle={__('Normal')}>
                                 <Color label={__(' Color')} value={iconColor} onChange={value => setAttributes({ iconColor: value })} />
@@ -207,16 +207,16 @@ class Edit extends Component {
                         {layout == 'fill' &&
                             <Fragment>
                                 <Padding
-										label={__('Padding')}
-										value={padding}
-										min={0}
-										max={100}
-										responsive
-										device={device}
-										unit={['px', 'em', '%']}
-										onChange={val => setAttributes({ padding: val })}
-										onDeviceChange={value => this.setState({ device: value })}
-									/>
+                                    label={__('Padding')}
+                                    value={padding}
+                                    min={0}
+                                    max={100}
+                                    responsive
+                                    device={device}
+                                    unit={['px', 'em', '%']}
+                                    onChange={val => setAttributes({ padding: val })}
+                                    onDeviceChange={value => this.setState({ device: value })}
+                                />
                                 <Separator />
                                 <BorderRadius
                                     label={__('Radius')}
@@ -226,7 +226,7 @@ class Edit extends Component {
                                     max={100}
                                     unit={['px', 'em', '%']}
                                     responsive
-                                    device={device} 
+                                    device={device}
                                     onDeviceChange={value => this.setState({ device: value })}
                                 />
                             </Fragment>
@@ -238,7 +238,7 @@ class Edit extends Component {
                                 {layout == 'fill' &&
                                     <Color label={__('Background Color')} value={background} onChange={val => setAttributes({ background: val })} />
                                 }
-                                <Border label={__('Border')} value={border} onChange={val => setAttributes({ border: val })} min={0} max={10} responsive device={device} onDeviceChange={value => this.setState({ device: value })}/>
+                                <Border label={__('Border')} value={border} onChange={val => setAttributes({ border: val })} min={0} max={10} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
                             </Tab>
                             <Tab tabTitle={__('Hover')}>
                                 <Color label={__('Text Color')} value={colorHover} onChange={val => setAttributes({ colorHover: val })} />
