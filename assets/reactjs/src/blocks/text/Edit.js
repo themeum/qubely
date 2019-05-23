@@ -177,7 +177,7 @@ class Edit extends Component {
                 </InspectorControls>
 
                 <BlockControls>
-                    <InlineSelector options={[['p', 'Paragraph'], ['span', 'span'], ['div', 'div']]} icons={icons} selector={selector} setAttributes={setAttributes} />
+                    <InlineSelector options={[['p', 'Paragraph'], ['span', 'span'], ['div', 'div']]} selector={selector} setAttributes={setAttributes} />
                     <Toolbar>
                         <InlineToolbar
                             data={[{ name: 'InlineSpacer', key: 'spacer', responsive: true, unit: ['px', 'em', '%'] }]}

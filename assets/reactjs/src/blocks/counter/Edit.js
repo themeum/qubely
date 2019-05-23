@@ -12,7 +12,6 @@ class Edit extends Component {
 		super(props)
 		this.state = {
 			device: 'md',
-			counterUpperLevel: this.props.attributes.count,
 			spacer: true
 		}
 	}
