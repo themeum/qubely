@@ -1,4 +1,3 @@
-import React from 'react';
 const {__} = wp.i18n
 export default (props) => {
 

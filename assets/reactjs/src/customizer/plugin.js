@@ -163,4 +163,4 @@ wp.data.subscribe( () => {
     if( isSavingPost() && (!isAutosavingPost()) && window.globalSaving === false ){
         saveGlobalData()
     }
-  } );
+} );
