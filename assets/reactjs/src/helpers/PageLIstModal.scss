@@ -50,11 +50,6 @@ body.qubely-builder-modal-open {
   left: 0;
   color: #fff;
 }
-
-.qubely-builder-modal-content > div > div {
-  padding: 20px 0 0;
-  position: relative;
-}
 .qubely-builder-modal-content > div.qubely-builder-modal-small > div {
   padding: 20px 30px;
 }
@@ -331,7 +326,7 @@ body.qubely-builder-modal-open {
   background: #ffffff;
 }
 .qubely-builder-modal-content > div > div {
-  padding: 20px;
+  padding: 0px;
   position: relative;
 }
 ul.qubely-builder-page-templates {
