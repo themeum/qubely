@@ -2,12 +2,12 @@ const { __ } = wp.i18n;
 const { InspectorControls, BlockControls } = wp.editor
 const { Component, Fragment } = wp.element;
 const { PanelBody, TextControl, Toolbar, Button } = wp.components;
-import { Styles, IconSocial, Toggle, Separator, RadioAdvanced, Range, Wrapper, Alignment, Typography, Color, Tabs, Tab, Border, BorderRadius } from '../../components/FieldRender'
+import { Styles, IconSelector, Toggle, Separator, RadioAdvanced, Range, Wrapper, Alignment, Typography, Color, Tabs, Tab, Border, BorderRadius } from '../../components/FieldRender'
 import { CssGenerator } from '../../components/CssGenerator';
 import InlineToolbar from '../../components/fields/inline/InlineToolbar'
 import '../../components/GlobalSettings';
 import icons from '../../helpers/icons';
-
+import IconSocialData from '../../components/fields/assets/IconSocialData'
 class Edit extends Component {
 
     constructor(props) {
@@ -218,11 +218,13 @@ class Edit extends Component {
                                                 })
                                             }}
                                         >
-                                            <IconSocial
-                                                value={socialIcons[selectedItem].icon}
+                                            <IconSelector
+                                                value={socialIcons[selectedItem].icon.value}
+                                                icons={IconSocialData}
+                                                enableSearch
                                                 onChange={val => {
-                                                    this.setSettings('icon', val.icon)
-                                                    this.setSettings('label', val.label)
+                                                    this.setSettings('icon', val.value)
+                                                    this.setSettings('label', val.name)
                                                     this.setSettings('id', val.id)
                                                 }}
                                             />
