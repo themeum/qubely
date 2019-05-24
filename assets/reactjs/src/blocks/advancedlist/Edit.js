@@ -2,7 +2,7 @@ const { __ } = wp.i18n;
 const { RichText, InspectorControls, BlockControls } = wp.editor
 const { Component, Fragment } = wp.element;
 const { PanelBody, Toolbar, Tooltip } = wp.components;
-import { Typography, Alignment, Styles, Range, Tabs, Tab, Border, RadioAdvanced, Color, BoxShadow, CustomIcons, Toggle, Separator, BorderRadius, Padding } from '../../components/FieldRender'
+import { Typography, Alignment, Styles, Range, Tabs, Tab, Border, RadioAdvanced, Color, BoxShadow, Toggle, Separator, IconSelector, BorderRadius, Padding } from '../../components/FieldRender'
 import { CssGenerator } from '../../components/CssGenerator'
 import InlineToolbar from '../../components/fields/inline/InlineToolbar'
 import '../../components/GlobalSettings';
@@ -98,7 +98,7 @@ class Edit extends Component {
         const ListTag = (listType == 'ordered') ? 'ol' : 'ul'
         return (
             listItems.length > 0 ?
-                <ListTag className={`qubely-list qubely-list-type-${listType} qubely-list-bullet-${bulletStyle}`}>
+                <ListTag className={`qubely-list qubely-list-type-${listType} qubely-list-bullet-${bulletStyle.name || bulletStyle}`}>
                     {listItems.map((item, index) => {
                         return (
                             <li className={`qubely-list-item`}  >
@@ -193,34 +193,35 @@ class Edit extends Component {
                     <PanelBody title={(listType == 'unordered') ? __('Bullet') : __('Number')} initialOpen={false}>
                         {listType == 'unordered' &&
                             <Fragment>
-                                <CustomIcons
+                                <IconSelector
                                     label="Icon"
-                                    value={bulletStyle}
+                                    value={bulletStyle.name || bulletStyle}
+                                    enableSearch
                                     icons={[
-                                        { value: 'check', name: 'fas fa-check' },
-                                        { value: 'check-square', name: 'fas fa-check-square' },
-                                        { value: 'check-square-outline', name: 'far fa-check-square' },
-                                        { value: 'check-double', name: 'fas fa-check-double' },
-                                        { value: 'check-circle', name: 'fas fa-check-circle' },
-                                        { value: 'check-circle-outline', name: 'far fa-check-circle' },
-                                        { value: 'square', name: 'fas fa-square' },
-                                        { value: 'square-outline', name: 'far fa-square' },
-                                        { value: 'circle', name: 'fas fa-circle' },
-                                        { value: 'circle-outline', name: 'far fa-circle' },
-                                        { value: 'arrow-right', name: 'fas fa-arrow-right' },
-                                        { value: 'arrow-left', name: 'fas fa-arrow-left' },
-                                        { value: 'arrow-circle-right', name: 'fas fa-arrow-circle-right' },
-                                        { value: 'arrow-circle-left', name: 'fas fa-arrow-circle-left' },
-                                        { value: 'arrow-alt-circle-right', name: 'far fa-arrow-alt-circle-right' },
-                                        { value: 'arrow-alt-circle-left', name: 'far fa-arrow-alt-circle-left' },
-                                        { value: 'long-arrow-alt-right', name: 'fas fa-long-arrow-alt-right' },
-                                        { value: 'long-arrow-alt-left', name: 'fas fa-long-arrow-alt-left' },
-                                        { value: 'chevron-right', name: 'fas fa-chevron-right' },
-                                        { value: 'chevron-left', name: 'fas fa-chevron-left' },
-                                        { value: 'angle-right', name: 'fas fa-angle-right' },
-                                        { value: 'angle-left', name: 'fas fa-angle-left' },
-                                        { value: 'star', name: 'fas fa-star' },
-                                        { value: 'star-outline', name: 'far fa-star' },
+                                        { name: 'check', value: 'fas fa-check' },
+                                        { name: 'check-square', value: 'fas fa-check-square' },
+                                        { name: 'check-square-outline', value: 'far fa-check-square' },
+                                        { name: 'check-double', value: 'fas fa-check-double' },
+                                        { name: 'check-circle', value: 'fas fa-check-circle' },
+                                        { name: 'check-circle-outline', value: 'far fa-check-circle' },
+                                        { name: 'square', value: 'fas fa-square' },
+                                        { name: 'square-outline', value: 'far fa-square' },
+                                        { name: 'circle', value: 'fas fa-circle' },
+                                        { name: 'circle-outline', value: 'far fa-circle' },
+                                        { name: 'arrow-right', value: 'fas fa-arrow-right' },
+                                        { name: 'arrow-left', value: 'fas fa-arrow-left' },
+                                        { name: 'arrow-circle-right', value: 'fas fa-arrow-circle-right' },
+                                        { name: 'arrow-circle-left', value: 'fas fa-arrow-circle-left' },
+                                        { name: 'arrow-alt-circle-right', value: 'far fa-arrow-alt-circle-right' },
+                                        { name: 'arrow-alt-circle-left', value: 'far fa-arrow-alt-circle-left' },
+                                        { name: 'long-arrow-alt-right', value: 'fas fa-long-arrow-alt-right' },
+                                        { name: 'long-arrow-alt-left', value: 'fas fa-long-arrow-alt-left' },
+                                        { name: 'chevron-right', value: 'fas fa-chevron-right' },
+                                        { name: 'chevron-left', value: 'fas fa-chevron-left' },
+                                        { name: 'angle-right', value: 'fas fa-angle-right' },
+                                        { name: 'angle-left', value: 'fas fa-angle-left' },
+                                        { name: 'star', value: 'fas fa-star' },
+                                        { name: 'star-outline', value: 'far fa-star' },
                                     ]}
                                     onChange={val => setAttributes({ bulletStyle: val })}
                                 />
@@ -238,11 +239,11 @@ class Edit extends Component {
                                 }
                             </Fragment>
                         }
-                        { listType == 'ordered' &&
+                        {listType == 'ordered' &&
                             <Fragment>
                                 <Range label={__('Font Size')} value={numberFontSize} onChange={(value) => setAttributes({ numberFontSize: value })} min={10} max={100} />
                                 <Toggle label={__('Use Background')} value={useNumberBg} onChange={val => setAttributes({ useNumberBg: val })} />
-                                { useNumberBg == 1 &&
+                                {useNumberBg == 1 &&
                                     <Fragment>
                                         <Range label={__('Background Size')} value={numberBgSize} onChange={(value) => setAttributes({ numberBgSize: value })} min={14} max={100} />
                                         <Range label={__('Corner')} value={numberCorner} onChange={(value) => setAttributes({ numberCorner: value })} min={0} max={50} />

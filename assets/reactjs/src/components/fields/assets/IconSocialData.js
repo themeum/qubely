@@ -1,252 +1,252 @@
 export default [
     {
-        icon: 'fab fa-facebook',
-        label: 'Facebook',
+        value: 'fab fa-facebook',
+        name: 'Facebook',
         id: 'facebook'
     },
     {
-        icon: 'fab fa-facebook-f',
-        label: 'Facebook',
+        value: 'fab fa-facebook-f',
+        name: 'Facebook',
         id: 'facebook'
     },
     {
-        icon: 'fab fa-twitter',
-        label: 'Twitter',
+        value: 'fab fa-twitter',
+        name: 'Twitter',
         id: 'twitter'
     },
     {
-        icon: 'fab fa-twitter-square',
-        label: 'Twitter',
+        value: 'fab fa-twitter-square',
+        name: 'Twitter',
         id: 'twitter'
     },
     {
-        icon: 'fab fa-youtube',
-        label: 'Youtube',
+        value: 'fab fa-youtube',
+        name: 'Youtube',
         id: 'youtube'
     },
     {
-        icon: 'fab fa-vimeo',
-        label: 'Vimeo',
+        value: 'fab fa-vimeo',
+        name: 'Vimeo',
         id: 'vimeo'
     },
     {
-        icon: 'fab fa-dribbble',
-        label: 'Dribbble',
+        value: 'fab fa-dribbble',
+        name: 'Dribbble',
         id: 'dribbble'
     },
     {
-        icon: 'fab fa-github',
-        label: 'Github',
+        value: 'fab fa-github',
+        name: 'Github',
         id: 'github'
     },
     {
-        icon: 'fab fa-github-square',
-        label: 'Github',
+        value: 'fab fa-github-square',
+        name: 'Github',
         id: 'github'
     },
     {
-        icon: 'fab fa-amazon',
-        label: 'Amazon',
+        value: 'fab fa-amazon',
+        name: 'Amazon',
         id: 'amazon'
     },
     {
-        icon: 'fab fa-behance',
-        label: 'Behance',
+        value: 'fab fa-behance',
+        name: 'Behance',
         id: 'behance'
     },
     {
-        icon: 'fab fa-codepen',
-        label: 'Codepen',
+        value: 'fab fa-codepen',
+        name: 'Codepen',
         id: 'codepan'
     },
     {
-        icon: 'fab fa-flickr',
-        label: 'Flickr',
+        value: 'fab fa-flickr',
+        name: 'Flickr',
         id: 'flickr'
     },
     {
-        icon: 'fab fa-foursquare',
-        label: 'Foursquare',
+        value: 'fab fa-foursquare',
+        name: 'Foursquare',
         id: 'foursquare'
     },
     {
-        icon: 'fab fa-gitlab',
-        label: 'Gitlab',
+        value: 'fab fa-gitlab',
+        name: 'Gitlab',
         id: 'gitlab'
     },
     {
-        icon: 'fab fa-linux',
-        label: 'Linux',
+        value: 'fab fa-linux',
+        name: 'Linux',
         id: 'linux'
     },
     {
-        icon: 'fab fa-whatsapp',
-        label: 'Whatsapp',
+        value: 'fab fa-whatsapp',
+        name: 'Whatsapp',
         id: 'whatsapp'
     },
     {
-        icon: 'fab fa-tumblr',
-        label: 'Tumblr',
+        value: 'fab fa-tumblr',
+        name: 'Tumblr',
         id: 'tumblr'
     },
     {
-        icon: 'fab fa-trello',
-        label: 'Trello',
+        value: 'fab fa-trello',
+        name: 'Trello',
         id: 'trello'
     },
     {
-        icon: 'fab fa-soundcloud',
-        label: 'Soundcloud',
+        value: 'fab fa-soundcloud',
+        name: 'Soundcloud',
         id: 'soundcloud'
     },
     {
-        icon: 'fab fa-spotify',
-        label: 'Spotify',
+        value: 'fab fa-spotify',
+        name: 'Spotify',
         id: 'spotify'
     },
     {
-        icon: 'fab fa-skype',
-        label: 'Skype',
+        value: 'fab fa-skype',
+        name: 'Skype',
         id: 'skype'
     },
     {
-        icon: 'fab fa-slack',
-        label: 'Slack',
+        value: 'fab fa-slack',
+        name: 'Slack',
         id: 'slack'
     },
     {
-        icon: 'fab fa-reddit-alien',
-        label: 'Reddit',
+        value: 'fab fa-reddit-alien',
+        name: 'Reddit',
         id: 'reddit'
     },
     {
-        icon: 'fab fa-tripadvisor',
-        label: 'TripAdvisor',
+        value: 'fab fa-tripadvisor',
+        name: 'TripAdvisor',
         id: 'tripadvisor'
     },
     {
-        icon: 'fab fa-pinterest',
-        label: 'Pinterest',
+        value: 'fab fa-pinterest',
+        name: 'Pinterest',
         id: 'pinterest'
     },
     {
-        icon: 'fab fa-pinterest-p',
-        label: 'Pinterest',
+        value: 'fab fa-pinterest-p',
+        name: 'Pinterest',
         id: 'pinterest'
     },
     {
-        icon: 'fab fa-pinterest-square',
-        label: 'Pinterest',
+        value: 'fab fa-pinterest-square',
+        name: 'Pinterest',
         id: 'pinterest'
     },
     {
-        icon: 'fab fa-product-hunt',
-        label: 'Product Hunt',
+        value: 'fab fa-product-hunt',
+        name: 'Product Hunt',
         id: 'producthunt'
     },
     {
-        icon: 'fab fa-medium',
-        label: 'Medium',
+        value: 'fab fa-medium',
+        name: 'Medium',
         id: 'medium'
     },
     {
-        icon: 'fab fa-instagram',
-        label: 'Instagram',
+        value: 'fab fa-instagram',
+        name: 'Instagram',
         id: 'instagram'
     },
     {
-        icon: 'fab fa-linkedin',
-        label: 'Linkedin',
+        value: 'fab fa-linkedin',
+        name: 'Linkedin',
         id: 'linkedin'
     },
     {
-        icon: 'fab fa-digg',
-        label: 'Digg',
+        value: 'fab fa-digg',
+        name: 'Digg',
         id: 'digg'
     },
     {
-        icon: 'fab fa-dropbox',
-        label: 'Dropbox',
+        value: 'fab fa-dropbox',
+        name: 'Dropbox',
         id: 'dropbox'
     },
     {
-        icon: 'fab fa-slideshare',
-        label: 'Slideshare',
+        value: 'fab fa-slideshare',
+        name: 'Slideshare',
         id: 'slideshare'
     },
     {
-        icon: 'fab fa-stack-overflow',
-        label: 'Stack Overflow',
+        value: 'fab fa-stack-overflow',
+        name: 'Stack Overflow',
         id: 'stackoverflow'
     },
     {
-        icon: 'fab fa-stumbleupon',
-        label: 'StumbleUpon',
+        value: 'fab fa-stumbleupon',
+        name: 'StumbleUpon',
         id: 'stumbleupon'
     },
     {
-        icon: 'fab fa-stumbleupon-circle',
-        label: 'StumbleUpon',
+        value: 'fab fa-stumbleupon-circle',
+        name: 'StumbleUpon',
         id: 'stumbleupon'
     },
     {
-        icon: 'fab fa-wordpress',
-        label: 'Wordpress',
+        value: 'fab fa-wordpress',
+        name: 'Wordpress',
         id: 'wordpress'
     },
     {
-        icon: 'fab fa-xing',
-        label: 'Xing',
+        value: 'fab fa-xing',
+        name: 'Xing',
         id: 'xing'
     },
     {
-        icon: 'fab fa-xing-square',
-        label: 'Xing',
+        value: 'fab fa-xing-square',
+        name: 'Xing',
         id: 'xing'
     },
     {
-        icon: 'fab fa-yahoo',
-        label: 'yahoo',
+        value: 'fab fa-yahoo',
+        name: 'yahoo',
         id: 'yahoo'
     },
     {
-        icon: 'fab fa-bitbucket',
-        label: 'bitbucket',
+        value: 'fab fa-bitbucket',
+        name: 'bitbucket',
         id: 'bitbucket'
     },
     {
-        icon: 'fab fa-jsfiddle',
-        label: 'JsFiddle',
+        value: 'fab fa-jsfiddle',
+        name: 'JsFiddle',
         id: 'jsfiddle'
     },
     {
-        icon: 'fab fa-joomla',
-        label: 'Joomla',
+        value: 'fab fa-joomla',
+        name: 'Joomla',
         id: 'joomla'
     },
     {
-        icon: 'fab fa-imdb',
-        label: 'IMDB',
+        value: 'fab fa-imdb',
+        name: 'IMDB',
         id: 'imdb'
     },
     {
-        icon: 'fab fa-snapchat',
-        label: 'Snapchat',
+        value: 'fab fa-snapchat',
+        name: 'Snapchat',
         id: 'snapchat'
     },
     {
-        icon: 'fab fa-snapchat-square',
-        label: 'Snapchat',
+        value: 'fab fa-snapchat-square',
+        name: 'Snapchat',
         id: 'snapchat'
     },
     {
-        icon: 'fab fa-telegram',
-        label: 'Telegram',
+        value: 'fab fa-telegram',
+        name: 'Telegram',
         id: 'telegram'
     },
     {
-        icon: 'fab fa-twitch',
-        label: 'Twitch',
+        value: 'fab fa-twitch',
+        name: 'Twitch',
         id: 'twitch'
     }
 ]

@@ -6,8 +6,7 @@ import Color from "./fields/Color"
 import Dimension from "./fields/Dimension"
 import Gradient from "./fields/Gradient"
 import IconList from "./fields/IconList"
-import IconSocial from "./fields/IconSocial"
-import CustomIcons from "./fields/CustomIcons"
+import IconSelector from "./fields/IconSelector"
 import Styles from "./fields/Styles"
 import Separator from "./fields/Separator"
 import Headings from "./fields/Headings"
@@ -36,4 +35,4 @@ import Margin from './fields/Margin'
 import { QubelyButtonEdit, QubelyButtonSave } from './fields/QubelyButton'
 import { QubelyIconListEdit, QubelyIconListSave } from './fields/QubelyIconList'
 
-export { Alignment, Border, BorderRadius, BoxShadow, Color, Dimension, Gradient, IconList, IconSocial, Styles, Separator, Wrapper, Shape, Media, Typography, Url, Selector, Background, Tabs, Tab, InnerPanel, Select, Range, Toggle, ColorAdvanced, RadioAdvanced, DragDimension, Counter, Animation, QubelyDropdown, QubelyButtonEdit, QubelyButtonSave, Headings, CustomIcons, GradientAngle, Padding, Margin, QubelyIconListEdit, QubelyIconListSave }
+export { Alignment, Border, BorderRadius, BoxShadow, Color, Dimension, Gradient, IconList, IconSelector, Styles, Separator, Wrapper, Shape, Media, Typography, Url, Selector, Background, Tabs, Tab, InnerPanel, Select, Range, Toggle, ColorAdvanced, RadioAdvanced, DragDimension, Counter, Animation, QubelyDropdown, QubelyButtonEdit, QubelyButtonSave, Headings, GradientAngle, Padding, Margin, QubelyIconListEdit, QubelyIconListSave }
