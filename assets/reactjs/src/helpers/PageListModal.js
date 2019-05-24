@@ -478,18 +478,20 @@ class PageListModal extends Component {
         
         return (
             <Modal className="qubely-builder-modal-pages-list" customClass="qubely-builder-modal-template-list" onRequestClose={this.props.onRequestClose} openTimeoutMS={0} closeTimeoutMS={0}>
+                        
+                <div className="qubely-template-list-header">
+                    <span className={ this.state.itemType == 'block' ? 'active' : ''} onClick={ e => this._onlickBlocksTab() }> {__('Sections')} </span>
+                    <span className={ this.state.itemType == 'layout' ? 'active' : ''} onClick={ e => this._onlickLayoutsTab() }> {__('Layouts')} </span>
+                    <span className={ this.state.itemType == 'saved_blocks' ? 'active' : ''} onClick={ e => this._onlickSavedBlocksTab() }> {__('Saved')} </span>                
+                </div>
+                <button className="qubely-builder-close-modal" onClick={ e => { ModalManager.close() } } >
+                    <i className={"fas fa-times"} />
+                </button>
+
                 { !this.state.loading ?
 					<div id="modalContainer" className="qubely-template-list-modal">
                         <div className="qubely-builder-template-list-container">
-
-                            <div className="qubely-template-list-header">
-                                <span className={ this.state.itemType == 'block' ? 'active' : ''} onClick={ e => this._onlickBlocksTab() }> {__('Sections')} </span>
-                                <span className={ this.state.itemType == 'layout' ? 'active' : ''} onClick={ e => this._onlickLayoutsTab() }> {__('Layouts')} </span>
-                                <span className={ this.state.itemType == 'saved_blocks' ? 'active' : ''} onClick={ e => this._onlickSavedBlocksTab() }> {__('Saved')} </span>
-							</div>
-
                             <div className="qubely-template-option-header">
-                            
                                 { ( this.state.itemType == 'layout' && this.state.layer == 'single' ) &&
                                     <span className={"qubely-template-back"} onClick={()=>this.setState({layer:'multiple', parent_id: ''})}><span className="dashicons dashicons-arrow-left-alt" /></span>
                                 }
@@ -579,12 +581,6 @@ class PageListModal extends Component {
                                 
                             </ul>
                         </div>
-                        <button
-                            className="qubely-builder-close-modal" 
-                            onClick={ e => { ModalManager.close() } }
-                        >
-                            <i className={"fas fa-times"} />
-                        </button>
                     </div>
                     :
                     <div>
