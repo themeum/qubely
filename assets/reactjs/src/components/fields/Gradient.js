@@ -4,6 +4,7 @@ const { Component, Fragment } = wp.element
 const { Dropdown, ColorPicker, Tooltip } = wp.components;
 import Select from "./Select"
 import GradientAngle from './GradientAngle'
+import GradientPosition from './GradientPosition'
 import Range from "./Range"
 
 const defaultState = { color1: '#16d03e', color2: '#1f91f3', type: 'linear', direction: '90', start: 5, stop: 80, radial: 'center', clip: false };
@@ -110,13 +111,20 @@ class Gradient extends Component {
                 </div>
 
                 {value.type == 'radial' ?
-                    <Select
-                        label={__('Radial Pointer')}
-                        className={(value.type && value.type == 'radial') ? 'half' : ''}
-                        value={value.radial ? value.radial : 'center'}
-                        options={['center', 'top left', 'top', 'top right', 'right', 'bottom right', 'bottom', 'bottom left', 'left']}
-                        onChange={radial => this.setSettings(radial, 'radial')}
-                    />
+                    <Fragment>
+                        <Select
+                            label={__('Radial Pointer')}
+                            className={(value.type && value.type == 'radial') ? 'half' : ''}
+                            value={value.radial ? value.radial : 'center'}
+                            options={['center', 'top left', 'top', 'top right', 'right', 'bottom right', 'bottom', 'bottom left', 'left']}
+                            onChange={radial => this.setSettings(radial, 'radial')}
+                        />
+                        {/* <GradientPosition
+                            label={__('Gradient Position')}
+                            value={value.radial ? value.radial : 'center'}
+                            onChange={radial => this.setSettings(radial, 'radial')}
+                        /> */}
+                    </Fragment>
                     :
                     <GradientAngle
                         label={__('Gradient Angle')}

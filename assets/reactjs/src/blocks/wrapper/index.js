@@ -6,11 +6,11 @@ const { registerBlockType } = wp.blocks
 
 registerBlockType ( 'qubely/wrapper', {
 	title: __( 'Block Wrapper' ),
-	description: 'Place icons of various preset styles with Qubely icons.',
+	description: 'Make Blocks more attractive with Block Wraper.',
 	category: 'qubely',
 	icon: <img src={qubely_admin.plugin+'assets/img/blocks/block-wrapper.svg'} alt={__('Icon Block')}/>,
 	supports: { align: false },
-	keywords: [ __( 'Icon' ), __( 'Font Awesome' ), __( 'Line Icon' ) ],
+	keywords: [ __( 'Block' ), __( 'Block Wraper' ), __( 'Wraper' ) ],
 	attributes: {
 		uniqueId:{ type: 'string', default: '' },
 		spacer: { type: 'object', default:{spaceTop: { md: '0', unit: "px"}, spaceBottom: { md: '0', unit: "px"}}, style: [{ selector: '{{QUBELY}}' }] },

@@ -1,0 +1,12 @@
+.qubely-gradient-position-wraper{
+    display: flex;
+    align-items: center;
+    justify-content:space-between;
+    margin-bottom: 15px;
+    .qubely-gradient-position{
+        width: 60%;
+        display:flex;
+        align-items: center;
+        justify-content:space-between;
+    }
+}
