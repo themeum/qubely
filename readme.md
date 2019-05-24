@@ -6,7 +6,7 @@ Donate link: <a href=" https://www.themeum.com">https://www.themeum.com</a>
 Tags: Qubely, website builder, gutenberg block, gutenberg, page builder, drag and drop editor, responsive, site editor, editor, drag-and-drop, visual editor, landing page, frontend editor, wordpress page builder, free page builder, layout builder  
 Requires at least: 5.0  
 Tested up to: 5.2  
-Stable tag: 1.0.0-beta-3 
+Stable tag: 1.0.0-RC-1
 Requires PHP: 5.4.0  
 License: GPL-2.0+  
 License URI: http://www.gnu.org/licenses/gpl-2.0.txt
@@ -181,6 +181,15 @@ Found a bug? Please let us know by posting on the support section of this plugin
 
 
 # Changelog
+
+**1.0.0-RC-1 - 24 May, 2019**
+
+Update: Block Wraper's description & keyword
+Update: Code optimization
+Fix: List item auto focus issue in Advanced list & Icon list block
+Fix: Border Hover color option in Icon block
+Fix: Import layout Reloading Issue
+
 
 **1.0.0-beta-3 - 22 May, 2019**
 
