@@ -157,9 +157,9 @@ class Background extends Component {
                     </div>
                 }
 
-                {(value && value.openBg == 1) && ( this.props.video && value.bgType == 'video' ) &&
+                {(value && value.openBg == 1) && ( value.bgType == 'video' ) &&
                     <div className="qubely-background-inner">
-                        <Select label={ __('Video Source') } value={value.videoSource} options={ ['local','external'] } onChange={ (val)=>this.setSettings( val, 'videoSource' ) } />
+                        <Select label={ __('Video Source') } value={value.videoSource} options={ [ ['local', __('Local')], ['external', __('External')]] } onChange={ (val)=>this.setSettings( val, 'videoSource' ) } />
                         { value.videoSource === 'external' ?
                             <TextControl
                                 label={__('Video URL')}
