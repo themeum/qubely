@@ -111,20 +111,11 @@ class Gradient extends Component {
                 </div>
 
                 {value.type == 'radial' ?
-                    <Fragment>
-                        <Select
-                            label={__('Radial Pointer')}
-                            className={(value.type && value.type == 'radial') ? 'half' : ''}
-                            value={value.radial ? value.radial : 'center'}
-                            options={['center', 'top left', 'top', 'top right', 'right', 'bottom right', 'bottom', 'bottom left', 'left']}
-                            onChange={radial => this.setSettings(radial, 'radial')}
-                        />
-                        <GradientPosition
-                            label={__('Gradient Position')}
-                            value={value.radial ? value.radial : 'center'}
-                            onChange={radial => this.setSettings(radial, 'radial')}
-                        />
-                    </Fragment>
+                    <GradientPosition
+                        label={__('Gradient Position')}
+                        value={value.radial}
+                        onChange={radial => this.setSettings(radial, 'radial')}
+                    />
                     :
                     <GradientAngle
                         label={__('Gradient Angle')}

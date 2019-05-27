@@ -144,7 +144,12 @@ export const cssColor = (v) => {
         if (v.gradient && v.gradient.type == 'linear') {
             data += 'background-image : linear-gradient(' + v.gradient.direction + 'deg, ' + v.gradient.color1 + ' ' + v.gradient.start + '%,' + v.gradient.color2 + ' ' + v.gradient.stop + '%);'
         } else {
-            data += 'background-image : radial-gradient( circle at ' + v.gradient.radial + ' , ' + v.gradient.color1 + ' ' + v.gradient.start + '%,' + v.gradient.color2 + ' ' + v.gradient.stop + '%);'
+            if (typeof (v.gradient.radial) == 'object') {
+                data += 'background-image : radial-gradient( circle at ' + v.gradient.radial.x + '% ' + v.gradient.radial.y + '%' + ' , ' + v.gradient.color1 + ' ' + v.gradient.start + '%,' + v.gradient.color2 + ' ' + v.gradient.stop + '%);'
+            } else {
+                data += 'background-image : radial-gradient( circle at ' + '50' + '% ' + '50' + '%' + ' , ' + v.gradient.color1 + ' ' + v.gradient.start + '%,' + v.gradient.color2 + ' ' + v.gradient.stop + '%);'
+
+            }
         }
     }
     return '{' + data + '}';
