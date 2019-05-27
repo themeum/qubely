@@ -16,18 +16,6 @@
     }  
 }
 
-.qubely-field-border,
-.qubely-field-border-radius{
-    .qubely-button{
-        -webkit-filter: grayscale(100%);
-        filter: grayscale(100%);
-        &.active{
-            -webkit-filter: grayscale(0%);
-            filter: grayscale(0%);
-        }
-    }
-}
-
 .active {
     .qubely-field-border-type {
         &.qubely-field-border-type-solid {

@@ -138,7 +138,11 @@ class Border extends Component {
                                     ['global', 'custom'].map((data, index) => {
                                         return (
                                             <button className={(value.widthType == data ? 'active' : '') + ' qubely-button'} key={index} onClick={() => this.setSettings('widthType', data)}>
-                                                { data == 'global' ? icons.border_global : icons.border_custom }
+                                                {data == 'global' ?
+                                                    <svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M15.971 15.059v.941h-16v-16h16v15.058zm-1.882-.941v-12.235h-12.235v12.235h12.235z" className="qubely-svg-fill" /></svg>
+                                                    :
+                                                    <svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><g className="qubely-svg-fill"><path d="M2.794 0h10.353v1.882h-10.353z" /><path d="M15.97 2.824v10.353h-1.882v-10.353z" /><path d="M1.853 2.823v10.353h-1.882v-10.353z" /><path d="M2.794 14.118h10.353v1.882h-10.353z" /></g></svg>
+                                                }
                                             </button>
                                         )
                                     })
