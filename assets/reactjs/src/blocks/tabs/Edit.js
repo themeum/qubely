@@ -84,14 +84,6 @@ class Edit extends Component {
 						<i class="fas fa-times" />
 					</span>
 				</Tooltip>
-				{(activeTab == index + 1 && showIconPicker) &&
-					<Wrapper inline>
-						<IconList
-							label={__('Icon')}
-							value={tabTitles[this.state.activeTab - 1].iconName}
-							onChange={(value) => this.updateTitles({ iconName: value }, this.state.activeTab - 1)} />
-					</Wrapper>
-				}
 			</span>
 		)
 	}
@@ -234,9 +226,14 @@ class Edit extends Component {
 								}
 							</Tab>
 						</Tabs>
-						<Typography label={__('Typography')} value={typography} onChange={(value) => setAttributes({ typography: value })} disableLineHeight device={device} onDeviceChange={value => this.setState({ device: value })}/>
+						<Typography label={__('Typography')} value={typography} onChange={(value) => setAttributes({ typography: value })} disableLineHeight device={device} onDeviceChange={value => this.setState({ device: value })} />
 					</PanelBody>
 					<PanelBody title={__('Icon')} initialOpen={false}>
+						<IconList
+							label={__('Icon')}
+							disableToggle
+							value={tabTitles[activeTab - 1].iconName}
+							onChange={(value) => this.updateTitles({ iconName: value }, activeTab - 1)} />
 						<Select
 							label={__('Icon Position')}
 							options={[['left', __('Left')], ['right', __('Right')], ['top', __('Top')]]}
