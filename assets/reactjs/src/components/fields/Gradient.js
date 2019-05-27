@@ -119,11 +119,11 @@ class Gradient extends Component {
                             options={['center', 'top left', 'top', 'top right', 'right', 'bottom right', 'bottom', 'bottom left', 'left']}
                             onChange={radial => this.setSettings(radial, 'radial')}
                         />
-                        {/* <GradientPosition
+                        <GradientPosition
                             label={__('Gradient Position')}
                             value={value.radial ? value.radial : 'center'}
                             onChange={radial => this.setSettings(radial, 'radial')}
-                        /> */}
+                        />
                     </Fragment>
                     :
                     <GradientAngle

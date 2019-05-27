@@ -63,7 +63,7 @@ class QUBELY {
 		// Development
 		wp_enqueue_script( 'qubely-blocks-js', QUBELY_DIR_URL . 'assets/js/blocks.build.js', array( 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor' ), QUBELY_VERSION, true );
 		// Production
-		// wp_enqueue_script( 'qubely-blocks-js', QUBELY_DIR_URL . 'assets/js/blocks.build.min.js', array( 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor' ), QUBELY_VERSION, true );
+		// wp_enqueue_script( 'qubely-blocks-js', QUBELY_DIR_URL . 'assets/js/qubely_build.min.js', array( 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor' ), QUBELY_VERSION, true );
 		
 		wp_localize_script( 'qubely-blocks-js', 'qubely_admin', array (
 			'plugin' => QUBELY_DIR_URL,
