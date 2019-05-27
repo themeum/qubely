@@ -1,6 +1,7 @@
 const { __ } = wp.i18n
 const { Component } = wp.element
 import '../css/gradientposition.scss'
+import icons from '../../helpers/icons'
 class GradientPosition extends Component {
 
     constructor(props) {
@@ -77,6 +78,18 @@ class GradientPosition extends Component {
                     <span className="qubely-gradient-position-circle">
                         <svg width="55" data-svg-spinner="true" height="55" xmlns="http://www.w3.org/2000/svg">
                             <rect className="qubely-gradient-rectangle" stroke="#ddd" strokeWidth="1" fill="none" width="55" height="55" />
+                            <circle id="Oval-1" fill="#D6D9DD" cx="10" cy="10" r="2.03703704" />
+                            <circle id="Oval-2" fill="#D6D9DD" cx="10" cy="27.5" r="2.03703704" />
+                            <circle id="Oval-3" fill="#D6D9DD" cx="10" cy="45" r="2.03703704" />
+
+                            <circle id="Oval-4" fill="#D6D9DD" cx="27.5" cy="10" r="2.03703704" />
+                            <circle id="Oval-5" fill="#D6D9DD" cx="27.5" cy="27.5" r="2.03703704" />
+                            <circle id="Oval-6" fill="#D6D9DD" cx="27.5" cy="45" r="2.03703704" />
+
+                            <circle id="Oval-7" fill="#D6D9DD" cx="45" cy="10" r="2.03703704" />
+                            <circle id="Oval-8" fill="#D6D9DD" cx="45" cy="27.5" r="2.03703704" />
+                            <circle id="Oval-9" fill="#D6D9DD" cx="45" cy="45" r="2.03703704" />
+
                             <circle ref="qubelyGradientSelector" className="qubley-gradient-position-selector" style={{ cursor: 'all-scroll' }} strokeWidth="5" fill="blue" stroke="transparent" cx={cx || 25} cy={cy || 25} r="5"
                                 onMouseDown={event => this.dragStart(event)}
                             />
