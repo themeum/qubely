@@ -1,13 +1,19 @@
 const { __ } = wp.i18n
-import Range from "./Range"
-import Select from "./Select"
-import Toggle from './Toggle'
 const { Component, Fragment } = wp.element
-const { Dropdown, Tooltip } = wp.components;
+const { Dropdown, Tooltip } = wp.components
+import '../css/typography.scss'
 import FontList from "./assets/FontList"
+import { Range, Select, Toggle, Wrapper } from '../FieldRender'
 
 class Typography extends Component {
-
+    constructor(props) {
+        super(props)
+        this.state = {
+            showFontFamily: false,
+            filterText: this.props.value.family ? this.props.value.family : '',
+            changeType: '',
+        }
+    }
     _getWeight() {
         const { value } = this.props
         if (value && value.family) {
@@ -42,7 +48,7 @@ class Typography extends Component {
 
         let qubelyFonts = JSON.parse(localStorage.getItem('qubelyFonts'))
         let selectedFont = FontList.filter(font => font.n == val)
-        
+
         if (qubelyFonts) {
             let oldFont = qubelyFonts.filter(font => font.n == val).length > 0
             if (oldFont) {
@@ -68,6 +74,9 @@ class Typography extends Component {
             filteredFontList = FontList.filter(font => !qubelyFonts.filter(qubelyFont => qubelyFont.n == font.n).length > 0)
             newFontList = [...qubelyFonts, ...filteredFontList]
         }
+        // $(document).on('change', '.qubely-font-family', event => {
+        //     this.handleTypographyChange(event.target.value)
+        // })
 
         return (
             <div className="qubely-field qubely-field-typography">
@@ -92,6 +101,19 @@ class Typography extends Component {
                         />
 
                         <div className="qubely-field-group qubely-65-35">
+                            {/* <div className="qubely-field-datalist qubely-field">
+                                <label>{__('Font Family')}</label>
+                                <input type="text" className="qubely-font-family" list="font-family"
+                                    // onKeyPress={event => { }}
+                                    // onChange={event => { }} 
+                                    />
+
+                                <datalist id="font-family">
+                                    {newFontList.map(e => { return <option value={e.n} /> })}
+                                </datalist>
+
+                            </div> */}
+
                             <Select
                                 direction={"left"}
                                 label={__('Font Family')}

@@ -11,7 +11,7 @@ class IconSelector extends Component {
         const { value, label, icons, enableSearch, onChange } = this.props
         const { filterText } = this.state
         let finalData = []
-        if (enableSearch && filterText.length > 2) {
+        if (enableSearch && filterText.length >= 2) {
             finalData = icons.filter(item =>
                 item.name.toLowerCase().search(filterText.toLowerCase()) !== -1
             )
