@@ -106,11 +106,13 @@ class Save extends Component {
             enableFeatures, iconPosition,
             defaultbuttonPosition,
             enableBadge, badge,
+            badgeStyle,
             animation } = this.props.attributes
         const listTag = listType == 'ordered' ? 'ol' : 'ul'
         return (
             <div className={`qubely-block-${uniqueId}`} {...animationAttr(animation)}>
                 <div className={`qubely-block-pricing`}>
+                    {enableBadge && <span className={`qubely-pricing-badge qubely-badge-style-${badgeStyle}`} > {badge} </span>}
                     <div className="qubely-block-pricing-header">
                         {this.renderPricingTitle()}
 
@@ -146,7 +148,6 @@ class Save extends Component {
                     {(layout == 1 || layout == 2 || layout == 3 || layout == 5) &&
                         this.renderPricingButton()
                     }
-                    {enableBadge && <span className={`qubely-pricing-badge`} > {badge} </span>}
 
                 </div>
             </div>
