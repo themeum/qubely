@@ -259,6 +259,35 @@ registerBlockType('qubely/pricing', {
                     ],
                     selector: '{{QUBELY}} .qubely-block-pricing .qubely-pricing-badge {right: -50px; transform: rotate(45deg);}'
                 },
+                {
+                    condition: [
+                        { key: 'badgeStyle', relation: '==', value: 5 },
+                        { key: 'badgePosition', relation: '==', value: 'left' }
+                    ],
+                    selector: '{{QUBELY}} .qubely-block-pricing .qubely-pricing-badge {left: 20px;}'
+                },
+                {
+                    condition: [
+                        { key: 'badgeStyle', relation: '==', value: 5 },
+                        { key: 'badgePosition', relation: '==', value: 'right' }
+                    ],
+                    selector: '{{QUBELY}} .qubely-block-pricing .qubely-pricing-badge {right: 20px;}'
+                },
+
+                {
+                    condition: [
+                        { key: 'badgeStyle', relation: '==', value: 6 },
+                        { key: 'badgePosition', relation: '==', value: 'left' }
+                    ],
+                    selector: '{{QUBELY}} .qubely-block-pricing .qubely-pricing-badge {left: 12px;}'
+                },
+                {
+                    condition: [
+                        { key: 'badgeStyle', relation: '==', value: 6 },
+                        { key: 'badgePosition', relation: '==', value: 'right' }
+                    ],
+                    selector: '{{QUBELY}} .qubely-block-pricing .qubely-pricing-badge {right: 12px;}'
+                },
             ]
         },
         enableBadgeOverflow: {
