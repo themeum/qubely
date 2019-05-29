@@ -3,6 +3,7 @@ const { Component, Fragment } = wp.element
 const { Dropdown, Tooltip } = wp.components
 import '../css/typography.scss'
 import FontList from "./assets/FontList"
+const { RichText } = wp.editor;
 import { Range, Select, Toggle, Wrapper } from '../FieldRender'
 
 class Typography extends Component {
@@ -10,10 +11,25 @@ class Typography extends Component {
         super(props)
         this.state = {
             showFontFamily: false,
-            filterText: this.props.value.family ? this.props.value.family : '',
+            filterText: '',
             changeType: '',
+            showFontFamiles: false,
         }
     }
+    componentDidMount() {
+        document.addEventListener('mousedown', this.handleClickOutside)
+    }
+    componentWillUnmount() {
+        document.removeEventListener('mousedown', this.handleClickOutside);
+    }
+    handleClickOutside = (event) => {
+        const qubelyFontFamilyWrapper = this.refs.qubelyFontFamilyWrapper
+        const domNodetobeAvoided = this.refs.avoidOnClick
+        if (qubelyFontFamilyWrapper && !qubelyFontFamilyWrapper.contains(event.target)) {
+            domNodetobeAvoided && !domNodetobeAvoided.contains(event.target) && this.setState({ showFontFamiles: false })
+        }
+    }
+ 
     _getWeight() {
         const { value } = this.props
         if (value && value.family) {
@@ -68,16 +84,18 @@ class Typography extends Component {
     }
     render() {
         const { value, label, device, onDeviceChange } = this.props
+        const { showFontFamiles, filterText } = this.state
         let qubelyFonts = JSON.parse(localStorage.getItem('qubelyFonts'))
         let filteredFontList = [], newFontList = FontList
         if (qubelyFonts) {
             filteredFontList = FontList.filter(font => !qubelyFonts.filter(qubelyFont => qubelyFont.n == font.n).length > 0)
             newFontList = [...qubelyFonts, ...filteredFontList]
         }
-        // $(document).on('change', '.qubely-font-family', event => {
-        //     this.handleTypographyChange(event.target.value)
-        // })
-
+        if (filterText.length >= 2) {
+            newFontList = newFontList.filter(item =>
+                item.n.toLowerCase().search(filterText.toLowerCase()) !== -1
+            )
+        }
         return (
             <div className="qubely-field qubely-field-typography">
                 <Toggle
@@ -101,6 +119,52 @@ class Typography extends Component {
                         />
 
                         <div className="qubely-field-group qubely-65-35">
+                            <div className="qubely-field">
+                                <label>{__('Font Family')}</label>
+                                <div className="qubely-font-family-picker" ref="avoidOnClick"
+                                    onClick={() => { this.setState({ showFontFamiles: true }) }
+                                    }>
+                                    {
+                                        showFontFamiles ?
+                                            <RichText
+                                                tagName="span"
+                                                className="qubely-font-family-search"
+                                                placeholder={__(value.family || 'Search')}
+                                                value={filterText}
+                                                keepPlaceholderOnFocus
+                                                onChange={value => this.setState({ filterText: value })}
+                                            />
+                                            : <span className="qubely-selected-font-family">{value.family}</span>
+                                    }
+
+                                </div>
+                            </div>
+                            {
+                                showFontFamiles && <div className="qubely-font-family-option-wrapper" ref="qubelyFontFamilyWrapper">
+                                    <div className="qubely-font-family-options" >
+                                        {newFontList.map((font, index) => {
+                                            return (
+                                                <div className={`${font.n == value.family ? 'qubely-active-font-family' : 'qubely-font-family-option'}`}
+                                                    id={`qubely-font-family-${index}`}
+                                                    onClick={() => { this.setState({ showFontFamiles: false, filterText: '' }); this.handleTypographyChange(font.n) }}
+                                                >
+                                                    {font.n}
+                                                </div>
+                                            )
+                                        })
+                                        }
+                                    </div>
+                                </div>
+                            }
+                            {/* <Select
+                                direction={"left"}
+                                label={__('Font Family')}
+                                value={value && value.family}
+                                clear
+                                search
+                                options={newFontList.map((e) => { return e.n; })}
+                                onChange={val => this.handleTypographyChange(val)}
+                            /> */}
                             {/* <div className="qubely-field-datalist qubely-field">
                                 <label>{__('Font Family')}</label>
                                 <input type="text" className="qubely-font-family" list="font-family"
@@ -114,15 +178,6 @@ class Typography extends Component {
 
                             </div> */}
 
-                            <Select
-                                direction={"left"}
-                                label={__('Font Family')}
-                                value={value && value.family}
-                                clear
-                                search
-                                options={newFontList.map((e) => { return e.n; })}
-                                onChange={val => this.handleTypographyChange(val)}
-                            />
                             <Select
                                 direction={"right"}
                                 label={__('Weight')}

@@ -1,3 +1,73 @@
-.qubely-font-family{
-    height: 28px;
+.qubely-font-family-picker{
+    -webkit-box-align: center;
+    align-items: center;
+    background-color: rgb(255, 255, 255);
+    cursor: default;
+    display: flex;
+    flex-wrap: wrap;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    position: relative;
+    box-sizing: border-box;
+    border-color: rgb(204, 204, 204);
+    border-radius: 4px;
+    border-style: solid;
+    border-width: 1px;
+    transition: all 100ms ease 0s;
+    outline: 0px !important;
+    line-height: 28px;
+    height: 30px;
+    vertical-align: middle;
+    padding-left: 5px;
+    .editor-rich-text{
+        width: 100%;
+    }
 }
+.qubely-font-family-option-wrapper {
+    top: 100%;
+    background-color: rgb(255, 255, 255);
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 0px 1px, rgba(0, 0, 0, 0.1) 0px 4px 11px;
+    margin-bottom: 8px;
+    margin-top: 8px;
+    position: absolute;
+    width: 70%;
+    z-index: 1;
+    box-sizing: border-box;
+    border-radius: 4px;
+}
+.qubely-font-family-options {
+    max-height: 270px;
+    overflow-y: auto;
+    padding-bottom: 4px;
+    padding-top: 4px;
+    position: relative;
+    box-sizing: border-box;
+    .qubely-font-family-option {
+        background-color: transparent;
+        color: inherit;
+        cursor: default;
+        display: block;
+        font-size: inherit;
+        width: 100%;
+        user-select: none;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        box-sizing: border-box;
+        padding: 8px 12px;
+    }
+    .qubely-font-family-option:hover{
+        background-color: #e8eaeb;
+    }
+}
+.qubely-active-font-family{
+    background-color: rgb(38, 132, 255);
+    color: rgb(255, 255, 255);
+    cursor: default;
+    display: block;
+    font-size: inherit;
+    width: 100%;
+    user-select: none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    box-sizing: border-box;
+    padding: 8px 12px;
+}
+
