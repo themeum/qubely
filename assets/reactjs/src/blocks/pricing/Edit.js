@@ -554,15 +554,17 @@ class Edit extends Component {
 									]}
 								/>
 
-								<RadioAdvanced
-									label={__('Position')}
-									options={[
-										{ label: __('Left'), value: 'left', title: __('Left') },
-										{ label: __('Right'), value: 'right', title: __('Right') },
-									]}
-									value={badgePosition}
-									onChange={val => setAttributes({ badgePosition: val })}
-								/>
+								{ (badgeStyle == 1 || badgeStyle == 2 || badgeStyle == 5 || badgeStyle == 6) &&
+									<RadioAdvanced
+										label={__('Position')}
+										options={[
+											{ label: __('Left'), value: 'left', title: __('Left') },
+											{ label: __('Right'), value: 'right', title: __('Right') },
+										]}
+										value={badgePosition}
+										onChange={val => setAttributes({ badgePosition: val })}
+									/>
+								}
 
 								{
 									badgeStyle == 'circle' &&
