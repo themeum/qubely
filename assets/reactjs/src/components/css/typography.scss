@@ -4,7 +4,7 @@
 .qubely-field-font-weight{
     min-width: 35%;
 }
-.qubely-font-family-picker, .qubely-font-weight-picker{
+.qubely-font-family-picker, .qubely-font-weight-picker-wrapper{
     -webkit-box-align: center;
     align-items: center;
     background-color: rgb(255, 255, 255);
@@ -93,4 +93,19 @@
 }
 .qubely-font-family-option:hover, .qubely-font-weight-option:hover{
     background-color: #e8eaeb;
+}
+.qubely-font-family-search-wrapper{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+.qubely-font-weight-picker-wrapper{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+.qubely-font-select-icon{
+    display: flex;
+    align-items: center;
+    padding-right: 3px;
 }

@@ -3,8 +3,9 @@ const { Component, Fragment } = wp.element
 const { Dropdown, Tooltip } = wp.components
 import '../css/typography.scss'
 import FontList from "./assets/FontList"
-const { RichText } = wp.editor;
-import { Range, Select, Toggle, Wrapper } from '../FieldRender'
+const { RichText } = wp.editor
+import icons from '../../helpers/icons'
+import { Range, Select, Toggle } from '../FieldRender'
 
 class Typography extends Component {
     constructor(props) {
@@ -135,14 +136,20 @@ class Typography extends Component {
                                 <div className="qubely-font-family-picker" ref="qubelySelectedFontFamily"
                                     onClick={() => { this.setState({ showFontFamiles: !showFontFamiles }) }
                                     }>
-                                    <RichText
-                                        tagName="span"
-                                        className={`qubely-font-family-search${!showFontFamiles ? ' selected-font-family' : ''}`}
-                                        placeholder={__(value.family || 'Search')}
-                                        value={filterText}
-                                        keepPlaceholderOnFocus
-                                        onChange={value => this.setState({ filterText: value })}
-                                    />
+                                    <span className="qubely-font-family-search-wrapper">
+                                        <RichText
+                                            tagName="span"
+                                            className={`qubely-font-family-search${!showFontFamiles ? ' selected-font-family' : ''}`}
+                                            placeholder={__(value.family || 'Search')}
+                                            value={filterText}
+                                            keepPlaceholderOnFocus
+                                            onChange={value => this.setState({ filterText: value })}
+                                        />
+                                        <span className="qubely-font-select-icon">   {showFontFamiles ? icons.arrow_up : icons.arrow_down}  </span>
+
+                                    </span>
+
+
                                 </div>
                             </div>
                             {
@@ -167,10 +174,11 @@ class Typography extends Component {
                             }
                             <div className="qubely-field qubely-field-font-weight">
                                 <label>{__('Weight')}</label>
-                                <div className="qubely-font-weight-picker"
-                                    ref="qubelySelectedFontWeight"
-                                    onClick={() => this.setState({ showFontWeights: !showFontWeights })}>
-                                    {value.weight ||'Select'}
+                                <div className="qubely-font-weight-picker-wrapper" ref="qubelySelectedFontWeight" onClick={() => this.setState({ showFontWeights: !showFontWeights })}>
+                                    <div className="qubely-font-weight-picker" >
+                                        {value.weight || 'Select'}
+                                    </div>
+                                    <span className="qubely-font-select-icon">   {showFontWeights ? icons.arrow_up : icons.arrow_down}  </span>
                                 </div>
                             </div>
                             {
@@ -191,14 +199,7 @@ class Typography extends Component {
                                     </div>
                                 </div>
                             }
-                            {/* <Select
-                                direction={"right"}
-                                label={__('Weight')}
-                                value={value && value.weight}
-                                clear
-                                options={this._getWeight()}
-                                onChange={val => this.setSettings('weight', val)}
-                            /> */}
+    
                         </div>
 
                         <Dropdown
