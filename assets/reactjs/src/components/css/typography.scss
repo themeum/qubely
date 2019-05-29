@@ -1,3 +1,9 @@
+.qubely-field-font-family{
+    min-width: calc(65% - 15px);
+}
+.qubely-field-font-weight{
+    min-width: 35%;
+}
 .qubely-font-family-picker{
     -webkit-box-align: center;
     align-items: center;
@@ -22,6 +28,9 @@
     .editor-rich-text{
         width: 100%;
     }
+    .selected-font-family{
+        color: black;
+    }
 }
 .qubely-font-family-option-wrapper {
     top: 100%;
@@ -31,34 +40,34 @@
     margin-top: 8px;
     position: absolute;
     width: 70%;
-    z-index: 1;
     box-sizing: border-box;
     border-radius: 4px;
+    z-index: 100;
 }
-.qubely-font-family-options {
+//font weight 
+.qubely-font-weight-wrapper {
+    top: 100%;
+    left:62%;
+    background-color: rgb(255, 255, 255);
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 0px 1px, rgba(0, 0, 0, 0.1) 0px 4px 11px;
+    margin-bottom: 8px;
+    margin-top: 8px;
+    position: absolute;
+    width: 40%;
+    box-sizing: border-box;
+    border-radius: 4px;
+    z-index: 100;
+}
+
+.qubely-font-family-options, .qubely-font-family-weights {
     max-height: 270px;
     overflow-y: auto;
     padding-bottom: 4px;
     padding-top: 4px;
     position: relative;
-    box-sizing: border-box;
-    .qubely-font-family-option {
-        background-color: transparent;
-        color: inherit;
-        cursor: default;
-        display: block;
-        font-size: inherit;
-        width: 100%;
-        user-select: none;
-        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-        box-sizing: border-box;
-        padding: 8px 12px;
-    }
-    .qubely-font-family-option:hover{
-        background-color: #e8eaeb;
-    }
+    box-sizing: border-box;     
 }
-.qubely-active-font-family{
+.qubely-active-font-family, .qubely-active-font-weight{
     background-color: rgb(38, 132, 255);
     color: rgb(255, 255, 255);
     cursor: default;
@@ -69,5 +78,19 @@
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     box-sizing: border-box;
     padding: 8px 12px;
+}   
+.qubely-font-family-option, .qubely-font-weight-option {
+    background-color: transparent;
+    color: inherit;
+    cursor: default;
+    display: block;
+    font-size: inherit;
+    width: 100%;
+    user-select: none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    box-sizing: border-box;
+    padding: 8px 12px;
 }
-
+.qubely-font-family-option:hover, .qubely-font-weight-option:hover{
+    background-color: #e8eaeb;
+}

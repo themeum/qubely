@@ -4,7 +4,7 @@ const { compose } = wp.compose
 const { withSelect, withDispatch } = wp.data
 const { Component, Fragment } = wp.element;
 const { InnerBlocks, RichText, InspectorControls, BlockControls } = wp.editor
-import { Color, IconList, Select, Styles, Typography, Range, RadioAdvanced, Wrapper, BoxShadow, Alignment, Tabs, Tab, Separator, Border, Padding, BorderRadius } from "../../components/FieldRender"
+import { Color, IconList, Select, Styles, Typography, Range, RadioAdvanced, Toggle, BoxShadow, Alignment, Tabs, Tab, Separator, Border, Padding, BorderRadius } from "../../components/FieldRender"
 import InlineToolbar from '../../components/fields/inline/InlineToolbar'
 import '../../components/GlobalSettings'
 import { CssGenerator } from '../../components/CssGenerator'
@@ -58,7 +58,7 @@ class Edit extends Component {
 	renderTabTitles = () => {
 		const { attributes: { tabTitles, iconPosition }, block, clientId } = this.props
 		let currentTabBlock = $(`#block-${clientId}`)
-		const { activeTab, showIconPicker } = this.state
+		const { showIconPicker } = this.state
 		return tabTitles.map((title, index) =>
 			<span className={`qubely-tab-item ${(this.state.activeTab == index + 1) ? 'qubely-active' : ''}`}>
 				<span class={`qubely-tab-title ${title.iconName ? 'qubely-has-icon-' + iconPosition : ''}`} onClick={() => {
@@ -229,9 +229,9 @@ class Edit extends Component {
 						<Typography label={__('Typography')} value={typography} onChange={(value) => setAttributes({ typography: value })} disableLineHeight device={device} onDeviceChange={value => this.setState({ device: value })} />
 					</PanelBody>
 					<PanelBody title={__('Icon')} initialOpen={false}>
+
 						<IconList
 							label={__('Icon')}
-							disableToggle
 							value={tabTitles[activeTab - 1].iconName}
 							onChange={(value) => this.updateTitles({ iconName: value }, activeTab - 1)} />
 						<Select
@@ -259,6 +259,7 @@ class Edit extends Component {
 							responsive
 							device={device}
 							onDeviceChange={value => this.setState({ device: value })} />
+
 					</PanelBody>
 					<PanelBody title={__('Body')} initialOpen={false}>
 						{tabStyle == 'tabs' &&
