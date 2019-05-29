@@ -3,6 +3,7 @@ const { Component, Fragment } = wp.element
 const { Dropdown, Tooltip } = wp.components
 import '../css/typography.scss'
 import FontList from "./assets/FontList"
+const { RichText } = wp.editor;
 import { Range, Select, Toggle, Wrapper } from '../FieldRender'
 
 class Typography extends Component {
@@ -10,10 +11,36 @@ class Typography extends Component {
         super(props)
         this.state = {
             showFontFamily: false,
-            filterText: this.props.value.family ? this.props.value.family : '',
+            filterText: '',
             changeType: '',
+            showFontFamiles: false,
+            showFontWeights: false,
         }
     }
+    componentDidMount() {
+        document.addEventListener('mousedown', this.handleClickOutside)
+    }
+    componentWillUnmount() {
+        document.removeEventListener('mousedown', this.handleClickOutside);
+    }
+    handleClickOutside = (event) => {
+        const { showFontFamiles, showFontWeights } = this.state
+        if (showFontFamiles) {
+            const qubelyFontFamilyWrapper = this.refs.qubelyFontFamilyWrapper
+            const qubelySelectedFontFamily = this.refs.qubelySelectedFontFamily
+            if (qubelyFontFamilyWrapper && !qubelyFontFamilyWrapper.contains(event.target)) {
+                qubelySelectedFontFamily && !qubelySelectedFontFamily.contains(event.target) && this.setState({ showFontFamiles: false })
+            }
+        } else if (showFontWeights) {
+            const qubelyFontWeightWrapper = this.refs.qubelyFontWeightWrapper
+            const qubelySelectedFontWeight = this.refs.qubelySelectedFontWeight
+            if (qubelyFontWeightWrapper && !qubelyFontWeightWrapper.contains(event.target)) {
+                qubelySelectedFontWeight && !qubelySelectedFontWeight.contains(event.target) && this.setState({ showFontWeights: false })
+            }
+        }
+
+    }
+
     _getWeight() {
         const { value } = this.props
         if (value && value.family) {
@@ -68,16 +95,18 @@ class Typography extends Component {
     }
     render() {
         const { value, label, device, onDeviceChange } = this.props
+        const { showFontFamiles, showFontWeights, filterText } = this.state
         let qubelyFonts = JSON.parse(localStorage.getItem('qubelyFonts'))
         let filteredFontList = [], newFontList = FontList
         if (qubelyFonts) {
             filteredFontList = FontList.filter(font => !qubelyFonts.filter(qubelyFont => qubelyFont.n == font.n).length > 0)
             newFontList = [...qubelyFonts, ...filteredFontList]
         }
-        // $(document).on('change', '.qubely-font-family', event => {
-        //     this.handleTypographyChange(event.target.value)
-        // })
-
+        if (filterText.length >= 2) {
+            newFontList = newFontList.filter(item =>
+                item.n.toLowerCase().search(filterText.toLowerCase()) !== -1
+            )
+        }
         return (
             <div className="qubely-field qubely-field-typography">
                 <Toggle
@@ -101,36 +130,75 @@ class Typography extends Component {
                         />
 
                         <div className="qubely-field-group qubely-65-35">
-                            {/* <div className="qubely-field-datalist qubely-field">
+                            <div className="qubely-field qubely-field-font-family">
                                 <label>{__('Font Family')}</label>
-                                <input type="text" className="qubely-font-family" list="font-family"
-                                    // onKeyPress={event => { }}
-                                    // onChange={event => { }} 
+                                <div className="qubely-font-family-picker" ref="qubelySelectedFontFamily"
+                                    onClick={() => { this.setState({ showFontFamiles: !showFontFamiles }) }
+                                    }>
+                                    <RichText
+                                        tagName="span"
+                                        className={`qubely-font-family-search${!showFontFamiles ? ' selected-font-family' : ''}`}
+                                        placeholder={__(value.family || 'Search')}
+                                        value={filterText}
+                                        keepPlaceholderOnFocus
+                                        onChange={value => this.setState({ filterText: value })}
                                     />
-
-                                <datalist id="font-family">
-                                    {newFontList.map(e => { return <option value={e.n} /> })}
-                                </datalist>
-
-                            </div> */}
-
-                            <Select
-                                direction={"left"}
-                                label={__('Font Family')}
-                                value={value && value.family}
-                                clear
-                                search
-                                options={newFontList.map((e) => { return e.n; })}
-                                onChange={val => this.handleTypographyChange(val)}
-                            />
-                            <Select
+                                </div>
+                            </div>
+                            {
+                                showFontFamiles && <div className="qubely-font-family-option-wrapper" ref="qubelyFontFamilyWrapper">
+                                    <div className="qubely-font-family-options" >
+                                        {newFontList.length > 0 ?
+                                            newFontList.map((font, index) => {
+                                                return (
+                                                    <div className={`${font.n == value.family ? 'qubely-active-font-family' : 'qubely-font-family-option'}`}
+                                                        id={`qubely-font-family-${index}`}
+                                                        onClick={() => { this.setState({ showFontFamiles: false, filterText: '' }); this.handleTypographyChange(font.n) }}
+                                                    >
+                                                        {font.n}
+                                                    </div>
+                                                )
+                                            })
+                                            :
+                                            <div className={`qubely-font-family-option no-match`} onClick={() => this.setState({ showFontFamiles: false, filterText: '' })}  >  No matched font  </div>
+                                        }
+                                    </div>
+                                </div>
+                            }
+                            <div className="qubely-field qubely-field-font-weight">
+                                <label>{__('Weight')}</label>
+                                <div className="qubely-font-weight-picker"
+                                    ref="qubelySelectedFontWeight"
+                                    onClick={() => this.setState({ showFontWeights: !showFontWeights })}>
+                                    {value.weight ||'Select'}
+                                </div>
+                            </div>
+                            {
+                                showFontWeights && <div className="qubely-font-weight-wrapper" ref="qubelyFontWeightWrapper">
+                                    <div className="qubely-font-family-weights" >
+                                        {
+                                            this._getWeight().map(font => {
+                                                return (
+                                                    <div
+                                                        onClick={() => { this.setState({ showFontWeights: false }); this.setSettings('weight', font) }}
+                                                        className={`${font == value.weight ? 'qubely-active-font-weight' : 'qubely-font-weight-option'}`}
+                                                    >
+                                                        {font}
+                                                    </div>
+                                                )
+                                            })
+                                        }
+                                    </div>
+                                </div>
+                            }
+                            {/* <Select
                                 direction={"right"}
                                 label={__('Weight')}
                                 value={value && value.weight}
                                 clear
                                 options={this._getWeight()}
                                 onChange={val => this.setSettings('weight', val)}
-                            />
+                            /> */}
                         </div>
 
                         <Dropdown

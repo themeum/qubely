@@ -3,8 +3,6 @@ import '../css/gradient.scss'
 const { Component, Fragment } = wp.element
 const { Dropdown, ColorPicker, Tooltip } = wp.components;
 import Select from "./Select"
-import GradientAngle from './GradientAngle'
-import GradientPosition from './GradientPosition'
 import Range from "./Range"
 
 const defaultState = { color1: '#16d03e', color2: '#1f91f3', type: 'linear', direction: '90', start: 5, stop: 80, radial: 'center', clip: false };
@@ -111,16 +109,24 @@ class Gradient extends Component {
                 </div>
 
                 {value.type == 'radial' ?
-                    <GradientPosition
-                        label={__('Gradient Position')}
+                    <Select label={__('Gradient Position')}
+                        label={__('Radial Pointer')}
                         value={value.radial}
+                        className={(value.type && value.type == 'radial') ? 'half' : ''}
+                        value={value.radial ? value.radial : 'center'}
+                        options={['center', 'top left', 'top', 'top right', 'right', 'bottom right', 'bottom', 'bottom left', 'left']}
                         onChange={radial => this.setSettings(radial, 'radial')}
                     />
                     :
-                    <GradientAngle
+                    <Range
                         label={__('Gradient Angle')}
+                        min={0}
+                        max={360}
+                        step={1}
+                        beforeIcon="image-rotate"
+                        allowReset
                         value={value.direction || 90}
-                        onChange={value => this.setSettings(value, 'direction')}
+                        onChange={direction => this.setSettings(direction, 'direction')}
                     />
                 }
                 <Range

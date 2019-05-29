@@ -26,6 +26,7 @@ icons.corner_round = <svg width="12" height="12" viewBox="0 0 12 12" xmlns="http
 
 icons.tab_tabs = <img src={`${img_path}/tab/tabs.svg`} alt={__('Tabs')} />;
 icons.tab_pills = <img src={`${img_path}/tab/pills.svg`} alt={__('Pills')} />;
+icons.tab_underline = <img src={`${img_path}/tab/underline.svg`} alt={__('Underline')} />;
 
 icons.social_normal = <img src={`${img_path}//socialicon/normal.svg`} alt={__('Normal')} />;
 icons.social_fill = <img src={`${img_path}//socialicon/fill.svg`} alt={__('Fill')} />;

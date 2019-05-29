@@ -4,12 +4,12 @@ import { animationAttr } from '../../components/HelperFunction'
 
 class Save extends Component {
     renderTabTitles = () => {
-        const { attributes: { tabTitles, tabs, iconPosition } } = this.props
+        const { attributes: { tabTitles, iconPosition } } = this.props
 
         return tabTitles.map((title, index) =>
             <span className={`qubely-tab-item ${(index == 0) ? 'qubely-active' : ''}`}>
                 <span class={`qubely-tab-title ${title.iconName ? 'qubely-has-icon-' + iconPosition : ''}`} role="button">
-                    {title.iconName && ( iconPosition == 'top' || iconPosition == 'left' ) && (<i className={`qubely-tab-icon ${title.iconName}`} />)}
+                    {title.iconName && (iconPosition == 'top' || iconPosition == 'left') && (<i className={`qubely-tab-icon ${title.iconName}`} />)}
                     {title.title}
                     {title.iconName && (iconPosition == 'right') && (<i className={`qubely-tab-icon ${title.iconName}`} />)}
                 </span>
