@@ -167,7 +167,7 @@ class Typography extends Component {
                             }
                             <div className="qubely-field qubely-field-font-weight">
                                 <label>{__('Weight')}</label>
-                                <div className="qubely-font-family-picker"
+                                <div className="qubely-font-weight-picker"
                                     ref="qubelySelectedFontWeight"
                                     onClick={() => this.setState({ showFontWeights: !showFontWeights })}>
                                     {value.weight ||'Select'}
