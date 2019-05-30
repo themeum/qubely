@@ -5,7 +5,7 @@ import '../css/typography.scss'
 import FontList from "./assets/FontList"
 const { RichText } = wp.editor
 import icons from '../../helpers/icons'
-import { Range, Select, Toggle } from '../FieldRender'
+import { Range, Toggle } from '../FieldRender'
 
 class Typography extends Component {
     constructor(props) {
