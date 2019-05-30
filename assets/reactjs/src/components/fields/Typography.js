@@ -139,7 +139,7 @@ class Typography extends Component {
                                         <RichText
                                             tagName="span"
                                             className={`qubely-font-family-search${!showFontFamiles ? ' selected-font-family' : ''}`}
-                                            placeholder={__(value.family || 'Select')}
+                                            placeholder={__(showFontFamiles ? 'Search' : value.family || 'Select')}
                                             value={filterText}
                                             keepPlaceholderOnFocus
                                             onChange={value => this.setState({ filterText: value })}

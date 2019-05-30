@@ -204,8 +204,6 @@ class Edit extends Component {
 				currency, currencyCustom, currencyPosition, currencyAlign, currencyColor, currencyTypography,
 				// Duration
 				enableDuration, duration, durationPosition, durationColor, durationTypography, durationAlign, durationPadding, durationPaddingTop, durationPaddingBottom,
-				// Badge
-				enableBadge, badge, badgeStyle, enableBadgeOverflow, badgeCircleRotation, badgePosition, badgeColor, badgeTextColor, badgeHoverColor, badgeTextHoverColor, badgeTypography, badgeRadius, badgeTop, badgeRight, badgeLeft, badgePadding, badgeOverflowPadding, badgeOverflowTop, badgeOverflowLeft, badgeOverflowRight,
 				// Background
 				bgColor, bgPadding, bgBorderRadius, bgBorder, bgShadow,
 				// features
@@ -214,6 +212,8 @@ class Edit extends Component {
 				headerBg, headerBorder, headerPadding,
 				//postButton text
 				enablePostButtonText,
+				//Badge
+				enableBadge, badge, badgeStyle, enableBadgeOverflow, badgeCircleRotation, badgePosition, badgeColor, badgeTextColor, badgeHoverColor, badgeTextHoverColor, badgeTypography, badgeRadius, badgeTop, badgeRight, badgeLeft, badgePadding, badgeOverflowPadding, badgeOverflowTop, badgeOverflowLeft, badgeOverflowRight,
 			}
 
 		} = this.props
@@ -238,10 +238,6 @@ class Edit extends Component {
 							value={enableFeatures}
 							label={__('Show Features')}
 							onChange={val => setAttributes({ enableFeatures: val })} />
-						<Toggle
-							value={enableBadge}
-							label={__('Show Badge')}
-							onChange={val => setAttributes({ enableBadge: val })} />
 						<Toggle
 							value={enablePostButtonText}
 							label={__('Show PostButtonText')}
@@ -522,109 +518,6 @@ class Edit extends Component {
 						</PanelBody>
 					}
 
-					{
-						enableBadge &&
-						<PanelBody title={__('Badge')} opened={'Badge' === openPanelSetting} onToggle={() => this.handlePanelOpenings(openPanelSetting !== 'Badge' ? 'Badge' : '')}>
-							<Select
-								label={__('Badge Style')}
-								options={['corner', 'half-', 'circle', 'ribbon']}
-								value={badgeStyle}
-								onChange={val => setAttributes({ badgeStyle: val })} />
-							{
-								badgeStyle == 'circle' &&
-								<Fragment>
-									<Range
-										min={30}
-										max={100}
-										value={badgeRadius}
-										label={__('Circle Radius')}
-										onChange={val => setAttributes({ badgeRadius: val })} />
-									<Range
-										min={-180}
-										max={180}
-										value={badgeCircleRotation}
-										label={__('Rotate Circle')}
-										onChange={val => setAttributes({ badgeCircleRotation: val })} />
-								</Fragment>
-
-							}
-							<Toggle
-								value={enableBadgeOverflow}
-								label={__('Overflow')}
-								onChange={val => setAttributes({ enableBadgeOverflow: val })} />
-							<RadioAdvanced
-								label={__('Badge Position')}
-								options={[
-									{ label: __('Left'), value: 'left', title: __('Left') },
-									{ label: __('Right'), value: 'right', title: __('Right') },
-								]}
-								value={badgePosition}
-								onChange={val => setAttributes({ badgePosition: val })} />
-
-							<Range
-								min={-200}
-								max={200}
-								value={enableBadgeOverflow ? badgeOverflowTop : badgeTop}
-								label={__('Position Top')}
-								onChange={val => setAttributes(enableBadgeOverflow ? { badgeOverflowTop: val } : { badgeTop: val })} />
-							{badgePosition == 'left' ?
-								<Range
-									min={-200}
-									max={200}
-									value={enableBadgeOverflow ? badgeOverflowRight : badgeRight}
-									label={__('Right')}
-									onChange={val => setAttributes(enableBadgeOverflow ? { badgeOverflowRight: val } : { badgeRight: val })} />
-								:
-								<Range
-									min={-200}
-									max={200}
-									value={enableBadgeOverflow ? badgeOverflowLeft : badgeLeft}
-									label={__('Left')}
-									onChange={val => setAttributes(enableBadgeOverflow ? { badgeOverflowLeft: val } : { badgeLeft: val })} />
-							}
-							<Padding
-								label={__('Padding')}
-								value={enableBadgeOverflow ? badgeOverflowPadding : badgePadding}
-								onChange={val => setAttributes(enableBadgeOverflow ? { badgeOverflowPadding: val } : { badgePadding: val })}
-								unit={['px', 'em', '%']}
-								max={100}
-								min={0}
-								responsive
-								device={device}
-								onDeviceChange={value => this.setState({ device: value })}
-							/>
-							<Tabs>
-								<Tab tabTitle={__('Normal')}>
-									<Color
-										label={__('Background color')}
-										value={badgeColor}
-										onChange={val => setAttributes({ badgeColor: val })} />
-									<Color
-										label={__('Text Color')}
-										value={badgeTextColor}
-										onChange={val => setAttributes({ badgeTextColor: val })} />
-								</Tab>
-								<Tab tabTitle={__('Hover')}>
-									<Color
-										label={__('Badge color')}
-										value={badgeHoverColor}
-										onChange={val => setAttributes({ badgeHoverColor: val })} />
-									<Color
-										label={__('Text Color')}
-										value={badgeTextHoverColor}
-										onChange={val => setAttributes({ badgeTextHoverColor: val })} />
-								</Tab>
-							</Tabs>
-							<Typography
-								value={badgeTypography}
-								disableLineHeight
-								onChange={val => setAttributes({ badgeTypography: val })}
-								device={device}
-								onDeviceChange={value => this.setState({ device: value })} />
-
-						</PanelBody>
-					}
-
 					<PanelBody title={__('Background')} initialOpen={false}>
 						<ColorAdvanced label={__('Background Color')} value={bgColor} onChange={val => setAttributes({ bgColor: val })} />
 						<Border label={__('Border')} value={bgBorder} onChange={val => setAttributes({ bgBorder: val })} min={0} max={10} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
@@ -640,6 +533,115 @@ class Edit extends Component {
 							onDeviceChange={value => this.setState({ device: value })} />
 						<BorderRadius label={__('Radius')} value={bgBorderRadius} onChange={(value) => setAttributes({ bgBorderRadius: value })} min={0} max={100} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
 					</PanelBody>
+
+					<PanelBody title={__('Badge')} opened={'Badge' === openPanelSetting} onToggle={() => this.handlePanelOpenings(openPanelSetting !== 'Badge' ? 'Badge' : '')}>
+						<Toggle
+							value={enableBadge}
+							label={__('Enable')}
+							onChange={val => setAttributes({ enableBadge: val })}
+						/>
+
+						{enableBadge &&
+							<Fragment>
+								<Styles value={badgeStyle} onChange={val => setAttributes({ badgeStyle: val })}
+									options={[
+										{ value: 1, svg: icons.pricing.badge[1], label: __('Style 1') },
+										{ value: 2, svg: icons.pricing.badge[2], label: __('Style 2') },
+										{ value: 3, svg: icons.pricing.badge[3], label: __('Style 3') },
+										{ value: 4, svg: icons.pricing.badge[4], label: __('Style 4') },
+										{ value: 5, svg: icons.pricing.badge[5], label: __('Style 5') },
+										{ value: 6, svg: icons.pricing.badge[6], label: __('Style 6') },
+									]}
+								/>
+
+								{ (badgeStyle == 1 || badgeStyle == 2 || badgeStyle == 5 || badgeStyle == 6) &&
+									<RadioAdvanced
+										label={__('Position')}
+										options={[
+											{ label: __('Left'), value: 'left', title: __('Left') },
+											{ label: __('Right'), value: 'right', title: __('Right') },
+										]}
+										value={badgePosition}
+										onChange={val => setAttributes({ badgePosition: val })}
+									/>
+								}
+
+								{
+									badgeStyle == 'circle' &&
+									<Fragment>
+										<Range
+											min={30}
+											max={100}
+											value={badgeRadius}
+											label={__('Circle Radius')}
+											onChange={val => setAttributes({ badgeRadius: val })} />
+										<Range
+											min={-180}
+											max={180}
+											value={badgeCircleRotation}
+											label={__('Rotate Circle')}
+											onChange={val => setAttributes({ badgeCircleRotation: val })} />
+									</Fragment>
+
+								}
+								<Toggle
+									value={enableBadgeOverflow}
+									label={__('Overflow')}
+									onChange={val => setAttributes({ enableBadgeOverflow: val })} />
+								
+
+								<Range
+									min={-200}
+									max={200}
+									value={enableBadgeOverflow ? badgeOverflowTop : badgeTop}
+									label={__('Position Top')}
+									onChange={val => setAttributes(enableBadgeOverflow ? { badgeOverflowTop: val } : { badgeTop: val })} />
+								{badgePosition == 'left' ?
+									<Range
+										min={-200}
+										max={200}
+										value={enableBadgeOverflow ? badgeOverflowRight : badgeRight}
+										label={__('Right')}
+										onChange={val => setAttributes(enableBadgeOverflow ? { badgeOverflowRight: val } : { badgeRight: val })} />
+									:
+									<Range
+										min={-200}
+										max={200}
+										value={enableBadgeOverflow ? badgeOverflowLeft : badgeLeft}
+										label={__('Left')}
+										onChange={val => setAttributes(enableBadgeOverflow ? { badgeOverflowLeft: val } : { badgeLeft: val })} />
+								}
+								<Padding
+									label={__('Padding')}
+									value={enableBadgeOverflow ? badgeOverflowPadding : badgePadding}
+									onChange={val => setAttributes(enableBadgeOverflow ? { badgeOverflowPadding: val } : { badgePadding: val })}
+									unit={['px', 'em', '%']}
+									max={100}
+									min={0}
+									responsive
+									device={device}
+									onDeviceChange={value => this.setState({ device: value })}
+								/>
+								<Color
+									label={__('Background color')}
+									value={badgeColor}
+									onChange={val => setAttributes({ badgeColor: val })} />
+								<Color
+									label={__('Text Color')}
+									value={badgeTextColor}
+									onChange={val => setAttributes({ badgeTextColor: val })} />
+								
+								<Typography
+									value={badgeTypography}
+									disableLineHeight
+									onChange={val => setAttributes({ badgeTypography: val })}
+									device={device}
+									onDeviceChange={value => this.setState({ device: value })} />
+							</Fragment>
+						}
+
+					</PanelBody>
+
 				</InspectorControls>
 
 				<BlockControls>
@@ -654,6 +656,7 @@ class Edit extends Component {
 
 				<div className={`qubely-block-${uniqueId}`} >
 					<div className={`qubely-block-pricing`}>
+						{enableBadge && <span className={`qubely-pricing-badge qubely-badge-style-${badgeStyle}`} contenteditable="true" onBlur={(e) => setAttributes({ 'badge': e.target.innerText })} onClick={() => this.handlePanelOpenings('Badge')}> {badge} </span>}
 						<div className="qubely-block-pricing-header">
 							{this.renderPricingTitle()}
 
@@ -696,8 +699,6 @@ class Edit extends Component {
 						{(layout == 1 || layout == 2 || layout == 3 || layout == 5) &&
 							this.renderPricingButton()
 						}
-
-						{enableBadge && <span className={`qubely-pricing-badge`} contenteditable="true" onBlur={(e) => setAttributes({ 'badge': e.target.innerText })} onClick={() => this.handlePanelOpenings('Badge')}> {badge} </span>}
 					</div>
 				</div>
 			</Fragment>

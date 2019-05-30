@@ -1,6 +1,7 @@
 .qubely-block-pricing { 
 	transition: 400ms;
 	position:relative;
+	// overflow: hidden;
     .qubely-list {
         list-style: none;
         padding: 0;
@@ -57,9 +58,95 @@
 		}
 	}
 
-	.qubely-pricing-badge{
-		display: flex;
-		align-items: center;
-		justify-content: center;
+	.qubely-pricing-badge {
+		&.qubely-badge-style-1 {
+			text-align: center;
+			position: absolute;
+			top: -11px;
+			display: block;
+			height: 80px;
+			line-height: 1;
+			padding-top: 40px;
+			background: red;
+			width: 200px;
+		}
+
+		&.qubely-badge-style-2 {
+			text-align: center;
+			position: absolute;
+			top: 25px;
+			display: block;
+			height: 40px;
+			line-height: 40px;
+			background: red;
+			width: 200px;
+		}
+
+		&.qubely-badge-style-3 {
+			text-align: center;
+			display: block;
+			height: 40px;
+			line-height: 40px;
+			background: red;
+			margin: 0 -20px;
+			position: relative;
+
+			&:after,
+			&:before {
+				content: " ";
+				position: absolute;
+				bottom: -20px;
+				border-style: solid;
+				border-width: 10px;
+			}
+			&:before {
+				left: 0;
+				border-color: red red transparent transparent;
+			}
+			&:after {
+				right: 0;
+				border-color: red transparent transparent red;
+			}
+		}
+
+		&.qubely-badge-style-4 {
+			text-align: center;
+			display: block;
+			height: 40px;
+			line-height: 40px;
+			background: red;
+		}
+
+		&.qubely-badge-style-5 {
+			text-align: center;
+			display: inline-block;
+			height: 40px;
+			line-height: 40px;
+			padding: 0 20px;
+			background: red;
+			position: absolute;
+			top: 20px;
+		}
+
+		&.qubely-badge-style-6 {
+			text-align: center;
+			position: absolute;
+			top: 28px;
+			display: block;
+			height: 40px;
+			line-height: 40px;
+			background: red;
+			padding: 0 0 0 20px;
+			transform: rotate(90deg);
+			&::before {
+				content: " ";
+				position: absolute;
+				top: 0;
+				right: -40px;
+				border-style: solid;
+				border-width: 20px;
+				border-color: red transparent red red;
+			}
+		}
 	}
 }

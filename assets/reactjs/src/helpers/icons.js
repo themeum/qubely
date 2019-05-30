@@ -78,6 +78,15 @@ icons.pricing = {
     6: <img src={`${img_path}/pricing/6.svg`} alt={__('Layout 6')} />
 }
 
+icons.pricing.badge = {
+    1: <img src={`${img_path}/pricing/badges/1.svg`} alt={__('Badge 1')} />,
+    2: <img src={`${img_path}/pricing/badges/2.svg`} alt={__('Badge 2')} />,
+    3: <img src={`${img_path}/pricing/badges/3.svg`} alt={__('Badge 3')} />,
+    4: <img src={`${img_path}/pricing/badges/4.svg`} alt={__('Badge 4')} />,
+    5: <img src={`${img_path}/pricing/badges/5.svg`} alt={__('Badge 5')} />,
+    6: <img src={`${img_path}/pricing/badges/6.svg`} alt={__('Badge 6')} />,
+}
+
 icons.copy = <svg width="20px" height="15px" viewBox="0 0 1792 1792" class="dashicon" xmlns="http://www.w3.org/2000/svg"><path d="M1696 384q40 0 68 28t28 68v1216q0 40-28 68t-68 28h-960q-40 0-68-28t-28-68v-288h-544q-40 0-68-28t-28-68v-672q0-40 20-88t48-76l408-408q28-28 76-48t88-20h416q40 0 68 28t28 68v328q68-40 128-40h416zm-544 213l-299 299h299v-299zm-640-384l-299 299h299v-299zm196 647l316-316v-416h-384v416q0 40-28 68t-68 28h-416v640h512v-256q0-40 20-88t48-76zm956 804v-1152h-384v416q0 40-28 68t-68 28h-416v640h896z" /></svg>
 icons.paste = <svg width="20px" height="15px" viewBox="0 0 1792 1792" class="dashicon" xmlns="http://www.w3.org/2000/svg"><path d="M768 1664h896v-640h-416q-40 0-68-28t-28-68v-416h-384v1152zm256-1440v-64q0-13-9.5-22.5t-22.5-9.5h-704q-13 0-22.5 9.5t-9.5 22.5v64q0 13 9.5 22.5t22.5 9.5h704q13 0 22.5-9.5t9.5-22.5zm256 672h299l-299-299v299zm512 128v672q0 40-28 68t-68 28h-960q-40 0-68-28t-28-68v-160h-544q-40 0-68-28t-28-68v-1344q0-40 28-68t68-28h1088q40 0 68 28t28 68v328q21 13 36 28l408 408q28 28 48 76t20 88z" /></svg>
 

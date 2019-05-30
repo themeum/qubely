@@ -208,48 +208,128 @@ registerBlockType('qubely/pricing', {
         },
         // Badge__
         enableBadge: { type: 'boolean', default: false },
-        badge: { type: 'string', default: 'SALE', style: [{ selector: '{{QUBELY}} .qubely-pricing-badge{text-align:center;position:absolute;overflow:hidden; top:0; }' }] },
-        badgeStyle: { type: 'string', default: 'corner' },
-        enableBadgeOverflow: {
-            type: 'boolean',
-            default: true,
-            style: [{
-                condition: [{ key: 'enableBadgeOverflow', relation: '==', value: true }],
-                selector: '{{QUBELY}} .qubely-block-pricing{  overflow:hidden;}'
-            },
-            ]
-        },
-        badgePosition: {
-            type: 'string', default: 'left', style: [
-                { selector: '{{QUBELY}} .qubely-pricing-badge{ {{badgePosition}}:0; }' },
-                { condition: [{ key: 'badgeStyle', relation: '==', value: 'corner' }, { key: 'badgePosition', relation: '==', value: 'left' }], selector: '{{QUBELY}} .qubely-pricing-badge{ left:0; transform: rotate(-45deg); }' },
-                { condition: [{ key: 'badgeStyle', relation: '==', value: 'corner' }, { key: 'badgePosition', relation: '==', value: 'right' }], selector: '{{QUBELY}} .qubely-pricing-badge{ right:0; transform: rotate(45deg); }' },
-            ]
-        },
-        badgeColor: { type: 'string', default: '#FF494A', style: [{ selector: '{{QUBELY}} .qubely-pricing-badge{background-color: {{badgeColor}};}' }] },
-        badgeTextColor: { type: 'string', default: '#ffffff', style: [{ selector: '{{QUBELY}} .qubely-pricing-badge{color: {{badgeTextColor}};}' }] },
-        badgeTypography: { type: 'object', default: { openTypography: 1, size: { md: 12, unit: 'px' } }, style: [{ selector: '{{QUBELY}} .qubely-pricing-badge' }] },
-        badgeRadius: {
-            type: 'string',
-            default: '70',
+        badge: { type: 'string', default: 'Sale' },
+        badgeStyle: {
+            type: 'number',
+            default: 1,
             style: [
                 {
                     condition: [
-                        { key: 'badgeStyle', relation: '==', value: 'circle' }
+                        { key: 'badgeStyle', relation: '==', value: 1 }
                     ],
-                    selector: '{{QUBELY}} .qubely-pricing-badge{height: {{badgeRadius}}px;width: {{badgeRadius}}px;border-radius:50%}'
-                }]
+                    selector: '{{QUBELY}} .qubely-block-pricing {overflow: hidden;}'
+                },
+                {
+                    condition: [
+                        { key: 'badgeStyle', relation: '==', value: 2 }
+                    ],
+                    selector: '{{QUBELY}} .qubely-block-pricing {overflow: hidden;}'
+                }
+            ]
+        },
+        badgePosition: {
+            type: 'string',
+            default: 'left',
+            style: [
+                {
+                    condition: [
+                        { key: 'badgeStyle', relation: '==', value: 1 },
+                        { key: 'badgePosition', relation: '==', value: 'left' }
+                    ],
+                    selector: '{{QUBELY}} .qubely-block-pricing .qubely-pricing-badge {left: -73px; transform: rotate(-45deg);}'
+                },
+                {
+                    condition: [
+                        { key: 'badgeStyle', relation: '==', value: 1 },
+                        { key: 'badgePosition', relation: '==', value: 'right' }
+                    ],
+                    selector: '{{QUBELY}} .qubely-block-pricing .qubely-pricing-badge {right: -73px; transform: rotate(45deg);}'
+                },
+                {
+                    condition: [
+                        { key: 'badgeStyle', relation: '==', value: 2 },
+                        { key: 'badgePosition', relation: '==', value: 'left' }
+                    ],
+                    selector: '{{QUBELY}} .qubely-block-pricing .qubely-pricing-badge {left: -50px; transform: rotate(-45deg);}'
+                },
+                {
+                    condition: [
+                        { key: 'badgeStyle', relation: '==', value: 2 },
+                        { key: 'badgePosition', relation: '==', value: 'right' }
+                    ],
+                    selector: '{{QUBELY}} .qubely-block-pricing .qubely-pricing-badge {right: -50px; transform: rotate(45deg);}'
+                },
+                {
+                    condition: [
+                        { key: 'badgeStyle', relation: '==', value: 5 },
+                        { key: 'badgePosition', relation: '==', value: 'left' }
+                    ],
+                    selector: '{{QUBELY}} .qubely-block-pricing .qubely-pricing-badge {left: 20px;}'
+                },
+                {
+                    condition: [
+                        { key: 'badgeStyle', relation: '==', value: 5 },
+                        { key: 'badgePosition', relation: '==', value: 'right' }
+                    ],
+                    selector: '{{QUBELY}} .qubely-block-pricing .qubely-pricing-badge {right: 20px;}'
+                },
+
+                {
+                    condition: [
+                        { key: 'badgeStyle', relation: '==', value: 6 },
+                        { key: 'badgePosition', relation: '==', value: 'left' }
+                    ],
+                    selector: '{{QUBELY}} .qubely-block-pricing .qubely-pricing-badge {left: 12px;}'
+                },
+                {
+                    condition: [
+                        { key: 'badgeStyle', relation: '==', value: 6 },
+                        { key: 'badgePosition', relation: '==', value: 'right' }
+                    ],
+                    selector: '{{QUBELY}} .qubely-block-pricing .qubely-pricing-badge {right: 12px;}'
+                },
+            ]
+        },
+        enableBadgeOverflow: {
+            type: 'boolean',
+            default: true,
+            // style: [{
+            //     condition: [{ key: 'enableBadgeOverflow', relation: '==', value: true }],
+            //     selector: '{{QUBELY}} .qubely-block-pricing{  overflow:hidden;}'
+            // },
+            // ]
+        },
+        
+        badgeColor: { type: 'string', default: '#FF494A',
+        // style: [{ selector: '{{QUBELY}} .qubely-pricing-badge{background-color: {{badgeColor}};}' }]
+        },
+        badgeTextColor: { type: 'string', default: '#ffffff',
+            // style: [{ selector: '{{QUBELY}} .qubely-pricing-badge{color: {{badgeTextColor}};}' }]
+        },
+        badgeTypography: { type: 'object', default: { openTypography: 1, size: { md: 12, unit: 'px' } },
+            // style: [{ selector: '{{QUBELY}} .qubely-pricing-badge' }]
+        },
+        badgeRadius: {
+            type: 'string',
+            default: '70',
+            // style: [
+            //     {
+            //         condition: [
+            //             { key: 'badgeStyle', relation: '==', value: 'circle' }
+            //         ],
+            //         selector: '{{QUBELY}} .qubely-pricing-badge{height: {{badgeRadius}}px;width: {{badgeRadius}}px;border-radius:50%}'
+            //     }]
         },
         badgeCircleRotation: {
             type: 'string',
             default: '-90',
-            style: [
-                {
-                    condition: [
-                        { key: 'badgeStyle', relation: '==', value: 'circle' }
-                    ],
-                    selector: '{{QUBELY}} .qubely-pricing-badge{transform: rotate({{badgeCircleRotation}}deg);}'
-                }]
+            // style: [
+            //     {
+            //         condition: [
+            //             { key: 'badgeStyle', relation: '==', value: 'circle' }
+            //         ],
+            //         selector: '{{QUBELY}} .qubely-pricing-badge{transform: rotate({{badgeCircleRotation}}deg);}'
+            //     }]
         },
         badgePadding: {
             type: 'object',
@@ -260,12 +340,12 @@ registerBlockType('qubely/pricing', {
                 custom: { md: '3 15 3 15' },
                 unit: 'px'
             },
-            style: [{
-                condition: [
-                    { key: 'enableBadgeOverflow', relation: '==', value: false }
-                ],
-                selector: '{{QUBELY}} .qubely-pricing-badge'
-            }],
+            // style: [{
+            //     condition: [
+            //         { key: 'enableBadgeOverflow', relation: '==', value: false }
+            //     ],
+            //     selector: '{{QUBELY}} .qubely-pricing-badge'
+            // }],
         },
         badgeOverflowPadding: {
             type: 'object',
@@ -276,83 +356,82 @@ registerBlockType('qubely/pricing', {
                 custom: { md: '5 35 5 35' },
                 unit: 'px'
             },
-            style: [{
-                condition: [
-                    { key: 'enableBadgeOverflow', relation: '==', value: true }
-                ],
-                selector: '{{QUBELY}} .qubely-pricing-badge'
-            }],
+            // style: [{
+            //     condition: [
+            //         { key: 'enableBadgeOverflow', relation: '==', value: true }
+            //     ],
+            //     selector: '{{QUBELY}} .qubely-pricing-badge'
+            // }],
         },
 
         badgeTop: {
             type: 'string',
             default: '20',
-            style: [{
-                condition: [
-                    { key: 'enableBadgeOverflow', relation: '==', value: false }
-                ],
-                selector: '{{QUBELY}} .qubely-pricing-badge { top: {{badgeTop}}px;}'
-            }]
+            // style: [{
+            //     condition: [
+            //         { key: 'enableBadgeOverflow', relation: '==', value: false }
+            //     ],
+            //     selector: '{{QUBELY}} .qubely-pricing-badge { top: {{badgeTop}}px;}'
+            // }]
         },
         badgeRight: {
             type: 'string',
             default: '-5',
-            style: [
-                {
-                    condition: [
-                        { key: 'badgePosition', relation: '==', value: 'left' },
-                        { key: 'enableBadgeOverflow', relation: '==', value: false }],
-                    selector: '{{QUBELY}} .qubely-pricing-badge { left: {{badgeRight}}px;}'
-                }]
+            // style: [
+            //     {
+            //         condition: [
+            //             { key: 'badgePosition', relation: '==', value: 'left' },
+            //             { key: 'enableBadgeOverflow', relation: '==', value: false }],
+            //         selector: '{{QUBELY}} .qubely-pricing-badge { left: {{badgeRight}}px;}'
+            //     }]
         },
         badgeLeft: {
             type: 'string',
             default: '-5',
-            style: [
-                {
-                    condition: [
-                        { key: 'badgePosition', relation: '==', value: 'right' },
-                        { key: 'enableBadgeOverflow', relation: '==', value: false }
-                        ,],
-                    selector: '{{QUBELY}} .qubely-pricing-badge { right: {{badgeLeft}}px;}'
-                }]
+            // style: [
+            //     {
+            //         condition: [
+            //             { key: 'badgePosition', relation: '==', value: 'right' },
+            //             { key: 'enableBadgeOverflow', relation: '==', value: false }
+            //             ,],
+            //         selector: '{{QUBELY}} .qubely-pricing-badge { right: {{badgeLeft}}px;}'
+            //     }]
         },
 
         badgeOverflowTop: {
             type: 'string',
             default: '10',
-            style: [
-                {
-                    condition: [
-                        { key: 'enableBadgeOverflow', relation: '==', value: true }
-                    ],
-                    selector: '{{QUBELY}} .qubely-pricing-badge { top: {{badgeOverflowTop}}px;}'
-                }]
+            // style: [
+            //     {
+            //         condition: [
+            //             { key: 'enableBadgeOverflow', relation: '==', value: true }
+            //         ],
+            //         selector: '{{QUBELY}} .qubely-pricing-badge { top: {{badgeOverflowTop}}px;}'
+            //     }]
         },
         badgeOverflowRight: {
             type: 'string',
             default: '-25',
-            style: [
-                {
-                    condition: [
-                        { key: 'badgePosition', relation: '==', value: 'left' },
-                        { key: 'enableBadgeOverflow', relation: '==', value: true }
-                    ],
-                    selector: '{{QUBELY}} .qubely-pricing-badge { left: {{badgeOverflowRight}}px;}'
-                }]
+            // style: [
+            //     {
+            //         condition: [
+            //             { key: 'badgePosition', relation: '==', value: 'left' },
+            //             { key: 'enableBadgeOverflow', relation: '==', value: true }
+            //         ],
+            //         selector: '{{QUBELY}} .qubely-pricing-badge { left: {{badgeOverflowRight}}px;}'
+            //     }]
         },
         badgeOverflowLeft: {
             type: 'string',
             default: '-25',
-            style: [
-                {
-                    condition: [
-                        { key: 'badgePosition', relation: '==', value: 'right' },
-                        { key: 'enableBadgeOverflow', relation: '==', value: true }],
-                    selector: '{{QUBELY}} .qubely-pricing-badge { right: {{badgeOverflowLeft}}px;}'
-                }]
+            // style: [
+            //     {
+            //         condition: [
+            //             { key: 'badgePosition', relation: '==', value: 'right' },
+            //             { key: 'enableBadgeOverflow', relation: '==', value: true }],
+            //         selector: '{{QUBELY}} .qubely-pricing-badge { right: {{badgeOverflowLeft}}px;}'
+            //     }]
         },
-
 
         // Background
         bgColor: {
