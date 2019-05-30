@@ -4,7 +4,7 @@ const { withDispatch } = wp.data;
 const { PanelBody, TextControl, SelectControl, Tooltip, Button, RangeControl } = wp.components
 const { Component, Fragment } = wp.element
 const { InspectorControls, InnerBlocks, InspectorAdvancedControls } = wp.editor
-import { Dimension, Background, Select, Range, Toggle, Shape, BoxShadow, Tab, Tabs, Separator, DragDimension, Border, BorderRadius, RadioAdvanced } from '../../components/FieldRender'
+import { Background, Select, Range, Toggle, Shape, BoxShadow, Tab, Tabs, Separator, DragDimension, Border, BorderRadius } from '../../components/FieldRender'
 import { CssGenerator } from '../../components/CssGenerator'
 import { videoBackground } from '../../components/HelperFunction'
 import { ModalManager } from '../../helpers/ModalManager';
@@ -277,7 +277,7 @@ class Edit extends Component {
                         <div className="qubely-shape-divider qubely-bottom-shape" dangerouslySetInnerHTML={{ __html: qubely_admin.shapes[shapeBottom.style] }} />
                     }
                     <div className="qubely-row-overlay"></div>
-                    <div className={`${align == 'full' ? 'qubely-container' : 'qubely-container-fluid' }`}>
+                    <div className={`${align == 'full' ? 'qubely-container' : 'qubely-container-fluid'}`}>
                         <div className={`qubely-row qubely-backend-row ${(heightOptions == 'window') ? 'qubely-row-height-window' : ''}`}>
                             <InnerBlocks template={this.getTemplate(columns)} templateLock="all" allowedBlocks={['qubely/column']} />
                         </div>

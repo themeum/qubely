@@ -5,7 +5,7 @@ import '../css/typography.scss'
 import FontList from "./assets/FontList"
 const { RichText } = wp.editor
 import icons from '../../helpers/icons'
-import { Range, Select, Toggle } from '../FieldRender'
+import { Range, Toggle } from '../FieldRender'
 
 class Typography extends Component {
     constructor(props) {
@@ -134,13 +134,12 @@ class Typography extends Component {
                             <div className="qubely-field qubely-field-font-family">
                                 <label>{__('Font Family')}</label>
                                 <div className="qubely-font-family-picker" ref="qubelySelectedFontFamily"
-                                    onClick={() => { this.setState({ showFontFamiles: !showFontFamiles }) }
-                                    }>
+                                    onClick={() => { this.setState({ showFontFamiles: !showFontFamiles }) }}>
                                     <span className="qubely-font-family-search-wrapper">
                                         <RichText
                                             tagName="span"
                                             className={`qubely-font-family-search${!showFontFamiles ? ' selected-font-family' : ''}`}
-                                            placeholder={__(value.family || 'Search')}
+                                            placeholder={__(showFontFamiles ? 'Search' : value.family || 'Select')}
                                             value={filterText}
                                             keepPlaceholderOnFocus
                                             onChange={value => this.setState({ filterText: value })}
@@ -175,9 +174,7 @@ class Typography extends Component {
                             <div className="qubely-field qubely-field-font-weight">
                                 <label>{__('Weight')}</label>
                                 <div className="qubely-font-weight-picker-wrapper" ref="qubelySelectedFontWeight" onClick={() => this.setState({ showFontWeights: !showFontWeights })}>
-                                    <div className="qubely-font-weight-picker" >
-                                        {value.weight || 'Select'}
-                                    </div>
+                                    <div className="qubely-font-weight-picker" >  {value.weight || 'Select'}   </div>
                                     <span className="qubely-font-select-icon">   {showFontWeights ? icons.arrow_up : icons.arrow_down}  </span>
                                 </div>
                             </div>
@@ -199,7 +196,7 @@ class Typography extends Component {
                                     </div>
                                 </div>
                             }
-    
+
                         </div>
 
                         <Dropdown
