@@ -112,7 +112,7 @@ class Save extends Component {
         return (
             <div className={`qubely-block-${uniqueId}`} {...animationAttr(animation)}>
                 <div className={`qubely-block-pricing`}>
-                    {enableBadge && <span className={`qubely-pricing-badge qubely-badge-style-${badgeStyle}`} > {badge} </span>}
+                    {enableBadge && <span className={`qubely-pricing-badge qubely-badge-style-${badgeStyle}`}><span>{badge}</span></span>}
                     <div className="qubely-block-pricing-header">
                         {this.renderPricingTitle()}
 

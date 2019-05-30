@@ -299,27 +299,88 @@ registerBlockType('qubely/pricing', {
             // },
             // ]
         },
-        
-        badgeColor: { type: 'string', default: '#FF494A',
-        // style: [{ selector: '{{QUBELY}} .qubely-pricing-badge{background-color: {{badgeColor}};}' }]
-        },
-        badgeTextColor: { type: 'string', default: '#ffffff',
-            // style: [{ selector: '{{QUBELY}} .qubely-pricing-badge{color: {{badgeTextColor}};}' }]
-        },
-        badgeTypography: { type: 'object', default: { openTypography: 1, size: { md: 12, unit: 'px' } },
-            // style: [{ selector: '{{QUBELY}} .qubely-pricing-badge' }]
-        },
-        badgeRadius: {
+
+        badgeBg: {
             type: 'string',
-            default: '70',
-            // style: [
-            //     {
-            //         condition: [
-            //             { key: 'badgeStyle', relation: '==', value: 'circle' }
-            //         ],
-            //         selector: '{{QUBELY}} .qubely-pricing-badge{height: {{badgeRadius}}px;width: {{badgeRadius}}px;border-radius:50%}'
-            //     }]
+            default: '#50E3C2',
+            style:
+            [
+                {
+                    condition: [
+                        { key: 'enableBadge', relation: '==', value: true }
+                    ],
+                    selector: '{{QUBELY}} .qubely-block-pricing .qubely-pricing-badge {background-color: {{badgeBg}};}'
+                },
+                {
+                    condition: [
+                        { key: 'enableBadge', relation: '==', value: true },
+                        { key: 'badgeStyle', relation: '==', value: 3 }
+                    ],
+                    selector: '{{QUBELY}} .qubely-block-pricing .qubely-pricing-badge::before {border-color: {{badgeBg}} {{badgeBg}} transparent transparent;} {{QUBELY}} .qubely-block-pricing .qubely-pricing-badge::after {border-color: {{badgeBg}} transparent transparent {{badgeBg}};}'
+                },
+                {
+                    condition: [
+                        { key: 'enableBadge', relation: '==', value: true },
+                        { key: 'badgeStyle', relation: '==', value: 6 }
+                    ],
+                    selector: '{{QUBELY}} .qubely-block-pricing .qubely-pricing-badge::before {border-color: {{badgeBg}} transparent {{badgeBg}} {{badgeBg}};}'
+                }
+            ]
         },
+        
+        badgeColor: {
+            type: 'string',
+            default: '#FFFFFF',
+            style:
+            [
+                {
+                    condition:
+                    [
+                        { key: 'enableBadge', relation: '==', value: true }
+                    ],
+                    selector: '{{QUBELY}} .qubely-block-pricing .qubely-pricing-badge {color: {{badgeColor}};}'
+                }
+            ]
+        },
+
+        badgeTypography: {
+            type: 'object',
+            default: {
+                openTypography: 1,
+                size: {
+                    md: 14,
+                    unit: 'px'
+                }
+            },
+            style:
+            [
+                {
+                    condition:
+                    [
+                        { key: 'enableBadge', relation: '==', value: true }
+                    ],
+                    selector: '{{QUBELY}} .qubely-block-pricing .qubely-pricing-badge'
+                }
+            ]
+        },
+
+        badgeRadius: {
+            type: 'object',
+            default: {
+                paddingType: 'global',
+            },
+            style: [
+                {
+                    condition:
+                    [
+                        { key: 'enableBadge', relation: '==', value: true },
+                        { key: 'badgeStyle', relation: '==', value: 5 }
+                    ],
+                    selector: '{{QUBELY}} .qubely-block-pricing .qubely-pricing-badge'
+                }
+            ]
+        },
+
         badgeCircleRotation: {
             type: 'string',
             default: '-90',

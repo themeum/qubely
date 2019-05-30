@@ -213,7 +213,7 @@ class Edit extends Component {
 				//postButton text
 				enablePostButtonText,
 				//Badge
-				enableBadge, badge, badgeStyle, enableBadgeOverflow, badgeCircleRotation, badgePosition, badgeColor, badgeTextColor, badgeHoverColor, badgeTextHoverColor, badgeTypography, badgeRadius, badgeTop, badgeRight, badgeLeft, badgePadding, badgeOverflowPadding, badgeOverflowTop, badgeOverflowLeft, badgeOverflowRight,
+				enableBadge, badge, badgeStyle, enableBadgeOverflow, badgeCircleRotation, badgePosition, badgeColor, badgeBg, badgeTypography, badgeRadius, badgeTop, badgeRight, badgeLeft, badgePadding, badgeOverflowPadding, badgeOverflowTop, badgeOverflowLeft, badgeOverflowRight,
 			}
 
 		} = this.props
@@ -566,23 +566,30 @@ class Edit extends Component {
 									/>
 								}
 
-								{
-									badgeStyle == 'circle' &&
-									<Fragment>
-										<Range
-											min={30}
-											max={100}
-											value={badgeRadius}
-											label={__('Circle Radius')}
-											onChange={val => setAttributes({ badgeRadius: val })} />
-										<Range
-											min={-180}
-											max={180}
-											value={badgeCircleRotation}
-											label={__('Rotate Circle')}
-											onChange={val => setAttributes({ badgeCircleRotation: val })} />
-									</Fragment>
+								<Color
+									label={__('Background color')}
+									value={badgeBg}
+									onChange={val => setAttributes({ badgeBg: val })}
+								/>
 
+								<Color
+									label={__('Text color')}
+									value={badgeColor}
+									onChange={val => setAttributes({ badgeColor: val })}
+								/>
+
+								{ badgeStyle == 5 &&
+									<BorderRadius
+										label={__('Radius')}
+										value={badgeRadius}
+										onChange={(value) => setAttributes({ badgeRadius: value })}
+										min={0}
+										max={100}
+										unit={['px', 'em', '%']}
+										responsive
+										device={device}
+										onDeviceChange={value => this.setState({ device: value })}
+									/>
 								}
 								<Toggle
 									value={enableBadgeOverflow}
@@ -622,14 +629,6 @@ class Edit extends Component {
 									device={device}
 									onDeviceChange={value => this.setState({ device: value })}
 								/>
-								<Color
-									label={__('Background color')}
-									value={badgeColor}
-									onChange={val => setAttributes({ badgeColor: val })} />
-								<Color
-									label={__('Text Color')}
-									value={badgeTextColor}
-									onChange={val => setAttributes({ badgeTextColor: val })} />
 								
 								<Typography
 									value={badgeTypography}
@@ -656,7 +655,7 @@ class Edit extends Component {
 
 				<div className={`qubely-block-${uniqueId}`} >
 					<div className={`qubely-block-pricing`}>
-						{enableBadge && <span className={`qubely-pricing-badge qubely-badge-style-${badgeStyle}`} contenteditable="true" onBlur={(e) => setAttributes({ 'badge': e.target.innerText })} onClick={() => this.handlePanelOpenings('Badge')}> {badge} </span>}
+						{enableBadge && <span className={`qubely-pricing-badge qubely-badge-style-${badgeStyle}`} contenteditable="true" onBlur={(e) => setAttributes({ 'badge': e.target.innerText })} onClick={() => this.handlePanelOpenings('Badge')}><span>{badge}</span></span>}
 						<div className="qubely-block-pricing-header">
 							{this.renderPricingTitle()}
 
