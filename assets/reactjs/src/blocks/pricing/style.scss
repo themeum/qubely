@@ -72,15 +72,15 @@
 				width: 180px;
 			}
 			&.qubely-badge-size-regular {
-				top: -15px;
-				height: 80px;
-				padding-top: 44px;
-				width: 200px;
+				top: -17px;
+				height: 70px;
+				padding-top: 40px;
+				width: 180px;
 			}
 			&.qubely-badge-size-large {
-				top: -23px;
-				height: 100px;
-				padding-top: 66px;
+				top: -17px;
+				height: 80px;
+				padding-top: 46px;
 				width: 200px;
 			}
 		}
@@ -91,30 +91,27 @@
 			display: block;
 			&.qubely-badge-size-small {
 				top: 13px;
-				height: 30px;
-				line-height: 30px;
+				height: 27px;
+				line-height: 27px;
 				width: 160px;
 			}
 			&.qubely-badge-size-regular {
 				top: 18px;
-				height: 40px;
-				line-height: 40px;
-				width: 180px;
+				height: 34px;
+				line-height: 34px;
+				width: 170px;
 			}
 			&.qubely-badge-size-large {
-				top: 25px;
-				height: 50px;
-				line-height: 50px;
-				width: 200px;
+				top: 22px;
+				height: 42px;
+				line-height: 42px;
+				width: 180px;
 			}
 		}
 
 		&.qubely-badge-style-3 {
 			text-align: center;
 			display: block;
-			height: 40px;
-			line-height: 40px;
-			margin: 0 -20px;
 			position: relative;
 
 			>span:before,
@@ -123,9 +120,49 @@
 			&:after {
 				content: " ";
 				position: absolute;
-				bottom: -20px;
 				border-style: solid;
-				border-width: 10px;
+			}
+
+			&.qubely-badge-size-small {
+				height: 27px;
+				line-height: 27px;
+				margin-left: -10px;
+				margin-right: -10px;
+				>span:before,
+				>span:after,
+				&:before,
+				&:after {
+					bottom: -10px;
+					border-width: 5px;
+				}
+			}
+
+			&.qubely-badge-size-regular {
+				height: 37px;
+				line-height: 37px;
+				margin-left: -15px;
+				margin-right: -15px;
+				>span:before,
+				>span:after,
+				&:before,
+				&:after {
+					bottom: -15px;
+					border-width: 7.5px;
+				}
+			}
+
+			&.qubely-badge-size-large {
+				height: 46px;
+				line-height: 46px;
+				margin-left: -20px;
+				margin-right: -20px;
+				>span:before,
+				>span:after,
+				&:before,
+				&:after {
+					bottom: -20px;
+					border-width: 10px;
+				}
 			}
 
 			>span:before,
@@ -158,16 +195,43 @@
 			display: block;
 			height: 40px;
 			line-height: 40px;
+			
+			&.qubely-badge-size-small {
+				height: 27px;
+				line-height: 27px;
+			}
+
+			&.qubely-badge-size-regular {
+				height: 37px;
+				line-height: 37px;
+			}
+
+			&.qubely-badge-size-large {
+				height: 46px;
+				line-height: 46px;
+			}
 		}
 
 		&.qubely-badge-style-5 {
 			text-align: center;
 			display: inline-block;
-			height: 40px;
-			line-height: 40px;
 			padding: 0 20px;
 			position: absolute;
 			top: 20px;
+			&.qubely-badge-size-small {
+				height: 27px;
+				line-height: 27px;
+			}
+
+			&.qubely-badge-size-regular {
+				height: 37px;
+				line-height: 37px;
+			}
+
+			&.qubely-badge-size-large {
+				height: 46px;
+				line-height: 46px;
+			}
 		}
 
 		&.qubely-badge-style-6 {
@@ -175,21 +239,45 @@
 			position: absolute;
 			top: 0;
 			display: block;
-			width: 40px;
-			padding: 20px 0;
 			line-height: 1;
 
 			>span {
 				display: inline-block;
 				transform: rotate(90deg);
 			}
+
 			&::before {
 				content: " ";
 				position: absolute;
 				left: 0;
-				bottom: -20px;
 				border-style: solid;
-				border-width: 20px;
+			}
+
+			&.qubely-badge-size-small {
+				width: 27px;
+				padding: 15px 0;
+				&::before {
+					bottom: -15px;
+					border-width: 13.5px;
+				}
+			}
+
+			&.qubely-badge-size-regular {
+				width: 37px;
+				padding: 18px 0;
+				&::before {
+					bottom: -18px;
+					border-width: 18.5px;
+				}
+			}
+
+			&.qubely-badge-size-large {
+				width: 46px;
+				padding: 23px 0;
+				&::before {
+					bottom: -23px;
+					border-width: 23px;
+				}
 			}
 		}
 	}

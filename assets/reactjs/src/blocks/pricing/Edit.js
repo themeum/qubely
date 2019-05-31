@@ -213,7 +213,7 @@ class Edit extends Component {
 				//postButton text
 				enablePostButtonText,
 				//Badge
-				enableBadge, badge, badgeStyle, enableBadgeOverflow, badgeSize, badgePosition, badgeColor, badgeBg, badgeTypography, badgeRadius, badgeTop, badgeRight, badgeLeft, badgePadding, badgeOverflowPadding, badgeOverflowTop, badgeOverflowLeft, badgeOverflowRight,
+				enableBadge, badge, badgeStyle, badgeSize, badgePosition, badgeSpacing, badgeColor, badgeBg, badgeTypography, badgeRadius,
 			}
 
 		} = this.props
@@ -602,44 +602,22 @@ class Edit extends Component {
 										onDeviceChange={value => this.setState({ device: value })}
 									/>
 								}
-								<Toggle
-									value={enableBadgeOverflow}
-									label={__('Overflow')}
-									onChange={val => setAttributes({ enableBadgeOverflow: val })} />
-								
 
-								<Range
-									min={-200}
-									max={200}
-									value={enableBadgeOverflow ? badgeOverflowTop : badgeTop}
-									label={__('Position Top')}
-									onChange={val => setAttributes(enableBadgeOverflow ? { badgeOverflowTop: val } : { badgeTop: val })} />
-								{badgePosition == 'left' ?
+								{ (badgeStyle == 3 || badgeStyle == 4 || badgeStyle == 5 || badgeStyle == 6) &&
 									<Range
-										min={-200}
-										max={200}
-										value={enableBadgeOverflow ? badgeOverflowRight : badgeRight}
-										label={__('Right')}
-										onChange={val => setAttributes(enableBadgeOverflow ? { badgeOverflowRight: val } : { badgeRight: val })} />
-									:
-									<Range
-										min={-200}
-										max={200}
-										value={enableBadgeOverflow ? badgeOverflowLeft : badgeLeft}
-										label={__('Left')}
-										onChange={val => setAttributes(enableBadgeOverflow ? { badgeOverflowLeft: val } : { badgeLeft: val })} />
+										label={__('Spacing')}
+										value={badgeSpacing}
+										onChange={(value) => setAttributes({ badgeSpacing: value })}
+										min={0}
+										max={100}
+										unit={['px', 'em', '%']}
+										responsive
+										device={device}
+										onDeviceChange={value => this.setState({ device: value })}
+									/>
 								}
-								<Padding
-									label={__('Padding')}
-									value={enableBadgeOverflow ? badgeOverflowPadding : badgePadding}
-									onChange={val => setAttributes(enableBadgeOverflow ? { badgeOverflowPadding: val } : { badgePadding: val })}
-									unit={['px', 'em', '%']}
-									max={100}
-									min={0}
-									responsive
-									device={device}
-									onDeviceChange={value => this.setState({ device: value })}
-								/>
+
+								<Separator />
 								
 								<Typography
 									value={badgeTypography}

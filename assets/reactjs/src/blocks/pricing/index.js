@@ -294,16 +294,23 @@ registerBlockType('qubely/pricing', {
             type: 'string',
             default: 'regular'
         },
-        enableBadgeOverflow: {
-            type: 'boolean',
-            default: true,
-            // style: [{
-            //     condition: [{ key: 'enableBadgeOverflow', relation: '==', value: true }],
-            //     selector: '{{QUBELY}} .qubely-block-pricing{  overflow:hidden;}'
-            // },
-            // ]
+        badgeSpacing: {
+            type: 'object',
+            default: {
+                md: 20,
+                unit: 'px'
+            },
+            style:
+            [
+                {
+                    condition: [
+                        { key: 'enableBadge', relation: '==', value: true },
+                        { key: 'badgeStyle', relation: '==', value: 3 },
+                    ],
+                    selector: '{{QUBELY}} .qubely-block-pricing .qubely-pricing-badge {margin-top: {{badgeSpacing}};}'
+                },
+            ]
         },
-
         badgeBg: {
             type: 'string',
             default: '#50E3C2',
@@ -383,119 +390,6 @@ registerBlockType('qubely/pricing', {
                     selector: '{{QUBELY}} .qubely-block-pricing .qubely-pricing-badge'
                 }
             ]
-        },
-
-        badgeCircleRotation: {
-            type: 'string',
-            default: '-90',
-            // style: [
-            //     {
-            //         condition: [
-            //             { key: 'badgeStyle', relation: '==', value: 'circle' }
-            //         ],
-            //         selector: '{{QUBELY}} .qubely-pricing-badge{transform: rotate({{badgeCircleRotation}}deg);}'
-            //     }]
-        },
-        badgePadding: {
-            type: 'object',
-            default: {
-                openPadding: 1,
-                paddingType: 'custom',
-                global: { md: 10 },
-                custom: { md: '3 15 3 15' },
-                unit: 'px'
-            },
-            // style: [{
-            //     condition: [
-            //         { key: 'enableBadgeOverflow', relation: '==', value: false }
-            //     ],
-            //     selector: '{{QUBELY}} .qubely-pricing-badge'
-            // }],
-        },
-        badgeOverflowPadding: {
-            type: 'object',
-            default: {
-                openPadding: 1,
-                paddingType: 'custom',
-                global: { md: 10 },
-                custom: { md: '5 35 5 35' },
-                unit: 'px'
-            },
-            // style: [{
-            //     condition: [
-            //         { key: 'enableBadgeOverflow', relation: '==', value: true }
-            //     ],
-            //     selector: '{{QUBELY}} .qubely-pricing-badge'
-            // }],
-        },
-
-        badgeTop: {
-            type: 'string',
-            default: '20',
-            // style: [{
-            //     condition: [
-            //         { key: 'enableBadgeOverflow', relation: '==', value: false }
-            //     ],
-            //     selector: '{{QUBELY}} .qubely-pricing-badge { top: {{badgeTop}}px;}'
-            // }]
-        },
-        badgeRight: {
-            type: 'string',
-            default: '-5',
-            // style: [
-            //     {
-            //         condition: [
-            //             { key: 'badgePosition', relation: '==', value: 'left' },
-            //             { key: 'enableBadgeOverflow', relation: '==', value: false }],
-            //         selector: '{{QUBELY}} .qubely-pricing-badge { left: {{badgeRight}}px;}'
-            //     }]
-        },
-        badgeLeft: {
-            type: 'string',
-            default: '-5',
-            // style: [
-            //     {
-            //         condition: [
-            //             { key: 'badgePosition', relation: '==', value: 'right' },
-            //             { key: 'enableBadgeOverflow', relation: '==', value: false }
-            //             ,],
-            //         selector: '{{QUBELY}} .qubely-pricing-badge { right: {{badgeLeft}}px;}'
-            //     }]
-        },
-
-        badgeOverflowTop: {
-            type: 'string',
-            default: '10',
-            // style: [
-            //     {
-            //         condition: [
-            //             { key: 'enableBadgeOverflow', relation: '==', value: true }
-            //         ],
-            //         selector: '{{QUBELY}} .qubely-pricing-badge { top: {{badgeOverflowTop}}px;}'
-            //     }]
-        },
-        badgeOverflowRight: {
-            type: 'string',
-            default: '-25',
-            // style: [
-            //     {
-            //         condition: [
-            //             { key: 'badgePosition', relation: '==', value: 'left' },
-            //             { key: 'enableBadgeOverflow', relation: '==', value: true }
-            //         ],
-            //         selector: '{{QUBELY}} .qubely-pricing-badge { left: {{badgeOverflowRight}}px;}'
-            //     }]
-        },
-        badgeOverflowLeft: {
-            type: 'string',
-            default: '-25',
-            // style: [
-            //     {
-            //         condition: [
-            //             { key: 'badgePosition', relation: '==', value: 'right' },
-            //             { key: 'enableBadgeOverflow', relation: '==', value: true }],
-            //         selector: '{{QUBELY}} .qubely-pricing-badge { right: {{badgeOverflowLeft}}px;}'
-            //     }]
         },
 
         // Background
