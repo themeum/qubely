@@ -213,7 +213,7 @@ class Edit extends Component {
 				//postButton text
 				enablePostButtonText,
 				//Badge
-				enableBadge, badge, badgeStyle, enableBadgeOverflow, badgeCircleRotation, badgePosition, badgeColor, badgeBg, badgeTypography, badgeRadius, badgeTop, badgeRight, badgeLeft, badgePadding, badgeOverflowPadding, badgeOverflowTop, badgeOverflowLeft, badgeOverflowRight,
+				enableBadge, badge, badgeStyle, enableBadgeOverflow, badgeSize, badgePosition, badgeColor, badgeBg, badgeTypography, badgeRadius, badgeTop, badgeRight, badgeLeft, badgePadding, badgeOverflowPadding, badgeOverflowTop, badgeOverflowLeft, badgeOverflowRight,
 			}
 
 		} = this.props
@@ -554,6 +554,17 @@ class Edit extends Component {
 									]}
 								/>
 
+								<RadioAdvanced
+									label={__('Size')}
+									options={[
+										{ label: __('Small'), value: 'small', title: __('Small') },
+										{ label: __('Regular'), value: 'regular', title: __('Regular') },
+										{ label: __('Large'), value: 'large', title: __('Large') },
+									]}
+									value={badgeSize}
+									onChange={val => setAttributes({ badgeSize: val })}
+								/>
+
 								{ (badgeStyle == 1 || badgeStyle == 2 || badgeStyle == 5 || badgeStyle == 6) &&
 									<RadioAdvanced
 										label={__('Position')}
@@ -655,7 +666,7 @@ class Edit extends Component {
 
 				<div className={`qubely-block-${uniqueId}`} >
 					<div className={`qubely-block-pricing`}>
-						{enableBadge && <span className={`qubely-pricing-badge qubely-badge-style-${badgeStyle}`} contenteditable="true" onBlur={(e) => setAttributes({ 'badge': e.target.innerText })} onClick={() => this.handlePanelOpenings('Badge')}><span>{badge}</span></span>}
+						{enableBadge && <span className={`qubely-pricing-badge qubely-badge-style-${badgeStyle} qubely-badge-size-${badgeSize}`} contenteditable="true" onBlur={(e) => setAttributes({ 'badge': e.target.innerText })} onClick={() => this.handlePanelOpenings('Badge')}><span>{badge}</span></span>}
 						<div className="qubely-block-pricing-header">
 							{this.renderPricingTitle()}
 
