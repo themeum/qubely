@@ -2,8 +2,8 @@ const { __ } = wp.i18n
 import '../css/shape.scss'
 import icons from '../../helpers/icons'
 const { Component, Fragment } = wp.element
-const { CheckboxControl } = wp.components
-import { Range, Color, QubelyDropdown } from '../FieldRender'
+const { CheckboxControl, Tooltip } = wp.components
+import { Range, Color, Select, QubelyDropdown } from '../FieldRender'
 class Shape extends Component {
     constructor(props) {
         super(props)
@@ -23,9 +23,15 @@ class Shape extends Component {
     renderShapeOptions = () => {
         const { value } = this.props
         let shapes = ['clouds-flat', 'clouds-opacity', 'paper-torn', 'pointy-wave', 'rocky-mountain', 'single-wave', 'slope-opacity', 'slope', 'waves3-opacity', 'drip', 'turning-slope', 'hill-wave', 'hill', 'line-wave', 'swirl', 'wavy-opacity', 'zigzag-shark']
+
+        if (value.style) {
+            shapes = shapes.filter(item => item.toLowerCase().search(value.style.toLowerCase()) == -1)
+            shapes = [value.style, ...shapes]
+        }
+
         return (
             <ul className="qubely-shape-picker-options">
-                {shapes.map(item => <li className={`qubely-shape-picker-option`} onClick={() => this.setSettings('style', item)} dangerouslySetInnerHTML={{ __html: qubely_admin.shapes[item] }} style={{ fill: value.color }} />)}
+                {shapes.map(item => <li className={`qubely-shape-picker-option`} onClick={() => this.setSettings('style', item)} dangerouslySetInnerHTML={{ __html: qubely_admin.shapes[item] }} style={value.style == item ? { fill: value.color } : {}} />)}
             </ul>
         )
     }
@@ -35,15 +41,15 @@ class Shape extends Component {
         return (
             <div className="qubely-field-shape qubely-field">
                 <div className="qubely-field-child">
-                    <div className="qubely-field ">
+                    <div className="qubely-field qubely-shape-picker-wrapper">
                         <QubelyDropdown
-                            dropDownClassName="qubely-field-child qubely-shape-picker"
+                            dropDownClassName={`qubely-field-child qubely-shape-picker ${value.style ? 'has-value' : ''}`}
                             contentClassName="qubely-shape-picker-content"
                             position="bottom center"
                         >
                             {
                                 value.style ?
-                                    <div className="qubely-field-shape-value" dangerouslySetInnerHTML={{ __html: qubely_admin.shapes[value.style] }} style={{ fill: value.color }} />
+                                    <div className="qubely-field-shape-value" dangerouslySetInnerHTML={{ __html: qubely_admin.shapes[value.style] }} />
                                     :
                                     <div className="qubely-field-shape-placeholder">
                                         <span >Select Shape</span>
@@ -52,6 +58,15 @@ class Shape extends Component {
                             }
                             {this.renderShapeOptions()}
                         </QubelyDropdown>
+                        {
+                            value.style &&
+                            <Tooltip text={__('Clear')}>
+                                <div className="qubely-ml-10">
+                                    <span className="qubely-shape-clear" onClick={() => this.setSettings('style', '')} role="button"><i className="fas fa-undo"></i></span>
+                                </div>
+                            </Tooltip>
+                        }
+
                     </div>
 
 
