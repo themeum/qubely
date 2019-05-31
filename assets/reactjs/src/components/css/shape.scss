@@ -1,6 +1,21 @@
+.qubely-shape-picker-wrapper{
+    display: flex;
+    .qubely-shape-picker{
+        width: 100%;
+    }
+    .has-value{
+        width: 90%;
+    }
+}
+
+
 .qubely-shape-picker-options{
     .qubely-shape-picker-option{
-        padding: 10px 0px 10px 0px;
+        padding: 10px 10px 10px 10px;
+    }
+    .qubely-shape-picker-option:hover{
+        background-color: #e8eaeb;
+        border-radius: 4px;
     }
 }
 .qubely-field-shape-placeholder{
