@@ -213,7 +213,7 @@ class Edit extends Component {
 				//postButton text
 				enablePostButtonText,
 				//Badge
-				enableBadge, badge, badgeStyle, badgeSize, badgePosition, badgeSpacing, badgeColor, badgeBg, badgeTypography, badgeRadius,
+				enableBadge, badge, badgeStyle, badgeSize, badgePosition, badgeSpacing, badgeSpacingTop, badgeColor, badgeBg, badgeTypography, badgeRadius,
 			}
 
 		} = this.props
@@ -603,11 +603,25 @@ class Edit extends Component {
 									/>
 								}
 
-								{ (badgeStyle == 3 || badgeStyle == 4 || badgeStyle == 5 || badgeStyle == 6) &&
+								{ (badgeStyle == 3 || badgeStyle == 5 || badgeStyle == 6) &&
 									<Range
-										label={__('Spacing')}
+										label={ badgeStyle == 5 ? __('Side Spacing') : __('Spacing') }
 										value={badgeSpacing}
 										onChange={(value) => setAttributes({ badgeSpacing: value })}
+										min={0}
+										max={100}
+										unit={['px', 'em', '%']}
+										responsive
+										device={device}
+										onDeviceChange={value => this.setState({ device: value })}
+									/>
+								}
+
+								{ badgeStyle == 5 &&
+									<Range
+										label={ __('Top Spacing') }
+										value={badgeSpacingTop}
+										onChange={(value) => setAttributes({ badgeSpacingTop: value })}
 										min={0}
 										max={100}
 										unit={['px', 'em', '%']}
@@ -645,48 +659,49 @@ class Edit extends Component {
 				<div className={`qubely-block-${uniqueId}`} >
 					<div className={`qubely-block-pricing`}>
 						{enableBadge && <span className={`qubely-pricing-badge qubely-badge-style-${badgeStyle} qubely-badge-size-${badgeSize}`} contenteditable="true" onBlur={(e) => setAttributes({ 'badge': e.target.innerText })} onClick={() => this.handlePanelOpenings('Badge')}><span>{badge}</span></span>}
-						<div className="qubely-block-pricing-header">
-							{this.renderPricingTitle()}
+						<div className="qubely-block-pricing-content">
+							<div className="qubely-block-pricing-header">
+								{this.renderPricingTitle()}
 
-							{(layout == 3 || layout == 4) &&
-								this.renderPricingSubTitle()
+								{(layout == 3 || layout == 4) &&
+									this.renderPricingSubTitle()
+								}
+
+								{this.renderPricingPrice()}
+								{enableDuration && durationPosition == 'bottom' && this.renderDuration()}
+
+								{(layout == 2) &&
+									this.renderPricingSubTitle()
+								}
+							</div>
+
+							{(layout == 4) &&
+								this.renderPricingButton()
 							}
 
-							{this.renderPricingPrice()}
-							{enableDuration && durationPosition == 'bottom' && this.renderDuration()}
+							{enableFeatures &&
+								<div ref={this.contextRef} className={`qubely-pricing-features`} onClick={() => this.handlePanelOpenings('Features')}>
+									<QubelyIconListEdit
+										parentBlock={`qubely-block-${uniqueId}`}
+										disableButton={listItems.length > 0 ? true : false}
+										buttonText={__('Add New Feature')}
+										enableListIcons={enableListIcons}
+										listItems={listItems}
+										iconColor={iconColor}
+										iconPosition={iconPosition}
+										listWrapperClassName={`qubely-list icon-position-${iconPosition}`}
+										newListItemPlaceHolder={__('Add New Feature')}
+										onListItemModification={newValues => setAttributes({ listItems: newValues })}
+										onChange={(key, value) => setAttributes({ [key]: value })}
+										onIconColorChange={(color, currentListItemIndex) => setAttributes({ iconColor: color })}
+									/>
+								</div>
+							}
 
-							{(layout == 2) &&
-								this.renderPricingSubTitle()
+							{(layout == 1 || layout == 2 || layout == 3 || layout == 5) &&
+								this.renderPricingButton()
 							}
 						</div>
-
-						{(layout == 4) &&
-							this.renderPricingButton()
-						}
-
-						{
-							enableFeatures &&
-							<div ref={this.contextRef} className={`qubely-pricing-features`} onClick={() => this.handlePanelOpenings('Features')}>
-								<QubelyIconListEdit
-									parentBlock={`qubely-block-${uniqueId}`}
-									disableButton={listItems.length > 0 ? true : false}
-									buttonText={__('Add New Feature')}
-									enableListIcons={enableListIcons}
-									listItems={listItems}
-									iconColor={iconColor}
-									iconPosition={iconPosition}
-									listWrapperClassName={`qubely-list icon-position-${iconPosition}`}
-									newListItemPlaceHolder={__('Add New Feature')}
-									onListItemModification={newValues => setAttributes({ listItems: newValues })}
-									onChange={(key, value) => setAttributes({ [key]: value })}
-									onIconColorChange={(color, currentListItemIndex) => setAttributes({ iconColor: color })}
-								/>
-							</div>
-						}
-
-						{(layout == 1 || layout == 2 || layout == 3 || layout == 5) &&
-							this.renderPricingButton()
-						}
 					</div>
 				</div>
 			</Fragment>
