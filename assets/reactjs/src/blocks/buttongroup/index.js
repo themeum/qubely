@@ -24,7 +24,7 @@ registerBlockType('qubely/buttongroup', {
             default: {
                 openPadding: 1,
                 paddingType: 'global',
-                global: { md: 18 },
+                global: { md: 0 },
                 unit: 'px'
             },
             style: [{ selector: '{{QUBELY}} .qubely-block-button-group' }]

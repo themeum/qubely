@@ -71,7 +71,7 @@ class Edit extends Component {
                     <div className={`qubely-block-button-group`}>
                         <InnerBlocks
                             tagName="div"
-                            className=""
+                            // className=""
                             template={iterator.map(buttonIndex => ['qubely/button',
                                 {
                                     buttonGroup: true,
