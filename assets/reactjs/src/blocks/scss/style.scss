@@ -94,3 +94,11 @@
 [data-qubelyanimation]{
     opacity: 0;
 }
+.components-modal__frame.edit-post-manage-blocks-modal{
+    .block-editor-block-icon img {
+        min-width: 20px;
+        min-height: 20px;
+        max-width: 24px;
+        max-height: 24px;
+    }
+}
