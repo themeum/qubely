@@ -69,12 +69,19 @@ registerBlockType('qubely/advancedlist', {
 
         useNumberBg: { type: 'boolean', default: true },
         numberFontSize: { type: 'string', default: '14', style: [{ condition: [{ key: 'listType', relation: '==', value: 'ordered' }], selector: '{{QUBELY}} .qubely-list li::before, {{QUBELY}} .qubely-list li::after { font-size: {{numberFontSize}}px;}' }] },
-        numberBgSize: { type: 'string', default: '22', style: [{ condition: [{ key: 'listType', relation: '==', value: 'ordered' }, { key: 'useNumberBg', relation: '==', value: true }], selector: '{{QUBELY}} .qubely-list li::before, {{QUBELY}} .qubely-list li::after { width: {{numberBgSize}}px; height: {{numberBgSize}}px; line-height: {{numberBgSize}}px;}' }] },
+        numberBgSize: { type: 'string', default: '5', style: [{ condition: [{ key: 'listType', relation: '==', value: 'ordered' }, { key: 'useNumberBg', relation: '==', value: true }], selector: '{{QUBELY}} .qubely-list li::before, {{QUBELY}} .qubely-list li::after { padding: {{numberBgSize}}px; }' }] },
         numberBg: { type: 'string', default: '#c2e5ff', style: [{ condition: [{ key: 'listType', relation: '==', value: 'ordered' }, { key: 'useNumberBg', relation: '==', value: true }], selector: '{{QUBELY}} .qubely-list li::before, {{QUBELY}} .qubely-list li::after { background-color: {{numberBg}};}' }] },
         numberBgHover: { type: 'string', default: '', style: [{ condition: [{ key: 'listType', relation: '==', value: 'ordered' }, { key: 'useNumberBg', relation: '==', value: true }], selector: '{{QUBELY}} .qubely-list li:hover::before, {{QUBELY}} .qubely-list li:hover::after { background-color: {{numberBgHover}};}' }] },
-        numberCorner: { type: 'string', default: '50px', style: [{ condition: [{ key: 'listType', relation: '==', value: 'ordered' }, { key: 'useNumberBg', relation: '==', value: true }], selector: '{{QUBELY}} .qubely-list li::before, {{QUBELY}} .qubely-list li::after { border-radius: {{numberCorner}}px;}' }] },
+        numberCorner: { type: 'string', default: '50', style: [{ condition: [{ key: 'listType', relation: '==', value: 'ordered' }, { key: 'useNumberBg', relation: '==', value: true }], selector: '{{QUBELY}} .qubely-list li::before, {{QUBELY}} .qubely-list li::after { border-radius: {{numberCorner}}%;}' }] },
 
-        typography: { type: 'object', default: { openTypography: 1, size: { md: 16, unit: 'px' } }, style: [{ selector: '{{QUBELY}} .qubely-list' }] },
+        typography: {
+            type: 'object',
+            default: { openTypography: 1, size: { md: 16, unit: 'px' } },
+            style: [
+                { selector: '{{QUBELY}} .qubely-list' },
+                { condition: [{ key: 'listType', relation: '==', value: 'ordered' }], selector: '{{QUBELY}} .qubely-list li::before, {{QUBELY}} .qubely-list li::after ' }
+            ]
+        },
         color: { type: 'string', default: '#333', style: [{ selector: '{{QUBELY}} .qubely-list li {color: {{color}};}' }] },
         colorHover: { type: 'string', default: '', style: [{ selector: '{{QUBELY}} .qubely-list li:hover {color: {{colorHover}};}' }] },
         spacing: { type: 'object', default: { md: 5, unit: 'px' }, style: [{ selector: '{{QUBELY}} .qubely-list li:not(:last-child) {margin-bottom: {{spacing}};}' }] },
