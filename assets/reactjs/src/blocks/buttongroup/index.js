@@ -29,6 +29,7 @@ registerBlockType('qubely/buttongroup', {
             },
             style: [{ selector: '{{QUBELY}} .qubely-block-button-group' }]
         },
+        showGlobalSettings: { type: 'boolean', default: true },  // Global Settings
     },
     edit: Edit,
     save: Save,

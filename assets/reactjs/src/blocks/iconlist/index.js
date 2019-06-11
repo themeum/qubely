@@ -149,7 +149,7 @@ registerBlockType('qubely/iconlist', {
             style: [{ selector: '{{QUBELY}} .qubely-list .qubely-list-li' }]
         },
         borderColorHover: { type: 'string', default: '', style: [{ selector: '{{QUBELY}} .qubely-list .qubely-list-li:hover {border-bottom-color: {{borderColorHover}};}' }] },
-
+        showGlobalSettings: { type: 'boolean', default: true },  // Global Settings
     },
     edit: Edit,
     save: Save,

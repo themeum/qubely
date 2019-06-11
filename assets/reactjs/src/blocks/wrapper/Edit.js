@@ -6,7 +6,6 @@ import { Color, ColorAdvanced, Padding, BoxShadow, Tabs, Tab, Border, BorderRadi
 import { CssGenerator } from '../../components/CssGenerator'
 import InlineToolbar from '../../components/fields/inline/InlineToolbar'
 import '../../components/GlobalSettings'
-import icons from '../../helpers/icons';
 
 class Edit extends Component {
 	constructor() {

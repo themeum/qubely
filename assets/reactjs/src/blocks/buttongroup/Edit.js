@@ -7,6 +7,7 @@ const { InnerBlocks, InspectorControls } = wp.editor
 
 import { Range, Padding } from "../../components/FieldRender"
 import { CssGenerator } from '../../components/CssGenerator'
+import '../../components/GlobalSettings';
 
 class Edit extends Component {
     constructor(props) {
