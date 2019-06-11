@@ -5,7 +5,7 @@ const { compose } = wp.compose
 const { withSelect, withDispatch } = wp.data
 const { InnerBlocks, InspectorControls } = wp.editor
 
-import { Range, Padding } from "../../components/FieldRender"
+import { Range, Padding, Alignment } from "../../components/FieldRender"
 import { CssGenerator } from '../../components/CssGenerator'
 import '../../components/GlobalSettings';
 
@@ -27,7 +27,7 @@ class Edit extends Component {
     }
 
     render() {
-        const { attributes: { uniqueId, buttons, spacing, padding }, setAttributes, block, clientId, updateBlockAttributes } = this.props
+        const { attributes: { uniqueId, alignment, buttons, spacing, padding }, setAttributes, block, clientId, updateBlockAttributes } = this.props
         if (uniqueId) { CssGenerator(this.props.attributes, 'buttongroup', uniqueId); }
         const { device } = this.state
         let index = 0
@@ -55,6 +55,7 @@ class Edit extends Component {
                             responsive
                             device={device}
                             onDeviceChange={value => this.setState({ device: value })} />
+                        <Alignment label={__('Alignment')} value={alignment} alignmentType="content" onChange={val => setAttributes({ alignment: val })} disableJustify />
                         <Padding
                             label={__('Padding')}
                             value={padding}

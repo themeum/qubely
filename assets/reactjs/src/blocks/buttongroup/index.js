@@ -8,12 +8,25 @@ registerBlockType('qubely/buttongroup', {
     title: __('Button Group'),
     description: 'Bunch together a group of useful buttons with Qubely Button Group.',
     category: 'qubely',
-    icon: <img src={qubely_admin.plugin + 'assets/img/blocks/block-button-group.svg'} alt={__('Button Block')} />,
+    icon: <img src={qubely_admin.plugin + 'assets/img/blocks/block-button-group.svg'} alt={__('Button Group Block')} />,
     supports: { align: false },
     keywords: [__('button'), __('link'), __('button group')],
     attributes: {
         uniqueId: { type: 'string', default: '' },
         buttons: { type: 'number', default: 2 },
+        alignment: {
+            type: 'string', default: 'left',
+            style: [
+                {
+                    condition: [{ key: 'alignment', relation: '==', value: 'center' }],
+                    selector: '{{QUBELY}} .qubely-block-button-group {justify-content: center;}'
+                },
+                {
+                    condition: [{ key: 'alignment', relation: '==', value: 'right' }],
+                    selector: '{{QUBELY}} .qubely-block-button-group {justify-content: flex-end;}'
+                }
+            ]
+        },
         spacing: {
             type: 'object',
             default: { unit: "px", md: "5" },
@@ -23,7 +36,7 @@ registerBlockType('qubely/buttongroup', {
             type: 'object',
             default: {
                 openPadding: 1,
-                paddingType: 'global',
+                paddingType: 'custom',
                 global: { md: 0 },
                 unit: 'px'
             },
