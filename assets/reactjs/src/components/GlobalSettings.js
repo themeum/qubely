@@ -13,7 +13,7 @@ const addAttribute = (settings) => {
     if (settings.attributes && settings.attributes.showGlobalSettings) {
         settings.attributes = Object.assign({}, settings.attributes, {
             animation: { type: 'object', default: {} },
-            globalZindex: { type: 'number', default: 0, style: [{ selector: '{{QUBELY}} {z-index:{{globalZindex}};}' }] },
+            globalZindex: { type: 'string', default: '0', style: [{ selector: '{{QUBELY}} {z-index:{{globalZindex}};}' }] },
             hideTablet: { type: 'boolean', default: false, style: [{ selector: '{{QUBELY}}{display:none;}' }] },
             hideMobile: { type: 'boolean', default: false, style: [{ selector: '{{QUBELY}}{display:none;}' }] },
             globalCss: { type: 'string', default: '', style: [{ selector: '' }] },
