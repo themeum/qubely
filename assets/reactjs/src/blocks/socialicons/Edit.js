@@ -2,7 +2,7 @@ const { __ } = wp.i18n;
 const { InspectorControls, BlockControls } = wp.editor
 const { Component, Fragment } = wp.element;
 const { PanelBody, TextControl, Toolbar, Button } = wp.components;
-import { Styles, IconSelector, Toggle, Separator, RadioAdvanced, Range, Wrapper, Alignment, Typography, Color, Tabs, Tab, Border, BorderRadius } from '../../components/FieldRender'
+import { Styles, IconSelector, Toggle, Separator, RadioAdvanced, Range, Wrapper, Alignment, Typography, Color, Tabs, Tab, Border, Padding, BorderRadius } from '../../components/FieldRender'
 import { CssGenerator } from '../../components/CssGenerator';
 import InlineToolbar from '../../components/fields/inline/InlineToolbar'
 import '../../components/GlobalSettings';
@@ -14,6 +14,7 @@ class Edit extends Component {
         super(props)
         this.state = {
             spacer: true,
+            device: 'md',
             selectedItem: -1
         }
     }
@@ -55,9 +56,9 @@ class Edit extends Component {
     }
 
     render() {
-        const { selectedItem } = this.state;
+        const { selectedItem, device } = this.state;
         const { attributes, setAttributes, isSelected } = this.props;
-        const { uniqueId, alignment, socialIcons, iconLabel, layout, useDefaultStyle, iconSize, iconSizeCustom, iconSpacing, iconBorderRadius, labelSpacing, labelTypography, iconColor, iconColorHover, IconBackground, IconBackgroundHover, iconPaddingX, iconPaddingY, iconBorder, iconBorderColor, iconBorderColorHover } = attributes;
+        const { uniqueId, alignment, socialIcons, iconLabel, layout, useDefaultStyle, iconSize, iconSizeCustom, iconSpacing, iconBorderRadius, labelSpacing, labelTypography, iconColor, iconColorHover, IconBackground, IconBackgroundHover, iconPaddingX, iconPaddingY, iconPadding, iconBorder, iconBorderColor, iconBorderColorHover } = attributes;
         if (uniqueId) { CssGenerator(this.props.attributes, 'socialicons', uniqueId); };
 
         return (
@@ -73,7 +74,7 @@ class Edit extends Component {
                         />
                         <Toggle label={__('Default Styles')} value={useDefaultStyle} onChange={val => setAttributes({ useDefaultStyle: val })} />
                         <Toggle label={__('Show Label')} value={iconLabel} onChange={val => setAttributes({ iconLabel: val })} />
-                        <Alignment label={__('Alignment')} value={alignment} alignmentType="content" onChange={val => setAttributes({ alignment: val })} disableJustify responsive />
+                        <Alignment label={__('Alignment')} value={alignment} alignmentType="content" onChange={val => setAttributes({ alignment: val })} disableJustify responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
                     </PanelBody>
 
                     {!useDefaultStyle &&
@@ -84,7 +85,7 @@ class Edit extends Component {
                                     {layout == 'fill' &&
                                         <Fragment>
                                             <Color label={__('Background Color')} value={IconBackground} onChange={(value) => setAttributes({ IconBackground: value })} />
-                                            <Border label={__('Border')} value={iconBorder} onChange={(value) => setAttributes({ iconBorder: value })} max={10} min={0} unit={['px', 'em', '%']} responsive />
+                                            <Border label={__('Border')} value={iconBorder} onChange={(value) => setAttributes({ iconBorder: value })} max={10} min={0} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
                                         </Fragment>
                                     }
                                 </Tab>
@@ -121,35 +122,33 @@ class Edit extends Component {
                                 unit={['px', 'em', '%']}
                                 max={100}
                                 min={10}
-                                responsive />
+                                responsive
+                                device={device}
+                                onDeviceChange={value => this.setState({ device: value })} />
                         }
                         {layout == 'fill' &&
                             <Fragment>
-                                <Range
-                                    label={<span className="dashicons dashicons-sort" title="X Padding" />}
-                                    value={iconPaddingY}
-                                    onChange={(value) => setAttributes({ iconPaddingY: value })}
+                                <Padding
+                                    label={__('Padding')}
+                                    value={iconPadding}
+                                    onChange={(value) => setAttributes({ iconPadding: value })}
                                     unit={['px', 'em', '%']}
                                     max={150}
-                                    min={10}
-                                    responsive />
-                                <Range
-                                    label={<span className="dashicons dashicons-leftright" title="Y Padding" />}
-                                    value={iconPaddingX}
-                                    onChange={(value) => setAttributes({ iconPaddingX: value })}
-                                    unit={['px', 'em', '%']}
-                                    max={150}
-                                    min={10}
-                                    responsive />
+                                    min={0}
+                                    responsive
+                                    device={device}
+                                    onDeviceChange={value => this.setState({ device: value })} />
                                 <Separator />
-                                
+
                                 <BorderRadius
                                     label={__('Radius')}
                                     value={iconBorderRadius}
                                     onChange={(value) => setAttributes({ iconBorderRadius: value })}
                                     min={0}
                                     max={100} unit={['px', 'em', '%']}
-                                    responsive />
+                                    responsive
+                                    device={device}
+                                    onDeviceChange={value => this.setState({ device: value })} />
                             </Fragment>
                         }
                         <Separator />
@@ -160,7 +159,9 @@ class Edit extends Component {
                             unit={['px', 'em', '%']}
                             max={50}
                             min={0}
-                            responsive />
+                            responsive
+                            device={device}
+                            onDeviceChange={value => this.setState({ device: value })} />
 
                     </PanelBody>
 
@@ -173,12 +174,16 @@ class Edit extends Component {
                                 unit={['px', 'em', '%']}
                                 max={30}
                                 min={0}
-                                responsive />
+                                responsive
+                                device={device}
+                                onDeviceChange={value => this.setState({ device: value })} />
                             <Typography
                                 label={__('Typography')}
                                 value={labelTypography}
                                 onChange={(value) => setAttributes({ labelTypography: value })}
-                                disableLineHeight />
+                                disableLineHeight
+                                device={device}
+                                onDeviceChange={value => this.setState({ device: value })} />
                         </PanelBody>
                     }
 
