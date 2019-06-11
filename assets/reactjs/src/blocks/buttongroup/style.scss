@@ -2,10 +2,9 @@
     display: flex;
     flex-wrap: wrap;
     .editor-inner-blocks{
-        flex-grow: 1;
         .editor-block-list__layout{
             display: block;
-            width: 100%;
+            width: fit-content;
             .qubely-group-button{
                 display: inline-block;
                 width: auto;
