@@ -35,11 +35,11 @@ class QubelyButtonSave extends Component {
             <div className="qubely-block-btn-wrapper">
                 <div className={`qubely-block-btn`}>
                     {buttonTag == 'a' ?
-                        <a className={`qubely-block-btn-anchor is-${buttonSize}`} {...buttonId ? 'id="' + buttonId + '"' : '' } href={buttonUrl.url ? buttonUrl.url : '#'} {...(buttonUrl.target && { target: '_blank' })} {...(buttonUrl.nofollow && { rel: 'nofollow noopener noreferrer' })} >
+                        <a className={`qubely-block-btn-anchor is-${buttonSize}`} {...buttonId ? 'id="' + buttonId + '"' : ''} href={buttonUrl.url ? buttonUrl.url : '#'} {...(buttonUrl.target && { target: '_blank' })} {...(buttonUrl.nofollow ? { rel: 'nofollow noopener noreferrer' } : { ...buttonUrl.target && { rel: 'noopener noreferrer' } })} >
                             {buttonHtml}
                         </a>
                         :
-                        <button className={`qubely-block-btn-anchor is-${buttonSize}`} {...buttonId ? 'id="' + buttonId + '"' : '' } type="submit" role="button">
+                        <button className={`qubely-block-btn-anchor is-${buttonSize}`} {...buttonId ? 'id="' + buttonId + '"' : ''} type="submit" role="button">
                             {buttonHtml}
                         </button>
                     }

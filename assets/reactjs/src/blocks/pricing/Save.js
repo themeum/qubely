@@ -59,7 +59,7 @@ class Save extends Component {
     renderPricingButton = () => {
         const {
             setAttributes,
-            attributes: { enableButton, buttonFillType, buttonSize, buttonText, buttonIconName, buttonIconPosition, buttonTag, enablePostButtonText, postButtonText }
+            attributes: { enableButton,buttonUrl, buttonFillType, buttonSize, buttonText, buttonIconName, buttonIconPosition, buttonTag, enablePostButtonText, postButtonText }
         } = this.props
 
         return (
@@ -70,7 +70,8 @@ class Save extends Component {
                     buttonText={buttonText}
                     buttonIconName={buttonIconName}
                     buttonIconPosition={buttonIconPosition}
-                // buttonUrl={buttonUrl}
+                    buttonTag = 'a'
+                    buttonUrl={buttonUrl}
                 />
                 {
                     enablePostButtonText &&
@@ -113,42 +114,44 @@ class Save extends Component {
             <div className={`qubely-block-${uniqueId}`} {...animationAttr(animation)}>
                 <div className={`qubely-block-pricing`}>
                     {enableBadge && <span className={`qubely-pricing-badge qubely-badge-style-${badgeStyle} qubely-badge-size-${badgeSize}`}><span>{badge}</span></span>}
-                    <div className="qubely-block-pricing-header">
-                        {this.renderPricingTitle()}
+                    <div className="qubely-block-pricing-content">
+                        <div className="qubely-block-pricing-header">
+                            {this.renderPricingTitle()}
 
-                        {(layout == 3 || layout == 4) &&
-                            this.renderPricingSubTitle()
-                        }
+                            {(layout == 3 || layout == 4) &&
+                                this.renderPricingSubTitle()
+                            }
 
-                        {this.renderPricingPrice()}
-                        {enableDuration && durationPosition == 'bottom' && this.renderDuration()}
+                            {this.renderPricingPrice()}
+                            {enableDuration && durationPosition == 'bottom' && this.renderDuration()}
 
-                        {(layout == 2) &&
-                            this.renderPricingSubTitle()
-                        }
-                    </div>
-
-                    {(layout == 4) &&
-                        this.renderPricingButton()
-                    }
-
-                    {
-                        enableFeatures &&
-                        <div className={`qubely-pricing-features qubely-alignment-${listAlignment}`} >
-                            <QubelyIconListSave
-                                listItems={listItems}
-                                enableListIcons={enableListIcons}
-                                iconColor={iconColor}
-                                iconPosition={iconPosition}
-                                listWrapperClassName={`qubely-list icon-position-${iconPosition}`}
-                            />
+                            {(layout == 2) &&
+                                this.renderPricingSubTitle()
+                            }
                         </div>
-                    }
 
-                    {(layout == 1 || layout == 2 || layout == 3 || layout == 5) &&
-                        this.renderPricingButton()
-                    }
+                        {(layout == 4) &&
+                            this.renderPricingButton()
+                        }
 
+                        {
+                            enableFeatures &&
+                            <div className={`qubely-pricing-features qubely-alignment-${listAlignment}`} >
+                                <QubelyIconListSave
+                                    listItems={listItems}
+                                    enableListIcons={enableListIcons}
+                                    iconColor={iconColor}
+                                    iconPosition={iconPosition}
+                                    listWrapperClassName={`qubely-list icon-position-${iconPosition}`}
+                                />
+                            </div>
+                        }
+
+                        {(layout == 1 || layout == 2 || layout == 3 || layout == 5) &&
+                            this.renderPricingButton()
+                        }
+
+                    </div>
                 </div>
             </div>
         )

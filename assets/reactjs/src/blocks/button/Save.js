@@ -8,7 +8,7 @@ class Save extends Component {
 			<div className={`qubely-block-${uniqueId} ${customClassName ? customClassName : ''}`} {...animationAttr(animation)}>
 				<div className="qubely-block-btn-wrapper">
 					<div className={`qubely-block-btn`}>
-						<a className={`qubely-block-btn-anchor is-${buttonSize}`} href={url.url ? url.url : '#'} {...(url.target && { target: '_blank' })} {...(url.nofollow && { rel: 'nofollow noopener noreferrer' })} >
+						<a className={`qubely-block-btn-anchor is-${buttonSize}`} href={url.url ? url.url : '#'} {...(url.target && { target: '_blank' })} {...(url.nofollow ? { rel: 'nofollow noopener noreferrer' } : {...url.target && { rel: 'noopener noreferrer' }}  )} >
 							{(iconName.trim() != "") && (iconPosition == 'left') && (<i className={`qubely-btn-icon ${iconName}`} />)}
 							<RichText.Content value={(textField == '') ? 'Add Text...' : textField} />
 							{(iconName.trim() != "") && (iconPosition == 'right') && (<i className={`qubely-btn-icon ${iconName}`} />)}
