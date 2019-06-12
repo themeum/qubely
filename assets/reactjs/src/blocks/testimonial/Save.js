@@ -11,7 +11,7 @@ class Save extends Component {
 
         const authorInfo = <Fragment>
             <div className={`qubely-testimonial-author`}>
-                <div className={`qubely-testimonial-avatar-layout-${avatarLayout}`}>
+            <div className={showAvatar ? `qubely-testimonial-avatar-layout-${avatarLayout}` : ``}>
                     {showAvatar && (avatarLayout == 'left' || avatarLayout == 'top') &&
                         <Fragment>
                             {avatar.url != undefined ?

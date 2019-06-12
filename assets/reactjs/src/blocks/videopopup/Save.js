@@ -14,7 +14,6 @@ class Save extends Component {
                                 <i className={`qubely-btn-icon ${icon}`}>
                                     { ( iconBgColor && isRipple) && <span
                                         className="qubely-ripple"
-										style={{ '--qubely-ripple-radius': iconBorderRadius }}
                                     ></span> }
                                 </i>
                             ) }

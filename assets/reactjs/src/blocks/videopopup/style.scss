@@ -40,7 +40,6 @@
                 z-index: -1;
                 box-shadow: 0 0 0 15px rgba(white, .8), 0 0 0 30px rgba(white, .6), 0 0 0 45px rgba(white, .4);
                 animation: qubelyRipple 2s infinite;
-                border-radius: var(--qubely-ripple-radius);
             }
         }
         &.qubely-size-small .qubely-btn-icon{
