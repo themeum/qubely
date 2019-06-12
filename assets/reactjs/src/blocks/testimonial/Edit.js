@@ -2,7 +2,7 @@ const { __ } = wp.i18n
 const { Fragment, Component } = wp.element;
 const { PanelBody, TextControl, Toolbar } = wp.components
 const { RichText, BlockControls, InspectorControls, AlignmentToolbar } = wp.editor
-import { Media, RadioAdvanced, Range, Color, Typography, Separator, ColorAdvanced, Border, BorderRadius, BoxShadow, Styles, Alignment, Padding } from '../../components/FieldRender'
+import { Media, RadioAdvanced, Range, Color, Typography, Toggle, Separator, ColorAdvanced, Border, BorderRadius, BoxShadow, Styles, Alignment, Padding } from '../../components/FieldRender'
 import InlineToolbar from '../../components/fields/inline/InlineToolbar'
 import { CssGenerator } from '../../components/CssGenerator'
 import icons from '../../helpers/icons';
@@ -30,7 +30,7 @@ class Edit extends Component {
         this.setState({ ...this.state, openPanelSetting: panelName })
     }
     render() {
-        const { uniqueId, layout, message, messageSpacingTop, messageSpacingBottom, name, alignment, designation, avatar, avatarAlt, avatarBorderRadius, avatarSize, avatarWidth, avatarHeight, avatarBorder, avatarSpacing, avatarLayout, quoteIconColor, quoteIconSize, quoteIconSpacing, nameTypo, nameSpacing, messageTypo, designationTypo, starsSize, ratingsColor, quoteIcon, ratings, ratingsSpacing, bgPadding, textColor, bgColor, bgBorderRadius, border, boxShadow } = this.props.attributes
+        const { uniqueId, layout, message, messageSpacingTop, messageSpacingBottom, name, alignment, designation, showAvatar, avatar, avatarAlt, avatarBorderRadius, avatarSize, avatarWidth, avatarHeight, avatarBorder, avatarSpacing, avatarLayout, quoteIconColor, quoteIconSize, quoteIconSpacing, nameTypo, nameSpacing, messageTypo, designationTypo, starsSize, ratingsColor, quoteIcon, ratings, ratingsSpacing, bgPadding, textColor, bgColor, bgBorderRadius, border, boxShadow } = this.props.attributes
         const { setAttributes } = this.props
         const { openPanelSetting, device } = this.state
         if (uniqueId) { CssGenerator(this.props.attributes, 'testimonial', uniqueId); }
@@ -68,7 +68,7 @@ class Edit extends Component {
         const authorInfo = <Fragment>
             <div className={`qubely-testimonial-author`}>
                 <div className={`qubely-testimonial-avatar-layout-${avatarLayout}`}>
-                    {(avatarLayout == 'left' || avatarLayout == 'top') &&
+                    {showAvatar && (avatarLayout == 'left' || avatarLayout == 'top') &&
                         <Fragment>
                             {avatar.url != undefined ?
                                 <img className="qubely-testimonial-avatar" src={avatar.url} alt={avatarAlt} onClick={() => this.handlePanelOpenings('Avatar')} />
@@ -77,13 +77,13 @@ class Edit extends Component {
                             }
                         </Fragment>
                     }
-                    
+
                     <div className="qubely-testimonial-author-info">
                         <div className="qubely-testimonial-author-name" onClick={() => this.handlePanelOpenings('Name')}>{testimonialTitle}</div>
                         <div className="qubely-testimonial-author-designation" onClick={() => this.handlePanelOpenings('Designation')}>{testimonialDesignation}</div>
                     </div>
 
-                    {(avatarLayout == 'right' || avatarLayout == 'bottom') &&
+                    {showAvatar && (avatarLayout == 'right' || avatarLayout == 'bottom') &&
                         <Fragment>
                             {avatar.url != undefined ?
                                 <img className="qubely-testimonial-avatar" src={avatar.url} alt={avatarAlt} onClick={() => this.handlePanelOpenings('Avatar')} />
@@ -157,90 +157,96 @@ class Edit extends Component {
                     </PanelBody>
 
                     <PanelBody title={__('Avatar')} opened={'Avatar' === openPanelSetting} onToggle={() => this.handlePanelOpenings(openPanelSetting !== 'Avatar' ? 'Avatar' : '')}>
-                        <Media
-                            label={__('Upload Avatar')} multiple={false} type={['image']}
-                            value={avatar} panel={true} onChange={value => setAttributes({ avatar: value })} />
-                        {avatar.url &&
-                            <TextControl
-                                label={__('Alt Text (Alternative Text)')}
-                                value={avatarAlt} onChange={value => setAttributes({ avatarAlt: value })} />
-                        }
-                        <Styles label={__('Avatar Layout')} value={avatarLayout} onChange={val => setAttributes({ avatarLayout: val })}
-                            options={[
-                                { value: 'left', svg: icons.avatar_left, label: __('Left') },
-                                { value: 'right', svg: icons.avatar_right, label: __('Right') },
-                                { value: 'top', svg: icons.avatar_top, label: __('Top') },
-                                { value: 'bottom', svg: icons.avatar_bottom, label: __('Bottom') },
-                            ]}
-                        />
-                        <Separator />
-                        <RadioAdvanced
-                            label={__('Avatar Size')}
-                            options={[
-                                { label: 'S', value: '48px', title: 'Small' },
-                                { label: 'M', value: '64px', title: 'Medium' },
-                                { label: 'L', value: '96px', title: 'Large' },
-                                { icon: 'fas fa-cog', value: 'custom', title: 'Custom' }
-                            ]}
-                            value={avatarSize}
-                            onChange={(value) => setAttributes({ avatarSize: value })}
-                        />
-                        {avatarSize == 'custom' &&
-                            <Fragment>
-                                <Range
-                                    label={<span className="dashicons dashicons-leftright" title="Width" />}
-                                    value={avatarWidth}
-                                    onChange={(value) => setAttributes({ avatarWidth: value })}
-                                    unit={['px', 'em', '%']}
-                                    max={300}
-                                    min={0}
-                                    responsive
-                                    device={device}
-                                    onDeviceChange={value => this.setState({ device: value })}
+                        <Toggle label={__('Show Avatar')} value={showAvatar} onChange={val => setAttributes({ showAvatar: val })} />
+                        {
+                            showAvatar && <Fragment>
+                                <Media
+                                    label={__('Upload Avatar')} multiple={false} type={['image']}
+                                    value={avatar} panel={true} onChange={value => setAttributes({ avatar: value })} />
+                                {avatar.url &&
+                                    <TextControl
+                                        label={__('Alt Text (Alternative Text)')}
+                                        value={avatarAlt} onChange={value => setAttributes({ avatarAlt: value })} />
+                                }
+                                <Styles label={__('Avatar Layout')} value={avatarLayout} onChange={val => setAttributes({ avatarLayout: val })}
+                                    options={[
+                                        { value: 'left', svg: icons.avatar_left, label: __('Left') },
+                                        { value: 'right', svg: icons.avatar_right, label: __('Right') },
+                                        { value: 'top', svg: icons.avatar_top, label: __('Top') },
+                                        { value: 'bottom', svg: icons.avatar_bottom, label: __('Bottom') },
+                                    ]}
                                 />
-                                <Range
-                                    label={<span className="dashicons dashicons-sort" title="Height" />}
-                                    value={avatarHeight}
-                                    onChange={(value) => setAttributes({ avatarHeight: value })}
-                                    unit={['px', 'em', '%']}
-                                    max={300}
-                                    min={0}
-                                    responsive
-                                    device={device}
-                                    onDeviceChange={value => this.setState({ device: value })}
+                                <Separator />
+                                <RadioAdvanced
+                                    label={__('Avatar Size')}
+                                    options={[
+                                        { label: 'S', value: '48px', title: 'Small' },
+                                        { label: 'M', value: '64px', title: 'Medium' },
+                                        { label: 'L', value: '96px', title: 'Large' },
+                                        { icon: 'fas fa-cog', value: 'custom', title: 'Custom' }
+                                    ]}
+                                    value={avatarSize}
+                                    onChange={(value) => setAttributes({ avatarSize: value })}
                                 />
+                                {avatarSize == 'custom' &&
+                                    <Fragment>
+                                        <Range
+                                            label={<span className="dashicons dashicons-leftright" title="Width" />}
+                                            value={avatarWidth}
+                                            onChange={(value) => setAttributes({ avatarWidth: value })}
+                                            unit={['px', 'em', '%']}
+                                            max={300}
+                                            min={0}
+                                            responsive
+                                            device={device}
+                                            onDeviceChange={value => this.setState({ device: value })}
+                                        />
+                                        <Range
+                                            label={<span className="dashicons dashicons-sort" title="Height" />}
+                                            value={avatarHeight}
+                                            onChange={(value) => setAttributes({ avatarHeight: value })}
+                                            unit={['px', 'em', '%']}
+                                            max={300}
+                                            min={0}
+                                            responsive
+                                            device={device}
+                                            onDeviceChange={value => this.setState({ device: value })}
+                                        />
+                                    </Fragment>
+                                }
+                                <Fragment>
+                                    <BorderRadius
+                                        label={__('Radius')}
+                                        value={avatarBorderRadius} onChange={(value) => setAttributes({ avatarBorderRadius: value })}
+                                        min={0}
+                                        max={100}
+                                        unit={['px', 'em', '%']}
+                                        responsive
+                                        device={device}
+                                        onDeviceChange={value => this.setState({ device: value })} />
+                                    <Border
+                                        label={__('Border')}
+                                        value={avatarBorder}
+                                        onChange={(value) => setAttributes({ avatarBorder: value })}
+                                        unit={['px', 'em', '%']}
+                                        responsive
+                                        device={device}
+                                        onDeviceChange={value => this.setState({ device: value })}
+                                    />
+                                    <Range
+                                        label={__('Spacing')}
+                                        value={avatarSpacing}
+                                        onChange={(value) => setAttributes({ avatarSpacing: value })}
+                                        min={0}
+                                        max={200}
+                                        unit={['px', 'em', '%']}
+                                        responsive
+                                        device={device}
+                                        onDeviceChange={value => this.setState({ device: value })} />
+                                </Fragment>
                             </Fragment>
                         }
-                        <Fragment>
-                            <BorderRadius
-                                label={__('Radius')}
-                                value={avatarBorderRadius} onChange={(value) => setAttributes({ avatarBorderRadius: value })}
-                                min={0}
-                                max={100}
-                                unit={['px', 'em', '%']}
-                                responsive
-                                device={device}
-                                onDeviceChange={value => this.setState({ device: value })} />
-                            <Border
-                                label={__('Border')}
-                                value={avatarBorder}
-                                onChange={(value) => setAttributes({ avatarBorder: value })}
-                                unit={['px', 'em', '%']}
-                                responsive
-                                device={device}
-                                onDeviceChange={value => this.setState({ device: value })}
-                            />
-                            <Range
-                                label={__('Spacing')}
-                                value={avatarSpacing}
-                                onChange={(value) => setAttributes({ avatarSpacing: value })}
-                                min={0}
-                                max={200}
-                                unit={['px', 'em', '%']}
-                                responsive
-                                device={device}
-                                onDeviceChange={value => this.setState({ device: value })} />
-                        </Fragment>
+
                     </PanelBody>
 
                     <PanelBody title={__('Quote Icon')} opened={'Quote Icon' === openPanelSetting} onToggle={() => this.handlePanelOpenings(openPanelSetting !== 'Quote Icon' ? 'Quote Icon' : '')}>
@@ -347,12 +353,12 @@ class Edit extends Component {
                             value={bgBorderRadius}
                             onChange={val => setAttributes({ bgBorderRadius: val })}
                             min={0}
-                            max={100} 
+                            max={100}
                             unit={['px', 'em', '%']}
                             responsive
                             device={device}
                             onDeviceChange={value => this.setState({ device: value })} />
-                        
+
                     </PanelBody>
 
                 </InspectorControls>
@@ -375,13 +381,13 @@ class Edit extends Component {
                 <div className={`qubely-block-${uniqueId}`}>
                     <div className={`qubely-block-testimonial`}>
 
-                        { layout == 2 && authorInfo }
+                        {layout == 2 && authorInfo}
 
                         {ratings > 0 && (layout == 2) &&
                             <div className="qubely-testimonial-ratings" data-qubelyrating={ratings} onClick={() => this.handlePanelOpenings('Ratings')}></div>
                         }
-                        
-                        { (quoteIcon && (layout == 1)) &&
+
+                        {(quoteIcon && (layout == 1)) &&
                             <div className="qubely-testimonial-quote" onClick={() => this.handlePanelOpenings('Quote Icon')}><span className={`qubely-quote-icon ${quoteIcon}`}></span></div>
                         }
 
@@ -393,12 +399,12 @@ class Edit extends Component {
                             <div className="qubely-testimonial-ratings" data-qubelyrating={ratings} onClick={() => this.handlePanelOpenings('Ratings')}></div>
                         }
 
-                        { layout == 1 && authorInfo }
+                        {layout == 1 && authorInfo}
 
-                        { (quoteIcon && (layout == 2)) &&
+                        {(quoteIcon && (layout == 2)) &&
                             <div className="qubely-testimonial-quote qubely-position-bottom" onClick={() => this.handlePanelOpenings('Quote Icon')}><span className={`qubely-quote-icon ${quoteIcon}`}></span></div>
                         }
-                        
+
                     </div>
                 </div>
             </Fragment>
