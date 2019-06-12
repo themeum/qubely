@@ -2,7 +2,7 @@ const { Component } = wp.element;
 import { animationAttr } from '../../components/HelperFunction'
 class Save extends Component {
     render() {
-		const { uniqueId, layout, animation, alignment, icon, postfix, prefix, iconSize, url, isRipple, iconCorner, iconCornerRadius, iconBgColor, videoSource, bgVideo } = this.props.attributes
+		const { uniqueId, layout, animation, alignment, icon, postfix, prefix, iconSize, url, isRipple, iconBorderRadius, iconBgColor, videoSource, bgVideo } = this.props.attributes
 		return (
 			<div className={`qubely-block-${uniqueId}`} {...animationAttr(animation)}>
 				<div className={`qubely-block-videopopup-wrapper qubely-alignment-${alignment}`}>
@@ -12,11 +12,9 @@ class Save extends Component {
 							{ prefix &&  <span className="qubely-video-popup-prefix"> {prefix} </span> }
 							{ icon && (
                                 <i className={`qubely-btn-icon ${icon}`}>
-                                    { (iconCorner && iconBgColor && isRipple) && <span
+                                    { ( iconBgColor && isRipple) && <span
                                         className="qubely-ripple"
-                                        style={{
-                                            '--qubely-ripple-radius' : iconCorner != 'custom' ? iconCorner : iconCornerRadius
-                                        }}
+										style={{ '--qubely-ripple-radius': iconBorderRadius }}
                                     ></span> }
                                 </i>
                             ) }
