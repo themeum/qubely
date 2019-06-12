@@ -46,6 +46,7 @@ class Edit extends Component {
             <Fragment>
                 <InspectorControls key="inspector">
                     <PanelBody title="" initialOpen={true}>
+                    <Alignment label={__('Alignment')} value={alignment} alignmentType="content" onChange={val => setAttributes({ alignment: val })} disableJustify />
                         <Range
                             label={__('Button Spacing')}
                             value={spacing}
@@ -55,17 +56,7 @@ class Edit extends Component {
                             responsive
                             device={device}
                             onDeviceChange={value => this.setState({ device: value })} />
-                        <Alignment label={__('Alignment')} value={alignment} alignmentType="content" onChange={val => setAttributes({ alignment: val })} disableJustify />
-                        <Padding
-                            label={__('Padding')}
-                            value={padding}
-                            onChange={(value) => setAttributes({ padding: value })}
-                            unit={['px', 'em', '%']}
-                            max={150}
-                            min={0}
-                            responsive
-                            device={device}
-                            onDeviceChange={value => this.setState({ device: value })} />
+                      
                     </PanelBody>
                 </InspectorControls>
 

@@ -32,16 +32,6 @@ registerBlockType('qubely/buttongroup', {
             default: { unit: "px", md: "5" },
             style: [{ selector: '{{QUBELY}} .qubely-block-button-group {margin: 0 -{{spacing}};} {{QUBELY}} .qubely-block-button-group .wp-block.qubely-group-button {margin: 0 {{spacing}};} {{QUBELY}} .qubely-block-button-group >div {margin: 0 calc(14px + {{spacing}});}' }]
         },
-        padding: {
-            type: 'object',
-            default: {
-                openPadding: 1,
-                paddingType: 'custom',
-                global: { md: 0 },
-                unit: 'px'
-            },
-            style: [{ selector: '{{QUBELY}} .qubely-block-button-group' }]
-        },
         showGlobalSettings: { type: 'boolean', default: true },  // Global Settings
     },
     edit: Edit,
