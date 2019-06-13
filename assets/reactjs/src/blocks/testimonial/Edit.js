@@ -2,7 +2,7 @@ const { __ } = wp.i18n
 const { Fragment, Component } = wp.element;
 const { PanelBody, TextControl, Toolbar } = wp.components
 const { RichText, BlockControls, InspectorControls, AlignmentToolbar } = wp.editor
-import { Media, RadioAdvanced, Range, Color, Typography, Toggle, Separator, ColorAdvanced, Border, BorderRadius, BoxShadow, Styles, Alignment, Padding } from '../../components/FieldRender'
+import { Media, RadioAdvanced, Range, Color, Typography, Toggle, Separator, ColorAdvanced, Border, BorderRadius, BoxShadow, Styles, Alignment, Padding, Tabs, Tab } from '../../components/FieldRender'
 import InlineToolbar from '../../components/fields/inline/InlineToolbar'
 import { CssGenerator } from '../../components/CssGenerator'
 import icons from '../../helpers/icons';
@@ -30,7 +30,7 @@ class Edit extends Component {
         this.setState({ ...this.state, openPanelSetting: panelName })
     }
     render() {
-        const { uniqueId, layout, message, messageSpacingTop, messageSpacingBottom, name, alignment, designation, showAvatar, avatar, avatarAlt, avatarBorderRadius, avatarSize, avatarWidth, avatarHeight, avatarBorder, avatarSpacing, avatarLayout, quoteIconColor, quoteIconSize, quoteIconSpacing, nameTypo, nameSpacing, messageTypo, designationTypo, starsSize, ratingsColor, quoteIcon, ratings, ratingsSpacing, bgPadding, textColor, bgColor, bgBorderRadius, border, boxShadow } = this.props.attributes
+        const { uniqueId, layout, message, messageSpacingTop, messageSpacingBottom, name, nameColor, alignment, designation, designationColor, showAvatar, avatar, avatarAlt, avatarBorderRadius, avatarSize, avatarWidth, avatarHeight, avatarBorder, avatarSpacing, avatarLayout, quoteIconColor, quoteIconSize, quoteIconSpacing, nameTypo, nameSpacing, messageTypo, designationTypo, starsSize, ratingsColor, quoteIcon, ratings, ratingsSpacing, bgPadding, textColor, bgColor, bgBorderRadius, border, boxShadow, boxShadowHover } = this.props.attributes
         const { setAttributes } = this.props
         const { openPanelSetting, device } = this.state
         if (uniqueId) { CssGenerator(this.props.attributes, 'testimonial', uniqueId); }
@@ -141,6 +141,10 @@ class Edit extends Component {
                             responsive
                             device={device}
                             onDeviceChange={value => this.setState({ device: value })} />
+                        <Color
+                            label={__('Color')}
+                            value={nameColor} onChange={(value) => setAttributes({ nameColor: value })}
+                        />
                         <Typography
                             label={__('Typography')}
                             value={nameTypo}
@@ -149,6 +153,10 @@ class Edit extends Component {
                     </PanelBody>
 
                     <PanelBody title={__('Designation')} className={'Designation' === openPanelSetting ? 'activePanel' : ''} opened={'Designation' === openPanelSetting} onToggle={() => this.handlePanelOpenings(openPanelSetting !== 'Designation' ? 'Designation' : '')}>
+                        <Color
+                            label={__('Color')}
+                            value={designationColor} onChange={(value) => setAttributes({ designationColor: value })}
+                        />
                         <Typography
                             label={__('Typography')}
                             value={designationTypo}
@@ -334,10 +342,6 @@ class Edit extends Component {
                         <Border
                             label={__('Border')}
                             value={border} onChange={val => setAttributes({ border: val })} />
-                        <BoxShadow
-                            label={__('Box Shadow')}
-                            value={boxShadow} onChange={val => setAttributes({ boxShadow: val })} />
-                        <Separator />
                         <Padding
                             label={__('Padding')}
                             value={bgPadding} onChange={(value) => setAttributes({ bgPadding: value })}
@@ -358,6 +362,21 @@ class Edit extends Component {
                             responsive
                             device={device}
                             onDeviceChange={value => this.setState({ device: value })} />
+
+                        <Tabs>
+                            <Tab tabTitle={__('Normal')}>
+                                <BoxShadow
+                                    label={__('Box Shadow')}
+                                    value={boxShadow} onChange={val => setAttributes({ boxShadow: val })}
+                                />
+                            </Tab>
+                            <Tab tabTitle={__('Hover')}>
+                                <BoxShadow
+                                    label={__('Box Shadow')}
+                                    value={boxShadowHover} onChange={val => setAttributes({ boxShadowHover: val })}
+                                />
+                            </Tab>
+                        </Tabs>
 
                     </PanelBody>
 

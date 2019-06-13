@@ -17,11 +17,13 @@ registerBlockType('qubely/testimonial', {
 
         //Name
         name: { type: 'string', default: 'JOHN DOE' },
+        nameColor: { type: 'string', default: '', style: [{ selector: '{{QUBELY}} .qubely-testimonial-author-name { color:{{nameColor}}; }' }] },
         nameTypo: { type: 'object', default: { openTypography: 1, weight: 700, size: { md: 16, unit: 'px' } }, style: [{ selector: '{{QUBELY}} .qubely-testimonial-author-name' }] },
         nameSpacing: { type: 'object', default: {}, style: [{ selector: '{{QUBELY}} .qubely-testimonial-author-name {margin-bottom: {{nameSpacing}};}' }] },
 
         //Designation
         designation: { type: 'string', default: 'WordPress Developer' },
+        designationColor: { type: 'string', default: '', style: [{ selector: '{{QUBELY}} .qubely-testimonial-author-designation { color:{{designationColor}}; }' }] },
         designationTypo: { type: 'object', default: { openTypography: 1, size: { md: 14, unit: 'px' } }, style: [{ selector: '{{QUBELY}} .qubely-testimonial-author-designation' }] },
 
         //Messsage
@@ -172,6 +174,7 @@ registerBlockType('qubely/testimonial', {
 
         border: { type: 'object', default: { openTy: 0, color: '#3373dc', width: { bottom: '1', left: '1', right: '1', top: '1', unit: 'px' } }, style: [{ selector: '{{QUBELY}} .qubely-block-testimonial' }] },
         boxShadow: { type: 'object', default: {}, style: [{ selector: '{{QUBELY}} .qubely-block-testimonial' }] },
+        boxShadowHover: { type: 'object', default: {}, style: [{ selector: '{{QUBELY}} .qubely-block-testimonial:hover' }] },
 
         showGlobalSettings: { type: 'boolean', default: true }, // Global Settings
     },
