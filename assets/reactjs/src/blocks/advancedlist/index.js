@@ -78,7 +78,7 @@ registerBlockType('qubely/advancedlist', {
             type: 'object',
             default: { openTypography: 1, size: { md: 16, unit: 'px' } },
             style: [
-                { selector: '{{QUBELY}} .qubely-list' },
+                { selector: '{{QUBELY}} .qubely-list li' },
                 { condition: [{ key: 'listType', relation: '==', value: 'ordered' }], selector: '{{QUBELY}} .qubely-list li::before, {{QUBELY}} .qubely-list li::after ' }
             ]
         },
