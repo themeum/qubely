@@ -72,7 +72,7 @@ const objectField = (data) => {
         return { data: cssBoxShadow(data), action: 'append' }; //Shadow
     } else if (data.direction) {
         return { data: cssGradient(data, 'return'), action: 'append' }; //Gradient
-    } else if (data.top || data.left || data.right || data.bottom) {
+    } else if (typeof (data.top) != 'undefined' || typeof (data.left) != 'undefined' || typeof (data.right) != 'undefined' || typeof (data.bottom) != 'undefined') {
         return { data: cssDimension(data), action: 'replace' }; //Dimension
     } else if (data.openShape) {
         return { data: cssShape(data), action: 'append' }; //Shape

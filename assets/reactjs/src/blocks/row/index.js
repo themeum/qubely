@@ -15,8 +15,24 @@ registerBlockType('qubely/row', {
         columns: { type: 'number', default: '' },
 
         // Dimension
-        padding: { type: 'object', default: { md: { bottom: 70, top: 70, unit: 'px' } }, style: [{ selector: '{{QUBELY}}.qubely-section {padding: {{padding}};}' }] },
-        margin: { type: 'object', default: { md: { bottom: 0, top: 0, unit: 'px' } }, style: [{ selector: '{{QUBELY}}.qubely-section {margin: {{margin}} !important;}' }] },
+        padding: {
+            type: 'object',
+            default: {
+                md: { bottom: 70, top: 70, unit: 'px' },
+                sm: { bottom: 70, top: 70, unit: 'px' },
+                xs: { bottom: 70, top: 70, unit: 'px' },
+            },
+            style: [{ selector: '{{QUBELY}}.qubely-section {padding: {{padding}};}' }]
+        },
+        margin: {
+            type: 'object',
+            default: {
+                md: { bottom: 0, top: 0, unit: 'px' },
+                sm: { bottom: 0, top: 0, unit: 'px' },
+                xs: { bottom: 0, top: 0, unit: 'px' },
+            },
+            style: [{ selector: '{{QUBELY}}.qubely-section {margin: {{margin}} !important;}' }]
+        },
 
         rowGutter: {
             type: 'object', default: { md: 30, sm: 30, xs: 30, unit: 'px' }, style: [{
