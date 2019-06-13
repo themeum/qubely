@@ -4,14 +4,14 @@ import { animationAttr } from '../../components/HelperFunction';
 
 class Save extends Component {
 	render() {
-		const { uniqueId, layout, image, name, designation, description, useInfoIcon, phone, email, website, facebook, twitter, instagram, linkedin, youtube, github, flickr, pinterest, dribbble, behance, iconStyle, iconUseDefaultStyle, enableDesignation, enableDescription, animation } = this.props.attributes
+		const { uniqueId, layout, image, name, designation, description, useInfoIcon, phone, email, website, showSociallinks, facebook, twitter, instagram, linkedin, youtube, github, flickr, pinterest, dribbble, behance, iconStyle, iconUseDefaultStyle, enableDesignation, enableDescription, animation } = this.props.attributes
 
 		return (
 			<div className={`qubely-block-${uniqueId}`} {...animationAttr(animation)}>
 				<div className={`qubely-block-team qubely-team-layout-${layout}`}>
 					<div className="qubely-team-image-wrapper">
 						{image.url != undefined ?
-							<img className="qubely-team-image" src={ image.url } alt={name} />
+							<img className="qubely-team-image" src={image.url} alt={name} />
 							:
 							<div className="qubely-image-placeholder"><i className="far fa-image"></i></div>
 						}
@@ -31,7 +31,7 @@ class Save extends Component {
 								<div className="qubely-team-information">
 									{phone &&
 										<div class="qubely-team-information-phone">
-											{useInfoIcon && 
+											{useInfoIcon &&
 												<i className="qubely-info-icon fas fa-phone" aria-label={__('Phone')} />
 											}
 											<span>{phone}</span>
@@ -39,7 +39,7 @@ class Save extends Component {
 									}
 									{email &&
 										<div class="qubely-team-information-email">
-											{useInfoIcon && 
+											{useInfoIcon &&
 												<i class="qubely-info-icon fas fa-envelope" aria-label={__('Email')} />
 											}
 											<span>{email}</span>
@@ -47,7 +47,7 @@ class Save extends Component {
 									}
 									{website &&
 										<div class="qubely-team-information-website">
-											{useInfoIcon && 
+											{useInfoIcon &&
 												<i class="qubely-info-icon fas fa-globe" aria-label={__('Website')} />
 											}
 											<span><a>{website}</a></span>
@@ -55,7 +55,7 @@ class Save extends Component {
 									}
 								</div>
 							}
-							{ (facebook || twitter || instagram || linkedin || youtube || github || flickr || pinterest || dribbble || behance) &&
+							{showSociallinks && (facebook || twitter || instagram || linkedin || youtube || github || flickr || pinterest || dribbble || behance) &&
 								<div className={`qubely-team-social-links qubely-team-icon-layout-${iconStyle} qubely-team-icon-style-${iconUseDefaultStyle == 1 ? 'default' : 'custom'}`}>
 									{facebook &&
 										<a href={facebook} className="qubely-team-social-facebook" target="_blank" rel="noopener noreferrer"><i className="fab fa-facebook" /></a>
