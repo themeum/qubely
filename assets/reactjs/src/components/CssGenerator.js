@@ -214,8 +214,8 @@ export const CssGenerator = (settings, blockName, blockID, isInline = false) => 
 
     // Join CSS
     if (md.length > 0) { __CSS += md.join('') }
-    if (sm.length > 0) { __CSS += '@media (min-width: 768px) and (max-width: 991px) {' + sm.join('') + '}' }
-    if (xs.length > 0) { __CSS += '@media (max-width: 767px) {' + xs.join('') + '}' }
+    if (sm.length > 0) { __CSS += '@media (max-width: 1199px) {' + sm.join('') + '}' }
+    if (xs.length > 0) { __CSS += '@media (max-width: 991px) {' + xs.join('') + '}' }
     if (notResponsiveCss.length > 0) { __CSS += notResponsiveCss.join('') }
 
     if (isInline) {

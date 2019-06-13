@@ -31,18 +31,25 @@ registerBlockType('qubely/row', {
             }]
         },
 
+        rowContainerWidth: {
+            type: 'string',
+            default: 'boxed'
+        },
+
         rowContainer: {
-            type: 'object', default: { md: 1140, sm: 960, xs: 720, unit: 'px' },
+            type: 'number',
+            default: 1140,
             style: [
                 {
                     condition: [
                         { key: 'align', relation: '==', value: 'full' },
+                        { key: 'rowContainerWidth', relation: '==', value: 'boxed' },
                     ],
-                    selector: '{{QUBELY}} .qubely-container {max-width: {{rowContainer}}; margin: 0 auto;}'
+                    selector: '@media (min-width: 1200px) {{{QUBELY}} .qubely-container {max-width: {{rowContainer}}px;}}'
                 }
             ]
         },
-        position: { type: 'string', default: '', style: [{ selector: '{{QUBELY}} .qubely-row {-webkit-box-align: {{position}}; -ms-flex-align: {{position}}; align-items: {{position}}; }' }] },
+        position: { type: 'string', default: '', style: [{ selector: '{{QUBELY}} .qubely-row, {{QUBELY}} .qubely-row .editor-block-list__layout {-webkit-box-align: {{position}}; -ms-flex-align: {{position}}; align-items: {{position}}; }' }] },
 
         // Background
         rowBg: { type: 'object', default: { bgimgPosition: 'center center', bgimgSize: 'cover', bgimgRepeat: 'no-repeat', bgDefaultColor: '#f5f5f5' }, style: [{ selector: '{{QUBELY}}.qubely-section' }] },

@@ -14,7 +14,7 @@ registerBlockType ( 'qubely/column', {
 		uniqueId:{ type:'string', default: ''},
 		
 		// Dimension
-		colWidth:{ type:'object', default: {md: 50, sm: 100, xs: 100, unit:'%', device: 'md' }, style: [{ selector: '{{QUBELY}}.qubely-column-front {flex:{{colWidth}};} {{QUBELY}}.qubely-column-front {max-width:{{colWidth}};}' }] },
+		colWidth:{ type:'object', default: {md: 50, sm: 50, xs: 100, unit:'%', device: 'md' }, style: [{ selector: '{{QUBELY}}.qubely-column-front {flex:{{colWidth}};} {{QUBELY}}.qubely-column-front {max-width:{{colWidth}};}' }] },
 		padding:{ type: 'object', default: {md:{unit: 'px'}}, style: [{ selector: '{{QUBELY}} .qubely-column-inner{padding:{{padding}};}' }] },
 		margin:{ type: 'object', default: {md:{unit: 'px'}}, style: [{ selector: '{{QUBELY}} .qubely-column-inner{margin:{{margin}};}' }] },
 		
