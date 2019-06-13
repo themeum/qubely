@@ -69,6 +69,7 @@ class Edit extends Component {
             separatorSpacing,
 
             //content
+            enableContent,
             content,
             contentTypography,
             contentColor,
@@ -323,19 +324,27 @@ class Edit extends Component {
                         }
                     </PanelBody>
 
+
                     <PanelBody title={__('Content')} opened={'Content' === openPanelSetting} onToggle={() => this.handlePanelOpenings(openPanelSetting !== 'Content' ? 'Content' : '')}>
-                        <Typography label={__('Typography')} value={contentTypography} onChange={(value) => setAttributes({ contentTypography: value })} device={device} onDeviceChange={value => this.setState({ device: value })} />
-                        <Tabs>
-                            <Tab tabTitle={__('Normal')}>
-                                <Color label={__('Color')} value={contentColor} onChange={(value) => setAttributes({ contentColor: value })} />
-                            </Tab>
-                            <Tab tabTitle={__('Hover')}>
-                                <Color label={__('Color')} value={contentColorHover} onChange={(value) => setAttributes({ contentColorHover: value })} />
-                            </Tab>
-                        </Tabs>
-                        <Padding label={__('Padding')} value={contentPadding} onChange={val => setAttributes({ contentPadding: val })} min={0} max={200} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
-                        {enableButton == 1 &&
-                            <Range label={__('Spacing')} value={contentSpacing} onChange={(value) => setAttributes({ contentSpacing: value })} unit={['px', 'em', '%']} min={0} max={100} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
+                        <Toggle label={__('Show Content')} value={enableContent} onChange={val => setAttributes({ enableContent: val })} />
+                        {
+                            enableContent &&
+                            <Fragment>
+
+                                <Typography label={__('Typography')} value={contentTypography} onChange={(value) => setAttributes({ contentTypography: value })} device={device} onDeviceChange={value => this.setState({ device: value })} />
+                                <Tabs>
+                                    <Tab tabTitle={__('Normal')}>
+                                        <Color label={__('Color')} value={contentColor} onChange={(value) => setAttributes({ contentColor: value })} />
+                                    </Tab>
+                                    <Tab tabTitle={__('Hover')}>
+                                        <Color label={__('Color')} value={contentColorHover} onChange={(value) => setAttributes({ contentColorHover: value })} />
+                                    </Tab>
+                                </Tabs>
+                                <Padding label={__('Padding')} value={contentPadding} onChange={val => setAttributes({ contentPadding: val })} min={0} max={200} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
+                                {enableButton == 1 &&
+                                    <Range label={__('Spacing')} value={contentSpacing} onChange={(value) => setAttributes({ contentSpacing: value })} unit={['px', 'em', '%']} min={0} max={100} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
+                                }
+                            </Fragment>
                         }
                     </PanelBody>
 
@@ -420,17 +429,20 @@ class Edit extends Component {
                                 }
                             </div>
 
-                            <div className="qubely-info-box-content" onClick={() => this.handlePanelOpenings('Content')}>
-                                <RichText
-                                    key="editable"
-                                    tagName='div'
-                                    className="qubely-info-box-text"
-                                    keepPlaceholderOnFocus
-                                    placeholder={__('Add Text...')}
-                                    onChange={value => setAttributes({ content: value })}
-                                    value={content}
-                                />
-                            </div>
+                            {
+                                enableContent &&
+                                <div className="qubely-info-box-content" onClick={() => this.handlePanelOpenings('Content')}>
+                                    <RichText
+                                        key="editable"
+                                        tagName='div'
+                                        className="qubely-info-box-text"
+                                        keepPlaceholderOnFocus
+                                        placeholder={__('Add Text...')}
+                                        onChange={value => setAttributes({ content: value })}
+                                        value={content}
+                                    />
+                                </div>
+                            }
                             {enableButton == 1 &&
                                 <QubelyButtonEdit
                                     enableButton={enableButton}
