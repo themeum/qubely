@@ -205,13 +205,13 @@ class Edit extends Component {
 
                                     {mediaType == 'number' &&
                                         <Fragment>
-                                            <TextControl label={__('Number')} type="number" value={number} onChange={val => setAttributes({ number: val })} />
+                                            <TextControl label={__('Number')} type="number" value={number} onChange={val => setAttributes({ number: parseInt(val) })} />
                                             <Typography value={numberTypography} onChange={(value) => setAttributes({ numberTypography: value })} disableLineHeight device={device} onDeviceChange={value => this.setState({ device: value })} />
                                         </Fragment>
                                     }
 
                                     <Toggle label={__('Use Background')} value={useMediaBg} onChange={val => setAttributes({ useMediaBg: val })} />
-                                    
+
                                     <Tabs>
                                         <Tab tabTitle={__('Normal')}>
                                             {mediaType == 'icon' &&
@@ -370,7 +370,7 @@ class Edit extends Component {
                 <div className={`qubely-block-${uniqueId}`}>
                     <div className={`qubely-block-info-box qubely-info-box-layout-${layout}`}>
                         {(layout != 4 && mediaType) &&
-                            <div className={`qubely-info-box-media${ useMediaBg ? ' qubely-media-has-bg' : '' }`} onClick={() => this.handlePanelOpenings('Media')}>
+                            <div className={`qubely-info-box-media${useMediaBg ? ' qubely-media-has-bg' : ''}`} onClick={() => this.handlePanelOpenings('Media')}>
                                 {(mediaType == 'icon' && iconName) &&
                                     <i className={"qubely-info-box-icon " + iconName} />
                                 }

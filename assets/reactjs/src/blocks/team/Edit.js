@@ -11,7 +11,7 @@ class Edit extends Component {
 
     constructor(props) {
         super(props)
-        this.state = {device: 'md', selector: true, spacer: true, openPanelSetting: '' };
+        this.state = { device: 'md', selector: true, spacer: true, openPanelSetting: '' };
     }
 
     componentDidMount() {
@@ -75,6 +75,7 @@ class Edit extends Component {
             infoTypo,
             infoColor,
 
+            showSociallinks,
             facebook,
             twitter,
             instagram,
@@ -106,8 +107,7 @@ class Edit extends Component {
             contentPosition,
             contentAlignment,
             contentBg,
-            contentPaddingX,
-            contentPaddingY,
+            contentPadding,
             contentBorder,
             overlayAlignment,
 
@@ -116,7 +116,7 @@ class Edit extends Component {
             bodyBorder,
             bodyBorderRadius,
             bodyBoxShadow,
-            
+
         } = this.props.attributes
 
         const { setAttributes } = this.props
@@ -127,7 +127,7 @@ class Edit extends Component {
         return (
             <Fragment>
                 <InspectorControls key="inspector">
-                    <PanelBody title={__('Layout')} opened={'Layout' === openPanelSetting} onToggle={() => this.handlePanelOpenings(openPanelSetting !== 'Layout' ? 'Layout' : '')} initialOpen={true}>
+                    <PanelBody title={__('')} initialOpen={true}>
                         <Styles columns={21} value={layout} onChange={val => setAttributes({ layout: val })}
                             options={[
                                 { value: 1, svg: icons.team_1, label: __('Basic') },
@@ -140,15 +140,10 @@ class Edit extends Component {
 
                     <PanelBody title={__('Image')} opened={'Image' === openPanelSetting} onToggle={() => this.handlePanelOpenings(openPanelSetting !== 'Image' ? 'Image' : '')}>
                         <Media label={__('Team Member Image')} multiple={false} type={['image']} panel={true} value={image} onChange={val => setAttributes({ image: val })} />
-                        {layout != 2 &&
-                            <Fragment>
-                                <Range label={__('Image Width')} value={imageWidth} onChange={val => setAttributes({ imageWidth: val })} min={32} max={500} unit={['px', 'em']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
-                                <BorderRadius label={__('Radius')} value={imageBorderRadius} onChange={val => setAttributes({ imageBorderRadius: val })} min={0} max={100} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
-                                {layout == 1 &&
-                                    <Range label={__('Image Spacing')} value={imageSpacing} onChange={val => setAttributes({ imageSpacing: val })} min={0} max={500} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
-                                }
-                            </Fragment>
-                        }
+                        {layout != 2 && <Range label={__('Image Width')} value={imageWidth} onChange={val => setAttributes({ imageWidth: val })} min={32} max={500} unit={['px', 'em']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />}
+                        <BorderRadius label={__('Radius')} value={imageBorderRadius} onChange={val => setAttributes({ imageBorderRadius: val })} min={0} max={100} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
+                        {layout == 1 && <Range label={__('Image Spacing')} value={imageSpacing} onChange={val => setAttributes({ imageSpacing: val })} min={0} max={500} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />}
+
                     </PanelBody>
 
                     <PanelBody title={__('Name')} opened={'Name' === openPanelSetting} onToggle={() => this.handlePanelOpenings(openPanelSetting !== 'Name' ? 'Name' : '')}>
@@ -163,7 +158,7 @@ class Edit extends Component {
                         {enableDesignation == 1 &&
                             <Fragment>
                                 <Separator />
-                                <Typography label="Typography" value={designationTypo} onChange={(value) => setAttributes({ designationTypo: value })} device={device} onDeviceChange={value => this.setState({ device: value })}  />
+                                <Typography label="Typography" value={designationTypo} onChange={(value) => setAttributes({ designationTypo: value })} device={device} onDeviceChange={value => this.setState({ device: value })} />
                                 <Separator />
                                 <Color label={__('Color')} value={designationColor} onChange={(value) => setAttributes({ designationColor: value })} />
                                 <Range label={__('Spacing')} value={designationSpacing} onChange={val => setAttributes({ designationSpacing: val })} min={0} max={60} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
@@ -186,7 +181,7 @@ class Edit extends Component {
                         <TextControl label={__('Phone')} value={phone} onChange={val => setAttributes({ phone: val })} />
                         <TextControl label={__('Email')} value={email} onChange={val => setAttributes({ email: val })} />
                         <TextControl label={__('Website')} value={website} onChange={val => setAttributes({ website: val })} />
-                        { (phone || email || website) &&
+                        {(phone || email || website) &&
                             <Fragment>
                                 <Typography label="Typography" value={infoTypo} onChange={(value) => setAttributes({ infoTypo: value })} device={device} onDeviceChange={value => this.setState({ device: value })} />
                                 <Color label={__('Color')} value={infoColor} onChange={(value) => setAttributes({ infoColor: value })} />
@@ -215,73 +210,79 @@ class Edit extends Component {
                     </PanelBody>
 
                     <PanelBody title={__('Social')} opened={'Social' === openPanelSetting} onToggle={() => this.handlePanelOpenings(openPanelSetting !== 'Social' ? 'Social' : '')}>
-                        <TextControl label={__('Facebook')} value={facebook} onChange={val => setAttributes({ facebook: val })} />
-                        <TextControl label={__('Twitter')} value={twitter} onChange={val => setAttributes({ twitter: val })} />
-                        <TextControl label={__('Instagram')} value={instagram} onChange={val => setAttributes({ instagram: val })} />
-                        <TextControl label={__('Linkedin')} value={linkedin} onChange={val => setAttributes({ linkedin: val })} />
-                        <TextControl label={__('Youtube')} value={youtube} onChange={val => setAttributes({ youtube: val })} />
-                        <TextControl label={__('Github')} value={github} onChange={val => setAttributes({ github: val })} />
-                        <TextControl label={__('Flickr')} value={flickr} onChange={val => setAttributes({ flickr: val })} />
-                        <TextControl label={__('Pinterest')} value={pinterest} onChange={val => setAttributes({ pinterest: val })} />
-                        <TextControl label={__('Dribbble')} value={dribbble} onChange={val => setAttributes({ dribbble: val })} />
-                        <TextControl label={__('Behance')} value={behance} onChange={val => setAttributes({ behance: val })} />
-                        <Separator />
-                        <Styles label={__('Icon Style')} value={iconStyle} onChange={val => setAttributes({ iconStyle: val })}
-                            options={[
-                                { value: 'fill', svg: icons.social_fill, label: __('Fill') },
-                                { value: 'normal', svg: icons.social_normal, label: __('Normal') },
-                            ]}
-                        />
-                        <RadioAdvanced label={__('Icon Size')} value={iconSize} onChange={(value) => setAttributes({ iconSize: value })}
-                            options={[
-                                { label: 'S', value: '14px', title: 'Small' },
-                                { label: 'M', value: '18px', title: 'Medium' },
-                                { label: 'L', value: '24px', title: 'Large' },
-                                { icon: 'fas fa-cog', value: 'custom', title: 'Custom' }
-                            ]}
-                        />
-                        {iconSize == 'custom' &&
-                            <Range label={__('Custom Size')} value={iconSizeCustom} onChange={val => setAttributes({ iconSizeCustom: val })} min={12} max={300} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
-                        }
+                        <Toggle label={__('Show Social-links')} value={showSociallinks} onChange={val => setAttributes({ showSociallinks: val })} />
+                        {
+                            showSociallinks &&
+                            <Fragment>
+                                <TextControl label={__('Facebook')} value={facebook} onChange={val => setAttributes({ facebook: val })} />
+                                <TextControl label={__('Twitter')} value={twitter} onChange={val => setAttributes({ twitter: val })} />
+                                <TextControl label={__('Instagram')} value={instagram} onChange={val => setAttributes({ instagram: val })} />
+                                <TextControl label={__('Linkedin')} value={linkedin} onChange={val => setAttributes({ linkedin: val })} />
+                                <TextControl label={__('Youtube')} value={youtube} onChange={val => setAttributes({ youtube: val })} />
+                                <TextControl label={__('Github')} value={github} onChange={val => setAttributes({ github: val })} />
+                                <TextControl label={__('Flickr')} value={flickr} onChange={val => setAttributes({ flickr: val })} />
+                                <TextControl label={__('Pinterest')} value={pinterest} onChange={val => setAttributes({ pinterest: val })} />
+                                <TextControl label={__('Dribbble')} value={dribbble} onChange={val => setAttributes({ dribbble: val })} />
+                                <TextControl label={__('Behance')} value={behance} onChange={val => setAttributes({ behance: val })} />
+                                <Separator />
+                                <Styles label={__('Icon Style')} value={iconStyle} onChange={val => setAttributes({ iconStyle: val })}
+                                    options={[
+                                        { value: 'fill', svg: icons.social_fill, label: __('Fill') },
+                                        { value: 'normal', svg: icons.social_normal, label: __('Normal') },
+                                    ]}
+                                />
+                                <RadioAdvanced label={__('Icon Size')} value={iconSize} onChange={(value) => setAttributes({ iconSize: value })}
+                                    options={[
+                                        { label: 'S', value: '14px', title: 'Small' },
+                                        { label: 'M', value: '18px', title: 'Medium' },
+                                        { label: 'L', value: '24px', title: 'Large' },
+                                        { icon: 'fas fa-cog', value: 'custom', title: 'Custom' }
+                                    ]}
+                                />
+                                {iconSize == 'custom' &&
+                                    <Range label={__('Custom Size')} value={iconSizeCustom} onChange={val => setAttributes({ iconSizeCustom: val })} min={12} max={300} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
+                                }
 
-                        {iconStyle == 'fill' && 
-                            <BorderRadius
-                                label={__('Corner Radius')}
-                                value={iconBorderRadius}
-                                onChange={(value) => setAttributes({ iconBorderRadius: value })}
-                                min={0}
-                                max={100} unit={['px', 'em', '%']}
-                                responsive
-                                device={device} 
-                                onDeviceChange={value => this.setState({ device: value })}  />
-                        }
+                                {iconStyle == 'fill' &&
+                                    <BorderRadius
+                                        label={__('Corner Radius')}
+                                        value={iconBorderRadius}
+                                        onChange={(value) => setAttributes({ iconBorderRadius: value })}
+                                        min={0}
+                                        max={100} unit={['px', 'em', '%']}
+                                        responsive
+                                        device={device}
+                                        onDeviceChange={value => this.setState({ device: value })} />
+                                }
 
-                        <Range label={__('Gutter')} value={iconGutter} onChange={val => setAttributes({ iconGutter: val })} min={0} max={40} unit={['px', 'em']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
-                        <Range label={__('Spacing')} value={iconSpacing} onChange={val => setAttributes({ iconSpacing: val })} min={0} max={60} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
-                        
-                        <Toggle label={__('Default Styles')} value={iconUseDefaultStyle} onChange={val => setAttributes({ iconUseDefaultStyle: val })} />
+                                <Range label={__('Gutter')} value={iconGutter} onChange={val => setAttributes({ iconGutter: val })} min={0} max={40} unit={['px', 'em']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
+                                <Range label={__('Spacing')} value={iconSpacing} onChange={val => setAttributes({ iconSpacing: val })} min={0} max={60} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
 
-                        {!iconUseDefaultStyle &&
-                            <Tabs>
-                                <Tab tabTitle={__('Normal')}>
-                                    <Color label={__('Color')} value={iconColor} onChange={(value) => setAttributes({ iconColor: value })} />
-                                    {iconStyle == 'fill' &&
-                                        <Fragment>
-                                            <Color label={__('Background Color')} value={iconBackground} onChange={(value) => setAttributes({ iconBackground: value })} />
-                                            <Border label={__('Border')} value={iconBorder} onChange={(value) => setAttributes({ iconBorder: value })} />
-                                        </Fragment>
-                                    }
-                                </Tab>
-                                <Tab tabTitle={__('Hover')}>
-                                    <Color label={__('Color')} value={iconColorHover} onChange={(value) => setAttributes({ iconColorHover: value })} />
-                                    {iconStyle == 'fill' &&
-                                        <Fragment>
-                                            <Color label={__('Background Color')} value={iconBackgroundHover} onChange={(value) => setAttributes({ iconBackgroundHover: value })} />
-                                            <Color label={__('Border Color')} value={iconBorderColorHover} onChange={(value) => setAttributes({ iconBorderColorHover: value })} />
-                                        </Fragment>
-                                    }
-                                </Tab>
-                            </Tabs>
+                                <Toggle label={__('Default Styles')} value={iconUseDefaultStyle} onChange={val => setAttributes({ iconUseDefaultStyle: val })} />
+
+                                {!iconUseDefaultStyle &&
+                                    <Tabs>
+                                        <Tab tabTitle={__('Normal')}>
+                                            <Color label={__('Color')} value={iconColor} onChange={(value) => setAttributes({ iconColor: value })} />
+                                            {iconStyle == 'fill' &&
+                                                <Fragment>
+                                                    <Color label={__('Background Color')} value={iconBackground} onChange={(value) => setAttributes({ iconBackground: value })} />
+                                                    <Border label={__('Border')} value={iconBorder} onChange={(value) => setAttributes({ iconBorder: value })} />
+                                                </Fragment>
+                                            }
+                                        </Tab>
+                                        <Tab tabTitle={__('Hover')}>
+                                            <Color label={__('Color')} value={iconColorHover} onChange={(value) => setAttributes({ iconColorHover: value })} />
+                                            {iconStyle == 'fill' &&
+                                                <Fragment>
+                                                    <Color label={__('Background Color')} value={iconBackgroundHover} onChange={(value) => setAttributes({ iconBackgroundHover: value })} />
+                                                    <Color label={__('Border Color')} value={iconBorderColorHover} onChange={(value) => setAttributes({ iconBorderColorHover: value })} />
+                                                </Fragment>
+                                            }
+                                        </Tab>
+                                    </Tabs>
+                                }
+                            </Fragment>
                         }
                     </PanelBody>
 
@@ -304,31 +305,29 @@ class Edit extends Component {
                                     />
                                 }
                                 <ColorAdvanced label={__('Background')} value={overlayBg} onChange={(value) => setAttributes({ overlayBg: value })} />
-                                <Range label={<span className="dashicons dashicons-leftright" title="X Padding" />} value={overlayPaddingX} onChange={val => setAttributes({ overlayPaddingX: val })} min={0} max={200} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })}  />
+                                <Range label={<span className="dashicons dashicons-leftright" title="X Padding" />} value={overlayPaddingX} onChange={val => setAttributes({ overlayPaddingX: val })} min={0} max={200} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
                                 <Range label={<span className="dashicons dashicons-sort" title="Y Padding" />} value={overlayPaddingY} onChange={val => setAttributes({ overlayPaddingY: val })} min={0} max={200} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
                             </PanelBody>
                         </Fragment>
                     }
-                    
-                    {layout == 3 &&
+
+                    {layout != 2 &&
                         <Fragment>
                             <PanelBody title={__('Content')} initialOpen={false}>
-                                <RadioAdvanced label={__('Position')} value={contentPosition} onChange={(value) => setAttributes({ contentPosition: value })}
-                                    options={[
-                                        { label: 'Left', value: 'left', title: 'Left' },
-                                        { label: 'Right', value: 'right', title: 'Right' }
-                                    ]}
-                                />
-                                <RadioAdvanced label={__('Alignment')} value={contentAlignment} onChange={(value) => setAttributes({ contentAlignment: value })}
-                                    options={[
-                                        { label: 'Top', value: 'flex-start', title: 'Top' },
-                                        { label: 'Middle', value: 'center', title: 'Middle' },
-                                        { label: 'Bottom', value: 'flex-end', title: 'Bottom' },
-                                    ]}
-                                />
+                                {
+                                    layout == 3 &&
+                                    <Fragment>
+                                        <RadioAdvanced label={__('Position')} value={contentPosition} onChange={(value) => setAttributes({ contentPosition: value })}
+                                            options={[
+                                                { label: 'Left', value: 'left', title: 'Left' },
+                                                { label: 'Right', value: 'right', title: 'Right' }
+                                            ]}
+                                        />
+                                        <Alignment label={__('Alignment')} alignmentType="content" value={contentAlignment} onChange={val => setAttributes({ contentAlignment: val })} disableJustify responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
+                                    </Fragment>
+                                }
                                 <ColorAdvanced label={__('Background')} value={contentBg} onChange={(value) => setAttributes({ contentBg: value })} />
-                                <Range label={<span className="dashicons dashicons-leftright" title="X Padding" />} value={contentPaddingX} onChange={val => setAttributes({ contentPaddingX: val })} min={0} max={200} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
-                                <Range label={<span className="dashicons dashicons-sort" title="Y Padding" />} value={contentPaddingY} onChange={val => setAttributes({ contentPaddingY: val })} min={0} max={200} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
+                                <Padding label={__('Padding')} value={contentPadding} onChange={val => setAttributes({ contentPadding: val })} min={0} max={200} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
                                 <Border label={__('Border')} value={contentBorder} onChange={val => setAttributes({ contentBorder: val })} />
                             </PanelBody>
                         </Fragment>
@@ -340,7 +339,7 @@ class Edit extends Component {
                         <Border label={__('Border')} separator value={bodyBorder} onChange={(value) => setAttributes({ bodyBorder: value })} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
                         <BorderRadius label={__('Radius')} value={bodyBorderRadius} onChange={val => setAttributes({ bodyBorderRadius: val })} min={0} max={100} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
                         <BoxShadow label={__('Box-Shadow')} value={bodyBoxShadow} onChange={(value) => setAttributes({ bodyBoxShadow: value })} />
-                       </PanelBody>
+                    </PanelBody>
                 </InspectorControls>
 
                 <BlockControls>
@@ -357,7 +356,7 @@ class Edit extends Component {
                     <div className={`qubely-block-team qubely-team-layout-${layout}`}>
                         <div className="qubely-team-image-wrapper" onClick={() => this.handlePanelOpenings('Image')}>
                             {image.url != undefined ?
-                                <img className="qubely-team-image" src={ image.url } alt={name} />
+                                <img className="qubely-team-image" src={image.url} alt={name} />
                                 :
                                 <div className="qubely-image-placeholder"><i className="far fa-image"></i></div>
                             }
@@ -402,7 +401,7 @@ class Edit extends Component {
                                     <div className="qubely-team-information" onClick={() => this.handlePanelOpenings('Information')}>
                                         {phone &&
                                             <div class="qubely-team-information-phone">
-                                                {useInfoIcon && 
+                                                {useInfoIcon &&
                                                     <i className="qubely-info-icon fas fa-phone" aria-label={__('Phone')} />
                                                 }
                                                 <span>{phone}</span>
@@ -410,7 +409,7 @@ class Edit extends Component {
                                         }
                                         {email &&
                                             <div class="qubely-team-information-email">
-                                                {useInfoIcon && 
+                                                {useInfoIcon &&
                                                     <i class="qubely-info-icon fas fa-envelope" aria-label={__('Email')} />
                                                 }
                                                 <span>{email}</span>
@@ -418,7 +417,7 @@ class Edit extends Component {
                                         }
                                         {website &&
                                             <div class="qubely-team-information-website">
-                                                {useInfoIcon && 
+                                                {useInfoIcon &&
                                                     <i class="qubely-info-icon fas fa-globe" aria-label={__('Website')} />
                                                 }
                                                 <span><a>{website}</a></span>
@@ -426,7 +425,7 @@ class Edit extends Component {
                                         }
                                     </div>
                                 }
-                                { (facebook || twitter || instagram || linkedin || youtube || github || flickr || pinterest || dribbble || behance) &&
+                                {showSociallinks && (facebook || twitter || instagram || linkedin || youtube || github || flickr || pinterest || dribbble || behance) &&
                                     <div className={`qubely-team-social-links qubely-team-icon-layout-${iconStyle} qubely-team-icon-style-${iconUseDefaultStyle == 1 ? 'default' : 'custom'}`} onClick={() => this.handlePanelOpenings('Social')}>
                                         {facebook &&
                                             <a className="qubely-team-social-facebook"><i className="fab fa-facebook" /></a>
