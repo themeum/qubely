@@ -21,7 +21,7 @@ class Save extends Component {
 				}
 				<div className="qubely-row-overlay"></div>
 				<div className={`${align == 'full' ? ((rowContainerWidth == 'boxed') ? 'qubely-container' : 'qubely-container-fluid') : 'qubely-container-fluid' }`}>
-					<div className={`qubely-row qubely-backend-row ${(heightOptions == 'window') ? 'qubely-row-height-window':''}`}>
+					<div className={`qubely-row ${(heightOptions == 'window') ? 'qubely-row-height-window':''}`}>
 						<InnerBlocks.Content />
 					</div>
 				</div>
