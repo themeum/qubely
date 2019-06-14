@@ -68,7 +68,7 @@ registerBlockType('qubely/team', {
             type: 'object',
             default: { md: 5, unit: 'px' },
             style: [{
-                selector: '{{QUBELY}} .qubely-team-name {margin-bottom: {{nameSpacing}};}'
+                selector: '{{QUBELY}} .qubely-team-name {display:block;margin-bottom: {{nameSpacing}};}'
             }]
         },
 
