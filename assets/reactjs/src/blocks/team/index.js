@@ -73,7 +73,17 @@ registerBlockType('qubely/team', {
         },
 
         // Designation
-        enableDesignation: { type: 'boolean', default: 1 },
+        enableDesignation: {
+            type: 'boolean', default: 1,
+            style: [
+                {
+                    condition: [
+                        { key: 'enableDesignation', relation: '==', value: 1 }
+                    ],
+                    selector: '{{QUBELY}} .qubely-team-designation{display:block;}'
+                }
+            ]
+        },
         designation: { type: 'string', default: 'CREATIVE DESIGNER' },
         designationTypo: {
             type: 'object', default: { openTypography: 1, size: { md: 14, unit: 'px' } },
