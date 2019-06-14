@@ -174,6 +174,7 @@ class Edit extends Component {
                             responsive 
                             device={this.state.device} 
                             onDeviceChange={value => this.setState({ device: value })}
+                            clientId={this.props.clientId}
                         />
 
                         <Dimension
@@ -186,6 +187,7 @@ class Edit extends Component {
                             responsive 
                             device={this.state.device} 
                             onDeviceChange={value => this.setState({ device: value })}
+                            clientId={this.props.clientId}
                         />
 
                         <Separator />
