@@ -143,7 +143,7 @@ registerBlockType('qubely/row', {
         hideMobile: { type: 'boolean', default: false, style: [{ selector: '{{QUBELY}}.qubely-section{ display:none; }' }] },
 
         // Advanced Settings
-        rowId: { type: 'object', default: '' },
+        rowId: { type: 'string', default: '' },
         rowZindex: { type: 'number', default: '', style: [{ selector: '{{QUBELY}}.qubely-section{z-index:{{rowZindex}};}' }] },
         rowReverse: { type: 'object', default: {}, style: [{ selector: '{{QUBELY}}.qubely-section .qubely-row, {{QUBELY}}.qubely-row > .editor-inner-blocks > .editor-block-list__layout{flex-direction:row-reverse;}' }] },
 

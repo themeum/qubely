@@ -239,7 +239,7 @@ class Edit extends Component {
 
                 <InspectorAdvancedControls>
                     <Toggle label={__('Column Reverse')} responsive value={rowReverse} onChange={val => setAttributes({ rowReverse: val })} />
-                    <TextControl label={__('CSS ID')} value={rowId} onChange={(val) => setAttributes({ rowId: val })} />
+                    <TextControl label={__('CSS ID')} value={rowId} onChange={val => setAttributes({ rowId: val })} />
                 </InspectorAdvancedControls>
 
                 <div className={`qubely-section qubely-block-${uniqueId} ${(rowBg.bgimgParallax && rowBg.bgimgParallax == 'animated') ? 'qubely-section-parallax' : ''}`} {...rowId ? { id: rowId } : ''}>
