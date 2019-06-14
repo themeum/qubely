@@ -48,7 +48,7 @@ class Gradient extends Component {
     render() {
         const { value } = this.props
         let gradientColors = [['color1', __('Color 1'), '#cccccc', 'left'], ['color2', __('Color 2'), '#1f91f3', 'right']]
-        let test = $(`.qubely-field-gradient-preview`).width() / 2
+
         return (
             <div className={"qubely-gradient qubely-field inline"}>
 
