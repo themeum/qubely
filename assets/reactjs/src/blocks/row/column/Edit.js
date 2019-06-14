@@ -5,7 +5,7 @@ const { Component, Fragment } = wp.element
 const { InnerBlocks, InspectorControls, BlockControls } = wp.editor
 const { createBlock } = wp.blocks
 const { select, dispatch } = wp.data
-import { Background, Border, BorderRadius, BoxShadow, Range, Separator, DragDimension } from '../../../components/FieldRender'
+import { Background, Border, BorderRadius, BoxShadow, Range, Separator, Dimension } from '../../../components/FieldRender'
 import { CssGenerator } from '../../../components/CssGenerator'
 import '../../../components/GlobalSettings';
 import icons from '../../../helpers/icons';
@@ -320,14 +320,28 @@ class Edit extends Component {
                         <div className={columns === (blockIndex + 1) && responsiveDevice === 'md' ? 'qubely-mb-20 disable-slide' : 'qubely-mb-20'}>
                             <Range label={__('Width')} value={colWidth} onChange={val => this.updateColumnWidth(val)} min={15} max={this.state.colWidthMax} unit={['%']} responsive device={this.state.responsiveDevice} />
                         </div>
-                        <Separator />
-                        <DragDimension
-                            uniqueId={uniqueId}
-                            label={__('Column Spacing')}
-                            value={{ padding: padding, margin: margin }}
-                            onChange={val => setAttributes(val)}
-                            responsive
-                            unit
+                        <Dimension
+                            label={__('Padding')}
+                            value={padding}
+                            onChange={val => setAttributes({ padding: val })}
+                            min={0}
+                            max={200} 
+                            unit={['px', 'em', '%']}
+                            responsive 
+                            device={this.state.device} 
+                            onDeviceChange={value => this.setState({ device: value })}
+                        />
+
+                        <Dimension
+                            label={__('Margin')}
+                            value={margin}
+                            onChange={val => setAttributes({ margin: val })}
+                            min={0}
+                            max={200} 
+                            unit={['px', 'em', '%']}
+                            responsive 
+                            device={this.state.device} 
+                            onDeviceChange={value => this.setState({ device: value })}
                         />
                     </PanelBody>
                     <PanelBody initialOpen={false} title={__('Design')}>
