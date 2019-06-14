@@ -343,14 +343,14 @@ class Edit extends Component {
 
                 <BlockControls>
                     <Toolbar>
-                        {columns < 6 &&
+                        {/* {columns < 6 &&
                             <IconButton
                                 className="components-icon-button components-toolbar__control"
                                 label={__('Add Column')}
                                 onClick={this.addColumnToNext.bind(this)}
                                 icon="plus"
                             />
-                        }
+                        } */}
                         {columns > 1 &&
                             <IconButton
                                 className="components-icon-button components-toolbar__control"
