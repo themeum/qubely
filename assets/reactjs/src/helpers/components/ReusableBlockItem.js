@@ -2,7 +2,7 @@ const {__} = wp.i18n
 export default (props) => {
 
     return (
-        <li>
+        <div>
             <div className="qubely-reusable-list-content">
                 <span className="qubely-tmpl-title" dangerouslySetInnerHTML={ { __html:props.data.post_title } }/>
             </div>
@@ -18,6 +18,6 @@ export default (props) => {
                 </div>
             </div>
 
-        </li>
+        </div>
     )
 }

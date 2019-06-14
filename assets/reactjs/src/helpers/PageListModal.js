@@ -449,15 +449,49 @@ class PageListModal extends Component {
         }
     }
 
-    _OnChangeCategory( event ) {
-        event.preventDefault();
-        let  value = event.target.value;
+    _OnChangeCategory( value ) {
         if( this.state.itemType == 'block' ) {
             this.setState({ selectedBlockCategory: value });
         } else if( this.state.itemType == 'layout' ) {
             this.setState({ selectedLayoutCategory: value });
         }
     }
+
+
+    _sliceCurrentData(data, n = 3, balanced = true) {
+        if (n < 2)
+            return [data];
+
+        var len = data.length,
+            out = [],
+            i = 0,
+            size;
+
+        if (len % n === 0) {
+            size = Math.floor(len / n);
+            while (i < len) {
+                out.push(data.slice(i, i += size));
+            }
+        } else if (balanced) {
+            while (i < len) {
+                size = Math.ceil((len - i) / n--);
+                out.push(data.slice(i, i += size));
+            }
+        } else {
+
+            n--;
+            size = Math.floor(len / n);
+            if (len % size === 0)
+                size--;
+            while (i < size * n) {
+                out.push(data.slice(i, i += size));
+            }
+            out.push(data.slice(size * n));
+
+        }
+        return out;
+    }
+
 
     _OnSearchTemplate( event ) {
         let { isSearchEnable } = this.state;
@@ -472,135 +506,164 @@ class PageListModal extends Component {
         return url;
     }
 
+    _getDataLength(){
+        let test=0
+        Object.keys( this.state.blockData).forEach(key=>test+=this.state.blockData[key].length)
+        return test
+    }
+
+
     render() {
         let { pageCategories, selectedCategory, currentPageData } = this.getCurrentPageData();
         let types = typeof wp.QUBELY_PRO_VERSION === 'undefined' ? 'inactive' : 'active';
-        
+const {itemType,blockData,layoutData, layer}=this.state
         return (
+
             <Modal className="qubely-builder-modal-pages-list" customClass="qubely-builder-modal-template-list" onRequestClose={this.props.onRequestClose} openTimeoutMS={0} closeTimeoutMS={0}>
-                        
-                <div className="qubely-template-list-header">
-                    <span className={ this.state.itemType == 'block' ? 'active' : ''} onClick={ e => this._onlickBlocksTab() }> {__('Sections')} </span>
-                    <span className={ this.state.itemType == 'layout' ? 'active' : ''} onClick={ e => this._onlickLayoutsTab() }> {__('Layouts')} </span>
-                    <span className={ this.state.itemType == 'saved_blocks' ? 'active' : ''} onClick={ e => this._onlickSavedBlocksTab() }> {__('Saved')} </span>                
+                <div className="qubely-layout-modal-sidebar">
+                    <div className="template-search-box">
+                        <i className="fas fa-search"></i>
+                        <input type="search" onChange={this._OnSearchTemplate.bind(this)} value={this.state.searchContext} placeholder={__('Type to search')} className="form-control"/>
+                    </div>
+
+                    <div className="qubely-modal-sidebar-content">
+
+                        {
+                            !(itemType == 'layout' && layer == 'single') || !(itemType== 'saved_blocks') && <h3>Categories</h3>
+                        }
+                        {
+                            // @TODO: Must add category count
+                            ( !this.state.parent_id ) && this.state.layer != 'block' &&
+                            <ul className="qubely-template-categories">
+                                <li onClick={() => this._OnChangeCategory('')} >All Categories <span>{this._getDataLength()}</span></li>
+                                {
+                                    pageCategories.map((data, index) => {
+                                        return <li onClick={() => this._OnChangeCategory(data.slug)} key={index}>{data.name}
+                                        <span>
+                                            {
+                                            itemType=='block'? blockData[data.slug] ? blockData[data.slug].length :0: layoutData[data.slug] ? layoutData[data.slug].length :0
+                                        }
+                                        </span></li>
+                                    })
+                                }
+                            </ul>
+                        }
+                    </div>
                 </div>
-                <button className="qubely-builder-close-modal" onClick={ e => { ModalManager.close() } } >
-                    <i className={"fas fa-times"} />
-                </button>
-
-                { !this.state.loading ?
-					<div id="modalContainer" className="qubely-template-list-modal">
-                        <div className="qubely-builder-template-list-container">
-                            <div className="qubely-template-option-header">
-                                { ( this.state.itemType == 'layout' && this.state.layer == 'single' ) &&
+                <div className="qubely-layout-modal-content-area">
+                    <div className="qubely-template-list-header">
+                        <button className={ this.state.itemType == 'block' ? 'active' : ''} onClick={ e => this._onlickBlocksTab() }> {__('Sections')} </button>
+                        <button className={ this.state.itemType == 'layout' ? 'active' : ''} onClick={ e => this._onlickLayoutsTab() }> {__('Layouts')} </button>
+                        <button className={ this.state.itemType == 'saved_blocks' ? 'active' : ''} onClick={ e => this._onlickSavedBlocksTab() }> {__('Saved')} </button>
+                        <button className="qubely-builder-close-modal" onClick={ e => { ModalManager.close() } } >
+                            <i className={"fas fa-times"} />
+                        </button>
+                    </div>
+                    { !this.state.loading ?
+                        <div id="modalContainer" className="qubely-template-list-modal">
+                            <div className="qubely-builder-template-list-container">
+                                <div className="qubely-template-option-header">
+                                    { ( this.state.itemType == 'layout' && this.state.layer == 'single' ) &&
                                     <span className={"qubely-template-back"} onClick={()=>this.setState({layer:'multiple', parent_id: ''})}><span className="dashicons dashicons-arrow-left-alt" /></span>
-                                }
+                                    }
 
-                                { ( !this.state.parent_id ) && this.state.layer != 'block' &&
-                                <div className="qubely-template-option-select">
-                                    <select onChange={this._OnChangeCategory.bind(this) } value={ selectedCategory }>
-                                        <option value="">{__('All Categories')}</option>
-                                        { 
-                                            pageCategories.map( ( data, index ) => {
-                                                return(
-                                                    <option key={ index } value={ data.slug }> { data.name } </option>
-                                                )
-                                            }
-                                        ) }
-                                    </select>
+                                    { /*
+                                        ( this.state.itemType == 'layout' ) &&
+                                        <div className="template-options">
+                                            <ul>
+                                                <li className={ this.state.layer === 'multiple' ? 'active' : '' }> <i className="qubely-folder-view" onClick={ e => this.setState( { layer: 'multiple', parent_id: '' } ) } /></li>
+                                                <li className={ this.state.layer === 'single' ? 'active' : '' }> <i className="qubely-grid-view" onClick={ e => this.setState( { layer: 'single' } ) } /> </li>
+                                            </ul>
+                                        </div>
+                                    */}
                                 </div>
-                                }
-                                <div className="template-search-box">
-                                    <input type="text" onChange={this._OnSearchTemplate.bind(this)} value={this.state.searchContext} placeholder={__('Enter Keyword')} className="form-control"/>
-                                </div>
-                                
-                                { ( this.state.itemType == 'layout' ) &&
-                                    <div className="template-options">
-                                        <ul>
-                                            <li className={ this.state.layer === 'multiple' ? 'active' : '' }> <i className="qubely-folder-view" onClick={ e => this.setState( { layer: 'multiple', parent_id: '' } ) } /></li>
-                                            <li className={ this.state.layer === 'single' ? 'active' : '' }> <i className="qubely-grid-view" onClick={ e => this.setState( { layer: 'single' } ) } /> </li>
-                                        </ul>
-                                    </div>
-                                }
-							</div>
 
-                            <ul id="layouts-blocks-list" className={"qubely-builder-page-templates " + (this.state.itemType == "saved_blocks" ? 'qubely-frontendd-block-list' : '')}>
-                                { this.state.layer == 'single' && 
-                                currentPageData.map((data, index) =>
-                                    <SingleItem
-                                        key={index} 
-                                        data={data}
-                                        index={index}
-                                        types={types}
-                                        itemType={this.state.itemType}
-                                        spinner={this.state.spinner}
-                                        importLayoutBlock={this.importLayoutBlock.bind(this)}
-                                        backgroundImage={this._backgroundImage}
-                                    />
-                                ) }
+                                <div id="layouts-blocks-list" className={"qubely-builder-page-templates " + (this.state.itemType == "saved_blocks" ? 'qubely-frontendd-block-list' : '')}>
+                                    {
+                                        this.state.layer == 'single' && this._sliceCurrentData(currentPageData).map(item => (
+                                            <div className="qubely-pagelist-column">
+                                                {
+                                                    item.map((data, index) =>
+                                                        <SingleItem
+                                                            key={index}
+                                                            data={data}
+                                                            index={index}
+                                                            types={types}
+                                                            itemType={this.state.itemType}
+                                                            spinner={this.state.spinner}
+                                                            importLayoutBlock={this.importLayoutBlock.bind(this)}
+                                                            backgroundImage={this._backgroundImage}
+                                                        />
+                                                    )
+                                                }
+                                            </div>
+                                        ))
 
-                                { this.state.layer == 'multiple' &&
-                                currentPageData.map((data, index) =>
-                                    <MultipleItem 
-                                        key={ index }
-                                        data={ data }
-                                        totalLayouts={ this.state.layoutCategoryItems[ `item${data.ID}` ] }
-                                        onClickSingleEntity={this._onClickSingleEntity.bind(this)}
-                                        backgroundImage={this._backgroundImage}
-                                    />
-                                ) }
+                                    }
 
-                                { ( this.state.layer == 'block' ) &&
-                                    <li className="qubely-reusable-list-title">
+                                    { this.state.layer == 'multiple' &&
+                                    currentPageData.map((data, index) =>
+                                        <MultipleItem
+                                            key={ index }
+                                            data={ data }
+                                            totalLayouts={ this.state.layoutCategoryItems[ `item${data.ID}` ] }
+                                            onClickSingleEntity={this._onClickSingleEntity.bind(this)}
+                                            backgroundImage={this._backgroundImage}
+                                        />
+                                    ) }
+
+                                    { ( this.state.layer == 'block' ) &&
+                                    <div className="qubely-reusable-list-title">
                                         <div className="qubely-reusable-list-content">
                                             <span className="qubely-tmpl-title" > {__('Title')}</span>
                                         </div>
                                         <div className="qubely-reusable-list-info">
                                             <div className="qubely-reusable-list-info-date">{__('Publish')} </div>
                                         </div>
-                                    </li>
-                                }
+                                    </div>
+                                    }
 
-                                { this.state.layer == 'block' &&
-                                currentPageData.map((data, index) =>
-                                    <ReusableBlockItem
-                                        key={index}
-                                        data={data}
-                                        index={index}
-                                        importSavedBlock={this.importSavedBlock.bind(this)}
-                                        deleteSavedBlock={this.deleteSavedBlock.bind(this)}
-                                        backgroundImage={this._backgroundImage}
-                                    />
-                                ) }
+                                    { this.state.layer == 'block' &&
+                                    currentPageData.map((data, index) =>
+                                        <ReusableBlockItem
+                                            key={index}
+                                            data={data}
+                                            index={index}
+                                            importSavedBlock={this.importSavedBlock.bind(this)}
+                                            deleteSavedBlock={this.deleteSavedBlock.bind(this)}
+                                            backgroundImage={this._backgroundImage}
+                                        />
+                                    ) }
 
-                                { ( currentPageData.length === 0 ) &&
-                                    <li className="qubely-builder-template-found-empty">
+                                    { ( currentPageData.length === 0 ) &&
+                                    <div className="qubely-builder-template-found-empty">
                                         <h3 className="qubely-builder-empty-title"> {this.state.notFoundMessage} </h3>
-                                    </li>
-                                }
-                                
-                            </ul>
-                        </div>
-                    </div>
-                    :
-                    <div>
-                        <div style={ { height: "600px"} }>
-                            { this.state.requestFailedMsg ?
-                                this.state.requestFailedMsg.map( (error, index) => <p key={index}>{error}</p> )
-                                :
-                                <div className="qubely-modal-loader"> 
-                                    <Spinner /> 
+                                    </div>
+                                    }
+
                                 </div>
-                            }
-                            <button
-                                className="qubely-builder-close-modal" 
-                                onClick={ () => { ModalManager.close() } }
-                            >
-                                <i className={"fas fa-times"} />
-                            </button>
+                            </div>
                         </div>
-                    </div>
-                }
+                        :
+                        <div>
+                            <div style={ { height: "600px"} }>
+                                { this.state.requestFailedMsg ?
+                                    this.state.requestFailedMsg.map( (error, index) => <p key={index}>{error}</p> )
+                                    :
+                                    <div className="qubely-modal-loader">
+                                        <Spinner />
+                                    </div>
+                                }
+                                {/*<button
+                                    className="qubely-builder-close-modal"
+                                    onClick={ () => { ModalManager.close() } }
+                                >
+                                    <i className={"fas fa-times"} />
+                                </button>*/}
+                            </div>
+                        </div>
+                    }
+                </div>
             </Modal>
         )
     }

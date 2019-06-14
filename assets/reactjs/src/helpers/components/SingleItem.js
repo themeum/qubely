@@ -3,7 +3,7 @@ const { Fragment } = wp.element;
 
 export default (props) => {
     return (
-        <li id={(props.index==0) ? 'first-single-item' : ''} className={ 'qubely-single-block-item ' + (( props.types == 'inactive' && props.data.pro == true ) ? 'inactive' : '') }>
+        <div id={(props.index==0) ? 'first-single-item' : ''} className={ 'qubely-single-block-item ' + (( props.types == 'inactive' && props.data.pro == true ) ? 'inactive' : '') }>
             <div className="qubely-single-item-inner">
                 <div className="qubely-default-template-image">
                     <img className="lazy" alt={__('Lazy Loading')} src={ qubely_admin.plugin+'assets/img/image-loader.gif'} data-src={props.backgroundImage(props.data.image)} />
@@ -25,6 +25,6 @@ export default (props) => {
                     </div>
                 </div>
             </div>
-        </li>
+        </div>
     )
 }

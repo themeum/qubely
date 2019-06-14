@@ -1,39 +1,7 @@
 const { __ } = wp.i18n
-import React,{ Component } from 'react';
+import React, {Component, Fragment} from 'react';
 import ReactDOM from 'react-dom';
 
-// so that our CSS is statically analyzable
-const CLASS_NAMES = {
-    overlay: {
-        base: 'qubely-builder-modal-overlay',
-        afterOpen: 'qubely-builder-modal-overlay-after-open',
-        beforeClose: 'qubely-builder-modal-overlay-before-close'
-    },
-    content: {
-        base: 'qubely-builder-modal-content',
-        afterOpen: 'qubely-builder-modal-content-after-open',
-        beforeClose: 'qubely-builder-modal-content-before-close'
-    }
-};
-
-const defaultStyles = {
-    overlay: {
-        position        : 'fixed',
-        top             : 0,
-        left            : 0,
-        right           : 0,
-        bottom          : 0,
-        backgroundColor : 'rgba(255, 255, 255, 0.75)'
-    },
-    content: {
-        position                : 'fixed',
-        top                     : '0',
-        left                    : '0',
-        right                   : '0',
-        bottom                  : '0',
-        overflow                : 'auto'
-    }
-};
 
 var onClose;
 
@@ -68,30 +36,16 @@ class Modal extends Component{
         clearTimeout(this.closeTimer);
     }
 
-    buildClassName(which, additional) {
-        var className = CLASS_NAMES[which].base;
-        if (this.state.afterOpen)
-            className += ' '+CLASS_NAMES[which].afterOpen;
-        if (this.state.beforeClose)
-            className += ' '+CLASS_NAMES[which].beforeClose;
-        return additional ? className + ' ' + additional : className;
-    }
-
     render(){
         const {style} = this.props;
 
         return (
-            <div ref="overlay" className={this.buildClassName('overlay',this.props.overlayClassName)} style={Object.assign({},defaultStyles.overlay,style ? (style.overlay ? style.overlay : {}) : {})}>
-                <div ref="content" className={this.buildClassName('content',this.props.className)} style={Object.assign({},defaultStyles.content,style ? (style.content ? style.content : {}) : {})}>
-                    <div className={this.props.customClass?this.props.customClass:''} onClick={e => e.stopPropagation()} onKeyDown={this.handleKeyDown.bind(this)}>
-                        { this.props.title != 'undefined'
-                            ? <h2 className="qubely-builder-modal-title">{this.props.title}</h2>
-                            : ''
-                        }
-                        { this.props.children }
-                    </div>
+            <Fragment>
+                <span  onClick={ e => { this.close() } } className="qubely-pagelist-modal-overlay">&nbsp;</span>
+                <div className={`qubely-pagelist-modal-inner`} onClick={e => e.stopPropagation()} onKeyDown={this.handleKeyDown.bind(this)}>
+                    { this.props.children }
                 </div>
-            </div>
+            </Fragment>
         );
     }
 }
@@ -113,8 +67,8 @@ const Manager = {
     close(){
         onClose && onClose(() => {
             ReactDOM.unmountComponentAtNode(node);
-        document.body.classList.remove('qubely-builder-modal-open')
-    });
+            document.body.classList.remove('qubely-builder-modal-open');
+        });
     },
 }
 
