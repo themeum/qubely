@@ -16,23 +16,32 @@ registerBlockType('qubely/column', {
 		// Dimension
 		colWidth: { type: 'object', default: { md: 50, sm: 50, xs: 100, unit: '%', device: 'md' }, style: [{ selector: '{{QUBELY}}.qubely-column-front {flex:{{colWidth}};} {{QUBELY}}.qubely-column-front {max-width:{{colWidth}};}' }] },
 		padding: {
-			type: 'object',
-			default: {
-				md: { bottom: 0, top: 0, unit: 'px' },
-				sm: { bottom: 0, top: 0, unit: 'px' },
-				xs: { bottom: 0, top: 0, unit: 'px' },
-			},
-			style: [{ selector: '{{QUBELY}} .qubely-column-inner{padding:{{padding}};}' }]
-		},
-		margin: {
-			type: 'object',
-			default: {
-				md: { bottom: 0, top: 0, unit: 'px' },
-				sm: { bottom: 0, top: 0, unit: 'px' },
-				xs: { bottom: 0, top: 0, unit: 'px' },
-			},
-			style: [{ selector: '{{QUBELY}} .qubely-column-inner{margin:{{margin}};}' }]
-		},
+            type: 'object',
+            default: {
+                md: {
+                    top: 0,
+                    right: 0,
+                    bottom: 0,
+                    left: 0
+                },
+                unit: 'px',
+            },
+            style: [{ selector: '{{QUBELY}} .qubely-column-inner {padding: {{padding}};}' }]
+        },
+
+        margin: {
+            type: 'object',
+            default: {
+                md: {
+                    top: 0,
+                    right: 0,
+                    bottom: 0,
+                    left: 0
+                },
+                unit: 'px',
+            },
+            style: [{ selector: '{{QUBELY}} .qubely-column-inner {margin: {{margin}};}' }]
+        },
 
 		// Style
 		colBg: { type: 'object', default: {}, style: [{ selector: '{{QUBELY}} .qubely-column-inner' }] },

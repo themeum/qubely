@@ -18,18 +18,27 @@ registerBlockType('qubely/row', {
         padding: {
             type: 'object',
             default: {
-                md: { bottom: 70, top: 70, unit: 'px' },
-                sm: { bottom: 70, top: 70, unit: 'px' },
-                xs: { bottom: 70, top: 70, unit: 'px' },
+                md: {
+                    top: 70,
+                    right: 0,
+                    bottom: 70,
+                    left: 0
+                },
+                unit: 'px',
             },
             style: [{ selector: '{{QUBELY}}.qubely-section {padding: {{padding}};}' }]
         },
+
         margin: {
             type: 'object',
             default: {
-                md: { bottom: 0, top: 0, unit: 'px' },
-                sm: { bottom: 0, top: 0, unit: 'px' },
-                xs: { bottom: 0, top: 0, unit: 'px' },
+                md: {
+                    top: 0,
+                    right: 0,
+                    bottom: 0,
+                    left: 0
+                },
+                unit: 'px',
             },
             style: [{ selector: '{{QUBELY}}.qubely-section {margin: {{margin}} !important;}' }]
         },

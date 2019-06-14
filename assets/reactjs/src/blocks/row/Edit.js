@@ -4,7 +4,7 @@ const { withDispatch } = wp.data;
 const { PanelBody, TextControl, SelectControl, Tooltip, Button, RangeControl } = wp.components
 const { Component, Fragment } = wp.element
 const { InspectorControls, InnerBlocks, InspectorAdvancedControls } = wp.editor
-import { Background, Select, Range, Toggle, Shape, BoxShadow, Tab, Tabs, Separator, DragDimension, Border, BorderRadius, RadioAdvanced } from '../../components/FieldRender'
+import { Background, Select, Range, Toggle, Shape, BoxShadow, Tab, Tabs, Separator, Border, BorderRadius, RadioAdvanced, Dimension } from '../../components/FieldRender'
 import { CssGenerator } from '../../components/CssGenerator'
 import { videoBackground } from '../../components/HelperFunction'
 import { ModalManager } from '../../helpers/ModalManager';
@@ -117,8 +117,76 @@ class Edit extends Component {
                         />
 
                         {heightOptions === 'custom' &&
-                            <Range label={__('Min Height')} value={rowHeight || ''} onChange={val => setAttributes({ rowHeight: val })} min={40} max={1200} unit={['px', 'em', '%']} responsive />
+                            <Range
+                                label={__('Min Height')}
+                                value={rowHeight || ''}
+                                onChange={val => setAttributes({ rowHeight: val })}
+                                min={40}
+                                max={1200}
+                                unit={['px', 'em', '%']}
+                                responsive
+                                device={this.state.device} 
+                                onDeviceChange={value => this.setState({ device: value })}
+                            />
                         }
+
+                        {align == 'full' &&
+                            <Fragment>
+                                <RadioAdvanced label={__('Container')} value={rowContainerWidth} onChange={val => setAttributes({ rowContainerWidth: val })}
+                                    options={[
+                                        { label: __('Full Width'), value: 'fluid', title: __('Full Width') },
+                                        { label: __('Boxed'), value: 'boxed', title: __('Boxed') }
+                                    ]}
+                                />
+                                {rowContainerWidth == 'boxed' &&
+                                    <Range
+                                        label={__('Container Width')}
+                                        min={970} max={1920}
+                                        value={rowContainer}
+                                        onChange={val => setAttributes({ rowContainer: parseInt(val) })}
+                                    />
+                                }
+                            </Fragment>
+                        }
+
+                        {columns > 1 &&
+                            <Range
+                                label={__('Gutter Size')}
+                                min={0} max={100}
+                                value={rowGutter}
+                                onChange={val => setAttributes({ rowGutter: val })}
+                                unit={['px', 'em', '%']}
+                                responsive
+                                device={this.state.device}
+                                onDeviceChange={value => this.setState({ device: value })}
+                            />
+                        }
+
+                        <Separator />
+
+                        <Dimension
+                            label={__('Padding')}
+                            value={padding}
+                            onChange={val => setAttributes({ padding: val })}
+                            min={0}
+                            max={200} 
+                            unit={['px', 'em', '%']}
+                            responsive 
+                            device={this.state.device} 
+                            onDeviceChange={value => this.setState({ device: value })}
+                        />
+
+                        <Dimension
+                            label={__('Margin')}
+                            value={margin}
+                            onChange={val => setAttributes({ margin: val })}
+                            min={0}
+                            max={200} 
+                            unit={['px', 'em', '%']}
+                            responsive 
+                            device={this.state.device} 
+                            onDeviceChange={value => this.setState({ device: value })}
+                        />
 
                         <Separator />
 
@@ -147,57 +215,21 @@ class Edit extends Component {
                                 </Tooltip>
                             </div>
                         </div>
-
-                        <Separator />
-
-                        <DragDimension
-                            uniqueId={uniqueId}
-                            label={__('Row Spacing')}
-                            unit
-                            value={{ padding: padding, margin: margin }}
-                            onChange={val => setAttributes(val)}
-                            responsive
-                        />
-                        {columns > 1 &&
-                            <Fragment>
-                                <Separator />
-                                <Range
-                                    label={__('Gutter Size')}
-                                    min={0} max={100}
-                                    value={rowGutter}
-                                    onChange={val => setAttributes({ rowGutter: val })}
-                                    unit={['px', 'em', '%']}
-                                    responsive
-                                    device={this.state.device}
-                                    onDeviceChange={value => this.setState({ device: value })}
-                                />
-                            </Fragment>
-                        }
-                        {align == 'full' &&
-                            <Fragment>
-                                <Separator />
-                                <RadioAdvanced label={__('Container')} value={rowContainerWidth} onChange={val => setAttributes({ rowContainerWidth: val })}
-                                    options={[
-                                        { label: __('Full Width'), value: 'fluid', title: __('Full Width') },
-                                        { label: __('Boxed'), value: 'boxed', title: __('Boxed') }
-                                    ]}
-                                />
-                                {rowContainerWidth == 'boxed' &&
-                                    <Range
-                                        label={__('Container Width')}
-                                        min={970} max={1920}
-                                        value={rowContainer}
-                                        onChange={val => setAttributes({ rowContainer: parseInt(val) })}
-                                    />
-                                }
-                            </Fragment>
-                        }
                     </PanelBody>
 
                     <PanelBody initialOpen={false} title={__('Background')}>
                         <Background label={__('Background')} sources={['image', 'gradient', 'video']} parallax value={rowBg} onChange={val => setAttributes({ rowBg: val })} />
                         <Separator />
-                        <Border label={__('Border')} value={border} unit={['px', 'em']} responsive onChange={val => setAttributes({ border: val })} min={0} max={10} />
+                        <Border
+                            label={__('Border')}
+                            value={border} unit={['px', 'em']}
+                            responsive
+                            onChange={val => setAttributes({ border: val })}
+                            min={0}
+                            max={10}
+                            device={this.state.device} 
+                            onDeviceChange={value => this.setState({ device: value })}
+                        />
                         <Separator />
                         <BoxShadow label={__('Box-Shadow')} value={rowShadow} onChange={val => setAttributes({ rowShadow: val })} />
                         <Separator />
@@ -208,7 +240,10 @@ class Edit extends Component {
                             min={0}
                             max={100}
                             unit={['px', 'em', '%']}
-                            responsive />
+                            responsive
+                            device={this.state.device} 
+                            onDeviceChange={value => this.setState({ device: value })}
+                        />
 
                         <Separator />
                         <Toggle label={__('Enable Overlay')} value={enableRowOverlay} onChange={val => setAttributes({ enableRowOverlay: val })} />
@@ -244,31 +279,31 @@ class Edit extends Component {
 
                 <div className={`qubely-section qubely-block-${uniqueId} ${(rowBg.bgimgParallax && rowBg.bgimgParallax == 'animated') ? 'qubely-section-parallax' : ''}`} {...rowId ? { id: rowId } : ''}>
                     <div className="qubley-padding-indicator">
-                        <span className="qubely-indicator-top" style={{ height: padding.md.top ? padding.md.top + padding.md.unit : 0 }} >
-                            {(padding.md.top && padding.md.top > 20) ? padding.md.top + ' ' + padding.md.unit : ''}
+                        <span className="qubely-indicator-top" style={{ height: padding.md.top ? padding.md.top + padding.unit : 0 }} >
+                            {(padding.md.top && padding.md.top > 20) ? padding.md.top + ' ' + padding.unit : ''}
                         </span>
-                        <span className="qubely-indicator-right" style={{ width: padding.md.right ? padding.md.right + padding.md.unit : 0 }} >
-                            {(padding.md.right && padding.md.right > 40) ? padding.md.right + ' ' + padding.md.unit : ''}
+                        <span className="qubely-indicator-right" style={{ width: padding.md.right ? padding.md.right + padding.unit : 0 }} >
+                            {(padding.md.right && padding.md.right > 40) ? padding.md.right + ' ' + padding.unit : ''}
                         </span>
-                        <span className="qubely-indicator-bottom" style={{ height: padding.md.bottom ? padding.md.bottom + padding.md.unit : 0 }} >
-                            {(padding.md.bottom && padding.md.bottom > 20) ? padding.md.bottom + ' ' + padding.md.unit : ''}
+                        <span className="qubely-indicator-bottom" style={{ height: padding.md.bottom ? padding.md.bottom + padding.unit : 0 }} >
+                            {(padding.md.bottom && padding.md.bottom > 20) ? padding.md.bottom + ' ' + padding.unit : ''}
                         </span>
-                        <span className="qubely-indicator-left" style={{ width: padding.md.left ? padding.md.left + padding.md.unit : 0 }} >
-                            {(padding.md.left && padding.md.left > 40) ? padding.md.left + ' ' + padding.md.unit : ''}
+                        <span className="qubely-indicator-left" style={{ width: padding.md.left ? padding.md.left + padding.unit : 0 }} >
+                            {(padding.md.left && padding.md.left > 40) ? padding.md.left + ' ' + padding.unit : ''}
                         </span>
                     </div>
                     <div className="qubley-margin-indicator">
-                        <span className="qubely-indicator-top" style={{ height: margin.md.top ? margin.md.top + margin.md.unit : 0 }} >
-                            {margin.md.top && margin.md.top > 20 ? margin.md.top + ' ' + margin.md.unit : ''}
+                        <span className="qubely-indicator-top" style={{ height: margin.md.top ? margin.md.top + margin.unit : 0 }} >
+                            {margin.md.top && margin.md.top > 20 ? margin.md.top + ' ' + margin.unit : ''}
                         </span>
-                        <span className="qubely-indicator-right" style={{ width: margin.md.right ? margin.md.right + margin.md.unit : 0 }} >
-                            {margin.md.right && margin.md.right > 40 ? margin.md.right + ' ' + margin.md.unit : ''}
+                        <span className="qubely-indicator-right" style={{ width: margin.md.right ? margin.md.right + margin.unit : 0 }} >
+                            {margin.md.right && margin.md.right > 40 ? margin.md.right + ' ' + margin.unit : ''}
                         </span>
-                        <span className="qubely-indicator-bottom" style={{ height: margin.md.bottom ? margin.md.bottom + margin.md.unit : 0 }} >
-                            {margin.md.bottom && margin.md.bottom > 20 ? margin.md.bottom + ' ' + margin.md.unit : ''}
+                        <span className="qubely-indicator-bottom" style={{ height: margin.md.bottom ? margin.md.bottom + margin.unit : 0 }} >
+                            {margin.md.bottom && margin.md.bottom > 20 ? margin.md.bottom + ' ' + margin.unit : ''}
                         </span>
-                        <span className="qubely-indicator-left" style={{ width: margin.md.left ? margin.md.left + margin.md.unit : 0 }} >
-                            {margin.md.left && margin.md.left > 40 ? margin.md.left + ' ' + margin.md.unit : ''}
+                        <span className="qubely-indicator-left" style={{ width: margin.md.left ? margin.md.left + margin.unit : 0 }} >
+                            {margin.md.left && margin.md.left > 40 ? margin.md.left + ' ' + margin.unit : ''}
                         </span>
                     </div>
                     {(Object.entries(shapeTop).length > 1 && shapeTop.openShape == 1 && shapeTop.style) &&
