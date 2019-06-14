@@ -6,7 +6,7 @@ import { animationAttr } from '../../components/HelperFunction';
 
 class Save extends Component {
 	render() {
-		const { uniqueId, layout, mediaType, titleLevel, title, separatorStyle, separatorPosition, content, iconName, image, number, enableButton, animation, subTitle, subTitleLevel, subTitleContent, buttonFillType, buttonSize, buttonText, buttonUrl, buttonIconName, buttonIconPosition, useMediaBg } = this.props.attributes
+		const { uniqueId, layout, mediaType, titleLevel, title, separatorStyle, separatorPosition, enableContent, content, iconName, image, number, enableButton, animation, subTitle, subTitleLevel, subTitleContent, buttonFillType, buttonSize, buttonText, buttonUrl, buttonIconName, buttonIconPosition, useMediaBg } = this.props.attributes
 
 		const separators = {
 			solid: { type: 'css', separator: 'solid', width: 300, stroke: 10 },
@@ -39,7 +39,7 @@ class Save extends Component {
 			<div className={`qubely-block-${uniqueId}`} {...animationAttr(animation)}>
 				<div className={`qubely-block-info-box qubely-info-box-layout-${layout}`}>
 					{(layout != 4 && mediaType) &&
-						<div className={`qubely-info-box-media${ useMediaBg ? ' qubely-media-has-bg' : '' }`}>
+						<div className={`qubely-info-box-media${useMediaBg ? ' qubely-media-has-bg' : ''}`}>
 							{(mediaType == 'icon' && iconName) &&
 								<i className={"qubely-info-box-icon " + iconName} />
 							}
@@ -72,11 +72,14 @@ class Save extends Component {
 							}
 						</div>
 
-						<div className="qubely-info-box-content">
-							<RichText.Content tagName='div' className="qubely-info-box-text" value={content} />
-						</div>
-						{ enableButton == 1 &&
-							<QubelyButtonSave 
+						{
+							enableContent &&
+							<div className="qubely-info-box-content">
+								<RichText.Content tagName='div' className="qubely-info-box-text" value={content} />
+							</div>
+						}
+						{enableButton == 1 &&
+							<QubelyButtonSave
 								buttonFillType={buttonFillType}
 								buttonSize={buttonSize}
 								buttonText={buttonText}

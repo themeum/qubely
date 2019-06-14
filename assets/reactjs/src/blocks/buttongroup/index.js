@@ -30,7 +30,7 @@ registerBlockType('qubely/buttongroup', {
         spacing: {
             type: 'object',
             default: { unit: "px", md: "5" },
-            style: [{ selector: '{{QUBELY}} .qubely-block-button-group {margin: 0 -{{spacing}};} {{QUBELY}} .qubely-block-button-group .wp-block.qubely-group-button {margin: 0 {{spacing}};} {{QUBELY}} .qubely-block-button-group >div {margin: 0 calc(14px + {{spacing}});}' }]
+            style: [{ selector: '{{QUBELY}} .qubely-block-button-group {margin: -{{spacing}};} {{QUBELY}} .qubely-block-button-group .qubely-block-btn-wrapper {margin: {{spacing}};}' }]
         },
         showGlobalSettings: { type: 'boolean', default: true },  // Global Settings
     },

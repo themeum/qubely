@@ -84,7 +84,7 @@ export const cssTypography = (v) => {
 
 // CSS Dimension
 export const cssDimension = (v) => {
-    const unit = v.unit
+    const unit = v.unit ? v.unit : 'px'
     return (v.top || 0) + unit + ' ' + (v.right || 0) + unit + ' ' + (v.bottom || 0) + unit + ' ' + (v.left || 0) + unit
 }
 

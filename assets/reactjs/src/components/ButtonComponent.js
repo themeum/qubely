@@ -62,12 +62,9 @@ const addAttribute = (settings) => {
             },
             buttonTypography: { type: 'object', default: {}, style: [{ selector: '{{QUBELY}} .qubely-block-btn-anchor' }] },
             buttonColor: {
-                type: 'string', default: '#fff',
+                type: 'string', default: '#000',
                 style: [
                     {
-                        condition: [
-                            { key: 'buttonFillType', relation: '==', value: 'fill' }
-                        ],
                         selector: '{{QUBELY}} .qubely-block-btn-anchor { color:{{buttonColor}}; }'
                     }
                 ]

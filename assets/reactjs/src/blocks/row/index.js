@@ -15,8 +15,33 @@ registerBlockType('qubely/row', {
         columns: { type: 'number', default: '' },
 
         // Dimension
-        padding: { type: 'object', default: { md: { bottom: 70, top: 70, unit: 'px' } }, style: [{ selector: '{{QUBELY}}.qubely-section {padding: {{padding}};}' }] },
-        margin: { type: 'object', default: { md: { bottom: 0, top: 0, unit: 'px' } }, style: [{ selector: '{{QUBELY}}.qubely-section {margin: {{margin}} !important;}' }] },
+        padding: {
+            type: 'object',
+            default: {
+                md: {
+                    top: 70,
+                    right: 0,
+                    bottom: 70,
+                    left: 0
+                },
+                unit: 'px',
+            },
+            style: [{ selector: '{{QUBELY}}.qubely-section {padding: {{padding}};}' }]
+        },
+
+        margin: {
+            type: 'object',
+            default: {
+                md: {
+                    top: 0,
+                    right: 0,
+                    bottom: 0,
+                    left: 0
+                },
+                unit: 'px',
+            },
+            style: [{ selector: '{{QUBELY}}.qubely-section {margin: {{margin}} !important;}' }]
+        },
 
         rowGutter: {
             type: 'object', default: { md: 30, sm: 30, xs: 30, unit: 'px' }, style: [{
@@ -31,18 +56,25 @@ registerBlockType('qubely/row', {
             }]
         },
 
+        rowContainerWidth: {
+            type: 'string',
+            default: 'boxed'
+        },
+
         rowContainer: {
-            type: 'object', default: { md: 1140, sm: 960, xs: 720, unit: 'px' },
+            type: 'number',
+            default: 1140,
             style: [
                 {
                     condition: [
                         { key: 'align', relation: '==', value: 'full' },
+                        { key: 'rowContainerWidth', relation: '==', value: 'boxed' },
                     ],
-                    selector: '{{QUBELY}} .qubely-container {max-width: {{rowContainer}}; margin: 0 auto;}'
+                    selector: '@media (min-width: 1200px) {{{QUBELY}} .qubely-container {max-width: {{rowContainer}}px;}}'
                 }
             ]
         },
-        position: { type: 'string', default: '', style: [{ selector: '{{QUBELY}} .qubely-row {-webkit-box-align: {{position}}; -ms-flex-align: {{position}}; align-items: {{position}}; }' }] },
+        position: { type: 'string', default: '', style: [{ selector: '{{QUBELY}} .qubely-row, {{QUBELY}} .qubely-row .editor-block-list__layout {-webkit-box-align: {{position}}; -ms-flex-align: {{position}}; align-items: {{position}}; }' }] },
 
         // Background
         rowBg: { type: 'object', default: { bgimgPosition: 'center center', bgimgSize: 'cover', bgimgRepeat: 'no-repeat', bgDefaultColor: '#f5f5f5' }, style: [{ selector: '{{QUBELY}}.qubely-section' }] },
@@ -120,7 +152,7 @@ registerBlockType('qubely/row', {
         hideMobile: { type: 'boolean', default: false, style: [{ selector: '{{QUBELY}}.qubely-section{ display:none; }' }] },
 
         // Advanced Settings
-        rowId: { type: 'object', default: '' },
+        rowId: { type: 'string', default: '' },
         rowZindex: { type: 'number', default: '', style: [{ selector: '{{QUBELY}}.qubely-section{z-index:{{rowZindex}};}' }] },
         rowReverse: { type: 'object', default: {}, style: [{ selector: '{{QUBELY}}.qubely-section .qubely-row, {{QUBELY}}.qubely-row > .editor-inner-blocks > .editor-block-list__layout{flex-direction:row-reverse;}' }] },
 

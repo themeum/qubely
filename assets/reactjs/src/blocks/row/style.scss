@@ -1,13 +1,21 @@
 .qubely-section {
     position: relative;
-    // &.alignfull {
-    //     margin: 0 !important;
-    // }
-    .qubely-container{
+    .qubely-container {
         position: relative;
-        @media only screen and (max-width: 991px) {
-            padding-left: 15px;
-            padding-right: 15px;
+        width: 100%;
+        margin-right: auto;
+        margin-left: auto;
+        
+        @media (min-width: 576px) {
+            max-width: 540px;
+        }
+          
+        @media (min-width: 768px) {
+            max-width: 720px;
+        }
+          
+        @media (min-width: 992px) {
+            max-width: 960px;
         }
     }
     .qubely-row {

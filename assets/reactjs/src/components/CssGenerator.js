@@ -72,7 +72,7 @@ const objectField = (data) => {
         return { data: cssBoxShadow(data), action: 'append' }; //Shadow
     } else if (data.direction) {
         return { data: cssGradient(data, 'return'), action: 'append' }; //Gradient
-    } else if (data.top || data.left || data.right || data.bottom) {
+    } else if (typeof (data.top) != 'undefined' || typeof (data.left) != 'undefined' || typeof (data.right) != 'undefined' || typeof (data.bottom) != 'undefined') {
         return { data: cssDimension(data), action: 'replace' }; //Dimension
     } else if (data.openShape) {
         return { data: cssShape(data), action: 'append' }; //Shape
@@ -214,8 +214,8 @@ export const CssGenerator = (settings, blockName, blockID, isInline = false) => 
 
     // Join CSS
     if (md.length > 0) { __CSS += md.join('') }
-    if (sm.length > 0) { __CSS += '@media (min-width: 768px) and (max-width: 991px) {' + sm.join('') + '}' }
-    if (xs.length > 0) { __CSS += '@media (max-width: 767px) {' + xs.join('') + '}' }
+    if (sm.length > 0) { __CSS += '@media (max-width: 1199px) {' + sm.join('') + '}' }
+    if (xs.length > 0) { __CSS += '@media (max-width: 991px) {' + xs.join('') + '}' }
     if (notResponsiveCss.length > 0) { __CSS += notResponsiveCss.join('') }
 
     if (isInline) {
