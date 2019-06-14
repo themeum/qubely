@@ -529,7 +529,7 @@ const {itemType,blockData,layoutData, layer}=this.state
                     <div className="qubely-modal-sidebar-content">
 
                         {
-                            !(itemType == 'layout' && layer == 'single') || !(itemType== 'saved_blocks') && <h3>Categories</h3>
+                            !(itemType == 'layout' && layer == 'single') && !(itemType== 'saved_blocks') && <h3>Categories</h3>
                         }
                         {
                             // @TODO: Must add category count
