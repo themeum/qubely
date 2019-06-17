@@ -325,7 +325,7 @@ class Edit extends Component {
                             value={padding}
                             onChange={val => setAttributes({ padding: val })}
                             min={0}
-                            max={200}
+                            max={600}
                             unit={['px', 'em', '%']}
                             responsive
                             device={this.state.device}
@@ -336,8 +336,8 @@ class Edit extends Component {
                             label={__('Margin')}
                             value={margin}
                             onChange={val => setAttributes({ margin: val })}
-                            min={0}
-                            max={200}
+                            min={-600}
+                            max={600}
                             unit={['px', 'em', '%']}
                             responsive
                             device={this.state.device}
