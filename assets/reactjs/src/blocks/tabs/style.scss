@@ -97,7 +97,11 @@
 			border-color: #0085ba;
 		}
 	}
-
+	@media (max-width: 991px) {
+		.qubely-tab-item {
+			margin-bottom: 10px;
+		}
+	}
 	.qubely-tab-content {
 		display: none;
 		&.qubely-active {
