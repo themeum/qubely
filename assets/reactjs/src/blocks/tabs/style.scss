@@ -9,6 +9,7 @@
 			display: block;
 			text-align: center;
 			position: relative;
+			margin-bottom: 10px;
 			
 			.qubely-tab-title {
 				cursor: pointer;
@@ -95,11 +96,6 @@
 		&:hover {
 			color: #0085ba;
 			border-color: #0085ba;
-		}
-	}
-	@media (max-width: 991px) {
-		.qubely-tab-item {
-			margin-bottom: 10px;
 		}
 	}
 	.qubely-tab-content {
