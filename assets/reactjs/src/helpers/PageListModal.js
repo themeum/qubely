@@ -33,7 +33,8 @@ class PageListModal extends Component {
             notFoundMessage: 'Sorry we couldn\'t find your match request!',
             requestFailedMsg: '',
             spinner: false,
-            lazyloadThrottleTimeout: 0
+            lazyloadThrottleTimeout: 0,
+            priceFilter: ''
         };
         this._lazyload = this._lazyload.bind(this);
     }
@@ -115,7 +116,7 @@ class PageListModal extends Component {
     };
 
     getCurrentPageData() {
-        let { itemType } = this.state;
+        let { itemType, priceFilter } = this.state;
         let pageData = ( itemType == 'block' ) ? this.state.blockData : this.state.layoutData;
         let pageCategories = ( itemType == 'block' ) ? this.state.blockCategories : this.state.layoutCategories;
         let selectedCategory = ( itemType == 'block' ) ? this.state.selectedBlockCategory : this.state.selectedLayoutCategory;
@@ -171,7 +172,6 @@ class PageListModal extends Component {
             if( selectedCategory ) {
                 let itemCount = 0;
                 pageData[ selectedCategory ].map( value => {
-
                     if( ! value.parentID   && ! (tempDataID.indexOf(value.ID) > -1 ) ) {
                         let found = value.category.find( item => item.slug == selectedCategory );
                         if( found ) {
@@ -184,8 +184,8 @@ class PageListModal extends Component {
                 for(let key in pageData) {
                     pageData[ key ].map( value => {
                         if( ! value.parentID && ! (tempDataID.indexOf(value.ID) > -1 )  ) {
-                            currentPageData.push( value );
                             tempDataID.push(value.ID);
+                            currentPageData.push( value );
                         }
                     })
                 }
@@ -194,6 +194,10 @@ class PageListModal extends Component {
 
         if( this.state.layer === 'block' ) {
             currentPageData = this.state.savedBlocks;
+        }
+
+        if(itemType != 'saved_blocks'){
+            currentPageData = priceFilter == 'pro' ? currentPageData.filter( item => item.pro == true ) : priceFilter == 'pro' ? currentPageData.filter( item => item.pro == false ) : currentPageData;
         }
 
         if( this.state.isSearchEnable && currentPageData.length > 0 ) {
@@ -205,6 +209,7 @@ class PageListModal extends Component {
             }
             return { pageCategories, selectedCategory, currentPageData: filterData }
         }
+
         return { pageCategories, selectedCategory, currentPageData }
     }
 
@@ -508,49 +513,35 @@ class PageListModal extends Component {
 
     _getDataLength(){
         let test=0
-        Object.keys( this.state.blockData).forEach(key=>test+=this.state.blockData[key].length)
+        if(this.state.itemType == 'block'){
+            Object.keys( this.state.blockData).forEach(key=>test+=this.state.blockData[key].length)
+        }else{
+            Object.keys( this.state.layoutData).forEach(key=>test+=this.state.layoutData[key].length)
+        }
         return test
+    }
+
+    _changePriceFilter(val = ''){
+        this.setState({
+            priceFilter: val ? val : ''
+        })
     }
 
 
     render() {
         let { pageCategories, selectedCategory, currentPageData } = this.getCurrentPageData();
         let types = typeof wp.QUBELY_PRO_VERSION === 'undefined' ? 'inactive' : 'active';
-const {itemType,blockData,layoutData, layer}=this.state
+        let {itemType,blockData,layoutData, layer, selectedBlockCategory, selectedLayoutCategory}=this.state
         return (
 
             <Modal className="qubely-builder-modal-pages-list" customClass="qubely-builder-modal-template-list" onRequestClose={this.props.onRequestClose} openTimeoutMS={0} closeTimeoutMS={0}>
-                <div className="qubely-layout-modal-sidebar">
+
+                <div className="qubely-builder-modal-header">
                     <div className="template-search-box">
                         <i className="fas fa-search"></i>
                         <input type="search" onChange={this._OnSearchTemplate.bind(this)} value={this.state.searchContext} placeholder={__('Type to search')} className="form-control"/>
                     </div>
 
-                    <div className="qubely-modal-sidebar-content">
-
-                        {
-                            !(itemType == 'layout' && layer == 'single') && !(itemType== 'saved_blocks') && <h3>Categories</h3>
-                        }
-                        {
-                            // @TODO: Must add category count
-                            ( !this.state.parent_id ) && this.state.layer != 'block' &&
-                            <ul className="qubely-template-categories">
-                                <li onClick={() => this._OnChangeCategory('')} >All Categories <span>{this._getDataLength()}</span></li>
-                                {
-                                    pageCategories.map((data, index) => {
-                                        return <li onClick={() => this._OnChangeCategory(data.slug)} key={index}>{data.name}
-                                        <span>
-                                            {
-                                            itemType=='block'? blockData[data.slug] ? blockData[data.slug].length :0: layoutData[data.slug] ? layoutData[data.slug].length :0
-                                        }
-                                        </span></li>
-                                    })
-                                }
-                            </ul>
-                        }
-                    </div>
-                </div>
-                <div className="qubely-layout-modal-content-area">
                     <div className="qubely-template-list-header">
                         <button className={ this.state.itemType == 'block' ? 'active' : ''} onClick={ e => this._onlickBlocksTab() }> {__('Sections')} </button>
                         <button className={ this.state.itemType == 'layout' ? 'active' : ''} onClick={ e => this._onlickLayoutsTab() }> {__('Layouts')} </button>
@@ -559,15 +550,69 @@ const {itemType,blockData,layoutData, layer}=this.state
                             <i className={"fas fa-times"} />
                         </button>
                     </div>
+                </div>
+
+                <div className="qubely-layout-modal-sidebar">
+
+                    <div className="qubely-modal-sidebar-content">
+                        {
+                            !(itemType == 'layout' && layer == 'single') && !(itemType== 'saved_blocks') && <h3>Categories</h3>
+                        }
+                        {
+                            ( !this.state.parent_id ) && this.state.layer != 'block' &&
+                            <ul className="qubely-template-categories">
+                                <li
+                                    className={itemType == 'block' ? '' == selectedBlockCategory ? 'active' : '' : '' == selectedLayoutCategory ? 'active' : ''}
+                                    onClick={() => this._OnChangeCategory('')}>
+                                    {__('All Categories')}
+                                    <span>
+                                        {this._getDataLength()}
+                                    </span>
+                                </li>
+                                {
+                                    pageCategories.map((data, index) => (
+                                        <li className={itemType == 'block' ? data.slug == selectedBlockCategory ? 'active' : '' : data.slug == selectedLayoutCategory ? 'active' : ''}
+                                            onClick={() => this._OnChangeCategory(data.slug)}
+                                            key={index}>
+                                                {data.name}
+                                            <span>
+                                                {
+                                                    itemType=='block'? blockData[data.slug] ? blockData[data.slug].length :0: layoutData[data.slug] ? layoutData[data.slug].length :0
+                                                }
+                                            </span>
+                                        </li>
+                                    ))
+                                }
+                            </ul>
+                        }
+                    </div>
+                </div>
+                <div className="qubely-layout-modal-content-area">
+
+                    { itemType != 'saved_blocks' && <div className="qubely-template-list-sub-header">
+                        <h4>
+
+                            { ( this.state.itemType == 'layout' && this.state.layer == 'single' ) &&
+                                <span className={"qubely-template-back"} onClick={()=>this.setState({layer:'multiple', parent_id: ''})}><span className="dashicons dashicons-arrow-left-alt" />&nbsp;</span>
+                            }
+
+                            {this._getDataLength()}&nbsp;
+                            {itemType == 'block' ? __('Sections') : __('Layout Bundles')}
+                        </h4>
+                        <div className="qubely-template-filter-button-group">
+                            <button onClick={() => this._changePriceFilter()} className={'' == this.state.priceFilter ? 'active' : ''}>{__('All')}</button>
+                            <button onClick={() => this._changePriceFilter('free')} className={'free' == this.state.priceFilter ? 'active' : ''}>{__('Free')}</button>
+                            <button onClick={() => this._changePriceFilter('pro')} className={'pro' == this.state.priceFilter ? 'active' : ''}>
+                                <img src={qubely_admin.plugin+'assets/img/icon-premium.svg'} alt=""/>
+                                {__('Premium')}
+                            </button>
+                        </div>
+                    </div>}
+
                     { !this.state.loading ?
                         <div id="modalContainer" className="qubely-template-list-modal">
                             <div className="qubely-builder-template-list-container">
-                                <div className="qubely-template-option-header">
-                                    { ( this.state.itemType == 'layout' && this.state.layer == 'single' ) &&
-                                    <span className={"qubely-template-back"} onClick={()=>this.setState({layer:'multiple', parent_id: ''})}><span className="dashicons dashicons-arrow-left-alt" /></span>
-                                    }
-
-                                    { /*
+                                {/*<div className="qubely-template-option-header">
                                         ( this.state.itemType == 'layout' ) &&
                                         <div className="template-options">
                                             <ul>
@@ -575,8 +620,8 @@ const {itemType,blockData,layoutData, layer}=this.state
                                                 <li className={ this.state.layer === 'single' ? 'active' : '' }> <i className="qubely-grid-view" onClick={ e => this.setState( { layer: 'single' } ) } /> </li>
                                             </ul>
                                         </div>
-                                    */}
-                                </div>
+
+                                </div>*/}
 
                                 <div id="layouts-blocks-list" className={"qubely-builder-page-templates " + (this.state.itemType == "saved_blocks" ? 'qubely-frontendd-block-list' : '')}>
                                     {
@@ -612,7 +657,7 @@ const {itemType,blockData,layoutData, layer}=this.state
                                         />
                                     ) }
 
-                                    { ( this.state.layer == 'block' ) &&
+                                    { ( this.state.layer == 'block' && currentPageData.length != 0 ) &&
                                     <div className="qubely-reusable-list-title">
                                         <div className="qubely-reusable-list-content">
                                             <span className="qubely-tmpl-title" > {__('Title')}</span>
