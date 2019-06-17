@@ -42,7 +42,7 @@ class Border extends Component {
 
         unit && value.unit ? newBorder.unit = value.unit : newBorder.unit = defaultUnit
         newBorder.widthType = value.widthType ? value.widthType : defaultWidthType
-        newBorder.openBorder = value.openBorder ? value.openBorder : 1
+        newBorder.openBorder = value.openBorder ? value.openBorder : 0
         onChange(newBorder)
     }
     setSettings(type, newValue) {
@@ -156,8 +156,8 @@ class Border extends Component {
                                     <Range
                                         value={global}
                                         onChange={val => this.updateBorder('global', val)}
-                                        min={min || '0'}
-                                        max={max || '10'}
+                                        min={min || 0}
+                                        max={max || 10}
                                         step={1}
                                     />
                                 </div>
@@ -175,8 +175,8 @@ class Border extends Component {
                                                     <Range
                                                         value={values[index] || ''}
                                                         onChange={val => this.updateBorder(iterator[index], val)}
-                                                        min={min || '0'}
-                                                        max={max || '10'}
+                                                        min={min || 0}
+                                                        max={max || 10}
                                                         step={1}
                                                     />
                                                 </div>

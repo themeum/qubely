@@ -328,8 +328,8 @@ class Edit extends Component {
                             max={600}
                             unit={['px', 'em', '%']}
                             responsive
-                            device={this.state.device}
-                            onDeviceChange={value => this.setState({ device: value })}
+                            device={this.state.responsiveDevice}
+                            onDeviceChange={value => this.setState({ responsiveDevice: value })}
                         />
 
                         <Dimension
@@ -340,8 +340,8 @@ class Edit extends Component {
                             max={600}
                             unit={['px', 'em', '%']}
                             responsive
-                            device={this.state.device}
-                            onDeviceChange={value => this.setState({ device: value })}
+                            device={this.state.responsiveDevice}
+                            onDeviceChange={value => this.setState({ responsiveDevice: value })}
                         />
                     </PanelBody>
                     <PanelBody initialOpen={false} title={__('Design')}>

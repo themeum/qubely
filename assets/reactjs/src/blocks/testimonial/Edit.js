@@ -339,7 +339,8 @@ class Edit extends Component {
                         <Separator />
                         <Border
                             label={__('Border')}
-                            value={border} onChange={val => setAttributes({ border: val })} />
+                            value={border} 
+                            onChange={val => setAttributes({ border: val })} />
                         <Padding
                             label={__('Padding')}
                             value={bgPadding} onChange={(value) => setAttributes({ bgPadding: value })}

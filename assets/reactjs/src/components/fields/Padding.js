@@ -37,7 +37,7 @@ class Padding extends Component {
 
         unit && value.unit ? newPadding.unit = value.unit : newPadding.unit = defaultUnit
         newPadding.paddingType = value.paddingType ? value.paddingType : defaultPaddingType
-        newPadding.openPadding = value.openPadding ? value.openPadding : 1
+        newPadding.openPadding = value.openPadding ? value.openPadding : 0
         onChange(newPadding)
     }
 

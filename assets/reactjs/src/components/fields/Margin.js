@@ -39,7 +39,7 @@ class Margin extends Component {
 
         unit && value.unit ? newMargin.unit = value.unit : newMargin.unit = defaultUnit
         newMargin.marginType = value.marginType ? value.marginType : defaultMarginType
-        newMargin.openMargin = value.openMargin ? value.openMargin : 1
+        newMargin.openMargin = value.openMargin ? value.openMargin : 0
         onChange(newMargin)
     }
     updateMarginType = (newType) => {

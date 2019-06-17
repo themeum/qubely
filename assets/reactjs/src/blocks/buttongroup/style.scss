@@ -2,6 +2,7 @@
     display: flex;
     flex-wrap: wrap;
     .editor-inner-blocks{
+        width: auto !important;
         .editor-block-list__layout{
             display: block;
             width: fit-content;

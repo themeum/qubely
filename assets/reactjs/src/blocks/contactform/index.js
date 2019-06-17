@@ -16,7 +16,7 @@ registerBlockType('qubely/contactform', {
     description: __('Encourage site visitor interactions with Qubely Contact Form List'),
     category: 'qubely',
     icon: <img src={qubely_admin.plugin + 'assets/img/blocks/block-contact-form.svg'} alt={__('Contact Form')} />,
-    keywords: [__('Form')],
+    keywords: [__('Contact'),__('Form')],
     attributes: {
         uniqueId: { type: 'string', default: '' },
         layout: { type: 'string', default: 'classic' },

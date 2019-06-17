@@ -33,7 +33,7 @@ class BorderRadius extends Component {
         }
         unit && value.unit ? newBorderRadius.unit = value.unit : newBorderRadius.unit = defaultUnit
         newBorderRadius.radiusType = value.radiusType ? value.radiusType : defaultRadiusType
-        newBorderRadius.openBorderRadius = value.openBorderRadius ? value.openBorderRadius : 1
+        newBorderRadius.openBorderRadius = value.openBorderRadius ? value.openBorderRadius : 0
         onChange(newBorderRadius)
     }
 

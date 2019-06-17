@@ -24,8 +24,8 @@ class Dimension extends Component {
     setSettings(action, position) {
         const { responsive, value, onChange, max, min } = this.props
         let newVal = action;
-        if( typeof min != undefined ){newVal = action<min?min:newVal }
-        if( max ){ newVal = action>max?max:newVal }
+        if (typeof min != undefined) { newVal = action < min ? min : newVal }
+        if (max) { newVal = action > max ? max : newVal }
         let data = (this.state.lock && position != 'unit') ? { 'top': newVal, 'right': newVal, 'bottom': newVal, 'left': newVal } : { [position]: newVal }
         data = Object.assign({}, responsive ? value[window.qubelyDevice] || {} : value, data)
         const final = Object.assign({}, value, responsive ? { [window.qubelyDevice]: data } : data)
@@ -48,8 +48,8 @@ class Dimension extends Component {
                             </label>
                         </div>
                     }
-                    
-                    {responsive && <Device device={responsiveDevice} commonResponsiveDevice={device} className="qubely-ml-10" onChange={(val) => { device && onDeviceChange ? onDeviceChange(val) : this.updateDevice(val) }} />}
+
+                    {responsive && <Device device={responsiveDevice} commonResponsiveDevice={device} className="qubely-ml-10" onChange={(val) => { onDeviceChange(val) }} />}
 
                     {unit &&
                         <div className="qubely-unit-btn-group qubely-ml-auto">
@@ -63,21 +63,21 @@ class Dimension extends Component {
                 </div>
                 <div className="qubely-field-child">
                     <div className={"qubely-dimension-input-group" + (!this.props.noLock ? ' hasLock' : '')}>
-                        {['top', 'right', 'bottom', 'left'].map((val, index) => (<span><input type='number' {...typeof min != undefined ?{min}:''} {...max?{max}:''} value={this._filterValue(val)} 
-                        onChange={
-                            (v) => { 
-                                this.setSettings(v.target.value, val)
-                                if( clientId ){
-                                    $( '#block-'+clientId+' .qubely-section' ).addClass('active');
+                        {['top', 'right', 'bottom', 'left'].map((val, index) => (<span><input type='number' {...typeof min != undefined ? { min } : ''} {...max ? { max } : ''} value={this._filterValue(val)}
+                            onChange={
+                                (v) => {
+                                    this.setSettings(v.target.value, val)
+                                    if (clientId) {
+                                        $('#block-' + clientId + ' .qubely-section').addClass('active');
+                                    }
+                                }}
+                            onBlur={
+                                (v) => {
+                                    if (clientId) {
+                                        $('#block-' + clientId + ' .qubely-section').removeClass('active');
+                                    }
                                 }
-                            }}
-                        onBlur={
-                            (v) => {
-                                if( clientId ){
-                                    $( '#block-'+clientId+' .qubely-section' ).removeClass('active');
-                                } 
-                            }
-                        } /><span>{this.props.dataLabel ? this.props.dataLabel[index] : val}</span></span>))}
+                            } /><span>{this.props.dataLabel ? this.props.dataLabel[index] : val}</span></span>))}
                         {!this.props.noLock &&
                             <button className={(this.state.lock ? 'active ' : '') + 'qubely-button'} onClick={() => this.setState({ lock: !this.state.lock })}>
                                 {this.state.lock ? <span className={'fas fa-lock'} /> : <span className={'fas fa-unlock'} />}
