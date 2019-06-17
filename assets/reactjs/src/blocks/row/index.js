@@ -120,12 +120,12 @@ registerBlockType('qubely/row', {
                     condition: [
                         { key: 'enableRowOverlay', relation: '==', value: true },
                     ],
-                    selector: '{{QUBELY}} .qubely-row-overlay'
+                    selector: '{{QUBELY}} >.qubely-row-overlay'
                 }
             ]
         },
-        rowBlend: { type: 'string', default: '', style: [{ selector: '{{QUBELY}} .qubely-row-overlay { mix-blend-mode: {{rowBlend}}; }' }] },
-        rowOpacity: { type: 'number', default: '.8', style: [{ selector: '{{QUBELY}} .qubely-row-overlay {opacity: {{rowOpacity}}; }' }] },
+        rowBlend: { type: 'string', default: '', style: [{ selector: '{{QUBELY}} >.qubely-row-overlay { mix-blend-mode: {{rowBlend}}; }' }] },
+        rowOpacity: { type: 'number', default: '.8', style: [{ selector: '{{QUBELY}} >.qubely-row-overlay {opacity: {{rowOpacity}}; }' }] },
 
         // Divider
         shapeTop: {
