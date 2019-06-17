@@ -262,9 +262,7 @@ class Edit extends Component {
                             label={__('Icon')}
                             options={[
                                 { icon: 'fas fa-ban', value: '' },
-                                { icon: 'fas fa-quote-left', value: 'fas fa-quote-left' },
-                                { icon: 'dashicons dashicons-format-quote', value: 'dashicons dashicons-format-quote' },
-                                { icon: 'dashicons dashicons-editor-quote', value: 'dashicons dashicons-editor-quote' }
+                                { icon: 'fas fa-quote-left', value: 'fas fa-quote-left' }
                             ]}
                             value={quoteIcon}
                             onChange={val => setAttributes({ quoteIcon: val })} />

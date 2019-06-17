@@ -9,6 +9,7 @@
 			display: block;
 			text-align: center;
 			position: relative;
+			margin-bottom: 10px;
 			
 			.qubely-tab-title {
 				cursor: pointer;
@@ -97,7 +98,6 @@
 			border-color: #0085ba;
 		}
 	}
-
 	.qubely-tab-content {
 		display: none;
 		&.qubely-active {
