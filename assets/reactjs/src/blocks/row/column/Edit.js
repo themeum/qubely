@@ -325,10 +325,10 @@ class Edit extends Component {
                             value={padding}
                             onChange={val => setAttributes({ padding: val })}
                             min={0}
-                            max={200} 
+                            max={200}
                             unit={['px', 'em', '%']}
-                            responsive 
-                            device={this.state.device} 
+                            responsive
+                            device={this.state.device}
                             onDeviceChange={value => this.setState({ device: value })}
                         />
 
@@ -337,21 +337,21 @@ class Edit extends Component {
                             value={margin}
                             onChange={val => setAttributes({ margin: val })}
                             min={0}
-                            max={200} 
+                            max={200}
                             unit={['px', 'em', '%']}
-                            responsive 
-                            device={this.state.device} 
+                            responsive
+                            device={this.state.device}
                             onDeviceChange={value => this.setState({ device: value })}
                         />
                     </PanelBody>
                     <PanelBody initialOpen={false} title={__('Design')}>
                         <Background label={__('Background')} sources={['image', 'gradient']} value={colBg} onChange={val => setAttributes({ colBg: val })} />
                         <Separator />
-                        <Border label={__('Border')} value={colBorder} onChange={val => setAttributes({ colBorder: val })} />
+                        <Border label={__('Border')} value={colBorder} onChange={val => setAttributes({ colBorder: val })} min={0} max={10} />
                         <Separator />
                         <BoxShadow label={__('Box-Shadow')} value={colShadow} onChange={val => setAttributes({ colShadow: val })} />
                         <Separator />
-                        <BorderRadius label={__('Radius')} value={borderRadius} onChange={val => setAttributes({ borderRadius: val })} min={0} max={100} unit={['px', 'em', '%']} responsive  device={this.state.responsiveDevice}  onDeviceChange={value => this.setState({ responsiveDevice: value })}/>
+                        <BorderRadius label={__('Radius')} value={borderRadius} onChange={val => setAttributes({ borderRadius: val })} min={0} max={100} unit={['px', 'em', '%']} responsive device={this.state.responsiveDevice} onDeviceChange={value => this.setState({ responsiveDevice: value })} />
                     </PanelBody>
                 </InspectorControls>
 

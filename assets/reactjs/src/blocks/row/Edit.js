@@ -181,7 +181,7 @@ class Edit extends Component {
                             label={__('Margin')}
                             value={margin}
                             onChange={val => setAttributes({ margin: val })}
-                            min={0}
+                            min={-200}
                             max={200} 
                             unit={['px', 'em', '%']}
                             responsive 
