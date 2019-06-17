@@ -143,14 +143,6 @@ class Edit extends Component {
                             <PanelBody title={__('Background')} initialOpen={false}>
                                 <Range label={__('Height')} value={height} onChange={val => setAttributes({ height: val })} min={100} max={1200} responsive unit device={device} onDeviceChange={value => this.setState({ device: value })} />
                                 <Background label={__('Background')} sources={['image', 'gradient']} value={background} onChange={val => setAttributes({ background: val })} />
-                                <Tabs>
-                                    <Tab tabTitle={__('Normal')}>
-                                        <BoxShadow label={__('Box-Shadow')} value={shadow} onChange={val => setAttributes({ shadow: val })} />
-                                    </Tab>
-                                    <Tab tabTitle={__('Hover')}>
-                                        <BoxShadow label={__('Box-Shadow')} value={shadowHover} onChange={val => setAttributes({ shadowHover: val })} />
-                                    </Tab>
-                                </Tabs>
                                 {background.openBg == 1 &&
                                     <Fragment>
                                         <BorderRadius label={__('Radius')} value={borderRadius} onChange={(value) => setAttributes({ borderRadius: value })} min={0} max={100} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
@@ -170,6 +162,14 @@ class Edit extends Component {
                                         }
                                     </Fragment>
                                 }
+                                <Tabs>
+                                    <Tab tabTitle={__('Normal')}>
+                                        <BoxShadow label={__('Box-Shadow')} value={shadow} onChange={val => setAttributes({ shadow: val })} />
+                                    </Tab>
+                                    <Tab tabTitle={__('Hover')}>
+                                        <BoxShadow label={__('Box-Shadow')} value={shadowHover} onChange={val => setAttributes({ shadowHover: val })} />
+                                    </Tab>
+                                </Tabs>
                             </PanelBody>
                         </Fragment>
                     }
