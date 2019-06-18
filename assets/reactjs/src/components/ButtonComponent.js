@@ -17,8 +17,8 @@ const addAttribute = (settings) => {
             buttonSize: { type: 'string', default: 'medium' },
             buttonWidthType: {
                 type: 'string',
-                 default: 'auto',
-                 style: [
+                default: 'auto',
+                style: [
                     {
                         condition: [
                             { key: 'buttonWidthType', relation: '==', value: 'block' }
@@ -29,11 +29,11 @@ const addAttribute = (settings) => {
             },
             buttonWidth: {
                 type: 'object',
-                 default: {
+                default: {
                     md: 260,
                     unit: 'px'
-                 },
-                 style: [
+                },
+                style: [
                     {
                         condition: [
                             { key: 'buttonWidthType', relation: '==', value: 'fixed' }
@@ -101,11 +101,11 @@ const addAttribute = (settings) => {
                 type: 'object',
                 default: {
                     openBorder: 1,
-                    borderType: 'global',
-                    global: {
-                        md: 1
-                    },
-                    color: '#2184F9'
+                    widthType: 'global',
+                    global: 1,
+                    color: '#2184F9',
+                    type: "solid",
+                    unit: "px"
                 },
                 style: [
                     {
@@ -265,7 +265,7 @@ const withInspectorControls = createHigherOrderComponent(OriginalComponent => {
                                 unit={['px', 'em', '%']}
                                 min={30}
                                 max={800}
-                                responsive 
+                                responsive
                                 device={device}
                                 onDeviceChange={value => this.setState({ device: value })} />
                         }
@@ -282,7 +282,8 @@ const withInspectorControls = createHigherOrderComponent(OriginalComponent => {
                                     label={__('Border')}
                                     separator
                                     value={buttonBorder}
-                                    min={0} max={10}
+                                    min={0}
+                                    max={10}
                                     onChange={val => setAttributes({ buttonBorder: val })}
                                 />
                                 <BoxShadow

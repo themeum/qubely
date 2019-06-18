@@ -220,7 +220,7 @@ class Edit extends Component {
 
 		const { device, openPanelSetting } = this.state
 		if (uniqueId) { CssGenerator(this.props.attributes, 'pricing', uniqueId) }
-
+	
 		return (
 			<Fragment>
 				<InspectorControls key="inspector">
@@ -565,7 +565,7 @@ class Edit extends Component {
 									onChange={val => setAttributes({ badgeSize: val })}
 								/>
 
-								{ (badgeStyle == 1 || badgeStyle == 2 || badgeStyle == 5 || badgeStyle == 6) &&
+								{(badgeStyle == 1 || badgeStyle == 2 || badgeStyle == 5 || badgeStyle == 6) &&
 									<RadioAdvanced
 										label={__('Position')}
 										options={[
@@ -589,7 +589,7 @@ class Edit extends Component {
 									onChange={val => setAttributes({ badgeColor: val })}
 								/>
 
-								{ badgeStyle == 5 &&
+								{badgeStyle == 5 &&
 									<BorderRadius
 										label={__('Radius')}
 										value={badgeRadius}
@@ -603,9 +603,9 @@ class Edit extends Component {
 									/>
 								}
 
-								{ (badgeStyle == 3 || badgeStyle == 5 || badgeStyle == 6) &&
+								{(badgeStyle == 3 || badgeStyle == 5 || badgeStyle == 6) &&
 									<Range
-										label={ badgeStyle == 5 ? __('Side Spacing') : __('Spacing') }
+										label={badgeStyle == 5 ? __('Side Spacing') : __('Spacing')}
 										value={badgeSpacing}
 										onChange={(value) => setAttributes({ badgeSpacing: value })}
 										min={0}
@@ -617,9 +617,9 @@ class Edit extends Component {
 									/>
 								}
 
-								{ badgeStyle == 5 &&
+								{badgeStyle == 5 &&
 									<Range
-										label={ __('Top Spacing') }
+										label={__('Top Spacing')}
 										value={badgeSpacingTop}
 										onChange={(value) => setAttributes({ badgeSpacingTop: value })}
 										min={0}
@@ -632,7 +632,7 @@ class Edit extends Component {
 								}
 
 								<Separator />
-								
+
 								<Typography
 									value={badgeTypography}
 									disableLineHeight

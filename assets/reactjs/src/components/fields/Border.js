@@ -42,7 +42,7 @@ class Border extends Component {
 
         unit && value.unit ? newBorder.unit = value.unit : newBorder.unit = defaultUnit
         newBorder.widthType = value.widthType ? value.widthType : defaultWidthType
-        newBorder.openBorder = value.openBorder ? value.openBorder : 0
+        newBorder.openBorder = 1
         onChange(newBorder)
     }
     setSettings(type, newValue) {
