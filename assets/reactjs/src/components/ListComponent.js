@@ -127,7 +127,7 @@ const withInspectorControls = createHigherOrderComponent(OriginalComponent => {
                 attributes: { listItems, enableListIcons, clickedListItem, iconSize, iconSizeCustom, iconSpacing, iconPosition, color,
                     typography, enableListAlignment, listAlignment, iconColor, spacing, featuresPadding }
             } = this.props
-            console.log('featuresPadding : ', featuresPadding)
+
             return (
                 <Fragment>
                     <Toggle value={enableListAlignment} label={__('Custom Alignment')} onChange={val => setAttributes({ enableListAlignment: val })} />
