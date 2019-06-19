@@ -46,7 +46,7 @@ class PageListModal extends Component {
         
         const options = {
             method: 'POST',
-            url: qubely_admin.ajax+'?action=qubely_get_blocks',
+            url: qubely_admin.ajax+'?action=qubely_get_sections',
             headers: { 'Content-Type': 'application/json' }
         }
         apiFetch( options ).then( response => {
@@ -77,7 +77,7 @@ class PageListModal extends Component {
                         } )
                     }
                 } );
-                
+
                 this.setState( {
                     loading: false,
                     blockCategories,
@@ -100,7 +100,7 @@ class PageListModal extends Component {
             this.setState({
                 loading: false,
                 requestFailedMsg
-            } );
+            });
         } );
     }
 
@@ -242,42 +242,29 @@ class PageListModal extends Component {
         if( typeof wp.QUBELY_PRO_VERSION === 'undefined' && isPro == true ){
             //
         } else {
-        
             this.setState( { spinner: itemData.ID } )
-
-            if( itemType == 'block' ) {
-                //import block
-                let pageData = parse( itemData.rawData );
-                insertBlocks( pageData );
-                if( rowClientId ) {
-                    removeBlock( rowClientId );// remove row block
-                }
-                ModalManager.close();
-
-            } else  if( itemType == 'layout' ) {
-                let requestFailedMsg = [];
-                const options = {
-                    method: 'POST',
-                    url: qubely_admin.ajax+'?action=qubely_get_single_layout&layout_id='+itemData.ID,
-                    headers: {'Content-Type': 'application/json'}
-                }
-                apiFetch( options ).then( response => {
-                    if( response.success ) {
-                        //import layout
-                        let pageData = parse( response.data.rawData );
-                        insertBlocks( pageData );
-                        if( rowClientId ) {
-                            removeBlock( rowClientId );// remove row block
-                        }
-                        ModalManager.close(); //close modal
-                    }
-                } ).catch( error => {
-                    requestFailedMsg.push(error.code+' : '+error.message);
-                    this.setState( { 
-                        requestFailedMsg
-                    } );
-                } );
+            let requestFailedMsg = [];
+            const options = {
+                method: 'POST',
+                url: qubely_admin.ajax+'?action=qubely_get_single_'+itemType+'&'+itemType+'_id='+itemData.ID,
+                headers: {'Content-Type': 'application/json'}
             }
+            apiFetch( options ).then( response => {
+                if( response.success ) {
+                    //import layout
+                    let pageData = parse( response.data.rawData );
+                    insertBlocks( pageData );
+                    if( rowClientId ) {
+                        removeBlock( rowClientId );// remove row block
+                    }
+                    ModalManager.close(); //close modal
+                }
+            } ).catch( error => {
+                requestFailedMsg.push(error.code+' : '+error.message);
+                this.setState( { 
+                    requestFailedMsg
+                } );
+            } );
         }
     }
 
@@ -340,11 +327,17 @@ class PageListModal extends Component {
                                 layoutCategories.forEach( ( change, i ) => {
                                     if ( cat.slug == change.slug ) {
                                         index = i
+                                        if( item.parentID == 0 ){
+                                            layoutCategories[i].count = layoutCategories[i].count + 1
+                                        }
                                     }
                                 });
                                 if ( index === -1 ) {
-                                    layoutCategories.push( { name: cat.name, slug: cat.slug } )
+                                    layoutCategories.push( { name: cat.name, slug: cat.slug, count: 0 } )
                                 }
+                                // if( count > 1 ){
+                                //     layoutCategories[i].count = count
+                                // }
                             })
                         }
                     });
@@ -425,9 +418,7 @@ class PageListModal extends Component {
     _lazyload() {
         let { lazyloadThrottleTimeout } = this.state;
         let lazyloadImages = document.querySelectorAll('img.lazy');
-
         if( lazyloadImages.length ) {
-
             if ( lazyloadThrottleTimeout ) {
                 this.setState( {
                     lazyloadThrottleTimeout: clearTimeout(lazyloadThrottleTimeout)
@@ -512,13 +503,11 @@ class PageListModal extends Component {
     }
 
     _getDataLength(){
-        let test=0
         if(this.state.itemType == 'block'){
-            Object.keys( this.state.blockData).forEach(key=>test+=this.state.blockData[key].length)
+            return Object.getOwnPropertyNames( this.state.blockData ).length
         }else{
-            Object.keys( this.state.layoutData).forEach(key=>test+=this.state.layoutData[key].length)
+            return  this.state.layoutCategories.length
         }
-        return test
     }
 
     _changePriceFilter(val = ''){
@@ -531,9 +520,9 @@ class PageListModal extends Component {
     render() {
         let { pageCategories, selectedCategory, currentPageData } = this.getCurrentPageData();
         let types = typeof wp.QUBELY_PRO_VERSION === 'undefined' ? 'inactive' : 'active';
-        let {itemType,blockData,layoutData, layer, selectedBlockCategory, selectedLayoutCategory}=this.state
-        return (
+        let {itemType,blockData,layoutData, layer, selectedBlockCategory, selectedLayoutCategory} = this.state
 
+        return (
             <Modal className="qubely-builder-modal-pages-list" customClass="qubely-builder-modal-template-list" onRequestClose={this.props.onRequestClose} openTimeoutMS={0} closeTimeoutMS={0}>
 
                 <div className="qubely-builder-modal-header">
@@ -577,7 +566,7 @@ class PageListModal extends Component {
                                                 {data.name}
                                             <span>
                                                 {
-                                                    itemType=='block'? blockData[data.slug] ? blockData[data.slug].length :0: layoutData[data.slug] ? layoutData[data.slug].length :0
+                                                    itemType=='block'? blockData[data.slug] ? blockData[data.slug].length :0: data.count
                                                 }
                                             </span>
                                         </li>
@@ -599,14 +588,14 @@ class PageListModal extends Component {
                             {this._getDataLength()}&nbsp;
                             {itemType == 'block' ? __('Sections') : __('Layout Bundles')}
                         </h4>
-                        <div className="qubely-template-filter-button-group">
+                        {/* <div className="qubely-template-filter-button-group">
                             <button onClick={() => this._changePriceFilter()} className={'' == this.state.priceFilter ? 'active' : ''}>{__('All')}</button>
                             <button onClick={() => this._changePriceFilter('free')} className={'free' == this.state.priceFilter ? 'active' : ''}>{__('Free')}</button>
                             <button onClick={() => this._changePriceFilter('pro')} className={'pro' == this.state.priceFilter ? 'active' : ''}>
                                 <img src={qubely_admin.plugin+'assets/img/icon-premium.svg'} alt=""/>
                                 {__('Premium')}
                             </button>
-                        </div>
+                        </div> */}
                     </div>}
 
                     { !this.state.loading ?

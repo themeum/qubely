@@ -5,7 +5,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 class QUBELY {
 
-	protected $api_base_url = 'https://builder.themeum.com/wp-json/restapi/v2/';
+	protected $api_base_url = 'http://qubely.io/wp-json/restapi/v2/';
 	protected $qubely_api_request_body;
 	protected $qubely_api_request_body_default;
 
@@ -44,9 +44,12 @@ class QUBELY {
 		add_action( 'delete_post', array($this, 'before_delete_post'), 10 );
 		
 		//Get layout and block from Server and Cache
-		add_action('wp_ajax_qubely_get_blocks', array($this, 'qubely_get_blocks'));
+		add_action('wp_ajax_qubely_get_sections', array($this, 'qubely_get_sections'));
 		add_action('wp_ajax_qubely_get_layouts', array($this, 'qubely_get_layouts'));
+		
 		add_action('wp_ajax_qubely_get_single_layout', array($this, 'qubely_get_single_layout'));
+		add_action('wp_ajax_qubely_get_single_block', array($this, 'qubely_get_single_section'));
+
 		add_action('wp_ajax_qubely_get_saved_block', array($this, 'qubely_get_saved_block'));
 		add_action('wp_ajax_qubely_delete_saved_block', array($this, 'qubely_delete_saved_block'));
 
@@ -415,27 +418,27 @@ class QUBELY {
 	 * @since 1.0.0-BETA
 	 * Get Blocks
 	 */
-	public function qubely_get_blocks() {
-		$cachedBlockFile = "qubely-blocks.json";
-		$cache_time = ( 60*60*24*7 ); //cached for 7 days
+	public function qubely_get_sections() {
+		// $cachedBlockFile = "qubely-blocks.json";
+		// $cache_time = ( 60*60*24*7 ); //cached for 7 days
 
-		$blockData = array();
+		$sectionData = array();
 
-		$upload_dir = wp_upload_dir();
-		$dir = trailingslashit( $upload_dir[ 'basedir' ] ) . 'qubely/cache/';
-		$file_path_name = $dir . $cachedBlockFile;
+		// $upload_dir = wp_upload_dir();
+		// $dir = trailingslashit( $upload_dir[ 'basedir' ] ) . 'qubely/cache/';
+		// $file_path_name = $dir . $cachedBlockFile;
 
 		/* if ( file_exists( $file_path_name ) && ( filemtime( $file_path_name ) + $cache_time ) > time() ) {
 			$getBlocksFromCached = file_get_contents( $file_path_name );
-			$blockData = json_decode( $getBlocksFromCached, true );
+			$sectionData = json_decode( $getBlocksFromCached, true );
 			$cached_at = 'Last cached: '.human_time_diff( filemtime($file_path_name), current_time( 'timestamp') ). ' ago';
 
-			wp_send_json( array( 'success' => true, 'cached_at' => $cached_at,  'data' => $blockData ) );
+			wp_send_json( array( 'success' => true, 'cached_at' => $cached_at,  'data' => $sectionData ) );
 		} else { */
-			$blockData = $this->load_blocks_from_server();
+			$sectionData = $this->load_blocks_from_server();
 		//}
 
-		wp_send_json_success( $blockData );
+		wp_send_json_success( $sectionData );
 	}
 
 	/**
@@ -444,12 +447,12 @@ class QUBELY {
 	 */
 	public function load_blocks_from_server() {
 
-		$apiUrl = $this->api_base_url.'qubelyblocks';
+		$apiUrl = $this->api_base_url.'sections';
 
 		$post_args = array( 'timeout' => 120 );
-		$body_param = array_merge( $this->qubely_api_request_body_default, array( 'request_for' => 'get_all_qubelyblocks' ) );
+		$body_param = array_merge( $this->qubely_api_request_body_default, array( 'request_for' => 'get_all_sections' ) );
 		$post_args['body'] = array_merge( $body_param, $this->qubely_api_request_body );
-		$blockRequest = wp_remote_post( $apiUrl, $post_args );
+		$blockRequest = wp_remote_post( $apiUrl, array() );
 		if (is_wp_error( $blockRequest ) ){
 			wp_send_json_error( array( 'messages' => $blockRequest->get_error_messages() ) );
 		}
@@ -471,14 +474,14 @@ class QUBELY {
 	 * Get Blocks
 	 */
 	public function qubely_get_layouts() {
-		$cachedLayoutFile = "qubely-layouts.json";
-		$cache_time = ( 60*60*24*7 ); //cached for 7 days
+		// $cachedLayoutFile = "qubely-layouts.json";
+		// $cache_time = ( 60*60*24*7 ); //cached for 7 days
 
 		$layoutData = array();
 
-		$upload_dir = wp_upload_dir();
-		$dir = trailingslashit( $upload_dir[ 'basedir' ] ) . 'qubely/cache/';
-		$file_path_name = $dir . $cachedLayoutFile;
+		// $upload_dir = wp_upload_dir();
+		// $dir = trailingslashit( $upload_dir[ 'basedir' ] ) . 'qubely/cache/';
+		// $file_path_name = $dir . $cachedLayoutFile;
 
 		/* if ( file_exists( $file_path_name ) && ( filemtime( $file_path_name ) + $cache_time ) > time() ) {
 			$getLayoutFromCached = file_get_contents($file_path_name);
@@ -529,11 +532,11 @@ class QUBELY {
 	public function qubely_get_single_layout() {
 		$layout_id = ( int ) sanitize_text_field( $_REQUEST[ 'layout_id' ] );
 
-		$cache_time = ( 60*60*24*7 ); //cached for 7 days
-		$cachedSingleLayoutFile = "qubely-single-layout-{$layout_id}.json";
-		$upload_dir = wp_upload_dir();
-		$dir = trailingslashit( $upload_dir['basedir'] ) . 'qubely/cache/layouts/';
-		$file_path_name = $dir . $cachedSingleLayoutFile;
+		// $cache_time = ( 60*60*24*7 ); //cached for 7 days
+		// $cachedSingleLayoutFile = "qubely-single-layout-{$layout_id}.json";
+		// $upload_dir = wp_upload_dir();
+		// $dir = trailingslashit( $upload_dir['basedir'] ) . 'qubely/cache/layouts/';
+		// $file_path_name = $dir . $cachedSingleLayoutFile;
 		// Checking if exists file and cache validity true
 		/* if ( file_exists( $file_path_name ) && ( filemtime( $file_path_name ) + $cache_time ) > time() ) {
 			$getSingleLayoutFromCached = file_get_contents( $file_path_name );
@@ -542,6 +545,43 @@ class QUBELY {
 			$layoutData = $this->load_and_cache_single_layout_from_server( $layout_id );
 		//}
 		wp_send_json_success( $layoutData );
+	}
+
+	/**
+	 * @since 1.0.0(Stable)
+	 * Get single layout
+	 */
+	public function qubely_get_single_section() {
+		$section_id = ( int ) sanitize_text_field( $_REQUEST[ 'block_id' ] );
+		$sectionData = $this->load_and_cache_single_section_from_server( $section_id );
+		wp_send_json_success( $sectionData );
+	}
+
+	/**
+	 * @since 1.0.0(Stable)
+	 * Get single section
+	 */
+	public function load_and_cache_single_section_from_server( $section_id = 0 ) {
+		if ( !$section_id ){
+			return false;
+		}
+		$apiUrl = $this->api_base_url.'single-section';
+
+		$post_args = array( 'timeout' => 120 );
+
+		$body_param = array_merge( $this->qubely_api_request_body_default,
+			array( 'request_for' => 'get_single_section', 'section_id' => $section_id )
+		);
+		$post_args[ 'body' ] = array_merge( $body_param, $this->qubely_api_request_body );
+		$sectionRequest = wp_remote_post( $apiUrl, $post_args );
+
+		if ( is_wp_error( $sectionRequest ) ) {
+			wp_send_json_error( array( 'messages' => $sectionRequest->get_error_messages() ) );
+		}
+
+		$sectionData = json_decode( $sectionRequest[ 'body' ], true );
+
+		return $sectionData;
 	}
 
 

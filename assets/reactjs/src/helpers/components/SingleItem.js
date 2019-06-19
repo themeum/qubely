@@ -12,7 +12,7 @@ export default (props) => {
                 <div className="qubely-tmpl-info">
                     <h4 className="qubely-tmpl-title" dangerouslySetInnerHTML={{__html:props.data.name}}/>
                     <div className="qubely-import-button-group">
-                        { props.itemType != 'layout' ?
+                        { props.itemType != 'comming' ?
                             <Fragment>
                                 { props.data.liveurl && <a className="qubely-button" target="_blank" href={props.data.liveurl}><i className="fa fa-share"/> {__('Preview')} </a> }
                                 <a className="qubely-button" onClick={(e) => { props.importLayoutBlock( props.data, props.data.pro ) } }> {
