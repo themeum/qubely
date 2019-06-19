@@ -14,7 +14,7 @@ class Save extends Component {
         return (
             <div className={`qubely-block-${uniqueId}`} {...animationAttr(animation)}>
                 <div className={`qubely-block-advanced-list qubely-alignment-${alignment}`}>
-                    <ListTag className={`qubely-list qubely-list-type-${listType} qubely-list-bullet-${bulletStyle.name ? bulletStyle.name : bulletStyle}`}>
+                    <ListTag className={`qubely-list qubely-list-type-${listType} qubely-list-bullet-${bulletStyle.name}`}>
                         {this.renderListItems()}
                     </ListTag>
 

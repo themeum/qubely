@@ -15,6 +15,17 @@ const addAttribute = (settings) => {
             buttonTag: { type: 'string', default: 'a' },
             buttonUrl: { type: 'object', default: { url: '#' } },
             buttonSize: { type: 'string', default: 'medium' },
+            buttonAlignment: {
+                type: 'object', default: { md: 'left' },
+                style: [
+                    {
+                        condition: [
+                            { key: 'enableButtonAlignment', relation: '==', value: true }
+                        ],
+                        selector: '{{QUBELY}} .qubely-block-btn-wrapper {text-align: {{buttonAlignment}};}'
+                    }
+                ]
+            },
             buttonWidthType: {
                 type: 'string',
                 default: 'auto',
@@ -220,7 +231,7 @@ const withInspectorControls = createHigherOrderComponent(OriginalComponent => {
                     }
                     {
                         enableButtonAlignment &&
-                        <Alignment label={__('Alignment')} value={buttonAlignment} onChange={val => setAttributes({ buttonAlignment: val })} disableJustify />
+                        <Alignment label={__('Alignment')} value={buttonAlignment} onChange={val => setAttributes({ buttonAlignment: val })} disableJustify responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
                     }
 
                     <InnerPanel title={__('Size')}>
