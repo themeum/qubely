@@ -93,12 +93,12 @@ class Edit extends Component {
 
     }
     renderListItems = () => {
-        const { attributes: { listItems, alignment, listType, listIcon, bulletStyle } } = this.props
+        const { attributes: { listItems, alignment, listType, bulletStyle } } = this.props
         const { focusedItem, removeItemViaBackSpace } = this.state
         const ListTag = (listType == 'ordered') ? 'ol' : 'ul'
         return (
             listItems.length > 0 ?
-                <ListTag className={`qubely-list qubely-list-type-${listType} qubely-list-bullet-${bulletStyle.name || bulletStyle}`}>
+                <ListTag className={`qubely-list qubely-list-type-${listType} qubely-list-bullet-${bulletStyle}`}>
                     {listItems.map((item, index) => {
                         return (
                             <li className={`qubely-list-item`}  >
@@ -195,7 +195,7 @@ class Edit extends Component {
                             <Fragment>
                                 <IconSelector
                                     label="Icon"
-                                    value={bulletStyle.name || bulletStyle}
+                                    value={bulletStyle}
                                     enableSearch
                                     icons={[
                                         { name: 'check', value: 'fas fa-check' },
