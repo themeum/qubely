@@ -10,28 +10,14 @@ const addAttribute = (settings) => {
     if (settings.attributes && settings.attributes.listComponent) {
         settings.attributes = Object.assign({},
             {
+                enableListAlignment: { type: 'boolean', default: false },
                 listAlignment: {
                     type: 'string', default: 'center',
                     style: [
                         {
-                            condition: [
-                                { key: 'listAlignment', relation: '==', value: 'left' },
-                            ],
-                            selector: '{{QUBELY}} .qubely-list-li {-webkit-box-pack: start;-ms-flex-pack: start;justify-content: flex-start;}'
-                        },
-                        {
-                            condition: [
-                                { key: 'listAlignment', relation: '==', value: 'center' },
-                            ],
-                            selector: '{{QUBELY}} .qubely-list-li {-webkit-box-pack: center;-ms-flex-pack: center;justify-content: center;}'
-                        },
-                        {
-                            condition: [
-                                { key: 'listAlignment', relation: '==', value: 'right' },
-                            ],
-                            selector: '{{QUBELY}} .qubely-list-li {-webkit-box-pack: end;-ms-flex-pack: end;justify-content: flex-end;}'
-                        }
-                    ]
+                            condition: [{ key: 'enableListAlignment', relation: '==', value: true }],
+                            selector: '{{QUBELY}} .qubely-list {text-align:{{listAlignment}};}'
+                        }]
                 },
 
                 listItems: {
@@ -144,6 +130,8 @@ const withInspectorControls = createHigherOrderComponent(OriginalComponent => {
 
             return (
                 <Fragment>
+                    <Toggle value={enableListAlignment} label={__('Custom Alignment')} onChange={val => setAttributes({ enableListAlignment: val })} />
+                    {enableListAlignment && <Alignment label={__('Alignment')} value={listAlignment} onChange={val => setAttributes({ listAlignment: val })} disableJustify />}
                     <Color label={__('Color')} value={color} onChange={val => setAttributes({ color: val })} />
                     <Typography label={__('Typography')} value={typography} onChange={val => setAttributes({ typography: val })} />
                     <Range label={__('Spacing')} value={spacing} onChange={val => setAttributes({ spacing: val })} min={0} max={60} />
@@ -155,15 +143,8 @@ const withInspectorControls = createHigherOrderComponent(OriginalComponent => {
                         unit={['px', 'em', '%']}
                         label={"Padding"}
                         onChange={val => setAttributes({ featuresPadding: val })} />
-                    {
-                        enableListAlignment &&
-                        <Alignment label={__('Alignment')} value={listAlignment} onChange={val => setAttributes({ listAlignment: val })} disableJustify />
-                    }
                     <Separator />
-                    <Toggle
-                        value={enableListIcons}
-                        label={__('Icons')}
-                        onChange={val => setAttributes({ enableListIcons: val })} />
+                    <Toggle value={enableListIcons} label={__('Icons')} onChange={val => setAttributes({ enableListIcons: val })} />
                     {enableListIcons &&
                         <Fragment>
                             <IconList

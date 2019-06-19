@@ -196,7 +196,7 @@ registerBlockType('qubely/team', {
             type: 'object', default: { md: 10, unit: 'px' },
             style: [
                 {
-                    selector: '{{QUBELY}} .qubely-team-social-links {margin: calc(-{{iconGutter}}/2);} {{QUBELY}} .qubely-team-social-links > a {margin: calc({{iconGutter}}/2);}'
+                    selector: '{{QUBELY}} .qubely-team-social-links > a {margin: 0 calc({{iconGutter}}/2);}'
                 }
             ]
         },
