@@ -34,6 +34,7 @@
             .qubely-info-box-number {
                 width: 1em;
                 height: 1em;
+                white-space: nowrap;
                 &:before {
                     position: absolute;
                     left: 50%;
