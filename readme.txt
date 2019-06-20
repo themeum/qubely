@@ -198,12 +198,30 @@ Found a bug? Please let us know by posting on the support section of this plugin
 
 = 1.0.0 - 20 June, 2019 =
 
-New: Premade Sections & Layouts
-New: Redesigned import layout modal UI
-Update: Dimesion field in Row & Column Block
-Update: Dimesion field in Row & Column Block
-Fix: Testimonial Block layout change issue
-Fix: Advanced list bullet changing issue
+New: Premade Sections & Layouts  
+New: Infobox - Content disabling option  
+New: Team - Padding Option for Content  
+New: Contact Form - Button Alignment option  
+New: Pricing - Features - Custom Alignment option   
+New: Advanced List - Background Size option for Number  
+New: Button Group - Alignment field  
+Update: Redesigned import layout modal UI  
+Update: Dimesion field in Row & Column Block  
+Update: Testimonial - Replaced dashicons with Font Awesome  
+Fix: Accordion - Heading update issue  
+Fix: Advanced list - Bullet icon changing issue 
+Fix: Advanced list - Line height issue  
+Fix: Advanced Text - Title - Separator Stroke value update  
+Fix: Advanced Setting - Z-index value update  
+Fix: Block Manager - Resized qubely icons  
+Fix: Button - Button URL - Open in new window setting Bug
+Fix: Button Group - Spacing option  
+Fix: Google Map - Generate your Google API key - not opening in new tab
+Fix: Heading - Sub Heading - Tag change  
+Fix: Row -  Overlay issue in inner Rows  
+Fix: Testimonial -  Layout change issue  
+Fix: Tabs - Nav responsive margin issue  
+Fix: Video Popup - Icon - Ripple Effect issue  
 
 = 1.0.0-RC-2 - 31 May, 2019 =
 

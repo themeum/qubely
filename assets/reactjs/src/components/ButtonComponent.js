@@ -198,6 +198,10 @@ const addAttribute = (settings) => {
                     },
                 ]
             },
+            buttonGap: {
+                type: 'object', default: { md: 8, unit: 'px' },
+                style: [{ selector: '{{QUBELY}} .qubely-block-btn-wrapper { margin-bottom: {{buttonGap}}; }' }]
+            }
         }, settings.attributes)
     }
     return settings

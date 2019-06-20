@@ -6,7 +6,7 @@ Donate link: <a href=" https://www.themeum.com">https://www.themeum.com</a>
 Tags: Qubely, website builder, gutenberg block, gutenberg, page builder, drag and drop editor, responsive, site editor, editor, drag-and-drop, visual editor, landing page, frontend editor, wordpress page builder, free page builder, layout builder  
 Requires at least: 5.0  
 Tested up to: 5.2  
-Stable tag: 1.0.0
+Stable tag: 1.0.0  
 Requires PHP: 5.4.0  
 License: GPL-2.0+  
 License URI: http://www.gnu.org/licenses/gpl-2.0.txt
@@ -184,92 +184,111 @@ Found a bug? Please let us know by posting on the support section of this plugin
 
 **1.0.0 - 20 June, 2019**
 
-New: Premade Sections & Layouts
-New: Redesigned import layout modal UI
-Update: Dimesion field in Row & Column Block
-Update: Dimesion field in Row & Column Block
-Fix: Testimonial Block layout change issue
-Fix: Advanced list bullet changing issue
+New: Premade Sections & Layouts  
+New: Infobox - Content disabling option  
+New: Team - Padding Option for Content  
+New: Contact Form - Button Alignment option  
+New: Pricing - Features - Custom Alignment option   
+New: Advanced List - Background Size option for Number  
+New: Button Group - Alignment field  
+Update: Redesigned import layout modal UI  
+Update: Dimesion field in Row & Column Block  
+Update: Testimonial - Replaced dashicons with Font Awesome  
+Fix: Accordion - Heading update issue  
+Fix: Advanced list - Bullet icon changing issue 
+Fix: Advanced list - Line height issue  
+Fix: Advanced Text - Title - Separator Stroke value update  
+Fix: Advanced Setting - Z-index value update  
+Fix: Block Manager - Resized qubely icons  
+Fix: Button - Button URL - Open in new window setting Bug
+Fix: Button Group - Spacing option  
+Fix: Google Map - Generate your Google API key - not opening in new tab
+Fix: Heading - Sub Heading - Tag change  
+Fix: Row -  Overlay issue in inner Rows  
+Fix: Testimonial -  Layout change issue  
+Fix: Tabs - Nav responsive margin issue  
+Fix: Video Popup - Icon - Ripple Effect issue  
+
 
 **1.0.0-RC-2 - 31 May, 2019**
 
-New: Font family search option in typography
-Update: Pricing Badge UI
-Update: Tab icon setting 
-Update: Gradient angle & position UI
-Update: Shape divider settings in Row
+New: Font family search option in typography  
+Update: Pricing Badge UI  
+Update: Tab icon setting  
+Update: Gradient angle & position UI  
+Update: Shape divider settings in Row  
 
 
 **1.0.0-RC-1 - 24 May, 2019**
 
-Update: Block Wraper's description & keyword
-Update: Code optimization
-Fix: List item auto focus issue in Advanced list & Icon list block
-Fix: Border Hover color option in Icon block
-Fix: Import layout Reloading Issue
+Update: Block Wraper's description & keyword  
+Update: Code optimization  
+Fix: List item auto focus issue in Advanced list & Icon list block  
+Fix: Border Hover color option in Icon block  
+Fix: Import layout Reloading Issue  
 
 
 **1.0.0-beta-3 - 22 May, 2019**
 
-New: Global color palate setting
-New: Recent font-family setting in typography
-Update: Inline text-color and background-color option
-Update: Removed hover option from Pricing block’s background
-Fix: Text color issue in Advanced block
-Fix: Border Hover color option in Icon block
-Fix: Animation delay issue in global option
+New: Global color palate setting  
+New: Recent font-family setting in typography  
+Update: Inline text-color and background-color option  
+Update: Removed hover option from Pricing block’s background  
+Fix: Text color issue in Advanced block  
+Fix: Border Hover color option in Icon block  
+Fix: Animation delay issue in global option  
 
 **1.0.0-beta-2 - 16 May, 2019**
 
-Update: Gradient field color picker position
-Update: Redesigned Testimonial Block's layout
-Update: Responsive device setting
-Update: Changed icon updating option in Pricing Block's features
-Fix: Button Size issue in Pricing Block
-Fix: Transition issue in Video Popup block,  Button Block
+Update: Gradient field color picker position  
+Update: Redesigned Testimonial Block's layout  
+Update: Responsive device setting  
+Update: Changed icon updating option in Pricing Block's features  
+Fix: Button Size issue in Pricing Block  
+Fix: Transition issue in Video Popup block,  Button Block  
 
 **1.0.0-beta-1 - 10 May, 2019**
 
-New: Pricing Block
-New: Wrapper Block
-New: Team Block
-New: Redesigned user interface
-New: Radically Redesigned user experience
-New: Added Responsive settings to the Shape Divider
-Update: Improved padding, margin, Radius, Box Shadow, Background, Color and border options
-Update: Improved typography settings
-Update: Restructured Advanced List block
-Fix: Icon size in the icon list
-Fix: Autofocus in the icon list
-Fix: Video Popup SVG
+New: Pricing Block  
+New: Wrapper Block  
+New: Team Block  
+New: Redesigned user interface  
+New: Radically Redesigned user experience  
+New: Added Responsive settings to the Shape Divider  
+Update: Improved padding, margin, Radius, Box Shadow, Background, Color and border options  
+Update: Improved typography settings  
+Update: Restructured Advanced List block  
+Fix: Icon size in the icon list  
+Fix: Autofocus in the icon list  
+Fix: Video Popup SVG  
 
 **1.0.0-alpha-4 - 28 March, 2019**
 
-New: Contact Form Block
-New: Icon List Block
-New: Advanced List Block
-New: Button Group Block
-New: Info Box Block
-Update: Row settings 
-Update: Column settings
-Fix: Link open in new tab issue
-Fix: Button Alignment issue
-Fix: Video Popup youtube short link issue
+New: Contact Form Block  
+New: Icon List Block  
+New: Advanced List Block  
+New: Button Group Block  
+New: Info Box Block  
+Update: Row settings   
+Update: Column settings  
+Fix: Link open in new tab issue  
+Fix: Button Alignment issue  
+Fix: Video Popup youtube short link issue  
 
 **1.0.0-alpha-3 - 11 March, 2019**
 
-Update: Tab Improvement
-Fix: Social icon blocks dropdown issue
+Update: Tab Improvement  
+Fix: Social icon blocks dropdown issue  
 
 **1.0.0-alpha-2 - 08 March, 2019**
 
-New: Tabs block
-New: Social Icons block
-Update: Row setting
-Update: Column setting
-Fix: Select field issue
-Fix: Responsive device issue
-Fix: Map block address issue
+New: Tabs block  
+New: Social Icons block  
+Update: Row setting  
+Update: Column setting  
+Fix: Select field issue  
+Fix: Responsive device issue  
+Fix: Map block address issue  
 
 **1.0.0-alpha - 01 March, 2019**
 
