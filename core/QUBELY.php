@@ -54,8 +54,6 @@ class QUBELY {
 		add_action('wp_ajax_qubely_delete_saved_block', array($this, 'qubely_delete_saved_block'));
 
 		add_action('wp_ajax_qubely_send_form_data', array($this, 'qubely_send_form_data'));
-		add_action('wp_ajax_qubely_blocks_toggle', array($this, 'qubely_blocks_toggle'));
-		add_action('wp_ajax_nopriv_qubely_blocks_toggle', array($this, 'qubely_blocks_toggle'));
 	}
 	
 	/**
@@ -71,8 +69,7 @@ class QUBELY {
 		wp_localize_script( 'qubely-blocks-js', 'qubely_admin', array (
 			'plugin' => QUBELY_DIR_URL,
 			'ajax' => admin_url( 'admin-ajax.php' ),
-			'shapes' => $this->getSvgShapes(),
-			'unregistered_blocks' => get_option( 'qubely_unregistered_blocks' ),
+			'shapes' => $this->getSvgShapes()
 		) );
 	}
 
@@ -118,12 +115,8 @@ class QUBELY {
 		wp_enqueue_style( 'qubely-animation', QUBELY_DIR_URL . 'assets/css/animation.css', false, QUBELY_VERSION );
 		wp_enqueue_style( 'font-awesome', QUBELY_DIR_URL . 'assets/css/font-awesome.min.css', false, QUBELY_VERSION );
 		wp_enqueue_style( 'qubely-options', QUBELY_DIR_URL . 'assets/css/options.css', false, QUBELY_VERSION );
-		wp_enqueue_script( 'qubely-option-script', QUBELY_DIR_URL . 'assets/js/option-script.js', array('jquery'), QUBELY_VERSION , true );
 		wp_enqueue_script( 'qubely-magnific-popup', QUBELY_DIR_URL . 'assets/js/jquery.magnific-popup.min.js', array('jquery'), QUBELY_VERSION , true );
 		wp_enqueue_style( 'qubely-magnific-popup-style', QUBELY_DIR_URL . 'assets/css/magnific-popup.css', false, QUBELY_VERSION );
-		wp_localize_script( 'qubely-option-script', 'qubely_option', array(
-			'ajax' => admin_url( 'admin-ajax.php' )
-		) );
 	}
 
 	/**
@@ -755,48 +748,6 @@ class QUBELY {
 			$responseData['msg'] = $e->getMessage();
 			wp_send_json_error( $responseData );
 		}
-	}
-	
-
-	/**
-	 * Ajax activate/deactivate blocks
-	 */
-	public function qubely_blocks_toggle() {
-		if ( ! isset( $_POST['block'] ) ) {
-			return wp_send_json_error();
-		}
-		// Get variables.
-		$unregistered_blocks = get_option( 'qubely_unregistered_blocks' );
-		$block = sanitize_text_field( wp_unslash( $_POST['block'] ) );
-
-		if ( ! is_array( $unregistered_blocks ) ) {
-			$unregistered_blocks = array();
-		}
-
-		// If current block is in the array - remove it.
-		if ( in_array( $block, $unregistered_blocks ) ) {
-			$index = array_search( $block, $unregistered_blocks );
-			if ( false !== $index ) {
-				unset( $unregistered_blocks[ $index ] );
-			}
-			// if current block is not in the array - add it.
-		} else {
-			array_push( $unregistered_blocks, $block );
-		}
-
-		update_option( 'qubely_unregistered_blocks', $unregistered_blocks );
-
-		$enabled = true;
-		if ( in_array( $block, $unregistered_blocks ) ) {
-			$enabled = false;
-		}
-
-		$output = array();
-		$output['enabled'] = $enabled;
-		$output['status'] = true;
-
-		echo json_encode($output);
-		die();
 	}
 
 }
