@@ -201,13 +201,8 @@ class PageListModal extends Component {
             currentPageData = priceFilter == 'pro' ? currentPageData.filter( item => item.pro == true ) : priceFilter == 'pro' ? currentPageData.filter( item => item.pro == false ) : currentPageData;
         }
 
-        if( this.state.isSearchEnable && currentPageData.length > 0 ) {
-            let filterData;
-            if( this.state.layer === 'block' ) {
-                filterData = currentPageData.filter( item => item.post_title.toLowerCase().search(this.state.searchContext.toLowerCase()) !== -1 );
-            } else {
-                filterData = currentPageData.filter( item => item.keyword.toLowerCase().search(this.state.searchContext.toLowerCase()) !== -1 );
-            }
+        if( this.state.isSearchEnable ){
+            let filterData = currentPageData.filter( item => item.name.toLowerCase().indexOf(this.state.searchContext.toLowerCase()) != -1 );
             return { pageCategories, selectedCategory, currentPageData: filterData }
         }
 
@@ -616,7 +611,7 @@ class PageListModal extends Component {
                                 <span className={"qubely-template-back"} onClick={()=>this.setState({layer:'multiple', parent_id: ''})}><span className="dashicons dashicons-arrow-left-alt" />&nbsp;</span>
                             }
                             {this._getDataLength('heading', currentPageData.length )}&nbsp;
-                            {itemType == 'block' ? __('Sections') : __('Layout Bundles')}
+                            {itemType == 'block' ? __('Sections') : this.state.layer == 'single'?__('Layouts'):__('Layout Bundles')}
                         </h4>
                         {/* <div className="qubely-template-filter-button-group">
                             <button onClick={() => this._changePriceFilter()} className={'' == this.state.priceFilter ? 'active' : ''}>{__('All')}</button>
