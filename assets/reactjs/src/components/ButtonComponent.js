@@ -34,7 +34,7 @@ const addAttribute = (settings) => {
                         condition: [
                             { key: 'buttonWidthType', relation: '==', value: 'block' }
                         ],
-                        selector: '{{QUBELY}} .qubely-block-btn-anchor {display: -webkit-box; display: -ms-flexbox; display: flex;}'
+                        selector: '{{QUBELY}} .qubely-block-btn-anchor {width:100%; display: -webkit-box; display: -ms-flexbox; display: flex;}'
                     }
                 ]
             },
