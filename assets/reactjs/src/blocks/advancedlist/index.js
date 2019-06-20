@@ -22,7 +22,7 @@ registerBlockType('qubely/advancedlist', {
             default: ['Create advanced list items', 'Options to choose list design', 'Beautiful interaction transitions']
         },
 
-        bulletStyle: { type: 'string', default: 'check-circle-outline' },
+        bulletStyle: { type: 'object', default: { name: 'check-circle-outline', value: 'far fa-check-circle' }, },
         bulletSize: {
             type: 'string', default: '16px',
             style: [

@@ -23,6 +23,7 @@ registerBlockType('qubely/contactform', {
         useDefaultStyle: { type: 'boolean', default: true },
         spacer: { type: 'object', default: { spaceTop: { md: '10', unit: "px" }, spaceBottom: { md: '10', unit: "px" } }, style: [{ selector: '{{QUBELY}}' }] },
         buttonComponent: { type: 'boolean', default: true },
+        enableButtonAlignment: { type: 'boolean', default: true },
         enableButton: { type: 'boolean', default: true },
         buttonTag: { type: 'string', default: 'button' },
         buttonText: { type: 'string', default: 'Submit' },

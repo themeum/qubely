@@ -18,7 +18,7 @@ export const accordionItemSettings = {
     attributes: {
         uniqueId:{ type: 'string', default: ''},
         itemNumber:{ type: 'number' },
-        heading: { type: 'array', default: 'Accordion Item' },
+        heading: { type: 'string', default: 'Accordion Item' },
         active: { type: 'boolean', default: false },
         defaultText: { type: 'string', default: '' },
         fillType: { type: 'string', default: 'fill' },

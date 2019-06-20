@@ -13,7 +13,7 @@ registerBlockType('qubely/testimonial', {
         uniqueId: { type: 'string', default: '' },
         spacer: { type: 'object', default: { spaceTop: { md: '10', unit: "px" }, spaceBottom: { md: '10', unit: "px" } }, style: [{ selector: '{{QUBELY}}' }] },
         alignment: { type: 'object', default: { md: 'center' }, style: [{ selector: '{{QUBELY}} .qubely-block-testimonial {text-align: {{alignment}};}' }] },
-        layout: { type: 'string', default: '1' },
+        layout: { type: 'number', default: 1 },
 
         //Name
         name: { type: 'string', default: 'JOHN DOE' },

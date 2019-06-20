@@ -9,7 +9,6 @@
 			display: block;
 			text-align: center;
 			position: relative;
-			margin-bottom: 10px;
 			
 			.qubely-tab-title {
 				cursor: pointer;
@@ -102,6 +101,11 @@
 		display: none;
 		&.qubely-active {
 			display: block;
+		}
+	}
+	&.qubely-tab-style-pills,&.qubely-tab-style-tabs{
+		.qubely-tab-item {
+			margin-bottom: 10px;
 		}
 	}
 }
