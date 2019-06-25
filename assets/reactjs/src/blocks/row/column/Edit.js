@@ -156,63 +156,38 @@ class Edit extends Component {
     }
 
     /**
-     * Add column to the next index 
-     * Update column width by equal divided (columns/100)
-     * 
-     * Also update resize box width by their root/row width
-     * 
-     * Update parent columns number
-     */
-    addColumnToNext() {
+         * Updates the column count, including necessary revisions to child Column
+         *
+         * @param {string} updateType operation type 'add' || 'delete'
+         */
+    updateColumns(updateType) {
+
         const { clientId } = this.props
-        const { getBlockRootClientId, getBlock, getBlockIndex } = select('core/editor')
-        const { insertBlock, updateBlockAttributes } = dispatch('core/editor')
+        const { getBlockRootClientId, getBlock, getBlocks, getBlockIndex } = select('core/block-editor')
+        const { replaceInnerBlocks, updateBlockAttributes } = dispatch('core/block-editor')
 
         const rootClientId = getBlockRootClientId(clientId)
         const rootBlock = getBlock(rootClientId)
         const selectedBlockIndex = getBlockIndex(clientId, rootClientId)
-        const columns = rootBlock.attributes.columns + 1
+        const columns = updateType === 'add' ? rootBlock.attributes.columns + 1 : rootBlock.attributes.columns - 1
         const columnFixedWidth = parseFloat((100 / columns).toFixed(3))
         const equalWidth = { ...this.state.colWidth, ...{ md: columnFixedWidth, sm: 100, xs: 100 } }
-        const currentBlock = createBlock('qubely/column', { colWidth: equalWidth })
 
-        insertBlock(currentBlock, selectedBlockIndex + 1, rootClientId, true)
+        let innerBlocks = [...getBlocks(rootClientId)]
+        updateType === 'delete' ? innerBlocks.splice(selectedBlockIndex, 1)
+            :
+            innerBlocks.splice(selectedBlockIndex + 1, 0, createBlock('qubely/column', { colWidth: equalWidth }))
+
+        replaceInnerBlocks(rootClientId, innerBlocks, false);
 
         updateBlockAttributes(rootClientId, Object.assign(rootBlock.attributes, { columns: columns }))
 
-        let innerBlocks = rootBlock.innerBlocks
-        innerBlocks.splice(selectedBlockIndex + 1, 0, currentBlock)
-        innerBlocks.map(block => {
+        getBlocks(rootClientId).forEach(block => {
             updateBlockAttributes(block.clientId, Object.assign(block.attributes, { colWidth: { ...equalWidth } }))
             $(`#block-${block.clientId}`).css({ width: equalWidth.md + '%' }) //update next block width
         })
     }
 
-    /**
-     * Delete a single column with resize all column with equal width (columns/100)
-     * 
-     * Update resize box width 
-     * Update parent columns number
-     */
-    onDeleteColumn() {
-        const { clientId } = this.props
-        const { getBlockRootClientId, getBlock, getBlockIndex } = select('core/editor')
-        const { updateBlockAttributes, removeBlock } = dispatch('core/editor')
-        const rootClientId = getBlockRootClientId(clientId)
-        const rootBlock = getBlock(rootClientId)
-        const selectedBlockIndex = getBlockIndex(clientId, rootClientId)
-        const columns = rootBlock.attributes.columns - 1
-        const columnFixedWidth = parseFloat((100 / columns).toFixed(3))
-        const equalWidth = { ...this.state.colWidth, ...{ md: columnFixedWidth, sm: 100, xs: 100 } }
-        removeBlock(clientId, false)
-        updateBlockAttributes(rootClientId, Object.assign(rootBlock.attributes, { columns: columns }))
-        let innerBlocks = rootBlock.innerBlocks
-        innerBlocks.splice(selectedBlockIndex, 1)
-        innerBlocks.map(block => {
-            updateBlockAttributes(block.clientId, Object.assign(block.attributes, { colWidth: { ...equalWidth } }))
-            $(`#block-${block.clientId}`).css({ width: equalWidth.md + '%' })
-        })
-    }
 
     /**
      * Check current row columns status 
@@ -357,19 +332,19 @@ class Edit extends Component {
 
                 <BlockControls>
                     <Toolbar>
-                        {/* {columns < 6 &&
+                        {columns < 6 &&
                             <IconButton
                                 className="components-icon-button components-toolbar__control"
                                 label={__('Add Column')}
-                                onClick={this.addColumnToNext.bind(this)}
+                                onClick={() => this.updateColumns('add')}
                                 icon="plus"
                             />
-                        } */}
+                        }
                         {columns > 1 &&
                             <IconButton
                                 className="components-icon-button components-toolbar__control"
                                 label={__('Delete Column')}
-                                onClick={this.onDeleteColumn.bind(this)}
+                                onClick={() => this.updateColumns('delete')}
                                 icon="trash"
                             />
                         }
