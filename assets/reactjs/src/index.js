@@ -33,23 +33,23 @@ import './customizer'
 
 window.qubelyDevice = 'md'
 window.bindCss = false
-window.globalData = { 
-                    settings:{ 
-                        colorPreset1:'#456bed',
-                        colorPreset2:'#30ac3d',
-                        colorPreset3:'#fa9200',
-                        colorPreset4:'#006fbf',
-                        colorPreset5:'#ff1818',
-                        colorPreset6:'#941f90',
-                    }
-                };
+window.globalData = {
+    settings: {
+        colorPreset1: '#456bed',
+        colorPreset2: '#30ac3d',
+        colorPreset3: '#fa9200',
+        colorPreset4: '#006fbf',
+        colorPreset5: '#ff1818',
+        colorPreset6: '#941f90',
+    }
+};
 window.globalSaving = false
 
 // Save CSS in Database/File
 import ParseCss from './helpers/ParseCss'
 wp.data.subscribe(() => {
-    const { isSavingPost, isAutosavingPost } = wp.data.select("core/editor")
-    if (isSavingPost() && (!isAutosavingPost())) {
+    const { isPreviewingPost, isSavingPost, isAutosavingPost } = wp.data.select("core/editor")
+    if (isPreviewingPost() || (isSavingPost() && (!isAutosavingPost()))) {
         if (window.bindCss === false) {
             ParseCss();
         }
@@ -79,9 +79,9 @@ function qubelyImportLayout() {
 
 //DEACTIVATE BLOCKS
 let qubely_deactivated_blocks = qubely_admin.unregistered_blocks;
-if ( ! qubely_deactivated_blocks.length ) { // convert object into an array.
-	qubely_deactivated_blocks = Object.keys( qubely_deactivated_blocks ).map( key => qubely_deactivated_blocks[ key ] )
+if (!qubely_deactivated_blocks.length) { // convert object into an array.
+    qubely_deactivated_blocks = Object.keys(qubely_deactivated_blocks).map(key => qubely_deactivated_blocks[key])
 }
-if ( typeof wp.blocks.unregisterBlockType !== "undefined" ) {
-	qubely_deactivated_blocks.forEach( block => wp.blocks.unregisterBlockType( block ) )
+if (typeof wp.blocks.unregisterBlockType !== "undefined") {
+    qubely_deactivated_blocks.forEach(block => wp.blocks.unregisterBlockType(block))
 }
