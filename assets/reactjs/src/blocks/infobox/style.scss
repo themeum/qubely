@@ -32,8 +32,9 @@
         &.qubely-media-has-bg {
             i,
             .qubely-info-box-number {
-                width: 1em;
+                min-width: 1em;
                 height: 1em;
+                white-space: nowrap;
                 &:before {
                     position: absolute;
                     left: 50%;

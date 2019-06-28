@@ -24,8 +24,10 @@ class QubelyButtonEdit extends Component {
     }
 }
 class QubelyButtonSave extends Component {
+
     render() {
         const { buttonIconName, buttonIconPosition, buttonSize, buttonText, buttonUrl, buttonTag, buttonId } = this.props
+
         const buttonHtml = <Fragment>{buttonIconName && (buttonIconPosition == 'left') && (<i className={`qubely-btn-icon ${buttonIconName}`} />)}
             <RichText.Content value={(buttonText == '') ? 'Add Text...' : buttonText} />
             {buttonIconName && (buttonIconPosition == 'right') && (<i className={`qubely-btn-icon ${buttonIconName}`} />)}
@@ -34,7 +36,7 @@ class QubelyButtonSave extends Component {
         return (
             <div className="qubely-block-btn-wrapper">
                 <div className={`qubely-block-btn`}>
-                    {buttonTag == 'a' ?
+                    {buttonTag == 'a' || buttonUrl && buttonUrl.url != "#" ?
                         <a className={`qubely-block-btn-anchor is-${buttonSize}`} {...buttonId ? 'id="' + buttonId + '"' : ''} href={buttonUrl.url ? buttonUrl.url : '#'} {...(buttonUrl.target && { target: '_blank' })} {...(buttonUrl.nofollow ? { rel: 'nofollow noopener noreferrer' } : { ...buttonUrl.target && { rel: 'noopener noreferrer' } })} >
                             {buttonHtml}
                         </a>

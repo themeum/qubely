@@ -181,7 +181,7 @@ class Edit extends Component {
                             onChange={ val => this.initMapLibrary( val ) } />
                         { !apiKey &&
                             <Fragment>
-                                <i>{__('Generate your Google API key in')} <a href='https://developers.google.com/maps/documentation/javascript/get-api-key'>{__('here')}</a>.</i>
+                                <i>{__('Generate your Google API key in')} <a href='https://developers.google.com/maps/documentation/javascript/get-api-key' target="_blank">{__('here')}</a>.</i>
                                 <Separator />
                             </Fragment>
                         }

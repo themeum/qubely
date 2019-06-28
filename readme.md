@@ -6,7 +6,7 @@ Donate link: <a href=" https://www.themeum.com">https://www.themeum.com</a>
 Tags: Qubely, website builder, gutenberg block, gutenberg, page builder, drag and drop editor, responsive, site editor, editor, drag-and-drop, visual editor, landing page, frontend editor, wordpress page builder, free page builder, layout builder  
 Requires at least: 5.0  
 Tested up to: 5.2  
-Stable tag: 1.0.0-RC-2
+Stable tag: 1.0.0  
 Requires PHP: 5.4.0  
 License: GPL-2.0+  
 License URI: http://www.gnu.org/licenses/gpl-2.0.txt
@@ -43,11 +43,11 @@ Qubely adds numerous custom Gutenberg blocks to the WordPress block editor and t
 
 * Row
 * Button
-* Accordion/Toggle
-* Tabs
 * Testimonial
 * Heading
 * Counter
+* Tabs
+* Accordion/Toggle
 * Advanced Text
 * Video Popup
 * Google Map
@@ -55,12 +55,17 @@ Qubely adds numerous custom Gutenberg blocks to the WordPress block editor and t
 * Icon
 * Divider
 * Social Icons
-* Contact Form
-* Icon List
-* Advanced List
 * Button Group
 * Info Box
+* Advanced List
+* Contact Form
+* Icon List
+* Pricing
+* Block Wrapper
+* Team
 * More advanced Gutenberg blocks coming
+
+
 
 ## Qubely Gutenberg blocks features and functionalities in details
 
@@ -102,6 +107,12 @@ regardless of the device type and align them flexibly (Left/Center/Right). Color
 - **Contact Form:** Display contact forms effectively in your site with Qubely Contact Form List block. This block comes with two layouts- Classic and Material. Enable/Disable placeholders and labels in your contact form lists. You even get to design your label typography with desired font size, height, spacing, area and more. Improve your input styles with prefered size, textarea height,  spacing, gutter, colour, background colour and more! Enter your receiver email right from the block settings and enable captcha if you wish to do so. Finally add buttons and even animation to your creative contact form lists!
 
 - **Icon List:** Qubely Icon List comes with the Classic and Fill predefined layouts that you can customize to make outstanding lists. Choose from hundreds of icons to find the perfect ones for the icon lists on your site. Define icon list alignment and personalize the icon size, position, spacing and colour. Modify design flexibly with colour, spacing and border options. The typography settings comes with options to change font size, spacing, height and more!
+
+- **Pricing:** Craft each plan of the pricing table individually by choosing a design from 5 predefined layouts. Decide whether to show features, badges, and post button text in the plan. Set up the plan’s duration, typography, style badges, and edit any text in real time. You can literally tweak each and every part of your pricing plans with Qubely Pricing block.
+
+- **Block Wrapper:** Block Wrapper wraps up the block with background of your favorite color. You can set up gradient background by defining Gradient Angle and Type. Apply border from the predefined styles, give box-shadow, define border radius, have hover effects and animate the entire wrapped item with preset effects.
+
+- **Team:** Qubely’s Team block lets you enlist your team members one by one with their details like names, designations, social links, images, and more. You can choose the team member’s profile design from 3 preset layouts. Decide whether to show designation and description with the member profile. Also, apply animation effects on each of the profiles individually.
 
 
 ## Some exciting Qubely features in details
@@ -182,85 +193,113 @@ Found a bug? Please let us know by posting on the support section of this plugin
 
 # Changelog
 
+**1.0.0 - 20 June, 2019**
+
+New: Premade sections & layouts  
+New: Info Box block - Content disable option  
+New: Team block - Padding option for content  
+New: Contact Form block - Button alignment option  
+New: Pricing & Features blocks - Custom alignment option  
+New: Advanced List block - Background size option for number  
+New: Button Group block - Alignment field  
+Update: Redesigned import layout modal UI  
+Update: Dimension field in Row & Column blocks  
+Update: Testimonial block - Replaced dashicons with Font Awesome  
+Fix: Accordion block - Heading update issue  
+Fix: Advanced List block - Bullet icon changing issue  
+Fix: Advanced List block - Line height issue  
+Fix: Advanced Text & Title blocks - Separator stroke value update issue  
+Fix: Advanced settings - Z-index value update issue  
+Fix: Block manager - Resized qubely icons  
+Fix: Button block - Button URL open in new window setting issue  
+Fix: Button Group block - Spacing option issue  
+Fix: Heading block - Sub heading tag change issue  
+Fix: Row block - Overlay issue in inner rows  
+Fix: Testimonial block -  Layout change issue  
+Fix: Tabs block - Nav responsive margin issue  
+Fix: Video Popup block - Icon ripple effect issue  
+
+
+
 **1.0.0-RC-2 - 31 May, 2019**
 
-New: Font family search option in typography
-Update: Pricing Badge UI
-Update: Tab icon setting 
-Update: Gradient angle & position UI
-Update: Shape divider settings in Row
+New: Font family search option in typography  
+Update: Pricing Badge UI  
+Update: Tab icon setting  
+Update: Gradient angle & position UI  
+Update: Shape divider settings in Row  
 
 
 **1.0.0-RC-1 - 24 May, 2019**
 
-Update: Block Wraper's description & keyword
-Update: Code optimization
-Fix: List item auto focus issue in Advanced list & Icon list block
-Fix: Border Hover color option in Icon block
-Fix: Import layout Reloading Issue
+Update: Block Wraper's description & keyword  
+Update: Code optimization  
+Fix: List item auto focus issue in Advanced list & Icon list block  
+Fix: Border Hover color option in Icon block  
+Fix: Import layout Reloading Issue  
 
 
 **1.0.0-beta-3 - 22 May, 2019**
 
-New: Global color palate setting
-New: Recent font-family setting in typography
-Update: Inline text-color and background-color option
-Update: Removed hover option from Pricing block’s background
-Fix: Text color issue in Advanced block
-Fix: Border Hover color option in Icon block
-Fix: Animation delay issue in global option
+New: Global color palate setting  
+New: Recent font-family setting in typography  
+Update: Inline text-color and background-color option  
+Update: Removed hover option from Pricing block’s background  
+Fix: Text color issue in Advanced block  
+Fix: Border Hover color option in Icon block  
+Fix: Animation delay issue in global option  
 
 **1.0.0-beta-2 - 16 May, 2019**
 
-Update: Gradient field color picker position
-Update: Redesigned Testimonial Block's layout
-Update: Responsive device setting
-Update: Changed icon updating option in Pricing Block's features
-Fix: Button Size issue in Pricing Block
-Fix: Transition issue in Video Popup block,  Button Block
+Update: Gradient field color picker position  
+Update: Redesigned Testimonial Block's layout  
+Update: Responsive device setting  
+Update: Changed icon updating option in Pricing Block's features  
+Fix: Button Size issue in Pricing Block  
+Fix: Transition issue in Video Popup block,  Button Block  
 
 **1.0.0-beta-1 - 10 May, 2019**
 
-New: Pricing Block
-New: Wrapper Block
-New: Team Block
-New: Redesigned user interface
-New: Radically Redesigned user experience
-New: Added Responsive settings to the Shape Divider
-Update: Improved padding, margin, Radius, Box Shadow, Background, Color and border options
-Update: Improved typography settings
-Update: Restructured Advanced List block
-Fix: Icon size in the icon list
-Fix: Autofocus in the icon list
-Fix: Video Popup SVG
+New: Pricing Block  
+New: Wrapper Block  
+New: Team Block  
+New: Redesigned user interface  
+New: Radically Redesigned user experience  
+New: Added Responsive settings to the Shape Divider  
+Update: Improved padding, margin, Radius, Box Shadow, Background, Color and border options  
+Update: Improved typography settings  
+Update: Restructured Advanced List block  
+Fix: Icon size in the icon list  
+Fix: Autofocus in the icon list  
+Fix: Video Popup SVG  
 
 **1.0.0-alpha-4 - 28 March, 2019**
 
-New: Contact Form Block
-New: Icon List Block
-New: Advanced List Block
-New: Button Group Block
-New: Info Box Block
-Update: Row settings 
-Update: Column settings
-Fix: Link open in new tab issue
-Fix: Button Alignment issue
-Fix: Video Popup youtube short link issue
+New: Contact Form Block  
+New: Icon List Block  
+New: Advanced List Block  
+New: Button Group Block  
+New: Info Box Block  
+Update: Row settings   
+Update: Column settings  
+Fix: Link open in new tab issue  
+Fix: Button Alignment issue  
+Fix: Video Popup youtube short link issue  
 
 **1.0.0-alpha-3 - 11 March, 2019**
 
-Update: Tab Improvement
-Fix: Social icon blocks dropdown issue
+Update: Tab Improvement  
+Fix: Social icon blocks dropdown issue  
 
 **1.0.0-alpha-2 - 08 March, 2019**
 
-New: Tabs block
-New: Social Icons block
-Update: Row setting
-Update: Column setting
-Fix: Select field issue
-Fix: Responsive device issue
-Fix: Map block address issue
+New: Tabs block  
+New: Social Icons block  
+Update: Row setting  
+Update: Column setting  
+Fix: Select field issue  
+Fix: Responsive device issue  
+Fix: Map block address issue  
 
 **1.0.0-alpha - 01 March, 2019**
 

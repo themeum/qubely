@@ -75,6 +75,7 @@ function appendImportButton() {
 }
 function qubelyImportLayout() {
     ModalManager.open(<PageListModal rowClientId={false} />);
+<<<<<<< HEAD
 }
 
 //DEACTIVATE BLOCKS
@@ -84,4 +85,6 @@ if (!qubely_deactivated_blocks.length) { // convert object into an array.
 }
 if (typeof wp.blocks.unregisterBlockType !== "undefined") {
     qubely_deactivated_blocks.forEach(block => wp.blocks.unregisterBlockType(block))
+=======
+>>>>>>> master
 }

@@ -69,10 +69,11 @@ class PageListModal extends Component {
                             blockCategories.forEach( ( change, i ) => {
                                 if ( cat.slug == change.slug ) {
                                     index = i
+                                    blockCategories[i].count = blockCategories[i].count + 1
                                 }
                             } );
                             if ( index === -1 ) {
-                                blockCategories.push( { name: cat.name, slug: cat.slug } )
+                                blockCategories.push( { name: cat.name, slug: cat.slug, count: 1 } )
                             }
                         } )
                     }
@@ -200,13 +201,8 @@ class PageListModal extends Component {
             currentPageData = priceFilter == 'pro' ? currentPageData.filter( item => item.pro == true ) : priceFilter == 'pro' ? currentPageData.filter( item => item.pro == false ) : currentPageData;
         }
 
-        if( this.state.isSearchEnable && currentPageData.length > 0 ) {
-            let filterData;
-            if( this.state.layer === 'block' ) {
-                filterData = currentPageData.filter( item => item.post_title.toLowerCase().search(this.state.searchContext.toLowerCase()) !== -1 );
-            } else {
-                filterData = currentPageData.filter( item => item.keyword.toLowerCase().search(this.state.searchContext.toLowerCase()) !== -1 );
-            }
+        if( this.state.isSearchEnable ){
+            let filterData = currentPageData.filter( item => item.name.toLowerCase().indexOf(this.state.searchContext.toLowerCase()) != -1 );
             return { pageCategories, selectedCategory, currentPageData: filterData }
         }
 
@@ -335,9 +331,6 @@ class PageListModal extends Component {
                                 if ( index === -1 ) {
                                     layoutCategories.push( { name: cat.name, slug: cat.slug, count: 0 } )
                                 }
-                                // if( count > 1 ){
-                                //     layoutCategories[i].count = count
-                                // }
                             })
                         }
                     });
@@ -502,11 +495,45 @@ class PageListModal extends Component {
         return url;
     }
 
-    _getDataLength(){
-        if(this.state.itemType == 'block'){
-            return Object.getOwnPropertyNames( this.state.blockData ).length
+    _getDataLength( type, singleCount ){
+        const { selectedBlockCategory, blockCategories, selectedLayoutCategory, itemType, blockData, layoutCategories } = this.state
+        let count = 0;
+        if( type == 'heading' ){
+            if( itemType == 'block' ){
+                if( selectedBlockCategory == '' ){
+                    blockCategories.forEach(function(data) { count = count + data.count;});
+                 }else{
+                     blockCategories.forEach(function(data) { 
+                         if( data.slug == selectedBlockCategory ){
+                             count = data.count
+                         }
+                     });
+                 }
+                 return count;
+             }else{
+                 if( this.state.layer == 'multiple' ){
+                    if( selectedLayoutCategory == '' ){
+                        layoutCategories.forEach( function(data) { count = count + data.count;} );
+                    }else{
+                       layoutCategories.forEach(function(data) {
+                           if( data.slug == selectedLayoutCategory ){
+                               count = data.count
+                           }
+                       });
+                    }
+                    return count
+                 }else{
+                    return singleCount
+                 }
+             }
         }else{
-            return  this.state.layoutCategories.length
+            if( itemType == 'block' ){
+                Object.keys(blockData).forEach(function(key) { count = count + blockData[key].length;});
+                return count;
+             }else{
+                layoutCategories.forEach( function(data) { count = count + data.count;} );
+                return count
+             }
         }
     }
 
@@ -518,9 +545,9 @@ class PageListModal extends Component {
 
 
     render() {
-        let { pageCategories, selectedCategory, currentPageData } = this.getCurrentPageData();
+        let { pageCategories, currentPageData } = this.getCurrentPageData();
         let types = typeof wp.QUBELY_PRO_VERSION === 'undefined' ? 'inactive' : 'active';
-        let {itemType,blockData,layoutData, layer, selectedBlockCategory, selectedLayoutCategory} = this.state
+        let {itemType,blockData, layer, selectedBlockCategory, selectedLayoutCategory} = this.state
 
         return (
             <Modal className="qubely-builder-modal-pages-list" customClass="qubely-builder-modal-template-list" onRequestClose={this.props.onRequestClose} openTimeoutMS={0} closeTimeoutMS={0}>
@@ -533,7 +560,7 @@ class PageListModal extends Component {
 
                     <div className="qubely-template-list-header">
                         <button className={ this.state.itemType == 'block' ? 'active' : ''} onClick={ e => this._onlickBlocksTab() }> {__('Sections')} </button>
-                        <button className={ this.state.itemType == 'layout' ? 'active' : ''} onClick={ e => this._onlickLayoutsTab() }> {__('Layouts')} </button>
+                        <button className={ this.state.itemType == 'layout' ? 'active' : ''} onClick={ e => this._onlickLayoutsTab() }> {__('Bundles')} </button>
                         <button className={ this.state.itemType == 'saved_blocks' ? 'active' : ''} onClick={ e => this._onlickSavedBlocksTab() }> {__('Saved')} </button>
                         <button className="qubely-builder-close-modal" onClick={ e => { ModalManager.close() } } >
                             <i className={"fas fa-times"} />
@@ -553,9 +580,9 @@ class PageListModal extends Component {
                                 <li
                                     className={itemType == 'block' ? '' == selectedBlockCategory ? 'active' : '' : '' == selectedLayoutCategory ? 'active' : ''}
                                     onClick={() => this._OnChangeCategory('')}>
-                                    {__('All Categories')}
+                                    {__('All ')}{itemType=='block'?'Sections':'Bundles'}
                                     <span>
-                                        {this._getDataLength()}
+                                        {this._getDataLength('category')}
                                     </span>
                                 </li>
                                 {
@@ -580,13 +607,11 @@ class PageListModal extends Component {
 
                     { itemType != 'saved_blocks' && <div className="qubely-template-list-sub-header">
                         <h4>
-
                             { ( this.state.itemType == 'layout' && this.state.layer == 'single' ) &&
                                 <span className={"qubely-template-back"} onClick={()=>this.setState({layer:'multiple', parent_id: ''})}><span className="dashicons dashicons-arrow-left-alt" />&nbsp;</span>
                             }
-
-                            {this._getDataLength()}&nbsp;
-                            {itemType == 'block' ? __('Sections') : __('Layout Bundles')}
+                            {this._getDataLength('heading', currentPageData.length )}&nbsp;
+                            {itemType == 'block' ? __('Sections') : this.state.layer == 'single'?__('Layouts'):__('Layout Bundles')}
                         </h4>
                         {/* <div className="qubely-template-filter-button-group">
                             <button onClick={() => this._changePriceFilter()} className={'' == this.state.priceFilter ? 'active' : ''}>{__('All')}</button>
