@@ -1,8 +1,8 @@
 const { __ } = wp.i18n;
 const { InspectorControls } = wp.editor
 const { Component, Fragment } = wp.element;
-const { PanelBody, Tooltip } = wp.components;
-import { Typography, Alignment, Wrapper, Padding, Styles, Range, Tabs, Tab, IconList, Color, RadioAdvanced, Border, BorderRadius, BoxShadow, Separator } from '../../components/FieldRender'
+const { PanelBody, Tooltip, Popover } = wp.components;
+import { Typography, Alignment, Padding, Styles, Range, Tabs, Tab, IconList, Color, RadioAdvanced, Border, BorderRadius, BoxShadow, Separator } from '../../components/FieldRender'
 import { CssGenerator } from '../../components/CssGenerator'
 import '../../components/GlobalSettings';
 import icons from '../../helpers/icons'
@@ -74,12 +74,12 @@ class Edit extends Component {
     }
     renderListItems = () => {
         const { isSelected, attributes: { iconPosition, listItems } } = this.props
-        const { focusedItem, removeItemViaBackSpace } = this.state
+        const { focusedItem, removeItemViaBackSpace, currentListItemIndex, openIconPopUp } = this.state
         return listItems.map((item, index) => {
             return (
                 <li className="qubely-list-li qubely-list-li-editor" >
                     <div ref="avoidOnClick" className={`qubely-list-item qubely-list-item-${index}`} onClick={() => this.setState({ currentListItemIndex: index })}>
-                        {iconPosition == 'left' && <span className={`qubely-list-item-icon ${item.icon} fa-fw`} onClick={() => this.setState({ openIconPopUp: this.state.currentListItemIndex == index ? !this.state.openIconPopUp : true })} />}
+                        {iconPosition == 'left' && <span className={`qubely-list-item-icon ${item.icon} fa-fw`} onClick={() => this.setState({ openIconPopUp: openIconPopUp ? (currentListItemIndex == index) ? false : true : true })} />}
                         <div
                             className={`qubely-list-item-text-${index}`}
                             id={`qubely-list-item-text-${index}`}
@@ -90,7 +90,7 @@ class Edit extends Component {
                                 if (event.key == 'Enter') {
                                     event.preventDefault()
                                     this.updateListItems(index, 'add')
-                                    this.setState({ focusedItem: index + 1 == listItems.length ? listItems.length : this.state.focusedItem + 1 })
+                                    this.setState({ focusedItem: index + 1 == listItems.length ? listItems.length : focusedItem + 1 })
                                 }
                             }
                             }
@@ -106,7 +106,7 @@ class Edit extends Component {
                             onClick={() => this.setState({ focusedItem: index })}>
                             {item.text}
                         </div>
-                        {iconPosition == 'right' && <span className={`qubely-list-item-icon ${item.icon} fa-fw`} onClick={() => this.setState({ openIconPopUp: this.state.currentListItemIndex == index ? !this.state.openIconPopUp : true })} />}
+                        {iconPosition == 'right' && <span className={`qubely-list-item-icon ${item.icon} fa-fw`} onClick={() => this.setState({  openIconPopUp: openIconPopUp ? (currentListItemIndex == index) ? false : true : true  })} />}
                         {
                             item.text.length > 0 &&
                             <Tooltip text={__('Delete this item')}>
@@ -122,20 +122,17 @@ class Edit extends Component {
                                 </span>
                             </Tooltip>
                         }
-                        {(this.state.currentListItemIndex == index && this.state.openIconPopUp && isSelected) &&
-                            <Wrapper inline
-                                domNodetobeAvoided={this.refs.avoidOnClick}
-                                onClickOutside={() => {
-                                    this.setState({
-                                        openIconPopUp: false
-                                    })
-                                }}
-                                customClass="qubely-padding-0">
+                        {(currentListItemIndex == index && openIconPopUp && isSelected) &&
+
+                            <Popover
+                                position={`bottom ${iconPosition}`}
+                                className="qubely-iconlist-icons-popover"
+                            >
                                 <IconList
                                     disableToggle={true}
                                     value={listItems.length > 0 && listItems[index].icon}
                                     onChange={(value) => this.modifySpecificItem({ icon: value }, index)} />
-                            </Wrapper>
+                            </Popover>
                         }
                     </div>
                 </li>
@@ -145,10 +142,9 @@ class Edit extends Component {
     }
 
     render() {
-        const { setAttributes, attributes: { uniqueId,
-            iconSize, iconSizeCustom, iconSpacing, layout, iconPosition,
-            listItems, typography, alignment, iconColor, iconHoverColor,
-            spacing, color, colorHover, padding, background, backgroundHover, border, borderRadius, borderColorHover, shadow, shadowHover,
+        const { setAttributes, attributes: { uniqueId, iconSize, iconSizeCustom, iconSpacing, layout, iconPosition,
+            listItems, typography, alignment, iconColor, iconHoverColor, spacing, color, colorHover, padding, background,
+            backgroundHover, border, borderRadius, borderColorHover, shadow, shadowHover,
         } } = this.props
 
         const { device } = this.state

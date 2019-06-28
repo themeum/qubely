@@ -2,7 +2,7 @@ const { __ } = wp.i18n;
 const { InspectorControls, BlockControls } = wp.editor
 const { Component, Fragment } = wp.element;
 const { PanelBody, TextControl, Toolbar, Button, Popover } = wp.components;
-import { Styles, IconSelector, Toggle, Separator, RadioAdvanced, Range, Wrapper, Alignment, Typography, Color, Tabs, Tab, Border, Padding, BorderRadius } from '../../components/FieldRender'
+import { Styles, IconSelector, Toggle, Separator, RadioAdvanced, Range, Alignment, Typography, Color, Tabs, Tab, Border, Padding, BorderRadius } from '../../components/FieldRender'
 import { CssGenerator } from '../../components/CssGenerator';
 import InlineToolbar from '../../components/fields/inline/InlineToolbar'
 import '../../components/GlobalSettings';
@@ -15,7 +15,9 @@ class Edit extends Component {
         this.state = {
             spacer: true,
             device: 'md',
+            selectedLabel: -1,
             selectedItem: -1,
+            showIconPicker: false
         }
     }
 
@@ -29,11 +31,10 @@ class Edit extends Component {
         }
     }
 
-    setSettings(type, val) {
-        const { selectedItem } = this.state;
-        const { attributes, setAttributes } = this.props;
-        let socialIcons = [...attributes.socialIcons];
-        socialIcons[selectedItem] ? socialIcons[selectedItem][type] = val : ''
+    setSettings(index, type, val) {
+        const { attributes, setAttributes } = this.props
+        let socialIcons = [...attributes.socialIcons]
+        socialIcons[index] ? socialIcons[index][type] = val : ''
         setAttributes({ socialIcons })
     }
 
@@ -56,7 +57,7 @@ class Edit extends Component {
     }
 
     render() {
-        const { selectedItem, device } = this.state;
+        const { selectedItem, selectedLabel, device, showIconPicker } = this.state;
         const { attributes, setAttributes, isSelected } = this.props;
         const { uniqueId, alignment, socialIcons, iconLabel, layout, useDefaultStyle, iconSize, iconSizeCustom, iconSpacing, iconBorderRadius, labelSpacing, labelTypography, iconColor, iconColorHover, IconBackground, IconBackgroundHover, iconPaddingX, iconPaddingY, iconPadding, iconBorder, iconBorderColor, iconBorderColorHover } = attributes;
         if (uniqueId) { CssGenerator(this.props.attributes, 'socialicons', uniqueId); };
@@ -207,14 +208,18 @@ class Edit extends Component {
                                     <a
                                         onClick={(e) => {
                                             e.preventDefault()
-                                            this.setState({ selectedItem: (selectedItem == index) ? -1 : index })
+                                            this.setState({
+                                                selectedLabel: index,
+                                                selectedItem: showIconPicker ? (selectedItem == index) ? -1 : index : index,
+                                                showIconPicker: !showIconPicker
+                                            })
                                         }}
                                     >
                                         <i className={'qubely-social-icon ' + item.icon} />
-                                        {(iconLabel && item.label) && <div className="qubely-social-label" contenteditable="true" onBlur={(e) => this.setSettings('label', e.target.innerHTML)}>{item.label}</div>}
+                                        {(iconLabel && item.label) && <div className="qubely-social-label" contenteditable="true" onBlur={(e) => this.setSettings(selectedLabel, 'label', e.target.innerHTML)}>{item.label}</div>}
                                     </a>
 
-                                    {(selectedItem == index && isSelected) &&
+                                    {(showIconPicker && selectedItem == index && isSelected) &&
                                         <Fragment>
                                             <Popover
                                                 position="bottom center"
@@ -227,15 +232,15 @@ class Edit extends Component {
                                                         icons={IconSocialData}
                                                         enableSearch
                                                         onChange={val => {
-                                                            this.setSettings('icon', val.value)
-                                                            this.setSettings('label', val.name)
-                                                            this.setSettings('id', val.id)
+                                                            this.setSettings(selectedItem, 'icon', val.value)
+                                                            this.setSettings(selectedItem, 'label', val.name)
+                                                            this.setSettings(selectedItem, 'id', val.id)
                                                         }}
                                                     />
                                                     <TextControl
                                                         label={__('URL')}
                                                         value={socialIcons[selectedItem].url}
-                                                        onChange={val => this.setSettings('url', val)}
+                                                        onChange={val => this.setSettings(selectedItem, 'url', val)}
                                                         placeholder={__('URL')}
 
                                                     />
@@ -243,7 +248,7 @@ class Edit extends Component {
                                                         <TextControl
                                                             label={__('Label')}
                                                             value={socialIcons[selectedItem].label}
-                                                            onChange={val => this.setSettings('label', val)}
+                                                            onChange={val => this.setSettings(selectedItem, 'label', val)}
                                                             placeholder={__('Enter icon label')}
                                                         />
                                                     }
