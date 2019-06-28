@@ -8,7 +8,6 @@ const { select, dispatch } = wp.data
 import { Background, Border, BorderRadius, BoxShadow, Range, Separator, Dimension } from '../../../components/FieldRender'
 import { CssGenerator } from '../../../components/CssGenerator'
 import '../../../components/GlobalSettings';
-import icons from '../../../helpers/icons';
 
 class Edit extends Component {
     constructor() {

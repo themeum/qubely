@@ -75,16 +75,4 @@ function appendImportButton() {
 }
 function qubelyImportLayout() {
     ModalManager.open(<PageListModal rowClientId={false} />);
-<<<<<<< HEAD
-}
-
-//DEACTIVATE BLOCKS
-let qubely_deactivated_blocks = qubely_admin.unregistered_blocks;
-if (!qubely_deactivated_blocks.length) { // convert object into an array.
-    qubely_deactivated_blocks = Object.keys(qubely_deactivated_blocks).map(key => qubely_deactivated_blocks[key])
-}
-if (typeof wp.blocks.unregisterBlockType !== "undefined") {
-    qubely_deactivated_blocks.forEach(block => wp.blocks.unregisterBlockType(block))
-=======
->>>>>>> master
 }
