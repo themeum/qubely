@@ -149,10 +149,10 @@ const withInspectorControls = createHigherOrderComponent(OriginalComponent => {
                         <Fragment>
                             <IconList
                                 disableToggle={true}
-                                value={listItems.length > 0 && listItems[clickedListItem].icon}
+                                value={listItems.length > 0 && listItems[clickedListItem] && listItems[clickedListItem].icon}
                                 onChange={(value) => this.modifySpecificItem({ icon: value }, clickedListItem)}
                                 colorSettings
-                                iconColor={listItems.length > 0 && (listItems[clickedListItem].customColor || '#5D7FEB')}
+                                iconColor={listItems.length > 0 && listItems[clickedListItem] && (listItems[clickedListItem].customColor || '#5D7FEB')}
                                 onColorChange={(color) => this.modifySpecificItem({ customColor: color }, clickedListItem)}
                             />
                             <Separator label={__('Common Settings')} customClassName="qubely-separtor-extra-margin" />

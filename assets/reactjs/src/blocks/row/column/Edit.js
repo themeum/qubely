@@ -174,9 +174,11 @@ class Edit extends Component {
         const equalWidth = { ...this.state.colWidth, ...{ md: columnFixedWidth, sm: 100, xs: 100 } }
 
         let innerBlocks = [...getBlocks(rootClientId)]
-        updateType === 'delete' ? innerBlocks.splice(selectedBlockIndex, 1)
-            :
+        if (updateType === 'delete') {
+            innerBlocks.splice(selectedBlockIndex, 1)
+        } else {
             innerBlocks.splice(selectedBlockIndex + 1, 0, createBlock('qubely/column', { colWidth: equalWidth }))
+        }
 
         replaceInnerBlocks(rootClientId, innerBlocks, false);
 

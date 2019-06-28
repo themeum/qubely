@@ -151,21 +151,24 @@ class QubelyIconListSave extends Component {
                 <ul className={listWraperClassName || listWraperGlobalClassName}>
                     {
                         listItems.map((item, index) => {
-                            return (
-                                <li className={`qubely-list-li qubely-icon-position-${iconPosition}`}>
-                                    <div className={`qubely-list-item qubely-list-item-${index}`} >
-                                        {enableListIcons && iconPosition == 'left' && <span className={`qubely-list-item-icon ${item.icon} fa-fw`} style={item.customColor ? { color: item.customColor } : {}} />}
-                                        <div
-                                            className={`qubely-list-item-text-${index} qubely-text `}
-                                            id={`qubely-list-item-text-${index}`}
-                                        >
-                                            {item.text}
+                            if (item.text.length > 0) {
+                                return (
+                                    <li className={`qubely-list-li qubely-icon-position-${iconPosition}`}>
+                                        <div className={`qubely-list-item qubely-list-item-${index}`} >
+                                            {enableListIcons && iconPosition == 'left' && <span className={`qubely-list-item-icon ${item.icon} fa-fw`} style={item.customColor ? { color: item.customColor } : {}} />}
+                                            <div
+                                                className={`qubely-list-item-text-${index} qubely-text `}
+                                                id={`qubely-list-item-text-${index}`}
+                                            >
+                                                {item.text}
+                                            </div>
+                                            {enableListIcons && iconPosition == 'right' && <span className={`qubely-list-item-icon ${item.icon} fa-fw`} style={item.customColor ? { color: item.customColor } : {}} />}
                                         </div>
-                                        {enableListIcons && iconPosition == 'right' && <span className={`qubely-list-item-icon ${item.icon} fa-fw`} style={item.customColor ? { color: item.customColor } : {}} />}
-                                    </div>
 
-                                </li>
-                            )
+                                    </li>
+                                )
+                            } else return null
+
                         })
                     }
                 </ul>
