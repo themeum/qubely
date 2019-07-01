@@ -86,7 +86,7 @@ class QubelyIconListEdit extends Component {
                                     event.target.innerText.length == 0 && this.setState({ removeItemViaBackSpace: index })
                                     if (removeItemViaBackSpace == index) {
                                         this.updateListItems(index, 'delete')
-                                        this.setState({ focusedItem: index > 0 ? index - 1 : index })
+                                        this.setState({ focusedItem: index > 0 ? index - 1 : index, removeItemViaBackSpace: -1 })
                                     }
                                 }
                             }}

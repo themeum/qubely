@@ -14,7 +14,7 @@ class Edit extends Component {
             device: 'md',
             currentListItemIndex: 0,
             openIconPopUp: false,
-            removeItemViaBackSpace: 999,
+            removeItemViaBackSpace: -1,
             focusedItem: this.props.attributes.listItems.length - 1
         }
     }
