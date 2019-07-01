@@ -195,14 +195,14 @@ Found a bug? Please let us know by posting on the support section of this plugin
 
 **1.0.1 - 01 July, 2019**
 
-New: Colum block - Add column button in BlockControls' Toolbar  
-Update: Social Icons block - Popover component  
-Update: Icon List block - Icon picker modal UI  
-Fix: Styling issue - on previewing post  
-Fix: Column Block - Css selector to fix styles in child row's columns  
-Fix: Icon List block - Bug on removing item using Backspace   
-Fix: Pricing block - Bug on removing newly added feature  
-Fix: Social Icons block - Icon label change without using Popover  
+New: Column block - Add column option in BlockControls  
+Update: Social Icons block - Used Gutenberg’s Popover component  
+Update: Icon List block - Used Gutenberg’s Popover component  
+Fix: Styling issue while previewing post  
+Fix: Column block - CSS selector to fix styles in child row’s columns  
+Fix: Icon List block - Issue with item removal using Backspace  
+Fix: Pricing block - Issue with removing any newly added feature  
+Fix: Social Icons block - Icon label inline changing issue  
 
 
 **1.0.0 - 20 June, 2019**
