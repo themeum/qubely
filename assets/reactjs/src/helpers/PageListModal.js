@@ -4,7 +4,7 @@ const { Component } = wp.element
 const { Spinner } = wp.components;
 const { parse } = wp.blocks
 const { apiFetch } = wp;
-const {__} = wp.i18n
+const { __ } = wp.i18n
 import { Modal, ModalManager } from './ModalManager'
 import SingleItem from './components/SingleItem'
 import MultipleItem from './components/MultipleItem'
@@ -28,7 +28,7 @@ class PageListModal extends Component {
             savedBlocks: '',
             itemType: 'block',
             layer: 'single',
-            searchContext:'',
+            searchContext: '',
             isSearchEnable: false,
             notFoundMessage: 'Sorry we couldn\'t find your match request!',
             requestFailedMsg: '',
@@ -41,126 +41,126 @@ class PageListModal extends Component {
 
     componentDidMount() {
 
-        this.setState( { loading: true } );
+        this.setState({ loading: true });
         let requestFailedMsg = [];
-        
+
         const options = {
             method: 'POST',
-            url: qubely_admin.ajax+'?action=qubely_get_sections',
+            url: qubely_admin.ajax + '?action=qubely_get_sections',
             headers: { 'Content-Type': 'application/json' }
         }
-        apiFetch( options ).then( response => {
+        apiFetch(options).then(response => {
 
-            if ( response.success ) {
+            if (response.success) {
 
                 let blockCategories = [],
                     blockData = {};
 
-                response.data.map( item => {
-                    if( item.category ) {
-                        item.category.map( cat => {
-                            if( cat.slug in blockData ) {
-                                blockData[ cat.slug ].push( item )
+                response.data.map(item => {
+                    if (item.category) {
+                        item.category.map(cat => {
+                            if (cat.slug in blockData) {
+                                blockData[cat.slug].push(item)
                             } else {
-                                blockData[ cat.slug ] = [];
-                                blockData[ cat.slug ].push( item )
+                                blockData[cat.slug] = [];
+                                blockData[cat.slug].push(item)
                             }
                             let index = -1;
-                            blockCategories.forEach( ( change, i ) => {
-                                if ( cat.slug == change.slug ) {
+                            blockCategories.forEach((change, i) => {
+                                if (cat.slug == change.slug) {
                                     index = i
                                     blockCategories[i].count = blockCategories[i].count + 1
                                 }
-                            } );
-                            if ( index === -1 ) {
-                                blockCategories.push( { name: cat.name, slug: cat.slug, count: 1 } )
+                            });
+                            if (index === -1) {
+                                blockCategories.push({ name: cat.name, slug: cat.slug, count: 1 })
                             }
-                        } )
+                        })
                     }
-                } );
+                });
 
-                this.setState( {
+                this.setState({
                     loading: false,
                     blockCategories,
                     blockData
-                } );
+                });
 
-                let node = document.querySelector( '#modalContainer' );
-                node.addEventListener( "scroll", this._lazyload, true );
-                this._lazyload(); 
+                let node = document.querySelector('#modalContainer');
+                node.addEventListener("scroll", this._lazyload, true);
+                this._lazyload();
 
             } else {
-                this.setState( {
-                    loading: false, 
+                this.setState({
+                    loading: false,
                     requestFailedMsg: response.data.message
-                } );
+                });
             }
-                
-        } ).catch( error => {
-            requestFailedMsg.push( error.code+' : '+error.message );
+
+        }).catch(error => {
+            requestFailedMsg.push(error.code + ' : ' + error.message);
             this.setState({
                 loading: false,
                 requestFailedMsg
             });
-        } );
+        });
     }
 
     componentDidUpdate() {
-        if( this.state.layer === 'single' ) {
+        if (this.state.layer === 'single') {
             this._lazyload();
         }
     }
 
     componentWillUnmount() {
         let node = document.querySelector('#modalContainer');
-        node.removeEventListener('scroll', this._lazyload);
+        node && node.removeEventListener('scroll', this._lazyload);
     };
 
     getCurrentPageData() {
         let { itemType, priceFilter } = this.state;
-        let pageData = ( itemType == 'block' ) ? this.state.blockData : this.state.layoutData;
-        let pageCategories = ( itemType == 'block' ) ? this.state.blockCategories : this.state.layoutCategories;
-        let selectedCategory = ( itemType == 'block' ) ? this.state.selectedBlockCategory : this.state.selectedLayoutCategory;
+        let pageData = (itemType == 'block') ? this.state.blockData : this.state.layoutData;
+        let pageCategories = (itemType == 'block') ? this.state.blockCategories : this.state.layoutCategories;
+        let selectedCategory = (itemType == 'block') ? this.state.selectedBlockCategory : this.state.selectedLayoutCategory;
         let currentPageData = [];
         let tempDataID = [];
 
-        if( this.state.layer === 'single' ) {
-            if( this.state.parent_id ) { //if click from multiple entry
-                for( let key in pageData ) {
-                    pageData[ key ].map( value => {
-                        if( value.parentID && this.state.parent_id === value.parentID  && ! (tempDataID.indexOf(value.ID) > -1 )  ) {
-                            currentPageData.push( value );
-                            tempDataID.push( value.ID );
+        if (this.state.layer === 'single') {
+            if (this.state.parent_id) { //if click from multiple entry
+                for (let key in pageData) {
+                    pageData[key].map(value => {
+                        if (value.parentID && this.state.parent_id === value.parentID && !(tempDataID.indexOf(value.ID) > -1)) {
+                            currentPageData.push(value);
+                            tempDataID.push(value.ID);
                         }
                     })
                 }
             } else {
-                if( selectedCategory ) {
-                    pageData[ selectedCategory ].map( value => {
-                        if( itemType == 'block' ) {
-                            if( !(tempDataID.indexOf(value.ID) > -1 )  ) {
-                                currentPageData.push( value );
+                if (selectedCategory) {
+                    pageData[selectedCategory].map(value => {
+                        if (itemType == 'block') {
+                            if (!(tempDataID.indexOf(value.ID) > -1)) {
+                                currentPageData.push(value);
                                 tempDataID.push(value.ID);
                             }
                         } else {
-                            if( value.parentID  && ! (tempDataID.indexOf(value.ID) > -1 )  ) {
-                                currentPageData.push( value );
-                                tempDataID.push( value.ID );
+                            if (value.parentID && !(tempDataID.indexOf(value.ID) > -1)) {
+                                currentPageData.push(value);
+                                tempDataID.push(value.ID);
                             }
                         }
-                    } )
+                    })
                 } else {
-                    for( let key in pageData ) {
-                        pageData[ key ].map( value => {
-                            if( itemType == 'block' ) {
-                                if( !(tempDataID.indexOf(value.ID) > -1 )  ) {
-                                    currentPageData.push( value );
+                    for (let key in pageData) {
+                        pageData[key].map(value => {
+                            if (itemType == 'block') {
+                                if (!(tempDataID.indexOf(value.ID) > -1)) {
+                                    currentPageData.push(value);
                                     tempDataID.push(value.ID);
                                 }
                             } else {
-                                if( value.parentID  && ! (tempDataID.indexOf(value.ID) > -1 )  ) {
-                                    currentPageData.push( value );
-                                    tempDataID.push( value.ID );
+                                if (value.parentID && !(tempDataID.indexOf(value.ID) > -1)) {
+                                    currentPageData.push(value);
+                                    tempDataID.push(value.ID);
                                 }
                             }
                         })
@@ -169,279 +169,279 @@ class PageListModal extends Component {
             }
         }
 
-        if( this.state.layer === 'multiple' ) {
-            if( selectedCategory ) {
+        if (this.state.layer === 'multiple') {
+            if (selectedCategory) {
                 let itemCount = 0;
-                pageData[ selectedCategory ].map( value => {
-                    if( ! value.parentID   && ! (tempDataID.indexOf(value.ID) > -1 ) ) {
-                        let found = value.category.find( item => item.slug == selectedCategory );
-                        if( found ) {
+                pageData[selectedCategory].map(value => {
+                    if (!value.parentID && !(tempDataID.indexOf(value.ID) > -1)) {
+                        let found = value.category.find(item => item.slug == selectedCategory);
+                        if (found) {
                             tempDataID.push(value.ID);
-                            currentPageData.push( value );
+                            currentPageData.push(value);
                         }
                     }
                 })
             } else {
-                for(let key in pageData) {
-                    pageData[ key ].map( value => {
-                        if( ! value.parentID && ! (tempDataID.indexOf(value.ID) > -1 )  ) {
+                for (let key in pageData) {
+                    pageData[key].map(value => {
+                        if (!value.parentID && !(tempDataID.indexOf(value.ID) > -1)) {
                             tempDataID.push(value.ID);
-                            currentPageData.push( value );
+                            currentPageData.push(value);
                         }
                     })
                 }
             }
         }
 
-        if( this.state.layer === 'block' ) {
+        if (this.state.layer === 'block') {
             currentPageData = this.state.savedBlocks;
         }
 
-        if(itemType != 'saved_blocks'){
-            currentPageData = priceFilter == 'pro' ? currentPageData.filter( item => item.pro == true ) : priceFilter == 'pro' ? currentPageData.filter( item => item.pro == false ) : currentPageData;
+        if (itemType != 'saved_blocks') {
+            currentPageData = priceFilter == 'pro' ? currentPageData.filter(item => item.pro == true) : priceFilter == 'pro' ? currentPageData.filter(item => item.pro == false) : currentPageData;
         }
 
-        if( this.state.isSearchEnable ){
-            let filterData = currentPageData.filter( item => item.name.toLowerCase().indexOf(this.state.searchContext.toLowerCase()) != -1 );
+        if (this.state.isSearchEnable) {
+            let filterData = currentPageData.filter(item => item.name.toLowerCase().indexOf(this.state.searchContext.toLowerCase()) != -1);
             return { pageCategories, selectedCategory, currentPageData: filterData }
         }
 
         return { pageCategories, selectedCategory, currentPageData }
     }
 
-    deleteSavedBlock( index, blockID ) {
+    deleteSavedBlock(index, blockID) {
         let { savedBlocks } = this.state;
         let requestFailedMsg = [];
         const options = {
             method: 'POST',
-            url: qubely_admin.ajax+'?action=qubely_delete_saved_block&block_id='+blockID,
-            headers: {'Content-Type': 'application/json'}
+            url: qubely_admin.ajax + '?action=qubely_delete_saved_block&block_id=' + blockID,
+            headers: { 'Content-Type': 'application/json' }
         }
-        apiFetch( options ).then( response => {
-            if(response.success) {
-                delete savedBlocks[ index ];
+        apiFetch(options).then(response => {
+            if (response.success) {
+                delete savedBlocks[index];
                 this.setState({ savedBlocks });
             }
-        }).catch( error => {
-            requestFailedMsg.push(error.code+' : '+error.message);
+        }).catch(error => {
+            requestFailedMsg.push(error.code + ' : ' + error.message);
             this.setState({
                 requestFailedMsg
             });
         });
     }
 
-    importLayoutBlock( itemData , isPro ) {
+    importLayoutBlock(itemData, isPro) {
 
         let { itemType } = this.state;
         const { insertBlocks, removeBlock, rowClientId } = this.props;
 
-        if( typeof wp.QUBELY_PRO_VERSION === 'undefined' && isPro == true ){
+        if (typeof wp.QUBELY_PRO_VERSION === 'undefined' && isPro == true) {
             //
         } else {
-            this.setState( { spinner: itemData.ID } )
+            this.setState({ spinner: itemData.ID })
             let requestFailedMsg = [];
             const options = {
                 method: 'POST',
-                url: qubely_admin.ajax+'?action=qubely_get_single_'+itemType+'&'+itemType+'_id='+itemData.ID,
-                headers: {'Content-Type': 'application/json'}
+                url: qubely_admin.ajax + '?action=qubely_get_single_' + itemType + '&' + itemType + '_id=' + itemData.ID,
+                headers: { 'Content-Type': 'application/json' }
             }
-            apiFetch( options ).then( response => {
-                if( response.success ) {
+            apiFetch(options).then(response => {
+                if (response.success) {
                     //import layout
-                    let pageData = parse( response.data.rawData );
-                    insertBlocks( pageData );
-                    if( rowClientId ) {
-                        removeBlock( rowClientId );// remove row block
+                    let pageData = parse(response.data.rawData);
+                    insertBlocks(pageData);
+                    if (rowClientId) {
+                        removeBlock(rowClientId);// remove row block
                     }
                     ModalManager.close(); //close modal
                 }
-            } ).catch( error => {
-                requestFailedMsg.push(error.code+' : '+error.message);
-                this.setState( { 
+            }).catch(error => {
+                requestFailedMsg.push(error.code + ' : ' + error.message);
+                this.setState({
                     requestFailedMsg
-                } );
-            } );
+                });
+            });
         }
     }
 
-    importSavedBlock( block ) {
-        const { insertBlocks, removeBlock, rowClientId} = this.props;
-        const blocks = parse( block.post_content );
-        insertBlocks( blocks );
-        if( rowClientId ) {
-            removeBlock( rowClientId );// remove row block
+    importSavedBlock(block) {
+        const { insertBlocks, removeBlock, rowClientId } = this.props;
+        const blocks = parse(block.post_content);
+        insertBlocks(blocks);
+        if (rowClientId) {
+            removeBlock(rowClientId);// remove row block
         }
         ModalManager.close();
     }
 
     _onlickBlocksTab() {
-        this.setState( {
-            itemType:'block', 
-            layer: 'single', 
+        this.setState({
+            itemType: 'block',
+            layer: 'single',
             parent_id: ''
-        } )
+        })
     }
 
     _onlickLayoutsTab() {
 
         let { layoutData, layoutCategoryItems } = this.state;
 
-        if( !layoutData ) {
-            this.setState( { loading: true } );
+        if (!layoutData) {
+            this.setState({ loading: true });
             let requestFailedMsg = [];
 
             const options = {
                 method: 'POST',
-                url: qubely_admin.ajax+'?action=qubely_get_layouts',
-                headers: {'Content-Type': 'application/json'}
+                url: qubely_admin.ajax + '?action=qubely_get_layouts',
+                headers: { 'Content-Type': 'application/json' }
             }
-            apiFetch( options ).then( response => {
+            apiFetch(options).then(response => {
 
-                if ( response.success ) {
+                if (response.success) {
 
                     let layoutCategories = [],
                         layoutData = {};
 
-                    response.data.map( item => {
+                    response.data.map(item => {
 
                         let itemKey = `item${item.parentID}`;
-                        if( layoutCategoryItems.hasOwnProperty( itemKey ) ) {
-                            layoutCategoryItems[ itemKey ] += 1; 
+                        if (layoutCategoryItems.hasOwnProperty(itemKey)) {
+                            layoutCategoryItems[itemKey] += 1;
                         } else {
-                            layoutCategoryItems[ itemKey ] = 1;
+                            layoutCategoryItems[itemKey] = 1;
                         }
 
-                        if( item.category ) {
-                            item.category.map( cat => {
-                                if( cat.slug in layoutData ) {
-                                    layoutData[ cat.slug ].push( item )
+                        if (item.category) {
+                            item.category.map(cat => {
+                                if (cat.slug in layoutData) {
+                                    layoutData[cat.slug].push(item)
                                 } else {
-                                    layoutData[ cat.slug ] = [];
-                                    layoutData[ cat.slug ].push( item )
+                                    layoutData[cat.slug] = [];
+                                    layoutData[cat.slug].push(item)
                                 }
                                 let index = -1;
-                                layoutCategories.forEach( ( change, i ) => {
-                                    if ( cat.slug == change.slug ) {
+                                layoutCategories.forEach((change, i) => {
+                                    if (cat.slug == change.slug) {
                                         index = i
-                                        if( item.parentID == 0 ){
+                                        if (item.parentID == 0) {
                                             layoutCategories[i].count = layoutCategories[i].count + 1
                                         }
                                     }
                                 });
-                                if ( index === -1 ) {
-                                    layoutCategories.push( { name: cat.name, slug: cat.slug, count: 0 } )
+                                if (index === -1) {
+                                    layoutCategories.push({ name: cat.name, slug: cat.slug, count: 0 })
                                 }
                             })
                         }
                     });
-                    
-                    this.setState( {
+
+                    this.setState({
                         loading: false,
                         layoutCategories,
                         layoutCategoryItems,
                         layoutData
-                    } );
+                    });
 
                     let node = document.querySelector('#modalContainer');
                     node.addEventListener("scroll", this._lazyload, true);
-                    this._lazyload(); 
-                    
+                    this._lazyload();
+
                 } else {
-                    this.setState( {
-                        loading: false, 
+                    this.setState({
+                        loading: false,
                         requestFailedMsg: response.data.message
-                    } );
+                    });
                 }
-                    
-            } ).catch( error => {
-                requestFailedMsg.push( error.code+' : '+error.message );
-                this.setState( { 
+
+            }).catch(error => {
+                requestFailedMsg.push(error.code + ' : ' + error.message);
+                this.setState({
                     loading: false,
                     requestFailedMsg
-                } );
-            } );
+                });
+            });
         }
-        
-        this.setState( {
-            itemType:'layout',
+
+        this.setState({
+            itemType: 'layout',
             layer: 'multiple',
             parent_id: ''
-        } )
+        })
     }
 
     _onlickSavedBlocksTab() {
         let requestFailedMsg = [];
         let { savedBlocks } = this.state;
-        if( !savedBlocks ) {
-            this.setState( { loading: true } );
+        if (!savedBlocks) {
+            this.setState({ loading: true });
             const options = {
                 method: 'POST',
-                url: qubely_admin.ajax+'?action=qubely_get_saved_block',
-                headers: {'Content-Type': 'application/json'}
+                url: qubely_admin.ajax + '?action=qubely_get_saved_block',
+                headers: { 'Content-Type': 'application/json' }
             }
-            apiFetch( options ).then( response => {
-                this.setState( {
+            apiFetch(options).then(response => {
+                this.setState({
                     loading: false,
                     layer: 'block',
                     itemType: 'saved_blocks',
                     savedBlocks: response.data,
-                } );
-            } ).catch( error => {
-                requestFailedMsg.push( error.code+' : '+error.message );
-                this.setState( {
+                });
+            }).catch(error => {
+                requestFailedMsg.push(error.code + ' : ' + error.message);
+                this.setState({
                     loading: false,
                     requestFailedMsg
-                } );
-            } );
+                });
+            });
         } else {
-            this.setState( { 
+            this.setState({
                 layer: 'block',
                 itemType: 'saved_blocks'
-            } );
+            });
         }
     }
 
-    _onClickSingleEntity( template_id ) {
-        this.setState( {
-            layer:'single',
-            parent_id : template_id 
-        } )
+    _onClickSingleEntity(template_id) {
+        this.setState({
+            layer: 'single',
+            parent_id: template_id
+        })
     }
 
     _lazyload() {
         let { lazyloadThrottleTimeout } = this.state;
         let lazyloadImages = document.querySelectorAll('img.lazy');
-        if( lazyloadImages.length ) {
-            if ( lazyloadThrottleTimeout ) {
-                this.setState( {
+        if (lazyloadImages.length) {
+            if (lazyloadThrottleTimeout) {
+                this.setState({
                     lazyloadThrottleTimeout: clearTimeout(lazyloadThrottleTimeout)
-                } );
+                });
             }
-            let modalContainer = document.querySelector( '#modalContainer' );
-    
-            lazyloadThrottleTimeout = setTimeout( function () {
-                let firstElement = document.querySelector( '#first-single-item' ),
+            let modalContainer = document.querySelector('#modalContainer');
+
+            lazyloadThrottleTimeout = setTimeout(function () {
+                let firstElement = document.querySelector('#first-single-item'),
                     rect = firstElement.getBoundingClientRect(),
                     scrollTop = window.pageYOffset || document.documentElement.scrollTop,
-                    scrollTopOffset = Math.abs( rect.top + scrollTop );
-    
+                    scrollTopOffset = Math.abs(rect.top + scrollTop);
+
                 lazyloadImages.forEach(function (img) {
                     if (img.offsetTop < (modalContainer.clientHeight + scrollTopOffset)) {
                         img.src = img.dataset.src;
                         //img.classList.remove('lazy');
                     }
-                } );
-                if ( lazyloadImages.length == 0 ) {
+                });
+                if (lazyloadImages.length == 0) {
                     modalContainer.removeEventListener("scroll", this._lazyload);
                 }
             }, 20);
         }
     }
 
-    _OnChangeCategory( value ) {
-        if( this.state.itemType == 'block' ) {
+    _OnChangeCategory(value) {
+        if (this.state.itemType == 'block') {
             this.setState({ selectedBlockCategory: value });
-        } else if( this.state.itemType == 'layout' ) {
+        } else if (this.state.itemType == 'layout') {
             this.setState({ selectedLayoutCategory: value });
         }
     }
@@ -482,62 +482,62 @@ class PageListModal extends Component {
     }
 
 
-    _OnSearchTemplate( event ) {
+    _OnSearchTemplate(event) {
         let { isSearchEnable } = this.state;
         isSearchEnable = event.target.value === '' ? false : true
-        this.setState({ isSearchEnable , searchContext: event.target.value })
+        this.setState({ isSearchEnable, searchContext: event.target.value })
     }
 
-    _backgroundImage( url ) {
-        if ( !url ) {
-            return qubely_admin.plugin+'assets/img/qubely-medium.jpg';
+    _backgroundImage(url) {
+        if (!url) {
+            return qubely_admin.plugin + 'assets/img/qubely-medium.jpg';
         }
         return url;
     }
 
-    _getDataLength( type, singleCount ){
+    _getDataLength(type, singleCount) {
         const { selectedBlockCategory, blockCategories, selectedLayoutCategory, itemType, blockData, layoutCategories } = this.state
         let count = 0;
-        if( type == 'heading' ){
-            if( itemType == 'block' ){
-                if( selectedBlockCategory == '' ){
-                    blockCategories.forEach(function(data) { count = count + data.count;});
-                 }else{
-                     blockCategories.forEach(function(data) { 
-                         if( data.slug == selectedBlockCategory ){
-                             count = data.count
-                         }
-                     });
-                 }
-                 return count;
-             }else{
-                 if( this.state.layer == 'multiple' ){
-                    if( selectedLayoutCategory == '' ){
-                        layoutCategories.forEach( function(data) { count = count + data.count;} );
-                    }else{
-                       layoutCategories.forEach(function(data) {
-                           if( data.slug == selectedLayoutCategory ){
-                               count = data.count
-                           }
-                       });
+        if (type == 'heading') {
+            if (itemType == 'block') {
+                if (selectedBlockCategory == '') {
+                    blockCategories.forEach(function (data) { count = count + data.count; });
+                } else {
+                    blockCategories.forEach(function (data) {
+                        if (data.slug == selectedBlockCategory) {
+                            count = data.count
+                        }
+                    });
+                }
+                return count;
+            } else {
+                if (this.state.layer == 'multiple') {
+                    if (selectedLayoutCategory == '') {
+                        layoutCategories.forEach(function (data) { count = count + data.count; });
+                    } else {
+                        layoutCategories.forEach(function (data) {
+                            if (data.slug == selectedLayoutCategory) {
+                                count = data.count
+                            }
+                        });
                     }
                     return count
-                 }else{
+                } else {
                     return singleCount
-                 }
-             }
-        }else{
-            if( itemType == 'block' ){
-                Object.keys(blockData).forEach(function(key) { count = count + blockData[key].length;});
+                }
+            }
+        } else {
+            if (itemType == 'block') {
+                Object.keys(blockData).forEach(function (key) { count = count + blockData[key].length; });
                 return count;
-             }else{
-                layoutCategories.forEach( function(data) { count = count + data.count;} );
+            } else {
+                layoutCategories.forEach(function (data) { count = count + data.count; });
                 return count
-             }
+            }
         }
     }
 
-    _changePriceFilter(val = ''){
+    _changePriceFilter(val = '') {
         this.setState({
             priceFilter: val ? val : ''
         })
@@ -547,7 +547,7 @@ class PageListModal extends Component {
     render() {
         let { pageCategories, currentPageData } = this.getCurrentPageData();
         let types = typeof wp.QUBELY_PRO_VERSION === 'undefined' ? 'inactive' : 'active';
-        let {itemType,blockData, layer, selectedBlockCategory, selectedLayoutCategory} = this.state
+        let { itemType, blockData, layer, selectedBlockCategory, selectedLayoutCategory } = this.state
 
         return (
             <Modal className="qubely-builder-modal-pages-list" customClass="qubely-builder-modal-template-list" onRequestClose={this.props.onRequestClose} openTimeoutMS={0} closeTimeoutMS={0}>
@@ -555,14 +555,14 @@ class PageListModal extends Component {
                 <div className="qubely-builder-modal-header">
                     <div className="template-search-box">
                         <i className="fas fa-search"></i>
-                        <input type="search" onChange={this._OnSearchTemplate.bind(this)} value={this.state.searchContext} placeholder={__('Type to search')} className="form-control"/>
+                        <input type="search" onChange={this._OnSearchTemplate.bind(this)} value={this.state.searchContext} placeholder={__('Type to search')} className="form-control" />
                     </div>
 
                     <div className="qubely-template-list-header">
-                        <button className={ this.state.itemType == 'block' ? 'active' : ''} onClick={ e => this._onlickBlocksTab() }> {__('Sections')} </button>
-                        <button className={ this.state.itemType == 'layout' ? 'active' : ''} onClick={ e => this._onlickLayoutsTab() }> {__('Bundles')} </button>
-                        <button className={ this.state.itemType == 'saved_blocks' ? 'active' : ''} onClick={ e => this._onlickSavedBlocksTab() }> {__('Saved')} </button>
-                        <button className="qubely-builder-close-modal" onClick={ e => { ModalManager.close() } } >
+                        <button className={this.state.itemType == 'block' ? 'active' : ''} onClick={e => this._onlickBlocksTab()}> {__('Sections')} </button>
+                        <button className={this.state.itemType == 'layout' ? 'active' : ''} onClick={e => this._onlickLayoutsTab()}> {__('Bundles')} </button>
+                        <button className={this.state.itemType == 'saved_blocks' ? 'active' : ''} onClick={e => this._onlickSavedBlocksTab()}> {__('Saved')} </button>
+                        <button className="qubely-builder-close-modal" onClick={e => { ModalManager.close() }} >
                             <i className={"fas fa-times"} />
                         </button>
                     </div>
@@ -572,15 +572,15 @@ class PageListModal extends Component {
 
                     <div className="qubely-modal-sidebar-content">
                         {
-                            !(itemType == 'layout' && layer == 'single') && !(itemType== 'saved_blocks') && <h3>Categories</h3>
+                            !(itemType == 'layout' && layer == 'single') && !(itemType == 'saved_blocks') && <h3>Categories</h3>
                         }
                         {
-                            ( !this.state.parent_id ) && this.state.layer != 'block' &&
+                            (!this.state.parent_id) && this.state.layer != 'block' &&
                             <ul className="qubely-template-categories">
                                 <li
                                     className={itemType == 'block' ? '' == selectedBlockCategory ? 'active' : '' : '' == selectedLayoutCategory ? 'active' : ''}
                                     onClick={() => this._OnChangeCategory('')}>
-                                    {__('All ')}{itemType=='block'?'Sections':'Bundles'}
+                                    {__('All ')}{itemType == 'block' ? 'Sections' : 'Bundles'}
                                     <span>
                                         {this._getDataLength('category')}
                                     </span>
@@ -590,10 +590,10 @@ class PageListModal extends Component {
                                         <li className={itemType == 'block' ? data.slug == selectedBlockCategory ? 'active' : '' : data.slug == selectedLayoutCategory ? 'active' : ''}
                                             onClick={() => this._OnChangeCategory(data.slug)}
                                             key={index}>
-                                                {data.name}
+                                            {data.name}
                                             <span>
                                                 {
-                                                    itemType=='block'? blockData[data.slug] ? blockData[data.slug].length :0: data.count
+                                                    itemType == 'block' ? blockData[data.slug] ? blockData[data.slug].length : 0 : data.count
                                                 }
                                             </span>
                                         </li>
@@ -605,13 +605,13 @@ class PageListModal extends Component {
                 </div>
                 <div className="qubely-layout-modal-content-area">
 
-                    { itemType != 'saved_blocks' && <div className="qubely-template-list-sub-header">
+                    {itemType != 'saved_blocks' && <div className="qubely-template-list-sub-header">
                         <h4>
-                            { ( this.state.itemType == 'layout' && this.state.layer == 'single' ) &&
-                                <span className={"qubely-template-back"} onClick={()=>this.setState({layer:'multiple', parent_id: ''})}><span className="dashicons dashicons-arrow-left-alt" />&nbsp;</span>
+                            {(this.state.itemType == 'layout' && this.state.layer == 'single') &&
+                                <span className={"qubely-template-back"} onClick={() => this.setState({ layer: 'multiple', parent_id: '' })}><span className="dashicons dashicons-arrow-left-alt" />&nbsp;</span>
                             }
-                            {this._getDataLength('heading', currentPageData.length )}&nbsp;
-                            {itemType == 'block' ? __('Sections') : this.state.layer == 'single'?__('Layouts'):__('Layout Bundles')}
+                            {this._getDataLength('heading', currentPageData.length)}&nbsp;
+                            {itemType == 'block' ? __('Sections') : this.state.layer == 'single' ? __('Layouts') : __('Layout Bundles')}
                         </h4>
                         {/* <div className="qubely-template-filter-button-group">
                             <button onClick={() => this._changePriceFilter()} className={'' == this.state.priceFilter ? 'active' : ''}>{__('All')}</button>
@@ -623,7 +623,7 @@ class PageListModal extends Component {
                         </div> */}
                     </div>}
 
-                    { !this.state.loading ?
+                    {!this.state.loading ?
                         <div id="modalContainer" className="qubely-template-list-modal">
                             <div className="qubely-builder-template-list-container">
                                 {/*<div className="qubely-template-option-header">
@@ -660,44 +660,44 @@ class PageListModal extends Component {
 
                                     }
 
-                                    { this.state.layer == 'multiple' &&
-                                    currentPageData.map((data, index) =>
-                                        <MultipleItem
-                                            key={ index }
-                                            data={ data }
-                                            totalLayouts={ this.state.layoutCategoryItems[ `item${data.ID}` ] }
-                                            onClickSingleEntity={this._onClickSingleEntity.bind(this)}
-                                            backgroundImage={this._backgroundImage}
-                                        />
-                                    ) }
+                                    {this.state.layer == 'multiple' &&
+                                        currentPageData.map((data, index) =>
+                                            <MultipleItem
+                                                key={index}
+                                                data={data}
+                                                totalLayouts={this.state.layoutCategoryItems[`item${data.ID}`]}
+                                                onClickSingleEntity={this._onClickSingleEntity.bind(this)}
+                                                backgroundImage={this._backgroundImage}
+                                            />
+                                        )}
 
-                                    { ( this.state.layer == 'block' && currentPageData.length != 0 ) &&
-                                    <div className="qubely-reusable-list-title">
-                                        <div className="qubely-reusable-list-content">
-                                            <span className="qubely-tmpl-title" > {__('Title')}</span>
+                                    {(this.state.layer == 'block' && currentPageData.length != 0) &&
+                                        <div className="qubely-reusable-list-title">
+                                            <div className="qubely-reusable-list-content">
+                                                <span className="qubely-tmpl-title" > {__('Title')}</span>
+                                            </div>
+                                            <div className="qubely-reusable-list-info">
+                                                <div className="qubely-reusable-list-info-date">{__('Publish')} </div>
+                                            </div>
                                         </div>
-                                        <div className="qubely-reusable-list-info">
-                                            <div className="qubely-reusable-list-info-date">{__('Publish')} </div>
-                                        </div>
-                                    </div>
                                     }
 
-                                    { this.state.layer == 'block' &&
-                                    currentPageData.map((data, index) =>
-                                        <ReusableBlockItem
-                                            key={index}
-                                            data={data}
-                                            index={index}
-                                            importSavedBlock={this.importSavedBlock.bind(this)}
-                                            deleteSavedBlock={this.deleteSavedBlock.bind(this)}
-                                            backgroundImage={this._backgroundImage}
-                                        />
-                                    ) }
+                                    {this.state.layer == 'block' &&
+                                        currentPageData.map((data, index) =>
+                                            <ReusableBlockItem
+                                                key={index}
+                                                data={data}
+                                                index={index}
+                                                importSavedBlock={this.importSavedBlock.bind(this)}
+                                                deleteSavedBlock={this.deleteSavedBlock.bind(this)}
+                                                backgroundImage={this._backgroundImage}
+                                            />
+                                        )}
 
-                                    { ( currentPageData.length === 0 ) &&
-                                    <div className="qubely-builder-template-found-empty">
-                                        <h3 className="qubely-builder-empty-title"> {this.state.notFoundMessage} </h3>
-                                    </div>
+                                    {(currentPageData.length === 0) &&
+                                        <div className="qubely-builder-template-found-empty">
+                                            <h3 className="qubely-builder-empty-title"> {this.state.notFoundMessage} </h3>
+                                        </div>
                                     }
 
                                 </div>
@@ -705,9 +705,9 @@ class PageListModal extends Component {
                         </div>
                         :
                         <div>
-                            <div style={ { height: "600px"} }>
-                                { this.state.requestFailedMsg ?
-                                    this.state.requestFailedMsg.map( (error, index) => <p key={index}>{error}</p> )
+                            <div style={{ height: "600px" }}>
+                                {this.state.requestFailedMsg ?
+                                    this.state.requestFailedMsg.map((error, index) => <p key={index}>{error}</p>)
                                     :
                                     <div className="qubely-modal-loader">
                                         <Spinner />
@@ -729,16 +729,16 @@ class PageListModal extends Component {
 }
 
 
-export default compose( [
-    withDispatch( ( dispatch ) => {
+export default compose([
+    withDispatch((dispatch) => {
         const {
             insertBlocks,
             removeBlock
-        } = dispatch( 'core/editor' );
+        } = dispatch('core/editor');
 
         return {
             insertBlocks,
             removeBlock
         };
-    } ),
-] )( PageListModal );
+    }),
+])(PageListModal);
