@@ -97,15 +97,21 @@
 			border-color: #0085ba;
 		}
 	}
-	.qubely-tab-content {
-		display: none;
-		&.qubely-active {
-			display: block;
-		}
-	}
+
 	&.qubely-tab-style-pills,&.qubely-tab-style-tabs{
 		.qubely-tab-item {
 			margin-bottom: 10px;
 		}
+	}
+}
+.wp-block.qubely-tab-content {
+	visibility: hidden;
+	opacity: 0;
+	position: absolute;
+	&.qubely-active {
+		position: relative;
+		opacity: 1;
+		visibility: visible;
+		transition: opacity 400ms;
 	}
 }
