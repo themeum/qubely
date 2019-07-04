@@ -15,18 +15,12 @@ registerBlockType('qubely/buttongroup', {
         uniqueId: { type: 'string', default: '' },
         buttons: { type: 'number', default: 2 },
         alignment: {
-            type: 'string', default: 'left',
-            style: [
-                {
-                    condition: [{ key: 'alignment', relation: '==', value: 'center' }],
-                    selector: '{{QUBELY}} .qubely-block-button-group {justify-content: center;}'
-                },
-                {
-                    condition: [{ key: 'alignment', relation: '==', value: 'right' }],
-                    selector: '{{QUBELY}} .qubely-block-button-group {justify-content: flex-end;}'
-                }
-            ]
-        },
+			type: 'object',
+			default: {md:'flex-start'},
+			style: [
+				{ selector: '{{QUBELY}} .qubely-block-button-group {justify-content: {{alignment}}; }' }
+			],
+		},
         spacing: {
             type: 'object',
             default: { unit: "px", md: "5" },
