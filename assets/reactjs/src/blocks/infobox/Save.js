@@ -86,6 +86,7 @@ class Save extends Component {
 								buttonIconName={buttonIconName}
 								buttonIconPosition={buttonIconPosition}
 								buttonUrl={buttonUrl}
+								buttonTag='a'
 							/>
 						}
 					</div>
