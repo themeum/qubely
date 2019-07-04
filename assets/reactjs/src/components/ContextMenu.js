@@ -18,16 +18,10 @@ const addAttribute = (block) => {
 
 const withContextMenu = createHigherOrderComponent(OriginalComponent => {
     class QubelyWrappedComponent extends Component {
-        constructor(props) {
-            super(props)
-            this.state = {
-                ctrlPressed: false,
-                shiftPressed: false
-            }
-        }
+
         componentDidMount() {
             const { clientId, attributes: { sourceOfCopiedStyle } } = this.props
-            document.addEventListener('mousedown', this.handleClickOutside)
+            document.addEventListener('mousedown', this.handleonClickOutside)
             if (sourceOfCopiedStyle) {
                 let qubelyCopiedStyles = JSON.parse(localStorage.getItem('qubelyCopiedStyles'))
                 qubelyCopiedStyles.copiedFrom = clientId
@@ -36,7 +30,7 @@ const withContextMenu = createHigherOrderComponent(OriginalComponent => {
         }
 
         componentWillUnmount() {
-            document.removeEventListener('mousedown', this.handleClickOutside);
+            document.removeEventListener('mousedown', this.handleonClickOutside);
         }
         renderContextMenu = () => {
             const { name, clientId, attributes: { sourceOfCopiedStyle } } = this.props
@@ -65,7 +59,7 @@ const withContextMenu = createHigherOrderComponent(OriginalComponent => {
                 </div>
             )
         }
-        handleClickOutside = (event) => {
+        handleonClickOutside = (event) => {
             const qubelyContextMenu = this.refs.qubelyContextMenu
             if (qubelyContextMenu && !qubelyContextMenu.contains(event.target)) {
                 qubelyContextMenu.style.display = `none`
@@ -116,7 +110,7 @@ const withContextMenu = createHigherOrderComponent(OriginalComponent => {
             let previouslyCopiedStyle = JSON.parse(localStorage.getItem('qubelyCopiedStyles'))
             if (previouslyCopiedStyle) {
                 let previouslyCopiedFrom = previouslyCopiedStyle.copiedFrom
-                select('core/block-editor').getBlock(previouslyCopiedFrom) && updateBlockAttributes(previouslyCopiedFrom, { sourceOfCopiedStyle: false })
+                select('core/block-editor').getBlock(`${previouslyCopiedFrom}`) && updateBlockAttributes(`${previouslyCopiedFrom}`, { sourceOfCopiedStyle: false })
             }
 
             setTimeout(() => localStorage.setItem('qubelyCopiedStyles', JSON.stringify(newStyles)), 500)
