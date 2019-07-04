@@ -97,7 +97,12 @@
 			border-color: #0085ba;
 		}
 	}
-
+	.wp-block-qubely-tab.qubely-tab-content {	
+		display: none;	
+	   &.qubely-active {	
+		   display: block;	
+	   }	
+   }
 	&.qubely-tab-style-pills,&.qubely-tab-style-tabs{
 		.qubely-tab-item {
 			margin-bottom: 10px;
