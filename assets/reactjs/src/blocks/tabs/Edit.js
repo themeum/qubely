@@ -232,7 +232,7 @@ class Edit extends Component {
 
 						<IconList
 							label={__('Icon')}
-							value={tabTitles[activeTab - 1].iconName}
+							value={tabTitles[activeTab - 1] && tabTitles[activeTab - 1].iconName}
 							onChange={(value) => this.updateTitles({ iconName: value }, activeTab - 1)} />
 						<Select
 							label={__('Icon Position')}
