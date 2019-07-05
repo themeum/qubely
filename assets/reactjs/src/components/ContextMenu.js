@@ -22,8 +22,8 @@ const withContextMenu = createHigherOrderComponent(OriginalComponent => {
         componentDidMount() {
             const { clientId, attributes: { sourceOfCopiedStyle } } = this.props
             document.addEventListener('mousedown', this.handleonClickOutside)
-            if (sourceOfCopiedStyle) {
-                let qubelyCopiedStyles = JSON.parse(localStorage.getItem('qubelyCopiedStyles'))
+            let qubelyCopiedStyles = JSON.parse(localStorage.getItem('qubelyCopiedStyles'))
+            if (sourceOfCopiedStyle && qubelyCopiedStyles) {
                 qubelyCopiedStyles.copiedFrom = clientId
                 localStorage.setItem('qubelyCopiedStyles', JSON.stringify(qubelyCopiedStyles))
             }
@@ -43,7 +43,7 @@ const withContextMenu = createHigherOrderComponent(OriginalComponent => {
                                 <div class="qubely-context-menu-item-icon"> <i className="fas fa-copy"></i></div>
                                 <div class="qubely-context-menu-item-title">Copy Style</div>
                             </div>
-                            <div className={`qubely-context-menu-item qubely-context-menu-item-paste disable-${previouslyCopiedStyle.blockName == name ? sourceOfCopiedStyle : true}`} onClick={() => this.pasteStyle()} aria-disabled={sourceOfCopiedStyle} >
+                            <div className={`qubely-context-menu-item qubely-context-menu-item-paste disable-${previouslyCopiedStyle && previouslyCopiedStyle.blockName == name ? sourceOfCopiedStyle : true}`} onClick={() => this.pasteStyle()} aria-disabled={sourceOfCopiedStyle} >
                                 <div class="qubely-context-menu-item-icon"> <i className="fas fa-paste"></i></div>
                                 <div class="qubely-context-menu-item-title">Paste Style</div>
                             </div>
@@ -102,11 +102,12 @@ const withContextMenu = createHigherOrderComponent(OriginalComponent => {
             Object.keys(blockDefaultAttributes).forEach(key => {
                 if (blockDefaultAttributes[key].hasOwnProperty('style')) {
                     newStyles.copiedStyles[key] = JSON.parse(JSON.stringify(blockAttributes[key]))
+                } else if (key.toLowerCase() == 'layout' || key.toLowerCase() == 'filltype'.toLowerCase() || key == 'iconStyle') {
+                    newStyles.copiedStyles[key] =JSON.parse(JSON.stringify( blockAttributes[key]))
                 }
             })
             newStyles['copiedFrom'] = clientId
             newStyles['blockName'] = name
-
             let previouslyCopiedStyle = JSON.parse(localStorage.getItem('qubelyCopiedStyles'))
             if (previouslyCopiedStyle) {
                 let previouslyCopiedFrom = previouslyCopiedStyle.copiedFrom
@@ -128,11 +129,12 @@ const withContextMenu = createHigherOrderComponent(OriginalComponent => {
         }
 
         render() {
-            const { isSelected, name, attributes: { uniqueId, showContextMenu } } = this.props
+            const { isSelected, name, attributes: { uniqueId, showContextMenu, sourceOfCopiedStyle } } = this.props
             let type = name.split("/")[0]
             let blockName = name.split("/")[1]
-            if (uniqueId) { CssGenerator(this.props.attributes, blockName, uniqueId); }
-            let PluginBlockSettingsMenuItem = wp.editPost.PluginBlockSettingsMenuItem;
+            if (uniqueId) { CssGenerator(this.props.attributes, blockName, uniqueId) }
+            let PluginBlockSettingsMenuItem = wp.editPost.PluginBlockSettingsMenuItem
+            let previouslyCopiedStyle = JSON.parse(localStorage.getItem('qubelyCopiedStyles'))
             if (type !== 'qubely' || showContextMenu != true) {
                 return <OriginalComponent {...this.props} />
             } else {
@@ -145,10 +147,14 @@ const withContextMenu = createHigherOrderComponent(OriginalComponent => {
                                     icon={icons.copy}
                                     label={__(`Copy Style`)}
                                     onClick={() => this.copyStyles()} />
-                                <PluginBlockSettingsMenuItem
-                                    icon={icons.paste}
-                                    label={__(`Paste Style`)}
-                                    onClick={() => this.pasteStyle()} />
+                                {
+                                    !(previouslyCopiedStyle && previouslyCopiedStyle.blockName == name ? sourceOfCopiedStyle : true) &&
+                                    <PluginBlockSettingsMenuItem
+                                        icon={icons.paste}
+                                        label={__(`Paste Style`)}
+                                        onClick={() => this.pasteStyle()} />
+                                }
+
                             </Fragment>
                         }
                         <div className={`qubely-${blockName}-block`} onContextMenu={event => this.handleContextMenu(event)}   >
