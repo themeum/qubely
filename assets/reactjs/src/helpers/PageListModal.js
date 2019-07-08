@@ -151,7 +151,7 @@ class PageListModal extends Component {
                     })
                 } else {
                     for (let key in pageData) {
-                        pageData[key].map(value => {
+                        Array.isArray(pageData[key]) && pageData[key].map(value => {
                             if (itemType == 'block') {
                                 if (!(tempDataID.indexOf(value.ID) > -1)) {
                                     currentPageData.push(value);
