@@ -4,7 +4,7 @@ Donate link: https://www.themeum.com
 Tags: Qubely, website builder, gutenberg block, gutenberg, page builder, drag and drop editor, responsive, site editor, editor, drag-and-drop, visual editor, landing page, frontend editor, wordpress page builder, free page builder, layout builder
 Requires at least: 5.0
 Tested up to: 5.2
-Stable tag: 1.0.1
+Stable tag: 1.0.2
 Requires PHP: 5.4.0
 License: GPL-2.0+
 License URI: http://www.gnu.org/licenses/gpl-2.0.txt
@@ -17,7 +17,7 @@ Qubely is a full-fledged Gutenberg toolkit with plenty of predefined sections an
 
 Qubely extends Gutenberg with many custom blocks that are missing in the editor. Take full control of the WordPress block editor with the ability to apply out of the box styling options. Create web pages and posts using Qubely’s custom Gutenberg blocks that are stunning as well as mobile optimized.
 
-[youtube https://www.youtube.com/watch?v=oLFeWSS9HhU]
+[youtube https://www.youtube.com/watch?v=_aRAQkHZiUQ]
 
 = Qubely core features at a glance =
 
@@ -39,28 +39,29 @@ Qubely extends Gutenberg with many custom blocks that are missing in the editor.
 
 Qubely adds numerous custom Gutenberg blocks to the WordPress block editor and takes site building to the next level. The available custom advanced Gutenberg blocks inside Qubely are:
 
-* Row
-* Button
-* Testimonial
-* Heading
-* Counter
-* Tabs
-* Accordion/Toggle
-* Advanced Text
-* Video Popup
-* Google Map
-* Progress Bar
+* [Row](https://qubely.io/block/row-advanced-text/)
+* [Button](https://qubely.io/block/button/)
+* [Testimonial](https://qubely.io/block/testimonial/)
+* [Heading](https://qubely.io/block/heading/)
+* [Counter](https://qubely.io/block/counters/)
+* [Tabs](https://qubely.io/block/tabs/)
+* [Accordion/Toggle](https://qubely.io/block/accordion/)
+* [Advanced Text](https://qubely.io/block/row-advanced-text/)
+* [Video Popup](https://qubely.io/block/video-popup/)
+* [Google Map](https://qubely.io/block/google-map/)
+* [Progress Bar](https://qubely.io/block/progress-bar/)
 * Icon
 * Divider
-* Social Icons
-* Button Group
-* Info Box
-* Advanced List
-* Contact Form
-* Icon List
-* Pricing
+* [Social Icons](https://qubely.io/block/social-icons/)
+* [Button Group](https://qubely.io/block/button-group/)
+* [Button](https://qubely.io/block/button/)
+* [Info Box](https://qubely.io/block/info-box/)
+* [Advanced List](https://qubely.io/block/advanced-list/)
+* [Contact Form](https://qubely.io/block/contact/)
+* [Icon List](https://qubely.io/block/icon-list/)
+* [Pricing](https://qubely.io/block/pricing/)
 * Block Wrapper
-* Team
+* [Team](https://qubely.io/block/team/)
 * More advanced Gutenberg blocks coming
 
 
@@ -204,6 +205,13 @@ Found a bug? Please let us know by posting on the support section of this plugin
 
 
 == Changelog ==
+
+= 1.0.2 - 08 July, 2019 =
+
+New: Button Group block - Responsive setting in Alignment field  
+Update: Info Box block - Button default tag  
+Update: Import layout modal modification  
+Fix: Tabs block - inactive tab content display issue in Backend  
 
 = 1.0.1 - 01 July, 2019 =
 
