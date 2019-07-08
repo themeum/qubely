@@ -39,7 +39,7 @@ class Edit extends Component {
 										label={__('Padding')}
 										value={padding}
 										min={0}
-										max={100}
+										max={300}
 										responsive
 										device={device}
 										unit={['px', 'em', '%']}

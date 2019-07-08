@@ -32,7 +32,7 @@ class Edit extends Component {
     }
     componentDidUpdate(prevProps, prevState) {
         if (this.props.attributes.listItems.length > prevProps.attributes.listItems.length) {
-            let focusedListItem = document.getElementById(`qubely-list-item-text-${this.state.focusedItem}`)
+            let focusedListItem = document.querySelector(`.qubely-block-${prevProps.attributes.uniqueId} .qubely-list-item-text-${this.state.focusedItem}`)
             focusedListItem.focus()
         } else if (this.props.attributes.listItems.length < prevProps.attributes.listItems.length) {
             const { focusedItem } = this.state
