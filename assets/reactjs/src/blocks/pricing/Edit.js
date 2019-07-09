@@ -220,7 +220,7 @@ class Edit extends Component {
 
 		const { device, openPanelSetting } = this.state
 		if (uniqueId) { CssGenerator(this.props.attributes, 'pricing', uniqueId) }
-	
+
 		return (
 			<Fragment>
 				<InspectorControls key="inspector">
@@ -234,14 +234,6 @@ class Edit extends Component {
 								{ value: 5, svg: icons.pricing[5], label: __('Layout 5') }
 							]}
 						/>
-						<Toggle
-							value={enableFeatures}
-							label={__('Show Features')}
-							onChange={val => setAttributes({ enableFeatures: val })} />
-						<Toggle
-							value={enablePostButtonText}
-							label={__('Show PostButtonText')}
-							onChange={val => setAttributes({ enablePostButtonText: val })} />
 
 						<Alignment
 							label={__('Alignment')}
@@ -252,6 +244,10 @@ class Edit extends Component {
 							responsive
 							device={device}
 							onDeviceChange={value => this.setState({ device: value })} />
+						<Toggle
+							value={enableFeatures}
+							label={__('Show Features')}
+							onChange={val => setAttributes({ enableFeatures: val })} />
 					</PanelBody>
 
 					<PanelBody title={__('Title')} opened={'Title' === openPanelSetting} onToggle={() => this.handlePanelOpenings(openPanelSetting !== 'Title' ? 'Title' : '')}>

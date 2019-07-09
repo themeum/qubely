@@ -416,56 +416,65 @@ const withInspectorControls = createHigherOrderComponent(OriginalComponent => {
                                 </Fragment>
                             }
                             {
-                                enablePostButtonText &&
+                                typeof (enablePostButtonText) != 'undefined' &&
 
-                                <PanelBody title={__('Post Button Text')} initialOpen={false}>
-                                    <Tabs>
-                                        <Tab tabTitle={__('Normal')}>
-                                            <Color
-                                                label={__('Color')}
-                                                value={postButtonTextColor}
-                                                onChange={val => setAttributes({ postButtonTextColor: val })} />
-
-                                        </Tab>
-                                        <Tab tabTitle={__('Hover')}>
-                                            <Color
-                                                label={__('Color')}
-                                                value={postButtonTextHoverColor}
-                                                onChange={val => setAttributes({ postButtonTextHoverColor: val })} />
-                                        </Tab>
-                                    </Tabs>
+                                <PanelBody title={__('Post Button Text')} initialOpen={true}>
                                     <Toggle
-                                        value={showPostTextTypography}
-                                        label={__('Typography')}
-                                        onChange={val => this.setState({ showPostTextTypography: val })} />
+                                        value={enablePostButtonText}
+                                        label={__('Show PostButtonText')}
+                                        onChange={val => setAttributes({ enablePostButtonText: val })} />
                                     {
-                                        showPostTextTypography &&
-                                        <Typography
-                                            value={postButtonTextTypography}
-                                            onChange={val => setAttributes({ postButtonTextTypography: val })}
-                                            device={device}
-                                            onDeviceChange={value => this.setState({ device: value })} />
+                                        enablePostButtonText &&
+                                        <Fragment>
+                                            <Tabs>
+                                                <Tab tabTitle={__('Normal')}>
+                                                    <Color
+                                                        label={__('Color')}
+                                                        value={postButtonTextColor}
+                                                        onChange={val => setAttributes({ postButtonTextColor: val })} />
+
+                                                </Tab>
+                                                <Tab tabTitle={__('Hover')}>
+                                                    <Color
+                                                        label={__('Color')}
+                                                        value={postButtonTextHoverColor}
+                                                        onChange={val => setAttributes({ postButtonTextHoverColor: val })} />
+                                                </Tab>
+                                            </Tabs>
+                                            <Toggle
+                                                value={showPostTextTypography}
+                                                label={__('Typography')}
+                                                onChange={val => this.setState({ showPostTextTypography: val })} />
+                                            {
+                                                showPostTextTypography &&
+                                                <Typography
+                                                    value={postButtonTextTypography}
+                                                    onChange={val => setAttributes({ postButtonTextTypography: val })}
+                                                    device={device}
+                                                    onDeviceChange={value => this.setState({ device: value })} />
+                                            }
+                                            <Range
+                                                min={-50}
+                                                max={200}
+                                                responsive
+                                                value={postButtonTextPaddingTop}
+                                                unit={['px', 'em', '%']}
+                                                label={"Top"}
+                                                onChange={val => setAttributes({ postButtonTextPaddingTop: val })}
+                                                device={device}
+                                                onDeviceChange={value => this.setState({ device: value })} />
+                                            <Range
+                                                min={-50}
+                                                max={200}
+                                                responsive
+                                                value={postButtonTextPaddingBottom}
+                                                unit={['px', 'em', '%']}
+                                                label={"Bottom"}
+                                                onChange={val => setAttributes({ postButtonTextPaddingBottom: val })}
+                                                device={device}
+                                                onDeviceChange={value => this.setState({ device: value })} />
+                                        </Fragment>
                                     }
-                                    <Range
-                                        min={-50}
-                                        max={200}
-                                        responsive
-                                        value={postButtonTextPaddingTop}
-                                        unit={['px', 'em', '%']}
-                                        label={"Top"}
-                                        onChange={val => setAttributes({ postButtonTextPaddingTop: val })}
-                                        device={device}
-                                        onDeviceChange={value => this.setState({ device: value })} />
-                                    <Range
-                                        min={-50}
-                                        max={200}
-                                        responsive
-                                        value={postButtonTextPaddingBottom}
-                                        unit={['px', 'em', '%']}
-                                        label={"Bottom"}
-                                        onChange={val => setAttributes({ postButtonTextPaddingBottom: val })}
-                                        device={device}
-                                        onDeviceChange={value => this.setState({ device: value })} />
 
                                 </PanelBody>
                             }
