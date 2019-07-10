@@ -418,7 +418,7 @@ const withInspectorControls = createHigherOrderComponent(OriginalComponent => {
                             {
                                 typeof (enablePostButtonText) != 'undefined' &&
 
-                                <PanelBody title={__('Post Button Text')} initialOpen={true}>
+                                <PanelBody title={__('Post Button Text')} initialOpen={false}>
                                     <Toggle
                                         value={enablePostButtonText}
                                         label={__('Show PostButtonText')}
