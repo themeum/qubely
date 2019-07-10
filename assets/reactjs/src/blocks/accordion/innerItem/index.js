@@ -322,9 +322,9 @@ export const accordionItemSettings = {
         iconSpacing: {type: 'object', default: {md: 10, unit: 'px'}, style: [{ selector: '{{QUBELY}} .qubely-accordion-panel.qubely-icon-position-left .qubely-accordion-icon { margin-right:{{iconSpacing}}; } {{QUBELY}} .qubely-accordion-panel.qubely-icon-position-right .qubely-accordion-icon { margin-left:{{iconSpacing}}; }' }] },
 
         //Spacing
-        spacing: {type: 'string', default: {md: 10, unit: 'px'}, style: [{ selector: '{{QUBELY}} { margin-bottom: calc( {{spacing}} / 2); padding-bottom: calc( {{spacing}} / 2); }' }] },
+        spacing: {type: 'object', default: {md: 10, unit: 'px'}, style: [{ selector: '{{QUBELY}} { margin-bottom: calc( {{spacing}} / 2); padding-bottom: calc( {{spacing}} / 2); }' }] },
         spacingBorder: {type: 'string', default: '', style: [{ selector: '{{QUBELY}} { border-bottom: {{spacingBorder}}px solid; }' }] },
-        spacingBorderColor: {type: 'object', default: {}, style: [{ selector: '{{QUBELY}} { border-bottom-color: {{spacingBorderColor}}; }' }] },
+        spacingBorderColor: {type: 'string', default: '', style: [{ selector: '{{QUBELY}} { border-bottom-color: {{spacingBorderColor}}; }' }] },
                 
     },
 
