@@ -53,12 +53,23 @@ class Typography extends Component {
 
     setSettings(type, val) {
         let prevValue = this.props.value
-        if (type == 'family' && val) {
-            val = { [type]: val, type: (FontList.filter(o => { return o.n == val })[0].f) }
+        if (val == 'default' || val == 'Default') {
+            if (type == 'family') {
+                delete prevValue.family
+                delete prevValue.type
+            } else if (type == 'weight') {
+                delete prevValue.weight
+            }
+            this.props.onChange(Object.assign({}, prevValue))
         } else {
-            val = { [type]: val }
+            if (type == 'family' && val) {
+                val = { [type]: val, type: (FontList.filter(o => { return o.n == val })[0].f) }
+            } else {
+                val = { [type]: val }
+            }
+            this.props.onChange(Object.assign({}, prevValue, val))
         }
-        this.props.onChange(Object.assign({}, prevValue, val))
+
     }
     findArrayIndex = (font) => {
         let index = 0
@@ -100,8 +111,8 @@ class Typography extends Component {
         let qubelyFonts = JSON.parse(localStorage.getItem('qubelyFonts'))
         let filteredFontList = [], newFontList = FontList
         if (qubelyFonts) {
-            filteredFontList = FontList.filter(font => !qubelyFonts.filter(qubelyFont => qubelyFont.n == font.n).length > 0)
-            newFontList = [...qubelyFonts, ...filteredFontList]
+            filteredFontList = FontList.filter(font => !qubelyFonts.filter(qubelyFont => qubelyFont.n == font.n || font.n == 'Default').length > 0)
+            newFontList = [{ n: 'Default', f: 'default', v: [] }, ...qubelyFonts, ...filteredFontList]
         }
         if (filterText.length >= 2) {
             newFontList = newFontList.filter(item =>
@@ -147,8 +158,6 @@ class Typography extends Component {
                                         <span className="qubely-font-select-icon">   {showFontFamiles ? icons.arrow_up : icons.arrow_down}  </span>
 
                                     </span>
-
-
                                 </div>
                             </div>
                             {
@@ -159,7 +168,10 @@ class Typography extends Component {
                                                 return (
                                                     <div className={`${font.n == value.family ? 'qubely-active-font-family' : 'qubely-font-family-option'}`}
                                                         id={`qubely-font-family-${index}`}
-                                                        onClick={() => { this.setState({ showFontFamiles: false, filterText: '' }); this.handleTypographyChange(font.n) }}
+                                                        onClick={() => {
+                                                            this.setState({ showFontFamiles: false, filterText: '' });
+                                                            font.n == 'Default' ? this.setSettings('family', 'default') : this.handleTypographyChange(font.n)
+                                                        }}
                                                     >
                                                         {font.n}
                                                     </div>
@@ -182,11 +194,10 @@ class Typography extends Component {
                                 showFontWeights && <div className="qubely-font-weight-wrapper" ref="qubelyFontWeightWrapper">
                                     <div className="qubely-font-family-weights" >
                                         {
-                                            this._getWeight().map(font => {
+                                            ['Default', ...this._getWeight()].map(font => {
                                                 return (
-                                                    <div
+                                                    <div className={`${font == value.weight ? 'qubely-active-font-weight' : 'qubely-font-weight-option'}`}
                                                         onClick={() => { this.setState({ showFontWeights: false }); this.setSettings('weight', font) }}
-                                                        className={`${font == value.weight ? 'qubely-active-font-weight' : 'qubely-font-weight-option'}`}
                                                     >
                                                         {font}
                                                     </div>
