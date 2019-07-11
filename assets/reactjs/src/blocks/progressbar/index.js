@@ -43,6 +43,7 @@ registerBlockType( 'qubely/progressbar', {
 		showProgress: {type: 'boolean', default: true},
 		
 		showGlobalSettings: { type: 'boolean', default: true },
+		showContextMenu: { type: 'boolean', default: true }
 	},
 	edit: Edit,
 	save: Save

@@ -106,6 +106,7 @@ registerBlockType('qubely/advancedlist', {
 
         // Global
         showGlobalSettings: { type: 'boolean', default: true },
+        showContextMenu: { type: 'boolean', default: true }
     },
     edit: Edit,
     save: Save,

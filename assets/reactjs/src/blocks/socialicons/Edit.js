@@ -5,8 +5,9 @@ const { PanelBody, TextControl, Toolbar, Button, Popover } = wp.components;
 import { Styles, IconSelector, Toggle, Separator, RadioAdvanced, Range, Alignment, Typography, Color, Tabs, Tab, Border, Padding, BorderRadius } from '../../components/FieldRender'
 import { CssGenerator } from '../../components/CssGenerator';
 import InlineToolbar from '../../components/fields/inline/InlineToolbar'
-import '../../components/GlobalSettings';
-import icons from '../../helpers/icons';
+import '../../components/GlobalSettings'
+import '../../components/ContextMenu'
+import icons from '../../helpers/icons'
 import IconSocialData from '../../components/fields/assets/IconSocialData'
 class Edit extends Component {
 

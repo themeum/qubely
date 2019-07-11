@@ -22,8 +22,8 @@ registerBlockType('qubely/button', {
         textField: { type: 'string', default: '' },
         buttonWidthType: {
             type: 'string',
-             default: 'auto',
-             style: [
+            default: 'auto',
+            style: [
                 {
                     condition: [
                         { key: 'buttonWidthType', relation: '==', value: 'block' }
@@ -34,11 +34,11 @@ registerBlockType('qubely/button', {
         },
         buttonWidth: {
             type: 'object',
-             default: {
+            default: {
                 md: 260,
                 unit: 'px'
-             },
-             style: [
+            },
+            style: [
                 {
                     condition: [
                         { key: 'buttonWidthType', relation: '==', value: 'fixed' }
@@ -105,7 +105,17 @@ registerBlockType('qubely/button', {
             type: 'string', default: '#fff',
             style: [
                 {
+                    condition: [{ key: 'fillType', relation: '==', value: 'fill' }],
                     selector: '{{QUBELY}} .qubely-block-btn-anchor:hover { color:{{buttonHoverColor}}; }'
+                }
+            ]
+        },
+        buttonHoverColor2: {
+            type: 'string', default: '#1066CC',
+            style: [
+                {
+                    condition: [  { key: 'fillType', relation: '!=', value: 'fill' }  ],
+                    selector: '{{QUBELY}} .qubely-block-btn-anchor:hover { color:{{buttonHoverColor2}}; }'
                 }
             ]
         },
@@ -124,6 +134,9 @@ registerBlockType('qubely/button', {
             type: 'object', default: { type: 'color', openColor: 1, color: '#1066CC', gradient: { color1: '#2184F9', color2: '#1066CC', direction: 0, start: 0, stop: 100 } },
             style: [
                 {
+                    condition: [
+                        { key: 'fillType', relation: '==', value: 'fill' }
+                    ],
                     selector: '{{QUBELY}} .qubely-block-btn-anchor:before'
                 }
             ]

@@ -299,6 +299,7 @@ registerBlockType('qubely/contactform', {
         emailSubject: { type: 'string', default: '{{subject}} | {{email}} | {{site-name}}' },
         emailBody: { type: 'string', default: '<p><strong>From:</strong> {{full-name }}</p><strong>Email:</strong> {{email}}</p>\n<p><strong>Subject:</strong> {{subject}}</p>\n<p><strong>Message:</strong> {{message}}</p>' },
         showGlobalSettings: { type: 'boolean', default: true },  // Global Settings
+        showContextMenu: { type: 'boolean', default: true }
     },
     edit: Edit,
     save: Save,

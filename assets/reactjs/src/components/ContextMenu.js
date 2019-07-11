@@ -102,7 +102,7 @@ const withContextMenu = createHigherOrderComponent(OriginalComponent => {
             Object.keys(blockDefaultAttributes).forEach(key => {
                 if (blockDefaultAttributes[key].hasOwnProperty('style')) {
                     newStyles.copiedStyles[key] = JSON.parse(JSON.stringify(blockAttributes[key]))
-                } else if (key.toLowerCase() == 'layout' || key.toLowerCase() == 'filltype'.toLowerCase() || key == 'iconStyle') {
+                } else if (key.toLowerCase() == 'layout' || key.toLowerCase() == 'filltype' || key == 'iconStyle'|| key.toLowerCase() == 'buttonfilltype'  ) {
                     newStyles.copiedStyles[key] =JSON.parse(JSON.stringify( blockAttributes[key]))
                 }
             })

@@ -6,6 +6,7 @@ import { Counter, Range, Alignment, Typography, Color } from '../../components/F
 import InlineToolbar from '../../components/fields/inline/InlineToolbar'
 import { CssGenerator } from '../../components/CssGenerator'
 import '../../components/GlobalSettings'
+import '../../components/ContextMenu'
 
 class Edit extends Component {
 	constructor(props) {

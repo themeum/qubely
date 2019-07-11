@@ -3,10 +3,10 @@ const { InspectorControls, BlockControls } = wp.editor
 const { Component, Fragment } = wp.element;
 const { PanelBody, ToggleControl, TextControl, RangeControl, Toolbar } = wp.components;
 import { Media, Separator } from '../../components/FieldRender'
-import { CssGenerator } from '../../components/CssGenerator';
-import mapStyles from './mapStyles';
+import { CssGenerator } from '../../components/CssGenerator'
+import mapStyles from './mapStyles'
 import InlineToolbar from '../../components/fields/inline/InlineToolbar'
-import '../../components/GlobalSettings';
+import '../../components/GlobalSettings'
 
 class Edit extends Component {
 

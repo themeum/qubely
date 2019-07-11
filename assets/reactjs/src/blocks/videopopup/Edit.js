@@ -5,8 +5,9 @@ const { InspectorControls, BlockControls } = wp.editor
 import { Media, Background, Tabs, Tab, Range, BoxShadow, Separator, RadioAdvanced, Typography, Select, Color, Styles, Toggle, Border, Alignment, BorderRadius } from "../../components/FieldRender"
 import InlineToolbar from '../../components/fields/inline/InlineToolbar'
 import { CssGenerator } from '../../components/CssGenerator'
-import icons from '../../helpers/icons';
-import '../../components/GlobalSettings';
+import icons from '../../helpers/icons'
+import '../../components/GlobalSettings'
+import '../../components/ContextMenu'
 
 class Edit extends Component {
 

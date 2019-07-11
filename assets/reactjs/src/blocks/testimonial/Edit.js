@@ -5,8 +5,9 @@ const { RichText, BlockControls, InspectorControls, AlignmentToolbar } = wp.edit
 import { Media, RadioAdvanced, Range, Color, Typography, Toggle, Separator, ColorAdvanced, Border, BorderRadius, BoxShadow, Styles, Alignment, Padding, Tabs, Tab } from '../../components/FieldRender'
 import InlineToolbar from '../../components/fields/inline/InlineToolbar'
 import { CssGenerator } from '../../components/CssGenerator'
-import icons from '../../helpers/icons';
+import icons from '../../helpers/icons'
 import '../../components/GlobalSettings'
+import '../../components/ContextMenu'
 
 class Edit extends Component {
     constructor(props) {

@@ -7,14 +7,14 @@ const { RichText, InspectorControls, BlockControls } = wp.editor
 import { Alignment, Typography, Color, ColorAdvanced, IconList, Select, Styles, Tabs, Tab, Range, Url, BoxShadow, RadioAdvanced, Separator, Border, BorderRadius, Padding } from "../../components/FieldRender"
 import { CssGenerator } from '../../components/CssGenerator'
 import InlineToolbar from '../../components/fields/inline/InlineToolbar'
-import '../../components/GlobalSettings';
+import '../../components/GlobalSettings'
 import '../../components/ContextMenu'
-import icons from '../../helpers/icons';
+import icons from '../../helpers/icons'
 
 class Edit extends Component {
     constructor() {
         super(...arguments);
-        this.state = {	device: 'md', spacer: true };
+        this.state = { device: 'md', spacer: true };
     }
 
     componentDidMount() {
@@ -28,9 +28,9 @@ class Edit extends Component {
     }
 
     render() {
-        const { uniqueId, parentClientId, buttonGroup, fillType, buttonSize, buttonWidthType, buttonWidth, buttonPadding, typography, textField, url, enableAlignment, alignment, buttonBorderRadius, iconName, iconPosition, iconSize, iconGap, buttonBorder, borderHoverColor, buttonColor, buttonColor2, buttonHoverColor, bgColor, bgHoverColor, buttonShadow, buttonHoverShadow } = this.props.attributes
+        const { uniqueId, parentClientId, buttonGroup, fillType, buttonSize, buttonWidthType, buttonWidth, buttonPadding, typography, textField, url, enableAlignment, alignment, buttonBorderRadius, iconName, iconPosition, iconSize, iconGap, buttonBorder, borderHoverColor, buttonColor, buttonColor2, buttonHoverColor, buttonHoverColor2, bgColor, bgHoverColor, buttonShadow, buttonHoverShadow } = this.props.attributes
         const { clientId, removeBlock, updateBlockAttributes, buttonGroupAttributes, setAttributes } = this.props
-        const {device}=this.state
+        const { device } = this.state
 
         if (uniqueId) { CssGenerator(this.props.attributes, 'button', uniqueId); }
 
@@ -48,7 +48,7 @@ class Edit extends Component {
                         />
                         <Separator />
                         <Url label={__('Button URL')} value={url} onChange={(value) => setAttributes({ url: value })} />
-                        {enableAlignment && <Alignment label={__('Alignment')} value={alignment} alignmentType="content" onChange={val => setAttributes({ alignment: val })} responsive disableJustify 	device={device} onDeviceChange={value => this.setState({ device: value })} />}
+                        {enableAlignment && <Alignment label={__('Alignment')} value={alignment} alignmentType="content" onChange={val => setAttributes({ alignment: val })} responsive disableJustify device={device} onDeviceChange={value => this.setState({ device: value })} />}
                     </PanelBody>
 
                     <PanelBody title={__('Size')} initialOpen={false}>
@@ -70,7 +70,7 @@ class Edit extends Component {
                                 unit={['px', 'em', '%']}
                                 max={150}
                                 min={0}
-                                responsive 
+                                responsive
                                 device={device}
                                 onDeviceChange={value => this.setState({ device: value })} />
                         }
@@ -91,7 +91,7 @@ class Edit extends Component {
                                 unit={['px', 'em', '%']}
                                 min={30}
                                 max={800}
-                                responsive 
+                                responsive
                                 device={device}
                                 onDeviceChange={value => this.setState({ device: value })} />
                         }
@@ -104,11 +104,11 @@ class Edit extends Component {
                                 {fillType == 'fill' &&
                                     <ColorAdvanced label={__('Background')} value={bgColor} onChange={(value) => setAttributes({ bgColor: value })} />
                                 }
-                                <Border label={__('Border')} value={buttonBorder} onChange={val => setAttributes({ buttonBorder: val })} min={0} max={10} unit={['px', 'em', '%']} responsive	device={device}	onDeviceChange={value => this.setState({ device: value })}  />
+                                <Border label={__('Border')} value={buttonBorder} onChange={val => setAttributes({ buttonBorder: val })} min={0} max={10} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
                                 <BoxShadow label={__('Box-Shadow')} value={buttonShadow} onChange={(value) => setAttributes({ buttonShadow: value })} />
                             </Tab>
                             <Tab tabTitle={__('Hover')}>
-                                <Color label={__('Text Color')} value={buttonHoverColor} onChange={(value) => setAttributes({ buttonHoverColor: value })} />
+                                <Color label={__('Text Color')} value={fillType == 'fill' ? buttonHoverColor : buttonHoverColor2} onChange={(value) => fillType == 'fill' ? setAttributes({ buttonHoverColor: value }) : setAttributes({ buttonHoverColor2: value })} />
                                 <ColorAdvanced label={__('Background')} value={bgHoverColor} onChange={(value) => setAttributes({ bgHoverColor: value })} />
                                 <Color label={__('Border Color')} value={borderHoverColor} onChange={(value) => setAttributes({ borderHoverColor: value })} />
                                 <BoxShadow label={__('Box-Shadow')} value={buttonHoverShadow} onChange={(value) => setAttributes({ buttonHoverShadow: value })} />
@@ -121,7 +121,7 @@ class Edit extends Component {
                             min={0}
                             max={100}
                             unit={['px', 'em', '%']}
-                            responsive 
+                            responsive
                             device={device}
                             onDeviceChange={value => this.setState({ device: value })} />
                     </PanelBody>
@@ -145,9 +145,9 @@ class Edit extends Component {
                                     unit={['px', 'em', '%']}
                                     min={5}
                                     max={48}
-                                    responsive 
+                                    responsive
                                     device={device}
-									onDeviceChange={value => this.setState({ device: value })} />
+                                    onDeviceChange={value => this.setState({ device: value })} />
                                 <Range
                                     label={__('Gap')}
                                     value={iconGap}
@@ -157,7 +157,7 @@ class Edit extends Component {
                                     max={64}
                                     responsive
                                     device={device}
-									onDeviceChange={value => this.setState({ device: value })}  />
+                                    onDeviceChange={value => this.setState({ device: value })} />
                             </Fragment>
                         }
                     </PanelBody>
@@ -169,8 +169,8 @@ class Edit extends Component {
                             onChange={(value) => setAttributes({ typography: value })}
                             disableLineHeight
                             device={device}
-                            onDeviceChange={value => this.setState({ device: value })} 
-                             />
+                            onDeviceChange={value => this.setState({ device: value })}
+                        />
                     </PanelBody>
                 </InspectorControls>
 
@@ -188,7 +188,7 @@ class Edit extends Component {
                     <div className="qubely-block-btn-wrapper">
                         <div className={`qubely-block-btn`}>
                             <span className={`qubely-block-btn-anchor is-${buttonSize}`}>
-                                { (iconName.trim() != "") && (iconPosition == 'left') && (<i className={`qubely-btn-icon ${iconName}`} />)}
+                                {(iconName.trim() != "") && (iconPosition == 'left') && (<i className={`qubely-btn-icon ${iconName}`} />)}
                                 <RichText
                                     key="editable"
                                     keepPlaceholderOnFocus
@@ -197,7 +197,7 @@ class Edit extends Component {
                                     onChange={value => setAttributes({ textField: value })}
                                     value={textField}
                                 />
-                                { (iconName.trim() != "") && (iconPosition == 'right') && (<i className={`qubely-btn-icon ${iconName}`} />)}
+                                {(iconName.trim() != "") && (iconPosition == 'right') && (<i className={`qubely-btn-icon ${iconName}`} />)}
                             </span>
                         </div>
                         {

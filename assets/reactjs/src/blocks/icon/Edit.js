@@ -6,7 +6,8 @@ import { Color, IconList, Styles, ColorAdvanced, Range, RadioAdvanced, Url, BoxS
 import { CssGenerator } from '../../components/CssGenerator'
 import InlineToolbar from '../../components/fields/inline/InlineToolbar'
 import '../../components/GlobalSettings'
-import icons from '../../helpers/icons';
+import '../../components/ContextMenu'
+import icons from '../../helpers/icons'
 
 class Edit extends Component {
 	constructor() {

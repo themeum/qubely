@@ -6,6 +6,7 @@ import { RadioAdvanced, Range, Typography, ColorAdvanced, Toggle, Color, BorderR
 import InlineToolbar from '../../components/fields/inline/InlineToolbar'
 import { CssGenerator } from '../../components/CssGenerator'
 import '../../components/GlobalSettings'
+import '../../components/ContextMenu'
 
 class Edit extends Component {
 

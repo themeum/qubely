@@ -76,6 +76,7 @@ registerBlockType('qubely/icon', {
 			]
 		},
 		showGlobalSettings: { type: 'boolean', default: true }, // Global Settings
+		showContextMenu: { type: 'boolean', default: true }
 	},
 	edit: Edit,
 	save: Save,

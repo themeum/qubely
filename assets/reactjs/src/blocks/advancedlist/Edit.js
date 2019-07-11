@@ -5,7 +5,8 @@ const { PanelBody, Toolbar, Tooltip } = wp.components;
 import { Typography, Alignment, Styles, Range, Tabs, Tab, Border, RadioAdvanced, Color, BoxShadow, Toggle, Separator, IconSelector, BorderRadius, Padding } from '../../components/FieldRender'
 import { CssGenerator } from '../../components/CssGenerator'
 import InlineToolbar from '../../components/fields/inline/InlineToolbar'
-import '../../components/GlobalSettings';
+import '../../components/GlobalSettings'
+import '../../components/ContextMenu'
 import icons from '../../helpers/icons'
 
 class Edit extends Component {

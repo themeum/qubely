@@ -23,6 +23,7 @@ registerBlockType( 'qubely/counter', {
     counterTypo: { type: 'object', default: {}, style: [{ selector: '{{QUBELY}} .qubely-block-counter-content' }] },
     counterColor: { type: 'string', default: '', style: [{ selector: '{{QUBELY}} .qubely-block-counter-content {color: {{counterColor}};}' }] },
     showGlobalSettings: { type: 'boolean', default: true },  // Global Settings
+    showContextMenu: { type: 'boolean', default: true }
   },
   edit: Edit,
   save: Save
