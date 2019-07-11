@@ -303,7 +303,7 @@ const withInspectorControls = createHigherOrderComponent(OriginalComponent => {
                             </Tab>
                             <Tab tabTitle={__('Hover')}>
                                 <Color label={__('Text Color')} value={buttonFillType == 'fill' ? buttonHoverColor : buttonHoverColor2} onChange={(value) => buttonFillType == 'fill' ? setAttributes({ buttonHoverColor: value }) : setAttributes({ buttonHoverColor2: value })} />
-                                <ColorAdvanced label={__('Background')} value={buttonBgHoverColor} onChange={(value) => setAttributes({ buttonBgHoverColor: value })} />
+                                {buttonFillType == 'fill' && <ColorAdvanced label={__('Background')} value={buttonBgHoverColor} onChange={(value) => setAttributes({ buttonBgHoverColor: value })} />}
                                 <Color label={__('Border Color')} value={buttonBorderHoverColor} onChange={(value) => setAttributes({ buttonBorderHoverColor: value })} />
                                 <BoxShadow
                                     label={__('Box-Shadow')}
