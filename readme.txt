@@ -4,12 +4,12 @@ Donate link: https://www.themeum.com
 Tags: Blocks, Gutenberg editor, Block editor, Block, Gutenberg, Gutenberg Blocks
 Requires at least: 5.0
 Tested up to: 5.2
-Stable tag: 1.0.2
+Stable tag: 1.0.3
 Requires PHP: 5.4.0
 License: GPL-2.0+
 License URI: http://www.gnu.org/licenses/gpl-2.0.txt
 
-The one and only Gutenberg block plugin you will ever need
+Gutenberg Blocks and readymade sections with rich customization options. Enhance Gutenberg editor with easy UI and functional blocks.
 
 == Description ==
 
@@ -205,6 +205,14 @@ Found a bug? Please let us know by posting on the support section of this plugin
 
 
 == Changelog ==
+
+= 1.0.3 - 11 July, 2019 =
+
+New: Block style copy/paste option on the context menu  
+New: Typography field - gets Font family & font-weight reset option  
+Fix: Button block/Button component - has default text-color & background-color for layouts  
+Fix: Accordion block - not saving separator value issue  
+Fix: Import layout modal conflict with Yoast SEO plugin  
 
 = 1.0.2 - 08 July, 2019 =
 

@@ -30,7 +30,7 @@ registerBlockType('qubely/iconlist', {
             default: [
                 {
                     icon: 'far fa-star',
-                    text: 'Add beautiful icons and text to this block'
+                    text: 'Add beautiful icons and text'
                 },
                 {
                     icon: 'far fa-heart',

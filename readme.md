@@ -1,4 +1,4 @@
-#  Qubely Blocks - Full-fledged Gutenberg Toolkit 
+#  Gutenberg Blocks with Layout Packs & Readymade Blocks Collection - Qubely 
 
 Contributors: **themeum**
 
@@ -6,7 +6,7 @@ Donate link: <a href=" https://www.themeum.com">https://www.themeum.com</a>
 Tags: Qubely, website builder, gutenberg block, gutenberg, page builder, drag and drop editor, responsive, site editor, editor, drag-and-drop, visual editor, landing page, frontend editor, wordpress page builder, free page builder, layout builder  
 Requires at least: 5.0  
 Tested up to: 5.2  
-Stable tag: 1.0.2  
+Stable tag: 1.0.3  
 Requires PHP: 5.4.0  
 License: GPL-2.0+  
 License URI: http://www.gnu.org/licenses/gpl-2.0.txt
@@ -19,7 +19,7 @@ Qubely is a full-fledged Gutenberg toolkit with plenty of predefined sections an
 
 Qubely extends Gutenberg with many custom blocks that are missing in the editor. Take full control of the WordPress block editor with the ability to apply out of the box styling options. Create web pages and posts using Qubely’s custom Gutenberg blocks that are stunning as well as mobile optimized.
 
-[youtube https://www.youtube.com/watch?v=oLFeWSS9HhU]
+[youtube https://www.youtube.com/watch?v=_aRAQkHZiUQ]
 
 ## Qubely core features at a glance 
 
@@ -192,6 +192,15 @@ Found a bug? Please let us know by posting on the support section of this plugin
 
 
 # Changelog
+
+
+**1.0.3 - 11 July, 2019**
+
+New: Block style copy/paste option on the context menu  
+New: Typography field - gets Font family & font-weight reset option  
+Fix: Button block/Button component - has default text-color & background-color for layouts  
+Fix: Accordion block - not saving separator value issue  
+Fix: Import layout modal conflict with Yoast SEO plugin  
 
 
 **1.0.2 - 08 July, 2019**
