@@ -3,11 +3,13 @@ const { InspectorControls, BlockControls } = wp.editor
 const { Component, Fragment } = wp.element;
 const { PanelBody, TextControl, TextareaControl, Toolbar } = wp.components;
 import { Styles, Range, Toggle, Typography, Color, Tabs, Tab, Border, RadioAdvanced, QubelyButtonEdit, BorderRadius, Separator } from '../../components/FieldRender'
-import { CssGenerator } from '../../components/CssGenerator';
-import InlineToolbar from '../../components/fields/inline/InlineToolbar';
+import { CssGenerator } from '../../components/CssGenerator'
+import InlineToolbar from '../../components/fields/inline/InlineToolbar'
+import icons from '../../helpers/icons'
 import '../../components/ButtonComponent'
-import '../../components/GlobalSettings';
-import icons from '../../helpers/icons';
+import '../../components/GlobalSettings'
+import '../../components/ContextMenu'
+
 
 class Edit extends Component {
 

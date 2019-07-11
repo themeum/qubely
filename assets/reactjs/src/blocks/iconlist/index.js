@@ -150,6 +150,7 @@ registerBlockType('qubely/iconlist', {
         },
         borderColorHover: { type: 'string', default: '', style: [{ selector: '{{QUBELY}} .qubely-list .qubely-list-li:hover {border-bottom-color: {{borderColorHover}};}' }] },
         showGlobalSettings: { type: 'boolean', default: true },  // Global Settings
+        showContextMenu: { type: 'boolean', default: true }
     },
     edit: Edit,
     save: Save,

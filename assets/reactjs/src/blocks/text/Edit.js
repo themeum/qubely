@@ -5,10 +5,11 @@ const { RichText, InspectorControls, BlockControls } = wp.editor
 import { Typography, Color, Alignment, Headings, Toggle, Range, Separator } from "../../components/FieldRender"
 import { CssGenerator } from '../../components/CssGenerator'
 import '../../components/GlobalSettings'
+import '../../components/ContextMenu'
 import '../../components/fields/inline/editorInline'
 import InlineSelector from '../../components/fields/inline/Selector'
 import InlineToolbar from '../../components/fields/inline/InlineToolbar'
-import svg from '../heading/separators';
+import svg from '../heading/separators'
 
 class Edit extends Component {
     constructor() {

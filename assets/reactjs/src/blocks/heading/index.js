@@ -138,6 +138,7 @@ registerBlockType('qubely/heading', {
 			],
 		},
 		showGlobalSettings: { type: 'boolean', default: true },
+		showContextMenu: { type: 'boolean', default: true }
 	},
 	edit: Edit,
 	save: Save,

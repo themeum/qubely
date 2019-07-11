@@ -1,6 +1,6 @@
 <?php
 /*
- * Plugin Name:       Qubely Blocks - Full-fledged Gutenberg Toolkit
+ * Plugin Name:       Gutenberg Blocks with Layout Packs & Readymade Blocks Collection - Qubely
  * Plugin URI:        https://www.themeum.com/
  * Description:       The one and only Gutenberg block plugin you will ever need.
  * Version: 		  1.0.2

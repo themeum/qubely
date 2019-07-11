@@ -9,7 +9,8 @@ import icons from '../../helpers/icons';
 import svg from '../heading/separators';
 import { QubelyButtonEdit } from '../../components/FieldRender'
 import '../../components/ButtonComponent'
-import '../../components/GlobalSettings';
+import '../../components/GlobalSettings'
+import '../../components/ContextMenu'
 class Edit extends Component {
 
     constructor(props) {

@@ -10,7 +10,7 @@ registerBlockType('qubely/team', {
     icon: <img src={qubely_admin.plugin + 'assets/img/blocks/block-team.svg'} alt={__('Team Block')} />,
     category: 'qubely',
     supports: { align: false },
-    keywords: [__('service'), __('feature'), __('info')],
+    keywords: [__('Team'), __('profile')],
     attributes: {
         uniqueId: { type: 'string', default: '' },
         buttonComponent: { type: 'boolean', default: true },
@@ -533,6 +533,7 @@ registerBlockType('qubely/team', {
 
         // Global
         showGlobalSettings: { type: 'boolean', default: true },
+        showContextMenu: { type: 'boolean', default: true }
     },
     edit: Edit,
     save: Save,

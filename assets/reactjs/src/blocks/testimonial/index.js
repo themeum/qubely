@@ -177,6 +177,7 @@ registerBlockType('qubely/testimonial', {
         boxShadowHover: { type: 'object', default: {}, style: [{ selector: '{{QUBELY}} .qubely-block-testimonial:hover' }] },
 
         showGlobalSettings: { type: 'boolean', default: true }, // Global Settings
+        showContextMenu: { type: 'boolean', default: true }
     },
     edit: Edit,
     save: Save

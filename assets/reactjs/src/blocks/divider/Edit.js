@@ -5,8 +5,9 @@ const { PanelBody, Toolbar, Dropdown } = wp.components;
 import { Range, Color, Alignment, QubelyDropdown } from '../../components/FieldRender'
 import { CssGenerator } from '../../components/CssGenerator'
 import InlineToolbar from '../../components/fields/inline/InlineToolbar'
-import icons from '../divider/icon';
-import '../../components/GlobalSettings';
+import icons from '../divider/icon'
+import '../../components/GlobalSettings'
+import '../../components/ContextMenu'
 const dividerOptions = ['fill', 'dot', 'dash', 'branch', 'dashes', 'leaf', 'line1', 'line2', 'line3', 'line4', 'line5', 'line6', 'line7', 'line8', 'line9', 'line10', 'line11', 'line12', 'line13', 'liner', 'mustache', 'shadow', 'slash', 'spring', 'valla', 'wave1', 'wave2', 'wave3']
 class Edit extends Component {
 

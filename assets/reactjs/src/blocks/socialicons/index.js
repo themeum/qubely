@@ -59,6 +59,7 @@ registerBlockType('qubely/socialicons', {
         iconBorder: { type: 'object', default: {}, style: [{ condition: [{ key: 'layout', relation: '==', value: 'fill' }, { key: 'useDefaultStyle', relation: '==', value: false }], selector: '{{QUBELY}} .qubely-block-social-icons .qubely-ul li.qubely-social-item a' }] },
         iconBorderColorHover: { type: 'string', default: '', style: [{ condition: [{ key: 'layout', relation: '==', value: 'fill' }, { key: 'useDefaultStyle', relation: '==', value: false }], selector: '{{QUBELY}} .qubely-block-social-icons .qubely-ul li.qubely-social-item a:hover {border-color: {{iconBorderColorHover}};}' }] },
         showGlobalSettings: { type: 'boolean', default: true },  // Global Settings
+        showContextMenu: { type: 'boolean', default: true }
     },
     edit: Edit,
     save: Save,

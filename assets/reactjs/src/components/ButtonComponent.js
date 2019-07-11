@@ -19,9 +19,7 @@ const addAttribute = (settings) => {
                 type: 'object', default: { md: 'left' },
                 style: [
                     {
-                        condition: [
-                            { key: 'enableButtonAlignment', relation: '==', value: true }
-                        ],
+                        condition: [{ key: 'enableButtonAlignment', relation: '==', value: true }],
                         selector: '{{QUBELY}} .qubely-block-btn-wrapper {text-align: {{buttonAlignment}};}'
                     }
                 ]
@@ -31,9 +29,7 @@ const addAttribute = (settings) => {
                 default: 'auto',
                 style: [
                     {
-                        condition: [
-                            { key: 'buttonWidthType', relation: '==', value: 'block' }
-                        ],
+                        condition: [{ key: 'buttonWidthType', relation: '==', value: 'block' }],
                         selector: '{{QUBELY}} .qubely-block-btn-anchor {width:100%; display: -webkit-box; display: -ms-flexbox; display: flex;}'
                     }
                 ]
@@ -46,9 +42,7 @@ const addAttribute = (settings) => {
                 },
                 style: [
                     {
-                        condition: [
-                            { key: 'buttonWidthType', relation: '==', value: 'fixed' }
-                        ],
+                        condition: [{ key: 'buttonWidthType', relation: '==', value: 'fixed' }],
                         selector: '{{QUBELY}} .qubely-block-btn-anchor {width: {{buttonWidth}};}'
                     }
                 ]
@@ -76,7 +70,17 @@ const addAttribute = (settings) => {
                 type: 'string', default: '#000',
                 style: [
                     {
+                        condition: [{ key: 'buttonFillType', relation: '==', value: 'fill' }],
                         selector: '{{QUBELY}} .qubely-block-btn-anchor { color:{{buttonColor}}; }'
+                    }
+                ]
+            },
+            buttonColor2: {
+                type: 'string', default: '#2184F9',
+                style: [
+                    {
+                        condition: [{ key: 'buttonFillType', relation: '!=', value: 'fill' }],
+                        selector: '{{QUBELY}} .qubely-block-btn-anchor { color:{{buttonColor2}}; }'
                     }
                 ]
             },
@@ -84,7 +88,17 @@ const addAttribute = (settings) => {
                 type: 'string', default: '#fff',
                 style: [
                     {
+                        condition: [{ key: 'buttonFillType', relation: '==', value: 'fill' }],
                         selector: '{{QUBELY}} .qubely-block-btn-anchor:hover { color:{{buttonHoverColor}}; }'
+                    }
+                ]
+            },
+            buttonHoverColor2: {
+                type: 'string', default: '#1066CC',
+                style: [
+                    {
+                        condition: [{ key: 'buttonFillType', relation: '!=', value: 'fill' }],
+                        selector: '{{QUBELY}} .qubely-block-btn-anchor:hover { color:{{buttonHoverColor2}}; }'
                     }
                 ]
             },
@@ -92,9 +106,7 @@ const addAttribute = (settings) => {
                 type: 'object', default: { type: 'color', openColor: 1, color: '#2184F9', gradient: { color1: '#1066CC', color2: '#2184F9', direction: 0, start: 0, stop: 100 } },
                 style: [
                     {
-                        condition: [
-                            { key: 'buttonFillType', relation: '==', value: 'fill' }
-                        ],
+                        condition: [{ key: 'buttonFillType', relation: '==', value: 'fill' }],
                         selector: '{{QUBELY}} .qubely-block-btn-anchor'
                     }
                 ]
@@ -103,6 +115,7 @@ const addAttribute = (settings) => {
                 type: 'object', default: { type: 'color', openColor: 1, color: '#1066CC', gradient: { color1: '#2184F9', color2: '#1066CC', direction: 0, start: 0, stop: 100 } },
                 style: [
                     {
+                        condition: [{ key: 'buttonFillType', relation: '==', value: 'fill' }],
                         selector: '{{QUBELY}} .qubely-block-btn-anchor:before'
                     }
                 ]
@@ -118,11 +131,7 @@ const addAttribute = (settings) => {
                     type: "solid",
                     unit: "px"
                 },
-                style: [
-                    {
-                        selector: '{{QUBELY}} .qubely-block-btn-anchor'
-                    }
-                ]
+                style: [{ selector: '{{QUBELY}} .qubely-block-btn-anchor' }]
             },
 
             buttonBorderHoverColor: {
@@ -144,27 +153,15 @@ const addAttribute = (settings) => {
                     },
                     unit: 'px'
                 },
-                style: [
-                    {
-                        selector: '{{QUBELY}} .qubely-block-btn-anchor'
-                    }
-                ]
+                style: [{ selector: '{{QUBELY}} .qubely-block-btn-anchor' }]
             },
             buttonShadow: {
                 type: 'object', default: {},
-                style: [
-                    {
-                        selector: '{{QUBELY}} .qubely-block-btn-anchor'
-                    }
-                ]
+                style: [{ selector: '{{QUBELY}} .qubely-block-btn-anchor' }]
             },
             buttonHoverShadow: {
                 type: 'object', default: {},
-                style: [
-                    {
-                        selector: '{{QUBELY}} .qubely-block-btn-anchor:hover'
-                    }
-                ]
+                style: [{ selector: '{{QUBELY}} .qubely-block-btn-anchor:hover' }]
             },
             buttonIconName: { type: 'string', default: '' },
             buttonIconPosition: { type: 'string', default: 'right' },
@@ -172,9 +169,7 @@ const addAttribute = (settings) => {
                 type: 'object', default: {},
                 style: [
                     {
-                        condition: [
-                            { key: 'buttonIconName', relation: '!=', value: '' }
-                        ],
+                        condition: [{ key: 'buttonIconName', relation: '!=', value: '' }],
                         selector: '{{QUBELY}} .qubely-btn-icon {font-size: {{buttonIconSize}}}'
                     }
                 ]
@@ -219,7 +214,7 @@ const withInspectorControls = createHigherOrderComponent(OriginalComponent => {
 
         renderButtonControls = () => {
             const { setAttributes,
-                attributes: { enableButtonAlignment, buttonAlignment, buttonGap, buttonWidthType, buttonWidth, buttonTag, buttonFillType, buttonSize, buttonTypography, buttonPadding, buttonUrl, buttonBorderRadius, buttonIconName, buttonIconPosition, buttonIconSize, buttonIconGap, buttonBorder, buttonBorderHoverColor, buttonColor, buttonHoverColor, buttonBgColor, buttonBgHoverColor, buttonShadow, buttonHoverShadow } } = this.props
+                attributes: { enableButtonAlignment, buttonAlignment, buttonGap, buttonWidthType, buttonWidth, buttonTag, buttonFillType, buttonSize, buttonTypography, buttonPadding, buttonUrl, buttonBorderRadius, buttonIconName, buttonIconPosition, buttonIconSize, buttonIconGap, buttonBorder, buttonBorderHoverColor, buttonColor, buttonColor2, buttonHoverColor, buttonHoverColor2, buttonBgColor, buttonBgHoverColor, buttonShadow, buttonHoverShadow } } = this.props
             const { device } = this.state
             return (
                 <Fragment>
@@ -289,7 +284,7 @@ const withInspectorControls = createHigherOrderComponent(OriginalComponent => {
                     <InnerPanel title={__('Design')} initialOpen={false}>
                         <Tabs>
                             <Tab tabTitle={__('Normal')}>
-                                <Color label={__('Text Color')} value={buttonColor} onChange={(value) => setAttributes({ buttonColor: value })} />
+                                <Color label={__('Text Color')} value={buttonFillType == 'fill' ? buttonColor : buttonColor2} onChange={(value) => buttonFillType == 'fill' ? setAttributes({ buttonColor: value }) : setAttributes({ buttonColor2: value })} />
                                 {buttonFillType == 'fill' &&
                                     <ColorAdvanced label={__('Background')} value={buttonBgColor} onChange={(value) => setAttributes({ buttonBgColor: value })} />
                                 }
@@ -307,7 +302,7 @@ const withInspectorControls = createHigherOrderComponent(OriginalComponent => {
                                     onChange={(value) => setAttributes({ buttonShadow: value })} />
                             </Tab>
                             <Tab tabTitle={__('Hover')}>
-                                <Color label={__('Text Color')} value={buttonHoverColor} onChange={(value) => setAttributes({ buttonHoverColor: value })} />
+                                <Color label={__('Text Color')} value={buttonFillType == 'fill' ? buttonHoverColor : buttonHoverColor2} onChange={(value) => buttonFillType == 'fill' ? setAttributes({ buttonHoverColor: value }) : setAttributes({ buttonHoverColor2: value })} />
                                 <ColorAdvanced label={__('Background')} value={buttonBgHoverColor} onChange={(value) => setAttributes({ buttonBgHoverColor: value })} />
                                 <Color label={__('Border Color')} value={buttonBorderHoverColor} onChange={(value) => setAttributes({ buttonBorderHoverColor: value })} />
                                 <BoxShadow

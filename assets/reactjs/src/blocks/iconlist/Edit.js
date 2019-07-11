@@ -4,8 +4,10 @@ const { Component, Fragment } = wp.element;
 const { PanelBody, Tooltip, Popover } = wp.components;
 import { Typography, Alignment, Padding, Styles, Range, Tabs, Tab, IconList, Color, RadioAdvanced, Border, BorderRadius, BoxShadow, Separator } from '../../components/FieldRender'
 import { CssGenerator } from '../../components/CssGenerator'
-import '../../components/GlobalSettings';
 import icons from '../../helpers/icons'
+import '../../components/GlobalSettings'
+import '../../components/ContextMenu'
+
 class Edit extends Component {
     constructor(props) {
         super(props)
