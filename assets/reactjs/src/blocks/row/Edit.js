@@ -63,8 +63,8 @@ class Edit extends Component {
     }
 
     render() {
-        const { attributes: { uniqueId, rowId, columns, align, rowGutter, rowBlend, rowOverlay, rowOpacity, rowContainer, rowContainerWidth, position, padding, margin, rowBg, shapeTop, shapeBottom, rowReverse, rowShadow, heightOptions, rowHeight, border, borderRadius, enableRowOverlay }, setAttributes } = this.props;
-
+        const { attributes: { uniqueId, rowId, columns, align, rowGutter, rowBlend, rowOverlay, rowOpacity, rowContainer, rowContainerWidth, position, padding, marginTop, marginBottom, rowBg, shapeTop, shapeBottom, rowReverse, rowShadow, heightOptions, rowHeight, border, borderRadius, enableRowOverlay }, setAttributes } = this.props;
+        const { device } = this.state
         if (uniqueId) { CssGenerator(this.props.attributes, 'row', uniqueId); }
 
         if (!columns) {
@@ -125,7 +125,7 @@ class Edit extends Component {
                                 max={1200}
                                 unit={['px', 'em', '%']}
                                 responsive
-                                device={this.state.device} 
+                                device={this.state.device}
                                 onDeviceChange={value => this.setState({ device: value })}
                             />
                         }
@@ -169,26 +169,18 @@ class Edit extends Component {
                             value={padding}
                             onChange={val => setAttributes({ padding: val })}
                             min={0}
-                            max={600} 
+                            max={600}
                             unit={['px', 'em', '%']}
-                            responsive 
-                            device={this.state.device} 
+                            responsive
+                            device={this.state.device}
                             onDeviceChange={value => this.setState({ device: value })}
                             clientId={this.props.clientId}
                         />
 
-                        <Dimension
-                            label={__('Margin')}
-                            value={margin}
-                            onChange={val => setAttributes({ margin: val })}
-                            min={-600}
-                            max={600} 
-                            unit={['px', 'em', '%']}
-                            responsive 
-                            device={this.state.device} 
-                            onDeviceChange={value => this.setState({ device: value })}
-                            clientId={this.props.clientId}
-                        />
+                        <Separator />
+                        <Range label={__('Margin Top')} value={marginTop} onChange={(value) => setAttributes({ marginTop: value })} unit={['px', 'em', '%']} min={-400} max={500} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
+                        <Range label={__('Margin Bottom')} value={marginBottom} onChange={(value) => setAttributes({ marginBottom: value })} unit={['px', 'em', '%']} min={-400} max={500} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
+
 
                         <Separator />
 
@@ -229,7 +221,7 @@ class Edit extends Component {
                             onChange={val => setAttributes({ border: val })}
                             min={0}
                             max={10}
-                            device={this.state.device} 
+                            device={this.state.device}
                             onDeviceChange={value => this.setState({ device: value })}
                         />
                         <Separator />
@@ -243,7 +235,7 @@ class Edit extends Component {
                             max={100}
                             unit={['px', 'em', '%']}
                             responsive
-                            device={this.state.device} 
+                            device={this.state.device}
                             onDeviceChange={value => this.setState({ device: value })}
                         />
 
@@ -295,18 +287,13 @@ class Edit extends Component {
                         </span>
                     </div>
                     <div className="qubley-margin-indicator">
-                        <span className="qubely-indicator-top" style={{ height: margin.md.top ? margin.md.top + margin.unit : 0 }} >
-                            {margin.md.top && margin.md.top > 20 ? margin.md.top + ' ' + margin.unit : ''}
+                        <span className="qubely-indicator-top" style={{ height: marginTop.md ? marginTop.md + marginTop.unit : 0 }} >
+                            {marginTop.md && marginTop.md > 20 ? marginTop.md + ' ' + marginTop.unit : ''}
                         </span>
-                        <span className="qubely-indicator-right" style={{ width: margin.md.right ? margin.md.right + margin.unit : 0 }} >
-                            {margin.md.right && margin.md.right > 40 ? margin.md.right + ' ' + margin.unit : ''}
+                        <span className="qubely-indicator-bottom" style={{ height: marginBottom.md ? marginBottom.md + marginBottom.unit : 0 }} >
+                            {marginBottom.md && marginBottom.md > 20 ? marginBottom.md + ' ' + marginBottom.unit : ''}
                         </span>
-                        <span className="qubely-indicator-bottom" style={{ height: margin.md.bottom ? margin.md.bottom + margin.unit : 0 }} >
-                            {margin.md.bottom && margin.md.bottom > 20 ? margin.md.bottom + ' ' + margin.unit : ''}
-                        </span>
-                        <span className="qubely-indicator-left" style={{ width: margin.md.left ? margin.md.left + margin.unit : 0 }} >
-                            {margin.md.left && margin.md.left > 40 ? margin.md.left + ' ' + margin.unit : ''}
-                        </span>
+        
                     </div>
                     {(Object.entries(shapeTop).length > 1 && shapeTop.openShape == 1 && shapeTop.style) &&
                         <div className="qubely-shape-divider qubely-top-shape" dangerouslySetInnerHTML={{ __html: qubely_admin.shapes[shapeTop.style] }} />

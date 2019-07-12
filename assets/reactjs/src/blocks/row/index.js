@@ -29,20 +29,9 @@ registerBlockType('qubely/row', {
             style: [{ selector: '{{QUBELY}}.qubely-section {padding: {{padding}};}' }]
         },
 
-        margin: {
-            type: 'object',
-            default: {
-                md: {
-                    top: 0,
-                    right: 0,
-                    bottom: 0,
-                    left: 0
-                },
-                unit: 'px',
-            },
-            style: [{ selector: '{{QUBELY}}.qubely-section {margin: {{margin}} !important;}' }]
-        },
-
+        marginTop: {type: 'object', default: {md: 0, unit: 'px'}, style: [{ selector: '{{QUBELY}}.qubely-section{ margin-top:  {{marginTop}}; }' }] },
+        marginBottom: {type: 'object', default: {md: 0, unit: 'px'}, style: [{ selector: '{{QUBELY}}.qubely-section{ margin-bottom:  {{marginBottom}}; }' }] },
+      
         rowGutter: {
             type: 'object', default: { md: 30, sm: 30, xs: 30, unit: 'px' }, style: [{
                 selector:
