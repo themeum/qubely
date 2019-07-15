@@ -6,7 +6,7 @@ Donate link: <a href=" https://www.themeum.com">https://www.themeum.com</a>
 Tags: Qubely, website builder, gutenberg block, gutenberg, page builder, drag and drop editor, responsive, site editor, editor, drag-and-drop, visual editor, landing page, frontend editor, wordpress page builder, free page builder, layout builder  
 Requires at least: 5.0  
 Tested up to: 5.2  
-Stable tag: 1.0.3  
+Stable tag: 1.0.4  
 Requires PHP: 5.4.0  
 License: GPL-2.0+  
 License URI: http://www.gnu.org/licenses/gpl-2.0.txt
@@ -192,6 +192,11 @@ Found a bug? Please let us know by posting on the support section of this plugin
 
 
 # Changelog
+
+**1.0.4 - 15 July, 2019**
+
+Update: InfoBox Block - Button enable/disable toggle position  
+Fix: Row - Margin field issue fixed  
 
 
 **1.0.3 - 11 July, 2019**

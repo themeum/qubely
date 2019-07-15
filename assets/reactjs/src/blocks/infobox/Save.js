@@ -78,7 +78,7 @@ class Save extends Component {
 								<RichText.Content tagName='div' className="qubely-info-box-text" value={content} />
 							</div>
 						}
-						{enableButton == 1 &&
+						{enableButton &&
 							<QubelyButtonSave
 								buttonFillType={buttonFillType}
 								buttonSize={buttonSize}

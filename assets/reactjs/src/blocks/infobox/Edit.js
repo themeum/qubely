@@ -167,7 +167,6 @@ class Edit extends Component {
                         {(layout == 1 || layout == 4) &&
                             <Alignment label={__('Alignment')} value={alignment} alignmentType="content" onChange={val => setAttributes({ alignment: val })} alignmentType="content" disableJustify responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
                         }
-                        <Toggle label={__('Enable Button')} value={enableButton} onChange={val => setAttributes({ enableButton: val })} />
                     </PanelBody>
 
                     {layout != 4 &&
@@ -342,7 +341,7 @@ class Edit extends Component {
                                     </Tab>
                                 </Tabs>
                                 <Padding label={__('Padding')} value={contentPadding} onChange={val => setAttributes({ contentPadding: val })} min={0} max={200} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
-                                {enableButton == 1 &&
+                                {enableButton &&
                                     <Range label={__('Spacing')} value={contentSpacing} onChange={(value) => setAttributes({ contentSpacing: value })} unit={['px', 'em', '%']} min={0} max={100} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
                                 }
                             </Fragment>
@@ -444,7 +443,7 @@ class Edit extends Component {
                                     />
                                 </div>
                             }
-                            {enableButton == 1 &&
+                            {enableButton &&
                                 <QubelyButtonEdit
                                     enableButton={enableButton}
                                     buttonFillType={buttonFillType}

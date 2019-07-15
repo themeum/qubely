@@ -396,20 +396,18 @@ const withInspectorControls = createHigherOrderComponent(OriginalComponent => {
                     <Fragment>
                         <OriginalComponent {...this.props} />
                         <InspectorControls key="inspector">
-                            {enableButton == 1 &&
-                                <Fragment>
-                                    {
-                                        controlledButtonPanel ?
-                                            <PanelBody title={__('Button')} opened={showButtonPanel} onToggle={() => setAttributes({ showButtonPanel: !showButtonPanel })}>
-                                                {this.renderButtonControls()}
-                                            </PanelBody>
-                                            :
-                                            <PanelBody title={__('Button')} initialOpen={false}>
-                                                {this.renderButtonControls()}
-                                            </PanelBody>
-                                    }
-                                </Fragment>
+                            {
+                                controlledButtonPanel ?
+                                    <PanelBody title={__('Button')} opened={showButtonPanel} onToggle={() => setAttributes({ showButtonPanel: !showButtonPanel })}>
+                                        {enableButton && this.renderButtonControls()}
+                                    </PanelBody>
+                                    :
+                                    <PanelBody title={__('Button')} initialOpen={false}>
+                                        <Toggle label={__('Enable Button')} value={enableButton} onChange={val => setAttributes({ enableButton: val })} />
+                                        {enableButton && this.renderButtonControls()}
+                                    </PanelBody>
                             }
+
                             {
                                 typeof (enablePostButtonText) != 'undefined' &&
 

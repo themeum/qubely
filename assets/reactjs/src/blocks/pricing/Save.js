@@ -57,10 +57,7 @@ class Save extends Component {
 
 
     renderPricingButton = () => {
-        const {
-            setAttributes,
-            attributes: { enableButton,buttonUrl, buttonFillType, buttonSize, buttonText, buttonIconName, buttonIconPosition, buttonTag, enablePostButtonText, postButtonText }
-        } = this.props
+        const { attributes: { enableButton, buttonUrl, buttonFillType, buttonSize, buttonText, buttonIconName, buttonIconPosition, buttonTag, enablePostButtonText, postButtonText } } = this.props
 
         return (
             <div className={`qubely-pricing-button`} >
@@ -70,7 +67,7 @@ class Save extends Component {
                     buttonText={buttonText}
                     buttonIconName={buttonIconName}
                     buttonIconPosition={buttonIconPosition}
-                    buttonTag = 'a'
+                    buttonTag='a'
                     buttonUrl={buttonUrl}
                 />
                 {
