@@ -383,7 +383,7 @@ const withInspectorControls = createHigherOrderComponent(OriginalComponent => {
         }
         render() {
             const { setAttributes,
-                attributes: { uniqueId, buttonComponent, controlledButtonPanel, showButtonPanel, enableButton, enablePostButtonText, postButtonTextTypography, postButtonTextColor, postButtonTextHoverColor, postButtonTextPaddingBottom, postButtonTextPaddingTop }
+                attributes: { uniqueId, buttonComponent, controlledButtonPanel, showButtonPanel, enableButton, buttonToggleOption, enablePostButtonText, postButtonTextTypography, postButtonTextColor, postButtonTextHoverColor, postButtonTextPaddingBottom, postButtonTextPaddingTop }
             } = this.props
             const { showPostTextTypography, device } = this.state
             let type = this.props.name.split("/")[0]
@@ -399,11 +399,12 @@ const withInspectorControls = createHigherOrderComponent(OriginalComponent => {
                             {
                                 controlledButtonPanel ?
                                     <PanelBody title={__('Button')} opened={showButtonPanel} onToggle={() => setAttributes({ showButtonPanel: !showButtonPanel })}>
+                                        {buttonToggleOption && <Toggle label={__('Enable Button')} value={enableButton} onChange={val => setAttributes({ enableButton: val })} />}
                                         {enableButton && this.renderButtonControls()}
                                     </PanelBody>
                                     :
                                     <PanelBody title={__('Button')} initialOpen={false}>
-                                        <Toggle label={__('Enable Button')} value={enableButton} onChange={val => setAttributes({ enableButton: val })} />
+                                        {buttonToggleOption && <Toggle label={__('Enable Button')} value={enableButton} onChange={val => setAttributes({ enableButton: val })} />}
                                         {enableButton && this.renderButtonControls()}
                                     </PanelBody>
                             }

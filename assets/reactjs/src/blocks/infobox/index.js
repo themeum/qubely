@@ -35,6 +35,7 @@ registerBlockType('qubely/infobox', {
         spacer: { type: 'object', default: { spaceTop: { md: '10', unit: "px" }, spaceBottom: { md: '10', unit: "px" } }, style: [{ selector: '{{QUBELY}}' }] },
         mediaType: { type: 'string', default: 'icon' },
         enableButton: { type: 'boolean', default: false },
+        buttonToggleOption: { type: 'boolean', default: true },
 
         // Icon
         iconName: { type: 'string', default: 'fas fa-rocket' },
