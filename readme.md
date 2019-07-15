@@ -196,6 +196,7 @@ Found a bug? Please let us know by posting on the support section of this plugin
 **1.0.4 - 15 July, 2019**
 
 Update: InfoBox Block - Button enable/disable toggle position  
+Update: Button Component - Panel settings improvement  
 Fix: Row - Margin field issue fixed  
 
 
