@@ -95,6 +95,7 @@ class Edit extends Component {
             mediaSpacing,
 
             image,
+            imgAlt,
             imageHeight,
 
             number,
@@ -200,6 +201,7 @@ class Edit extends Component {
                                     {mediaType == 'image' &&
                                         <Fragment>
                                             <Media label={__('Image')} multiple={false} type={['image']} panel={true} value={image} onChange={val => setAttributes({ image: val })} />
+                                            {image.url && <TextControl label={__('alt Attribute')} value={imgAlt} onChange={val => setAttributes({ imgAlt: val })} />}
                                             <Range label={__('Image Height')} value={imageHeight} onChange={val => setAttributes({ imageHeight: val })} min={0} max={500} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
                                         </Fragment>
                                     }
@@ -386,7 +388,7 @@ class Edit extends Component {
                                 {(mediaType == 'image') &&
                                     <Fragment>
                                         {image.url != undefined ?
-                                            <img className="qubely-info-box-image" src={image.url} alt="" />
+                                            <img className="qubely-info-box-image" src={image.url} alt={imgAlt && imgAlt} />
                                             :
                                             <div className="qubely-info-box-image qubely-image-placeholder"><i className="far fa-image"></i></div>
                                         }

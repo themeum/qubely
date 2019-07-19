@@ -92,6 +92,7 @@ registerBlockType('qubely/infobox', {
 
         // Image
         image: { type: 'object', default: {} },
+        imgAlt: { type: 'string', default: '' },
         imageHeight: {
             type: 'object',
             default: {
