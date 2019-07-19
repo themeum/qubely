@@ -111,10 +111,10 @@ registerBlockType('qubely/button', {
             ]
         },
         buttonHoverColor2: {
-            type: 'string', default: '#1066CC',
+            type: 'string', default: '#fff',
             style: [
                 {
-                    condition: [  { key: 'fillType', relation: '!=', value: 'fill' }  ],
+                    condition: [{ key: 'fillType', relation: '!=', value: 'fill' }],
                     selector: '{{QUBELY}} .qubely-block-btn-anchor:hover { color:{{buttonHoverColor2}}; }'
                 }
             ]
@@ -131,14 +131,9 @@ registerBlockType('qubely/button', {
             ]
         },
         bgHoverColor: {
-            type: 'object', default: { type: 'color', openColor: 1, color: '#1066CC', gradient: { color1: '#2184F9', color2: '#1066CC', direction: 0, start: 0, stop: 100 } },
+            type: 'object', default: { type: 'color', openColor: 1, color: '#1066CC', gradient: { color1: '#16d03e', color2: '#1f91f3', direction: 0, start: 0, stop: 100 } },
             style: [
-                {
-                    condition: [
-                        { key: 'fillType', relation: '==', value: 'fill' }
-                    ],
-                    selector: '{{QUBELY}} .qubely-block-btn-anchor:before'
-                }
+                { selector: '{{QUBELY}} .qubely-block-btn-anchor:before' }
             ]
         },
         buttonBorder: {
