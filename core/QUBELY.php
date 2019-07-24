@@ -386,10 +386,12 @@ class QUBELY {
 			if ( file_exists( $css_path ) ) {
 				$blockCss = file_get_contents($css_path);
 				echo '<style type="text/css">'.$blockCss.'</style>';
-			}else{
-				echo '<style type="text/css">';
-				echo get_post_meta( get_the_ID(),'_qubely_css',true);
-				echo '</style>';
+				$css_url     = $upload_css_dir . "qubely/qubely-css-{$post_id}.css";
+				if(!file_exists($css_url)){
+					echo '<style type="text/css">';
+					echo get_post_meta( get_the_ID(),'_qubely_css',true);
+					echo '</style>';
+				}
 			}
 		}
 	}

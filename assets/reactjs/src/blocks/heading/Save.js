@@ -5,9 +5,8 @@ import { animationAttr } from '../../components/HelperFunction'
 
 class Save extends Component {
 
-    render() {
-        const { uniqueId, content, selector, separatorStyle, separatorPosition, subHeading, subHeadingLevel, subHeadingContent, subHeadingPosition, animation } = this.props.attributes
-
+    renderSeparators = () => {
+        const { attributes: { separatorStyle } } = this.props
         const separators = {
             solid: { type: 'css', separator: 'solid', width: 300, stroke: 10 },
             double: { type: 'css', separator: 'double', width: 300, stroke: 10 },
@@ -18,36 +17,46 @@ class Save extends Component {
             zigzag: { type: 'svg', separator: 'zigzag', svg: svg['zigzag'], style: 'fill', width: 88, stroke: 5 },
             zigzag_large: { type: 'svg', separator: 'zigzag_large', svg: svg['zigzag_large'], style: 'fill', width: 161, stroke: 5 },
         }
+        return (
+            <Fragment>
+                {separators[separatorStyle].type == 'css' &&
+                    <span className={`qubely-separator-type-css qubely-separator-${separatorStyle}`}></span>
+                }
+                {separators[separatorStyle].type == 'svg' &&
+                    <span className={`qubely-separator-type-svg qubely-separator-${separatorStyle}`}>{separators[separatorStyle].svg}</span>
+                }
+            </Fragment>
+        )
+    }
+    rendeSubHeading = () => {
+        const { subHeading, subHeadingLevel, subHeadingContent } = this.props.attributes
 
-        const renderSeparators = <Fragment>
-            {separatorStyle &&
-                <Fragment>
-                    {separators[separatorStyle].type == 'css' &&
-                        <span className={`qubely-separator-type-css qubely-separator-${separatorStyle}`}></span>
-                    }
-                    {separators[separatorStyle].type == 'svg' &&
-                        <span className={`qubely-separator-type-svg qubely-separator-${separatorStyle}`}>{separators[separatorStyle].svg}</span>
-                    }
-                </Fragment>
-            }
-        </Fragment>
+        if (subHeading) {
+            const subSubTagName = 'h' + subHeadingLevel;
+            return (
+                <RichText.Content
+                    tagName={subSubTagName}
+                    className="qubely-sub-heading-selector"
+                    value={subHeadingContent} />
+            )
+        } else return null
+    }
 
-        const subSubTagName = 'h' + subHeadingLevel;
+
+    render() {
+        const { uniqueId, content, selector, separatorStyle, separatorPosition, subHeadingPosition, animation } = this.props.attributes
+
 
         return (
             <div className={`qubely-block-${uniqueId}`} {...animationAttr(animation)} >
                 <div className={`qubely-block-heading ${separatorStyle ? 'qubely-has-separator qubely-separator-position-' + separatorPosition : ''}`}>
-                    {(subHeading && subHeadingPosition == 'before_title') &&
-                        <RichText.Content tagName={subSubTagName} className="qubely-sub-heading-selector" value={subHeadingContent} />
-                    }
+                    {subHeadingPosition == 'before_title' && this.rendeSubHeading()}
                     <div className="qubely-heading-container">
-                        {separatorStyle && (separatorPosition == 'left' || separatorPosition == 'top' || separatorPosition == 'leftright') ? <div className="qubely-separator qubely-separator-before">{renderSeparators}</div> : ''}
+                        {(separatorStyle && (separatorPosition == 'left' || separatorPosition == 'top' || separatorPosition == 'leftright')) && <div className="qubely-separator qubely-separator-before">{this.renderSeparators()}</div>}
                         <RichText.Content tagName={selector} className="qubely-heading-selector" value={content} />
-                        {separatorStyle != '' && (separatorPosition == 'right' || separatorPosition == 'bottom' || separatorPosition == 'leftright') ? <div className="qubely-separator qubely-separator-after">{renderSeparators}</div> : ''}
+                        {(separatorStyle && (separatorPosition == 'right' || separatorPosition == 'bottom' || separatorPosition == 'leftright')) && <div className="qubely-separator qubely-separator-after">{this.renderSeparators()}</div>}
                     </div>
-                    {(subHeading && subHeadingPosition == 'after_title') &&
-                        <RichText.Content tagName={subSubTagName} className="qubely-sub-heading-selector" value={subHeadingContent} />
-                    }
+                    {subHeadingPosition == 'after_title' && this.rendeSubHeading()}
                 </div>
             </div>
         )

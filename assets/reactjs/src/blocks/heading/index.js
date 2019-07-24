@@ -84,7 +84,7 @@ registerBlockType('qubely/heading', {
 			],
 		},
 
-		subHeading: { type: 'boolean', default: 0 },
+		subHeading: { type: 'boolean', default: false },
 		subHeadingLevel: { type: 'number', default: 3 },
 		subHeadingContent: {
 			type: 'string',
