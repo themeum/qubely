@@ -5,18 +5,6 @@ import { animationAttr } from '../../components/HelperFunction'
 
 class Save extends Component {
 
-    renderSeparators = () => {
-        return (
-            <Fragment>
-                {separators[separatorStyle].type == 'css' &&
-                    <span className={`qubely-separator-type-css qubely-separator-${separatorStyle}`}></span>
-                }
-                {separators[separatorStyle].type == 'svg' &&
-                    <span className={`qubely-separator-type-svg qubely-separator-${separatorStyle}`}>{separators[separatorStyle].svg}</span>
-                }
-            </Fragment>
-        )
-    }
     render() {
         const { uniqueId, content, selector, separatorStyle, separatorPosition, subHeading, subHeadingLevel, subHeadingContent, subHeadingPosition, animation } = this.props.attributes
 
