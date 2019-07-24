@@ -1,7 +1,7 @@
 {
   "name": "qubely",
-  "version": "1.0.4",
-  "description": "Qubely",
+  "version": "1.0.5",
+  "description": "Gutenberg Blocks with Layout Packs & Readymade Blocks Collection - Qubely",
   "main": "index.js",
   "scripts": {
     "start": "webpack --watch",

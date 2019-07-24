@@ -6,7 +6,7 @@ Donate link: <a href=" https://www.themeum.com">https://www.themeum.com</a>
 Tags: Qubely, website builder, gutenberg block, gutenberg, page builder, drag and drop editor, responsive, site editor, editor, drag-and-drop, visual editor, landing page, frontend editor, wordpress page builder, free page builder, layout builder  
 Requires at least: 5.0  
 Tested up to: 5.2  
-Stable tag: 1.0.4  
+Stable tag: 1.0.5  
 Requires PHP: 5.4.0  
 License: GPL-2.0+  
 License URI: http://www.gnu.org/licenses/gpl-2.0.txt
@@ -192,6 +192,16 @@ Found a bug? Please let us know by posting on the support section of this plugin
 
 
 # Changelog
+
+
+**1.0.5 - 24 July, 2019**
+
+Update: Advanced Text Block - HTML support for RichText  
+Update: Testimonial Block - HTML support for RichText  
+Update: Infobox Block - HTML support for RichText and image alt text  
+Update: Pricing Block - HTML support for RichText  
+Fix: CSS issue while exporting/importing pages  
+Fix: Button Block - Outline layout hover fill color  
 
 **1.0.4 - 15 July, 2019**
 

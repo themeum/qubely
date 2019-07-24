@@ -39,7 +39,8 @@ class QUBELY {
 
 		// Common style 
 		$this->enqueue_block_css();
-		
+
+		$this->set_inline_css();
 
 		add_action( 'rest_api_init', array($this, 'register_api_hook'));
 		add_action( 'delete_post', array($this, 'before_delete_post'), 10 );
@@ -58,6 +59,25 @@ class QUBELY {
 
 	}
 	
+	public function set_inline_css(){
+		$post_id=get_the_ID();
+		$upload_dir     = wp_get_upload_dir();
+		$upload_css_dir = trailingslashit( $upload_dir['basedir'] );
+		$css_path       = $upload_css_dir . "qubely/qubely-css-{$post_id}.css";
+
+		if ( !file_exists( $css_path ) ) {
+				add_action( 'wp_head', array($this,'get_post_meta_callback') );
+		}
+	}
+
+	public function get_post_meta_callback(){
+		$post_id=get_the_ID();
+		echo '<style type="text/css">';
+		echo get_post_meta($post_id,'_qubely_css',true);
+		echo '</style>';
+	}
+
+
 	/**
 	 * Load Editor Styles and Scripts
 	 * @since 1.0.0
@@ -386,12 +406,6 @@ class QUBELY {
 			if ( file_exists( $css_path ) ) {
 				$blockCss = file_get_contents($css_path);
 				echo '<style type="text/css">'.$blockCss.'</style>';
-				$css_url     = $upload_css_dir . "qubely/qubely-css-{$post_id}.css";
-				if(!file_exists($css_url)){
-					echo '<style type="text/css">';
-					echo get_post_meta( get_the_ID(),'_qubely_css',true);
-					echo '</style>';
-				}
 			}
 		}
 	}
