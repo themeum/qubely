@@ -14,7 +14,12 @@ registerBlockType('qubely/heading', {
 	attributes: {
 		uniqueId: { type: 'string', default: '' },
 		spacer: { type: 'object', default: { spaceTop: { md: '10', unit: "px" }, spaceBottom: { md: '10', unit: "px" } }, style: [{ selector: '{{QUBELY}}' }] },
-		content: { type: 'string', default: 'Qubely - A Full-fledged Gutenberg Builder' },
+		content: {
+			type: 'string',
+			source: 'html',
+			selector: '.qubely-heading-selector',
+			default: 'Qubely - A Full-fledged Gutenberg Builder'
+		},
 		alignment: {
 			type: 'object',
 			default: {},
@@ -81,7 +86,12 @@ registerBlockType('qubely/heading', {
 
 		subHeading: { type: 'boolean', default: 0 },
 		subHeadingLevel: { type: 'number', default: 3 },
-		subHeadingContent: { type: 'string', default: 'Sub Heading' },
+		subHeadingContent: {
+			type: 'string',
+			source: 'html',
+			selector: '.qubely-sub-heading-selector',
+			default: 'Sub Heading'
+		},
 		subHeadingTypography: {
 			type: 'object',
 			default: { openTypography: 1, size: { md: 16, unit: 'px' } },

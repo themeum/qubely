@@ -291,7 +291,12 @@ registerBlockType('qubely/infobox', {
         },
 
         // Title
-        title: { type: 'string', default: 'This is an info box' },
+        title: {
+            type: 'string',
+            source: 'html',
+            selector: '.qubely-info-box-title',
+            default: 'This is an info box'
+        },
         titleLevel: { type: 'number', default: 2 },
         titleTypography: { type: 'object', default: { openTypography: 1, size: { md: 24, unit: 'px' } }, style: [{ selector: '{{QUBELY}} .qubely-info-box-title' }] },
         titleColor: { type: 'string', default: '', style: [{ selector: '{{QUBELY}} .qubely-info-box-title {color: {{titleColor}};}' }] },
@@ -300,7 +305,12 @@ registerBlockType('qubely/infobox', {
 
         subTitle: { type: 'boolean', default: 0 },
         subTitleLevel: { type: 'number', default: 3 },
-        subTitleContent: { type: 'string', default: 'Sub Title' },
+        subTitleContent: {
+            type: 'string',
+            source: 'html',
+            selector: '.qubely-info-box-sub-title',
+            default: 'Sub Title'
+        },
         subTitleTypography: { type: 'object', default: { openTypography: 1, size: { md: 16, unit: 'px' } }, style: [{ selector: '{{QUBELY}} .qubely-block-info-box .qubely-info-box-sub-title' }] },
         subTitleColor: {
             type: 'string', default: '#333',
@@ -436,7 +446,12 @@ registerBlockType('qubely/infobox', {
 
         //Content
         enableContent: { type: 'boolean', default: true },
-        content: { type: 'string', default: 'Qubely blocks is added to the Gutenberg editor as soon as you install the plugin. You can start using it as any other Gutenberg block.' },
+        content: {
+            type: 'string',
+            source: 'html',
+            selector: '.qubely-info-box-text',
+            default: 'Qubely blocks is added to the Gutenberg editor as soon as you install the plugin. You can start using it as any other Gutenberg block.'
+        },
         contentTypography: { type: 'object', default: { openTypography: 1, size: { md: 16, unit: 'px' } }, style: [{ condition: [{ key: 'enableContent', relation: '==', value: true }], selector: '{{QUBELY}} .qubely-info-box-text' }] },
         contentColor: { type: 'string', default: '', style: [{ condition: [{ key: 'enableContent', relation: '==', value: true }], selector: '{{QUBELY}} .qubely-info-box-text {color: {{contentColor}};}' }] },
         contentColorHover: { type: 'string', default: '', style: [{ condition: [{ key: 'enableContent', relation: '==', value: true }], selector: '{{QUBELY}} .qubely-block-info-box:hover .qubely-info-box-text {color: {{contentColorHover}};}' }] },

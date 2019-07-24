@@ -86,7 +86,6 @@ class Edit extends Component {
         </Fragment>
 
         if (uniqueId) { CssGenerator(this.props.attributes, 'text', uniqueId); }
-
         return (
             <Fragment>
                 <InspectorControls key="inspector">
@@ -222,15 +221,14 @@ class Edit extends Component {
                                 }
                             </div>
                         }
-
-                        <RichText
-                            key="editable"
-                            tagName={selector}
-                            keepPlaceholderOnFocus
-                            placeholder={__('Add Text...')}
-                            onChange={value => setAttributes({ content: value })}
-                            value={content}
-                        />
+                            <RichText
+                                key="editable"
+                                tagName={selector}
+                                keepPlaceholderOnFocus
+                                placeholder={__('Add Text...')}
+                                onChange={value => setAttributes({ content: value })}
+                                value={content}
+                            />
                     </div>
                 </div>
 

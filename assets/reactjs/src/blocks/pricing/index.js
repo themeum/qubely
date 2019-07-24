@@ -25,7 +25,12 @@ registerBlockType('qubely/pricing', {
         copyStyle: { type: 'boolean', default: false },
 
         // Title__
-        title: { type: 'string', default: 'Basic' },
+        title: {
+            type: 'string',
+            source: 'html',
+            selector: '.qubely-pricing-title',
+            default: 'Basic'
+        },
         titleColor: { type: 'string', default: '#0081FF', style: [{ selector: '{{QUBELY}} .qubely-pricing-title{color: {{titleColor}};}' }] },
         titleTypography: { type: 'object', default: { openTypography: 1, size: { md: 20, unit: 'px' } }, style: [{ selector: '{{QUBELY}} .qubely-pricing-title' }] },
 
@@ -39,7 +44,12 @@ registerBlockType('qubely/pricing', {
         },
 
         //Sub Title
-        subTitle: { type: 'string', default: 'Best Choice for Individuals' },
+        subTitle: {
+            type: 'string',
+            source: 'html',
+            selector: '.qubely-sub-title',
+            default: 'Best Choice for Individuals'
+        },
         subTitleSpacing: {
             type: 'object',
             default: {
@@ -202,7 +212,7 @@ registerBlockType('qubely/pricing', {
             default: {
                 openPadding: 1,
                 paddingType: 'custom',
-                custom:{md:'10 0 10 0'}
+                custom: { md: '10 0 10 0' }
             },
             style: [{ condition: [{ key: 'durationPosition', relation: '==', value: 'bottom' }], selector: '{{QUBELY}} .qubely-pricing-duration' }]
         },
@@ -266,47 +276,47 @@ registerBlockType('qubely/pricing', {
                 unit: 'px'
             },
             style:
-            [
-                {
-                    condition: [
-                        { key: 'enableBadge', relation: '==', value: true },
-                        { key: 'badgeStyle', relation: '==', value: 3 },
-                    ],
-                    selector: '{{QUBELY}} .qubely-block-pricing .qubely-pricing-badge {margin-top: {{badgeSpacing}};}'
-                },
-                {
-                    condition: [
-                        { key: 'enableBadge', relation: '==', value: true },
-                        { key: 'badgeStyle', relation: '==', value: 5 },
-                        { key: 'badgePosition', relation: '==', value: 'left' }
-                    ],
-                    selector: '{{QUBELY}} .qubely-block-pricing .qubely-pricing-badge {left: {{badgeSpacing}};}'
-                },
-                {
-                    condition: [
-                        { key: 'enableBadge', relation: '==', value: true },
-                        { key: 'badgeStyle', relation: '==', value: 5 },
-                        { key: 'badgePosition', relation: '==', value: 'right' }
-                    ],
-                    selector: '{{QUBELY}} .qubely-block-pricing .qubely-pricing-badge {right: {{badgeSpacing}};}'
-                },
-                {
-                    condition: [
-                        { key: 'enableBadge', relation: '==', value: true },
-                        { key: 'badgeStyle', relation: '==', value: 6 },
-                        { key: 'badgePosition', relation: '==', value: 'left' }
-                    ],
-                    selector: '{{QUBELY}} .qubely-block-pricing .qubely-pricing-badge {left: {{badgeSpacing}};}'
-                },
-                {
-                    condition: [
-                        { key: 'enableBadge', relation: '==', value: true },
-                        { key: 'badgeStyle', relation: '==', value: 6 },
-                        { key: 'badgePosition', relation: '==', value: 'right' }
-                    ],
-                    selector: '{{QUBELY}} .qubely-block-pricing .qubely-pricing-badge {right: {{badgeSpacing}};}'
-                }
-            ]
+                [
+                    {
+                        condition: [
+                            { key: 'enableBadge', relation: '==', value: true },
+                            { key: 'badgeStyle', relation: '==', value: 3 },
+                        ],
+                        selector: '{{QUBELY}} .qubely-block-pricing .qubely-pricing-badge {margin-top: {{badgeSpacing}};}'
+                    },
+                    {
+                        condition: [
+                            { key: 'enableBadge', relation: '==', value: true },
+                            { key: 'badgeStyle', relation: '==', value: 5 },
+                            { key: 'badgePosition', relation: '==', value: 'left' }
+                        ],
+                        selector: '{{QUBELY}} .qubely-block-pricing .qubely-pricing-badge {left: {{badgeSpacing}};}'
+                    },
+                    {
+                        condition: [
+                            { key: 'enableBadge', relation: '==', value: true },
+                            { key: 'badgeStyle', relation: '==', value: 5 },
+                            { key: 'badgePosition', relation: '==', value: 'right' }
+                        ],
+                        selector: '{{QUBELY}} .qubely-block-pricing .qubely-pricing-badge {right: {{badgeSpacing}};}'
+                    },
+                    {
+                        condition: [
+                            { key: 'enableBadge', relation: '==', value: true },
+                            { key: 'badgeStyle', relation: '==', value: 6 },
+                            { key: 'badgePosition', relation: '==', value: 'left' }
+                        ],
+                        selector: '{{QUBELY}} .qubely-block-pricing .qubely-pricing-badge {left: {{badgeSpacing}};}'
+                    },
+                    {
+                        condition: [
+                            { key: 'enableBadge', relation: '==', value: true },
+                            { key: 'badgeStyle', relation: '==', value: 6 },
+                            { key: 'badgePosition', relation: '==', value: 'right' }
+                        ],
+                        selector: '{{QUBELY}} .qubely-block-pricing .qubely-pricing-badge {right: {{badgeSpacing}};}'
+                    }
+                ]
         },
         badgeSpacingTop: {
             type: 'object',
@@ -315,57 +325,57 @@ registerBlockType('qubely/pricing', {
                 unit: 'px'
             },
             style:
-            [
-                {
-                    condition: [
-                        { key: 'enableBadge', relation: '==', value: true },
-                        { key: 'badgeStyle', relation: '==', value: 5 }
-                    ],
-                    selector: '{{QUBELY}} .qubely-block-pricing .qubely-pricing-badge {top: {{badgeSpacingTop}};}'
-                }
-            ]
+                [
+                    {
+                        condition: [
+                            { key: 'enableBadge', relation: '==', value: true },
+                            { key: 'badgeStyle', relation: '==', value: 5 }
+                        ],
+                        selector: '{{QUBELY}} .qubely-block-pricing .qubely-pricing-badge {top: {{badgeSpacingTop}};}'
+                    }
+                ]
         },
         badgeBg: {
             type: 'string',
             default: '#50E3C2',
             style:
-            [
-                {
-                    condition: [
-                        { key: 'enableBadge', relation: '==', value: true }
-                    ],
-                    selector: '{{QUBELY}} .qubely-block-pricing .qubely-pricing-badge {background-color: {{badgeBg}};}'
-                },
-                {
-                    condition: [
-                        { key: 'enableBadge', relation: '==', value: true },
-                        { key: 'badgeStyle', relation: '==', value: 3 }
-                    ],
-                    selector: '{{QUBELY}} .qubely-block-pricing .qubely-pricing-badge::before {border-color: {{badgeBg}} {{badgeBg}} transparent transparent;} {{QUBELY}} .qubely-block-pricing .qubely-pricing-badge::after {border-color: {{badgeBg}} transparent transparent {{badgeBg}};}'
-                },
-                {
-                    condition: [
-                        { key: 'enableBadge', relation: '==', value: true },
-                        { key: 'badgeStyle', relation: '==', value: 6 }
-                    ],
-                    selector: '{{QUBELY}} .qubely-block-pricing .qubely-pricing-badge::before {border-color: {{badgeBg}} {{badgeBg}} transparent {{badgeBg}};}'
-                }
-            ]
+                [
+                    {
+                        condition: [
+                            { key: 'enableBadge', relation: '==', value: true }
+                        ],
+                        selector: '{{QUBELY}} .qubely-block-pricing .qubely-pricing-badge {background-color: {{badgeBg}};}'
+                    },
+                    {
+                        condition: [
+                            { key: 'enableBadge', relation: '==', value: true },
+                            { key: 'badgeStyle', relation: '==', value: 3 }
+                        ],
+                        selector: '{{QUBELY}} .qubely-block-pricing .qubely-pricing-badge::before {border-color: {{badgeBg}} {{badgeBg}} transparent transparent;} {{QUBELY}} .qubely-block-pricing .qubely-pricing-badge::after {border-color: {{badgeBg}} transparent transparent {{badgeBg}};}'
+                    },
+                    {
+                        condition: [
+                            { key: 'enableBadge', relation: '==', value: true },
+                            { key: 'badgeStyle', relation: '==', value: 6 }
+                        ],
+                        selector: '{{QUBELY}} .qubely-block-pricing .qubely-pricing-badge::before {border-color: {{badgeBg}} {{badgeBg}} transparent {{badgeBg}};}'
+                    }
+                ]
         },
-        
+
         badgeColor: {
             type: 'string',
             default: '#FFFFFF',
             style:
-            [
-                {
-                    condition:
-                    [
-                        { key: 'enableBadge', relation: '==', value: true }
-                    ],
-                    selector: '{{QUBELY}} .qubely-block-pricing .qubely-pricing-badge {color: {{badgeColor}};}'
-                }
-            ]
+                [
+                    {
+                        condition:
+                            [
+                                { key: 'enableBadge', relation: '==', value: true }
+                            ],
+                        selector: '{{QUBELY}} .qubely-block-pricing .qubely-pricing-badge {color: {{badgeColor}};}'
+                    }
+                ]
         },
 
         badgeTypography: {
@@ -378,15 +388,15 @@ registerBlockType('qubely/pricing', {
                 }
             },
             style:
-            [
-                {
-                    condition:
-                    [
-                        { key: 'enableBadge', relation: '==', value: true }
-                    ],
-                    selector: '{{QUBELY}} .qubely-block-pricing .qubely-pricing-badge'
-                }
-            ]
+                [
+                    {
+                        condition:
+                            [
+                                { key: 'enableBadge', relation: '==', value: true }
+                            ],
+                        selector: '{{QUBELY}} .qubely-block-pricing .qubely-pricing-badge'
+                    }
+                ]
         },
 
         badgeRadius: {
@@ -397,10 +407,10 @@ registerBlockType('qubely/pricing', {
             style: [
                 {
                     condition:
-                    [
-                        { key: 'enableBadge', relation: '==', value: true },
-                        { key: 'badgeStyle', relation: '==', value: 5 }
-                    ],
+                        [
+                            { key: 'enableBadge', relation: '==', value: true },
+                            { key: 'badgeStyle', relation: '==', value: 5 }
+                        ],
                     selector: '{{QUBELY}} .qubely-block-pricing .qubely-pricing-badge'
                 }
             ]

@@ -3,7 +3,7 @@ const { RichText } = wp.editor
 import svg from '../heading/separators';
 import { animationAttr } from '../../components/HelperFunction'
 class Save extends Component {
-    render() {
+	render() {
 
 		const separators = {
 			solid: { type: 'css', separator: 'solid', width: 300, stroke: 10 },
@@ -32,10 +32,9 @@ class Save extends Component {
 				</Fragment>
 			}
 		</Fragment>
-
 		return (
 			<div className={`qubely-block-${uniqueId}`} {...animationAttr(animation)}>
-				<div className={`qubely-block-text ${ (dropCap == 1) ? 'qubely-has-drop-cap' : '' }`}>
+				<div className={`qubely-block-text ${(dropCap == 1) ? 'qubely-has-drop-cap' : ''}`}>
 					{enableTitle == 1 &&
 						<div className={`qubely-block-text-title-container ${separatorStyle ? 'qubely-has-separator' : ''} ${separatorPosition ? 'qubely-separator-position-' + separatorPosition : ''}`} >
 							<div className="qubely-block-text-title-inner">
@@ -50,12 +49,12 @@ class Save extends Component {
 								</div>
 							}
 						</div>
-                    }
+					}
 
-					<RichText.Content tagName={selector}  value={content} />
+						<RichText.Content tagName={selector} value={content} />
 				</div>
 			</div>
 		)
-    }
+	}
 }
 export default Save

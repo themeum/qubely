@@ -16,18 +16,33 @@ registerBlockType('qubely/testimonial', {
         layout: { type: 'number', default: 1 },
 
         //Name
-        name: { type: 'string', default: 'JOHN DOE' },
+        name: {
+            type: 'string',
+            source: 'html',
+            selector: '.qubely-testimonial-author-name>span',
+            default: 'JOHN DOE'
+        },
         nameColor: { type: 'string', default: '', style: [{ selector: '{{QUBELY}} .qubely-testimonial-author-name { color:{{nameColor}}; }' }] },
         nameTypo: { type: 'object', default: { openTypography: 1, weight: 700, size: { md: 16, unit: 'px' } }, style: [{ selector: '{{QUBELY}} .qubely-testimonial-author-name' }] },
         nameSpacing: { type: 'object', default: {}, style: [{ selector: '{{QUBELY}} .qubely-testimonial-author-name {margin-bottom: {{nameSpacing}};}' }] },
 
         //Designation
-        designation: { type: 'string', default: 'WordPress Developer' },
+        designation: {
+            type: 'string',
+            source: 'html',
+            selector: '.qubely-testimonial-author-designation>span',
+            default: 'WordPress Developer'
+        },
         designationColor: { type: 'string', default: '', style: [{ selector: '{{QUBELY}} .qubely-testimonial-author-designation { color:{{designationColor}}; }' }] },
         designationTypo: { type: 'object', default: { openTypography: 1, size: { md: 14, unit: 'px' } }, style: [{ selector: '{{QUBELY}} .qubely-testimonial-author-designation' }] },
 
         //Messsage
-        message: { type: 'string', default: '“There’s no easier way to add innovative Gutenberg blocks than using Qubely Gutenberg Blocks Toolkit. Instantly raise your website appearance with this stylish new plugin.”' },
+        message: {
+            type: 'string',
+            source: 'html',
+            selector: '.qubely-testimonial-content>div',
+            default: '“There’s no easier way to add innovative Gutenberg blocks than using Qubely Gutenberg Blocks Toolkit. Instantly raise your website appearance with this stylish new plugin.”'
+        },
         messagePosition: { type: 'string', default: 'top' },
         messageTypo: { type: 'object', default: { openTypography: 1, size: { md: 20, unit: 'px' } }, style: [{ selector: '{{QUBELY}} .qubely-testimonial-content' }] },
         messageSpacingTop: { type: 'object', default: { md: 0, unit: 'px' }, style: [{ selector: '{{QUBELY}} .qubely-testimonial-content {margin-top: {{messageSpacingTop}};}' }] },
