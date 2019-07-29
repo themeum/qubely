@@ -96,7 +96,7 @@ class Edit extends Component {
 
             image,
             imgAlt,
-            imageHeight,
+            imageWidth,
 
             number,
             numberColor,
@@ -202,7 +202,7 @@ class Edit extends Component {
                                         <Fragment>
                                             <Media label={__('Image')} multiple={false} type={['image']} panel={true} value={image} onChange={val => setAttributes({ image: val })} />
                                             {image.url && <TextControl label={__('Alt Text')} value={imgAlt} onChange={val => setAttributes({ imgAlt: val })} />}
-                                            <Range label={__('Image Height')} value={imageHeight} onChange={val => setAttributes({ imageHeight: val })} min={0} max={500} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
+                                            <Range label={__('Image Width')} value={imageWidth} onChange={val => setAttributes({ imageWidth: val })} min={0} max={2000} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
                                         </Fragment>
                                     }
 
@@ -213,33 +213,47 @@ class Edit extends Component {
                                         </Fragment>
                                     }
 
-                                    <Toggle label={__('Use Background')} value={useMediaBg} onChange={val => setAttributes({ useMediaBg: val })} />
+                                    {mediaType != 'image' &&
+                                        <Fragment>
+                                            <Toggle label={__('Use Background')} value={useMediaBg} onChange={val => setAttributes({ useMediaBg: val })} />
+                                            {useMediaBg == 1 &&
+                                                <Range label={__('Background Size')} value={mediaBackgroundSize} onChange={val => setAttributes({ mediaBackgroundSize: val })} min={0} max={200} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
+                                            }
+                                            <Tabs>
+                                                <Tab tabTitle={__('Normal')}>
+                                                    {mediaType == 'icon' &&
+                                                        <Color label={__('Color')} value={iconColor} onChange={val => setAttributes({ iconColor: val })} />
+                                                    }
+                                                    {mediaType == 'number' &&
+                                                        <Color label={__('Color')} value={numberColor} onChange={(value) => setAttributes({ numberColor: value })} />
+                                                    }
+                                                    {useMediaBg == 1 &&
+                                                        <Fragment>
+                                                            <ColorAdvanced label={__('Background Color')} value={mediaBg} onChange={val => setAttributes({ mediaBg: val })} />
+                                                            <Border label={__('Border')} value={mediaBorder} onChange={val => setAttributes({ mediaBorder: val })} min={0} max={10} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
+                                                            <BoxShadow label={__('Box-Shadow')} value={mediaShadow} onChange={(value) => setAttributes({ mediaShadow: value })} />
+                                                        </Fragment>
+                                                    }
+                                                </Tab>
+                                                <Tab tabTitle={__('Hover')}>
+                                                    {mediaType == 'icon' &&
+                                                        <Color label={__('Color')} value={iconHoverColor} onChange={val => setAttributes({ iconHoverColor: val })} />
+                                                    }
+                                                    {mediaType == 'number' &&
+                                                        <Color label={__('Color')} value={numberColorHover} onChange={(value) => setAttributes({ numberColorHover: value })} />
+                                                    }
+                                                    {useMediaBg == 1 &&
+                                                        <Fragment>
+                                                            <ColorAdvanced label={__('Background Color')} value={mediaBgHover} onChange={val => setAttributes({ mediaBgHover: val })} />
+                                                            <Color label={__('Border Color')} value={mediaBorderColorHover} onChange={(value) => setAttributes({ mediaBorderColorHover: value })} />
+                                                            <BoxShadow label={__('Box-Shadow')} value={mediaShadowHover} onChange={(value) => setAttributes({ mediaShadowHover: value })} />
+                                                        </Fragment>
+                                                    }
+                                                </Tab>
+                                            </Tabs>
+                                        </Fragment>
+                                    }
 
-                                    <Tabs>
-                                        <Tab tabTitle={__('Normal')}>
-                                            {mediaType == 'icon' &&
-                                                <Color label={__('Color')} value={iconColor} onChange={val => setAttributes({ iconColor: val })} />
-                                            }
-                                            {mediaType == 'number' &&
-                                                <Color label={__('Color')} value={numberColor} onChange={(value) => setAttributes({ numberColor: value })} />
-                                            }
-                                            <ColorAdvanced label={__('Background Color')} value={mediaBg} onChange={val => setAttributes({ mediaBg: val })} />
-                                            <Border label={__('Border')} value={mediaBorder} onChange={val => setAttributes({ mediaBorder: val })} min={0} max={10} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
-                                            <BoxShadow label={__('Box-Shadow')} value={mediaShadow} onChange={(value) => setAttributes({ mediaShadow: value })} />
-                                        </Tab>
-                                        <Tab tabTitle={__('Hover')}>
-                                            {mediaType == 'icon' &&
-                                                <Color label={__('Color')} value={iconHoverColor} onChange={val => setAttributes({ iconHoverColor: val })} />
-                                            }
-                                            {mediaType == 'number' &&
-                                                <Color label={__('Color')} value={numberColorHover} onChange={(value) => setAttributes({ numberColorHover: value })} />
-                                            }
-                                            <ColorAdvanced label={__('Background Color')} value={mediaBgHover} onChange={val => setAttributes({ mediaBgHover: val })} />
-                                            <Color label={__('Border Color')} value={mediaBorderColorHover} onChange={(value) => setAttributes({ mediaBorderColorHover: value })} />
-                                            <BoxShadow label={__('Box-Shadow')} value={mediaShadowHover} onChange={(value) => setAttributes({ mediaShadowHover: value })} />
-                                        </Tab>
-                                    </Tabs>
-                                    <Range label={__('Background Size')} value={mediaBackgroundSize} onChange={val => setAttributes({ mediaBackgroundSize: val })} min={0} max={200} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
                                     <BorderRadius label={__('Radius')} value={mediaBorderRadius} onChange={val => setAttributes({ mediaBorderRadius: val })} min={0} max={100} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
                                     <Range label={__('Spacing')} value={mediaSpacing} onChange={val => setAttributes({ mediaSpacing: val })} min={0} max={200} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
                                 </Fragment>

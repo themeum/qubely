@@ -93,19 +93,16 @@ registerBlockType('qubely/infobox', {
         // Image
         image: { type: 'object', default: {} },
         imgAlt: { type: 'string', default: '' },
-        imageHeight: {
+        imageWidth: {
             type: 'object',
-            default: {
-                md: 86,
-                unit: 'px'
-            },
+            default: {},
             style: [
                 {
                     condition: [
                         { key: 'layout', relation: '!=', value: 4 },
                         { key: 'mediaType', relation: '==', value: 'image' }
                     ],
-                    selector: '{{QUBELY}} .qubely-info-box-media img {height: {{imageHeight}};} {{QUBELY}} .qubely-info-box-media .qubely-image-placeholder {height: {{imageHeight}}; width: {{imageHeight}};}'
+                    selector: '{{QUBELY}} .qubely-info-box-media img {width: {{imageWidth}};} {{QUBELY}} .qubely-info-box-media .qubely-image-placeholder {height: {{imageWidth}}; width: {{imageWidths}};}'
                 }
             ]
         },
@@ -163,6 +160,7 @@ registerBlockType('qubely/infobox', {
             style: [
                 {
                     condition: [
+                        { key: 'mediaType', relation: '!=', value: 'image' },
                         { key: 'layout', relation: '!=', value: 4 },
                         { key: 'useMediaBg', relation: '==', value: 1 }
                     ],
@@ -175,6 +173,7 @@ registerBlockType('qubely/infobox', {
             style: [
                 {
                     condition: [
+                        { key: 'mediaType', relation: '!=', value: 'image' },
                         { key: 'layout', relation: '!=', value: 4 },
                         { key: 'useMediaBg', relation: '==', value: 1 }
                     ],
@@ -187,6 +186,7 @@ registerBlockType('qubely/infobox', {
             style: [
                 {
                     condition: [
+                        { key: 'mediaType', relation: '!=', value: 'image' },
                         { key: 'layout', relation: '!=', value: 4 },
                         { key: 'useMediaBg', relation: '==', value: 1 }
                     ],
@@ -199,8 +199,8 @@ registerBlockType('qubely/infobox', {
             default: {
                 openBorderRadius: 1,
                 radiusType: 'global',
-                global: { md: 100 },
-                unit: '%',
+                global: { md: 5 },
+                unit: 'px',
 
             },
             style: [

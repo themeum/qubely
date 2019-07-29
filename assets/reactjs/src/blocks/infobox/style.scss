@@ -28,6 +28,11 @@
             display: block;
             transition: 400ms;
         }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
     
         &.qubely-media-has-bg {
             i,
