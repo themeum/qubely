@@ -1,7 +1,7 @@
 import '../css/media.scss'
 export const { Tooltip, Dashicon } = wp.components;
 const { MediaUpload } = wp.editor;
-const { Component } = wp.element;
+const { Component, Fragment } = wp.element;
 const {__} = wp.i18n
 
 class Media extends Component {
@@ -35,7 +35,7 @@ class Media extends Component {
 	}
 
 	isUrl(url){
-		if( ['wbm','jpg','jpeg','gif','png'].indexOf( url.split('.').pop().toLowerCase() ) != -1 ){
+		if( ['wbm','jpg','jpeg','gif','png', 'svg'].indexOf( url.split('.').pop().toLowerCase() ) != -1 ){
 			return url;
 		}else{
 			return qubely_admin.plugin+'assets/img/qubely-medium.jpg';
@@ -66,7 +66,18 @@ class Media extends Component {
 													<span className="qubely-media-image-parent">
 														<img src={this.isUrl(v.url)} alt={__('image')}/>
 														{ panel &&
-															<button aria-label="Close" className="qubely-image-close-icon fas fa-times" onClick={ () => this.removeImage(index) }></button>
+															<div className="qubely-media-actions qubely-field-button-list">
+																<Tooltip text={__('Edit')}>
+																	<button className="qubely-button" aria-label={__('Edit')} onClick={open} role="button">
+																		<span aria-label={__('Edit')} className="fas fa-pencil-alt fa-fw"></span>
+																	</button>
+																</Tooltip>
+																<Tooltip text={__('Remove')}>
+																	<button className="qubely-button" aria-label={__('Remove')} onClick={ () => this.removeImage(index) } role="button">
+																		<span aria-label={__('Close')} className="far fa-trash-alt fa-fw"></span>
+																	</button>
+																</Tooltip>		
+															</div>
 														}
 													</span>
 												)
@@ -79,7 +90,18 @@ class Media extends Component {
 										<span className="qubely-media-image-parent"> 
 											<img src={this.isUrl(value.url)} alt={__('image')}/>
 											{ panel &&
-												<button aria-label="Close" className="qubely-image-close-icon goo fas fa-times" onClick={ () => this.removeImage(value.id) }></button>
+												<div className="qubely-media-actions qubely-field-button-list">
+													<Tooltip text={__('Edit')}>
+														<button className="qubely-button" aria-label={__('Edit')} onClick={open} role="button">
+															<span aria-label={__('Edit')} className="fas fa-pencil-alt fa-fw"></span>
+														</button>
+													</Tooltip>
+													<Tooltip text={__('Remove')}>
+														<button className="qubely-button" aria-label={__('Remove')} onClick={ () => this.removeImage(value.id) } role="button">
+															<span aria-label={__('Close')} className="far fa-trash-alt fa-fw"></span>
+														</button>
+													</Tooltip>		
+												</div>
 											}
 										</span>
 										:

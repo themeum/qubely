@@ -487,6 +487,8 @@ div[data-type="qubely/row"].is-resizing .components-resizable-box__container.qub
     padding: 3px 8px;
     text-align: center;
     color: #8D96A0;
+    transition: all 400ms;
+    border-radius: 3px;
     cursor: pointer;
 
     &:focus {
@@ -506,23 +508,28 @@ div[data-type="qubely/row"].is-resizing .components-resizable-box__container.qub
 
 .qubely-field-button-list {
     display: inline-flex;
+    vertical-align: middle;
     .qubely-button {
-        display: flex;
+        position: relative;
+        flex: 1 1 auto;
+
         &:not(:last-child) {
-            border-right: 0;
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+        
+        &:not(:first-child) {
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
         }
 
-        &:first-child {
-            border-radius: 3px 0 0 3px;
-        }
-
-        &:last-child {
-            border-radius: 0 3px 3px 0;
+        &:not(:first-child) {
+            margin-left: -1px;
         }
     }
 }
 
-.qubely-common-button{
+.qubely-common-button {
     border: 1px solid #6c7781;
     text-align: center;
     flex-grow: 1;
