@@ -29,9 +29,9 @@ registerBlockType('qubely/row', {
             style: [{ selector: '{{QUBELY}}.qubely-section {padding: {{padding}};}' }]
         },
 
-        marginTop: {type: 'object', default: {md: 0, unit: 'px'}, style: [{ selector: '{{QUBELY}}.qubely-section{ margin-top:  {{marginTop}}; }' }] },
-        marginBottom: {type: 'object', default: {md: 0, unit: 'px'}, style: [{ selector: '{{QUBELY}}.qubely-section{ margin-bottom:  {{marginBottom}}; }' }] },
-      
+        marginTop: { type: 'object', default: { md: 0, unit: 'px' }, style: [{ selector: '{{QUBELY}}.qubely-section{ margin-top:  {{marginTop}}; }' }] },
+        marginBottom: { type: 'object', default: { md: 0, unit: 'px' }, style: [{ selector: '{{QUBELY}}.qubely-section{ margin-bottom:  {{marginBottom}}; }' }] },
+
         rowGutter: {
             type: 'object', default: { md: 30, sm: 30, xs: 30, unit: 'px' }, style: [{
                 selector:
@@ -143,7 +143,7 @@ registerBlockType('qubely/row', {
         // Advanced Settings
         rowId: { type: 'string', default: '' },
         rowZindex: { type: 'number', default: '', style: [{ selector: '{{QUBELY}}.qubely-section{z-index:{{rowZindex}};}' }] },
-        rowReverse: { type: 'object', default: {}, style: [{ selector: '{{QUBELY}}.qubely-section .qubely-row, {{QUBELY}}.qubely-row > .editor-inner-blocks > .editor-block-list__layout{flex-direction:row-reverse;}' }] },
+        rowReverse: { type: 'object', default: { openRowReverse: true, values: {} }, style: [{ selector: '{{QUBELY}}.qubely-section .qubely-row, {{QUBELY}} .qubely-row > .editor-inner-blocks > .editor-block-list__layout' }] },
 
         rowCss: { type: 'string', default: '', style: [{ selector: '' }] },
         showGlobalSettings: { type: 'boolean', default: true },
