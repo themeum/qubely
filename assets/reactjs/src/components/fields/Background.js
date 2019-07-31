@@ -52,7 +52,7 @@ class Background extends Component {
                                 return (
                                     <button className={((value.bgType == data && value.openBg) ? 'active' : '') + ' qubely-button'} onClick={() => this.setSettings(data, 'bgType')}>
                                         {data == 'image' &&
-                                            <Tooltip text={ __( 'Classic' )  }>
+                                            <Tooltip text={ __( 'Image' )  }>
                                                 <svg width="18" height="15" viewBox="0 0 18 15" xmlns="http://www.w3.org/2000/svg"><path d="M16.083.263h-14.446c-.798 0-1.445.648-1.445 1.447v11.579c0 .8.646 1.447 1.445 1.447h14.446c.798 0 1.445-.648 1.445-1.447v-11.579c0-.8-.646-1.447-1.445-1.447zm-4.334 2.171c2.389 0 2.386 3.618 0 3.618-2.385 0-2.39-3.618 0-3.618zm-9.39 10.855l4.334-5.789 2.965 3.961 2.091-2.514 3.611 4.342h-13.001z" className="qubely-svg-fill" fill-rule="nonzero"/></svg>
                                             </Tooltip>
                                         }
