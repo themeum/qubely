@@ -263,3 +263,15 @@ export const cssMargin = (v) => {
     }
 
 }
+
+// CSS cssRowReverse
+export const cssRowReverse = (v) => {
+    let data = { md: [], sm: [], xs: [] }
+    if (v.values.md) { data.md.push(`flex-direction:row-reverse`) }
+    if (v.values.sm) { data.sm.push(`flex-direction:column-reverse`) }
+    if (v.values.xs) { data.xs.push(`flex-direction:column-reverse`) }
+
+
+
+    return { md: data.md, sm: data.sm, xs: data.xs };
+}

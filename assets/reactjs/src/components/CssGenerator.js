@@ -1,4 +1,4 @@
-import { cssSize, cssBorderRadius, cssGradient, cssBorder, cssBoxShadow, cssTypography, cssDimension, cssBackground, cssShape, cssColor, cssSpacer, cssPadding, cssMargin } from './CssHelper'
+import { cssSize, cssBorderRadius, cssGradient, cssBorder, cssBoxShadow, cssTypography, cssDimension, cssBackground, cssShape, cssColor, cssSpacer, cssPadding, cssMargin, cssRowReverse } from './CssHelper'
 
 // Replace Value
 const replaceData = (selector, key, value) => {
@@ -88,6 +88,8 @@ const objectField = (data) => {
         return { data: cssPadding(data), action: 'append' }; //padding
     } else if (data.openMargin) {
         return { data: cssMargin(data), action: 'append' }; //margin
+    } else if (data.openRowReverse) {
+        return { data: cssRowReverse(data), action: 'append' }; //column reverse
     } else {
         return { data: '', action: 'append' };
     }
@@ -150,6 +152,7 @@ export const CssGenerator = (settings, blockName, blockID, isInline = false) => 
                     if (typeof settings[key] == 'object') {
                         let device = false;
                         let dimension = '';
+
                         if (settings[key].md) { // Desktop
                             device = true
                             dimension = typeof settings[key].md == 'object' ? objectField(settings[key].md).data : settings[key].md + (settings[key].unit || '')
@@ -165,6 +168,7 @@ export const CssGenerator = (settings, blockName, blockID, isInline = false) => 
                             dimension = typeof settings[key].xs == 'object' ? objectField(settings[key].xs).data : settings[key].xs + (settings[key].unit || '')
                             xs = xs.concat(singleField(cssSelecor, blockID, key, dimension))
                         }
+
                         if (!device) { // Object Field Type Only
                             const objectCss = objectField(settings[key])
                             const repWarp = replaceWarp(cssSelecor, blockID)
