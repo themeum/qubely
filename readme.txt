@@ -209,7 +209,7 @@ Found a bug? Please let us know by posting on the support section of this plugin
 = 1.0.6 - 01 August, 2019 =
 
 New: Block Wrapper - Image background option  
-Update: Infobox Block - Settings UI  
+Update: Infobox Block - Settings UI improved  
 Update: Media field improvement  
 Fix: Row Block - Column reverse setting  
 
