@@ -35,7 +35,7 @@ registerBlockType('qubely/content-timeline', {
 				{ selector: '{{QUBELY}} .qubely-block-content-timeline' }
 			]
 		},
-		timelineItems: { type: 'string', default: 5 },
+		timelineItems: { type: 'number', default: 5 },
 		showGlobalSettings: { type: 'boolean', default: true }, // Global Settings
 		showContextMenu: { type: 'boolean', default: true },
 	},
