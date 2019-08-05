@@ -57,8 +57,6 @@ class Edit extends Component {
 
             image,
             imgAlt,
-            imageSize,
-            imageWidth,
             imageBorderRadius,
             imageOpacity,
             imageBoxShadow,
@@ -103,18 +101,6 @@ class Edit extends Component {
                         <Separator />
                         <Media label={__('Image')} multiple={false} type={['image']} panel={true} value={image} onChange={val => setAttributes({ image: val })} />
                         <TextControl label={__('Alt Text')} value={imgAlt} onChange={val => setAttributes({ imgAlt: val })} />
-                        <RadioAdvanced label={__('Image Size')} value={imageSize} onChange={(value) => setAttributes({ imageSize: value })}
-                            options={[
-                                { label: 'Auto', value: 'auto', title: 'Auto' },
-                                { label: 'S', value: 'small', title: 'Small' },
-                                { label: 'M', value: 'medium', title: 'Medium' },
-                                { label: 'L', value: 'large', title: 'Large' },
-                                { icon: 'fas fa-cog', value: 'custom', title: 'Custom' }
-                            ]}
-                        />
-                        {imageSize == 'custom' &&
-                            <Range label={__('Image Width')} value={imageWidth} onChange={val => setAttributes({ imageWidth: val })} min={12} max={300} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
-                        }
                         <Range label={__('Opacity')} value={imageOpacity} onChange={val => setAttributes({ imageOpacity: parseFloat(val) })} min={0.1} max={1} step={.1} />
                         <BorderRadius label={__('Radius')} value={imageBorderRadius} onChange={val => setAttributes({ imageBorderRadius: val })} min={0} max={100} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
                         <Separator />
@@ -228,7 +214,7 @@ class Edit extends Component {
 
                 <div className={`qubely-block-${uniqueId}`}>
                     <div className={`qubely-block-image qubely-image-layout-${layout}`}>
-                        <div className={`qubely-image-media qubely-image-size-${imageSize}${(layout == 'blurb' && animateOnHover == 1) ? ' qubely-hover-animation-on' : ''}${(layout == 'blurb' && animateOnHover == 1) ? ' qubely-hover-animation-type-' + contentAnimation : ''} qubely-vertical-alignment-${contentVerticalAlign} qubely-horizontal-alignment-${contentAlignment}${enableFrame == 1 ? ((animateOnHover == 1 && frameAnimateOnHover == 1) ? ' qubely-has-frame qubely-frame-animate-on-hover' : ' qubely-has-frame') : ''}`} onClick={() => this.handlePanelOpenings('Media')}>
+                        <div className={`qubely-image-media${(layout == 'blurb' && animateOnHover == 1) ? ' qubely-hover-animation-on' : ''}${(layout == 'blurb' && animateOnHover == 1) ? ' qubely-hover-animation-type-' + contentAnimation : ''} qubely-vertical-alignment-${contentVerticalAlign} qubely-horizontal-alignment-${contentAlignment}${enableFrame == 1 ? ((animateOnHover == 1 && frameAnimateOnHover == 1) ? ' qubely-has-frame qubely-frame-animate-on-hover' : ' qubely-has-frame') : ''}`} onClick={() => this.handlePanelOpenings('Media')}>
                             <figure>
                                 <div className="qubely-image-container">
 

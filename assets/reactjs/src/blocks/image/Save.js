@@ -4,14 +4,14 @@ const { RichText } = wp.editor
 class Save extends Component {
 
     render() {
-        const { attributes: { uniqueId, layout, image, imgAlt, imageSize, animateOnHover, titleVisibleOnHover, subTitleVisibleOnHover, title, titleLevel, subTitle, enableSubTitle, imageCaption, enableCaption, contentAnimation, contentVerticalAlign, contentAlignment, enableFrame, frameAnimateOnHover } } = this.props
+        const { attributes: { uniqueId, layout, image, imgAlt, animateOnHover, titleVisibleOnHover, subTitleVisibleOnHover, title, titleLevel, subTitle, enableSubTitle, imageCaption, enableCaption, contentAnimation, contentVerticalAlign, contentAlignment, enableFrame, frameAnimateOnHover } } = this.props
 
         const titleTagName = 'h' + titleLevel;
 
         return (
             <div className={`qubely-block-${uniqueId}`}>
                 <div className={`qubely-block-image qubely-image-layout-${layout}`}>
-                    <div className={`qubely-image-media qubely-image-size-${imageSize}${ (layout == 'blurb' && animateOnHover == 1) ? ' qubely-hover-animation-on' : '' }${ (layout == 'blurb' && animateOnHover == 1) ? ' qubely-hover-animation-type-' + contentAnimation : '' } qubely-vertical-alignment-${contentVerticalAlign} qubely-horizontal-alignment-${contentAlignment}${enableFrame == 1 ? ( (animateOnHover == 1 && frameAnimateOnHover == 1) ? ' qubely-has-frame qubely-frame-animate-on-hover' : ' qubely-has-frame' ) : ''}`}>
+                    <div className={`qubely-image-media${ (layout == 'blurb' && animateOnHover == 1) ? ' qubely-hover-animation-on' : '' }${ (layout == 'blurb' && animateOnHover == 1) ? ' qubely-hover-animation-type-' + contentAnimation : '' } qubely-vertical-alignment-${contentVerticalAlign} qubely-horizontal-alignment-${contentAlignment}${enableFrame == 1 ? ( (animateOnHover == 1 && frameAnimateOnHover == 1) ? ' qubely-has-frame qubely-frame-animate-on-hover' : ' qubely-has-frame' ) : ''}`}>
                         <figure>
                             <div className="qubely-image-container">
                                 

@@ -44,11 +44,6 @@ registerBlockType('qubely/image', {
             default: {}
         },
 
-        imageSize: {
-            type: 'string',
-            default: 'auto'
-        },
-
         imageOpacity: {
             type: 'number',
             default: 1,
@@ -162,7 +157,7 @@ registerBlockType('qubely/image', {
         },
         subTitle: {
             type: 'string',
-            default: 'Image Block Sub Title'
+            default: 'Qubely blocks is added to the Gutenberg editor as soon as you install the plugin.'
         },
         subTitleTypography: {
             type: 'object',
@@ -264,7 +259,8 @@ registerBlockType('qubely/image', {
                     color2: 'rgba(96, 10, 255, 0.85)',
                     direction: 45,
                     start: 0,
-                    stop: 100
+                    stop: 100,
+                    type: 'linear'
                 }
             },
             style: [

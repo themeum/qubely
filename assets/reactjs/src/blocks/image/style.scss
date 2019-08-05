@@ -45,9 +45,11 @@
 		}
 	}
 
-	.qubely-image-size-small {
-		.qubely-image-image {
-			width: 300px;
+	.qubely-image-media {
+		&:hover {
+			.qubely-image-container:after {
+				opacity: 1;
+			}
 		}
 	}
 
