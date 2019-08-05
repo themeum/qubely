@@ -43,7 +43,10 @@ registerBlockType('qubely/image', {
             type: 'object',
             default: {}
         },
-
+        imgAlt: {
+            type: 'string',
+            default: ''
+        },
         imageSize: {
             type: 'string',
             default: 'auto'
@@ -100,7 +103,14 @@ registerBlockType('qubely/image', {
                 }
             },
             style: [{
-                selector: '{{QUBELY}} .qubely-list .qubely-list-li'
+                selector: '{{QUBELY}} .qubely-image-caption'
+            }]
+        },
+        captionColor: {
+            type: 'string',
+            default: '#566372',
+            style: [{
+                selector: '{{QUBELY}} .qubely-image-caption {color: {{captionColor}};}'
             }]
         },
         captionSpacing: {
