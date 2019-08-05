@@ -192,13 +192,13 @@ class Edit extends Component {
                                     onChange={(value) => setAttributes({ frameMargin: value })}
                                     unit={['px', 'em', '%']}
                                     max={150}
-                                    min={0}
+                                    min={-150}
                                     responsive
                                     device={device}
                                     onDeviceChange={value => this.setState({ device: value })} />
 
                                 <Toggle label={__('Send to Back')} value={frameSendToBack} onChange={val => setAttributes({ frameSendToBack: val })} />
-                                <Toggle label={__('Animate on Hover')} value={frameAnimateOnHover} onChange={val => setAttributes({ frameAnimateOnHover: val })} />
+                                <Toggle label={__('Visible on Hover')} value={frameAnimateOnHover} onChange={val => setAttributes({ frameAnimateOnHover: val })} />
                             </Fragment>
                         }
                     </PanelBody>
