@@ -46,11 +46,7 @@
 	}
 
 	.qubely-image-media {
-		&:hover {
-			.qubely-image-container:after {
-				opacity: 1;
-			}
-		}
+		display: inline-block;
 	}
 
 	.qubely-has-frame {
@@ -80,9 +76,16 @@
 	}
 
 	.qubely-hover-animation-on {
+
 		.qubely-image-title {
 			margin: 0;
 			line-height: 1;
+		}
+		
+		&:hover {
+			.qubely-image-container:after {
+				opacity: 1;
+			}
 		}
 
 		// Animation Zoom Out

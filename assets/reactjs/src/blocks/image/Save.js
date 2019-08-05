@@ -40,7 +40,7 @@ class Save extends Component {
                                 }
                             </div>
 
-                            {enableCaption &&
+                            { (layout == 'simple' && enableCaption == 1) &&
                                 <RichText.Content
                                     tagName='figcaption'
                                     className="qubely-image-caption"

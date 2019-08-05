@@ -100,6 +100,10 @@ registerBlockType('qubely/image', {
                 }
             },
             style: [{
+                condition: [
+                    { key: 'layout', relation: '==', value: 'simple' },
+                    { key: 'enableCaption', relation: '==', value: 1 }
+                ],
                 selector: '{{QUBELY}} .qubely-image-caption'
             }]
         },
@@ -107,23 +111,22 @@ registerBlockType('qubely/image', {
             type: 'string',
             default: '#566372',
             style: [{
+                condition: [
+                    { key: 'layout', relation: '==', value: 'simple' },
+                    { key: 'enableCaption', relation: '==', value: 1 }
+                ],
                 selector: '{{QUBELY}} .qubely-image-caption {color: {{captionColor}};}'
             }]
         },
+
         captionSpacing: {
             type: 'object',
             default: {
-                spaceTop: {
-                    md: '10',
-                    unit: "px"
-                },
-                spaceBottom: {
-                    md: '10',
-                    unit: "px"
-                }
+                md: 20,
+                unit: 'px'
             },
             style: [{
-                selector: '{{QUBELY}}'
+                selector: '{{QUBELY}} .qubely-image-caption {margin-top: {{captionSpacing}};}'
             }]
         },
 
@@ -252,8 +255,7 @@ registerBlockType('qubely/image', {
                 {
                     condition: [
                         { key: 'layout', relation: '==', value: 'blurb' },
-                        { key: 'enableOverlay', relation: '==', value: true },
-                        { key: 'animateOnHover', relation: '==', value: true }
+                        { key: 'enableOverlay', relation: '==', value: true }
                     ],
                     selector: '{{QUBELY}} .qubely-image-container:before'
                 }
@@ -280,7 +282,7 @@ registerBlockType('qubely/image', {
                     condition: [
                         { key: 'layout', relation: '==', value: 'blurb' },
                         { key: 'enableOverlay', relation: '==', value: true },
-                        { key: 'animateOnHover', relation: '==', value: true }
+                        { key: 'animateOnHover', relation: '==', value: true },
                     ],
                     selector: '{{QUBELY}} .qubely-image-container:after'
                 }

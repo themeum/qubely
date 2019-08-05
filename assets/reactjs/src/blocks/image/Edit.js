@@ -164,41 +164,45 @@ class Edit extends Component {
                                     </Fragment>
                                 }
                             </PanelBody>
+                            
+                            <PanelBody title={__('Frame')} initialOpen={false}>
+                                <Toggle label={__('Enable')} value={enableFrame} onChange={val => setAttributes({ enableFrame: val })} />
+                                {enableFrame == 1 &&
+                                    <Fragment>
+                                        <Border label={__('Border')} value={frameBorder} onChange={val => setAttributes({ frameBorder: val })} responsive unit={['px', 'em', '%']} device={device} onDeviceChange={value => this.setState({ device: value })} />
+                                        <Margin
+                                            label={__('Margin')}
+                                            value={frameMargin}
+                                            onChange={(value) => setAttributes({ frameMargin: value })}
+                                            unit={['px', 'em', '%']}
+                                            max={150}
+                                            min={-150}
+                                            responsive
+                                            device={device}
+                                            onDeviceChange={value => this.setState({ device: value })} />
+
+                                        <Toggle label={__('Send to Back')} value={frameSendToBack} onChange={val => setAttributes({ frameSendToBack: val })} />
+                                        {animateOnHover == 1 &&
+                                            <Toggle label={__('Visible on Hover')} value={frameAnimateOnHover} onChange={val => setAttributes({ frameAnimateOnHover: val })} />
+                                        }
+                                    </Fragment>
+                                }
+                            </PanelBody>
                         </Fragment>
                     }
 
-                    <PanelBody title={__('Frame')} initialOpen={false}>
-                        <Toggle label={__('Enable')} value={enableFrame} onChange={val => setAttributes({ enableFrame: val })} />
-                        {enableFrame == 1 &&
-                            <Fragment>
-                                <Border label={__('Border')} value={frameBorder} onChange={val => setAttributes({ frameBorder: val })} responsive unit={['px', 'em', '%']} device={device} onDeviceChange={value => this.setState({ device: value })} />
-                                <Margin
-                                    label={__('Margin')}
-                                    value={frameMargin}
-                                    onChange={(value) => setAttributes({ frameMargin: value })}
-                                    unit={['px', 'em', '%']}
-                                    max={150}
-                                    min={-150}
-                                    responsive
-                                    device={device}
-                                    onDeviceChange={value => this.setState({ device: value })} />
-
-                                <Toggle label={__('Send to Back')} value={frameSendToBack} onChange={val => setAttributes({ frameSendToBack: val })} />
-                                <Toggle label={__('Visible on Hover')} value={frameAnimateOnHover} onChange={val => setAttributes({ frameAnimateOnHover: val })} />
-                            </Fragment>
-                        }
-                    </PanelBody>
-
-                    <PanelBody title={__('Caption')} initialOpen={false}>
-                        <Toggle label={__('Enable')} value={enableCaption} onChange={val => setAttributes({ enableCaption: val })} />
-                        {enableCaption == 1 &&
-                            <Fragment>
-                                <Typography label={__('Typography')} value={captionTypography} onChange={val => setAttributes({ captionTypography: val })} device={device} onDeviceChange={value => this.setState({ device: value })} />
-                                <Color label={__('Color')} value={captionColor} onChange={val => setAttributes({ captionColor: val })} />
-                                <Range label={__('Spacing')} value={captionSpacing} onChange={val => setAttributes({ captionSpacing: val })} min={0} max={100} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
-                            </Fragment>
-                        }
-                    </PanelBody>
+                    {layout == 'simple' &&
+                        <PanelBody title={__('Caption')} initialOpen={false}>
+                            <Toggle label={__('Enable')} value={enableCaption} onChange={val => setAttributes({ enableCaption: val })} />
+                            {enableCaption == 1 &&
+                                <Fragment>
+                                    <Typography label={__('Typography')} value={captionTypography} onChange={val => setAttributes({ captionTypography: val })} device={device} onDeviceChange={value => this.setState({ device: value })} />
+                                    <Color label={__('Color')} value={captionColor} onChange={val => setAttributes({ captionColor: val })} />
+                                    <Range label={__('Spacing')} value={captionSpacing} onChange={val => setAttributes({ captionSpacing: val })} min={0} max={100} responsive unit={['px', 'em', '%']} device={device} onDeviceChange={value => this.setState({ device: value })} />
+                                </Fragment>
+                            }
+                        </PanelBody>
+                    }
 
                 </InspectorControls>
 
@@ -251,7 +255,7 @@ class Edit extends Component {
                                     }
                                 </div>
 
-                                {enableCaption &&
+                                { (layout == 'simple' && enableCaption == 1) &&
                                     <RichText
                                         key="editable"
                                         tagName='figcaption'
