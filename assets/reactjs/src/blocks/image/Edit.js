@@ -25,7 +25,7 @@ class Edit extends Component {
             setAttributes({ uniqueId: _client });
         }
     }
-    
+
     handlePanelOpenings = (panelName) => {
         this.setState({ ...this.state, openPanelSetting: panelName })
     }
@@ -54,7 +54,7 @@ class Edit extends Component {
             contentPadding,
             contentVerticalAlign,
             contentAlignment,
-            
+
             image,
             imgAlt,
             imageSize,
@@ -138,7 +138,7 @@ class Edit extends Component {
                             <Alignment label={__('Horizontal Alignment')} value={contentAlignment} alignmentType="content" onChange={val => setAttributes({ contentAlignment: val })} alignmentType="content" disableJustify />
                         </PanelBody>
                     }
-                    
+
                     {layout == 'blurb' &&
                         <Fragment>
                             <PanelBody title={__('Title')} initialOpen={false}>
@@ -153,7 +153,7 @@ class Edit extends Component {
                                 <Toggle label={__('Enable')} value={enableSubTitle} onChange={val => setAttributes({ enableSubTitle: val })} />
                                 {enableSubTitle == 1 &&
                                     <Fragment>
-                                        { (animateOnHover == 1 && titleVisibleOnHover != 1) &&
+                                        {(animateOnHover == 1 && titleVisibleOnHover != 1) &&
                                             <Toggle label={__('Visible on Hover')} value={subTitleVisibleOnHover} onChange={val => setAttributes({ subTitleVisibleOnHover: val })} />
                                         }
                                         <Color label={__('Color')} value={subTitleColor} onChange={val => setAttributes({ subTitleColor: val })} />
@@ -186,7 +186,17 @@ class Edit extends Component {
                         {enableFrame == 1 &&
                             <Fragment>
                                 <Border label={__('Border')} value={frameBorder} onChange={val => setAttributes({ frameBorder: val })} responsive unit={['px', 'em', '%']} device={device} onDeviceChange={value => this.setState({ device: value })} />
-                                <Margin label={__('Margin')} value={frameMargin} onChange={val => setAttributes({ frameMargin: val })} responsive unit={['px', 'em', '%']} device={device} onDeviceChange={value => this.setState({ device: value })} />
+                                <Margin
+                                    label={__('Margin')}
+                                    value={frameMargin}
+                                    onChange={(value) => setAttributes({ frameMargin: value })}
+                                    unit={['px', 'em', '%']}
+                                    max={150}
+                                    min={0}
+                                    responsive
+                                    device={device}
+                                    onDeviceChange={value => this.setState({ device: value })} />
+
                                 <Toggle label={__('Send to Back')} value={frameSendToBack} onChange={val => setAttributes({ frameSendToBack: val })} />
                                 <Toggle label={__('Animate on Hover')} value={frameAnimateOnHover} onChange={val => setAttributes({ frameAnimateOnHover: val })} />
                             </Fragment>
@@ -218,10 +228,10 @@ class Edit extends Component {
 
                 <div className={`qubely-block-${uniqueId}`}>
                     <div className={`qubely-block-image qubely-image-layout-${layout}`}>
-                        <div className={`qubely-image-media qubely-image-size-${imageSize}${ (layout == 'blurb' && animateOnHover == 1) ? ' qubely-hover-animation-on' : '' }${ (layout == 'blurb' && animateOnHover == 1) ? ' qubely-hover-animation-type-' + contentAnimation : '' } qubely-vertical-alignment-${contentVerticalAlign} qubely-horizontal-alignment-${contentAlignment}${enableFrame == 1 ? ( (animateOnHover == 1 && frameAnimateOnHover == 1) ? ' qubely-has-frame qubely-frame-animate-on-hover' : ' qubely-has-frame' ) : ''}`} onClick={() => this.handlePanelOpenings('Media')}>
+                        <div className={`qubely-image-media qubely-image-size-${imageSize}${(layout == 'blurb' && animateOnHover == 1) ? ' qubely-hover-animation-on' : ''}${(layout == 'blurb' && animateOnHover == 1) ? ' qubely-hover-animation-type-' + contentAnimation : ''} qubely-vertical-alignment-${contentVerticalAlign} qubely-horizontal-alignment-${contentAlignment}${enableFrame == 1 ? ((animateOnHover == 1 && frameAnimateOnHover == 1) ? ' qubely-has-frame qubely-frame-animate-on-hover' : ' qubely-has-frame') : ''}`} onClick={() => this.handlePanelOpenings('Media')}>
                             <figure>
                                 <div className="qubely-image-container">
-                                    
+
                                     {image.url != undefined ?
                                         <img className="qubely-image-image" src={image.url} alt={imgAlt && imgAlt} />
                                         :
@@ -233,21 +243,21 @@ class Edit extends Component {
                                             <div className="qubely-image-content-inner">
                                                 <RichText
                                                     identifier="content"
-                                                    className={`qubely-image-title${(animateOnHover == 1 && subTitleVisibleOnHover == 1 && titleVisibleOnHover != 1) ? ' qubely-visible-on-hover-enabled' : ''}${ (animateOnHover == 1 && titleVisibleOnHover == 1) ? ' qubely-visible-on-hover' : ''}`}
+                                                    className={`qubely-image-title${(animateOnHover == 1 && subTitleVisibleOnHover == 1 && titleVisibleOnHover != 1) ? ' qubely-visible-on-hover-enabled' : ''}${(animateOnHover == 1 && titleVisibleOnHover == 1) ? ' qubely-visible-on-hover' : ''}`}
                                                     tagName={titleTagName}
-                                                    value={ title }
-                                                    onChange={ ( value ) => setAttributes( { title: value } ) }
-                                                    placeholder={ __( 'Add Title…' ) }
+                                                    value={title}
+                                                    onChange={(value) => setAttributes({ title: value })}
+                                                    placeholder={__('Add Title…')}
                                                 />
 
                                                 {enableSubTitle == 1 &&
                                                     <RichText
                                                         identifier="content"
-                                                        className={`qubely-image-sub-title${(animateOnHover == 1 && subTitleVisibleOnHover == 1 && titleVisibleOnHover != 1) ? ' qubely-visible-on-hover-enabled' : ''}${ titleVisibleOnHover == 1 ? ' qubely-visible-on-hover' : (animateOnHover == 1 && subTitleVisibleOnHover == 1) ? ' qubely-visible-on-hover' : '' }`}
+                                                        className={`qubely-image-sub-title${(animateOnHover == 1 && subTitleVisibleOnHover == 1 && titleVisibleOnHover != 1) ? ' qubely-visible-on-hover-enabled' : ''}${titleVisibleOnHover == 1 ? ' qubely-visible-on-hover' : (animateOnHover == 1 && subTitleVisibleOnHover == 1) ? ' qubely-visible-on-hover' : ''}`}
                                                         tagName='div'
-                                                        value={ subTitle }
-                                                        onChange={ ( value ) => setAttributes( { subTitle: value } ) }
-                                                        placeholder={ __( 'Add Sub Title…' ) }
+                                                        value={subTitle}
+                                                        onChange={(value) => setAttributes({ subTitle: value })}
+                                                        placeholder={__('Add Sub Title…')}
                                                     />
                                                 }
                                             </div>
@@ -257,7 +267,7 @@ class Edit extends Component {
 
                                 {enableCaption &&
                                     <RichText
-                                        key="editable"  
+                                        key="editable"
                                         tagName='figcaption'
                                         className="qubely-image-caption"
                                         keepPlaceholderOnFocus

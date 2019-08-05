@@ -12,7 +12,7 @@ registerBlockType('qubely/image', {
     title: __('Image'),
     description: __('Include attractive icon lists with Qubely Icon List.'),
     category: 'qubely',
-    icon: <img src = {qubely_admin.plugin + 'assets/img/blocks/block-icon-list.svg'} alt = { __('Image') } />,
+    icon: <img src={qubely_admin.plugin + 'assets/img/blocks/block-icon-list.svg'} alt={__('Image')} />,
     keywords: [__('image', 'advanced image', 'fancy image'), 'image overlay'],
     attributes: {
         uniqueId: {
@@ -33,7 +33,7 @@ registerBlockType('qubely/image', {
             type: 'boolean',
             default: true
         },
-        
+
         layout: {
             type: 'string',
             default: 'simple'
@@ -149,7 +149,7 @@ registerBlockType('qubely/image', {
                 selector: '{{QUBELY}} .qubely-image-title {color: {{titleColor}};}'
             }]
         },
-        
+
         titleVisibleOnHover: {
             type: 'boolean',
             default: false,
@@ -174,7 +174,7 @@ registerBlockType('qubely/image', {
                 }
             },
             style: [{
-                condition:[
+                condition: [
                     { key: 'layout', relation: '==', value: 'blurb' },
                     { key: 'enableSubTitle', relation: '==', value: 1 }
                 ],
@@ -185,7 +185,7 @@ registerBlockType('qubely/image', {
             type: 'string',
             default: '#FFF',
             style: [{
-                condition:[
+                condition: [
                     { key: 'layout', relation: '==', value: 'blurb' },
                     { key: 'enableSubTitle', relation: '==', value: 1 }
                 ],
@@ -199,7 +199,7 @@ registerBlockType('qubely/image', {
                 unit: 'px'
             },
             style: [{
-                condition:[
+                condition: [
                     { key: 'layout', relation: '==', value: 'blurb' },
                     { key: 'enableSubTitle', relation: '==', value: 1 }
                 ],
@@ -237,7 +237,8 @@ registerBlockType('qubely/image', {
                     color2: 'rgba(96, 10, 255, 0.7)',
                     direction: 45,
                     start: 0,
-                    stop: 100
+                    stop: 100,
+                    type: 'linear'
                 },
             },
             style: [
@@ -251,7 +252,7 @@ registerBlockType('qubely/image', {
                 }
             ]
         },
-        
+
         overlayHoverBg: {
             type: 'object',
             default: {
@@ -386,9 +387,7 @@ registerBlockType('qubely/image', {
             default: {
                 openMargin: 1,
                 marginType: 'global',
-                global: {
-                    md: 30,
-                },
+                global: { md: 30 },
                 unit: 'px'
             },
             style: [
@@ -401,7 +400,6 @@ registerBlockType('qubely/image', {
                 }
             ]
         },
-
         frameBorder: {
             type: 'object',
             default: {
