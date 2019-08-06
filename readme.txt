@@ -4,7 +4,7 @@ Donate link: https://www.themeum.com
 Tags: Blocks, Gutenberg editor, Block editor, Block, Gutenberg, Gutenberg Blocks
 Requires at least: 5.0
 Tested up to: 5.2
-Stable tag: 1.0.6
+Stable tag: 1.0.7
 Requires PHP: 5.4.0
 License: GPL-2.0+
 License URI: http://www.gnu.org/licenses/gpl-2.0.txt
@@ -63,6 +63,7 @@ Qubely adds numerous custom Gutenberg blocks to the Gutenberg block editor and t
 * [Pricing](https://qubely.io/block/pricing/)
 * Block Wrapper
 * [Team](https://qubely.io/block/team/)
+* Image
 * More advanced Gutenberg blocks coming
 
 
@@ -111,6 +112,8 @@ Qubely adds numerous custom Gutenberg blocks to the Gutenberg block editor and t
 - **Block Wrapper:** Block Wrapper wraps up the block with background of your favorite color. You can set up a gradient background by defining Gradient Angle and Type in Qubely Gutenberg block editor. Apply border from the predefined styles, give box-shadow, define border radius, have hover effects and animate the entire wrapped item with preset effects.
 
 - **Team:** Qubely’s Team block lets you enlist your team members one by one with their details like names, designations, social links, images, and more. You can choose the team member’s profile design from 3 preset layouts. Decide whether to show designation and description with the member profile. Also, apply animation effects on each of the profiles individually.
+
+- **Image:** Insert and beautify images with Qubely Image Block. There are 2 different premade layouts (Simple and Blurb) with plenty of customization options. You can define image opacity, alignment, border-radius, and box-shadow. Animate images, set up typography, enable overlay, and many more.
 
  = SOME EXCITING QUBELY FEATURES IN DETAILS =
 
@@ -205,6 +208,12 @@ Found a bug? Please let us know by posting on the support section of this plugin
 
 
 == Changelog ==
+
+= 1.0.7 - 06 August, 2019 =
+
+New: Image Block  
+Update: Testimonial Block - Ratings settings UI improved  
+Fix: Qubely Options page issue  
 
 = 1.0.6 - 01 August, 2019 =
 

@@ -22,7 +22,7 @@ if ( ! class_exists('QUBELY_Options')){
 				esc_html__( 'Qubely Options', 'qubely' ),
 				'manage_options',
 				'qubely-settings',
-				array( self::class, 'create_admin_page' ),
+				array( $this, 'create_admin_page' ),
 				QUBELY_DIR_URL.'assets/img/qubely-logo-white.svg'
 			);
 		}
@@ -55,7 +55,7 @@ if ( ! class_exists('QUBELY_Options')){
 		 *
 		 * @since 1.0.0
 		 */
-		public static function create_admin_page() { ?>
+		public function create_admin_page() { ?>
             <div class="wrap">
                 <div class="qubely-options-section qubely-mt-20 qubely-mb-30" style="background-image: url(<?php echo QUBELY_DIR_URL.'assets/img/options-logo.png' ?>)">
                     <div class="qubely-options-section-header">

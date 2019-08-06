@@ -3,7 +3,7 @@ const { RichText } = wp.editor
 import { animationAttr } from '../../components/HelperFunction'
 class Save extends Component {
     render() {
-        const { uniqueId, layout, animation, message, name, designation, showAvatar, avatar, avatarAlt, avatarLayout, quoteIcon, ratings } = this.props.attributes
+        const { uniqueId, layout, animation, message, name, designation, showAvatar, avatar, avatarAlt, avatarLayout, quoteIcon, showRatings, ratings } = this.props.attributes
 
         const testimonialTitle = <RichText.Content tagName="span" value={name} />
         const testimonialDesignation = <RichText.Content tagName="span" value={designation} />
@@ -11,7 +11,7 @@ class Save extends Component {
 
         const authorInfo = <Fragment>
             <div className={`qubely-testimonial-author`}>
-            <div className={showAvatar ? `qubely-testimonial-avatar-layout-${avatarLayout}` : ``}>
+                <div className={showAvatar ? `qubely-testimonial-avatar-layout-${avatarLayout}` : ``}>
                     {showAvatar && (avatarLayout == 'left' || avatarLayout == 'top') &&
                         <Fragment>
                             {avatar.url != undefined ?
@@ -46,7 +46,7 @@ class Save extends Component {
 
                     {layout == 2 && authorInfo}
 
-                    {ratings > 0 && (layout == 2) &&
+                    {(showRatings && ratings > 0 && layout == 2) &&
                         <div className="qubely-testimonial-ratings" data-qubelyrating={ratings}></div>
                     }
 
@@ -60,7 +60,7 @@ class Save extends Component {
                         {testimonialMessage}
                     </div>
 
-                    {ratings > 0 && (layout == 1) &&
+                    {(showRatings && ratings > 0 && layout == 1) &&
                         <div className="qubely-testimonial-ratings" data-qubelyrating={ratings}></div>
                     }
 

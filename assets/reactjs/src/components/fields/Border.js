@@ -114,7 +114,7 @@ class Border extends Component {
                 {value.type &&
                     <Fragment>
                         <Color
-                            label={__('Border Color')}
+                            label={this.props.label ? this.props.label + __(' Color') : __('Border Color')}
                             value={value.color}
                             onChange={val => this.setSettings('color', val)}
                         />
@@ -130,7 +130,7 @@ class Border extends Component {
                         }
                         <div className="qubely-field qubely-field-border qubely-d-flex qubely-align-center">
                             <div>
-                                {__('Border Width')}
+                                {this.props.label ? this.props.label + __(' Width') : __('Border Width')}
                             </div>
                             {responsive && <Device device={responsiveDevice} commonResponsiveDevice={device} className="qubely-ml-10" onChange={val => { device ? onDeviceChange(val) : this.setState({ device: val }) }} />}
                             <div className="qubely-field-button-list qubely-ml-auto">
