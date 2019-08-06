@@ -12,7 +12,7 @@ registerBlockType('qubely/image', {
     title: __('Image'),
     description: __('Insert images and beautify them with Qubely Image Block.'),
     category: 'qubely',
-    icon: <img src={qubely_admin.plugin + 'assets/img/blocks/block-icon-list.svg'} alt={__('Image')} />,
+    icon: <img src={qubely_admin.plugin + 'assets/img/blocks/block-image.svg'} alt={__('Image')} />,
     keywords: [__('image', 'advanced image', 'fancy image'), 'image overlay'],
     attributes: {
         uniqueId: {
