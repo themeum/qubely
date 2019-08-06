@@ -1,10 +1,10 @@
-const { Component } = wp.element;
+const { Component, Fragment } = wp.element;
 const { RichText } = wp.editor
 
 class Save extends Component {
 
     render() {
-        const { attributes: { uniqueId, layout, image, imgAlt, animateOnHover, titleVisibleOnHover, subTitleVisibleOnHover, title, titleLevel, subTitle, enableSubTitle, imageCaption, enableCaption, contentAnimation, contentVerticalAlign, contentAlignment, enableFrame, frameAnimateOnHover } } = this.props
+        const { attributes: { uniqueId, layout, image, image2x, imgAlt, animateOnHover, titleVisibleOnHover, subTitleVisibleOnHover, title, titleLevel, subTitle, enableSubTitle, imageCaption, enableCaption, contentAnimation, contentVerticalAlign, contentAlignment, enableFrame, frameAnimateOnHover } } = this.props
 
         const titleTagName = 'h' + titleLevel;
 
@@ -16,7 +16,13 @@ class Save extends Component {
                             <div className="qubely-image-container">
                                 
                                 {image.url != undefined ?
-                                    <img className="qubely-image-image" src={image.url} alt={imgAlt && imgAlt} />
+                                    <Fragment>
+                                        { image2x.url != undefined ?
+                                            <img className="qubely-image-image" src={image.url} srcset={image.url + ' 1x, ' + image2x.url + ' 2x'} alt={imgAlt && imgAlt} />
+                                            :
+                                            <img className="qubely-image-image" src={image.url} alt={imgAlt && imgAlt} />
+                                        }
+                                    </Fragment>
                                     :
                                     <div className="qubely-image-image qubely-image-placeholder"><i className="far fa-image"></i></div>
                                 }

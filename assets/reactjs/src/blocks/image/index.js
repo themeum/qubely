@@ -44,6 +44,37 @@ registerBlockType('qubely/image', {
             default: {}
         },
         
+        image2x: {
+            type: 'object',
+            default: {}
+        },
+
+        imageSize: {
+            type: 'string',
+            default: 'auto',
+            style: [{
+                condition: [
+                    { key: 'imageSize', relation: '!=', value: 'auto' },
+                    { key: 'imageSize', relation: '!=', value: 'custom' },
+                ],
+                selector: '{{QUBELY}} .qubely-image-image {width: {{imageSize}};}'
+            }]
+        },
+
+        imageSizeCustom: {
+            type: 'object',
+            default: {
+                md: 300,
+                unit: 'px'
+            },
+            style: [{
+                condition: [
+                    { key: 'imageSize', relation: '==', value: 'custom' },
+                ],
+                selector: '{{QUBELY}} .qubely-image-image {width: {{imageSizeCustom}};}'
+            }]
+        },
+        
         imgAlt: {
             type: 'string',
             default: ''
@@ -67,7 +98,7 @@ registerBlockType('qubely/image', {
 
             },
             style: [{
-                selector: '{{QUBELY}} .qubely-image-container, {{QUBELY}} .qubely-has-frame figure::after'
+                selector: '{{QUBELY}} .qubely-image-container'
             }]
         },
 
@@ -76,6 +107,14 @@ registerBlockType('qubely/image', {
             default: {},
             style: [{
                 selector: '{{QUBELY}} .qubely-image-container'
+            }]
+        },
+        
+        imageBoxShadowHover: {
+            type: 'object',
+            default: {},
+            style: [{
+                selector: '{{QUBELY}} .qubely-image-media:hover .qubely-image-container'
             }]
         },
 
@@ -220,14 +259,6 @@ registerBlockType('qubely/image', {
         subTitleVisibleOnHover: {
             type: 'boolean',
             default: false,
-        },
-
-        borderColorHover: {
-            type: 'string',
-            default: '',
-            style: [{
-                selector: '{{QUBELY}} .qubely-list .qubely-list-li:hover {border-bottom-color: {{borderColorHover}};}'
-            }]
         },
 
         // Overlay
@@ -430,6 +461,24 @@ registerBlockType('qubely/image', {
                     selector: '{{QUBELY}} .qubely-has-frame figure:after'
                 }
             ]
+        },
+
+        frameBorderRadius: {
+            type: 'object',
+            default: {
+                openBorderRadius: 0,
+                radiusType: 'global',
+                global: {},
+                unit: 'px',
+
+            },
+            style: [{
+                condition: [
+                    { key: 'layout', relation: '==', value: 'blurb' },
+                    { key: 'enableFrame', relation: '==', value: true }
+                ],
+                selector: '{{QUBELY}} .qubely-has-frame figure::after'
+            }]
         },
 
         frameSendToBack: {

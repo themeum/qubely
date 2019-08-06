@@ -2,7 +2,7 @@ const { __ } = wp.i18n
 const { Fragment, Component } = wp.element;
 const { PanelBody, TextControl, Toolbar } = wp.components
 const { RichText, InspectorControls, BlockControls } = wp.editor
-import { Media, Range, BoxShadow, RadioAdvanced, Typography, Toggle, Styles, Alignment, ColorAdvanced, Color, Headings, Border, BorderRadius, Padding, Separator, Select, Margin } from "../../components/FieldRender"
+import { Media, Range, BoxShadow, Tabs, Tab, RadioAdvanced, Typography, Toggle, Styles, Alignment, ColorAdvanced, Color, Headings, Border, BorderRadius, Padding, Separator, Select, Margin } from "../../components/FieldRender"
 import InlineToolbar from '../../components/fields/inline/InlineToolbar'
 import { CssGenerator } from '../../components/CssGenerator'
 import icons from '../../helpers/icons';
@@ -56,10 +56,14 @@ class Edit extends Component {
             contentAlignment,
 
             image,
+            image2x,
             imgAlt,
+            imageSize,
+            imageSizeCustom,
             imageBorderRadius,
             imageOpacity,
             imageBoxShadow,
+            imageBoxShadowHover,
 
             enableCaption,
             imageCaption,
@@ -77,6 +81,7 @@ class Edit extends Component {
             frameMargin,
             frameSendToBack,
             frameAnimateOnHover,
+            frameBorderRadius,
 
         } = this.props.attributes
 
@@ -94,44 +99,45 @@ class Edit extends Component {
                         <Styles value={layout} onChange={val => setAttributes({ layout: val })}
                             options={[
                                 { value: 'simple', svg: icons.image.simple, label: __('Simple') },
-                                { value: 'blurb', svg: icons.image.blurb, label: __('blurb') }
+                                { value: 'blurb', svg: icons.image.blurb, label: __('Blurb') }
                             ]}
                         />
                         <Alignment label={__('Alignment')} value={alignment} alignmentType="content" onChange={val => setAttributes({ alignment: val })} alignmentType="content" disableJustify responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
                         <Separator />
                         <Media label={__('Image')} multiple={false} type={['image']} panel={true} value={image} onChange={val => setAttributes({ image: val })} />
+                        <Media label={__('Retina Image (@2x)')} multiple={false} type={['image']} panel={true} value={image2x} onChange={val => setAttributes({ image2x: val })} />
                         <TextControl label={__('Alt Text')} value={imgAlt} onChange={val => setAttributes({ imgAlt: val })} />
+                        <RadioAdvanced label={__('Size')} value={imageSize} onChange={(value) => setAttributes({ imageSize: value })}
+                            options={[
+                                { label: __('Auto'), value: 'auto', title: __('Auto') },
+                                { label: __('S'), value: '300px', title: __('Small') },
+                                { label: __('M'), value: '600px', title: __('Medium') },
+                                { label: __('L'), value: '800px', title: __('Large') },
+                                { icon: 'fas fa-cog', value: 'custom', title: __('Custom') },
+                            ]}
+                        />
+                        {imageSize == 'custom' &&
+                            <Fragment>
+                                <Range label={__('Custom Width')} value={imageSizeCustom} onChange={val => setAttributes({ imageSizeCustom: val })} min={10} max={1920} responsive unit={['px', 'em', '%']} device={device} onDeviceChange={value => this.setState({ device: value })} />
+                                <Separator />
+                            </Fragment>
+                        }
                         <Range label={__('Opacity')} value={imageOpacity} onChange={val => setAttributes({ imageOpacity: parseFloat(val) })} min={0.1} max={1} step={.1} />
                         <BorderRadius label={__('Radius')} value={imageBorderRadius} onChange={val => setAttributes({ imageBorderRadius: val })} min={0} max={100} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
-                        <Separator />
-                        <BoxShadow label={__('Box-Shadow')} value={imageBoxShadow} onChange={val => setAttributes({ imageBoxShadow: val })} disableInset />
+                        <Tabs>
+                            <Tab tabTitle={__('Normal')}>
+                                <BoxShadow label={__('Box-Shadow')} value={imageBoxShadow} onChange={val => setAttributes({ imageBoxShadow: val })} disableInset />
+                            </Tab>
+                            <Tab tabTitle={__('Hover')}>
+                                <BoxShadow label={__('Box-Shadow Hover')} value={imageBoxShadowHover} onChange={val => setAttributes({ imageBoxShadowHover: val })} disableInset />
+                            </Tab>
+                        </Tabs>
                     </PanelBody>
-
-                    {layout == 'blurb' &&
-                        <PanelBody title={__('Content')} initialOpen={false}>
-                            <Toggle label={__('Animate on Hover')} value={animateOnHover} onChange={val => setAttributes({ animateOnHover: val })} />
-                            {animateOnHover == 1 &&
-                                <Select label={__('Animation')} options={[['none', __('No Animation')], ['slide-top', __('Slide From Top')], ['slide-right', __('Slide From Right')], ['slide-bottom', __('Slide From Bottom')], ['slide-left', __('Slide From Left')], ['zoom-in', __('Zoom In')], ['zoom-out', __('Zoom Out')], ['scale', __('Scale')]]} value={contentAnimation} onChange={val => setAttributes({ contentAnimation: val })} />
-                            }
-                            <Padding label={__('Padding')} value={contentPadding} onChange={val => setAttributes({ contentPadding: val })} min={0} max={200} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
-                            <RadioAdvanced label={__('Vertical Align')} value={contentVerticalAlign} onChange={(value) => setAttributes({ contentVerticalAlign: value })}
-                                options={[
-                                    { label: __('Top'), value: 'top', title: __('Top') },
-                                    { label: __('Middle'), value: 'center', title: __('Middle') },
-                                    { label: __('Bottom'), value: 'bottom', title: __('Bottom') },
-                                ]}
-                            />
-                            <Alignment label={__('Horizontal Alignment')} value={contentAlignment} alignmentType="content" onChange={val => setAttributes({ contentAlignment: val })} alignmentType="content" disableJustify />
-                        </PanelBody>
-                    }
 
                     {layout == 'blurb' &&
                         <Fragment>
                             <PanelBody title={__('Title')} initialOpen={false}>
                                 <Headings label={__('Title Tag')} selectedLevel={titleLevel} onChange={(value) => setAttributes({ titleLevel: value })} />
-                                {animateOnHover == 1 &&
-                                    <Toggle label={__('Visible on Hover')} value={titleVisibleOnHover} onChange={val => setAttributes({ titleVisibleOnHover: val })} />
-                                }
                                 <Typography label={__('Typography')} value={titleTypography} onChange={val => setAttributes({ titleTypography: val })} device={device} onDeviceChange={value => this.setState({ device: value })} />
                                 <Color label={__('Color')} value={titleColor} onChange={val => setAttributes({ titleColor: val })} />
                             </PanelBody>
@@ -139,28 +145,56 @@ class Edit extends Component {
                                 <Toggle label={__('Enable')} value={enableSubTitle} onChange={val => setAttributes({ enableSubTitle: val })} />
                                 {enableSubTitle == 1 &&
                                     <Fragment>
-                                        {(animateOnHover == 1 && titleVisibleOnHover != 1) &&
-                                            <Toggle label={__('Visible on Hover')} value={subTitleVisibleOnHover} onChange={val => setAttributes({ subTitleVisibleOnHover: val })} />
-                                        }
                                         <Color label={__('Color')} value={subTitleColor} onChange={val => setAttributes({ subTitleColor: val })} />
                                         <Typography label={__('Typography')} value={subTitleTypography} onChange={val => setAttributes({ subTitleTypography: val })} device={device} onDeviceChange={value => this.setState({ device: value })} />
                                         <Range label={__('Spacing')} value={subTitleSpacing} onChange={val => setAttributes({ subTitleSpacing: val })} min={0} max={100} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
                                     </Fragment>
                                 }
                             </PanelBody>
+                            <PanelBody title={__('Content')} initialOpen={false}>
+                                <Toggle label={__('Animate on Hover')} value={animateOnHover} onChange={val => setAttributes({ animateOnHover: val })} />
+                                {animateOnHover == 1 &&
+                                    <Fragment>
+                                        <Select label={__('Animation')} options={[['none', __('No Animation')], ['slide-top', __('Slide From Top')], ['slide-right', __('Slide From Right')], ['slide-bottom', __('Slide From Bottom')], ['slide-left', __('Slide From Left')], ['zoom-in', __('Zoom In')], ['zoom-out', __('Zoom Out')], ['scale', __('Scale')]]} value={contentAnimation} onChange={val => setAttributes({ contentAnimation: val })} />
+                                        <Separator />
+                                        <Toggle label={__('Title Reveal on Hover')} value={titleVisibleOnHover} onChange={val => setAttributes({ titleVisibleOnHover: val })} />
+                                        {(enableSubTitle == 1 && titleVisibleOnHover != 1) &&
+                                            <Toggle label={__('Sub Title Reveal on Hover')} value={subTitleVisibleOnHover} onChange={val => setAttributes({ subTitleVisibleOnHover: val })} />
+                                        }
+                                        <Separator />
+                                    </Fragment>
+                                }
+                                <Padding label={__('Padding')} value={contentPadding} onChange={val => setAttributes({ contentPadding: val })} min={0} max={200} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
+                                <RadioAdvanced label={__('Vertical Align')} value={contentVerticalAlign} onChange={(value) => setAttributes({ contentVerticalAlign: value })}
+                                    options={[
+                                        { label: __('Top'), value: 'top', title: __('Top') },
+                                        { label: __('Middle'), value: 'center', title: __('Middle') },
+                                        { label: __('Bottom'), value: 'bottom', title: __('Bottom') },
+                                    ]}
+                                />
+                                <Alignment label={__('Horizontal Alignment')} value={contentAlignment} alignmentType="content" onChange={val => setAttributes({ contentAlignment: val })} alignmentType="content" disableJustify />
+                            </PanelBody>
                             <PanelBody title={__('Overlay')} initialOpen={false}>
                                 <Toggle label={__('Enable')} value={enableOverlay} onChange={val => setAttributes({ enableOverlay: val })} />
                                 {enableOverlay == 1 &&
                                     <Fragment>
-                                        <ColorAdvanced label={__('Overlay Background')} value={overlayBg} onChange={(value) => setAttributes({ overlayBg: value })} />
-                                        {animateOnHover == 1 &&
+                                        
+                                        {animateOnHover == 1 ?
+                                            <Tabs>
+                                                <Tab tabTitle={__('Normal')}>
+                                                    <ColorAdvanced label={__('Background')} value={overlayBg} onChange={(value) => setAttributes({ overlayBg: value })} />
+                                                </Tab>
+                                                <Tab tabTitle={__('Hover')}>
+                                                    <ColorAdvanced label={__('Background')} value={overlayHoverBg} onChange={(value) => setAttributes({ overlayHoverBg: value })} />
+                                                </Tab>
+                                            </Tabs>
+                                            :
                                             <Fragment>
-                                                <Separator />
-                                                <ColorAdvanced label={__('Hover Overlay Background')} value={overlayHoverBg} onChange={(value) => setAttributes({ overlayHoverBg: value })} />
+                                                <ColorAdvanced label={__('Background')} value={overlayBg} onChange={(value) => setAttributes({ overlayBg: value })} />
                                                 <Separator />
                                             </Fragment>
                                         }
-                                        <Select label={__('Overlay Blend Mode')} options={[['normal', __('Normal')], ['multiply', __('Multiply')], ['screen', __('Screen')], ['overlay', __('Overlay')], ['darken', __('Darken')], ['lighten', __('Lighten')], ['color-dodge', __('Color Dodge')], ['saturation', __('Saturation')], ['luminosity', __('Luminosity')], ['color', __('Color')], ['color-burn', __('Color Burn')], ['exclusion', __('Exclusion')], ['hue', __('Hue')]]} value={overlayBlend} onChange={val => setAttributes({ overlayBlend: val })} />
+                                        <Select label={__('Blend Mode')} options={[['normal', __('Normal')], ['multiply', __('Multiply')], ['screen', __('Screen')], ['overlay', __('Overlay')], ['darken', __('Darken')], ['lighten', __('Lighten')], ['color-dodge', __('Color Dodge')], ['saturation', __('Saturation')], ['luminosity', __('Luminosity')], ['color', __('Color')], ['color-burn', __('Color Burn')], ['exclusion', __('Exclusion')], ['hue', __('Hue')]]} value={overlayBlend} onChange={val => setAttributes({ overlayBlend: val })} />
                                     </Fragment>
                                 }
                             </PanelBody>
@@ -169,7 +203,7 @@ class Edit extends Component {
                                 <Toggle label={__('Enable')} value={enableFrame} onChange={val => setAttributes({ enableFrame: val })} />
                                 {enableFrame == 1 &&
                                     <Fragment>
-                                        <Border label={__('Border')} value={frameBorder} onChange={val => setAttributes({ frameBorder: val })} responsive unit={['px', 'em', '%']} device={device} onDeviceChange={value => this.setState({ device: value })} />
+                                        <Border label={__('Frame')} value={frameBorder} onChange={val => setAttributes({ frameBorder: val })} responsive unit={['px', 'em', '%']} device={device} onDeviceChange={value => this.setState({ device: value })} />
                                         <Margin
                                             label={__('Margin')}
                                             value={frameMargin}
@@ -180,6 +214,8 @@ class Edit extends Component {
                                             responsive
                                             device={device}
                                             onDeviceChange={value => this.setState({ device: value })} />
+                                        
+                                        <BorderRadius label={__('Radius')} value={frameBorderRadius} onChange={val => setAttributes({ frameBorderRadius: val })} min={0} max={100} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
 
                                         <Toggle label={__('Send to Back')} value={frameSendToBack} onChange={val => setAttributes({ frameSendToBack: val })} />
                                         {animateOnHover == 1 &&
@@ -223,7 +259,13 @@ class Edit extends Component {
                                 <div className="qubely-image-container">
 
                                     {image.url != undefined ?
-                                        <img className="qubely-image-image" src={image.url} alt={imgAlt && imgAlt} />
+                                        <Fragment>
+                                            { image2x.url != undefined ?
+                                                <img className="qubely-image-image" src={image.url} srcset={image.url + ' 1x, ' + image2x.url + ' 2x'} alt={imgAlt && imgAlt} />
+                                                :
+                                                <img className="qubely-image-image" src={image.url} alt={imgAlt && imgAlt} />
+                                            }
+                                        </Fragment>
                                         :
                                         <div className="qubely-image-image qubely-image-placeholder"><i className="far fa-image"></i></div>
                                     }
