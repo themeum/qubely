@@ -5,7 +5,7 @@ import '../css/typography.scss'
 import FontList from "./assets/FontList"
 const { RichText } = wp.editor
 import icons from '../../helpers/icons'
-import { Range, Toggle } from '../FieldRender'
+import { Range, Toggle} from '../FieldRender'
 
 class Typography extends Component {
     constructor(props) {
@@ -250,7 +250,7 @@ class Typography extends Component {
                                         device={device}
                                         onDeviceChange={value => onDeviceChange(value)}
                                     />
-                                    <div className="qubely-d-flex qubely-align-center">
+                                    <div className="qubely-field qubely-d-flex qubely-align-center">
                                         <div>
                                             {__('Text Transform')}
                                         </div>

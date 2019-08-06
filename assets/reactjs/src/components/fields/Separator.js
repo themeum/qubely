@@ -4,7 +4,7 @@ class Separator extends Component {
     render() {
         const { label, customClassName } = this.props
         return (
-            <div className={`qubely-field-separator qubely-field ${customClassName ? customClassName : ''}`}>
+            <div className={`qubely-field-separator qubely-field ${ label != '' ? 'qubely-has-label' : '' } ${customClassName ? customClassName : ''}`}>
                 {label &&
                     <label>{label}</label>
                 }

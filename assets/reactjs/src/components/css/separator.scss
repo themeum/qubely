@@ -5,12 +5,18 @@
     &:not(:first-child-child){
         margin-top: 20px;
     }
-    label {
-        display: inline-block;
-        width: auto;
-        background: #fff;
-        padding-right: 10px;
-        margin: 0;
+
+    &.qubely-has-label {
+        position: relative;
+        label {
+            position: absolute;
+            top: -8px;
+            display: inline-block;
+            width: auto;
+            background: #fff;
+            padding-right: 10px;
+            margin: 0;
+        }
     }
 }
 .qubely-field-separator.qubely-separtor-extra-margin{

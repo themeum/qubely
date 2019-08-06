@@ -10,6 +10,7 @@ import './blocks/icon'          // Icon
 import './blocks/map'           // Map
 import './blocks/divider'       // Divider
 import './blocks/infobox'       // Info Box
+import './blocks/image'         // Image
 import './blocks/testimonial'   // Testimonial
 import './blocks/accordion'     // Accordion
 import './blocks/heading'       // Heading Box
