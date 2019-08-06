@@ -8,7 +8,7 @@ module.exports = {
     ],
     output: {
         path: path.join(__dirname, '../js/'),
-        filename: 'blocks.build.js'
+        filename: 'qubely.dev.js'
     },
     module: {
         rules: [

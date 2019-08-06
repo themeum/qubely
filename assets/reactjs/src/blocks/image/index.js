@@ -10,7 +10,7 @@ const {
 
 registerBlockType('qubely/image', {
     title: __('Image'),
-    description: __('Include attractive icon lists with Qubely Icon List.'),
+    description: __('Insert images and beautify them with Qubely Image Block.'),
     category: 'qubely',
     icon: <img src={qubely_admin.plugin + 'assets/img/blocks/block-icon-list.svg'} alt={__('Image')} />,
     keywords: [__('image', 'advanced image', 'fancy image'), 'image overlay'],
@@ -172,7 +172,7 @@ registerBlockType('qubely/image', {
         },
         subTitle: {
             type: 'string',
-            default: 'Qubely blocks is added to the Gutenberg editor as soon as you install the plugin.'
+            default: 'Insert images and beautify them with Qubely Image Block.'
         },
         subTitleTypography: {
             type: 'object',
@@ -367,7 +367,7 @@ registerBlockType('qubely/image', {
                         { key: 'layout', relation: '==', value: 'blurb' },
                         { key: 'contentAlignment', relation: '==', value: 'left' }
                     ],
-                    selector: '{{QUBELY}} .qubely-image-content {-webkit-box-pack: start; -ms-flex-pack: start; justify-content: flex-start;}'
+                    selector: '{{QUBELY}} .qubely-image-content {-webkit-box-pack: start; -ms-flex-pack: start; justify-content: flex-start; text-align: left;}'
                 },
                 {
                     condition: [
