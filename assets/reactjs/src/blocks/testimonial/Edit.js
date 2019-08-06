@@ -31,7 +31,7 @@ class Edit extends Component {
         this.setState({ ...this.state, openPanelSetting: panelName })
     }
     render() {
-        const { uniqueId, layout, message, messageSpacingTop, messageSpacingBottom, name, nameColor, alignment, designation, designationColor, showAvatar, avatar, avatarAlt, avatarBorderRadius, avatarSize, avatarWidth, avatarHeight, avatarBorder, avatarSpacing, avatarLayout, quoteIconColor, quoteIconSize, quoteIconSpacing, nameTypo, nameSpacing, messageTypo, designationTypo, starsSize, ratingsColor, quoteIcon, ratings, ratingsSpacing, bgPadding, textColor, bgColor, bgBorderRadius, border, boxShadow, boxShadowHover } = this.props.attributes
+        const { uniqueId, layout, message, messageSpacingTop, messageSpacingBottom, name, nameColor, alignment, designation, designationColor, showAvatar, avatar, avatarAlt, avatarBorderRadius, avatarSize, avatarWidth, avatarHeight, avatarBorder, avatarSpacing, avatarLayout, quoteIconColor, quoteIconSize, quoteIconSpacing, nameTypo, nameSpacing, messageTypo, designationTypo, starsSize, showRatings, ratingsColor, quoteIcon, ratings, ratingsSpacing, bgPadding, textColor, bgColor, bgBorderRadius, border, boxShadow, boxShadowHover } = this.props.attributes
         const { setAttributes } = this.props
         const { openPanelSetting, device } = this.state
         if (uniqueId) { CssGenerator(this.props.attributes, 'testimonial', uniqueId); }
@@ -296,35 +296,42 @@ class Edit extends Component {
                     </PanelBody>
 
                     <PanelBody title={__('Ratings')} opened={'Ratings' === openPanelSetting} onToggle={() => this.handlePanelOpenings(openPanelSetting !== 'Ratings' ? 'Ratings' : '')}>
-                        <Range
-                            label={__('Ratings')}
-                            value={ratings} onChange={(value) => setAttributes({ ratings: value })}
-                            min={0}
-                            max={5} step={.5} />
-                        {(ratings != 0) &&
-                            <Fragment>
-                                <Color
-                                    label={__('Color')}
-                                    value={ratingsColor}
-                                    onChange={(value) => setAttributes({ ratingsColor: value })} />
+
+                        <Toggle label={__('Show Ratings')} value={showRatings} onChange={val => setAttributes({ showRatings: val })} />
+                        {
+                            showRatings && <Fragment>
+
                                 <Range
-                                    label={__('Stars Size')}
-                                    value={starsSize} onChange={(value) => setAttributes({ starsSize: value })}
-                                    unit={['px', 'em', '%']}
-                                    min={10}
-                                    max={48}
-                                    responsive
-                                    device={device}
-                                    onDeviceChange={value => this.setState({ device: value })} />
-                                <Range
-                                    label={__('Spacing')}
-                                    value={ratingsSpacing} onChange={(value) => setAttributes({ ratingsSpacing: value })}
-                                    unit={['px', 'em', '%']}
+                                    label={__('Ratings')}
+                                    value={ratings} onChange={(value) => setAttributes({ ratings: value })}
                                     min={0}
-                                    max={200}
-                                    responsive
-                                    device={device}
-                                    onDeviceChange={value => this.setState({ device: value })} />
+                                    max={5} step={.5} />
+                                {(ratings != 0) &&
+                                    <Fragment>
+                                        <Color
+                                            label={__('Color')}
+                                            value={ratingsColor}
+                                            onChange={(value) => setAttributes({ ratingsColor: value })} />
+                                        <Range
+                                            label={__('Stars Size')}
+                                            value={starsSize} onChange={(value) => setAttributes({ starsSize: value })}
+                                            unit={['px', 'em', '%']}
+                                            min={10}
+                                            max={48}
+                                            responsive
+                                            device={device}
+                                            onDeviceChange={value => this.setState({ device: value })} />
+                                        <Range
+                                            label={__('Spacing')}
+                                            value={ratingsSpacing} onChange={(value) => setAttributes({ ratingsSpacing: value })}
+                                            unit={['px', 'em', '%']}
+                                            min={0}
+                                            max={200}
+                                            responsive
+                                            device={device}
+                                            onDeviceChange={value => this.setState({ device: value })} />
+                                    </Fragment>
+                                }
                             </Fragment>
                         }
                     </PanelBody>
@@ -340,7 +347,7 @@ class Edit extends Component {
                         <Separator />
                         <Border
                             label={__('Border')}
-                            value={border} 
+                            value={border}
                             onChange={val => setAttributes({ border: val })} />
                         <Padding
                             label={__('Padding')}
@@ -402,7 +409,7 @@ class Edit extends Component {
 
                         {layout == 2 && authorInfo}
 
-                        {ratings > 0 && (layout == 2) &&
+                        {(showRatings && ratings > 0 && layout == 2) &&
                             <div className="qubely-testimonial-ratings" data-qubelyrating={ratings} onClick={() => this.handlePanelOpenings('Ratings')}></div>
                         }
 
@@ -414,7 +421,7 @@ class Edit extends Component {
                             {testimonialContent}
                         </div>
 
-                        {ratings > 0 && (layout == 1) &&
+                        {(showRatings && ratings > 0 && layout == 1) &&
                             <div className="qubely-testimonial-ratings" data-qubelyrating={ratings} onClick={() => this.handlePanelOpenings('Ratings')}></div>
                         }
 
