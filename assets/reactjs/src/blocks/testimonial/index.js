@@ -146,6 +146,7 @@ registerBlockType('qubely/testimonial', {
         },
 
         //Ratings
+        showRatings: { type: 'boolean', default: true },
         ratings: { type: 'string', default: 4.5 },
         ratingsPosition: { type: 'string', default: 'bottom' },
         ratingsColor: { type: 'string', default: '#FFB800', style: [{ condition: [{ key: 'ratings', relation: '!=', value: '0' }], selector: '{{QUBELY}} .qubely-testimonial-ratings:before {color: {{ratingsColor}};} {{QUBELY}} .qubely-testimonial-ratings {color: {{ratingsColor}};}' }] },
