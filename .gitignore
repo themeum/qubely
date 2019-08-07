@@ -72,7 +72,8 @@ assets/css/style.min.css
 assets/js/blocks.build.min.js
 assets/js/blocks.build.js.map
 assets/reactjs/node_modules/
-assets/reactjs/package-lock.json
+
+package-lock.json
 .idea/
 .vscode/
 .DS_Store
