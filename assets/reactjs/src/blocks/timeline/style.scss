@@ -20,7 +20,8 @@
 
 			.qubely-timeline-connector {
 				position: absolute;
-				top: 17px;
+				top: 50%;
+				transform: translateY(-50%);
 				display: flex;
 				align-items: center;
 				justify-content: center;
@@ -28,24 +29,26 @@
 			}
 			
 			.qubely-timeline-date-container {
+				display: block;
 				position: absolute;
-				top: 27px;
+				top: 50%;
 				transform: translateY(-50%);
 				text-align: left;
 				white-space: nowrap;
+				width: 100%;
 			}
 
 			&.qubely-timeline-left {
 				.qubely-timeline-date-container {
 					left: 100%;
-					padding-left: 20px;
+					text-align: left;
 				}
 			}
 
 			&.qubely-timeline-right {
 				.qubely-timeline-date-container {
 					right: 100%;
-					padding-right: 20px;
+					text-align: right;
 				}
 			}
 
@@ -58,7 +61,8 @@
 					width: 0;
 					height: 0;
 					border-style: solid;
-					top: 20px;
+					top: 50%;
+					transform: translateY(-50%);
 					border-width: 15px;
 					z-index: 1;
 				}
@@ -69,6 +73,8 @@
 						position: absolute;
 						width: 0;
 						height: 0;
+						top: 50%;
+						transform: translateY(-50%);
 						border-style: solid;
 						z-index: 0;
 					}

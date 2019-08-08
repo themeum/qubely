@@ -7,13 +7,14 @@ import Edit from './Edit'
 import Save from './Save'
 
 registerBlockType('qubely/timeline', {
-	title: __('Timeline'),
-	icon: 'dashboard',
-	category: 'qubely',
+	title: __('Row'),
+    category: 'qubely',
+    description: 'Showcase detailed timelines/roadmaps with Qubely Timeline.',
+    icon: <img src={qubely_admin.plugin + 'assets/img/blocks/block-timeline.svg'} alt={__('Timeline')} />,
 	keywords: [
 		__('Timeline'),
 		__('Content'),
-		__('Timeline'),
+		__('Roadmap'),
 	],
 	attributes: {
 		uniqueId: { type: 'string', default: '' },
@@ -21,11 +22,11 @@ registerBlockType('qubely/timeline', {
 		timelineContents: {
 			type: 'Array',
 			default: [
-				{ title: 'Qubely Blocks', date: 'January 1, 2019', description: 'So strongly and metaphysically did I conceive of my situation then, that while earnestly watching his motions, I seemed distinctly to perceive that my.' },
-				{ title: 'two', date: 'February 1, 2019', description: 'description two' },
-				{ title: 'three', date: 'March 1, 2019', description: 'description three' },
-				{ title: 'four', date: 'April 1, 2019', description: 'description four' },
-				{ title: 'five', date: 'May 1, 2019', description: 'description five' },
+				{ title: 'Qubely Blocks', date: 'January 1, 2019', description: 'Qubely offers a rich collection of highly customizable dedicated Gutenberg blocks.' },
+				{ title: 'Pre-made Sections', date: 'February 1, 2019', description: 'Qubely has a rich library of ready sections that can be imported and used as blocks on the Gutenberg editor.' },
+				{ title: 'Rich Blocks Collection', date: 'March 1, 2019', description: 'Get a rich collection of blocks that are highly customizable and easy to use even for the beginners.' },
+				{ title: 'Layout Packs', date: 'April 1, 2019', description: 'Qubely gives you many beautiful template layouts completely free of cost. These can also be customized and styled your way.' },
+				{ title: 'Smart Layout Builder', date: 'May 1, 2019', description: 'Its row-column structure lets you take 1 to as many as 6 columns in a single row.' },
 			]
 		},
 		orientation: {
@@ -41,7 +42,10 @@ registerBlockType('qubely/timeline', {
 			},
 			style: [
 				{
-					selector: '{{QUBELY}} .qubely-timeline-left {padding-right: {{horizontalSpacing}};}{{QUBELY}} .qubely-timeline-right {padding-left: {{horizontalSpacing}};}'
+					selector: '{{QUBELY}} .qubely-timeline-left {padding-right: {{horizontalSpacing}};}' +
+						'{{QUBELY}} .qubely-timeline-left .qubely-timeline-date-container {padding-left: {{horizontalSpacing}};}' + 
+						'{{QUBELY}} .qubely-timeline-right {padding-left: {{horizontalSpacing}};}' +
+						'{{QUBELY}} .qubely-timeline-right .qubely-timeline-date-container {padding-right: {{horizontalSpacing}};}' 
 				}
 			]
 		},
@@ -77,8 +81,8 @@ registerBlockType('qubely/timeline', {
                         { key: 'enableContentBorder', relation: '==', value: true }
                     ],
 					selector: '{{QUBELY}} .qubely-timeline-content {border-style: solid; border-width: {{contentBorderWidth}};}' +
-						'{{QUBELY}} .qubely-timeline-left .qubely-timeline-content.qubely-content-has-border:after {top: calc(20px - {{contentBorderWidth}}); border-width: calc(15px + {{contentBorderWidth}}); right: calc(-15px*2 - {{contentBorderWidth}}*2);}' +
-						'{{QUBELY}} .qubely-timeline-right .qubely-timeline-content.qubely-content-has-border:after {top: calc(20px - {{contentBorderWidth}}); border-width: calc(15px + {{contentBorderWidth}}); left: calc(-15px*2 - {{contentBorderWidth}}*2);}'
+						'{{QUBELY}} .qubely-timeline-left .qubely-timeline-content.qubely-content-has-border:after {border-width: calc(15px + {{contentBorderWidth}}); right: calc(-15px*2 - {{contentBorderWidth}}*2 - {{contentBorderWidth}}/2);}' +
+						'{{QUBELY}} .qubely-timeline-right .qubely-timeline-content.qubely-content-has-border:after {border-width: calc(15px + {{contentBorderWidth}}); left: calc(-15px*2 - {{contentBorderWidth}}*2 - {{contentBorderWidth}}/2);}'
                 }
 			]
 		},
