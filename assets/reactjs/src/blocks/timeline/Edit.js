@@ -1,10 +1,10 @@
 const { __ } = wp.i18n
 const { Fragment, Component } = wp.element;
-const { PanelBody, Tooltip } = wp.components
-const { InspectorControls, RichText, MediaUpload } = wp.editor
-import { CssGenerator } from '../../components/CssGenerator'
-// import icons from '../../helpers/icons'
-import { IconList, RadioAdvanced, Range, Color, Typography, Toggle, Separator, ColorAdvanced, Border, BorderRadius, BoxShadow, Styles, Alignment, Padding, Tabs, Tab, Carousel, Headings } from '../../components/FieldRender'
+const { PanelBody, Tooltip, Toolbar } = wp.components
+const { InspectorControls, RichText, BlockControls, MediaUpload } = wp.editor
+import { IconList, RadioAdvanced, Range, Color, Typography, Toggle, Separator, Border, BorderRadius, BoxShadow, Alignment, Padding, Headings } from '../../components/FieldRender'
+import InlineToolbar from '../../components/fields/inline/InlineToolbar'
+import { CssGenerator } from '../../components/CssGenerator';
 
 
 class Edit extends Component {
@@ -268,6 +268,17 @@ class Edit extends Component {
 					</PanelBody>
 
 				</InspectorControls>
+
+				<BlockControls>
+                    <Toolbar>
+                        <InlineToolbar
+                            data={[{ name: 'InlineSpacer', key: 'spacer', responsive: true, unit: ['px', 'em', '%'] }]}
+                            {...this.props}
+                            prevState={this.state}
+                        />
+                    </Toolbar>
+                </BlockControls>
+
 				<div className={`qubely-block-${uniqueId}`}>
 					<div className={`qubely-block-timeline qubely-timeline-layout-vertical qubely-timeline-orientation-${orientation}`}>
 						<div className={`qubely-timeline-items`}>

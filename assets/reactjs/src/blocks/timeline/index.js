@@ -19,6 +19,23 @@ registerBlockType('qubely/timeline', {
 	attributes: {
 		uniqueId: { type: 'string', default: '' },
 
+		spacer: {
+            type: 'object',
+            default: {
+                spaceTop: {
+                    md: '10',
+                    unit: "px"
+                },
+                spaceBottom: {
+                    md: '10',
+                    unit: "px"
+                }
+            },
+            style: [
+                { selector: '{{QUBELY}}' }
+            ]
+        },
+
 		timelineContents: {
 			type: 'Array',
 			default: [

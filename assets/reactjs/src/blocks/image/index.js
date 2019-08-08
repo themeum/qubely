@@ -15,10 +15,29 @@ registerBlockType('qubely/image', {
     icon: <img src={qubely_admin.plugin + 'assets/img/blocks/block-image.svg'} alt={__('Image')} />,
     keywords: [__('image', 'advanced image', 'fancy image'), 'image overlay'],
     attributes: {
+        
         uniqueId: {
             type: 'string',
             default: ''
         },
+
+        spacer: {
+            type: 'object',
+            default: {
+                spaceTop: {
+                    md: '10',
+                    unit: "px"
+                },
+                spaceBottom: {
+                    md: '10',
+                    unit: "px"
+                }
+            },
+            style: [
+                { selector: '{{QUBELY}}' }
+            ]
+        },
+        
         alignment: {
             type: 'object',
             default: {
