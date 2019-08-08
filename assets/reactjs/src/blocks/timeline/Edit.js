@@ -29,7 +29,7 @@ class Edit extends Component {
 	updateTimelineContent = (key, value, index) => {
 		const { setAttributes, attributes: { timelineItems, timelineContents } } = this.props
 		if (key === 'add' || key === 'delete') {
-			let updatedAttributes = key === 'add' ? [...timelineContents, { title: 'new', date: 'January 1, 2019', description: 'new description' }] : timelineContents.slice(0, timelineItems - 1)
+			let updatedAttributes = key === 'add' ? [...timelineContents, { title: 'Timeline Block', date: 'January 1, 2021', description: 'Include detailed timelines for your products, company, etc with Qubely Timeline.' }] : timelineContents.slice(0, timelineItems - 1)
 			setAttributes({
 				timelineContents: updatedAttributes,
 				timelineItems: key === 'add' ? timelineItems + 1 : timelineItems - 1
@@ -51,7 +51,7 @@ class Edit extends Component {
 		const { attributes: { timelineContents, enableContentBorder, headingLevel, enableDateTime, enableImage, connectorIcon } } = this.props
 		const titleTagName = 'h' + headingLevel;
 		return (timelineContents.map(({ title, date, description, image }, index) => {
-			console.log(connectorIcon);
+
 			return (
 				<div key={index} className={`qubely-timeline-item qubely-timeline-${index % 2 ? 'right' : 'left'}`}>
 					<div className="qubely-timeline-connector">
@@ -166,13 +166,13 @@ class Edit extends Component {
 
 			enableImage,
 			imagePosition,
-			imageHeight,
 			imageBorderRadius,
 			imageSpacing,
 
 			connectorSize,
 			connectorColor,
 			connectorBorder,
+			connectorBoxShadow,
 			connectorBorderRadius,
 			connectorIcon,
 			connectorIconSize,
@@ -192,7 +192,7 @@ class Edit extends Component {
 					<PanelBody title={__('Timeline Settings')}>
 						<Range
 							min={2}
-							max={10}
+							max={20}
 							label={__('Number of Items')}
 							value={timelineItems}
 							onChange={value => this.updateTimelineContent(value > timelineItems ? 'add' : 'delete')}
@@ -246,7 +246,6 @@ class Edit extends Component {
 										{ label: __('After'), value: 'after', title: __('After') }
 									]}
 								/>
-								<Range label={__('Height')} value={imageHeight} onChange={val => setAttributes({ imageHeight: val })} min={32} max={800} responsive unit={['px', 'em', '%']} device={device} onDeviceChange={value => this.setState({ device: value })} />
 								<BorderRadius label={__('Radius')} value={imageBorderRadius} onChange={val => setAttributes({ imageBorderRadius: val })} min={0} max={100} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
 								<Range label={__('Spacing')} value={imageSpacing} onChange={val => setAttributes({ imageSpacing: val })} min={0} max={100} responsive unit={['px', 'em', '%']} device={device} onDeviceChange={value => this.setState({ device: value })} />
 							</Fragment>
@@ -257,6 +256,7 @@ class Edit extends Component {
 						<Color label={__('Color')} value={connectorColor} onChange={(value) => setAttributes({ connectorColor: value })} />
 						<Range label={__('Size')} value={connectorSize} onChange={val => setAttributes({ connectorSize: val })} min={16} max={64} responsive unit={['px', 'em', '%']} device={device} onDeviceChange={value => this.setState({ device: value })} />
 						<Border label={__('Border')} value={connectorBorder} onChange={val => setAttributes({ connectorBorder: val })} responsive unit={['px', 'em', '%']} device={device} onDeviceChange={value => this.setState({ device: value })} />
+						<BoxShadow label={__('Box-Shadow')} value={connectorBoxShadow} onChange={val => setAttributes({ connectorBoxShadow: val })} disableInset />
 						<BorderRadius label={__('Radius')} value={connectorBorderRadius} onChange={val => setAttributes({ connectorBorderRadius: val })} min={0} max={100} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
 						<Separator />
 						<IconList label={__('Icon')} value={connectorIcon} onChange={val => setAttributes({ connectorIcon: val })} />

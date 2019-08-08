@@ -7,7 +7,7 @@ import Edit from './Edit'
 import Save from './Save'
 
 registerBlockType('qubely/timeline', {
-	title: __('Row'),
+	title: __('Timeline'),
     category: 'qubely',
     description: 'Showcase detailed timelines/roadmaps with Qubely Timeline.',
     icon: <img src={qubely_admin.plugin + 'assets/img/blocks/block-timeline.svg'} alt={__('Timeline')} />,
@@ -29,6 +29,7 @@ registerBlockType('qubely/timeline', {
 				{ title: 'Smart Layout Builder', date: 'May 1, 2019', description: 'Its row-column structure lets you take 1 to as many as 6 columns in a single row.' },
 			]
 		},
+
 		orientation: {
 			type: 'string',
 			default: 'center'
@@ -42,10 +43,28 @@ registerBlockType('qubely/timeline', {
 			},
 			style: [
 				{
-					selector: '{{QUBELY}} .qubely-timeline-left {padding-right: {{horizontalSpacing}};}' +
-						'{{QUBELY}} .qubely-timeline-left .qubely-timeline-date-container {padding-left: {{horizontalSpacing}};}' + 
-						'{{QUBELY}} .qubely-timeline-right {padding-left: {{horizontalSpacing}};}' +
-						'{{QUBELY}} .qubely-timeline-right .qubely-timeline-date-container {padding-right: {{horizontalSpacing}};}' 
+					condition: [
+                        { key: 'orientation', relation: '==', value: 'center' }
+                    ],
+					selector: '@media (max-width: 767px) { {{QUBELY}} .qubely-timeline-item {padding-left: {{horizontalSpacing}};}}' +
+						'@media (min-width: 768px) { {{QUBELY}} .qubely-timeline-left {padding-right: {{horizontalSpacing}};} }' +
+						'@media (min-width: 768px) { {{QUBELY}} .qubely-timeline-left .qubely-timeline-date-container {padding-left: {{horizontalSpacing}};} }' + 
+						'@media (min-width: 768px) { {{QUBELY}} .qubely-timeline-right {padding-left: {{horizontalSpacing}};} }' +
+						'@media (min-width: 768px) { {{QUBELY}} .qubely-timeline-right .qubely-timeline-date-container {padding-right: {{horizontalSpacing}};} }'
+				},
+				{
+					condition: [
+                        { key: 'orientation', relation: '==', value: 'left' }
+                    ],
+					selector: '{{QUBELY}} .qubely-timeline-item {padding-left: {{horizontalSpacing}};} ' +
+						'{{QUBELY}} .qubely-timeline-date-container {padding-left: {{horizontalSpacing}};}'
+				},
+				{
+					condition: [
+                        { key: 'orientation', relation: '==', value: 'right' }
+                    ],
+					selector: '{{QUBELY}} .qubely-timeline-item {padding-right: {{horizontalSpacing}};} ' +
+						'{{QUBELY}} .qubely-timeline-date-container {padding-right: {{horizontalSpacing}};}'
 				}
 			]
 		},
@@ -76,27 +95,64 @@ registerBlockType('qubely/timeline', {
 				unit: 'px'
 			},
 			style: [
+				{
+					selector: '{{QUBELY}} .qubely-timeline-content {border-style: solid; border-width: {{contentBorderWidth}};}'
+				},
                 {
 					condition: [
-                        { key: 'enableContentBorder', relation: '==', value: true }
+						{ key: 'enableContentBorder', relation: '==', value: true },
+						{ key: 'orientation', relation: '==', value: 'center' }
                     ],
-					selector: '{{QUBELY}} .qubely-timeline-content {border-style: solid; border-width: {{contentBorderWidth}};}' +
-						'{{QUBELY}} .qubely-timeline-left .qubely-timeline-content.qubely-content-has-border:after {border-width: calc(15px + {{contentBorderWidth}}); right: calc(-15px*2 - {{contentBorderWidth}}*2 - {{contentBorderWidth}}/2);}' +
-						'{{QUBELY}} .qubely-timeline-right .qubely-timeline-content.qubely-content-has-border:after {border-width: calc(15px + {{contentBorderWidth}}); left: calc(-15px*2 - {{contentBorderWidth}}*2 - {{contentBorderWidth}}/2);}'
+					selector: '@media (max-width: 767px) { {{QUBELY}} .qubely-timeline-content.qubely-content-has-border:after {border-width: calc(15px + {{contentBorderWidth}}); left: calc(-15px*2 - {{contentBorderWidth}}*2 - {{contentBorderWidth}}/2);} }' + // Phone
+						'@media (min-width: 768px) { {{QUBELY}} .qubely-timeline-left .qubely-timeline-content.qubely-content-has-border:after {border-width: calc(15px + {{contentBorderWidth}}); right: calc(-15px*2 - {{contentBorderWidth}}*2 - {{contentBorderWidth}}/2);} }' +
+						'@media (min-width: 768px) { {{QUBELY}} .qubely-timeline-right .qubely-timeline-content.qubely-content-has-border:after {border-width: calc(15px + {{contentBorderWidth}}); left: calc(-15px*2 - {{contentBorderWidth}}*2 - {{contentBorderWidth}}/2);} }'
+				},
+				{
+					condition: [
+						{ key: 'enableContentBorder', relation: '==', value: true },
+						{ key: 'orientation', relation: '==', value: 'left' }
+                    ],
+					selector: '{{QUBELY}} .qubely-timeline-content.qubely-content-has-border:after {border-width: calc(15px + {{contentBorderWidth}}); left: calc(-15px*2 - {{contentBorderWidth}}*2 - {{contentBorderWidth}}/2);}'
+				},
+				{
+					condition: [
+						{ key: 'enableContentBorder', relation: '==', value: true },
+						{ key: 'orientation', relation: '==', value: 'right' }
+                    ],
+					selector: '{{QUBELY}} .qubely-timeline-content.qubely-content-has-border:after {border-width: calc(15px + {{contentBorderWidth}}); right: calc(-15px*2 - {{contentBorderWidth}}*2 - {{contentBorderWidth}}/2);}'
                 }
 			]
 		},
+
 		contentBorderColor: {
 			type: 'string',
 			default: '#F6F7FB',
 			style: [
+				{
+					selector: '{{QUBELY}} .qubely-timeline-content {border-color: {{contentBorderColor}};}'
+				},
                 {
 					condition: [
-                        { key: 'enableContentBorder', relation: '==', value: true }
+						{ key: 'enableContentBorder', relation: '==', value: true },
+						{ key: 'orientation', relation: '==', value: 'center' }
                     ],
-					selector: '{{QUBELY}} .qubely-timeline-content {border-color: {{contentBorderColor}};}'+
-						'{{QUBELY}} .qubely-timeline-left .qubely-timeline-content.qubely-content-has-border:after {border-color: transparent transparent transparent {{contentBorderColor}};}' +
-						'{{QUBELY}} .qubely-timeline-right .qubely-timeline-content.qubely-content-has-border:after {border-color: transparent {{contentBorderColor}} transparent transparent;}'
+					selector: '@media (max-width: 767px) { {{QUBELY}} .qubely-timeline-content.qubely-content-has-border:after {border-color: transparent {{contentBorderColor}} transparent transparent;} }' + // Phone
+						'@media (min-width: 768px) { {{QUBELY}} .qubely-timeline-left .qubely-timeline-content.qubely-content-has-border:after {border-color: transparent transparent transparent {{contentBorderColor}};}' +
+						'{{QUBELY}} .qubely-timeline-right .qubely-timeline-content.qubely-content-has-border:after {border-color: transparent {{contentBorderColor}} transparent transparent;} }'
+				},
+				{
+					condition: [
+						{ key: 'enableContentBorder', relation: '==', value: true },
+						{ key: 'orientation', relation: '==', value: 'left' }
+                    ],
+					selector: '{{QUBELY}} .qubely-timeline-content.qubely-content-has-border:after {border-color: transparent {{contentBorderColor}} transparent transparent;}'
+				},
+				{
+					condition: [
+						{ key: 'enableContentBorder', relation: '==', value: true },
+						{ key: 'orientation', relation: '==', value: 'right' }
+                    ],
+					selector: '{{QUBELY}} .qubely-timeline-content.qubely-content-has-border:after {border-color: transparent transparent transparent {{contentBorderColor}};}'
                 }
 			]
 		},
@@ -105,10 +161,28 @@ registerBlockType('qubely/timeline', {
             type: 'string',
             default: '#F9F9F9',
             style: [
+				{
+					selector: '{{QUBELY}} .qubely-timeline-content {background-color: {{contentBg}};}'
+				},
                 {
-					selector: '{{QUBELY}} .qubely-timeline-content {background-color: {{contentBg}};}' +
-						'{{QUBELY}} .qubely-timeline-left .qubely-timeline-content:before {border-color: transparent transparent transparent {{contentBg}};}' +
-						'{{QUBELY}} .qubely-timeline-right .qubely-timeline-content:before {border-color: transparent {{contentBg}} transparent transparent;}'
+					condition: [
+                        { key: 'orientation', relation: '==', value: 'center' }
+                    ],
+					selector: '@media (max-width: 767px) { {{QUBELY}} .qubely-timeline-content:before {border-color: transparent {{contentBg}} transparent transparent;} }' +
+						'@media (min-width: 768px) { {{QUBELY}} .qubely-timeline-left .qubely-timeline-content:before {border-color: transparent transparent transparent {{contentBg}};} }' +
+						'@media (min-width: 768px) { {{QUBELY}} .qubely-timeline-right .qubely-timeline-content:before {border-color: transparent {{contentBg}} transparent transparent;} }'
+				},
+				{
+					condition: [
+                        { key: 'orientation', relation: '==', value: 'left' }
+                    ],
+					selector: '{{QUBELY}} .qubely-timeline-content:before {border-color: transparent {{contentBg}} transparent transparent;}'
+				},
+				{
+					condition: [
+                        { key: 'orientation', relation: '==', value: 'right' }
+                    ],
+					selector: '{{QUBELY}} .qubely-timeline-content:before {border-color: transparent transparent transparent {{contentBg}};}'
 				}
             ]
 		},
@@ -132,7 +206,14 @@ registerBlockType('qubely/timeline', {
 
 		contentBorderRadius: {
 			type: 'object',
-			default: {},
+			default: {
+				openBorderRadius: 1,
+				radiusType: 'global',
+				global: {
+					md: 5
+				},
+				unit: 'px'
+			},
 			style: [
                 {
                     selector: '{{QUBELY}} .qubely-timeline-content'
@@ -167,7 +248,9 @@ registerBlockType('qubely/timeline', {
 			type: 'object',
 			default: {},
 			style: [
-				{ selector: '{{QUBELY}} .qubely-timeline-title' }
+				{
+					selector: '{{QUBELY}} .qubely-timeline-title'
+				}
 			]
 		},
 
@@ -261,19 +344,6 @@ registerBlockType('qubely/timeline', {
                 }
             ]
 		},
-
-		imageHeight: {
-			type: 'object',
-			default: {},
-			style: [
-                {
-					condition: [
-                        { key: 'enableImage', relation: '==', value: true },
-                    ],
-                    selector: '{{QUBELY}} .qubely-timeline-image-container img {height: {{imageHeight}};}'
-                }
-            ]
-		},
 		
 		imageBorderRadius: {
 			type: 'object',
@@ -321,9 +391,27 @@ registerBlockType('qubely/timeline', {
 			},
 			style: [
 				{
-					selector: '{{QUBELY}} .qubely-timeline-connector {width: {{connectorSize}}; height: {{connectorSize}};}' +
-						'{{QUBELY}} .qubely-timeline-left .qubely-timeline-connector {right: calc(-{{connectorSize}}/2);}' +
-						'{{QUBELY}} .qubely-timeline-right .qubely-timeline-connector {left: calc(-{{connectorSize}}/2);}'
+					selector: '{{QUBELY}} .qubely-timeline-connector {width: {{connectorSize}}; height: {{connectorSize}};}'
+                },
+				{
+					condition: [
+                        { key: 'orientation', relation: '==', value: 'center' }
+                    ],
+					selector: '@media (max-width: 767px) { {{QUBELY}} .qubely-timeline-connector {left: calc(-{{connectorSize}}/2);} }' + // Phone
+						'@media (min-width: 768px) { {{QUBELY}} .qubely-timeline-left .qubely-timeline-connector {right: calc(-{{connectorSize}}/2);} }' +
+						'@media (min-width: 768px) { {{QUBELY}} .qubely-timeline-right .qubely-timeline-connector {left: calc(-{{connectorSize}}/2);} }'
+				},
+				{
+					condition: [
+                        { key: 'orientation', relation: '==', value: 'left' }
+                    ],
+					selector: '{{QUBELY}} .qubely-timeline-connector {left: calc(-{{connectorSize}}/2);}'
+				},
+				{
+					condition: [
+                        { key: 'orientation', relation: '==', value: 'right' }
+                    ],
+					selector: '{{QUBELY}} .qubely-timeline-connector {right: calc(-{{connectorSize}}/2);}'
                 }
 			]
 		},
@@ -346,6 +434,16 @@ registerBlockType('qubely/timeline', {
 					selector: '{{QUBELY}} .qubely-timeline-connector'
                 }
 			]
+		},
+
+		connectorBoxShadow: {
+			type: 'object',
+			default: {},
+			style: [
+                {
+                    selector: '{{QUBELY}} .qubely-timeline-connector'
+                }
+            ]
 		},
 
 		connectorBorderRadius: {
@@ -402,7 +500,7 @@ registerBlockType('qubely/timeline', {
 			},
 			style: [
 				{
-					selector: '{{QUBELY}} .qubely-timeline-items:after {width: {{connectorBarWidth}};}'
+					selector: '{{QUBELY}} .qubely-block-timeline:after {width: {{connectorBarWidth}};}'
                 }
 			]
 		},
@@ -412,7 +510,7 @@ registerBlockType('qubely/timeline', {
 			default: '#D2D2D2',
 			style: [
 				{
-					selector: '{{QUBELY}} .qubely-timeline-items:after {background-color: {{connectorBarColor}};}'
+					selector: '{{QUBELY}} .qubely-block-timeline:after {background-color: {{connectorBarColor}};}'
                 }
 			]
 		},
