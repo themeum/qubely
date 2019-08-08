@@ -40,8 +40,6 @@ class QUBELY {
 		// Common style 
 		$this->enqueue_block_css();
 
-		$this->set_inline_css();
-
 		add_action( 'rest_api_init', array($this, 'register_api_hook'));
 		add_action( 'delete_post', array($this, 'before_delete_post'), 10 );
 		
@@ -370,7 +368,7 @@ class QUBELY {
 	public function enqueue_block_css_file(){
 
 		$post_id = $this->is_qubely_single();
-		if( $post_id ){ 
+		if( $post_id ){
 			
 			$upload_dir     = wp_get_upload_dir();
 			$upload_css_dir = trailingslashit( $upload_dir['basedir'] );
@@ -382,6 +380,8 @@ class QUBELY {
 				if ( ! $this->is_editor_screen() ) {
 					wp_enqueue_style( "qubely-post-{$post_id}", $css_url, array(), QUBELY_VERSION, 'all' );
 				}
+			}else{
+				$this->set_inline_css();
 			}
 		}
 		
