@@ -1,70 +1,77 @@
 <?php
 // Exit if accessed directly
-if ( ! defined( 'ABSPATH' ) ) exit;
+if (!defined('ABSPATH')) exit;
 
-if ( ! class_exists('QUBELY_Options')){
+if (!class_exists('QUBELY_Options')) {
 
-	class QUBELY_Options {
-		// Constructor
-		public function __construct() {
-			add_action( 'admin_menu', array( $this, 'add_admin_menu' ) );
-			add_action( 'admin_init', array( $this, 'register_settings' ) );
-		}
+    class QUBELY_Options
+    {
+        // Constructor
+        public function __construct()
+        {
+            add_action('admin_menu', array($this, 'add_admin_menu'));
+            add_action('admin_init', array($this, 'register_settings'));
+        }
 
-		/**
-		 * Add Menu Page Callback
-		 *
-		 * @since 1.0.0
-		 */
-		public static function add_admin_menu() {
-			add_menu_page(
-				esc_html__( 'Qubely Options', 'qubely' ),
-				esc_html__( 'Qubely Options', 'qubely' ),
-				'manage_options',
-				'qubely-settings',
-				array( $this, 'create_admin_page' ),
-				QUBELY_DIR_URL.'assets/img/qubely-logo-white.svg'
-			);
-		}
+        /**
+         * Add Menu Page Callback
+         *
+         * @since 1.0.0
+         */
+        public  function add_admin_menu()
+        {
+            add_menu_page(
+                esc_html__('Qubely Options', 'qubely'),
+                esc_html__('Qubely Options', 'qubely'),
+                'manage_options',
+                'qubely-settings',
+                array($this, 'create_admin_page'),
+                QUBELY_DIR_URL . 'assets/img/qubely-logo-white.svg'
+            );
+        }
 
-		/**
-		 * Register a setting and its sanitization callback.
-		 *
-		 * @since 1.0.0
-		 */
-		public static function register_settings() {
-			register_setting( 'qubely_options', 'qubely_options', array( self::class, 'sanitize' ) );
-		}
+        /**
+         * Register a setting and its sanitization callback.
+         *
+         * @since 1.0.0
+         */
+        public function register_settings()
+        {
+            register_setting('qubely_options', 'qubely_options', array($this, 'sanitize'));
+        }
 
-		/**
-		 * Sanitization callback
-		 *
-		 * @since 1.0.0
-		 */
-		public static function sanitize( $options ) {
-			if ( $options ) {
-				if ( ! empty( $options['css_save_as'] ) ) {
-					$options['css_save_as'] = sanitize_text_field( $options['css_save_as'] );
-				}
-			}
-			return $options;
-		}
+        /**
+         * Sanitization callback
+         *
+         * @since 1.0.0
+         */
+        public  function sanitize($options)
+        {
+            if ($options) {
+                if (!empty($options['css_save_as'])) {
+                    $options['css_save_as'] = sanitize_text_field($options['css_save_as']);
+                }
+            }
+            return $options;
+        }
 
-		/**
-		 * Settings page output
-		 *
-		 * @since 1.0.0
-		 */
-		public function create_admin_page() { ?>
+        /**
+         * Settings page output
+         *
+         * @since 1.0.0
+         */
+        public function create_admin_page()
+        { ?>
             <div class="wrap">
-                <div class="qubely-options-section qubely-mt-20 qubely-mb-30" style="background-image: url(<?php echo QUBELY_DIR_URL.'assets/img/options-logo.png' ?>)">
+                <div class="qubely-options-section qubely-mt-20 qubely-mb-30" style="background-image: url(<?php echo QUBELY_DIR_URL . 'assets/img/options-logo.png' ?>)">
                     <div class="qubely-options-section-header">
                         <div class="qubely-header-left">
-                            <h2 class="qubely-options-section-title"><?php esc_attr_e('Welcome to Qubely! - Version ', 'qubely'); echo QUBELY_VERSION; ?></h2>
+                            <h2 class="qubely-options-section-title"><?php esc_attr_e('Welcome to Qubely! - Version ', 'qubely');
+                                                                        echo QUBELY_VERSION; ?></h2>
                             <h3 class="qubely-options-section-subtitle"><?php esc_attr_e('Full-Fledged Gutenburg Toolkit', 'qubely') ?></h3>
                         </div>
                         <div class="qubely-header-right qubely-option-logo">
-                            <img src="<?php echo QUBELY_DIR_URL.'assets/img/logo.svg' ?>" alt="Logo">
+                            <img src="<?php echo QUBELY_DIR_URL . 'assets/img/logo.svg' ?>" alt="Logo">
                         </div>
                     </div>
 
@@ -97,24 +104,24 @@ if ( ! class_exists('QUBELY_Options')){
                             <h3>Settings</h3>
                             <form method="post" action="options.php">
                                 <?php
-                                settings_fields( 'qubely_options' );
-                                $option_data    = get_option( 'qubely_options' );
+                                settings_fields('qubely_options');
+                                $option_data    = get_option('qubely_options');
                                 ?>
 
                                 <table class="form-table wpex-custom-admin-login-table">
                                     <tr>
-                                        <th scope="row"><?php esc_html_e( 'CSS Save Method', 'qubely' ); ?></th>
+                                        <th scope="row"><?php esc_html_e('CSS Save Method', 'qubely'); ?></th>
                                         <td>
                                             <?php $value = $option_data['css_save_as']; ?>
                                             <select name="qubely_options[css_save_as]">
                                                 <?php
                                                 $options = array(
-                                                    'wp_head'   => __( 'Header','qubely' ),
-                                                    'filesystem' => __( 'File System','qubely' ),
+                                                    'wp_head'   => __('Header', 'qubely'),
+                                                    'filesystem' => __('File System', 'qubely'),
                                                 );
-                                                foreach ( $options as $id => $label ) { ?>
-                                                    <option value="<?php echo esc_attr( $id ); ?>" <?php selected( $value, $id, true ); ?>>
-                                                        <?php echo strip_tags( $label ); ?>
+                                                foreach ($options as $id => $label) { ?>
+                                                    <option value="<?php echo esc_attr($id); ?>" <?php selected($value, $id, true); ?>>
+                                                        <?php echo strip_tags($label); ?>
                                                     </option>
                                                 <?php } ?>
                                             </select>
@@ -136,5 +143,5 @@ if ( ! class_exists('QUBELY_Options')){
                 </div>
             </div>
         <?php }
-	}
+    }
 }
