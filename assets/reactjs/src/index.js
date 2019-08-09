@@ -27,6 +27,7 @@ import './blocks/iconlist'      // Icon List
 import './blocks/wrapper'       // Wrapper
 import './blocks/team'          // Team
 import './blocks/pricing'       // pricing
+import './blocks/timeline'      // Timeline
 
 // Global Settings
 import './blocks/pagesettings'
