@@ -27,6 +27,7 @@ registerBlockType('qubely/team', {
 
         // Image
         image: { type: 'object', default: {} },
+        image2x: { type: 'object', default: {} },
         imageWidth: {
             type: 'object', default: {},
             style: [

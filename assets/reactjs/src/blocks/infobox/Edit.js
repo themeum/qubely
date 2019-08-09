@@ -95,6 +95,7 @@ class Edit extends Component {
             mediaSpacing,
 
             image,
+            image2x,
             imgAlt,
             imageWidth,
 
@@ -201,6 +202,7 @@ class Edit extends Component {
                                     {mediaType == 'image' &&
                                         <Fragment>
                                             <Media label={__('Image')} multiple={false} type={['image']} panel={true} value={image} onChange={val => setAttributes({ image: val })} />
+                                            <Media label={__('Retina Image')} multiple={false} type={['image']} panel={true} value={image2x} onChange={val => setAttributes({ image2x: val })} />
                                             {image.url && <TextControl label={__('Alt Text')} value={imgAlt} onChange={val => setAttributes({ imgAlt: val })} />}
                                             <Range label={__('Image Width')} value={imageWidth} onChange={val => setAttributes({ imageWidth: val })} min={0} max={2000} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
                                         </Fragment>
@@ -402,7 +404,7 @@ class Edit extends Component {
                                 {(mediaType == 'image') &&
                                     <Fragment>
                                         {image.url != undefined ?
-                                            <img className="qubely-info-box-image" src={image.url} alt={imgAlt && imgAlt} />
+                                            <img className="qubely-info-box-image" src={image.url} srcset={image2x.url != undefined ? image.url + ' 1x, ' + image2x.url + ' 2x' : '' } alt={imgAlt && imgAlt} />
                                             :
                                             <div className="qubely-info-box-image qubely-image-placeholder"><i className="far fa-image"></i></div>
                                         }
