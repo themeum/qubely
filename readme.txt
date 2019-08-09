@@ -64,6 +64,7 @@ Qubely adds numerous custom Gutenberg blocks to the Gutenberg block editor and t
 * Block Wrapper
 * [Team](https://qubely.io/block/team/)
 * Image
+* Timeline
 * More advanced Gutenberg blocks coming
 
 
@@ -114,6 +115,8 @@ Qubely adds numerous custom Gutenberg blocks to the Gutenberg block editor and t
 - **Team:** Qubely’s Team block lets you enlist your team members one by one with their details like names, designations, social links, images, and more. You can choose the team member’s profile design from 3 preset layouts. Decide whether to show designation and description with the member profile. Also, apply animation effects on each of the profiles individually.
 
 - **Image:** Insert and beautify images with Qubely Image Block. There are 2 different premade layouts (Simple and Blurb) with plenty of customization options. You can define image opacity, alignment, border-radius, and box-shadow. Animate images, set up typography, enable overlay, and many more.
+
+- **Timeline:** Display the timelines of various events like product releases, company history & milestones, upcoming updates, achievements, and many more with Qubely’s Timeline block. Showcase detailed timelines/roadmaps and style them with plenty of customization options. Add images, texts, headings, setup connectors with icons, and tweak timeline bar your way.
 
  = SOME EXCITING QUBELY FEATURES IN DETAILS =
 
@@ -209,6 +212,15 @@ Found a bug? Please let us know by posting on the support section of this plugin
 
 == Changelog ==
 
+= 1.0.8 - 09 August, 2019 =
+
+New: Timeline block  
+New: Info Box block - Retina image uploading option  
+New: Team block - Retina image uploading option  
+New: Testimonial block - Retina image uploading option  
+Fix: Image block - Top and bottom spacer issue  
+Fix: CSS duplication issue on frontend  
+ 
 = 1.0.7 - 06 August, 2019 =
 
 New: Image Block  
