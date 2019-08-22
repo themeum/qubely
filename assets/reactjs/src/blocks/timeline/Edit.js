@@ -192,7 +192,7 @@ class Edit extends Component {
 					<PanelBody title={__('Timeline Settings')}>
 						<Range
 							min={2}
-							max={20}
+							max={100}
 							label={__('Number of Items')}
 							value={timelineItems}
 							onChange={value => this.updateTimelineContent(value > timelineItems ? 'add' : 'delete')}
