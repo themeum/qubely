@@ -4,7 +4,7 @@ Donate link: https://www.themeum.com
 Tags: Blocks, Gutenberg editor, Block editor, Block, Gutenberg, Gutenberg Blocks
 Requires at least: 5.0
 Tested up to: 5.2
-Stable tag: 1.0.8
+Stable tag: 1.0.9
 Requires PHP: 5.4.0
 License: GPL-2.0+
 License URI: http://www.gnu.org/licenses/gpl-2.0.txt
@@ -211,6 +211,11 @@ Found a bug? Please let us know by posting on the support section of this plugin
 
 
 == Changelog ==
+
+= 1.0.9 - 23 August, 2019 =
+
+Update: Timeline block - Item limit increased to 100 from 20  
+Fix: Inline CSS issue on frontend  
 
 = 1.0.8 - 09 August, 2019 =
 
