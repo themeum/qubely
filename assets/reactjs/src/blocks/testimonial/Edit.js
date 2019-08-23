@@ -31,7 +31,7 @@ class Edit extends Component {
         this.setState({ ...this.state, openPanelSetting: panelName })
     }
     render() {
-        const { uniqueId, layout, message, messageSpacingTop, messageSpacingBottom, name, nameColor, alignment, designation, designationColor, showAvatar, avatar, avatarAlt, avatarBorderRadius, avatarSize, avatarWidth, avatarHeight, avatarBorder, avatarSpacing, avatarLayout, quoteIconColor, quoteIconSize, quoteIconSpacing, nameTypo, nameSpacing, messageTypo, designationTypo, starsSize, showRatings, ratingsColor, quoteIcon, ratings, ratingsSpacing, bgPadding, textColor, bgColor, bgBorderRadius, border, boxShadow, boxShadowHover } = this.props.attributes
+        const { uniqueId, layout, message, messageSpacingTop, messageSpacingBottom, name, nameColor, alignment, designation, designationColor, showAvatar, avatar, avatar2x, avatarAlt, avatarBorderRadius, avatarSize, avatarWidth, avatarHeight, avatarBorder, avatarSpacing, avatarLayout, quoteIconColor, quoteIconSize, quoteIconSpacing, nameTypo, nameSpacing, messageTypo, designationTypo, starsSize, showRatings, ratingsColor, quoteIcon, ratings, ratingsSpacing, bgPadding, textColor, bgColor, bgBorderRadius, border, boxShadow, boxShadowHover } = this.props.attributes
         const { setAttributes } = this.props
         const { openPanelSetting, device } = this.state
         if (uniqueId) { CssGenerator(this.props.attributes, 'testimonial', uniqueId); }
@@ -72,7 +72,7 @@ class Edit extends Component {
                     {showAvatar && (avatarLayout == 'left' || avatarLayout == 'top') &&
                         <Fragment>
                             {avatar.url != undefined ?
-                                <img className="qubely-testimonial-avatar" src={avatar.url} alt={avatarAlt} onClick={() => this.handlePanelOpenings('Avatar')} />
+                                <img className="qubely-testimonial-avatar" src={avatar.url} srcset={avatar2x.url != undefined ? avatar.url + ' 1x, ' + avatar2x.url + ' 2x' : '' } alt={avatarAlt} onClick={() => this.handlePanelOpenings('Avatar')} />
                                 :
                                 <div className="qubely-image-placeholder qubely-testimonial-avatar" onClick={() => this.handlePanelOpenings('Avatar')}><i className="far fa-user"></i></div>
                             }
@@ -87,7 +87,7 @@ class Edit extends Component {
                     {showAvatar && (avatarLayout == 'right' || avatarLayout == 'bottom') &&
                         <Fragment>
                             {avatar.url != undefined ?
-                                <img className="qubely-testimonial-avatar" src={avatar.url} alt={avatarAlt} onClick={() => this.handlePanelOpenings('Avatar')} />
+                                <img className="qubely-testimonial-avatar" src={avatar.url} srcset={avatar2x.url != undefined ? avatar.url + ' 1x, ' + avatar2x.url + ' 2x' : '' } alt={avatarAlt} onClick={() => this.handlePanelOpenings('Avatar')} />
                                 :
                                 <div className="qubely-image-placeholder qubely-testimonial-avatar" onClick={() => this.handlePanelOpenings('Avatar')}><i className="far fa-user"></i></div>
                             }
@@ -172,6 +172,10 @@ class Edit extends Component {
                                 <Media
                                     label={__('Upload Avatar')} multiple={false} type={['image']}
                                     value={avatar} panel={true} onChange={value => setAttributes({ avatar: value })} />
+                                
+                                <Media
+                                    label={__('Upload Avatar @2x')} multiple={false} type={['image']}
+                                    value={avatar2x} panel={true} onChange={value => setAttributes({ avatar2x: value })} />
                                 {avatar.url &&
                                     <TextControl
                                         label={__('Alt Text (Alternative Text)')}

@@ -4,14 +4,14 @@ import { animationAttr } from '../../components/HelperFunction';
 
 class Save extends Component {
 	render() {
-		const { uniqueId, layout, image, name, designation, description, useInfoIcon, phone, email, website, showSociallinks, facebook, twitter, instagram, linkedin, youtube, github, flickr, pinterest, dribbble, behance, iconStyle, iconUseDefaultStyle, enableDesignation, enableDescription, animation } = this.props.attributes
+		const { uniqueId, layout, image, image2x, name, designation, description, useInfoIcon, phone, email, website, showSociallinks, facebook, twitter, instagram, linkedin, youtube, github, flickr, pinterest, dribbble, behance, iconStyle, iconUseDefaultStyle, enableDesignation, enableDescription, animation } = this.props.attributes
 
 		return (
 			<div className={`qubely-block-${uniqueId}`} {...animationAttr(animation)}>
 				<div className={`qubely-block-team qubely-team-layout-${layout}`}>
 					<div className="qubely-team-image-wrapper">
 						{image.url != undefined ?
-							<img className="qubely-team-image" src={image.url} alt={name} />
+							<img className="qubely-team-image" src={image.url} srcset={image2x.url != undefined ? image.url + ' 1x, ' + image2x.url + ' 2x' : '' } alt={name} />
 							:
 							<div className="qubely-image-placeholder"><i className="far fa-image"></i></div>
 						}

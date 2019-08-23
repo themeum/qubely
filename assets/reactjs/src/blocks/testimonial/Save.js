@@ -3,7 +3,7 @@ const { RichText } = wp.editor
 import { animationAttr } from '../../components/HelperFunction'
 class Save extends Component {
     render() {
-        const { uniqueId, layout, animation, message, name, designation, showAvatar, avatar, avatarAlt, avatarLayout, quoteIcon, showRatings, ratings } = this.props.attributes
+        const { uniqueId, layout, animation, message, name, designation, showAvatar, avatar, avatar2x, avatarAlt, avatarLayout, quoteIcon, showRatings, ratings } = this.props.attributes
 
         const testimonialTitle = <RichText.Content tagName="span" value={name} />
         const testimonialDesignation = <RichText.Content tagName="span" value={designation} />
@@ -15,7 +15,7 @@ class Save extends Component {
                     {showAvatar && (avatarLayout == 'left' || avatarLayout == 'top') &&
                         <Fragment>
                             {avatar.url != undefined ?
-                                <img className="qubely-testimonial-avatar" src={avatar.url} alt={avatarAlt} />
+                                <img className="qubely-testimonial-avatar" src={avatar.url} srcset={avatar2x.url != undefined ? avatar.url + ' 1x, ' + avatar2x.url + ' 2x' : '' } alt={avatarAlt} />
                                 :
                                 <div className="qubely-image-placeholder qubely-testimonial-avatar"><i className="far fa-user"></i></div>
                             }
@@ -30,7 +30,7 @@ class Save extends Component {
                     {showAvatar && (avatarLayout == 'right' || avatarLayout == 'bottom') &&
                         <Fragment>
                             {avatar.url != undefined ?
-                                <img className="qubely-testimonial-avatar" src={avatar.url} alt={avatarAlt} />
+                                <img className="qubely-testimonial-avatar" src={avatar.url} srcset={avatar2x.url != undefined ? avatar.url + ' 1x, ' + avatar2x.url + ' 2x' : '' } alt={avatarAlt} />
                                 :
                                 <div className="qubely-image-placeholder qubely-testimonial-avatar"><i className="far fa-user"></i></div>
                             }

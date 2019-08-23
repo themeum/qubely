@@ -51,6 +51,7 @@ registerBlockType('qubely/testimonial', {
         //Avatar
         showAvatar: { type: 'boolean', default: true },
         avatar: { type: 'object', default: {} },
+        avatar2x: { type: 'object', default: {} },
         avatarLayout: { type: 'string', default: 'left' },
         avatarAlt: { type: 'string', default: '' },
         avatarSize: {

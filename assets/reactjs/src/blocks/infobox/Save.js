@@ -6,7 +6,7 @@ import { animationAttr } from '../../components/HelperFunction';
 
 class Save extends Component {
 	render() {
-		const { uniqueId, layout, mediaType, titleLevel, title, separatorStyle, separatorPosition, enableContent, content, iconName, image, imgAlt, number, enableButton, animation, subTitle, subTitleLevel, subTitleContent, buttonFillType, buttonSize, buttonText, buttonUrl, buttonIconName, buttonIconPosition, useMediaBg } = this.props.attributes
+		const { uniqueId, layout, mediaType, titleLevel, title, separatorStyle, separatorPosition, enableContent, content, iconName, image, image2x, imgAlt, number, enableButton, animation, subTitle, subTitleLevel, subTitleContent, buttonFillType, buttonSize, buttonText, buttonUrl, buttonIconName, buttonIconPosition, useMediaBg } = this.props.attributes
 
 		const separators = {
 			solid: { type: 'css', separator: 'solid', width: 300, stroke: 10 },
@@ -46,7 +46,7 @@ class Save extends Component {
 							{(mediaType == 'image') &&
 								<Fragment>
 									{image.url != undefined ?
-										<img className="qubely-info-box-image" src={image.url} alt={imgAlt && imgAlt} />
+										<img className="qubely-info-box-image" src={image.url} srcset={image2x.url != undefined ? image.url + ' 1x, ' + image2x.url + ' 2x' : '' } alt={imgAlt && imgAlt} />
 										:
 										<div className="qubely-info-box-image qubely-image-placeholder"><i className="far fa-image"></i></div>
 									}
