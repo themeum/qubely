@@ -356,8 +356,10 @@ class QUBELY {
 			if ( ! $this->is_editor_screen() ) {
 				wp_enqueue_style( "qubely-post-{$post_id}", $css_url, array(), QUBELY_VERSION, 'all' );
 			}
-		}else{
-			wp_add_inline_script( "qubely-post-{$post_id}", get_post_meta($post_id,'_qubely_css',true), array(), QUBELY_VERSION, 'all' );
+		} else {
+			wp_register_style( 'qubely-post-data', false );
+			wp_enqueue_style( 'qubely-post-data' );
+			wp_add_inline_style( 'qubely-post-data', get_post_meta(get_the_ID(),'_qubely_css',true) );
 		}
 	}
 
