@@ -43,6 +43,9 @@ require_once QUBELY_DIR_PATH.'core/initial-setup.php'; // Initial Setup Data
  */
 require_once QUBELY_DIR_PATH.'core/Options.php';   // Loading QUBELY Blocks Main Files
 
+// Page Template Added
+require_once QUBELY_DIR_PATH.'core/Template.php';
+
 if (class_exists('QUBELY_Options')){
     new QUBELY_Options();
 }
