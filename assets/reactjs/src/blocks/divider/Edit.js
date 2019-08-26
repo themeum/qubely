@@ -2,7 +2,7 @@ const { __ } = wp.i18n;
 const { InspectorControls, BlockControls } = wp.editor
 const { Component, Fragment } = wp.element;
 const { PanelBody, Toolbar, Dropdown } = wp.components;
-import { Range, Color, Alignment, QubelyDropdown } from '../../components/FieldRender'
+import { Range, Color, Alignment } from '../../components/FieldRender'
 import { CssGenerator } from '../../components/CssGenerator'
 import InlineToolbar from '../../components/fields/inline/InlineToolbar'
 import icons from '../divider/icon'
@@ -52,14 +52,15 @@ class Edit extends Component {
             <Fragment>
                 <InspectorControls key="inspector">
                     <PanelBody title={__('Divider Options')} initialOpen={true}>
-                        <QubelyDropdown
-                            dropDownClassName="qubely-divider-picker"
-                            contentClassName="qubely-divider-picker-content"
+                        <Dropdown
+                            className={"qubely-divider-picker"}
+                            contentClassName={"qubely-divider-picker-content"}
                             position="bottom center"
-                        >
-                            <span >{icons[style]}</span>
-                            {this.renderDividerOptions()}
-                        </QubelyDropdown>
+                            renderToggle={({ isOpen, onToggle }) =>
+                                <span onClick={onToggle} aria-expanded={isOpen}> {icons[style]}</span>
+                            }
+                            renderContent={() => this.renderDividerOptions()}
+                        />
                         <Alignment
                             label={__('Alignment')}
                             alignmentType="content"
@@ -67,7 +68,7 @@ class Edit extends Component {
                             value={alignment}
                             onChange={val => setAttributes({ alignment: val })}
                             responsive
-                            device={device} 
+                            device={device}
                             onDeviceChange={value => this.setState({ device: value })} />
                     </PanelBody >
 
@@ -83,9 +84,9 @@ class Edit extends Component {
                             min={0}
                             max={15}
                             unit={['px', 'em', '%']}
-                            responsive 
-                            device={device} 
-                            onDeviceChange={value => this.setState({ device: value })}/>
+                            responsive
+                            device={device}
+                            onDeviceChange={value => this.setState({ device: value })} />
                         <Range
                             label={__('Width')}
                             value={width}
@@ -94,7 +95,7 @@ class Edit extends Component {
                             max={1000}
                             unit={['px', 'em', '%']}
                             responsive
-                            device={device} 
+                            device={device}
                             onDeviceChange={value => this.setState({ device: value })} />
                     </PanelBody>
 
@@ -111,20 +112,21 @@ class Edit extends Component {
                 </BlockControls>
 
                 <div className={`qubely-block-${uniqueId}`}>
-                    <QubelyDropdown
-                        dropDownClassName="qubely-divider-picker"
-                        contentClassName="qubely-divider-picker-content"
+                    <Dropdown
+                        className={"qubely-divider-picker"}
+                        contentClassName={"qubely-divider-picker-content"}
                         position="bottom center"
-                    >
-                        <div className={`qubely-block-divider`}>
-                            {((style == 'fill') || (style == 'dot') || (style == 'dash')) ?
-                                <div className={`qubely-block-divider-style-${style}`} />
-                                :
-                                <span >{icons[style]}</span>
-                            }
-                        </div>
-                        {this.renderDividerOptions()}
-                    </QubelyDropdown>
+                        renderToggle={({ isOpen, onToggle }) =>
+                            <div className={`qubely-block-divider`} onClick={onToggle} aria-expanded={isOpen}>
+                                {((style == 'fill') || (style == 'dot') || (style == 'dash')) ?
+                                    <div className={`qubely-block-divider-style-${style}`} />
+                                    :
+                                    <span >{icons[style]}</span>
+                                }
+                            </div>
+                        }
+                        renderContent={() => this.renderDividerOptions()}
+                    />
                 </div>
             </Fragment >
         );
