@@ -58,12 +58,12 @@ class Edit extends Component {
 	}
 
 	renderFeaturedImages = (post) => {
-		const { attributes: { layout, imgSize, imageAnimation, showCategory, categoryPosition } } = this.props
+		const { attributes: { layout, style, imgSize, imageAnimation, showCategory, categoryPosition } } = this.props
 		return (
 			<div className={`${layout === 1 ? 'qubely-post-list-img' : 'qubely-post-grid-img'} qubely-post-img qubely-post-img-${imageAnimation}`}>
 				<img className="qubely-post-image" src={post.qubely_featured_image_url && post.qubely_featured_image_url[imgSize][0]} />
 				{
-					showCategory == 'badge' &&
+					(showCategory == 'badge' && style !== 4) &&
 					<div className={`qubely-postgrid-cat-position qubely-postgrid-cat-position-${categoryPosition}`}>
 						<span className="qubely-postgrid-category" dangerouslySetInnerHTML={{ __html: post.qubely_category }} />
 					</div>
@@ -73,12 +73,20 @@ class Edit extends Component {
 	}
 
 	renderCardContents = (post) => {
-		const { attributes: { layout, readmoreStyle, showCategory, showTitle, titlePosition, showAuthor, showDates, showComment, showExcerpt, excerptLimit, showReadMore, buttonText, readmoreSize } } = this.props
+		const { attributes: { layout, style, readmoreStyle, showCategory, categoryPosition, showTitle, titlePosition, showAuthor, showDates, showComment, showExcerpt, excerptLimit, showReadMore, buttonText, readmoreSize } } = this.props
 		let title = <h3 className="qubely-postgrid-title"><a>{post.title.rendered}</a></h3>
 
 		return (
 			<div className={`${layout === 1 ? 'qubely-post-list-content' : 'qubely-post-grid-content'}`}>
 				{(showCategory === 'default') && <span className="qubely-postgrid-category" dangerouslySetInnerHTML={{ __html: post.qubely_category }} />}
+
+				{
+					(showCategory == 'badge' && style === 4) &&
+					<div className={`qubely-postgrid-cat-position qubely-postgrid-cat-position-${categoryPosition}`}>
+						<span className="qubely-postgrid-category" dangerouslySetInnerHTML={{ __html: post.qubely_category }} />
+					</div>
+				}
+
 				{showTitle && (titlePosition == true) && title}
 				{
 					(showAuthor || showDates || showComment) &&
@@ -478,6 +486,8 @@ class Edit extends Component {
 									onChange={val => setAttributes({ readmoreStyle: val })}
 								/>
 								<TextControl label={__('Button Text')} value={buttonText} onChange={val => setAttributes({ buttonText: val })} />
+								<Typography label={__('Typography')} value={readmoreTypography} onChange={value => setAttributes({ readmoreTypography: value })} device={device} onDeviceChange={value => this.setState({ device: value })} />
+
 								{
 									readmoreStyle === 'fill' &&
 									<Fragment>
@@ -503,26 +513,26 @@ class Edit extends Component {
 												device={device}
 												onDeviceChange={value => this.setState({ device: value })} />
 										}
+
+
+										<Border label={__('Border')} value={readmoreBorder} onChange={val => setAttributes({ readmoreBorder: val })} min={0} max={10} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
+										{
+											(readmoreBorder.openBorder || readmoreStyle === 'fill') &&
+											<BorderRadius
+												min={0}
+												max={100}
+												responsive
+												device={device}
+												label={__('Corner')}
+												value={readmoreBorderRadius}
+												unit={['px', 'em', '%']}
+												onChange={value => setAttributes({ readmoreBorderRadius: value })}
+												onDeviceChange={value => this.setState({ device: value })}
+											/>
+										}
+										<BoxShadow label={__('Box-Shadow')} value={readmoreBoxShadow} onChange={(value) => setAttributes({ readmoreBoxShadow: value })} />
 									</Fragment>
 								}
-
-								<Typography label={__('Typography')} value={readmoreTypography} onChange={value => setAttributes({ readmoreTypography: value })} device={device} onDeviceChange={value => this.setState({ device: value })} />
-								<Border label={__('Border')} value={readmoreBorder} onChange={val => setAttributes({ readmoreBorder: val })} min={0} max={10} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
-								{
-									(readmoreBorder.openBorder || readmoreStyle === 'fill') &&
-									<BorderRadius
-										min={0}
-										max={100}
-										responsive
-										device={device}
-										label={__('Corner')}
-										value={readmoreBorderRadius}
-										unit={['px', 'em', '%']}
-										onChange={value => setAttributes({ readmoreBorderRadius: value })}
-										onDeviceChange={value => this.setState({ device: value })}
-									/>
-								}
-								<BoxShadow label={__('Box-Shadow')} value={readmoreBoxShadow} onChange={(value) => setAttributes({ readmoreBoxShadow: value })} />
 								<Tabs>
 									<Tab tabTitle={__('Normal')}>
 										<Color label={__('Text Color')} value={readmoreStyle === 'fill' ? readmoreColor : readmoreColor2} onChange={value => setAttributes(readmoreStyle === 'fill' ? { readmoreColor: value } : { readmoreColor2: value })} />
@@ -558,7 +568,7 @@ class Edit extends Component {
 					</PanelBody>
 
 					<PanelBody title={__('Colors')} initialOpen={false}>
-						<Color label={__('Title')} value={style === 4 ? titleColor : titleOverlayColor} onChange={value => setAttributes(style === 4 ? { titleColor: value } : { titleOverlayColor: value })} />
+						<Color label={__('Title')} value={style !== 4 ? titleColor : titleOverlayColor} onChange={value => setAttributes(style !== 4 ? { titleColor: value } : { titleOverlayColor: value })} />
 						<Color label={__('Title Hover')} value={titleHoverColor} onChange={value => setAttributes({ titleHoverColor: value })} />
 						<Color label={__('Meta')} value={style !== 4 ? metaColor : metaOverlayColor} onChange={value => setAttributes(style !== 4 ? { metaColor: value } : { metaOverlayColor: value })} />
 						<Color label={__('Excerpt')} value={style !== 4 ? excerptColor : excerptColor2} onChange={value => setAttributes(style !== 4 ? { excerptColor: value } : { excerptColor2: value })} />
