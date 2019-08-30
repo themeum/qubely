@@ -1114,7 +1114,7 @@ function render_block_qubely_postgrid($att)
 					$html .= '<a href="' . esc_url(get_the_permalink()) . '">';
 					$html .= $image;
 					$html .= '</a>';
-					if ($showCategory == 'badge') {
+					if ($showCategory == 'badge' && $style != 4) {
 						$html .= '<div class="qubely-postgrid-cat-position qubely-postgrid-cat-position-' . esc_attr($categoryPosition) . '">';
 						$html .= $category;
 						$html .= '</div>';
@@ -1125,6 +1125,13 @@ function render_block_qubely_postgrid($att)
 				if ($showCategory == 'default') {
 					$html .= $category;
 				}
+
+				if ($showCategory == 'badge'  && $style == 4) {
+					$html .= '<div class="qubely-postgrid-cat-position qubely-postgrid-cat-position-' . esc_attr($categoryPosition) . '">';
+					$html .= $category;
+					$html .= '</div>';
+				}
+
 				if ($showTitle == 1) {
 					$html .= $title;
 				}
@@ -1151,7 +1158,7 @@ function render_block_qubely_postgrid($att)
 					$html .= '<a href="' . esc_url(get_the_permalink()) . '">';
 					$html .= $image;
 					$html .= '</a>';
-					if ($showCategory == 'badge') {
+					if ($showCategory == 'badge'  && $style != 4) {
 						$html .= '<div class="qubely-postgrid-cat-position qubely-postgrid-cat-position-' . esc_attr($categoryPosition) . '">';
 						$html .= $category;
 						$html .= '</div>';
@@ -1161,6 +1168,11 @@ function render_block_qubely_postgrid($att)
 				$html .= '<div class="qubely-post-grid-content">';
 				if ($showCategory == 'default') {
 					$html .= $category;
+				}
+				if ($showCategory == 'badge'  && $style == 4) {
+					$html .= '<div class="qubely-postgrid-cat-position qubely-postgrid-cat-position-' . esc_attr($categoryPosition) . '">';
+					$html .= $category;
+					$html .= '</div>';
 				}
 				if ($showTitle == 1) {
 					$html .= $title;
