@@ -2,8 +2,8 @@ const { __ } = wp.i18n
 import '../css/shape.scss'
 import icons from '../../helpers/icons'
 const { Component, Fragment } = wp.element
-const { CheckboxControl, Tooltip } = wp.components
-import { Range, Color, Select, QubelyDropdown } from '../FieldRender'
+const { CheckboxControl, Tooltip, Dropdown } = wp.components
+import { Range, Color } from '../FieldRender'
 class Shape extends Component {
     constructor(props) {
         super(props)
@@ -42,22 +42,25 @@ class Shape extends Component {
             <div className="qubely-field-shape qubely-field">
                 <div className="qubely-field-child">
                     <div className="qubely-field qubely-shape-picker-wrapper">
-                        <QubelyDropdown
-                            dropDownClassName={`qubely-field-child qubely-shape-picker ${value.style ? 'has-value' : ''}`}
+                        <Dropdown
+                            className={`qubely-field-child qubely-shape-picker ${value.style ? 'has-value' : ''}`}
                             contentClassName="qubely-shape-picker-content"
                             position="bottom center"
-                        >
-                            {
-                                value.style ?
-                                    <div className="qubely-field-shape-value" dangerouslySetInnerHTML={{ __html: qubely_admin.shapes[value.style] }} />
-                                    :
-                                    <div className="qubely-field-shape-placeholder">
-                                        <span >Select Shape</span>
-                                        <span className="qubely-icon">{showShapeOptions ? icons.arrow_up : icons.arrow_down}  </span>
-                                    </div>
+                            renderToggle={({ isOpen, onToggle }) =>
+                                <span onClick={onToggle} aria-expanded={isOpen}>
+                                    {
+                                        value.style ?
+                                            <div className="qubely-field-shape-value" dangerouslySetInnerHTML={{ __html: qubely_admin.shapes[value.style] }} />
+                                            :
+                                            <div className="qubely-field-shape-placeholder">
+                                                <span >Select Shape</span>
+                                                <span className="qubely-icon">{showShapeOptions ? icons.arrow_up : icons.arrow_down}  </span>
+                                            </div>
+                                    }
+                                </span>
                             }
-                            {this.renderShapeOptions()}
-                        </QubelyDropdown>
+                            renderContent={() => this.renderShapeOptions()}
+                        />
                         {
                             value.style &&
                             <Tooltip text={__('Clear')}>
