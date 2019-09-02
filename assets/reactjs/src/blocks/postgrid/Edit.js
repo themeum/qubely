@@ -137,7 +137,6 @@ class Edit extends Component {
 
 				//scart
 				stackBg,
-				scartHeight,
 				stackWidth,
 				stackSpace,
 				stackBorderRadius,
@@ -204,9 +203,8 @@ class Edit extends Component {
 				categoryPadding,
 				badgePadding,
 
-				//desing
+				//design
 				bgColor,
-				color,
 				border,
 				borderRadius,
 				padding,
