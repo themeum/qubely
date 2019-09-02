@@ -13,7 +13,7 @@ Gutenberg Blocks and readymade sections with rich customization options. Enhance
 
 == Description ==
 
-Qubely is a full-fledged Gutenberg block editor with plenty of predefined sections and modern layout packs to create beautiful pages and posts on the Gutenberg editor. It offers a whole new experience that minimizes all limitations of the Gutenberg editor and opens unlimited possibilities to create any simple to complex content on a WordPress website using the Gutenberg block editor. This user-friendly Gutenberg blocks has been developed with all necessary customization features to achieve any possible layout with Qubely Gutenberg block editor.
+Qubely is a full-fledged Gutenberg block toolkit with plenty of predefined sections and modern layout packs to create beautiful pages and posts on the Gutenberg editor. It offers a whole new experience that minimizes all limitations of the Gutenberg editor and opens unlimited possibilities to create any simple to complex content on a WordPress website using the Gutenberg block editor. This user-friendly Gutenberg blocks has been developed with all necessary customization features to achieve any possible layout with Qubely Gutenberg block editor.
 
 Qubely extends Gutenberg editor with many custom Gutenberg blocks that are missing in the Gutenberg editor. Take full control of the WordPress Gutenberg block editor with the ability to apply out of the box styling options. Create web pages and posts using Qubely’s custom Gutenberg blocks that are stunning as well as mobile optimized.
 

@@ -21,7 +21,6 @@ class Edit extends Component {
 		this.state = {
 			device: 'md',
 			spacer: true,
-			showBadgePadding: 'default',
 			categoriesList: [],
 		};
 	}
@@ -58,7 +57,7 @@ class Edit extends Component {
 		return value.split(' ').splice(0, limit).join(' ');
 	}
 
-	renderFeaturedImages = (post) => {
+	renderFeaturedImage = (post) => {
 		const { attributes: { layout, style, imgSize, imageAnimation, showCategory, categoryPosition } } = this.props
 		return (
 			<div className={`${layout === 1 ? 'qubely-post-list-img' : 'qubely-post-grid-img'} qubely-post-img qubely-post-img-${imageAnimation}`}>
@@ -73,7 +72,7 @@ class Edit extends Component {
 		)
 	}
 
-	renderCardContents = (post) => {
+	renderCardContent = (post) => {
 		const { attributes: { layout, style, readmoreStyle, showCategory, categoryPosition, showTitle, titlePosition, showAuthor, showDates, showComment, showExcerpt, excerptLimit, showReadMore, buttonText, readmoreSize } } = this.props
 		let title = <h3 className="qubely-postgrid-title"><a>{post.title.rendered}</a></h3>
 
@@ -92,7 +91,7 @@ class Edit extends Component {
 				{
 					(showAuthor || showDates || showComment) &&
 					<div className="qubely-postgrid-meta">
-						{showAuthor && <span><i className="fas fa-user"></i> By <a >{post.qubely_author.display_name}</a></span>}
+						{showAuthor && <span><i className="fas fa-user"></i> {__('By')} <a >{post.qubely_author.display_name}</a></span>}
 						{showDates && <span><i className="far fa-calendar-alt"></i> {dateI18n(__experimentalGetSettings().formats.date, post.date_gmt)}</span>}
 						{showComment && <span><i className="fas fa-comment"></i> {(post.qubely_comment ? post.qubely_comment : '0')}</span>}
 					</div>
@@ -201,6 +200,7 @@ class Edit extends Component {
 				categoryHoverBackground,
 				categoryRadius,
 				categoryPadding,
+				badgePosition,
 				badgePadding,
 
 				//design
@@ -230,7 +230,7 @@ class Edit extends Component {
 
 			}
 		} = this.props
-		const { device, showBadgePadding } = this.state
+		const { device } = this.state
 
 		if (uniqueId) { CssGenerator(this.props.attributes, 'postgrid', uniqueId) }
 
@@ -451,11 +451,11 @@ class Edit extends Component {
 												{ value: 'default', label: __('default'), title: __('Pre-defined') },
 												{ icon: 'fas fa-cog', value: 'none', title: __('Advanced') },
 											]}
-											value={showBadgePadding}
-											onChange={val => this.setState({ showBadgePadding: val })}
+											value={badgePosition}
+											onChange={val => setAttributes({ badgePosition: val })}
 										/>
 										{
-											showBadgePadding === 'default' ?
+											badgePosition === 'default' ?
 												<Select
 													label={__("")}
 													options={[['leftTop', __('Left Top')], ['rightTop', __('Right Top')], ['leftBottom', __('Left Bottom')], ['rightBottom', __('Right Bottom')]]}
@@ -620,8 +620,8 @@ class Edit extends Component {
 										return (
 											<div className={`qubely-postgrid ${layout === 1 ? 'qubely-post-list-view' : 'qubely-post-grid-view'} qubely-postgrid-style-${style}`}>
 												<div className={`${layout === 1 ? `qubely-post-list-wrap qubely-post-list-${((layout === 2) && (style === 3)) ? contentPosition : girdContentPosition}` : `qubely-post-grid-wrap qubely-post-grid-${((layout === 2) && (style === 3)) ? contentPosition : girdContentPosition}`}`}>
-													{showImages && post.qubely_featured_image_url && this.renderFeaturedImages(post)}
-													{this.renderCardContents(post)}
+													{showImages && post.qubely_featured_image_url && this.renderFeaturedImage(post)}
+													{this.renderCardContent(post)}
 												</div>
 											</div>
 										)

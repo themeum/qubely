@@ -29,8 +29,6 @@ export default function ({ label, enableSearch, defaultOptionsLabel, value, opti
                 console.log('close me !')
                 toggleOptions(false)
             }
-            // console.log('qubelySelectedOptions  : ', qubelySelectedOptions)
-            // console.log('event  : ', event.target)
         }
     }
     useEffect(() => {
