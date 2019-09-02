@@ -661,7 +661,7 @@ export default withSelect((select, props) => {
 	}
 	return {
 		posts: getEntityRecords('postType', 'post', query),
-		taxonomyList: allTaxonomy.post.terms[taxonomy === 'categories' ? 'category' : 'post_tag'] ? allTaxonomy.post.terms[taxonomy === 'categories' ? 'category' : 'post_tag'] : [],
+		taxonomyList: allTaxonomy.post.terms ? allTaxonomy.post.terms[taxonomy === 'categories' ? 'category' : 'post_tag'] ? allTaxonomy.post.terms[taxonomy === 'categories' ? 'category' : 'post_tag'] : [] : [],
 	};
 })
 	(Edit)

@@ -777,10 +777,7 @@ function register_block_qubely_postgrid()
 					'default' => '#fff',
 					'style' => [(object) [
 						'condition' => [
-							(object) ['key' => 'style', 'relation' => '==', 'value' => 4],
-							(object) ['key' => 'showAuthor', 'relation' => '==', 'value' => true],
-							(object) ['key' => 'showDates', 'relation' => '==', 'value' => true],
-							(object) ['key' => 'showComment', 'relation' => '==', 'value' => true]
+							(object) ['key' => 'style', 'relation' => '==', 'value' => 4]
 						],
 						'selector' => '{{QUBELY}} .qubely-postgrid-meta a {color: {{metaOverlayColor}};} {{QUBELY}} .qubely-postgrid-meta {color: {{metaOverlayColor}};} {{QUBELY}} .qubely-postgrid-meta span:before {background: {{metaOverlayColor}};}'
 					]]
