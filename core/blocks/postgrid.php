@@ -97,7 +97,7 @@ function register_block_qubely_postgrid()
 								(object) ['key' => 'style', 'relation' => '!=', 'value' => 4],
 								(object) ['key' => 'badgePosition', 'relation' => '!=', 'value' => 'default'],
 							],
-							'selector' => '{{QUBELY}} .qubely-postgrid-wraper .qubely-postgrid .qubely-post-grid-wrap .qubely-postgrid-cat-position'
+							'selector' => '{{QUBELY}} .qubely-postgrid-wrapper .qubely-postgrid .qubely-post-grid-wrapper .qubely-postgrid-cat-position'
 						]
 					]
 				),
@@ -147,20 +147,20 @@ function register_block_qubely_postgrid()
 				),
 
 				//Seperator
-				'showSeperator' => array(
+				'showSeparator' => array(
 					'type' => 'boolean',
 					'default' => true
 				),
 
-				'seperatorColor' => array(
+				'separatorColor' => array(
 					'type'    => 'string',
 					'default' => '#e5e5e5',
 					'style' => [(object) [
 						'condition' => [
 							(object) ['key' => 'style', 'relation' => '==', 'value' => 1],
-							(object) ['key' => 'showSeperator', 'relation' => '==', 'value' => true]
+							(object) ['key' => 'showSeparator', 'relation' => '==', 'value' => true]
 						],
-						'selector' => '{{QUBELY}} .qubely-post-list-view.qubely-postgrid-style-1:not(:last-child) {border-bottom-color: {{seperatorColor}};}'
+						'selector' => '{{QUBELY}} .qubely-post-list-view.qubely-postgrid-style-1:not(:last-child) {border-bottom-color: {{separatorColor}};}'
 					]]
 				),
 
@@ -174,7 +174,7 @@ function register_block_qubely_postgrid()
 						(object) [
 							'condition' => [
 								(object) ['key' => 'style', 'relation' => '==', 'value' => 1],
-								(object) ['key' => 'showSeperator', 'relation' => '==', 'value' => true]
+								(object) ['key' => 'showSeparator', 'relation' => '==', 'value' => true]
 							],
 							'selector' => '{{QUBELY}} .qubely-post-list-view.qubely-postgrid-style-1:not(:last-child){border-bottom-style: solid;border-bottom-width: {{separatorHeight}};}'
 						],
@@ -191,7 +191,7 @@ function register_block_qubely_postgrid()
 						(object) [
 							'condition' => [
 								(object) ['key' => 'style', 'relation' => '==', 'value' => 1],
-								(object) ['key' => 'showSeperator', 'relation' => '==', 'value' => true]
+								(object) ['key' => 'showSeparator', 'relation' => '==', 'value' => true]
 							],
 							'selector' => '{{QUBELY}} .qubely-post-list-view.qubely-postgrid-style-1:not(:last-child){padding-bottom: {{separatorSpace}};margin-bottom: {{separatorSpace}};}'
 						],
@@ -300,7 +300,7 @@ function register_block_qubely_postgrid()
 								(object) ['key' => 'layout', 'relation' => '==', 'value' => 1],
 								(object) ['key' => 'style', 'relation' => '==', 'value' => 3]
 							],
-							'selector' => '{{QUBELY}} .qubely-post-list-view.qubely-postgrid-style-3 .qubely-post-list-wrap .qubely-post-list-content'
+							'selector' => '{{QUBELY}} .qubely-post-list-view.qubely-postgrid-style-3 .qubely-post-list-wrapper .qubely-post-list-content'
 						],
 						(object) [
 							'condition' => [
@@ -327,7 +327,7 @@ function register_block_qubely_postgrid()
 								(object) ['key' => 'layout', 'relation' => '==', 'value' => 1],
 								(object) ['key' => 'style', 'relation' => '==', 'value' => 3]
 							],
-							'selector' => '{{QUBELY}} .qubely-post-list-view.qubely-postgrid-style-3 .qubely-post-list-wrap .qubely-post-list-content'
+							'selector' => '{{QUBELY}} .qubely-post-list-view.qubely-postgrid-style-3 .qubely-post-list-wrapper .qubely-post-list-content'
 						],
 						(object) [
 							'condition' => [
@@ -383,14 +383,14 @@ function register_block_qubely_postgrid()
 								(object) ['key' => 'layout', 'relation' => '==', 'value' => 1],
 								(object) ['key' => 'style', 'relation' => '==', 'value' => 3]
 							],
-							'selector' => '{{QUBELY}} .qubely-post-list-view.qubely-postgrid-style-3 .qubely-post-list-wrap .qubely-post-list-content'
+							'selector' => '{{QUBELY}} .qubely-post-list-view.qubely-postgrid-style-3 .qubely-post-list-wrapper .qubely-post-list-content'
 						],
 						(object) [
 							'condition' => [
 								(object) ['key' => 'layout', 'relation' => '==', 'value' => 2],
 								(object) ['key' => 'style', 'relation' => '==', 'value' => 3]
 							],
-							'selector' => '{{QUBELY}} .qubely-post-grid-view.qubely-postgrid-style-3 .qubely-post-grid-wrap .qubely-post-grid-content'
+							'selector' => '{{QUBELY}} .qubely-post-grid-view.qubely-postgrid-style-3 .qubely-post-grid-wrapper .qubely-post-grid-content'
 						]
 					]
 				),
@@ -411,7 +411,7 @@ function register_block_qubely_postgrid()
 								(object) ['key' => 'layout', 'relation' => '==', 'value' => 1],
 								(object) ['key' => 'style', 'relation' => '==', 'value' => 3]
 							],
-							'selector' => '{{QUBELY}} .qubely-post-list-view.qubely-postgrid-style-3 .qubely-post-list-wrap .qubely-post-list-content'
+							'selector' => '{{QUBELY}} .qubely-post-list-view.qubely-postgrid-style-3 .qubely-post-list-wrapper .qubely-post-list-content'
 						],
 						(object) [
 							'condition' => [
@@ -540,7 +540,7 @@ function register_block_qubely_postgrid()
 							(object) ['key' => 'readmoreStyle', 'relation' => '==', 'value' => 'fill'],
 							(object) ['key' => 'readmoreSize', 'relation' => '==', 'value' => 'custom']
 						],
-						'selector' => '{{QUBELY}} .qubely-postgrid-wraper .qubely-postgrid .qubely-postgrid-btn-wrapper .qubely-postgrid-btn.qubely-button-fill.is-custom'
+						'selector' => '{{QUBELY}} .qubely-postgrid-wrapper .qubely-postgrid .qubely-postgrid-btn-wrapper .qubely-postgrid-btn.qubely-button-fill.is-custom'
 					]]
 				),
 
@@ -554,7 +554,7 @@ function register_block_qubely_postgrid()
 					],
 					'style' => [(object) [
 						'condition' => [(object) ['key' => 'showTitle', 'relation' => '==', 'value' => true]],
-						'selector' => '{{QUBELY}} .qubely-postgrid-wraper .qubely-postgrid .qubely-postgrid-btn'
+						'selector' => '{{QUBELY}} .qubely-postgrid-wrapper .qubely-postgrid .qubely-postgrid-btn'
 					]]
 				),
 				'readmoreColor' => array(
@@ -565,7 +565,7 @@ function register_block_qubely_postgrid()
 							(object) ['key' => 'showReadMore', 'relation' => '==', 'value' => true],
 							(object) ['key' => 'readmoreStyle', 'relation' => '==', 'value' => 'fill']
 						],
-						'selector' => '{{QUBELY}} .qubely-postgrid-wraper .qubely-postgrid a.qubely-postgrid-btn {color: {{readmoreColor}};}'
+						'selector' => '{{QUBELY}} .qubely-postgrid-wrapper .qubely-postgrid a.qubely-postgrid-btn {color: {{readmoreColor}};}'
 					]]
 
 				),
@@ -577,7 +577,7 @@ function register_block_qubely_postgrid()
 							(object) ['key' => 'showReadMore', 'relation' => '==', 'value' => true],
 							(object) ['key' => 'readmoreStyle', 'relation' => '==', 'value' => 'outline']
 						],
-						'selector' => '{{QUBELY}} .qubely-postgrid-wraper .qubely-postgrid a.qubely-postgrid-btn {color: {{readmoreColor2}};}'
+						'selector' => '{{QUBELY}} .qubely-postgrid-wrapper .qubely-postgrid a.qubely-postgrid-btn {color: {{readmoreColor2}};}'
 					]]
 
 				),
@@ -586,7 +586,7 @@ function register_block_qubely_postgrid()
 					'default' => '',
 					'style' => [(object) [
 						'condition' => [(object) ['key' => 'showReadMore', 'relation' => '==', 'value' => true]],
-						'selector' => '{{QUBELY}} .qubely-postgrid-wraper .qubely-postgrid a.qubely-postgrid-btn:hover {color: {{readmoreHoverColor}};}'
+						'selector' => '{{QUBELY}} .qubely-postgrid-wrapper .qubely-postgrid a.qubely-postgrid-btn:hover {color: {{readmoreHoverColor}};}'
 					]]
 
 				),
@@ -607,7 +607,7 @@ function register_block_qubely_postgrid()
 					),
 					'style' => [(object) [
 						'condition' => [(object) ['key' => 'readmoreStyle', 'relation' => '==', 'value' => 'fill']],
-						'selector' => '{{QUBELY}} .qubely-postgrid-wraper .qubely-postgrid .qubely-postgrid-btn'
+						'selector' => '{{QUBELY}} .qubely-postgrid-wrapper .qubely-postgrid .qubely-postgrid-btn'
 					]]
 				),
 				'readmoreHoverBg' => array(
@@ -615,7 +615,7 @@ function register_block_qubely_postgrid()
 					'default' => (object) array(),
 					'style' => [(object) [
 						'condition' => [(object) ['key' => 'readmoreStyle', 'relation' => '==', 'value' => 'fill']],
-						'selector' => '{{QUBELY}} .qubely-postgrid-wraper .qubely-postgrid .qubely-postgrid-btn:hover'
+						'selector' => '{{QUBELY}} .qubely-postgrid-wrapper .qubely-postgrid .qubely-postgrid-btn:hover'
 					]]
 				),
 				'readmoreBorder' => array(
@@ -623,7 +623,7 @@ function register_block_qubely_postgrid()
 					'default' => (object) array(),
 					'style' => [(object) [
 						'condition' => [(object) ['key' => 'readmoreStyle', 'relation' => '==', 'value' => 'fill']],
-						'selector' => '{{QUBELY}} .qubely-postgrid-wraper .qubely-postgrid .qubely-postgrid-btn'
+						'selector' => '{{QUBELY}} .qubely-postgrid-wrapper .qubely-postgrid .qubely-postgrid-btn'
 					]]
 				),
 				'readmoreBorderRadius' => array(
@@ -638,7 +638,7 @@ function register_block_qubely_postgrid()
 					),
 					'style' => [(object) [
 						'condition' => [(object) ['key' => 'readmoreStyle', 'relation' => '==', 'value' => 'fill']],
-						'selector' => '{{QUBELY}} .qubely-postgrid-wraper .qubely-postgrid .qubely-postgrid-btn'
+						'selector' => '{{QUBELY}} .qubely-postgrid-wrapper .qubely-postgrid .qubely-postgrid-btn'
 					]]
 				),
 				'readmoreBoxShadow' => array(
@@ -646,7 +646,7 @@ function register_block_qubely_postgrid()
 					'default' => (object) array(),
 					'style' => [(object) [
 						'condition' => [(object) ['key' => 'readmoreStyle', 'relation' => '==', 'value' => 'fill']],
-						'selector' => '{{QUBELY}} .qubely-postgrid-wraper .qubely-postgrid .qubely-postgrid-btn'
+						'selector' => '{{QUBELY}} .qubely-postgrid-wrapper .qubely-postgrid .qubely-postgrid-btn'
 					]]
 				),
 
@@ -669,7 +669,7 @@ function register_block_qubely_postgrid()
 				'contentPadding' => array(
 					'type' => 'object',
 					'default' => (object) array(),
-					'style' => [(object) ['selector' => '{{QUBELY}} .qubely-postgrid-wraper .qubely-postgrid .qubely-post-grid-content,{{QUBELY}} .qubely-postgrid-wraper .qubely-postgrid .qubely-post-list-content']]
+					'style' => [(object) ['selector' => '{{QUBELY}} .qubely-postgrid-wrapper .qubely-postgrid .qubely-post-grid-content,{{QUBELY}} .qubely-postgrid-wrapper .qubely-postgrid .qubely-post-list-content']]
 				),
 				'categoryRadius' => array(
 					'type' => 'object',
@@ -830,7 +830,7 @@ function register_block_qubely_postgrid()
 					'default' => '',
 					'style' => [(object) [
 						'condition' => [(object) ['key' => 'style', 'relation' => '==', 'value' => 1]],
-						'selector' => '{{QUBELY}} .qubely-postgrid-wraper .qubely-postgrid .qubely-post-list-content {color: {{color}};}'
+						'selector' => '{{QUBELY}} .qubely-postgrid-wrapper .qubely-postgrid .qubely-post-list-content {color: {{color}};}'
 					]]
 				),
 				'bgColor' => array(
@@ -838,7 +838,7 @@ function register_block_qubely_postgrid()
 					'default' => (object) array(),
 					'style' => [(object) [
 						'condition' => [(object) ['key' => 'style', 'relation' => '==', 'value' => 1]],
-						'selector' => '{{QUBELY}} .qubely-postgrid-wraper'
+						'selector' => '{{QUBELY}} .qubely-postgrid-wrapper'
 					]]
 				),
 				'border' => array(
@@ -846,7 +846,7 @@ function register_block_qubely_postgrid()
 					'default' => (object) array(),
 					'style' => [(object) [
 						'condition' => [(object) ['key' => 'style', 'relation' => '==', 'value' => 1]],
-						'selector' => '{{QUBELY}} .qubely-postgrid-wraper'
+						'selector' => '{{QUBELY}} .qubely-postgrid-wrapper'
 					]]
 				),
 				'borderRadius' => array(
@@ -854,7 +854,7 @@ function register_block_qubely_postgrid()
 					'default' => (object) array(),
 					'style' => [(object) [
 						'condition' => [(object) ['key' => 'style', 'relation' => '==', 'value' => 1]],
-						'selector' => '{{QUBELY}} .qubely-postgrid-wraper'
+						'selector' => '{{QUBELY}} .qubely-postgrid-wrapper'
 					]]
 				),
 				'padding' => array(
@@ -862,7 +862,7 @@ function register_block_qubely_postgrid()
 					'default' => (object) array(),
 					'style' => [(object) [
 						'condition' => [(object) ['key' => 'style', 'relation' => '==', 'value' => 1]],
-						'selector' => '{{QUBELY}} .qubely-postgrid-wraper'
+						'selector' => '{{QUBELY}} .qubely-postgrid-wrapper'
 					]]
 				),
 				'boxShadow' => array(
@@ -870,7 +870,7 @@ function register_block_qubely_postgrid()
 					'default' => (object) array(),
 					'style' => [(object) [
 						'condition' => [(object) ['key' => 'style', 'relation' => '==', 'value' => 1]],
-						'selector' => '{{QUBELY}} .qubely-postgrid-wraper'
+						'selector' => '{{QUBELY}} .qubely-postgrid-wrapper'
 					]]
 				),
 
@@ -1021,7 +1021,7 @@ function register_block_qubely_postgrid()
 						'md' => 10,
 						'unit' => 'px'
 					),
-					// 'style' => [(object) ['selector' => '{{QUBELY}} .qubely-postgrid-wraper .qubely-postgrid']]
+					// 'style' => [(object) ['selector' => '{{QUBELY}} .qubely-postgrid-wrapper .qubely-postgrid']]
 				),
 				'showGlobalSettings' => array(
 					'type' => 'boolean',
@@ -1110,7 +1110,7 @@ function render_block_qubely_postgrid($att)
 
 	if ($query->have_posts()) {
 		$html .= '<div class="qubely-block-' . $uniqueId . '">';
-		$html .= '<div class="qubely-postgrid-wraper qubely-postgrid-layout-' . esc_attr($layout) . esc_attr($col) . '">';
+		$html .= '<div class="qubely-postgrid-wrapper qubely-postgrid-layout-' . esc_attr($layout) . esc_attr($col) . '">';
 		while ($query->have_posts()) {
 			$query->the_post();
 			$id = get_post_thumbnail_id();
@@ -1126,7 +1126,7 @@ function render_block_qubely_postgrid($att)
 
 			if ($layout === 1) {
 				$html .= '<div class="qubely-postgrid qubely-post-list-view qubely-postgrid-style-' . esc_attr($style) . '">';
-				$html .= '<div class="qubely-post-list-wrap qubely-post-list-' .  esc_attr(($layout == 2 && $style === 3) ? $contentPosition : $girdContentPosition)  . '">';
+				$html .= '<div class="qubely-post-list-wrapper qubely-post-list-' .  esc_attr(($layout == 2 && $style === 3) ? $contentPosition : $girdContentPosition)  . '">';
 				if (($showImages == 1) && has_post_thumbnail()) {
 					$html .= '<div class="qubely-post-list-img qubely-post-img qubely-post-img-' . esc_attr($imageAnimation) . '">';
 					$html .= '<a href="' . esc_url(get_the_permalink()) . '">';
@@ -1170,7 +1170,7 @@ function render_block_qubely_postgrid($att)
 			}
 			if ($layout === 2) {
 				$html .= '<div class="qubely-postgrid qubely-post-grid-view qubely-postgrid-style-' . esc_attr($style) . '">';
-				$html .= '<div class="qubely-post-grid-wrap qubely-post-grid-' . esc_attr(($layout == 2 && $style === 3) ? $contentPosition : $girdContentPosition)  . '">';
+				$html .= '<div class="qubely-post-grid-wrapper qubely-post-grid-' . esc_attr(($layout == 2 && $style === 3) ? $contentPosition : $girdContentPosition)  . '">';
 				if (($showImages == 1) && has_post_thumbnail()) {
 					$html .= '<div class="qubely-post-grid-img qubely-post-img qubely-post-img-' . esc_attr($imageAnimation) . '">';
 					$html .= '<a href="' . esc_url(get_the_permalink()) . '">';

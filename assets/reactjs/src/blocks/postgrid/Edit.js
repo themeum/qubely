@@ -172,9 +172,9 @@ class Edit extends Component {
 				showTitle,
 				titlePosition,
 
-				//Seperator
-				showSeperator,
-				seperatorColor,
+				//separator
+				showSeparator,
+				separatorColor,
 				separatorHeight,
 				separatorSpace,
 
@@ -341,14 +341,14 @@ class Edit extends Component {
 						{(layout === 1) && (style === 1) &&
 							<Fragment>
 								<Separator />
-								<Toggle label={__('Enable Seperator')} value={showSeperator} onChange={value => setAttributes({ showSeperator: value })} />
+								<Toggle label={__('Enable Separator')} value={showSeparator} onChange={value => setAttributes({ showSeparator: value })} />
 							</Fragment>
 						}
-						{(layout === 1) && (style === 1) && (showSeperator === true) &&
+						{(layout === 1) && (style === 1) && (showSeparator === true) &&
 							<Fragment>
-								<Color label={__('Seperator Color')} value={seperatorColor} onChange={value => setAttributes({ seperatorColor: value })} />
-								<Range label={__('Seperator Height')} value={separatorHeight} onChange={value => setAttributes({ separatorHeight: value })} unit={['px', 'em', '%']} min={0} max={30} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
-								<Range label={__('Seperator Spacing')} value={separatorSpace} onChange={value => setAttributes({ separatorSpace: value })} unit={['px', 'em', '%']} min={0} max={100} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
+								<Color label={__('Separator Color')} value={separatorColor} onChange={value => setAttributes({ separatorColor: value })} />
+								<Range label={__('Separator Height')} value={separatorHeight} onChange={value => setAttributes({ separatorHeight: value })} unit={['px', 'em', '%']} min={0} max={30} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
+								<Range label={__('Separator Spacing')} value={separatorSpace} onChange={value => setAttributes({ separatorSpace: value })} unit={['px', 'em', '%']} min={0} max={100} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
 							</Fragment>
 						}
 					</PanelBody>
@@ -362,21 +362,26 @@ class Edit extends Component {
 							onChange={value => setAttributes({ taxonomy: value })}
 						/>
 						<Dropdown
-							label={taxonomy}
+							label={taxonomy === 'categories' ? __('Categories') : __('Tags')}
 							enableSearch
 							defaultOptionsLabel="All"
 							options={[{ value: 'all', label: __('All') }, ...taxonomyList]}
-
 							value={taxonomy === 'categories' ? categories : tags}
 							onChange={value => setAttributes(taxonomy === 'categories' ? { categories: value.length && value[value.length - 1].label === 'All' ? [] : value } : { tags: value.length && value[value.length - 1].label === 'All' ? [] : value })}
 						/>
 						<Range label={__('Number of Items')} value={postsToShow} onChange={value => setAttributes({ postsToShow: parseInt(value) })} min={0} max={15} />
 
-						<Select
+						<SelectControl
 							label={__("Order By")}
-							options={['date', 'title', 'rand', 'menu_order']}
 							value={orderBy}
-							onChange={value => setAttributes({ orderBy: value })} />
+							options={[
+								{ label: __('Date'), value: 'date' },
+								{ label: __('Title'), value: 'title' },
+								{ label: __('Random'), value: 'rand' },
+								{ label: __('Menu Order'), value: 'menu_order' },
+							]}
+							onChange={value => setAttributes({ orderBy: value })}
+						/>
 						<ButtonGroup
 							label={__('Order')}
 							options={[[__('Ascending'), 'asc'], [__('Descending'), 'desc',]]}
@@ -435,7 +440,7 @@ class Edit extends Component {
 						/>
 						{showCategory !== 'none' &&
 							<Fragment>
-								{layout !== 2 && showCategory == 'badge' &&
+								{(layout !== 2 && showCategory == 'badge' && style != 4) &&
 									<Select
 										label={__("Badge Position")}
 										options={[['leftTop', __('Left Top')], ['rightTop', __('Right Top')], ['leftBottom', __('Left Bottom')], ['rightBottom', __('Right Bottom')]]}
@@ -443,7 +448,7 @@ class Edit extends Component {
 										onChange={value => setAttributes({ categoryPosition: value })}
 									/>
 								}
-								{layout === 2 && showCategory == 'badge' &&
+								{(layout === 2 && showCategory == 'badge' && style != 4) &&
 									<Fragment>
 										<RadioAdvanced
 											label={__('Badge Position')}
@@ -614,12 +619,12 @@ class Edit extends Component {
 					{
 						(posts && posts.length) ?
 
-							<div className={`qubely-postgrid-wraper qubely-postgrid-layout-${layout} ${(layout === 2) ? 'qubely-column qubely-column-md' + column.md + ' ' + 'qubely-column-sm' + column.sm + ' ' + 'qubely-column-xs' + column.xs : ''}`}>
+							<div className={`qubely-postgrid-wrapper qubely-postgrid-layout-${layout} ${(layout === 2) ? 'qubely-column qubely-column-md' + column.md + ' ' + 'qubely-column-sm' + column.sm + ' ' + 'qubely-column-xs' + column.xs : ''}`}>
 								{
 									posts && posts.map(post => {
 										return (
 											<div className={`qubely-postgrid ${layout === 1 ? 'qubely-post-list-view' : 'qubely-post-grid-view'} qubely-postgrid-style-${style}`}>
-												<div className={`${layout === 1 ? `qubely-post-list-wrap qubely-post-list-${((layout === 2) && (style === 3)) ? contentPosition : girdContentPosition}` : `qubely-post-grid-wrap qubely-post-grid-${((layout === 2) && (style === 3)) ? contentPosition : girdContentPosition}`}`}>
+												<div className={`${layout === 1 ? `qubely-post-list-wrapper qubely-post-list-${((layout === 2) && (style === 3)) ? contentPosition : girdContentPosition}` : `qubely-post-grid-wrapper qubely-post-grid-${((layout === 2) && (style === 3)) ? contentPosition : girdContentPosition}`}`}>
 													{showImages && post.qubely_featured_image_url && this.renderFeaturedImage(post)}
 													{this.renderCardContent(post)}
 												</div>
