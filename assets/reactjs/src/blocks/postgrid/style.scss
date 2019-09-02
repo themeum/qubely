@@ -5,7 +5,7 @@
   min-height: 200px;
 }
 //list view
-.qubely-post-list-wrap {
+.qubely-post-list-wrapper {
   display: block;
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
@@ -29,7 +29,7 @@
   }
 }
 @media screen and (min-width: 767px) {
-  .qubely-post-list-wrap {
+  .qubely-post-list-wrapper {
     display: -ms-flexbox;
     display: flex;
     .qubely-post-list-img {
@@ -337,17 +337,17 @@
 
 //content position
 .qubely-post-list-center {
-  &.qubely-post-list-wrap {
+  &.qubely-post-list-wrapper {
     align-items: center;
   }
 }
 .qubely-post-list-top {
-  &.qubely-post-list-wrap {
+  &.qubely-post-list-wrapper {
     align-items: flex-start;
   }
 }
 .qubely-post-list-bottom {
-  &.qubely-post-list-wrap {
+  &.qubely-post-list-wrapper {
     align-items: flex-end;
   }
 }
@@ -355,7 +355,7 @@
 //style 3
 .qubely-post-list-view {
   &.qubely-postgrid-style-3 {
-    .qubely-post-list-wrap {
+    .qubely-post-list-wrapper {
       .qubely-post-list-content {
         background: #fff;
         padding: 20px;
@@ -454,11 +454,11 @@
 }
 
 @media screen and (max-width: 992px) {
-  .qubely-post-list-center.qubely-post-list-wrap {
+  .qubely-post-list-center.qubely-post-list-wrapper {
     align-items: flex-start;
   }
   .qubely-post-list-view.qubely-postgrid-style-3
-    .qubely-post-list-wrap
+    .qubely-post-list-wrapper
     .qubely-post-list-img
     + .qubely-post-list-content {
     margin-left: 0;
