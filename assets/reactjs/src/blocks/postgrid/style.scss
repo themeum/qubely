@@ -536,21 +536,42 @@
     }
   }
   .qubely-column-md4 {
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     &.qubely-postgrid-layout-5 {
-      column-count: 4;
+      column-count: 3;
     }
   }
   .qubely-column-md5 {
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     &.qubely-postgrid-layout-5 {
-      column-count: 5;
+      column-count: 3;
     }
   }
   .qubely-column-md6 {
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     &.qubely-postgrid-layout-5 {
-      column-count: 6;
+      column-count: 3;
     }
   }
+}
+
+@media (min-width: 1299px) {
+    .qubely-column-md4 {
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        &.qubely-postgrid-layout-5 {
+          column-count: 4;
+        }
+    }
+    .qubely-column-md5 {
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+        &.qubely-postgrid-layout-5 {
+          column-count: 5;
+        }
+      }
+      .qubely-column-md6 {
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+        &.qubely-postgrid-layout-5 {
+          column-count: 6;
+        }
+      }
 }
