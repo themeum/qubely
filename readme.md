@@ -1,4 +1,4 @@
-#  Gutenberg Blocks with Layout Packs & Readymade Blocks Collection - Qubely 
+#  Advanced Gutenberg Blocks – Qubely   
 
 Contributors: **themeum**
 
