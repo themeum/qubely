@@ -80,6 +80,22 @@ function register_block_qubely_postgrid()
 					'type' => 'string',
 					'default' => 'leftTop',
 				),
+				'badgePadding' => array(
+					'type' => 'object',
+					'default' => (object) [
+						'paddingType' => 'custom',
+						'unit' => 'px',
+					],
+					'style' => [
+						(object) [
+							'condition' => [
+								(object) ['key' => 'layout', 'relation' => '==', 'value' => 2,],
+								(object) ['key' => 'style', 'relation' => '!=', 'value' => 4]
+							],
+							'selector' => '{{QUBELY}} .qubely-postgrid-wraper .qubely-postgrid .qubely-post-grid-wrap .qubely-postgrid-cat-position'
+						]
+					]
+				),
 				'showDates' => array(
 					'type' => 'boolean',
 					'default' => true

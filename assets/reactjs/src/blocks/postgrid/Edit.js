@@ -21,6 +21,7 @@ class Edit extends Component {
 		this.state = {
 			device: 'md',
 			spacer: true,
+			showBadgePadding: 'default',
 			categoriesList: [],
 		};
 	}
@@ -201,6 +202,7 @@ class Edit extends Component {
 				categoryHoverBackground,
 				categoryRadius,
 				categoryPadding,
+				badgePadding,
 
 				//desing
 				bgColor,
@@ -230,7 +232,7 @@ class Edit extends Component {
 
 			}
 		} = this.props
-		const { device } = this.state
+		const { device, showBadgePadding } = this.state
 
 		if (uniqueId) { CssGenerator(this.props.attributes, 'postgrid', uniqueId) }
 
@@ -435,13 +437,37 @@ class Edit extends Component {
 						/>
 						{showCategory !== 'none' &&
 							<Fragment>
-								{showCategory == 'badge' &&
+								{layout !== 2 && showCategory == 'badge' &&
 									<Select
 										label={__("Badge Position")}
 										options={[['leftTop', __('Left Top')], ['rightTop', __('Right Top')], ['leftBottom', __('Left Bottom')], ['rightBottom', __('Right Bottom')]]}
 										value={categoryPosition}
 										onChange={value => setAttributes({ categoryPosition: value })}
 									/>
+								}
+								{layout === 2 && showCategory == 'badge' &&
+									<Fragment>
+										<RadioAdvanced
+											label={__('Badge Position')}
+											options={[
+												{ value: 'default', label: __('default'), title: __('Pre-defined') },
+												{ icon: 'fas fa-cog', value: 'none', title: __('Advanced') },
+											]}
+											value={showBadgePadding}
+											onChange={val => this.setState({ showBadgePadding: val })}
+										/>
+										{
+											showBadgePadding === 'default' ?
+												<Select
+													label={__("")}
+													options={[['leftTop', __('Left Top')], ['rightTop', __('Right Top')], ['leftBottom', __('Left Bottom')], ['rightBottom', __('Right Bottom')]]}
+													value={categoryPosition}
+													onChange={value => setAttributes({ categoryPosition: value })}
+												/>
+												: <Padding label={__('Advanced')} value={badgePadding} onChange={val => setAttributes({ badgePadding: val })} min={0} max={60} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
+										}
+										<Separator />
+									</Fragment>
 								}
 								<Typography label={__('Typography')} value={categoryTypography} onChange={value => setAttributes({ categoryTypography: value })} device={device} onDeviceChange={value => this.setState({ device: value })} />
 								<Tabs>
