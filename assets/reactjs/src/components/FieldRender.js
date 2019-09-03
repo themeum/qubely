@@ -32,7 +32,51 @@ import Animation from './fields/Animation'
 import Dropdown from './fields/DropDown'
 import Padding from './fields/Padding'
 import Margin from './fields/Margin'
+import Carousel from './fields/Carousel'
 import { QubelyButtonEdit, QubelyButtonSave } from './fields/QubelyButton'
 import { QubelyIconListEdit, QubelyIconListSave } from './fields/QubelyIconList'
+import { TestimonialEdit, TestimonialSave } from './fields/Testimonial'
 
-export { Alignment, Border, BorderRadius, BoxShadow, ButtonGroup, Color, Dimension, Gradient, IconList, IconSelector, Styles, Separator, Wrapper, Shape, Media, Typography, Url, Selector, Background, Tabs, Tab, InnerPanel, Select, Range, Toggle, ColorAdvanced, RadioAdvanced, DragDimension, Counter, Animation, Dropdown, QubelyButtonEdit, QubelyButtonSave, Headings, Padding, Margin, QubelyIconListEdit, QubelyIconListSave }
+export {
+    Alignment,
+    Animation,
+    Border,
+    BorderRadius,
+    BoxShadow,
+    ButtonGroup,
+    Color,
+    Counter,
+    Carousel,
+    Dimension,
+    Gradient,
+    Headings,
+    IconList,
+    IconSelector,
+    Margin,
+    Padding,
+    Selector,
+    Select,
+    Styles,
+    Shape,
+    Separator,
+    Tabs,
+    Tab,
+    TestimonialEdit,
+    TestimonialSave,
+    Typography,
+    Wrapper,
+    Media,
+    Url,
+    Background,
+    InnerPanel,
+    Range,
+    Toggle,
+    ColorAdvanced,
+    RadioAdvanced,
+    DragDimension,
+    Dropdown,
+    QubelyButtonEdit,
+    QubelyButtonSave,
+    QubelyIconListEdit,
+    QubelyIconListSave
+}

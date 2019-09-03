@@ -1,0 +1,239 @@
+
+.qubely-block-testimonial {
+    transition: all 400ms;
+    // Editor line height hack
+    .editor-rich-text {
+        .editor-rich-text__tinymce {
+            line-height: inherit;
+        }
+    }
+    
+    .qubely-testimonial-quote {
+        .qubely-quote-icon {
+            line-height: 1;
+            width: auto;
+            height: auto;
+        }
+  
+        &.qubely-position-bottom {
+            .qubely-quote-icon {
+                transform: scaleY(-1);
+            }
+        }
+    }
+  
+    .qubely-testimonial-avatar {
+        &.qubely-image-placeholder i {
+            font-size: .5em;
+        }
+    }
+    
+    .qubely-testimonial-avatar-layout-left,
+    .qubely-testimonial-avatar-layout-right {
+        display: inline-flex;
+        align-items: center;
+        .qubely-testimonial-author-info {
+            text-align: left;
+        }
+    }
+  
+    .qubely-testimonial-avatar-layout-right {
+        .qubely-testimonial-author-info {
+            text-align: right;
+        }
+    }
+  
+    //rating
+    .qubely-testimonial-ratings {
+        unicode-bidi: bidi-override;
+        display: inline-block;
+        position: relative;
+        letter-spacing: 5px;
+        &:before, &:after{
+            content: "\f005\f005\f005\f005\f005";
+            font-family: 'Font Awesome\ 5 Free';
+            font-weight: 400;
+            display: block;
+            white-space: nowrap;
+        }
+        
+        &:before{
+            position: absolute;
+            z-index: 1;
+            left: 0px;
+            overflow: hidden;
+            font-family: 'Font Awesome\ 5 Free';
+            font-weight: 900;
+            content: "\f005\f005\f005\f005\f005";
+        }
+        &:after{
+            z-index: 0;
+        }
+        &[data-qubelyrating="1"]:before {
+            width: 20%;
+        }
+        &[data-qubelyrating="1.5"]:before {
+            width: 29%;
+        }
+        &[data-qubelyrating="2"]:before {
+            width: 40%;
+        }
+        &[data-qubelyrating="2.5"]:before {
+            width: 49%;
+        }
+        &[data-qubelyrating="3"]:before {
+            width: 60%;
+        }
+        &[data-qubelyrating="3.5"]:before {
+            width: 69%;
+        }
+        &[data-qubelyrating="4"]:before {
+            width: 80%;
+        }
+        &[data-qubelyrating="4.5"]:before {
+            width: 89%;
+        }
+        &[data-qubelyrating="5"]:before {
+            width: 100%;
+        }
+    }
+  }
+  
+  //slider css
+  
+  .js-slider{
+    -ms-touch-action:pan-y;
+    touch-action:pan-y;
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none
+  }
+  .js-slider,.js-slider .js-slider-list,.js-slider-outer-stage{
+        position:relative;
+        overflow:hidden
+    }
+  .js-slider-outer-stage{
+    -webkit-perspective:1000px;
+    perspective:1000px;
+    transition:all .25s ease 0s;
+    -webkit-transition:all .25s ease 0s
+  }
+  .js-slider .js-indicator{
+    position:absolute;
+    z-index:9;
+    -webkit-perspective:1000px;
+    perspective:1000px;
+    transform-style:preserve-3d;
+    transition-property:transform,-webkit-transform,width;
+    -webkit-transition-property:transform,-webkit-transform,width;
+    transition-timing-function:linear;
+    -webkit-transition-timing-function:linear
+  }
+  .js-slider .js-item{
+    position:relative;
+    float:left;
+    overflow:hidden
+  }
+  .js-slider .js-item.active,.js-slider .js-item.dragenable{
+    visibility:visible;
+    transform-style:preserve-3d
+  }
+  .js-slider .js-item.prev-item{
+    z-index:1;
+    visibility:visible
+  }
+  .js-slider .js-dots,.js-slider .js-nav-control{
+    position:relative;
+    height:20px;
+    width:100%;
+    margin-top:5px;
+    z-index:3
+  }
+  .js-slider .js-dots{
+    position:absolute;
+    bottom:0px;
+    left:50%;
+    transform:translateX(-50%)}
+  
+  .js-slider .js-nav-control .nav-control{
+    display:inline-block;
+    height:40px;
+    width:40px;
+    padding:10px;
+    border:1px solid #ababab;
+    position:absolute;
+    cursor:pointer;
+    text-align:center;
+    bottom:155px;
+    background:rgba(255,255,255,.4)
+  }
+  .js-slider .js-nav-control .nav-control.next-control{
+    right:0
+  }
+  .js-slider .js-nav-control .nav-control.prev-control{
+    left:0
+  }
+  .js-slider .js-dots ul{
+    margin:-4px;
+    padding:0;
+    list-style:none;
+    text-align:center
+  }
+  .js-slider .js-dots ul li{
+    display:inline-block;
+    height:4px;
+    width:30px;
+    margin:5px;
+    border:0;
+    background:rgba(218,92,92,.4);
+    border-radius:2px;
+    cursor:pointer;
+    position:relative
+  }
+  .js-slider .js-dots ul li.active{
+    width:80px
+  }
+  .js-slider .js-dots ul li .dot-indicator{
+    position:absolute;
+    -webkit-perspective:1000px;
+    perspective:1000px;
+    transform-style:preserve-3d;
+    transition-property:transform,-webkit-transform,width;
+    -webkit-transition-property:transform,-webkit-transform,width;
+    transition-timing-function:linear;
+    -webkit-transition-timing-function:linear;
+    width:0;
+    left:0;
+    top:0;
+    height:4px;
+    border-radius:2px
+  }
+  .js-slider .js-dots ul li .dot-indicator.active{
+    background:#0A6EBD;
+    width:100%;
+    top:0;
+    border-radius:2px
+  }
+  
+  .qubely-single-img{
+    cursor: cell;
+  }
+  
+  .qubely-block-testimonial {
+    background-color: #F4F4F4;
+  }
+  .qubely-layout-three span.dashicons.dashicons-arrow-down {
+    text-align: center;
+    font-size: 52px;
+    margin-top: -22px;
+    width: 100%;
+    color: #F4F4F4;
+  }
+  
+  .qubely-layout-three .qubely-testimonial-avatar i {
+    font-size: .5em;
+  }
+  .qubely-layout-three .qubely-single-img {
+    float: left;
+  }
