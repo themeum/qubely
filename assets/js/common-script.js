@@ -499,4 +499,19 @@ function loadScriptAsync(src) {
             })
         })
     }
+
+    $(document).ready(function(){
+        if($('.qubely-block-carousel').length > 0){
+            $('.qubely-block-carousel').each( function(){
+                const wrapperDiv = $(this).parent()
+                let options = {}
+                if( typeof wrapperDiv.attr('options') !== 'undefined'){
+                    let _options = wrapperDiv.attr('options')
+                    options = _options !== '' ? JSON.parse( _options ) : options
+                }
+                $(this).JsSlider(options)
+            })
+        }
+    })
+
 })(jQuery);

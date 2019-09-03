@@ -4,15 +4,15 @@ const { Component } = wp.element
 const { InnerBlocks } = wp.editor
 
 class Edit extends Component {
-    constructor(){
+    constructor() {
         super()
         this.state = {
             activeItem: false
         }
     }
 
-    onDeleteItem(event){
-    let { rootBlock, block, clientId, updateBlockAttributes, removeBlock } = this.props
+    onDeleteItem(event) {
+        let { rootBlock, block, clientId, updateBlockAttributes, removeBlock } = this.props
         const selectedBlockIndex = this.props.getIndex(clientId, rootBlock.clientId)
         let innerBlocks = rootBlock.innerBlocks
         innerBlocks.splice(selectedBlockIndex, 1)
@@ -20,22 +20,20 @@ class Edit extends Component {
         slider_items.splice(selectedBlockIndex, 1)
         updateBlockAttributes(rootBlock.clientId, Object.assign(rootBlock.attributes, { slider_items: slider_items }))
         removeBlock(block.clientId);
-        if( slider_items.length === 0 ){
+        if (slider_items.length === 0) {
             removeBlock(rootBlock.clientId)
         }
     }
 
     render() {
         return (
-            <div 
-                className="qubely-slider-item-edit-mode" 
+            <div
+                className="qubely-slider-item-edit-mode"
                 onMouseEnter={() => this.setState({ activeItem: true })}
                 onMouseLeave={() => this.setState({ activeItem: false })}
             >
-                {this.state.activeItem && <span onClick={this.onDeleteItem.bind(this)} className="qubely-delete-slider-item"><i className="fas fa-trash"></i></span> }
-                <InnerBlocks
-                    templateLock={false}
-                />
+                {this.state.activeItem && <span onClick={this.onDeleteItem.bind(this)} className="qubely-delete-slider-item"><i className="fas fa-trash"></i></span>}
+                <InnerBlocks templateLock={false} />
             </div>
         )
     }

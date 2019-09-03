@@ -1,7 +1,7 @@
 const { __ } = wp.i18n
 const { Fragment, Component } = wp.element;
 const { PanelBody, TextControl, ToggleControl, Tooltip, Notice } = wp.components
-import {  Range } from '../../components/FieldRender'
+import { Range } from '../../components/FieldRender'
 const { InspectorControls, InnerBlocks } = wp.editor
 
 import Carousel from './Carousel'
@@ -14,7 +14,7 @@ class Edit extends Component {
 		}
 	}
 
-	componentDidMount(){
+	componentDidMount() {
 		const { setAttributes, clientId, attributes: { uniqueId } } = this.props
 		const _client = clientId.substr(0, 6)
 		if (!uniqueId) {
@@ -32,27 +32,27 @@ class Edit extends Component {
 		this.props.setAttributes({ [key]: value })
 	}
 
-    renderTmpls(){
-		const { attributes:{slider_items} } = this.props
-		return slider_items.map( (item, index) => {
-			return ['qubely/carouselitem', { id: index+1, customClassName: `qubely-slider-item`},
+	renderTmpls() {
+		const { attributes: { slider_items } } = this.props
+		return slider_items.map((item, index) => {
+			return ['qubely/carouselitem', { id: index + 1, customClassName: `qubely-slider-item` },
 				[
-					[ 'qubely/heading', { content: `Carousel Title`, alignment: {md:'center'} }],
-					[ 'core/image', { url:'https://sppagebuilder.com/addons/image/image1.jpg'}],
+					['qubely/heading', { content: `Carousel ${index + 1}`, alignment: { md: 'center' } }],
+					['qubely/testimonial', {}],
 				]
 			]
-        })
+		})
 	}
 
-	addSliderItem(){
-		const { setAttributes, attributes:{ slider_items } } = this.props
-		const cloneItems = [...slider_items, slider_items.length+1]
+	addSliderItem() {
+		const { setAttributes, attributes: { slider_items } } = this.props
+		const cloneItems = [...slider_items, slider_items.length + 1]
 		setAttributes({ slider_items: cloneItems })
 	}
 
 	render() {
 		const { attributes } = this.props
-		const { autoplay, items, slider_items, interval, speed, dots, nav, center  } = attributes
+		const { autoplay, items, slider_items, interval, speed, dots, nav, center } = attributes
 		const options = {
 			autoplay,
 			items,
@@ -60,7 +60,7 @@ class Edit extends Component {
 			speed,
 			center,
 			dots,
-            nav,
+			nav,
 			interval,
 		};
 		return (
@@ -92,51 +92,51 @@ class Edit extends Component {
 						/>
 
 						<Range
-                            label={__('Active Items')}
-                            value={items}
-                            onChange={(value) => this.changePluginAttribute('items', value)}
-                            min={1}
+							label={__('Active Items')}
+							value={items}
+							onChange={(value) => this.changePluginAttribute('items', value)}
+							min={1}
 							max={20}
 							step={1}
-                            responsive={true}
-                        />
+							responsive={true}
+						/>
 
 						<Range
-                            label={__('Add Interval(ms)')}
-                            value={interval}
-                            onChange={(value) => this.changePluginAttribute('interval', value)}
-                            min={500}
+							label={__('Add Interval(ms)')}
+							value={interval}
+							onChange={(value) => this.changePluginAttribute('interval', value)}
+							min={500}
 							max={10000}
 							step={100}
-                        />
-						
-						<Range
-                            label={__('Speed (ms)')}
-                            value={speed}
-                            onChange={(value) => this.changePluginAttribute('speed', value)}
-                            min={300}
-							max={10000}
-							step={100}
-                        />
+						/>
 
-						{ speed > interval &&  
-						<Notice status="warning">
-							Interval should be bigger than speed otherwise it will make equal!
+						<Range
+							label={__('Speed (ms)')}
+							value={speed}
+							onChange={(value) => this.changePluginAttribute('speed', value)}
+							min={300}
+							max={10000}
+							step={100}
+						/>
+
+						{speed > interval &&
+							<Notice status="warning">
+								Interval should be bigger than speed otherwise it will make equal!
 						</Notice>
 						}
 
 					</PanelBody>
 				</InspectorControls>
 				<Fragment>
-					<Carousel 
-						ref="JsSlider" 
+					<Carousel
+						ref="JsSlider"
 						items={slider_items}
 						options={options}
 					>
 						<InnerBlocks
 							template={this.renderTmpls()}
 							templateLock="all"
-							allowedBlocks={['qubely/carouselitem']} 
+							allowedBlocks={['qubely/carouselitem']}
 						/>
 					</Carousel>
 					<Tooltip text={__('Add new item')}>
