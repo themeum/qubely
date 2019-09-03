@@ -38,7 +38,7 @@ class Edit extends Component {
 			return ['qubely/carouselitem', { id: index + 1, customClassName: `qubely-slider-item` },
 				[
 					['qubely/heading', { content: `Carousel ${index + 1}`, alignment: { md: 'center' } }],
-					['qubely/testimonial', {}],
+					['qubely/testimonial', {}]
 				]
 			]
 		})
