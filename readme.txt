@@ -65,7 +65,7 @@ Qubely adds numerous custom Gutenberg blocks to the Gutenberg block editor and t
 * [Team](https://qubely.io/block/team/)
 * [Image](https://qubely.io/block/image/)
 * [Timeline](https://qubely.io/block/timeline/)
-* Post Grid
+* [Post Grid](https://qubely.io/block/post-grid/)
 * More advanced Gutenberg blocks coming
 
 
