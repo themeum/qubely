@@ -260,8 +260,5 @@ registerBlockType('qubely/carousel', {
 		showContextMenu: { type: 'boolean', default: true },
 	},
 	edit: Edit,
-	// save: Save
-	save: function(){
-		return <div>test</div>
-	},
+	save: Save
 });
