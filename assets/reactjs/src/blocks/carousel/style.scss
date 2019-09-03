@@ -1,0 +1,151 @@
+.qubely-slider{
+    -ms-touch-action:pan-y;
+    touch-action:pan-y;
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none
+  }
+  
+  .qubely-slider-outer-stage{
+        position:relative;
+        overflow:hidden
+    }
+  .qubely-slider-outer-stage{
+    -webkit-perspective:1000px;
+    perspective:1000px;
+    transition:all .25s ease 0s;
+    -webkit-transition:all .25s ease 0s
+  }
+  .qubely-slider .js-indicator{
+    position:absolute;
+    z-index:9;
+    -webkit-perspective:1000px;
+    perspective:1000px;
+    transform-style:preserve-3d;
+    transition-property:transform,-webkit-transform,width;
+    -webkit-transition-property:transform,-webkit-transform,width;
+    transition-timing-function:linear;
+    -webkit-transition-timing-function:linear
+  }
+  .qubely-slider .qubely-slider-item{
+    position:relative;
+    float:left;
+  }
+  .qubely-slider .qubely-slider-item.active,.qubely-slider .qubely-slider-item.dragenable{
+    visibility:visible;
+    transform-style:preserve-3d
+  }
+  .qubely-slider .qubely-slider-item.prev-item{
+    z-index:1;
+    visibility:visible
+  }
+  .qubely-slider .qubely-slider-dots{
+    position:relative;
+    height:20px;
+    width:100%;
+    margin-top:5px;
+    z-index:3
+  }
+  .qubely-slider .qubely-slider-nav-control {
+    position: absolute;
+    height: 1px;
+    width: 100%;
+    top: 40%;
+  }
+  .qubely-slider .qubely-slider-dots{
+    position: absolute;
+    bottom:50px;
+    left:50%;
+    transform:translateX(-50%)}
+  
+  .qubely-slider .qubely-slider-nav-control .qubely-nav-control{
+    display: inline-block;
+    height:40px;
+    width:40px;
+    border:1px solid #ababab;
+    position: absolute;
+    cursor: pointer;
+    text-align:center;
+    bottom:100px;
+    background:rgba(255,255,255,.4);
+    top: 50%;
+  }
+  .qubely-slider .qubely-slider-nav-control .qubely-nav-control.qubely-next-control{
+    right:-14px;
+  }
+  .qubely-slider .qubely-slider-nav-control .qubely-nav-control.qubely-prev-control{
+    left:-14px;
+  }
+  .qubely-slider .qubely-slider-dots ul{
+    margin:-4px;
+    padding:0;
+    list-style:none;
+    text-align:center
+  }
+  .qubely-slider .qubely-slider-dots ul li{
+    display:inline-block;
+    height:4px;
+    width:30px
+    ;margin:5px;
+    border:0;
+    background:rgba(218,92,92,.4);
+    border-radius:2px;
+    cursor:pointer;
+    position:relative
+  }
+  .qubely-slider .qubely-slider-dots ul li.active{
+    width:80px
+  }
+  .qubely-slider .qubely-slider-dots ul li .dot-indicator{
+    position:absolute;
+    -webkit-perspective:1000px;
+    perspective:1000px;
+    transform-style:preserve-3d;
+    transition-property:transform,-webkit-transform,width;
+    -webkit-transition-property:transform,-webkit-transform,width;
+    transition-timing-function:linear;
+    -webkit-transition-timing-function:linear;
+    width:0;
+    left:0;
+    top:0;
+    height:4px;
+    border-radius:2px
+  }
+  .qubely-slider .qubely-slider-dots ul li .dot-indicator.active{
+    background:#fff;
+    width:100%;
+    top:0;
+    border-radius:2px
+  }
+  .qubely-slider-item-edit-mode {
+    &:hover{
+      &:before {
+        content: '';
+        border: 1px solid #efefef;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+      }
+    }
+    
+  }
+  .qubely-slider-freez {
+    overflow: hidden;
+  }
+  .qubely-action-add-carousel-item {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    cursor: pointer;
+  }
+  .qubely-delete-slider-item {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 12px;
+    cursor: pointer;
+    display: inline-block;
+    color: red;
+    z-index: 9;
+  }

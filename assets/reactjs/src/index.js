@@ -29,7 +29,9 @@ import './blocks/team'          // Team
 import './blocks/pricing'       // pricing
 import './blocks/timeline'      // Timeline
 import './blocks/postgrid'      // Postgrid
-import './blocks/testimonialcarousel'      // testimonialcarousel
+// import './blocks/testimonialcarousel'      // testimonialcarousel
+import './blocks/carousel'       // Carousel
+import './blocks/carousel/carouselitem'       // Carousel item
 
 // Global Settings
 import './blocks/pagesettings'

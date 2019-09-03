@@ -12,6 +12,10 @@ export const selectValue = ( data ) => {
     return data.map( (val) => { return { value: val, label: val } })
 }
 
+export const isObject = ( obj ) => typeof obj === 'function' || typeof obj === 'object' && !!obj;
+export const isArray = (arg) => Object.prototype.toString.call(arg) === '[object Array]';
+
+
 export const setValue = ( defaultVal, key ) => {
     let data = {}
     defaultVal.forEach(val=>data[val]=false)
