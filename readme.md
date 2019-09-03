@@ -1,4 +1,4 @@
-#  Gutenberg Blocks with Layout Packs & Readymade Blocks Collection - Qubely 
+#  Advanced Gutenberg Blocks – Qubely   
 
 Contributors: **themeum**
 
@@ -6,7 +6,7 @@ Donate link: <a href=" https://www.themeum.com">https://www.themeum.com</a>
 Tags: Qubely, website builder, gutenberg block, gutenberg, page builder, drag and drop editor, responsive, site editor, editor, drag-and-drop, visual editor, landing page, frontend editor, wordpress page builder, free page builder, layout builder  
 Requires at least: 5.0  
 Tested up to: 5.2  
-Stable tag: 1.0.9  
+Stable tag: 1.1.0  
 Requires PHP: 5.4.0  
 License: GPL-2.0+  
 License URI: http://www.gnu.org/licenses/gpl-2.0.txt
@@ -65,6 +65,7 @@ Qubely adds numerous custom Gutenberg blocks to the WordPress block editor and t
 * Team
 * Image
 * Timeline
+* Post Grid
 * More advanced Gutenberg blocks coming
 
 
@@ -119,6 +120,8 @@ regardless of the device type and align them flexibly (Left/Center/Right). Color
 - **Image:** Insert and beautify images with Qubely Image Block. There are 2 different premade layouts (Simple and Blurb) with plenty of customization options. You can define image opacity, alignment, border-radius, and box-shadow. Animate images, set up typography, enable overlay, and many more.
 
 - **Timeline:** Display the timelines of various events like product releases, company history & milestones, upcoming updates, achievements, and many more with Qubely’s Timeline block. Showcase detailed timelines/roadmaps and style them with plenty of customization options. Add images, texts, headings, setup connectors with icons, and tweak timeline bar your way.
+
+- **Post Grid:** The Post Grid block lets you take the blog posts of the website and display them in different grid and list layouts. It takes care of every detail of the grid/list layout. You can define the number of blog post, style the feature image, tweak typography, control spacing, determine post excerpts, apply animation effect, and do many more with Qubely’s Post Grid block.
 
 
 ## Some exciting Qubely features in details
@@ -198,6 +201,11 @@ Found a bug? Please let us know by posting on the support section of this plugin
 
 
 # Changelog
+
+**1.1.0 - 02 September, 2019**
+
+New: Post Grid block  
+New: Custom dropdown field with search option  
 
 **1.0.9 - 23 August, 2019**
 

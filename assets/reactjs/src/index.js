@@ -28,6 +28,7 @@ import './blocks/wrapper'       // Wrapper
 import './blocks/team'          // Team
 import './blocks/pricing'       // pricing
 import './blocks/timeline'      // Timeline
+import './blocks/postgrid'      // Postgrid
 
 // Global Settings
 import './blocks/pagesettings'

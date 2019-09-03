@@ -59,6 +59,19 @@ icons.form_material = <img src={`${img_path}/form/material.svg`} alt={__('Materi
 icons.videopopup_fill = <img src={`${img_path}/videopopup/fill.svg`} alt={__('Fill')} />;
 icons.videopopup_classic = <img src={`${img_path}/videopopup/classic.svg`} alt={__('Classic')} />;
 
+icons.postgrid_1 = <img src={`${img_path}/postgrid/1.svg`} alt={__('Layout 1')} />;
+icons.postgrid_2 = <img src={`${img_path}/postgrid/2.svg`} alt={__('Layout 2')} />;
+icons.postgrid_3 = <img src={`${img_path}/postgrid/pro1.svg`} alt={__('Layout 3')} />;
+icons.postgrid_4 = <img src={`${img_path}/postgrid/pro2.svg`} alt={__('Layout 4')} />;
+icons.postgrid_5 = <img src={`${img_path}/postgrid/pro3.svg`} alt={__('Layout 4')} />;
+icons.postgrid_design_1 = <img src={`${img_path}/postgrid/11.svg`} alt={__('Design 1')} />;
+icons.postgrid_design_2 = <img src={`${img_path}/postgrid/12.svg`} alt={__('Design 2')} />;
+icons.postgrid_design_3 = <img src={`${img_path}/postgrid/13.svg`} alt={__('Design 3')} />;
+icons.postgrid_design_4 = <img src={`${img_path}/postgrid/14.svg`} alt={__('Design 4')} />;
+icons.postgrid_design_5 = <img src={`${img_path}/postgrid/15.svg`} alt={__('Design 5')} />;
+icons.postgrid_design_6 = <img src={`${img_path}/postgrid/16.svg`} alt={__('Design 6')} />;
+
+
 icons.h1 = <svg width="17" height="13" viewBox="0 0 17 13" xmlns="http://www.w3.org/2000/svg"><g className="qubely-svg-fill" fill-rule="nonzero"><path d="M10.83 13h-2.109v-5.792h-5.924v5.792h-2.101v-12.85h2.101v5.256h5.924v-5.256h2.109z" /><path d="M16.809 13h-1.147v-4.609c0-.55.013-.986.039-1.309l-.276.259c-.109.094-.474.394-1.096.898l-.576-.728 2.1-1.65h.957v7.139z" /></g></svg>;
 icons.h2 = <svg width="19" height="13" viewBox="0 0 19 13" xmlns="http://www.w3.org/2000/svg"><g className="qubely-svg-fill" fill-rule="nonzero"><path d="M10.83 13h-2.109v-5.792h-5.924v5.792h-2.101v-12.85h2.101v5.256h5.924v-5.256h2.109z" /><path d="M18.278 13h-4.839v-.869l1.841-1.851c.544-.557.904-.951 1.082-1.184.177-.233.307-.452.388-.657.081-.205.122-.425.122-.659 0-.322-.097-.576-.291-.762-.194-.186-.461-.278-.803-.278-.273 0-.538.05-.793.151-.256.101-.551.283-.886.547l-.62-.757c.397-.335.783-.573 1.157-.713s.773-.21 1.196-.21c.664 0 1.196.173 1.597.52.4.347.601.813.601 1.399 0 .322-.058.628-.173.918-.116.29-.293.588-.532.896-.239.308-.637.723-1.194 1.248l-1.24 1.201v.049h3.389v1.011z" /></g></svg>;
 icons.h3 = <svg width="19" height="14" viewBox="0 0 19 14" xmlns="http://www.w3.org/2000/svg"><g className="qubely-svg-fill" fill-rule="nonzero"><path d="M10.83 13h-2.109v-5.792h-5.924v5.792h-2.101v-12.85h2.101v5.256h5.924v-5.256h2.109z" /><path d="M18.01 7.502c0 .452-.132.829-.396 1.13-.264.301-.635.504-1.113.608v.039c.573.072 1.003.25 1.289.535.286.285.43.663.43 1.135 0 .687-.243 1.217-.728 1.589-.485.373-1.175.559-2.07.559-.791 0-1.458-.129-2.002-.386v-1.021c.303.15.623.265.962.347.339.081.664.122.977.122.553 0 .967-.103 1.24-.308.273-.205.41-.522.41-.952 0-.381-.151-.661-.454-.84-.303-.179-.778-.269-1.426-.269h-.62v-.933h.63c1.139 0 1.709-.394 1.709-1.182 0-.306-.099-.542-.298-.708-.199-.166-.492-.249-.879-.249-.27 0-.531.038-.781.115-.251.076-.547.225-.889.447l-.562-.801c.654-.482 1.414-.723 2.28-.723.719 0 1.281.155 1.685.464.404.309.605.736.605 1.279z" /></g></svg>;

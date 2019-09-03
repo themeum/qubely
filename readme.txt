@@ -1,10 +1,10 @@
-=== Gutenberg Blocks with Layout Packs & Readymade Blocks Collection - Qubely ===
+=== Advanced Gutenberg Blocks – Qubely ===
 Contributors: themeum
 Donate link: https://www.themeum.com
 Tags: Blocks, Gutenberg editor, Block editor, Block, Gutenberg, Gutenberg Blocks
 Requires at least: 5.0
 Tested up to: 5.2
-Stable tag: 1.0.9
+Stable tag: 1.1.0
 Requires PHP: 5.4.0
 License: GPL-2.0+
 License URI: http://www.gnu.org/licenses/gpl-2.0.txt
@@ -13,7 +13,7 @@ Gutenberg Blocks and readymade sections with rich customization options. Enhance
 
 == Description ==
 
-Qubely is a full-fledged Gutenberg block editor with plenty of predefined sections and modern layout packs to create beautiful pages and posts on the Gutenberg editor. It offers a whole new experience that minimizes all limitations of the Gutenberg editor and opens unlimited possibilities to create any simple to complex content on a WordPress website using the Gutenberg block editor. This user-friendly Gutenberg blocks has been developed with all necessary customization features to achieve any possible layout with Qubely Gutenberg block editor.
+Qubely is a full-fledged Gutenberg block toolkit with plenty of predefined sections and modern layout packs to create beautiful pages and posts on the Gutenberg editor. It offers a whole new experience that minimizes all limitations of the Gutenberg editor and opens unlimited possibilities to create any simple to complex content on a WordPress website using the Gutenberg block editor. This user-friendly Gutenberg blocks has been developed with all necessary customization features to achieve any possible layout with Qubely Gutenberg block editor.
 
 Qubely extends Gutenberg editor with many custom Gutenberg blocks that are missing in the Gutenberg editor. Take full control of the WordPress Gutenberg block editor with the ability to apply out of the box styling options. Create web pages and posts using Qubely’s custom Gutenberg blocks that are stunning as well as mobile optimized.
 
@@ -63,8 +63,9 @@ Qubely adds numerous custom Gutenberg blocks to the Gutenberg block editor and t
 * [Pricing](https://qubely.io/block/pricing/)
 * Block Wrapper
 * [Team](https://qubely.io/block/team/)
-* Image
-* Timeline
+* [Image](https://qubely.io/block/image/)
+* [Timeline](https://qubely.io/block/timeline/)
+* Post Grid
 * More advanced Gutenberg blocks coming
 
 
@@ -117,6 +118,8 @@ Qubely adds numerous custom Gutenberg blocks to the Gutenberg block editor and t
 - **Image:** Insert and beautify images with Qubely Image Block. There are 2 different premade layouts (Simple and Blurb) with plenty of customization options. You can define image opacity, alignment, border-radius, and box-shadow. Animate images, set up typography, enable overlay, and many more.
 
 - **Timeline:** Display the timelines of various events like product releases, company history & milestones, upcoming updates, achievements, and many more with Qubely’s Timeline block. Showcase detailed timelines/roadmaps and style them with plenty of customization options. Add images, texts, headings, setup connectors with icons, and tweak timeline bar your way.
+
+- **Post Grid:** The Post Grid block lets you take the blog posts of the website and display them in different grid and list layouts. It takes care of every detail of the grid/list layout. You can define the number of blog post, style the feature image, tweak typography, control spacing, determine post excerpts, apply animation effect, and do many more with Qubely’s Post Grid block.
 
  = SOME EXCITING QUBELY FEATURES IN DETAILS =
 
@@ -211,6 +214,11 @@ Found a bug? Please let us know by posting on the support section of this plugin
 
 
 == Changelog ==
+
+= 1.1.0 - 02 September, 2019 =
+
+New: Post Grid block  
+New: Custom dropdown field with search option  
 
 = 1.0.9 - 23 August, 2019 =
 
