@@ -191,7 +191,7 @@ class Edit extends Component {
 
 	render() {
 		const { setAttributes, attributes: {
-			uniqueId, items, autoPlay, interval, speed, dots, nav, carouselItems,
+			uniqueId, items, autoPlay, interval, speed, dots, nav, carouselItems, dragable,
 			layout, messageSpacingTop, messageSpacingBottom, nameColor, alignment, designationColor,
 			showAvatar, avatar, avatarAlt, avatarBorderRadius, avatarSize, avatarWidth, avatarHeight,
 			avatarBorder, avatarSpacing, avatarLayout, quoteIconColor, quoteIconSize, quoteIconSpacing,
