@@ -269,10 +269,6 @@ class QUBELY
 		
 		wp_enqueue_script('slider-script', QUBELY_DIR_URL .'assets/js/slider-script.js', array('jquery'), QUBELY_VERSION );
 		wp_enqueue_script('slider-script-min', QUBELY_DIR_URL .'assets/js/js_slider-min.js', array('jquery'), QUBELY_VERSION );
-			//carousel
-			wp_enqueue_style( 'js_slider', QUBELY_DIR_URL . 'assets/css/js_slider.css', false, QUBELY_VERSION );
-			wp_enqueue_script( 'qubely-js-slider', QUBELY_DIR_URL . 'assets/js/js-slider.js', array('jquery'), QUBELY_VERSION );
-			
 		
 		wp_localize_script('common-script', 'qubely_urls', array(
 			'plugin' => QUBELY_DIR_URL,
