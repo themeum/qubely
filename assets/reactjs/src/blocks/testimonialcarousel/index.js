@@ -73,22 +73,32 @@ registerBlockType('qubely/testimonialcarousel', {
 			]
 		},
 
-		// common/style attributes
-		spacer: { type: 'object', default: { spaceTop: { md: '10', unit: "px" }, spaceBottom: { md: '10', unit: "px" } }, style: [{ selector: '{{QUBELY}}' }] },
-		alignment: { type: 'object', default: { md: 'center' }, style: [{ selector: '{{QUBELY}} .qubely-block-testimonial {text-align: {{alignment}};}' }] },
+		/*---------------------------------------------------
+		* 	Testimonial Layouts:  common/style attributes
+		* --------------------------------------------------- */
 		layout: { type: 'number', default: 1 },
+		alignment: { type: 'object', default: { md: 'center' }, style: [{ selector: '{{QUBELY}} .qubely-block-testimonial {text-align: {{alignment}};}' }] },
+		spacer: { type: 'object', default: { spaceTop: { md: '10', unit: "px" }, spaceBottom: { md: '10', unit: "px" } }, style: [{ selector: '{{QUBELY}}' }] },
 
-		// New Field.
+		// Number of slider.
 		sliderNumber: { type: 'string', default: '5' },
-
+		// Item per Slider  
+		itemPerSlides: { type: 'string', default: '2' },
 		// Space Between Two item.
 		sliderItemsSpace: { type: 'string', default: '5',
-
 			style: [{
 				selector: '{{QUBELY}} .js-slider-list .js-item { padding: 0 {{sliderItemsSpace}}px; }'
 			}]
-	
 		},
+		// Infinite Loop
+		infiniteLoop: { type: 'boolean', default: true },
+		centeredSlider: { type: 'boolean', default: true },
+		activeFade: { type: 'boolean', default: true },
+
+		/*------------------------------------
+		* 			Slider Settings 			
+		-------------------------------------- */
+		
 
 		//Name
 		nameColor: { type: 'string', default: '', style: [{ selector: '{{QUBELY}} .qubely-testimonial-author-name { color:{{nameColor}}; }' }] },

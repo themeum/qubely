@@ -6,7 +6,7 @@ import { CssGenerator } from '../../components/CssGenerator'
 import icons from '../../helpers/icons'
 import { Media, RadioAdvanced, Range, Color, Typography, Toggle, 
 	Separator, ColorAdvanced, Border, BorderRadius, BoxShadow, 
-	Styles, Alignment, Padding, Tabs, Tab, Carousel, TestimonialEdit } from '../../components/FieldRender'
+	Styles, Alignment, Padding, Tabs, Tab, Carousel, TestimonialEdit, ButtonGroup } from '../../components/FieldRender'
 
 
 class Edit extends Component {
@@ -55,7 +55,7 @@ class Edit extends Component {
 		return (carouselItems.map((item, index) => {
 			const { author, designation, message, ratings, avatar } = item
 
-			return (
+			return ( 
 				<div key={index} className="js-item" >
 					<TestimonialEdit
 						layout={layout}
@@ -87,7 +87,8 @@ class Edit extends Component {
 			nameTypo, nameSpacing, messageTypo, designationTypo, starsSize, ratingsColor, quoteIcon, ratings, 
 			ratingsSpacing, bgPadding, textColor, bgColor, bgBorderRadius, border, boxShadow, boxShadowHover,
 
-			sliderNumber, itemPerSlides, sliderItemsSpace
+			sliderNumber, itemPerSlides, sliderItemsSpace,
+			infiniteLoop, centeredSlider, activeFade, arrowStyle, arrowPosition
 
 		} } = this.props
 		const { device } = this.state
@@ -123,8 +124,8 @@ class Edit extends Component {
 		return (
 			<Fragment>
 				<InspectorControls key="inspector">
-					
-					<PanelBody title="Testimonial Layouts" initialOpen={true}>
+					{/* Testimonial Layout */}
+					<PanelBody title="Testimonial Layouts" initialOpen={false}>
 						<Styles value={layout} onChange={val => setAttributes({ layout: val })}
 							options={[
 								{ value: 1, svg: icons.testimonial_1, label: __('Layout 1') },
@@ -132,7 +133,7 @@ class Edit extends Component {
 								{ value: 3, svg: icons.testimonial_2, label: __('Layout 3') }
 							]}
 						/>
-						<Alignment 
+						<Alignment              
 							label={__('Alignment')} 
 							value={alignment} 
 							alignmentType="content" 
@@ -140,7 +141,6 @@ class Edit extends Component {
 							alignmentType="content" disableJustify responsive device={device} 
 							onDeviceChange={value => this.setState({ device: value })} 
 						/>
-						{/* Number of slider */}
 						<Range
 							label={__('Number of slides')}
 							value={ sliderNumber } 
@@ -166,21 +166,47 @@ class Edit extends Component {
 							onDeviceChange={value => this.setState({ device: value })} 
 						/>
 					</PanelBody>
+					{/* End */}
 
-
-
-
-					<PanelBody title={__('Carousel Control')}>
-						<Toggle label={__('Dots')} value={dots} onChange={value => setAttributes({ dots: value })} />
-						<Toggle label={__('Nav')} value={nav} onChange={value => setAttributes({ nav: value })} />
-						<Toggle label={__('Draggable')} value={dragable} onChange={value => setAttributes({ dragable: value })} />
+					{/* Carousel Settings */}
+					<PanelBody title={__('Carousel Settings')} initialOpen={false}>
 						<Toggle label={__('Autoplay')} value={autoPlay} onChange={value => setAttributes({ autoPlay: value })} />
 						{autoPlay &&
 							<Fragment>
+								<Range label={__('Speed (ms)')} value={speed} onChange={value => setAttributes({ speed: parseInt(value) })} min={500} max={5000} />
 								<Range label={__('Interval (ms)')} value={interval} onChange={value => setAttributes({ interval: parseInt(value) })} min={500} max={5000} />
-								<Range label={__('Transition Speed (ms)')} value={speed} onChange={value => setAttributes({ speed: parseInt(value) })} min={500} max={5000} />
 							</Fragment>
 						}
+						<Toggle label={__('Infinite Loop')} value={infiniteLoop} onChange={value => setAttributes({ infiniteLoop: value })} />
+						<Toggle label={__('Centered Slides')} value={centeredSlider} onChange={value => setAttributes({ centeredSlider: value })} />
+						<Toggle label={__('Fade Deactivated Items')} value={activeFade} onChange={value => setAttributes({ activeFade: value })} />
+					</PanelBody>
+					{/* End */}
+
+					{/* Slider Settings */}
+					<PanelBody title={__('Slider Settings')}>
+						<Toggle label={__('Show Arrow Navigation')} value={nav} onChange={value => setAttributes({ nav: value })} />
+
+
+						<ButtonGroup
+							label={__('Arrow Style')}
+							options={ [ [<span className="dashicons dashicons-arrow-right-alt"></span>, 'arrowright'], [<span className="dashicons dashicons-arrow-right-alt2"></span>, 'arrowright2'] ] }
+							value={arrowStyle}
+							onChange={value => setAttributes({ arrowStyle: value })}
+						/>
+
+						<ButtonGroup
+							label={__('Arrow Position')}
+							options={ [ [__('Center'), 'center'], [__('Buttom'), 'buttom'] ] }
+							value={arrowPosition}
+							onChange={value => setAttributes({ arrowPosition: value })}
+						/>
+
+
+						<Toggle label={__('Dots')} value={dots} onChange={value => setAttributes({ dots: value })} />
+						<Toggle label={__('Draggable')} value={dragable} onChange={value => setAttributes({ dragable: value })} />
+						
+						
 						<Range label={__('Columns')} 
 							value={items} 
 							onChange={(value) => setAttributes({ items: value })} 
@@ -190,6 +216,10 @@ class Edit extends Component {
 							onDeviceChange={value => this.setState({ device: value })} 
 						/>
 					</PanelBody>
+
+
+
+
 
 					<PanelBody title={__('Message')} initialOpen={false}>
 						<Range
