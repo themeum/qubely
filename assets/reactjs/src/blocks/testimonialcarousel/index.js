@@ -98,7 +98,41 @@ registerBlockType('qubely/testimonialcarousel', {
 		/*------------------------------------
 		* 			Slider Settings 			
 		-------------------------------------- */
+		arrowStyle: {type: 'string', default: 'arrowright' },
+		arrowPosition: {type: 'string', default: 'center' },
+		borderWidth: { type: 'string', default: '' },
+		cornerRadius: { type: 'string', default: '' },
+		arrowSize: { type: 'string', default: '' },
+
+		// arrowBorderColor,
+		// arrowHoverColor, arrowShapeHoverColor, arrowBorderHoverColor
+		// Section Arrow 
+		arrowColor: { type: 'string', default: '', style: [{ selector: '{{QUBELY}} .js-slider .nav-control .dashicons { color:{{arrowColor}}; }' }] },
+		arrowShapeColor: { type: 'object', default: {}, 
+			style: [
+				{ selector: '{{QUBELY}} .js-slider .js-nav-control .nav-control'},
+			],
+		},
+		arrowBorderColor: { 
+			type: 'object', 
+			default: { openTy: 0, color: '#3373dc', width: { bottom: '1', left: '1', right: '1', top: '1', unit: 'px' } }, 
+			style: [{ selector: '{{QUBELY}} .js-slider .js-nav-control .nav-control' }] 
+		},
 		
+		// Arrow Hover Color.
+		arrowHoverColor: { type: 'string', default: '', style: [{ selector: '{{QUBELY}} .js-slider .js-nav-control .nav-control:hover .dashicons { color:{{arrowHoverColor}}; }' }] },
+		arrowShapeHoverColor: { type: 'object', default: {}, 
+			style: [
+				{ selector: '{{QUBELY}} .js-nav-control .nav-control:hover'},
+			],
+		},
+		arrowBorderHoverColor: { 
+			type: 'object', 
+			default: { openTy: 0, color: '#3373dc', width: { bottom: '1', left: '1', right: '1', top: '1', unit: 'px' } }, 
+			style: [{ selector: '{{QUBELY}} .js-slider .js-nav-control .nav-control:hover' }] 
+		},
+		
+
 
 		//Name
 		nameColor: { type: 'string', default: '', style: [{ selector: '{{QUBELY}} .qubely-testimonial-author-name { color:{{nameColor}}; }' }] },

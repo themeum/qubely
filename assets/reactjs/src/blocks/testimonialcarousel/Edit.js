@@ -190,19 +190,24 @@ class Edit extends Component {
 
 
 	render() {
-		const { setAttributes,
-			attributes: {
-				uniqueId, items, autoPlay, dragable, interval, speed, dots, nav, carouselItems,
-				layout, messageSpacingTop, messageSpacingBottom, nameColor, alignment, designationColor,
-				showAvatar, avatar, avatarAlt, avatarBorderRadius, avatarSize, avatarWidth, avatarHeight,
-				avatarBorder, avatarSpacing, avatarLayout, quoteIconColor, quoteIconSize, quoteIconSpacing,
-				nameTypo, nameSpacing, messageTypo, designationTypo, starsSize, ratingsColor, quoteIcon, ratings,
-				ratingsSpacing, bgPadding, textColor, bgColor, bgBorderRadius, border, boxShadow, boxShadowHover,
+		const { setAttributes, attributes: {
+			uniqueId, items, autoPlay, dragable, interval, speed, dots, nav, carouselItems,
+			layout, messageSpacingTop, messageSpacingBottom, nameColor, alignment, designationColor,
+			showAvatar, avatar, avatarAlt, avatarBorderRadius, avatarSize, avatarWidth, avatarHeight,
+			avatarBorder, avatarSpacing, avatarLayout, quoteIconColor, quoteIconSize, quoteIconSpacing,
+			nameTypo, nameSpacing, messageTypo, designationTypo, starsSize, ratingsColor, quoteIcon, ratings,
+			ratingsSpacing, bgPadding, textColor, bgColor, bgBorderRadius, border, boxShadow, boxShadowHover,
 
-				sliderNumber, itemPerSlides, sliderItemsSpace,
-				infiniteLoop, centeredSlider, activeFade, arrowStyle, arrowPosition
-			}
-		} = this.props
+			sliderNumber, itemPerSlides, sliderItemsSpace,
+			infiniteLoop, centeredSlider, activeFade, arrowStyle, arrowPosition,
+			borderWidth, cornerRadius, arrowSize, 
+			arrowColor, arrowShapeColor, arrowBorderColor,
+			arrowHoverColor, arrowShapeHoverColor, arrowBorderHoverColor
+
+
+
+ 
+		} } = this.props
 		const { device } = this.state
 		const options = {
 			autoplay: false,
@@ -298,39 +303,66 @@ class Edit extends Component {
 					{/* Slider Settings */}
 					<PanelBody title={__('Slider Settings')}>
 						<Toggle label={__('Show Arrow Navigation')} value={nav} onChange={value => setAttributes({ nav: value })} />
-
-
 						<ButtonGroup
 							label={__('Arrow Style')}
 							options={[[<span className="dashicons dashicons-arrow-right-alt"></span>, 'arrowright'], [<span className="dashicons dashicons-arrow-right-alt2"></span>, 'arrowright2']]}
 							value={arrowStyle}
 							onChange={value => setAttributes({ arrowStyle: value })}
 						/>
-
 						<ButtonGroup
 							label={__('Arrow Position')}
 							options={[[__('Center'), 'center'], [__('Buttom'), 'buttom']]}
 							value={arrowPosition}
 							onChange={value => setAttributes({ arrowPosition: value })}
 						/>
-
+						<Range
+							label={__('Arrow Size')}
+							value={arrowSize} onChange={(value) => setAttributes({ arrowSize: value })}
+							min={1}
+							max={65}
+							device={device}
+							onDeviceChange={value => this.setState({ device: value })}
+						/>
+						<Range
+							label={__('Corner Radius')}
+							value={cornerRadius} onChange={(value) => setAttributes({ cornerRadius: value })}
+							min={1}
+							max={100}
+							device={device}
+							onDeviceChange={value => this.setState({ device: value })}
+						/>
+						<Range
+							label={__('Border Width')}
+							value={borderWidth} onChange={(value) => setAttributes({ borderWidth: value })}
+							min={1}
+							max={100}
+							device={device}
+							onDeviceChange={value => this.setState({ device: value })}
+						/>
+						<Tabs>
+                            <Tab tabTitle={__('Normal')}>  
+								<Color label={__('Arrow Color')} value={arrowColor} onChange={(value) => setAttributes({ arrowColor: value }) } />
+								<ColorAdvanced label={__('Shape Color')} value={arrowShapeColor} onChange={val => setAttributes({ arrowShapeColor: val })} />
+								<Border label={__('Border')} value={arrowBorderColor} onChange={val => setAttributes({ arrowBorderColor: val })} />
+                            </Tab>
+                            <Tab tabTitle={__('Hover')}>
+                                <Color label={__('Arrow Hover Color')} value={arrowHoverColor} onChange={(value) => setAttributes({ arrowHoverColor: value }) } />
+								<ColorAdvanced label={__('Shape Hover Color')} value={arrowShapeHoverColor} onChange={val => setAttributes({ arrowShapeHoverColor: val })} />
+								<Border label={__('Border Hover Color')} value={arrowBorderHoverColor} onChange={val => setAttributes({ arrowBorderHoverColor: val })} />
+                            </Tab>
+                        </Tabs>
 
 						<Toggle label={__('Dots')} value={dots} onChange={value => setAttributes({ dots: value })} />
 						<Toggle label={__('Draggable')} value={dragable} onChange={value => setAttributes({ dragable: value })} />
-
-
-						<Range label={__('Columns')}
-							value={items}
-							onChange={(value) => setAttributes({ items: value })}
-							min={1}
-							max={carouselItems.length - 1}
-							responsive device={device}
-							onDeviceChange={value => this.setState({ device: value })}
+						<Range label={__('Columns')} 
+							value={items} 
+							onChange={(value) => setAttributes({ items: value })} 
+							min={1} 
+							max={carouselItems.length - 1} 
+							responsive device={device} 
+							onDeviceChange={value => this.setState({ device: value })} 
 						/>
 					</PanelBody>
-
-
-
 
 
 					<PanelBody title={__('Message')} initialOpen={false}>
