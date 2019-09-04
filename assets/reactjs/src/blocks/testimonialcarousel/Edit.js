@@ -154,22 +154,25 @@ class Edit extends Component {
 
 				return (
 					<div key={index} className="js-item" >
-						<div className={`qubely-block-testimonial`}>
+						<div className={`qubely-tesitmonial-item`}>
 
 							{layout === 2 && this.renderAuthorInfo(item, index)}
-
-							{(ratings > 0 && layout !== 1) && <div className="qubely-testimonial-ratings" data-qubelyrating={ratings}></div>}
 
 							{
 								(quoteIcon && layout === 1) && <div className="qubely-testimonial-quote" >
 									<span className={`qubely-quote-icon ${quoteIcon}`}></span>
 								</div>
 							}
-							<div className="qubely-testimonial-content" >
-								{this.renderMessage(message, index)}
+							<div className={`qubely-testimonial-carousel-content-wrapper`}>
+								{(ratings > 0 && layout !== 1) && <div className="qubely-testimonial-ratings" data-qubelyrating={ratings}></div>}
+
+								<div className="qubely-testimonial-content" >
+									{this.renderMessage(message, index)}
+								</div>
+								{(ratings > 0 && layout == 1) && <div className="qubely-testimonial-ratings" data-qubelyrating={ratings}></div>}
 							</div>
-							{(ratings > 0 && layout == 1) && <div className="qubely-testimonial-ratings" data-qubelyrating={ratings}></div>}
-							{layout === 3 && <span class="dashicons dashicons-arrow-down"></span>}
+							{layout === 3 && <span class="qubely-testimonial-carousel-arrow-down"></span>}
+
 							{layout !== 2 && this.renderAuthorInfo(item, index)}
 							{
 								(quoteIcon && layout == 2) &&
@@ -196,15 +199,24 @@ class Edit extends Component {
 			ratingsSpacing, bgPadding, textColor, bgColor, bgBorderRadius, border, boxShadow, boxShadowHover,
 			
 			sliderNumber, itemPerSlides, sliderItemsSpace,
+<<<<<<< HEAD
 			infiniteLoop, centeredSlider, activeFade, 
 			// arrow 
 			arrowStyle, arrowPosition,
 			borderWidth, cornerRadius, arrowSize, 
+=======
+			infiniteLoop, centeredSlider, activeFade, arrowStyle, arrowPosition,
+			borderWidth, cornerRadius, arrowSize,
+>>>>>>> c8b61889915aa004d86f7e09d57e4f93477b5cd8
 			arrowColor, arrowShapeColor, arrowBorderColor,
 			arrowHoverColor, arrowShapeHoverColor, arrowBorderHoverColor,
 			// Dot
 			dotSize, dotBorderWidth, dotColor, dotBorderColor, dotActiveColor, dotBorderActiveColor,
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> c8b61889915aa004d86f7e09d57e4f93477b5cd8
 		} } = this.props
 		const { device } = this.state
 		const options = {
@@ -240,7 +252,11 @@ class Edit extends Component {
 			<Fragment>
 				<InspectorControls key="inspector">
 					{/* Testimonial Layout */}
+<<<<<<< HEAD
 					<PanelBody title="Testimonial Layouts" initialOpen={true}>
+=======
+					<PanelBody title="" opened={true}>
+>>>>>>> c8b61889915aa004d86f7e09d57e4f93477b5cd8
 						<Styles value={layout} onChange={val => setAttributes({ layout: val })}
 							options={[
 								{ value: 1, svg: icons.testimonial_1, label: __('Layout 1') },
@@ -346,18 +362,19 @@ class Edit extends Component {
 							onDeviceChange={value => this.setState({ device: value })}
 						/>
 						<Tabs>
-                            <Tab tabTitle={__('Normal')}>  
-								<Color label={__('Arrow Color')} value={arrowColor} onChange={(value) => setAttributes({ arrowColor: value }) } />
+							<Tab tabTitle={__('Normal')}>
+								<Color label={__('Arrow Color')} value={arrowColor} onChange={(value) => setAttributes({ arrowColor: value })} />
 								<ColorAdvanced label={__('Shape Color')} value={arrowShapeColor} onChange={val => setAttributes({ arrowShapeColor: val })} />
 								<Border label={__('Border')} value={arrowBorderColor} onChange={val => setAttributes({ arrowBorderColor: val })} />
-                            </Tab>
-                            <Tab tabTitle={__('Hover')}>
-                                <Color label={__('Arrow Hover Color')} value={arrowHoverColor} onChange={(value) => setAttributes({ arrowHoverColor: value }) } />
+							</Tab>
+							<Tab tabTitle={__('Hover')}>
+								<Color label={__('Arrow Hover Color')} value={arrowHoverColor} onChange={(value) => setAttributes({ arrowHoverColor: value })} />
 								<ColorAdvanced label={__('Shape Hover Color')} value={arrowShapeHoverColor} onChange={val => setAttributes({ arrowShapeHoverColor: val })} />
 								<Border label={__('Border Hover Color')} value={arrowBorderHoverColor} onChange={val => setAttributes({ arrowBorderHoverColor: val })} />
-                            </Tab>
-                        </Tabs>
+							</Tab>
+						</Tabs>
 
+<<<<<<< HEAD
 						
 						<Toggle label={__('Show Dot Navigation')} value={dots} onChange={value => setAttributes({ dots: value })} />
 						<Range
@@ -374,6 +391,16 @@ class Edit extends Component {
 							min={1}
 							max={30}
 							device={device}
+=======
+						<Toggle label={__('Dots')} value={dots} onChange={value => setAttributes({ dots: value })} />
+						<Toggle label={__('Draggable')} value={dragable} onChange={value => setAttributes({ dragable: value })} />
+						<Range label={__('Columns')}
+							value={items}
+							onChange={(value) => setAttributes({ items: value })}
+							min={1}
+							max={carouselItems.length - 1}
+							responsive device={device}
+>>>>>>> c8b61889915aa004d86f7e09d57e4f93477b5cd8
 							onDeviceChange={value => this.setState({ device: value })}
 						/>
 						<Tabs>

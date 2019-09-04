@@ -43,19 +43,21 @@ class Save extends Component {
       const { message, ratings } = item
       return (
         <div key={index} className="js-item" >
-          <div className={`qubely-block-testimonial-carousel qubely-layout-${layout}`}>
+          <div className={`qubely-tesitmonial-item`}>
 
             {layout == 2 && this.renderAuthorInfo(item)}
-            {(ratings > 0 && layout !== 1)&& <div className="qubely-testimonial-ratings" data-qubelyrating={ratings}></div>}
             {
               (quoteIcon && layout == 1) &&
               <div className="qubely-testimonial-quote">
                 <span className={`qubely-quote-icon ${quoteIcon}`}></span>
               </div>
             }
-            <div className="qubely-testimonial-content"> <RichText.Content value={message} /></div>
-            {(ratings > 0 && layout == 1) && <div className="qubely-testimonial-ratings" data-qubelyrating={ratings} />}
-            {layout === 3 && <span class="dashicons dashicons-arrow-down"></span>}
+            <div className={`qubely-testimonial-carousel-content-wrapper`}>
+              {(ratings > 0 && layout !== 1) && <div className="qubely-testimonial-ratings" data-qubelyrating={ratings}></div>}
+              <div className="qubely-testimonial-content"> <RichText.Content value={message} /></div>
+              {(ratings > 0 && layout == 1) && <div className="qubely-testimonial-ratings" data-qubelyrating={ratings} />}
+            </div>
+            {layout === 3 && <span class="qubely-testimonial-carousel-arrow-down"></span>}
             {layout !== 2 && this.renderAuthorInfo(item)}
 
             {
