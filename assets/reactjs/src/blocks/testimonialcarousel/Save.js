@@ -1,27 +1,71 @@
-const { Component } = wp.element
-import { TestimonialSave } from '../../components/FieldRender'
+const { Component,Fragment } = wp.element
+const { RichText } = wp.editor
 import { animationAttr } from '../../components/HelperFunction'
 class Save extends Component {
+  renderAuthorInfo = (item) => {
+    const { attributes: { showAvatar, avatarAlt, avatarLayout } } = this.props
+    const { author, designation, avatar } = item
 
-  renderItem() {
-    const { attributes: { carouselItems, layout, showAvatar, avatarLayout, avatarAlt, quoteIcon } } = this.props
+    return (
+      <div className={`qubely-testimonial-author`}>
+        <div className={showAvatar ? `qubely-testimonial-avatar-layout-${avatarLayout}` : ``}>
+          {showAvatar && (avatarLayout == 'left' || avatarLayout == 'top') &&
+            <Fragment>
+              {avatar.url != undefined ?
+                <img className="qubely-testimonial-avatar" src={avatar.url} alt={avatarAlt} />
+                :
+                <div className="qubely-image-placeholder qubely-testimonial-avatar"><i className="far fa-user"></i></div>
+              }
+            </Fragment>
+          }
+
+          <div className="qubely-testimonial-author-info">
+            <div className="qubely-testimonial-author-name"><RichText.Content value={author} /></div>
+            <div className="qubely-testimonial-author-designation"><RichText.Content value={designation} /></div>
+          </div>
+
+          {showAvatar && (avatarLayout == 'right' || avatarLayout == 'bottom') &&
+            <Fragment>
+              {avatar.url != undefined ?
+                <img className="qubely-testimonial-avatar" src={avatar.url} alt={avatarAlt} />
+                :
+                <div className="qubely-image-placeholder qubely-testimonial-avatar"><i className="far fa-user"></i></div>
+              }
+            </Fragment>
+          }
+        </div>
+      </div>
+    )
+  }
+  renderTestimonial() {
+    const { attributes: { carouselItems, layout, quoteIcon } } = this.props
 
     return (carouselItems.map((item, index) => {
-      const { author, designation, message, ratings, avatar } = item
+      const { message, ratings } = item
       return (
         <div key={index} className="js-item" >
-          <TestimonialSave
-            layout={layout}
-            name={author}
-            ratings={ratings}
-            quoteIcon={quoteIcon}
-            designation={designation}
-            message={message}
-            showAvatar={showAvatar}
-            avatarLayout={avatarLayout}
-            avatar={avatar}
-            avatarAlt={avatarAlt}
-          />
+          <div className={`qubely-block-testimonial`}>
+
+            {layout == 2 && this.renderAuthorInfo(item)}
+            {ratings > 0 && layout == 2 && <div className="qubely-testimonial-ratings" data-qubelyrating={ratings}></div>}
+            {
+              (quoteIcon && layout == 1) &&
+              <div className="qubely-testimonial-quote">
+                <span className={`qubely-quote-icon ${quoteIcon}`}></span>
+              </div>
+            }
+            <div className="qubely-testimonial-content"> <RichText.Content value={message} /></div>
+            {ratings > 0 && layout == 1 && <div className="qubely-testimonial-ratings" data-qubelyrating={ratings} />}
+            {layout == 1 && this.renderAuthorInfo(item)}
+
+            {
+              (quoteIcon && layout == 2) &&
+              <div className="qubely-testimonial-quote qubely-position-bottom">
+                <span className={`qubely-quote-icon ${quoteIcon}`}></span>
+              </div>
+            }
+
+          </div>
         </div>
       )
     }))
@@ -58,7 +102,7 @@ class Save extends Component {
     return (
       <div className={`qubely-block-${uniqueId}`} {...animationAttr(animation)}>
         <div className="js-slider" id="jsSlider1" data-options={options} >
-          {this.renderItem()}
+          {this.renderTestimonial()}
         </div>
       </div>
     )

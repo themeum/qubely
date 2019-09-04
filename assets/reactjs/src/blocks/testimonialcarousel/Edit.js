@@ -1,12 +1,29 @@
 const { __ } = wp.i18n
 const { Fragment, Component } = wp.element;
 const { PanelBody } = wp.components
-const { InspectorControls } = wp.editor
+const { InspectorControls, RichText, MediaUpload } = wp.editor
 import { CssGenerator } from '../../components/CssGenerator'
 import icons from '../../helpers/icons'
-import { Media, RadioAdvanced, Range, Color, Typography, Toggle, 
-	Separator, ColorAdvanced, Border, BorderRadius, BoxShadow, 
-	Styles, Alignment, Padding, Tabs, Tab, Carousel, TestimonialEdit, ButtonGroup } from '../../components/FieldRender'
+import {
+	Media,
+	RadioAdvanced,
+	Range,
+	Color,
+	Typography,
+	Toggle,
+	Separator,
+	ColorAdvanced,
+	Border,
+	BorderRadius,
+	BoxShadow,
+	Styles,
+	Alignment,
+	Padding,
+	Tabs,
+	Tab,
+	Carousel,
+	ButtonGroup
+} from '../../components/FieldRender'
 
 
 class Edit extends Component {
@@ -49,7 +66,84 @@ class Edit extends Component {
 		setAttributes({ carouselItems: updatedAttributes })
 	}
 
-	renderItem() {
+	renderName = (name, index) => {
+		return (
+			<RichText
+				key="editable"
+				keepPlaceholderOnFocus
+				placeholder={__('Add Name...')}
+				formattingControls={['bold', 'italic', 'link', 'strikethrough']}
+				onChange={value => this.updateAtrributes('author', value, index)}
+				value={name}
+			/>
+		)
+	}
+	renderDesignation = (designation, index) => {
+		return (
+			<RichText
+				key="editable"
+				placeholder={__('Add designation...')}
+				formattingControls={['bold', 'italic', 'link', 'strikethrough']}
+				keepPlaceholderOnFocus
+				onChange={value => this.updateAtrributes('designation', value, index)}
+				value={designation}
+			/>
+		)
+	}
+	renderAvatar = (avatar, index) => {
+		const { attributes: { avatarAlt } } = this.props
+		return (
+			<MediaUpload
+				onSelect={val => this.updateAtrributes('avatar', val, index)}
+				allowedTypes={['image']}
+				multiple={false}
+				value={avatar}
+				render={({ open }) => (
+					<div className="qubely-single-img">
+						{
+							(avatar && avatar.url) ?
+								<img onClick={open} className="qubely-testimonial-avatar" src={avatar.url} alt={avatarAlt} />
+								:
+								<div onClick={open} className="qubely-image-placeholder qubely-testimonial-avatar" ><i className="far fa-user"></i></div>
+						}
+					</div>
+				)}
+			/>
+
+		)
+	}
+	renderMessage = (message, index) => {
+		return (
+			<RichText
+				key="editable"
+				placeholder={__('Add Message...')}
+				formattingControls={['bold', 'italic', 'link', 'strikethrough']}
+				keepPlaceholderOnFocus
+				onChange={value => this.updateAtrributes('message', value, index)}
+				value={message}
+			/>
+		)
+	}
+	renderAuthorInfo = (item, index) => {
+		const { attributes: { showAvatar, avatarLayout } } = this.props
+		const { author, designation, avatar } = item
+		return (
+			<div className={`qubely-testimonial-author`}>
+				<div className={showAvatar ? `qubely-testimonial-avatar-layout-${avatarLayout}` : ``}>
+					{showAvatar && (avatarLayout == 'left' || avatarLayout == 'top') && this.renderAvatar(avatar, index)}
+
+					<div className="qubely-testimonial-author-info">
+						<div className="qubely-testimonial-author-name" >{this.renderName(author, index)}</div>
+						<div className="qubely-testimonial-author-designation" >{this.renderDesignation(designation, index)}</div>
+					</div>
+
+					{showAvatar && (avatarLayout == 'right' || avatarLayout == 'bottom') && this.renderAvatar(avatar, index)}
+				</div>
+			</div>
+		)
+	}
+
+	renderTestimonials = () => {
 		const { setAttributes, attributes: { carouselItems, layout, showAvatar, avatarAlt, avatarLayout, quoteIcon } } = this.props
 
 		return (carouselItems.map((item, index) => {
@@ -57,21 +151,29 @@ class Edit extends Component {
 
 			return ( 
 				<div key={index} className="js-item" >
-					<TestimonialEdit
-						layout={layout}
-						name={author}
-						ratings={ratings}
-						quoteIcon={quoteIcon}
-						designation={designation}
-						message={message}
-						showAvatar={showAvatar}
-						avatarLayout={avatarLayout}
-						avatar={avatar}
-						avatarAlt={avatarAlt}
-						setAttributes={setAttributes}
-						index={index}
-						updateAtrributes={(name, value, index) => this.updateAtrributes(name, value, index)}
-					/>
+					<div className={`qubely-block-testimonial`}>
+
+						{layout == 2 && this.renderAuthorInfo(item, index)}
+
+						{ratings > 0 && layout == 2 && <div className="qubely-testimonial-ratings" data-qubelyrating={ratings}></div>}
+
+						{
+							quoteIcon && layout == 1 && <div className="qubely-testimonial-quote" >
+								<span className={`qubely-quote-icon ${quoteIcon}`}></span>
+							</div>
+						}
+						<div className="qubely-testimonial-content" >
+							{this.renderMessage(message, index)}
+						</div>
+						{ratings > 0 && layout == 1 && <div className="qubely-testimonial-ratings" data-qubelyrating={ratings}></div>}
+						{layout == 1 && this.renderAuthorInfo(item, index)}
+						{
+							quoteIcon && layout == 2 &&
+							<div className="qubely-testimonial-quote qubely-position-bottom" >
+								<span className={`qubely-quote-icon ${quoteIcon}`}></span>
+							</div>
+						}
+					</div>
 				</div>
 			)
 		}))
@@ -80,11 +182,11 @@ class Edit extends Component {
 
 	render() {
 		const { setAttributes, attributes: {
-			uniqueId, items, autoPlay,dragable, interval, speed, dots, nav, carouselItems,
-			layout, messageSpacingTop, messageSpacingBottom, nameColor, alignment, designationColor, 
-			showAvatar, avatar, avatarAlt, avatarBorderRadius, avatarSize, avatarWidth, avatarHeight, 
-			avatarBorder, avatarSpacing, avatarLayout, quoteIconColor, quoteIconSize, quoteIconSpacing, 
-			nameTypo, nameSpacing, messageTypo, designationTypo, starsSize, ratingsColor, quoteIcon, ratings, 
+			uniqueId, items, autoPlay, dragable, interval, speed, dots, nav, carouselItems,
+			layout, messageSpacingTop, messageSpacingBottom, nameColor, alignment, designationColor,
+			showAvatar, avatar, avatarAlt, avatarBorderRadius, avatarSize, avatarWidth, avatarHeight,
+			avatarBorder, avatarSpacing, avatarLayout, quoteIconColor, quoteIconSize, quoteIconSpacing,
+			nameTypo, nameSpacing, messageTypo, designationTypo, starsSize, ratingsColor, quoteIcon, ratings,
 			ratingsSpacing, bgPadding, textColor, bgColor, bgBorderRadius, border, boxShadow, boxShadowHover,
 
 			sliderNumber, itemPerSlides, sliderItemsSpace,
@@ -119,8 +221,8 @@ class Edit extends Component {
 			],
 		};
 
-		if (uniqueId) { CssGenerator(this.props.attributes, 'carousel', uniqueId) }
-		
+		if (uniqueId) { CssGenerator(this.props.attributes, 'testimonialcarousel', uniqueId) }
+
 		return (
 			<Fragment>
 				<InspectorControls key="inspector">
@@ -143,27 +245,27 @@ class Edit extends Component {
 						/>
 						<Range
 							label={__('Number of slides')}
-							value={ sliderNumber } 
+							value={sliderNumber}
 							onChange={(value) => setAttributes({ sliderNumber: value })}
 							min={1}
-							max={20} 
+							max={20}
 							device={device}
-							onDeviceChange={value => this.setState({ device: value })} 
+							onDeviceChange={value => this.setState({ device: value })}
 						/>
 						<Range
 							label={__('Items per Slides')}
-							value={ itemPerSlides } onChange={(value) => setAttributes({ itemPerSlides: value })}
+							value={itemPerSlides} onChange={(value) => setAttributes({ itemPerSlides: value })}
 							min={1}
 							device={device}
-							onDeviceChange={value => this.setState({ device: value })} 
+							onDeviceChange={value => this.setState({ device: value })}
 						/>
 						<Range
 							label={__('Space Between Each items')}
-							value={ sliderItemsSpace } onChange={(value) => setAttributes({ sliderItemsSpace: value })}
+							value={sliderItemsSpace} onChange={(value) => setAttributes({ sliderItemsSpace: value })}
 							min={1}
 							max={80}
 							device={device}
-							onDeviceChange={value => this.setState({ device: value })} 
+							onDeviceChange={value => this.setState({ device: value })}
 						/>
 					</PanelBody>
 					{/* End */}
@@ -497,7 +599,7 @@ class Edit extends Component {
 
 				<div className={`qubely-block-${uniqueId}`}>
 					<Carousel ref="JsSlider" options={options} 	>
-						{this.renderItem()}
+						{this.renderTestimonials()}
 					</Carousel>
 				</div>
 			</Fragment>
