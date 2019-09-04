@@ -6,8 +6,8 @@ import './style.scss'
 import Edit from './Edit'
 import Save from './Save'
 
-registerBlockType('qubely/carousel', {
-	title: __('carousel'),
+registerBlockType('qubely/testimonialcarousel', {
+	title: __('testimonial carousel'),
 	icon: 'dashboard',
 	category: 'qubely',
 	keywords: [
