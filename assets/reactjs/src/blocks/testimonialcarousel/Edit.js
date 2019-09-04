@@ -125,58 +125,64 @@ class Edit extends Component {
 		)
 	}
 	renderAuthorInfo = (item, index) => {
-		const { attributes: { showAvatar, avatarLayout } } = this.props
+		const { attributes: { layout, showAvatar, avatarLayout } } = this.props
 		const { author, designation, avatar } = item
 		return (
 			<div className={`qubely-testimonial-author`}>
+				{(layout === 3 && showAvatar) && this.renderAvatar(avatar, index)}
+
 				<div className={showAvatar ? `qubely-testimonial-avatar-layout-${avatarLayout}` : ``}>
-					{showAvatar && (avatarLayout == 'left' || avatarLayout == 'top') && this.renderAvatar(avatar, index)}
+					{(layout !== 3 && showAvatar && (avatarLayout == 'left' || avatarLayout == 'top')) && this.renderAvatar(avatar, index)}
 
 					<div className="qubely-testimonial-author-info">
 						<div className="qubely-testimonial-author-name" >{this.renderName(author, index)}</div>
 						<div className="qubely-testimonial-author-designation" >{this.renderDesignation(designation, index)}</div>
 					</div>
 
-					{showAvatar && (avatarLayout == 'right' || avatarLayout == 'bottom') && this.renderAvatar(avatar, index)}
+					{(layout !== 3 && showAvatar && (avatarLayout == 'right' || avatarLayout == 'bottom')) && this.renderAvatar(avatar, index)}
 				</div>
 			</div>
 		)
 	}
 
 	renderTestimonials = () => {
-		const { setAttributes, attributes: { carouselItems, layout, showAvatar, avatarAlt, avatarLayout, quoteIcon } } = this.props
+		const { attributes: { layout, carouselItems, quoteIcon } } = this.props
 
-		return (carouselItems.map((item, index) => {
-			const { author, designation, message, ratings, avatar } = item
+		return (
+			carouselItems.map((item, index) => {
+				const { message, ratings } = item
 
-			return ( 
-				<div key={index} className="js-item" >
-					<div className={`qubely-block-testimonial`}>
+				return (
+					<div key={index} className="js-item" >
+						<div className={`qubely-block-testimonial`}>
 
-						{layout == 2 && this.renderAuthorInfo(item, index)}
+							{layout === 2 && this.renderAuthorInfo(item, index)}
 
-						{ratings > 0 && layout == 2 && <div className="qubely-testimonial-ratings" data-qubelyrating={ratings}></div>}
+							{(ratings > 0 && layout !== 1) && <div className="qubely-testimonial-ratings" data-qubelyrating={ratings}></div>}
 
-						{
-							quoteIcon && layout == 1 && <div className="qubely-testimonial-quote" >
-								<span className={`qubely-quote-icon ${quoteIcon}`}></span>
+							{
+								(quoteIcon && layout === 1) && <div className="qubely-testimonial-quote" >
+									<span className={`qubely-quote-icon ${quoteIcon}`}></span>
+								</div>
+							}
+							<div className="qubely-testimonial-content" >
+								{this.renderMessage(message, index)}
 							</div>
-						}
-						<div className="qubely-testimonial-content" >
-							{this.renderMessage(message, index)}
+							{(ratings > 0 && layout == 1) && <div className="qubely-testimonial-ratings" data-qubelyrating={ratings}></div>}
+							{layout === 3 && <span class="dashicons dashicons-arrow-down"></span>}
+							{layout !== 2 && this.renderAuthorInfo(item, index)}
+							{
+								(quoteIcon && layout == 2) &&
+								<div className="qubely-testimonial-quote qubely-position-bottom" >
+									<span className={`qubely-quote-icon ${quoteIcon}`}></span>
+								</div>
+							}
 						</div>
-						{ratings > 0 && layout == 1 && <div className="qubely-testimonial-ratings" data-qubelyrating={ratings}></div>}
-						{layout == 1 && this.renderAuthorInfo(item, index)}
-						{
-							quoteIcon && layout == 2 &&
-							<div className="qubely-testimonial-quote qubely-position-bottom" >
-								<span className={`qubely-quote-icon ${quoteIcon}`}></span>
-							</div>
-						}
 					</div>
-				</div>
-			)
-		}))
+				)
+			})
+		)
+
 	}
 
 
@@ -241,13 +247,13 @@ class Edit extends Component {
 								{ value: 3, svg: icons.testimonial_2, label: __('Layout 3') }
 							]}
 						/>
-						<Alignment              
-							label={__('Alignment')} 
-							value={alignment} 
-							alignmentType="content" 
-							onChange={val => setAttributes({ alignment: val })} 
-							alignmentType="content" disableJustify responsive device={device} 
-							onDeviceChange={value => this.setState({ device: value })} 
+						<Alignment
+							label={__('Alignment')}
+							value={alignment}
+							alignmentType="content"
+							onChange={val => setAttributes({ alignment: val })}
+							alignmentType="content" disableJustify responsive device={device}
+							onDeviceChange={value => this.setState({ device: value })}
 						/>
 						<Range
 							label={__('Number of slides')}
@@ -296,13 +302,13 @@ class Edit extends Component {
 						<Toggle label={__('Show Arrow Navigation')} value={nav} onChange={value => setAttributes({ nav: value })} />
 						<ButtonGroup
 							label={__('Arrow Style')}
-							options={ [ [<span className="dashicons dashicons-arrow-right-alt"></span>, 'arrowright'], [<span className="dashicons dashicons-arrow-right-alt2"></span>, 'arrowright2'] ] }
+							options={[[<span className="dashicons dashicons-arrow-right-alt"></span>, 'arrowright'], [<span className="dashicons dashicons-arrow-right-alt2"></span>, 'arrowright2']]}
 							value={arrowStyle}
 							onChange={value => setAttributes({ arrowStyle: value })}
 						/>
 						<ButtonGroup
 							label={__('Arrow Position')}
-							options={ [ [__('Center'), 'center'], [__('Buttom'), 'buttom'] ] }
+							options={[[__('Center'), 'center'], [__('Buttom'), 'buttom']]}
 							value={arrowPosition}
 							onChange={value => setAttributes({ arrowPosition: value })}
 						/>
@@ -354,9 +360,6 @@ class Edit extends Component {
 							onDeviceChange={value => this.setState({ device: value })} 
 						/>
 					</PanelBody>
-
-
-
 
 
 					<PanelBody title={__('Message')} initialOpen={false}>
@@ -631,12 +634,12 @@ class Edit extends Component {
 				</InspectorControls>
 				{/* Siderbar End */}
 
-
-
 				<div className={`qubely-block-${uniqueId}`}>
-					<Carousel ref="JsSlider" options={options} 	>
-						{this.renderTestimonials()}
-					</Carousel>
+					<div className={`qubely-block-testimonial-carousel qubely-layout-${layout}`}>
+						<Carousel ref="JsSlider" options={options} 	>
+							{this.renderTestimonials()}
+						</Carousel>
+					</div>
 				</div>
 			</Fragment>
 		)
