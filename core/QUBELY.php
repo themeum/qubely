@@ -437,7 +437,7 @@ class QUBELY
 
 	/**
 	 * @since 1.0.2
-	 * Save block css for each post in a css file and enqueue the file to the post page
+	 * Set font import to the top of the CSS file
 	 */
 	public function set_import_url_to_top_css($get_css = ''){
 		$css_url = "@import url('https://fonts.googleapis.com/css?family=";
