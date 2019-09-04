@@ -35,7 +35,6 @@ import Margin from './fields/Margin'
 import Carousel from './fields/Carousel'
 import { QubelyButtonEdit, QubelyButtonSave } from './fields/QubelyButton'
 import { QubelyIconListEdit, QubelyIconListSave } from './fields/QubelyIconList'
-import { TestimonialEdit, TestimonialSave } from './fields/Testimonial'
 
 export {
     Alignment,
@@ -61,8 +60,6 @@ export {
     Separator,
     Tabs,
     Tab,
-    TestimonialEdit,
-    TestimonialSave,
     Typography,
     Wrapper,
     Media,
