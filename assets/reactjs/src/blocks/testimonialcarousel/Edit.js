@@ -200,13 +200,13 @@ class Edit extends Component {
 
 			sliderNumber, itemPerSlides, sliderItemsSpace,
 			infiniteLoop, centeredSlider, activeFade, arrowStyle, arrowPosition,
-			borderWidth, cornerRadius, arrowSize, 
+			borderWidth, cornerRadius, arrowSize,
 			arrowColor, arrowShapeColor, arrowBorderColor,
 			arrowHoverColor, arrowShapeHoverColor, arrowBorderHoverColor
 
 
 
- 
+
 		} } = this.props
 		const { device } = this.state
 		const options = {
@@ -242,7 +242,7 @@ class Edit extends Component {
 			<Fragment>
 				<InspectorControls key="inspector">
 					{/* Testimonial Layout */}
-					<PanelBody title="Testimonial Layouts" initialOpen={false}>
+					<PanelBody title="" opened={true}>
 						<Styles value={layout} onChange={val => setAttributes({ layout: val })}
 							options={[
 								{ value: 1, svg: icons.testimonial_1, label: __('Layout 1') },
@@ -340,27 +340,27 @@ class Edit extends Component {
 							onDeviceChange={value => this.setState({ device: value })}
 						/>
 						<Tabs>
-                            <Tab tabTitle={__('Normal')}>  
-								<Color label={__('Arrow Color')} value={arrowColor} onChange={(value) => setAttributes({ arrowColor: value }) } />
+							<Tab tabTitle={__('Normal')}>
+								<Color label={__('Arrow Color')} value={arrowColor} onChange={(value) => setAttributes({ arrowColor: value })} />
 								<ColorAdvanced label={__('Shape Color')} value={arrowShapeColor} onChange={val => setAttributes({ arrowShapeColor: val })} />
 								<Border label={__('Border')} value={arrowBorderColor} onChange={val => setAttributes({ arrowBorderColor: val })} />
-                            </Tab>
-                            <Tab tabTitle={__('Hover')}>
-                                <Color label={__('Arrow Hover Color')} value={arrowHoverColor} onChange={(value) => setAttributes({ arrowHoverColor: value }) } />
+							</Tab>
+							<Tab tabTitle={__('Hover')}>
+								<Color label={__('Arrow Hover Color')} value={arrowHoverColor} onChange={(value) => setAttributes({ arrowHoverColor: value })} />
 								<ColorAdvanced label={__('Shape Hover Color')} value={arrowShapeHoverColor} onChange={val => setAttributes({ arrowShapeHoverColor: val })} />
 								<Border label={__('Border Hover Color')} value={arrowBorderHoverColor} onChange={val => setAttributes({ arrowBorderHoverColor: val })} />
-                            </Tab>
-                        </Tabs>
+							</Tab>
+						</Tabs>
 
 						<Toggle label={__('Dots')} value={dots} onChange={value => setAttributes({ dots: value })} />
 						<Toggle label={__('Draggable')} value={dragable} onChange={value => setAttributes({ dragable: value })} />
-						<Range label={__('Columns')} 
-							value={items} 
-							onChange={(value) => setAttributes({ items: value })} 
-							min={1} 
-							max={carouselItems.length - 1} 
-							responsive device={device} 
-							onDeviceChange={value => this.setState({ device: value })} 
+						<Range label={__('Columns')}
+							value={items}
+							onChange={(value) => setAttributes({ items: value })}
+							min={1}
+							max={carouselItems.length - 1}
+							responsive device={device}
+							onDeviceChange={value => this.setState({ device: value })}
 						/>
 					</PanelBody>
 
