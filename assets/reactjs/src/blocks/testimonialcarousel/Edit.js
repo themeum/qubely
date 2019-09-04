@@ -197,26 +197,17 @@ class Edit extends Component {
 			avatarBorder, avatarSpacing, avatarLayout, quoteIconColor, quoteIconSize, quoteIconSpacing,
 			nameTypo, nameSpacing, messageTypo, designationTypo, starsSize, ratingsColor, quoteIcon, ratings,
 			ratingsSpacing, bgPadding, textColor, bgColor, bgBorderRadius, border, boxShadow, boxShadowHover,
-			
+
 			sliderNumber, itemPerSlides, sliderItemsSpace,
-<<<<<<< HEAD
-			infiniteLoop, centeredSlider, activeFade, 
+			infiniteLoop, centeredSlider, activeFade,
 			// arrow 
 			arrowStyle, arrowPosition,
-			borderWidth, cornerRadius, arrowSize, 
-=======
-			infiniteLoop, centeredSlider, activeFade, arrowStyle, arrowPosition,
 			borderWidth, cornerRadius, arrowSize,
->>>>>>> c8b61889915aa004d86f7e09d57e4f93477b5cd8
 			arrowColor, arrowShapeColor, arrowBorderColor,
 			arrowHoverColor, arrowShapeHoverColor, arrowBorderHoverColor,
 			// Dot
 			dotSize, dotBorderWidth, dotColor, dotBorderColor, dotActiveColor, dotBorderActiveColor,
 
-<<<<<<< HEAD
-=======
-
->>>>>>> c8b61889915aa004d86f7e09d57e4f93477b5cd8
 		} } = this.props
 		const { device } = this.state
 		const options = {
@@ -252,11 +243,7 @@ class Edit extends Component {
 			<Fragment>
 				<InspectorControls key="inspector">
 					{/* Testimonial Layout */}
-<<<<<<< HEAD
-					<PanelBody title="Testimonial Layouts" initialOpen={true}>
-=======
 					<PanelBody title="" opened={true}>
->>>>>>> c8b61889915aa004d86f7e09d57e4f93477b5cd8
 						<Styles value={layout} onChange={val => setAttributes({ layout: val })}
 							options={[
 								{ value: 1, svg: icons.testimonial_1, label: __('Layout 1') },
@@ -296,13 +283,13 @@ class Edit extends Component {
 							device={device}
 							onDeviceChange={value => this.setState({ device: value })}
 						/>
-						<Range label={__('Columns')} 
-							value={items} 
-							onChange={(value) => setAttributes({ items: value })} 
-							min={1} 
-							max={carouselItems.length - 1} 
-							responsive device={device} 
-							onDeviceChange={value => this.setState({ device: value })} 
+						<Range label={__('Columns')}
+							value={items}
+							onChange={(value) => setAttributes({ items: value })}
+							min={1}
+							max={carouselItems.length - 1}
+							responsive device={device}
+							onDeviceChange={value => this.setState({ device: value })}
 						/>
 					</PanelBody>
 					{/* End */}
@@ -374,24 +361,6 @@ class Edit extends Component {
 							</Tab>
 						</Tabs>
 
-<<<<<<< HEAD
-						
-						<Toggle label={__('Show Dot Navigation')} value={dots} onChange={value => setAttributes({ dots: value })} />
-						<Range
-							label={__('Dot Size')}
-							value={dotSize} onChange={(value) => setAttributes({ dotSize: value })}
-							min={1}
-							max={100}
-							device={device}
-							onDeviceChange={value => this.setState({ device: value })}
-						/>
-						<Range
-							label={__('Border Width')}
-							value={dotBorderWidth} onChange={(value) => setAttributes({ dotBorderWidth: value })}
-							min={1}
-							max={30}
-							device={device}
-=======
 						<Toggle label={__('Dots')} value={dots} onChange={value => setAttributes({ dots: value })} />
 						<Toggle label={__('Draggable')} value={dragable} onChange={value => setAttributes({ dragable: value })} />
 						<Range label={__('Columns')}
@@ -400,19 +369,18 @@ class Edit extends Component {
 							min={1}
 							max={carouselItems.length - 1}
 							responsive device={device}
->>>>>>> c8b61889915aa004d86f7e09d57e4f93477b5cd8
 							onDeviceChange={value => this.setState({ device: value })}
 						/>
 						<Tabs>
-                            <Tab tabTitle={__('Normal')}> 
+							<Tab tabTitle={__('Normal')}>
 								<ColorAdvanced label={__('Dot Color')} value={dotColor} onChange={val => setAttributes({ dotColor: val })} />
 								<Border label={__('Border Color')} value={dotBorderColor} onChange={value => setAttributes({ dotBorderColor: value })} />
-                            </Tab>
-                            <Tab tabTitle={__('Active')}>
+							</Tab>
+							<Tab tabTitle={__('Active')}>
 								<ColorAdvanced label={__('Dot Active Color')} value={dotActiveColor} onChange={val => setAttributes({ dotActiveColor: val })} />
 								<Border label={__('Border Active Color')} value={dotBorderActiveColor} onChange={value => setAttributes({ dotBorderActiveColor: value })} />
-                            </Tab>
-                        </Tabs>
+							</Tab>
+						</Tabs>
 					</PanelBody>
 
 
