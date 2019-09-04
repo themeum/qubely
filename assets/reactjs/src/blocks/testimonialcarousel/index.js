@@ -24,7 +24,6 @@ registerBlockType('qubely/testimonialcarousel', {
 		nav: { type: 'boolean', default: true },
 		interval: { type: 'number', default: 1000 },
 		speed: { type: 'number', default: 800 },
-		dragable: { type: 'boolean', default: true },
 		carouselItems: {
 			type: 'array',
 			default: [
@@ -104,8 +103,6 @@ registerBlockType('qubely/testimonialcarousel', {
 		cornerRadius: { type: 'string', default: '' },
 		arrowSize: { type: 'string', default: '' },
 
-		// arrowBorderColor,
-		// arrowHoverColor, arrowShapeHoverColor, arrowBorderHoverColor
 		// Section Arrow 
 		arrowColor: { type: 'string', default: '', style: [{ selector: '{{QUBELY}} .js-slider .nav-control .dashicons { color:{{arrowColor}}; }' }] },
 		arrowShapeColor: { type: 'object', default: {}, 
@@ -131,8 +128,34 @@ registerBlockType('qubely/testimonialcarousel', {
 			default: { openTy: 0, color: '#3373dc', width: { bottom: '1', left: '1', right: '1', top: '1', unit: 'px' } }, 
 			style: [{ selector: '{{QUBELY}} .js-slider .js-nav-control .nav-control:hover' }] 
 		},
-		
 
+		// Dot Navigation.
+		dotSize: {type: 'string', default: '' },
+		dotBorderWidth: {type: 'string', default: '' },
+
+		// Dot
+		dotColor: { 
+			type: 'object', 
+			default: { openTy: 0, color: '#3373dc', width: { bottom: '1', left: '1', right: '1', top: '1', unit: 'px' } }, 
+			style: [{ selector: '{{QUBELY}} .js-slider .js-dots ul li' }] 
+		},
+		dotBorderColor: { 
+			type: 'object', 
+			default: { openTy: 0, color: '#3373dc', width: { bottom: '1', left: '1', right: '1', top: '1', unit: 'px' } }, 
+			style: [{ selector: '{{QUBELY}} .js-slider .js-dots ul li' }] 
+		},
+
+		// Dot Active color
+		dotActiveColor: { 
+			type: 'object', 
+			default: { openTy: 0, color: '#3373dc', width: { bottom: '1', left: '1', right: '1', top: '1', unit: 'px' } }, 
+			style: [{ selector: '{{QUBELY}} .js-slider .js-dots ul li.active, {{QUBELY}} .js-dots ul li .dot-indicator.active' }] 
+		},
+		dotBorderActiveColor: { 
+			type: 'object', 
+			default: { openTy: 0, color: '#3373dc', width: { bottom: '1', left: '1', right: '1', top: '1', unit: 'px' } }, 
+			style: [{ selector: '{{QUBELY}} .js-slider .js-dots ul li.active' }] 
+		},
 
 		//Name
 		nameColor: { type: 'string', default: '', style: [{ selector: '{{QUBELY}} .qubely-testimonial-author-name { color:{{nameColor}}; }' }] },
