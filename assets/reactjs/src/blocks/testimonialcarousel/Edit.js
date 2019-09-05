@@ -148,6 +148,7 @@ class Edit extends Component {
 	renderTestimonials = () => {
 		const { attributes: { layout, showRatings, carouselItems, quoteIcon, ratings } } = this.props
 
+
 		return (
 			carouselItems.map((item, index) => {
 				const { message } = item

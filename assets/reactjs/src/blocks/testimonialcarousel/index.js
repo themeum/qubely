@@ -309,31 +309,31 @@ registerBlockType('qubely/testimonialcarousel', {
 
 
 		// Design
-		bgPadding: { type: 'object', default: {}, style: [{ selector: '{{QUBELY}} .qubely-block-testimonial' }] },
-		textColor: { type: 'string', default: '', style: [{ selector: '{{QUBELY}} .qubely-block-testimonial { color:{{textColor}}; }' }] },
-		bgColor: { 
-			type: 'object', default: {}, 
-			style: [
-				{ selector: '{{QUBELY}} .qubely-block-testimonial'},
-			],
+		// .qubely-block-testimonial-carousel .qubely-testimonial-carousel-arrow-down
+
+        textColor: { type: 'string', default: '', style: [{ selector: '{{QUBELY}} .qubely-testimonial-carousel-content-wrapper { color:{{textColor}}; }' }] },
+		bgPadding: { type: 'object', default: {}, style: [{ selector: '{{QUBELY}} .qubely-testimonial-carousel-content-wrapper' }] },
+        bgColor: { 
+			type: 'object', 
+			default: {}, 
+			style: [ { selector: '{{QUBELY}} .qubely-testimonial-carousel-content-wrapper' }] 
 		},
+        bgBorderRadius: {
+            type: 'object',
+            default: {
+                openBorderRadius: 1,
+                radiusType: 'global',
+            },
+            style: [
+				{ selector: '{{QUBELY}} .qubely-testimonial-carousel-content-wrapper' }
+			]
+        },
+
+        border: { type: 'object', default: { openTy: 0, color: '#3373dc', width: { bottom: '1', left: '1', right: '1', top: '1', unit: 'px' } }, style: [{ selector: '{{QUBELY}} .qubely-testimonial-carousel-content-wrapper' }] },
+        boxShadow: { type: 'object', default: {}, style: [{ selector: '{{QUBELY}} .qubely-testimonial-carousel-content-wrapper' }] },
+        boxShadowHover: { type: 'object', default: {}, style: [{ selector: '{{QUBELY}} .qubely-testimonial-carousel-content-wrapper:hover' }] },
 		
 		// arrowColor: { type: 'string', default: '', style: [{ selector: '{{QUBELY}} .qubely-layout-three span.dashicons.dashicons-arrow-down { color:{{arrowColor}} }' }] },
-
-
-
-		bgBorderRadius: {
-			type: 'object',
-			default: {
-				openBorderRadius: 1,
-				radiusType: 'global',
-			},
-			style: [{ selector: '{{QUBELY}} .qubely-block-testimonial' }]
-		},
-
-		border: { type: 'object', default: { openTy: 0, color: '#3373dc', width: { bottom: '1', left: '1', right: '1', top: '1', unit: 'px' } }, style: [{ selector: '{{QUBELY}} .qubely-block-testimonial' }] },
-		boxShadow: { type: 'object', default: {}, style: [{ selector: '{{QUBELY}} .qubely-block-testimonial' }] },
-		boxShadowHover: { type: 'object', default: {}, style: [{ selector: '{{QUBELY}} .qubely-block-testimonial:hover' }] },
 
 		showGlobalSettings: { type: 'boolean', default: true }, // Global Settings
 		showContextMenu: { type: 'boolean', default: true },
