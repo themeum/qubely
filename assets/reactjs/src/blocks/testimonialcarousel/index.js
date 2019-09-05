@@ -136,24 +136,24 @@ registerBlockType('qubely/testimonialcarousel', {
 		// Dot
 		dotColor: { 
 			type: 'object', 
-			default: { openTy: 0, color: '#3373dc', width: { bottom: '1', left: '1', right: '1', top: '1', unit: 'px' } }, 
+			default: { openTy: 0, color: '#f4f4f4', width: { bottom: '1', left: '1', right: '1', top: '1', unit: 'px' } }, 
 			style: [{ selector: '{{QUBELY}} .js-slider .js-dots ul li' }] 
 		},
 		dotBorderColor: { 
 			type: 'object', 
-			default: { openTy: 0, color: '#3373dc', width: { bottom: '1', left: '1', right: '1', top: '1', unit: 'px' } }, 
+			default: { openTy: 0, color: '#f4f4f4', width: { bottom: '1', left: '1', right: '1', top: '1', unit: 'px' } }, 
 			style: [{ selector: '{{QUBELY}} .js-slider .js-dots ul li' }] 
 		},
 
 		// Dot Active color
 		dotActiveColor: { 
 			type: 'object', 
-			default: { openTy: 0, color: '#3373dc', width: { bottom: '1', left: '1', right: '1', top: '1', unit: 'px' } }, 
+			default: { openTy: 0, color: '#2084f9', width: { bottom: '1', left: '1', right: '1', top: '1', unit: 'px' } }, 
 			style: [{ selector: '{{QUBELY}} .js-slider .js-dots ul li.active, {{QUBELY}} .js-dots ul li .dot-indicator.active' }] 
 		},
 		dotBorderActiveColor: { 
 			type: 'object', 
-			default: { openTy: 0, color: '#3373dc', width: { bottom: '1', left: '1', right: '1', top: '1', unit: 'px' } }, 
+			default: { openTy: 0, color: '#2084f9', width: { bottom: '1', left: '1', right: '1', top: '1', unit: 'px' } }, 
 			style: [{ selector: '{{QUBELY}} .js-slider .js-dots ul li.active' }] 
 		},
 
