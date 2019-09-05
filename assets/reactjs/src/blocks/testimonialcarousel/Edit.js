@@ -155,7 +155,7 @@ class Edit extends Component {
 
 				return (
 					<div key={index} className="js-item" >
-						<div className={`qubely-tesitmonial-item`}>
+						<div className={`qubely-tesitmonial-item layout-${layout}`}>
 
 							{layout === 2 && this.renderAuthorInfo(item, index)}
 
@@ -177,9 +177,6 @@ class Edit extends Component {
 								</div>
 								{(showRatings && ratings > 0 && layout == 1) && <div className="qubely-testimonial-ratings" data-qubelyrating={ratings}></div>}
 							</div>
-
-							{layout === 3 && <span class="qubely-testimonial-carousel-arrow-down"></span>}
-
 							{layout !== 2 && this.renderAuthorInfo(item, index)}
 							{
 								(quoteIcon && layout == 2) &&

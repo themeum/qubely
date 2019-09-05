@@ -285,11 +285,11 @@ registerBlockType('qubely/testimonialcarousel', {
 		ratings: { type: 'string', default: 4.5 },
 		ratingsPosition: { type: 'string', default: 'bottom' },
 		ratingsColor: { type: 'string', default: '#FFB800', style: [{ condition: [{ key: 'ratings', relation: '!=', value: '0' }], selector: '{{QUBELY}} .qubely-testimonial-ratings:before {color: {{ratingsColor}};} {{QUBELY}} .qubely-testimonial-ratings {color: {{ratingsColor}};}' }] },
-		starsSize: { type: 'object', default: { md: 20, unit: 'px' }, style: [{ condition: [{ key: 'ratings', relation: '!=', value: '0' }], selector: '{{QUBELY}} .qubely-testimonial-ratings {font-size:{{starsSize}};}' }] },
+		starsSize: { type: 'object', default: { md: 16, unit: 'px' }, style: [{ condition: [{ key: 'ratings', relation: '!=', value: '0' }], selector: '{{QUBELY}} .qubely-testimonial-ratings {font-size:{{starsSize}};}' }] },
 		ratingsSpacing: {
             type: 'object',
             default: {
-                md: 30,
+                md: 0,
                 unit: 'px'
             },
             style: [
@@ -317,10 +317,9 @@ registerBlockType('qubely/testimonialcarousel', {
             ]
         },
 
-
-		// Design
-		// .qubely-block-testimonial-carousel .qubely-testimonial-carousel-arrow-down
-
+		/*-----------------------------------
+		* 			Design 
+		------------------------------------- */
         textColor: { type: 'string', default: '', style: [{ selector: '{{QUBELY}} .qubely-testimonial-carousel-content-wrapper { color:{{textColor}}; }' }] },
 		bgPadding: { type: 'object', default: {}, style: [{ selector: '{{QUBELY}} .qubely-testimonial-carousel-content-wrapper' }] },
         bgColor: { 
@@ -330,10 +329,7 @@ registerBlockType('qubely/testimonialcarousel', {
 		},
         bgBorderRadius: {
             type: 'object',
-            default: {
-                openBorderRadius: 1,
-                radiusType: 'global',
-            },
+            default: {},
             style: [
 				{ selector: '{{QUBELY}} .qubely-testimonial-carousel-content-wrapper' }
 			]
