@@ -146,11 +146,11 @@ class Edit extends Component {
 	}
 
 	renderTestimonials = () => {
-		const { attributes: { layout, carouselItems, quoteIcon } } = this.props
+		const { attributes: { layout, showRatings, carouselItems, quoteIcon, ratings } } = this.props
 
 		return (
 			carouselItems.map((item, index) => {
-				const { message, ratings } = item
+				const { message } = item
 
 				return (
 					<div key={index} className="js-item" >
@@ -163,14 +163,20 @@ class Edit extends Component {
 									<span className={`qubely-quote-icon ${quoteIcon}`}></span>
 								</div>
 							}
+
+							{/* showRatings,ratings */}
 							<div className={`qubely-testimonial-carousel-content-wrapper`}>
-								{(ratings > 0 && layout !== 1) && <div className="qubely-testimonial-ratings" data-qubelyrating={ratings}></div>}
+								{	
+									( showRatings && ratings > 0 && layout !== 1 ) && 
+									<div className="qubely-testimonial-ratings" data-qubelyrating={ratings}></div>
+								}
 
 								<div className="qubely-testimonial-content" >
 									{this.renderMessage(message, index)}
 								</div>
-								{(ratings > 0 && layout == 1) && <div className="qubely-testimonial-ratings" data-qubelyrating={ratings}></div>}
+								{(showRatings && ratings > 0 && layout == 1) && <div className="qubely-testimonial-ratings" data-qubelyrating={ratings}></div>}
 							</div>
+
 							{layout === 3 && <span class="qubely-testimonial-carousel-arrow-down"></span>}
 
 							{layout !== 2 && this.renderAuthorInfo(item, index)}
@@ -195,7 +201,7 @@ class Edit extends Component {
 			layout, messageSpacingTop, messageSpacingBottom, nameColor, alignment, designationColor,
 			showAvatar, avatar, avatarAlt, avatarBorderRadius, avatarSize, avatarWidth, avatarHeight,
 			avatarBorder, avatarSpacing, avatarLayout, quoteIconColor, quoteIconSize, quoteIconSpacing,
-			nameTypo, nameSpacing, messageTypo, designationTypo, starsSize, ratingsColor, quoteIcon, ratings,
+			nameTypo, nameSpacing, messageTypo, designationTypo, starsSize, ratingsColor, quoteIcon, ratings, showRatings,
 			ratingsSpacing, bgPadding, textColor, bgColor, bgBorderRadius, border, boxShadow, boxShadowHover,
 
 			sliderNumber, itemPerSlides, sliderItemsSpace,
@@ -207,6 +213,8 @@ class Edit extends Component {
 			arrowHoverColor, arrowShapeHoverColor, arrowBorderHoverColor,
 			// Dot
 			dotSize, dotBorderWidth, dotColor, dotBorderColor, dotActiveColor, dotBorderActiveColor,
+
+			
 
 		} } = this.props
 		const { device } = this.state
@@ -243,7 +251,7 @@ class Edit extends Component {
 			<Fragment>
 				<InspectorControls key="inspector">
 					{/* Testimonial Layout */}
-					<PanelBody title="" opened={true}>
+					<PanelBody title="Testimonial Layout" initialOpen={false}>
 						<Styles value={layout} onChange={val => setAttributes({ layout: val })}
 							options={[
 								{ value: 1, svg: icons.testimonial_1, label: __('Layout 1') },
@@ -361,16 +369,25 @@ class Edit extends Component {
 							</Tab>
 						</Tabs>
 
-						<Toggle label={__('Dots')} value={dots} onChange={value => setAttributes({ dots: value })} />
-						<Toggle label={__('Draggable')} value={dragable} onChange={value => setAttributes({ dragable: value })} />
-						<Range label={__('Columns')}
-							value={items}
-							onChange={(value) => setAttributes({ items: value })}
+						<Toggle label={__('Show Dot Navigation')} value={dots} onChange={value => setAttributes({ dots: value })} />
+
+						<Range 
+							label={__('Dot Size')}
+							value={dotSize} onChange={(value) => setAttributes({ dotSize: value })}
 							min={1}
-							max={carouselItems.length - 1}
-							responsive device={device}
+							max={100}
+							device={device}
 							onDeviceChange={value => this.setState({ device: value })}
 						/>
+						<Range
+							label={__('Border Width')}
+							value={dotBorderWidth} onChange={(value) => setAttributes({ dotBorderWidth: value })}
+							min={1}
+							max={30}
+							device={device}
+							onDeviceChange={value => this.setState({ device: value })}
+						/>
+						<Toggle label={__('Draggable')} value={dragable} onChange={value => setAttributes({ dragable: value })} />
 						<Tabs>
 							<Tab tabTitle={__('Normal')}>
 								<ColorAdvanced label={__('Dot Color')} value={dotColor} onChange={val => setAttributes({ dotColor: val })} />
@@ -382,7 +399,6 @@ class Edit extends Component {
 							</Tab>
 						</Tabs>
 					</PanelBody>
-
 
 					<PanelBody title={__('Message')} initialOpen={false}>
 						<Range
@@ -442,16 +458,8 @@ class Edit extends Component {
 
 					<PanelBody title={__('Avatar')} initialOpen={false}>
 						<Toggle label={__('Show Avatar')} value={showAvatar} onChange={val => setAttributes({ showAvatar: val })} />
-						{
-							showAvatar && <Fragment>
-								<Media
-									label={__('Upload Avatar')} multiple={false} type={['image']}
-									value={avatar} panel={true} onChange={value => setAttributes({ avatar: value })} />
-								{avatar && avatar.url &&
-									<TextControl
-										label={__('Alt Text (Alternative Text)')}
-										value={avatarAlt} onChange={value => setAttributes({ avatarAlt: value })} />
-								}
+						{showAvatar && 
+							<Fragment>
 								<Styles label={__('Avatar Layout')} value={avatarLayout} onChange={val => setAttributes({ avatarLayout: val })}
 									options={[
 										{ value: 'left', svg: icons.avatar_left, label: __('Left') },
@@ -571,35 +579,37 @@ class Edit extends Component {
 					</PanelBody>
 
 					<PanelBody title={__('Ratings')} initialOpen={false}>
-						<Range
-							label={__('Ratings')}
-							value={ratings} onChange={(value) => setAttributes({ ratings: value })}
-							min={0}
-							max={5} step={.5} />
-						{(ratings != 0) &&
+						<Toggle label={__('Show Ratings')} value={showRatings} onChange={val => setAttributes({ showRatings: val })} />
+
+						{showRatings &&
 							<Fragment>
-								<Color
-									label={__('Color')}
-									value={ratingsColor}
-									onChange={(value) => setAttributes({ ratingsColor: value })} />
-								<Range
-									label={__('Stars Size')}
-									value={starsSize} onChange={(value) => setAttributes({ starsSize: value })}
-									unit={['px', 'em', '%']}
-									min={10}
-									max={48}
-									responsive
-									device={device}
-									onDeviceChange={value => this.setState({ device: value })} />
-								<Range
-									label={__('Spacing')}
-									value={ratingsSpacing} onChange={(value) => setAttributes({ ratingsSpacing: value })}
-									unit={['px', 'em', '%']}
-									min={0}
-									max={200}
-									responsive
-									device={device}
-									onDeviceChange={value => this.setState({ device: value })} />
+								<Range label={__('Ratings')} value={ratings} onChange={(value) => setAttributes({ ratings: value })} min={0} max={5} step={.5} />
+								{ (ratings != 0) &&
+									<Fragment>
+										<Color
+											label={__('Color')}
+											value={ratingsColor}
+											onChange={(value) => setAttributes({ ratingsColor: value })} />
+										<Range
+											label={__('Stars Size')}
+											value={starsSize} onChange={(value) => setAttributes({ starsSize: value })}
+											unit={['px', 'em', '%']}
+											min={10}
+											max={48}
+											responsive
+											device={device}
+											onDeviceChange={value => this.setState({ device: value })} />
+										<Range
+											label={__('Spacing')}
+											value={ratingsSpacing} onChange={(value) => setAttributes({ ratingsSpacing: value })}
+											unit={['px', 'em', '%']}
+											min={0}
+											max={200}
+											responsive
+											device={device}
+											onDeviceChange={value => this.setState({ device: value })} />
+									</Fragment>
+								}
 							</Fragment>
 						}
 					</PanelBody>

@@ -268,33 +268,45 @@ registerBlockType('qubely/testimonialcarousel', {
 			]
 		},
 
-		//Ratings
+		/*-----------------------------------
+		* 				Ratings 
+		------------------------------------- */
+		showRatings: { type: 'boolean', default: true },
+		ratings: { type: 'string', default: 4.5 },
 		ratingsPosition: { type: 'string', default: 'bottom' },
 		ratingsColor: { type: 'string', default: '#FFB800', style: [{ condition: [{ key: 'ratings', relation: '!=', value: '0' }], selector: '{{QUBELY}} .qubely-testimonial-ratings:before {color: {{ratingsColor}};} {{QUBELY}} .qubely-testimonial-ratings {color: {{ratingsColor}};}' }] },
 		starsSize: { type: 'object', default: { md: 20, unit: 'px' }, style: [{ condition: [{ key: 'ratings', relation: '!=', value: '0' }], selector: '{{QUBELY}} .qubely-testimonial-ratings {font-size:{{starsSize}};}' }] },
 		ratingsSpacing: {
-			type: 'object',
-			default: {
-				md: 30,
-				unit: 'px'
-			},
-			style: [
-				{
-					condition: [
-						{ key: 'layout', relation: '==', value: '1' },
-						{ key: 'ratings', relation: '!=', value: '0' }
-					],
-					selector: '{{QUBELY}} .qubely-testimonial-ratings {margin-bottom: {{ratingsSpacing}};}'
+            type: 'object',
+            default: {
+                md: 30,
+                unit: 'px'
+            },
+            style: [
+                {
+                    condition: [
+                        { key: 'layout', relation: '==', value: '1' },
+                        { key: 'ratings', relation: '!=', value: '0' }
+                    ],
+                    selector: '{{QUBELY}} .qubely-testimonial-ratings {margin-bottom: {{ratingsSpacing}};}'
+                },
+                {
+                    condition: [
+                        { key: 'layout', relation: '==', value: '2' },
+                        { key: 'ratings', relation: '!=', value: '0' }
+                    ],
+                    selector: '{{QUBELY}} .qubely-testimonial-ratings {margin-top: {{ratingsSpacing}};}'
 				},
 				{
 					condition: [
-						{ key: 'layout', relation: '==', value: '2' },
-						{ key: 'ratings', relation: '!=', value: '0' }
+						{ key: 'layout', relation: '==', value: '3'},
+						{ key: 'layout', relation: '!=', value: '0'}
 					],
-					selector: '{{QUBELY}} .qubely-testimonial-ratings {margin-top: {{ratingsSpacing}};}'
+					selector: '{{QUBELY}} .qubely-testimonial-ratings {margin-bottom: {{ratingsSpacing}};}'
 				}
-			]
-		},
+            ]
+        },
+
 
 		// Design
 		bgPadding: { type: 'object', default: {}, style: [{ selector: '{{QUBELY}} .qubely-block-testimonial' }] },
@@ -305,9 +317,9 @@ registerBlockType('qubely/testimonialcarousel', {
 				{ selector: '{{QUBELY}} .qubely-block-testimonial'},
 			],
 		},
-
-
+		
 		// arrowColor: { type: 'string', default: '', style: [{ selector: '{{QUBELY}} .qubely-layout-three span.dashicons.dashicons-arrow-down { color:{{arrowColor}} }' }] },
+
 
 
 		bgBorderRadius: {
