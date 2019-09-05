@@ -76,7 +76,7 @@ registerBlockType('qubely/testimonialcarousel', {
 		* 	Testimonial Layouts:  common/style attributes
 		* --------------------------------------------------- */
 		layout: { type: 'number', default: 1 },
-		alignment: { type: 'object', default: { md: 'center' }, style: [{ selector: '{{QUBELY}} .qubely-block-testimonial {text-align: {{alignment}};}' }] },
+		alignment: { type: 'object', default: { md: 'center' }, style: [{ selector: '{{QUBELY}} .qubely-tesitmonial-item {text-align: {{alignment}};}' }] },
 		spacer: { type: 'object', default: { spaceTop: { md: '10', unit: "px" }, spaceBottom: { md: '10', unit: "px" } }, style: [{ selector: '{{QUBELY}}' }] },
 
 		// Number of slider.
@@ -168,11 +168,20 @@ registerBlockType('qubely/testimonialcarousel', {
 
 		//Messsage
 		messagePosition: { type: 'string', default: 'top' },
-		messageTypo: { type: 'object', default: { openTypography: 1, size: { md: 16, unit: 'px' } }, style: [{ selector: '{{QUBELY}} .qubely-testimonial-content' }] },
+		messageTypo: { 
+			type: 'object', 
+			default: { 
+				openTypography: 1, 
+				size: { md: 16, unit: 'px' } 
+			}, 
+			style: [{ selector: '{{QUBELY}} .qubely-testimonial-content' }] 
+		},
 		messageSpacingTop: { type: 'object', default: { md: 0, unit: 'px' }, style: [{ selector: '{{QUBELY}} .qubely-testimonial-content {margin-top: {{messageSpacingTop}};}' }] },
 		messageSpacingBottom: { type: 'object', default: { md: 20, unit: 'px' }, style: [{ selector: '{{QUBELY}} .qubely-testimonial-content {margin-bottom: {{messageSpacingBottom}};}' }] },
 
-		//Avatar
+		/*------------------------------------
+		* 			Avatar 
+		* ------------------------------------ */
 		showAvatar: { type: 'boolean', default: true },
 		avatarLayout: { type: 'string', default: 'left' },
 		avatarAlt: { type: 'string', default: '' },
@@ -193,7 +202,7 @@ registerBlockType('qubely/testimonialcarousel', {
 		avatarSpacing: {
 			type: 'object',
 			default: {
-				md: 20,
+				md: 0,
 				unit: 'px'
 			},
 			style: [
@@ -235,10 +244,11 @@ registerBlockType('qubely/testimonialcarousel', {
 				{ selector: '{{QUBELY}} .qubely-testimonial-avatar' }
 			]
 		},
-
 		avatarBorder: { type: 'object', default: {}, style: [{ selector: '{{QUBELY}} .qubely-testimonial-avatar' }] },
 
-		//Quote
+		/*------------------------------------
+		* 			Quote 
+		* ------------------------------------ */
 		quoteIcon: { type: 'string', default: 'fas fa-quote-left' },
 		quoteIconPosition: { type: 'string', default: 'top' },
 		quoteIconSize: { type: 'object', default: { md: 48, unit: 'px' }, style: [{ condition: [{ key: 'quoteIcon', relation: '!=', value: '' }], selector: '{{QUBELY}} .qubely-quote-icon {font-size: {{quoteIconSize}};}' }] },
