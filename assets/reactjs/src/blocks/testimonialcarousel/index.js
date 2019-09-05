@@ -260,14 +260,16 @@ registerBlockType('qubely/testimonialcarousel', {
 			},
 			style: [
 				{
-					condition: [
+					condition:
+						[
 							{ key: 'layout', relation: '==', value: '1' },
 							{ key: 'quoteIcon', relation: '!=', value: '' }
 						],
 					selector: '{{QUBELY}} .qubely-testimonial-quote {margin-bottom: {{quoteIconSpacing}};}'
 				},
 				{
-					condition: [
+					condition:
+						[
 							{ key: 'layout', relation: '==', value: '2' },
 							{ key: 'quoteIcon', relation: '!=', value: '' }
 						],
@@ -283,11 +285,11 @@ registerBlockType('qubely/testimonialcarousel', {
 		ratings: { type: 'string', default: 4.5 },
 		ratingsPosition: { type: 'string', default: 'bottom' },
 		ratingsColor: { type: 'string', default: '#FFB800', style: [{ condition: [{ key: 'ratings', relation: '!=', value: '0' }], selector: '{{QUBELY}} .qubely-testimonial-ratings:before {color: {{ratingsColor}};} {{QUBELY}} .qubely-testimonial-ratings {color: {{ratingsColor}};}' }] },
-		starsSize: { type: 'object', default: { md: 16, unit: 'px' }, style: [{ condition: [{ key: 'ratings', relation: '!=', value: '0' }], selector: '{{QUBELY}} .qubely-testimonial-ratings {font-size:{{starsSize}};}' }] },
+		starsSize: { type: 'object', default: { md: 20, unit: 'px' }, style: [{ condition: [{ key: 'ratings', relation: '!=', value: '0' }], selector: '{{QUBELY}} .qubely-testimonial-ratings {font-size:{{starsSize}};}' }] },
 		ratingsSpacing: {
             type: 'object',
             default: {
-                md: 0,
+                md: 30,
                 unit: 'px'
             },
             style: [
@@ -316,42 +318,35 @@ registerBlockType('qubely/testimonialcarousel', {
         },
 
 
-		/*--------------------------------------------
-		*				Design
-		*--------------------------------------------- */
+		// Design
+		// .qubely-block-testimonial-carousel .qubely-testimonial-carousel-arrow-down
+
         textColor: { type: 'string', default: '', style: [{ selector: '{{QUBELY}} .qubely-testimonial-carousel-content-wrapper { color:{{textColor}}; }' }] },
-		bgPadding: { 
+		bgPadding: { type: 'object', default: {}, style: [{ selector: '{{QUBELY}} .qubely-testimonial-carousel-content-wrapper' }] },
+        bgColor: { 
 			type: 'object', 
 			default: {}, 
-			style: [{ selector: '{{QUBELY}} .layout-3 .qubely-testimonial-carousel-content-wrapper' }] },
-		bgColor: {
-            type: 'string',
-            default: '#F4F4F4',
-            style: [
-				{
-					selector: '{{QUBELY}} .layout-3 .qubely-testimonial-carousel-content-wrapper {background-color: {{bgColor}};}'
-				},
-				{
-					condition: [
-                        { key: 'layout', relation: '==', value: '3'},
-                    ],
-					selector: '{{QUBELY}} .layout-3 .qubely-testimonial-carousel-content-wrapper:before {border-color: {{bgColor}} transparent transparent transparent;}'
-				}
-            ]
+			style: [ { selector: '{{QUBELY}} .qubely-testimonial-carousel-content-wrapper' }] 
 		},
         bgBorderRadius: {
             type: 'object',
-            default: {},
+            default: {
+                openBorderRadius: 1,
+                radiusType: 'global',
+            },
             style: [
-				{ selector: '{{QUBELY}} .qubely-testimonial-carousel-content-wrapper' },
+				{ selector: '{{QUBELY}} .qubely-testimonial-carousel-content-wrapper' }
 			]
         },
+
         border: { type: 'object', default: { openTy: 0, color: '#3373dc', width: { bottom: '1', left: '1', right: '1', top: '1', unit: 'px' } }, style: [{ selector: '{{QUBELY}} .qubely-testimonial-carousel-content-wrapper' }] },
         boxShadow: { type: 'object', default: {}, style: [{ selector: '{{QUBELY}} .qubely-testimonial-carousel-content-wrapper' }] },
         boxShadowHover: { type: 'object', default: {}, style: [{ selector: '{{QUBELY}} .qubely-testimonial-carousel-content-wrapper:hover' }] },
+		
+		// arrowColor: { type: 'string', default: '', style: [{ selector: '{{QUBELY}} .qubely-layout-three span.dashicons.dashicons-arrow-down { color:{{arrowColor}} }' }] },
 
 		showGlobalSettings: { type: 'boolean', default: true }, // Global Settings
-		showContextMenu: { type: 'boolean', default: true },
+		//showContextMenu: { type: 'boolean', default: true },
 	},
 	edit: Edit,
 	save: Save

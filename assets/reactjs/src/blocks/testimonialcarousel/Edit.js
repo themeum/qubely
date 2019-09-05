@@ -148,12 +148,14 @@ class Edit extends Component {
 	renderTestimonials = () => {
 		const { attributes: { layout, showRatings, carouselItems, quoteIcon, ratings } } = this.props
 
+
 		return (
 			carouselItems.map((item, index) => {
 				const { message } = item
+
 				return (
 					<div key={index} className="js-item" >
-						<div className={`qubely-tesitmonial-item layout-${layout}`}>
+						<div className={`qubely-tesitmonial-item`}>
 
 							{layout === 2 && this.renderAuthorInfo(item, index)}
 
@@ -163,6 +165,7 @@ class Edit extends Component {
 								</div>
 							}
 
+							{/* showRatings,ratings */}
 							<div className={`qubely-testimonial-carousel-content-wrapper`}>
 								{	
 									( showRatings && ratings > 0 && layout !== 1 ) && 
@@ -174,6 +177,8 @@ class Edit extends Component {
 								</div>
 								{(showRatings && ratings > 0 && layout == 1) && <div className="qubely-testimonial-ratings" data-qubelyrating={ratings}></div>}
 							</div>
+
+							{layout === 3 && <span class="qubely-testimonial-carousel-arrow-down"></span>}
 
 							{layout !== 2 && this.renderAuthorInfo(item, index)}
 							{
@@ -199,13 +204,19 @@ class Edit extends Component {
 			avatarBorder, avatarSpacing, avatarLayout, quoteIconColor, quoteIconSize, quoteIconSpacing,
 			nameTypo, nameSpacing, messageTypo, designationTypo, starsSize, ratingsColor, quoteIcon, ratings, showRatings,
 			ratingsSpacing, bgPadding, textColor, bgColor, bgBorderRadius, border, boxShadow, boxShadowHover,
+
 			sliderNumber, itemPerSlides, sliderItemsSpace,
 			infiniteLoop, centeredSlider, activeFade,
+			// arrow 
 			arrowStyle, arrowPosition,
 			borderWidth, cornerRadius, arrowSize,
 			arrowColor, arrowShapeColor, arrowBorderColor,
 			arrowHoverColor, arrowShapeHoverColor, arrowBorderHoverColor,
+			// Dot
 			dotSize, dotBorderWidth, dotColor, dotBorderColor, dotActiveColor, dotBorderActiveColor,
+
+			
+
 		} } = this.props
 		const { device } = this.state
 		const options = {
@@ -609,9 +620,9 @@ class Edit extends Component {
 							label={__('Text Color')}
 							value={textColor}
 							onChange={val => setAttributes({ textColor: val })} />
-
-						<Color label={__('Background Color')} value={bgColor} onChange={(value) => setAttributes({ bgColor: value })} />
-						
+						<ColorAdvanced
+							label={__('Background')}
+							value={bgColor} onChange={val => setAttributes({ bgColor: val })} />
 						<Separator />
 						<Border
 							label={__('Border')}
