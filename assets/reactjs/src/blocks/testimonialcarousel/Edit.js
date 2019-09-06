@@ -206,7 +206,7 @@ class Edit extends Component {
 			infiniteLoop, centeredSlider, activeFade,
 			// arrow 
 			arrowStyle, arrowPosition,
-			borderWidth, cornerRadius, arrowSize,
+			cornerRadius, arrowSize,
 			arrowColor, arrowShapeColor, arrowBorderColor,
 			arrowHoverColor, arrowShapeHoverColor, arrowBorderHoverColor,
 			// Dot
@@ -225,6 +225,8 @@ class Edit extends Component {
 			dots: dots,
 			dot_indicator: true,
 			nav: nav,
+			arrowStyle: arrowStyle,
+			arrowPosition: arrowPosition,
 			speed: speed,
 			interval: interval,
 			responsive: [
@@ -341,14 +343,6 @@ class Edit extends Component {
 						<Range
 							label={__('Corner Radius')}
 							value={cornerRadius} onChange={(value) => setAttributes({ cornerRadius: value })}
-							min={1}
-							max={100}
-							device={device}
-							onDeviceChange={value => this.setState({ device: value })}
-						/>
-						<Range
-							label={__('Border Width')}
-							value={borderWidth} onChange={(value) => setAttributes({ borderWidth: value })}
 							min={1}
 							max={100}
 							device={device}
