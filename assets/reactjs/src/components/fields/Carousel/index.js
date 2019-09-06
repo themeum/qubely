@@ -2,14 +2,13 @@
 const { Component, cloneElement, findDOMNode } = wp.element;
 import { _equal } from './utils'
 const JSOptions = {
-    autoplay: false,
-    items: 3,
+    items: 1,
     margin: 10,
-    center: false,
-    dots: false,
-    dot_indicator: false,
     nav: false,
-    arrowStyle: 'arrowright'
+    dots: false,
+    center: false,
+    autoplay: false,
+    dot_indicator: false,
 }
 
 export default class Carousel extends Component {
@@ -83,7 +82,7 @@ export default class Carousel extends Component {
         })
         return items
     }
-    
+
     finddotLength = () => {
         const { options: { items } } = this.props
         let device = this.parseResponsiveViewPort()
@@ -109,13 +108,12 @@ export default class Carousel extends Component {
         const { options: { nav, dots, arrowStyle, arrowPosition }, } = this.props
 
         return (
-            <div className={`js-slider`} ref={(item) => this.$node = $(findDOMNode(item))} {...this.props.options}>
+            <div className={`js-slider AQ`} ref={(item) => this.$node = $(findDOMNode(item))} {...this.props.options}>
                 <div className="js-slider-list">
                     <div className="js-slider-outer-stage">
                         {this.cloneItems()}
                     </div>
                 </div>
- 
                 {nav &&
                     <div className="js-nav-control">
                         <span className={`next-control nav-control ${arrowPosition}`} onClick={() => this.$jsSlider.navigate('next')}>
@@ -126,7 +124,6 @@ export default class Carousel extends Component {
                         </span>
                     </div>
                 }
-
                 {dots &&
                     <div className="js-dots">
                         <ul className={`slider-test`}>
@@ -134,7 +131,6 @@ export default class Carousel extends Component {
                         </ul>
                     </div>
                 }
-
             </div>
         )
     }
