@@ -210,7 +210,7 @@ class Edit extends Component {
 			arrowColor, arrowShapeColor, arrowBorderColor,
 			arrowHoverColor, arrowShapeHoverColor, arrowBorderHoverColor,
 			// Dot
-			dotSize, dotBorderWidth, dotColor, dotBorderColor, dotActiveColor, dotBorderActiveColor,
+			dotSize, dotColor, dotBorderColor, dotActiveColor, dotBorderActiveColor,
 
 			
 
@@ -314,6 +314,7 @@ class Edit extends Component {
 						<Toggle label={__('Infinite Loop')} value={infiniteLoop} onChange={value => setAttributes({ infiniteLoop: value })} />
 						<Toggle label={__('Centered Slides')} value={centeredSlider} onChange={value => setAttributes({ centeredSlider: value })} />
 						<Toggle label={__('Fade Deactivated Items')} value={activeFade} onChange={value => setAttributes({ activeFade: value })} />
+						<Toggle label={__('Draggable')} value={dragable} onChange={value => setAttributes({ dragable: value })} />
 					</PanelBody>
 					{/* End */}
 
@@ -371,15 +372,6 @@ class Edit extends Component {
 							device={device}
 							onDeviceChange={value => this.setState({ device: value })}
 						/>
-						<Range
-							label={__('Border Width')}
-							value={dotBorderWidth} onChange={(value) => setAttributes({ dotBorderWidth: value })}
-							min={1}
-							max={30}
-							device={device}
-							onDeviceChange={value => this.setState({ device: value })}
-						/>
-						<Toggle label={__('Draggable')} value={dragable} onChange={value => setAttributes({ dragable: value })} />
 						<Tabs>
 							<Tab tabTitle={__('Normal')}>
 								<ColorAdvanced label={__('Dot Color')} value={dotColor} onChange={val => setAttributes({ dotColor: val })} />

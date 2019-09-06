@@ -100,13 +100,13 @@ registerBlockType('qubely/testimonialcarousel', {
 		arrowStyle: {type: 'string', default: 'arrowright' },
 		arrowPosition: {type: 'string', default: 'center' },
 		cornerRadius: { 
-			type: 'string', default: '',
+			type: 'string', default: '4',
 			style: [
 				{ selector: '{{QUBELY}} .js-slider .js-nav-control .nav-control { border-radius: {{cornerRadius}}px; } ' }
 			] 
 		},
 		arrowSize: { 
-			type: 'string', default: '',
+			type: 'string', default: '20',
 			style: [
 				{ selector: '{{QUBELY}} .js-slider .js-nav-control .nav-control .dashicons { font-size: {{arrowSize}}px; } ' }
 			] 
@@ -140,8 +140,6 @@ registerBlockType('qubely/testimonialcarousel', {
 
 		// Dot Navigation.
 		dotSize: {type: 'string', default: '' },
-		dotBorderWidth: {type: 'string', default: '' },
-
 		// Dot
 		dotColor: { 
 			type: 'object', 
