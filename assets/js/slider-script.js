@@ -1,14 +1,14 @@
 jQuery(document).ready(function ($) {
 
-    if ($('#jsSlider1').length > 0) {
-        const counterElement = $('#jsSlider1')
+    if ($('.js-slider').length > 0) {
+        const counterElement = $('.js-slider')
         let indexOfCounterElement = 0
         while (indexOfCounterElement < counterElement.length) {
             let currentElement = counterElement[indexOfCounterElement]
 
             const { items, autoplay, interval, speed, dots, dot_indicator, nav, responsive } = JSON.parse(currentElement.dataset.options)
 
-            $("#jsSlider1").jsSlider({
+            $(".js-slider").jsSlider({
                 autoplay: autoplay,
                 interval: interval,
                 speed: speed,

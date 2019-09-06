@@ -104,7 +104,7 @@ class Save extends Component {
     return (
       <div className={`qubely-block-${uniqueId}`} {...animationAttr(animation)}>
         <div className={`qubely-block-testimonial-carousel qubely-layout-${layout}`}>
-          <div className="js-slider" id="jsSlider1" data-options={options} >
+          <div className="js-slider" data-options={options} >
             {this.renderTestimonial()}
           </div>
         </div>
