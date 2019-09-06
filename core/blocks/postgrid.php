@@ -974,7 +974,7 @@ function register_block_qubely_postgrid()
 					),
 					'style' => [(object) [
 						'condition' => [(object) ['key' => 'layout', 'relation' => '==', 'value' => 2]],
-						'selector' => '{{QUBELY}} .qubely-column {grid-column-gap: {{columnGap}};}, {{QUBELY}} .qubely-column {grid-row-gap: {{columnGap}};}'
+						'selector' => '{{QUBELY}} .qubely-postgrid-column {grid-column-gap: {{columnGap}};}, {{QUBELY}} .qubely-postgrid-column {grid-row-gap: {{columnGap}};}'
 					]]
 				),
 				'titleSpace' => array(
@@ -1100,7 +1100,7 @@ function render_block_qubely_postgrid($att)
 
 	//column
 	if ($layout == 2) {
-		$col = (' qubely-column qubely-column-md' . $column['md'] . ' qubely-column-sm' . $column['sm'] . ' qubely-column-xs' . $column['xs']);
+		$col = (' qubely-postgrid-column qubely-postgrid-column-md' . $column['md'] . ' qubely-postgrid-column-sm' . $column['sm'] . ' qubely-postgrid-column-xs' . $column['xs']);
 	} else {
 		$col = "";
 	}
