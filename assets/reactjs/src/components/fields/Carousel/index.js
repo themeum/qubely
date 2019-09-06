@@ -108,7 +108,7 @@ export default class Carousel extends Component {
         const { options: { nav, dots, arrowStyle, arrowPosition }, } = this.props
 
         return (
-            <div className={`js-slider AQ`} ref={(item) => this.$node = $(findDOMNode(item))} {...this.props.options}>
+            <div className={`js-slider`} ref={(item) => this.$node = $(findDOMNode(item))} {...this.props.options}>
                 <div className="js-slider-list">
                     <div className="js-slider-outer-stage">
                         {this.cloneItems()}

@@ -328,7 +328,7 @@ class Edit extends Component {
 						<Range
 							label={__('Horizontal Scroll')}
 							value={horizontalScroll} onChange={(value) => setAttributes({ horizontalScroll: value })}
-							min={1}
+							min={-100}
 							max={100}
 							device={device}
 							onDeviceChange={value => this.setState({ device: value })}
