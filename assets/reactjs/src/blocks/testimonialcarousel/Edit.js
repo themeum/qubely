@@ -212,8 +212,6 @@ class Edit extends Component {
 			// Dot
 			dotSize, dotColor, dotBorderColor, dotActiveColor, dotBorderActiveColor,
 
-			
-
 		} } = this.props
 		const { device } = this.state
 		const options = {
@@ -444,15 +442,21 @@ class Edit extends Component {
 						<Toggle label={__('Show Avatar')} value={showAvatar} onChange={val => setAttributes({ showAvatar: val })} />
 						{showAvatar && 
 							<Fragment>
-								<Styles label={__('Avatar Layout')} value={avatarLayout} onChange={val => setAttributes({ avatarLayout: val })}
-									options={[
-										{ value: 'left', svg: icons.avatar_left, label: __('Left') },
-										{ value: 'right', svg: icons.avatar_right, label: __('Right') },
-										{ value: 'top', svg: icons.avatar_top, label: __('Top') },
-										{ value: 'bottom', svg: icons.avatar_bottom, label: __('Bottom') },
-									]}
-								/>
-								<Separator />
+
+								{layout != 3 && 
+									<Fragment>
+										<Styles label={__('Avatar Layout')} value={avatarLayout} onChange={val => setAttributes({ avatarLayout: val })}
+											options={[
+												{ value: 'left', svg: icons.avatar_left, label: __('Left') },
+												{ value: 'right', svg: icons.avatar_right, label: __('Right') },
+												{ value: 'top', svg: icons.avatar_top, label: __('Top') },
+												{ value: 'bottom', svg: icons.avatar_bottom, label: __('Bottom') },
+											]}
+										/>
+										<Separator />
+									</Fragment>
+								}
+
 								<RadioAdvanced
 									label={__('Avatar Size')}
 									options={[

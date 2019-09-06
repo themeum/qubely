@@ -70,7 +70,6 @@ export default class Carousel extends Component {
         this.$jsSlider.destroy();
     }
 
-
     cloneItems() {
         const { children, options } = this.props
         let device = this.parseResponsiveViewPort()
@@ -84,6 +83,7 @@ export default class Carousel extends Component {
         })
         return items
     }
+    
     finddotLength = () => {
         const { options: { items } } = this.props
         let device = this.parseResponsiveViewPort()
