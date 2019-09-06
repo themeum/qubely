@@ -348,7 +348,7 @@ registerBlockType('qubely/testimonialcarousel', {
         boxShadow: { type: 'object', default: {}, style: [{ selector: '{{QUBELY}} .qubely-testimonial-carousel-content-wrapper' }] },
         boxShadowHover: { type: 'object', default: {}, style: [{ selector: '{{QUBELY}} .qubely-testimonial-carousel-content-wrapper:hover' }] },
 		showGlobalSettings: { type: 'boolean', default: true }, // Global Settings
-		showContextMenu: { type: 'boolean', default: true },
+		//showContextMenu: { type: 'boolean', default: true },
 	},
 	edit: Edit,
 	save: Save

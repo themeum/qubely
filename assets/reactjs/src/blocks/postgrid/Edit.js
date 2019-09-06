@@ -619,7 +619,7 @@ class Edit extends Component {
 					{
 						(posts && posts.length) ?
 
-							<div className={`qubely-postgrid-wrapper qubely-postgrid-layout-${layout} ${(layout === 2) ? 'qubely-column qubely-column-md' + column.md + ' ' + 'qubely-column-sm' + column.sm + ' ' + 'qubely-column-xs' + column.xs : ''}`}>
+							<div className={`qubely-postgrid-wrapper qubely-postgrid-layout-${layout} ${(layout === 2) ? 'qubely-postgrid-column qubely-postgrid-column-md' + column.md + ' ' + 'qubely-postgrid-column-sm' + column.sm + ' ' + 'qubely-postgrid-column-xs' + column.xs : ''}`}>
 								{
 									posts && posts.map(post => {
 										return (
