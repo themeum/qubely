@@ -167,8 +167,8 @@ class Edit extends Component {
 
 							{/* showRatings,ratings */}
 							<div className={`qubely-testimonial-carousel-content-wrapper`}>
-								{	
-									( showRatings && ratings > 0 && layout !== 1 ) && 
+								{
+									(showRatings && ratings > 0 && layout !== 1) &&
 									<div className="qubely-testimonial-ratings" data-qubelyrating={ratings}></div>
 								}
 
@@ -192,7 +192,26 @@ class Edit extends Component {
 
 	}
 
+	setCarouselLength = (newLength) => {
 
+		const { setAttributes, attributes: { carouselItems, items } } = this.props
+		let newCarouselItems = JSON.parse(JSON.stringify(carouselItems))
+
+		let defaultItem = {
+			author: 'James Moriarty',
+			designation: 'Web WordPress Developer',
+			message: '“Innovative Gutenberg blocks than using Qubely Gutenberg Blocks Toolkit. Instantly raise your website appearance with this stylish new plugin.”',
+			ratings: '5',
+			avatar: {}
+		}
+		if (newLength > carouselItems.length) {
+			newCarouselItems.push(defaultItem)
+		} else {
+			(newLength >= items.md && newLength >= items.sm && newLength >= items.sm) && newCarouselItems.pop()
+		}
+		setAttributes({ carouselItems: newCarouselItems })
+
+	}
 	render() {
 		const { setAttributes, attributes: {
 			uniqueId, items, autoPlay, interval, speed, dots, nav, carouselItems, dragable,
@@ -213,11 +232,13 @@ class Edit extends Component {
 			dotSize, dotColor, dotBorderColor, dotActiveColor, dotBorderActiveColor,
 
 		} } = this.props
+
 		const { device } = this.state
-		const options = {
-			autoplay: false,
+
+		const carouselSettings = {
+			autoplay: autoPlay,
 			items: items,
-			sliderNumber: sliderNumber,
+			sliderNumber: carouselItems.length,
 			margin: 10,
 			center: false,
 			dots: dots,
@@ -249,7 +270,7 @@ class Edit extends Component {
 			<Fragment>
 				<InspectorControls key="inspector">
 					{/* Testimonial Layout */}
-					<PanelBody title="Testimonial Layout" initialOpen={false}>
+					<PanelBody title="" opened={true}>
 						<Styles value={layout} onChange={val => setAttributes({ layout: val })}
 							options={[
 								{ value: 1, svg: icons.testimonial_1, label: __('Layout 1') },
@@ -267,15 +288,15 @@ class Edit extends Component {
 						/>
 						<Range
 							label={__('Number of slides')}
-							value={sliderNumber}
-							onChange={(value) => setAttributes({ sliderNumber: value })}
 							min={1}
 							max={20}
 							device={device}
+							value={carouselItems.length}
+							onChange={value => this.setCarouselLength(value)}
 							onDeviceChange={value => this.setState({ device: value })}
 						/>
 						<Range
-							label={__('Items per Slides')}
+							label={__('Items per Slide')}
 							value={itemPerSlides} onChange={(value) => setAttributes({ itemPerSlides: value })}
 							min={1}
 							device={device}
@@ -297,11 +318,7 @@ class Edit extends Component {
 							responsive device={device}
 							onDeviceChange={value => this.setState({ device: value })}
 						/>
-					</PanelBody>
-					{/* End */}
-
-					{/* Carousel Settings */}
-					<PanelBody title={__('Carousel Settings')} initialOpen={false}>
+						<Separator />
 						<Toggle label={__('Autoplay')} value={autoPlay} onChange={value => setAttributes({ autoPlay: value })} />
 						{autoPlay &&
 							<Fragment>
@@ -309,6 +326,12 @@ class Edit extends Component {
 								<Range label={__('Interval (ms)')} value={interval} onChange={value => setAttributes({ interval: parseInt(value) })} min={500} max={5000} />
 							</Fragment>
 						}
+					</PanelBody>
+					{/* End */}
+
+					{/* Carousel Settings */}
+					<PanelBody title={__('Carousel Settings')} initialOpen={false}>
+
 						<Toggle label={__('Infinite Loop')} value={infiniteLoop} onChange={value => setAttributes({ infiniteLoop: value })} />
 						<Toggle label={__('Centered Slides')} value={centeredSlider} onChange={value => setAttributes({ centeredSlider: value })} />
 						<Toggle label={__('Fade Deactivated Items')} value={activeFade} onChange={value => setAttributes({ activeFade: value })} />
@@ -317,7 +340,7 @@ class Edit extends Component {
 					{/* End */}
 
 					{/* Slider Settings */}
-					<PanelBody title={__('Slider Settings')} initialOpen={true}>
+					<PanelBody title={__('Slider Settings')} initialOpen={false}>
 						<Toggle label={__('Show Arrow Navigation')} value={nav} onChange={value => setAttributes({ nav: value })} />
 						<ButtonGroup
 							label={__('Arrow Style')}
@@ -362,7 +385,7 @@ class Edit extends Component {
 
 						<Toggle label={__('Show Dot Navigation')} value={dots} onChange={value => setAttributes({ dots: value })} />
 
-						<Range 
+						<Range
 							label={__('Dot Size')}
 							value={dotSize} onChange={(value) => setAttributes({ dotSize: value })}
 							min={1}
@@ -440,10 +463,10 @@ class Edit extends Component {
 
 					<PanelBody title={__('Avatar')} initialOpen={false}>
 						<Toggle label={__('Show Avatar')} value={showAvatar} onChange={val => setAttributes({ showAvatar: val })} />
-						{showAvatar && 
+						{showAvatar &&
 							<Fragment>
 
-								{layout != 3 && 
+								{layout != 3 &&
 									<Fragment>
 										<Styles label={__('Avatar Layout')} value={avatarLayout} onChange={val => setAttributes({ avatarLayout: val })}
 											options={[
@@ -572,7 +595,7 @@ class Edit extends Component {
 						{showRatings &&
 							<Fragment>
 								<Range label={__('Ratings')} value={ratings} onChange={(value) => setAttributes({ ratings: value })} min={0} max={5} step={.5} />
-								{ (ratings != 0) &&
+								{(ratings != 0) &&
 									<Fragment>
 										<Color
 											label={__('Color')}
@@ -658,7 +681,7 @@ class Edit extends Component {
 
 				<div className={`qubely-block-${uniqueId}`}>
 					<div className={`qubely-block-testimonial-carousel qubely-layout-${layout}`}>
-						<Carousel ref="JsSlider" options={options} 	>
+						<Carousel ref="JsSlider" options={carouselSettings}>
 							{this.renderTestimonials()}
 						</Carousel>
 					</div>
