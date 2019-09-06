@@ -322,11 +322,23 @@ registerBlockType('qubely/testimonialcarousel', {
 		------------------------------------- */
         textColor: { type: 'string', default: '', style: [{ selector: '{{QUBELY}} .qubely-testimonial-carousel-content-wrapper { color:{{textColor}}; }' }] },
 		bgPadding: { type: 'object', default: {}, style: [{ selector: '{{QUBELY}} .qubely-testimonial-carousel-content-wrapper' }] },
-        bgColor: { 
-			type: 'object', 
-			default: {}, 
-			style: [ { selector: '{{QUBELY}} .qubely-testimonial-carousel-content-wrapper' }] 
+		bgColor: {
+            type: 'string',
+            default: '',
+            style: [
+				{
+					selector: '{{QUBELY}} .qubely-testimonial-carousel-content-wrapper {background-color: {{bgColor}};}'
+				},
+				{
+					condition: [
+                        { key: 'layout', relation: '==', value: '3' }
+                    ],
+					selector: '{{QUBELY}} .layout-3 .qubely-testimonial-carousel-content-wrapper:before {border-color: {{bgColor}} transparent transparent transparent;}'
+				}
+            ]
 		},
+
+
         bgBorderRadius: {
             type: 'object',
             default: {},

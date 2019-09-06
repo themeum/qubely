@@ -617,9 +617,11 @@ class Edit extends Component {
 							label={__('Text Color')}
 							value={textColor}
 							onChange={val => setAttributes({ textColor: val })} />
-						<ColorAdvanced
+
+						<Color
 							label={__('Background')}
-							value={bgColor} onChange={val => setAttributes({ bgColor: val })} />
+							value={bgColor}
+							onChange={val => setAttributes({ bgColor: val })} />
 						<Separator />
 						<Border
 							label={__('Border')}
