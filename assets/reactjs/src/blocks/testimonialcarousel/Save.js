@@ -43,7 +43,7 @@ class Save extends Component {
       const { message, ratings } = item
       return (
         <div key={index} className="js-item" >
-          <div className={`qubely-tesitmonial-item`}>
+          <div className={`qubely-tesitmonial-item layout-${layout}`}>
 
             {layout == 2 && this.renderAuthorInfo(item)}
             {
@@ -57,7 +57,7 @@ class Save extends Component {
               <div className="qubely-testimonial-content"> <RichText.Content value={message} /></div>
               {(ratings > 0 && layout == 1) && <div className="qubely-testimonial-ratings" data-qubelyrating={ratings} />}
             </div>
-            {layout === 3 && <span class="qubely-testimonial-carousel-arrow-down"></span>}
+            
             {layout !== 2 && this.renderAuthorInfo(item)}
 
             {

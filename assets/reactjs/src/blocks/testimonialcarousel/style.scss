@@ -154,8 +154,7 @@
 }
 .js-slider .js-dots,
 .js-slider .js-nav-control {
-  position: relative;
-  height: 20px;
+  height: 50px;
   width: 100%;
   margin-top: 5px;
   z-index: 3;
@@ -176,8 +175,12 @@
   position: absolute;
   cursor: pointer;
   text-align: center;
-  bottom: 155px;
+  bottom: 49%;
   background: rgba(255, 255, 255, 0.4);
+}
+.js-slider .js-nav-control .next-control.nav-control.buttom,
+.js-slider .js-nav-control .prev-control.nav-control.buttom {
+  bottom: 0;
 }
 .js-slider .js-nav-control .nav-control.next-control {
   right: 0;
@@ -186,7 +189,7 @@
   left: 0;
 }
 .js-slider .js-dots ul {
-  margin: -4px;
+  margin: 15px;
   padding: 0;
   list-style: none;
   text-align: center;

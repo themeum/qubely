@@ -206,13 +206,11 @@ class Edit extends Component {
 			infiniteLoop, centeredSlider, activeFade,
 			// arrow 
 			arrowStyle, arrowPosition,
-			borderWidth, cornerRadius, arrowSize,
+			cornerRadius, arrowSize,
 			arrowColor, arrowShapeColor, arrowBorderColor,
 			arrowHoverColor, arrowShapeHoverColor, arrowBorderHoverColor,
 			// Dot
-			dotSize, dotBorderWidth, dotColor, dotBorderColor, dotActiveColor, dotBorderActiveColor,
-
-			
+			dotSize, dotColor, dotBorderColor, dotActiveColor, dotBorderActiveColor,
 
 		} } = this.props
 		const { device } = this.state
@@ -225,6 +223,8 @@ class Edit extends Component {
 			dots: dots,
 			dot_indicator: true,
 			nav: nav,
+			arrowStyle: arrowStyle,
+			arrowPosition: arrowPosition,
 			speed: speed,
 			interval: interval,
 			responsive: [
@@ -312,6 +312,7 @@ class Edit extends Component {
 						<Toggle label={__('Infinite Loop')} value={infiniteLoop} onChange={value => setAttributes({ infiniteLoop: value })} />
 						<Toggle label={__('Centered Slides')} value={centeredSlider} onChange={value => setAttributes({ centeredSlider: value })} />
 						<Toggle label={__('Fade Deactivated Items')} value={activeFade} onChange={value => setAttributes({ activeFade: value })} />
+						<Toggle label={__('Draggable')} value={dragable} onChange={value => setAttributes({ dragable: value })} />
 					</PanelBody>
 					{/* End */}
 
@@ -346,14 +347,6 @@ class Edit extends Component {
 							device={device}
 							onDeviceChange={value => this.setState({ device: value })}
 						/>
-						<Range
-							label={__('Border Width')}
-							value={borderWidth} onChange={(value) => setAttributes({ borderWidth: value })}
-							min={1}
-							max={100}
-							device={device}
-							onDeviceChange={value => this.setState({ device: value })}
-						/>
 						<Tabs>
 							<Tab tabTitle={__('Normal')}>
 								<Color label={__('Arrow Color')} value={arrowColor} onChange={(value) => setAttributes({ arrowColor: value })} />
@@ -377,15 +370,6 @@ class Edit extends Component {
 							device={device}
 							onDeviceChange={value => this.setState({ device: value })}
 						/>
-						<Range
-							label={__('Border Width')}
-							value={dotBorderWidth} onChange={(value) => setAttributes({ dotBorderWidth: value })}
-							min={1}
-							max={30}
-							device={device}
-							onDeviceChange={value => this.setState({ device: value })}
-						/>
-						<Toggle label={__('Draggable')} value={dragable} onChange={value => setAttributes({ dragable: value })} />
 						<Tabs>
 							<Tab tabTitle={__('Normal')}>
 								<ColorAdvanced label={__('Dot Color')} value={dotColor} onChange={val => setAttributes({ dotColor: val })} />
@@ -458,15 +442,21 @@ class Edit extends Component {
 						<Toggle label={__('Show Avatar')} value={showAvatar} onChange={val => setAttributes({ showAvatar: val })} />
 						{showAvatar && 
 							<Fragment>
-								<Styles label={__('Avatar Layout')} value={avatarLayout} onChange={val => setAttributes({ avatarLayout: val })}
-									options={[
-										{ value: 'left', svg: icons.avatar_left, label: __('Left') },
-										{ value: 'right', svg: icons.avatar_right, label: __('Right') },
-										{ value: 'top', svg: icons.avatar_top, label: __('Top') },
-										{ value: 'bottom', svg: icons.avatar_bottom, label: __('Bottom') },
-									]}
-								/>
-								<Separator />
+
+								{layout != 3 && 
+									<Fragment>
+										<Styles label={__('Avatar Layout')} value={avatarLayout} onChange={val => setAttributes({ avatarLayout: val })}
+											options={[
+												{ value: 'left', svg: icons.avatar_left, label: __('Left') },
+												{ value: 'right', svg: icons.avatar_right, label: __('Right') },
+												{ value: 'top', svg: icons.avatar_top, label: __('Top') },
+												{ value: 'bottom', svg: icons.avatar_bottom, label: __('Bottom') },
+											]}
+										/>
+										<Separator />
+									</Fragment>
+								}
+
 								<RadioAdvanced
 									label={__('Avatar Size')}
 									options={[
