@@ -98,6 +98,9 @@ registerBlockType('qubely/testimonialcarousel', {
 		* 			Slider Settings 			
 		-------------------------------------- */
 		arrowStyle: {type: 'string', default: 'arrowright' },
+
+		horizontalScroll: { type: 'string', default: '1', },
+
 		arrowPosition: {type: 'string', default: 'center' },
 		cornerRadius: { 
 			type: 'string', default: '4',
