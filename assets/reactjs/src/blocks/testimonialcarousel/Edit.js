@@ -229,7 +229,7 @@ class Edit extends Component {
 			arrowColor, arrowShapeColor, arrowBorderColor,
 			arrowHoverColor, arrowShapeHoverColor, arrowBorderHoverColor,
 			// Dot
-			dotSize, dotColor, dotBorderColor, dotActiveColor, dotBorderActiveColor,
+			dotSize, dotColor, dotBorderColor, dotActiveColor, dotBorderActiveColor, horizontalScroll
 
 		} } = this.props
 
@@ -348,8 +348,16 @@ class Edit extends Component {
 							value={arrowStyle}
 							onChange={value => setAttributes({ arrowStyle: value })}
 						/>
+						<Range
+							label={__('Horizontal Scroll')}
+							value={horizontalScroll} onChange={(value) => setAttributes({ horizontalScroll: value })}
+							min={-100}
+							max={100}
+							device={device}
+							onDeviceChange={value => this.setState({ device: value })}
+						/>
 						<ButtonGroup
-							label={__('Arrow Position')}
+							label={__('Vertical Position')}
 							options={[[__('Center'), 'center'], [__('Buttom'), 'buttom']]}
 							value={arrowPosition}
 							onChange={value => setAttributes({ arrowPosition: value })}

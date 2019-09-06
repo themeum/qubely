@@ -99,6 +99,12 @@ registerBlockType('qubely/testimonialcarousel', {
 		* 			Slider Settings 			
 		-------------------------------------- */
 		arrowStyle: {type: 'string', default: 'arrowright' },
+		horizontalScroll: { 
+			type: 'string', default: '1', 
+			style: [
+				{ selector: '{{QUBELY}} .js-slider .js-nav-control .nav-control.next-control { right: {{horizontalScroll}}% } {{QUBELY}} .js-slider .js-nav-control .nav-control.prev-control { left: {{horizontalScroll}}% }  ' }
+			] 	
+		},
 		arrowPosition: {type: 'string', default: 'center' },
 		cornerRadius: { 
 			type: 'string', default: '4',

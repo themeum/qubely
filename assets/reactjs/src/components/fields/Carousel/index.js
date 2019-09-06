@@ -2,14 +2,13 @@
 const { Component, cloneElement, findDOMNode } = wp.element;
 import { _equal } from './utils'
 const JSOptions = {
-    autoplay: false,
-    items: 3,
+    items: 1,
     margin: 10,
-    center: false,
-    dots: false,
-    dot_indicator: false,
     nav: false,
-    arrowStyle: 'arrowright'
+    dots: false,
+    center: false,
+    autoplay: false,
+    dot_indicator: false,
 }
 
 export default class Carousel extends Component {
@@ -116,7 +115,6 @@ export default class Carousel extends Component {
                         {this.cloneItems()}
                     </div>
                 </div>
-
                 {nav &&
                     <div className="js-nav-control">
                         <span className={`next-control nav-control ${arrowPosition}`} onClick={() => this.$jsSlider.navigate('next')}>
@@ -127,7 +125,6 @@ export default class Carousel extends Component {
                         </span>
                     </div>
                 }
-
                 {dots &&
                     <div className="js-dots">
                         <ul className={`slider-test`}>
@@ -135,7 +132,6 @@ export default class Carousel extends Component {
                         </ul>
                     </div>
                 }
-
             </div>
         )
     }
