@@ -9,6 +9,7 @@ const JSOptions = {
     dots: false,
     dot_indicator: false,
     nav: false,
+    arrowStyle: 'arrowright'
 }
 
 export default class Carousel extends Component {
@@ -106,6 +107,7 @@ export default class Carousel extends Component {
 
     render() {
         const { options: { nav, dots } } = this.props
+
         return (
             <div className={`js-slider`} ref={(item) => this.$node = $(findDOMNode(item))} {...this.props.options}>
                 <div className="js-slider-list">
@@ -113,7 +115,7 @@ export default class Carousel extends Component {
                         {this.cloneItems()}
                     </div>
                 </div>
-
+ 
                 {nav &&
                     <div className="js-nav-control">
                         <span className="next-control nav-control" onClick={() => this.$jsSlider.navigate('next')}>

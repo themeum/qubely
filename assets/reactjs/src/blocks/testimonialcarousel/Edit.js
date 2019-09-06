@@ -316,7 +316,7 @@ class Edit extends Component {
 					{/* End */}
 
 					{/* Slider Settings */}
-					<PanelBody title={__('Slider Settings')} initialOpen={false}>
+					<PanelBody title={__('Slider Settings')} initialOpen={true}>
 						<Toggle label={__('Show Arrow Navigation')} value={nav} onChange={value => setAttributes({ nav: value })} />
 						<ButtonGroup
 							label={__('Arrow Style')}

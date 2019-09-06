@@ -337,8 +337,6 @@ registerBlockType('qubely/testimonialcarousel', {
 				}
             ]
 		},
-
-
         bgBorderRadius: {
             type: 'object',
             default: {},
@@ -346,15 +344,11 @@ registerBlockType('qubely/testimonialcarousel', {
 				{ selector: '{{QUBELY}} .qubely-testimonial-carousel-content-wrapper' }
 			]
         },
-
         border: { type: 'object', default: { openTy: 0, color: '#3373dc', width: { bottom: '1', left: '1', right: '1', top: '1', unit: 'px' } }, style: [{ selector: '{{QUBELY}} .qubely-testimonial-carousel-content-wrapper' }] },
         boxShadow: { type: 'object', default: {}, style: [{ selector: '{{QUBELY}} .qubely-testimonial-carousel-content-wrapper' }] },
         boxShadowHover: { type: 'object', default: {}, style: [{ selector: '{{QUBELY}} .qubely-testimonial-carousel-content-wrapper:hover' }] },
-		
-		// arrowColor: { type: 'string', default: '', style: [{ selector: '{{QUBELY}} .qubely-layout-three span.dashicons.dashicons-arrow-down { color:{{arrowColor}} }' }] },
-
 		showGlobalSettings: { type: 'boolean', default: true }, // Global Settings
-		//showContextMenu: { type: 'boolean', default: true },
+		showContextMenu: { type: 'boolean', default: true },
 	},
 	edit: Edit,
 	save: Save
