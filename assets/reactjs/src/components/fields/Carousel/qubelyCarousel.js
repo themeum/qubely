@@ -122,15 +122,15 @@
         createHtmlDom: function () {
 
 
-            if (this.$element.find(".js-slider-outer-stage").length > 0) {
-                this.$outerStage = this.$element.find(".js-slider-outer-stage")
+            if (this.$element.find(".qubely-carousel-extended-outer-stage").length > 0) {
+                this.$outerStage = this.$element.find(".qubely-carousel-extended-outer-stage")
             }
 
-            if (this.$element.find(".js-slider-list").length > 0) {
-                this.$sliderList = this.$element.find(".js-slider-list")
+            if (this.$element.find(".qubely-carousel-extended-list").length > 0) {
+                this.$sliderList = this.$element.find(".qubely-carousel-extended-list")
             }
 
-            // js-slider-list
+            // qubely-carousel-extended-list
             // Do calculate total items and clone numbers
             this.itemProfessor()
 

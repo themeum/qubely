@@ -20,7 +20,7 @@ export default class Carousel extends Component {
     componentDidMount() {
         let activeDevice = this.parseResponsiveViewPort()
         this.setState({ device: activeDevice })
-        require('./jsSlider')
+        require('./qubelyCarousel')
         this.init(this.getOptions())
     }
     componentWillReceiveProps(nextProps) {
@@ -89,8 +89,8 @@ export default class Carousel extends Component {
     finddotLength = () => {
         const { options: { items } } = this.props
         let device = this.parseResponsiveViewPort()
-        const cloneItems = $('.js-slider-outer-stage').find('.clone').length
-        let numberOfItems = $('.js-slider-outer-stage').find('.js-item').length - cloneItems
+        const cloneItems = $('.qubely-carousel-extended-outer-stage').find('.clone').length
+        let numberOfItems = $('.qubely-carousel-extended-outer-stage').find('.js-item').length - cloneItems
         return (Math.floor(numberOfItems / items[device]))
     }
 
@@ -111,9 +111,9 @@ export default class Carousel extends Component {
         const { options: { nav, dots, arrowStyle, arrowPosition }, children } = this.props
         const cloneItems = this.cloneItems()
         return (
-            <div className={`js-slider`} ref={(item) => this.$node = $(findDOMNode(item))} {...this.props.options}>
-                <div className="js-slider-list">
-                    <div className="js-slider-outer-stage">
+            <div className={`qubely-carousel qubely-carousel-wrapper`} ref={(item) => this.$node = $(findDOMNode(item))} {...this.props.options}>
+                <div className="qubely-carousel-extended-list">
+                    <div className="qubely-carousel-extended-outer-stage">
                         {cloneItems.lastChilds}
                         {children}
                         {cloneItems.firstChilds}
