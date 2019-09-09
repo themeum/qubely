@@ -347,7 +347,7 @@ class Edit extends Component {
 							onChange={value => setAttributes({ arrowStyle: value })}
 						/>
 						<Range
-							label={__('Horizontal Scroll')}
+							label={__('Horizontal Position')}
 							value={horizontalScroll} onChange={(value) => setAttributes({ horizontalScroll: value })}
 							min={-100}
 							max={100}
