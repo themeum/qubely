@@ -137,10 +137,10 @@
 
             // Create dots element if dots setting enable
             if (this.options.dots) {
-                if(this.$element.find('.js-dots').length === 0 ){
+                if(this.$element.find('.qubely-carousel-dots').length === 0 ){
                     this.createDotsController()
                 }else{
-                    this.$dotContainer = this.$element.find('.js-dots ul');
+                    this.$dotContainer = this.$element.find('.qubely-carousel-dots ul');
                 }
                 
             }
@@ -158,7 +158,7 @@
          */
         itemProfessor: function () {
             const cloneItems = this.$element.find('.clone').length
-            this._numberOfItems = this.$element.find('.js-item').length - cloneItems
+            this._numberOfItems = this.$element.find('.qubely-carousel-item').length - cloneItems
             let viewPort = null
             if (typeof this.options.responsive !== 'undefined')
                 viewPort = this.parseResponsiveViewPort()
@@ -201,7 +201,7 @@
         createDotsController: function () {
             //Create dots navigation
             let dotBox = document.createElement('div')
-            dotBox.setAttribute('class', 'js-dots')
+            dotBox.setAttribute('class', 'qubely-carousel-dots')
             this.$element.append(dotBox)
             let jsSlider = this;
             let dotContainer = document.createElement('ul')
@@ -213,7 +213,7 @@
             if (dotLength > 1) {
                 for (var i = 0; i < dotLength; i++) {
                     let dotItem = document.createElement('li')
-                    dotItem.setAttribute('class', 'js-dot-' + i)
+                    dotItem.setAttribute('class', 'qubely-carousel-dot-' + i)
                     $(dotItem).css({ '-webkit-transition': 'all 0.5s linear 0s' })
                     if (i === 0) {
                         $(dotItem).addClass('active')
@@ -247,7 +247,7 @@
                 cssPropety.marginRight = this.options.margin + 'px'
             }
 
-            this.$element.find('.js-item').each(function () {
+            this.$element.find('.qubely-carousel-item').each(function () {
                 totalItems++;
                 $(this).css(cssPropety)
             })
@@ -603,7 +603,7 @@
         callback: function () {
             let onChange = this.options.onChange
             if (typeof onChange === 'function') {
-                const items = this.$element.find('.js-item').length
+                const items = this.$element.find('.qubely-carousel-item').length
                 let option = { item: this.item, items: items, element: this.$element }
                 onChange.call(this.element, option)
             }

@@ -174,34 +174,34 @@
   transition-timing-function: linear;
   -webkit-transition-timing-function: linear;
 }
-.qubely-carousel.qubely-carousel-wrapper .js-item {
+.qubely-carousel.qubely-carousel-wrapper .qubely-carousel-item {
   position: relative;
   float: left;
   overflow: hidden;
 }
-.qubely-carousel.qubely-carousel-wrapper .js-item.active,
-.qubely-carousel.qubely-carousel-wrapper .js-item.dragenable {
+.qubely-carousel.qubely-carousel-wrapper .qubely-carousel-item.active,
+.qubely-carousel.qubely-carousel-wrapper .qubely-carousel-item.dragenable {
   visibility: visible;
   transform-style: preserve-3d;
 }
-.qubely-carousel.qubely-carousel-wrapper .js-item.prev-item {
+.qubely-carousel.qubely-carousel-wrapper .qubely-carousel-item.prev-item {
   z-index: 1;
   visibility: visible;
 }
-.qubely-carousel.qubely-carousel-wrapper .js-dots,
-.qubely-carousel.qubely-carousel-wrapper .js-nav-control {
+.qubely-carousel.qubely-carousel-wrapper .qubely-carousel-dots,
+.qubely-carousel.qubely-carousel-wrapper .qubely-carousel-nav-control {
   height: 50px;
   width: 100%;
   margin-top: 5px;
   z-index: 3;
 }
-.qubely-carousel.qubely-carousel-wrapper .js-dots {
+.qubely-carousel.qubely-carousel-wrapper .qubely-carousel-dots {
   position: absolute;
   bottom: 0px;
   left: 50%;
   transform: translateX(-50%);
 }
-.qubely-carousel.qubely-carousel-wrapper .js-nav-control .nav-control {
+.qubely-carousel.qubely-carousel-wrapper .qubely-carousel-nav-control .nav-control {
   display: inline-block;
   height: 40px;
   width: 40px;
@@ -213,23 +213,23 @@
   bottom: 49%;
   background: rgba(255, 255, 255, 0.4);
 }
-.qubely-carousel.qubely-carousel-wrapper .js-nav-control .next-control.nav-control.buttom,
-.qubely-carousel.qubely-carousel-wrapper .js-nav-control .prev-control.nav-control.buttom {
+.qubely-carousel.qubely-carousel-wrapper .qubely-carousel-nav-control .next-control.nav-control.buttom,
+.qubely-carousel.qubely-carousel-wrapper .qubely-carousel-nav-control .prev-control.nav-control.buttom {
   bottom: 0;
 }
-.qubely-carousel.qubely-carousel-wrapper .js-nav-control .nav-control.next-control {
+.qubely-carousel.qubely-carousel-wrapper .qubely-carousel-nav-control .nav-control.next-control {
   right: 0;
 }
-.qubely-carousel.qubely-carousel-wrapper .js-nav-control .nav-control.prev-control {
+.qubely-carousel.qubely-carousel-wrapper .qubely-carousel-nav-control .nav-control.prev-control {
   left: 0;
 }
-.qubely-carousel.qubely-carousel-wrapper .js-dots ul {
+.qubely-carousel.qubely-carousel-wrapper .qubely-carousel-dots ul {
   margin: 15px;
   padding: 0;
   list-style: none;
   text-align: center;
 }
-.qubely-carousel.qubely-carousel-wrapper .js-dots ul li {
+.qubely-carousel.qubely-carousel-wrapper .qubely-carousel-dots ul li {
   display: inline-block;
   height: 4px;
   width: 30px;
@@ -240,10 +240,10 @@
   cursor: pointer;
   position: relative;
 }
-.qubely-carousel.qubely-carousel-wrapper .js-dots ul li.active {
+.qubely-carousel.qubely-carousel-wrapper .qubely-carousel-dots ul li.active {
   width: 55px;
 }
-.qubely-carousel.qubely-carousel-wrapper .js-dots ul li .dot-indicator {
+.qubely-carousel.qubely-carousel-wrapper .qubely-carousel-dots ul li .dot-indicator {
   position: absolute;
   -webkit-perspective: 1000px;
   perspective: 1000px;
@@ -258,7 +258,7 @@
   height: 4px;
   border-radius: 2px;
 }
-.qubely-carousel.qubely-carousel-wrapper .js-dots ul li .dot-indicator.active {
+.qubely-carousel.qubely-carousel-wrapper .qubely-carousel-dots ul li .dot-indicator.active {
   background: #2084f9;
   width: 100%;
   top: 0;

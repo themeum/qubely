@@ -78,8 +78,8 @@ export default class Carousel extends Component {
 
         const cloneItems = children.length > options.items[device] ? Math.ceil(children.length / 2) : options.items[device]
         Array(parseInt(cloneItems)).fill(0).map((_, i) => {
-            const lastChild = cloneElement(children[(children.length - 1) - i], { className: `clone js-item` })
-            const firstChild = cloneElement(children[i], { className: `clone js-item` })
+            const lastChild = cloneElement(children[(children.length - 1) - i], { className: `clone qubely-carousel-item` })
+            const firstChild = cloneElement(children[i], { className: `clone qubely-carousel-item` })
             firstChilds.push(firstChild)
             lastChilds.push(lastChild)
         })
@@ -90,7 +90,7 @@ export default class Carousel extends Component {
         const { options: { items } } = this.props
         let device = this.parseResponsiveViewPort()
         const cloneItems = $('.qubely-carousel-extended-outer-stage').find('.clone').length
-        let numberOfItems = $('.qubely-carousel-extended-outer-stage').find('.js-item').length - cloneItems
+        let numberOfItems = $('.qubely-carousel-extended-outer-stage').find('.qubely-carousel-item').length - cloneItems
         return (Math.floor(numberOfItems / items[device]))
     }
 
@@ -100,7 +100,7 @@ export default class Carousel extends Component {
         let dots = Math.floor(children.length / items[device]) + 1;
         return Array(dots).fill(0).map((item, index) => {
             return (
-                <li className={`js-dot-${index} ${index === 0 ? 'active' : ''}`}>
+                <li className={`qubely-carousel-dot-${index}${index === 0 ? ' active' : ''}`}>
                     <span className="dot-indicator"></span>
                 </li>
             )
@@ -120,7 +120,7 @@ export default class Carousel extends Component {
                     </div>
                 </div>
                 {nav &&
-                    <div className="js-nav-control">
+                    <div className="qubely-carousel-nav-control">
                         <span className={`next-control nav-control ${arrowPosition}`} onClick={() => this.$jsSlider.navigate('next')}>
                             {(arrowStyle == 'arrowright2') ? <span class="dashicons dashicons-arrow-right-alt2"></span> : <span class="dashicons dashicons-arrow-right-alt"></span>}
                         </span>
@@ -130,8 +130,8 @@ export default class Carousel extends Component {
                     </div>
                 }
                 {dots &&
-                    <div className="js-dots">
-                        <ul className={`slider-test`}>
+                    <div className="qubely-carousel-dots">
+                        <ul >
                             {this.createDotsItems()}
                         </ul>
                     </div>
