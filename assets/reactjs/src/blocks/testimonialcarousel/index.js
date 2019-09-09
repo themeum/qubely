@@ -197,7 +197,7 @@ registerBlockType('qubely/testimonialcarousel', {
 			style: [{ selector: '{{QUBELY}} .qubely-testimonial-content' }] 
 		},
 		messageSpacingTop: { type: 'object', default: { md: 0, unit: 'px' }, style: [{ selector: '{{QUBELY}} .qubely-testimonial-content {margin-top: {{messageSpacingTop}};}' }] },
-		messageSpacingBottom: { type: 'object', default: { md: 20, unit: 'px' }, style: [{ selector: '{{QUBELY}} .qubely-testimonial-content {margin-bottom: {{messageSpacingBottom}};}' }] },
+		messageSpacingBottom: { type: 'object', default: { md: 5, unit: 'px' }, style: [{ selector: '{{QUBELY}} .qubely-testimonial-content {margin-bottom: {{messageSpacingBottom}};}' }] },
 
 		/*------------------------------------
 		* 			Avatar 
@@ -222,7 +222,7 @@ registerBlockType('qubely/testimonialcarousel', {
 		avatarSpacing: {
 			type: 'object',
 			default: {
-				md: 0,
+				md: 20,
 				unit: 'px'
 			},
 			style: [
@@ -236,19 +236,19 @@ registerBlockType('qubely/testimonialcarousel', {
 					condition: [
 						{ key: 'avatarLayout', relation: '==', value: 'right' }
 					],
-					selector: '{{QUBELY}} .qubely-testimonial-avatar {margin-left: {{avatarSpacing}};}'
+					selector: '{{QUBELY}} .qubely-testimonial-avatar {margin: 0px 0px 0px {{avatarSpacing}};}'
 				},
 				{
 					condition: [
 						{ key: 'avatarLayout', relation: '==', value: 'top' }
 					],
-					selector: '{{QUBELY}} .qubely-testimonial-avatar {margin-bottom: {{avatarSpacing}};}'
+					selector: '{{QUBELY}} .qubely-testimonial-avatar {margin: 0px 0px {{avatarSpacing}};}'
 				},
 				{
 					condition: [
 						{ key: 'avatarLayout', relation: '==', value: 'bottom' }
 					],
-					selector: '{{QUBELY}} .qubely-testimonial-avatar {margin-top: {{avatarSpacing}};}'
+					selector: '{{QUBELY}} .qubely-testimonial-avatar {margin: {{avatarSpacing}} 0px 0px;}'
 				}
 			]
 		},
@@ -309,7 +309,7 @@ registerBlockType('qubely/testimonialcarousel', {
 		ratingsSpacing: {
             type: 'object',
             default: {
-                md: 0,
+                md: 12,
                 unit: 'px'
             },
             style: [
@@ -337,9 +337,9 @@ registerBlockType('qubely/testimonialcarousel', {
             ]
         },
 
-		/*-----------------------------------
-		* 			Design 
-		------------------------------------- */
+		/* ------------------------------------
+		* 			|| Design 
+		* ------------------------------------- */
         textColor: { type: 'string', default: '', style: [{ selector: '{{QUBELY}} .qubely-testimonial-carousel-content-wrapper { color:{{textColor}}; }' }] },
 		bgPadding: { type: 'object', default: {}, style: [{ selector: '{{QUBELY}} .qubely-testimonial-carousel-content-wrapper' }] },
 		bgColor: {

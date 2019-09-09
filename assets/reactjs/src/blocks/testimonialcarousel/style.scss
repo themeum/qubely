@@ -206,7 +206,7 @@
 }
 .js-slider .js-dots ul li.active {
   width: 55px;
-}
+} 
 .js-slider .js-dots ul li .dot-indicator {
   position: absolute;
   -webkit-perspective: 1000px;
@@ -228,7 +228,9 @@
   top: 0;
   border-radius: 2px;
 }
-
+.qubely-tesitmonial-item.layout-3 .qubely-testimonial-avatar {
+  margin-right: 0;
+}
 .qubely-testimonial-carousel-content-wrapper {
   position: relative;
 }
