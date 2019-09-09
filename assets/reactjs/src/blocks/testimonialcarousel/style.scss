@@ -41,14 +41,7 @@
       text-align: right;
     }
   }
-// .qubely-block-testimonial-carousel .qubely-testimonial-ratings:before, 
-// .qubely-block-testimonial-carousel .qubely-testimonial-ratings:after {
-//     content: "\f005\f005\f005\f005\f005";
-//     font-family: "Font Awesome\ 5 Free";
-//     font-weight: 400;
-//     display: block;
-//     white-space: nowrap;
-// }
+
   //rating
   .qubely-testimonial-ratings {
     unicode-bidi: bidi-override;
@@ -229,7 +222,7 @@
   height: 4px;
   border-radius: 2px;
 }
-.js-slider .js-dots ul li .dot-indicator.active {
+.js-slider .js-dots ul li.active span.dot-indicator {
   background: #2084f9;
   width: 100%;
   top: 0;

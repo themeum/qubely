@@ -166,7 +166,7 @@ registerBlockType('qubely/testimonialcarousel', {
 		dotActiveColor: { 
 			type: 'object', 
 			default: { openTy: 0, color: '#2084f9', width: { bottom: '1', left: '1', right: '1', top: '1', unit: 'px' } }, 
-			style: [{ selector: '{{QUBELY}} .js-slider .js-dots ul li.active, {{QUBELY}} .js-dots ul li .dot-indicator.active' }] 
+			style: [{ selector: '{{QUBELY}} .js-slider .js-dots ul li.active span.dot-indicator' }] 
 		},
 		dotBorderActiveColor: { 
 			type: 'object', 
