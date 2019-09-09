@@ -1,5 +1,6 @@
 
 const { Component, cloneElement, findDOMNode } = wp.element;
+
 import { _equal } from './utils'
 const JSOptions = {
     items: 1,
@@ -72,16 +73,17 @@ export default class Carousel extends Component {
     cloneItems() {
         const { children, options } = this.props
         let device = this.parseResponsiveViewPort()
-        let items = [...children]
+        let firstChilds = []
+        let lastChilds = []
+
         const cloneItems = children.length > options.items[device] ? Math.ceil(children.length / 2) : options.items[device]
         Array(parseInt(cloneItems)).fill(0).map((_, i) => {
-            const lastChild = cloneElement(children[(children.length - 1) - i], { className: "clone js-item" })
-            const firstChild = cloneElement(children[i], { className: "clone js-item" })
-            items = [...items, firstChild]
-            items = [lastChild, ...items]
+            const lastChild = cloneElement(children[(children.length - 1) - i], { className: `clone js-item` })
+            const firstChild = cloneElement(children[i], { className: `clone js-item` })
+            firstChilds.push(firstChild)
+            lastChilds.push(lastChild)
         })
-        console.log('items : ',items)
-        return items
+        return { firstChilds, lastChilds }
     }
 
     finddotLength = () => {
@@ -106,13 +108,15 @@ export default class Carousel extends Component {
     }
 
     render() {
-        const { options: { nav, dots, arrowStyle, arrowPosition }, } = this.props
-
+        const { options: { nav, dots, arrowStyle, arrowPosition }, children } = this.props
+        const cloneItems = this.cloneItems()
         return (
             <div className={`js-slider`} ref={(item) => this.$node = $(findDOMNode(item))} {...this.props.options}>
                 <div className="js-slider-list">
                     <div className="js-slider-outer-stage">
-                        {this.cloneItems()}
+                        {cloneItems.lastChilds}
+                        {children}
+                        {cloneItems.firstChilds}
                     </div>
                 </div>
                 {nav &&
