@@ -16,7 +16,8 @@ jQuery(document).ready(function ($) {
                 dots: dots,
                 dot_indicator: dot_indicator,
                 nav: nav,
-                center: false,
+                centerPadding: 150,
+                center: true,
                 dragable: dragable,
                 responsive: [...responsive],
 
