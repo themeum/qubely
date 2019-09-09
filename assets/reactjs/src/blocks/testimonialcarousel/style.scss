@@ -102,142 +102,17 @@
     height: 0;
     border-left: 15px solid transparent;
     border-right: 15px solid transparent;
-    border-top: 15px solid #D6D9DD;
+    border-top: 15px solid #d6d9dd;
   }
 }
- 
-//slider css
-.js-slider {
-  -ms-touch-action: pan-y;
-  touch-action: pan-y;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  position: relative;
-}
-.js-slider .js-slider-list,
-.js-slider-outer-stage {
-  position: relative;
-  overflow: hidden;
-}
-.js-slider-outer-stage {
-  -webkit-perspective: 1000px;
-  perspective: 1000px;
-  transition: all 0.25s ease 0s;
-  -webkit-transition: all 0.25s ease 0s;
-}
-.js-slider .js-indicator {
-  position: absolute;
-  z-index: 9;
-  -webkit-perspective: 1000px;
-  perspective: 1000px;
-  transform-style: preserve-3d;
-  transition-property: transform, -webkit-transform, width;
-  -webkit-transition-property: transform, -webkit-transform, width;
-  transition-timing-function: linear;
-  -webkit-transition-timing-function: linear;
-}
-.js-slider .js-item {
-  position: relative;
-  float: left;
-  overflow: hidden;
-}
-.js-slider .js-item.active,
-.js-slider .js-item.dragenable {
-  visibility: visible;
-  transform-style: preserve-3d;
-}
-.js-slider .js-item.prev-item {
-  z-index: 1;
-  visibility: visible;
-}
-.js-slider .js-dots,
-.js-slider .js-nav-control {
-  height: 50px;
-  width: 100%;
-  margin-top: 5px;
-  z-index: 3;
-}
-.js-slider .js-dots {
-  position: absolute;
-  bottom: 0px;
-  left: 50%;
-  transform: translateX(-50%);
-}
-.js-slider .js-nav-control .nav-control {
-  display: inline-block;
-  height: 40px;
-  width: 40px;
-  padding: 10px;
-  border: 1px solid #ababab;
-  position: absolute;
-  cursor: pointer;
-  text-align: center;
-  bottom: 49%;
-  background: rgba(255, 255, 255, 0.4);
-}
-.js-slider .js-nav-control .next-control.nav-control.buttom,
-.js-slider .js-nav-control .prev-control.nav-control.buttom {
-  bottom: 0;
-}
-.js-slider .js-nav-control .nav-control.next-control {
-  right: 0;
-}
-.js-slider .js-nav-control .nav-control.prev-control {
-  left: 0;
-}
-.js-slider .js-dots ul {
-  margin: 15px;
-  padding: 0;
-  list-style: none;
-  text-align: center;
-}
-.js-slider .js-dots ul li {
-  display: inline-block;
-  height: 4px;
-  width: 30px;
-  margin: 5px;
-  border: 0;
-  background: #f4f4f4;
-  border-radius: 2px;
-  cursor: pointer;
-  position: relative;
-}
-.js-slider .js-dots ul li.active {
-  width: 55px;
-} 
-.js-slider .js-dots ul li .dot-indicator {
-  position: absolute;
-  -webkit-perspective: 1000px;
-  perspective: 1000px;
-  transform-style: preserve-3d;
-  transition-property: transform, -webkit-transform, width;
-  -webkit-transition-property: transform, -webkit-transform, width;
-  transition-timing-function: linear;
-  -webkit-transition-timing-function: linear;
-  width: 0;
-  left: 0;
-  top: 0;
-  height: 4px;
-  border-radius: 2px;
-}
-.js-slider .js-dots ul li.active span.dot-indicator {
-  background: #2084f9;
-  width: 100%;
-  top: 0;
-  border-radius: 2px;
-}
-.qubely-tesitmonial-item.layout-3 .qubely-testimonial-avatar {
-  margin-right: 0;
-}
+
 .qubely-testimonial-carousel-content-wrapper {
   position: relative;
 }
 .layout-3 .qubely-testimonial-carousel-content-wrapper {
   padding: 20px;
   border-radius: 10px;
-  background: #F4F4F4;
+  background: #f4f4f4;
 }
 .layout-3 .qubely-testimonial-carousel-content-wrapper:before {
   content: " ";
@@ -248,7 +123,7 @@
   transform: translate(-50%, 50%);
   border-width: 15px;
   z-index: 1;
-  border-color: #F4F4F4 transparent transparent transparent;
+  border-color: #f4f4f4 transparent transparent transparent;
   left: 50%;
   bottom: -15px;
 }
@@ -265,4 +140,260 @@
 .layout-1 .qubely-testimonial-avatar,
 .layout-2 .qubely-testimonial-avatar {
   margin-right: 20px;
+}
+
+//slider css
+.qubely-carousel.qubely-carousel-wrapper {
+  -ms-touch-action: pan-y;
+  touch-action: pan-y;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  position: relative;
+}
+.qubely-carousel.qubely-carousel-wrapper .qubely-carousel-extended-list,
+.qubely-carousel-extended-outer-stage {
+  position: relative;
+  overflow: hidden;
+}
+.qubely-carousel-extended-outer-stage {
+  -webkit-perspective: 1000px;
+  perspective: 1000px;
+  transition: all 0.25s ease 0s;
+  -webkit-transition: all 0.25s ease 0s;
+}
+.qubely-carousel.qubely-carousel-wrapper .js-indicator {
+  position: absolute;
+  z-index: 9;
+  -webkit-perspective: 1000px;
+  perspective: 1000px;
+  transform-style: preserve-3d;
+  transition-property: transform, -webkit-transform, width;
+  -webkit-transition-property: transform, -webkit-transform, width;
+  transition-timing-function: linear;
+  -webkit-transition-timing-function: linear;
+}
+.qubely-carousel.qubely-carousel-wrapper .qubely-carousel-item {
+  position: relative;
+  float: left;
+  overflow: hidden;
+}
+.qubely-carousel.qubely-carousel-wrapper .qubely-carousel-item.active,
+.qubely-carousel.qubely-carousel-wrapper .qubely-carousel-item.dragenable {
+  visibility: visible;
+  transform-style: preserve-3d;
+}
+.qubely-carousel.qubely-carousel-wrapper .qubely-carousel-item.prev-item {
+  z-index: 1;
+  visibility: visible;
+}
+.qubely-carousel.qubely-carousel-wrapper .qubely-carousel-dots,
+.qubely-carousel.qubely-carousel-wrapper .qubely-carousel-nav-control {
+  height: 50px;
+  width: 100%;
+  margin-top: 5px;
+  z-index: 3;
+}
+.qubely-carousel.qubely-carousel-wrapper .qubely-carousel-dots {
+  position: absolute;
+  bottom: 0px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.qubely-carousel.qubely-carousel-wrapper .qubely-carousel-nav-control .nav-control {
+  display: inline-block;
+  height: 40px;
+  width: 40px;
+  padding: 10px;
+  border: 1px solid #ababab;
+  position: absolute;
+  cursor: pointer;
+  text-align: center;
+  bottom: 49%;
+  background: rgba(255, 255, 255, 0.4);
+}
+.qubely-carousel.qubely-carousel-wrapper .qubely-carousel-nav-control .next-control.nav-control.buttom,
+.qubely-carousel.qubely-carousel-wrapper .qubely-carousel-nav-control .prev-control.nav-control.buttom {
+  bottom: 0;
+}
+.qubely-carousel.qubely-carousel-wrapper .qubely-carousel-nav-control .nav-control.next-control {
+  right: 0;
+}
+.qubely-carousel.qubely-carousel-wrapper .qubely-carousel-nav-control .nav-control.prev-control {
+  left: 0;
+}
+.qubely-carousel.qubely-carousel-wrapper .qubely-carousel-dots ul {
+  margin: 15px;
+  padding: 0;
+  list-style: none;
+  text-align: center;
+}
+.qubely-carousel.qubely-carousel-wrapper .qubely-carousel-dots ul li {
+  display: inline-block;
+  height: 4px;
+  width: 30px;
+  margin: 5px;
+  border: 0;
+  background: #f4f4f4;
+  border-radius: 2px;
+  cursor: pointer;
+  position: relative;
+}
+.qubely-carousel.qubely-carousel-wrapper .qubely-carousel-dots ul li.active {
+  width: 55px;
+}
+.qubely-carousel.qubely-carousel-wrapper .qubely-carousel-dots ul li .dot-indicator {
+  position: absolute;
+  -webkit-perspective: 1000px;
+  perspective: 1000px;
+  transform-style: preserve-3d;
+  transition-property: transform, -webkit-transform, width;
+  -webkit-transition-property: transform, -webkit-transform, width;
+  transition-timing-function: linear;
+  -webkit-transition-timing-function: linear;
+  width: 0;
+  left: 0;
+  top: 0;
+  height: 4px;
+  border-radius: 2px;
+}
+.qubely-carousel.qubely-carousel-wrapper .qubely-carousel-dots ul li .dot-indicator.active {
+  background: #2084f9;
+  width: 100%;
+  top: 0;
+  border-radius: 2px;
+}
+
+.qubely-tesitmonial-item.layout-3 .qubely-testimonial-avatar {
+  margin-right: 0;
+}
+.qubely-testimonial-carousel-content-wrapper {
+  position: relative;
+}
+.qubely-carousel {
+  -ms-touch-action: pan-y;
+  touch-action: pan-y;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  overflow: hidden;
+}
+.qubely-carousel .qubely-carousel-extended-list {
+  position: relative;
+  overflow: hidden;
+}
+.qubely-carousel-extended-outer-stage {
+  position: relative;
+  overflow: hidden;
+  -webkit-perspective: 1000px;
+  perspective: 1000px;
+  transition: all 0.25s ease 0s;
+  -webkit-transition: all 0.25s ease 0s;
+  display: flex;
+}
+
+.qubely-carousel .js-indicator {
+  position: absolute;
+  z-index: 9;
+  -webkit-perspective: 1000px;
+  perspective: 1000px;
+  transform-style: preserve-3d;
+  transition-property: transform, -webkit-transform, width;
+  -webkit-transition-property: transform, -webkit-transform, width;
+  transition-timing-function: linear;
+  -webkit-transition-timing-function: linear;
+}
+
+.qubely-carousel .qubely-carousel-extended-item {
+  position: relative;
+  float: left;
+  /* overflow: hidden; */
+}
+
+.qubely-carousel .qubely-carousel-extended-item.active,
+.qubely-carousel .qubely-carousel-extended-item.dragenable {
+  visibility: visible;
+  transform-style: preserve-3d;
+}
+
+.qubely-carousel .qubely-carousel-extended-item.prev-item {
+  z-index: 1;
+  visibility: visible;
+}
+
+.qubely-carousel .qubely-carousel-extended-nav-control,
+.qubely-carousel .qubely-carousel-extended-dots {
+  position: relative;
+  height: 20px;
+  width: 100%;
+  margin-top: 5px;
+  z-index: 3;
+}
+.qubely-carousel .qubely-carousel-extended-nav-control .nav-control {
+  display: inline-block;
+  height: 40px;
+  width: 40px;
+  padding: 10px;
+  border: 1px solid #ababab;
+  position: absolute;
+  cursor: pointer;
+  text-align: center;
+  bottom: 100px;
+  background: rgba(255, 255, 255, 0.4);
+}
+.qubely-carousel .qubely-carousel-extended-nav-control .nav-control.next-control {
+  right: 0;
+}
+.qubely-carousel .qubely-carousel-extended-nav-control .nav-control.prev-control {
+  left: 0;
+}
+.qubely-carousel .qubely-carousel-extended-dots {
+  position: absolute;
+  bottom: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.qubely-carousel .qubely-carousel-extended-dots ul {
+  margin: -4px;
+  padding: 0;
+  list-style: none;
+  text-align: center;
+}
+.qubely-carousel .qubely-carousel-extended-dots ul li {
+  display: inline-block;
+  height: 4px;
+  width: 30px;
+  margin: 5px;
+  border: 0;
+  background: rgba(218, 92, 92, 0.4);
+  border-radius: 2px;
+  cursor: pointer;
+  position: relative;
+}
+.qubely-carousel .qubely-carousel-extended-dots ul li.active {
+  width: 80px;
+}
+.qubely-carousel .qubely-carousel-extended-dots ul li .qubely-carousel-extended-dot-indicator {
+  position: absolute;
+  -webkit-perspective: 1000px;
+  perspective: 1000px;
+  transform-style: preserve-3d;
+  transition-property: transform, -webkit-transform, width;
+  -webkit-transition-property: transform, -webkit-transform, width;
+  transition-timing-function: linear;
+  -webkit-transition-timing-function: linear;
+  width: 0;
+  left: 0;
+  top: 0;
+  height: 4px;
+  border-radius: 2px;
+}
+
+.qubely-carousel .qubely-carousel-extended-dots ul li .qubely-carousel-extended-dot-indicator.active {
+  background: #ffffff;
+  width: 100%;
+  top: 0;
+  border-radius: 2px;
 }

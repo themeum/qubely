@@ -42,7 +42,7 @@ class Save extends Component {
     return (carouselItems.map((item, index) => {
       const { message } = item
       return (
-        <div key={index} className="js-item" >
+        <div key={index} className={`qubely-carousel-extended-item${index === 0 ? ' active' : ''}`} >
           <div className={`qubely-tesitmonial-item layout-${layout}`}>
 
             {layout == 2 && this.renderAuthorInfo(item)}
@@ -59,7 +59,7 @@ class Save extends Component {
               <div className="qubely-testimonial-content"> <RichText.Content value={message} /></div>
               {(showRatings && ratings > 0 && layout == 1) && <div className="qubely-testimonial-ratings" data-qubelyrating={ratings} />}
             </div>
-            
+
             {layout !== 2 && this.renderAuthorInfo(item)}
 
             {(quoteIcon && layout == 2) && <div className="qubely-testimonial-quote qubely-position-bottom">
@@ -104,7 +104,7 @@ class Save extends Component {
     return (
       <div className={`qubely-block-${uniqueId}`} {...animationAttr(animation)}>
         <div className={`qubely-block-testimonial-carousel qubely-layout-${layout}`}>
-          <div className="js-slider" data-options={options} >
+          <div className="qubely-carousel qubely-carousel-wrapper" data-options={options} id="qubelyCarousel1" >
             {this.renderTestimonial()}
           </div>
         </div>

@@ -1,14 +1,14 @@
 jQuery(document).ready(function ($) {
 
-    if ($('.js-slider').length > 0) {
-        const counterElement = $('.js-slider')
+    if ($('.qubely-carousel-wrapper').length > 0) {
+        const counterElement = $('.qubely-carousel-wrapper')
         let indexOfCounterElement = 0
         while (indexOfCounterElement < counterElement.length) {
             let currentElement = counterElement[indexOfCounterElement]
 
             const { items, autoplay, interval, speed, dots, dot_indicator, nav, responsive } = JSON.parse(currentElement.dataset.options)
 
-            $(".js-slider").jsSlider({
+            $(".qubely-carousel-wrapper").qubelyCarousel({
                 autoplay: autoplay,
                 interval: interval,
                 speed: speed,

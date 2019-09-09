@@ -509,7 +509,7 @@ function loadScriptAsync(src) {
                     let _options = wrapperDiv.attr('options')
                     options = _options !== '' ? JSON.parse( _options ) : options
                 }
-                $(this).JsSlider(options)
+                $(this).qubelyCarousel(options)
             })
         }
     })
