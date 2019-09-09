@@ -16,7 +16,8 @@ registerBlockType('qubely/testimonialcarousel', {
 	],
 	attributes: {
 		uniqueId: { type: 'string', default: '' },
-		items: { type: 'object', default: { md: '2', sm: '3', xs: '1' } },
+		// items: { type: 'object', default: { md: '2', sm: '3', xs: '1' } },
+		items: { type: 'object', default: { md: '2', sm: '1', xs: '1' } },
 		columns: { type: 'number', default: 2 },
 		autoPlay: { type: 'boolean', default: false },
 		dots: { type: 'boolean', default: true },
@@ -28,47 +29,47 @@ registerBlockType('qubely/testimonialcarousel', {
 			type: 'array',
 			default: [
 				{
-					author: 'James Moriarty',
+					author: 'James Moriarty one',
 					designation: 'Web WordPress Developer',
 					message: '“Innovative Gutenberg blocks than using Qubely Gutenberg Blocks Toolkit. Instantly raise your website appearance with this stylish new plugin.”',
 					ratings: '5',
 					avatar: {}
 				},
 				{
-					author: 'Julia Toufis',
+					author: 'Julia Toufis two',
 					designation: 'WordPress Developer',
 					message: '“Gutenberg blocks than using Qubely Gutenberg Blocks Toolkit. Instantly raise your website appearance with this stylish new plugin.”',
 					ratings: '4.5',
 					avatar: {}
 				},
 				{
-					author: 'Mila Kunis',
+					author: 'Mila Kunis three',
 					designation: 'WordPress Developer',
 					message: '“Gutenberg blocks than using Qubely Gutenberg Blocks Toolkit. Instantly raise your website appearance with this stylish new plugin.”',
 					ratings: '4.5',
 					avatar: {}
 				},
 				{
-					author: 'Arthur Conan Doyle',
+					author: 'Arthur Conan Doyle four',
 					designation: 'Writer',
 					message: '“Gutenberg blocks than using Qubely Gutenberg Blocks Toolkit. Instantly raise your website appearance with this stylish new plugin.”',
 					ratings: '5',
 					avatar: {}
 				},
-				{
-					author: 'John Deo',
-					designation: 'WordPress Developer',
-					message: '“Gutenberg blocks than using Qubely Gutenberg Blocks Toolkit. Instantly raise your website appearance with this stylish new plugin.”',
-					ratings: '5',
-					avatar: {}
-				},
-				{
-					author: 'Alex Fera',
-					designation: 'WordPress Developer',
-					message: '“Gutenberg blocks than using Qubely Gutenberg Blocks Toolkit. Instantly raise your website appearance with this stylish new plugin.”',
-					ratings: '5',
-					avatar: {}
-				},
+				// {
+				// 	author: 'John Deo',
+				// 	designation: 'WordPress Developer',
+				// 	message: '“Gutenberg blocks than using Qubely Gutenberg Blocks Toolkit. Instantly raise your website appearance with this stylish new plugin.”',
+				// 	ratings: '5',
+				// 	avatar: {}
+				// },
+				// {
+				// 	author: 'Alex Fera',
+				// 	designation: 'WordPress Developer',
+				// 	message: '“Gutenberg blocks than using Qubely Gutenberg Blocks Toolkit. Instantly raise your website appearance with this stylish new plugin.”',
+				// 	ratings: '5',
+				// 	avatar: {}
+				// },
 			]
 		},
 
@@ -80,7 +81,7 @@ registerBlockType('qubely/testimonialcarousel', {
 		spacer: { type: 'object', default: { spaceTop: { md: '10', unit: "px" }, spaceBottom: { md: '10', unit: "px" } }, style: [{ selector: '{{QUBELY}}' }] },
 
 		// Number of slider.
-		sliderNumber: { type: 'string', default: '5' },
+		sliderNumber: { type: 'number', default: 5 },
 		// Item per Slider  
 		itemPerSlides: { type: 'string', default: '2' },
 		// Space Between Two item.

@@ -80,6 +80,7 @@ export default class Carousel extends Component {
             items = [...items, firstChild]
             items = [lastChild, ...items]
         })
+        console.log('items : ',items)
         return items
     }
 
@@ -117,10 +118,10 @@ export default class Carousel extends Component {
                 {nav &&
                     <div className="js-nav-control">
                         <span className={`next-control nav-control ${arrowPosition}`} onClick={() => this.$jsSlider.navigate('next')}>
-                            { (arrowStyle == 'arrowright2') ? <span class="dashicons dashicons-arrow-right-alt2"></span> : <span class="dashicons dashicons-arrow-right-alt"></span> }
+                            {(arrowStyle == 'arrowright2') ? <span class="dashicons dashicons-arrow-right-alt2"></span> : <span class="dashicons dashicons-arrow-right-alt"></span>}
                         </span>
                         <span className={`prev-control nav-control ${arrowPosition}`} onClick={() => this.$jsSlider.navigate('prev')}>
-                            { (arrowStyle == 'arrowright2') ? <span class="dashicons dashicons-arrow-left-alt2"></span> : <span class="dashicons dashicons-arrow-left-alt"></span> }
+                            {(arrowStyle == 'arrowright2') ? <span class="dashicons dashicons-arrow-left-alt2"></span> : <span class="dashicons dashicons-arrow-left-alt"></span>}
                         </span>
                     </div>
                 }
