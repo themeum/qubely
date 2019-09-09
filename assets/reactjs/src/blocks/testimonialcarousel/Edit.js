@@ -687,7 +687,7 @@ class Edit extends Component {
 
 				<div className={`qubely-block-${uniqueId}`}>
 					<div className={`qubely-block-testimonial-carousel qubely-layout-${layout}`}>
-						<Carousel ref="JsSlider" options={carouselSettings}>
+						<Carousel ref="QubelyCarousel" options={carouselSettings}>
 							{this.renderTestimonials()}
 						</Carousel>
 					</div>
