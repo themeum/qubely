@@ -383,8 +383,8 @@ registerBlockType('qubely/testimonialcarousel', {
             default: {
                 openBorderRadius: 1,
                 radiusType: 'global',
-                global: { md: 100 },
-                unit: '%'
+                global: { md: 20 },
+                unit: 'px'
             },
             style: [
 				{ selector: '{{QUBELY}} .qubely-layout-1 .qubely-tesitmonial-item, {{QUBELY}} .qubely-layout-2 .qubely-tesitmonial-item, {{QUBELY}} .qubely-layout-3 .qubely-testimonial-carousel-content-wrapper' }
