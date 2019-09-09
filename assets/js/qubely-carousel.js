@@ -925,6 +925,8 @@
         //Enable/Disable navigation
         nav: true,
 
+        infiniteLoop: true,
+
         /**
          * Navigation text for next and previous
          * Its will be html or icon or text

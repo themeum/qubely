@@ -28,47 +28,47 @@ registerBlockType('qubely/testimonialcarousel', {
 			type: 'array',
 			default: [
 				{
-					author: 'James Moriarty one',
+					author: 'James Moriarty',
 					designation: 'Web WordPress Developer',
 					message: '“Innovative Gutenberg blocks than using Qubely Gutenberg Blocks Toolkit. Instantly raise your website appearance with this stylish new plugin.”',
 					ratings: '5',
 					avatar: {}
 				},
 				{
-					author: 'Julia Toufis two',
+					author: 'Julia Toufis',
 					designation: 'WordPress Developer',
 					message: '“Gutenberg blocks than using Qubely Gutenberg Blocks Toolkit. Instantly raise your website appearance with this stylish new plugin.”',
 					ratings: '4.5',
 					avatar: {}
 				},
 				{
-					author: 'Mila Kunis three',
+					author: 'Mila Kunis',
 					designation: 'WordPress Developer',
 					message: '“Gutenberg blocks than using Qubely Gutenberg Blocks Toolkit. Instantly raise your website appearance with this stylish new plugin.”',
 					ratings: '4.5',
 					avatar: {}
 				},
 				{
-					author: 'Arthur Conan Doyle four',
+					author: 'Arthur Conan Doyle',
 					designation: 'Writer',
 					message: '“Gutenberg blocks than using Qubely Gutenberg Blocks Toolkit. Instantly raise your website appearance with this stylish new plugin.”',
 					ratings: '5',
 					avatar: {}
 				},
-				// {
-				// 	author: 'John Deo',
-				// 	designation: 'WordPress Developer',
-				// 	message: '“Gutenberg blocks than using Qubely Gutenberg Blocks Toolkit. Instantly raise your website appearance with this stylish new plugin.”',
-				// 	ratings: '5',
-				// 	avatar: {}
-				// },
-				// {
-				// 	author: 'Alex Fera',
-				// 	designation: 'WordPress Developer',
-				// 	message: '“Gutenberg blocks than using Qubely Gutenberg Blocks Toolkit. Instantly raise your website appearance with this stylish new plugin.”',
-				// 	ratings: '5',
-				// 	avatar: {}
-				// },
+				{
+					author: 'John Deo',
+					designation: 'WordPress Developer',
+					message: '“Gutenberg blocks than using Qubely Gutenberg Blocks Toolkit. Instantly raise your website appearance with this stylish new plugin.”',
+					ratings: '5',
+					avatar: {}
+				},
+				{
+					author: 'Alex Fera',
+					designation: 'WordPress Developer',
+					message: '“Gutenberg blocks than using Qubely Gutenberg Blocks Toolkit. Instantly raise your website appearance with this stylish new plugin.”',
+					ratings: '5',
+					avatar: {}
+				},
 			]
 		},
 
