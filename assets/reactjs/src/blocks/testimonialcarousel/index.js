@@ -278,17 +278,14 @@ registerBlockType('qubely/testimonialcarousel', {
 				md: 20, unit: 'px'
 			},
 			style: [
-				{
-					condition:
-						[
+				{	condition:[
 							{ key: 'layout', relation: '==', value: '1' },
 							{ key: 'quoteIcon', relation: '!=', value: '' }
 						],
 					selector: '{{QUBELY}} .qubely-testimonial-quote {margin-bottom: {{quoteIconSpacing}};}'
 				},
 				{
-					condition:
-						[
+					condition: [
 							{ key: 'layout', relation: '==', value: '2' },
 							{ key: 'quoteIcon', relation: '!=', value: '' }
 						],
@@ -337,10 +334,34 @@ registerBlockType('qubely/testimonialcarousel', {
         },
 
 		/* ------------------------------------
-		* 			|| Design 
+		* 			Design 
 		* ------------------------------------- */
         textColor: { type: 'string', default: '', style: [{ selector: '{{QUBELY}} .qubely-testimonial-carousel-content-wrapper { color:{{textColor}}; }' }] },
-		bgPadding: { type: 'object', default: {}, style: [{ selector: '{{QUBELY}} .qubely-testimonial-carousel-content-wrapper' }] },
+		bgPadding: { 
+			type: 'object', 
+			default: {}, 
+			style: [
+				{
+					condition: [
+						{ key: 'layout', relation: '==', value: '1' }
+					],
+					selector: '{{QUBELY}} .qubely-layout-1 .qubely-tesitmonial-item'
+				},
+				{
+					condition: [
+						{ key: 'layout', relation: '==', value: '2' }
+					],
+					selector: '{{QUBELY}} .qubely-layout-2 .qubely-tesitmonial-item'
+				},
+				{
+					condition: [
+						{ key: 'layout', relation: '==', value: '3' }
+					],
+					selector: '{{QUBELY}} .qubely-layout-3 .qubely-testimonial-carousel-content-wrapper'
+				}
+			] 
+		},
+		// Background Color
 		bgColor: {
             type: 'string',
             default: '',
@@ -352,17 +373,24 @@ registerBlockType('qubely/testimonialcarousel', {
 					condition: [
                         { key: 'layout', relation: '==', value: '3' }
                     ],
-					selector: '{{QUBELY}} .layout-3 .qubely-testimonial-carousel-content-wrapper:before {border-color: {{bgColor}} transparent transparent transparent;}'
+					selector: '{{QUBELY}} .layout-3 .qubely-testimonial-carousel-content-wrapper {background-color: {{bgColor}};} {{QUBELY}} .layout-3 .qubely-testimonial-carousel-content-wrapper:before {border-color: {{bgColor}} transparent transparent transparent;}'
 				}
             ]
 		},
-        bgBorderRadius: {
+		// Border radius
+		bgBorderRadius: {
             type: 'object',
-            default: {},
+            default: {
+                openBorderRadius: 1,
+                radiusType: 'global',
+                global: { md: 100 },
+                unit: '%'
+            },
             style: [
-				{ selector: '{{QUBELY}} .qubely-testimonial-carousel-content-wrapper' }
-			]
+				{ selector: '{{QUBELY}} .qubely-layout-1 .qubely-tesitmonial-item, {{QUBELY}} .qubely-layout-2 .qubely-tesitmonial-item, {{QUBELY}} .qubely-layout-3 .qubely-testimonial-carousel-content-wrapper' }
+            ]
         },
+
         border: { type: 'object', default: { openTy: 0, color: '#3373dc', width: { bottom: '1', left: '1', right: '1', top: '1', unit: 'px' } }, style: [{ selector: '{{QUBELY}} .qubely-testimonial-carousel-content-wrapper' }] },
         boxShadow: { type: 'object', default: {}, style: [{ selector: '{{QUBELY}} .qubely-testimonial-carousel-content-wrapper' }] },
         boxShadowHover: { type: 'object', default: {}, style: [{ selector: '{{QUBELY}} .qubely-testimonial-carousel-content-wrapper:hover' }] },
