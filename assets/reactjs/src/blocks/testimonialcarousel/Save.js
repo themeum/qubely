@@ -46,13 +46,13 @@ class Save extends Component {
           <div className={`qubely-tesitmonial-item layout-${layout}`}>
 
             {layout == 2 && this.renderAuthorInfo(item)}
-            { (quoteIcon && layout == 1) && <div className="qubely-testimonial-quote">
-                <span className={`qubely-quote-icon ${quoteIcon}`}></span>
-              </div>
+            {(quoteIcon && layout == 1) && <div className="qubely-testimonial-quote">
+              <span className={`qubely-quote-icon ${quoteIcon}`}></span>
+            </div>
             }
 
             <div className={`qubely-testimonial-carousel-content-wrapper`}>
-              {(showRatings && ratings > 0 && layout !== 1) && 
+              {(showRatings && ratings > 0 && layout !== 1) &&
                 <div className="qubely-testimonial-ratings" data-qubelyrating={ratings}></div>
               }
 
@@ -63,8 +63,8 @@ class Save extends Component {
             {layout !== 2 && this.renderAuthorInfo(item)}
 
             {(quoteIcon && layout == 2) && <div className="qubely-testimonial-quote qubely-position-bottom">
-                <span className={`qubely-quote-icon ${quoteIcon}`}></span>
-              </div>
+              <span className={`qubely-quote-icon ${quoteIcon}`}></span>
+            </div>
             }
 
           </div>
@@ -74,17 +74,18 @@ class Save extends Component {
   }
 
   render() {
-    const { attributes: { uniqueId, layout, items, autoPlay, dragable, nav, dots, dotIndicator, interval, speed, animation } } = this.props
+    const { attributes: { uniqueId, layout, items, autoPlay, isCentered, dragable, nav, dots, dotIndicator, interval, speed, animation } } = this.props
     let options = JSON.stringify({
       autoplay: autoPlay,
       items: items,
       margin: 10,
-      center: false,
+      center: isCentered,
       dots: dots,
       dot_indicator: dotIndicator,
       nav: nav,
       speed: speed,
       interval: interval,
+      dragable:dragable,
       responsive: [
         {
           viewport: 1170,

@@ -19,6 +19,7 @@ registerBlockType('qubely/testimonialcarousel', {
 		columns: { type: 'number', default: 2 },
 		autoPlay: { type: 'boolean', default: false },
 		dots: { type: 'boolean', default: true },
+		dragable: { type: 'boolean', default: true },
 		dotIndicator: { type: 'boolean', default: true },
 		nav: { type: 'boolean', default: true },
 		interval: { type: 'number', default: 1000 },
@@ -92,7 +93,7 @@ registerBlockType('qubely/testimonialcarousel', {
 		},
 		// Infinite Loop
 		infiniteLoop: { type: 'boolean', default: true },
-		centeredSlider: { type: 'boolean', default: true },
+		isCentered: { type: 'boolean', default: false },
 		activeFade: { type: 'boolean', default: true },
 
 		/*------------------------------------

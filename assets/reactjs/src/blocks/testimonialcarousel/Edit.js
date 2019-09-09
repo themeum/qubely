@@ -212,7 +212,7 @@ class Edit extends Component {
 	}
 	render() {
 		const { setAttributes, attributes: {
-			uniqueId, items, autoPlay, interval, speed, dots, nav, carouselItems, dragable,
+			uniqueId, items, autoPlay, interval, speed, nav, carouselItems, dragable,
 			layout, messageSpacingTop, messageSpacingBottom, nameColor, alignment, designationColor,
 			showAvatar, avatar, avatarAlt, avatarBorderRadius, avatarSize, avatarWidth, avatarHeight,
 			avatarBorder, avatarSpacing, avatarLayout, quoteIconColor, quoteIconSize, quoteIconSpacing,
@@ -220,14 +220,14 @@ class Edit extends Component {
 			ratingsSpacing, bgPadding, textColor, bgColor, bgBorderRadius, border, boxShadow, boxShadowHover,
 
 			sliderNumber, itemPerSlides, sliderItemsSpace,
-			infiniteLoop, centeredSlider, activeFade,
+			infiniteLoop, isCentered, activeFade,
 			// arrow 
 			arrowStyle, arrowPosition,
 			cornerRadius, arrowSize,
 			arrowColor, arrowShapeColor, arrowBorderColor,
 			arrowHoverColor, arrowShapeHoverColor, arrowBorderHoverColor,
 			// Dot
-			dotSize, dotColor, dotBorderColor, dotActiveColor, dotBorderActiveColor, horizontalScroll
+			dots, dotIndicator, dotSize, dotColor, dotBorderColor, dotActiveColor, dotBorderActiveColor, horizontalScroll
 
 		} } = this.props
 
@@ -236,11 +236,10 @@ class Edit extends Component {
 		const carouselSettings = {
 			autoplay: autoPlay,
 			items: items,
-			sliderNumber: carouselItems.length,
 			margin: 10,
-			center: false,
+			center: isCentered,
 			dots: dots,
-			dot_indicator: true,
+			dot_indicator: dotIndicator,
 			nav: nav,
 			arrowStyle: arrowStyle,
 			arrowPosition: arrowPosition,
@@ -267,7 +266,7 @@ class Edit extends Component {
 		return (
 			<Fragment>
 				<InspectorControls key="inspector">
-					{/* Testimonial Layout */}
+
 					<PanelBody title="" opened={true}>
 						<Styles value={layout} onChange={val => setAttributes({ layout: val })}
 							options={[
@@ -296,7 +295,7 @@ class Edit extends Component {
 							onDeviceChange={value => this.setState({ device: value })}
 						/>
 						<Range
-							label={__('Space Between items')}
+							label={__('Padding')}
 							min={1}
 							max={80}
 							responsive
@@ -306,7 +305,9 @@ class Edit extends Component {
 							device={device}
 							onDeviceChange={value => this.setState({ device: value })}
 						/>
-						<Separator />
+					</PanelBody>
+
+					<PanelBody title={__('Carousel Settings')} initialOpen={false}>
 						<Toggle label={__('Autoplay')} value={autoPlay} onChange={value => setAttributes({ autoPlay: value })} />
 						{autoPlay &&
 							<Fragment>
@@ -314,11 +315,8 @@ class Edit extends Component {
 								<Range label={__('Interval (ms)')} value={interval} onChange={value => setAttributes({ interval: parseInt(value) })} min={500} max={5000} />
 							</Fragment>
 						}
-					</PanelBody>
-					{/* End */}
-
-					{/* Carousel Settings */}
-					<PanelBody title={__('Carousel Settings')} initialOpen={false}>
+						<Toggle label={__('Draggable')} value={dragable} onChange={value => setAttributes({ dragable: value })} />
+						<Separator />
 						<Range
 							label={__('Items per Slide')}
 							value={itemPerSlides} onChange={(value) => setAttributes({ itemPerSlides: value })}
@@ -327,9 +325,8 @@ class Edit extends Component {
 							onDeviceChange={value => this.setState({ device: value })}
 						/>
 						<Toggle label={__('Infinite Loop')} value={infiniteLoop} onChange={value => setAttributes({ infiniteLoop: value })} />
-						<Toggle label={__('Centered Slides')} value={centeredSlider} onChange={value => setAttributes({ centeredSlider: value })} />
+						<Toggle label={__('Centered Slides')} value={isCentered} onChange={value => setAttributes({ isCentered: value })} />
 						<Toggle label={__('Fade Deactivated Items')} value={activeFade} onChange={value => setAttributes({ activeFade: value })} />
-						<Toggle label={__('Draggable')} value={dragable} onChange={value => setAttributes({ dragable: value })} />
 					</PanelBody>
 					{/* End */}
 
