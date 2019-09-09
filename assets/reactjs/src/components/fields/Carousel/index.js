@@ -2,7 +2,7 @@
 const { Component, cloneElement, findDOMNode } = wp.element;
 
 import { _equal } from './utils'
-const JSOptions = {
+const CarouselOptions = {
     items: 1,
     margin: 10,
     nav: false,
@@ -62,7 +62,7 @@ export default class Carousel extends Component {
 
     getOptions() {
         const { options } = this.props
-        const newOptions = Object.assign(JSOptions, options)
+        const newOptions = Object.assign(CarouselOptions, options)
         return newOptions
     }
 
