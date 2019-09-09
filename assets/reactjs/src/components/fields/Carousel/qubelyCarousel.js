@@ -1,14 +1,14 @@
 /**
- * Plugin Name: JS Slider
+ * Plugin Name: Qubely Carousel
  * Version: 1.0.0
- * Author: Joomshaper
- * Company: Joomshaper
- * Website: https://www.joomshaper.com/
- * Description: Joomshaper Slider 
+ * Author: Themeum
+ * Company: Themeum
+ * Website: https://www.themeum.com/
+ * Description: Qubely Carousel 
  */
 ; (function ($, window, document, undefined) {
 
-    var pluginName = 'jsSlider';
+    var pluginName = 'qubelyCarousel';
 
     // Create the plugin constructor
     function Plugin(element, options) {
@@ -39,7 +39,7 @@
         this.coordinate = { x: 0, y: 0 };
         this.prevCoordinate = { x: 0, y: 0, diff: 0, dragPointer: -1 };
 
-        this._defaults = $.fn.jsSlider.defaults;
+        this._defaults = $.fn.qubelyCarousel.defaults;
         /*
             The "$.extend" method merges the contents of two or more objects,
             and stores the result in the first object.
@@ -93,11 +93,11 @@
 
         //navigate through items
         navigate: function (direction) {
-            const jsSlider = this
-            if (jsSlider.isAnimating === false) {
-                direction === 'next' ? jsSlider.Next() : jsSlider.Prev()
-                //Call jsSlider
-                jsSlider.checkCallBackMethod.call(jsSlider)
+            const qubelyCarousel = this
+            if (qubelyCarousel.isAnimating === false) {
+                direction === 'next' ? qubelyCarousel.Next() : qubelyCarousel.Prev()
+                //Call qubelyCarousel
+                qubelyCarousel.checkCallBackMethod.call(qubelyCarousel)
             }
         },
 
@@ -187,10 +187,10 @@
          * Find each children width and do parallal sum operation and store in array
          */
         calculateItemCoordinate: function () {
-            let jsSlider = this
+            let qubelyCarousel = this
             let child_ = this.$outerStage.children()
             child_.each(function (i, obj) {
-                jsSlider._itemCoordinate.push((i + 1) * jsSlider.itemWidth)
+                qubelyCarousel._itemCoordinate.push((i + 1) * qubelyCarousel.itemWidth)
             })
         },
 
@@ -203,7 +203,7 @@
             let dotBox = document.createElement('div')
             dotBox.setAttribute('class', 'qubely-carousel-dots')
             this.$element.append(dotBox)
-            let jsSlider = this;
+            let qubelyCarousel = this;
             let dotContainer = document.createElement('ul')
             let viewPort = null
             if (typeof this.options.responsive !== 'undefined')
@@ -220,7 +220,7 @@
                     }
 
                     // Dot indicator                        
-                    if (jsSlider.options.dot_indicator) {
+                    if (qubelyCarousel.options.dot_indicator) {
                         let dotIndicator = document.createElement('span')
                         dotIndicator.setAttribute('class', 'dot-indicator')
                         dotItem.append(dotIndicator)
@@ -499,28 +499,28 @@
         },
         // Bind events that trigger methods
         bindEvents: function () {
-            const jsSlider = this;
+            const qubelyCarousel = this;
 
 
-            if (jsSlider.options.dots) {
-                jsSlider.$dotContainer.find('li').each(function (index) {
-                    $(this).on('click' + '.' + jsSlider._name, function (e) {
-                        if ($(this).hasClass('active') || jsSlider.isAnimating === true)
+            if (qubelyCarousel.options.dots) {
+                qubelyCarousel.$dotContainer.find('li').each(function (index) {
+                    $(this).on('click' + '.' + qubelyCarousel._name, function (e) {
+                        if ($(this).hasClass('active') || qubelyCarousel.isAnimating === true)
                             return false
 
                         let activeDotNav = $(this).parent().find('li.active')
-                        let activeIndex = jsSlider.$dotContainer.find('li').index(activeDotNav)
+                        let activeIndex = qubelyCarousel.$dotContainer.find('li').index(activeDotNav)
                         let delta = activeIndex > index ? -1 : 1
-                        jsSlider.slideFromPosition(index, delta)
-                        jsSlider.updateDotsFromPosition(index + 1)
+                        qubelyCarousel.slideFromPosition(index, delta)
+                        qubelyCarousel.updateDotsFromPosition(index + 1)
 
-                        //Call jsSlider
-                        jsSlider.checkCallBackMethod.call(jsSlider)
+                        //Call qubelyCarousel
+                        qubelyCarousel.checkCallBackMethod.call(qubelyCarousel)
                     })
                 })
             }
 
-            $(window).on('resize' + '.' + jsSlider._name, $.proxy(jsSlider.windowResize, jsSlider))
+            $(window).on('resize' + '.' + qubelyCarousel._name, $.proxy(qubelyCarousel.windowResize, qubelyCarousel))
 
         },
 
@@ -549,9 +549,9 @@
         updateResponsiveView: function () {
             if (typeof this.options.responsive === 'undefined')
                 return
-            let jsSlider = this
+            let qubelyCarousel = this
             let wHeight = window.innerHeight
-            let viewPort = jsSlider.parseResponsiveViewPort()
+            let viewPort = qubelyCarousel.parseResponsiveViewPort()
 
             if (viewPort.height === 'full') {
                 if (this._lastViewPort === wHeight)
@@ -614,7 +614,7 @@
     /**
      * Initiate the js-coursel plugin 
      */
-    $.fn.jsSlider = function (options) {
+    $.fn.qubelyCarousel = function (options) {
         this.each(function () {
             if (!$.data(this, pluginName)) {
                 $.data(this, pluginName, new Plugin(this, options));
@@ -626,7 +626,7 @@
     /**
      * Default setting for intire slide operation
      */
-    $.fn.jsSlider.defaults = {
+    $.fn.qubelyCarousel.defaults = {
 
         // Number of item need to show
         items: 4,

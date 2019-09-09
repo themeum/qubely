@@ -56,8 +56,8 @@ export default class Carousel extends Component {
     }
 
     init(options) {
-        this.$node.jsSlider(options)
-        this.$jsSlider = this.$node.data('jsSlider')
+        this.$node.qubelyCarousel(options)
+        this.$qubelyCarousel = this.$node.data('qubelyCarousel')
     }
 
     getOptions() {
@@ -67,7 +67,7 @@ export default class Carousel extends Component {
     }
 
     destroy() {
-        this.$jsSlider.destroy();
+        this.$qubelyCarousel.destroy();
     }
 
     cloneItems() {
@@ -121,10 +121,10 @@ export default class Carousel extends Component {
                 </div>
                 {nav &&
                     <div className="qubely-carousel-nav-control">
-                        <span className={`next-control nav-control ${arrowPosition}`} onClick={() => this.$jsSlider.navigate('next')}>
+                        <span className={`next-control nav-control ${arrowPosition}`} onClick={() => this.$qubelyCarousel.navigate('next')}>
                             {(arrowStyle == 'arrowright2') ? <span class="dashicons dashicons-arrow-right-alt2"></span> : <span class="dashicons dashicons-arrow-right-alt"></span>}
                         </span>
-                        <span className={`prev-control nav-control ${arrowPosition}`} onClick={() => this.$jsSlider.navigate('prev')}>
+                        <span className={`prev-control nav-control ${arrowPosition}`} onClick={() => this.$qubelyCarousel.navigate('prev')}>
                             {(arrowStyle == 'arrowright2') ? <span class="dashicons dashicons-arrow-left-alt2"></span> : <span class="dashicons dashicons-arrow-left-alt"></span>}
                         </span>
                     </div>
