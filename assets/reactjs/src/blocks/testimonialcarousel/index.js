@@ -15,8 +15,7 @@ registerBlockType('qubely/testimonialcarousel', {
 	],
 	attributes: {
 		uniqueId: { type: 'string', default: '' },
-		// items: { type: 'object', default: { md: '2', sm: '3', xs: '1' } },
-		items: { type: 'object', default: { md: '2', sm: '1', xs: '1' } },
+		items: { type: 'object', default: { md: '2', sm: '2', xs: '1' } },
 		columns: { type: 'number', default: 2 },
 		autoPlay: { type: 'boolean', default: false },
 		dots: { type: 'boolean', default: true },

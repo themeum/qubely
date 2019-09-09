@@ -289,15 +289,10 @@ class Edit extends Component {
 							min={1}
 							max={20}
 							device={device}
-							value={carouselItems.length}
-							onChange={value => this.setCarouselLength(value)}
-							onDeviceChange={value => this.setState({ device: value })}
-						/>
-						<Range
-							label={__('Items per Slide')}
-							value={itemPerSlides} onChange={(value) => setAttributes({ itemPerSlides: value })}
-							min={1}
-							device={device}
+							responsive
+							value={items}
+							onChange={val => setAttributes({ items: val })}
+							device={this.state.device}
 							onDeviceChange={value => this.setState({ device: value })}
 						/>
 						<Range
@@ -329,7 +324,13 @@ class Edit extends Component {
 
 					{/* Carousel Settings */}
 					<PanelBody title={__('Carousel Settings')} initialOpen={false}>
-
+						<Range
+							label={__('Items per Slide')}
+							value={itemPerSlides} onChange={(value) => setAttributes({ itemPerSlides: value })}
+							min={1}
+							device={device}
+							onDeviceChange={value => this.setState({ device: value })}
+						/>
 						<Toggle label={__('Infinite Loop')} value={infiniteLoop} onChange={value => setAttributes({ infiniteLoop: value })} />
 						<Toggle label={__('Centered Slides')} value={centeredSlider} onChange={value => setAttributes({ centeredSlider: value })} />
 						<Toggle label={__('Fade Deactivated Items')} value={activeFade} onChange={value => setAttributes({ activeFade: value })} />
