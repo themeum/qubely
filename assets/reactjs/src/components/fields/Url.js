@@ -1,7 +1,7 @@
+const {__} = wp.i18n
 import '../css/url.scss'
 const { Component } = wp.element
 const { CheckboxControl, Tooltip } = wp.components
-const {__} = wp.i18n
 
 class Url extends Component {
 

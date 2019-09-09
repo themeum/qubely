@@ -1,11 +1,13 @@
 const { __ } = wp.i18n
+import Range from './Range'
+import Toggle from './Toggle'
+const { RichText } = wp.editor
+import '../css/typography.scss'
 const { Component, Fragment } = wp.element
 const { Dropdown, Tooltip } = wp.components
-import '../css/typography.scss'
 import FontList from "./assets/FontList"
-const { RichText } = wp.editor
 import icons from '../../helpers/icons'
-import { Range, Toggle} from '../FieldRender'
+
 
 class Typography extends Component {
     constructor(props) {

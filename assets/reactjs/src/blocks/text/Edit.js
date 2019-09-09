@@ -2,7 +2,7 @@ const { __ } = wp.i18n
 const { Fragment, Component } = wp.element;
 const { PanelBody, Toolbar, SelectControl } = wp.components
 const { RichText, InspectorControls, BlockControls } = wp.editor
-import { Typography, Color, Alignment, Headings, Toggle, Range, Separator } from "../../components/FieldRender"
+const { Typography, Color, Alignment, Headings, Toggle, Range, Separator } = wp.qubelyComponents
 import { CssGenerator } from '../../components/CssGenerator'
 import '../../components/GlobalSettings'
 import '../../components/ContextMenu'
@@ -189,7 +189,7 @@ class Edit extends Component {
                 </BlockControls>
 
                 <div className={`qubely-block-${uniqueId}`}>
-                    <div className={`qubely-block-text ${(dropCap == 1) ? 'qubely-has-drop-cap' : ''}`}>
+                    <div className={`qubely-block-textE ${(dropCap == 1) ? 'qubely-has-drop-cap' : ''}`}>
                         {enableTitle == 1 &&
                             <div className={`qubely-block-text-title-container ${separatorStyle ? 'qubely-has-separator' : ''} ${separatorPosition ? 'qubely-separator-position-' + separatorPosition : ''}`} >
                                 <div className="qubely-block-text-title-inner">

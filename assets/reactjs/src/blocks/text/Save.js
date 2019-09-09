@@ -34,7 +34,7 @@ class Save extends Component {
 		</Fragment>
 		return (
 			<div className={`qubely-block-${uniqueId}`} {...animationAttr(animation)}>
-				<div className={`qubely-block-text ${(dropCap == 1) ? 'qubely-has-drop-cap' : ''}`}>
+				<div className={`qubely-block-textS ${(dropCap == 1) ? 'qubely-has-drop-cap' : ''}`}>
 					{enableTitle == 1 &&
 						<div className={`qubely-block-text-title-container ${separatorStyle ? 'qubely-has-separator' : ''} ${separatorPosition ? 'qubely-separator-position-' + separatorPosition : ''}`} >
 							<div className="qubely-block-text-title-inner">

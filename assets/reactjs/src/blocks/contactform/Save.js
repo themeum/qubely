@@ -1,6 +1,6 @@
 const { __ } = wp.i18n;
 const { Component } = wp.element;
-import { QubelyButtonSave } from '../../components/FieldRender'
+const { QubelyButtonSave } = wp.qubelyComponents
 import { animationAttr } from '../../components/HelperFunction';
 class Save extends Component {
 

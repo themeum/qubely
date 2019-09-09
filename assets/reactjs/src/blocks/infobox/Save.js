@@ -1,7 +1,7 @@
 const { Fragment, Component } = wp.element;
 const { RichText } = wp.editor
 import svg from '../heading/separators';
-import { QubelyButtonSave } from '../../components/FieldRender'
+const { QubelyButtonSave } = wp.qubelyComponents
 import { animationAttr } from '../../components/HelperFunction';
 
 class Save extends Component {

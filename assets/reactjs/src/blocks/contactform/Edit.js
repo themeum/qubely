@@ -2,7 +2,7 @@ const { __ } = wp.i18n;
 const { InspectorControls, BlockControls } = wp.editor
 const { Component, Fragment } = wp.element;
 const { PanelBody, TextControl, TextareaControl, Toolbar } = wp.components;
-import { Styles, Range, Toggle, Typography, Color, Tabs, Tab, Border, RadioAdvanced, QubelyButtonEdit, BorderRadius, Separator } from '../../components/FieldRender'
+const { Styles, Range, Toggle, Typography, Color, Tabs, Tab, Border, RadioAdvanced, QubelyButtonEdit, BorderRadius, Separator } = wp.qubelyComponents
 import { CssGenerator } from '../../components/CssGenerator'
 import InlineToolbar from '../../components/fields/inline/InlineToolbar'
 import icons from '../../helpers/icons'

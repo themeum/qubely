@@ -1,4 +1,5 @@
 const { Component, Fragment } = wp.element
+
 class Tab extends Component {
     render() {
         const { children, onTabChange } = this.props

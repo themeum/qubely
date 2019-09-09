@@ -3,7 +3,9 @@ import '../css/shape.scss'
 import icons from '../../helpers/icons'
 const { Component, Fragment } = wp.element
 const { CheckboxControl, Tooltip, Dropdown } = wp.components
-import { Range, Color } from '../FieldRender'
+import Range from './Range'
+import Color from './Color'
+
 class Shape extends Component {
     constructor(props) {
         super(props)

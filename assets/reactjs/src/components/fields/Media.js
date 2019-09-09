@@ -1,8 +1,8 @@
-import '../css/media.scss'
-export const { Tooltip, Dashicon } = wp.components;
-const { MediaUpload } = wp.editor;
-const { Component, Fragment } = wp.element;
 const {__} = wp.i18n
+import '../css/media.scss'
+const { Component } = wp.element;
+const { MediaUpload } = wp.editor;
+export const { Tooltip, Dashicon } = wp.components;
 
 class Media extends Component {
 

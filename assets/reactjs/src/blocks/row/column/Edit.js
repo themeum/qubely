@@ -5,7 +5,7 @@ const { Component, Fragment } = wp.element
 const { InnerBlocks, InspectorControls, BlockControls } = wp.editor
 const { createBlock } = wp.blocks
 const { select, dispatch } = wp.data
-import { Background, Border, BorderRadius, BoxShadow, Range, Separator, Dimension } from '../../../components/FieldRender'
+const { Background, Border, BorderRadius, BoxShadow, Range, Separator, Dimension } = wp.qubelyComponents
 import { CssGenerator } from '../../../components/CssGenerator'
 import '../../../components/GlobalSettings';
 

@@ -4,26 +4,7 @@ const { PanelBody } = wp.components
 const { InspectorControls, RichText, MediaUpload } = wp.editor
 import { CssGenerator } from '../../components/CssGenerator'
 import icons from '../../helpers/icons'
-import {
-	Media,
-	RadioAdvanced,
-	Range,
-	Color,
-	Typography,
-	Toggle,
-	Separator,
-	ColorAdvanced,
-	Border,
-	BorderRadius,
-	BoxShadow,
-	Styles,
-	Alignment,
-	Padding,
-	Tabs,
-	Tab,
-	Carousel,
-	ButtonGroup
-} from '../../components/FieldRender'
+const { RadioAdvanced, Range, Color, Typography, Toggle, Separator, ColorAdvanced, Border, BorderRadius, BoxShadow, Styles, Alignment, Padding, Tabs, Tab, Carousel, ButtonGroup } = wp.qubelyComponents
 
 
 class Edit extends Component {

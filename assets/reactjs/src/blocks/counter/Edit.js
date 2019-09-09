@@ -2,7 +2,7 @@ const { __ } = wp.i18n;
 const { InspectorControls, BlockControls } = wp.editor
 const { Component, Fragment } = wp.element;
 const { PanelBody, TextControl, Toolbar } = wp.components;
-import { Counter, Range, Alignment, Typography, Color } from '../../components/FieldRender'
+const { Counter, Range, Alignment, Typography, Color } = wp.qubelyComponents
 import InlineToolbar from '../../components/fields/inline/InlineToolbar'
 import { CssGenerator } from '../../components/CssGenerator'
 import '../../components/GlobalSettings'

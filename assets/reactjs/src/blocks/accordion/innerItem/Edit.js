@@ -4,7 +4,7 @@ const { withSelect, withDispatch } = wp.data;
 const { Component, Fragment } = wp.element;
 const { PanelBody, SelectControl, Button } = wp.components;
 const { InspectorControls, InnerBlocks, RichText } = wp.editor;
-import { Styles, ColorAdvanced, Range, Typography, BoxShadow, RadioAdvanced, Tabs, Tab, Color, Toggle, Padding, Border, BorderRadius } from "../../../components/FieldRender"
+const { Styles, ColorAdvanced, Range, Typography, BoxShadow, RadioAdvanced, Tabs, Tab, Color, Toggle, Padding, Border, BorderRadius } = wp.qubelyComponents
 import icons from '../../../helpers/icons';
 import { CssGenerator } from '../../../components/CssGenerator'
 

@@ -2,7 +2,7 @@ const { __ } = wp.i18n
 import Color from './Color'
 import Toggle from './Toggle'
 const { TextControl } = wp.components
-const { Component, Fragment } = wp.element
+const { Component } = wp.element
 
 const defaultData = {
     openShadow: 0,

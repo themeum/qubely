@@ -4,7 +4,7 @@ const { withDispatch } = wp.data;
 const { PanelBody, TextControl, SelectControl, Tooltip, Button, RangeControl } = wp.components
 const { Component, Fragment } = wp.element
 const { InspectorControls, InnerBlocks, InspectorAdvancedControls } = wp.editor
-import { Background, Select, Range, Toggle, Shape, BoxShadow, Tab, Tabs, Separator, Border, BorderRadius, RadioAdvanced, Dimension } from '../../components/FieldRender'
+const { Background, Select, Range, Toggle, Shape, BoxShadow, Tab, Tabs, Separator, Border, BorderRadius, RadioAdvanced, Dimension } = wp.qubelyComponents
 import { CssGenerator } from '../../components/CssGenerator'
 import { videoBackground } from '../../components/HelperFunction'
 import { ModalManager } from '../../helpers/ModalManager';

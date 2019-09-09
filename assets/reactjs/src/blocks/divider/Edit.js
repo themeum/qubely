@@ -2,7 +2,7 @@ const { __ } = wp.i18n;
 const { InspectorControls, BlockControls } = wp.editor
 const { Component, Fragment } = wp.element;
 const { PanelBody, Toolbar, Dropdown } = wp.components;
-import { Range, Color, Alignment } from '../../components/FieldRender'
+const { Range, Color, Alignment } = wp.qubelyComponents
 import { CssGenerator } from '../../components/CssGenerator'
 import InlineToolbar from '../../components/fields/inline/InlineToolbar'
 import icons from '../divider/icon'

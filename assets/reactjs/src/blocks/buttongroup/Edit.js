@@ -5,7 +5,7 @@ const { compose } = wp.compose
 const { withSelect, withDispatch } = wp.data
 const { InnerBlocks, InspectorControls } = wp.editor
 
-import { Range, Padding, Alignment } from "../../components/FieldRender"
+const { Range, Padding, Alignment } = wp.qubelyComponents
 import { CssGenerator } from '../../components/CssGenerator'
 import '../../components/GlobalSettings';
 

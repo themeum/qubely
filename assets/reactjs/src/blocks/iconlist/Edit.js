@@ -2,7 +2,7 @@ const { __ } = wp.i18n;
 const { InspectorControls } = wp.editor
 const { Component, Fragment } = wp.element;
 const { PanelBody, Tooltip, Popover } = wp.components;
-import { Typography, Alignment, Padding, Styles, Range, Tabs, Tab, IconList, Color, RadioAdvanced, Border, BorderRadius, BoxShadow, Separator } from '../../components/FieldRender'
+const { Typography, Alignment, Padding, Styles, Range, Tabs, Tab, IconList, Color, RadioAdvanced, Border, BorderRadius, BoxShadow, Separator } = wp.qubelyComponents
 import { CssGenerator } from '../../components/CssGenerator'
 import icons from '../../helpers/icons'
 import '../../components/GlobalSettings'

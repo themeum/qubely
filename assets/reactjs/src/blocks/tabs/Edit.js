@@ -4,7 +4,7 @@ const { compose } = wp.compose
 const { withSelect, withDispatch } = wp.data
 const { Component, Fragment } = wp.element;
 const { InnerBlocks, RichText, InspectorControls, BlockControls } = wp.editor
-import { Color, IconList, Select, Styles, Typography, Range, RadioAdvanced, Toggle, BoxShadow, Alignment, Tabs, Tab, Separator, Border, Padding, BorderRadius } from "../../components/FieldRender"
+const { Color, IconList, Select, Styles, Typography, Range, RadioAdvanced, Toggle, BoxShadow, Alignment, Tabs, Tab, Separator, Border, Padding, BorderRadius } = wp.qubelyComponents
 import InlineToolbar from '../../components/fields/inline/InlineToolbar'
 import '../../components/GlobalSettings'
 import { CssGenerator } from '../../components/CssGenerator'

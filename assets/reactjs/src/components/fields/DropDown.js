@@ -1,6 +1,6 @@
 const { __ } = wp.i18n
 const { RichText } = wp.editor
-const { Fragment, useState, useEffect, useRef } = wp.element
+const { useState, useEffect, useRef } = wp.element
 import '../css/dropdown.scss'
 import icons from '../../helpers/icons'
 

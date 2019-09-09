@@ -1,6 +1,7 @@
 const { __ } = wp.i18n
 const { Component, Fragment } = wp.element
 const { RichText } = wp.editor
+
 class QubelyButtonEdit extends Component {
     render() {
         const { buttonIconName, buttonIconPosition, buttonSize, buttonText, onTextChange } = this.props

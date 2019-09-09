@@ -5,7 +5,7 @@ const { PanelBody } = wp.components
 const { withDispatch, select } = wp.data;
 import { _equal } from '../components/HelperFunction'
 import { CssGenerator } from '../components/CssGenerator'
-import { Typography, Color, Separator } from '../components/FieldRender'
+const { Typography, Color, Separator } = wp.qubelyComponents
 const { PluginSidebar, PluginSidebarMoreMenuItem } = wp.editPost;
 
 

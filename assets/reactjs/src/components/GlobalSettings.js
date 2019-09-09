@@ -7,7 +7,7 @@ const { InspectorAdvancedControls, InspectorControls } = wp.editor
 const { TextareaControl, PanelBody } = wp.components
 
 import { CssGenerator } from './CssGenerator'
-import { Range, Toggle, Animation } from './FieldRender'
+const { Range, Toggle, Animation } = wp.qubelyComponents
 
 const addAttribute = (settings) => {
     if (settings.attributes && settings.attributes.showGlobalSettings) {

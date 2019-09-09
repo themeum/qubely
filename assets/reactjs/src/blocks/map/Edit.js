@@ -2,7 +2,7 @@ const { __ } = wp.i18n;
 const { InspectorControls, BlockControls } = wp.editor
 const { Component, Fragment } = wp.element;
 const { PanelBody, ToggleControl, TextControl, RangeControl, Toolbar } = wp.components;
-import { Media, Separator } from '../../components/FieldRender'
+const { Media, Separator } = wp.qubelyComponents
 import { CssGenerator } from '../../components/CssGenerator'
 import mapStyles from './mapStyles'
 import InlineToolbar from '../../components/fields/inline/InlineToolbar'
