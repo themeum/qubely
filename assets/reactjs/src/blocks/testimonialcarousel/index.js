@@ -95,31 +95,33 @@ registerBlockType('qubely/testimonialcarousel', {
 		infiniteLoop: { type: 'boolean', default: true },
 		isCentered: { type: 'boolean', default: false },
 		activeFade: { type: 'boolean', default: true },
-
+ 
 		/*------------------------------------
 		* 			Slider Settings 			
 		-------------------------------------- */
-		arrowStyle: { type: 'string', default: 'arrowright' },
-		horizontalScroll: {
-			type: 'string', default: { md: 0, unit: '%' },
+		arrowStyle: {type: 'string', default: 'arrowright' },
+		horizontalScroll: { 
+			type: 'object', 
+			default: { md: 0, unit: '%' }, 
 			style: [
-				{ selector: '{{QUBELY}} .qubely-carousel.qubely-carousel-wrapper .qubely-carousel-nav-control .nav-control.next-control { right: {{horizontalScroll}}% } {{QUBELY}} .qubely-carousel.qubely-carousel-wrapper .qubely-carousel-nav-control .nav-control.prev-control { left: {{horizontalScroll}}% }  ' }
-			]
+				{ selector: '{{QUBELY}} .qubely-carousel.qubely-carousel-wrapper .qubely-carousel-nav-control .nav-control.next-control { right: {{horizontalScroll}} } {{QUBELY}} .qubely-carousel.qubely-carousel-wrapper .qubely-carousel-nav-control .nav-control.prev-control { left: {{horizontalScroll}} }  ' }
+			] 	
 		},
-		arrowPosition: { type: 'string', default: 'center' },
-		cornerRadius: {
-			type: 'string', default: '4',
+		arrowPosition: {type: 'string', default: 'center' },
+		cornerRadius: { 
+			type: 'string', 
+			default: { md: 4, unit: 'px' }, 
 			style: [
-				{ selector: '{{QUBELY}} .qubely-carousel-nav-control .nav-control { border-radius: {{cornerRadius}}px; } ' }
-			]
+				{ selector: '{{QUBELY}} .qubely-carousel-nav-control .nav-control { border-radius: {{cornerRadius}}; } ' }
+			] 
 		},
-		arrowSize: {
-			type: 'string', default: '20',
+		arrowSize: { 
+			type: 'string', 
+			default: '20',
 			style: [
 				{ selector: '{{QUBELY}} .qubely-carousel-nav-control .nav-control .dashicons { font-size: {{arrowSize}}px; } ' }
 			]
 		},
-
 		// Section Arrow 
 		arrowColor: { type: 'string', default: '', style: [{ selector: '{{QUBELY}} .qubely-block-testimonial-carousel .nav-control .dashicons { color:{{arrowColor}}; }' }] },
 		arrowShapeColor: {
@@ -251,7 +253,7 @@ registerBlockType('qubely/testimonialcarousel', {
 					condition: [
 						{ key: 'avatarLayout', relation: '==', value: 'bottom' }
 					],
-					selector: '{{QUBELY}} .qubely-testimonial-avatar .qubely-single-img{margin: {{avatarSpacing}} 0px 0px;}'
+					selector: '{{QUBELY}} .qubely-testimonial-avatar{margin: {{avatarSpacing}} 0px 0px;}'
 				}
 			]
 		},
@@ -393,12 +395,11 @@ registerBlockType('qubely/testimonialcarousel', {
 			},
 			style: [
 				{ selector: '{{QUBELY}} .qubely-layout-1 .qubely-tesitmonial-item, {{QUBELY}} .qubely-layout-2 .qubely-tesitmonial-item, {{QUBELY}} .qubely-layout-3 .qubely-testimonial-carousel-content-wrapper' }
-			]
-		},
-
-		border: {
-			type: 'object',
-			default: { openTy: 0, color: '#3373dc', width: { bottom: '1', left: '1', right: '1', top: '1', unit: 'px' } },
+            ]
+        },
+        border: { 
+			type: 'object', 
+			default: { openTy: 0, color: '#3373dc', width: { bottom: '1', left: '1', right: '1', top: '1', unit: 'px' } }, 
 			style: [
 				{ selector: '{{QUBELY}} .qubely-tesitmonial-item.layout-1, {{QUBELY}} .qubely-tesitmonial-item.layout-2, {{QUBELY}} .qubely-tesitmonial-item.layout-3 .qubely-testimonial-carousel-content-wrapper' }]
 		},
@@ -414,7 +415,6 @@ registerBlockType('qubely/testimonialcarousel', {
 				{ selector: '{{QUBELY}} .qubely-tesitmonial-item.layout-1:hover, {{QUBELY}} .qubely-tesitmonial-item.layout-2:hover, {{QUBELY}} .qubely-tesitmonial-item.layout-3 .qubely-testimonial-carousel-content-wrapper:hover' }
 			]
 		},
-
 		showGlobalSettings: { type: 'boolean', default: true }, // Global Settings
 		//showContextMenu: { type: 'boolean', default: true },
 	},

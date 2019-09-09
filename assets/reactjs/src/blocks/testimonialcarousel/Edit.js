@@ -191,10 +191,8 @@ class Edit extends Component {
 	}
 
 	setCarouselLength = (newLength) => {
-
 		const { setAttributes, attributes: { carouselItems, items } } = this.props
 		let newCarouselItems = JSON.parse(JSON.stringify(carouselItems))
-
 		let defaultItem = {
 			author: 'James Moriarty',
 			designation: 'Web WordPress Developer',
@@ -349,8 +347,8 @@ class Edit extends Component {
 						<Range
 							label={__('Horizontal Position')}
 							value={horizontalScroll} onChange={(value) => setAttributes({ horizontalScroll: value })}
-							min={-100}
-							max={100}
+							min={-100} max={100}
+							responsive unit={['px', 'em', '%']} 
 							device={device}
 							onDeviceChange={value => this.setState({ device: value })}
 						/>
@@ -363,16 +361,16 @@ class Edit extends Component {
 						<Range
 							label={__('Arrow Size')}
 							value={arrowSize} onChange={(value) => setAttributes({ arrowSize: value })}
-							min={1}
-							max={65}
+							min={10} max={60}
+							responsive
 							device={device}
 							onDeviceChange={value => this.setState({ device: value })}
 						/>
 						<Range
 							label={__('Corner Radius')}
 							value={cornerRadius} onChange={(value) => setAttributes({ cornerRadius: value })}
-							min={1}
-							max={100}
+							min={1} max={100}
+							responsive unit={['px', 'em', '%']} 
 							device={device}
 							onDeviceChange={value => this.setState({ device: value })}
 						/>
@@ -555,7 +553,6 @@ class Edit extends Component {
 								</Fragment>
 							</Fragment>
 						}
-
 					</PanelBody>
 
 					<PanelBody title={__('Quote Icon')} initialOpen={false}>
@@ -597,7 +594,6 @@ class Edit extends Component {
 
 					<PanelBody title={__('Ratings')} initialOpen={false}>
 						<Toggle label={__('Show Ratings')} value={showRatings} onChange={val => setAttributes({ showRatings: val })} />
-
 						{showRatings &&
 							<Fragment>
 								<Range label={__('Ratings')} value={ratings} onChange={(value) => setAttributes({ ratings: value })} min={0} max={5} step={.5} />
@@ -636,7 +632,6 @@ class Edit extends Component {
 							label={__('Text Color')}
 							value={textColor}
 							onChange={val => setAttributes({ textColor: val })} />
-
 						<Color
 							label={__('Background')}
 							value={bgColor}
@@ -655,7 +650,6 @@ class Edit extends Component {
 							responsive
 							device={device}
 							onDeviceChange={value => this.setState({ device: value })} />
-
 						<BorderRadius
 							label={__('Border Radius')}
 							value={bgBorderRadius}
@@ -666,7 +660,6 @@ class Edit extends Component {
 							responsive
 							device={device}
 							onDeviceChange={value => this.setState({ device: value })} />
-
 						<Tabs>
 							<Tab tabTitle={__('Normal')}>
 								<BoxShadow
@@ -683,7 +676,6 @@ class Edit extends Component {
 						</Tabs>
 					</PanelBody>
 				</InspectorControls>
-				{/* Siderbar End */}
 
 				<div className={`qubely-block-${uniqueId}`}>
 					<div className={`qubely-block-testimonial-carousel qubely-layout-${layout}`}>

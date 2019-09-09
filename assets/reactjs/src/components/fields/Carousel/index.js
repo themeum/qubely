@@ -68,7 +68,7 @@ export default class Carousel extends Component {
 
     destroy() {
         this.$qubelyCarousel.destroy();
-    }
+    } 
 
     cloneItems() {
         const { children, options } = this.props
@@ -97,7 +97,7 @@ export default class Carousel extends Component {
     createDotsItems() {
         const { children, options: { items } } = this.props
         let device = this.parseResponsiveViewPort()
-        let dots = Math.floor(children.length / items[device]) + 1;
+        let dots = Math.floor(children.length / items[device]);
         return Array(dots).fill(0).map((item, index) => {
             return (
                 <li className={`qubely-carousel-dot-${index}${index === 0 ? ' active' : ''}`}>
@@ -119,16 +119,18 @@ export default class Carousel extends Component {
                         {cloneItems.firstChilds}
                     </div>
                 </div>
-                {nav &&
-                    <div className="qubely-carousel-nav-control">
-                        <span className={`next-control nav-control ${arrowPosition}`} onClick={() => this.$qubelyCarousel.navigate('next')}>
-                            {(arrowStyle == 'arrowright2') ? <span class="dashicons dashicons-arrow-right-alt2"></span> : <span class="dashicons dashicons-arrow-right-alt"></span>}
-                        </span>
-                        <span className={`prev-control nav-control ${arrowPosition}`} onClick={() => this.$qubelyCarousel.navigate('prev')}>
-                            {(arrowStyle == 'arrowright2') ? <span class="dashicons dashicons-arrow-left-alt2"></span> : <span class="dashicons dashicons-arrow-left-alt"></span>}
-                        </span>
-                    </div>
-                }
+                <div className="qubely-carousel-nav-control">
+                    {nav &&
+                        <div>
+                            <span className={`next-control nav-control ${arrowPosition}`} onClick={() => this.$qubelyCarousel.navigate('next')}>
+                                {(arrowStyle == 'arrowright2') ? <span class="dashicons dashicons-arrow-right-alt2"></span> : <span class="dashicons dashicons-arrow-right-alt"></span>}
+                            </span>
+                            <span className={`prev-control nav-control ${arrowPosition}`} onClick={() => this.$qubelyCarousel.navigate('prev')}>
+                                {(arrowStyle == 'arrowright2') ? <span class="dashicons dashicons-arrow-left-alt2"></span> : <span class="dashicons dashicons-arrow-left-alt"></span>}
+                            </span>
+                        </div>
+                    }
+                </div>
                 {dots &&
                     <div className="qubely-carousel-dots">
                         <ul >
