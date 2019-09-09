@@ -99,7 +99,7 @@ registerBlockType('qubely/testimonialcarousel', {
 		-------------------------------------- */
 		arrowStyle: {type: 'string', default: 'arrowright' },
 		horizontalScroll: { 
-			type: 'string', default: '1', 
+			type: 'string', default: { md: 0, unit: '%' }, 
 			style: [
 				{ selector: '{{QUBELY}} .js-slider .js-nav-control .nav-control.next-control { right: {{horizontalScroll}}% } {{QUBELY}} .js-slider .js-nav-control .nav-control.prev-control { left: {{horizontalScroll}}% }  ' }
 			] 	
@@ -145,7 +145,11 @@ registerBlockType('qubely/testimonialcarousel', {
 		},
 
 		// Dot Navigation.
-		dotSize: {type: 'string', default: '' },
+		dotSize: {
+			type: 'string', 
+			default: '30',
+			style: [{ selector: '{{QUBELY}} .js-slider .js-dots ul li.active{ width: calc(15px + {{dotSize}}px )} {{QUBELY}} .js-slider .js-dots ul li{ width: {{dotSize}}px } ' }]
+		},
 		// Dot
 		dotColor: { 
 			type: 'object', 
@@ -179,7 +183,9 @@ registerBlockType('qubely/testimonialcarousel', {
 		designationColor: { type: 'string', default: '', style: [{ selector: '{{QUBELY}} .qubely-testimonial-author-designation { color:{{designationColor}}; }' }] },
 		designationTypo: { type: 'object', default: { openTypography: 1, size: { md: 14, unit: 'px' } }, style: [{ selector: '{{QUBELY}} .qubely-testimonial-author-designation' }] },
 
-		//Messsage
+		/*------------------------------------
+		* 			Messsage 
+		* ------------------------------------ */
 		messagePosition: { type: 'string', default: 'top' },
 		messageTypo: { 
 			type: 'object', 
