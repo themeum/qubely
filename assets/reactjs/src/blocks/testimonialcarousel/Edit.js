@@ -296,19 +296,14 @@ class Edit extends Component {
 							onDeviceChange={value => this.setState({ device: value })}
 						/>
 						<Range
-							label={__('Space Between Each items')}
-							value={sliderItemsSpace} onChange={(value) => setAttributes({ sliderItemsSpace: value })}
+							label={__('Space Between items')}
 							min={1}
 							max={80}
+							responsive
+							unit={['px', 'em', '%']}
+							value={sliderItemsSpace}
+							onChange={(value) => setAttributes({ sliderItemsSpace: value })}
 							device={device}
-							onDeviceChange={value => this.setState({ device: value })}
-						/>
-						<Range label={__('Columns')}
-							value={items}
-							onChange={(value) => setAttributes({ items: value })}
-							min={1}
-							max={carouselItems.length - 1}
-							responsive device={device}
 							onDeviceChange={value => this.setState({ device: value })}
 						/>
 						<Separator />
