@@ -37,32 +37,32 @@ class Save extends Component {
     )
   }
   renderTestimonial() {
-    const { attributes: { carouselItems, layout, quoteIcon } } = this.props
+    const { attributes: { carouselItems, showRatings, layout, ratings, quoteIcon } } = this.props
 
     return (carouselItems.map((item, index) => {
-      const { message, ratings } = item
+      const { message } = item
       return (
         <div key={index} className="js-item" >
           <div className={`qubely-tesitmonial-item layout-${layout}`}>
 
             {layout == 2 && this.renderAuthorInfo(item)}
-            {
-              (quoteIcon && layout == 1) &&
-              <div className="qubely-testimonial-quote">
+            { (quoteIcon && layout == 1) && <div className="qubely-testimonial-quote">
                 <span className={`qubely-quote-icon ${quoteIcon}`}></span>
               </div>
             }
+
             <div className={`qubely-testimonial-carousel-content-wrapper`}>
-              {(ratings > 0 && layout !== 1) && <div className="qubely-testimonial-ratings" data-qubelyrating={ratings}></div>}
+              {(showRatings && ratings > 0 && layout !== 1) && 
+                <div className="qubely-testimonial-ratings" data-qubelyrating={ratings}></div>
+              }
+
               <div className="qubely-testimonial-content"> <RichText.Content value={message} /></div>
-              {(ratings > 0 && layout == 1) && <div className="qubely-testimonial-ratings" data-qubelyrating={ratings} />}
+              {(showRatings && ratings > 0 && layout == 1) && <div className="qubely-testimonial-ratings" data-qubelyrating={ratings} />}
             </div>
             
             {layout !== 2 && this.renderAuthorInfo(item)}
 
-            {
-              (quoteIcon && layout == 2) &&
-              <div className="qubely-testimonial-quote qubely-position-bottom">
+            {(quoteIcon && layout == 2) && <div className="qubely-testimonial-quote qubely-position-bottom">
                 <span className={`qubely-quote-icon ${quoteIcon}`}></span>
               </div>
             }

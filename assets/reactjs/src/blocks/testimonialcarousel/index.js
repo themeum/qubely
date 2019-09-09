@@ -2,7 +2,6 @@ const { __ } = wp.i18n
 const { registerBlockType } = wp.blocks
 
 import './style.scss'
-
 import Edit from './Edit'
 import Save from './Save'
 
@@ -230,7 +229,7 @@ registerBlockType('qubely/testimonialcarousel', {
 					condition: [
 						{ key: 'avatarLayout', relation: '==', value: 'left' }
 					],
-					selector: '{{QUBELY}} .qubely-testimonial-avatar {margin-right: {{avatarSpacing}};}'
+					selector: '{{QUBELY}} .qubely-testimonial-avatar {margin-right: {{avatarSpacing}}; }'
 				},
 				{
 					condition: [
@@ -347,7 +346,7 @@ registerBlockType('qubely/testimonialcarousel', {
             default: '',
             style: [
 				{
-					selector: '{{QUBELY}} .qubely-testimonial-carousel-content-wrapper {background-color: {{bgColor}};}'
+					selector: '{{QUBELY}} .qubely-tesitmonial-item.layout-1 {background-color: {{bgColor}};} {{QUBELY}} .qubely-tesitmonial-item.layout-2 {background-color: {{bgColor}};}'
 				},
 				{
 					condition: [
