@@ -102,10 +102,9 @@
     height: 0;
     border-left: 15px solid transparent;
     border-right: 15px solid transparent;
-    border-top: 15px solid #D6D9DD;
+    border-top: 15px solid #d6d9dd;
   }
 }
- 
 
 .qubely-testimonial-carousel-content-wrapper {
   position: relative;
@@ -113,7 +112,7 @@
 .layout-3 .qubely-testimonial-carousel-content-wrapper {
   padding: 20px;
   border-radius: 10px;
-  background: #F4F4F4;
+  background: #f4f4f4;
 }
 .layout-3 .qubely-testimonial-carousel-content-wrapper:before {
   content: " ";
@@ -124,7 +123,7 @@
   transform: translate(-50%, 50%);
   border-width: 15px;
   z-index: 1;
-  border-color: #F4F4F4 transparent transparent transparent;
+  border-color: #f4f4f4 transparent transparent transparent;
   left: 50%;
   bottom: -15px;
 }
@@ -142,8 +141,6 @@
 .layout-2 .qubely-testimonial-avatar {
   margin-right: 20px;
 }
-
-
 
 //slider css
 .qubely-carousel.qubely-carousel-wrapper {
@@ -268,19 +265,22 @@
   border-radius: 2px;
 }
 
-
-
-.qubely-carousel {
-  -ms-touch-action:pan-y;
-  touch-action:pan-y;
-  -webkit-user-select:none;
-  -moz-user-select:none;
-  -ms-user-select:none;
-  user-select:none;
-  overflow: hidden;
+.qubely-tesitmonial-item.layout-3 .qubely-testimonial-avatar {
+  margin-right: 0;
+}
+.qubely-testimonial-carousel-content-wrapper {
   position: relative;
 }
-.qubely-carousel .qubely-carousel-extended-list{
+.qubely-carousel {
+  -ms-touch-action: pan-y;
+  touch-action: pan-y;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  overflow: hidden;
+}
+.qubely-carousel .qubely-carousel-extended-list {
   position: relative;
   overflow: hidden;
 }
@@ -312,7 +312,8 @@
   /* overflow: hidden; */
 }
 
-.qubely-carousel .qubely-carousel-extended-item.active, .qubely-carousel .qubely-carousel-extended-item.dragenable {
+.qubely-carousel .qubely-carousel-extended-item.active,
+.qubely-carousel .qubely-carousel-extended-item.dragenable {
   visibility: visible;
   transform-style: preserve-3d;
 }
@@ -322,7 +323,8 @@
   visibility: visible;
 }
 
-.qubely-carousel .qubely-carousel-extended-nav-control, .qubely-carousel .qubely-carousel-extended-dots {
+.qubely-carousel .qubely-carousel-extended-nav-control,
+.qubely-carousel .qubely-carousel-extended-dots {
   position: relative;
   height: 20px;
   width: 100%;
@@ -339,7 +341,7 @@
   cursor: pointer;
   text-align: center;
   bottom: 100px;
-  background: rgba(255, 255, 255, .4);
+  background: rgba(255, 255, 255, 0.4);
 }
 .qubely-carousel .qubely-carousel-extended-nav-control .nav-control.next-control {
   right: 0;
@@ -347,7 +349,7 @@
 .qubely-carousel .qubely-carousel-extended-nav-control .nav-control.prev-control {
   left: 0;
 }
-.qubely-carousel .qubely-carousel-extended-dots  {
+.qubely-carousel .qubely-carousel-extended-dots {
   position: absolute;
   bottom: 50px;
   left: 50%;
@@ -389,7 +391,7 @@
   border-radius: 2px;
 }
 
-.qubely-carousel .qubely-carousel-extended-dots ul li .qubely-carousel-extended-dot-indicator.active{
+.qubely-carousel .qubely-carousel-extended-dots ul li .qubely-carousel-extended-dot-indicator.active {
   background: #ffffff;
   width: 100%;
   top: 0;

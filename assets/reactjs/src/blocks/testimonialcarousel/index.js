@@ -2,7 +2,6 @@ const { __ } = wp.i18n
 const { registerBlockType } = wp.blocks
 
 import './style.scss'
-
 import Edit from './Edit'
 import Save from './Save'
 
@@ -167,7 +166,7 @@ registerBlockType('qubely/testimonialcarousel', {
 		dotActiveColor: { 
 			type: 'object', 
 			default: { openTy: 0, color: '#2084f9', width: { bottom: '1', left: '1', right: '1', top: '1', unit: 'px' } }, 
-			style: [{ selector: '{{QUBELY}} .js-slider .js-dots ul li.active, {{QUBELY}} .js-dots ul li .dot-indicator.active' }] 
+			style: [{ selector: '{{QUBELY}} .js-slider .js-dots ul li.active span.dot-indicator' }] 
 		},
 		dotBorderActiveColor: { 
 			type: 'object', 
@@ -197,7 +196,7 @@ registerBlockType('qubely/testimonialcarousel', {
 			style: [{ selector: '{{QUBELY}} .qubely-testimonial-content' }] 
 		},
 		messageSpacingTop: { type: 'object', default: { md: 0, unit: 'px' }, style: [{ selector: '{{QUBELY}} .qubely-testimonial-content {margin-top: {{messageSpacingTop}};}' }] },
-		messageSpacingBottom: { type: 'object', default: { md: 20, unit: 'px' }, style: [{ selector: '{{QUBELY}} .qubely-testimonial-content {margin-bottom: {{messageSpacingBottom}};}' }] },
+		messageSpacingBottom: { type: 'object', default: { md: 5, unit: 'px' }, style: [{ selector: '{{QUBELY}} .qubely-testimonial-content {margin-bottom: {{messageSpacingBottom}};}' }] },
 
 		/*------------------------------------
 		* 			Avatar 
@@ -222,7 +221,7 @@ registerBlockType('qubely/testimonialcarousel', {
 		avatarSpacing: {
 			type: 'object',
 			default: {
-				md: 0,
+				md: 20,
 				unit: 'px'
 			},
 			style: [
@@ -230,25 +229,25 @@ registerBlockType('qubely/testimonialcarousel', {
 					condition: [
 						{ key: 'avatarLayout', relation: '==', value: 'left' }
 					],
-					selector: '{{QUBELY}} .qubely-testimonial-avatar {margin-right: {{avatarSpacing}};}'
+					selector: '{{QUBELY}} .qubely-testimonial-avatar {margin-right: {{avatarSpacing}}; }'
 				},
 				{
 					condition: [
 						{ key: 'avatarLayout', relation: '==', value: 'right' }
 					],
-					selector: '{{QUBELY}} .qubely-testimonial-avatar {margin-left: {{avatarSpacing}};}'
+					selector: '{{QUBELY}} .qubely-testimonial-avatar {margin: 0px 0px 0px {{avatarSpacing}};}'
 				},
 				{
 					condition: [
 						{ key: 'avatarLayout', relation: '==', value: 'top' }
 					],
-					selector: '{{QUBELY}} .qubely-testimonial-avatar {margin-bottom: {{avatarSpacing}};}'
+					selector: '{{QUBELY}} .qubely-testimonial-avatar {margin: 0px 0px {{avatarSpacing}};}'
 				},
 				{
 					condition: [
 						{ key: 'avatarLayout', relation: '==', value: 'bottom' }
 					],
-					selector: '{{QUBELY}} .qubely-testimonial-avatar {margin-top: {{avatarSpacing}};}'
+					selector: '{{QUBELY}} .qubely-testimonial-avatar {margin: {{avatarSpacing}} 0px 0px;}'
 				}
 			]
 		},
@@ -309,7 +308,7 @@ registerBlockType('qubely/testimonialcarousel', {
 		ratingsSpacing: {
             type: 'object',
             default: {
-                md: 0,
+                md: 12,
                 unit: 'px'
             },
             style: [
@@ -337,9 +336,9 @@ registerBlockType('qubely/testimonialcarousel', {
             ]
         },
 
-		/*-----------------------------------
-		* 			Design 
-		------------------------------------- */
+		/* ------------------------------------
+		* 			|| Design 
+		* ------------------------------------- */
         textColor: { type: 'string', default: '', style: [{ selector: '{{QUBELY}} .qubely-testimonial-carousel-content-wrapper { color:{{textColor}}; }' }] },
 		bgPadding: { type: 'object', default: {}, style: [{ selector: '{{QUBELY}} .qubely-testimonial-carousel-content-wrapper' }] },
 		bgColor: {
@@ -347,7 +346,7 @@ registerBlockType('qubely/testimonialcarousel', {
             default: '',
             style: [
 				{
-					selector: '{{QUBELY}} .qubely-testimonial-carousel-content-wrapper {background-color: {{bgColor}};}'
+					selector: '{{QUBELY}} .qubely-tesitmonial-item.layout-1 {background-color: {{bgColor}};} {{QUBELY}} .qubely-tesitmonial-item.layout-2 {background-color: {{bgColor}};}'
 				},
 				{
 					condition: [
