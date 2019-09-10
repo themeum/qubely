@@ -20,9 +20,10 @@
       }
     }
   }
-
-  .qubely-testimonial-avatar {
+  .qubely-single-img.qubely-backend .qubely-testimonial-avatar{
     cursor: pointer;
+  }
+  .qubely-testimonial-avatar {
     &.qubely-image-placeholder i {
       font-size: 0.5em;
     }
