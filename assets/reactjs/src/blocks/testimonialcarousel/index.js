@@ -8,7 +8,7 @@ import Save from './Save'
 registerBlockType('qubely/testimonialcarousel', {
 	title: __('testimonial carousel'),
 	description: __('Design and showcase customer reviews, remarks as testimonials with Qubely Testimonial Carousel block'),
-	icon: 'dashboard',
+	icon: <img src={qubely_admin.plugin + 'assets/img/blocks/block-testimonial-carousel.svg'} alt={__('Team Block')} />,
 	category: 'qubely',
 	keywords: [
 		__('Testimonial'),
