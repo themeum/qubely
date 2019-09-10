@@ -6,7 +6,7 @@ import Edit from './Edit'
 import Save from './Save'
 
 registerBlockType('qubely/testimonialcarousel', {
-	title: __('testimonial carousel'),
+	title: __('Testimonial Carousel'),
 	description: __('Design and showcase customer reviews, remarks as testimonials with Qubely Testimonial Carousel block'),
 	icon: <img src={qubely_admin.plugin + 'assets/img/blocks/block-testimonial-carousel.svg'} alt={__('Team Block')} />,
 	category: 'qubely',
@@ -116,16 +116,16 @@ registerBlockType('qubely/testimonialcarousel', {
 				{ selector: '{{QUBELY}} .qubely-carousel.qubely-carousel-wrapper .qubely-carousel-nav-control .nav-control { bottom: {{arrowPosition}}; } ' }
 			]
 		},
-		cornerRadius: {
-			type: 'object',
-			default: { md: 4, unit: 'px' },
+		cornerRadius: { 
+			type: 'object', 
+			default: { md: 10, unit: 'px' }, 
 			style: [
 				{ selector: '{{QUBELY}} .qubely-carousel-nav-control .nav-control { border-radius: {{cornerRadius}}; } ' }
 			]
 		},
-		cornerHoverRadius: {
-			type: 'object',
-			default: { md: 4, unit: 'px' },
+		cornerHoverRadius: { 
+			type: 'object', 
+			default: { md: 50, unit: '%' }, 
 			style: [
 				{ selector: '{{QUBELY}} .qubely-carousel-nav-control .nav-control:hover { border-radius: {{cornerHoverRadius}}; } ' }
 			]
@@ -145,10 +145,14 @@ registerBlockType('qubely/testimonialcarousel', {
 			]
 		},
 		// Section Arrow 
-		arrowColor: { type: 'string', default: '', style: [{ selector: '{{QUBELY}} .qubely-block-testimonial-carousel .nav-control .dashicons { color:{{arrowColor}}; }' }] },
+		arrowColor: { 
+			type: 'string', 
+			default: '#1066CC', 
+			style: [{ selector: '{{QUBELY}} .qubely-block-testimonial-carousel .nav-control .dashicons { color:{{arrowColor}}; }' }] 
+		},
 		// Arrow background color
 		arrowShapeColor: {
-			type: 'object', default: {},
+			type: 'object', default: { type: 'color', openColor: 1, color: '#fafafa' },
 			style: [
 				{ selector: '{{QUBELY}} .qubely-carousel.qubely-carousel-wrapper .qubely-carousel-nav-control .nav-control' },
 			],
@@ -156,14 +160,16 @@ registerBlockType('qubely/testimonialcarousel', {
 		// Arrow Border Color
 		arrowBorderColor: {
 			type: 'object',
-			default: { openTy: 0, color: '#3373dc', width: { bottom: '1', left: '1', right: '1', top: '1', unit: 'px' } },
+			default: {},
 			style: [{ selector: '{{QUBELY}} .qubely-carousel.qubely-carousel-wrapper .qubely-carousel-nav-control .nav-control' }]
 		},
 		// Arrow Hover Color.
-		arrowHoverColor: { type: 'string', default: '', style: [{ selector: '{{QUBELY}} .qubely-carousel-nav-control .nav-control:hover .dashicons { color:{{arrowHoverColor}}; }' }] },
+		arrowHoverColor: { 
+			type: 'string', default: '#ffffff',
+			style: [{ selector: '{{QUBELY}} .qubely-carousel-nav-control .nav-control:hover .dashicons { color:{{arrowHoverColor}}; }' }] },
 		// Arrow background Hover Color.
 		arrowShapeHoverColor: {
-			type: 'object', default: {},
+			type: 'object', default: { type: 'color', openColor: 1, color: '#1066CC' },
 			style: [
 				{ selector: '{{QUBELY}} .qubely-carousel.qubely-carousel-wrapper .qubely-carousel-nav-control .nav-control:hover ' },
 			],
@@ -197,11 +203,11 @@ registerBlockType('qubely/testimonialcarousel', {
 		},
 		// Dot Active Color
 		dotActiveColor: {
-			type: 'object', default: { type: 'color', openColor: 1, color: '#2084f9' },
-			style: [
-				{ selector: '{{QUBELY}} .qubely-carousel.qubely-carousel-wrapper .qubely-carousel-dots ul li.active span.dot-indicator' }
-			]
-		},
+            type: 'object', default: { type: 'color', openColor: 1, color: '#1066CC' },
+            style: [
+                { selector: '{{QUBELY}} .qubely-carousel.qubely-carousel-wrapper .qubely-carousel-dots ul li.active span.dot-indicator' }
+            ]
+        },
 		//Name
 		nameColor: { type: 'string', default: '', style: [{ selector: '{{QUBELY}} .qubely-testimonial-author-name { color:{{nameColor}}; }' }] },
 		nameTypo: { type: 'object', default: { openTypography: 1, weight: 700, size: { md: 16, unit: 'px' } }, style: [{ selector: '{{QUBELY}} .qubely-testimonial-author-name' }] },

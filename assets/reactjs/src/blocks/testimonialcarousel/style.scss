@@ -20,7 +20,9 @@
       }
     }
   }
-
+  .qubely-single-img.qubely-backend .qubely-testimonial-avatar{
+    cursor: pointer;
+  }
   .qubely-testimonial-avatar {
     &.qubely-image-placeholder i {
       font-size: 0.5em;
@@ -204,12 +206,13 @@
 .qubely-carousel.qubely-carousel-wrapper .qubely-carousel-nav-control .nav-control {
   display: inline-block;
   padding: 10px;
-  border: 1px solid #ababab;
+  border: 1px solid #e2e2e2;
   position: absolute;
   cursor: pointer;
   text-align: center;
   bottom: 49%;
   background: rgba(255, 255, 255, 0.4);
+  transition: .3s;
 }
 .qubely-carousel.qubely-carousel-wrapper .qubely-carousel-dots ul li.active span.dot-indicator {
   width: 100%;
@@ -408,7 +411,7 @@
 .qubely-carousel.qubely-carousel-wrapper.is-faded{
   .qubely-carousel-extended-list .qubely-carousel-extended-outer-stage{
     .qubely-carousel-extended-item:not(.active){
-      filter: blur(4px);
+      opacity: 0.1;
     }
   }
 }
