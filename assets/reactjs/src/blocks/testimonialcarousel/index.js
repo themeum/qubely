@@ -107,7 +107,15 @@ registerBlockType('qubely/testimonialcarousel', {
 				{ selector: '{{QUBELY}} .qubely-carousel.qubely-carousel-wrapper .qubely-carousel-nav-control .nav-control.next-control { right: {{horizontalScroll}} } {{QUBELY}} .qubely-carousel.qubely-carousel-wrapper .qubely-carousel-nav-control .nav-control.prev-control { left: {{horizontalScroll}} }  ' }
 			] 	
 		},
-		arrowPosition: {type: 'string', default: 'center' },
+		// arrowPosition: {type: 'string', default: 'center' },
+		arrowPosition: { 
+			type: 'object', 
+			default: { md: 49, unit: '%' }, 
+			style: [
+				{ selector: '{{QUBELY}} .qubely-carousel.qubely-carousel-wrapper .qubely-carousel-nav-control .nav-control { bottom: {{arrowPosition}}; } ' }
+			]
+		},
+
 		cornerRadius: { 
 			type: 'string', 
 			default: { md: 4, unit: 'px' }, 
@@ -115,11 +123,19 @@ registerBlockType('qubely/testimonialcarousel', {
 				{ selector: '{{QUBELY}} .qubely-carousel-nav-control .nav-control { border-radius: {{cornerRadius}}; } ' }
 			] 
 		},
-		arrowSize: { 
+
+		sizeWidth: {
 			type: 'string', 
-			default: '20',
+			default: { md: 12, unit: 'px' }, 
 			style: [
-				{ selector: '{{QUBELY}} .qubely-carousel-nav-control .nav-control .dashicons { font-size: {{arrowSize}}px; } ' }
+				{ selector: '{{QUBELY}} .qubely-carousel.qubely-carousel-wrapper .qubely-carousel-nav-control .nav-control { padding: {{sizeWidth}}; } ' }
+			] 
+		},
+		arrowSize: { 
+			type: 'object', 
+			default: { md: 20, unit: 'px' },
+			style: [
+				{ selector: '{{QUBELY}} .qubely-carousel-nav-control .nav-control .dashicons { font-size: {{arrowSize}}; } ' }
 			]
 		},
 		// Section Arrow 
@@ -162,11 +178,11 @@ registerBlockType('qubely/testimonialcarousel', {
 			default: { openTy: 0, color: '#f4f4f4', width: { bottom: '1', left: '1', right: '1', top: '1', unit: 'px' } },
 			style: [{ selector: '{{QUBELY}} .qubely-carousel.qubely-carousel-wrapper .qubely-carousel-dots ul li' }]
 		},
-		dotBorderColor: {
-			type: 'object',
-			default: { openTy: 0, color: '#f4f4f4', width: { bottom: '1', left: '1', right: '1', top: '1', unit: 'px' } },
-			style: [{ selector: '{{QUBELY}} .qubely-carousel.qubely-carousel-wrapper .qubely-carousel-dots ul li' }]
-		},
+		// dotBorderColor: {
+		// 	type: 'object',
+		// 	default: { openTy: 0, color: '#f4f4f4', width: { bottom: '1', left: '1', right: '1', top: '1', unit: 'px' } },
+		// 	style: [{ selector: '{{QUBELY}} .qubely-carousel.qubely-carousel-wrapper .qubely-carousel-dots ul li' }]
+		// },
 
 		// Dot Active color
 		dotActiveColor: {
@@ -174,11 +190,11 @@ registerBlockType('qubely/testimonialcarousel', {
 			default: { openTy: 0, color: '#2084f9', width: { bottom: '1', left: '1', right: '1', top: '1', unit: 'px' } },
 			style: [{ selector: '{{QUBELY}} .qubely-carousel.qubely-carousel-wrapper .qubely-carousel-dots ul li.active span.dot-indicator' }]
 		},
-		dotBorderActiveColor: {
-			type: 'object',
-			default: { openTy: 0, color: '#2084f9', width: { bottom: '1', left: '1', right: '1', top: '1', unit: 'px' } },
-			style: [{ selector: '{{QUBELY}} .qubely-carousel.qubely-carousel-wrapper .qubely-carousel-dots ul li.active' }]
-		},
+		// dotBorderActiveColor: {
+		// 	type: 'object',
+		// 	default: { openTy: 0, color: '#2084f9', width: { bottom: '1', left: '1', right: '1', top: '1', unit: 'px' } },
+		// 	style: [{ selector: '{{QUBELY}} .qubely-carousel.qubely-carousel-wrapper .qubely-carousel-dots ul li.active' }]
+		// },
 
 		//Name
 		nameColor: { type: 'string', default: '', style: [{ selector: '{{QUBELY}} .qubely-testimonial-author-name { color:{{nameColor}}; }' }] },
@@ -301,9 +317,9 @@ registerBlockType('qubely/testimonialcarousel', {
 			]
 		},
 
-		/*-----------------------------------
+		/* ------------------------------------
 		* 				Ratings 
-		------------------------------------- */
+		* ------------------------------------- */
 		showRatings: { type: 'boolean', default: true },
 		ratings: { type: 'string', default: 4.5 },
 		ratingsPosition: { type: 'string', default: 'bottom' },
@@ -416,7 +432,7 @@ registerBlockType('qubely/testimonialcarousel', {
 			]
 		},
 		showGlobalSettings: { type: 'boolean', default: true }, // Global Settings
-		//showContextMenu: { type: 'boolean', default: true },
+		//showContextMenu: { type: 'boolean', default: true }, 
 	},
 	edit: Edit,
 	save: Save
