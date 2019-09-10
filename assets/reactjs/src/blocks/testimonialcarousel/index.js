@@ -117,14 +117,14 @@ registerBlockType('qubely/testimonialcarousel', {
 		},
 		cornerRadius: { 
 			type: 'object', 
-			default: { md: 4, unit: 'px' }, 
+			default: { md: 10, unit: 'px' }, 
 			style: [
 				{ selector: '{{QUBELY}} .qubely-carousel-nav-control .nav-control { border-radius: {{cornerRadius}}; } ' }
 			] 
 		},
 		cornerHoverRadius: { 
 			type: 'object', 
-			default: { md: 4, unit: 'px' }, 
+			default: { md: 50, unit: '%' }, 
 			style: [
 				{ selector: '{{QUBELY}} .qubely-carousel-nav-control .nav-control:hover { border-radius: {{cornerHoverRadius}}; } ' }
 			] 
@@ -144,10 +144,14 @@ registerBlockType('qubely/testimonialcarousel', {
 			]
 		},
 		// Section Arrow 
-		arrowColor: { type: 'string', default: '', style: [{ selector: '{{QUBELY}} .qubely-block-testimonial-carousel .nav-control .dashicons { color:{{arrowColor}}; }' }] },
+		arrowColor: { 
+			type: 'string', 
+			default: '#1066CC', 
+			style: [{ selector: '{{QUBELY}} .qubely-block-testimonial-carousel .nav-control .dashicons { color:{{arrowColor}}; }' }] 
+		},
 		// Arrow background color
 		arrowShapeColor: {
-			type: 'object', default: {},
+			type: 'object', default: { type: 'color', openColor: 1, color: '#fafafa' },
 			style: [
 				{ selector: '{{QUBELY}} .qubely-carousel.qubely-carousel-wrapper .qubely-carousel-nav-control .nav-control' },
 			],
@@ -155,14 +159,16 @@ registerBlockType('qubely/testimonialcarousel', {
 		// Arrow Border Color
 		arrowBorderColor: {
 			type: 'object',
-			default: { openTy: 0, color: '#3373dc', width: { bottom: '1', left: '1', right: '1', top: '1', unit: 'px' } },
+			default: {},
 			style: [{ selector: '{{QUBELY}} .qubely-carousel.qubely-carousel-wrapper .qubely-carousel-nav-control .nav-control' }]
 		},
 		// Arrow Hover Color.
-		arrowHoverColor: { type: 'string', default: '', style: [{ selector: '{{QUBELY}} .qubely-carousel-nav-control .nav-control:hover .dashicons { color:{{arrowHoverColor}}; }' }] },
+		arrowHoverColor: { 
+			type: 'string', default: '#ffffff',
+			style: [{ selector: '{{QUBELY}} .qubely-carousel-nav-control .nav-control:hover .dashicons { color:{{arrowHoverColor}}; }' }] },
 		// Arrow background Hover Color.
 		arrowShapeHoverColor: {
-			type: 'object', default: {},
+			type: 'object', default: { type: 'color', openColor: 1, color: '#1066CC' },
 			style: [
 				{ selector: '{{QUBELY}} .qubely-carousel.qubely-carousel-wrapper .qubely-carousel-nav-control .nav-control:hover ' },
 			],
@@ -196,7 +202,7 @@ registerBlockType('qubely/testimonialcarousel', {
 		},
 		// Dot Active Color
 		dotActiveColor: {
-            type: 'object', default: { type: 'color', openColor: 1, color: '#2084f9' },
+            type: 'object', default: { type: 'color', openColor: 1, color: '#1066CC' },
             style: [
                 { selector: '{{QUBELY}} .qubely-carousel.qubely-carousel-wrapper .qubely-carousel-dots ul li.active span.dot-indicator' }
             ]
