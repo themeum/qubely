@@ -404,3 +404,12 @@
   top: 0;
   border-radius: 2px;
 }
+
+.qubely-carousel.qubely-carousel-wrapper.is-faded{
+  .qubely-carousel-extended-list .qubely-carousel-extended-outer-stage{
+    .qubely-carousel-extended-item:not(.active){
+      filter: blur(4px);
+    }
+  }
+}
+

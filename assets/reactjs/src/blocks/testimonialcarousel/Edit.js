@@ -146,13 +146,13 @@ class Edit extends Component {
 	}
 
 	renderTestimonials = () => {
-		const { attributes: { layout, showRatings, carouselItems, quoteIcon, ratings } } = this.props
+		const { attributes: { layout, items, showRatings, carouselItems, quoteIcon, ratings } } = this.props
 		return (
 			carouselItems.map((item, index) => {
 				const { message } = item
 
 				return (
-					<div key={index} className="qubely-carousel-item" >
+					<div key={index} className={`qubely-carousel-item ${index < items[this.parseResponsiveViewPort()] ? 'active' : ''}`} >
 						<div className={`qubely-tesitmonial-item layout-${layout}`}>
 
 							{layout === 2 && this.renderAuthorInfo(item, index)}
@@ -208,6 +208,28 @@ class Edit extends Component {
 		setAttributes({ carouselItems: newCarouselItems })
 
 	}
+	parseResponsiveViewPort = () => {
+		const { attributes: { items } } = this.props
+		let responsive = [
+			{ viewport: 1170, items: items.md },
+			{ viewport: 980, items: items.sm },
+			{ viewport: 580, items: items.xs }
+		]
+		if (typeof responsive === 'undefined')
+			return
+		let activeView = null
+
+		for (let i = 0; i < responsive.length; i++) {
+			if (window.innerWidth > responsive[i].viewport) {
+				activeView = responsive[i]
+				break;
+			}
+		}
+		if (activeView === null) {
+			activeView = responsive[responsive.length - 1]
+		}
+		return activeView.viewport <= 1199 ? activeView.viewport <= 991 ? 'xs' : 'sm' : 'md'
+	}
 	render() {
 		const { setAttributes, attributes: {
 			uniqueId, items, autoPlay, interval, speed, nav, carouselItems, dragable,
@@ -215,16 +237,11 @@ class Edit extends Component {
 			showAvatar, avatar, avatarAlt, avatarBorderRadius, avatarSize, avatarWidth, avatarHeight,
 			avatarBorder, avatarSpacing, avatarLayout, quoteIconColor, quoteIconSize, quoteIconSpacing,
 			nameTypo, nameSpacing, messageTypo, designationTypo, starsSize, ratingsColor, quoteIcon, ratings, showRatings,
-			ratingsSpacing, bgPadding, textColor, bgColor, bgBorderRadius, border, boxShadow, boxShadowHover,
-			sliderNumber, itemPerSlides, sliderItemsSpace, infiniteLoop, isCentered, activeFade,
-			// arrow 
-			arrowStyle, arrowPosition,
-			cornerRadius, cornerHoverRadius, arrowSize, sizeWidth,
-			arrowColor, arrowShapeColor, arrowBorderColor,
-			arrowHoverColor, arrowShapeHoverColor, arrowBorderHoverColor,
-			// Dot
+			ratingsSpacing, bgPadding, textColor, bgColor, bgBorderRadius, border, boxShadow, 
+			boxShadowHover, sliderNumber, itemPerSlides, sliderItemsSpace, infiniteLoop, isCentered, activeFade,
+			arrowStyle, arrowPosition, cornerRadius, cornerHoverRadius, arrowSize, sizeWidth,
+			arrowColor, arrowShapeColor, arrowBorderColor, arrowHoverColor, arrowShapeHoverColor, arrowBorderHoverColor,
 			dots, dotIndicator, dotwidth, dotHeight, dotBorderRadius, dotColor, dotActiveColor, horizontalScroll,
-			// dotBorderColor, dotBorderActiveColor
 		} } = this.props 
 
 		const { device } = this.state
@@ -279,8 +296,17 @@ class Edit extends Component {
 							alignmentType="content" disableJustify responsive device={device}
 							onDeviceChange={value => this.setState({ device: value })}
 						/>
+
 						<Range
-							label={__('Number of slides')}
+							label={__('Number of Carousels')}
+							min={1}
+							max={20}
+							value={carouselItems.length}
+							onChange={val => this.setCarouselLength(val)}
+						/>
+
+						<Range
+							label={__('Number of Columns')}
 							min={1}
 							max={20}
 							device={device}
@@ -289,13 +315,6 @@ class Edit extends Component {
 							onChange={val => setAttributes({ items: val })}
 							device={this.state.device}
 							onDeviceChange={value => this.setState({ device: value })}
-						/>
-						<Range
-							label={__('Number of Columns')}
-							min={1}
-							max={20}
-							value={carouselItems.length}
-							onChange={val => this.setCarouselLength(val)}
 						/>
 						<Range
 							label={__('Padding')}
@@ -319,21 +338,22 @@ class Edit extends Component {
 							</Fragment>
 						}
 						<Toggle label={__('Draggable')} value={dragable} onChange={value => setAttributes({ dragable: value })} />
-						<Separator />
-						<Range
+
+						{/* <Range
 							label={__('Items per Slide')}
 							value={itemPerSlides} onChange={(value) => setAttributes({ itemPerSlides: value })}
 							min={1}
 							device={device}
 							onDeviceChange={value => this.setState({ device: value })}
-						/>
-						<Toggle label={__('Infinite Loop')} value={infiniteLoop} onChange={value => setAttributes({ infiniteLoop: value })} />
+						/> */}
+						{/* <Toggle label={__('Infinite Loop')} value={infiniteLoop} onChange={value => setAttributes({ infiniteLoop: value })} /> */}
 						<Toggle label={__('Centered Slides')} value={isCentered} onChange={value => setAttributes({ isCentered: value })} />
-						<Toggle label={__('Fade Deactivated Items')} value={activeFade} onChange={value => setAttributes({ activeFade: value })} />
+						{
+							isCentered &&
+							<Toggle label={__('Fade Deactivated Items')} value={activeFade} onChange={value => setAttributes({ activeFade: value })} />
+						}
 					</PanelBody>
-					{/* End */}
 
-					{/* Slider Settings */}
 					<PanelBody title={__('Slider Settings')} initialOpen={false}>
 						<Toggle label={__('Show Arrow Navigation')} value={nav} onChange={value => setAttributes({ nav: value })} />
 						<ButtonGroup
@@ -346,7 +366,7 @@ class Edit extends Component {
 							label={__('Horizontal Position')}
 							value={horizontalScroll} onChange={(value) => setAttributes({ horizontalScroll: value })}
 							min={-100} max={100}
-							responsive unit={['px', 'em', '%']} 
+							responsive unit={['px', 'em', '%']}
 							device={device}
 							onDeviceChange={value => this.setState({ device: value })}
 						/>
@@ -432,11 +452,9 @@ class Edit extends Component {
 						<Tabs>
 							<Tab tabTitle={__('Normal')}>
 								<ColorAdvanced label={__('Dot Color')} value={dotColor} onChange={val => setAttributes({ dotColor: val })} />
-								{/* <Border label={__('Border Color')} value={dotBorderColor} onChange={value => setAttributes({ dotBorderColor: value })} /> */}
 							</Tab>
 							<Tab tabTitle={__('Active')}>
 								<ColorAdvanced label={__('Dot Active Color')} value={dotActiveColor} onChange={val => setAttributes({ dotActiveColor: val })} />
-								{/* <Border label={__('Border Active Color')} value={dotBorderActiveColor} onChange={value => setAttributes({ dotBorderActiveColor: value })} /> */}
 							</Tab>
 						</Tabs>
 					</PanelBody>
@@ -622,7 +640,7 @@ class Edit extends Component {
 									onDeviceChange={value => this.setState({ device: value })} />
 							</Fragment>
 						}
-					</PanelBody>
+						</PanelBody>
 					}
 					<PanelBody title={__('Ratings')} initialOpen={false}>
 						<Toggle label={__('Show Ratings')} value={showRatings} onChange={val => setAttributes({ showRatings: val })} />
@@ -711,7 +729,7 @@ class Edit extends Component {
 
 				<div className={`qubely-block-${uniqueId}`}>
 					<div className={`qubely-block-testimonial-carousel qubely-layout-${layout}`}>
-						<Carousel ref="QubelyCarousel" options={carouselSettings}>
+						<Carousel options={carouselSettings}>
 							{this.renderTestimonials()}
 						</Carousel>
 					</div>

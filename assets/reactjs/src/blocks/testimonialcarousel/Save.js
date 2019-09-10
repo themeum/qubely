@@ -47,15 +47,14 @@ class Save extends Component {
 
             {layout == 2 && this.renderAuthorInfo(item)}
             {(quoteIcon && layout == 1) && <div className="qubely-testimonial-quote">
-              <span className={`qubely-quote-icon ${quoteIcon}`}></span>
-            </div>
+                <span className={`qubely-quote-icon ${quoteIcon}`}></span>
+              </div>
             }
 
             <div className={`qubely-testimonial-carousel-content-wrapper`}>
               {(showRatings && ratings > 0 && layout !== 1) &&
                 <div className="qubely-testimonial-ratings" data-qubelyrating={ratings}></div>
               }
-
               <div className="qubely-testimonial-content"> <RichText.Content value={message} /></div>
               {(showRatings && ratings > 0 && layout == 1) && <div className="qubely-testimonial-ratings" data-qubelyrating={ratings} />}
             </div>
@@ -64,7 +63,7 @@ class Save extends Component {
 
             {(quoteIcon && layout == 2) && <div className="qubely-testimonial-quote qubely-position-bottom">
               <span className={`qubely-quote-icon ${quoteIcon}`}></span>
-            </div>
+              </div>
             }
 
           </div>
@@ -74,7 +73,7 @@ class Save extends Component {
   }
 
   render() {
-    const { attributes: { uniqueId, layout, items, autoPlay, infiniteLoop, isCentered, dragable, nav, dots, dotIndicator, interval, speed, animation } } = this.props
+    const { attributes: { uniqueId, layout, items, autoPlay, infiniteLoop, activeFade, isCentered, dragable, nav, dots, dotIndicator, interval, speed, animation } } = this.props
     let options = JSON.stringify({
       autoplay: autoPlay,
       items: items,
@@ -87,6 +86,7 @@ class Save extends Component {
       interval: interval,
       dragable: dragable,
       infiniteLoop: infiniteLoop,
+      activeFade: activeFade,
       responsive: [
         {
           viewport: 1170,
@@ -106,14 +106,12 @@ class Save extends Component {
     return (
       <div className={`qubely-block-${uniqueId}`} {...animationAttr(animation)}>
         <div className={`qubely-block-testimonial-carousel qubely-layout-${layout}`}>
-          <div className="qubely-carousel qubely-carousel-wrapper" data-options={options} id="qubelyCarousel1" >
+          <div className={`qubely-carousel qubely-carousel-wrapper${isCentered && activeFade ? ' is-faded' : ''}`} data-options={options} id="qubelyCarousel1" >
             {this.renderTestimonial()}
           </div>
         </div>
       </div>
     )
-
-
   }
 }
 

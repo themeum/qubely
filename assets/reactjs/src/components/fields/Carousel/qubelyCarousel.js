@@ -166,10 +166,10 @@
             this.options.items = viewPort === null ? this.options.items : typeof viewPort.items === 'undefined' ? this.options.items : viewPort.items
 
             this.elementWidth = this.$element.outerWidth() + this.options.margin
-            this.itemWidth = Math.abs(this.elementWidth / this.options.items)
+            this.itemWidth = this.options.center ? Math.abs((this.elementWidth - this.options.centerPadding) / this.options.items) : Math.abs(this.elementWidth / this.options.items)
             this._clones = this._numberOfItems > this.options.items ? Math.ceil(this._numberOfItems / 2) : this.options.items
             this._maxL = this.itemWidth * (this._numberOfItems + (this._clones - 1))
-            this._minL = this.options.center === false ? this.itemWidth * this._clones : (this.itemWidth * this._clones) - (this.itemWidth / 2)
+            this._minL = this.options.center === false ? this.itemWidth * this._clones : (this.itemWidth * this._clones) - (this.options.centerPadding / 2)
         },
 
 
@@ -254,7 +254,7 @@
 
             this._currentPosition = this._clones * this.itemWidth
             if (this.options.center === true) {
-                this._currentPosition = this._clones * this.itemWidth - (this.itemWidth / 2)
+                this._currentPosition = this._clones * this.itemWidth - (this.options.centerPadding / 2)
             }
             this.$outerStage.css({
                 '-webkit-transition-duration': '0s',
@@ -416,7 +416,7 @@
         processActivationWorker: function () {
             let currentStagePosition = this._currentPosition
             let startIndex = Math.floor(currentStagePosition / this.itemWidth)
-            let endIndex = Math.floor(Math.abs(this.options.items + startIndex))
+            let endIndex = Math.floor(Math.abs(parseInt(this.options.items) + parseInt(startIndex)))
             this.$outerStage.find('.active').removeClass('active')
             for (let i = startIndex; i < endIndex; i++) {
                 this.$outerStage.children(':eq(' + i + ')').addClass('active')
@@ -636,6 +636,8 @@
 
         // Is item mode center
         center: false,
+
+        centerPadding: 150,
 
         // Margin between items 
         margin: 10,

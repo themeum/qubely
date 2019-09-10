@@ -1,10 +1,10 @@
 /**
- * Plugin Name: JS Slider
+ * Plugin Name: Qubely Carousel
  * Version: 1.0.0
- * Author: Joomshaper
- * Company: Joomshaper
- * Website: https://www.joomshaper.com/
- * Description: Joomshaper Slider 
+ * Author: Themeum
+ * Company: Themeum
+ * Website: https://www.themeum.com/
+ * Description: Qubely Carousel 
  */
 ; (function ($, window, document, undefined) {
 
@@ -527,9 +527,9 @@
             let currentStagePosition = this._currentPosition
             let startIndex = Math.floor(currentStagePosition / this.itemWidth)
             startIndex = this.options.center ? startIndex + 1 : startIndex
-            // let items = this.options.center ? this.options.items+1 : this.options.items
-            let endIndex = Math.floor(Math.abs(this.options.items + startIndex))
+            let endIndex = Math.floor(Math.abs(parseInt(this.options.items) + parseInt(startIndex)))
             this.$outerStage.find('.active').removeClass('active')
+
             for (let i = startIndex; i < endIndex; i++) {
                 this.$outerStage.children(':eq(' + i + ')').addClass('active')
             }
@@ -900,7 +900,7 @@
         // Is item mode center
         center: false,
 
-        centerPadding: 50,
+        centerPadding: 150,
 
         // Margin between items 
         margin: 10,

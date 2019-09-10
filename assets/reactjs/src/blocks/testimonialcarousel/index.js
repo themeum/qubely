@@ -94,7 +94,7 @@ registerBlockType('qubely/testimonialcarousel', {
 		// Infinite Loop
 		infiniteLoop: { type: 'boolean', default: true },
 		isCentered: { type: 'boolean', default: false },
-		activeFade: { type: 'boolean', default: true },
+		activeFade: { type: 'boolean', default: false },
  
 		/*------------------------------------
 		* 			Slider Settings 			
