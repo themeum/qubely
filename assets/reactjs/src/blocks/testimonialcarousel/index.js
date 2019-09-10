@@ -76,7 +76,7 @@ registerBlockType('qubely/testimonialcarousel', {
 		/*---------------------------------------------------
 		* 	Testimonial Layouts:  common/style attributes
 		* --------------------------------------------------- */
-		layout: { type: 'number', default: 1 },
+		layout: { type: 'number', default: 3 },
 		alignment: { type: 'object', default: { md: 'center' }, style: [{ selector: '{{QUBELY}} .qubely-tesitmonial-item {text-align: {{alignment}};}' }] },
 		spacer: { type: 'object', default: { spaceTop: { md: '10', unit: "px" }, spaceBottom: { md: '10', unit: "px" } }, style: [{ selector: '{{QUBELY}}' }] },
 

@@ -4,13 +4,13 @@ import { animationAttr } from '../../components/HelperFunction'
 class Save extends Component {
   renderAvatar = (avatar, avatarAlt) => {
     return (
-      <Fragment>
+      <div className="qubely-single-img">
         {avatar.url != undefined ?
           <img className="qubely-testimonial-avatar" src={avatar.url} alt={avatarAlt} />
           :
           <div className="qubely-image-placeholder qubely-testimonial-avatar"><i className="far fa-user"></i></div>
         }
-      </Fragment>
+      </div>
     )
   }
   renderAuthorInfo = (item) => {
@@ -47,8 +47,8 @@ class Save extends Component {
 
             {layout == 2 && this.renderAuthorInfo(item)}
             {(quoteIcon && layout == 1) && <div className="qubely-testimonial-quote">
-                <span className={`qubely-quote-icon ${quoteIcon}`}></span>
-              </div>
+              <span className={`qubely-quote-icon ${quoteIcon}`}></span>
+            </div>
             }
 
             <div className={`qubely-testimonial-carousel-content-wrapper`}>
@@ -63,7 +63,7 @@ class Save extends Component {
 
             {(quoteIcon && layout == 2) && <div className="qubely-testimonial-quote qubely-position-bottom">
               <span className={`qubely-quote-icon ${quoteIcon}`}></span>
-              </div>
+            </div>
             }
 
           </div>
