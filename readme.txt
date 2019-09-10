@@ -4,7 +4,7 @@ Donate link: https://www.themeum.com
 Tags: Blocks, Gutenberg editor, Block editor, Block, Gutenberg, Gutenberg Blocks
 Requires at least: 5.0
 Tested up to: 5.2
-Stable tag: 1.1.2
+Stable tag: 1.1.3
 Requires PHP: 5.4.0
 License: GPL-2.0+
 License URI: http://www.gnu.org/licenses/gpl-2.0.txt
@@ -68,6 +68,7 @@ Qubely adds numerous custom Gutenberg blocks to the Gutenberg block editor and t
 * [Image](https://qubely.io/block/image/)
 * [Timeline](https://qubely.io/block/timeline/)
 * [Post Grid](https://qubely.io/block/post-grid/)
+* Testimonial Carousel
 * More advanced Gutenberg blocks coming
 
 
@@ -216,6 +217,10 @@ Found a bug? Please let us know by posting on the support section of this plugin
 
 
 == Changelog ==
+
+= 1.1.3 - 10 September, 2019 =
+
+Fix: Post Grid block - Category clickable issue in Edit view    
 
 = 1.1.2 - 06 September, 2019 =
 
