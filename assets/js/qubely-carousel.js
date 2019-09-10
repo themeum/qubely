@@ -47,11 +47,6 @@
         */
         this.options = $.extend({}, this._defaults, options);
 
-        // Check if has valid array nav_text 
-        if (this.options.nav_text.length !== 2) {
-            console.warn("nav text must be need two control element!")
-            this.options.nav_text = ['<', '>']
-        }
 
         //Check if speed is bigger than interval then make they both equal
         if (this.options.speed > this.options.interval) {
@@ -108,10 +103,10 @@
             this.$outerStage.children().unwrap();
             this.$sliderList.unwrap();
             if (this.options.dots) {
-                this.$dotContainer.parent('.qubely-carousel-extended-dots').remove()
+                this.$dotContainer.parent('.qubely-carousel-dots').remove()
             }
             if (this.options.nav) {
-                this.$nextBtn.parent('.qubely-carousel-extended-nav-control').remove()
+                this.$nextBtn.parent('.qubely-carousel-nav-control').remove()
             }
             this.$element.removeData(this._name);
         },
@@ -248,7 +243,7 @@
         createNavigationController: function () {
             // build controlls
             let controllerBox = document.createElement('div')
-            controllerBox.setAttribute('class', 'qubely-carousel-extended-nav-control')
+            controllerBox.setAttribute('class', 'qubely-carousel-nav-control')
             this.$element.append(controllerBox)
 
             this.nextBtn = document.createElement('span')
@@ -258,8 +253,15 @@
             controllerBox.append(this.nextBtn)
             controllerBox.append(this.prevBtn)
 
-            this.nextBtn.innerHTML = this.options.nav_text[1]; //this.nav_text[1]
-            this.prevBtn.innerHTML = this.options.nav_text[0]; //this.nav_text[0]
+            this.nextNavIcon = document.createElement('span')
+
+            this.nextNavIcon.setAttribute('class', this.options.arrowStyle == 'arrowright2' ? `dashicons dashicons-arrow-right-alt2` : `dashicons dashicons-arrow-right-alt`)
+            this.nextBtn.append(this.nextNavIcon);
+
+            this.prevNavIcon = document.createElement('span')
+            this.prevNavIcon.setAttribute('class', this.options.arrowStyle == 'arrowright2' ? `dashicons dashicons-arrow-left-alt2` : `dashicons dashicons-arrow-left-alt`)
+            this.prevBtn.append(this.prevNavIcon);
+
 
             // Cache next and prev button 
             this.$nextBtn = $(this.nextBtn)
@@ -273,7 +275,7 @@
         createDotsController: function () {
             //Create dots navigation
             let dotBox = document.createElement('div')
-            dotBox.setAttribute('class', 'qubely-carousel-extended-dots')
+            dotBox.setAttribute('class', 'qubely-carousel-dots')
             this.$element.append(dotBox)
             let qubelyCarousel = this;
             let dotContainer = document.createElement('ul')
@@ -285,7 +287,7 @@
             if (dotLength > 1) {
                 for (var i = 0; i < dotLength; i++) {
                     let dotItem = document.createElement('li')
-                    dotItem.setAttribute('class', 'qubely-carousel-extended-dot-' + i)
+                    dotItem.setAttribute('class', 'qubely-carousel-dot-' + i)
                     $(dotItem).css({ '-webkit-transition': 'all 0.5s linear 0s' })
                     if (i === 0) {
                         $(dotItem).addClass('active')
@@ -294,7 +296,7 @@
                     // Dot indicator                        
                     if (qubelyCarousel.options.dot_indicator) {
                         let dotIndicator = document.createElement('span')
-                        dotIndicator.setAttribute('class', 'qubely-carousel-extended-dot-indicator')
+                        dotIndicator.setAttribute('class', 'dot-indicator')
                         dotItem.append(dotIndicator)
                     }
                     dotContainer.append(dotItem)
@@ -440,13 +442,13 @@
          */
         animateDotIndicator: function (dotItem, action) {
             if (action === 'stop') {
-                dotItem.find('.qubely-carousel-extended-dot-indicator').removeClass('active').css({
+                dotItem.find('.dot-indicator').removeClass('active').css({
                     '-webkit-transition-duration': '0s'
                 })
             }
             if (action === 'start') {
                 const speed = Math.abs(this.options.interval - this.options.speed);
-                dotItem.find('.qubely-carousel-extended-dot-indicator').addClass('active').css({
+                dotItem.find('.dot-indicator').addClass('active').css({
                     '-webkit-transition-duration': speed + 'ms',
                 })
             }
@@ -931,7 +933,8 @@
          * Navigation text for next and previous
          * Its will be html or icon or text
          */
-        nav_text: ['<', '>']
+
+        arrowStyle: 'arrowright'
     };
 
 })(jQuery, window, document);

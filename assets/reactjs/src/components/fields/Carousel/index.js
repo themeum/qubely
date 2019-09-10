@@ -1,5 +1,5 @@
 
-const { Component, cloneElement, findDOMNode } = wp.element;
+const { Component, cloneElement, Fragment, findDOMNode } = wp.element;
 
 import { _equal } from './utils'
 const CarouselOptions = {
@@ -68,7 +68,7 @@ export default class Carousel extends Component {
 
     destroy() {
         this.$qubelyCarousel.destroy();
-    } 
+    }
 
     cloneItems() {
         const { children, options } = this.props
@@ -121,14 +121,14 @@ export default class Carousel extends Component {
                 </div>
                 <div className="qubely-carousel-nav-control">
                     {nav &&
-                        <div>
+                        <Fragment>
                             <span className={`next-control nav-control ${arrowPosition}`} onClick={() => this.$qubelyCarousel.navigate('next')}>
                                 {(arrowStyle == 'arrowright2') ? <span class="dashicons dashicons-arrow-right-alt2"></span> : <span class="dashicons dashicons-arrow-right-alt"></span>}
                             </span>
                             <span className={`prev-control nav-control ${arrowPosition}`} onClick={() => this.$qubelyCarousel.navigate('prev')}>
                                 {(arrowStyle == 'arrowright2') ? <span class="dashicons dashicons-arrow-left-alt2"></span> : <span class="dashicons dashicons-arrow-left-alt"></span>}
                             </span>
-                        </div>
+                        </Fragment>
                     }
                 </div>
                 {dots &&

@@ -152,7 +152,7 @@ class Edit extends Component {
 				const { message } = item
 
 				return (
-					<div key={index} className={`qubely-carousel-item ${index < items[this.parseResponsiveViewPort()] ? 'active' : ''}`} >
+					<div key={index} className={`qubely-carousel-item${index < items[this.parseResponsiveViewPort()] ? ' active' : ''}`} >
 						<div className={`qubely-tesitmonial-item layout-${layout}`}>
 
 							{layout === 2 && this.renderAuthorInfo(item, index)}

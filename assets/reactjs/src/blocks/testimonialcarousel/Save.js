@@ -74,7 +74,7 @@ class Save extends Component {
   }
 
   render() {
-    const { attributes: { uniqueId, layout, items, autoPlay, infiniteLoop, activeFade, isCentered, dragable, nav, dots, dotIndicator, interval, speed, animation } } = this.props
+    const { attributes: { uniqueId, layout, items, autoPlay, arrowStyle, infiniteLoop, activeFade, isCentered, dragable, nav, dots, dotIndicator, interval, speed, animation } } = this.props
     let options = JSON.stringify({
       autoplay: autoPlay,
       items: items,
@@ -88,6 +88,7 @@ class Save extends Component {
       dragable: dragable,
       infiniteLoop: infiniteLoop,
       activeFade: activeFade,
+      arrowStyle: arrowStyle,
       responsive: [
         {
           viewport: 1170,
