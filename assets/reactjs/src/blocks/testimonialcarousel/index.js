@@ -173,7 +173,6 @@ registerBlockType('qubely/testimonialcarousel', {
 			default: { openTy: 0, color: '#3373dc', width: { bottom: '1', left: '1', right: '1', top: '1', unit: 'px' } },
 			style: [{ selector: '{{QUBELY}} .qubely-carousel.qubely-carousel-wrapper .qubely-carousel-nav-control .nav-control:hover' }]
 		},
-
 		// Dot Navigation.
 		dotwidth: {
 			type: 'string',
@@ -190,13 +189,11 @@ registerBlockType('qubely/testimonialcarousel', {
 			default: { md: 4, unit: 'px' },
 			style: [{ selector: '{{QUBELY}} .qubely-carousel.qubely-carousel-wrapper .qubely-carousel-dots ul li { border-radius: {{dotBorderRadius}} } {{QUBELY}} .qubely-carousel.qubely-carousel-wrapper .qubely-carousel-dots ul li.active span.dot-indicator { border-radius: {{dotBorderRadius}} }' }]
 		},
-
 		// Dot
 		dotColor: {
 			type: 'object', default: { type: 'color', openColor: 1, color: '#f4f4f4' },
 			style: [{ selector: '{{QUBELY}} .qubely-carousel.qubely-carousel-wrapper .qubely-carousel-dots ul li' }]
 		},
-
 		// Dot Active Color
 		dotActiveColor: {
             type: 'object', default: { type: 'color', openColor: 1, color: '#2084f9' },
