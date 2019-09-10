@@ -281,8 +281,17 @@ class Edit extends Component {
 							alignmentType="content" disableJustify responsive device={device}
 							onDeviceChange={value => this.setState({ device: value })}
 						/>
+
 						<Range
-							label={__('Number of slides')}
+							label={__('Number of Carousels')}
+							min={1}
+							max={20}
+							value={carouselItems.length}
+							onChange={val => this.setCarouselLength(val)}
+						/>
+
+						<Range
+							label={__('Number of Columns')}
 							min={1}
 							max={20}
 							device={device}
@@ -291,13 +300,6 @@ class Edit extends Component {
 							onChange={val => setAttributes({ items: val })}
 							device={this.state.device}
 							onDeviceChange={value => this.setState({ device: value })}
-						/>
-						<Range
-							label={__('Number of Columns')}
-							min={1}
-							max={20}
-							value={carouselItems.length}
-							onChange={val => this.setCarouselLength(val)}
 						/>
 						<Range
 							label={__('Padding')}
@@ -321,21 +323,19 @@ class Edit extends Component {
 							</Fragment>
 						}
 						<Toggle label={__('Draggable')} value={dragable} onChange={value => setAttributes({ dragable: value })} />
-						<Separator />
-						<Range
+
+						{/* <Range
 							label={__('Items per Slide')}
 							value={itemPerSlides} onChange={(value) => setAttributes({ itemPerSlides: value })}
 							min={1}
 							device={device}
 							onDeviceChange={value => this.setState({ device: value })}
-						/>
-						<Toggle label={__('Infinite Loop')} value={infiniteLoop} onChange={value => setAttributes({ infiniteLoop: value })} />
+						/> */}
+						{/* <Toggle label={__('Infinite Loop')} value={infiniteLoop} onChange={value => setAttributes({ infiniteLoop: value })} /> */}
 						<Toggle label={__('Centered Slides')} value={isCentered} onChange={value => setAttributes({ isCentered: value })} />
 						<Toggle label={__('Fade Deactivated Items')} value={activeFade} onChange={value => setAttributes({ activeFade: value })} />
 					</PanelBody>
-					{/* End */}
 
-					{/* Slider Settings */}
 					<PanelBody title={__('Slider Settings')} initialOpen={false}>
 						<Toggle label={__('Show Arrow Navigation')} value={nav} onChange={value => setAttributes({ nav: value })} />
 						<ButtonGroup
@@ -348,7 +348,7 @@ class Edit extends Component {
 							label={__('Horizontal Position')}
 							value={horizontalScroll} onChange={(value) => setAttributes({ horizontalScroll: value })}
 							min={-100} max={100}
-							responsive unit={['px', 'em', '%']} 
+							responsive unit={['px', 'em', '%']}
 							device={device}
 							onDeviceChange={value => this.setState({ device: value })}
 						/>
@@ -370,7 +370,7 @@ class Edit extends Component {
 							label={__('Corner Radius')}
 							value={cornerRadius} onChange={(value) => setAttributes({ cornerRadius: value })}
 							min={1} max={100}
-							responsive unit={['px', 'em', '%']} 
+							responsive unit={['px', 'em', '%']}
 							device={device}
 							onDeviceChange={value => this.setState({ device: value })}
 						/>
@@ -679,7 +679,7 @@ class Edit extends Component {
 
 				<div className={`qubely-block-${uniqueId}`}>
 					<div className={`qubely-block-testimonial-carousel qubely-layout-${layout}`}>
-						<Carousel ref="QubelyCarousel" options={carouselSettings}>
+						<Carousel options={carouselSettings}>
 							{this.renderTestimonials()}
 						</Carousel>
 					</div>

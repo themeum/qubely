@@ -552,6 +552,13 @@
             const centerEq = Math.floor((startIndex + endIndex) / 2)
             this.$outerStage.find('.qubely-carousel-extended-item-center').removeClass('qubely-carousel-extended-item-center')
             this.$outerStage.children(':eq(' + centerEq + ')').addClass('qubely-carousel-extended-item-center')
+            $('.qubely-carousel-extended-item:not(.active)').css({
+                'filter'         : 'blur(5px)',
+                '-webkit-filter' : 'blur(5px)',
+                '-moz-filter'    : 'blur(5px)',
+                '-o-filter'      : 'blur(5px)',
+                '-ms-filter'     : 'blur(5px)'
+             });
         },
 
 
@@ -900,7 +907,7 @@
         // Is item mode center
         center: false,
 
-        centerPadding: 50,
+        centerPadding: 150,
 
         // Margin between items 
         margin: 10,
