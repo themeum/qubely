@@ -6,7 +6,8 @@ import Edit from './Edit'
 import Save from './Save'
 
 registerBlockType('qubely/testimonialcarousel', {
-	title: __('testimonial carousel'),
+	title: __('Testimonial Carousel'),
+	description: __('Design and showcase customer reviews, remarks as testimonials with Qubely Testimonial Carousel block'),
 	icon: 'dashboard',
 	category: 'qubely',
 	keywords: [
@@ -75,7 +76,7 @@ registerBlockType('qubely/testimonialcarousel', {
 		/*---------------------------------------------------
 		* 	Testimonial Layouts:  common/style attributes
 		* --------------------------------------------------- */
-		layout: { type: 'number', default: 1 },
+		layout: { type: 'number', default: 3 },
 		alignment: { type: 'object', default: { md: 'center' }, style: [{ selector: '{{QUBELY}} .qubely-tesitmonial-item {text-align: {{alignment}};}' }] },
 		spacer: { type: 'object', default: { spaceTop: { md: '10', unit: "px" }, spaceBottom: { md: '10', unit: "px" } }, style: [{ selector: '{{QUBELY}}' }] },
 
@@ -95,22 +96,22 @@ registerBlockType('qubely/testimonialcarousel', {
 		infiniteLoop: { type: 'boolean', default: true },
 		isCentered: { type: 'boolean', default: false },
 		activeFade: { type: 'boolean', default: false },
- 
+
 		/*------------------------------------
 		* 			Slider Settings 			
 		-------------------------------------- */
-		arrowStyle: {type: 'string', default: 'arrowright' },
-		horizontalScroll: { 
-			type: 'object', 
-			default: { md: 0, unit: '%' }, 
+		arrowStyle: { type: 'string', default: 'arrowright' },
+		horizontalScroll: {
+			type: 'object',
+			default: { md: 0, unit: '%' },
 			style: [
 				{ selector: '{{QUBELY}} .qubely-carousel.qubely-carousel-wrapper .qubely-carousel-nav-control .nav-control.next-control { right: {{horizontalScroll}} } {{QUBELY}} .qubely-carousel.qubely-carousel-wrapper .qubely-carousel-nav-control .nav-control.prev-control { left: {{horizontalScroll}} }  ' }
-			] 	
+			]
 		},
 		// arrowPosition: {type: 'string', default: 'center' },
-		arrowPosition: { 
-			type: 'object', 
-			default: { md: 49, unit: '%' }, 
+		arrowPosition: {
+			type: 'object',
+			default: { md: 49, unit: '%' },
 			style: [
 				{ selector: '{{QUBELY}} .qubely-carousel.qubely-carousel-wrapper .qubely-carousel-nav-control .nav-control { bottom: {{arrowPosition}}; } ' }
 			]
@@ -120,24 +121,24 @@ registerBlockType('qubely/testimonialcarousel', {
 			default: { md: 10, unit: 'px' }, 
 			style: [
 				{ selector: '{{QUBELY}} .qubely-carousel-nav-control .nav-control { border-radius: {{cornerRadius}}; } ' }
-			] 
+			]
 		},
 		cornerHoverRadius: { 
 			type: 'object', 
 			default: { md: 50, unit: '%' }, 
 			style: [
 				{ selector: '{{QUBELY}} .qubely-carousel-nav-control .nav-control:hover { border-radius: {{cornerHoverRadius}}; } ' }
-			] 
+			]
 		},
 		sizeWidth: {
-			type: 'string', 
-			default: { md: 12, unit: 'px' }, 
+			type: 'string',
+			default: { md: 12, unit: 'px' },
 			style: [
 				{ selector: '{{QUBELY}} .qubely-carousel.qubely-carousel-wrapper .qubely-carousel-nav-control .nav-control { padding: {{sizeWidth}}; } ' }
-			] 
+			]
 		},
-		arrowSize: { 
-			type: 'object', 
+		arrowSize: {
+			type: 'object',
 			default: { md: 20, unit: 'px' },
 			style: [
 				{ selector: '{{QUBELY}} .qubely-carousel-nav-control .nav-control .dashicons { font-size: {{arrowSize}}; } ' }
@@ -184,7 +185,7 @@ registerBlockType('qubely/testimonialcarousel', {
 			type: 'string',
 			default: { md: 30, unit: 'px' },
 			style: [{ selector: '{{QUBELY}} .qubely-carousel.qubely-carousel-wrapper .qubely-carousel-dots ul li { width: {{dotwidth}} }' }]
-		}, 
+		},
 		dotHeight: {
 			type: 'string',
 			default: { md: 4, unit: 'px' },
@@ -422,11 +423,11 @@ registerBlockType('qubely/testimonialcarousel', {
 			},
 			style: [
 				{ selector: '{{QUBELY}} .qubely-layout-1 .qubely-tesitmonial-item, {{QUBELY}} .qubely-layout-2 .qubely-tesitmonial-item, {{QUBELY}} .qubely-layout-3 .qubely-testimonial-carousel-content-wrapper' }
-            ]
-        },
-        border: { 
-			type: 'object', 
-			default: { openTy: 0, color: '#3373dc', width: { bottom: '1', left: '1', right: '1', top: '1', unit: 'px' } }, 
+			]
+		},
+		border: {
+			type: 'object',
+			default: { openTy: 0, color: '#3373dc', width: { bottom: '1', left: '1', right: '1', top: '1', unit: 'px' } },
 			style: [
 				{ selector: '{{QUBELY}} .qubely-tesitmonial-item.layout-1, {{QUBELY}} .qubely-tesitmonial-item.layout-2, {{QUBELY}} .qubely-tesitmonial-item.layout-3 .qubely-testimonial-carousel-content-wrapper' }]
 		},

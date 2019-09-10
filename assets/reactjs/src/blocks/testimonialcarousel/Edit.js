@@ -285,7 +285,7 @@ class Edit extends Component {
 							options={[
 								{ value: 1, svg: icons.testimonial_1, label: __('Layout 1') },
 								{ value: 2, svg: icons.testimonial_2, label: __('Layout 2') },
-								{ value: 3, svg: icons.testimonial_2, label: __('Layout 3') }
+								{ value: 3, svg: icons.testimonial_3, label: __('Layout 3') }
 							]}
 						/>
 						<Alignment
