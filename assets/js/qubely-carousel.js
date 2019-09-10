@@ -1,10 +1,10 @@
 /**
- * Plugin Name: JS Slider
+ * Plugin Name: Qubely Carousel
  * Version: 1.0.0
- * Author: Joomshaper
- * Company: Joomshaper
- * Website: https://www.joomshaper.com/
- * Description: Joomshaper Slider 
+ * Author: Themeum
+ * Company: Themeum
+ * Website: https://www.themeum.com/
+ * Description: Qubely Carousel 
  */
 ; (function ($, window, document, undefined) {
 
@@ -527,9 +527,9 @@
             let currentStagePosition = this._currentPosition
             let startIndex = Math.floor(currentStagePosition / this.itemWidth)
             startIndex = this.options.center ? startIndex + 1 : startIndex
-            // let items = this.options.center ? this.options.items+1 : this.options.items
-            let endIndex = Math.floor(Math.abs(this.options.items + startIndex))
+            let endIndex = Math.floor(Math.abs(parseInt(this.options.items) + parseInt(startIndex)))
             this.$outerStage.find('.active').removeClass('active')
+
             for (let i = startIndex; i < endIndex; i++) {
                 this.$outerStage.children(':eq(' + i + ')').addClass('active')
             }
@@ -552,13 +552,6 @@
             const centerEq = Math.floor((startIndex + endIndex) / 2)
             this.$outerStage.find('.qubely-carousel-extended-item-center').removeClass('qubely-carousel-extended-item-center')
             this.$outerStage.children(':eq(' + centerEq + ')').addClass('qubely-carousel-extended-item-center')
-            $('.qubely-carousel-extended-item:not(.active)').css({
-                'filter'         : 'blur(5px)',
-                '-webkit-filter' : 'blur(5px)',
-                '-moz-filter'    : 'blur(5px)',
-                '-o-filter'      : 'blur(5px)',
-                '-ms-filter'     : 'blur(5px)'
-             });
         },
 
 

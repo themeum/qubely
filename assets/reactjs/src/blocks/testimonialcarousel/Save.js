@@ -74,7 +74,7 @@ class Save extends Component {
   }
 
   render() {
-    const { attributes: { uniqueId, layout, items, autoPlay, infiniteLoop, isCentered, dragable, nav, dots, dotIndicator, interval, speed, animation } } = this.props
+    const { attributes: { uniqueId, layout, items, autoPlay, infiniteLoop, activeFade, isCentered, dragable, nav, dots, dotIndicator, interval, speed, animation } } = this.props
     let options = JSON.stringify({
       autoplay: autoPlay,
       items: items,
@@ -87,6 +87,7 @@ class Save extends Component {
       interval: interval,
       dragable: dragable,
       infiniteLoop: infiniteLoop,
+      activeFade: activeFade,
       responsive: [
         {
           viewport: 1170,
@@ -106,7 +107,7 @@ class Save extends Component {
     return (
       <div className={`qubely-block-${uniqueId}`} {...animationAttr(animation)}>
         <div className={`qubely-block-testimonial-carousel qubely-layout-${layout}`}>
-          <div className="qubely-carousel qubely-carousel-wrapper" data-options={options} id="qubelyCarousel1" >
+          <div className={`qubely-carousel qubely-carousel-wrapper${isCentered && activeFade ? ' is-faded' : ''}`} data-options={options} id="qubelyCarousel1" >
             {this.renderTestimonial()}
           </div>
         </div>

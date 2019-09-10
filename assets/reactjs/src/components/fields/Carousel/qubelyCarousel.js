@@ -416,7 +416,7 @@
         processActivationWorker: function () {
             let currentStagePosition = this._currentPosition
             let startIndex = Math.floor(currentStagePosition / this.itemWidth)
-            let endIndex = Math.floor(Math.abs(this.options.items + startIndex))
+            let endIndex = Math.floor(Math.abs(parseInt(this.options.items) + parseInt(startIndex)))
             this.$outerStage.find('.active').removeClass('active')
             for (let i = startIndex; i < endIndex; i++) {
                 this.$outerStage.children(':eq(' + i + ')').addClass('active')

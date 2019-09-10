@@ -146,13 +146,13 @@ class Edit extends Component {
 	}
 
 	renderTestimonials = () => {
-		const { attributes: { layout, showRatings, carouselItems, quoteIcon, ratings } } = this.props
+		const { attributes: { layout, items, showRatings, carouselItems, quoteIcon, ratings } } = this.props
 		return (
 			carouselItems.map((item, index) => {
 				const { message } = item
 
 				return (
-					<div key={index} className="qubely-carousel-item" >
+					<div key={index} className={`qubely-carousel-item ${index < items[this.parseResponsiveViewPort()] ? 'active' : ''}`} >
 						<div className={`qubely-tesitmonial-item layout-${layout}`}>
 
 							{layout === 2 && this.renderAuthorInfo(item, index)}
@@ -207,6 +207,28 @@ class Edit extends Component {
 		}
 		setAttributes({ carouselItems: newCarouselItems })
 
+	}
+	parseResponsiveViewPort = () => {
+		const { attributes: { items } } = this.props
+		let responsive = [
+			{ viewport: 1170, items: items.md },
+			{ viewport: 980, items: items.sm },
+			{ viewport: 580, items: items.xs }
+		]
+		if (typeof responsive === 'undefined')
+			return
+		let activeView = null
+
+		for (let i = 0; i < responsive.length; i++) {
+			if (window.innerWidth > responsive[i].viewport) {
+				activeView = responsive[i]
+				break;
+			}
+		}
+		if (activeView === null) {
+			activeView = responsive[responsive.length - 1]
+		}
+		return activeView.viewport <= 1199 ? activeView.viewport <= 991 ? 'xs' : 'sm' : 'md'
 	}
 	render() {
 		const { setAttributes, attributes: {
@@ -333,7 +355,10 @@ class Edit extends Component {
 						/> */}
 						{/* <Toggle label={__('Infinite Loop')} value={infiniteLoop} onChange={value => setAttributes({ infiniteLoop: value })} /> */}
 						<Toggle label={__('Centered Slides')} value={isCentered} onChange={value => setAttributes({ isCentered: value })} />
-						<Toggle label={__('Fade Deactivated Items')} value={activeFade} onChange={value => setAttributes({ activeFade: value })} />
+						{
+							isCentered &&
+							<Toggle label={__('Fade Deactivated Items')} value={activeFade} onChange={value => setAttributes({ activeFade: value })} />
+						}
 					</PanelBody>
 
 					<PanelBody title={__('Slider Settings')} initialOpen={false}>
