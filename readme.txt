@@ -35,6 +35,8 @@ Qubely extends Gutenberg editor with many custom Gutenberg blocks that are missi
 * Font Awesome 5 Icons and line icons
 * Custom CSS
 
+> Want to know all the latest news and be part of the Qubely community? Join our Facebook Qubely Community group! [https://www.facebook.com/groups/qubely/](https://www.facebook.com/groups/qubely/)
+
 
 = ADVANCED GUTENBERG BLOCKS INSIDE QUBELY =
 
