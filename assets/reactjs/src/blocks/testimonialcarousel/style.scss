@@ -203,8 +203,6 @@
 }
 .qubely-carousel.qubely-carousel-wrapper .qubely-carousel-nav-control .nav-control {
   display: inline-block;
-  height: 40px;
-  width: 40px;
   padding: 10px;
   border: 1px solid #ababab;
   position: absolute;
@@ -212,6 +210,16 @@
   text-align: center;
   bottom: 49%;
   background: rgba(255, 255, 255, 0.4);
+}
+.qubely-carousel.qubely-carousel-wrapper .qubely-carousel-dots ul li.active span.dot-indicator {
+  width: 100%;
+  height: 100%;
+}
+.qubely-carousel-nav-control .nav-control .dashicons {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  text-align: center;
 }
 .qubely-carousel.qubely-carousel-wrapper .qubely-carousel-nav-control .next-control.nav-control.buttom,
 .qubely-carousel.qubely-carousel-wrapper .qubely-carousel-nav-control .prev-control.nav-control.buttom {
