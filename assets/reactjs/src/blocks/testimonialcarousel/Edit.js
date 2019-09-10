@@ -291,6 +291,13 @@ class Edit extends Component {
 							onDeviceChange={value => this.setState({ device: value })}
 						/>
 						<Range
+							label={__('Number of Columns')}
+							min={1}
+							max={20}
+							value={carouselItems.length}
+							onChange={val => this.setCarouselLength(val)}
+						/>
+						<Range
 							label={__('Padding')}
 							min={1}
 							max={80}
