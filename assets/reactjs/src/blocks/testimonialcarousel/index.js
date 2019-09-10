@@ -22,7 +22,7 @@ registerBlockType('qubely/testimonialcarousel', {
 		dragable: { type: 'boolean', default: true },
 		dotIndicator: { type: 'boolean', default: true },
 		nav: { type: 'boolean', default: true },
-		interval: { type: 'number', default: 1000 },
+		interval: { type: 'number', default: 3000 },
 		speed: { type: 'number', default: 800 },
 		carouselItems: {
 			type: 'array',
