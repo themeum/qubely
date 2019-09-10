@@ -175,16 +175,28 @@ registerBlockType('qubely/testimonialcarousel', {
 		},
 
 		// Dot Navigation.
-		dotSize: {
+		dotwidth: {
 			type: 'string',
-			default: '30',
-			style: [{ selector: '{{QUBELY}} .qubely-carousel.qubely-carousel-wrapper .qubely-carousel-dots ul li.active{ width: calc(15px + {{dotSize}}px )} {{QUBELY}} .qubely-carousel.qubely-carousel-wrapper .qubely-carousel-dots ul li{ width: {{dotSize}}px } ' }]
+			default: { md: 30, unit: 'px' },
+			style: [{ selector: '{{QUBELY}} .qubely-carousel.qubely-carousel-wrapper .qubely-carousel-dots ul li { width: {{dotwidth}} }' }]
+		}, 
+		dotHeight: {
+			type: 'string',
+			default: { md: 4, unit: 'px' },
+			style: [{ selector: '{{QUBELY}} .qubely-carousel.qubely-carousel-wrapper .qubely-carousel-dots ul li { height: {{dotHeight}} }' }]
 		},
+		dotBorderRadius: {
+			type: 'string',
+			default: { md: 4, unit: 'px' },
+			style: [{ selector: '{{QUBELY}} .qubely-carousel.qubely-carousel-wrapper .qubely-carousel-dots ul li { border-radius: {{dotBorderRadius}} } {{QUBELY}} .qubely-carousel.qubely-carousel-wrapper .qubely-carousel-dots ul li.active span.dot-indicator { border-radius: {{dotBorderRadius}} }' }]
+		},
+
 		// Dot
 		dotColor: {
 			type: 'object', default: { type: 'color', openColor: 1, color: '#f4f4f4' },
 			style: [{ selector: '{{QUBELY}} .qubely-carousel.qubely-carousel-wrapper .qubely-carousel-dots ul li' }]
 		},
+
 		// Dot Active Color
 		dotActiveColor: {
             type: 'object', default: { type: 'color', openColor: 1, color: '#2084f9' },

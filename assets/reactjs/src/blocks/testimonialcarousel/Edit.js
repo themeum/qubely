@@ -223,7 +223,7 @@ class Edit extends Component {
 			arrowColor, arrowShapeColor, arrowBorderColor,
 			arrowHoverColor, arrowShapeHoverColor, arrowBorderHoverColor,
 			// Dot
-			dots, dotIndicator, dotSize, dotColor, dotActiveColor, horizontalScroll,
+			dots, dotIndicator, dotwidth, dotHeight, dotBorderRadius, dotColor, dotActiveColor, horizontalScroll,
 			// dotBorderColor, dotBorderActiveColor
 		} } = this.props 
 
@@ -376,6 +376,9 @@ class Edit extends Component {
 						/>
 						<Tabs>
 							<Tab tabTitle={__('Normal')}>
+								<Color label={__('Arrow Color')} value={arrowColor} onChange={(value) => setAttributes({ arrowColor: value })} />
+								<ColorAdvanced label={__('Shape Color')} value={arrowShapeColor} onChange={val => setAttributes({ arrowShapeColor: val })} />
+								<Border label={__('Border')} value={arrowBorderColor} onChange={val => setAttributes({ arrowBorderColor: val })} />
 								<Range
 									label={__('Corner Radius')}
 									value={cornerRadius} onChange={(value) => setAttributes({ cornerRadius: value })}
@@ -384,35 +387,48 @@ class Edit extends Component {
 									device={device}
 									onDeviceChange={value => this.setState({ device: value })}
 								/>
-								<Color label={__('Arrow Color')} value={arrowColor} onChange={(value) => setAttributes({ arrowColor: value })} />
-								<ColorAdvanced label={__('Shape Color')} value={arrowShapeColor} onChange={val => setAttributes({ arrowShapeColor: val })} />
-								<Border label={__('Border')} value={arrowBorderColor} onChange={val => setAttributes({ arrowBorderColor: val })} />
 							</Tab>
 							<Tab tabTitle={__('Hover')}>
+								<Color label={__('Arrow Hover Color')} value={arrowHoverColor} onChange={(value) => setAttributes({ arrowHoverColor: value })} />
+								<ColorAdvanced label={__('Shape Hover Color')} value={arrowShapeHoverColor} onChange={val => setAttributes({ arrowShapeHoverColor: val })} />
+								<Border label={__('Border Hover Color')} value={arrowBorderHoverColor} onChange={val => setAttributes({ arrowBorderHoverColor: val })} />
 								<Range
-									label={__('Corner Radius')}
+									label={__('Corner Hover Radius')}
 									value={cornerHoverRadius} onChange={(value) => setAttributes({ cornerHoverRadius: value })}
 									min={1} max={100}
 									responsive unit={['px', 'em', '%']} 
 									device={device}
 									onDeviceChange={value => this.setState({ device: value })}
 								/>
-								<Color label={__('Arrow Hover Color')} value={arrowHoverColor} onChange={(value) => setAttributes({ arrowHoverColor: value })} />
-								<ColorAdvanced label={__('Shape Hover Color')} value={arrowShapeHoverColor} onChange={val => setAttributes({ arrowShapeHoverColor: val })} />
-								<Border label={__('Border Hover Color')} value={arrowBorderHoverColor} onChange={val => setAttributes({ arrowBorderHoverColor: val })} />
 							</Tab>
 						</Tabs>
 
 						<Toggle label={__('Show Dot Navigation')} value={dots} onChange={value => setAttributes({ dots: value })} />
 
 						<Range
-							label={__('Dot Size')}
-							value={dotSize} onChange={(value) => setAttributes({ dotSize: value })}
-							min={1}
-							max={100}
+							label={__('Dot Width')}
+							value={dotwidth} onChange={(value) => setAttributes({ dotwidth: value })}
+							min={1} max={100}
+							responsive unit={['px', 'em', '%']}
 							device={device}
 							onDeviceChange={value => this.setState({ device: value })}
 						/>
+						<Range
+							label={__('Dot Height')}
+							value={dotHeight} onChange={(value) => setAttributes({ dotHeight: value })}
+							min={1} max={100}
+							responsive unit={['px', 'em', '%']}
+							device={device}
+							onDeviceChange={value => this.setState({ device: value })}
+						/> 
+						<Range
+							label={__('Dot Border Radius')}
+							value={dotBorderRadius} onChange={(value) => setAttributes({ dotBorderRadius: value })}
+							min={1} max={100}
+							responsive unit={['px', 'em', '%']}
+							device={device}
+							onDeviceChange={value => this.setState({ device: value })}
+						/> 
 						<Tabs>
 							<Tab tabTitle={__('Normal')}>
 								<ColorAdvanced label={__('Dot Color')} value={dotColor} onChange={val => setAttributes({ dotColor: val })} />
