@@ -211,6 +211,9 @@
   bottom: 49%;
   background: rgba(255, 255, 255, 0.4);
 }
+.qubely-carousel.qubely-carousel-wrapper .qubely-carousel-dots ul li.active span.dot-indicator {
+  width: 100%;
+}
 .qubely-carousel-nav-control .nav-control .dashicons {
   display: flex;
   width: 100%;

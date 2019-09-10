@@ -219,7 +219,7 @@ class Edit extends Component {
 			sliderNumber, itemPerSlides, sliderItemsSpace, infiniteLoop, isCentered, activeFade,
 			// arrow 
 			arrowStyle, arrowPosition,
-			cornerRadius, arrowSize, sizeWidth,
+			cornerRadius, cornerHoverRadius, arrowSize, sizeWidth,
 			arrowColor, arrowShapeColor, arrowBorderColor,
 			arrowHoverColor, arrowShapeHoverColor, arrowBorderHoverColor,
 			// Dot
@@ -359,7 +359,7 @@ class Edit extends Component {
 							onDeviceChange={value => this.setState({ device: value })}
 						/>
 						<Range
-							label={__('Size')}
+							label={__('Shape Size')}
 							value={sizeWidth} onChange={(value) => setAttributes({ sizeWidth: value })}
 							min={1} max={100}
 							responsive unit={['px', 'em', '%']} 
@@ -374,21 +374,29 @@ class Edit extends Component {
 							device={device}
 							onDeviceChange={value => this.setState({ device: value })}
 						/>
-						<Range
-							label={__('Corner Radius')}
-							value={cornerRadius} onChange={(value) => setAttributes({ cornerRadius: value })}
-							min={1} max={100}
-							responsive unit={['px', 'em', '%']} 
-							device={device}
-							onDeviceChange={value => this.setState({ device: value })}
-						/>
 						<Tabs>
 							<Tab tabTitle={__('Normal')}>
+								<Range
+									label={__('Corner Radius')}
+									value={cornerRadius} onChange={(value) => setAttributes({ cornerRadius: value })}
+									min={1} max={100}
+									responsive unit={['px', 'em', '%']} 
+									device={device}
+									onDeviceChange={value => this.setState({ device: value })}
+								/>
 								<Color label={__('Arrow Color')} value={arrowColor} onChange={(value) => setAttributes({ arrowColor: value })} />
 								<ColorAdvanced label={__('Shape Color')} value={arrowShapeColor} onChange={val => setAttributes({ arrowShapeColor: val })} />
 								<Border label={__('Border')} value={arrowBorderColor} onChange={val => setAttributes({ arrowBorderColor: val })} />
 							</Tab>
 							<Tab tabTitle={__('Hover')}>
+								<Range
+									label={__('Corner Radius')}
+									value={cornerHoverRadius} onChange={(value) => setAttributes({ cornerHoverRadius: value })}
+									min={1} max={100}
+									responsive unit={['px', 'em', '%']} 
+									device={device}
+									onDeviceChange={value => this.setState({ device: value })}
+								/>
 								<Color label={__('Arrow Hover Color')} value={arrowHoverColor} onChange={(value) => setAttributes({ arrowHoverColor: value })} />
 								<ColorAdvanced label={__('Shape Hover Color')} value={arrowShapeHoverColor} onChange={val => setAttributes({ arrowShapeHoverColor: val })} />
 								<Border label={__('Border Hover Color')} value={arrowBorderHoverColor} onChange={val => setAttributes({ arrowBorderHoverColor: val })} />
