@@ -79,7 +79,7 @@ class Edit extends Component {
 				multiple={false}
 				value={avatar}
 				render={({ open }) => (
-					<div className="qubely-single-img">
+					<div className="qubely-single-img qubely-backend">
 						{
 							(avatar && avatar.url) ?
 								<img onClick={open} className="qubely-testimonial-avatar" src={avatar.url} alt={avatarAlt} />
@@ -126,15 +126,13 @@ class Edit extends Component {
 	}
 
 	renderTestimonials = () => {
-		const { attributes: { layout, showRatings, carouselItems, quoteIcon, ratings } } = this.props
-
-
+		const { attributes: { layout, items, showRatings, carouselItems, quoteIcon, ratings } } = this.props
 		return (
 			carouselItems.map((item, index) => {
 				const { message } = item
 
 				return (
-					<div key={index} className="js-item" >
+					<div key={index} className={`qubely-carousel-item ${index < items[this.parseResponsiveViewPort()] ? 'active' : ''}`} >
 						<div className={`qubely-tesitmonial-item layout-${layout}`}>
 
 							{layout === 2 && this.renderAuthorInfo(item, index)}
@@ -173,10 +171,8 @@ class Edit extends Component {
 	}
 
 	setCarouselLength = (newLength) => {
-
 		const { setAttributes, attributes: { carouselItems, items } } = this.props
 		let newCarouselItems = JSON.parse(JSON.stringify(carouselItems))
-
 		let defaultItem = {
 			author: 'James Moriarty',
 			designation: 'Web WordPress Developer',
@@ -192,37 +188,51 @@ class Edit extends Component {
 		setAttributes({ carouselItems: newCarouselItems })
 
 	}
+	parseResponsiveViewPort = () => {
+		const { attributes: { items } } = this.props
+		let responsive = [
+			{ viewport: 1170, items: items.md },
+			{ viewport: 980, items: items.sm },
+			{ viewport: 580, items: items.xs }
+		]
+		if (typeof responsive === 'undefined')
+			return
+		let activeView = null
+
+		for (let i = 0; i < responsive.length; i++) {
+			if (window.innerWidth > responsive[i].viewport) {
+				activeView = responsive[i]
+				break;
+			}
+		}
+		if (activeView === null) {
+			activeView = responsive[responsive.length - 1]
+		}
+		return activeView.viewport <= 1199 ? activeView.viewport <= 991 ? 'xs' : 'sm' : 'md'
+	} 
 	render() {
 		const { setAttributes, attributes: {
-			uniqueId, items, autoPlay, interval, speed, dots, nav, carouselItems, dragable,
+			uniqueId, items, autoPlay, interval, speed, nav, carouselItems, dragable,
 			layout, messageSpacingTop, messageSpacingBottom, nameColor, alignment, designationColor,
 			showAvatar, avatar, avatarAlt, avatarBorderRadius, avatarSize, avatarWidth, avatarHeight,
 			avatarBorder, avatarSpacing, avatarLayout, quoteIconColor, quoteIconSize, quoteIconSpacing,
 			nameTypo, nameSpacing, messageTypo, designationTypo, starsSize, ratingsColor, quoteIcon, ratings, showRatings,
-			ratingsSpacing, bgPadding, textColor, bgColor, bgBorderRadius, border, boxShadow, boxShadowHover,
-
-			sliderNumber, itemPerSlides, sliderItemsSpace,
-			infiniteLoop, centeredSlider, activeFade,
-			// arrow 
-			arrowStyle, arrowPosition,
-			cornerRadius, arrowSize,
-			arrowColor, arrowShapeColor, arrowBorderColor,
-			arrowHoverColor, arrowShapeHoverColor, arrowBorderHoverColor,
-			// Dot
-			dotSize, dotColor, dotBorderColor, dotActiveColor, dotBorderActiveColor, horizontalScroll
-
-		} } = this.props
+			ratingsSpacing, bgPadding, textColor, bgColor, bgBorderRadius, border, boxShadow, 
+			boxShadowHover, sliderNumber, itemPerSlides, sliderItemsSpace, infiniteLoop, isCentered, activeFade,
+			arrowStyle, arrowPosition, cornerRadius, cornerHoverRadius, arrowSize, sizeWidth,
+			arrowColor, arrowShapeColor, arrowBorderColor, arrowHoverColor, arrowShapeHoverColor, arrowBorderHoverColor,
+			dots, dotIndicator, dotwidth, dotHeight, dotBorderRadius, dotColor, dotActiveColor, horizontalScroll,
+		} } = this.props 
 
 		const { device } = this.state
 
 		const carouselSettings = {
 			autoplay: autoPlay,
 			items: items,
-			sliderNumber: carouselItems.length,
 			margin: 10,
-			center: false,
+			center: isCentered,
 			dots: dots,
-			dot_indicator: true,
+			dot_indicator: dotIndicator,
 			nav: nav,
 			arrowStyle: arrowStyle,
 			arrowPosition: arrowPosition,
@@ -249,13 +259,13 @@ class Edit extends Component {
 		return (
 			<Fragment>
 				<InspectorControls key="inspector">
-					{/* Testimonial Layout */}
+
 					<PanelBody title="" opened={true}>
 						<Styles value={layout} onChange={val => setAttributes({ layout: val })}
 							options={[
 								{ value: 1, svg: icons.testimonial_1, label: __('Layout 1') },
 								{ value: 2, svg: icons.testimonial_2, label: __('Layout 2') },
-								{ value: 3, svg: icons.testimonial_2, label: __('Layout 3') }
+								{ value: 3, svg: icons.testimonial_3, label: __('Layout 3') }
 							]}
 						/>
 						<Alignment
@@ -266,39 +276,40 @@ class Edit extends Component {
 							alignmentType="content" disableJustify responsive device={device}
 							onDeviceChange={value => this.setState({ device: value })}
 						/>
+
 						<Range
-							label={__('Number of slides')}
+							label={__('Number of Carousels')}
+							min={1}
+							max={20}
+							value={carouselItems.length}
+							onChange={val => this.setCarouselLength(val)}
+						/>
+
+						<Range
+							label={__('Number of Columns')}
 							min={1}
 							max={20}
 							device={device}
-							value={carouselItems.length}
-							onChange={value => this.setCarouselLength(value)}
+							responsive
+							value={items}
+							onChange={val => setAttributes({ items: val })}
+							device={this.state.device}
 							onDeviceChange={value => this.setState({ device: value })}
 						/>
 						<Range
-							label={__('Items per Slide')}
-							value={itemPerSlides} onChange={(value) => setAttributes({ itemPerSlides: value })}
-							min={1}
-							device={device}
-							onDeviceChange={value => this.setState({ device: value })}
-						/>
-						<Range
-							label={__('Space Between Each items')}
-							value={sliderItemsSpace} onChange={(value) => setAttributes({ sliderItemsSpace: value })}
+							label={__('Padding')}
 							min={1}
 							max={80}
+							responsive
+							unit={['px', 'em', '%']}
+							value={sliderItemsSpace}
+							onChange={(value) => setAttributes({ sliderItemsSpace: value })}
 							device={device}
 							onDeviceChange={value => this.setState({ device: value })}
-						/>
-						<Range label={__('Columns')}
-							value={items}
-							onChange={(value) => setAttributes({ items: value })}
-							min={1}
-							max={carouselItems.length - 1}
-							responsive device={device}
-							onDeviceChange={value => this.setState({ device: value })}
-						/>
-						<Separator />
+						/> 
+					</PanelBody>
+
+					<PanelBody title={__('Carousel Settings')} initialOpen={false}>
 						<Toggle label={__('Autoplay')} value={autoPlay} onChange={value => setAttributes({ autoPlay: value })} />
 						{autoPlay &&
 							<Fragment>
@@ -306,91 +317,135 @@ class Edit extends Component {
 								<Range label={__('Interval (ms)')} value={interval} onChange={value => setAttributes({ interval: parseInt(value) })} min={500} max={5000} />
 							</Fragment>
 						}
-					</PanelBody>
-					{/* End */}
-
-					{/* Carousel Settings */}
-					<PanelBody title={__('Carousel Settings')} initialOpen={false}>
-
-						<Toggle label={__('Infinite Loop')} value={infiniteLoop} onChange={value => setAttributes({ infiniteLoop: value })} />
-						<Toggle label={__('Centered Slides')} value={centeredSlider} onChange={value => setAttributes({ centeredSlider: value })} />
-						<Toggle label={__('Fade Deactivated Items')} value={activeFade} onChange={value => setAttributes({ activeFade: value })} />
 						<Toggle label={__('Draggable')} value={dragable} onChange={value => setAttributes({ dragable: value })} />
-					</PanelBody>
-					{/* End */}
 
-					{/* Slider Settings */}
+						{/* <Range
+							label={__('Items per Slide')}
+							value={itemPerSlides} onChange={(value) => setAttributes({ itemPerSlides: value })}
+							min={1}
+							device={device}
+							onDeviceChange={value => this.setState({ device: value })}
+						/> */}
+						{/* <Toggle label={__('Infinite Loop')} value={infiniteLoop} onChange={value => setAttributes({ infiniteLoop: value })} /> */}
+						<Toggle label={__('Centered Slides')} value={isCentered} onChange={value => setAttributes({ isCentered: value })} />
+						{
+							isCentered &&
+							<Toggle label={__('Fade Deactivated Items')} value={activeFade} onChange={value => setAttributes({ activeFade: value })} />
+						}
+					</PanelBody>
+
 					<PanelBody title={__('Slider Settings')} initialOpen={false}>
 						<Toggle label={__('Show Arrow Navigation')} value={nav} onChange={value => setAttributes({ nav: value })} />
-						<ButtonGroup
-							label={__('Arrow Style')}
-							options={[[<span className="dashicons dashicons-arrow-right-alt"></span>, 'arrowright'], [<span className="dashicons dashicons-arrow-right-alt2"></span>, 'arrowright2']]}
-							value={arrowStyle}
-							onChange={value => setAttributes({ arrowStyle: value })}
-						/>
-						<Range
-							label={__('Horizontal Position')}
-							value={horizontalScroll} onChange={(value) => setAttributes({ horizontalScroll: value })}
-							min={-100}
-							max={100}
-							device={device}
-							onDeviceChange={value => this.setState({ device: value })}
-						/>
-						<ButtonGroup
-							label={__('Vertical Position')}
-							options={[[__('Center'), 'center'], [__('Buttom'), 'buttom']]}
-							value={arrowPosition}
-							onChange={value => setAttributes({ arrowPosition: value })}
-						/>
-						<Range
-							label={__('Arrow Size')}
-							value={arrowSize} onChange={(value) => setAttributes({ arrowSize: value })}
-							min={1}
-							max={65}
-							device={device}
-							onDeviceChange={value => this.setState({ device: value })}
-						/>
-						<Range
-							label={__('Corner Radius')}
-							value={cornerRadius} onChange={(value) => setAttributes({ cornerRadius: value })}
-							min={1}
-							max={100}
-							device={device}
-							onDeviceChange={value => this.setState({ device: value })}
-						/>
-						<Tabs>
-							<Tab tabTitle={__('Normal')}>
-								<Color label={__('Arrow Color')} value={arrowColor} onChange={(value) => setAttributes({ arrowColor: value })} />
-								<ColorAdvanced label={__('Shape Color')} value={arrowShapeColor} onChange={val => setAttributes({ arrowShapeColor: val })} />
-								<Border label={__('Border')} value={arrowBorderColor} onChange={val => setAttributes({ arrowBorderColor: val })} />
-							</Tab>
-							<Tab tabTitle={__('Hover')}>
-								<Color label={__('Arrow Hover Color')} value={arrowHoverColor} onChange={(value) => setAttributes({ arrowHoverColor: value })} />
-								<ColorAdvanced label={__('Shape Hover Color')} value={arrowShapeHoverColor} onChange={val => setAttributes({ arrowShapeHoverColor: val })} />
-								<Border label={__('Border Hover Color')} value={arrowBorderHoverColor} onChange={val => setAttributes({ arrowBorderHoverColor: val })} />
-							</Tab>
-						</Tabs>
+
+						{nav && 
+							<Fragment>
+								<ButtonGroup
+									label={__('Arrow Style')}
+									options={[[<span className="dashicons dashicons-arrow-right-alt"></span>, 'arrowright'], [<span className="dashicons dashicons-arrow-right-alt2"></span>, 'arrowright2']]}
+									value={arrowStyle}
+									onChange={value => setAttributes({ arrowStyle: value })}
+								/>
+								<Range
+									label={__('Horizontal Position')}
+									value={horizontalScroll} onChange={(value) => setAttributes({ horizontalScroll: value })}
+									min={-100} max={100}
+									responsive unit={['px', 'em', '%']}
+									device={device}
+									onDeviceChange={value => this.setState({ device: value })}
+								/>
+								<Range
+									label={__('Vertical Position')}
+									value={arrowPosition} onChange={(value) => setAttributes({ arrowPosition: value })}
+									min={1} max={100}
+									responsive unit={['px', 'em', '%']} 
+									device={device}
+									onDeviceChange={value => this.setState({ device: value })}
+								/>
+								<Range
+									label={__('Shape Size')}
+									value={sizeWidth} onChange={(value) => setAttributes({ sizeWidth: value })}
+									min={1} max={100}
+									responsive unit={['px', 'em', '%']} 
+									device={device}
+									onDeviceChange={value => this.setState({ device: value })}
+								/>
+								<Range
+									label={__('Arrow Size')}
+									value={arrowSize} onChange={(value) => setAttributes({ arrowSize: value })}
+									min={0} max={100}
+									responsive unit={['px', 'em', '%']} 
+									device={device}
+									onDeviceChange={value => this.setState({ device: value })}
+								/>
+								<Tabs>
+									<Tab tabTitle={__('Normal')}>
+										<Color label={__('Arrow Color')} value={arrowColor} onChange={(value) => setAttributes({ arrowColor: value })} />
+										<ColorAdvanced label={__('Shape Color')} value={arrowShapeColor} onChange={val => setAttributes({ arrowShapeColor: val })} />
+										<Border label={__('Border')} value={arrowBorderColor} onChange={val => setAttributes({ arrowBorderColor: val })} />
+										<Range
+											label={__('Corner Radius')}
+											value={cornerRadius} onChange={(value) => setAttributes({ cornerRadius: value })}
+											min={1} max={100}
+											responsive unit={['px', 'em', '%']} 
+											device={device}
+											onDeviceChange={value => this.setState({ device: value })}
+										/>
+									</Tab>
+									<Tab tabTitle={__('Hover')}>
+										<Color label={__('Arrow Hover Color')} value={arrowHoverColor} onChange={(value) => setAttributes({ arrowHoverColor: value })} />
+										<ColorAdvanced label={__('Shape Hover Color')} value={arrowShapeHoverColor} onChange={val => setAttributes({ arrowShapeHoverColor: val })} />
+										<Border label={__('Border Hover Color')} value={arrowBorderHoverColor} onChange={val => setAttributes({ arrowBorderHoverColor: val })} />
+										<Range
+											label={__('Corner Hover Radius')}
+											value={cornerHoverRadius} onChange={(value) => setAttributes({ cornerHoverRadius: value })}
+											min={1} max={100}
+											responsive unit={['px', 'em', '%']} 
+											device={device}
+											onDeviceChange={value => this.setState({ device: value })}
+										/>
+									</Tab>
+								</Tabs>
+							</Fragment>
+						}
 
 						<Toggle label={__('Show Dot Navigation')} value={dots} onChange={value => setAttributes({ dots: value })} />
 
-						<Range
-							label={__('Dot Size')}
-							value={dotSize} onChange={(value) => setAttributes({ dotSize: value })}
-							min={1}
-							max={100}
-							device={device}
-							onDeviceChange={value => this.setState({ device: value })}
-						/>
-						<Tabs>
-							<Tab tabTitle={__('Normal')}>
-								<ColorAdvanced label={__('Dot Color')} value={dotColor} onChange={val => setAttributes({ dotColor: val })} />
-								<Border label={__('Border Color')} value={dotBorderColor} onChange={value => setAttributes({ dotBorderColor: value })} />
-							</Tab>
-							<Tab tabTitle={__('Active')}>
-								<ColorAdvanced label={__('Dot Active Color')} value={dotActiveColor} onChange={val => setAttributes({ dotActiveColor: val })} />
-								<Border label={__('Border Active Color')} value={dotBorderActiveColor} onChange={value => setAttributes({ dotBorderActiveColor: value })} />
-							</Tab>
-						</Tabs>
+						{dots && 
+							<Fragment>
+								<Range
+									label={__('Dot Width')}
+									value={dotwidth} onChange={(value) => setAttributes({ dotwidth: value })}
+									min={1} max={100}
+									responsive unit={['px', 'em', '%']}
+									device={device}
+									onDeviceChange={value => this.setState({ device: value })}
+								/>
+								<Range
+									label={__('Dot Height')}
+									value={dotHeight} onChange={(value) => setAttributes({ dotHeight: value })}
+									min={1} max={100}
+									responsive unit={['px', 'em', '%']}
+									device={device}
+									onDeviceChange={value => this.setState({ device: value })}
+								/> 
+								<Range
+									label={__('Dot Border Radius')}
+									value={dotBorderRadius} onChange={(value) => setAttributes({ dotBorderRadius: value })}
+									min={1} max={100}
+									responsive unit={['px', 'em', '%']}
+									device={device}
+									onDeviceChange={value => this.setState({ device: value })}
+								/> 
+								<Tabs>
+									<Tab tabTitle={__('Normal')}>
+										<ColorAdvanced label={__('Dot Color')} value={dotColor} onChange={val => setAttributes({ dotColor: val })} />
+									</Tab>
+									<Tab tabTitle={__('Active')}>
+										<ColorAdvanced label={__('Dot Active Color')} value={dotActiveColor} onChange={val => setAttributes({ dotActiveColor: val })} />
+									</Tab>
+								</Tabs>
+							</Fragment>
+						}
 					</PanelBody>
 
 					<PanelBody title={__('Message')} initialOpen={false}>
@@ -537,10 +592,9 @@ class Edit extends Component {
 								</Fragment>
 							</Fragment>
 						}
-
 					</PanelBody>
-
-					<PanelBody title={__('Quote Icon')} initialOpen={false}>
+					{layout != 3 &&
+						<PanelBody title={__('Quote Icon')} initialOpen={false}>
 						<RadioAdvanced
 							label={__('Icon')}
 							options={[
@@ -575,11 +629,10 @@ class Edit extends Component {
 									onDeviceChange={value => this.setState({ device: value })} />
 							</Fragment>
 						}
-					</PanelBody>
-
+						</PanelBody>
+					}
 					<PanelBody title={__('Ratings')} initialOpen={false}>
 						<Toggle label={__('Show Ratings')} value={showRatings} onChange={val => setAttributes({ showRatings: val })} />
-
 						{showRatings &&
 							<Fragment>
 								<Range label={__('Ratings')} value={ratings} onChange={(value) => setAttributes({ ratings: value })} min={0} max={5} step={.5} />
@@ -618,7 +671,6 @@ class Edit extends Component {
 							label={__('Text Color')}
 							value={textColor}
 							onChange={val => setAttributes({ textColor: val })} />
-
 						<Color
 							label={__('Background')}
 							value={bgColor}
@@ -637,7 +689,6 @@ class Edit extends Component {
 							responsive
 							device={device}
 							onDeviceChange={value => this.setState({ device: value })} />
-
 						<BorderRadius
 							label={__('Border Radius')}
 							value={bgBorderRadius}
@@ -648,7 +699,6 @@ class Edit extends Component {
 							responsive
 							device={device}
 							onDeviceChange={value => this.setState({ device: value })} />
-
 						<Tabs>
 							<Tab tabTitle={__('Normal')}>
 								<BoxShadow
@@ -665,11 +715,10 @@ class Edit extends Component {
 						</Tabs>
 					</PanelBody>
 				</InspectorControls>
-				{/* Siderbar End */}
 
 				<div className={`qubely-block-${uniqueId}`}>
 					<div className={`qubely-block-testimonial-carousel qubely-layout-${layout}`}>
-						<Carousel ref="JsSlider" options={carouselSettings}>
+						<Carousel options={carouselSettings}>
 							{this.renderTestimonials()}
 						</Carousel>
 					</div>

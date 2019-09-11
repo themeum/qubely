@@ -1,6 +1,6 @@
 const { Component } = wp.element
 const { InnerBlocks } = wp.editor
-import { animationAttr } from '../../../components/HelperFunction'
+const { HelperFunction: { animationAttr } } = wp.qubelyComponents
 
 class Save extends Component {
 	render() {
