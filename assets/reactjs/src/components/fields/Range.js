@@ -1,5 +1,5 @@
 import '../css/range.scss'
-import Device from '../Device'
+import Device from './Device'
 const { Component } = wp.element
 
 class Range extends Component {

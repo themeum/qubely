@@ -1,5 +1,5 @@
 import '../css/buttonGroup.scss'
-import Device from '../Device'
+import Device from './Device'
 const { useState } = wp.element
 const { Button, ButtonGroup } = wp.components
 

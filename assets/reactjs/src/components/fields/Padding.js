@@ -1,6 +1,6 @@
 const { __ } = wp.i18n
 import Range from './Range'
-import Device from '../Device'
+import Device from './Device'
 import icons from '../../helpers/icons'
 const { Fragment, Component } = wp.element
 const { Tooltip } = wp.components

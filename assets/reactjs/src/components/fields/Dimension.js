@@ -1,5 +1,5 @@
 import '../css/dimension.scss'
-import Device from "../Device";
+import Device from "./Device";
 const { Component } = wp.element
 
 class Dimension extends Component {

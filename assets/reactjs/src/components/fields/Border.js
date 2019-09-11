@@ -3,7 +3,7 @@ import '../css/border.scss'
 import Range from './Range'
 import Separator from './Separator'
 import Color from './Color'
-import Device from '../Device'
+import Device from './Device'
 import icons from '../../helpers/icons'
 const { Component, Fragment } = wp.element
 const { Tooltip } = wp.components;

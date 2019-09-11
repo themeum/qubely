@@ -1,5 +1,5 @@
 import '../css/toggle.scss'
-import Device from '../Device'
+import Device from './Device'
 const { Component, Fragment } = wp.element
 const { ToggleControl } = wp.components
 

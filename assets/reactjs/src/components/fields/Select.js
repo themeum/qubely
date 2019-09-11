@@ -1,6 +1,6 @@
 const { __ } = wp.i18n
 import '../css/select.scss'
-import Device from '../Device'
+import Device from './Device'
 const { Component, Fragment } = wp.element
 
 class Select extends Component {

@@ -4,6 +4,7 @@ import BorderRadius from "./fields/BorderRadius"
 import BoxShadow from "./fields/BoxShadow"
 import ButtonGroup from './fields/ButtonGroup'
 import Color from "./fields/Color"
+import Device from './fields/Device'
 import Dimension from "./fields/Dimension"
 import Gradient from "./fields/Gradient"
 import IconList from "./fields/IconList"
@@ -49,6 +50,7 @@ wp.qubelyComponents = {
     Counter,
     Carousel,
     Dimension,
+    Device,
     Dropdown,
     DragDimension,
     Gradient,

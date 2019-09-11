@@ -1,6 +1,6 @@
 const { __ } = wp.i18n
 import '../css/alignment.scss'
-import Device from '../Device'
+import Device from './Device'
 const { Fragment, Component } = wp.element;
 const { Tooltip } = wp.components;
 
