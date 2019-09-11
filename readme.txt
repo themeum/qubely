@@ -65,7 +65,7 @@ Qubely adds numerous custom Gutenberg blocks to the Gutenberg block editor and t
 * [Team](https://qubely.io/block/team/)
 * [Image](https://qubely.io/block/image/)
 * [Timeline](https://qubely.io/block/timeline/)
-* Post Grid
+* [Post Grid](https://qubely.io/block/post-grid/)
 * More advanced Gutenberg blocks coming
 
 
@@ -214,6 +214,15 @@ Found a bug? Please let us know by posting on the support section of this plugin
 
 
 == Changelog ==
+
+= 1.1.2 - 06 September, 2019 =
+
+Fix: Font weight issue in frontend  
+Fix: Conflict with Gutenberg plugin  
+
+= 1.1.1 - 03 September, 2019 =
+
+Fix: Post Grid block - Front end issue  
 
 = 1.1.0 - 02 September, 2019 =
 

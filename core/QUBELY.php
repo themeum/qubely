@@ -417,9 +417,11 @@ class QUBELY
 			$upload_dir = wp_upload_dir();
 			$dir = trailingslashit($upload_dir['basedir']) . 'qubely/';
 
+			// Add Import in first
+			$import_first = $this->set_import_url_to_top_css($qubely_block_css);
 
 			//development
-			update_post_meta($post_id, '_qubely_css', $qubely_block_css);
+			update_post_meta($post_id, '_qubely_css', $import_first);
 
 			WP_Filesystem(false, $upload_dir['basedir'], true);
 
@@ -427,7 +429,7 @@ class QUBELY
 				$wp_filesystem->mkdir($dir);
 			}
 			//If fail to save css in directory, then it will show a message to user
-			if (!$wp_filesystem->put_contents($dir . $filename, $qubely_block_css)) {
+			if (!$wp_filesystem->put_contents($dir . $filename, $import_first)) {
 				throw new Exception(__('CSS can not be saved due to permission!!!', 'qubely'));
 			}
 
@@ -436,6 +438,45 @@ class QUBELY
 			return ['success' => false, 'message' => $e->getMessage()];
 		}
 	}
+
+
+	/**
+	 * @since 1.0.2
+	 * Set font import to the top of the CSS file
+	 */
+	public function set_import_url_to_top_css($get_css = ''){
+		$css_url = "@import url('https://fonts.googleapis.com/css?family=";
+		$google_font_exists = substr_count($get_css, $css_url);
+
+		if ($google_font_exists){
+			$pattern = sprintf(
+				'/%s(.+?)%s/ims',
+				preg_quote($css_url, '/'), preg_quote("');", '/')
+			);
+
+			if (preg_match_all($pattern, $get_css, $matches)) {
+				$fonts = $matches[0];
+				$get_css = str_replace($fonts, '', $get_css);
+				if( preg_match_all( '/font-weight[ ]?:[ ]?[\d]{3}[ ]?;/' , $get_css, $matche_weight ) ){ // short out font weight
+					$weight = array_map( function($val){
+						$process = trim( str_replace( array( 'font-weight',':',';' ) , '', $val ) );
+						if( is_numeric( $process ) ){
+							return $process;
+						}
+					}, $matche_weight[0] );
+					foreach ( $fonts as $key => $val ) {
+						$fonts[$key] = str_replace( "');",'', $val ).':'.implode( ',',$weight )."');";
+					}
+				}
+
+				//Multiple same fonts to single font
+				$fonts = array_unique($fonts);
+				$get_css = implode('', $fonts).$get_css;
+			}
+		}
+		return $get_css;
+	}
+
 
 	/**
 	 * @return bool|false|int
