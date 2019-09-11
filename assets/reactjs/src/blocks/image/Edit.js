@@ -2,9 +2,8 @@ const { __ } = wp.i18n
 const { Fragment, Component } = wp.element;
 const { PanelBody, TextControl, Toolbar } = wp.components
 const { RichText, InspectorControls, BlockControls } = wp.editor
-const { Media, Range, BoxShadow, Tabs, Tab, RadioAdvanced, Typography, Toggle, Styles, Alignment, ColorAdvanced, Color, Headings, Border, BorderRadius, Padding, Separator, Select, Margin } = wp.qubelyComponents
+const { Media, Range, BoxShadow, Tabs, Tab, RadioAdvanced, Typography, Toggle, Styles, Alignment, ColorAdvanced, Color, Headings, Border, BorderRadius, Padding, Separator, Select, Margin, CssGenerator: { CssGenerator } } = wp.qubelyComponents
 import InlineToolbar from '../../components/fields/inline/InlineToolbar'
-import { CssGenerator } from '../../components/CssGenerator'
 import icons from '../../helpers/icons';
 import '../../components/ButtonComponent'
 import '../../components/GlobalSettings'
@@ -178,7 +177,7 @@ class Edit extends Component {
                                 <Toggle label={__('Enable')} value={enableOverlay} onChange={val => setAttributes({ enableOverlay: val })} />
                                 {enableOverlay == 1 &&
                                     <Fragment>
-                                        
+
                                         {animateOnHover == 1 ?
                                             <Tabs>
                                                 <Tab tabTitle={__('Normal')}>
@@ -198,7 +197,7 @@ class Edit extends Component {
                                     </Fragment>
                                 }
                             </PanelBody>
-                            
+
                             <PanelBody title={__('Frame')} initialOpen={false}>
                                 <Toggle label={__('Enable')} value={enableFrame} onChange={val => setAttributes({ enableFrame: val })} />
                                 {enableFrame == 1 &&
@@ -214,7 +213,7 @@ class Edit extends Component {
                                             responsive
                                             device={device}
                                             onDeviceChange={value => this.setState({ device: value })} />
-                                        
+
                                         <BorderRadius label={__('Radius')} value={frameBorderRadius} onChange={val => setAttributes({ frameBorderRadius: val })} min={0} max={100} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
 
                                         <Toggle label={__('Send to Back')} value={frameSendToBack} onChange={val => setAttributes({ frameSendToBack: val })} />
@@ -260,7 +259,7 @@ class Edit extends Component {
 
                                     {image.url != undefined ?
                                         <Fragment>
-                                            { image2x.url != undefined ?
+                                            {image2x.url != undefined ?
                                                 <img className="qubely-image-image" src={image.url} srcset={image.url + ' 1x, ' + image2x.url + ' 2x'} alt={imgAlt && imgAlt} />
                                                 :
                                                 <img className="qubely-image-image" src={image.url} alt={imgAlt && imgAlt} />
@@ -297,7 +296,7 @@ class Edit extends Component {
                                     }
                                 </div>
 
-                                { (layout == 'simple' && enableCaption == 1) &&
+                                {(layout == 'simple' && enableCaption == 1) &&
                                     <RichText
                                         key="editable"
                                         tagName='figcaption'

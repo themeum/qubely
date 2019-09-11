@@ -1,6 +1,6 @@
 const { Fragment, Component } = wp.element
 const { RichText } = wp.editor
-import { animationAttr } from '../../components/HelperFunction'
+const { HelperFunction: { animationAttr } } = wp.qubelyComponents
 class Save extends Component {
     render() {
         const { uniqueId, layout, animation, message, name, designation, showAvatar, avatar, avatar2x, avatarAlt, avatarLayout, quoteIcon, showRatings, ratings } = this.props.attributes

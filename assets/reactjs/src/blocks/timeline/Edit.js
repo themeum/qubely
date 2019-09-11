@@ -2,10 +2,8 @@ const { __ } = wp.i18n
 const { Fragment, Component } = wp.element;
 const { PanelBody, Tooltip, Toolbar } = wp.components
 const { InspectorControls, RichText, BlockControls, MediaUpload } = wp.editor
-const { IconList, RadioAdvanced, Range, Color, Typography, Toggle, Separator, Border, BorderRadius, BoxShadow, Alignment, Padding, Headings } = wp.qubelyComponents
+const { IconList, RadioAdvanced, Range, Color, Typography, Toggle, Separator, Border, BorderRadius, BoxShadow, Alignment, Padding, Headings, CssGenerator: { CssGenerator } } = wp.qubelyComponents
 import InlineToolbar from '../../components/fields/inline/InlineToolbar'
-import { CssGenerator } from '../../components/CssGenerator';
-
 
 class Edit extends Component {
 	constructor(props) {
@@ -60,19 +58,19 @@ class Edit extends Component {
 						}
 					</div>
 					<div className={`qubely-timeline-content${enableContentBorder == 1 ? ' qubely-content-has-border' : ''}`}>
-						
+
 						{enableImage == 1 &&
-							<div className={`qubely-timeline-image-container${ (image != undefined && image.url != undefined) ? '' : ' qubely-empty-image' }`}>
+							<div className={`qubely-timeline-image-container${(image != undefined && image.url != undefined) ? '' : ' qubely-empty-image'}`}>
 								<MediaUpload
 									onSelect={value => this.updateTimelineContent('image', value, index)}
 									allowedTypes={['image']}
-									multiple={ false }
+									multiple={false}
 									value={image}
 									render={({ open }) => (
 										<Fragment>
 											{(image != undefined && image.url != undefined) ?
 												<div className="qubely-timeline-content-image-editor">
-													<img src={image.url} alt={__('image')}/>
+													<img src={image.url} alt={__('image')} />
 													<div className="qubely-media-actions qubely-field-button-list">
 														<Tooltip text={__('Edit')}>
 															<button className="qubely-button" aria-label={__('Edit')} onClick={open} role="button">
@@ -80,10 +78,10 @@ class Edit extends Component {
 															</button>
 														</Tooltip>
 														<Tooltip text={__('Remove')}>
-															<button className="qubely-button" aria-label={__('Remove')} onClick={ () => this.updateTimelineContent('image', '', index) } role="button">
+															<button className="qubely-button" aria-label={__('Remove')} onClick={() => this.updateTimelineContent('image', '', index)} role="button">
 																<span aria-label={__('Close')} className="far fa-trash-alt fa-fw"></span>
 															</button>
-														</Tooltip>		
+														</Tooltip>
 													</div>
 												</div>
 												:
@@ -179,13 +177,13 @@ class Edit extends Component {
 			connectorIconColor,
 			connectorBarWidth,
 			connectorBarColor,
-			
-		}} = this.props
-		
+
+		} } = this.props
+
 		const { device } = this.state
-		
+
 		if (uniqueId) { CssGenerator(this.props.attributes, 'timeline', uniqueId) }
-		
+
 		return (
 			<Fragment>
 				<InspectorControls key="inspector">
@@ -217,7 +215,7 @@ class Edit extends Component {
 						}
 						<BorderRadius label={__('Radius')} value={contentBorderRadius} onChange={val => setAttributes({ contentBorderRadius: val })} min={0} max={100} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
 						<Padding label={__('Padding')} value={contentPadding} onChange={val => setAttributes({ contentPadding: val })} min={0} max={200} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
-                        <BoxShadow label={__('Box-Shadow')} value={contentBoxShadow} onChange={val => setAttributes({ contentBoxShadow: val })} disableInset />
+						<BoxShadow label={__('Box-Shadow')} value={contentBoxShadow} onChange={val => setAttributes({ contentBoxShadow: val })} disableInset />
 						<Separator />
 						<Headings label={__('Heading Tag')} selectedLevel={headingLevel} onChange={(value) => setAttributes({ headingLevel: value })} />
 						<Typography label={__('Heading Typography')} value={headingTypography} onChange={val => setAttributes({ headingTypography: val })} device={device} onDeviceChange={value => this.setState({ device: value })} />
@@ -270,14 +268,14 @@ class Edit extends Component {
 				</InspectorControls>
 
 				<BlockControls>
-                    <Toolbar>
-                        <InlineToolbar
-                            data={[{ name: 'InlineSpacer', key: 'spacer', responsive: true, unit: ['px', 'em', '%'] }]}
-                            {...this.props}
-                            prevState={this.state}
-                        />
-                    </Toolbar>
-                </BlockControls>
+					<Toolbar>
+						<InlineToolbar
+							data={[{ name: 'InlineSpacer', key: 'spacer', responsive: true, unit: ['px', 'em', '%'] }]}
+							{...this.props}
+							prevState={this.state}
+						/>
+					</Toolbar>
+				</BlockControls>
 
 				<div className={`qubely-block-${uniqueId}`}>
 					<div className={`qubely-block-timeline qubely-timeline-layout-vertical qubely-timeline-orientation-${orientation}`}>

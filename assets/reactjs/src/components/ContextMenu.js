@@ -4,7 +4,7 @@ const { createHigherOrderComponent } = wp.compose
 const { Component, Fragment } = wp.element
 import './css/contextmenu.scss'
 import icons from '../helpers/icons'
-import { CssGenerator } from './CssGenerator'
+const { CssGenerator: { CssGenerator } } = wp.qubelyComponents
 
 const addAttribute = (block) => {
     if (block.attributes && block.attributes.showContextMenu) {
@@ -102,8 +102,8 @@ const withContextMenu = createHigherOrderComponent(OriginalComponent => {
             Object.keys(blockDefaultAttributes).forEach(key => {
                 if (blockDefaultAttributes[key].hasOwnProperty('style')) {
                     newStyles.copiedStyles[key] = JSON.parse(JSON.stringify(blockAttributes[key]))
-                } else if (key.toLowerCase() == 'layout' || key.toLowerCase() == 'filltype' || key == 'iconStyle'|| key.toLowerCase() == 'buttonfilltype'  ) {
-                    newStyles.copiedStyles[key] =JSON.parse(JSON.stringify( blockAttributes[key]))
+                } else if (key.toLowerCase() == 'layout' || key.toLowerCase() == 'filltype' || key == 'iconStyle' || key.toLowerCase() == 'buttonfilltype') {
+                    newStyles.copiedStyles[key] = JSON.parse(JSON.stringify(blockAttributes[key]))
                 }
             })
             newStyles['copiedFrom'] = clientId

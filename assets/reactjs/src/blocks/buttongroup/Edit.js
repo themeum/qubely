@@ -4,9 +4,7 @@ const { PanelBody, Tooltip } = wp.components
 const { compose } = wp.compose
 const { withSelect, withDispatch } = wp.data
 const { InnerBlocks, InspectorControls } = wp.editor
-
-const { Range, Padding, Alignment } = wp.qubelyComponents
-import { CssGenerator } from '../../components/CssGenerator'
+const { Range, Alignment, CssGenerator: { CssGenerator } } = wp.qubelyComponents
 import '../../components/GlobalSettings';
 
 class Edit extends Component {

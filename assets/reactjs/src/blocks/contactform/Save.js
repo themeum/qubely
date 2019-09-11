@@ -1,7 +1,7 @@
 const { __ } = wp.i18n;
 const { Component } = wp.element;
 const { QubelyButtonSave } = wp.qubelyComponents
-import { animationAttr } from '../../components/HelperFunction';
+const { HelperFunction: { animationAttr } } = wp.qubelyComponents;
 class Save extends Component {
 
     _encrypt(str) {

@@ -2,8 +2,17 @@ const { __ } = wp.i18n
 const { Fragment, Component } = wp.element;
 const { PanelBody, Toolbar, SelectControl } = wp.components
 const { RichText, InspectorControls, BlockControls } = wp.editor
-const { Color, Typography, Alignment, Range, Toggle, Headings, RadioAdvanced } = wp.qubelyComponents
-import { CssGenerator } from '../../components/CssGenerator'
+const {
+    Color,
+    Typography,
+    Alignment,
+    Range,
+    Toggle,
+    Headings,
+    RadioAdvanced,
+    CssGenerator: { CssGenerator }
+} = wp.qubelyComponents
+
 import '../../components/GlobalSettings'
 import '../../components/ContextMenu'
 import '../../components/fields/inline/editorInline'

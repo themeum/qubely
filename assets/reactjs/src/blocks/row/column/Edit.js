@@ -5,8 +5,7 @@ const { Component, Fragment } = wp.element
 const { InnerBlocks, InspectorControls, BlockControls } = wp.editor
 const { createBlock } = wp.blocks
 const { select, dispatch } = wp.data
-const { Background, Border, BorderRadius, BoxShadow, Range, Separator, Dimension } = wp.qubelyComponents
-import { CssGenerator } from '../../../components/CssGenerator'
+const { Background, Border, BorderRadius, BoxShadow, Range, Separator, Dimension, CssGenerator: { CssGenerator } } = wp.qubelyComponents
 import '../../../components/GlobalSettings';
 
 class Edit extends Component {

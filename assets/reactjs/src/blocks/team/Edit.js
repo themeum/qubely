@@ -2,9 +2,8 @@ const { __ } = wp.i18n
 const { Fragment, Component } = wp.element;
 const { PanelBody, TextControl, Toolbar } = wp.components
 const { RichText, InspectorControls, BlockControls } = wp.editor
-const { Media, Tabs, Tab, Range, Separator, RadioAdvanced, Typography, Toggle, Styles, Alignment, ColorAdvanced, Color, Border, BoxShadow, BorderRadius, Padding } = wp.qubelyComponents
+const { Media, Tabs, Tab, Range, Separator, RadioAdvanced, Typography, Toggle, Styles, Alignment, ColorAdvanced, Color, Border, BoxShadow, BorderRadius, Padding, CssGenerator: { CssGenerator } } = wp.qubelyComponents
 import InlineToolbar from '../../components/fields/inline/InlineToolbar'
-import { CssGenerator } from '../../components/CssGenerator'
 import icons from '../../helpers/icons'
 import '../../components/GlobalSettings'
 import '../../components/ContextMenu'
@@ -359,7 +358,7 @@ class Edit extends Component {
                     <div className={`qubely-block-team qubely-team-layout-${layout}`}>
                         <div className="qubely-team-image-wrapper" onClick={() => this.handlePanelOpenings('Image')}>
                             {image.url != undefined ?
-                                <img className="qubely-team-image" src={image.url} srcset={image2x.url != undefined ? image.url + ' 1x, ' + image2x.url + ' 2x' : '' } alt={name} />
+                                <img className="qubely-team-image" src={image.url} srcset={image2x.url != undefined ? image.url + ' 1x, ' + image2x.url + ' 2x' : ''} alt={name} />
                                 :
                                 <div className="qubely-image-placeholder"><i className="far fa-image"></i></div>
                             }

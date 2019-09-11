@@ -3,9 +3,8 @@ const { createHigherOrderComponent } = wp.compose
 const { Component, Fragment } = wp.element
 const { InspectorControls } = wp.editor
 const { PanelBody } = wp.components
-const { Typography, Color, ColorAdvanced, Padding, IconList, Select, Styles, Tabs, Tab, Range, Url, BoxShadow, RadioAdvanced, Border, InnerPanel, Alignment, Toggle, BorderRadius } = wp.qubelyComponents
+const { Typography, Color, ColorAdvanced, Padding, IconList, Select, Styles, Tabs, Tab, Range, Url, BoxShadow, RadioAdvanced, Border, InnerPanel, Alignment, Toggle, BorderRadius ,CssGenerator: { CssGenerator }} = wp.qubelyComponents
 import icons from '../helpers/icons';
-import { CssGenerator } from './CssGenerator'
 
 const addAttribute = (settings) => {
     if (settings.attributes && settings.attributes.buttonComponent) {

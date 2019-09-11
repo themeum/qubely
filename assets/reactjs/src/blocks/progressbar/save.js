@@ -1,5 +1,5 @@
 const { Fragment, Component } = wp.element
-import { animationAttr } from '../../components/HelperFunction'
+const { HelperFunction: { animationAttr } } = wp.qubelyComponents
 class Save extends Component {
   render() {
   const { uniqueId, animation, title, labelPosition, striped, progress, showProgress } = this.props.attributes

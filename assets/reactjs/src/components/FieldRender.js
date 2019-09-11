@@ -1,3 +1,4 @@
+//fields
 import Alignment from "./fields/Alignment"
 import Border from "./fields/Border"
 import BorderRadius from "./fields/BorderRadius"
@@ -37,6 +38,23 @@ import Carousel from './fields/Carousel'
 import { QubelyButtonEdit, QubelyButtonSave } from './fields/QubelyButton'
 import { QubelyIconListEdit, QubelyIconListSave } from './fields/QubelyIconList'
 
+//functions
+import {
+    CssGenerator,
+    objectReplace,
+    objectAppend,
+    singleField
+} from './CssGenerator'
+import {
+    animationAttr,
+    selectValue,
+    isObject,
+    isArray,
+    setValue,
+    videoBackground,
+    _equal
+} from './HelperFunction'
+
 wp.qubelyComponents = {
     Alignment,
     Animation,
@@ -49,12 +67,27 @@ wp.qubelyComponents = {
     ColorAdvanced,
     Counter,
     Carousel,
+    CssGenerator: {
+        CssGenerator,
+        objectReplace,
+        objectAppend,
+        singleField
+    },
     Dimension,
     Device,
     Dropdown,
     DragDimension,
     Gradient,
     Headings,
+    HelperFunction: {
+        animationAttr,
+        selectValue,
+        isObject,
+        isArray,
+        setValue,
+        videoBackground,
+        _equal
+    },
     IconList,
     IconSelector,
     InnerPanel,

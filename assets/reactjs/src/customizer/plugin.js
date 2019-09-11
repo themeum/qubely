@@ -3,9 +3,7 @@ const { Component, Fragment } = wp.element;
 const { compose } = wp.compose;
 const { PanelBody } = wp.components
 const { withDispatch, select } = wp.data;
-import { _equal } from '../components/HelperFunction'
-import { CssGenerator } from '../components/CssGenerator'
-const { Typography, Color, Separator } = wp.qubelyComponents
+const {CssGenerator: { CssGenerator }, Typography, Color, Separator,HelperFunction: { _equal }  } = wp.qubelyComponents
 const { PluginSidebar, PluginSidebarMoreMenuItem } = wp.editPost;
 
 

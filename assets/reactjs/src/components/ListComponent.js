@@ -3,8 +3,7 @@ const { createHigherOrderComponent } = wp.compose
 const { Component, Fragment } = wp.element
 const { InspectorControls } = wp.editor
 const { PanelBody } = wp.components
-const { Typography, Color, Alignment, Toggle, Range, Padding, RadioAdvanced, Separator, IconList } = wp.qubelyComponents
-import { CssGenerator } from './CssGenerator'
+const { Typography, Color, Alignment, Toggle, Range, Padding, RadioAdvanced, Separator, IconList, CssGenerator: { CssGenerator } } = wp.qubelyComponents
 
 const addAttribute = (settings) => {
     if (settings.attributes && settings.attributes.listComponent) {

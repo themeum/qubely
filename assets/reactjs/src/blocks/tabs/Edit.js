@@ -4,10 +4,9 @@ const { compose } = wp.compose
 const { withSelect, withDispatch } = wp.data
 const { Component, Fragment } = wp.element;
 const { InnerBlocks, RichText, InspectorControls, BlockControls } = wp.editor
-const { Color, IconList, Select, Styles, Typography, Range, RadioAdvanced, Toggle, BoxShadow, Alignment, Tabs, Tab, Separator, Border, Padding, BorderRadius } = wp.qubelyComponents
+const { Color, IconList, Select, Styles, Typography, Range, RadioAdvanced, Toggle, BoxShadow, Alignment, Tabs, Tab, Separator, Border, Padding, BorderRadius, CssGenerator: { CssGenerator } } = wp.qubelyComponents
 import InlineToolbar from '../../components/fields/inline/InlineToolbar'
 import '../../components/GlobalSettings'
-import { CssGenerator } from '../../components/CssGenerator'
 import icons from '../../helpers/icons';
 
 class Edit extends Component {

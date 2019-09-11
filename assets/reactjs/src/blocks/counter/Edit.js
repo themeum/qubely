@@ -2,9 +2,15 @@ const { __ } = wp.i18n;
 const { InspectorControls, BlockControls } = wp.editor
 const { Component, Fragment } = wp.element;
 const { PanelBody, TextControl, Toolbar } = wp.components;
-const { Counter, Range, Alignment, Typography, Color } = wp.qubelyComponents
+const {
+	Counter,
+	Range,
+	Alignment,
+	Typography,
+	Color,
+	CssGenerator: { CssGenerator }
+} = wp.qubelyComponents
 import InlineToolbar from '../../components/fields/inline/InlineToolbar'
-import { CssGenerator } from '../../components/CssGenerator'
 import '../../components/GlobalSettings'
 import '../../components/ContextMenu'
 

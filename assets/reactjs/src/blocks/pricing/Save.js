@@ -1,7 +1,7 @@
 const { Component, Fragment } = wp.element
 const { RichText } = wp.editor
 const { QubelyButtonSave, QubelyIconListSave } = wp.qubelyComponents
-import { animationAttr } from '../../components/HelperFunction'
+const { HelperFunction: { animationAttr } } = wp.qubelyComponents
 
 class Save extends Component {
 

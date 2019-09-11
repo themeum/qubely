@@ -1,6 +1,6 @@
 const { Component } = wp.element;
 import icons from '../divider/icon';
-import { animationAttr } from '../../components/HelperFunction'
+const { HelperFunction: { animationAttr } } = wp.qubelyComponents
 
 class Save extends Component {
     render() {

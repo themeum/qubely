@@ -1,5 +1,5 @@
 const { Component } = wp.element;
-import { animationAttr } from '../../components/HelperFunction'
+const { HelperFunction: { animationAttr } } = wp.qubelyComponents
 class Save extends Component {
     render() {
 		const { uniqueId, layout, animation, alignment, icon, postfix, prefix, iconSize, url, isRipple, iconBorderRadius, iconBgColor, videoSource, bgVideo } = this.props.attributes

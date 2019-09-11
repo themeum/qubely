@@ -2,8 +2,22 @@ const { __ } = wp.i18n;
 const { InspectorControls, BlockControls } = wp.editor
 const { Component, Fragment } = wp.element;
 const { PanelBody, TextControl, TextareaControl, Toolbar } = wp.components;
-const { Styles, Range, Toggle, Typography, Color, Tabs, Tab, Border, RadioAdvanced, QubelyButtonEdit, BorderRadius, Separator } = wp.qubelyComponents
-import { CssGenerator } from '../../components/CssGenerator'
+const {
+    Styles,
+    Range,
+    Toggle,
+    Typography,
+    Color,
+    Tabs,
+    Tab,
+    Border,
+    RadioAdvanced,
+    QubelyButtonEdit,
+    BorderRadius,
+    Separator,
+    CssGenerator: { CssGenerator }
+} = wp.qubelyComponents
+
 import InlineToolbar from '../../components/fields/inline/InlineToolbar'
 import icons from '../../helpers/icons'
 import '../../components/ButtonComponent'
@@ -218,7 +232,7 @@ class Edit extends Component {
                                     <Border label={__('Border')} value={inputBorder} onChange={val => setAttributes({ inputBorder: val })} min={0} max={10} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
                                 }
                                 {layout == 'material' &&
-                                    <Border label={__('Border')} value={inputBorderMaterial} onChange={val => setAttributes({ inputBorderMaterial: val })} min={0} max={10} responsive  device={device} onDeviceChange={value => this.setState({ device: value })} />
+                                    <Border label={__('Border')} value={inputBorderMaterial} onChange={val => setAttributes({ inputBorderMaterial: val })} min={0} max={10} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
                                 }
                             </Tab>
                             <Tab tabTitle={__('Focus')}>

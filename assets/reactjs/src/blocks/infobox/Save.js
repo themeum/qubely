@@ -2,7 +2,7 @@ const { Fragment, Component } = wp.element;
 const { RichText } = wp.editor
 import svg from '../heading/separators';
 const { QubelyButtonSave } = wp.qubelyComponents
-import { animationAttr } from '../../components/HelperFunction';
+const { HelperFunction: { animationAttr } } = wp.qubelyComponents;
 
 class Save extends Component {
 	render() {

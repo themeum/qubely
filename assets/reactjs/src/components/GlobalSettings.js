@@ -5,9 +5,7 @@ const { createHigherOrderComponent } = wp.compose
 const { Component, Fragment } = wp.element
 const { InspectorAdvancedControls, InspectorControls } = wp.editor
 const { TextareaControl, PanelBody } = wp.components
-
-import { CssGenerator } from './CssGenerator'
-const { Range, Toggle, Animation } = wp.qubelyComponents
+const { Range, Toggle, Animation, CssGenerator: { CssGenerator } } = wp.qubelyComponents
 
 const addAttribute = (settings) => {
     if (settings.attributes && settings.attributes.showGlobalSettings) {
