@@ -10,14 +10,16 @@ const {
     Toggle,
     Headings,
     RadioAdvanced,
+    Inline: {
+        InlineToolbar,
+        InlineSelector
+    },
     CssGenerator: { CssGenerator }
 } = wp.qubelyComponents
 
 import '../../components/GlobalSettings'
 import '../../components/ContextMenu'
 import '../../components/fields/inline/editorInline'
-import InlineSelector from '../../components/fields/inline/Selector'
-import InlineToolbar from '../../components/fields/inline/InlineToolbar'
 import svg from '../heading/separators'
 
 class Edit extends Component {
