@@ -38,6 +38,7 @@ import Carousel from './fields/Carousel'
 import { QubelyButtonEdit, QubelyButtonSave } from './fields/QubelyButton'
 import { QubelyIconListEdit, QubelyIconListSave } from './fields/QubelyIconList'
 
+import { InlineToolbar, InlineSpacer, InlineSelector } from './fields/inline'
 //functions
 import {
     CssGenerator,
@@ -91,6 +92,11 @@ wp.qubelyComponents = {
     IconList,
     IconSelector,
     InnerPanel,
+    Inline: {
+        InlineToolbar,
+        InlineSpacer,
+        InlineSelector
+    },
     Margin,
     Media,
     Padding,

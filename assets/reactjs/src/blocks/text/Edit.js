@@ -2,12 +2,10 @@ const { __ } = wp.i18n
 const { Fragment, Component } = wp.element;
 const { PanelBody, Toolbar, SelectControl } = wp.components
 const { RichText, InspectorControls, BlockControls } = wp.editor
-const { Typography, Color, Alignment, Headings, Toggle, Range, Separator ,CssGenerator: { CssGenerator }} = wp.qubelyComponents
+const { Typography, Color, Alignment, Headings, Toggle, Range, Separator, Inline: { InlineToolbar, InlineSelector }, CssGenerator: { CssGenerator } } = wp.qubelyComponents
 import '../../components/GlobalSettings'
 import '../../components/ContextMenu'
 import '../../components/fields/inline/editorInline'
-import InlineSelector from '../../components/fields/inline/Selector'
-import InlineToolbar from '../../components/fields/inline/InlineToolbar'
 import svg from '../heading/separators'
 
 class Edit extends Component {
@@ -220,14 +218,14 @@ class Edit extends Component {
                                 }
                             </div>
                         }
-                            <RichText
-                                key="editable"
-                                tagName={selector}
-                                keepPlaceholderOnFocus
-                                placeholder={__('Add Text...')}
-                                onChange={value => setAttributes({ content: value })}
-                                value={content}
-                            />
+                        <RichText
+                            key="editable"
+                            tagName={selector}
+                            keepPlaceholderOnFocus
+                            placeholder={__('Add Text...')}
+                            onChange={value => setAttributes({ content: value })}
+                            value={content}
+                        />
                     </div>
                 </div>
 

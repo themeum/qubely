@@ -1,7 +1,6 @@
 const { __ } = wp.i18n;
 
 import './components/FieldRender'
-import './components/Hooks'
 
 import './editor.scss'
 import './blocks/scss/style.scss'

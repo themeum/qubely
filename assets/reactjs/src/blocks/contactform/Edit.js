@@ -15,11 +15,10 @@ const {
     QubelyButtonEdit,
     BorderRadius,
     Separator,
-    Hooks: { buttonComponent } ,
+    Inline: { InlineToolbar },
     CssGenerator: { CssGenerator }
 } = wp.qubelyComponents
 
-import InlineToolbar from '../../components/fields/inline/InlineToolbar'
 import icons from '../../helpers/icons'
 import '../../components/GlobalSettings'
 import '../../components/ContextMenu'
