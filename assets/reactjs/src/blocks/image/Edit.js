@@ -2,10 +2,9 @@ const { __ } = wp.i18n
 const { Fragment, Component } = wp.element;
 const { PanelBody, TextControl, Toolbar } = wp.components
 const { RichText, InspectorControls, BlockControls } = wp.editor
-const { Media, Range, BoxShadow, Tabs, Tab, RadioAdvanced, Typography, Toggle, Styles, Alignment, ColorAdvanced, Color, Headings, Border, BorderRadius, Padding, Separator, Select, Margin, CssGenerator: { CssGenerator } } = wp.qubelyComponents
+const { Media, Range, BoxShadow, Tabs, Tab, RadioAdvanced, Typography, Toggle, Styles, Alignment, ColorAdvanced, Color, Headings, Border, BorderRadius, Padding, Separator, Select, Margin,Hooks: { buttonComponent } , CssGenerator: { CssGenerator } } = wp.qubelyComponents
 import InlineToolbar from '../../components/fields/inline/InlineToolbar'
 import icons from '../../helpers/icons';
-import '../../components/ButtonComponent'
 import '../../components/GlobalSettings'
 import '../../components/ContextMenu'
 class Edit extends Component {
@@ -23,6 +22,7 @@ class Edit extends Component {
         } else if (uniqueId && uniqueId != _client) {
             setAttributes({ uniqueId: _client });
         }
+        buttonComponent()
     }
 
     handlePanelOpenings = (panelName) => {

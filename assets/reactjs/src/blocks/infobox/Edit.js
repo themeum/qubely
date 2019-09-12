@@ -2,11 +2,10 @@ const { __ } = wp.i18n
 const { Fragment, Component } = wp.element;
 const { PanelBody, SelectControl, TextControl, Toolbar } = wp.components
 const { RichText, InspectorControls, BlockControls } = wp.editor
-const { QubelyButtonEdit, Media, Tabs, Tab, Range, BoxShadow, RadioAdvanced, Typography, Toggle, Styles, Alignment, IconList, ColorAdvanced, Color, Headings, Border, BorderRadius, Padding, CssGenerator: { CssGenerator } } = wp.qubelyComponents
+const { QubelyButtonEdit, Media, Tabs, Tab, Range, BoxShadow, RadioAdvanced, Typography, Toggle, Styles, Alignment, IconList, ColorAdvanced, Color, Headings, Border, BorderRadius, Padding,Hooks: { buttonComponent } , CssGenerator: { CssGenerator } } = wp.qubelyComponents
 import InlineToolbar from '../../components/fields/inline/InlineToolbar'
 import icons from '../../helpers/icons';
 import svg from '../heading/separators';
-import '../../components/ButtonComponent'
 import '../../components/GlobalSettings'
 import '../../components/ContextMenu'
 class Edit extends Component {
@@ -23,17 +22,9 @@ class Edit extends Component {
             setAttributes({ uniqueId: _client });
         } else if (uniqueId && uniqueId != _client) {
             setAttributes({ uniqueId: _client });
+            
         }
-
-        this.$el = $(this.el);
-        this.$el.magnificPopup({
-            type: 'iframe',
-            rtl: true,
-            mainClass: 'mfp-fade',
-            removalDelay: 300,
-            preloader: false,
-            fixedContentPos: false
-        });
+        buttonComponent()
     }
     handlePanelOpenings = (panelName) => {
         this.setState({ ...this.state, openPanelSetting: panelName })

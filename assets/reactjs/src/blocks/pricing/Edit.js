@@ -5,10 +5,9 @@ const { select, withSelect, withDispatch } = wp.data
 const { Component, Fragment } = wp.element
 const { getBlock } = select('core/editor')
 const { RichText, InspectorControls, BlockControls } = wp.editor
-const { Color, Toggle, Border, Padding, Alignment, Typography, QubelyButtonEdit, Select, ColorAdvanced, Range, RadioAdvanced, Tabs, Tab, Separator, QubelyIconListEdit, BoxShadow, Styles, BorderRadius, CssGenerator: { CssGenerator } } = wp.qubelyComponents
+const { Color, Toggle, Border, Padding, Alignment, Typography, QubelyButtonEdit, Hooks: { buttonComponent } , ColorAdvanced, Range, RadioAdvanced, Tabs, Tab, Separator, QubelyIconListEdit, BoxShadow, Styles, BorderRadius, CssGenerator: { CssGenerator } } = wp.qubelyComponents
 import InlineToolbar from '../../components/fields/inline/InlineToolbar'
 import '../../components/ListComponent'
-import '../../components/ButtonComponent'
 import '../../components/GlobalSettings'
 import '../../components/ContextMenu'
 import icons from '../../helpers/icons'
@@ -41,7 +40,7 @@ class Edit extends Component {
 		} else if (uniqueId && uniqueId != _client) {
 			setAttributes({ uniqueId: _client })
 		}
-
+		buttonComponent()
 	}
 	renderCurrencyContent = () => {
 		const { attributes: { currency, currencyCustom } } = this.props

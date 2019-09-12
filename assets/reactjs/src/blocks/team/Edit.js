@@ -22,16 +22,6 @@ class Edit extends Component {
         } else if (uniqueId && uniqueId != _client) {
             setAttributes({ uniqueId: _client });
         }
-
-        this.$el = $(this.el);
-        this.$el.magnificPopup({
-            type: 'iframe',
-            rtl: true,
-            mainClass: 'mfp-fade',
-            removalDelay: 300,
-            preloader: false,
-            fixedContentPos: false
-        });
     }
     handlePanelOpenings = (panelName) => {
         this.setState({ ...this.state, openPanelSetting: panelName })

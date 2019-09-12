@@ -15,12 +15,12 @@ const {
     QubelyButtonEdit,
     BorderRadius,
     Separator,
+    Hooks: { buttonComponent } ,
     CssGenerator: { CssGenerator }
 } = wp.qubelyComponents
 
 import InlineToolbar from '../../components/fields/inline/InlineToolbar'
 import icons from '../../helpers/icons'
-import '../../components/ButtonComponent'
 import '../../components/GlobalSettings'
 import '../../components/ContextMenu'
 
@@ -44,6 +44,7 @@ class Edit extends Component {
         } else if (uniqueId && uniqueId != _client) {
             setAttributes({ uniqueId: _client });
         }
+        buttonComponent()
     }
 
     setSettings(type, val, index = -1) {
