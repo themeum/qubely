@@ -33,7 +33,7 @@ function innerBlocks( blocks, type = false ){
     return __CSS
 }
 
-const ParseCss = () => {
+const ParseCss = (setDatabase = true) => {
     window.bindCss = true
     const { getBlocks, getCurrentPostId } = select('core/editor')
     let __blocks = '';
@@ -42,7 +42,10 @@ const ParseCss = () => {
     }
     __blocks += innerBlocks( getBlocks(), true )
     if( __blocks !== '' ){
-        API_fetch(getCurrentPostId(), __blocks).then( data => {} )
+        localStorage.setItem('qubelyCSS', __blocks)
+        if(setDatabase){
+            API_fetch(getCurrentPostId(), __blocks).then( data => {} )
+        }
     }
     setTimeout(()=>{
         window.bindCss = false
