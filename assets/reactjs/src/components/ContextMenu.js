@@ -132,7 +132,6 @@ const withContextMenu = createHigherOrderComponent(OriginalComponent => {
             const { isSelected, name, attributes: { uniqueId, showContextMenu, sourceOfCopiedStyle } } = this.props
             let type = name.split("/")[0]
             let blockName = name.split("/")[1]
-            if (uniqueId) { CssGenerator(this.props.attributes, blockName, uniqueId) }
             let PluginBlockSettingsMenuItem = wp.editPost.PluginBlockSettingsMenuItem
             let previouslyCopiedStyle = JSON.parse(localStorage.getItem('qubelyCopiedStyles'))
             if (type !== 'qubely' || showContextMenu != true) {

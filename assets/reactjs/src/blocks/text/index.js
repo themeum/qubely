@@ -205,8 +205,6 @@ registerBlockType('qubely/text', {
     deprecated: [
         {
             save(props) {
-                console.log('depricated save function', props.attributes.content)
-
                 const separators = {
                     solid: { type: 'css', separator: 'solid', width: 300, stroke: 10 },
                     double: { type: 'css', separator: 'double', width: 300, stroke: 10 },

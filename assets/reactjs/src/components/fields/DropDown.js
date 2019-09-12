@@ -26,7 +26,6 @@ export default function ({ label, enableSearch, defaultOptionsLabel, value, opti
     const handleClickOutside = (event) => {
         if (showOptions) {
             if (!(qubelyOptionsWraper.current.contains(event.target) || qubelySelectedOptions.current.contains(event.target))) {
-                console.log('close me !')
                 toggleOptions(false)
             }
         }

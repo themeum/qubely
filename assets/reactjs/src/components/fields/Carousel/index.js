@@ -80,7 +80,6 @@ export default class Carousel extends Component {
             items = [...items, firstChild]
             items = [lastChild, ...items]
         })
-        console.log('items : ',items)
         return items
     }
 

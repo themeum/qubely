@@ -19,9 +19,7 @@ jQuery(document).ready(function ($) {
                 center: false,
                 responsive: [...responsive],
                 
-                onChange: function (item) {
-                    // console.log("test: ", item)
-                }
+                onChange: function (item) {}
             })
             indexOfCounterElement++
         }

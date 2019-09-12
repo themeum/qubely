@@ -185,7 +185,6 @@ const withInspectorControls = createHigherOrderComponent(OriginalComponent => {
             const { setAttributes, attributes: { uniqueId, listComponent, controlledFeaturesPanel, showFeaturesPanel } } = this.props
             let type = this.props.name.split("/")[0]
             let blockName = this.props.name.split("/")[1]
-            if (uniqueId) { CssGenerator(this.props.attributes, blockName, uniqueId); }
 
             if (type !== 'qubely' || listComponent != true) {
                 return <OriginalComponent {...this.props} />

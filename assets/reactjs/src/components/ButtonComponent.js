@@ -388,7 +388,6 @@ const withInspectorControls = createHigherOrderComponent(OriginalComponent => {
             const { showPostTextTypography, device } = this.state
             let type = this.props.name.split("/")[0]
             let blockName = this.props.name.split("/")[1]
-            if (uniqueId) { CssGenerator(this.props.attributes, blockName, uniqueId); }
             if (type !== 'qubely' || buttonComponent != true) {
                 return <OriginalComponent {...this.props} />
             } else {
