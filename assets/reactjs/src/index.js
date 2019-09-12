@@ -32,7 +32,6 @@ import './blocks/team'          // Team
 import './blocks/pricing'       // pricing
 import './blocks/timeline'      // Timeline
 import './blocks/postgrid'      // Postgrid
-import './blocks/testimonialcarousel'      // testimonialcarousel
 
 // Global Settings
 import './blocks/pagesettings'
