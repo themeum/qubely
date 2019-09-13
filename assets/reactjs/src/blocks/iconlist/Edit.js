@@ -17,11 +17,11 @@ const {
     BorderRadius,
     BoxShadow,
     Separator,
+    gloalSettings: { globalSettingsPanel, animationSettings },
     CssGenerator: { CssGenerator }
 } = wp.qubelyComponents
 
 import icons from '../../helpers/icons'
-import '../../components/GlobalSettings'
 import '../../components/ContextMenu'
 
 class Edit extends Component {
@@ -160,10 +160,17 @@ class Edit extends Component {
     }
 
     render() {
-        const { setAttributes, attributes: { uniqueId, iconSize, iconSizeCustom, iconSpacing, layout, iconPosition,
-            listItems, typography, alignment, iconColor, iconHoverColor, spacing, color, colorHover, padding, background,
-            backgroundHover, border, borderRadius, borderColorHover, shadow, shadowHover,
-        } } = this.props
+        const { setAttributes,
+            attributes: {
+                uniqueId, iconSize, iconSizeCustom, iconSpacing, layout, iconPosition,
+                listItems, typography, alignment, iconColor, iconHoverColor, spacing, color, colorHover, padding, background,
+                backgroundHover, border, borderRadius, borderColorHover, shadow, shadowHover,
+                animation,
+                globalZindex,
+                hideTablet,
+                hideMobile,
+                globalCss
+            } } = this.props
 
         const { device } = this.state
 
@@ -279,8 +286,12 @@ class Edit extends Component {
                             </Tabs>
                         </PanelBody>
                     }
+                    {animationSettings(uniqueId, animation, setAttributes)}
 
                 </InspectorControls>
+
+                {globalSettingsPanel(globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
+
                 <div className={`qubely-block-${uniqueId}`}>
                     <div className="qubely-block-icon-list">
                         <ul className="qubely-list">

@@ -2,9 +2,8 @@ const { __ } = wp.i18n
 const { Fragment, Component } = wp.element;
 const { PanelBody, TextControl, Toolbar } = wp.components
 const { RichText, InspectorControls, BlockControls } = wp.editor
-const { Media, Range, BoxShadow, Tabs, Tab, RadioAdvanced, Typography, Toggle, Styles, Alignment, ColorAdvanced, Color, Headings, Border, BorderRadius, Padding, Separator, Select, Margin, Inline: { InlineToolbar }, CssGenerator: { CssGenerator } } = wp.qubelyComponents
+const { Media, Range, BoxShadow, Tabs, Tab, RadioAdvanced, Typography, Toggle, Styles, Alignment, ColorAdvanced, Color, Headings, Border, BorderRadius, Padding, Separator, Select, Margin, gloalSettings: { globalSettingsPanel, animationSettings }, Inline: { InlineToolbar }, CssGenerator: { CssGenerator } } = wp.qubelyComponents
 import icons from '../../helpers/icons';
-import '../../components/GlobalSettings'
 import '../../components/ContextMenu'
 class Edit extends Component {
 
@@ -80,6 +79,12 @@ class Edit extends Component {
             frameSendToBack,
             frameAnimateOnHover,
             frameBorderRadius,
+
+            animation,
+            globalZindex,
+            hideTablet,
+            hideMobile,
+            globalCss
 
         } = this.props.attributes
 
@@ -237,7 +242,7 @@ class Edit extends Component {
                             }
                         </PanelBody>
                     }
-
+                    {animationSettings(uniqueId, animation, setAttributes)}
                 </InspectorControls>
 
                 <BlockControls>
@@ -249,6 +254,8 @@ class Edit extends Component {
                         />
                     </Toolbar>
                 </BlockControls>
+
+                {globalSettingsPanel(globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
                 <div className={`qubely-block-${uniqueId}`}>
                     <div className={`qubely-block-image qubely-image-layout-${layout}`}>

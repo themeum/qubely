@@ -1,12 +1,9 @@
 import './style.scss'
 import Edit from './Edit'
 import Save from './Save';
-const {
-    __
-} = wp.i18n
-const {
-    registerBlockType
-} = wp.blocks
+const { __ } = wp.i18n
+const { registerBlockType } = wp.blocks
+const { gloalSettings: { globalAttributes } } = wp.qubelyComponents
 
 registerBlockType('qubely/image', {
     title: __('Image'),
@@ -15,7 +12,7 @@ registerBlockType('qubely/image', {
     icon: <img src={qubely_admin.plugin + 'assets/img/blocks/block-image.svg'} alt={__('Image')} />,
     keywords: [__('image', 'advanced image', 'fancy image'), 'image overlay'],
     attributes: {
-        
+
         uniqueId: {
             type: 'string',
             default: ''
@@ -37,7 +34,7 @@ registerBlockType('qubely/image', {
                 { selector: '{{QUBELY}}' }
             ]
         },
-        
+
         alignment: {
             type: 'object',
             default: {
@@ -62,7 +59,7 @@ registerBlockType('qubely/image', {
             type: 'object',
             default: {}
         },
-        
+
         image2x: {
             type: 'object',
             default: {}
@@ -93,7 +90,7 @@ registerBlockType('qubely/image', {
                 selector: '{{QUBELY}} .qubely-image-image {width: {{imageSizeCustom}};}'
             }]
         },
-        
+
         imgAlt: {
             type: 'string',
             default: ''
@@ -128,7 +125,7 @@ registerBlockType('qubely/image', {
                 selector: '{{QUBELY}} .qubely-image-container'
             }]
         },
-        
+
         imageBoxShadowHover: {
             type: 'object',
             default: {},
@@ -521,11 +518,7 @@ registerBlockType('qubely/image', {
         },
 
         // Global Options
-
-        showGlobalSettings: {
-            type: 'boolean',
-            default: true
-        }, // Global Settings
+        ...globalAttributes,
 
         showContextMenu: {
             type: 'boolean',

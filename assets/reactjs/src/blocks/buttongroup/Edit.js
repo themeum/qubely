@@ -4,8 +4,7 @@ const { PanelBody, Tooltip } = wp.components
 const { compose } = wp.compose
 const { withSelect, withDispatch } = wp.data
 const { InnerBlocks, InspectorControls } = wp.editor
-const { Range, Alignment, CssGenerator: { CssGenerator } } = wp.qubelyComponents
-import '../../components/GlobalSettings';
+const { Range, Alignment, gloalSettings: { globalSettingsPanel, animationSettings }, CssGenerator: { CssGenerator } } = wp.qubelyComponents
 
 class Edit extends Component {
     constructor(props) {
@@ -25,7 +24,26 @@ class Edit extends Component {
     }
 
     render() {
-        const { attributes: { uniqueId, alignment, buttons, spacing, padding }, setAttributes, block, clientId, updateBlockAttributes } = this.props
+        const {
+            attributes: {
+                uniqueId,
+                alignment,
+                buttons,
+                spacing,
+                padding,
+                
+                //animation
+                animation,
+                //global
+                globalZindex,
+                hideTablet,
+                hideMobile,
+                globalCss
+            },
+            setAttributes,
+            block,
+            clientId,
+            updateBlockAttributes } = this.props
         if (uniqueId) { CssGenerator(this.props.attributes, 'buttongroup', uniqueId); }
         const { device } = this.state
         let index = 0
@@ -54,9 +72,11 @@ class Edit extends Component {
                             responsive
                             device={device}
                             onDeviceChange={value => this.setState({ device: value })} />
-
                     </PanelBody>
+                    {animationSettings(uniqueId, animation, setAttributes)}
                 </InspectorControls>
+
+                {globalSettingsPanel(globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
                 <div className={`qubely-block-${uniqueId}`}>
                     <div className={`qubely-block-button-group`}>

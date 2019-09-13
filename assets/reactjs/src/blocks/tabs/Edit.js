@@ -4,8 +4,7 @@ const { compose } = wp.compose
 const { withSelect, withDispatch } = wp.data
 const { Component, Fragment } = wp.element;
 const { InnerBlocks, RichText, InspectorControls, BlockControls } = wp.editor
-const { Color, IconList, Select, Styles, Typography, Range, RadioAdvanced, Inline: { InlineToolbar }, BoxShadow, Alignment, Tabs, Tab, Separator, Border, Padding, BorderRadius, CssGenerator: { CssGenerator } } = wp.qubelyComponents
-import '../../components/GlobalSettings'
+const { Color, IconList, Select, Styles, Typography, Range, RadioAdvanced, gloalSettings: { globalSettingsPanel, animationSettings }, Inline: { InlineToolbar }, BoxShadow, Alignment, Tabs, Tab, Separator, Border, Padding, BorderRadius, CssGenerator: { CssGenerator } } = wp.qubelyComponents
 import icons from '../../helpers/icons';
 
 class Edit extends Component {
@@ -119,21 +118,47 @@ class Edit extends Component {
 		return newTitles
 	}
 	render() {
-		const { uniqueId, tabs, tabTitles, tabStyle,
-			navSpacing, navSize, navPaddingX, navPaddingY,
+		const {
+			uniqueId,
+			tabs,
+			tabTitles,
+			tabStyle,
+			navSpacing,
+			navSize,
+			navPaddingX,
+			navPaddingY,
 			navAlignment,
 			typography,
-			navColor, navColorActive,
-			navBg, navBgActive,
-			navBorder, navBorderActive,
+			navColor,
+			navColorActive,
+			navBg,
+			navBgActive,
+			navBorder,
+			navBorderActive,
 			navBorderRadiusTabs,
 			navBorderRadiusPills,
-			navUnderlineBorderWidth, navUnderlineBorderColor, navUnderlineBorderColorActive,
-			iconSize, iconGap, iconPosition,
-			bodyBg, bodyPadding, bodyBorder, bodyBorderRadius,
-			bodySeparatorHeight, bodySeparatorColor,
+			navUnderlineBorderWidth,
+			navUnderlineBorderColor,
+			navUnderlineBorderColorActive,
+			iconSize,
+			iconGap,
+			iconPosition,
+			bodyBg,
+			bodyPadding,
+			bodyBorder,
+			bodyBorderRadius,
+			bodySeparatorHeight,
+			bodySeparatorColor,
 			bodyTopSpacing,
 			bodyShadow,
+
+			//animation
+			animation,
+			//global
+			globalZindex,
+			hideTablet,
+			hideMobile,
+			globalCss
 
 		} = this.props.attributes
 		const { setAttributes } = this.props
@@ -287,6 +312,9 @@ class Edit extends Component {
 							</Fragment>
 						}
 					</PanelBody>
+					
+					{animationSettings(uniqueId, animation, setAttributes)}
+
 				</InspectorControls>
 
 				<BlockControls>
@@ -298,6 +326,8 @@ class Edit extends Component {
 						/>
 					</Toolbar>
 				</BlockControls>
+
+                {globalSettingsPanel(globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
 				<div className={`qubely-block-${uniqueId}`}>
 					<div className={`qubely-block-tab qubely-tab-style-${tabStyle}`}>

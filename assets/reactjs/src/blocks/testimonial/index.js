@@ -1,8 +1,10 @@
 import './style.scss'
 import Edit from './Edit'
 import Save from './Save'
-const { registerBlockType } = wp.blocks
 const { __ } = wp.i18n
+const { registerBlockType } = wp.blocks
+const { gloalSettings: { globalAttributes } } = wp.qubelyComponents
+
 registerBlockType('qubely/testimonial', {
     title: __('Testimonial'),
     description: 'Display testimonials from clients with Qubely Testimonials.',
@@ -193,7 +195,7 @@ registerBlockType('qubely/testimonial', {
         boxShadow: { type: 'object', default: {}, style: [{ selector: '{{QUBELY}} .qubely-block-testimonial' }] },
         boxShadowHover: { type: 'object', default: {}, style: [{ selector: '{{QUBELY}} .qubely-block-testimonial:hover' }] },
 
-        showGlobalSettings: { type: 'boolean', default: true }, // Global Settings
+        ...globalAttributes,
         showContextMenu: { type: 'boolean', default: true }
     },
     edit: Edit,

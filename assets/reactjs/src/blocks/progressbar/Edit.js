@@ -2,8 +2,7 @@ const { __ } = wp.i18n
 const { Fragment, Component } = wp.element;
 const { PanelBody, TextControl, Toolbar } = wp.components
 const { InspectorControls, BlockControls } = wp.editor
-const { RadioAdvanced, Range, Typography, ColorAdvanced, Toggle, Color, BorderRadius,Inline: { InlineToolbar }, CssGenerator: { CssGenerator } } = wp.qubelyComponents
-import '../../components/GlobalSettings'
+const { RadioAdvanced, Range, Typography, ColorAdvanced, Toggle, Color, BorderRadius, gloalSettings: { globalSettingsPanel, animationSettings }, Inline: { InlineToolbar }, CssGenerator: { CssGenerator } } = wp.qubelyComponents
 import '../../components/ContextMenu'
 
 class Edit extends Component {
@@ -27,9 +26,33 @@ class Edit extends Component {
     }
 
     render() {
-        const { uniqueId, progress, title, labelTypography, labelPosition, labelColor, labelSpacing, showProgress, barHeight, barBackground, progressBackground, striped, borderRadius } = this.props.attributes
-        const { setAttributes } = this.props
+        const {
+            setAttributes,
+            attributes: {
+                uniqueId,
+                progress,
+                title,
+                labelTypography,
+                labelPosition,
+                labelColor,
+                labelSpacing,
+                showProgress,
+                barHeight,
+                barBackground,
+                progressBackground,
+                striped,
+                borderRadius,
+
+                //animation
+                animation,
+                //global
+                globalZindex,
+                hideTablet,
+                hideMobile,
+                globalCss }
+        } = this.props
         const { device } = this.state
+
         if (uniqueId) { CssGenerator(this.props.attributes, 'progressbar', uniqueId); }
 
         const labelsContent = <Fragment>
@@ -83,6 +106,9 @@ class Edit extends Component {
                             value={barBackground}
                             onChange={val => setAttributes({ barBackground: val })} />
                     </PanelBody>
+
+                    {animationSettings(uniqueId, animation, setAttributes)}
+
                 </InspectorControls>
 
                 <BlockControls>
@@ -94,6 +120,8 @@ class Edit extends Component {
                         />
                     </Toolbar>
                 </BlockControls>
+
+                {globalSettingsPanel(globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
                 <div className={`qubely-block-${uniqueId}`}>
                     <div className="qubely-block-progress-bar">

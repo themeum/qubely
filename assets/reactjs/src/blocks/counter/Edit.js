@@ -8,11 +8,14 @@ const {
 	Alignment,
 	Typography,
 	Color,
+	gloalSettings: {
+		globalSettingsPanel,
+		animationSettings
+	},
 	Inline: { InlineToolbar },
 	CssGenerator: { CssGenerator }
 } = wp.qubelyComponents
 
-import '../../components/GlobalSettings'
 import '../../components/ContextMenu'
 
 class Edit extends Component {
@@ -33,8 +36,28 @@ class Edit extends Component {
 		}
 	}
 	render() {
-		const { attributes: { uniqueId, alignment, counterLimit, counterDuration, counterTypo, counterColor, postfix, prefix, prepostTypo, prepostSpacing, prepostColor }, setAttributes } = this.props
+		const {
+			setAttributes,
+			attributes: {
+				uniqueId, alignment,
+				counterLimit,
+				counterDuration,
+				counterTypo,
+				counterColor,
+				postfix,
+				prefix,
+				prepostTypo,
+				prepostSpacing,
+				prepostColor,
+
+				animation,
+				globalZindex,
+				hideTablet,
+				hideMobile,
+				globalCss
+			} } = this.props
 		const { device } = this.state
+
 		if (uniqueId) { CssGenerator(this.props.attributes, 'counter', uniqueId); }
 
 		return (
@@ -106,6 +129,7 @@ class Edit extends Component {
 							}
 						</PanelBody>
 					}
+					{animationSettings(uniqueId, animation, setAttributes)}
 				</InspectorControls>
 
 				<BlockControls>
@@ -117,6 +141,8 @@ class Edit extends Component {
 						/>
 					</Toolbar>
 				</BlockControls>
+
+				{globalSettingsPanel(globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
 				<div className={`qubely-block-${uniqueId}`}>
 					<div className="qubely-block-counter">

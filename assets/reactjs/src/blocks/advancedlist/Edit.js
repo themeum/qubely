@@ -2,8 +2,7 @@ const { __ } = wp.i18n;
 const { RichText, InspectorControls, BlockControls } = wp.editor
 const { Component, Fragment } = wp.element;
 const { PanelBody, Toolbar, Tooltip } = wp.components;
-const { Typography, Alignment, Styles, Range, Tabs, Tab, Border, Inline: { InlineToolbar }, RadioAdvanced, Color, BoxShadow, Toggle, Separator, IconSelector, BorderRadius, Padding, CssGenerator: { CssGenerator } } = wp.qubelyComponents
-import '../../components/GlobalSettings'
+const { Typography, Alignment, gloalSettings: { globalSettingsPanel, animationSettings }, Styles, Range, Tabs, Tab, Border, Inline: { InlineToolbar }, RadioAdvanced, Color, BoxShadow, Toggle, Separator, IconSelector, BorderRadius, Padding, CssGenerator: { CssGenerator } } = wp.qubelyComponents
 import '../../components/ContextMenu'
 import icons from '../../helpers/icons'
 
@@ -164,12 +163,22 @@ class Edit extends Component {
     }
 
     render() {
-        const { attributes: { uniqueId, alignment, layout, listType, typography,
-            spacing, color, colorHover, backgroundSize, background, backgroundHover, borderRadius,
-            border, borderColorHover, shadow, shadowHover,
-            bulletStyle, bulletSize, bulletSizeCustom, bulletColor, bulletColorHover, bulletSpacing,
-            numberCorner, numberFontSize, numberBgSize, useNumberBg, numberBg, numberBgHover,
-        }, setAttributes, onReplace } = this.props
+        const {
+            attributes: { uniqueId, alignment, layout, listType, typography,
+                spacing, color, colorHover, backgroundSize, background, backgroundHover, borderRadius,
+                border, borderColorHover, shadow, shadowHover,
+                bulletStyle, bulletSize, bulletSizeCustom, bulletColor, bulletColorHover, bulletSpacing,
+                numberCorner, numberFontSize, numberBgSize, useNumberBg, numberBg, numberBgHover,
+
+                //animation
+                animation,
+                //global
+                globalZindex,
+                hideTablet,
+                hideMobile,
+                globalCss,
+            },
+            setAttributes } = this.props
         const { device } = this.state
 
         if (uniqueId) { CssGenerator(this.props.attributes, 'advancedlist', uniqueId) }
@@ -302,7 +311,7 @@ class Edit extends Component {
                             </Tab>
                         </Tabs>
                     </PanelBody>
-
+                    {animationSettings(uniqueId, animation, setAttributes)}
                 </InspectorControls>
 
                 <BlockControls>
@@ -326,6 +335,7 @@ class Edit extends Component {
                         }]} />
                 </BlockControls>
 
+                {globalSettingsPanel(globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
                 <div className={`qubely-block-${uniqueId}`}>
                     <div className={`qubely-block-advanced-list qubely-alignment-${alignment}`}>

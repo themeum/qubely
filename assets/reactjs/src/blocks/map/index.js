@@ -3,6 +3,7 @@ import Edit from './Edit'
 import Save from './Save';
 const { __ } = wp.i18n
 const { registerBlockType } = wp.blocks
+const { gloalSettings: { globalAttributes } } = wp.qubelyComponents
 
 registerBlockType ( 'qubely/map', {
     title: __( 'Google Map' ),
@@ -29,7 +30,7 @@ registerBlockType ( 'qubely/map', {
         showMarker: { type: 'boolean', default: true },
         mapStyle: { type: 'string', default: '' },
         selectedStyle: { type: 'string', default: 'default' },
-        showGlobalSettings: { type: 'boolean', default: true },  // Global Settings
+        ...globalAttributes,  // Global Settings
     },
     edit: Edit,
     save: Save,

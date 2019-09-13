@@ -3,6 +3,7 @@ import Edit from './Edit'
 import Save from './Save';
 const { __ } = wp.i18n
 const { registerBlockType } = wp.blocks
+const { gloalSettings: { globalAttributes } } = wp.qubelyComponents
 
 registerBlockType('qubely/iconlist', {
     title: __('Icon List'),
@@ -149,7 +150,7 @@ registerBlockType('qubely/iconlist', {
             style: [{ selector: '{{QUBELY}} .qubely-list .qubely-list-li' }]
         },
         borderColorHover: { type: 'string', default: '', style: [{ selector: '{{QUBELY}} .qubely-list .qubely-list-li:hover {border-bottom-color: {{borderColorHover}};}' }] },
-        showGlobalSettings: { type: 'boolean', default: true },  // Global Settings
+        ...globalAttributes,
         showContextMenu: { type: 'boolean', default: true }
     },
     edit: Edit,

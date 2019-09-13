@@ -212,7 +212,6 @@ registerBlockType('qubely/button', {
                 },
             ]
         },
-        // showGlobalSettings: { type: 'boolean', default: true },  // Global Settings
         showContextMenu: { type: 'boolean', default: true },
         ...globalAttributes
     },

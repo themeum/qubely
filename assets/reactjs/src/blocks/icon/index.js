@@ -3,6 +3,7 @@ const { __ } = wp.i18n
 import Edit from './Edit'
 import Save from './Save';
 const { registerBlockType } = wp.blocks
+const { gloalSettings: { globalAttributes } } = wp.qubelyComponents
 
 registerBlockType('qubely/icon', {
 	title: __('Icon'),
@@ -75,7 +76,7 @@ registerBlockType('qubely/icon', {
 				}
 			]
 		},
-		showGlobalSettings: { type: 'boolean', default: true }, // Global Settings
+		...globalAttributes,
 		showContextMenu: { type: 'boolean', default: true }
 	},
 	edit: Edit,

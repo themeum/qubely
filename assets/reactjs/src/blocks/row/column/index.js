@@ -2,6 +2,7 @@ const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks
 import Edit from './Edit';
 import Save from './Save';
+const { gloalSettings: { globalAttributes } } = wp.qubelyComponents
 
 registerBlockType('qubely/column', {
 	title: __('Column'),
@@ -57,7 +58,7 @@ registerBlockType('qubely/column', {
 		// Advanced Settings
 		colZindex: { type: 'number', default: '', style: [{ selector: '{{QUBELY}} > .qubely-column-inner{z-index:{{colZindex}};}' }] },
 		colCss: { type: 'string', default: '', style: [{ selector: '' }] },
-		showGlobalSettings: { type: 'boolean', default: true }
+		...globalAttributes
 	},
 	edit: Edit,
 	save: Save

@@ -3,6 +3,7 @@ import Edit from './Edit'
 import Save from './Save';
 const { __ } = wp.i18n
 const { registerBlockType } = wp.blocks
+const { gloalSettings: { globalAttributes } } = wp.qubelyComponents
 
 registerBlockType('qubely/buttongroup', {
     title: __('Button Group'),
@@ -26,7 +27,7 @@ registerBlockType('qubely/buttongroup', {
             default: { unit: "px", md: "5" },
             style: [{ selector: '{{QUBELY}} .qubely-block-button-group {margin: -{{spacing}};} {{QUBELY}} .qubely-block-button-group .qubely-block-btn-wrapper {margin: {{spacing}};}' }]
         },
-        showGlobalSettings: { type: 'boolean', default: true },  // Global Settings
+        ...globalAttributes
     },
     edit: Edit,
     save: Save,

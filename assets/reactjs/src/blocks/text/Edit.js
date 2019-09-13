@@ -2,8 +2,7 @@ const { __ } = wp.i18n
 const { Fragment, Component } = wp.element;
 const { PanelBody, Toolbar, SelectControl } = wp.components
 const { RichText, InspectorControls, BlockControls } = wp.editor
-const { Typography, Color, Alignment, Headings, Toggle, Range, Separator, Inline: { InlineToolbar, InlineSelector }, CssGenerator: { CssGenerator } } = wp.qubelyComponents
-import '../../components/GlobalSettings'
+const { Typography, Color, Alignment, Headings, Toggle, Range, Separator, gloalSettings: { globalSettingsPanel, animationSettings }, Inline: { InlineToolbar, InlineSelector }, CssGenerator: { CssGenerator } } = wp.qubelyComponents
 import '../../components/ContextMenu'
 import '../../components/fields/inline/editorInline'
 import svg from '../heading/separators'
@@ -29,7 +28,17 @@ class Edit extends Component {
     }
 
     render() {
-        const { uniqueId, content, typography, alignment, selector, textColor, dropCap, dropCapSize, dropCapColor, dropCapSpacing,
+        const {
+            uniqueId,
+            content,
+            typography,
+            alignment,
+            selector,
+            textColor,
+            dropCap,
+            dropCapSize,
+            dropCapColor,
+            dropCapSpacing,
 
             titleLevel,
             title,
@@ -51,6 +60,13 @@ class Edit extends Component {
             separatorPosition,
             separatorWidth,
             separatorSpacing,
+
+            //animation
+            animation,
+            globalZindex,
+            hideTablet,
+            hideMobile,
+            globalCss
 
         } = this.props.attributes
         const { setAttributes } = this.props
@@ -169,7 +185,7 @@ class Edit extends Component {
                             }
                         </PanelBody>
                     }
-
+                    {animationSettings(uniqueId, animation, setAttributes)}
                 </InspectorControls>
 
                 <BlockControls>
@@ -184,6 +200,8 @@ class Edit extends Component {
                         />
                     </Toolbar>
                 </BlockControls>
+
+                {globalSettingsPanel(globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
                 <div className={`qubely-block-${uniqueId}`}>
                     <div className={`qubely-block-text ${(dropCap == 1) ? 'qubely-has-drop-cap' : ''}`}>

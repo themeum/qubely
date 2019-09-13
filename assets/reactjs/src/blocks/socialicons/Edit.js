@@ -2,8 +2,7 @@ const { __ } = wp.i18n;
 const { InspectorControls, BlockControls } = wp.editor
 const { Component, Fragment } = wp.element;
 const { PanelBody, TextControl, Toolbar, Button, Popover } = wp.components;
-const { Styles, IconSelector, Toggle, Separator, RadioAdvanced, Range, Alignment, Typography, Color, Tabs, Tab, Border, Padding, BorderRadius,Inline: { InlineToolbar }, CssGenerator: { CssGenerator } } = wp.qubelyComponents
-import '../../components/GlobalSettings'
+const { Styles, IconSelector, Toggle, Separator, RadioAdvanced, Range, Alignment, Typography, Color, Tabs, Tab, Border, Padding, BorderRadius, gloalSettings: { globalSettingsPanel, animationSettings }, Inline: { InlineToolbar }, CssGenerator: { CssGenerator } } = wp.qubelyComponents
 import '../../components/ContextMenu'
 import icons from '../../helpers/icons'
 import IconSocialData from '../../components/fields/assets/IconSocialData'
@@ -58,7 +57,35 @@ class Edit extends Component {
     render() {
         const { selectedItem, selectedLabel, device, showIconPicker } = this.state;
         const { attributes, setAttributes, isSelected } = this.props;
-        const { uniqueId, alignment, socialIcons, iconLabel, layout, useDefaultStyle, iconSize, iconSizeCustom, iconSpacing, iconBorderRadius, labelSpacing, labelTypography, iconColor, iconColorHover, IconBackground, IconBackgroundHover, iconPaddingX, iconPaddingY, iconPadding, iconBorder, iconBorderColor, iconBorderColorHover } = attributes;
+        const {
+            uniqueId,
+            alignment,
+            socialIcons,
+            iconLabel,
+            layout,
+            useDefaultStyle,
+            iconSize,
+            iconSizeCustom,
+            iconSpacing,
+            iconBorderRadius,
+            labelSpacing,
+            labelTypography,
+            iconColor,
+            iconColorHover,
+            IconBackground,
+            IconBackgroundHover,
+            iconPadding,
+            iconBorder,
+            iconBorderColorHover,
+
+            //animation
+            animation,
+            //global
+            globalZindex,
+            hideTablet,
+            hideMobile,
+            globalCss
+        } = attributes;
         if (uniqueId) { CssGenerator(this.props.attributes, 'socialicons', uniqueId); };
 
         return (
@@ -186,7 +213,7 @@ class Edit extends Component {
                                 onDeviceChange={value => this.setState({ device: value })} />
                         </PanelBody>
                     }
-
+                    {animationSettings(uniqueId, animation, setAttributes)}
                 </InspectorControls>
 
                 <BlockControls>
@@ -197,6 +224,8 @@ class Edit extends Component {
                             prevState={this.state} />
                     </Toolbar>
                 </BlockControls>
+
+                {globalSettingsPanel(globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
                 <div className={`qubely-block-${uniqueId}`}>
                     <div className={`qubely-block-social-icons qubely-layout-${layout} qubely-style-${useDefaultStyle ? 'default' : 'custom'}`}>

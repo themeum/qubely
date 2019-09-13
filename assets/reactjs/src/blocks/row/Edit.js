@@ -4,10 +4,9 @@ const { withDispatch } = wp.data;
 const { PanelBody, TextControl, SelectControl, Tooltip, Button, RangeControl } = wp.components
 const { Component, Fragment } = wp.element
 const { InspectorControls, InnerBlocks, InspectorAdvancedControls } = wp.editor
-const { Background, Select, Range, Toggle, Shape, BoxShadow, Tab, Tabs, Separator, Border, BorderRadius, RadioAdvanced, Dimension, HelperFunction: { videoBackground }, CssGenerator: { CssGenerator } } = wp.qubelyComponents
+const { Background, Select, Range, Toggle, Shape, BoxShadow, Tab, Tabs, Separator, Border, BorderRadius, RadioAdvanced, Dimension, gloalSettings: { globalSettingsPanel, animationSettings }, HelperFunction: { videoBackground }, CssGenerator: { CssGenerator } } = wp.qubelyComponents
 import { ModalManager } from '../../helpers/ModalManager';
 import PageListModal from '../../helpers/PageListModal';
-import '../../components/GlobalSettings';
 import icons from '../../helpers/icons';
 
 const colOption = [
@@ -61,7 +60,42 @@ class Edit extends Component {
     }
 
     render() {
-        const { attributes: { uniqueId, rowId, columns, align, rowGutter, rowBlend, rowOverlay, rowOpacity, rowContainer, rowContainerWidth, position, padding, marginTop, marginBottom, rowBg, shapeTop, shapeBottom, rowReverse, rowShadow, heightOptions, rowHeight, border, borderRadius, enableRowOverlay }, setAttributes } = this.props;
+        const {
+            attributes: {
+                uniqueId,
+                rowId,
+                columns,
+                align,
+                rowGutter,
+                rowBlend,
+                rowOverlay,
+                rowOpacity,
+                rowContainer,
+                rowContainerWidth,
+                position,
+                padding,
+                marginTop,
+                marginBottom,
+                rowBg,
+                shapeTop,
+                shapeBottom,
+                rowReverse,
+                rowShadow,
+                heightOptions,
+                rowHeight,
+                border,
+                borderRadius,
+                enableRowOverlay
+                ,
+                //animation
+                animation,
+                //global
+                globalZindex,
+                hideTablet,
+                hideMobile,
+                globalCss
+            },
+            setAttributes } = this.props;
         const { device } = this.state
         if (uniqueId) { CssGenerator(this.props.attributes, 'row', uniqueId); }
 
@@ -262,12 +296,15 @@ class Edit extends Component {
                             </Tab>
                         </Tabs>
                     </PanelBody>
+                    {animationSettings(uniqueId, animation, setAttributes)}
                 </InspectorControls>
 
                 <InspectorAdvancedControls>
                     <Toggle label={__('Column Reverse')} responsive value={rowReverse.values} onChange={val => setAttributes({ rowReverse: Object.assign({}, Object.assign(rowReverse, { values: val, openRowReverse: true })) })} />
                     <TextControl label={__('CSS ID')} value={rowId} onChange={val => setAttributes({ rowId: val })} />
                 </InspectorAdvancedControls>
+
+                {globalSettingsPanel(globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
                 <div className={`qubely-section qubely-block-${uniqueId} ${(rowBg.bgimgParallax && rowBg.bgimgParallax == 'animated') ? 'qubely-section-parallax' : ''}`} {...rowId ? { id: rowId } : ''}>
                     <div className="qubley-padding-indicator">

@@ -2,8 +2,7 @@ const { __ } = wp.i18n;
 const { Component, Fragment } = wp.element;
 const { PanelBody, Toolbar } = wp.components
 const { InspectorControls, BlockControls, InnerBlocks } = wp.editor
-const { Color, Padding, BoxShadow, Tabs, Tab, Border, BorderRadius, Background, Inline: { InlineToolbar }, CssGenerator: { CssGenerator } } = wp.qubelyComponents
-import '../../components/GlobalSettings'
+const { Color, Padding, BoxShadow, Tabs, Tab, Border, BorderRadius, Background, gloalSettings: { globalSettingsPanel, animationSettings }, Inline: { InlineToolbar }, CssGenerator: { CssGenerator } } = wp.qubelyComponents
 
 class Edit extends Component {
 	constructor() {
@@ -22,7 +21,26 @@ class Edit extends Component {
 	}
 
 	render() {
-		const { setAttributes, attributes: { uniqueId, bgColor, bgColorHover, bgShadow, bgShadowHover, bgBorderColorHover, padding, borderRadius, border } } = this.props
+		const { setAttributes,
+			attributes: {
+				uniqueId,
+				bgColor,
+				bgColorHover,
+				bgShadow,
+				bgShadowHover,
+				bgBorderColorHover,
+				padding,
+				borderRadius,
+				border,
+				
+				//animation
+				animation,
+				globalZindex,
+				hideTablet,
+				hideMobile,
+				globalCss
+			}
+		} = this.props
 		const { device } = this.state
 		if (uniqueId) { CssGenerator(this.props.attributes, 'wrapper', uniqueId); }
 
@@ -57,6 +75,7 @@ class Edit extends Component {
 							</Tab>
 						</Tabs>
 					</PanelBody>
+					{animationSettings(uniqueId, animation, setAttributes)}
 				</InspectorControls>
 
 				<BlockControls>
@@ -68,6 +87,8 @@ class Edit extends Component {
 						/>
 					</Toolbar>
 				</BlockControls>
+
+				{globalSettingsPanel(globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
 				<div className={`qubely-block-${uniqueId}`}>
 					<div className="qubely-block-wrapper-block">

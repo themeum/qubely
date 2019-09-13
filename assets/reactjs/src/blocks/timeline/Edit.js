@@ -2,7 +2,7 @@ const { __ } = wp.i18n
 const { Fragment, Component } = wp.element;
 const { PanelBody, Tooltip, Toolbar } = wp.components
 const { InspectorControls, RichText, BlockControls, MediaUpload } = wp.editor
-const { IconList,Inline: { InlineToolbar }, RadioAdvanced, Range, Color, Typography, Toggle, Separator, Border, BorderRadius, BoxShadow, Alignment, Padding, Headings, CssGenerator: { CssGenerator } } = wp.qubelyComponents
+const { IconList, Inline: { InlineToolbar }, RadioAdvanced, Range, Color, Typography, Toggle, Separator, Border, BorderRadius, BoxShadow, Alignment, Padding, Headings, gloalSettings: { globalSettingsPanel, animationSettings }, CssGenerator: { CssGenerator } } = wp.qubelyComponents
 
 class Edit extends Component {
 	constructor(props) {
@@ -177,6 +177,13 @@ class Edit extends Component {
 			connectorBarWidth,
 			connectorBarColor,
 
+			//animation
+			animation,
+			globalZindex,
+			hideTablet,
+			hideMobile,
+			globalCss
+
 		} } = this.props
 
 		const { device } = this.state
@@ -263,7 +270,7 @@ class Edit extends Component {
 						<Range label={__('Bar Width')} value={connectorBarWidth} onChange={val => setAttributes({ connectorBarWidth: val })} min={2} max={20} responsive unit={['px', 'em', '%']} device={device} onDeviceChange={value => this.setState({ device: value })} />
 						<Color label={__('Bar Color')} value={connectorBarColor} onChange={(value) => setAttributes({ connectorBarColor: value })} />
 					</PanelBody>
-
+					{animationSettings(uniqueId, animation, setAttributes)}
 				</InspectorControls>
 
 				<BlockControls>
@@ -275,6 +282,8 @@ class Edit extends Component {
 						/>
 					</Toolbar>
 				</BlockControls>
+
+				{globalSettingsPanel(globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
 				<div className={`qubely-block-${uniqueId}`}>
 					<div className={`qubely-block-timeline qubely-timeline-layout-vertical qubely-timeline-orientation-${orientation}`}>

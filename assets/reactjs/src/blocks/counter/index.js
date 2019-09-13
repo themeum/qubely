@@ -2,6 +2,7 @@ const { __ } = wp.i18n
 import Edit from './Edit'
 import Save from './Save'
 const { registerBlockType } = wp.blocks
+const { gloalSettings: { globalAttributes } } = wp.qubelyComponents
 
 registerBlockType( 'qubely/counter', {
   title: __('Counter'),
@@ -22,7 +23,7 @@ registerBlockType( 'qubely/counter', {
     prepostSpacing: { type: 'string', default: '', style: [{ selector: '{{QUBELY}} .qubely-block-counter-prefix {margin-right: {{prepostSpacing}};} {{QUBELY}} .qubely-block-counter-postfix {margin-left: {{prepostSpacing}};}' }] },
     counterTypo: { type: 'object', default: {}, style: [{ selector: '{{QUBELY}} .qubely-block-counter-content' }] },
     counterColor: { type: 'string', default: '', style: [{ selector: '{{QUBELY}} .qubely-block-counter-content {color: {{counterColor}};}' }] },
-    showGlobalSettings: { type: 'boolean', default: true },  // Global Settings
+    ...globalAttributes,
     showContextMenu: { type: 'boolean', default: true }
   },
   edit: Edit,

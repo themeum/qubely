@@ -5,8 +5,7 @@ const { Component, Fragment } = wp.element
 const { InnerBlocks, InspectorControls, BlockControls } = wp.editor
 const { createBlock } = wp.blocks
 const { select, dispatch } = wp.data
-const { Background, Border, BorderRadius, BoxShadow, Range, Separator, Dimension, CssGenerator: { CssGenerator } } = wp.qubelyComponents
-import '../../../components/GlobalSettings';
+const { Background, Border, BorderRadius, BoxShadow, Range, Separator, Dimension, gloalSettings: { globalSettingsPanel, animationSettings }, CssGenerator: { CssGenerator } } = wp.qubelyComponents
 
 class Edit extends Component {
     constructor() {
@@ -275,7 +274,31 @@ class Edit extends Component {
 
 
     render() {
-        const { attributes: { uniqueId, colWidth, padding, margin, colBg, colBorder, colRadius, colShadow, corner, borderRadius }, setAttributes, isSelected, clientId } = this.props
+        const {
+            attributes: {
+                uniqueId,
+                colWidth,
+                padding,
+                margin,
+                colBg,
+                colBorder,
+                colRadius,
+                colShadow,
+                corner,
+                borderRadius,
+                //animation
+                animation,
+                //global
+                globalZindex,
+                hideTablet,
+                hideMobile,
+                globalCss
+            },
+            setAttributes,
+            isSelected,
+            clientId
+        } = this.props
+        
         const { rowWidth, resizing, responsiveDevice } = this.state
         const { columns, nextBlockId, blockIndex } = this.checkColumnStatus()
 
@@ -328,6 +351,9 @@ class Edit extends Component {
                         <Separator />
                         <BorderRadius label={__('Radius')} value={borderRadius} onChange={val => setAttributes({ borderRadius: val })} min={0} max={100} unit={['px', 'em', '%']} responsive device={this.state.responsiveDevice} onDeviceChange={value => this.setState({ responsiveDevice: value })} />
                     </PanelBody>
+
+                    {animationSettings(uniqueId, animation, setAttributes)}
+
                 </InspectorControls>
 
                 <BlockControls>
@@ -350,6 +376,8 @@ class Edit extends Component {
                         }
                     </Toolbar>
                 </BlockControls>
+
+                {globalSettingsPanel(globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
                 {rowWidth !== 0 &&
                     <ResizableBox

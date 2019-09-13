@@ -2,9 +2,8 @@ const { __ } = wp.i18n;
 const { InspectorControls, BlockControls } = wp.editor
 const { Component, Fragment } = wp.element;
 const { PanelBody, ToggleControl, TextControl, RangeControl, Toolbar } = wp.components;
-const { Media, Separator, Inline: { InlineToolbar }, CssGenerator: { CssGenerator } } = wp.qubelyComponents
+const { Media, Separator, gloalSettings: { globalSettingsPanel, animationSettings }, Inline: { InlineToolbar }, CssGenerator: { CssGenerator } } = wp.qubelyComponents
 import mapStyles from './mapStyles'
-import '../../components/GlobalSettings'
 
 class Edit extends Component {
 
@@ -164,7 +163,31 @@ class Edit extends Component {
     }
 
     render() {
-        const { uniqueId, zoom, height, apiKey, mapAddress, selectedStyle, showZoomButtons, showMapTypeButtons, showStreetViewButton, showFullscreenButton, optionDraggable, showMarker, iconPointer } = this.props.attributes;
+        const {
+            setAttributes,
+            attributes: {
+                uniqueId,
+                zoom,
+                height,
+                apiKey,
+                mapAddress,
+                selectedStyle,
+                showZoomButtons,
+                showMapTypeButtons,
+                showStreetViewButton,
+                showFullscreenButton,
+                optionDraggable,
+                showMarker,
+                iconPointer,
+
+                //animation
+                animation,
+                //global
+                globalZindex,
+                hideTablet,
+                hideMobile,
+                globalCss }
+        } = this.props;
         if (uniqueId) { CssGenerator(this.props.attributes, 'map', uniqueId); }
 
         return (
@@ -261,6 +284,7 @@ class Edit extends Component {
                             }
                         </PanelBody>
                     </div>
+                    {animationSettings(uniqueId, animation, setAttributes)}
                 </InspectorControls>
 
                 <BlockControls>
@@ -271,6 +295,8 @@ class Edit extends Component {
                             prevState={this.state} />
                     </Toolbar>
                 </BlockControls>
+
+                {globalSettingsPanel(globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
                 <div className={`qubely-block-${uniqueId}`}>
                     <div className={apiKey ? 'qubely-google-map' : 'qubely-gmap-hide'}>

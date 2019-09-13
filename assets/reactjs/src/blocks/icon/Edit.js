@@ -16,11 +16,11 @@ const {
 	Tab,
 	Border,
 	BorderRadius,
+	gloalSettings: { globalSettingsPanel, animationSettings },
 	Inline: { InlineToolbar },
 	CssGenerator: { CssGenerator }
 } = wp.qubelyComponents
 
-import '../../components/GlobalSettings'
 import '../../components/ContextMenu'
 import icons from '../../helpers/icons'
 
@@ -57,8 +57,35 @@ class Edit extends Component {
 		setAttributes({ iconStyle: newStyle, border: newBorder })
 	}
 	render() {
-		const { uniqueId, name, url, alignment, iconSize, iconSizeCustom, iconBorderRadius, iconBackgroundSize, iconColor, iconHoverColor, bgColor, bgHoverColor, border, borderHoverColor, iconShadow, iconHoverShadow, iconStyle } = this.props.attributes
-		const { setAttributes } = this.props
+		const {
+			setAttributes,
+			attributes: {
+				uniqueId,
+				name,
+				url,
+				alignment,
+
+				iconSize,
+				iconSizeCustom,
+				iconBorderRadius,
+				iconBackgroundSize,
+				iconColor,
+				iconHoverColor,
+				
+				bgColor,
+				bgHoverColor,
+				border,
+				borderHoverColor,
+				iconShadow,
+				iconHoverShadow,
+				iconStyle,
+
+				animation,
+				globalZindex,
+				hideTablet,
+				hideMobile,
+				globalCss }
+		} = this.props
 
 		if (uniqueId) { CssGenerator(this.props.attributes, 'icon', uniqueId); }
 
@@ -208,6 +235,7 @@ class Edit extends Component {
 							</Tabs>
 						</PanelBody>
 					}
+					{animationSettings(uniqueId, animation, setAttributes)}
 				</InspectorControls>
 
 				<BlockControls>
@@ -219,6 +247,8 @@ class Edit extends Component {
 						/>
 					</Toolbar>
 				</BlockControls>
+
+				{globalSettingsPanel(globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
 				<div className={`qubely-block-${uniqueId}`}>
 					<div className="qubely-block-icon-wrapper">

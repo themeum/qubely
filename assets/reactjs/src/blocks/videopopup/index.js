@@ -3,6 +3,7 @@ import Edit from './Edit'
 import Save from './Save';
 const { __ } = wp.i18n
 const { registerBlockType } = wp.blocks
+const { gloalSettings: { globalAttributes } } = wp.qubelyComponents
 
 registerBlockType('qubely/videopopup', {
 	title: __('Video Popup'),
@@ -20,7 +21,7 @@ registerBlockType('qubely/videopopup', {
 		bgVideo: { type: 'object', default: {} },
 		url: { type: 'string', default: 'https://www.youtube.com/watch?v=HY3sut8LTSw' },
 		height: { type: 'object', default: { md: 500, unit: 'px' }, style: [{ condition: [{ key: 'layout', relation: '==', value: 'fill' }], selector: '{{QUBELY}} .qubely-block-videopopup-wrapper{ height:{{height}};}' }] },
-		background: { type: 'object', default: { bgType: 'image', openBg: 1, bgimgSize: 'cover', bgimgPosition: 'center center', bgImage: { url: 'https://builder.themeum.com/wp-content/uploads/2019/02/video-popup-bg.jpg' } },  style: [{condition: [{ key: 'layout', relation: '==', value: 'fill' }],selector: '{{QUBELY}} .qubely-block-videopopup-wrapper' }] },
+		background: { type: 'object', default: { bgType: 'image', openBg: 1, bgimgSize: 'cover', bgimgPosition: 'center center', bgImage: { url: 'https://builder.themeum.com/wp-content/uploads/2019/02/video-popup-bg.jpg' } }, style: [{ condition: [{ key: 'layout', relation: '==', value: 'fill' }], selector: '{{QUBELY}} .qubely-block-videopopup-wrapper' }] },
 		isRipple: { type: 'boolean', default: true },
 
 		// Icon
@@ -32,18 +33,18 @@ registerBlockType('qubely/videopopup', {
 		iconBorderRadius: {
 			type: 'object',
 			default: {
-                openBorderRadius: 1,
-                radiusType: 'global',
-                global: {md: 50},
-                unit: '%'
-            },
+				openBorderRadius: 1,
+				radiusType: 'global',
+				global: { md: 50 },
+				unit: '%'
+			},
 			style: [
 				{
 					selector: '{{QUBELY}} .qubely-block-videopopup .qubely-video-popup .qubely-btn-icon, {{QUBELY}} .qubely-block-videopopup .qubely-video-popup .qubely-btn-icon .qubely-ripple'
 				}
 			]
 		},
-		
+
 		iconBgColor: {
 			type: 'string',
 			default: '#2476CA',
@@ -54,16 +55,16 @@ registerBlockType('qubely/videopopup', {
 			]
 		},
 		iconHoverBgColor: { type: 'string', default: '', style: [{ selector: '{{QUBELY}} .qubely-block-videopopup .qubely-video-popup .qubely-btn-icon:hover{ background-color:{{iconHoverBgColor}}; }' }] },
-		
+
 		border: { type: 'object', default: {}, style: [{ selector: '{{QUBELY}} .qubely-btn-icon' }] },
 		hoverBorder: { type: 'object', default: {}, style: [{ selector: '{{QUBELY}} .qubely-btn-icon:hover' }] },
-		
+
 		borderRadius: {
 			type: 'object',
 			default: {
-                openBorderRadius: 1,
-                radiusType: 'global'
-            },
+				openBorderRadius: 1,
+				radiusType: 'global'
+			},
 			style: [
 				{
 					condition: [{ key: 'layout', relation: '==', value: 'fill' }],
@@ -79,68 +80,68 @@ registerBlockType('qubely/videopopup', {
 		prePostColor: { type: 'string', default: '', style: [{ selector: '{{QUBELY}} .qubely-block-videopopup-wrapper .qubely-block-videopopup span {color: {{prePostColor}};}' }] },
 		prePostHoverColor: { type: 'string', default: '', style: [{ selector: '{{QUBELY}} .qubely-block-videopopup-wrapper:hover .qubely-block-videopopup span {color: {{prePostHoverColor}};}' }] },
 		typography: { type: 'object', default: {}, style: [{ selector: '{{QUBELY}} .qubely-block-videopopup span' }] },
-		textGap: { type: 'object', default: {md: 10, unit: 'px'}, style: [{ selector: '{{QUBELY}} .qubely-video-popup-prefix{ margin-right:{{textGap}};} {{QUBELY}} .qubely-video-popup-postfix{ margin-left:{{textGap}};}' }] },
+		textGap: { type: 'object', default: { md: 10, unit: 'px' }, style: [{ selector: '{{QUBELY}} .qubely-video-popup-prefix{ margin-right:{{textGap}};} {{QUBELY}} .qubely-video-popup-postfix{ margin-left:{{textGap}};}' }] },
 
 		// overlay
 		enableBackgroundOverlay: { type: 'boolean', default: true },
-        overlayBackground: {
-            type: 'object',
-            default: {
+		overlayBackground: {
+			type: 'object',
+			default: {
 				openBg: 1,
 				bgDefaultColor: '#000'
 			},
-            style: [
-                {
-                    condition: [
+			style: [
+				{
+					condition: [
 						{ key: 'layout', relation: '==', value: 'fill' },
-                        { key: 'enableBackgroundOverlay', relation: '==', value: true },
-                    ],
-                    selector: '{{QUBELY}} .qubely-block-videopopup-overlay'
-                }
-            ]
+						{ key: 'enableBackgroundOverlay', relation: '==', value: true },
+					],
+					selector: '{{QUBELY}} .qubely-block-videopopup-overlay'
+				}
+			]
 		},
 		overlayOpacity: {
 			type: 'number',
 			default: .5,
-            style: [
-                {
-                    condition: [
+			style: [
+				{
+					condition: [
 						{ key: 'layout', relation: '==', value: 'fill' },
-                        { key: 'enableBackgroundOverlay', relation: '==', value: true },
-                    ],
-                    selector: '{{QUBELY}} .qubely-block-videopopup-overlay{opacity: {{overlayOpacity}}; }'
-                }
-            ]
+						{ key: 'enableBackgroundOverlay', relation: '==', value: true },
+					],
+					selector: '{{QUBELY}} .qubely-block-videopopup-overlay{opacity: {{overlayOpacity}}; }'
+				}
+			]
 		},
 		overlayHoverOpacity: {
 			type: 'number',
 			default: .6,
-            style: [
-                {
-                    condition: [
+			style: [
+				{
+					condition: [
 						{ key: 'layout', relation: '==', value: 'fill' },
-                        { key: 'enableBackgroundOverlay', relation: '==', value: true },
-                    ],
-                    selector: '{{QUBELY}} .qubely-block-videopopup-wrapper:hover .qubely-block-videopopup-overlay{opacity: {{overlayHoverOpacity}}; }'
-                }
-            ]
+						{ key: 'enableBackgroundOverlay', relation: '==', value: true },
+					],
+					selector: '{{QUBELY}} .qubely-block-videopopup-wrapper:hover .qubely-block-videopopup-overlay{opacity: {{overlayHoverOpacity}}; }'
+				}
+			]
 		},
 		overlayBlend: {
 			type: 'string',
 			default: '',
-            style: [
-                {
-                    condition: [
+			style: [
+				{
+					condition: [
 						{ key: 'layout', relation: '==', value: 'fill' },
-                        { key: 'enableBackgroundOverlay', relation: '==', value: true },
-                    ],
-                    selector: '{{QUBELY}} .qubely-block-videopopup-overlay{ mix-blend-mode:{{overlayBlend}}; }'
-                }
-            ]
-        },
+						{ key: 'enableBackgroundOverlay', relation: '==', value: true },
+					],
+					selector: '{{QUBELY}} .qubely-block-videopopup-overlay{ mix-blend-mode:{{overlayBlend}}; }'
+				}
+			]
+		},
 
 		// Global
-		showGlobalSettings: { type: 'boolean', default: true },
+		...globalAttributes,
 		showContextMenu: { type: 'boolean', default: true }
 	},
 	edit: Edit,

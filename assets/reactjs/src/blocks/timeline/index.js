@@ -1,10 +1,9 @@
 const { __ } = wp.i18n
-const { registerBlockType } = wp.blocks
-
 import './style.scss'
-
 import Edit from './Edit'
 import Save from './Save'
+const { registerBlockType } = wp.blocks
+const { gloalSettings: { globalAttributes } } = wp.qubelyComponents
 
 registerBlockType('qubely/timeline', {
 	title: __('Timeline'),
@@ -534,7 +533,7 @@ registerBlockType('qubely/timeline', {
 
 		//
 		timelineItems: { type: 'number', default: 5 },
-		showGlobalSettings: { type: 'boolean', default: true }, // Global Settings
+		...globalAttributes,
 		showContextMenu: { type: 'boolean', default: true },
 	},
 	edit: Edit,

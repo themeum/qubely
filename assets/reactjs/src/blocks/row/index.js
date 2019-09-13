@@ -1,7 +1,8 @@
-const { __ } = wp.i18n;
-const { registerBlockType } = wp.blocks
 import Edit from './Edit'
 import Save from './Save'
+const { __ } = wp.i18n;
+const { registerBlockType } = wp.blocks
+const { gloalSettings: { globalAttributes } } = wp.qubelyComponents
 
 registerBlockType('qubely/row', {
     title: __('Row'),
@@ -146,7 +147,7 @@ registerBlockType('qubely/row', {
         rowReverse: { type: 'object', default: { openRowReverse: true, values: {} }, style: [{ selector: '{{QUBELY}}.qubely-section .qubely-row, {{QUBELY}} .qubely-row > .editor-inner-blocks > .editor-block-list__layout' }] },
 
         rowCss: { type: 'string', default: '', style: [{ selector: '' }] },
-        showGlobalSettings: { type: 'boolean', default: true },
+        ...globalAttributes,
     },
     edit: Edit,
     save: Save

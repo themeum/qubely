@@ -6,12 +6,15 @@ const {
     Alignment,
     Range,
     Color,
+    gloalSettings: {
+        globalSettingsPanel,
+        animationSettings
+    },
     Inline: { InlineToolbar },
     CssGenerator: { CssGenerator }
 } = wp.qubelyComponents
 
 import icons from '../divider/icon'
-import '../../components/GlobalSettings'
 import '../../components/ContextMenu'
 const dividerOptions = ['fill', 'dot', 'dash', 'branch', 'dashes', 'leaf', 'line1', 'line2', 'line3', 'line4', 'line5', 'line6', 'line7', 'line8', 'line9', 'line10', 'line11', 'line12', 'line13', 'liner', 'mustache', 'shadow', 'slash', 'spring', 'valla', 'wave1', 'wave2', 'wave3']
 class Edit extends Component {
@@ -49,10 +52,26 @@ class Edit extends Component {
     }
 
     render() {
-        const { setAttributes, attributes: { uniqueId, color, height, width, alignment, style } } = this.props
+        const {
+            setAttributes,
+            attributes: {
+                uniqueId,
+                color,
+                height,
+                width,
+                alignment,
+                style,
+                animation,
+                globalZindex,
+                hideTablet,
+                hideMobile,
+                globalCss
+            }
+        } = this.props
 
         const { device } = this.state
         if (uniqueId) { CssGenerator(this.props.attributes, 'divider', uniqueId); }
+        
         return (
             <Fragment>
                 <InspectorControls key="inspector">
@@ -103,7 +122,7 @@ class Edit extends Component {
                             device={device}
                             onDeviceChange={value => this.setState({ device: value })} />
                     </PanelBody>
-
+                    {animationSettings(uniqueId, animation, setAttributes)}
                 </InspectorControls >
 
                 <BlockControls>
@@ -115,6 +134,8 @@ class Edit extends Component {
                         />
                     </Toolbar>
                 </BlockControls>
+
+                {globalSettingsPanel(globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
                 <div className={`qubely-block-${uniqueId}`}>
                     <Dropdown

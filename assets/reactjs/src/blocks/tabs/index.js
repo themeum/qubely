@@ -3,6 +3,7 @@ import Save from './Save'
 import Edit from './Edit'
 const { __ } = wp.i18n
 const { registerBlockType } = wp.blocks
+const { gloalSettings: { globalAttributes } } = wp.qubelyComponents
 
 registerBlockType('qubely/tabs', {
     title: __('Tabs'),
@@ -318,29 +319,7 @@ registerBlockType('qubely/tabs', {
             ]
         },
 
-        // Tabs Border
-        // bodyBorderWidthTabs: { type: 'string', default: 1,
-        //     style: [
-        //         {
-        //             condition:[
-        //                 { key: 'tabStyle', relation: '==', value: 'tabs' }
-        //             ],
-        //             selector: '{{QUBELY}} .qubely-block-tab .qubely-tab-nav .qubely-tab-item .qubely-tab-title {border: {{bodyBorderWidthTabs}}px solid transparent;} {{QUBELY}} .qubely-block-tab .qubely-tab-body {border: {{bodyBorderWidthTabs}}px solid transparent;} {{QUBELY}} .qubely-block-tab .qubely-tab-nav {margin-bottom: -{{bodyBorderWidthTabs}}px;} {{QUBELY}} .qubely-block-tab .qubely-tab-nav .qubely-tab-item.qubely-active .qubely-tab-title:after {height: {{bodyBorderWidthTabs}}px; bottom: -{{bodyBorderWidthTabs}}px} {{QUBELY}} .qubely-block-tab .qubely-tab-nav .qubely-tab-item:not(:first-child) {margin-left: -{{bodyBorderWidthTabs}}px;}' 
-        //         }
-        //     ]
-        // },
-        // bodyBorderColorTabs: { type: 'string', default: '#e5e5e5',
-        //     style: [
-        //         {
-        //             condition:[
-        //                 { key: 'tabStyle', relation: '==', value: 'tabs' }
-        //             ],
-        //             selector: '{{QUBELY}} .qubely-block-tab .qubely-tab-nav .qubely-tab-item .qubely-tab-title { border-color:{{bodyBorderColorTabs}};} {{QUBELY}} .qubely-block-tab .qubely-tab-body { border-color:{{bodyBorderColorTabs}};}' 
-        //         }
-        //     ]
-        // },
-
-        showGlobalSettings: { type: 'boolean', default: true },
+        ...globalAttributes,
     },
     edit: Edit,
     save: Save

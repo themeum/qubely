@@ -5,9 +5,8 @@ const { select, withSelect, withDispatch } = wp.data
 const { Component, Fragment } = wp.element
 const { getBlock } = select('core/editor')
 const { RichText, InspectorControls, BlockControls } = wp.editor
-const { Color, Toggle, Border, Padding, Alignment, Typography, QubelyButtonEdit, Inline: { InlineToolbar }, ColorAdvanced, Range, RadioAdvanced, Tabs, Tab, Separator, QubelyIconListEdit, BoxShadow, Styles, BorderRadius, CssGenerator: { CssGenerator } } = wp.qubelyComponents
+const { Color, Toggle, Border, Padding, Alignment, Typography, QubelyButtonEdit, gloalSettings: { globalSettingsPanel, animationSettings }, Inline: { InlineToolbar }, ColorAdvanced, Range, RadioAdvanced, Tabs, Tab, Separator, QubelyIconListEdit, BoxShadow, Styles, BorderRadius, CssGenerator: { CssGenerator } } = wp.qubelyComponents
 import '../../components/ListComponent'
-import '../../components/GlobalSettings'
 import '../../components/ContextMenu'
 import icons from '../../helpers/icons'
 
@@ -211,6 +210,14 @@ class Edit extends Component {
 				enablePostButtonText,
 				//Badge
 				enableBadge, badge, badgeStyle, badgeSize, badgePosition, badgeSpacing, badgeSpacingTop, badgeColor, badgeBg, badgeTypography, badgeRadius,
+
+				//animation
+				animation,
+				//global
+				globalZindex,
+				hideTablet,
+				hideMobile,
+				globalCss
 			}
 
 		} = this.props
@@ -636,7 +643,7 @@ class Edit extends Component {
 						}
 
 					</PanelBody>
-
+					{animationSettings(uniqueId, animation, setAttributes)}
 				</InspectorControls>
 
 				<BlockControls>
@@ -648,6 +655,8 @@ class Edit extends Component {
 
 					</Toolbar>
 				</BlockControls>
+
+				{globalSettingsPanel(globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
 				<div className={`qubely-block-${uniqueId}`} >
 					<div className={`qubely-block-pricing`}>

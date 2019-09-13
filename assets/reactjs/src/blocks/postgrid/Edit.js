@@ -5,8 +5,7 @@ const { dateI18n, __experimentalGetSettings } = wp.date
 const { addQueryArgs } = wp.url
 const { RangeControl, PanelBody, Toolbar, Spinner, TextControl, SelectControl } = wp.components;
 const { InspectorControls, BlockControls } = wp.editor
-const { Range, ButtonGroup,Inline: { InlineToolbar }, Toggle, Dropdown, Select, Separator, ColorAdvanced, Typography, Color, Border, BorderRadius, Padding, BoxShadow, Styles, Tabs, Tab, RadioAdvanced, CssGenerator: { CssGenerator } } = wp.qubelyComponents
-import '../../components/GlobalSettings'
+const { Range, ButtonGroup, Inline: { InlineToolbar }, Toggle, Dropdown, Select, Separator, ColorAdvanced, Typography, Color, Border, BorderRadius, Padding, BoxShadow, Styles, Tabs, Tab, RadioAdvanced, gloalSettings: { globalSettingsPanel, animationSettings }, CssGenerator: { CssGenerator } } = wp.qubelyComponents
 import '../../components/ContextMenu'
 import icons from '../../helpers/icons'
 
@@ -224,7 +223,15 @@ class Edit extends Component {
 				titleSpace,
 				categorySpace,
 				metaSpace,
-				excerptSpace
+				excerptSpace,
+
+				//animation
+				animation,
+				//global
+				globalZindex,
+				hideTablet,
+				hideMobile,
+				globalCss
 
 			}
 		} = this.props
@@ -600,7 +607,7 @@ class Edit extends Component {
 						<Color label={__('Meta')} value={style !== 4 ? metaColor : metaOverlayColor} onChange={value => setAttributes(style !== 4 ? { metaColor: value } : { metaOverlayColor: value })} />
 						<Color label={__('Excerpt')} value={style !== 4 ? excerptColor : excerptColor2} onChange={value => setAttributes(style !== 4 ? { excerptColor: value } : { excerptColor2: value })} />
 					</PanelBody>
-
+					{animationSettings(uniqueId, animation, setAttributes)}
 				</InspectorControls>
 
 				<BlockControls>
@@ -612,6 +619,8 @@ class Edit extends Component {
 						/>
 					</Toolbar>
 				</BlockControls>
+
+				{globalSettingsPanel(globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
 				<div className={`qubely-block-${uniqueId}`}>
 					{

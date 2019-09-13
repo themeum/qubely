@@ -15,12 +15,15 @@ const {
     QubelyButtonEdit,
     BorderRadius,
     Separator,
+    gloalSettings: {
+        globalSettingsPanel,
+        animationSettings
+    },
     Inline: { InlineToolbar },
     CssGenerator: { CssGenerator }
 } = wp.qubelyComponents
 
 import icons from '../../helpers/icons'
-import '../../components/GlobalSettings'
 import '../../components/ContextMenu'
 
 
@@ -57,7 +60,16 @@ class Edit extends Component {
     render() {
         const { selectedItem, device } = this.state;
         const { attributes, setAttributes } = this.props;
-        const { uniqueId, formItems, labelTypography, labelColor, labelColorFocus, inputTypography, inputColor, inputColorFocus, inputColorHover, inputBg, inputBgFocus, inputBgHover, inputBorder, inputBorderMaterial, inputBorderColorFocus, inputBorderColorHover, inputBorderRadius, inputSize, inputPaddingX, inputPaddingY, textareaHeight, placeholderColor, placeholderColorFocus, placeholderColorHover, enableButton, buttonTag, buttonSize, buttonFillType, buttonText, buttonIconName, buttonIconPosition, spacing, gutter, fieldErrorMessage, formSuccessMessage, formErrorMessage, reCaptcha, reCaptchaSiteKey, reCaptchaSecretKey, emailReceiver, emailHeaders, emailFrom, emailSubject, emailBody, layout } = attributes;
+        const { uniqueId, formItems, labelTypography, labelColor, labelColorFocus,
+            inputTypography, inputColor, inputColorFocus, inputColorHover,
+            inputBg, inputBgFocus, inputBgHover, inputBorder, inputBorderMaterial,
+            inputBorderColorFocus, inputBorderColorHover, inputBorderRadius, inputSize,
+            inputPaddingX, inputPaddingY, textareaHeight, placeholderColor, placeholderColorFocus,
+            placeholderColorHover, enableButton, buttonTag, buttonSize, buttonFillType,
+            buttonText, buttonIconName, buttonIconPosition, spacing, gutter, fieldErrorMessage,
+            formSuccessMessage, formErrorMessage, reCaptcha, reCaptchaSiteKey, reCaptchaSecretKey,
+            emailReceiver, emailHeaders, emailFrom, emailSubject, emailBody, layout,
+            animation, globalZindex, hideTablet, hideMobile, globalCss } = attributes;
         if (uniqueId) { CssGenerator(this.props.attributes, 'contactform', uniqueId); }
 
         return (
@@ -335,6 +347,7 @@ class Edit extends Component {
                             </Tab>
                         </Tabs>
                     </PanelBody>
+                    {animationSettings(uniqueId, animation, setAttributes)}
                 </InspectorControls>
 
                 <BlockControls>
@@ -345,6 +358,8 @@ class Edit extends Component {
                             prevState={this.state} />
                     </Toolbar>
                 </BlockControls>
+
+                {globalSettingsPanel(globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
                 <div className={`qubely-block-${uniqueId}`}>
                     <div className={`qubely-block-contact-form qubely-layout-${layout}`}>

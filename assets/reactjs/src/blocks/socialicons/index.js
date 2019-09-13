@@ -3,6 +3,7 @@ import Edit from './Edit'
 import Save from './Save';
 const { __ } = wp.i18n
 const { registerBlockType } = wp.blocks
+const { gloalSettings: { globalAttributes } } = wp.qubelyComponents
 
 registerBlockType('qubely/socialicons', {
     title: __('Social Icons'),
@@ -58,7 +59,7 @@ registerBlockType('qubely/socialicons', {
         IconBackgroundHover: { type: 'string', default: '', style: [{ condition: [{ key: 'layout', relation: '==', value: 'fill' }, { key: 'useDefaultStyle', relation: '==', value: false }], selector: '{{QUBELY}} .qubely-block-social-icons .qubely-ul li.qubely-social-item a:hover {background-color: {{IconBackgroundHover}};}' }] },
         iconBorder: { type: 'object', default: {}, style: [{ condition: [{ key: 'layout', relation: '==', value: 'fill' }, { key: 'useDefaultStyle', relation: '==', value: false }], selector: '{{QUBELY}} .qubely-block-social-icons .qubely-ul li.qubely-social-item a' }] },
         iconBorderColorHover: { type: 'string', default: '', style: [{ condition: [{ key: 'layout', relation: '==', value: 'fill' }, { key: 'useDefaultStyle', relation: '==', value: false }], selector: '{{QUBELY}} .qubely-block-social-icons .qubely-ul li.qubely-social-item a:hover {border-color: {{iconBorderColorHover}};}' }] },
-        showGlobalSettings: { type: 'boolean', default: true },  // Global Settings
+        ...globalAttributes,  // Global Settings
         showContextMenu: { type: 'boolean', default: true }
     },
     edit: Edit,

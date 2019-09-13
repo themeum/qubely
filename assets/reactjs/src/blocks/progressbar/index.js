@@ -3,6 +3,7 @@ import Edit from './Edit'
 import Save from './Save'
 const { registerBlockType } = wp.blocks
 const { __ } = wp.i18n
+const { gloalSettings: { globalAttributes } } = wp.qubelyComponents
 
 registerBlockType( 'qubely/progressbar', {
 	title: __('Progress Bar'),
@@ -42,7 +43,7 @@ registerBlockType( 'qubely/progressbar', {
 		},
 		showProgress: {type: 'boolean', default: true},
 		
-		showGlobalSettings: { type: 'boolean', default: true },
+		...globalAttributes,
 		showContextMenu: { type: 'boolean', default: true }
 	},
 	edit: Edit,

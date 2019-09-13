@@ -10,6 +10,10 @@ const {
     Toggle,
     Headings,
     RadioAdvanced,
+    gloalSettings: {
+        globalSettingsPanel,
+        animationSettings
+    },
     Inline: {
         InlineToolbar,
         InlineSelector
@@ -17,7 +21,6 @@ const {
     CssGenerator: { CssGenerator }
 } = wp.qubelyComponents
 
-import '../../components/GlobalSettings'
 import '../../components/ContextMenu'
 import '../../components/fields/inline/editorInline'
 import svg from '../heading/separators'
@@ -39,9 +42,41 @@ class Edit extends Component {
     }
 
     render() {
-        const { uniqueId, content, typography, alignment, selector, textColor, separatorStyle, separatorColor, separatorStroke, separatorPosition, separatorWidth, separatorSpacing, subHeading, subHeadingLevel, subHeadingContent, subHeadingTypography, subHeadingColor, subHeadingSpacing, subHeadingPosition } = this.props.attributes
-        const { setAttributes } = this.props
+        const {
+            setAttributes,
+            attributes: {
+                uniqueId,
+                content,
+                typography,
+                alignment,
+                selector,
+                textColor,
+
+                separatorStyle,
+                separatorColor,
+                separatorStroke,
+                separatorPosition,
+                separatorWidth,
+                separatorSpacing,
+
+                subHeading,
+                subHeadingLevel,
+                subHeadingContent,
+                subHeadingTypography,
+                subHeadingColor,
+                subHeadingSpacing,
+                subHeadingPosition,
+
+                animation,
+                globalZindex,
+                hideTablet,
+                hideMobile,
+                globalCss
+            }
+        } = this.props
+
         const { device } = this.state
+
         const separators = {
             solid: { type: 'css', separator: 'solid', width: 300, stroke: 10 },
             double: { type: 'css', separator: 'double', width: 300, stroke: 10 },
@@ -137,6 +172,7 @@ class Edit extends Component {
                             </Fragment>
                         }
                     </PanelBody>
+                    {animationSettings(uniqueId, animation, setAttributes)}
                 </InspectorControls>
 
                 <BlockControls>
@@ -158,6 +194,8 @@ class Edit extends Component {
                         />
                     </Toolbar>
                 </BlockControls>
+
+                {globalSettingsPanel(globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
                 <div className={`qubely-block-${uniqueId}`}>
                     <div className={`qubely-block-heading ${separatorStyle ? 'qubely-has-separator qubely-separator-position-' + separatorPosition : ''}`}>

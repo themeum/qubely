@@ -1,12 +1,12 @@
 import './style.scss'
 import Edit from './Edit'
 import Save from './Save';
-const { __ } = wp.i18n
-const { Fragment, Component } = wp.element;
-const { RichText } = wp.editor
 import svg from '../heading/separators';
-const { HelperFunction: { animationAttr } } = wp.qubelyComponents
+const { __ } = wp.i18n
+const { Fragment } = wp.element;
+const { RichText } = wp.editor
 const { registerBlockType } = wp.blocks
+const { gloalSettings: { globalAttributes }, HelperFunction: { animationAttr } } = wp.qubelyComponents
 
 registerBlockType('qubely/text', {
     title: __('Advanced Text'),
@@ -197,16 +197,12 @@ registerBlockType('qubely/text', {
                 },
             ]
         },
-
-
-        showGlobalSettings: { type: 'boolean', default: true },
+        ...globalAttributes,
         showContextMenu: { type: 'boolean', default: true }
     },
     deprecated: [
         {
             save(props) {
-                console.log('depricated save function', props.attributes.content)
-
                 const separators = {
                     solid: { type: 'css', separator: 'solid', width: 300, stroke: 10 },
                     double: { type: 'css', separator: 'double', width: 300, stroke: 10 },
@@ -253,7 +249,6 @@ registerBlockType('qubely/text', {
                                     }
                                 </div>
                             }
-
                             <RichText.Content tagName={selector} value={content} className="qubely-block-text-content" />
                         </div>
                     </div>

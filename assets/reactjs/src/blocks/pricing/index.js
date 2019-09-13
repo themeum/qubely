@@ -3,6 +3,7 @@ const { __ } = wp.i18n
 import Save from './Save'
 import Edit from './Edit'
 const { registerBlockType } = wp.blocks
+const { gloalSettings: { globalAttributes } } = wp.qubelyComponents
 
 registerBlockType('qubely/pricing', {
     title: __('Pricing'),
@@ -569,7 +570,7 @@ registerBlockType('qubely/pricing', {
         listComponent: { type: 'boolean', default: true },
         listType: { type: 'string', default: 'unordered' },
         bulletStyle: { type: 'string', default: 'check-circle-outline' },
-        showGlobalSettings: { type: 'boolean', default: true },
+        ...globalAttributes,
         showContextMenu: { type: 'boolean', default: true },
 
     },

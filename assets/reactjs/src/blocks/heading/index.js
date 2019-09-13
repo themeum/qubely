@@ -3,6 +3,7 @@ import Edit from './Edit'
 import Save from './Save';
 const { __ } = wp.i18n
 const { registerBlockType } = wp.blocks
+const { gloalSettings: { globalAttributes } } = wp.qubelyComponents
 
 registerBlockType('qubely/heading', {
 	title: __('Heading'),
@@ -147,7 +148,7 @@ registerBlockType('qubely/heading', {
 				}
 			],
 		},
-		showGlobalSettings: { type: 'boolean', default: true },
+		...globalAttributes,
 		showContextMenu: { type: 'boolean', default: true }
 	},
 	edit: Edit,

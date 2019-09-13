@@ -3,6 +3,7 @@ import Edit from './Edit'
 import Save from './Save';
 const { __ } = wp.i18n
 const { registerBlockType } = wp.blocks
+const { gloalSettings: { globalAttributes } } = wp.qubelyComponents
 
 const formItems = [
     { type: 'text', label: 'Full Name', name: 'full-name ', placeholder: 'Full Name', width: { md: 50 }, required: true, hideLabel: false },
@@ -298,7 +299,7 @@ registerBlockType('qubely/contactform', {
         emailFrom: { type: 'string', default: 'Your Name: admin@example.com' },
         emailSubject: { type: 'string', default: '{{subject}} | {{email}} | {{site-name}}' },
         emailBody: { type: 'string', default: '<p><strong>From:</strong> {{full-name }}</p><strong>Email:</strong> {{email}}</p>\n<p><strong>Subject:</strong> {{subject}}</p>\n<p><strong>Message:</strong> {{message}}</p>' },
-        showGlobalSettings: { type: 'boolean', default: true },  // Global Settings
+        ...globalAttributes,
         showContextMenu: { type: 'boolean', default: true }
     },
     edit: Edit,

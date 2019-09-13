@@ -2,9 +2,8 @@ const { __ } = wp.i18n
 const { Fragment, Component } = wp.element;
 const { PanelBody, TextControl, Toolbar } = wp.components
 const { RichText, BlockControls, InspectorControls, AlignmentToolbar } = wp.editor
-const { Media, RadioAdvanced, Range, Color, Typography, Toggle, Separator, ColorAdvanced, Border, BorderRadius, BoxShadow, Styles, Alignment, Padding, Tabs, Tab, Inline: { InlineToolbar }, CssGenerator: { CssGenerator } } = wp.qubelyComponents
+const { Media, RadioAdvanced, Range, Color, Typography, Toggle, Separator, ColorAdvanced, Border, BorderRadius, BoxShadow, Styles, Alignment, Padding, Tabs, Tab, gloalSettings: { globalSettingsPanel, animationSettings }, Inline: { InlineToolbar }, CssGenerator: { CssGenerator } } = wp.qubelyComponents
 import icons from '../../helpers/icons'
-import '../../components/GlobalSettings'
 import '../../components/ContextMenu'
 
 class Edit extends Component {
@@ -29,7 +28,57 @@ class Edit extends Component {
         this.setState({ ...this.state, openPanelSetting: panelName })
     }
     render() {
-        const { uniqueId, layout, message, messageSpacingTop, messageSpacingBottom, name, nameColor, alignment, designation, designationColor, showAvatar, avatar, avatar2x, avatarAlt, avatarBorderRadius, avatarSize, avatarWidth, avatarHeight, avatarBorder, avatarSpacing, avatarLayout, quoteIconColor, quoteIconSize, quoteIconSpacing, nameTypo, nameSpacing, messageTypo, designationTypo, starsSize, showRatings, ratingsColor, quoteIcon, ratings, ratingsSpacing, bgPadding, textColor, bgColor, bgBorderRadius, border, boxShadow, boxShadowHover } = this.props.attributes
+        const {
+            uniqueId,
+            layout,
+            message,
+            messageSpacingTop,
+            messageSpacingBottom,
+            name,
+            nameColor,
+            alignment,
+            designation,
+            designationColor,
+            showAvatar,
+            avatar,
+            avatar2x,
+            avatarAlt,
+            avatarBorderRadius,
+            avatarSize,
+            avatarWidth,
+            avatarHeight,
+            avatarBorder,
+            avatarSpacing,
+            avatarLayout,
+            quoteIconColor,
+            quoteIconSize,
+            quoteIconSpacing,
+            nameTypo,
+            nameSpacing,
+            messageTypo,
+            designationTypo,
+            starsSize,
+            showRatings,
+            ratingsColor,
+            quoteIcon,
+            ratings,
+            ratingsSpacing,
+            bgPadding,
+            textColor,
+            bgColor,
+            bgBorderRadius,
+            border,
+            boxShadow,
+            boxShadowHover,
+
+            //animation
+            animation,
+            globalZindex,
+            hideTablet,
+            hideMobile,
+            globalCss
+        } = this.props.attributes
+
         const { setAttributes } = this.props
         const { openPanelSetting, device } = this.state
         if (uniqueId) { CssGenerator(this.props.attributes, 'testimonial', uniqueId); }
@@ -389,6 +438,8 @@ class Edit extends Component {
 
                     </PanelBody>
 
+                    {animationSettings(uniqueId, animation, setAttributes)}
+
                 </InspectorControls>
 
                 <BlockControls>
@@ -405,6 +456,8 @@ class Edit extends Component {
                         onChange={(value) => { setAttributes({ alignment: value }) }}
                     />
                 </BlockControls>
+
+                {globalSettingsPanel(globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
                 <div className={`qubely-block-${uniqueId}`}>
                     <div className={`qubely-block-testimonial`}>

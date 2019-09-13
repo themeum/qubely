@@ -2,9 +2,8 @@ const { __ } = wp.i18n
 const { Fragment, Component } = wp.element;
 const { PanelBody, RangeControl, TextControl, Toolbar } = wp.components
 const { InspectorControls, BlockControls } = wp.editor
-const { Media, Background, Tabs, Tab, Range, BoxShadow, Separator, RadioAdvanced, Typography, Select, Color, Styles, Toggle, Border, Alignment, BorderRadius, Inline: { InlineToolbar }, CssGenerator: { CssGenerator } } = wp.qubelyComponents
+const { Media, Background, Tabs, Tab, Range, BoxShadow, Separator, RadioAdvanced, Typography, Select, Color, Styles, Toggle, Border, Alignment, BorderRadius, gloalSettings: { globalSettingsPanel, animationSettings }, Inline: { InlineToolbar }, CssGenerator: { CssGenerator } } = wp.qubelyComponents
 import icons from '../../helpers/icons'
-import '../../components/GlobalSettings'
 import '../../components/ContextMenu'
 
 class Edit extends Component {
@@ -35,8 +34,52 @@ class Edit extends Component {
     }
 
     render() {
-        const { uniqueId, videoSource, bgVideo, url, icon, height, iconColor, iconHoverColor, iconSize, iconSizeCustom, background, enableBackgroundOverlay, borderRadius, layout, shadow, shadowHover, postfix, prefix, typography, textGap, overlayBackground, overlayBlend, overlayOpacity, overlayHoverOpacity, iconBorderRadius, iconBgColor, isRipple, iconHoverBgColor, border, hoverBorder, prePostColor, prePostHoverColor, alignment } = this.props.attributes
-        const { setAttributes } = this.props
+        const {
+            setAttributes,
+            attributes: {
+                uniqueId,
+                videoSource,
+                bgVideo,
+                url,
+                icon,
+                height,
+                iconColor,
+                iconHoverColor,
+                iconSize,
+                iconSizeCustom,
+                background,
+                enableBackgroundOverlay,
+                borderRadius,
+                layout,
+                shadow,
+                shadowHover,
+                postfix,
+                prefix,
+                typography,
+                textGap,
+                overlayBackground,
+                overlayBlend,
+                overlayOpacity,
+                overlayHoverOpacity,
+                iconBorderRadius,
+                iconBgColor,
+                isRipple,
+                iconHoverBgColor,
+                border,
+                hoverBorder,
+                prePostColor,
+                prePostHoverColor,
+                alignment,
+
+                //animation
+                animation,
+                globalZindex,
+                hideTablet,
+                hideMobile,
+                globalCss
+            }
+        } = this.props
+
         const { device } = this.state
         if (uniqueId) { CssGenerator(this.props.attributes, 'videopopup', uniqueId); }
 
@@ -172,7 +215,7 @@ class Edit extends Component {
                             </PanelBody>
                         </Fragment>
                     }
-
+                    {animationSettings(uniqueId, animation, setAttributes)}
                 </InspectorControls>
 
                 <BlockControls>
@@ -184,6 +227,8 @@ class Edit extends Component {
                         />
                     </Toolbar>
                 </BlockControls>
+
+                {globalSettingsPanel(globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
                 <div className={`qubely-block-${uniqueId}`}>
                     <div className={`qubely-block-videopopup-wrapper qubely-alignment-${alignment}`}>

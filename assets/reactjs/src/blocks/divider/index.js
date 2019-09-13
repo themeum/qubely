@@ -1,8 +1,9 @@
 import './style.scss'
 import Edit from './Edit'
+import Save from './Save';
 const { __ } = wp.i18n
 const { registerBlockType } = wp.blocks
-import Save from './Save';
+const { gloalSettings: { globalAttributes } } = wp.qubelyComponents
 
 registerBlockType ( 'qubely/divider', {
     title: __( 'Divider' ),
@@ -18,7 +19,7 @@ registerBlockType ( 'qubely/divider', {
 		height: { type: 'object', default: {md: '2', unit: 'px'}, style: [{ selector: '{{QUBELY}} .qubely-block-divider > div { border-top-width: {{height}};}' }] }, 
 		width: { type: 'object', default: {md: '280', unit: 'px'}, style: [{ selector: '{{QUBELY}} .qubely-block-divider > div { width: {{width}};} {{QUBELY}} .qubely-block-divider svg { width: {{width}};}' }] },
 		alignment: { type: 'object', default: {md: 'center'}, style: [{ selector: '{{QUBELY}} .qubely-block-divider {text-align: {{alignment}};}' }]},
-        showGlobalSettings: { type: 'boolean', default: true },  // Global Settings
+        ...globalAttributes,
         showContextMenu: { type: 'boolean', default: true }
     },
     edit: Edit,

@@ -2,9 +2,8 @@ const { __ } = wp.i18n
 const { Fragment, Component } = wp.element;
 const { PanelBody, TextControl, Toolbar } = wp.components
 const { RichText, InspectorControls, BlockControls } = wp.editor
-const { Media, Tabs, Tab, Range, Separator, RadioAdvanced, Typography, Toggle, Styles, Alignment, ColorAdvanced, Color, Border, BoxShadow, BorderRadius, Padding, Inline: { InlineToolbar },CssGenerator: { CssGenerator } } = wp.qubelyComponents
+const { Media, Tabs, Tab, Range, Separator, RadioAdvanced, Typography, Toggle, Styles, Alignment, ColorAdvanced, Color, Border, BoxShadow, BorderRadius, Padding, gloalSettings: { globalSettingsPanel, animationSettings }, Inline: { InlineToolbar }, CssGenerator: { CssGenerator } } = wp.qubelyComponents
 import icons from '../../helpers/icons'
-import '../../components/GlobalSettings'
 import '../../components/ContextMenu'
 class Edit extends Component {
 
@@ -107,6 +106,12 @@ class Edit extends Component {
             bodyBorderRadius,
             bodyBoxShadow,
 
+            //animation
+            animation,
+            globalZindex,
+            hideTablet,
+            hideMobile,
+            globalCss
         } = this.props.attributes
 
         const { setAttributes } = this.props
@@ -331,6 +336,7 @@ class Edit extends Component {
                         <BorderRadius label={__('Radius')} value={bodyBorderRadius} onChange={val => setAttributes({ bodyBorderRadius: val })} min={0} max={100} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
                         <BoxShadow label={__('Box-Shadow')} value={bodyBoxShadow} onChange={(value) => setAttributes({ bodyBoxShadow: value })} />
                     </PanelBody>
+                    {animationSettings(uniqueId, animation, setAttributes)}
                 </InspectorControls>
 
                 <BlockControls>
@@ -342,6 +348,8 @@ class Edit extends Component {
                         />
                     </Toolbar>
                 </BlockControls>
+
+                {globalSettingsPanel(globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
                 <div className={`qubely-block-${uniqueId}`}>
                     <div className={`qubely-block-team qubely-team-layout-${layout}`}>
