@@ -2,8 +2,7 @@ const { __ } = wp.i18n
 const { Fragment, Component } = wp.element;
 const { PanelBody, TextControl, Toolbar } = wp.components
 const { InspectorControls, BlockControls } = wp.editor
-const { RadioAdvanced, Range, Typography, ColorAdvanced, Toggle, Color, BorderRadius, CssGenerator: { CssGenerator } } = wp.qubelyComponents
-import InlineToolbar from '../../components/fields/inline/InlineToolbar'
+const { RadioAdvanced, Range, Typography, ColorAdvanced, Toggle, Color, BorderRadius,Inline: { InlineToolbar }, CssGenerator: { CssGenerator } } = wp.qubelyComponents
 import '../../components/GlobalSettings'
 import '../../components/ContextMenu'
 

@@ -8,9 +8,10 @@ const {
 	Alignment,
 	Typography,
 	Color,
+	Inline: { InlineToolbar },
 	CssGenerator: { CssGenerator }
 } = wp.qubelyComponents
-import InlineToolbar from '../../components/fields/inline/InlineToolbar'
+
 import '../../components/GlobalSettings'
 import '../../components/ContextMenu'
 

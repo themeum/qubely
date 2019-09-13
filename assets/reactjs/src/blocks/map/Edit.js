@@ -2,9 +2,8 @@ const { __ } = wp.i18n;
 const { InspectorControls, BlockControls } = wp.editor
 const { Component, Fragment } = wp.element;
 const { PanelBody, ToggleControl, TextControl, RangeControl, Toolbar } = wp.components;
-const { Media, Separator, CssGenerator: { CssGenerator } } = wp.qubelyComponents
+const { Media, Separator, Inline: { InlineToolbar }, CssGenerator: { CssGenerator } } = wp.qubelyComponents
 import mapStyles from './mapStyles'
-import InlineToolbar from '../../components/fields/inline/InlineToolbar'
 import '../../components/GlobalSettings'
 
 class Edit extends Component {

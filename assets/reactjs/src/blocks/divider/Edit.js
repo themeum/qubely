@@ -6,10 +6,10 @@ const {
     Alignment,
     Range,
     Color,
+    Inline: { InlineToolbar },
     CssGenerator: { CssGenerator }
 } = wp.qubelyComponents
 
-import InlineToolbar from '../../components/fields/inline/InlineToolbar'
 import icons from '../divider/icon'
 import '../../components/GlobalSettings'
 import '../../components/ContextMenu'

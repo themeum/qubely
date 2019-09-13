@@ -38,6 +38,9 @@ import Carousel from './fields/Carousel'
 import { QubelyButtonEdit, QubelyButtonSave } from './fields/QubelyButton'
 import { QubelyIconListEdit, QubelyIconListSave } from './fields/QubelyIconList'
 
+//inline
+import { InlineToolbar, InlineSpacer, InlineSelector } from './fields/inline'
+
 //functions
 import {
     CssGenerator,
@@ -54,6 +57,11 @@ import {
     videoBackground,
     _equal
 } from './HelperFunction'
+
+//hooks
+
+import { globalAttributes, globalSettingsPanel, animationSettings } from './fields/GlobalSettings'
+
 
 wp.qubelyComponents = {
     Alignment,
@@ -77,6 +85,11 @@ wp.qubelyComponents = {
     Device,
     Dropdown,
     DragDimension,
+    gloalSettings: {
+        globalAttributes,
+        animationSettings,
+        globalSettingsPanel,
+    },
     Gradient,
     Headings,
     HelperFunction: {
@@ -91,6 +104,11 @@ wp.qubelyComponents = {
     IconList,
     IconSelector,
     InnerPanel,
+    Inline: {
+        InlineToolbar,
+        InlineSpacer,
+        InlineSelector
+    },
     Margin,
     Media,
     Padding,

@@ -4,9 +4,7 @@ const { compose } = wp.compose
 const { withSelect, withDispatch } = wp.data
 const { PanelBody, Toolbar, Tooltip } = wp.components
 const { RichText, InspectorControls, BlockControls } = wp.editor
-const { Alignment, Typography, Color, ColorAdvanced, IconList, Select, Styles, Tabs, Tab, Range, Url, BoxShadow, RadioAdvanced, Separator, Border, BorderRadius, Padding,CssGenerator: { CssGenerator } } = wp.qubelyComponents
-import InlineToolbar from '../../components/fields/inline/InlineToolbar'
-import '../../components/GlobalSettings'
+const { Alignment, Typography, Color, ColorAdvanced, gloalSettings: { globalSettingsPanel, animationSettings }, IconList, Inline: { InlineToolbar }, Select, Styles, Tabs, Tab, Range, Url, BoxShadow, RadioAdvanced, Separator, Border, BorderRadius, Padding, CssGenerator: { CssGenerator } } = wp.qubelyComponents
 import '../../components/ContextMenu'
 import icons from '../../helpers/icons'
 
@@ -27,7 +25,7 @@ class Edit extends Component {
     }
 
     render() {
-        const { uniqueId, parentClientId, buttonGroup, fillType, buttonSize, buttonWidthType, buttonWidth, buttonPadding, typography, textField, url, enableAlignment, alignment, buttonBorderRadius, iconName, iconPosition, iconSize, iconGap, buttonBorder, borderHoverColor, buttonColor, buttonColor2, buttonHoverColor, buttonHoverColor2, bgColor, bgHoverColor, buttonShadow, buttonHoverShadow } = this.props.attributes
+        const { uniqueId, parentClientId, buttonGroup, fillType, buttonSize, buttonWidthType, buttonWidth, buttonPadding, typography, textField, url, enableAlignment, alignment, buttonBorderRadius, iconName, iconPosition, iconSize, iconGap, buttonBorder, borderHoverColor, buttonColor, buttonColor2, buttonHoverColor, buttonHoverColor2, bgColor, bgHoverColor, buttonShadow, buttonHoverShadow, animation, globalZindex, hideTablet, hideMobile, globalCss } = this.props.attributes
         const { clientId, removeBlock, updateBlockAttributes, buttonGroupAttributes, setAttributes } = this.props
         const { device } = this.state
 
@@ -171,6 +169,9 @@ class Edit extends Component {
                             onDeviceChange={value => this.setState({ device: value })}
                         />
                     </PanelBody>
+                    
+                    {animationSettings(uniqueId, animation, setAttributes)}
+                
                 </InspectorControls>
 
                 <BlockControls>
@@ -182,6 +183,9 @@ class Edit extends Component {
                         />
                     </Toolbar>
                 </BlockControls>
+
+                {globalSettingsPanel(globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
+
 
                 <div className={`qubely-block-${uniqueId}`}>
                     <div className="qubely-block-btn-wrapper">

@@ -16,10 +16,10 @@ const {
 	Tab,
 	Border,
 	BorderRadius,
+	Inline: { InlineToolbar },
 	CssGenerator: { CssGenerator }
 } = wp.qubelyComponents
 
-import InlineToolbar from '../../components/fields/inline/InlineToolbar'
 import '../../components/GlobalSettings'
 import '../../components/ContextMenu'
 import icons from '../../helpers/icons'

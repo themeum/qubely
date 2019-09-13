@@ -3,7 +3,7 @@ const { createHigherOrderComponent } = wp.compose
 const { Component, Fragment } = wp.element
 const { InspectorControls } = wp.editor
 const { PanelBody } = wp.components
-const { Typography, Color, ColorAdvanced, Padding, IconList, Select, Styles, Tabs, Tab, Range, Url, BoxShadow, RadioAdvanced, Border, InnerPanel, Alignment, Toggle, BorderRadius ,CssGenerator: { CssGenerator }} = wp.qubelyComponents
+const { Typography, Color, ColorAdvanced, Padding, IconList, Select, Styles, Tabs, Tab, Range, Url, BoxShadow, RadioAdvanced, Border, InnerPanel, Alignment, Toggle, BorderRadius, CssGenerator: { CssGenerator } } = wp.qubelyComponents
 import icons from '../helpers/icons';
 
 const addAttribute = (settings) => {
@@ -482,4 +482,9 @@ const withInspectorControls = createHigherOrderComponent(OriginalComponent => {
 
 wp.hooks.addFilter('blocks.registerBlockType', 'qubely/extendbutton', addAttribute, 5)
 wp.hooks.addFilter('editor.BlockEdit', 'qubely/extendbutton', withInspectorControls, 10)
+
+export default function buttonComponent() {
+    wp.hooks.addFilter('blocks.registerBlockType', 'qubely/extendbutton', addAttribute, 5)
+    wp.hooks.addFilter('editor.BlockEdit', 'qubely/extendbutton', withInspectorControls, 10)
+}
 

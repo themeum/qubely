@@ -3,6 +3,7 @@ import Edit from './Edit'
 import Save from './Save';
 const { __ } = wp.i18n
 const { registerBlockType } = wp.blocks
+const { gloalSettings: { globalAttributes } } = wp.qubelyComponents
 
 registerBlockType('qubely/button', {
     title: __('Button'),
@@ -211,8 +212,9 @@ registerBlockType('qubely/button', {
                 },
             ]
         },
-        showGlobalSettings: { type: 'boolean', default: true },  // Global Settings
-        showContextMenu: { type: 'boolean', default: true }
+        // showGlobalSettings: { type: 'boolean', default: true },  // Global Settings
+        showContextMenu: { type: 'boolean', default: true },
+        ...globalAttributes
     },
     getEditWrapperProps(attributes) {
         if (attributes.customClassName != '') {
