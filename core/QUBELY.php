@@ -79,7 +79,8 @@ class QUBELY
 
 		wp_localize_script('qubely-blocks-js', 'qubely_admin', array(
 			'plugin' => QUBELY_DIR_URL,
-			'ajax' => admin_url('admin-ajax.php'),
+            'ajax' => admin_url('admin-ajax.php'),
+            'pro_enable' => defined('QUBELY_PRO_VERSION') ? true : false,
 			'shapes' => $this->getSvgShapes(),
 			'all_taxonomy' => $this->get_all_taxonomy(),
 			'image_sizes'  => $this->get_all_image_sizes(),

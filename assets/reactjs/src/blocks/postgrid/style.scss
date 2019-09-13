@@ -394,38 +394,6 @@
   }
 }
 
-// postgrid 3
-.qubely-postgrid-layout-3 {
-  .qubely-postgrid:nth-child(1) {
-    grid-column-start: 1;
-  }
-  &.qubely-postgrid-column-md2 {
-    .qubely-postgrid:nth-child(1) {
-      grid-column-end: 3;
-    }
-  }
-  &.qubely-postgrid-column-md3 {
-    .qubely-postgrid:nth-child(1) {
-      grid-column-end: 4;
-    }
-  }
-  &.qubely-postgrid-column-md4 {
-    .qubely-postgrid:nth-child(1) {
-      grid-column-end: 5;
-    }
-  }
-  &.qubely-postgrid-column-md5 {
-    .qubely-postgrid:nth-child(1) {
-      grid-column-end: 6;
-    }
-  }
-  &.qubely-postgrid-column-md6 {
-    .qubely-postgrid:nth-child(1) {
-      grid-column-end: 7;
-    }
-  }
-}
-
 //layout 4
 .qubely-postgrid-layout-4 {
   display: grid;

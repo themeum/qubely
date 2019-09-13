@@ -1056,7 +1056,7 @@ function render_block_qubely_postgrid($att)
 	$readmoreSize 		    = isset($att['readmoreSize']) ? $att['readmoreSize'] : 'small';
 	$readmoreStyle 		    = isset($att['readmoreStyle']) ? $att['readmoreStyle'] : 'fill';
 	$showImages 		    = isset($att['showImages']) ? $att['showImages'] : 1;
-	$imgSize 		    = isset($att['imgSize']) ? $att['imgSize'] : 'large';
+	$imgSize 		        = isset($att['imgSize']) ? $att['imgSize'] : 'large';
 	$showBadge 		        = isset($att['showBadge']) ? $att['showBadge'] : 1;
 	$order 		            = isset($att['order']) ? $att['order'] : 'DESC';
 	$imageAnimation 		= isset($att['imageAnimation']) ? $att['imageAnimation'] : '';
@@ -1213,4 +1213,6 @@ function render_block_qubely_postgrid($att)
 	}
 	return $html;
 }
-add_action('init', 'register_block_qubely_postgrid', 100);
+if(!defined('QUBELY_PRO_VERSION')) {
+    add_action('init', 'register_block_qubely_postgrid', 100);
+}
