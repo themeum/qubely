@@ -32,10 +32,10 @@ class Styles extends Component {
                             <img src={qubely_admin.plugin + 'assets/img/Qubely-Q.svg'} alt={__('Qubely-Q')} />
                         </div>
                         <div className='qubely-upgrade-message'>
-                            <span className='qubely-upgrade-message-title'>Upgrade to Pro</span>
-                            <span className='qubely-upgrade-message-description'>Get all features of post grid at your disposal by upgrading to pro version</span>
+                            <span className='qubely-upgrade-message-title'>{__('Upgrade to Pro')}</span>
+                            <span className='qubely-upgrade-message-description'>{__('Get all features of post grid at your disposal by upgrading to pro version')}</span>
                         </div>
-                        <a className='qubely-upgrade-button' href={'https://qubely.io'} target='_blank' >Upgrade Now</a>
+                        <a className='qubely-upgrade-button' href={'https://qubely.io'} target='_blank' >{__('Upgrade Now')}</a>
                     </div>
                 }
 

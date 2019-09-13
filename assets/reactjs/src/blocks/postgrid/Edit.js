@@ -237,10 +237,12 @@ class Edit extends Component {
 			<Fragment>
 				<InspectorControls key="inspector">
 					<PanelBody title='' initialOpen={true}>
-						<Styles
+						<Styles proUpgradation
 							options={[
 								{ value: 1, svg: icons.postgrid_1, label: __('') },
 								{ value: 2, svg: icons.postgrid_2, label: __('') },
+								{ value: 3, svg: icons.postgrid_3, label: __(''), pro:true },
+								{ value: 4, svg: icons.postgrid_3, label: __(''), pro:true },
 							]}
 							value={layout}
 							onChange={val => setAttributes({ layout: val })}
