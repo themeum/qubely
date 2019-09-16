@@ -27,7 +27,7 @@ const blockAttrs = {
  */
 registerBlockType ( 'qubely/pagesettings', {
     title: __( 'Global Settings' ),
-    icon: '',
+    icon: 'book-alt',
     category: 'qubely',
     keywords: [ __( 'Global Settings' ), __( 'Global Settings' ), ],
     supports: { inserter: false, reusable: false, html: false },

@@ -12,6 +12,16 @@ jQuery(document).ready(function ($) {
         });
     }
 
+    // Set Preview CSS
+    const cussrent_url = window.location.href;
+    if( cussrent_url.includes('preview=true') ) {
+        let cssInline = document.createElement('style');
+        cssInline.type = 'text/css';
+        cssInline.id = 'qubely-block-js-preview';
+        cssInline.innerHTML = localStorage.getItem('qubelyCSS');
+        window.document.getElementsByTagName("head")[0].appendChild(cssInline);
+    }
+
     if ($('.qubely-block-counter-number').length > 0) {
         const counterElement = $('.qubely-block-counter-number')
         let indexOfCounterElement = 0

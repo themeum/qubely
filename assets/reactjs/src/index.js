@@ -57,7 +57,7 @@ wp.data.subscribe(() => {
     const { isPreviewingPost, isSavingPost, isAutosavingPost } = wp.data.select("core/editor")
     if (isPreviewingPost() || (isSavingPost() && (!isAutosavingPost()))) {
         if (window.bindCss === false) {
-            ParseCss();
+            ParseCss( isPreviewingPost() ? false : true );
         }
     }
 });

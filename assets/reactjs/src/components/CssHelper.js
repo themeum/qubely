@@ -65,7 +65,7 @@ export const cssTypography = (v) => {
     let font = ''
     if (v.family) {
         if (!['Arial', 'Tahoma', 'Verdana', 'Helvetica', 'Times New Roman', 'Trebuchet MS', 'Georgia'].includes(v.family)) {
-            font = "@import url('https://fonts.googleapis.com/css?family=" + v.family.replace(' ', '+') + "');"
+            font = "@import url('https://fonts.googleapis.com/css?family=" + v.family.replace(/\s/g, '+') + ':' + (v.weight || 400) + "');"
         }
     }
     let data = { md: [], sm: [], xs: [] }

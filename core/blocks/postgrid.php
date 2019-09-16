@@ -1229,6 +1229,7 @@ function render_block_qubely_postgrid($att)
 			}
 		}
 		$html .= '</div>';
+		$html .= '</div>';
 		wp_reset_postdata();
 	}
 	return $html;

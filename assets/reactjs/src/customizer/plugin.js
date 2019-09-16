@@ -159,9 +159,6 @@ class Plugin extends Component {
 
     render() {
         const { globalSettings } = this.state
-        if( globalSettings !== null ){
-            CssGenerator( globalSettings, 'pagesettings', '82982429487' )
-        }
         return (
             <Fragment>
                 <PluginSidebarMoreMenuItem target="qubely-customizer">

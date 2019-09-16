@@ -33,16 +33,19 @@ function innerBlocks(blocks, type = false) {
     return __CSS
 }
 
-const ParseCss = () => {
+const ParseCss = (setDatabase = true) => {
     window.bindCss = true
     const { getBlocks, getCurrentPostId } = select('core/editor')
     let __blocks = '';
     if (typeof window.globalData != 'undefined') {
         __blocks += CssGenerator(window.globalData.settings, 'pagesettings', '8282882', true)
     }
-    __blocks += innerBlocks(getBlocks(), true)
-    if (__blocks !== '') {
-        API_fetch(getCurrentPostId(), __blocks).then(data => { })
+    __blocks += innerBlocks( getBlocks(), true )
+    if( __blocks !== '' ){
+        localStorage.setItem('qubelyCSS', __blocks)
+        if(setDatabase){
+            API_fetch(getCurrentPostId(), __blocks).then( data => {} )
+        }
     }
     setTimeout(() => {
         window.bindCss = false
