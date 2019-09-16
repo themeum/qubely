@@ -61,6 +61,8 @@ import {
 //hooks
 
 import { globalAttributes, globalSettingsPanel, animationSettings } from './fields/GlobalSettings'
+import { buttonAttributes, buttonSettings } from './fields/ButtonSettings'
+import { listAttributes, listSettings } from './fields/ListSettings'
 
 
 wp.qubelyComponents = {
@@ -68,6 +70,14 @@ wp.qubelyComponents = {
     Animation,
     Background,
     Border,
+    QubelyButton: {
+        buttonAttributes,
+        buttonSettings
+    },
+    QubelyList: {
+        listAttributes,
+        listSettings
+    },
     BorderRadius,
     BoxShadow,
     ButtonGroup,

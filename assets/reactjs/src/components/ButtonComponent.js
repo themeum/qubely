@@ -337,7 +337,7 @@ const withInspectorControls = createHigherOrderComponent(OriginalComponent => {
                         <IconList
                             label={__('Icon')}
                             value={buttonIconName}
-                            onChange={(value) => this.props.setAttributes({ buttonIconName: value })} />
+                            onChange={(value) => setAttributes({ buttonIconName: value })} />
                         {buttonIconName &&
                             <Fragment>
                                 <Select

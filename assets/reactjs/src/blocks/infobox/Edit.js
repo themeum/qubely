@@ -22,7 +22,6 @@ class Edit extends Component {
             setAttributes({ uniqueId: _client });
 
         }
-        buttonComponent()
     }
     handlePanelOpenings = (panelName) => {
         this.setState({ ...this.state, openPanelSetting: panelName })

@@ -1029,21 +1029,21 @@ function register_block_qubely_postgrid()
 					'default' => '0',
 					'style' => [(object) ['selector' => '{{QUBELY}} {z-index:{{globalZindex}};}']]
 				),
-				'hideTablet'=> array( 
-					'type'=> 'boolean',
-					 'default'=> false, 
-					 'style' => [(object) ['selector' => '{{QUBELY}}{display:none;}']]
-					),
-				'hideMobile'=> array( 
-					'type'=> 'boolean',
-					 'default'=> false, 
-					 'style' => [(object) ['selector' => '{{QUBELY}}{display:none;}']]
-					),
-					'globalCss' => array(
-						'type' => 'string',
-						'default' => '',
-						'style' => [(object) ['selector' => '']]
-					),		
+				'hideTablet' => array(
+					'type' => 'boolean',
+					'default' => false,
+					'style' => [(object) ['selector' => '{{QUBELY}}{display:none;}']]
+				),
+				'hideMobile' => array(
+					'type' => 'boolean',
+					'default' => false,
+					'style' => [(object) ['selector' => '{{QUBELY}}{display:none;}']]
+				),
+				'globalCss' => array(
+					'type' => 'string',
+					'default' => '',
+					'style' => [(object) ['selector' => '']]
+				),
 				// 'showContextMenu' => array(
 				// 	'type' => 'boolean',
 				// 	'default' => true

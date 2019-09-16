@@ -5,8 +5,7 @@ const { select, withSelect, withDispatch } = wp.data
 const { Component, Fragment } = wp.element
 const { getBlock } = select('core/editor')
 const { RichText, InspectorControls, BlockControls } = wp.editor
-const { Color, Toggle, Border, Padding, Alignment, Typography, QubelyButtonEdit, gloalSettings: { globalSettingsPanel, animationSettings }, Inline: { InlineToolbar }, ColorAdvanced, Range, RadioAdvanced, Tabs, Tab, Separator, QubelyIconListEdit, BoxShadow, Styles, BorderRadius, CssGenerator: { CssGenerator } } = wp.qubelyComponents
-import '../../components/ListComponent'
+const { Color, Toggle, Border, Padding, Alignment, Typography, QubelyButtonEdit, gloalSettings: { globalSettingsPanel, animationSettings }, Inline: { InlineToolbar }, ColorAdvanced, Range, RadioAdvanced, Tabs, Tab, Separator, QubelyIconListEdit, BoxShadow, Styles, BorderRadius, CssGenerator: { CssGenerator }, QubelyButton: { buttonSettings }, QubelyList: { listSettings } } = wp.qubelyComponents
 import '../../components/ContextMenu'
 import icons from '../../helpers/icons'
 
@@ -27,6 +26,7 @@ class Edit extends Component {
 			showPricingTitleSettings: false,
 			openContextMenu: false,
 			disablePasteStyle: false,
+			showPostTextTypography: false
 		}
 	}
 
@@ -38,7 +38,6 @@ class Edit extends Component {
 		} else if (uniqueId && uniqueId != _client) {
 			setAttributes({ uniqueId: _client })
 		}
-		buttonComponent()
 	}
 	renderCurrencyContent = () => {
 		const { attributes: { currency, currencyCustom } } = this.props
@@ -222,7 +221,7 @@ class Edit extends Component {
 
 		} = this.props
 
-		const { device, openPanelSetting } = this.state
+		const { device, openPanelSetting, showPostTextTypography } = this.state
 		if (uniqueId) { CssGenerator(this.props.attributes, 'pricing', uniqueId) }
 
 		return (
@@ -643,7 +642,13 @@ class Edit extends Component {
 						}
 
 					</PanelBody>
+
+					{buttonSettings(this.props.attributes, device, showPostTextTypography, setAttributes, (key, value) => { this.setState({ [key]: value }) })}
+
+					{listSettings(this.props.attributes, device, setAttributes)}
+
 					{animationSettings(uniqueId, animation, setAttributes)}
+
 				</InspectorControls>
 
 				<BlockControls>

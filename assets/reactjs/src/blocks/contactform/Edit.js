@@ -46,7 +46,6 @@ class Edit extends Component {
         } else if (uniqueId && uniqueId != _client) {
             setAttributes({ uniqueId: _client });
         }
-        buttonComponent()
     }
 
     setSettings(type, val, index = -1) {
