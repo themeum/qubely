@@ -63,6 +63,7 @@ import {
 import { globalAttributes, globalSettingsPanel, animationSettings } from './fields/GlobalSettings'
 import { buttonAttributes, buttonSettings } from './fields/ButtonSettings'
 import { listAttributes, listSettings } from './fields/ListSettings'
+import { ContextMenu, handleContextMenu } from './fields/ContextMenu'
 
 
 wp.qubelyComponents = {
@@ -70,6 +71,10 @@ wp.qubelyComponents = {
     Animation,
     Background,
     Border,
+    ContextMenu: {
+        ContextMenu,
+        handleContextMenu
+    },
     QubelyButton: {
         buttonAttributes,
         buttonSettings
