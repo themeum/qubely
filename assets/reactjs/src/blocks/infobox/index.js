@@ -509,7 +509,7 @@ registerBlockType('qubely/infobox', {
         // Global
         ...globalAttributes,
         ...buttonAttributes,
-        // sourceOfCopiedStyle: { type: 'boolean', default: false }
+        sourceOfCopiedStyle: { type: 'boolean', default: false }
     },
     edit: Edit,
     save: Save,
