@@ -14,6 +14,8 @@ registerBlockType('qubely/team', {
     keywords: [__('Team'), __('profile')],
     attributes: {
         uniqueId: { type: 'string', default: '' },
+        // Global
+        ...globalAttributes,
         layout: { type: 'number', default: 1 },
         alignment: {
             type: 'object', default: { md: 'center' },
@@ -531,9 +533,6 @@ registerBlockType('qubely/team', {
                 }
             ]
         },
-
-        // Global
-        ...globalAttributes,
         sourceOfCopiedStyle: { type: 'boolean', default: false }
     },
     edit: Edit,

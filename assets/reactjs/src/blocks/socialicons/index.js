@@ -14,6 +14,7 @@ registerBlockType('qubely/socialicons', {
     description: __('Add all your social media profiles in one place with Qubely Social Icons.'),
     attributes: {
         uniqueId: { type: 'string', default: '' },
+        ...globalAttributes,  // Global Settings
         layout: { type: 'string', default: 'fill' },
         iconLabel: { type: 'boolean', default: true },
         useDefaultStyle: { type: 'boolean', default: true },
@@ -59,7 +60,6 @@ registerBlockType('qubely/socialicons', {
         IconBackgroundHover: { type: 'string', default: '', style: [{ condition: [{ key: 'layout', relation: '==', value: 'fill' }, { key: 'useDefaultStyle', relation: '==', value: false }], selector: '{{QUBELY}} .qubely-block-social-icons .qubely-ul li.qubely-social-item a:hover {background-color: {{IconBackgroundHover}};}' }] },
         iconBorder: { type: 'object', default: {}, style: [{ condition: [{ key: 'layout', relation: '==', value: 'fill' }, { key: 'useDefaultStyle', relation: '==', value: false }], selector: '{{QUBELY}} .qubely-block-social-icons .qubely-ul li.qubely-social-item a' }] },
         iconBorderColorHover: { type: 'string', default: '', style: [{ condition: [{ key: 'layout', relation: '==', value: 'fill' }, { key: 'useDefaultStyle', relation: '==', value: false }], selector: '{{QUBELY}} .qubely-block-social-icons .qubely-ul li.qubely-social-item a:hover {border-color: {{iconBorderColorHover}};}' }] },
-        ...globalAttributes,  // Global Settings
         sourceOfCopiedStyle: { type: 'boolean', default: false }
     },
     edit: Edit,

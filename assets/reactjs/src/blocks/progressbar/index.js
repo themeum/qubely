@@ -14,6 +14,7 @@ registerBlockType( 'qubely/progressbar', {
 	keywords: [__('progress'), __('bar'), __('bar progress')],
 	attributes: {
 		uniqueId: { type: 'string', default: '' },
+		...globalAttributes,  // Global Settings
 		spacer: { type: 'object', default:{spaceTop: { md: '10', unit: "px"}, spaceBottom: { md: '10', unit: "px"}}, style: [{ selector: '{{QUBELY}}' }] },
 		progress: {type: 'string', default: 50, style: [{ selector: '{{QUBELY}} .qubely-progress-bar {width: {{progress}}%;}' }] },
 		
@@ -42,8 +43,6 @@ registerBlockType( 'qubely/progressbar', {
 			style: [{selector: '{{QUBELY}} .qubely-progress, {{QUBELY}} .qubely-progress-bar' }]
 		},
 		showProgress: {type: 'boolean', default: true},
-		
-		...globalAttributes,
 		sourceOfCopiedStyle: { type: 'boolean', default: false }
 	},
 	edit: Edit,

@@ -13,6 +13,7 @@ registerBlockType('qubely/row', {
     keywords: [__('Row'), __('rw'), __('Layout')],
     attributes: {
         uniqueId: { type: 'string', default: '' },
+        ...globalAttributes,  // Global Settings
         columns: { type: 'number', default: '' },
 
         // Dimension
@@ -147,7 +148,6 @@ registerBlockType('qubely/row', {
         rowReverse: { type: 'object', default: { openRowReverse: true, values: {} }, style: [{ selector: '{{QUBELY}}.qubely-section .qubely-row, {{QUBELY}} .qubely-row > .editor-inner-blocks > .editor-block-list__layout' }] },
 
         rowCss: { type: 'string', default: '', style: [{ selector: '' }] },
-        ...globalAttributes,
     },
     edit: Edit,
     save: Save

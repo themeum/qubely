@@ -14,6 +14,9 @@ registerBlockType('qubely/infobox', {
     keywords: [__('service'), __('feature'), __('info')],
     attributes: {
         uniqueId: { type: 'string', default: '' },
+         // Global
+         ...globalAttributes,
+         ...buttonAttributes,
         layout: { type: 'number', default: 1 },
         alignment: {
             type: 'object', default: { md: 'left' },
@@ -506,9 +509,6 @@ registerBlockType('qubely/infobox', {
         bgShadow: { type: 'object', default: { color: '' }, style: [{ selector: '{{QUBELY}} .qubely-block-info-box' }] },
         bgShadowHover: { type: 'object', default: { color: '' }, style: [{ selector: '{{QUBELY}} .qubely-block-info-box:hover' }] },
 
-        // Global
-        ...globalAttributes,
-        ...buttonAttributes,
         sourceOfCopiedStyle: { type: 'boolean', default: false }
     },
     edit: Edit,

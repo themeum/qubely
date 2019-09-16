@@ -14,6 +14,9 @@ registerBlockType('qubely/pricing', {
     keywords: [__('Pricing'), __('Pricing Table')],
     attributes: {
         uniqueId: { type: 'string', default: '' },
+        ...globalAttributes,
+        ...buttonAttributes,
+        ...listAttributes,
         layout: {
             type: 'number',
             default: 3
@@ -568,9 +571,6 @@ registerBlockType('qubely/pricing', {
         clickedListItem: { type: 'number', default: 0 },
         listType: { type: 'string', default: 'unordered' },
         bulletStyle: { type: 'string', default: 'check-circle-outline' },
-        ...globalAttributes,
-        ...buttonAttributes,
-        ...listAttributes,
         sourceOfCopiedStyle: { type: 'boolean', default: false },
 
     },

@@ -14,6 +14,7 @@ registerBlockType ( 'qubely/map', {
     supports: { align: ['full'] },
     attributes: {
         uniqueId: { type: 'string', default: '' },
+        ...globalAttributes,  // Global Settings
         spacer: { type: 'object', default:{spaceTop: { md: '10', unit: "px"}, spaceBottom: { md: '10', unit: "px"}}, style: [ { selector: '{{QUBELY}}' }] },
         zoom: { type: 'number', default: '16'},
         height: { type: 'number', default: '350'},
@@ -30,7 +31,6 @@ registerBlockType ( 'qubely/map', {
         showMarker: { type: 'boolean', default: true },
         mapStyle: { type: 'string', default: '' },
         selectedStyle: { type: 'string', default: 'default' },
-        ...globalAttributes,  // Global Settings
     },
     edit: Edit,
     save: Save,

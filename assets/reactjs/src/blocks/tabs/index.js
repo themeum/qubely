@@ -13,6 +13,7 @@ registerBlockType('qubely/tabs', {
     supports: { html: false, className: false },
     attributes: {
         uniqueId: { type: 'string', default: '' },
+        ...globalAttributes,  // Global Settings
         spacer: { type: 'object', default: { spaceTop: { md: '10', unit: "px" }, spaceBottom: { md: '10', unit: "px" } }, style: [{ selector: '{{QUBELY}}' }] },
         navAlignment: { type: 'string', default: 'left' },
         tabs: { type: 'number', default: 3 },
@@ -317,9 +318,7 @@ registerBlockType('qubely/tabs', {
                     selector: '{{QUBELY}} .qubely-block-tab .qubely-tab-body {padding-top: {{bodyTopSpacing}};}'
                 }
             ]
-        },
-
-        ...globalAttributes,
+        }
     },
     edit: Edit,
     save: Save

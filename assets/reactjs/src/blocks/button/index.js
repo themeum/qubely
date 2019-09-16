@@ -14,6 +14,8 @@ registerBlockType('qubely/button', {
     keywords: [__('button'), __('link')],
     attributes: {
         uniqueId: { type: 'string', default: '' },
+          // Global
+          ...globalAttributes,
         buttonGroup: { type: 'boolean', default: false },
         parentClientId: { type: 'string', default: '' },
         spacer: { type: 'object', default: { spaceTop: { md: '10', unit: "px" }, spaceBottom: { md: '10', unit: "px" } }, style: [{ selector: '{{QUBELY}}' }] },
@@ -212,8 +214,7 @@ registerBlockType('qubely/button', {
                 },
             ]
         },
-        sourceOfCopiedStyle: { type: 'boolean', default: false },
-        ...globalAttributes
+        sourceOfCopiedStyle: { type: 'boolean', default: false }
     },
     getEditWrapperProps(attributes) {
         if (attributes.customClassName != '') {

@@ -14,6 +14,7 @@ registerBlockType('qubely/heading', {
 	keywords: [__('heading'), __('head'), __('title')],
 	attributes: {
 		uniqueId: { type: 'string', default: '' },
+		...globalAttributes,
 		spacer: { type: 'object', default: { spaceTop: { md: '10', unit: "px" }, spaceBottom: { md: '10', unit: "px" } }, style: [{ selector: '{{QUBELY}}' }] },
 		content: {
 			type: 'string',
@@ -148,7 +149,6 @@ registerBlockType('qubely/heading', {
 				}
 			],
 		},
-		...globalAttributes,
 		sourceOfCopiedStyle: { type: 'boolean', default: false }
 	},
 	edit: Edit,

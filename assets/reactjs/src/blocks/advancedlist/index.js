@@ -13,6 +13,8 @@ registerBlockType('qubely/advancedlist', {
     keywords: [__('Advanced', 'list', 'advanced list', 'Advanced List')],
     attributes: {
         uniqueId: { type: 'string', default: '' },
+          // Global
+          ...globalAttributes,
         listType: { type: 'string', default: 'unordered' },
         spacer: { type: 'object', default: { spaceTop: { md: '10', unit: "px" }, spaceBottom: { md: '10', unit: "px" } }, style: [{ selector: '{{QUBELY}}' }] },
         alignment: { type: 'string', default: 'left', style: [{ selector: '{{QUBELY}} .qubely-block-advanced-list {text-align: {{alignment}};}' }] },
@@ -105,8 +107,6 @@ registerBlockType('qubely/advancedlist', {
         },
         borderColorHover: { type: 'string', default: '', style: [{ selector: '{{QUBELY}} .qubely-list li:hover {border-bottom-color: {{borderColorHover}};}' }] },
 
-        // Global
-        ...globalAttributes,
         sourceOfCopiedStyle: { type: 'boolean', default: false } 
     },
     edit: Edit,

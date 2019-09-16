@@ -20,6 +20,8 @@ registerBlockType('qubely/contactform', {
     keywords: [__('Contact'), __('Form')],
     attributes: {
         uniqueId: { type: 'string', default: '' },
+        ...globalAttributes,
+        ...buttonAttributes,
         layout: { type: 'string', default: 'classic' },
         useDefaultStyle: { type: 'boolean', default: true },
         spacer: { type: 'object', default: { spaceTop: { md: '10', unit: "px" }, spaceBottom: { md: '10', unit: "px" } }, style: [{ selector: '{{QUBELY}}' }] },
@@ -298,8 +300,6 @@ registerBlockType('qubely/contactform', {
         emailFrom: { type: 'string', default: 'Your Name: admin@example.com' },
         emailSubject: { type: 'string', default: '{{subject}} | {{email}} | {{site-name}}' },
         emailBody: { type: 'string', default: '<p><strong>From:</strong> {{full-name }}</p><strong>Email:</strong> {{email}}</p>\n<p><strong>Subject:</strong> {{subject}}</p>\n<p><strong>Message:</strong> {{message}}</p>' },
-        ...globalAttributes,
-        ...buttonAttributes,
         sourceOfCopiedStyle: { type: 'boolean', default: false }
     },
     edit: Edit,

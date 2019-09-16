@@ -14,6 +14,8 @@ registerBlockType('qubely/wrapper', {
     keywords: [__('Block'), __('Block Wraper'), __('Wraper')],
     attributes: {
         uniqueId: { type: 'string', default: '' },
+        // Global
+        ...globalAttributes,
         spacer: { type: 'object', default: { spaceTop: { md: '0', unit: "px" }, spaceBottom: { md: '0', unit: "px" } }, style: [{ selector: '{{QUBELY}}' }] },
 
         bgColor: { type: 'object', default: { openColor: 1, type: "color", color: "#f5f5f5" }, style: [{ selector: '{{QUBELY}} .qubely-block-wrapper-block' }] },
@@ -47,7 +49,6 @@ registerBlockType('qubely/wrapper', {
 
         bgShadow: { type: 'object', default: { openShadow: 1, horizontal: 1, vertical: 1, blur: 2, color: 'rgba(0, 0, 0, .2)', spread: 0 }, style: [{ selector: '{{QUBELY}} .qubely-block-wrapper-block' }] },
         bgShadowHover: { type: 'object', default: { color: '' }, style: [{ selector: '{{QUBELY}} .qubely-block-wrapper-block:hover' }] },
-        ...globalAttributes
     },
     edit: Edit,
     save: Save,

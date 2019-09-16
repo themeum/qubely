@@ -13,6 +13,7 @@ registerBlockType('qubely/iconlist', {
     keywords: [__('icon', 'list', 'icon list')],
     attributes: {
         uniqueId: { type: 'string', default: '' },
+        ...globalAttributes,
         listStyle: { type: 'string', default: 'ordered' },
         ordered: { type: 'boolean', default: false, },
         alignment: {
@@ -150,7 +151,6 @@ registerBlockType('qubely/iconlist', {
             style: [{ selector: '{{QUBELY}} .qubely-list .qubely-list-li' }]
         },
         borderColorHover: { type: 'string', default: '', style: [{ selector: '{{QUBELY}} .qubely-list .qubely-list-li:hover {border-bottom-color: {{borderColorHover}};}' }] },
-        ...globalAttributes,
         sourceOfCopiedStyle: { type: 'boolean', default: false }
     },
     edit: Edit,

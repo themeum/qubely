@@ -12,6 +12,7 @@ registerBlockType( 'qubely/counter', {
   keywords: [ __('Counter'), __('Animated Number'), __('Count up'), ],
   attributes: {
     uniqueId: { type: 'string', default: '' },
+    ...globalAttributes,
     spacer: { type: 'object', default:{spaceTop: { md: '10', unit: "px"}, spaceBottom: { md: '10', unit: "px"}}, style: [{ selector: '{{QUBELY}}' }] },
     alignment: { type: 'object', default: {md: 'center'}, style: [{ selector: '{{QUBELY}} .qubely-block-counter {text-align: {{alignment}};}' }] },
     prefix: { type: 'string', default: '' },
@@ -23,7 +24,6 @@ registerBlockType( 'qubely/counter', {
     prepostSpacing: { type: 'string', default: '', style: [{ selector: '{{QUBELY}} .qubely-block-counter-prefix {margin-right: {{prepostSpacing}};} {{QUBELY}} .qubely-block-counter-postfix {margin-left: {{prepostSpacing}};}' }] },
     counterTypo: { type: 'object', default: {}, style: [{ selector: '{{QUBELY}} .qubely-block-counter-content' }] },
     counterColor: { type: 'string', default: '', style: [{ selector: '{{QUBELY}} .qubely-block-counter-content {color: {{counterColor}};}' }] },
-    ...globalAttributes,
     sourceOfCopiedStyle: { type: 'boolean', default: false }
   },
   edit: Edit,

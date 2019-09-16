@@ -13,7 +13,7 @@ registerBlockType('qubely/column', {
 	supports: { inserter: false, reusable: false, html: false },
 	attributes: {
 		uniqueId: { type: 'string', default: '' },
-
+        ...globalAttributes,  // Global Settings
 		// Dimension
 		colWidth: { type: 'object', default: { md: 50, sm: 50, xs: 100, unit: '%', device: 'md' }, style: [{ selector: '{{QUBELY}}.qubely-column-front {flex:{{colWidth}};} {{QUBELY}}.qubely-column-front {max-width:{{colWidth}};}' }] },
 		padding: {
@@ -58,7 +58,6 @@ registerBlockType('qubely/column', {
 		// Advanced Settings
 		colZindex: { type: 'number', default: '', style: [{ selector: '{{QUBELY}} > .qubely-column-inner{z-index:{{colZindex}};}' }] },
 		colCss: { type: 'string', default: '', style: [{ selector: '' }] },
-		...globalAttributes
 	},
 	edit: Edit,
 	save: Save

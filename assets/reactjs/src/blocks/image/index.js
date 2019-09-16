@@ -17,7 +17,7 @@ registerBlockType('qubely/image', {
             type: 'string',
             default: ''
         },
-
+        ...globalAttributes,
         spacer: {
             type: 'object',
             default: {
@@ -515,14 +515,6 @@ registerBlockType('qubely/image', {
         frameAnimateOnHover: {
             type: 'boolean',
             default: false
-        },
-
-        // Global Options
-        ...globalAttributes,
-
-        showContextMenu: {
-            type: 'boolean',
-            default: true
         }
     },
     edit: Edit,

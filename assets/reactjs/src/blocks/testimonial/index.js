@@ -13,6 +13,8 @@ registerBlockType('qubely/testimonial', {
     keywords: [__('testimonial'), __('Quote')],
     attributes: {
         uniqueId: { type: 'string', default: '' },
+        // Global
+        ...globalAttributes,
         spacer: { type: 'object', default: { spaceTop: { md: '10', unit: "px" }, spaceBottom: { md: '10', unit: "px" } }, style: [{ selector: '{{QUBELY}}' }] },
         alignment: { type: 'object', default: { md: 'center' }, style: [{ selector: '{{QUBELY}} .qubely-block-testimonial {text-align: {{alignment}};}' }] },
         layout: { type: 'number', default: 1 },
@@ -194,8 +196,6 @@ registerBlockType('qubely/testimonial', {
         border: { type: 'object', default: { openTy: 0, color: '#3373dc', width: { bottom: '1', left: '1', right: '1', top: '1', unit: 'px' } }, style: [{ selector: '{{QUBELY}} .qubely-block-testimonial' }] },
         boxShadow: { type: 'object', default: {}, style: [{ selector: '{{QUBELY}} .qubely-block-testimonial' }] },
         boxShadowHover: { type: 'object', default: {}, style: [{ selector: '{{QUBELY}} .qubely-block-testimonial:hover' }] },
-
-        ...globalAttributes,
         sourceOfCopiedStyle: { type: 'boolean', default: false }
     },
     edit: Edit,

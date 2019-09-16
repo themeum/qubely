@@ -14,6 +14,8 @@ registerBlockType('qubely/videopopup', {
 	keywords: [__('video'), __('popup'), __('video popup')],
 	attributes: {
 		uniqueId: { type: 'string', default: '' },
+		// Global
+		...globalAttributes,
 		layout: { type: 'string', default: 'fill' },
 		alignment: { type: 'string', default: 'center' },
 		spacer: { type: 'object', default: { spaceTop: { md: '10', unit: "px" }, spaceBottom: { md: '10', unit: "px" } }, style: [{ selector: '{{QUBELY}}' }] },
@@ -139,9 +141,6 @@ registerBlockType('qubely/videopopup', {
 				}
 			]
 		},
-
-		// Global
-		...globalAttributes,
 		sourceOfCopiedStyle: { type: 'boolean', default: false }
 	},
 	edit: Edit,

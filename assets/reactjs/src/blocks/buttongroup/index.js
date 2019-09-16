@@ -14,6 +14,7 @@ registerBlockType('qubely/buttongroup', {
     keywords: [__('button'), __('link'), __('button group')],
     attributes: {
         uniqueId: { type: 'string', default: '' },
+        ...globalAttributes,
         buttons: { type: 'number', default: 2 },
         alignment: {
 			type: 'object',
@@ -26,8 +27,7 @@ registerBlockType('qubely/buttongroup', {
             type: 'object',
             default: { unit: "px", md: "5" },
             style: [{ selector: '{{QUBELY}} .qubely-block-button-group {margin: -{{spacing}};} {{QUBELY}} .qubely-block-button-group .qubely-block-btn-wrapper {margin: {{spacing}};}' }]
-        },
-        ...globalAttributes
+        }
     },
     edit: Edit,
     save: Save,
