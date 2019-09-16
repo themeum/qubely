@@ -299,7 +299,7 @@ registerBlockType('qubely/infobox', {
             type: 'string',
             source: 'html',
             selector: '.qubely-info-box-title',
-            default: 'This is an info box'
+            default: 'This is an infobox'
         },
         titleLevel: { type: 'number', default: 2 },
         titleTypography: { type: 'object', default: { openTypography: 1, size: { md: 24, unit: 'px' } }, style: [{ selector: '{{QUBELY}} .qubely-info-box-title' }] },
@@ -454,7 +454,7 @@ registerBlockType('qubely/infobox', {
             type: 'string',
             source: 'html',
             selector: '.qubely-info-box-text',
-            default: 'Qubely blocks is added to the Gutenberg editor as soon as you install the plugin. You can start using it as any other Gutenberg block.'
+            default: 'Qubely blocks are added to the Gutenberg editor as soon as you install the plugin. You can start using it as any other Gutenberg block.'
         },
         contentTypography: { type: 'object', default: { openTypography: 1, size: { md: 16, unit: 'px' } }, style: [{ condition: [{ key: 'enableContent', relation: '==', value: true }], selector: '{{QUBELY}} .qubely-info-box-text' }] },
         contentColor: { type: 'string', default: '', style: [{ condition: [{ key: 'enableContent', relation: '==', value: true }], selector: '{{QUBELY}} .qubely-info-box-text {color: {{contentColor}};}' }] },

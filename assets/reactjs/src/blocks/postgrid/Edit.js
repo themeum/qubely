@@ -61,7 +61,7 @@ class Edit extends Component {
 				{
 					(showCategory == 'badge' && style !== 4) &&
 					<div className={`qubely-postgrid-cat-position qubely-postgrid-cat-position-${categoryPosition}`}>
-						<span className="qubely-postgrid-category" dangerouslySetInnerHTML={{ __html: post.qubely_category }} />
+						<span className="qubely-postgrid-category qubely-backend" dangerouslySetInnerHTML={{ __html: post.qubely_category }} />
 					</div>
 				}
 			</div>
@@ -74,12 +74,12 @@ class Edit extends Component {
 
 		return (
 			<div className={`${layout === 1 ? 'qubely-post-list-content' : 'qubely-post-grid-content'}`}>
-				{(showCategory === 'default') && <span className="qubely-postgrid-category" dangerouslySetInnerHTML={{ __html: post.qubely_category }} />}
+				{(showCategory === 'default') && <span className="qubely-postgrid-category qubely-backend" dangerouslySetInnerHTML={{ __html: post.qubely_category }} />}
 
 				{
 					(showCategory == 'badge' && style === 4) &&
 					<div className={`qubely-postgrid-cat-position qubely-postgrid-cat-position-${categoryPosition}`}>
-						<span className="qubely-postgrid-category" dangerouslySetInnerHTML={{ __html: post.qubely_category }} />
+						<span className="qubely-postgrid-category qubely-backend" dangerouslySetInnerHTML={{ __html: post.qubely_category }} />
 					</div>
 				}
 
