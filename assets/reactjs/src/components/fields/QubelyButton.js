@@ -29,8 +29,9 @@ class QubelyButtonSave extends Component {
     render() {
         const { buttonIconName, buttonIconPosition, buttonSize, buttonText, buttonUrl, buttonTag, buttonId } = this.props
 
-        const buttonHtml = <Fragment>{buttonIconName && (buttonIconPosition == 'left') && (<i className={`qubely-btn-icon ${buttonIconName}`} />)}
-            <RichText.Content value={(buttonText == '') ? 'Add Text...' : buttonText} />
+        const buttonHtml = <Fragment>
+            {buttonIconName && (buttonIconPosition == 'left') && (<i className={`qubely-btn-icon ${buttonIconName}`} />)}
+            <RichText.Content value={buttonText ? buttonText : 'Add Text...'} />
             {buttonIconName && (buttonIconPosition == 'right') && (<i className={`qubely-btn-icon ${buttonIconName}`} />)}
         </Fragment>
 
