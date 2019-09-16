@@ -643,7 +643,7 @@ class Edit extends Component {
 
 					</PanelBody>
 
-					{buttonSettings(this.props.attributes, device, showPostTextTypography, setAttributes, (key, value) => { this.setState({ [key]: value }) })}
+					{buttonSettings(this.props.attributes, device, setAttributes, (key, value) => { this.setState({ [key]: value }) }, showPostTextTypography)}
 
 					{listSettings(this.props.attributes, device, setAttributes)}
 

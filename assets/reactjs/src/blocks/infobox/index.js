@@ -3,7 +3,7 @@ import Edit from './Edit'
 import Save from './Save';
 const { __ } = wp.i18n
 const { registerBlockType } = wp.blocks
-const { gloalSettings: { globalAttributes } } = wp.qubelyComponents
+const { gloalSettings: { globalAttributes }, QubelyButton: { buttonAttributes }, } = wp.qubelyComponents
 
 registerBlockType('qubely/infobox', {
     title: __('Info Box'),
@@ -14,7 +14,6 @@ registerBlockType('qubely/infobox', {
     keywords: [__('service'), __('feature'), __('info')],
     attributes: {
         uniqueId: { type: 'string', default: '' },
-        buttonComponent: { type: 'boolean', default: true },
         layout: { type: 'number', default: 1 },
         alignment: {
             type: 'object', default: { md: 'left' },
@@ -509,6 +508,7 @@ registerBlockType('qubely/infobox', {
 
         // Global
         ...globalAttributes,
+        ...buttonAttributes,
         showContextMenu: { type: 'boolean', default: true }
     },
     edit: Edit,

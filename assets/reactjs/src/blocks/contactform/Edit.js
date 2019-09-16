@@ -20,6 +20,7 @@ const {
         animationSettings
     },
     Inline: { InlineToolbar },
+    QubelyButton: { buttonSettings },
     CssGenerator: { CssGenerator }
 } = wp.qubelyComponents
 
@@ -346,6 +347,7 @@ class Edit extends Component {
                             </Tab>
                         </Tabs>
                     </PanelBody>
+                    {buttonSettings(this.props.attributes, device, setAttributes, (key, value) => { this.setState({ [key]: value }) })}
                     {animationSettings(uniqueId, animation, setAttributes)}
                 </InspectorControls>
 

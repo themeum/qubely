@@ -3,7 +3,7 @@ import Edit from './Edit'
 import Save from './Save';
 const { __ } = wp.i18n
 const { registerBlockType } = wp.blocks
-const { gloalSettings: { globalAttributes } } = wp.qubelyComponents
+const { gloalSettings: { globalAttributes }, QubelyButton: { buttonAttributes }, } = wp.qubelyComponents
 
 const formItems = [
     { type: 'text', label: 'Full Name', name: 'full-name ', placeholder: 'Full Name', width: { md: 50 }, required: true, hideLabel: false },
@@ -17,13 +17,12 @@ registerBlockType('qubely/contactform', {
     description: __('Encourage site visitor interactions with Qubely Contact Form List'),
     category: 'qubely',
     icon: <img src={qubely_admin.plugin + 'assets/img/blocks/block-contact-form.svg'} alt={__('Contact Form')} />,
-    keywords: [__('Contact'),__('Form')],
+    keywords: [__('Contact'), __('Form')],
     attributes: {
         uniqueId: { type: 'string', default: '' },
         layout: { type: 'string', default: 'classic' },
         useDefaultStyle: { type: 'boolean', default: true },
         spacer: { type: 'object', default: { spaceTop: { md: '10', unit: "px" }, spaceBottom: { md: '10', unit: "px" } }, style: [{ selector: '{{QUBELY}}' }] },
-        buttonComponent: { type: 'boolean', default: true },
         enableButtonAlignment: { type: 'boolean', default: true },
         enableButton: { type: 'boolean', default: true },
         buttonTag: { type: 'string', default: 'button' },
@@ -300,6 +299,7 @@ registerBlockType('qubely/contactform', {
         emailSubject: { type: 'string', default: '{{subject}} | {{email}} | {{site-name}}' },
         emailBody: { type: 'string', default: '<p><strong>From:</strong> {{full-name }}</p><strong>Email:</strong> {{email}}</p>\n<p><strong>Subject:</strong> {{subject}}</p>\n<p><strong>Message:</strong> {{message}}</p>' },
         ...globalAttributes,
+        ...buttonAttributes,
         showContextMenu: { type: 'boolean', default: true }
     },
     edit: Edit,

@@ -216,7 +216,7 @@ export const buttonAttributes = {
     }
 }
 
-export function buttonSettings(attributes, device, showPostTextTypography, setAttributes, updateParentState) {
+export function buttonSettings(attributes, device, setAttributes, updateParentState, showPostTextTypography) {
 
     const {
         controlledButtonPanel,

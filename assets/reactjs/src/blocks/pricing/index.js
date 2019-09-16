@@ -483,7 +483,6 @@ registerBlockType('qubely/pricing', {
         bgShadow: { type: 'object', default: {}, style: [{ selector: '{{QUBELY}} .qubely-block-pricing' }] },
 
         //button
-        buttonComponent: { type: 'boolean', default: true },
         buttonGap: {
             type: 'object',
             default: {

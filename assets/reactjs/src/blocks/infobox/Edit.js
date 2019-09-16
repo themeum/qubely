@@ -2,7 +2,7 @@ const { __ } = wp.i18n
 const { Fragment, Component } = wp.element;
 const { PanelBody, SelectControl, TextControl, Toolbar } = wp.components
 const { RichText, InspectorControls, BlockControls } = wp.editor
-const { QubelyButtonEdit, Media, Tabs, Tab, Range, BoxShadow, RadioAdvanced, Typography, Toggle, Styles, Alignment, IconList, ColorAdvanced, Color, Headings, Border, BorderRadius, Padding, gloalSettings: { globalSettingsPanel, animationSettings }, Inline: { InlineToolbar }, CssGenerator: { CssGenerator } } = wp.qubelyComponents
+const { QubelyButtonEdit, Media, Tabs, Tab, Range, BoxShadow, RadioAdvanced, Typography, Toggle, Styles, Alignment, IconList, ColorAdvanced, Color, Headings, Border, BorderRadius, Padding, gloalSettings: { globalSettingsPanel, animationSettings }, Inline: { InlineToolbar }, CssGenerator: { CssGenerator } , QubelyButton: { buttonSettings }} = wp.qubelyComponents
 import icons from '../../helpers/icons';
 import svg from '../heading/separators';
 import '../../components/ContextMenu'
@@ -374,6 +374,8 @@ class Edit extends Component {
                             </Tab>
                         </Tabs>
                     </PanelBody>
+                    
+                    {buttonSettings(this.props.attributes, device, setAttributes, (key, value) => { this.setState({ [key]: value }) })}
                     {animationSettings(uniqueId, animation, setAttributes)}
                 </InspectorControls>
 
