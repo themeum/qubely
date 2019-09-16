@@ -21,11 +21,11 @@ const {
     },
     Inline: { InlineToolbar },
     QubelyButton: { buttonSettings },
-    CssGenerator: { CssGenerator }
+    CssGenerator: { CssGenerator },
+    ContextMenu: { ContextMenu, handleContextMenu },
 } = wp.qubelyComponents
 
 import icons from '../../helpers/icons'
-import '../../components/ContextMenu'
 
 
 class Edit extends Component {
@@ -59,7 +59,7 @@ class Edit extends Component {
 
     render() {
         const { selectedItem, device } = this.state;
-        const { attributes, setAttributes } = this.props;
+        const { name, clientId, attributes, setAttributes } = this.props;
         const { uniqueId, formItems, labelTypography, labelColor, labelColorFocus,
             inputTypography, inputColor, inputColorFocus, inputColorHover,
             inputBg, inputBgFocus, inputBgHover, inputBorder, inputBorderMaterial,
@@ -363,7 +363,7 @@ class Edit extends Component {
                 {globalSettingsPanel(globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
                 <div className={`qubely-block-${uniqueId}`}>
-                    <div className={`qubely-block-contact-form qubely-layout-${layout}`}>
+                    <div className={`qubely-block-contact-form qubely-layout-${layout}`} onContextMenu={event => handleContextMenu(event, this.refs.qubelyContextMenu)}>
                         <form className="qubely-form">
                             {formItems.map((item, index) =>
                                 <div key={index} className={`qubely-form-group qubely-form-group-index-${index}`} style={{ width: `${item.width.md}%` }}>
@@ -408,6 +408,16 @@ class Edit extends Component {
                                 />
                             </div>
                         </form>
+
+                        <div ref="qubelyContextMenu" className={`qubely-context-menu-wraper`} >
+                            <ContextMenu
+                                name={name}
+                                clientId={clientId}
+                                attributes={attributes}
+                                setAttributes={setAttributes}
+                                qubelyContextMenu={this.refs.qubelyContextMenu}
+                            />
+                        </div>
                     </div>
                 </div>
 

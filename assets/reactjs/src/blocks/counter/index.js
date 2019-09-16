@@ -24,7 +24,7 @@ registerBlockType( 'qubely/counter', {
     counterTypo: { type: 'object', default: {}, style: [{ selector: '{{QUBELY}} .qubely-block-counter-content' }] },
     counterColor: { type: 'string', default: '', style: [{ selector: '{{QUBELY}} .qubely-block-counter-content {color: {{counterColor}};}' }] },
     ...globalAttributes,
-    showContextMenu: { type: 'boolean', default: true }
+    sourceOfCopiedStyle: { type: 'boolean', default: false }
   },
   edit: Edit,
   save: Save

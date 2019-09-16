@@ -2,9 +2,8 @@ const { __ } = wp.i18n
 const { Fragment, Component } = wp.element;
 const { PanelBody, RangeControl, TextControl, Toolbar } = wp.components
 const { InspectorControls, BlockControls } = wp.editor
-const { Media, Background, Tabs, Tab, Range, BoxShadow, Separator, RadioAdvanced, Typography, Select, Color, Styles, Toggle, Border, Alignment, BorderRadius, gloalSettings: { globalSettingsPanel, animationSettings }, Inline: { InlineToolbar }, CssGenerator: { CssGenerator } } = wp.qubelyComponents
+const { Media, Background, Tabs, Tab, Range, BoxShadow, Separator, RadioAdvanced, Typography, Select, Color, Styles, Toggle, Border, Alignment, BorderRadius, gloalSettings: { globalSettingsPanel, animationSettings }, Inline: { InlineToolbar }, CssGenerator: { CssGenerator }, ContextMenu: { ContextMenu, handleContextMenu }, } = wp.qubelyComponents
 import icons from '../../helpers/icons'
-import '../../components/ContextMenu'
 
 class Edit extends Component {
 
@@ -35,6 +34,9 @@ class Edit extends Component {
 
     render() {
         const {
+            name,
+            clientId,
+            attributes,
             setAttributes,
             attributes: {
                 uniqueId,
@@ -231,7 +233,7 @@ class Edit extends Component {
                 {globalSettingsPanel(globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
                 <div className={`qubely-block-${uniqueId}`}>
-                    <div className={`qubely-block-videopopup-wrapper qubely-alignment-${alignment}`}>
+                    <div className={`qubely-block-videopopup-wrapper qubely-alignment-${alignment}`} onContextMenu={event => handleContextMenu(event, this.refs.qubelyContextMenu)}>
                         {layout == 'fill' && <div className="qubely-block-videopopup-overlay"></div>}
                         <div className={`qubely-block-videopopup qubely-size-${iconSize}`} >
                             <a className="qubely-video-popup" ref={el => this.el = el} href={videoSource == 'external' ? url : (bgVideo.url || '')}>
@@ -248,6 +250,17 @@ class Edit extends Component {
                                 {postfix && <span className="qubely-video-popup-postfix">{postfix}</span>}
                             </a>
                         </div>
+
+                        <div ref="qubelyContextMenu" className={`qubely-context-menu-wraper`} >
+                            <ContextMenu
+                                name={name}
+                                clientId={clientId}
+                                attributes={attributes}
+                                setAttributes={setAttributes}
+                                qubelyContextMenu={this.refs.qubelyContextMenu}
+                            />
+                        </div>
+
                     </div>
                 </div>
             </Fragment>

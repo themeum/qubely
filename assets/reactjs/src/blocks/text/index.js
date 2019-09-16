@@ -198,7 +198,7 @@ registerBlockType('qubely/text', {
             ]
         },
         ...globalAttributes,
-        showContextMenu: { type: 'boolean', default: true }
+        sourceOfCopiedStyle: { type: 'boolean', default: false }
     },
     deprecated: [
         {

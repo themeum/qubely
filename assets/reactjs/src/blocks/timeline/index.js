@@ -534,7 +534,7 @@ registerBlockType('qubely/timeline', {
 		//
 		timelineItems: { type: 'number', default: 5 },
 		...globalAttributes,
-		showContextMenu: { type: 'boolean', default: true },
+		sourceOfCopiedStyle: { type: 'boolean', default: false },
 	},
 	edit: Edit,
 	save: Save

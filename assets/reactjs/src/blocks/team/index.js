@@ -534,7 +534,7 @@ registerBlockType('qubely/team', {
 
         // Global
         ...globalAttributes,
-        showContextMenu: { type: 'boolean', default: true }
+        sourceOfCopiedStyle: { type: 'boolean', default: false }
     },
     edit: Edit,
     save: Save,

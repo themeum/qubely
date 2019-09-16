@@ -13,10 +13,9 @@ const {
 		animationSettings
 	},
 	Inline: { InlineToolbar },
-	CssGenerator: { CssGenerator }
+	CssGenerator: { CssGenerator },
+	ContextMenu: { ContextMenu, handleContextMenu },
 } = wp.qubelyComponents
-
-import '../../components/ContextMenu'
 
 class Edit extends Component {
 	constructor(props) {
@@ -37,6 +36,9 @@ class Edit extends Component {
 	}
 	render() {
 		const {
+			name,
+			clientId,
+			attributes,
 			setAttributes,
 			attributes: {
 				uniqueId, alignment,
@@ -145,7 +147,7 @@ class Edit extends Component {
 				{globalSettingsPanel(globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
 				<div className={`qubely-block-${uniqueId}`}>
-					<div className="qubely-block-counter">
+					<div className="qubely-block-counter" onContextMenu={event => handleContextMenu(event, this.refs.qubelyContextMenu)}>
 						{counterLimit <= 0 && <div>Please enter counter number</div>}
 						{counterDuration <= 0 && <div>Please enter counter Duration</div>}
 						<div className="qubely-block-counter-content">
@@ -159,6 +161,17 @@ class Edit extends Component {
 								</Fragment>
 							}
 						</div>
+
+						<div ref="qubelyContextMenu" className={`qubely-context-menu-wraper`} >
+							<ContextMenu
+								name={name}
+								clientId={clientId}
+								attributes={attributes}
+								setAttributes={setAttributes}
+								qubelyContextMenu={this.refs.qubelyContextMenu}
+							/>
+						</div>
+
 					</div>
 				</div>
 

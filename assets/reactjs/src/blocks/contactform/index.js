@@ -300,7 +300,7 @@ registerBlockType('qubely/contactform', {
         emailBody: { type: 'string', default: '<p><strong>From:</strong> {{full-name }}</p><strong>Email:</strong> {{email}}</p>\n<p><strong>Subject:</strong> {{subject}}</p>\n<p><strong>Message:</strong> {{message}}</p>' },
         ...globalAttributes,
         ...buttonAttributes,
-        showContextMenu: { type: 'boolean', default: true }
+        sourceOfCopiedStyle: { type: 'boolean', default: false }
     },
     edit: Edit,
     save: Save,

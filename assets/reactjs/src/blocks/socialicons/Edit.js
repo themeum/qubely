@@ -2,8 +2,33 @@ const { __ } = wp.i18n;
 const { InspectorControls, BlockControls } = wp.editor
 const { Component, Fragment } = wp.element;
 const { PanelBody, TextControl, Toolbar, Button, Popover } = wp.components;
-const { Styles, IconSelector, Toggle, Separator, RadioAdvanced, Range, Alignment, Typography, Color, Tabs, Tab, Border, Padding, BorderRadius, gloalSettings: { globalSettingsPanel, animationSettings }, Inline: { InlineToolbar }, CssGenerator: { CssGenerator } } = wp.qubelyComponents
-import '../../components/ContextMenu'
+const {
+    Styles,
+    IconSelector,
+    Toggle,
+    Separator,
+    RadioAdvanced,
+    Range,
+    Alignment,
+    Typography,
+    Color,
+    Tabs,
+    Tab,
+    Border,
+    Padding,
+    BorderRadius,
+    Inline: { InlineToolbar },
+    CssGenerator: { CssGenerator },
+    ContextMenu: {
+        ContextMenu,
+        handleContextMenu
+    },
+    gloalSettings: {
+        globalSettingsPanel,
+        animationSettings
+    }
+} = wp.qubelyComponents
+
 import icons from '../../helpers/icons'
 import IconSocialData from '../../components/fields/assets/IconSocialData'
 class Edit extends Component {
@@ -56,7 +81,7 @@ class Edit extends Component {
 
     render() {
         const { selectedItem, selectedLabel, device, showIconPicker } = this.state;
-        const { attributes, setAttributes, isSelected } = this.props;
+        const { name, clientId, attributes, setAttributes, isSelected } = this.props;
         const {
             uniqueId,
             alignment,
@@ -228,7 +253,10 @@ class Edit extends Component {
                 {globalSettingsPanel(globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
                 <div className={`qubely-block-${uniqueId}`}>
-                    <div className={`qubely-block-social-icons qubely-layout-${layout} qubely-style-${useDefaultStyle ? 'default' : 'custom'}`}>
+                    <div
+                        onContextMenu={event => handleContextMenu(event, this.refs.qubelyContextMenu)}
+                        className={`qubely-block-social-icons qubely-layout-${layout} qubely-style-${useDefaultStyle ? 'default' : 'custom'}`} >
+
                         <ul className="qubely-ul" >
                             {socialIcons.map((item, index) =>
                                 <li key={index} className={`qubely-li qubely-social-item qubely-social-${item.id}`} arealabel={item.label} >
@@ -305,6 +333,16 @@ class Edit extends Component {
                                 <i className="qubely-social-icon fas fa-plus" />
                             </span>
                         </ul>
+
+                        <div ref="qubelyContextMenu" className={`qubely-context-menu-wraper`} >
+                            <ContextMenu
+                                name={name}
+                                clientId={clientId}
+                                attributes={attributes}
+                                setAttributes={setAttributes}
+                                qubelyContextMenu={this.refs.qubelyContextMenu}
+                            />
+                        </div>
                     </div>
                 </div>
             </Fragment>

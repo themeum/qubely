@@ -60,7 +60,7 @@ registerBlockType('qubely/socialicons', {
         iconBorder: { type: 'object', default: {}, style: [{ condition: [{ key: 'layout', relation: '==', value: 'fill' }, { key: 'useDefaultStyle', relation: '==', value: false }], selector: '{{QUBELY}} .qubely-block-social-icons .qubely-ul li.qubely-social-item a' }] },
         iconBorderColorHover: { type: 'string', default: '', style: [{ condition: [{ key: 'layout', relation: '==', value: 'fill' }, { key: 'useDefaultStyle', relation: '==', value: false }], selector: '{{QUBELY}} .qubely-block-social-icons .qubely-ul li.qubely-social-item a:hover {border-color: {{iconBorderColorHover}};}' }] },
         ...globalAttributes,  // Global Settings
-        showContextMenu: { type: 'boolean', default: true }
+        sourceOfCopiedStyle: { type: 'boolean', default: false }
     },
     edit: Edit,
     save: Save,

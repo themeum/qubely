@@ -212,7 +212,7 @@ registerBlockType('qubely/button', {
                 },
             ]
         },
-        showContextMenu: { type: 'boolean', default: true },
+        sourceOfCopiedStyle: { type: 'boolean', default: false },
         ...globalAttributes
     },
     getEditWrapperProps(attributes) {

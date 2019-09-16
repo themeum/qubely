@@ -2,8 +2,7 @@ const { __ } = wp.i18n
 const { Fragment, Component } = wp.element;
 const { PanelBody, Toolbar, SelectControl } = wp.components
 const { RichText, InspectorControls, BlockControls } = wp.editor
-const { Typography, Color, Alignment, Headings, Toggle, Range, Separator, gloalSettings: { globalSettingsPanel, animationSettings }, Inline: { InlineToolbar, InlineSelector }, CssGenerator: { CssGenerator } } = wp.qubelyComponents
-import '../../components/ContextMenu'
+const { Typography, Color, Alignment, Headings, Toggle, Range, Separator, gloalSettings: { globalSettingsPanel, animationSettings }, Inline: { InlineToolbar, InlineSelector }, CssGenerator: { CssGenerator }, ContextMenu: { ContextMenu, handleContextMenu }, } = wp.qubelyComponents
 import '../../components/fields/inline/editorInline'
 import svg from '../heading/separators'
 
@@ -69,7 +68,7 @@ class Edit extends Component {
             globalCss
 
         } = this.props.attributes
-        const { setAttributes } = this.props
+        const { name, clientId, attributes, setAttributes } = this.props
         const { device, openPanelSetting } = this.state
         const separators = {
             solid: { type: 'css', separator: 'solid', width: 300, stroke: 10 },
@@ -204,7 +203,9 @@ class Edit extends Component {
                 {globalSettingsPanel(globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
                 <div className={`qubely-block-${uniqueId}`}>
-                    <div className={`qubely-block-text ${(dropCap == 1) ? 'qubely-has-drop-cap' : ''}`}>
+                    <div
+                        onContextMenu={event => handleContextMenu(event, this.refs.qubelyContextMenu)}
+                        className={`qubely-block-text ${(dropCap == 1) ? 'qubely-has-drop-cap' : ''}`} >
                         {enableTitle == 1 &&
                             <div className={`qubely-block-text-title-container ${separatorStyle ? 'qubely-has-separator' : ''} ${separatorPosition ? 'qubely-separator-position-' + separatorPosition : ''}`} >
                                 <div className="qubely-block-text-title-inner">
@@ -244,6 +245,17 @@ class Edit extends Component {
                             onChange={value => setAttributes({ content: value })}
                             value={content}
                         />
+
+                        <div ref="qubelyContextMenu" className={`qubely-context-menu-wraper`} >
+                            <ContextMenu
+                                name={name}
+                                clientId={clientId}
+                                attributes={attributes}
+                                setAttributes={setAttributes}
+                                qubelyContextMenu={this.refs.qubelyContextMenu}
+                            />
+                        </div>
+
                     </div>
                 </div>
 

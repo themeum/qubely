@@ -571,7 +571,7 @@ registerBlockType('qubely/pricing', {
         ...globalAttributes,
         ...buttonAttributes,
         ...listAttributes,
-        showContextMenu: { type: 'boolean', default: true },
+        sourceOfCopiedStyle: { type: 'boolean', default: false },
 
     },
     edit: Edit,

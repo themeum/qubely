@@ -2,8 +2,24 @@ const { __ } = wp.i18n
 const { Fragment, Component } = wp.element;
 const { PanelBody, TextControl, Toolbar } = wp.components
 const { InspectorControls, BlockControls } = wp.editor
-const { RadioAdvanced, Range, Typography, ColorAdvanced, Toggle, Color, BorderRadius, gloalSettings: { globalSettingsPanel, animationSettings }, Inline: { InlineToolbar }, CssGenerator: { CssGenerator } } = wp.qubelyComponents
-import '../../components/ContextMenu'
+const {
+    RadioAdvanced,
+    Range,
+    Typography,
+    ColorAdvanced,
+    Toggle,
+    Color,
+    BorderRadius,
+    Inline: { InlineToolbar },
+    CssGenerator: { CssGenerator },
+    ContextMenu: {
+        ContextMenu,
+        handleContextMenu
+    },
+    gloalSettings: {
+        globalSettingsPanel,
+        animationSettings
+    } } = wp.qubelyComponents
 
 class Edit extends Component {
 
@@ -27,6 +43,9 @@ class Edit extends Component {
 
     render() {
         const {
+            name,
+            clientId,
+            attributes,
             setAttributes,
             attributes: {
                 uniqueId,
@@ -124,13 +143,23 @@ class Edit extends Component {
                 {globalSettingsPanel(globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
                 <div className={`qubely-block-${uniqueId}`}>
-                    <div className="qubely-block-progress-bar">
+                    <div className="qubely-block-progress-bar" onContextMenu={event => handleContextMenu(event, this.refs.qubelyContextMenu)}>
                         {labelPosition == 'outside' && labelsContent}
                         <div className="qubely-progress">
                             <div className="qubely-progress-bar" role="progressbar">
                                 {striped && <div className="qubely-progress-striped"></div>}
                                 {labelPosition == 'inside' && labelsContent}
                             </div>
+                        </div>
+
+                        <div ref="qubelyContextMenu" className={`qubely-context-menu-wraper`} >
+                            <ContextMenu
+                                name={name}
+                                clientId={clientId}
+                                attributes={attributes}
+                                setAttributes={setAttributes}
+                                qubelyContextMenu={this.refs.qubelyContextMenu}
+                            />
                         </div>
                     </div>
                 </div>

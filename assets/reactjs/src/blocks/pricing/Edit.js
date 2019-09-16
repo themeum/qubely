@@ -5,8 +5,7 @@ const { select, withSelect, withDispatch } = wp.data
 const { Component, Fragment } = wp.element
 const { getBlock } = select('core/editor')
 const { RichText, InspectorControls, BlockControls } = wp.editor
-const { Color, Toggle, Border, Padding, Alignment, Typography, QubelyButtonEdit, gloalSettings: { globalSettingsPanel, animationSettings }, Inline: { InlineToolbar }, ColorAdvanced, Range, RadioAdvanced, Tabs, Tab, Separator, QubelyIconListEdit, BoxShadow, Styles, BorderRadius, CssGenerator: { CssGenerator }, QubelyButton: { buttonSettings }, QubelyList: { listSettings } } = wp.qubelyComponents
-import '../../components/ContextMenu'
+const { Color, Toggle, Border, Padding, Alignment, Typography, QubelyButtonEdit, gloalSettings: { globalSettingsPanel, animationSettings }, Inline: { InlineToolbar }, ColorAdvanced, Range, RadioAdvanced, Tabs, Tab, Separator, QubelyIconListEdit, BoxShadow, Styles, BorderRadius, CssGenerator: { CssGenerator }, QubelyButton: { buttonSettings }, QubelyList: { listSettings }, ContextMenu: { ContextMenu, handleContextMenu }, } = wp.qubelyComponents
 import icons from '../../helpers/icons'
 
 class Edit extends Component {
@@ -186,7 +185,11 @@ class Edit extends Component {
 
 	render() {
 		const {
-			isSelected, clientId, setAttributes,
+			name,
+			isSelected,
+			clientId,
+			attributes,
+			setAttributes,
 			attributes: {
 				uniqueId, pricings, alignment, titleSpacing, layout,
 				// Title 
@@ -664,7 +667,7 @@ class Edit extends Component {
 				{globalSettingsPanel(globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
 				<div className={`qubely-block-${uniqueId}`} >
-					<div className={`qubely-block-pricing`}>
+					<div className={`qubely-block-pricing`} onContextMenu={event => handleContextMenu(event, this.refs.qubelyContextMenu)}>
 						{enableBadge && <span className={`qubely-pricing-badge qubely-badge-style-${badgeStyle} qubely-badge-size-${badgeSize}`} contenteditable="true" onBlur={(e) => setAttributes({ 'badge': e.target.innerText })} onClick={() => this.handlePanelOpenings('Badge')}><span>{badge}</span></span>}
 						<div className="qubely-block-pricing-content">
 							<div className="qubely-block-pricing-header">
@@ -709,6 +712,16 @@ class Edit extends Component {
 								this.renderPricingButton()
 							}
 						</div>
+						<div ref="qubelyContextMenu" className={`qubely-context-menu-wraper`} >
+							<ContextMenu
+								name={name}
+								clientId={clientId}
+								attributes={attributes}
+								setAttributes={setAttributes}
+								qubelyContextMenu={this.refs.qubelyContextMenu}
+							/>
+						</div>
+
 					</div>
 				</div>
 			</Fragment>

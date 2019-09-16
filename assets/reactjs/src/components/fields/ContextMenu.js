@@ -1,8 +1,8 @@
 
 const { __ } = wp.i18n
 const { select, dispatch } = wp.data
-const { Component, Fragment } = wp.element
-import icons from '../../helpers/icons';
+import '../css/contextmenu.scss'
+const { Component } = wp.element
 
 const PluginBlockSettingsMenuItem = wp.editPost.PluginBlockSettingsMenuItem
 
@@ -49,7 +49,7 @@ export class ContextMenu extends Component {
     componentWillUnmount() {
         document.removeEventListener('mousedown', this.handleonClickOutside);
     }
- 
+
     handleonClickOutside = (event) => {
         const { qubelyContextMenu } = this.props
         if (qubelyContextMenu && !qubelyContextMenu.contains(event.target)) {
@@ -73,7 +73,7 @@ export class ContextMenu extends Component {
         newStyles['copiedFrom'] = clientId
         newStyles['blockName'] = name
         let previouslyCopiedStyle = JSON.parse(localStorage.getItem('qubelyCopiedStyles'))
-        
+
         if (previouslyCopiedStyle) {
             let previouslyCopiedFrom = previouslyCopiedStyle.copiedFrom
             select('core/block-editor').getBlock(`${previouslyCopiedFrom}`) && updateBlockAttributes(`${previouslyCopiedFrom}`, { sourceOfCopiedStyle: false })

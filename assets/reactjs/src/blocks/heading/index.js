@@ -149,7 +149,7 @@ registerBlockType('qubely/heading', {
 			],
 		},
 		...globalAttributes,
-		showContextMenu: { type: 'boolean', default: true }
+		sourceOfCopiedStyle: { type: 'boolean', default: false }
 	},
 	edit: Edit,
 	save: Save,

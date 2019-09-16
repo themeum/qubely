@@ -4,8 +4,7 @@ const { compose } = wp.compose
 const { withSelect, withDispatch } = wp.data
 const { PanelBody, Toolbar, Tooltip } = wp.components
 const { RichText, InspectorControls, BlockControls } = wp.editor
-const { Alignment, Typography, Color, ColorAdvanced, gloalSettings: { globalSettingsPanel, animationSettings }, IconList, Inline: { InlineToolbar }, Select, Styles, Tabs, Tab, Range, Url, BoxShadow, RadioAdvanced, Separator, Border, BorderRadius, Padding, CssGenerator: { CssGenerator } } = wp.qubelyComponents
-import '../../components/ContextMenu'
+const { Alignment, Typography, Color, ColorAdvanced, gloalSettings: { globalSettingsPanel, animationSettings }, IconList, Inline: { InlineToolbar }, Select, Styles, Tabs, Tab, Range, Url, BoxShadow, RadioAdvanced, Separator, Border, BorderRadius, Padding, ContextMenu: { ContextMenu, handleContextMenu }, CssGenerator: { CssGenerator } } = wp.qubelyComponents
 import icons from '../../helpers/icons'
 
 class Edit extends Component {
@@ -26,7 +25,7 @@ class Edit extends Component {
 
     render() {
         const { uniqueId, parentClientId, buttonGroup, fillType, buttonSize, buttonWidthType, buttonWidth, buttonPadding, typography, textField, url, enableAlignment, alignment, buttonBorderRadius, iconName, iconPosition, iconSize, iconGap, buttonBorder, borderHoverColor, buttonColor, buttonColor2, buttonHoverColor, buttonHoverColor2, bgColor, bgHoverColor, buttonShadow, buttonHoverShadow, animation, globalZindex, hideTablet, hideMobile, globalCss } = this.props.attributes
-        const { clientId, removeBlock, updateBlockAttributes, buttonGroupAttributes, setAttributes } = this.props
+        const { name, clientId, attributes, removeBlock, updateBlockAttributes, buttonGroupAttributes, setAttributes } = this.props
         const { device } = this.state
 
         if (uniqueId) { CssGenerator(this.props.attributes, 'button', uniqueId); }
@@ -169,9 +168,9 @@ class Edit extends Component {
                             onDeviceChange={value => this.setState({ device: value })}
                         />
                     </PanelBody>
-                    
+
                     {animationSettings(uniqueId, animation, setAttributes)}
-                
+
                 </InspectorControls>
 
                 <BlockControls>
@@ -188,7 +187,7 @@ class Edit extends Component {
 
 
                 <div className={`qubely-block-${uniqueId}`}>
-                    <div className="qubely-block-btn-wrapper">
+                    <div className="qubely-block-btn-wrapper" onContextMenu={event => handleContextMenu(event, this.refs.qubelyContextMenu)}>
                         <div className={`qubely-block-btn`}>
                             <span className={`qubely-block-btn-anchor is-${buttonSize}`}>
                                 {(iconName.trim() != "") && (iconPosition == 'left') && (<i className={`qubely-btn-icon ${iconName}`} />)}
@@ -216,6 +215,17 @@ class Edit extends Component {
                                 </span>
                             </Tooltip>
                         }
+
+                        <div ref="qubelyContextMenu" className={`qubely-context-menu-wraper`} >
+                            <ContextMenu
+                                name={name}
+                                clientId={clientId}
+                                attributes={attributes}
+                                setAttributes={setAttributes}
+                                qubelyContextMenu={this.refs.qubelyContextMenu}
+                            />
+                        </div>
+
                     </div>
                 </div>
 

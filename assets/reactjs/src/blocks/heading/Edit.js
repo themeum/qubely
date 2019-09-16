@@ -18,10 +18,10 @@ const {
         InlineToolbar,
         InlineSelector
     },
-    CssGenerator: { CssGenerator }
+    CssGenerator: { CssGenerator },
+    ContextMenu: { ContextMenu, handleContextMenu },
 } = wp.qubelyComponents
 
-import '../../components/ContextMenu'
 import '../../components/fields/inline/editorInline'
 import svg from '../heading/separators'
 
@@ -43,6 +43,9 @@ class Edit extends Component {
 
     render() {
         const {
+            name,
+            clientId,
+            attributes,
             setAttributes,
             attributes: {
                 uniqueId,
@@ -198,7 +201,9 @@ class Edit extends Component {
                 {globalSettingsPanel(globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
                 <div className={`qubely-block-${uniqueId}`}>
-                    <div className={`qubely-block-heading ${separatorStyle ? 'qubely-has-separator qubely-separator-position-' + separatorPosition : ''}`}>
+                    <div
+                        onContextMenu={event => handleContextMenu(event, this.refs.qubelyContextMenu)}
+                        className={`qubely-block-heading ${separatorStyle ? 'qubely-has-separator qubely-separator-position-' + separatorPosition : ''}`}>
                         {(subHeading == 1 && subHeadingPosition == 'before_title') &&
                             <RichText
                                 key="editable"
@@ -231,6 +236,16 @@ class Edit extends Component {
                                 onChange={value => setAttributes({ subHeadingContent: value })}
                                 value={subHeadingContent} />
                         }
+                        <div ref="qubelyContextMenu" className={`qubely-context-menu-wraper`} >
+                            <ContextMenu
+                                name={name}
+                                clientId={clientId}
+                                attributes={attributes}
+                                setAttributes={setAttributes}
+                                qubelyContextMenu={this.refs.qubelyContextMenu}
+                            />
+                        </div>
+
                     </div>
                 </div>
 

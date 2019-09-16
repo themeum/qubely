@@ -509,7 +509,7 @@ registerBlockType('qubely/infobox', {
         // Global
         ...globalAttributes,
         ...buttonAttributes,
-        // showContextMenu: { type: 'boolean', default: true }
+        // sourceOfCopiedStyle: { type: 'boolean', default: false }
     },
     edit: Edit,
     save: Save,

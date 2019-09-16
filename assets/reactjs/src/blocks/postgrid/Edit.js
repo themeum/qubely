@@ -5,8 +5,7 @@ const { dateI18n, __experimentalGetSettings } = wp.date
 const { addQueryArgs } = wp.url
 const { RangeControl, PanelBody, Toolbar, Spinner, TextControl, SelectControl } = wp.components;
 const { InspectorControls, BlockControls } = wp.editor
-const { Range, ButtonGroup, Inline: { InlineToolbar }, Toggle, Dropdown, Select, Separator, ColorAdvanced, Typography, Color, Border, BorderRadius, Padding, BoxShadow, Styles, Tabs, Tab, RadioAdvanced, gloalSettings: { globalSettingsPanel, animationSettings }, CssGenerator: { CssGenerator } } = wp.qubelyComponents
-import '../../components/ContextMenu'
+const { Range, ButtonGroup, Inline: { InlineToolbar }, Toggle, Dropdown, Select, Separator, ColorAdvanced, Typography, Color, Border, BorderRadius, Padding, BoxShadow, Styles, Tabs, Tab, RadioAdvanced, gloalSettings: { globalSettingsPanel, animationSettings }, CssGenerator: { CssGenerator }, ContextMenu: { ContextMenu, handleContextMenu }, } = wp.qubelyComponents
 import icons from '../../helpers/icons'
 
 
@@ -102,6 +101,9 @@ class Edit extends Component {
 
 	render() {
 		const {
+			name,
+			clientId,
+			attributes,
 			setAttributes,
 			posts,
 			taxonomyList,
@@ -247,8 +249,8 @@ class Edit extends Component {
 							options={[
 								{ value: 1, svg: icons.postgrid_1, label: __('') },
 								{ value: 2, svg: icons.postgrid_2, label: __('') },
-								{ value: 3, svg: icons.postgrid_3, label: __(''), pro:true },
-								{ value: 4, svg: icons.postgrid_3, label: __(''), pro:true },
+								{ value: 3, svg: icons.postgrid_3, label: __(''), pro: true },
+								{ value: 4, svg: icons.postgrid_3, label: __(''), pro: true },
 							]}
 							value={layout}
 							onChange={val => setAttributes({ layout: val })}
@@ -628,7 +630,9 @@ class Edit extends Component {
 					{
 						(posts && posts.length) ?
 
-							<div className={`qubely-postgrid-wrapper qubely-postgrid-layout-${layout} ${(layout === 2) ? 'qubely-postgrid-column qubely-postgrid-column-md' + column.md + ' ' + 'qubely-postgrid-column-sm' + column.sm + ' ' + 'qubely-postgrid-column-xs' + column.xs : ''}`}>
+							<div
+								onContextMenu={event => handleContextMenu(event, this.refs.qubelyContextMenu)}
+								className={`qubely-postgrid-wrapper qubely-postgrid-layout-${layout} ${(layout === 2) ? 'qubely-postgrid-column qubely-postgrid-column-md' + column.md + ' ' + 'qubely-postgrid-column-sm' + column.sm + ' ' + 'qubely-postgrid-column-xs' + column.xs : ''}`}>
 								{
 									posts && posts.map(post => {
 										return (
@@ -641,6 +645,17 @@ class Edit extends Component {
 										)
 									})
 								}
+
+								<div ref="qubelyContextMenu" className={`qubely-context-menu-wraper`} >
+									<ContextMenu
+										name={name}
+										clientId={clientId}
+										attributes={attributes}
+										setAttributes={setAttributes}
+										qubelyContextMenu={this.refs.qubelyContextMenu}
+									/>
+								</div>
+
 							</div>
 							:
 							<div className="qubely-postgrid-is-loading">

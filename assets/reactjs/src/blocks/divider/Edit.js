@@ -6,6 +6,7 @@ const {
     Alignment,
     Range,
     Color,
+    ContextMenu: { ContextMenu, handleContextMenu },
     gloalSettings: {
         globalSettingsPanel,
         animationSettings
@@ -15,7 +16,6 @@ const {
 } = wp.qubelyComponents
 
 import icons from '../divider/icon'
-import '../../components/ContextMenu'
 const dividerOptions = ['fill', 'dot', 'dash', 'branch', 'dashes', 'leaf', 'line1', 'line2', 'line3', 'line4', 'line5', 'line6', 'line7', 'line8', 'line9', 'line10', 'line11', 'line12', 'line13', 'liner', 'mustache', 'shadow', 'slash', 'spring', 'valla', 'wave1', 'wave2', 'wave3']
 class Edit extends Component {
 
@@ -53,6 +53,9 @@ class Edit extends Component {
 
     render() {
         const {
+            name,
+            clientId,
+            attributes,
             setAttributes,
             attributes: {
                 uniqueId,
@@ -71,7 +74,7 @@ class Edit extends Component {
 
         const { device } = this.state
         if (uniqueId) { CssGenerator(this.props.attributes, 'divider', uniqueId); }
-        
+
         return (
             <Fragment>
                 <InspectorControls key="inspector">
@@ -137,7 +140,7 @@ class Edit extends Component {
 
                 {globalSettingsPanel(globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
-                <div className={`qubely-block-${uniqueId}`}>
+                <div className={`qubely-block-${uniqueId}`} onContextMenu={event => handleContextMenu(event, this.refs.qubelyContextMenu)}>
                     <Dropdown
                         className={"qubely-divider-picker"}
                         contentClassName={"qubely-divider-picker-content"}
@@ -153,6 +156,15 @@ class Edit extends Component {
                         }
                         renderContent={() => this.renderDividerOptions()}
                     />
+                    <div ref="qubelyContextMenu" className={`qubely-context-menu-wraper`} >
+                        <ContextMenu
+                            name={name}
+                            clientId={clientId}
+                            attributes={attributes}
+                            setAttributes={setAttributes}
+                            qubelyContextMenu={this.refs.qubelyContextMenu}
+                        />
+                    </div>
                 </div>
             </Fragment >
         );

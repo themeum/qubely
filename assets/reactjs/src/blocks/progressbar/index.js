@@ -44,7 +44,7 @@ registerBlockType( 'qubely/progressbar', {
 		showProgress: {type: 'boolean', default: true},
 		
 		...globalAttributes,
-		showContextMenu: { type: 'boolean', default: true }
+		sourceOfCopiedStyle: { type: 'boolean', default: false }
 	},
 	edit: Edit,
 	save: Save

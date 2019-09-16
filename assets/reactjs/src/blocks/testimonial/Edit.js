@@ -2,9 +2,8 @@ const { __ } = wp.i18n
 const { Fragment, Component } = wp.element;
 const { PanelBody, TextControl, Toolbar } = wp.components
 const { RichText, BlockControls, InspectorControls, AlignmentToolbar } = wp.editor
-const { Media, RadioAdvanced, Range, Color, Typography, Toggle, Separator, ColorAdvanced, Border, BorderRadius, BoxShadow, Styles, Alignment, Padding, Tabs, Tab, gloalSettings: { globalSettingsPanel, animationSettings }, Inline: { InlineToolbar }, CssGenerator: { CssGenerator } } = wp.qubelyComponents
+const { Media, RadioAdvanced, Range, Color, Typography, Toggle, Separator, ColorAdvanced, Border, BorderRadius, BoxShadow, Styles, Alignment, Padding, Tabs, Tab, gloalSettings: { globalSettingsPanel, animationSettings }, Inline: { InlineToolbar }, CssGenerator: { CssGenerator }, ContextMenu: { ContextMenu, handleContextMenu }, } = wp.qubelyComponents
 import icons from '../../helpers/icons'
-import '../../components/ContextMenu'
 
 class Edit extends Component {
     constructor(props) {
@@ -79,7 +78,7 @@ class Edit extends Component {
             globalCss
         } = this.props.attributes
 
-        const { setAttributes } = this.props
+        const { clientId, attributes, setAttributes } = this.props
         const { openPanelSetting, device } = this.state
         if (uniqueId) { CssGenerator(this.props.attributes, 'testimonial', uniqueId); }
 
@@ -460,7 +459,7 @@ class Edit extends Component {
                 {globalSettingsPanel(globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
                 <div className={`qubely-block-${uniqueId}`}>
-                    <div className={`qubely-block-testimonial`}>
+                    <div className={`qubely-block-testimonial`} onContextMenu={event => handleContextMenu(event, this.refs.qubelyContextMenu)}>
 
                         {layout == 2 && authorInfo}
 
@@ -485,6 +484,16 @@ class Edit extends Component {
                         {(quoteIcon && (layout == 2)) &&
                             <div className="qubely-testimonial-quote qubely-position-bottom" onClick={() => this.handlePanelOpenings('Quote Icon')}><span className={`qubely-quote-icon ${quoteIcon}`}></span></div>
                         }
+
+                        <div ref="qubelyContextMenu" className={`qubely-context-menu-wraper`} >
+                            <ContextMenu
+                                name={this.props.name}
+                                clientId={clientId}
+                                attributes={attributes}
+                                setAttributes={setAttributes}
+                                qubelyContextMenu={this.refs.qubelyContextMenu}
+                            />
+                        </div>
 
                     </div>
                 </div>

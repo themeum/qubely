@@ -17,12 +17,18 @@ const {
     BorderRadius,
     BoxShadow,
     Separator,
-    gloalSettings: { globalSettingsPanel, animationSettings },
-    CssGenerator: { CssGenerator }
+    CssGenerator: { CssGenerator },
+    gloalSettings: {
+        globalSettingsPanel,
+        animationSettings
+    },
+    ContextMenu: {
+        ContextMenu,
+        handleContextMenu
+    },
 } = wp.qubelyComponents
 
 import icons from '../../helpers/icons'
-import '../../components/ContextMenu'
 
 class Edit extends Component {
     constructor(props) {
@@ -160,11 +166,34 @@ class Edit extends Component {
     }
 
     render() {
-        const { setAttributes,
+        const {
+            name,
+            clientId,
+            attributes,
+            setAttributes,
             attributes: {
-                uniqueId, iconSize, iconSizeCustom, iconSpacing, layout, iconPosition,
-                listItems, typography, alignment, iconColor, iconHoverColor, spacing, color, colorHover, padding, background,
-                backgroundHover, border, borderRadius, borderColorHover, shadow, shadowHover,
+                uniqueId,
+                iconSize,
+                iconSizeCustom,
+                iconSpacing,
+                layout,
+                iconPosition,
+                listItems,
+                typography,
+                alignment,
+                iconColor,
+                iconHoverColor,
+                spacing,
+                color,
+                colorHover,
+                padding,
+                background,
+                backgroundHover,
+                border,
+                borderRadius,
+                borderColorHover,
+                shadow,
+                shadowHover,
                 animation,
                 globalZindex,
                 hideTablet,
@@ -293,7 +322,7 @@ class Edit extends Component {
                 {globalSettingsPanel(globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
                 <div className={`qubely-block-${uniqueId}`}>
-                    <div className="qubely-block-icon-list">
+                    <div className="qubely-block-icon-list" onContextMenu={event => handleContextMenu(event, this.refs.qubelyContextMenu)}>
                         <ul className="qubely-list">
                             {this.renderListItems()}
                         </ul>
@@ -303,6 +332,17 @@ class Edit extends Component {
                         }} className="button is-default qubely-action-button" role="button">
                             <i class="fas fa-plus" /> {__('Add New')}
                         </button>
+
+                        <div ref="qubelyContextMenu" className={`qubely-context-menu-wraper`} >
+                            <ContextMenu
+                                name={name}
+                                clientId={clientId}
+                                attributes={attributes}
+                                setAttributes={setAttributes}
+                                qubelyContextMenu={this.refs.qubelyContextMenu}
+                            />
+                        </div>
+
                     </div>
                 </div>
             </Fragment>

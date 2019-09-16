@@ -18,10 +18,10 @@ const {
 	BorderRadius,
 	gloalSettings: { globalSettingsPanel, animationSettings },
 	Inline: { InlineToolbar },
-	CssGenerator: { CssGenerator }
+	CssGenerator: { CssGenerator },
+	ContextMenu: { ContextMenu, handleContextMenu },
 } = wp.qubelyComponents
 
-import '../../components/ContextMenu'
 import icons from '../../helpers/icons'
 
 class Edit extends Component {
@@ -58,6 +58,8 @@ class Edit extends Component {
 	}
 	render() {
 		const {
+			clientId,
+			attributes,
 			setAttributes,
 			attributes: {
 				uniqueId,
@@ -71,7 +73,7 @@ class Edit extends Component {
 				iconBackgroundSize,
 				iconColor,
 				iconHoverColor,
-				
+
 				bgColor,
 				bgHoverColor,
 				border,
@@ -251,9 +253,18 @@ class Edit extends Component {
 				{globalSettingsPanel(globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
 				<div className={`qubely-block-${uniqueId}`}>
-					<div className="qubely-block-icon-wrapper">
+					<div className="qubely-block-icon-wrapper" onContextMenu={event => handleContextMenu(event, this.refs.qubelyContextMenu)}>
 						<div className="qubely-block-icon">
 							<i className={name} />
+						</div>
+						<div ref="qubelyContextMenu" className={`qubely-context-menu-wraper`} >
+							<ContextMenu
+								name={this.props.name}
+								clientId={clientId}
+								attributes={attributes}
+								setAttributes={setAttributes}
+								qubelyContextMenu={this.refs.qubelyContextMenu}
+							/>
 						</div>
 					</div>
 				</div>

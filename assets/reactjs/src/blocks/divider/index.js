@@ -20,7 +20,7 @@ registerBlockType ( 'qubely/divider', {
 		width: { type: 'object', default: {md: '280', unit: 'px'}, style: [{ selector: '{{QUBELY}} .qubely-block-divider > div { width: {{width}};} {{QUBELY}} .qubely-block-divider svg { width: {{width}};}' }] },
 		alignment: { type: 'object', default: {md: 'center'}, style: [{ selector: '{{QUBELY}} .qubely-block-divider {text-align: {{alignment}};}' }]},
         ...globalAttributes,
-        showContextMenu: { type: 'boolean', default: true }
+        sourceOfCopiedStyle: { type: 'boolean', default: false }
     },
     edit: Edit,
     save: Save,
