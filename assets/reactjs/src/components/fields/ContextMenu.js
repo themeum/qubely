@@ -4,8 +4,6 @@ const { select, dispatch } = wp.data
 import '../css/contextmenu.scss'
 const { Component } = wp.element
 
-const PluginBlockSettingsMenuItem = wp.editPost.PluginBlockSettingsMenuItem
-
 export function handleContextMenu(event, qubelyContextMenu) {
     event.preventDefault()
     const clickX = event.clientX
