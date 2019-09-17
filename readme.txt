@@ -220,6 +220,9 @@ Found a bug? Please let us know by posting on the support section of this plugin
 
 = 1.1.3 - 10 September, 2019 =
 
+New: Page Template  
+Update: Performance improvement  
+Update: Restructured Components & fields  
 Fix: Post Grid block - Category clickable issue in Edit view    
 
 = 1.1.2 - 06 September, 2019 =
