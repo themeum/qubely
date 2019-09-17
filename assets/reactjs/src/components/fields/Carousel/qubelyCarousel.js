@@ -417,13 +417,13 @@
             let currentStagePosition = this._currentPosition
             let startIndex = Math.floor(currentStagePosition / this.itemWidth)
             let endIndex = Math.floor(Math.abs(parseInt(this.options.items) + parseInt(startIndex)))
-            this.$outerStage.find('.active').removeClass('active')
+            this.$outerStage.find('.qubely-carousel-item.active').removeClass('active')
             for (let i = startIndex; i < endIndex; i++) {
                 this.$outerStage.children(':eq(' + i + ')').addClass('active')
             }
             let reminder = Math.floor(((startIndex - this._clones) / this.options.items)) + 1
             if (this.options.dots) {
-                this.$dotContainer.find('.active').removeClass('active')
+                this.$dotContainer.find('.qubely-carousel-item.active').removeClass('active')
                 this.$dotContainer.find('li:nth-child(' + reminder + ')').addClass('active')
             }
         },

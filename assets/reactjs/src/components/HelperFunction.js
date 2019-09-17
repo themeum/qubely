@@ -103,3 +103,25 @@ export const _equal = ( value, other ) => {
     };
     return isEqual(value, other);
 }
+
+export const parseResponsiveViewPort = () => {
+    let responsive = [
+        { viewport: 1170 },
+        { viewport: 980 },
+        { viewport: 580 }
+    ]
+    if (typeof responsive === 'undefined')
+        return
+    let activeView = null
+
+    for (let i = 0; i < responsive.length; i++) {
+        if (window.innerWidth > responsive[i].viewport) {
+            activeView = responsive[i]
+            break;
+        }
+    }
+    if (activeView === null) {
+        activeView = responsive[responsive.length - 1]
+    }
+    return activeView.viewport <= 1199 ? activeView.viewport <= 991 ? 'xs' : 'sm' : 'md'
+}

@@ -49,13 +49,14 @@ import {
     singleField
 } from './CssGenerator'
 import {
+    _equal,
     animationAttr,
     selectValue,
     isObject,
     isArray,
     setValue,
     videoBackground,
-    _equal
+    parseResponsiveViewPort
 } from './HelperFunction'
 
 //hooks
@@ -108,13 +109,14 @@ wp.qubelyComponents = {
     Gradient,
     Headings,
     HelperFunction: {
+        _equal,
         animationAttr,
         selectValue,
         isObject,
         isArray,
         setValue,
         videoBackground,
-        _equal
+        parseResponsiveViewPort
     },
     IconList,
     IconSelector,
