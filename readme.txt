@@ -68,7 +68,6 @@ Qubely adds numerous custom Gutenberg blocks to the Gutenberg block editor and t
 * [Image](https://qubely.io/block/image/)
 * [Timeline](https://qubely.io/block/timeline/)
 * [Post Grid](https://qubely.io/block/post-grid/)
-* Testimonial Carousel
 * More advanced Gutenberg blocks coming
 
 
@@ -218,7 +217,7 @@ Found a bug? Please let us know by posting on the support section of this plugin
 
 == Changelog ==
 
-= 1.1.3 - 10 September, 2019 =
+= 1.1.3 - 17 September, 2019 =
 
 New: Page Template  
 Update: Performance improvement  
