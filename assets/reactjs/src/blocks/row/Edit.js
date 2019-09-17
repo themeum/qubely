@@ -1,6 +1,6 @@
 const { __ } = wp.i18n
 const { compose } = wp.compose;
-const { withDispatch } = wp.data;
+const { select, withDispatch } = wp.data
 const { PanelBody, TextControl, SelectControl, Tooltip, Button, RangeControl } = wp.components
 const { Component, Fragment } = wp.element
 const { InspectorControls, InnerBlocks, InspectorAdvancedControls } = wp.editor
@@ -30,11 +30,21 @@ class Edit extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            device: 'md'
+            device: 'md',
+            showRowSettings: true
         }
     }
     componentDidMount() {
         const { setAttributes, clientId, attributes: { uniqueId } } = this.props
+        const { getBlockRootClientId, getBlockName } = select('core/editor');
+
+        let parentClientId = getBlockRootClientId(clientId)
+        let parentBlockName = getBlockName(parentClientId)
+    
+        if (parentBlockName === 'qubely/column') {
+            this.setState({ showRowSettings: false })
+        }
+
         const _client = clientId.substr(0, 6)
         if (!uniqueId) {
             setAttributes({ uniqueId: _client });
@@ -96,7 +106,9 @@ class Edit extends Component {
                 globalCss
             },
             setAttributes } = this.props;
-        const { device } = this.state
+
+        const { device, showRowSettings } = this.state
+     
         if (uniqueId) { CssGenerator(this.props.attributes, 'row', uniqueId); }
 
         if (!columns) {
@@ -162,7 +174,7 @@ class Edit extends Component {
                             />
                         }
 
-                        {align == 'full' &&
+                        {(align == 'full' && showRowSettings) &&
                             <Fragment>
                                 <RadioAdvanced label={__('Container')} value={rowContainerWidth} onChange={val => setAttributes({ rowContainerWidth: val })}
                                     options={[
