@@ -31,7 +31,7 @@ class Edit extends Component {
         super(props)
         this.state = {
             device: 'md',
-            showRowSettings: true
+            hideRowSettings: false
         }
     }
     componentDidMount() {
@@ -40,16 +40,16 @@ class Edit extends Component {
 
         let parentClientId = getBlockRootClientId(clientId)
         let parentBlockName = getBlockName(parentClientId)
-    
+
         if (parentBlockName === 'qubely/column') {
-            this.setState({ showRowSettings: false })
+            this.setState({ hideRowSettings: true })
         }
 
         const _client = clientId.substr(0, 6)
         if (!uniqueId) {
-            setAttributes({ uniqueId: _client });
+            setAttributes({ uniqueId: _client, childRow: parentBlockName === 'qubely/column' ? true : false });
         } else if (uniqueId && uniqueId != _client) {
-            setAttributes({ uniqueId: _client });
+            setAttributes({ uniqueId: _client, childRow: parentBlockName === 'qubely/column' ? true : false });
         }
     }
 
@@ -107,8 +107,8 @@ class Edit extends Component {
             },
             setAttributes } = this.props;
 
-        const { device, showRowSettings } = this.state
-     
+        const { device, hideRowSettings } = this.state
+
         if (uniqueId) { CssGenerator(this.props.attributes, 'row', uniqueId); }
 
         if (!columns) {
@@ -174,7 +174,7 @@ class Edit extends Component {
                             />
                         }
 
-                        {(align == 'full' && showRowSettings) &&
+                        {(align == 'full' && !hideRowSettings) &&
                             <Fragment>
                                 <RadioAdvanced label={__('Container')} value={rowContainerWidth} onChange={val => setAttributes({ rowContainerWidth: val })}
                                     options={[
