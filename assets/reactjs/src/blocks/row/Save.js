@@ -8,12 +8,11 @@ class Save extends Component {
 	getClassName = () => {
 		const { attributes: { align, childRow, rowContainerWidth } } = this.props
 		let wrapperClassName = align ? (align === 'full' && rowContainerWidth == 'boxed') ? 'qubely-container' : 'qubely-container-fluid' : childRow ? 'qubely-container-fluid' : 'qubely-container'
-
 		return wrapperClassName
 	}
 
 	render() {
-		const { attributes: { uniqueId, animation, rowId, rowBg, shapeTop, shapeBottom, align, heightOptions, rowContainerWidth } } = this.props
+		const { attributes: { uniqueId, animation, rowId, rowBg, shapeTop, shapeBottom, heightOptions } } = this.props
 
 		return (
 			<div className={`qubely-section qubely-block-${uniqueId} ${(rowBg.bgimgParallax && rowBg.bgimgParallax == 'animated') ? 'qubely-section-parallax' : ''}`} {...rowId ? { id: rowId } : ''} {...animationAttr(animation)}>
@@ -29,7 +28,6 @@ class Save extends Component {
 				}
 				<div className="qubely-row-overlay"></div>
 				<div className={this.getClassName()}>
-					{/* <div className={`${align == 'full' ? ((rowContainerWidth == 'boxed') ? 'qubely-container' : 'qubely-container-fluid') : 'qubely-container-fluid'}`}> */}
 					<div className={`qubely-row ${(heightOptions == 'window') ? 'qubely-row-height-window' : ''}`}>
 						<InnerBlocks.Content />
 					</div>

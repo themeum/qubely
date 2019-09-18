@@ -110,7 +110,7 @@ class Edit extends Component {
         const { device, hideRowSettings } = this.state
 
         if (uniqueId) { CssGenerator(this.props.attributes, 'row', uniqueId); }
-        console.log('align : ', align)
+
         if (!columns) {
             return (
                 <Fragment>
