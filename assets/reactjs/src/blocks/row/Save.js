@@ -4,8 +4,16 @@ const { InnerBlocks } = wp.editor
 const { HelperFunction: { animationAttr, videoBackground } } = wp.qubelyComponents
 
 class Save extends Component {
+
+	getClassName = () => {
+		const { attributes: { childRow, align, rowContainerWidth } } = this.props
+		let wrapperClassName = childRow ? 'qubely-container' : (align == 'full' ? (rowContainerWidth == 'boxed' ? 'qubely-container' : 'qubely-container-fluid') : 'qubely-container-fluid')
+		return wrapperClassName
+	}
+
 	render() {
 		const { attributes: { uniqueId, animation, rowId, rowBg, shapeTop, shapeBottom, align, heightOptions, rowContainerWidth } } = this.props
+
 		return (
 			<div className={`qubely-section qubely-block-${uniqueId} ${(rowBg.bgimgParallax && rowBg.bgimgParallax == 'animated') ? 'qubely-section-parallax' : ''}`} {...rowId ? { id: rowId } : ''} {...animationAttr(animation)}>
 
@@ -19,7 +27,7 @@ class Save extends Component {
 					<div className="qubely-shape-divider qubely-bottom-shape" dangerouslySetInnerHTML={{ __html: qubely_admin.shapes[shapeBottom.style] }} />
 				}
 				<div className="qubely-row-overlay"></div>
-				<div className={`${align == 'full' ? ((rowContainerWidth == 'boxed') ? 'qubely-container' : 'qubely-container-fluid') : 'qubely-container-fluid'}`}>
+				<div className={this.getClassName()}>
 					<div className={`qubely-row ${(heightOptions == 'window') ? 'qubely-row-height-window' : ''}`}>
 						<InnerBlocks.Content />
 					</div>
