@@ -6,8 +6,9 @@ const { HelperFunction: { animationAttr, videoBackground } } = wp.qubelyComponen
 class Save extends Component {
 
 	getClassName = () => {
-		const { attributes: { childRow, align, rowContainerWidth } } = this.props
-		let wrapperClassName = childRow ? 'qubely-container' : (align == 'full' ? (rowContainerWidth == 'boxed' ? 'qubely-container' : 'qubely-container-fluid') : 'qubely-container-fluid')
+		const { attributes: { align, childRow, rowContainerWidth } } = this.props
+		let wrapperClassName = align ? (align === 'full' && rowContainerWidth == 'boxed') ? 'qubely-container' : 'qubely-container-fluid' : childRow ? 'qubely-container-fluid' : 'qubely-container'
+
 		return wrapperClassName
 	}
 
@@ -28,6 +29,7 @@ class Save extends Component {
 				}
 				<div className="qubely-row-overlay"></div>
 				<div className={this.getClassName()}>
+					{/* <div className={`${align == 'full' ? ((rowContainerWidth == 'boxed') ? 'qubely-container' : 'qubely-container-fluid') : 'qubely-container-fluid'}`}> */}
 					<div className={`qubely-row ${(heightOptions == 'window') ? 'qubely-row-height-window' : ''}`}>
 						<InnerBlocks.Content />
 					</div>
