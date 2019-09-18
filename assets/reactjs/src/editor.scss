@@ -725,6 +725,7 @@ div[data-type="qubely/row"].is-resizing .components-resizable-box__container.qub
                 display: inline-block;
                 position: relative;
                 transition: 300ms;
+                font-style: normal;
                 &:not(:last-of-type) {
                     margin-right: 2px;
                 }
@@ -735,6 +736,7 @@ div[data-type="qubely/row"].is-resizing .components-resizable-box__container.qub
                 opacity: 1;
 
                 i {
+                    font-style: normal;
                     background: #FFFFFF;
                     border: 1px solid #2184F9;
                     box-shadow: 0 0 0 1px rgba(33,132,249,0.20);
@@ -885,6 +887,7 @@ div[data-type="qubely/row"].is-resizing .components-resizable-box__container.qub
                 border: 2px solid #333;
                 background-image: linear-gradient(45deg, #333 50%,#ffffff 50%);
                 i {
+                    font-style: normal;
                     width: 22px;
                     visibility: hidden;
                 }

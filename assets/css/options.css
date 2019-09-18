@@ -107,6 +107,7 @@ h4.qubely-options-section-title {
 }
 
 .qubely-options-features > li > i {
+    font-style: normal;
 	color: #60DA4F;
 	margin-right: 10px;
 }

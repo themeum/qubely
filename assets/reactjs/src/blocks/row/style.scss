@@ -104,3 +104,25 @@
         }
     }
 }
+
+.editor-styles-wrapper {
+    .qubely-section {
+        .qubely-column-inner {
+            // .components-dropdown-menu.components-toolbar {
+            //     border-right: none;
+            //     padding: 0;
+            //     button.components-dropdown-menu__toggle.has-text {
+            //         display: none;
+            //     }
+            
+            // }
+            .wp-block[data-align="full"] {
+                left: auto;
+                width: 100%;
+                max-width: 100%;
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+    }
+} 
