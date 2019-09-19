@@ -9,6 +9,9 @@
     
     .qubely-accordion-item {
         display: block;
+        .components-button:focus:enabled {
+            background-color: #ed0b0b;
+        }
     }
 
     .qubely-accordion-panel {
@@ -126,11 +129,14 @@
     width: 20px;
     position: absolute;
     top: -10px;
-    font-size: 12px;
-    color: #fff;
-    background: #eb5a46;
+    font-size: 11px;
+    color: #fff !important;
+    background: #ed0b0b;
     border-radius: 50%;
     right: -10px;
+    i {
+        font-size: 11px !important;
+    }
 }
 .qubely-accordion-item-remove-button i {
     font-style: normal;
