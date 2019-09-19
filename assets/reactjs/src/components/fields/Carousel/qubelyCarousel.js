@@ -71,6 +71,9 @@
 
             // On inital start animation
             this.triggerOnStart()
+
+            //init active class
+            this.processActivationWorker()
         },
 
         // Trigger animation element on inital time
@@ -137,12 +140,12 @@
 
             // Create dots element if dots setting enable
             if (this.options.dots) {
-                if(this.$element.find('.qubely-carousel-dots').length === 0 ){
+                if (this.$element.find('.qubely-carousel-dots').length === 0) {
                     this.createDotsController()
-                }else{
+                } else {
                     this.$dotContainer = this.$element.find('.qubely-carousel-dots ul');
                 }
-                
+
             }
 
             this.calculateItemCoordinate()
@@ -587,7 +590,7 @@
             }
             return result;
         },
-     
+
 
         /**
          * Check if it has callback function 
