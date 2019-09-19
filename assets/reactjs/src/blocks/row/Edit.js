@@ -36,20 +36,19 @@ class Edit extends Component {
     }
     componentDidMount() {
         const { setAttributes, clientId, attributes: { uniqueId } } = this.props
-        const { getBlockRootClientId, getBlockName } = select('core/editor');
+        const { getBlockRootClientId } = select('core/editor');
 
         let parentClientId = getBlockRootClientId(clientId)
-        let parentBlockName = getBlockName(parentClientId)
 
-        if (parentBlockName === 'qubely/column') {
+        if (parentClientId) {
             this.setState({ hideRowSettings: true })
         }
 
         const _client = clientId.substr(0, 6)
         if (!uniqueId) {
-            setAttributes({ uniqueId: _client, childRow: parentBlockName === 'qubely/column' ? true : false });
+            setAttributes({ uniqueId: _client, childRow: parentClientId ? true : false });
         } else if (uniqueId && uniqueId != _client) {
-            setAttributes({ uniqueId: _client, childRow: parentBlockName === 'qubely/column' ? true : false });
+            setAttributes({ uniqueId: _client, childRow: parentClientId ? true : false });
         }
     }
 

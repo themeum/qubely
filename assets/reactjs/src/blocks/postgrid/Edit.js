@@ -632,7 +632,7 @@ class Edit extends Component {
 						(posts && posts.length) ?
 
 							<div
-								onContextMenu={event => handleContextMenu(event, this.refs.qubelyContextMenu)}
+								// onContextMenu={event => handleContextMenu(event, this.refs.qubelyContextMenu)}
 								className={`qubely-postgrid-wrapper qubely-postgrid-layout-${layout} ${(layout === 2) ? 'qubely-postgrid-column qubely-postgrid-column-md' + column.md + ' ' + 'qubely-postgrid-column-sm' + column.sm + ' ' + 'qubely-postgrid-column-xs' + column.xs : ''}`}>
 								{
 									posts && posts.map(post => {
@@ -648,13 +648,13 @@ class Edit extends Component {
 								}
 
 								<div ref="qubelyContextMenu" className={`qubely-context-menu-wraper`} >
-									<ContextMenu
+									{/* <ContextMenu
 										name={name}
 										clientId={clientId}
 										attributes={attributes}
 										setAttributes={setAttributes}
 										qubelyContextMenu={this.refs.qubelyContextMenu}
-									/>
+									/> */}
 								</div>
 
 							</div>
