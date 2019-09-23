@@ -83,6 +83,23 @@
 	.qubely-timeline-content {
 		position: relative;
 		
+		.qubely-action-timeline-remove {
+			display: none;
+			font-size: 12px;
+			width: 18px;
+			height: 18px;
+			line-height: 20px;
+			text-align: center;
+			background: rgba(0, 0, 0, .8);
+			color: #fff;
+			position: absolute;
+			top: -9px;
+			right: -9px;
+			border-radius: 10px;
+			z-index: 1;
+			cursor: pointer;
+		}
+
 		&:before {
 			content: " ";
 			position: absolute;
@@ -105,6 +122,12 @@
 				transform: translateY(-50%);
 				border-style: solid;
 				z-index: 0;
+			}
+		}
+		
+		&:hover {
+			.qubely-action-timeline-remove {
+				display: block;
 			}
 		}
 	}

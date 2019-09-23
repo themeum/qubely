@@ -44,6 +44,13 @@ class Edit extends Component {
 
 	}
 
+	removeItem = (index) => {
+		const { setAttributes, attributes: { timelineContents, timelineItems } } = this.props
+		let newTimelineContents = JSON.parse(JSON.stringify(timelineContents))
+		newTimelineContents.splice(index, 1)
+		setAttributes({ timelineContents: newTimelineContents, timelineItems: timelineItems - 1 })
+	}
+
 	renderTimeline = () => {
 		const { attributes: { timelineContents, enableContentBorder, headingLevel, enableDateTime, enableImage, connectorIcon } } = this.props
 		const titleTagName = 'h' + headingLevel;
@@ -113,6 +120,13 @@ class Edit extends Component {
 								keepPlaceholderOnFocus
 							/>
 						</div>
+
+						<Tooltip text={__('Delete this item')}>
+							<span className="qubely-action-timeline-remove" role="button" onClick={() => this.removeItem(index)}>
+								<i className="fas fa-times"></i>
+							</span>
+						</Tooltip>
+
 					</div>
 					{enableDateTime == 1 &&
 						<div className="qubely-timeline-date-container">
@@ -132,59 +146,59 @@ class Edit extends Component {
 	}
 
 	render() {
-		const { setAttributes, attributes: {
-			uniqueId,
-			timelineItems,
-			typography,
-			timelineContents,
+		const {
+			setAttributes,
+			attributes: {
+				uniqueId,
+				timelineItems,
 
-			orientation,
-			horizontalSpacing,
-			verticalSpacing,
+				orientation,
+				horizontalSpacing,
+				verticalSpacing,
 
-			headingLevel,
-			headingTypography,
-			headingColor,
-			headingSpacing,
+				headingLevel,
+				headingTypography,
+				headingColor,
+				headingSpacing,
 
-			contentBg,
-			contentColor,
-			contentTypography,
-			enableContentBorder,
-			contentBorderWidth,
-			contentBorderColor,
-			contentPadding,
-			contentBorderRadius,
-			contentBoxShadow,
+				contentBg,
+				contentColor,
+				contentTypography,
+				enableContentBorder,
+				contentBorderWidth,
+				contentBorderColor,
+				contentPadding,
+				contentBorderRadius,
+				contentBoxShadow,
 
-			enableDateTime,
-			enableDateTimeTypography,
-			enableDateTimeColor,
+				enableDateTime,
+				enableDateTimeTypography,
+				enableDateTimeColor,
 
-			enableImage,
-			imagePosition,
-			imageBorderRadius,
-			imageSpacing,
+				enableImage,
+				imagePosition,
+				imageBorderRadius,
+				imageSpacing,
 
-			connectorSize,
-			connectorColor,
-			connectorBorder,
-			connectorBoxShadow,
-			connectorBorderRadius,
-			connectorIcon,
-			connectorIconSize,
-			connectorIconColor,
-			connectorBarWidth,
-			connectorBarColor,
+				connectorSize,
+				connectorColor,
+				connectorBorder,
+				connectorBoxShadow,
+				connectorBorderRadius,
+				connectorIcon,
+				connectorIconSize,
+				connectorIconColor,
+				connectorBarWidth,
+				connectorBarColor,
 
-			//animation
-			animation,
-			globalZindex,
-			hideTablet,
-			hideMobile,
-			globalCss
+				//animation
+				animation,
+				globalZindex,
+				hideTablet,
+				hideMobile,
+				globalCss
 
-		} } = this.props
+			} } = this.props
 
 		const { device } = this.state
 
