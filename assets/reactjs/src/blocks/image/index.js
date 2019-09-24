@@ -64,7 +64,7 @@ registerBlockType('qubely/image', {
             type: 'object',
             default: {}
         },
-
+		imageUrl: { type: 'object', default: {} },
         imageSize: {
             type: 'string',
             default: 'auto',
