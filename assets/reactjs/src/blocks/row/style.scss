@@ -22,6 +22,9 @@
         display: flex;
         flex-wrap: wrap;
         position: relative;
+        > .wp-block-qubely-column {
+            box-sizing: border-box;
+        }
         &.qubely-row-height-window {
             min-height: 100vh;
         }
