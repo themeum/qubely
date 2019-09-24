@@ -139,7 +139,11 @@ const attributes = {
     // Advanced Settings
     rowId: { type: 'string', default: '' },
     rowZindex: { type: 'number', default: '', style: [{ selector: '{{QUBELY}}.qubely-section{z-index:{{rowZindex}};}' }] },
-    rowReverse: { type: 'object', default: { openRowReverse: true, values: {} }, style: [{ selector: '{{QUBELY}}.qubely-section .qubely-row, {{QUBELY}} .qubely-row > .editor-inner-blocks > .editor-block-list__layout' }] },
+    rowReverse: {
+        type: 'object',
+        default: { openRowReverse: false, values: {} },
+        style: [{ selector: '{{QUBELY}}.qubely-section >.qubely-container >.qubely-row,{{QUBELY}}.qubely-section >.qubely-container-fluid >.qubely-row, {{QUBELY}} >.qubely-container-fluid >.qubely-row > .editor-inner-blocks > .editor-block-list__layout, {{QUBELY}} >.qubely-container >.qubely-row > .editor-inner-blocks > .editor-block-list__layout' }]
+    },
 
     rowCss: { type: 'string', default: '', style: [{ selector: '' }] },
 };
