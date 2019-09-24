@@ -218,10 +218,9 @@ Found a bug? Please let us know by posting on the support section of this plugin
 == Changelog ==
 
 = 1.1.4 - 24 September, 2019 =
-
-New: Image block - Image url option  
+New: Image block - Image URL option  
 Update: Timeline block - Item removing option  
-Fix: Row block - Column reverse issue for child Rows  
+Fix: Row block - Column reverse issue for child rows  
 Fix: Row block - Column issue in responsive devices  
 
 = 1.1.3 - 19 September, 2019 =
