@@ -72,8 +72,29 @@
             // On inital start animation
             this.triggerOnStart()
 
+
+
             //init active class
-            this.processActivationWorker()
+
+            this.initActiveClass()
+
+        },
+
+
+        initActiveClass: function () {
+
+            let currentStagePosition = this._currentPosition
+            let startIndex = Math.floor(currentStagePosition / this.itemWidth)
+
+            if (this.options.center) {
+                startIndex++
+            }
+            let endIndex = Math.floor(Math.abs(parseInt(this.options.items) + parseInt(startIndex)))
+            this.$outerStage.find('.qubely-carousel-item.active').removeClass('active')
+
+            for (let i = startIndex; i < endIndex; i++) {
+                this.$outerStage.children(':eq(' + i + ')').addClass('active')
+            }
         },
 
         // Trigger animation element on inital time
@@ -320,6 +341,8 @@
              * If prev element then slide from left otherwise from right
              */
             this.delta = delta
+
+            this.processActivationWorker()
         },
 
         updateDotsFromPosition: function (position) {
@@ -419,19 +442,23 @@
         processActivationWorker: function () {
             let currentStagePosition = this._currentPosition
             let startIndex = Math.floor(currentStagePosition / this.itemWidth)
+
+            if (this.options.center) {
+                startIndex++
+            }
             let endIndex = Math.floor(Math.abs(parseInt(this.options.items) + parseInt(startIndex)))
             this.$outerStage.find('.qubely-carousel-item.active').removeClass('active')
+
             for (let i = startIndex; i < endIndex; i++) {
                 this.$outerStage.children(':eq(' + i + ')').addClass('active')
             }
+
             let reminder = Math.floor(((startIndex - this._clones) / this.options.items)) + 1
             if (this.options.dots) {
                 this.$dotContainer.find('.qubely-carousel-item.active').removeClass('active')
                 this.$dotContainer.find('li:nth-child(' + reminder + ')').addClass('active')
             }
         },
-
-
 
 
         /**
