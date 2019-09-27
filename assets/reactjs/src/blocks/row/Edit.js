@@ -311,7 +311,7 @@ class Edit extends Component {
                 </InspectorControls>
 
                 <InspectorAdvancedControls>
-                    <Toggle label={__('Column Reverse')} responsive value={rowReverse.values} onChange={val => setAttributes({ rowReverse: Object.assign({}, Object.assign(rowReverse, { values: val, openRowReverse: true })) })} />
+                    <Toggle label={__('Column Reverse')} responsive value={rowReverse.values} onChange={val => setAttributes({ rowReverse: { values: val, openRowReverse: true } })} />
                     <TextControl label={__('CSS ID')} value={rowId} onChange={val => setAttributes({ rowId: val })} />
                 </InspectorAdvancedControls>
 
