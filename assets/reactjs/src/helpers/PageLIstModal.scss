@@ -483,6 +483,9 @@
   padding: 20px 20px 0;
   .qubely-template-back{
     cursor: pointer;
+    .dashicons {
+        vertical-align: middle;
+    }
   }
 }
 
@@ -497,7 +500,10 @@
 }
 
 .qubely-template-back{
-  cursor: pointer;
+    cursor: pointer;
+    .dashicons {
+        vertical-align: middle;
+    }
 }
 
 /* .qubely-modal-loader span {
