@@ -217,6 +217,12 @@ Found a bug? Please let us know by posting on the support section of this plugin
 
 == Changelog ==
 
+= 1.1.5 - 01 October, 2019 =
+Fix: CSS issue in import layout modal  
+Fix: Image block - Removed empty space  
+Update: Carousel field - Bug fixed & finalized 
+
+
 = 1.1.4 - 24 September, 2019 =
 New: Image block - Image URL option  
 Update: Timeline block - Item removing option  
