@@ -1,4 +1,10 @@
 .qubely-block-image {
+    &.qubely-image-layout-blurb {
+        line-height: 0;
+        .qubely-image-media {
+            display: inline-block;
+        }
+    }
 	figure {
 		padding: 0;
 		margin: 0;
@@ -7,7 +13,7 @@
 		.qubely-image-image {
 			margin: 0;
 			padding: 0;
-			display: block;
+			display: inline-block;
 			&.qubely-image-placeholder {
 				display: inline-flex;
 			}
@@ -28,10 +34,6 @@
 				z-index: 10;
 			}
 		}
-	}
-
-	.qubely-image-media {
-		display: inline-block;
 	}
 
 	.qubely-has-frame {
@@ -182,6 +184,7 @@
 			}
 	
 			.qubely-image-sub-title {
+                line-height: 1;
 				&.qubely-visible-on-hover {
 					transform: translate3d(0, -30px, 0);
 					opacity: 0;
