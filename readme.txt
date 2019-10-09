@@ -1,5 +1,5 @@
 === Advanced Gutenberg Blocks – Qubely ===
-Contributors: themeum
+Contributors: themeum, kawshar, mhshohel, jakirhasan, anik4e, faisalahmed29, delowardev, rejuancse, fahimmurshed, badsha_eee, joomcoder, sksaaju, mehedih
 Donate link: https://www.themeum.com
 Tags: Blocks, Gutenberg editor, Block editor, Block, Gutenberg, Gutenberg Blocks
 Requires at least: 5.0
