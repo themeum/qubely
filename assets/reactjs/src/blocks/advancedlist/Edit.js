@@ -2,7 +2,7 @@ const { __ } = wp.i18n;
 const { RichText, InspectorControls, BlockControls } = wp.editor
 const { Component, Fragment } = wp.element;
 const { PanelBody, Toolbar, Tooltip } = wp.components;
-const { Typography, Alignment, ContextMenu: { ContextMenu, handleContextMenu }, gloalSettings: { globalSettingsPanel, animationSettings }, Styles, Range, Tabs, Tab, Border, Inline: { InlineToolbar }, RadioAdvanced, Color, BoxShadow, Toggle, Separator, IconSelector, BorderRadius, Padding, CssGenerator: { CssGenerator } } = wp.qubelyComponents
+const { Typography, Alignment, ContextMenu: { ContextMenu, handleContextMenu }, gloalSettings: { globalSettingsPanel, animationSettings, interactionSettings }, Styles, Range, Tabs, Tab, Border, Inline: { InlineToolbar }, RadioAdvanced, Color, BoxShadow, Toggle, Separator, IconSelector, BorderRadius, Padding, CssGenerator: { CssGenerator } } = wp.qubelyComponents
 import icons from '../../helpers/icons'
 
 class Edit extends Component {
@@ -165,6 +165,7 @@ class Edit extends Component {
         const {
             name,
             clientId,
+            isSelected,
             attributes,
             setAttributes,
             attributes: {
@@ -205,6 +206,7 @@ class Edit extends Component {
                 hideTablet,
                 hideMobile,
                 globalCss,
+                interaction
             }, } = this.props
         const { device } = this.state
 
@@ -338,7 +340,11 @@ class Edit extends Component {
                             </Tab>
                         </Tabs>
                     </PanelBody>
+                    
                     {animationSettings(uniqueId, animation, setAttributes)}
+
+                    {interactionSettings(uniqueId, interaction, setAttributes)}
+
                 </InspectorControls>
 
                 <BlockControls>

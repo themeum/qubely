@@ -64,22 +64,15 @@ export function animationSettings(uniqueId, animation, setAttributes) {
 }
 
 
-export function interactionSettings(uniqueId, interaction, isSelected, setAttributes, name) {
-    const blockName = name.split("/")[1]
-    const isDisableInteraction = typeof excludeInteraction[blockName] === 'undefined' ? true : false
+export function interactionSettings(uniqueId, interaction, setAttributes) {
     return (
-        <Fragment>
-            { isDisableInteraction && 
-                <PanelBody title={__("Interaction")} initialOpen={false}>
-                    <Interaction
-                        isSelected={isSelected}
-                        uniqueId={uniqueId}
-                        label={__('Interaction')}
-                        value={interaction}
-                        onChange={ value => setAttributes({ interaction: value })}
-                    />
-                </PanelBody>
-            }
-        </Fragment>
+        <PanelBody title={__("Interaction")} initialOpen={false}>
+            <Interaction
+                uniqueId={uniqueId}
+                label={__('Interaction')}
+                value={interaction}
+                onChange={ value => setAttributes({ interaction: value })}
+            />
+        </PanelBody>
     )
 }

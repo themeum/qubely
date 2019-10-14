@@ -67,7 +67,7 @@ class Edit extends Component {
         const { rowWidth, nextColWidth, prevColWidth } = this.state
         toggleSelection(false)
 
-        const editorSelector = select('core/editor')
+        const editorSelector = select('core/block-editor')
         const colWidth = editorSelector.getBlockAttributes(clientId).colWidth
         const nextBlockClientId = editorSelector.getNextBlockClientId(clientId)
         const prevBlockClientId = editorSelector.getPreviousBlockClientId(clientId)

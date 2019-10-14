@@ -16,7 +16,7 @@ const {
 	Tab,
 	Border,
 	BorderRadius,
-	gloalSettings: { globalSettingsPanel, animationSettings },
+	gloalSettings: { globalSettingsPanel, animationSettings, interactionSettings },
 	Inline: { InlineToolbar },
 	CssGenerator: { CssGenerator },
 	ContextMenu: { ContextMenu, handleContextMenu },
@@ -59,6 +59,7 @@ class Edit extends Component {
 	render() {
 		const {
 			clientId,
+			isSelected,
 			attributes,
 			setAttributes,
 			attributes: {
@@ -86,7 +87,8 @@ class Edit extends Component {
 				globalZindex,
 				hideTablet,
 				hideMobile,
-				globalCss }
+				globalCss,
+				interaction }
 		} = this.props
 
 		if (uniqueId) { CssGenerator(this.props.attributes, 'icon', uniqueId); }
@@ -237,7 +239,11 @@ class Edit extends Component {
 							</Tabs>
 						</PanelBody>
 					}
+
 					{animationSettings(uniqueId, animation, setAttributes)}
+
+					{interactionSettings(uniqueId, interaction, setAttributes)}
+
 				</InspectorControls>
 
 				<BlockControls>

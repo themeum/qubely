@@ -20,7 +20,8 @@ const {
     CssGenerator: { CssGenerator },
     gloalSettings: {
         globalSettingsPanel,
-        animationSettings
+        animationSettings,
+        interactionSettings
     },
     ContextMenu: {
         ContextMenu,
@@ -170,6 +171,7 @@ class Edit extends Component {
             name,
             clientId,
             attributes,
+            isSelected,
             setAttributes,
             attributes: {
                 uniqueId,
@@ -198,7 +200,8 @@ class Edit extends Component {
                 globalZindex,
                 hideTablet,
                 hideMobile,
-                globalCss
+                globalCss,
+                interaction
             } } = this.props
 
         const { device } = this.state
@@ -315,7 +318,10 @@ class Edit extends Component {
                             </Tabs>
                         </PanelBody>
                     }
+
                     {animationSettings(uniqueId, animation, setAttributes)}
+
+                    {interactionSettings(uniqueId, interaction, setAttributes)}
 
                 </InspectorControls>
 

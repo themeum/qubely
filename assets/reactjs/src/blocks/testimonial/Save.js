@@ -1,9 +1,11 @@
 const { Fragment, Component } = wp.element
 const { RichText } = wp.editor
-const { HelperFunction: { animationAttr } } = wp.qubelyComponents
+const { HelperFunction: { animationAttr, IsInteraction } } = wp.qubelyComponents
+
 class Save extends Component {
     render() {
-        const { uniqueId, layout, animation, message, name, designation, showAvatar, avatar, avatar2x, avatarAlt, avatarLayout, quoteIcon, showRatings, ratings } = this.props.attributes
+        const { uniqueId, layout, animation, message, name, designation, showAvatar, avatar, avatar2x, avatarAlt, avatarLayout, quoteIcon, showRatings, ratings, interaction } = this.props.attributes
+        const interactionClass = IsInteraction(interaction) ? 'qubley-block-interaction' : '';
 
         const testimonialTitle = <RichText.Content tagName="span" value={name} />
         const testimonialDesignation = <RichText.Content tagName="span" value={designation} />
@@ -42,7 +44,7 @@ class Save extends Component {
 
         return (
             <div className={`qubely-block-${uniqueId}`} {...animationAttr(animation)}>
-                <div className={`qubely-block-testimonial`}>
+                <div className={`qubely-block-testimonial ${interactionClass}`}>
 
                     {layout == 2 && authorInfo}
 

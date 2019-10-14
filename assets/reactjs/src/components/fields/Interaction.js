@@ -144,7 +144,6 @@ class Interaction extends Component {
                                     { while_scroll_into_view.enable &&
                                         <Fragment>
                                             <Timeline
-                                                isSelected={this.props.isSelected}
                                                 uniqueId={this.props.uniqueId}
                                                 onChange={ (actionList) => this._saveAttributes('while_scroll_into_view','action_list', actionList)}
                                                 selectAction={this.selectAction.bind(this)}

@@ -171,7 +171,7 @@ class Edit extends Component {
 
                     {animationSettings(uniqueId, animation, setAttributes)}
 
-                    {interactionSettings(uniqueId, interaction, isSelected, setAttributes, name)}
+                    {interactionSettings(uniqueId, interaction, setAttributes)}
 
                 </InspectorControls>
 

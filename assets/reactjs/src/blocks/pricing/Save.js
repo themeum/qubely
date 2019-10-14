@@ -1,7 +1,7 @@
 const { Component, Fragment } = wp.element
 const { RichText } = wp.editor
 const { QubelyButtonSave, QubelyIconListSave } = wp.qubelyComponents
-const { HelperFunction: { animationAttr } } = wp.qubelyComponents
+const { HelperFunction: { animationAttr, IsInteraction } } = wp.qubelyComponents
 
 class Save extends Component {
 
@@ -107,9 +107,12 @@ class Save extends Component {
             badgeStyle, badgeSize,
             animation } = this.props.attributes
         const listTag = listType == 'ordered' ? 'ol' : 'ul'
+
+        const interactionClass = IsInteraction(interaction) ? 'qubley-block-interaction' : '';
+
         return (
             <div className={`qubely-block-${uniqueId}`} {...animationAttr(animation)}>
-                <div className={`qubely-block-pricing`}>
+                <div className={`qubely-block-pricing ${interactionClass}`}>
                     {enableBadge && <span className={`qubely-pricing-badge qubely-badge-style-${badgeStyle} qubely-badge-size-${badgeSize}`}><span>{badge}</span></span>}
                     <div className="qubely-block-pricing-content">
                         <div className="qubely-block-pricing-header">

@@ -2,7 +2,7 @@ const { __ } = wp.i18n
 const { Fragment, Component } = wp.element;
 const { PanelBody, SelectControl, TextControl, Toolbar } = wp.components
 const { RichText, InspectorControls, BlockControls } = wp.editor
-const { QubelyButtonEdit, Media, Tabs, Tab, Range, BoxShadow, ContextMenu: { ContextMenu, handleContextMenu }, RadioAdvanced, Typography, Toggle, Styles, Alignment, IconList, ColorAdvanced, Color, Headings, Border, BorderRadius, Padding, gloalSettings: { globalSettingsPanel, animationSettings }, Inline: { InlineToolbar }, CssGenerator: { CssGenerator }, QubelyButton: { buttonSettings } } = wp.qubelyComponents
+const { QubelyButtonEdit, Media, Tabs, Tab, Range, BoxShadow, ContextMenu: { ContextMenu, handleContextMenu }, RadioAdvanced, Typography, Toggle, Styles, Alignment, IconList, ColorAdvanced, Color, Headings, Border, BorderRadius, Padding, gloalSettings: { globalSettingsPanel, animationSettings, interactionSettings }, Inline: { InlineToolbar }, CssGenerator: { CssGenerator }, QubelyButton: { buttonSettings } } = wp.qubelyComponents
 import icons from '../../helpers/icons';
 import svg from '../heading/separators';
 class Edit extends Component {
@@ -112,10 +112,11 @@ class Edit extends Component {
             globalZindex,
             hideTablet,
             hideMobile,
-            globalCss
+            globalCss,
+            interaction
         } = this.props.attributes
 
-        const { name, clientId, attributes, setAttributes } = this.props
+        const { name, clientId, attributes, isSelected, setAttributes } = this.props
         const { openPanelSetting, device } = this.state
         const separators = {
             solid: { type: 'css', separator: 'solid', width: 300, stroke: 10 },
@@ -377,6 +378,7 @@ class Edit extends Component {
 
                     {buttonSettings(this.props.attributes, device, setAttributes, (key, value) => { this.setState({ [key]: value }) })}
                     {animationSettings(uniqueId, animation, setAttributes)}
+                    {interactionSettings(uniqueId, interaction, setAttributes)}
                 </InspectorControls>
 
                 <BlockControls>

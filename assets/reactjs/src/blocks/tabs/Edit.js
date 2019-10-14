@@ -4,7 +4,7 @@ const { compose } = wp.compose
 const { withSelect, withDispatch } = wp.data
 const { Component, Fragment } = wp.element;
 const { InnerBlocks, RichText, InspectorControls, BlockControls } = wp.editor
-const { Color, IconList, Select, Styles, Typography, Range, RadioAdvanced, gloalSettings: { globalSettingsPanel, animationSettings }, Inline: { InlineToolbar }, BoxShadow, Alignment, Tabs, Tab, Separator, Border, Padding, BorderRadius, CssGenerator: { CssGenerator } } = wp.qubelyComponents
+const { Color, IconList, Select, Styles, Typography, Range, RadioAdvanced, gloalSettings: { globalSettingsPanel, animationSettings, interactionSettings }, Inline: { InlineToolbar }, BoxShadow, Alignment, Tabs, Tab, Separator, Border, Padding, BorderRadius, CssGenerator: { CssGenerator } } = wp.qubelyComponents
 import icons from '../../helpers/icons';
 
 class Edit extends Component {
@@ -158,10 +158,10 @@ class Edit extends Component {
 			globalZindex,
 			hideTablet,
 			hideMobile,
-			globalCss
-
+			globalCss,
+			interaction
 		} = this.props.attributes
-		const { setAttributes } = this.props
+		const { name, setAttributes, isSelected } = this.props
 		const { activeTab, device } = this.state
 		if (uniqueId) { CssGenerator(this.props.attributes, 'tabs', uniqueId); }
 		let iterator = [], index = 0
@@ -314,6 +314,8 @@ class Edit extends Component {
 					</PanelBody>
 					
 					{animationSettings(uniqueId, animation, setAttributes)}
+
+					{interactionSettings(uniqueId, interaction, setAttributes)}
 
 				</InspectorControls>
 

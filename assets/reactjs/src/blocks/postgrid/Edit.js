@@ -101,9 +101,6 @@ class Edit extends Component {
 
 	render() {
 		const {
-			name,
-			clientId,
-			attributes,
 			setAttributes,
 			posts,
 			taxonomyList,

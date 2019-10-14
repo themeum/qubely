@@ -1,9 +1,9 @@
-const { Fragment, Component } = wp.element
-const { HelperFunction: { animationAttr } } = wp.qubelyComponents
+const { Component } = wp.element
+const { HelperFunction: { animationAttr, IsInteraction } } = wp.qubelyComponents
 class Save extends Component {
   render() {
-  const { uniqueId, animation, title, labelPosition, striped, progress, showProgress } = this.props.attributes
-
+  const { uniqueId, animation, title, labelPosition, striped, progress, showProgress, interaction } = this.props.attributes
+  const interactionClass = IsInteraction(interaction) ? 'qubley-block-interaction' : '';
   const labelsContent =  title != '' ?
             ( <div className={`qubely-block-progress-labels qubely-position-${labelPosition}`}>
                 <div className="qubely-block-progress-bar-title">{title}</div>
@@ -11,7 +11,7 @@ class Save extends Component {
             </div> ) : ''
     return (
         <div className={`qubely-block-${uniqueId}`} {...animationAttr(animation)}>
-            <div className="qubely-block-progress-bar">
+            <div className={`qubely-block-progress-bar ${interactionClass}`}>
                 { labelPosition == 'outside' && labelsContent }
                 <div className="qubely-progress">
                     <div className="qubely-progress-bar" role="progressbar">

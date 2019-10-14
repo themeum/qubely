@@ -10,7 +10,8 @@ const {
 	Color,
 	gloalSettings: {
 		globalSettingsPanel,
-		animationSettings
+		animationSettings,
+		interactionSettings
 	},
 	Inline: { InlineToolbar },
 	CssGenerator: { CssGenerator },
@@ -39,6 +40,7 @@ class Edit extends Component {
 			name,
 			clientId,
 			attributes,
+			isSelected,
 			setAttributes,
 			attributes: {
 				uniqueId, alignment,
@@ -51,7 +53,7 @@ class Edit extends Component {
 				prepostTypo,
 				prepostSpacing,
 				prepostColor,
-
+				interaction,
 				animation,
 				globalZindex,
 				hideTablet,
@@ -131,7 +133,11 @@ class Edit extends Component {
 							}
 						</PanelBody>
 					}
+					
 					{animationSettings(uniqueId, animation, setAttributes)}
+
+					{interactionSettings(uniqueId, interaction, setAttributes)}
+
 				</InspectorControls>
 
 				<BlockControls>

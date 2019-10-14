@@ -5,7 +5,7 @@ const { select, withSelect, withDispatch } = wp.data
 const { Component, Fragment } = wp.element
 const { getBlock } = select('core/editor')
 const { RichText, InspectorControls, BlockControls } = wp.editor
-const { Color, Toggle, Border, Padding, Alignment, Typography, QubelyButtonEdit, gloalSettings: { globalSettingsPanel, animationSettings }, Inline: { InlineToolbar }, ColorAdvanced, Range, RadioAdvanced, Tabs, Tab, Separator, QubelyIconListEdit, BoxShadow, Styles, BorderRadius, CssGenerator: { CssGenerator }, QubelyButton: { buttonSettings }, QubelyList: { listSettings }, ContextMenu: { ContextMenu, handleContextMenu }, } = wp.qubelyComponents
+const { Color, Toggle, Border, Padding, Alignment, Typography, QubelyButtonEdit, gloalSettings: { globalSettingsPanel, animationSettings, interactionSettings }, Inline: { InlineToolbar }, ColorAdvanced, Range, RadioAdvanced, Tabs, Tab, Separator, QubelyIconListEdit, BoxShadow, Styles, BorderRadius, CssGenerator: { CssGenerator }, QubelyButton: { buttonSettings }, QubelyList: { listSettings }, ContextMenu: { ContextMenu, handleContextMenu }, } = wp.qubelyComponents
 import icons from '../../helpers/icons'
 
 class Edit extends Component {
@@ -219,7 +219,8 @@ class Edit extends Component {
 				globalZindex,
 				hideTablet,
 				hideMobile,
-				globalCss
+				globalCss,
+				interaction
 			}
 
 		} = this.props
@@ -651,6 +652,8 @@ class Edit extends Component {
 					{listSettings(this.props.attributes, device, setAttributes)}
 
 					{animationSettings(uniqueId, animation, setAttributes)}
+
+					{interactionSettings(uniqueId, interaction, setAttributes)}
 
 				</InspectorControls>
 

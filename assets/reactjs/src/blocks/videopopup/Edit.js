@@ -2,7 +2,7 @@ const { __ } = wp.i18n
 const { Fragment, Component } = wp.element;
 const { PanelBody, RangeControl, TextControl, Toolbar } = wp.components
 const { InspectorControls, BlockControls } = wp.editor
-const { Media, Background, Tabs, Tab, Range, BoxShadow, Separator, RadioAdvanced, Typography, Select, Color, Styles, Toggle, Border, Alignment, BorderRadius, gloalSettings: { globalSettingsPanel, animationSettings }, Inline: { InlineToolbar }, CssGenerator: { CssGenerator }, ContextMenu: { ContextMenu, handleContextMenu }, } = wp.qubelyComponents
+const { Media, Background, Tabs, Tab, Range, BoxShadow, Separator, RadioAdvanced, Typography, Select, Color, Styles, Toggle, Border, Alignment, BorderRadius, gloalSettings: { globalSettingsPanel, animationSettings, interactionSettings }, Inline: { InlineToolbar }, CssGenerator: { CssGenerator }, ContextMenu: { ContextMenu, handleContextMenu }, } = wp.qubelyComponents
 import icons from '../../helpers/icons'
 
 class Edit extends Component {
@@ -37,6 +37,7 @@ class Edit extends Component {
             name,
             clientId,
             attributes,
+            isSelected,
             setAttributes,
             attributes: {
                 uniqueId,
@@ -78,7 +79,8 @@ class Edit extends Component {
                 globalZindex,
                 hideTablet,
                 hideMobile,
-                globalCss
+                globalCss,
+                interaction
             }
         } = this.props
 
@@ -217,7 +219,11 @@ class Edit extends Component {
                             </PanelBody>
                         </Fragment>
                     }
+                    
                     {animationSettings(uniqueId, animation, setAttributes)}
+
+                    {interactionSettings(uniqueId, interaction, setAttributes)}
+
                 </InspectorControls>
 
                 <BlockControls>

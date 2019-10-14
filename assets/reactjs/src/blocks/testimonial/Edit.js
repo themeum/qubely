@@ -2,7 +2,7 @@ const { __ } = wp.i18n
 const { Fragment, Component } = wp.element;
 const { PanelBody, TextControl, Toolbar } = wp.components
 const { RichText, BlockControls, InspectorControls, AlignmentToolbar } = wp.editor
-const { Media, RadioAdvanced, Range, Color, Typography, Toggle, Separator, ColorAdvanced, Border, BorderRadius, BoxShadow, Styles, Alignment, Padding, Tabs, Tab, gloalSettings: { globalSettingsPanel, animationSettings }, Inline: { InlineToolbar }, CssGenerator: { CssGenerator }, ContextMenu: { ContextMenu, handleContextMenu }, } = wp.qubelyComponents
+const { Media, RadioAdvanced, Range, Color, Typography, Toggle, Separator, ColorAdvanced, Border, BorderRadius, BoxShadow, Styles, Alignment, Padding, Tabs, Tab, gloalSettings: { globalSettingsPanel, animationSettings, interactionSettings }, Inline: { InlineToolbar }, CssGenerator: { CssGenerator }, ContextMenu: { ContextMenu, handleContextMenu }, } = wp.qubelyComponents
 import icons from '../../helpers/icons'
 
 class Edit extends Component {
@@ -75,10 +75,11 @@ class Edit extends Component {
             globalZindex,
             hideTablet,
             hideMobile,
-            globalCss
+            globalCss,
+            interaction
         } = this.props.attributes
 
-        const { clientId, attributes, setAttributes } = this.props
+        const { clientId, attributes, setAttributes, isSelected } = this.props
         const { openPanelSetting, device } = this.state
         if (uniqueId) { CssGenerator(this.props.attributes, 'testimonial', uniqueId); }
 
@@ -305,7 +306,6 @@ class Edit extends Component {
                                 </Fragment>
                             </Fragment>
                         }
-
                     </PanelBody>
 
                     <PanelBody title={__('Quote Icon')} opened={'Quote Icon' === openPanelSetting} onToggle={() => this.handlePanelOpenings(openPanelSetting !== 'Quote Icon' ? 'Quote Icon' : '')}>
@@ -438,6 +438,8 @@ class Edit extends Component {
                     </PanelBody>
 
                     {animationSettings(uniqueId, animation, setAttributes)}
+
+                    {interactionSettings(uniqueId, interaction, setAttributes)}
 
                 </InspectorControls>
 
