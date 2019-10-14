@@ -1,7 +1,7 @@
 const { __ } = wp.i18n;
 const { Component, Fragment } = wp.element;
 const { IconButton } = wp.components;
-const { InspectorControls, InnerBlocks } = wp.editor;
+const { InspectorControls, InnerBlocks } = wp.blockEditor;
 const { createBlock } = wp.blocks;
 const { compose } = wp.compose;
 const { withSelect, withDispatch } = wp.data;
@@ -94,7 +94,7 @@ export default compose([
         };
     }),
     withDispatch((dispatch) => {
-        const { insertBlock, updateBlockAttributes } = dispatch('core/editor');
+        const { insertBlock, updateBlockAttributes } = dispatch('core/block-editor');
         return {
             insertBlock,
             updateBlockAttributes

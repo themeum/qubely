@@ -2,7 +2,7 @@
 const { __ } = wp.i18n;
 const { PanelBody, Toolbar, ResizableBox, IconButton } = wp.components
 const { Component, Fragment } = wp.element
-const { InnerBlocks, InspectorControls, BlockControls } = wp.editor
+const { InnerBlocks, InspectorControls, BlockControls } = wp.blockEditor
 const { createBlock } = wp.blocks
 const { select, dispatch } = wp.data
 const { Background, Border, BorderRadius, BoxShadow, Range, Separator, Dimension, gloalSettings: { globalSettingsPanel, animationSettings }, CssGenerator: { CssGenerator } } = wp.qubelyComponents
@@ -43,7 +43,7 @@ class Edit extends Component {
      */
     updateColumnWidthAttribute() {
         const { attributes: { colWidth }, clientId } = this.props
-        const { getPreviousBlockClientId, getNextBlockClientId } = select('core/editor')
+        const { getPreviousBlockClientId, getNextBlockClientId } = select('core/block-editor')
         const currentColumn = $(`#block-${clientId}`)
         const rowWidth = currentColumn.parents('.qubely-backend-row').width()
         const nextBlockId = getNextBlockClientId(clientId)
@@ -130,7 +130,7 @@ class Edit extends Component {
                 if (nextBlockWidth > 10 && calWidth > 10) {
                     nextBlockWidth = Math.abs(nextBlockWidth)
                     NextColumn.css({ width: nextBlockWidth.toFixed(2) + '%' })
-                    const editorSelector = select('core/editor')
+                    const editorSelector = select('core/block-editor')
                     const nextBlockClientId = editorSelector.getNextBlockClientId(clientId)
                     if (nextBlockClientId !== null) {
                         const nextBlock = editorSelector.getBlock(nextBlockClientId)
@@ -194,7 +194,7 @@ class Edit extends Component {
      */
     checkColumnStatus() {
         const { clientId } = this.props
-        const { getBlockRootClientId, getBlockAttributes, getPreviousBlockClientId, getNextBlockClientId, getBlockIndex, getBlock } = select('core/editor')
+        const { getBlockRootClientId, getBlockAttributes, getPreviousBlockClientId, getNextBlockClientId, getBlockIndex, getBlock } = select('core/block-editor')
         const rootClientId = getBlockRootClientId(clientId)
         const rootBlockAttributes = getBlockAttributes(rootClientId)
         const nextBlockId = getNextBlockClientId(clientId)
@@ -206,8 +206,8 @@ class Edit extends Component {
 
 
     _isActiveRow() {
-        const rootClientId = select('core/editor').getBlockRootClientId(this.props.clientId)
-        const selected = select('core/editor').getSelectedBlock()
+        const rootClientId = select('core/block-editor').getBlockRootClientId(this.props.clientId)
+        const selected = select('core/block-editor').getSelectedBlock()
         if (selected && rootClientId && selected.clientId) {
             return rootClientId == selected.clientId ? true : false
         } else {
@@ -233,8 +233,8 @@ class Edit extends Component {
         let different = calWidth - parseFloat(attributes.colWidth.md)
         // If direction right then update next and current column
 
-        const { getPreviousBlockClientId, getNextBlockClientId, getBlock } = select('core/editor')
-        const { updateBlockAttributes } = dispatch('core/editor')
+        const { getPreviousBlockClientId, getNextBlockClientId, getBlock } = select('core/block-editor')
+        const { updateBlockAttributes } = dispatch('core/block-editor')
         let nextColumnNewWidth = 0
         if (NextColumn.length > 0) {
             const nextBlockClientId = getNextBlockClientId(clientId)

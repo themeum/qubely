@@ -1,7 +1,7 @@
 const { __ } = wp.i18n
 const { Fragment, Component } = wp.element;
 const { PanelBody, Tooltip, Toolbar } = wp.components
-const { InspectorControls, RichText, BlockControls, MediaUpload } = wp.editor
+const { InspectorControls, RichText, BlockControls, MediaUpload } = wp.blockEditor
 const { IconList, Inline: { InlineToolbar }, RadioAdvanced, Range, Color, Typography, Toggle, Separator, Border, BorderRadius, BoxShadow, Alignment, Padding, Headings, gloalSettings: { globalSettingsPanel, animationSettings, interactionSettings }, CssGenerator: { CssGenerator } } = wp.qubelyComponents
 
 class Edit extends Component {

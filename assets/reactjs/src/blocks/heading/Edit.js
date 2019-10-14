@@ -1,7 +1,7 @@
 const { __ } = wp.i18n
 const { Fragment, Component } = wp.element;
 const { PanelBody, Toolbar, SelectControl } = wp.components
-const { RichText, InspectorControls, BlockControls } = wp.editor
+const { RichText, InspectorControls, BlockControls } = wp.blockEditor
 const {
     Color,
     Typography,

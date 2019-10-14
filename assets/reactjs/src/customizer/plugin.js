@@ -75,7 +75,7 @@ class Plugin extends Component {
     }
 
     setPresetColor( blocks, prev, next ){
-        const { updateBlockAttributes } = wp.data.dispatch('core/editor')
+        const { updateBlockAttributes } = wp.data.dispatch('core/block-editor')
         if( prev && next ){
             blocks.map( row => {
                 const { attributes, name, clientId } = row
@@ -178,10 +178,10 @@ export default compose([
             updateGlobalData( attr )
         }
         const makePostDarty = () => {
-            const currentMeta = select( 'core/editor' ).getCurrentPostAttribute( 'meta' );
+            const currentMeta = select( 'core/block-editor' ).getCurrentPostAttribute( 'meta' );
             currentMeta.qubely_global_settings = currentMeta.qubely_global_settings === "true" ? "false" : "true"
             const meta = {...currentMeta, qubely_global_settings: "true" }
-            dispatch( 'core/editor' ).editPost( { meta } );
+            dispatch( 'core/block-editor' ).editPost( { meta } );
         }
        return { setAttributes, makePostDarty }
     })

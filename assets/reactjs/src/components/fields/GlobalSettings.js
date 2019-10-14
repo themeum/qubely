@@ -6,7 +6,7 @@ import Animation from './Animation'
 import Interaction from './Interaction'
 
 const { __ } = wp.i18n
-const { InspectorAdvancedControls } = wp.editor
+const { InspectorAdvancedControls } = wp.blockEditor
 const { TextareaControl, PanelBody } = wp.components
 const { Fragment } = wp.element;
 

@@ -1,6 +1,6 @@
 import './style.scss'
 const { Component } = wp.element
-const { InnerBlocks } = wp.editor
+const { InnerBlocks } = wp.blockEditor
 const { HelperFunction: { animationAttr, videoBackground } } = wp.qubelyComponents
 
 class Save extends Component {

@@ -1,5 +1,5 @@
 const { __ } = wp.i18n;
-const { InspectorControls, BlockControls } = wp.editor
+const { InspectorControls, BlockControls } = wp.blockEditor
 const { Component, Fragment } = wp.element;
 const { PanelBody, ToggleControl, TextControl, RangeControl, Toolbar } = wp.components;
 const { Media, Separator, gloalSettings: { globalSettingsPanel, animationSettings }, Inline: { InlineToolbar }, CssGenerator: { CssGenerator } } = wp.qubelyComponents

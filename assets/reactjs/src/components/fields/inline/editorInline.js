@@ -3,7 +3,7 @@ import icons from '../../../helpers/icons'
 const { __ } = wp.i18n;
 const { Component, Fragment } = wp.element
 const { toggleFormat, applyFormat } = wp.richText;
-const { RichTextToolbarButton } = wp.editor;
+const { RichTextToolbarButton } = wp.blockEditor;
 const { registerFormatType } = wp.richText;
 const { ColorPicker, Popover } = wp.components;
 

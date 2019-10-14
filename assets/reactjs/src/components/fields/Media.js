@@ -1,7 +1,7 @@
 const {__} = wp.i18n
 import '../css/media.scss'
 const { Component } = wp.element;
-const { MediaUpload } = wp.editor;
+const { MediaUpload } = wp.blockEditor;
 export const { Tooltip, Dashicon } = wp.components;
 
 class Media extends Component {

@@ -1,5 +1,5 @@
 const { Component } = wp.element;
-const { InnerBlocks, RichText } = wp.editor;
+const { InnerBlocks, RichText } = wp.blockEditor;
 const { HelperFunction: { animationAttr } } = wp.qubelyComponents
 class Save extends Component {
     render() {

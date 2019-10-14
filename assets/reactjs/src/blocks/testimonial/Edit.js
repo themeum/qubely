@@ -1,7 +1,7 @@
 const { __ } = wp.i18n
 const { Fragment, Component } = wp.element;
 const { PanelBody, TextControl, Toolbar } = wp.components
-const { RichText, BlockControls, InspectorControls, AlignmentToolbar } = wp.editor
+const { RichText, BlockControls, InspectorControls, AlignmentToolbar } = wp.blockEditor
 const { Media, RadioAdvanced, Range, Color, Typography, Toggle, Separator, ColorAdvanced, Border, BorderRadius, BoxShadow, Styles, Alignment, Padding, Tabs, Tab, gloalSettings: { globalSettingsPanel, animationSettings, interactionSettings }, Inline: { InlineToolbar }, CssGenerator: { CssGenerator }, ContextMenu: { ContextMenu, handleContextMenu }, } = wp.qubelyComponents
 import icons from '../../helpers/icons'
 
@@ -88,7 +88,7 @@ class Edit extends Component {
             tagName="span"
             keepPlaceholderOnFocus
             placeholder={__('Add Name...')}
-            formattingControls={['bold', 'italic', 'link', 'strikethrough']}
+            allowedFormats={['bold', 'italic', 'link', 'strikethrough']}
             onChange={value => setAttributes({ name: value })}
             value={name}
         />
@@ -97,7 +97,7 @@ class Edit extends Component {
             key="editable"
             tagName="span"
             placeholder={__('Add designation...')}
-            formattingControls={['bold', 'italic', 'link', 'strikethrough']}
+            allowedFormats={['bold', 'italic', 'link', 'strikethrough']}
             keepPlaceholderOnFocus
             onChange={value => setAttributes({ designation: value })}
             value={designation}
@@ -107,7 +107,7 @@ class Edit extends Component {
             key="editable"
             tagName="div"
             placeholder={__('Add Message...')}
-            formattingControls={['bold', 'italic', 'link', 'strikethrough']}
+            allowedFormats={['bold', 'italic', 'link', 'strikethrough']}
             keepPlaceholderOnFocus
             onChange={value => setAttributes({ message: value })}
             value={message}

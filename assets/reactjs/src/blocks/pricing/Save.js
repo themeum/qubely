@@ -1,5 +1,5 @@
 const { Component, Fragment } = wp.element
-const { RichText } = wp.editor
+const { RichText } = wp.blockEditor
 const { QubelyButtonSave, QubelyIconListSave } = wp.qubelyComponents
 const { HelperFunction: { animationAttr, IsInteraction } } = wp.qubelyComponents
 

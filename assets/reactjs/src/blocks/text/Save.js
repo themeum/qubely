@@ -1,5 +1,5 @@
 const { Fragment, Component } = wp.element;
-const { RichText } = wp.editor
+const { RichText } = wp.blockEditor
 import svg from '../heading/separators';
 const { HelperFunction: { animationAttr, IsInteraction } } = wp.qubelyComponents
 class Save extends Component {

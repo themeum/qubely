@@ -1,5 +1,5 @@
 const { Component } = wp.element
-const { RichText } = wp.editor
+const { RichText } = wp.blockEditor
 const { HelperFunction: { animationAttr, IsInteraction } } = wp.qubelyComponents
 class Save extends Component {
 

@@ -3,7 +3,7 @@ const { compose } = wp.compose;
 const { withSelect, withDispatch } = wp.data;
 const { Component, Fragment } = wp.element;
 const { PanelBody, SelectControl, Button } = wp.components;
-const { InspectorControls, InnerBlocks, RichText } = wp.editor;
+const { InspectorControls, InnerBlocks, RichText } = wp.blockEditor;
 const { Styles, ColorAdvanced, Range, Typography, BoxShadow, RadioAdvanced, Tabs, Tab, Color, Toggle, Padding, Border, BorderRadius, CssGenerator: { CssGenerator } } = wp.qubelyComponents
 import icons from '../../../helpers/icons';
 
@@ -284,7 +284,7 @@ class AccordionItemBlockEdit extends Component {
                                     className="qubely-accordion-panel-handler-label"
                                     value={heading}
                                     onChange={(value) => setAttributes({ heading: value })}
-                                    formattingControls={['bold', 'italic', 'strikethrough']}
+                                    allowedFormats={['bold', 'italic', 'strikethrough']}
                                     isSelected={isSelected}
                                     keepPlaceholderOnFocus
                                     onClick={() => this.updateLabel()}
@@ -327,7 +327,7 @@ class AccordionItemBlockEdit extends Component {
 export default compose([
     withSelect((select, ownProps) => {
         const { clientId } = ownProps;
-        const { getBlockHierarchyRootClientId, getBlock, isBlockSelected, hasSelectedInnerBlock } = select('core/editor');
+        const { getBlockHierarchyRootClientId, getBlock, isBlockSelected, hasSelectedInnerBlock } = select('core/block-editor');
         return {
             block: getBlock(clientId),
             isSelectedBlockInRoot: isBlockSelected(clientId) || hasSelectedInnerBlock(clientId, true),
@@ -335,7 +335,7 @@ export default compose([
         };
     }),
     withDispatch((dispatch) => {
-        const { removeBlock, updateBlockAttributes } = dispatch('core/editor');
+        const { removeBlock, updateBlockAttributes } = dispatch('core/block-editor');
         return {
             removeBlock,
             updateBlockAttributes

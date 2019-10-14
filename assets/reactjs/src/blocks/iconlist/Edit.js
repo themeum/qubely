@@ -1,5 +1,5 @@
 const { __ } = wp.i18n;
-const { InspectorControls } = wp.editor
+const { InspectorControls } = wp.blockEditor
 const { Component, Fragment } = wp.element;
 const { PanelBody, Tooltip, Popover } = wp.components;
 const {

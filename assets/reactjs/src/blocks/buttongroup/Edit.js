@@ -3,7 +3,7 @@ const { Fragment, Component } = wp.element;
 const { PanelBody, Tooltip } = wp.components
 const { compose } = wp.compose
 const { withSelect, withDispatch } = wp.data
-const { InnerBlocks, InspectorControls } = wp.editor
+const { InnerBlocks, InspectorControls } = wp.blockEditor
 const { Range, Alignment, gloalSettings: { globalSettingsPanel, animationSettings, interactionSettings }, CssGenerator: { CssGenerator } } = wp.qubelyComponents
 
 class Edit extends Component {
@@ -119,13 +119,13 @@ class Edit extends Component {
 export default compose([
     withSelect((select, ownProps) => {
         const { clientId } = ownProps
-        const { getBlock } = select('core/editor');
+        const { getBlock } = select('core/block-editor');
         return {
             block: getBlock(clientId)
         };
     }),
     withDispatch((dispatch) => {
-        const { updateBlockAttributes } = dispatch('core/editor');
+        const { updateBlockAttributes } = dispatch('core/block-editor');
         return {
             updateBlockAttributes
         }
