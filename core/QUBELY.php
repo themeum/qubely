@@ -265,7 +265,8 @@ class QUBELY
 		wp_enqueue_style('qubely-style-min', QUBELY_DIR_URL . 'assets/css/style.min.css', false, QUBELY_VERSION);
 		wp_enqueue_script('qubely-magnific-popup-script', QUBELY_DIR_URL . 'assets/js/jquery.magnific-popup.min.js', array('jquery'), QUBELY_VERSION);
 		wp_enqueue_style('qubely-magnific-popup-style', QUBELY_DIR_URL . 'assets/css/magnific-popup.css', false, QUBELY_VERSION);
-
+		wp_enqueue_script('qubely-interaction', QUBELY_DIR_URL .'assets/js/interaction.js', array('jquery'), QUBELY_VERSION, true );
+		
 		wp_enqueue_script('common-script', QUBELY_DIR_URL . 'assets/js/common-script.js', array('jquery'), QUBELY_VERSION);
 
 		wp_localize_script('common-script', 'qubely_urls', array(
@@ -299,6 +300,13 @@ class QUBELY
 	public function add_global_settings_post_meta()
 	{
 		register_meta('post', 'qubely_global_settings', [
+			'show_in_rest' => true,
+			'single' => true,
+			'type' => 'string'
+		]);
+
+		// @since 1.1.7
+		register_meta('post', 'qubely_interactions', [
 			'show_in_rest' => true,
 			'single' => true,
 			'type' => 'string'
@@ -407,9 +415,12 @@ class QUBELY
 			$params = $request->get_params();
 
 			$post_id = (int) sanitize_text_field($params['post_id']);
-			$qubely_block_css = $params['block_css'];
 
+			$qubely_block_css = $params['block_css'];
 			$filename = "qubely-css-{$post_id}.css";
+
+			$qubely_block_json = $params['interaction'];
+			$jsonfilename = "qubely-json-{$post_id}.json";
 
 			$upload_dir = wp_upload_dir();
 			$dir = trailingslashit($upload_dir['basedir']) . 'qubely/';
@@ -419,6 +430,9 @@ class QUBELY
 
 			//development
 			update_post_meta($post_id, '_qubely_css', $import_first);
+			if( $qubely_block_json ){
+				update_post_meta($post_id,'_qubely_interaction_json',$qubely_block_json);
+			}
 
 			WP_Filesystem(false, $upload_dir['basedir'], true);
 
@@ -428,6 +442,11 @@ class QUBELY
 			//If fail to save css in directory, then it will show a message to user
 			if (!$wp_filesystem->put_contents($dir . $filename, $import_first)) {
 				throw new Exception(__('CSS can not be saved due to permission!!!', 'qubely'));
+			}
+
+			//If fail to save css in directory, then it will show a message to user
+			if ( ! $wp_filesystem->put_contents( $dir . $jsonfilename, $qubely_block_json ) ) {
+				throw new Exception(__('JSON can not be saved due to permission!!!', 'qubely')); 
 			}
 
 			return ['success' => true, 'message' => __('Qubely block css file has been updated.', 'qubely')];
@@ -518,11 +537,11 @@ class QUBELY
 		if(!isset($_GET['preview'])){
 			$option_data = get_option('qubely_options');
 			$css_save_as = $option_data['css_save_as'];
-			if ($css_save_as === 'filesystem') {
-				add_action('wp_enqueue_scripts', array($this, 'enqueue_block_css_file'));
-			} else {
+			// if ($css_save_as === 'filesystem') {
+			// 	add_action('wp_enqueue_scripts', array($this, 'enqueue_block_css_file'));
+			// } else {
 				add_action('wp_head', array($this, 'add_block_inline_css'), 100);
-			}
+			//}
 		}
 	}
 
@@ -562,12 +581,35 @@ class QUBELY
 			$upload_dir     = wp_get_upload_dir();
 			$upload_css_dir = trailingslashit($upload_dir['basedir']);
 			$css_path       = $upload_css_dir . "qubely/qubely-css-{$post_id}.css";
+			$json_path       = $upload_css_dir . "qubely/qubely-json-{$post_id}.json";
+
 			if (file_exists($css_path)) {
 				$blockCss = file_get_contents($css_path);
 				echo '<style type="text/css">' . $blockCss . '</style>';
 			} else {
 				echo '<style type="text/css">' . get_post_meta(get_the_ID(), '_qubely_css', true) . '</style>';
 			}
+
+			if ( !file_exists( $json_path ) ) {
+				$this->print_interaction_json_to_header();
+			}else{
+				$blockJson = file_get_contents($json_path);
+				if( $blockJson != "{}" ){
+					echo '<script type="text/javascript"> var qubelyInteraction = '.$blockJson.'</script>';
+				}
+			}
+		}
+	}
+
+	/**
+	 * @since 1.1.7
+	 * Interaction Add
+	 */
+	public function print_interaction_json_to_header(){
+		$post_id = get_the_ID();
+		$interactionJson = get_post_meta($post_id, '_qubely_interaction_json', true);
+		if( $interactionJson != '{}' && $interactionJson != '' ){
+			echo '<script type="text/javascript"> var qubelyInteraction = '.$interactionJson.'</script>';
 		}
 	}
 

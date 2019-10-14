@@ -4,7 +4,7 @@ const { compose } = wp.compose
 const { withSelect, withDispatch } = wp.data
 const { PanelBody, Toolbar, Tooltip } = wp.components
 const { RichText, InspectorControls, BlockControls } = wp.editor
-const { Alignment, Typography, Color, ColorAdvanced, gloalSettings: { globalSettingsPanel, animationSettings }, IconList, Inline: { InlineToolbar }, Select, Styles, Tabs, Tab, Range, Url, BoxShadow, RadioAdvanced, Separator, Border, BorderRadius, Padding, ContextMenu: { ContextMenu, handleContextMenu }, CssGenerator: { CssGenerator } } = wp.qubelyComponents
+const { Alignment, Typography, Color, ColorAdvanced, gloalSettings: { globalSettingsPanel, animationSettings, interactionSettings }, IconList, Inline: { InlineToolbar }, Select, Styles, Tabs, Tab, Range, Url, BoxShadow, RadioAdvanced, Separator, Border, BorderRadius, Padding, ContextMenu: { ContextMenu, handleContextMenu }, CssGenerator: { CssGenerator } } = wp.qubelyComponents
 import icons from '../../helpers/icons'
 
 class Edit extends Component {
@@ -24,8 +24,8 @@ class Edit extends Component {
     }
 
     render() {
-        const { uniqueId, parentClientId, buttonGroup, fillType, buttonSize, buttonWidthType, buttonWidth, buttonPadding, typography, textField, url, enableAlignment, alignment, buttonBorderRadius, iconName, iconPosition, iconSize, iconGap, buttonBorder, borderHoverColor, buttonColor, buttonColor2, buttonHoverColor, buttonHoverColor2, bgColor, bgHoverColor, buttonShadow, buttonHoverShadow, animation, globalZindex, hideTablet, hideMobile, globalCss } = this.props.attributes
-        const { name, clientId, attributes, removeBlock, updateBlockAttributes, buttonGroupAttributes, setAttributes } = this.props
+        const { uniqueId, parentClientId, buttonGroup, fillType, buttonSize, buttonWidthType, buttonWidth, buttonPadding, typography, textField, url, enableAlignment, alignment, buttonBorderRadius, iconName, iconPosition, iconSize, iconGap, buttonBorder, borderHoverColor, buttonColor, buttonColor2, buttonHoverColor, buttonHoverColor2, bgColor, bgHoverColor, buttonShadow, buttonHoverShadow, animation, interaction, globalZindex, hideTablet, hideMobile, globalCss } = this.props.attributes
+        const { name, clientId, attributes, removeBlock, updateBlockAttributes, buttonGroupAttributes, setAttributes, isSelected } = this.props
         const { device } = this.state
 
         if (uniqueId) { CssGenerator(this.props.attributes, 'button', uniqueId); }
@@ -170,6 +170,8 @@ class Edit extends Component {
                     </PanelBody>
 
                     {animationSettings(uniqueId, animation, setAttributes)}
+
+                    {interactionSettings(uniqueId, interaction, isSelected, setAttributes, name)}
 
                 </InspectorControls>
 
