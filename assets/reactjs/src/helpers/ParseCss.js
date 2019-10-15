@@ -76,7 +76,7 @@ function innerBlocks(blocks, type = false) {
 
 const ParseCss = (setDatabase = true) => {
     window.bindCss = true
-    const { getBlocks, getCurrentPostId } = select('core/block-editor')
+    const { getBlocks, getCurrentPostId } = select('core/editor')
     let __blocks = { css: '', interaction:{} };
     if (typeof window.globalData != 'undefined') {
         __blocks.css += CssGenerator(window.globalData.settings, 'pagesettings', '8282882', true)

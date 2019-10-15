@@ -7,7 +7,7 @@ const { gloalSettings: { globalAttributes } } = wp.qubelyComponents
 
 registerBlockType('qubely/button', {
     title: __('Button'),
-    description: 'Create stylish call-to-action buttons with Qubely Buttons.',
+    description: __('Create stylish call-to-action buttons with Qubely Buttons.'),
     category: 'qubely',
     icon: <img src={qubely_admin.plugin + 'assets/img/blocks/block-button.svg'} alt={__('Button Block')} />,
     supports: { align: false },
