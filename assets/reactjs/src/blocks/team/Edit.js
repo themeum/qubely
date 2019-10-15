@@ -1,8 +1,8 @@
 const { __ } = wp.i18n
 const { Fragment, Component } = wp.element;
 const { PanelBody, TextControl, Toolbar } = wp.components
-const { RichText, InspectorControls, BlockControls } = wp.editor
-const { Media, Tabs, Tab, Range, Separator, RadioAdvanced, Typography, Toggle, Styles, Alignment, ColorAdvanced, Color, Border, BoxShadow, BorderRadius, Padding, gloalSettings: { globalSettingsPanel, animationSettings }, Inline: { InlineToolbar }, CssGenerator: { CssGenerator }, ContextMenu: { ContextMenu, handleContextMenu }, } = wp.qubelyComponents
+const { RichText, InspectorControls, BlockControls } = wp.blockEditor
+const { Media, Tabs, Tab, Range, Separator, RadioAdvanced, Typography, Toggle, Styles, Alignment, ColorAdvanced, Color, Border, BoxShadow, BorderRadius, Padding, gloalSettings: { globalSettingsPanel, animationSettings, interactionSettings }, Inline: { InlineToolbar }, CssGenerator: { CssGenerator }, ContextMenu: { ContextMenu, handleContextMenu }, } = wp.qubelyComponents
 import icons from '../../helpers/icons'
 class Edit extends Component {
 
@@ -110,10 +110,11 @@ class Edit extends Component {
             globalZindex,
             hideTablet,
             hideMobile,
-            globalCss
+            globalCss,
+            interaction
         } = this.props.attributes
 
-        const { clientId, attributes, setAttributes } = this.props
+        const { clientId, attributes, setAttributes, isSelected } = this.props
         const { openPanelSetting, device } = this.state
 
         if (uniqueId) { CssGenerator(this.props.attributes, 'team', uniqueId); }
@@ -335,7 +336,11 @@ class Edit extends Component {
                         <BorderRadius label={__('Radius')} value={bodyBorderRadius} onChange={val => setAttributes({ bodyBorderRadius: val })} min={0} max={100} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
                         <BoxShadow label={__('Box-Shadow')} value={bodyBoxShadow} onChange={(value) => setAttributes({ bodyBoxShadow: value })} />
                     </PanelBody>
+                    
                     {animationSettings(uniqueId, animation, setAttributes)}
+                    
+                    {interactionSettings(uniqueId, interaction, setAttributes)}
+
                 </InspectorControls>
 
                 <BlockControls>

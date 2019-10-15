@@ -6,13 +6,10 @@ import Animation from './Animation'
 import Interaction from './Interaction'
 
 const { __ } = wp.i18n
-const { InspectorAdvancedControls } = wp.editor
+const { InspectorAdvancedControls } = wp.blockEditor
 const { TextareaControl, PanelBody } = wp.components
-const { Fragment } = wp.element;
 
-const excludeInteraction = {row: true, column: true, videopopup: true }
 //attributes 
-
 export const globalAttributes = {
     animation: { type: 'object', default: {} },
     interaction: { type: 'object', default: {} },
@@ -51,7 +48,6 @@ export function globalSettingsPanel(globalZindex, hideTablet, hideMobile, global
 }
 
 export function animationSettings(uniqueId, animation, setAttributes) {
-    
     return (
         <PanelBody title={__('Animation')} initialOpen={false}>
             <Animation
@@ -64,22 +60,15 @@ export function animationSettings(uniqueId, animation, setAttributes) {
 }
 
 
-export function interactionSettings(uniqueId, interaction, isSelected, setAttributes, name) {
-    const blockName = name.split("/")[1]
-    const isDisableInteraction = typeof excludeInteraction[blockName] === 'undefined' ? true : false
+export function interactionSettings(uniqueId, interaction, setAttributes) {
     return (
-        <Fragment>
-            { isDisableInteraction && 
-                <PanelBody title={__("Interaction")} initialOpen={false}>
-                    <Interaction
-                        isSelected={isSelected}
-                        uniqueId={uniqueId}
-                        label={__('Interaction')}
-                        value={interaction}
-                        onChange={ value => setAttributes({ interaction: value })}
-                    />
-                </PanelBody>
-            }
-        </Fragment>
+        <PanelBody title={__("Interaction")} initialOpen={false}>
+            <Interaction
+                uniqueId={uniqueId}
+                label={__('Interaction')}
+                value={interaction}
+                onChange={ value => setAttributes({ interaction: value })}
+            />
+        </PanelBody>
     )
 }

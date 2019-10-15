@@ -1,5 +1,6 @@
 const { Component } = wp.element;
-const { RichText } = wp.editor
+const { RichText } = wp.blockEditor
+const { HelperFunction: { IsInteraction } } = wp.qubelyComponents
 
 class Save extends Component {
 
@@ -16,11 +17,13 @@ class Save extends Component {
         })
 
     }
+    
     render() {
-        const { attributes: { uniqueId } } = this.props
+        const { attributes: { uniqueId, interaction } } = this.props
+        const interactionClass = IsInteraction(interaction) ? 'qubley-block-interaction' : '';
         return (
             <div className={`qubely-block-${uniqueId}`}>
-                <div className="qubely-block-icon-list">
+                <div className={`qubely-block-icon-list ${interactionClass}`}>
                     <ul className="qubely-list">
                         {this.renderListItems()}
                     </ul>

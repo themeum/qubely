@@ -1,7 +1,7 @@
 const { __ } = wp.i18n
 import Range from './Range'
 import Toggle from './Toggle'
-const { RichText } = wp.editor
+const { RichText } = wp.blockEditor
 import '../css/typography.scss'
 const { Component, Fragment } = wp.element
 const { Dropdown, Tooltip } = wp.components

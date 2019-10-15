@@ -1,11 +1,11 @@
 const { __ } = wp.i18n;
 const { Component, Fragment } = wp.element;
 const { IconButton } = wp.components;
-const { InspectorControls, InnerBlocks } = wp.editor;
+const { InspectorControls, InnerBlocks } = wp.blockEditor;
 const { createBlock } = wp.blocks;
 const { compose } = wp.compose;
 const { withSelect, withDispatch } = wp.data;
-const { gloalSettings: { globalSettingsPanel, animationSettings } } = wp.qubelyComponents
+const { gloalSettings: { globalSettingsPanel, animationSettings, interactionSettings } } = wp.qubelyComponents
 import { accordionItemSettings } from './innerItem';
 
 class AccordionBlock extends Component {
@@ -46,23 +46,24 @@ class AccordionBlock extends Component {
 
     render() {
 
-        const { attributes, isSelectedBlockInRoot, setAttributes, attributes: { uniqueId, animation, globalZindex, hideTablet, hideMobile, globalCss } } = this.props;
+        const { name, attributes, isSelectedBlockInRoot, setAttributes, attributes: { uniqueId, animation, globalZindex, hideTablet, hideMobile, globalCss, interaction } } = this.props;
 
         return (
             <Fragment>
 
                 <InspectorControls>
                     {animationSettings(uniqueId, animation, setAttributes)}
+                    {interactionSettings(uniqueId, interaction, setAttributes)}
                 </InspectorControls >
 
                 {globalSettingsPanel(globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
-                < div className={`qubely-block-accordion qubely-block-${uniqueId}`}>
+                <div className={`qubely-block-accordion qubely-block-${uniqueId}`}>
                     <InnerBlocks
                         template={this.getAccordionTemplate(attributes)}
                         allowedBlocks={['qubely/accordion-item']}
                     />
-                </div >
+                </div>
 
                 {
                     isSelectedBlockInRoot && (
@@ -86,14 +87,14 @@ class AccordionBlock extends Component {
 export default compose([
     withSelect((select, ownProps) => {
         const { clientId } = ownProps;
-        const { getBlock, isBlockSelected, hasSelectedInnerBlock } = select('core/editor');
+        const { getBlock, isBlockSelected, hasSelectedInnerBlock } = select('core/block-editor');
         return {
             block: getBlock(clientId),
             isSelectedBlockInRoot: isBlockSelected(clientId) || hasSelectedInnerBlock(clientId, true),
         };
     }),
     withDispatch((dispatch) => {
-        const { insertBlock, updateBlockAttributes } = dispatch('core/editor');
+        const { insertBlock, updateBlockAttributes } = dispatch('core/block-editor');
         return {
             insertBlock,
             updateBlockAttributes

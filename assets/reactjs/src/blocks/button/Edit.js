@@ -3,7 +3,7 @@ const { Fragment, Component } = wp.element;
 const { compose } = wp.compose
 const { withSelect, withDispatch } = wp.data
 const { PanelBody, Toolbar, Tooltip } = wp.components
-const { RichText, InspectorControls, BlockControls } = wp.editor
+const { RichText, InspectorControls, BlockControls } = wp.blockEditor
 const { Alignment, Typography, Color, ColorAdvanced, gloalSettings: { globalSettingsPanel, animationSettings, interactionSettings }, IconList, Inline: { InlineToolbar }, Select, Styles, Tabs, Tab, Range, Url, BoxShadow, RadioAdvanced, Separator, Border, BorderRadius, Padding, ContextMenu: { ContextMenu, handleContextMenu }, CssGenerator: { CssGenerator } } = wp.qubelyComponents
 import icons from '../../helpers/icons'
 
@@ -171,7 +171,7 @@ class Edit extends Component {
 
                     {animationSettings(uniqueId, animation, setAttributes)}
 
-                    {interactionSettings(uniqueId, interaction, isSelected, setAttributes, name)}
+                    {interactionSettings(uniqueId, interaction, setAttributes)}
 
                 </InspectorControls>
 
@@ -238,11 +238,11 @@ class Edit extends Component {
 export default compose([
     withSelect((select, ownProps) => {
         const { parentClientId } = ownProps.attributes
-        const { getBlockAttributes } = select('core/editor');
+        const { getBlockAttributes } = select('core/block-editor');
         return { buttonGroupAttributes: getBlockAttributes(parentClientId) }
     }),
     withDispatch((dispatch) => {
-        const { removeBlock, updateBlockAttributes } = dispatch('core/editor');
+        const { removeBlock, updateBlockAttributes } = dispatch('core/block-editor');
         return {
             removeBlock,
             updateBlockAttributes

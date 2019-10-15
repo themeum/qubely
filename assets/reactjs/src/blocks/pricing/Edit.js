@@ -3,9 +3,9 @@ const { PanelBody, Toolbar, SelectControl, TextControl } = wp.components
 const { compose } = wp.compose
 const { select, withSelect, withDispatch } = wp.data
 const { Component, Fragment } = wp.element
-const { getBlock } = select('core/editor')
-const { RichText, InspectorControls, BlockControls } = wp.editor
-const { Color, Toggle, Border, Padding, Alignment, Typography, QubelyButtonEdit, gloalSettings: { globalSettingsPanel, animationSettings }, Inline: { InlineToolbar }, ColorAdvanced, Range, RadioAdvanced, Tabs, Tab, Separator, QubelyIconListEdit, BoxShadow, Styles, BorderRadius, CssGenerator: { CssGenerator }, QubelyButton: { buttonSettings }, QubelyList: { listSettings }, ContextMenu: { ContextMenu, handleContextMenu }, } = wp.qubelyComponents
+const { getBlock } = select('core/block-editor')
+const { RichText, InspectorControls, BlockControls } = wp.blockEditor
+const { Color, Toggle, Border, Padding, Alignment, Typography, QubelyButtonEdit, gloalSettings: { globalSettingsPanel, animationSettings, interactionSettings }, Inline: { InlineToolbar }, ColorAdvanced, Range, RadioAdvanced, Tabs, Tab, Separator, QubelyIconListEdit, BoxShadow, Styles, BorderRadius, CssGenerator: { CssGenerator }, QubelyButton: { buttonSettings }, QubelyList: { listSettings }, ContextMenu: { ContextMenu, handleContextMenu }, } = wp.qubelyComponents
 import icons from '../../helpers/icons'
 
 class Edit extends Component {
@@ -151,7 +151,7 @@ class Edit extends Component {
 
 	handleCardDeletion = () => {
 		const { clientId, removeBlock, updateBlockAttributes, rootBlock, rootBlockClientId, rootBlockAttributes, attributes: { id, pricings } } = this.props
-		const editorSelector = select('core/editor')
+		const editorSelector = select('core/block-editor')
 		let updatedRootBlock = getBlock(rootBlockClientId)
 		let updatedRootBlockAttributes = editorSelector.getBlockAttributes(rootBlockClientId)
 
@@ -219,7 +219,8 @@ class Edit extends Component {
 				globalZindex,
 				hideTablet,
 				hideMobile,
-				globalCss
+				globalCss,
+				interaction
 			}
 
 		} = this.props
@@ -652,6 +653,8 @@ class Edit extends Component {
 
 					{animationSettings(uniqueId, animation, setAttributes)}
 
+					{interactionSettings(uniqueId, interaction, setAttributes)}
+
 				</InspectorControls>
 
 				<BlockControls>
@@ -731,7 +734,7 @@ class Edit extends Component {
 export default compose([
 	withSelect((select, ownProps) => {
 		const { clientId } = ownProps
-		const { getBlock, getBlockRootClientId, getBlockAttributes } = select('core/editor')
+		const { getBlock, getBlockRootClientId, getBlockAttributes } = select('core/block-editor')
 		let block = getBlock(clientId),
 			rootBlockClientId = getBlockRootClientId(clientId),
 			rootBlock = getBlock(rootBlockClientId),
@@ -744,7 +747,7 @@ export default compose([
 		}
 	}),
 	withDispatch((dispatch) => {
-		const { insertBlock, removeBlock, updateBlockAttributes, toggleSelection } = dispatch('core/editor')
+		const { insertBlock, removeBlock, updateBlockAttributes, toggleSelection } = dispatch('core/block-editor')
 		return {
 			insertBlock,
 			removeBlock,

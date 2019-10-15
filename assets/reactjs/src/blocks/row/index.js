@@ -2,7 +2,7 @@ import Edit from './Edit'
 import Save from './Save'
 const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks
-const { InnerBlocks } = wp.editor
+const { InnerBlocks } = wp.blockEditor
 const { HelperFunction: { animationAttr, videoBackground }, gloalSettings: { globalAttributes } } = wp.qubelyComponents
 
 const attributes = {

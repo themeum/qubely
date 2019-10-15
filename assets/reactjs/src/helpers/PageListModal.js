@@ -734,7 +734,7 @@ export default compose([
         const {
             insertBlocks,
             removeBlock
-        } = dispatch('core/editor');
+        } = dispatch('core/block-editor');
 
         return {
             insertBlocks,

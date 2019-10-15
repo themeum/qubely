@@ -1,5 +1,5 @@
 const { __ } = wp.i18n;
-const { InspectorControls } = wp.editor
+const { InspectorControls } = wp.blockEditor
 const { Component, Fragment } = wp.element;
 const { PanelBody, Tooltip, Popover } = wp.components;
 const {
@@ -20,7 +20,8 @@ const {
     CssGenerator: { CssGenerator },
     gloalSettings: {
         globalSettingsPanel,
-        animationSettings
+        animationSettings,
+        interactionSettings
     },
     ContextMenu: {
         ContextMenu,
@@ -170,6 +171,7 @@ class Edit extends Component {
             name,
             clientId,
             attributes,
+            isSelected,
             setAttributes,
             attributes: {
                 uniqueId,
@@ -198,7 +200,8 @@ class Edit extends Component {
                 globalZindex,
                 hideTablet,
                 hideMobile,
-                globalCss
+                globalCss,
+                interaction
             } } = this.props
 
         const { device } = this.state
@@ -315,7 +318,10 @@ class Edit extends Component {
                             </Tabs>
                         </PanelBody>
                     }
+
                     {animationSettings(uniqueId, animation, setAttributes)}
+
+                    {interactionSettings(uniqueId, interaction, setAttributes)}
 
                 </InspectorControls>
 

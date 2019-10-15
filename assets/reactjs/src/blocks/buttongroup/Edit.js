@@ -3,8 +3,8 @@ const { Fragment, Component } = wp.element;
 const { PanelBody, Tooltip } = wp.components
 const { compose } = wp.compose
 const { withSelect, withDispatch } = wp.data
-const { InnerBlocks, InspectorControls } = wp.editor
-const { Range, Alignment, gloalSettings: { globalSettingsPanel, animationSettings }, CssGenerator: { CssGenerator } } = wp.qubelyComponents
+const { InnerBlocks, InspectorControls } = wp.blockEditor
+const { Range, Alignment, gloalSettings: { globalSettingsPanel, animationSettings, interactionSettings }, CssGenerator: { CssGenerator } } = wp.qubelyComponents
 
 class Edit extends Component {
     constructor(props) {
@@ -31,7 +31,7 @@ class Edit extends Component {
                 buttons,
                 spacing,
                 padding,
-                
+                interaction,
                 //animation
                 animation,
                 //global
@@ -43,6 +43,8 @@ class Edit extends Component {
             setAttributes,
             block,
             clientId,
+            isSelected,
+            name,
             updateBlockAttributes } = this.props
         if (uniqueId) { CssGenerator(this.props.attributes, 'buttongroup', uniqueId); }
         const { device } = this.state
@@ -73,7 +75,11 @@ class Edit extends Component {
                             device={device}
                             onDeviceChange={value => this.setState({ device: value })} />
                     </PanelBody>
+
                     {animationSettings(uniqueId, animation, setAttributes)}
+
+                    {interactionSettings(uniqueId, interaction, setAttributes)}
+
                 </InspectorControls>
 
                 {globalSettingsPanel(globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
@@ -113,13 +119,13 @@ class Edit extends Component {
 export default compose([
     withSelect((select, ownProps) => {
         const { clientId } = ownProps
-        const { getBlock } = select('core/editor');
+        const { getBlock } = select('core/block-editor');
         return {
             block: getBlock(clientId)
         };
     }),
     withDispatch((dispatch) => {
-        const { updateBlockAttributes } = dispatch('core/editor');
+        const { updateBlockAttributes } = dispatch('core/block-editor');
         return {
             updateBlockAttributes
         }

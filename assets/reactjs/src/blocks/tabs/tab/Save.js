@@ -1,5 +1,5 @@
 const { Component } = wp.element
-const { InnerBlocks } = wp.editor
+const { InnerBlocks } = wp.blockEditor
 class Save extends Component {
     render() {
         const { attributes: { id } } = this.props

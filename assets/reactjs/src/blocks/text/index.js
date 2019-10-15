@@ -4,7 +4,7 @@ import Save from './Save';
 import svg from '../heading/separators';
 const { __ } = wp.i18n
 const { Fragment } = wp.element;
-const { RichText } = wp.editor
+const { RichText } = wp.blockEditor
 const { registerBlockType } = wp.blocks
 const { gloalSettings: { globalAttributes }, HelperFunction: { animationAttr } } = wp.qubelyComponents
 

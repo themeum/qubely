@@ -3,7 +3,7 @@ const { compose } = wp.compose;
 const { select, withDispatch } = wp.data
 const { PanelBody, TextControl, SelectControl, Tooltip, Button, RangeControl } = wp.components
 const { Component, Fragment } = wp.element
-const { InspectorControls, InnerBlocks, InspectorAdvancedControls } = wp.editor
+const { InspectorControls, InnerBlocks, InspectorAdvancedControls } = wp.blockEditor
 const { Background, Select, Range, Toggle, Shape, BoxShadow, Tab, Tabs, Separator, Border, BorderRadius, RadioAdvanced, Dimension, gloalSettings: { globalSettingsPanel, animationSettings }, HelperFunction: { videoBackground }, CssGenerator: { CssGenerator } } = wp.qubelyComponents
 import { ModalManager } from '../../helpers/ModalManager';
 import PageListModal from '../../helpers/PageListModal';
@@ -36,7 +36,7 @@ class Edit extends Component {
     }
     componentDidMount() {
         const { setAttributes, clientId, attributes: { uniqueId } } = this.props
-        const { getBlockRootClientId } = select('core/editor');
+        const { getBlockRootClientId } = select('core/block-editor');
 
         let parentClientId = getBlockRootClientId(clientId)
 
@@ -366,7 +366,7 @@ export default compose([
     withDispatch((dispatch) => {
         const {
             removeBlock,
-        } = dispatch('core/editor');
+        } = dispatch('core/block-editor');
 
         return {
             removeBlock,

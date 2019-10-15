@@ -1,7 +1,7 @@
 const { __ } = wp.i18n
 const { Fragment, Component } = wp.element;
 const { PanelBody, Toolbar, SelectControl } = wp.components
-const { RichText, InspectorControls, BlockControls } = wp.editor
+const { RichText, InspectorControls, BlockControls } = wp.blockEditor
 const {
     Color,
     Typography,
@@ -12,7 +12,8 @@ const {
     RadioAdvanced,
     gloalSettings: {
         globalSettingsPanel,
-        animationSettings
+        animationSettings,
+        interactionSettings
     },
     Inline: {
         InlineToolbar,
@@ -45,6 +46,7 @@ class Edit extends Component {
         const {
             name,
             clientId,
+            isSelected,
             attributes,
             setAttributes,
             attributes: {
@@ -74,7 +76,8 @@ class Edit extends Component {
                 globalZindex,
                 hideTablet,
                 hideMobile,
-                globalCss
+                globalCss,
+                interaction
             }
         } = this.props
 
@@ -175,7 +178,11 @@ class Edit extends Component {
                             </Fragment>
                         }
                     </PanelBody>
+
                     {animationSettings(uniqueId, animation, setAttributes)}
+
+                    {interactionSettings(uniqueId, interaction, setAttributes)}
+
                 </InspectorControls>
 
                 <BlockControls>

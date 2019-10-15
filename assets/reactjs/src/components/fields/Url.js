@@ -29,7 +29,7 @@ class Url extends Component {
                 <div className="qubely-field-child">
                     <div className="qubely-url-input-group">
                         <input
-                            placeholder={placeholder ? placeholder : 'http://' }
+                            placeholder={placeholder ? placeholder : 'https://' }
                             type="url"
                             value={ value.url||'' }
                             onChange={ ( e ) => this.setSettings('url', e.target.value ) }

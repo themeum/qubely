@@ -1,5 +1,5 @@
 const { __ } = wp.i18n;
-const { InspectorControls, BlockControls } = wp.editor
+const { InspectorControls, BlockControls } = wp.blockEditor
 const { Component, Fragment } = wp.element;
 const { PanelBody, TextControl, Toolbar, Button, Popover } = wp.components;
 const {
@@ -25,7 +25,8 @@ const {
     },
     gloalSettings: {
         globalSettingsPanel,
-        animationSettings
+        animationSettings,
+        interactionSettings
     }
 } = wp.qubelyComponents
 
@@ -109,7 +110,8 @@ class Edit extends Component {
             globalZindex,
             hideTablet,
             hideMobile,
-            globalCss
+            globalCss,
+            interaction
         } = attributes;
         if (uniqueId) { CssGenerator(this.props.attributes, 'socialicons', uniqueId); };
 
@@ -238,7 +240,11 @@ class Edit extends Component {
                                 onDeviceChange={value => this.setState({ device: value })} />
                         </PanelBody>
                     }
+                    
                     {animationSettings(uniqueId, animation, setAttributes)}
+
+                    {interactionSettings(uniqueId, interaction, setAttributes)}
+                    
                 </InspectorControls>
 
                 <BlockControls>

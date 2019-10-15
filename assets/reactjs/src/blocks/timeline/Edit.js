@@ -1,8 +1,8 @@
 const { __ } = wp.i18n
 const { Fragment, Component } = wp.element;
 const { PanelBody, Tooltip, Toolbar } = wp.components
-const { InspectorControls, RichText, BlockControls, MediaUpload } = wp.editor
-const { IconList, Inline: { InlineToolbar }, RadioAdvanced, Range, Color, Typography, Toggle, Separator, Border, BorderRadius, BoxShadow, Alignment, Padding, Headings, gloalSettings: { globalSettingsPanel, animationSettings }, CssGenerator: { CssGenerator } } = wp.qubelyComponents
+const { InspectorControls, RichText, BlockControls, MediaUpload } = wp.blockEditor
+const { IconList, Inline: { InlineToolbar }, RadioAdvanced, Range, Color, Typography, Toggle, Separator, Border, BorderRadius, BoxShadow, Alignment, Padding, Headings, gloalSettings: { globalSettingsPanel, animationSettings, interactionSettings }, CssGenerator: { CssGenerator } } = wp.qubelyComponents
 
 class Edit extends Component {
 	constructor(props) {
@@ -147,6 +147,8 @@ class Edit extends Component {
 
 	render() {
 		const {
+			name,
+			isSelected,
 			setAttributes,
 			attributes: {
 				uniqueId,
@@ -196,8 +198,8 @@ class Edit extends Component {
 				globalZindex,
 				hideTablet,
 				hideMobile,
-				globalCss
-
+				globalCss,
+				interaction
 			} } = this.props
 
 		const { device } = this.state
@@ -285,6 +287,7 @@ class Edit extends Component {
 						<Color label={__('Bar Color')} value={connectorBarColor} onChange={(value) => setAttributes({ connectorBarColor: value })} />
 					</PanelBody>
 					{animationSettings(uniqueId, animation, setAttributes)}
+					{interactionSettings(uniqueId, interaction, setAttributes)}
 				</InspectorControls>
 
 				<BlockControls>

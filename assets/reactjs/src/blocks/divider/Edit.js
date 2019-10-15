@@ -1,5 +1,5 @@
 const { __ } = wp.i18n;
-const { InspectorControls, BlockControls } = wp.editor
+const { InspectorControls, BlockControls } = wp.blockEditor
 const { Component, Fragment } = wp.element;
 const { PanelBody, Toolbar, Dropdown } = wp.components;
 const {
@@ -9,7 +9,8 @@ const {
     ContextMenu: { ContextMenu, handleContextMenu },
     gloalSettings: {
         globalSettingsPanel,
-        animationSettings
+        animationSettings,
+        interactionSettings
     },
     Inline: { InlineToolbar },
     CssGenerator: { CssGenerator }
@@ -56,6 +57,7 @@ class Edit extends Component {
             name,
             clientId,
             attributes,
+            isSelected,
             setAttributes,
             attributes: {
                 uniqueId,
@@ -68,7 +70,8 @@ class Edit extends Component {
                 globalZindex,
                 hideTablet,
                 hideMobile,
-                globalCss
+                globalCss,
+                interaction
             }
         } = this.props
 
@@ -125,7 +128,11 @@ class Edit extends Component {
                             device={device}
                             onDeviceChange={value => this.setState({ device: value })} />
                     </PanelBody>
+
                     {animationSettings(uniqueId, animation, setAttributes)}
+
+                    {interactionSettings(uniqueId, interaction, setAttributes)}
+
                 </InspectorControls >
 
                 <BlockControls>
