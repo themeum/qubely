@@ -131,10 +131,16 @@ class Interaction extends Component {
                     <div className="qubely-interaction-view qubely-fields  qubely-field-alt">
                         <div className="sppb-interaction-view-body">
                             { !qubely_admin.pro_enable ?
-                                <div>
-                                    <p>To use the feature on your website, you need to upgrade to the <strong>Pro Version</strong></p>
-                                    <a href="https://www.themeum.com/product/qubely/" target="_blank">Upgrade To Pro</a>
-                                </div> 
+                                <div className='qubely-field-pro-upgrade'>
+                                    <div className='qubely-logo'>
+                                        <img src={qubely_admin.plugin + 'assets/img/Qubely-Q.svg'} alt={__('Qubely-Q')} />
+                                    </div>
+                                    <div className='qubely-upgrade-message'>
+                                        <span className='qubely-upgrade-message-title'>{__('Upgrade to Pro')}</span>
+                                        <span className='qubely-upgrade-message-description'>{__('Get all features of post grid at your disposal by upgrading to pro version')}</span>
+                                    </div>
+                                    <a className='qubely-upgrade-button' href={'https://www.themeum.com/product/qubely'} target='_blank' >{__('Upgrade Now')}</a>
+                                </div>
                                 :
                                 <Fragment>
                                     <Toggle
