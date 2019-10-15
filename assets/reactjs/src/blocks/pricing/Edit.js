@@ -646,7 +646,7 @@ class Edit extends Component {
 
 					</PanelBody>
 
-					{buttonSettings(this.props.attributes, device, setAttributes, (key, value) => { this.setState({ [key]: value }) }, showPostTextTypography)}
+					{buttonSettings(this.props.attributes, device, (key, value) => { setAttributes({ [key]: value }) }, (key, value) => { this.setState({ [key]: value }) },showPostTextTypography)}
 
 					{listSettings(this.props.attributes, device, setAttributes)}
 
