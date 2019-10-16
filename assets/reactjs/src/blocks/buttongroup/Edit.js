@@ -106,7 +106,7 @@ class Edit extends Component {
 
                         <Tooltip text={__('Add new Button')}>
                             <span className="qubely-add-new" onClick={() => setAttributes({ buttons: buttons + 1 })} role="button" areaLabel={__('Add new button')}>
-                                <i class="fas fa-plus-circle" />
+                                <i className="fas fa-plus-circle" />
                             </span>
                         </Tooltip>
                     </div>

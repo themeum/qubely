@@ -82,19 +82,19 @@ if (!class_exists('QUBELY_Options')) {
                     <div class="qubely-row qubely-columns-2">
                         <div>
                             <ul class="qubely-options-features">
-                                <li><i class="fas fa-check"></i> <?php esc_attr_e('Predefined sections'); ?></li>
-                                <li><i class="fas fa-check"></i> <?php esc_attr_e('Modern layout packs'); ?></li>
-                                <li><i class="fas fa-check"></i> <?php esc_attr_e('Highly customizable row columns'); ?></li>
-                                <li><i class="fas fa-check"></i> <?php esc_attr_e('Row video background & blend mode'); ?></li>
-                                <li><i class="fas fa-check"></i> <?php esc_attr_e('Drag column resizing'); ?></li>
-                                <li><i class="fas fa-check"></i> <?php esc_attr_e('Shape divider/builder'); ?></li>
-                                <li><i class="fas fa-check"></i> <?php esc_attr_e('Device specific responsive controls'); ?></li>
-                                <li><i class="fas fa-check"></i> <?php esc_attr_e('Unlimited Google web fonts & system fonts'); ?></li>
-                                <li><i class="fas fa-check"></i> <?php esc_attr_e('Classic & gradient color and background'); ?></li>
-                                <li><i class="fas fa-check"></i> <?php esc_attr_e('Built-in animation'); ?></li>
-                                <li><i class="fas fa-check"></i> <?php esc_attr_e('Box-shadow'); ?></li>
-                                <li><i class="fas fa-check"></i> <?php esc_attr_e('Font Awesome 5 Icons and line icons'); ?></li>
-                                <li><i class="fas fa-check"></i> <?php esc_attr_e('Custom CSS'); ?></li>
+                                <li><i class="fas fa-check"/> <?php esc_attr_e('Predefined sections'); ?></li>
+                                <li><i class="fas fa-check"/> <?php esc_attr_e('Modern layout packs'); ?></li>
+                                <li><i class="fas fa-check"/> <?php esc_attr_e('Highly customizable row columns'); ?></li>
+                                <li><i class="fas fa-check"/> <?php esc_attr_e('Row video background & blend mode'); ?></li>
+                                <li><i class="fas fa-check"/> <?php esc_attr_e('Drag column resizing'); ?></li>
+                                <li><i class="fas fa-check"/> <?php esc_attr_e('Shape divider/builder'); ?></li>
+                                <li><i class="fas fa-check"/> <?php esc_attr_e('Device specific responsive controls'); ?></li>
+                                <li><i class="fas fa-check"/> <?php esc_attr_e('Unlimited Google web fonts & system fonts'); ?></li>
+                                <li><i class="fas fa-check"/> <?php esc_attr_e('Classic & gradient color and background'); ?></li>
+                                <li><i class="fas fa-check"/> <?php esc_attr_e('Built-in animation'); ?></li>
+                                <li><i class="fas fa-check"/> <?php esc_attr_e('Box-shadow'); ?></li>
+                                <li><i class="fas fa-check"/> <?php esc_attr_e('Font Awesome 5 Icons and line icons'); ?></li>
+                                <li><i class="fas fa-check"/> <?php esc_attr_e('Custom CSS'); ?></li>
                             </ul>
                             <div class="qubely-mb-30">
                                 <a href="https://www.themeum.com/docs/qubely-introduction/" target="_blank" class="button button-large button-primary"><?php esc_attr_e('Documentation'); ?></a>

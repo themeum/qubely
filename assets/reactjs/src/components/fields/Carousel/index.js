@@ -101,7 +101,7 @@ export default class Carousel extends Component {
         return Array(dots).fill(0).map((item, index) => {
             return (
                 <li className={`qubely-carousel-dot-${index}${index === 0 ? ' active' : ''}`}>
-                    <span className="dot-indicator"></span>
+                    <span className="dot-indicator"/>
                 </li>
             )
         })
@@ -123,10 +123,10 @@ export default class Carousel extends Component {
                     {nav &&
                         <Fragment>
                             <span className={`next-control nav-control ${arrowPosition}`} onClick={() => this.$qubelyCarousel.navigate('next')}>
-                                {(arrowStyle == 'arrowright2') ? <span class="dashicons dashicons-arrow-right-alt2"></span> : <span class="dashicons dashicons-arrow-right-alt"></span>}
+                                {(arrowStyle == 'arrowright2') ? <span className={`dashicons dashicons-arrow-right-alt2`} /> : <span className={`dashicons dashicons-arrow-right-alt`} />}
                             </span>
                             <span className={`prev-control nav-control ${arrowPosition}`} onClick={() => this.$qubelyCarousel.navigate('prev')}>
-                                {(arrowStyle == 'arrowright2') ? <span class="dashicons dashicons-arrow-left-alt2"></span> : <span class="dashicons dashicons-arrow-left-alt"></span>}
+                                {(arrowStyle == 'arrowright2') ? <span className={`dashicons dashicons-arrow-left-alt2`} /> : <span className={`dashicons dashicons-arrow-left-alt`}/>}
                             </span>
                         </Fragment>
                     }

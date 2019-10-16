@@ -10,10 +10,10 @@ export default (props) => {
                 <div className="qubely-reusable-list-info-date">16 Feb 2019 </div>
                 <div className="qubely-reusable-list-button">
                     <button className="qubely-builder-btn qubely-btn-success" onClick={ (e) => { props.importSavedBlock( props.data ) } }>
-                        <i className="fas fa-download"></i>
+                        <i className="fas fa-download"/>
                     </button>
                     <button className="qubely-builder-btn qubely-btn-success" onClick={ (e) => { props.deleteSavedBlock( props.index, props.data.ID ) } }>
-                        <i className="fas fa-trash"></i>
+                        <i className="fas fa-trash"/>
                     </button>
                 </div>
             </div>

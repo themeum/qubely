@@ -213,7 +213,7 @@ class Edit extends Component {
                                         removeBlock(clientId)
                                     }}
                                     role="button">
-                                    <i class="fas fa-times" />
+                                    <i className="fas fa-times" />
                                 </span>
                             </Tooltip>
                         }

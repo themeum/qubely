@@ -58,7 +58,7 @@ class Edit extends Component {
 		const { showIconPicker } = this.state
 		return tabTitles.map((title, index) =>
 			<span className={`qubely-tab-item ${(this.state.activeTab == index + 1) ? 'qubely-active' : ''}`}>
-				<span class={`qubely-tab-title ${title.iconName ? 'qubely-has-icon-' + iconPosition : ''}`} onClick={() => {
+				<span className={`qubely-tab-title ${title.iconName ? 'qubely-has-icon-' + iconPosition : ''}`} onClick={() => {
 					let activeTab = $(`#block-${block.innerBlocks[index].clientId}`, currentTabBlock)
 					$('.qubely-tab-content.qubely-active', currentTabBlock).removeClass('qubely-active')
 					activeTab.addClass("qubely-active")
@@ -78,7 +78,7 @@ class Edit extends Component {
 				</span>
 				<Tooltip text={__('Delete this tab')}>
 					<span className="qubely-action-tab-remove" onClick={() => this.deleteTab(index)} role="button">
-						<i class="fas fa-times" />
+						<i className="fas fa-times" />
 					</span>
 				</Tooltip>
 			</span>
@@ -343,7 +343,7 @@ class Edit extends Component {
 										tabTitles: this.newTitles()
 									})
 								}} role="button" areaLabel={__('Add new tab')}>
-									<i class="fas fa-plus-circle" />
+									<i className="fas fa-plus-circle" />
 								</span>
 							</Tooltip>
 						</div>

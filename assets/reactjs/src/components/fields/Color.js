@@ -55,7 +55,7 @@ class Color extends Component {
                 {(value != '' && !disableClear) &&
                     <Tooltip text={__('Clear')}>
                         <div className="qubely-ml-10">
-                            <span className="qubely-border-clear" onClick={() => onChange('')} role="button"><i className="fas fa-undo"></i></span>
+                            <span className="qubely-border-clear" onClick={() => onChange('')} role="button"><i className="fas fa-undo"/></span>
                         </div>
                     </Tooltip>
                 }

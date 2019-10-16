@@ -96,19 +96,19 @@ export class ContextMenu extends Component {
             <div className="qubely-context-menu">
                 <div className="qubely-context-menu-group">
                     <div className="qubely-context-menu-item qubely-context-menu-item-copy" onClick={() => this.copyStyles()} >
-                        <div class="qubely-context-menu-item-icon"> <i className="fas fa-copy"></i></div>
-                        <div class="qubely-context-menu-item-title">Copy Style</div>
+                        <div className={`qubely-context-menu-item-icon`}> <i className="fas fa-copy"/></div>
+                        <div className="qubely-context-menu-item-title">{__('Copy Style')}</div>
                     </div>
                     <div className={`qubely-context-menu-item qubely-context-menu-item-paste disable-${previouslyCopiedStyle && previouslyCopiedStyle.blockName == name ? sourceOfCopiedStyle : true}`} onClick={() => this.pasteStyle()} aria-disabled={sourceOfCopiedStyle} >
-                        <div class="qubely-context-menu-item-icon"> <i className="fas fa-paste"></i></div>
-                        <div class="qubely-context-menu-item-title">Paste Style</div>
+                        <div className="qubely-context-menu-item-icon"> <i className="fas fa-paste"/></div>
+                        <div className="qubely-context-menu-item-title">{__('Paste Style')}</div>
                     </div>
                 </div>
                 <div className="qubely-context-menu-group">
                     <div className="qubely-context-menu-item qubely-context-menu-item-delete" onClick={() => dispatch('core/block-editor').removeBlock(clientId)} >
-                        <div class="qubely-context-menu-item-icon"> <i className="fas fa-trash"></i></div>
-                        <div class="qubely-context-menu-item-title">Delete</div>
-                        <div class="qubely-context-menu-item-shortcut">⌦</div>
+                        <div className="qubely-context-menu-item-icon"> <i className="fas fa-trash"/></div>
+                        <div className="qubely-context-menu-item-title">{__('Delete')}</div>
+                        <div className="qubely-context-menu-item-shortcut">⌦</div>
                     </div>
                 </div>
             </div>

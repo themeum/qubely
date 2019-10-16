@@ -143,7 +143,7 @@ class Edit extends Component {
                                             this.setState({ focusedItem: focusedItem > 0 ? focusedItem - 1 : focusedItem })
 
                                     }}>
-                                    <i class="fas fa-times" />
+                                    <i className="fas fa-times" />
                                 </span>
                             </Tooltip>
                         }
@@ -336,7 +336,7 @@ class Edit extends Component {
                             this.setState({ currentListItemIndex: listItems.length, focusedItem: listItems.length })
                             this.updateListItems(listItems.length, 'add')
                         }} className="button is-default qubely-action-button" role="button">
-                            <i class="fas fa-plus" /> {__('Add New')}
+                            <i className="fas fa-plus" /> {__('Add New')}
                         </button>
 
                         <div ref="qubelyContextMenu" className={`qubely-context-menu-wraper`} >

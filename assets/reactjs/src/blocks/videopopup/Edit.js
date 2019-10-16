@@ -247,9 +247,7 @@ class Edit extends Component {
                                 {icon &&
                                     <span className="qubely-btn-icon-wrapper">
                                         <i className={`qubely-btn-icon ${icon}`}>
-                                            {(iconBgColor && isRipple) && <span
-                                                className="qubely-ripple"
-                                            ></span>}
+                                            {(iconBgColor && isRipple) && <span className="qubely-ripple"/>}
                                         </i>
                                     </span>
                                 }
