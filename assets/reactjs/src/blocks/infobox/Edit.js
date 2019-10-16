@@ -376,7 +376,7 @@ class Edit extends Component {
                         </Tabs>
                     </PanelBody>
 
-                    {buttonSettings(this.props.attributes, device, setAttributes, (key, value) => { this.setState({ [key]: value }) })}
+                    {buttonSettings(this.props.attributes, device, (key, value) => { setAttributes({ [key]: value }) }, (key, value) => { this.setState({ [key]: value }) })}
                     {animationSettings(uniqueId, animation, setAttributes)}
                     {interactionSettings(uniqueId, interaction, setAttributes)}
                 </InspectorControls>
