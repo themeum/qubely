@@ -262,18 +262,18 @@ export function buttonSettings(attributes, device, setAttributes, updateParentSt
         return (
             <Fragment>
                 <Styles value={buttonFillType}
-                    onChange={(value) => setAttributes({ buttonFillType: value })}
+                    onChange={(value) => setAttributes('buttonFillType', value)}
                     options={[
                         { value: 'fill', svg: icons.btn_fill, label: __('Fill') },
                         { value: 'outline', svg: icons.btn_outline, label: __('Outline') }
                     ]}
                 />
                 {buttonTag == 'a' &&
-                    <Url label={__('URL')} value={buttonUrl} onChange={(value) => setAttributes({ buttonUrl: value })} />
+                    <Url label={__('URL')} value={buttonUrl} onChange={(value) => setAttributes('buttonUrl', value)} />
                 }
                 {
                     enableButtonAlignment &&
-                    <Alignment label={__('Alignment')} value={buttonAlignment} onChange={val => setAttributes({ buttonAlignment: val })} disableJustify responsive device={device} onDeviceChange={value => updateParentState('device', value)} />
+                    <Alignment label={__('Alignment')} value={buttonAlignment} onChange={val => setAttributes('buttonAlignment', val)} disableJustify responsive device={device} onDeviceChange={value => updateParentState('device', value)} />
                 }
 
                 <InnerPanel title={__('Size')}>
@@ -286,13 +286,13 @@ export function buttonSettings(attributes, device, setAttributes, updateParentSt
                             { icon: 'fas fa-cog', value: 'custom', title: 'Custom' }
                         ]}
                         value={buttonSize}
-                        onChange={(value) => setAttributes({ buttonSize: value })}
+                        onChange={(value) => setAttributes('buttonSize', value)}
                     />
                     {buttonSize == 'custom' &&
                         <Padding
                             label={__('Padding')}
                             value={buttonPadding}
-                            onChange={(value) => setAttributes({ buttonPadding: value })}
+                            onChange={(value) => setAttributes('buttonPadding', value)}
                             unit={['px', 'em', '%']}
                             max={150}
                             min={0}
@@ -309,12 +309,12 @@ export function buttonSettings(attributes, device, setAttributes, updateParentSt
                             { label: __('Fixed'), value: 'fixed', title: __('Fixed') }
                         ]}
                         value={buttonWidthType}
-                        onChange={(value) => setAttributes({ buttonWidthType: value })} />
+                        onChange={(value) => setAttributes('buttonWidthType', value)} />
                     {buttonWidthType == 'fixed' &&
                         <Range
                             label={__('Fixed Width')}
                             value={buttonWidth}
-                            onChange={(value) => setAttributes({ buttonWidth: value })}
+                            onChange={(value) => setAttributes('buttonWidth', value)}
                             unit={['px', 'em', '%']}
                             min={30}
                             max={800}
@@ -327,9 +327,9 @@ export function buttonSettings(attributes, device, setAttributes, updateParentSt
                 <InnerPanel title={__('Design')} initialOpen={false}>
                     <Tabs>
                         <Tab tabTitle={__('Normal')}>
-                            <Color label={__('Text Color')} value={buttonFillType == 'fill' ? buttonColor : buttonColor2} onChange={(value) => buttonFillType == 'fill' ? setAttributes({ buttonColor: value }) : setAttributes({ buttonColor2: value })} />
+                            <Color label={__('Text Color')} value={buttonFillType == 'fill' ? buttonColor : buttonColor2} onChange={(value) => buttonFillType == 'fill' ? setAttributes('buttonColor', value) : setAttributes('buttonColor2', value)} />
                             {buttonFillType == 'fill' &&
-                                <ColorAdvanced label={__('Background')} value={buttonBgColor} onChange={(value) => setAttributes({ buttonBgColor: value })} />
+                                <ColorAdvanced label={__('Background')} value={buttonBgColor} onChange={(value) => setAttributes('buttonBgColor', value)} />
                             }
                             <Border
                                 label={__('Border')}
@@ -337,28 +337,28 @@ export function buttonSettings(attributes, device, setAttributes, updateParentSt
                                 value={buttonBorder}
                                 min={0}
                                 max={10}
-                                onChange={val => setAttributes({ buttonBorder: val })}
+                                onChange={val => setAttributes('buttonBorder', val)}
                             />
                             <BoxShadow
                                 label={__('Box-Shadow')}
                                 value={buttonShadow}
-                                onChange={(value) => setAttributes({ buttonShadow: value })} />
+                                onChange={(value) => setAttributes('buttonShadow', value)} />
                         </Tab>
                         <Tab tabTitle={__('Hover')}>
-                            <Color label={__('Text Color')} value={buttonFillType == 'fill' ? buttonHoverColor : buttonHoverColor2} onChange={(value) => buttonFillType == 'fill' ? setAttributes({ buttonHoverColor: value }) : setAttributes({ buttonHoverColor2: value })} />
-                            {buttonFillType == 'fill' && <ColorAdvanced label={__('Background')} value={buttonBgHoverColor} onChange={(value) => setAttributes({ buttonBgHoverColor: value })} />}
-                            <Color label={__('Border Color')} value={buttonBorderHoverColor} onChange={(value) => setAttributes({ buttonBorderHoverColor: value })} />
+                            <Color label={__('Text Color')} value={buttonFillType == 'fill' ? buttonHoverColor : buttonHoverColor2} onChange={(value) => buttonFillType == 'fill' ? setAttributes('buttonHoverColor', value) : setAttributes('buttonHoverColor2', value)} />
+                            {buttonFillType == 'fill' && <ColorAdvanced label={__('Background')} value={buttonBgHoverColor} onChange={(value) => setAttributes('buttonBgHoverColor', value)} />}
+                            <Color label={__('Border Color')} value={buttonBorderHoverColor} onChange={(value) => setAttributes('buttonBorderHoverColor', value)} />
                             <BoxShadow
                                 label={__('Box-Shadow')}
                                 value={buttonHoverShadow}
-                                onChange={(value) => setAttributes({ buttonHoverShadow: value })} />
+                                onChange={(value) => setAttributes('buttonHoverShadow', value)} />
                         </Tab>
                     </Tabs>
 
                     <BorderRadius
                         label={__('Radius')}
                         value={buttonBorderRadius}
-                        onChange={(value) => setAttributes({ buttonBorderRadius: value })}
+                        onChange={(value) => setAttributes('buttonBorderRadius', value)}
                         min={0}
                         max={100} unit={['px', 'em', '%']}
                         responsive
@@ -371,7 +371,7 @@ export function buttonSettings(attributes, device, setAttributes, updateParentSt
                         max={100}
                         responsive
                         unit={['px', 'em', '%']}
-                        onChange={(value) => setAttributes({ buttonGap: value })}
+                        onChange={(value) => setAttributes('buttonGap', value)}
                         device={device}
                         onDeviceChange={value => updateParentState('device', value)}
                     />
@@ -381,18 +381,18 @@ export function buttonSettings(attributes, device, setAttributes, updateParentSt
                     <IconList
                         label={__('Icon')}
                         value={buttonIconName}
-                        onChange={(value) => setAttributes({ buttonIconName: value })} />
+                        onChange={(value) => setAttributes('buttonIconName', value)} />
                     {buttonIconName &&
                         <Fragment>
                             <Select
                                 label={__('Position')}
                                 options={['left', 'right']}
                                 value={buttonIconPosition}
-                                onChange={(value) => setAttributes({ buttonIconPosition: value })} />
+                                onChange={(value) => setAttributes('buttonIconPosition', value)} />
                             <Range
                                 label={__('Size')}
                                 value={buttonIconSize}
-                                onChange={(value) => setAttributes({ buttonIconSize: value })}
+                                onChange={(value) => setAttributes('buttonIconSize', value)}
                                 unit={['px', 'em', '%']}
                                 min={5}
                                 max={48}
@@ -402,7 +402,7 @@ export function buttonSettings(attributes, device, setAttributes, updateParentSt
                             <Range
                                 label={__('Gap')}
                                 value={buttonIconGap}
-                                onChange={val => setAttributes({ buttonIconGap: val })}
+                                onChange={val => setAttributes('buttonIconGap', val)}
                                 unit={['px', 'em', '%']}
                                 min={0}
                                 max={64}
@@ -416,7 +416,7 @@ export function buttonSettings(attributes, device, setAttributes, updateParentSt
                 <InnerPanel title={__('Typography')} initialOpen={false}>
                     <Typography
                         value={buttonTypography}
-                        onChange={(value) => setAttributes({ buttonTypography: value })}
+                        onChange={(value) => setAttributes('buttonTypography', value)}
                         disableLineHeight
                         device={device}
                         onDeviceChange={value => updateParentState('device', value)} />
@@ -428,13 +428,13 @@ export function buttonSettings(attributes, device, setAttributes, updateParentSt
         <Fragment>
             {
                 controlledButtonPanel ?
-                    <PanelBody title={__('Button')} opened={showButtonPanel} onToggle={() => setAttributes({ showButtonPanel: !showButtonPanel })}>
-                        {buttonToggleOption && <Toggle label={__('Enable Button')} value={enableButton} onChange={val => setAttributes({ enableButton: val })} />}
+                    <PanelBody title={__('Button')} opened={showButtonPanel} onToggle={() => setAttributes('showButtonPanel', !showButtonPanel)}>
+                        {buttonToggleOption && <Toggle label={__('Enable Button')} value={enableButton} onChange={val => setAttributes('enableButton', val)} />}
                         {enableButton && renderButtonControls()}
                     </PanelBody>
                     :
                     <PanelBody title={__('Button')} initialOpen={false}>
-                        {buttonToggleOption && <Toggle label={__('Enable Button')} value={enableButton} onChange={val => setAttributes({ enableButton: val })} />}
+                        {buttonToggleOption && <Toggle label={__('Enable Button')} value={enableButton} onChange={val => setAttributes('enableButton', val)} />}
                         {enableButton && renderButtonControls()}
                     </PanelBody>
             }
@@ -446,7 +446,7 @@ export function buttonSettings(attributes, device, setAttributes, updateParentSt
                     <Toggle
                         value={enablePostButtonText}
                         label={__('Show PostButtonText')}
-                        onChange={val => setAttributes({ enablePostButtonText: val })} />
+                        onChange={val => setAttributes('enablePostButtonText', val)} />
                     {
                         enablePostButtonText &&
                         <Fragment>
@@ -455,14 +455,14 @@ export function buttonSettings(attributes, device, setAttributes, updateParentSt
                                     <Color
                                         label={__('Color')}
                                         value={postButtonTextColor}
-                                        onChange={val => setAttributes({ postButtonTextColor: val })} />
+                                        onChange={val => setAttributes('postButtonTextColor', val)} />
 
                                 </Tab>
                                 <Tab tabTitle={__('Hover')}>
                                     <Color
                                         label={__('Color')}
                                         value={postButtonTextHoverColor}
-                                        onChange={val => setAttributes({ postButtonTextHoverColor: val })} />
+                                        onChange={val => setAttributes('postButtonTextHoverColor', val)} />
                                 </Tab>
                             </Tabs>
                             <Toggle
@@ -473,7 +473,7 @@ export function buttonSettings(attributes, device, setAttributes, updateParentSt
                                 showPostTextTypography &&
                                 <Typography
                                     value={postButtonTextTypography}
-                                    onChange={val => setAttributes({ postButtonTextTypography: val })}
+                                    onChange={val => setAttributes('postButtonTextTypography', val)}
                                     device={device}
                                     onDeviceChange={value => updateParentState('device', value)} />
                             }
@@ -484,7 +484,7 @@ export function buttonSettings(attributes, device, setAttributes, updateParentSt
                                 value={postButtonTextPaddingTop}
                                 unit={['px', 'em', '%']}
                                 label={"Top"}
-                                onChange={val => setAttributes({ postButtonTextPaddingTop: val })}
+                                onChange={val => setAttributes('postButtonTextPaddingTop', val)}
                                 device={device}
                                 onDeviceChange={value => updateParentState('device', value)} />
                             <Range
@@ -494,7 +494,7 @@ export function buttonSettings(attributes, device, setAttributes, updateParentSt
                                 value={postButtonTextPaddingBottom}
                                 unit={['px', 'em', '%']}
                                 label={"Bottom"}
-                                onChange={val => setAttributes({ postButtonTextPaddingBottom: val })}
+                                onChange={val => setAttributes('postButtonTextPaddingBottom', val)}
                                 device={device}
                                 onDeviceChange={value => updateParentState('device', value)} />
                         </Fragment>
