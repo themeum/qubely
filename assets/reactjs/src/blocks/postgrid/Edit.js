@@ -249,7 +249,7 @@ class Edit extends Component {
 								// { value: 3, svg: icons.postgrid_3, label: __(''), pro: true },
 								// { value: 4, svg: icons.postgrid_3, label: __(''), pro: true },
 							]}
-							// proUpgradation
+							proUpgradation
 							value={layout}
 							onChange={val => setAttributes({ layout: val })}
 						/>

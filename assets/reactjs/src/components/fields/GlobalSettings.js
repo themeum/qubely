@@ -8,11 +8,8 @@ import Interaction from './Interaction'
 const { __ } = wp.i18n
 const { InspectorAdvancedControls } = wp.blockEditor
 const { TextareaControl, PanelBody } = wp.components
-const { Fragment } = wp.element;
 
-const excludeInteraction = {row: true, column: true, videopopup: true }
 //attributes 
-
 export const globalAttributes = {
     animation: { type: 'object', default: {} },
     interaction: { type: 'object', default: {} },
@@ -51,7 +48,6 @@ export function globalSettingsPanel(globalZindex, hideTablet, hideMobile, global
 }
 
 export function animationSettings(uniqueId, animation, setAttributes) {
-    
     return (
         <PanelBody title={__('Animation')} initialOpen={false}>
             <Animation
