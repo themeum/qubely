@@ -143,7 +143,7 @@ class Edit extends Component {
                                             this.setState({ focusedItem: focusedItem > 0 ? focusedItem - 1 : focusedItem })
 
                                     }}>
-                                    <i class="fas fa-times" />
+                                    <i className="fas fa-times" />
                                 </span>
                             </Tooltip>
                         }
@@ -198,6 +198,10 @@ class Edit extends Component {
                 shadowHover,
                 animation,
                 globalZindex,
+                enablePosition, 
+                selectPosition, 
+                positionXaxis, 
+                positionYaxis,
                 hideTablet,
                 hideMobile,
                 globalCss,
@@ -325,7 +329,7 @@ class Edit extends Component {
 
                 </InspectorControls>
 
-                {globalSettingsPanel(globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
+                {globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
                 <div className={`qubely-block-${uniqueId}`}>
                     <div className="qubely-block-icon-list" onContextMenu={event => handleContextMenu(event, this.refs.qubelyContextMenu)}>
@@ -336,7 +340,7 @@ class Edit extends Component {
                             this.setState({ currentListItemIndex: listItems.length, focusedItem: listItems.length })
                             this.updateListItems(listItems.length, 'add')
                         }} className="button is-default qubely-action-button" role="button">
-                            <i class="fas fa-plus" /> {__('Add New')}
+                            <i className="fas fa-plus" /> {__('Add New')}
                         </button>
 
                         <div ref="qubelyContextMenu" className={`qubely-context-menu-wraper`} >

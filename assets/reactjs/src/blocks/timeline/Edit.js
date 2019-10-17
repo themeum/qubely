@@ -80,12 +80,12 @@ class Edit extends Component {
 													<div className="qubely-media-actions qubely-field-button-list">
 														<Tooltip text={__('Edit')}>
 															<button className="qubely-button" aria-label={__('Edit')} onClick={open} role="button">
-																<span aria-label={__('Edit')} className="fas fa-pencil-alt fa-fw"></span>
+																<span aria-label={__('Edit')} className="fas fa-pencil-alt fa-fw"/>
 															</button>
 														</Tooltip>
 														<Tooltip text={__('Remove')}>
 															<button className="qubely-button" aria-label={__('Remove')} onClick={() => this.updateTimelineContent('image', '', index)} role="button">
-																<span aria-label={__('Close')} className="far fa-trash-alt fa-fw"></span>
+																<span aria-label={__('Close')} className="far fa-trash-alt fa-fw"/>
 															</button>
 														</Tooltip>
 													</div>
@@ -123,7 +123,7 @@ class Edit extends Component {
 
 						<Tooltip text={__('Delete this item')}>
 							<span className="qubely-action-timeline-remove" role="button" onClick={() => this.removeItem(index)}>
-								<i className="fas fa-times"></i>
+								<i className="fas fa-times"/>
 							</span>
 						</Tooltip>
 
@@ -195,7 +195,11 @@ class Edit extends Component {
 
 				//animation
 				animation,
-				globalZindex,
+                globalZindex,
+                enablePosition, 
+                selectPosition, 
+                positionXaxis, 
+                positionYaxis,
 				hideTablet,
 				hideMobile,
 				globalCss,
@@ -300,7 +304,7 @@ class Edit extends Component {
 					</Toolbar>
 				</BlockControls>
 
-				{globalSettingsPanel(globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
+				{globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
 				<div className={`qubely-block-${uniqueId}`}>
 					<div className={`qubely-block-timeline qubely-timeline-layout-vertical qubely-timeline-orientation-${orientation}`}>

@@ -46,7 +46,7 @@ class AccordionBlock extends Component {
 
     render() {
 
-        const { name, attributes, isSelectedBlockInRoot, setAttributes, attributes: { uniqueId, animation, globalZindex, hideTablet, hideMobile, globalCss, interaction } } = this.props;
+        const { name, attributes, isSelectedBlockInRoot, setAttributes, attributes: { uniqueId, animation, enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, interaction } } = this.props;
 
         return (
             <Fragment>
@@ -56,7 +56,7 @@ class AccordionBlock extends Component {
                     {interactionSettings(uniqueId, interaction, setAttributes)}
                 </InspectorControls >
 
-                {globalSettingsPanel(globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
+                {globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
                 <div className={`qubely-block-accordion qubely-block-${uniqueId}`}>
                     <InnerBlocks

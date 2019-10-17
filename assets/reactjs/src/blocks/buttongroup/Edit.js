@@ -36,6 +36,10 @@ class Edit extends Component {
                 animation,
                 //global
                 globalZindex,
+                enablePosition, 
+                selectPosition, 
+                positionXaxis, 
+                positionYaxis,
                 hideTablet,
                 hideMobile,
                 globalCss
@@ -82,7 +86,7 @@ class Edit extends Component {
 
                 </InspectorControls>
 
-                {globalSettingsPanel(globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
+                {globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
                 <div className={`qubely-block-${uniqueId}`}>
                     <div className={`qubely-block-button-group`}>
@@ -106,7 +110,7 @@ class Edit extends Component {
 
                         <Tooltip text={__('Add new Button')}>
                             <span className="qubely-add-new" onClick={() => setAttributes({ buttons: buttons + 1 })} role="button" areaLabel={__('Add new button')}>
-                                <i class="fas fa-plus-circle" />
+                                <i className="fas fa-plus-circle" />
                             </span>
                         </Tooltip>
                     </div>

@@ -109,6 +109,10 @@ class Edit extends Component {
             buttonUrl,
 
             animation,
+            enablePosition, 
+            selectPosition, 
+            positionXaxis, 
+            positionYaxis,
             globalZindex,
             hideTablet,
             hideMobile,
@@ -391,7 +395,7 @@ class Edit extends Component {
                     </Toolbar>
                 </BlockControls>
 
-                {globalSettingsPanel(globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
+                {globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
                 <div className={`qubely-block-${uniqueId}`}>
                     <div className={`qubely-block-info-box qubely-info-box-layout-${layout}`} onContextMenu={event => handleContextMenu(event, this.refs.qubelyContextMenu)}>
@@ -405,7 +409,7 @@ class Edit extends Component {
                                         {image.url != undefined ?
                                             <img className="qubely-info-box-image" src={image.url} srcset={image2x.url != undefined ? image.url + ' 1x, ' + image2x.url + ' 2x' : ''} alt={imgAlt && imgAlt} />
                                             :
-                                            <div className="qubely-info-box-image qubely-image-placeholder"><i className="far fa-image"></i></div>
+                                            <div className="qubely-info-box-image qubely-image-placeholder"><i className="far fa-image"/></div>
                                         }
                                     </Fragment>
                                 }

@@ -73,6 +73,10 @@ class Edit extends Component {
             //animation
             animation,
             globalZindex,
+            enablePosition, 
+            selectPosition, 
+            positionXaxis, 
+            positionYaxis,
             hideTablet,
             hideMobile,
             globalCss,
@@ -121,7 +125,7 @@ class Edit extends Component {
                             {avatar.url != undefined ?
                                 <img className="qubely-testimonial-avatar" src={avatar.url} srcset={avatar2x.url != undefined ? avatar.url + ' 1x, ' + avatar2x.url + ' 2x' : ''} alt={avatarAlt} onClick={() => this.handlePanelOpenings('Avatar')} />
                                 :
-                                <div className="qubely-image-placeholder qubely-testimonial-avatar" onClick={() => this.handlePanelOpenings('Avatar')}><i className="far fa-user"></i></div>
+                                <div className="qubely-image-placeholder qubely-testimonial-avatar" onClick={() => this.handlePanelOpenings('Avatar')}><i className="far fa-user"/></div>
                             }
                         </Fragment>
                     }
@@ -136,7 +140,7 @@ class Edit extends Component {
                             {avatar.url != undefined ?
                                 <img className="qubely-testimonial-avatar" src={avatar.url} srcset={avatar2x.url != undefined ? avatar.url + ' 1x, ' + avatar2x.url + ' 2x' : ''} alt={avatarAlt} onClick={() => this.handlePanelOpenings('Avatar')} />
                                 :
-                                <div className="qubely-image-placeholder qubely-testimonial-avatar" onClick={() => this.handlePanelOpenings('Avatar')}><i className="far fa-user"></i></div>
+                                <div className="qubely-image-placeholder qubely-testimonial-avatar" onClick={() => this.handlePanelOpenings('Avatar')}><i className="far fa-user"/></div>
                             }
                         </Fragment>
                     }
@@ -458,7 +462,7 @@ class Edit extends Component {
                     />
                 </BlockControls>
 
-                {globalSettingsPanel(globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
+                {globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
                 <div className={`qubely-block-${uniqueId}`}>
                     <div className={`qubely-block-testimonial`} onContextMenu={event => handleContextMenu(event, this.refs.qubelyContextMenu)}>
@@ -470,7 +474,7 @@ class Edit extends Component {
                         }
 
                         {(quoteIcon && (layout == 1)) &&
-                            <div className="qubely-testimonial-quote" onClick={() => this.handlePanelOpenings('Quote Icon')}><span className={`qubely-quote-icon ${quoteIcon}`}></span></div>
+                            <div className="qubely-testimonial-quote" onClick={() => this.handlePanelOpenings('Quote Icon')}><span className={`qubely-quote-icon ${quoteIcon}`}/></div>
                         }
 
                         <div className="qubely-testimonial-content" onClick={() => this.handlePanelOpenings('Message')} >
@@ -484,7 +488,7 @@ class Edit extends Component {
                         {layout == 1 && authorInfo}
 
                         {(quoteIcon && (layout == 2)) &&
-                            <div className="qubely-testimonial-quote qubely-position-bottom" onClick={() => this.handlePanelOpenings('Quote Icon')}><span className={`qubely-quote-icon ${quoteIcon}`}></span></div>
+                            <div className="qubely-testimonial-quote qubely-position-bottom" onClick={() => this.handlePanelOpenings('Quote Icon')}><span className={`qubely-quote-icon ${quoteIcon}`}/></div>
                         }
 
                         <div ref="qubelyContextMenu" className={`qubely-context-menu-wraper`} >

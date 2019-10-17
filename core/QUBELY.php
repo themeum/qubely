@@ -306,7 +306,7 @@ class QUBELY
 			'type' => 'string'
 		]);
 
-		// @since 1.1.7
+		// @since 1.2.0
 		register_meta('post', 'qubely_interactions', [
 			'show_in_rest' => true,
 			'single' => true,
@@ -607,7 +607,7 @@ class QUBELY
 	}
 
 	/**
-	 * @since 1.1.7
+	 * @since 1.2.0
 	 * Interaction Add
 	 */
 	public function print_interaction_json_to_header(){

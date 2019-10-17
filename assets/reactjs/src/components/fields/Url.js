@@ -35,7 +35,7 @@ class Url extends Component {
                             onChange={ ( e ) => this.setSettings('url', e.target.value ) }
                         />
                         <Tooltip text={__("Advance Url Settings")}>
-                            <button className={`qubely-button qubely-button-rounded ${ openAdvance ? 'active' : '' }`} onClick={() => this.setState({openAdvance: !openAdvance})}><i className="fas fa-cog"></i></button>
+                            <button className={`qubely-button qubely-button-rounded ${ openAdvance ? 'active' : '' }`} onClick={() => this.setState({openAdvance: !openAdvance})}><i className="fas fa-cog"/></button>
                         </Tooltip>
                     </div>
                     { openAdvance &&

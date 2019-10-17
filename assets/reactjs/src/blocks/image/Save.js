@@ -17,7 +17,7 @@ class Save extends Component {
                         }
                     </Fragment>
                     :
-                    <div className="qubely-image-image qubely-image-placeholder"><i className="far fa-image"></i></div>
+                    <div className="qubely-image-image qubely-image-placeholder"><i className="far fa-image"/></div>
                 }
             </Fragment>
         )

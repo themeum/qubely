@@ -83,7 +83,7 @@ class Edit extends Component {
                             this.setState({ focusedItem: focusedItem > 0 ? focusedItem - 1 : focusedItem })
 
                     }}>
-                    <i class="fas fa-times" />
+                    <i className="fas fa-times" />
                 </span>
             </Tooltip>
         )
@@ -137,7 +137,7 @@ class Edit extends Component {
                     this.setState({ focusedItem: listItems.length })
                     this.updateListItems(listItems.length, 'add')
                 }} className="button is-default qubely-action-button" role="button">
-                    <i class="fas fa-plus" /> {__('Add List Item')}
+                    <i className="fas fa-plus" /> {__('Add List Item')}
                 </button>
         )
 
@@ -203,6 +203,10 @@ class Edit extends Component {
                 animation,
                 //global
                 globalZindex,
+                enablePosition, 
+                selectPosition, 
+                positionXaxis, 
+                positionYaxis,
                 hideTablet,
                 hideMobile,
                 globalCss,
@@ -368,7 +372,7 @@ class Edit extends Component {
                         }]} />
                 </BlockControls>
 
-                {globalSettingsPanel(globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
+                {globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
                 <div className={`qubely-block-${uniqueId}`}>
                     <div className={`qubely-block-advanced-list qubely-alignment-${alignment}`} onContextMenu={event => handleContextMenu(event, this.refs.qubelyContextMenu)}>

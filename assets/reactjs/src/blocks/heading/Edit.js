@@ -1,7 +1,7 @@
 const { __ } = wp.i18n
 const { Fragment, Component } = wp.element;
 const { PanelBody, Toolbar, SelectControl } = wp.components
-const { RichText, InspectorControls, BlockControls } = wp.blockEditor
+const { RichText, InspectorControls, BlockControls } = wp.editor
 const {
     Color,
     Typography,
@@ -74,6 +74,10 @@ class Edit extends Component {
 
                 animation,
                 globalZindex,
+                enablePosition, 
+                selectPosition, 
+                positionXaxis, 
+                positionYaxis,
                 hideTablet,
                 hideMobile,
                 globalCss,
@@ -100,7 +104,7 @@ class Edit extends Component {
             {separatorStyle &&
                 <Fragment>
                     {separators[separatorStyle].type == 'css' &&
-                        <span className={`qubely-separator-type-css qubely-separator-${separatorStyle}`}></span>
+                        <span className={`qubely-separator-type-css qubely-separator-${separatorStyle}`}/>
                     }
                     {separators[separatorStyle].type == 'svg' &&
                         <span className={`qubely-separator-type-svg qubely-separator-${separatorStyle}`}>{separators[separatorStyle].svg}</span>
@@ -205,7 +209,7 @@ class Edit extends Component {
                     </Toolbar>
                 </BlockControls>
 
-                {globalSettingsPanel(globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
+                {globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
                 <div className={`qubely-block-${uniqueId}`}>
                     <div

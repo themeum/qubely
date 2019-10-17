@@ -69,7 +69,7 @@ class Edit extends Component {
             buttonText, buttonIconName, buttonIconPosition, spacing, gutter, fieldErrorMessage,
             formSuccessMessage, formErrorMessage, reCaptcha, reCaptchaSiteKey, reCaptchaSecretKey,
             emailReceiver, emailHeaders, emailFrom, emailSubject, emailBody, layout,
-            animation, globalZindex, hideTablet, hideMobile, globalCss } = attributes;
+            animation, enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss } = attributes;
         if (uniqueId) { CssGenerator(this.props.attributes, 'contactform', uniqueId); }
 
         return (
@@ -366,7 +366,7 @@ class Edit extends Component {
                     </Toolbar>
                 </BlockControls>
 
-                {globalSettingsPanel(globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
+                {globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
                 <div className={`qubely-block-${uniqueId}`}>
                     <div className={`qubely-block-contact-form qubely-layout-${layout}`} onContextMenu={event => handleContextMenu(event, this.refs.qubelyContextMenu)}>

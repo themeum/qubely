@@ -263,7 +263,7 @@ class Typography extends Component {
                                                         <Tooltip text={data.charAt(0).toUpperCase() + data.slice(1)}>
                                                             <button className={(value.transform == data ? 'active' : '') + ' qubely-button'} key={index} onClick={() => this.setSettings('transform', data)}>
                                                                 {data == 'none' &&
-                                                                    <i class="fas fa-ban" />
+                                                                    <i className="fas fa-ban" />
                                                                 }
                                                                 {data == 'capitalize' &&
                                                                     <span>Aa</span>

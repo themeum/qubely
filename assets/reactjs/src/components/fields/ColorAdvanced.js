@@ -54,7 +54,7 @@ class ColorAdvanced extends Component {
                     {(value && (value.openColor && value.type) != '') &&
                         <div className="qubely-ml-10">
                             <Tooltip text={ __( 'Clear' )  }>
-                                <span className="qubely-border-clear" onClick={() => this.setSettings( value.openColor?0:1, 'openColor' ) } role="button"><i className="fas fa-undo"></i></span>
+                                <span className="qubely-border-clear" onClick={() => this.setSettings( value.openColor?0:1, 'openColor' ) } role="button"><i className="fas fa-undo"/></span>
                             </Tooltip>
                         </div>
                     }

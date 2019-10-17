@@ -69,12 +69,12 @@ class Media extends Component {
 															<div className="qubely-media-actions qubely-field-button-list">
 																<Tooltip text={__('Edit')}>
 																	<button className="qubely-button" aria-label={__('Edit')} onClick={open} role="button">
-																		<span aria-label={__('Edit')} className="fas fa-pencil-alt fa-fw"></span>
+																		<span aria-label={__('Edit')} className="fas fa-pencil-alt fa-fw"/>
 																	</button>
 																</Tooltip>
 																<Tooltip text={__('Remove')}>
 																	<button className="qubely-button" aria-label={__('Remove')} onClick={ () => this.removeImage(index) } role="button">
-																		<span aria-label={__('Close')} className="far fa-trash-alt fa-fw"></span>
+																		<span aria-label={__('Close')} className="far fa-trash-alt fa-fw"/>
 																	</button>
 																</Tooltip>		
 															</div>
@@ -93,12 +93,12 @@ class Media extends Component {
 												<div className="qubely-media-actions qubely-field-button-list">
 													<Tooltip text={__('Edit')}>
 														<button className="qubely-button" aria-label={__('Edit')} onClick={open} role="button">
-															<span aria-label={__('Edit')} className="fas fa-pencil-alt fa-fw"></span>
+															<span aria-label={__('Edit')} className="fas fa-pencil-alt fa-fw"/>
 														</button>
 													</Tooltip>
 													<Tooltip text={__('Remove')}>
 														<button className="qubely-button" aria-label={__('Remove')} onClick={ () => this.removeImage(value.id) } role="button">
-															<span aria-label={__('Close')} className="far fa-trash-alt fa-fw"></span>
+															<span aria-label={__('Close')} className="far fa-trash-alt fa-fw"/>
 														</button>
 													</Tooltip>		
 												</div>

@@ -81,6 +81,10 @@ class Edit extends Component {
 
             animation,
             globalZindex,
+            enablePosition, 
+            selectPosition, 
+            positionXaxis, 
+            positionYaxis,
             hideTablet,
             hideMobile,
             globalCss,
@@ -263,7 +267,7 @@ class Edit extends Component {
                     </Toolbar>
                 </BlockControls>
 
-                {globalSettingsPanel(globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
+                {globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
                 <div className={`qubely-block-${uniqueId}`}>
                     <div className={`qubely-block-image qubely-image-layout-${layout}`} onContextMenu={event => handleContextMenu(event, this.refs.qubelyContextMenu)}>
@@ -280,7 +284,7 @@ class Edit extends Component {
                                             }
                                         </Fragment>
                                         :
-                                        <div className="qubely-image-image qubely-image-placeholder"><i className="far fa-image"></i></div>
+                                        <div className="qubely-image-image qubely-image-placeholder"><i className="far fa-image"/></div>
                                     }
 
                                     {layout == 'blurb' &&

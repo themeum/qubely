@@ -25,7 +25,7 @@ class Save extends Component {
 			{ separatorStyle &&
 				<Fragment>
 					{separators[separatorStyle].type == 'css' &&
-						<span className={`qubely-separator-type-css qubely-separator-${separatorStyle}`}></span>
+						<span className={`qubely-separator-type-css qubely-separator-${separatorStyle}`}/>
 					}
 					{separators[separatorStyle].type == 'svg' &&
 						<span className={`qubely-separator-type-svg qubely-separator-${separatorStyle}`}>{separators[separatorStyle].svg}</span>

@@ -108,6 +108,10 @@ class Edit extends Component {
             //animation
             animation,
             globalZindex,
+            enablePosition, 
+            selectPosition, 
+            positionXaxis, 
+            positionYaxis,
             hideTablet,
             hideMobile,
             globalCss,
@@ -353,7 +357,7 @@ class Edit extends Component {
                     </Toolbar>
                 </BlockControls>
 
-                {globalSettingsPanel(globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
+                {globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
                 <div className={`qubely-block-${uniqueId}`}>
                     <div className={`qubely-block-team qubely-team-layout-${layout}`} onContextMenu={event => handleContextMenu(event, this.refs.qubelyContextMenu)}>
@@ -361,7 +365,7 @@ class Edit extends Component {
                             {image.url != undefined ?
                                 <img className="qubely-team-image" src={image.url} srcset={image2x.url != undefined ? image.url + ' 1x, ' + image2x.url + ' 2x' : ''} alt={name} />
                                 :
-                                <div className="qubely-image-placeholder"><i className="far fa-image"></i></div>
+                                <div className="qubely-image-placeholder"><i className="far fa-image"/></div>
                             }
                         </div>
                         <div className="qubely-team-content">
@@ -403,7 +407,7 @@ class Edit extends Component {
                                 {(phone || email || website) &&
                                     <div className="qubely-team-information" onClick={() => this.handlePanelOpenings('Information')}>
                                         {phone &&
-                                            <div class="qubely-team-information-phone">
+                                            <div className={`qubely-team-information-phone`}>
                                                 {useInfoIcon &&
                                                     <i className="qubely-info-icon fas fa-phone" aria-label={__('Phone')} />
                                                 }
@@ -411,17 +415,17 @@ class Edit extends Component {
                                             </div>
                                         }
                                         {email &&
-                                            <div class="qubely-team-information-email">
+                                            <div className={`qubely-team-information-email`}>
                                                 {useInfoIcon &&
-                                                    <i class="qubely-info-icon fas fa-envelope" aria-label={__('Email')} />
+                                                    <i className={`qubely-info-icon fas fa-envelope`} aria-label={__('Email')} />
                                                 }
                                                 <span>{email}</span>
                                             </div>
                                         }
                                         {website &&
-                                            <div class="qubely-team-information-website">
+                                            <div className={`qubely-team-information-website`}>
                                                 {useInfoIcon &&
-                                                    <i class="qubely-info-icon fas fa-globe" aria-label={__('Website')} />
+                                                    <i className={`qubely-info-icon fas fa-globe`} aria-label={__('Website')} />
                                                 }
                                                 <span><a>{website}</a></span>
                                             </div>
