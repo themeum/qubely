@@ -183,6 +183,10 @@ class Edit extends Component {
                 //animation
                 animation,
                 //global
+                enablePosition, 
+                selectPosition, 
+                positionXaxis, 
+                positionYaxis,
                 globalZindex,
                 hideTablet,
                 hideMobile,
@@ -296,7 +300,7 @@ class Edit extends Component {
                     </Toolbar>
                 </BlockControls>
 
-                {globalSettingsPanel(globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
+                {globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
                 <div className={`qubely-block-${uniqueId}`}>
                     <div className={apiKey ? 'qubely-google-map' : 'qubely-gmap-hide'}>

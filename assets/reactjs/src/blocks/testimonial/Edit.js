@@ -73,6 +73,10 @@ class Edit extends Component {
             //animation
             animation,
             globalZindex,
+            enablePosition, 
+            selectPosition, 
+            positionXaxis, 
+            positionYaxis,
             hideTablet,
             hideMobile,
             globalCss,
@@ -458,7 +462,7 @@ class Edit extends Component {
                     />
                 </BlockControls>
 
-                {globalSettingsPanel(globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
+                {globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
                 <div className={`qubely-block-${uniqueId}`}>
                     <div className={`qubely-block-testimonial`} onContextMenu={event => handleContextMenu(event, this.refs.qubelyContextMenu)}>
