@@ -130,11 +130,10 @@ class Edit extends Component {
                                 </Tooltip>
                             ))}
                         </div>
-                        <div class="import-layout-btn-container">
+                        <div className={`import-layout-btn-container`}>
                             <button type="button"
-                                class="components-button is-button is-default is-primary is-large"
-                                onClick={() => this.importLayout()}
-                            >
+                                className={`components-button is-button is-default is-primary is-large`}
+                                onClick={() => this.importLayout()}>
                                 {__('Import Layout')}
                             </button>
                         </div>

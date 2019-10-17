@@ -94,7 +94,7 @@ class Edit extends Component {
                         <Styles value={layout} onChange={val => setAttributes({ layout: val })}
                             options={[
                                 { value: 'fill', svg: icons.videopopup_fill, label: __('Fill') },
-                                { value: 'nofill', svg: icons.videopopup_classic, label: __('Claasic') },
+                                { value: 'nofill', svg: icons.videopopup_classic, label: __('Classic') },
                             ]}
                         />
                         <Alignment label={__('Alignment')} value={alignment} alignmentType="content" onChange={val => setAttributes({ alignment: val })} disableJustify />
@@ -247,9 +247,7 @@ class Edit extends Component {
                                 {icon &&
                                     <span className="qubely-btn-icon-wrapper">
                                         <i className={`qubely-btn-icon ${icon}`}>
-                                            {(iconBgColor && isRipple) && <span
-                                                className="qubely-ripple"
-                                            ></span>}
+                                            {(iconBgColor && isRipple) && <span className="qubely-ripple"/>}
                                         </i>
                                     </span>
                                 }

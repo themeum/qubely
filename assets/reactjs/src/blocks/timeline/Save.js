@@ -26,7 +26,7 @@ class Save extends Component {
 						<RichText.Content tagName={titleTagName} className="qubely-timeline-title" value={title} />
 						<RichText.Content tagName='div' className="qubely-timeline-description" value={description} />
 					</div>
-					<span className="qubely-timeline-indicator"></span>
+					<span className="qubely-timeline-indicator" />
 				</div>
 				{enableDateTime == 1 &&
 					<div className="qubely-timeline-date-container">

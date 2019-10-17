@@ -1,7 +1,7 @@
 const { __ } = wp.i18n
 const { Fragment, Component } = wp.element;
 const { PanelBody, Toolbar, SelectControl } = wp.components
-const { RichText, InspectorControls, BlockControls } = wp.blockEditor
+const { RichText, InspectorControls, BlockControls } = wp.editor
 const {
     Color,
     Typography,
@@ -100,7 +100,7 @@ class Edit extends Component {
             {separatorStyle &&
                 <Fragment>
                     {separators[separatorStyle].type == 'css' &&
-                        <span className={`qubely-separator-type-css qubely-separator-${separatorStyle}`}></span>
+                        <span className={`qubely-separator-type-css qubely-separator-${separatorStyle}`}/>
                     }
                     {separators[separatorStyle].type == 'svg' &&
                         <span className={`qubely-separator-type-svg qubely-separator-${separatorStyle}`}>{separators[separatorStyle].svg}</span>

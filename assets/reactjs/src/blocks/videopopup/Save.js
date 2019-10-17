@@ -13,9 +13,9 @@ class Save extends Component {
 							{ prefix &&  <span className="qubely-video-popup-prefix"> {prefix} </span> }
 							{ icon && (
                                 <i className={`qubely-btn-icon ${icon}`}>
-                                    { ( iconBgColor && isRipple) && <span
-                                        className="qubely-ripple"
-                                    ></span> }
+                                    { ( iconBgColor && isRipple) && 
+										<span className="qubely-ripple" /> 
+									}
                                 </i>
                             ) }
 							{ postfix &&  <span className="qubely-video-popup-postfix">{postfix}</span> }

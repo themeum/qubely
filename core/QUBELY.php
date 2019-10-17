@@ -40,6 +40,7 @@ class QUBELY
 		$this->add_global_settings_post_meta();
 
 		// Common style 
+
 		$this->enqueue_block_css();
 
 		add_action('rest_api_init', array($this, 'register_api_hook'));
@@ -305,7 +306,7 @@ class QUBELY
 			'type' => 'string'
 		]);
 
-		// @since 1.1.7
+		// @since 1.2.0
 		register_meta('post', 'qubely_interactions', [
 			'show_in_rest' => true,
 			'single' => true,
@@ -534,15 +535,18 @@ class QUBELY
 	 */
 	public function enqueue_block_css()
 	{
-		if(!isset($_GET['preview'])){
-			$option_data = get_option('qubely_options');
-			$css_save_as = $option_data['css_save_as'];
+
+		// if(!isset($_GET['preview'])){
+	
+			// $option_data = get_option('qubely_options');
+			// $css_save_as = $option_data['css_save_as'];
+	
 			// if ($css_save_as === 'filesystem') {
 			// 	add_action('wp_enqueue_scripts', array($this, 'enqueue_block_css_file'));
 			// } else {
 				add_action('wp_head', array($this, 'add_block_inline_css'), 100);
 			//}
-		}
+		// }
 	}
 
 	/**
@@ -577,6 +581,7 @@ class QUBELY
 	public function add_block_inline_css()
 	{
 		$post_id = $this->is_qubely_single();
+		
 		if ($post_id) {
 			$upload_dir     = wp_get_upload_dir();
 			$upload_css_dir = trailingslashit($upload_dir['basedir']);
@@ -602,7 +607,7 @@ class QUBELY
 	}
 
 	/**
-	 * @since 1.1.7
+	 * @since 1.2.0
 	 * Interaction Add
 	 */
 	public function print_interaction_json_to_header(){

@@ -19,7 +19,7 @@ class Save extends Component {
                             {avatar.url != undefined ?
                                 <img className="qubely-testimonial-avatar" src={avatar.url} srcset={avatar2x.url != undefined ? avatar.url + ' 1x, ' + avatar2x.url + ' 2x' : '' } alt={avatarAlt} />
                                 :
-                                <div className="qubely-image-placeholder qubely-testimonial-avatar"><i className="far fa-user"></i></div>
+                                <div className="qubely-image-placeholder qubely-testimonial-avatar"><i className="far fa-user"/></div>
                             }
                         </Fragment>
                     }
@@ -34,7 +34,7 @@ class Save extends Component {
                             {avatar.url != undefined ?
                                 <img className="qubely-testimonial-avatar" src={avatar.url} srcset={avatar2x.url != undefined ? avatar.url + ' 1x, ' + avatar2x.url + ' 2x' : '' } alt={avatarAlt} />
                                 :
-                                <div className="qubely-image-placeholder qubely-testimonial-avatar"><i className="far fa-user"></i></div>
+                                <div className="qubely-image-placeholder qubely-testimonial-avatar"><i className="far fa-user"/></div>
                             }
                         </Fragment>
                     }
@@ -54,7 +54,7 @@ class Save extends Component {
 
                     {(quoteIcon && (layout == 1)) &&
                         <div className="qubely-testimonial-quote">
-                            <span className={`qubely-quote-icon ${quoteIcon}`}></span>
+                            <span className={`qubely-quote-icon ${quoteIcon}`}/>
                         </div>
                     }
 
@@ -70,7 +70,7 @@ class Save extends Component {
 
                     {(quoteIcon && (layout == 2)) &&
                         <div className="qubely-testimonial-quote qubely-position-bottom">
-                            <span className={`qubely-quote-icon ${quoteIcon}`}></span>
+                            <span className={`qubely-quote-icon ${quoteIcon}`}/>
                         </div>
                     }
 

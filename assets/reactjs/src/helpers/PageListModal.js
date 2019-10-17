@@ -235,7 +235,7 @@ class PageListModal extends Component {
         let { itemType } = this.state;
         const { insertBlocks, removeBlock, rowClientId } = this.props;
 
-        if (typeof wp.QUBELY_PRO_VERSION === 'undefined' && isPro == true) {
+        if (!qubely_admin.pro_enable && isPro == true) {
             //
         } else {
             this.setState({ spinner: itemData.ID })
@@ -546,7 +546,7 @@ class PageListModal extends Component {
 
     render() {
         let { pageCategories, currentPageData } = this.getCurrentPageData();
-        let types = typeof wp.QUBELY_PRO_VERSION === 'undefined' ? 'inactive' : 'active';
+        let types = qubely_admin.pro_enable ? 'active' : 'inactive';
         let { itemType, blockData, layer, selectedBlockCategory, selectedLayoutCategory } = this.state
 
         return (
@@ -554,7 +554,7 @@ class PageListModal extends Component {
 
                 <div className="qubely-builder-modal-header">
                     <div className="template-search-box">
-                        <i className="fas fa-search"></i>
+                        <i className="fas fa-search"/>
                         <input type="search" onChange={this._OnSearchTemplate.bind(this)} value={this.state.searchContext} placeholder={__('Type to search')} className="form-control" />
                     </div>
 
@@ -665,6 +665,7 @@ class PageListModal extends Component {
                                             <MultipleItem
                                                 key={index}
                                                 data={data}
+                                                types={types}
                                                 totalLayouts={this.state.layoutCategoryItems[`item${data.ID}`]}
                                                 onClickSingleEntity={this._onClickSingleEntity.bind(this)}
                                                 backgroundImage={this._backgroundImage}

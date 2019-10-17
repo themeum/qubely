@@ -376,7 +376,7 @@ class Edit extends Component {
                         </Tabs>
                     </PanelBody>
 
-                    {buttonSettings(this.props.attributes, device, setAttributes, (key, value) => { this.setState({ [key]: value }) })}
+                    {buttonSettings(this.props.attributes, device, (key, value) => { setAttributes({ [key]: value }) }, (key, value) => { this.setState({ [key]: value }) })}
                     {animationSettings(uniqueId, animation, setAttributes)}
                     {interactionSettings(uniqueId, interaction, setAttributes)}
                 </InspectorControls>
@@ -405,7 +405,7 @@ class Edit extends Component {
                                         {image.url != undefined ?
                                             <img className="qubely-info-box-image" src={image.url} srcset={image2x.url != undefined ? image.url + ' 1x, ' + image2x.url + ' 2x' : ''} alt={imgAlt && imgAlt} />
                                             :
-                                            <div className="qubely-info-box-image qubely-image-placeholder"><i className="far fa-image"></i></div>
+                                            <div className="qubely-info-box-image qubely-image-placeholder"><i className="far fa-image"/></div>
                                         }
                                     </Fragment>
                                 }

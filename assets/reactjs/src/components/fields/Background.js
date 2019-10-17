@@ -74,7 +74,7 @@ class Background extends Component {
                     {(value && (value.openBg == 1 && value.bgType != 'color')) &&
                         <div className="qubely-ml-10">
                             <Tooltip text={ __( 'Clear' )  }>
-                                <span className="qubely-border-clear" onClick={() => this.setSettings( 'color', 'bgType' ) } role="button"><i className="fas fa-undo"></i></span>
+                                <span className="qubely-border-clear" onClick={() => this.setSettings( 'color', 'bgType' ) } role="button"><i className="fas fa-undo"/></span>
                             </Tooltip>
                         </div>
                     }
@@ -98,7 +98,7 @@ class Background extends Component {
                                                         <Tooltip text={data[1]}>
                                                             <button className={(value.bgimgParallax == data[0] ? 'active' : '') + ' qubely-button'} key={index} onClick={() => this.setSettings(  data[0], 'bgimgParallax' )}>
                                                                 {data[0] == 'none' ?
-                                                                    <i class="fas fa-ban" />
+                                                                    <i className="fas fa-ban" />
                                                                     :
                                                                     data[1]
                                                                 }

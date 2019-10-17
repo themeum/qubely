@@ -23,7 +23,7 @@ class Save extends Component {
 			{separatorStyle &&
 				<Fragment>
 					{separators[separatorStyle].type == 'css' &&
-						<span className={`qubely-separator-type-css qubely-separator-${separatorStyle}`}></span>
+						<span className={`qubely-separator-type-css qubely-separator-${separatorStyle}`}/>
 					}
 					{separators[separatorStyle].type == 'svg' &&
 						<span className={`qubely-separator-type-svg qubely-separator-${separatorStyle}`}>{separators[separatorStyle].svg}</span>
@@ -49,7 +49,7 @@ class Save extends Component {
 									{image.url != undefined ?
 										<img className="qubely-info-box-image" src={image.url} srcset={image2x.url != undefined ? image.url + ' 1x, ' + image2x.url + ' 2x' : '' } alt={imgAlt && imgAlt} />
 										:
-										<div className="qubely-info-box-image qubely-image-placeholder"><i className="far fa-image"></i></div>
+										<div className="qubely-info-box-image qubely-image-placeholder"><i className="far fa-image"/></div>
 									}
 								</Fragment>
 							}

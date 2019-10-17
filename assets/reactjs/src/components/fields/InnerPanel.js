@@ -15,7 +15,7 @@ class InnerPanel extends Component {
                 { this.props.title &&
                     <div className="qubely-field-inner-panel-title" onClick={() => this.setState({ show: !this.state.show })} role="button">
                         <span>{this.props.title}</span>
-                        <i className={`fas fa-chevron-${ this.state.show ? 'down' : 'right' }`}></i>
+                        <i className={`fas fa-chevron-${ this.state.show ? 'down' : 'right' }`}/>
                     </div>
                 }
                 {this.state.show &&

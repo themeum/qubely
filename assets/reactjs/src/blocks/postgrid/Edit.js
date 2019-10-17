@@ -87,9 +87,9 @@ class Edit extends Component {
 				{
 					(showAuthor || showDates || showComment) &&
 					<div className="qubely-postgrid-meta">
-						{showAuthor && <span><i className="fas fa-user"></i> {__('By')} <a >{post.qubely_author.display_name}</a></span>}
-						{showDates && <span><i className="far fa-calendar-alt"></i> {dateI18n(__experimentalGetSettings().formats.date, post.date_gmt)}</span>}
-						{showComment && <span><i className="fas fa-comment"></i> {(post.qubely_comment ? post.qubely_comment : '0')}</span>}
+						{showAuthor && <span><i className="fas fa-user"/> {__('By')} <a >{post.qubely_author.display_name}</a></span>}
+						{showDates && <span><i className="far fa-calendar-alt"/> {dateI18n(__experimentalGetSettings().formats.date, post.date_gmt)}</span>}
+						{showComment && <span><i className="fas fa-comment"/> {(post.qubely_comment ? post.qubely_comment : '0')}</span>}
 					</div>
 				}
 				{showTitle && (titlePosition == false) && title}
