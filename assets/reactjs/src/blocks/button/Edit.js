@@ -24,7 +24,7 @@ class Edit extends Component {
     }
 
     render() {
-        const { uniqueId, parentClientId, buttonGroup, fillType, buttonSize, buttonWidthType, buttonWidth, buttonPadding, typography, textField, url, enableAlignment, alignment, buttonBorderRadius, iconName, iconPosition, iconSize, iconGap, buttonBorder, borderHoverColor, buttonColor, buttonColor2, buttonHoverColor, buttonHoverColor2, bgColor, bgHoverColor, buttonShadow, buttonHoverShadow, animation, interaction, globalZindex, hideTablet, hideMobile, globalCss } = this.props.attributes
+        const { uniqueId, parentClientId, buttonGroup, fillType, buttonSize, buttonWidthType, buttonWidth, buttonPadding, typography, textField, url, enableAlignment, alignment, buttonBorderRadius, iconName, iconPosition, iconSize, iconGap, buttonBorder, borderHoverColor, buttonColor, buttonColor2, buttonHoverColor, buttonHoverColor2, bgColor, bgHoverColor, buttonShadow, buttonHoverShadow, animation, interaction, enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss } = this.props.attributes
         const { name, clientId, attributes, removeBlock, updateBlockAttributes, buttonGroupAttributes, setAttributes, isSelected } = this.props
         const { device } = this.state
 
@@ -185,7 +185,7 @@ class Edit extends Component {
                     </Toolbar>
                 </BlockControls>
 
-                {globalSettingsPanel(globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
+                {globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
 
                 <div className={`qubely-block-${uniqueId}`}>
