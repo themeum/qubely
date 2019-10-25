@@ -52,7 +52,7 @@ class QubelyIconListEdit extends Component {
                             this.setState({ focusedItem: focusedItem > 0 ? focusedItem - 1 : focusedItem })
 
                     }}>
-                    <i class="fas fa-times" />
+                    <i className="fas fa-times" />
                 </span>
             </Tooltip>
         )
@@ -132,7 +132,7 @@ class QubelyIconListEdit extends Component {
                         this.setState({ currentListItemIndex: listItems.length })
                         this.updateListItems(listItems.length, 'add')
                     }} className="button is-default qubely-action-button" role="button">
-                        <i class="fas fa-plus" />{buttonText || __('Add New')}
+                        <i className="fas fa-plus" />{buttonText || __('Add New')}
                     </button>
 
                 }

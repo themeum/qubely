@@ -1,8 +1,8 @@
 const { __ } = wp.i18n;
 const { Component, Fragment } = wp.element;
 const { PanelBody, Toolbar } = wp.components
-const { InspectorControls, BlockControls, InnerBlocks } = wp.editor
-const { Color, Padding, BoxShadow, Tabs, Tab, Border, BorderRadius, Background, gloalSettings: { globalSettingsPanel, animationSettings }, Inline: { InlineToolbar }, CssGenerator: { CssGenerator } } = wp.qubelyComponents
+const { InspectorControls, BlockControls, InnerBlocks } = wp.blockEditor
+const { Color, Padding, BoxShadow, Tabs, Tab, Border, BorderRadius, Background, gloalSettings: { globalSettingsPanel, animationSettings, interactionSettings }, Inline: { InlineToolbar }, CssGenerator: { CssGenerator } } = wp.qubelyComponents
 
 class Edit extends Component {
 	constructor() {
@@ -21,7 +21,10 @@ class Edit extends Component {
 	}
 
 	render() {
-		const { setAttributes,
+		const { 
+			name,
+			setAttributes,
+			isSelected,
 			attributes: {
 				uniqueId,
 				bgColor,
@@ -35,10 +38,15 @@ class Edit extends Component {
 				
 				//animation
 				animation,
-				globalZindex,
+                globalZindex,
+                enablePosition, 
+                selectPosition, 
+                positionXaxis, 
+                positionYaxis,
 				hideTablet,
 				hideMobile,
-				globalCss
+				globalCss,
+				interaction
 			}
 		} = this.props
 		const { device } = this.state
@@ -75,7 +83,11 @@ class Edit extends Component {
 							</Tab>
 						</Tabs>
 					</PanelBody>
+
 					{animationSettings(uniqueId, animation, setAttributes)}
+
+					{interactionSettings(uniqueId, interaction, setAttributes)}
+
 				</InspectorControls>
 
 				<BlockControls>
@@ -88,7 +100,7 @@ class Edit extends Component {
 					</Toolbar>
 				</BlockControls>
 
-				{globalSettingsPanel(globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
+				{globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
 				<div className={`qubely-block-${uniqueId}`}>
 					<div className="qubely-block-wrapper-block">

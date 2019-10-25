@@ -1,7 +1,7 @@
 const { Fragment, Component } = wp.element;
-const { RichText } = wp.editor
+const { RichText } = wp.blockEditor
 import svg from '../heading/separators';
-const { HelperFunction: { animationAttr } } = wp.qubelyComponents
+const { HelperFunction: { animationAttr, IsInteraction } } = wp.qubelyComponents
 
 class Save extends Component {
 
@@ -20,7 +20,7 @@ class Save extends Component {
         return (
             <Fragment>
                 {separators[separatorStyle].type == 'css' &&
-                    <span className={`qubely-separator-type-css qubely-separator-${separatorStyle}`}></span>
+                    <span className={`qubely-separator-type-css qubely-separator-${separatorStyle}`}/>
                 }
                 {separators[separatorStyle].type == 'svg' &&
                     <span className={`qubely-separator-type-svg qubely-separator-${separatorStyle}`}>{separators[separatorStyle].svg}</span>
@@ -44,12 +44,11 @@ class Save extends Component {
 
 
     render() {
-        const { uniqueId, content, selector, separatorStyle, separatorPosition, subHeadingPosition, animation } = this.props.attributes
-
-
+        const { uniqueId, content, selector, separatorStyle, separatorPosition, subHeadingPosition, animation, interaction } = this.props.attributes
+        const interactionClass = IsInteraction(interaction) ? 'qubley-block-interaction' : '';
         return (
             <div className={`qubely-block-${uniqueId}`} {...animationAttr(animation)} >
-                <div className={`qubely-block-heading ${separatorStyle ? 'qubely-has-separator qubely-separator-position-' + separatorPosition : ''}`}>
+                <div className={`qubely-block-heading ${interactionClass} ${separatorStyle ? 'qubely-has-separator qubely-separator-position-' + separatorPosition : ''}`}>
                     {subHeadingPosition == 'before_title' && this.rendeSubHeading()}
                     <div className="qubely-heading-container">
                         {(separatorStyle && (separatorPosition == 'left' || separatorPosition == 'top' || separatorPosition == 'leftright')) && <div className="qubely-separator qubely-separator-before">{this.renderSeparators()}</div>}

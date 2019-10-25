@@ -1,5 +1,5 @@
 const { __ } = wp.i18n;
-const { InspectorControls, BlockControls } = wp.editor
+const { InspectorControls, BlockControls } = wp.blockEditor
 const { Component, Fragment } = wp.element;
 const { PanelBody, TextControl, TextareaControl, Toolbar } = wp.components;
 const {
@@ -69,7 +69,7 @@ class Edit extends Component {
             buttonText, buttonIconName, buttonIconPosition, spacing, gutter, fieldErrorMessage,
             formSuccessMessage, formErrorMessage, reCaptcha, reCaptchaSiteKey, reCaptchaSecretKey,
             emailReceiver, emailHeaders, emailFrom, emailSubject, emailBody, layout,
-            animation, globalZindex, hideTablet, hideMobile, globalCss } = attributes;
+            animation, enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss } = attributes;
         if (uniqueId) { CssGenerator(this.props.attributes, 'contactform', uniqueId); }
 
         return (
@@ -353,7 +353,7 @@ class Edit extends Component {
                             </Tab>
                         </Tabs>
                     </PanelBody>
-                    {buttonSettings(this.props.attributes, device, setAttributes, (key, value) => { this.setState({ [key]: value }) })}
+                    {buttonSettings(this.props.attributes, device, (key, value) => { setAttributes({ [key]: value }) }, (key, value) => { this.setState({ [key]: value }) })}
                     {animationSettings(uniqueId, animation, setAttributes)}
                 </InspectorControls>
 
@@ -366,7 +366,7 @@ class Edit extends Component {
                     </Toolbar>
                 </BlockControls>
 
-                {globalSettingsPanel(globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
+                {globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
                 <div className={`qubely-block-${uniqueId}`}>
                     <div className={`qubely-block-contact-form qubely-layout-${layout}`} onContextMenu={event => handleContextMenu(event, this.refs.qubelyContextMenu)}>

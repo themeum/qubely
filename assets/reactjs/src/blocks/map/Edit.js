@@ -1,5 +1,5 @@
 const { __ } = wp.i18n;
-const { InspectorControls, BlockControls } = wp.editor
+const { InspectorControls, BlockControls } = wp.blockEditor
 const { Component, Fragment } = wp.element;
 const { PanelBody, ToggleControl, TextControl, RangeControl, Toolbar } = wp.components;
 const { Media, Separator, gloalSettings: { globalSettingsPanel, animationSettings }, Inline: { InlineToolbar }, CssGenerator: { CssGenerator } } = wp.qubelyComponents
@@ -183,6 +183,10 @@ class Edit extends Component {
                 //animation
                 animation,
                 //global
+                enablePosition, 
+                selectPosition, 
+                positionXaxis, 
+                positionYaxis,
                 globalZindex,
                 hideTablet,
                 hideMobile,
@@ -296,7 +300,7 @@ class Edit extends Component {
                     </Toolbar>
                 </BlockControls>
 
-                {globalSettingsPanel(globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
+                {globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
                 <div className={`qubely-block-${uniqueId}`}>
                     <div className={apiKey ? 'qubely-google-map' : 'qubely-gmap-hide'}>

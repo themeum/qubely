@@ -1,7 +1,7 @@
 const { __ } = wp.i18n;
 const { Component, Fragment } = wp.element;
 const { PanelBody, Toolbar } = wp.components
-const { InspectorControls, BlockControls } = wp.editor
+const { InspectorControls, BlockControls } = wp.blockEditor
 const {
 	Color,
 	IconList,
@@ -16,7 +16,7 @@ const {
 	Tab,
 	Border,
 	BorderRadius,
-	gloalSettings: { globalSettingsPanel, animationSettings },
+	gloalSettings: { globalSettingsPanel, animationSettings, interactionSettings },
 	Inline: { InlineToolbar },
 	CssGenerator: { CssGenerator },
 	ContextMenu: { ContextMenu, handleContextMenu },
@@ -59,6 +59,7 @@ class Edit extends Component {
 	render() {
 		const {
 			clientId,
+			isSelected,
 			attributes,
 			setAttributes,
 			attributes: {
@@ -82,11 +83,16 @@ class Edit extends Component {
 				iconHoverShadow,
 				iconStyle,
 
-				animation,
+                animation,
+                enablePosition, 
+                selectPosition, 
+                positionXaxis, 
+                positionYaxis,
 				globalZindex,
 				hideTablet,
 				hideMobile,
-				globalCss }
+				globalCss,
+				interaction }
 		} = this.props
 
 		if (uniqueId) { CssGenerator(this.props.attributes, 'icon', uniqueId); }
@@ -237,7 +243,11 @@ class Edit extends Component {
 							</Tabs>
 						</PanelBody>
 					}
+
 					{animationSettings(uniqueId, animation, setAttributes)}
+
+					{interactionSettings(uniqueId, interaction, setAttributes)}
+
 				</InspectorControls>
 
 				<BlockControls>
@@ -250,7 +260,7 @@ class Edit extends Component {
 					</Toolbar>
 				</BlockControls>
 
-				{globalSettingsPanel(globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
+				{globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
 				<div className={`qubely-block-${uniqueId}`}>
 					<div className="qubely-block-icon-wrapper" onContextMenu={event => handleContextMenu(event, this.refs.qubelyContextMenu)}>

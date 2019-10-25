@@ -12,7 +12,8 @@ const {
     RadioAdvanced,
     gloalSettings: {
         globalSettingsPanel,
-        animationSettings
+        animationSettings,
+        interactionSettings
     },
     Inline: {
         InlineToolbar,
@@ -45,6 +46,7 @@ class Edit extends Component {
         const {
             name,
             clientId,
+            isSelected,
             attributes,
             setAttributes,
             attributes: {
@@ -72,9 +74,14 @@ class Edit extends Component {
 
                 animation,
                 globalZindex,
+                enablePosition, 
+                selectPosition, 
+                positionXaxis, 
+                positionYaxis,
                 hideTablet,
                 hideMobile,
-                globalCss
+                globalCss,
+                interaction
             }
         } = this.props
 
@@ -97,7 +104,7 @@ class Edit extends Component {
             {separatorStyle &&
                 <Fragment>
                     {separators[separatorStyle].type == 'css' &&
-                        <span className={`qubely-separator-type-css qubely-separator-${separatorStyle}`}></span>
+                        <span className={`qubely-separator-type-css qubely-separator-${separatorStyle}`}/>
                     }
                     {separators[separatorStyle].type == 'svg' &&
                         <span className={`qubely-separator-type-svg qubely-separator-${separatorStyle}`}>{separators[separatorStyle].svg}</span>
@@ -175,7 +182,11 @@ class Edit extends Component {
                             </Fragment>
                         }
                     </PanelBody>
+
                     {animationSettings(uniqueId, animation, setAttributes)}
+
+                    {interactionSettings(uniqueId, interaction, setAttributes)}
+
                 </InspectorControls>
 
                 <BlockControls>
@@ -198,7 +209,7 @@ class Edit extends Component {
                     </Toolbar>
                 </BlockControls>
 
-                {globalSettingsPanel(globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
+                {globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
                 <div className={`qubely-block-${uniqueId}`}>
                     <div

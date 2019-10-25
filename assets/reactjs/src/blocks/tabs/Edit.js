@@ -3,8 +3,8 @@ const { Tooltip, PanelBody, Toolbar } = wp.components;
 const { compose } = wp.compose
 const { withSelect, withDispatch } = wp.data
 const { Component, Fragment } = wp.element;
-const { InnerBlocks, RichText, InspectorControls, BlockControls } = wp.editor
-const { Color, IconList, Select, Styles, Typography, Range, RadioAdvanced, gloalSettings: { globalSettingsPanel, animationSettings }, Inline: { InlineToolbar }, BoxShadow, Alignment, Tabs, Tab, Separator, Border, Padding, BorderRadius, CssGenerator: { CssGenerator } } = wp.qubelyComponents
+const { InnerBlocks, RichText, InspectorControls, BlockControls } = wp.blockEditor
+const { Color, IconList, Select, Styles, Typography, Range, RadioAdvanced, gloalSettings: { globalSettingsPanel, animationSettings, interactionSettings }, Inline: { InlineToolbar }, BoxShadow, Alignment, Tabs, Tab, Separator, Border, Padding, BorderRadius, CssGenerator: { CssGenerator } } = wp.qubelyComponents
 import icons from '../../helpers/icons';
 
 class Edit extends Component {
@@ -58,7 +58,7 @@ class Edit extends Component {
 		const { showIconPicker } = this.state
 		return tabTitles.map((title, index) =>
 			<span className={`qubely-tab-item ${(this.state.activeTab == index + 1) ? 'qubely-active' : ''}`}>
-				<span class={`qubely-tab-title ${title.iconName ? 'qubely-has-icon-' + iconPosition : ''}`} onClick={() => {
+				<span className={`qubely-tab-title ${title.iconName ? 'qubely-has-icon-' + iconPosition : ''}`} onClick={() => {
 					let activeTab = $(`#block-${block.innerBlocks[index].clientId}`, currentTabBlock)
 					$('.qubely-tab-content.qubely-active', currentTabBlock).removeClass('qubely-active')
 					activeTab.addClass("qubely-active")
@@ -78,7 +78,7 @@ class Edit extends Component {
 				</span>
 				<Tooltip text={__('Delete this tab')}>
 					<span className="qubely-action-tab-remove" onClick={() => this.deleteTab(index)} role="button">
-						<i class="fas fa-times" />
+						<i className="fas fa-times" />
 					</span>
 				</Tooltip>
 			</span>
@@ -155,13 +155,17 @@ class Edit extends Component {
 			//animation
 			animation,
 			//global
-			globalZindex,
+            globalZindex,
+            enablePosition, 
+            selectPosition, 
+            positionXaxis, 
+            positionYaxis,
 			hideTablet,
 			hideMobile,
-			globalCss
-
+			globalCss,
+			interaction
 		} = this.props.attributes
-		const { setAttributes } = this.props
+		const { name, setAttributes, isSelected } = this.props
 		const { activeTab, device } = this.state
 		if (uniqueId) { CssGenerator(this.props.attributes, 'tabs', uniqueId); }
 		let iterator = [], index = 0
@@ -315,6 +319,8 @@ class Edit extends Component {
 					
 					{animationSettings(uniqueId, animation, setAttributes)}
 
+					{interactionSettings(uniqueId, interaction, setAttributes)}
+
 				</InspectorControls>
 
 				<BlockControls>
@@ -327,7 +333,7 @@ class Edit extends Component {
 					</Toolbar>
 				</BlockControls>
 
-                {globalSettingsPanel(globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
+                {globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
 				<div className={`qubely-block-${uniqueId}`}>
 					<div className={`qubely-block-tab qubely-tab-style-${tabStyle}`}>
@@ -341,7 +347,7 @@ class Edit extends Component {
 										tabTitles: this.newTitles()
 									})
 								}} role="button" areaLabel={__('Add new tab')}>
-									<i class="fas fa-plus-circle" />
+									<i className="fas fa-plus-circle" />
 								</span>
 							</Tooltip>
 						</div>
@@ -362,13 +368,13 @@ class Edit extends Component {
 export default compose([
 	withSelect((select, ownProps) => {
 		const { clientId } = ownProps
-		const { getBlock } = select('core/editor');
+		const { getBlock } = select('core/block-editor');
 		return {
 			block: getBlock(clientId)
 		};
 	}),
 	withDispatch((dispatch) => {
-		const { insertBlock, removeBlock, updateBlockAttributes } = dispatch('core/editor');
+		const { insertBlock, removeBlock, updateBlockAttributes } = dispatch('core/block-editor');
 		return {
 			insertBlock,
 			removeBlock,

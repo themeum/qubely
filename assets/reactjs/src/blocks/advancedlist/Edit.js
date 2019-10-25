@@ -1,8 +1,8 @@
 const { __ } = wp.i18n;
-const { RichText, InspectorControls, BlockControls } = wp.editor
+const { RichText, InspectorControls, BlockControls } = wp.blockEditor
 const { Component, Fragment } = wp.element;
 const { PanelBody, Toolbar, Tooltip } = wp.components;
-const { Typography, Alignment, ContextMenu: { ContextMenu, handleContextMenu }, gloalSettings: { globalSettingsPanel, animationSettings }, Styles, Range, Tabs, Tab, Border, Inline: { InlineToolbar }, RadioAdvanced, Color, BoxShadow, Toggle, Separator, IconSelector, BorderRadius, Padding, CssGenerator: { CssGenerator } } = wp.qubelyComponents
+const { Typography, Alignment, ContextMenu: { ContextMenu, handleContextMenu }, gloalSettings: { globalSettingsPanel, animationSettings, interactionSettings }, Styles, Range, Tabs, Tab, Border, Inline: { InlineToolbar }, RadioAdvanced, Color, BoxShadow, Toggle, Separator, IconSelector, BorderRadius, Padding, CssGenerator: { CssGenerator } } = wp.qubelyComponents
 import icons from '../../helpers/icons'
 
 class Edit extends Component {
@@ -83,7 +83,7 @@ class Edit extends Component {
                             this.setState({ focusedItem: focusedItem > 0 ? focusedItem - 1 : focusedItem })
 
                     }}>
-                    <i class="fas fa-times" />
+                    <i className="fas fa-times" />
                 </span>
             </Tooltip>
         )
@@ -137,7 +137,7 @@ class Edit extends Component {
                     this.setState({ focusedItem: listItems.length })
                     this.updateListItems(listItems.length, 'add')
                 }} className="button is-default qubely-action-button" role="button">
-                    <i class="fas fa-plus" /> {__('Add List Item')}
+                    <i className="fas fa-plus" /> {__('Add List Item')}
                 </button>
         )
 
@@ -165,6 +165,7 @@ class Edit extends Component {
         const {
             name,
             clientId,
+            isSelected,
             attributes,
             setAttributes,
             attributes: {
@@ -202,9 +203,14 @@ class Edit extends Component {
                 animation,
                 //global
                 globalZindex,
+                enablePosition, 
+                selectPosition, 
+                positionXaxis, 
+                positionYaxis,
                 hideTablet,
                 hideMobile,
                 globalCss,
+                interaction
             }, } = this.props
         const { device } = this.state
 
@@ -338,7 +344,11 @@ class Edit extends Component {
                             </Tab>
                         </Tabs>
                     </PanelBody>
+                    
                     {animationSettings(uniqueId, animation, setAttributes)}
+
+                    {interactionSettings(uniqueId, interaction, setAttributes)}
+
                 </InspectorControls>
 
                 <BlockControls>
@@ -362,7 +372,7 @@ class Edit extends Component {
                         }]} />
                 </BlockControls>
 
-                {globalSettingsPanel(globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
+                {globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
                 <div className={`qubely-block-${uniqueId}`}>
                     <div className={`qubely-block-advanced-list qubely-alignment-${alignment}`} onContextMenu={event => handleContextMenu(event, this.refs.qubelyContextMenu)}>

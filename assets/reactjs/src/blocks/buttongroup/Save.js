@@ -1,11 +1,14 @@
 const { Component } = wp.element;
-const { InnerBlocks } = wp.editor
+const { InnerBlocks } = wp.blockEditor
+const { HelperFunction: { IsInteraction } } = wp.qubelyComponents
+
 class Save extends Component {
 	render() {
-		const { uniqueId } = this.props.attributes
+		const { uniqueId, interaction } = this.props.attributes
+		const interactionClass = IsInteraction(interaction) ? 'qubley-block-interaction' : '';
 		return (
 			<div className={`qubely-block-${uniqueId}`} >
-				<div className={`qubely-block-button-group`}>
+				<div className={`qubely-block-button-group ${interactionClass}`}>
 					<InnerBlocks.Content />
 				</div>
 			</div>

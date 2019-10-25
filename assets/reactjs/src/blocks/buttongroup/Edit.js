@@ -3,8 +3,8 @@ const { Fragment, Component } = wp.element;
 const { PanelBody, Tooltip } = wp.components
 const { compose } = wp.compose
 const { withSelect, withDispatch } = wp.data
-const { InnerBlocks, InspectorControls } = wp.editor
-const { Range, Alignment, gloalSettings: { globalSettingsPanel, animationSettings }, CssGenerator: { CssGenerator } } = wp.qubelyComponents
+const { InnerBlocks, InspectorControls } = wp.blockEditor
+const { Range, Alignment, gloalSettings: { globalSettingsPanel, animationSettings, interactionSettings }, CssGenerator: { CssGenerator } } = wp.qubelyComponents
 
 class Edit extends Component {
     constructor(props) {
@@ -31,11 +31,15 @@ class Edit extends Component {
                 buttons,
                 spacing,
                 padding,
-                
+                interaction,
                 //animation
                 animation,
                 //global
                 globalZindex,
+                enablePosition, 
+                selectPosition, 
+                positionXaxis, 
+                positionYaxis,
                 hideTablet,
                 hideMobile,
                 globalCss
@@ -43,6 +47,8 @@ class Edit extends Component {
             setAttributes,
             block,
             clientId,
+            isSelected,
+            name,
             updateBlockAttributes } = this.props
         if (uniqueId) { CssGenerator(this.props.attributes, 'buttongroup', uniqueId); }
         const { device } = this.state
@@ -73,10 +79,14 @@ class Edit extends Component {
                             device={device}
                             onDeviceChange={value => this.setState({ device: value })} />
                     </PanelBody>
+
                     {animationSettings(uniqueId, animation, setAttributes)}
+
+                    {interactionSettings(uniqueId, interaction, setAttributes)}
+
                 </InspectorControls>
 
-                {globalSettingsPanel(globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
+                {globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
                 <div className={`qubely-block-${uniqueId}`}>
                     <div className={`qubely-block-button-group`}>
@@ -100,7 +110,7 @@ class Edit extends Component {
 
                         <Tooltip text={__('Add new Button')}>
                             <span className="qubely-add-new" onClick={() => setAttributes({ buttons: buttons + 1 })} role="button" areaLabel={__('Add new button')}>
-                                <i class="fas fa-plus-circle" />
+                                <i className="fas fa-plus-circle" />
                             </span>
                         </Tooltip>
                     </div>
@@ -113,13 +123,13 @@ class Edit extends Component {
 export default compose([
     withSelect((select, ownProps) => {
         const { clientId } = ownProps
-        const { getBlock } = select('core/editor');
+        const { getBlock } = select('core/block-editor');
         return {
             block: getBlock(clientId)
         };
     }),
     withDispatch((dispatch) => {
-        const { updateBlockAttributes } = dispatch('core/editor');
+        const { updateBlockAttributes } = dispatch('core/block-editor');
         return {
             updateBlockAttributes
         }

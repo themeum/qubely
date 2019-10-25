@@ -1,8 +1,8 @@
 const { __ } = wp.i18n
 const { Fragment, Component } = wp.element;
 const { PanelBody, RangeControl, TextControl, Toolbar } = wp.components
-const { InspectorControls, BlockControls } = wp.editor
-const { Media, Background, Tabs, Tab, Range, BoxShadow, Separator, RadioAdvanced, Typography, Select, Color, Styles, Toggle, Border, Alignment, BorderRadius, gloalSettings: { globalSettingsPanel, animationSettings }, Inline: { InlineToolbar }, CssGenerator: { CssGenerator }, ContextMenu: { ContextMenu, handleContextMenu }, } = wp.qubelyComponents
+const { InspectorControls, BlockControls } = wp.blockEditor
+const { Media, Background, Tabs, Tab, Range, BoxShadow, Separator, RadioAdvanced, Typography, Select, Color, Styles, Toggle, Border, Alignment, BorderRadius, gloalSettings: { globalSettingsPanel, animationSettings, interactionSettings }, Inline: { InlineToolbar }, CssGenerator: { CssGenerator }, ContextMenu: { ContextMenu, handleContextMenu }, } = wp.qubelyComponents
 import icons from '../../helpers/icons'
 
 class Edit extends Component {
@@ -37,6 +37,7 @@ class Edit extends Component {
             name,
             clientId,
             attributes,
+            isSelected,
             setAttributes,
             attributes: {
                 uniqueId,
@@ -76,9 +77,14 @@ class Edit extends Component {
                 //animation
                 animation,
                 globalZindex,
+                enablePosition, 
+                selectPosition, 
+                positionXaxis, 
+                positionYaxis,
                 hideTablet,
                 hideMobile,
-                globalCss
+                globalCss,
+                interaction
             }
         } = this.props
 
@@ -217,7 +223,11 @@ class Edit extends Component {
                             </PanelBody>
                         </Fragment>
                     }
+                    
                     {animationSettings(uniqueId, animation, setAttributes)}
+
+                    {interactionSettings(uniqueId, interaction, setAttributes)}
+
                 </InspectorControls>
 
                 <BlockControls>
@@ -230,7 +240,7 @@ class Edit extends Component {
                     </Toolbar>
                 </BlockControls>
 
-                {globalSettingsPanel(globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
+                {globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
                 <div className={`qubely-block-${uniqueId}`}>
                     <div className={`qubely-block-videopopup-wrapper qubely-alignment-${alignment}`} onContextMenu={event => handleContextMenu(event, this.refs.qubelyContextMenu)}>
@@ -241,9 +251,7 @@ class Edit extends Component {
                                 {icon &&
                                     <span className="qubely-btn-icon-wrapper">
                                         <i className={`qubely-btn-icon ${icon}`}>
-                                            {(iconBgColor && isRipple) && <span
-                                                className="qubely-ripple"
-                                            ></span>}
+                                            {(iconBgColor && isRipple) && <span className="qubely-ripple"/>}
                                         </i>
                                     </span>
                                 }

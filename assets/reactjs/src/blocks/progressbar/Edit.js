@@ -1,7 +1,7 @@
 const { __ } = wp.i18n
 const { Fragment, Component } = wp.element;
 const { PanelBody, TextControl, Toolbar } = wp.components
-const { InspectorControls, BlockControls } = wp.editor
+const { InspectorControls, BlockControls } = wp.blockEditor
 const {
     RadioAdvanced,
     Range,
@@ -18,7 +18,8 @@ const {
     },
     gloalSettings: {
         globalSettingsPanel,
-        animationSettings
+        animationSettings,
+        interactionSettings
     } } = wp.qubelyComponents
 
 class Edit extends Component {
@@ -46,6 +47,7 @@ class Edit extends Component {
             name,
             clientId,
             attributes,
+            isSelected,
             setAttributes,
             attributes: {
                 uniqueId,
@@ -65,10 +67,15 @@ class Edit extends Component {
                 //animation
                 animation,
                 //global
+                enablePosition, 
+                selectPosition, 
+                positionXaxis, 
+                positionYaxis,
                 globalZindex,
                 hideTablet,
                 hideMobile,
-                globalCss }
+                globalCss,
+                interaction }
         } = this.props
         const { device } = this.state
 
@@ -128,6 +135,8 @@ class Edit extends Component {
 
                     {animationSettings(uniqueId, animation, setAttributes)}
 
+                    {interactionSettings(uniqueId, interaction, setAttributes)}
+
                 </InspectorControls>
 
                 <BlockControls>
@@ -140,7 +149,7 @@ class Edit extends Component {
                     </Toolbar>
                 </BlockControls>
 
-                {globalSettingsPanel(globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
+                {globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
                 <div className={`qubely-block-${uniqueId}`}>
                     <div className="qubely-block-progress-bar" onContextMenu={event => handleContextMenu(event, this.refs.qubelyContextMenu)}>

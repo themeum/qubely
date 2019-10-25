@@ -4,7 +4,7 @@ const { withSelect } = wp.data
 const { dateI18n, __experimentalGetSettings } = wp.date
 const { addQueryArgs } = wp.url
 const { RangeControl, PanelBody, Toolbar, Spinner, TextControl, SelectControl } = wp.components;
-const { InspectorControls, BlockControls } = wp.editor
+const { InspectorControls, BlockControls } = wp.blockEditor
 const { Range, ButtonGroup, Inline: { InlineToolbar }, Toggle, Dropdown, Select, Separator, ColorAdvanced, Typography, Color, Border, BorderRadius, Padding, BoxShadow, Styles, Tabs, Tab, RadioAdvanced, gloalSettings: { globalSettingsPanel, animationSettings }, CssGenerator: { CssGenerator }, ContextMenu: { ContextMenu, handleContextMenu }, } = wp.qubelyComponents
 import icons from '../../helpers/icons'
 
@@ -87,9 +87,9 @@ class Edit extends Component {
 				{
 					(showAuthor || showDates || showComment) &&
 					<div className="qubely-postgrid-meta">
-						{showAuthor && <span><i className="fas fa-user"></i> {__('By')} <a >{post.qubely_author.display_name}</a></span>}
-						{showDates && <span><i className="far fa-calendar-alt"></i> {dateI18n(__experimentalGetSettings().formats.date, post.date_gmt)}</span>}
-						{showComment && <span><i className="fas fa-comment"></i> {(post.qubely_comment ? post.qubely_comment : '0')}</span>}
+						{showAuthor && <span><i className="fas fa-user"/> {__('By')} <a >{post.qubely_author.display_name}</a></span>}
+						{showDates && <span><i className="far fa-calendar-alt"/> {dateI18n(__experimentalGetSettings().formats.date, post.date_gmt)}</span>}
+						{showComment && <span><i className="fas fa-comment"/> {(post.qubely_comment ? post.qubely_comment : '0')}</span>}
 					</div>
 				}
 				{showTitle && (titlePosition == false) && title}
@@ -101,9 +101,6 @@ class Edit extends Component {
 
 	render() {
 		const {
-			name,
-			clientId,
-			attributes,
 			setAttributes,
 			posts,
 			taxonomyList,
@@ -230,7 +227,11 @@ class Edit extends Component {
 				//animation
 				animation,
 				//global
-				globalZindex,
+                globalZindex,
+                enablePosition, 
+                selectPosition, 
+                positionXaxis, 
+                positionYaxis,
 				hideTablet,
 				hideMobile,
 				globalCss
@@ -252,7 +253,7 @@ class Edit extends Component {
 								// { value: 3, svg: icons.postgrid_3, label: __(''), pro: true },
 								// { value: 4, svg: icons.postgrid_3, label: __(''), pro: true },
 							]}
-							// proUpgradation
+							proUpgradation
 							value={layout}
 							onChange={val => setAttributes({ layout: val })}
 						/>
@@ -625,7 +626,7 @@ class Edit extends Component {
 					</Toolbar>
 				</BlockControls>
 
-				{globalSettingsPanel(globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
+				{globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
 				<div className={`qubely-block-${uniqueId}`}>
 					{

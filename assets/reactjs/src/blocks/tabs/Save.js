@@ -1,6 +1,6 @@
 const { Component } = wp.element
-const { InnerBlocks } = wp.editor
-const { HelperFunction: { animationAttr } } = wp.qubelyComponents
+const { InnerBlocks } = wp.blockEditor
+const { HelperFunction: { animationAttr, IsInteraction } } = wp.qubelyComponents
 
 class Save extends Component {
     renderTabTitles = () => {
@@ -17,8 +17,8 @@ class Save extends Component {
         )
     }
     render() {
-        const { uniqueId, tabs, tabStyle, navAlignment, animation } = this.props.attributes
-
+        const { uniqueId, tabs, tabStyle, navAlignment, animation, interaction } = this.props.attributes
+        const interactionClass = IsInteraction(interaction) ? 'qubley-block-interaction' : '';
         let iterator = [], index = 0
         while (index < tabs) {
             iterator.push(index)
@@ -26,7 +26,7 @@ class Save extends Component {
         }
         return (
             <div className={`qubely-block-${uniqueId}`} {...animationAttr(animation)}>
-                <div className={`qubely-block-tab qubely-tab-style-${tabStyle}`}>
+                <div className={`qubely-block-tab ${interactionClass} qubely-tab-style-${tabStyle}`}>
                     <div className={`qubely-tab-nav qubely-alignment-${navAlignment}`}>
                         {this.renderTabTitles(iterator)}
                     </div>

@@ -1,8 +1,8 @@
 const { __ } = wp.i18n
 const { Fragment, Component } = wp.element;
 const { PanelBody, SelectControl, TextControl, Toolbar } = wp.components
-const { RichText, InspectorControls, BlockControls } = wp.editor
-const { QubelyButtonEdit, Media, Tabs, Tab, Range, BoxShadow, ContextMenu: { ContextMenu, handleContextMenu }, RadioAdvanced, Typography, Toggle, Styles, Alignment, IconList, ColorAdvanced, Color, Headings, Border, BorderRadius, Padding, gloalSettings: { globalSettingsPanel, animationSettings }, Inline: { InlineToolbar }, CssGenerator: { CssGenerator }, QubelyButton: { buttonSettings } } = wp.qubelyComponents
+const { RichText, InspectorControls, BlockControls } = wp.blockEditor
+const { QubelyButtonEdit, Media, Tabs, Tab, Range, BoxShadow, ContextMenu: { ContextMenu, handleContextMenu }, RadioAdvanced, Typography, Toggle, Styles, Alignment, IconList, ColorAdvanced, Color, Headings, Border, BorderRadius, Padding, gloalSettings: { globalSettingsPanel, animationSettings, interactionSettings }, Inline: { InlineToolbar }, CssGenerator: { CssGenerator }, QubelyButton: { buttonSettings } } = wp.qubelyComponents
 import icons from '../../helpers/icons';
 import svg from '../heading/separators';
 class Edit extends Component {
@@ -109,13 +109,18 @@ class Edit extends Component {
             buttonUrl,
 
             animation,
+            enablePosition, 
+            selectPosition, 
+            positionXaxis, 
+            positionYaxis,
             globalZindex,
             hideTablet,
             hideMobile,
-            globalCss
+            globalCss,
+            interaction
         } = this.props.attributes
 
-        const { name, clientId, attributes, setAttributes } = this.props
+        const { name, clientId, attributes, isSelected, setAttributes } = this.props
         const { openPanelSetting, device } = this.state
         const separators = {
             solid: { type: 'css', separator: 'solid', width: 300, stroke: 10 },
@@ -375,8 +380,9 @@ class Edit extends Component {
                         </Tabs>
                     </PanelBody>
 
-                    {buttonSettings(this.props.attributes, device, setAttributes, (key, value) => { this.setState({ [key]: value }) })}
+                    {buttonSettings(this.props.attributes, device, (key, value) => { setAttributes({ [key]: value }) }, (key, value) => { this.setState({ [key]: value }) })}
                     {animationSettings(uniqueId, animation, setAttributes)}
+                    {interactionSettings(uniqueId, interaction, setAttributes)}
                 </InspectorControls>
 
                 <BlockControls>
@@ -389,7 +395,7 @@ class Edit extends Component {
                     </Toolbar>
                 </BlockControls>
 
-                {globalSettingsPanel(globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
+                {globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
                 <div className={`qubely-block-${uniqueId}`}>
                     <div className={`qubely-block-info-box qubely-info-box-layout-${layout}`} onContextMenu={event => handleContextMenu(event, this.refs.qubelyContextMenu)}>
@@ -403,7 +409,7 @@ class Edit extends Component {
                                         {image.url != undefined ?
                                             <img className="qubely-info-box-image" src={image.url} srcset={image2x.url != undefined ? image.url + ' 1x, ' + image2x.url + ' 2x' : ''} alt={imgAlt && imgAlt} />
                                             :
-                                            <div className="qubely-info-box-image qubely-image-placeholder"><i className="far fa-image"></i></div>
+                                            <div className="qubely-info-box-image qubely-image-placeholder"><i className="far fa-image"/></div>
                                         }
                                     </Fragment>
                                 }

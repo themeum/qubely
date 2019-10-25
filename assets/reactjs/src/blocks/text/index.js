@@ -4,7 +4,7 @@ import Save from './Save';
 import svg from '../heading/separators';
 const { __ } = wp.i18n
 const { Fragment } = wp.element;
-const { RichText } = wp.editor
+const { RichText } = wp.blockEditor
 const { registerBlockType } = wp.blocks
 const { gloalSettings: { globalAttributes }, HelperFunction: { animationAttr } } = wp.qubelyComponents
 
@@ -223,7 +223,7 @@ registerBlockType('qubely/text', {
                     {separatorStyle &&
                         <Fragment>
                             {separators[separatorStyle].type == 'css' &&
-                                <span className={`qubely-separator-type-css qubely-separator-${separatorStyle}`}></span>
+                                <span className={`qubely-separator-type-css qubely-separator-${separatorStyle}`}/>
                             }
                             {separators[separatorStyle].type == 'svg' &&
                                 <span className={`qubely-separator-type-svg qubely-separator-${separatorStyle}`}>{separators[separatorStyle].svg}</span>

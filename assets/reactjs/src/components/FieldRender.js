@@ -23,6 +23,7 @@ import Background from './fields/Background'
 import Tabs from './fields/Tabs'
 import Tab from './fields/Tab'
 import InnerPanel from './fields/InnerPanel'
+import Interaction from './fields/Interaction'
 import Select from './fields/Select'
 import Range from './fields/Range'
 import Toggle from './fields/Toggle'
@@ -56,12 +57,13 @@ import {
     isArray,
     setValue,
     videoBackground,
-    parseResponsiveViewPort
+    parseResponsiveViewPort,
+    IsInteraction
 } from './HelperFunction'
 
 //hooks
 
-import { globalAttributes, globalSettingsPanel, animationSettings } from './fields/GlobalSettings'
+import { globalAttributes, globalSettingsPanel, animationSettings, interactionSettings } from './fields/GlobalSettings'
 import { buttonAttributes, buttonSettings } from './fields/ButtonSettings'
 import { listAttributes, listSettings } from './fields/ListSettings'
 import { ContextMenu, handleContextMenu } from './fields/ContextMenu'
@@ -104,6 +106,7 @@ wp.qubelyComponents = {
     gloalSettings: {
         globalAttributes,
         animationSettings,
+        interactionSettings,
         globalSettingsPanel,
     },
     Gradient,
@@ -116,11 +119,13 @@ wp.qubelyComponents = {
         isArray,
         setValue,
         videoBackground,
-        parseResponsiveViewPort
+        parseResponsiveViewPort,
+        IsInteraction
     },
     IconList,
     IconSelector,
     InnerPanel,
+    Interaction,
     Inline: {
         InlineToolbar,
         InlineSpacer,

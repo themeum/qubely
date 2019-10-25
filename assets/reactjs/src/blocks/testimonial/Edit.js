@@ -1,8 +1,8 @@
 const { __ } = wp.i18n
 const { Fragment, Component } = wp.element;
 const { PanelBody, TextControl, Toolbar } = wp.components
-const { RichText, BlockControls, InspectorControls, AlignmentToolbar } = wp.editor
-const { Media, RadioAdvanced, Range, Color, Typography, Toggle, Separator, ColorAdvanced, Border, BorderRadius, BoxShadow, Styles, Alignment, Padding, Tabs, Tab, gloalSettings: { globalSettingsPanel, animationSettings }, Inline: { InlineToolbar }, CssGenerator: { CssGenerator }, ContextMenu: { ContextMenu, handleContextMenu }, } = wp.qubelyComponents
+const { RichText, BlockControls, InspectorControls, AlignmentToolbar } = wp.blockEditor
+const { Media, RadioAdvanced, Range, Color, Typography, Toggle, Separator, ColorAdvanced, Border, BorderRadius, BoxShadow, Styles, Alignment, Padding, Tabs, Tab, gloalSettings: { globalSettingsPanel, animationSettings, interactionSettings }, Inline: { InlineToolbar }, CssGenerator: { CssGenerator }, ContextMenu: { ContextMenu, handleContextMenu }, } = wp.qubelyComponents
 import icons from '../../helpers/icons'
 
 class Edit extends Component {
@@ -73,12 +73,17 @@ class Edit extends Component {
             //animation
             animation,
             globalZindex,
+            enablePosition, 
+            selectPosition, 
+            positionXaxis, 
+            positionYaxis,
             hideTablet,
             hideMobile,
-            globalCss
+            globalCss,
+            interaction
         } = this.props.attributes
 
-        const { clientId, attributes, setAttributes } = this.props
+        const { clientId, attributes, setAttributes, isSelected } = this.props
         const { openPanelSetting, device } = this.state
         if (uniqueId) { CssGenerator(this.props.attributes, 'testimonial', uniqueId); }
 
@@ -87,7 +92,7 @@ class Edit extends Component {
             tagName="span"
             keepPlaceholderOnFocus
             placeholder={__('Add Name...')}
-            formattingControls={['bold', 'italic', 'link', 'strikethrough']}
+            allowedFormats={['bold', 'italic', 'link', 'strikethrough']}
             onChange={value => setAttributes({ name: value })}
             value={name}
         />
@@ -96,7 +101,7 @@ class Edit extends Component {
             key="editable"
             tagName="span"
             placeholder={__('Add designation...')}
-            formattingControls={['bold', 'italic', 'link', 'strikethrough']}
+            allowedFormats={['bold', 'italic', 'link', 'strikethrough']}
             keepPlaceholderOnFocus
             onChange={value => setAttributes({ designation: value })}
             value={designation}
@@ -106,7 +111,7 @@ class Edit extends Component {
             key="editable"
             tagName="div"
             placeholder={__('Add Message...')}
-            formattingControls={['bold', 'italic', 'link', 'strikethrough']}
+            allowedFormats={['bold', 'italic', 'link', 'strikethrough']}
             keepPlaceholderOnFocus
             onChange={value => setAttributes({ message: value })}
             value={message}
@@ -120,7 +125,7 @@ class Edit extends Component {
                             {avatar.url != undefined ?
                                 <img className="qubely-testimonial-avatar" src={avatar.url} srcset={avatar2x.url != undefined ? avatar.url + ' 1x, ' + avatar2x.url + ' 2x' : ''} alt={avatarAlt} onClick={() => this.handlePanelOpenings('Avatar')} />
                                 :
-                                <div className="qubely-image-placeholder qubely-testimonial-avatar" onClick={() => this.handlePanelOpenings('Avatar')}><i className="far fa-user"></i></div>
+                                <div className="qubely-image-placeholder qubely-testimonial-avatar" onClick={() => this.handlePanelOpenings('Avatar')}><i className="far fa-user"/></div>
                             }
                         </Fragment>
                     }
@@ -135,7 +140,7 @@ class Edit extends Component {
                             {avatar.url != undefined ?
                                 <img className="qubely-testimonial-avatar" src={avatar.url} srcset={avatar2x.url != undefined ? avatar.url + ' 1x, ' + avatar2x.url + ' 2x' : ''} alt={avatarAlt} onClick={() => this.handlePanelOpenings('Avatar')} />
                                 :
-                                <div className="qubely-image-placeholder qubely-testimonial-avatar" onClick={() => this.handlePanelOpenings('Avatar')}><i className="far fa-user"></i></div>
+                                <div className="qubely-image-placeholder qubely-testimonial-avatar" onClick={() => this.handlePanelOpenings('Avatar')}><i className="far fa-user"/></div>
                             }
                         </Fragment>
                     }
@@ -305,7 +310,6 @@ class Edit extends Component {
                                 </Fragment>
                             </Fragment>
                         }
-
                     </PanelBody>
 
                     <PanelBody title={__('Quote Icon')} opened={'Quote Icon' === openPanelSetting} onToggle={() => this.handlePanelOpenings(openPanelSetting !== 'Quote Icon' ? 'Quote Icon' : '')}>
@@ -439,6 +443,8 @@ class Edit extends Component {
 
                     {animationSettings(uniqueId, animation, setAttributes)}
 
+                    {interactionSettings(uniqueId, interaction, setAttributes)}
+
                 </InspectorControls>
 
                 <BlockControls>
@@ -456,7 +462,7 @@ class Edit extends Component {
                     />
                 </BlockControls>
 
-                {globalSettingsPanel(globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
+                {globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
                 <div className={`qubely-block-${uniqueId}`}>
                     <div className={`qubely-block-testimonial`} onContextMenu={event => handleContextMenu(event, this.refs.qubelyContextMenu)}>
@@ -468,7 +474,7 @@ class Edit extends Component {
                         }
 
                         {(quoteIcon && (layout == 1)) &&
-                            <div className="qubely-testimonial-quote" onClick={() => this.handlePanelOpenings('Quote Icon')}><span className={`qubely-quote-icon ${quoteIcon}`}></span></div>
+                            <div className="qubely-testimonial-quote" onClick={() => this.handlePanelOpenings('Quote Icon')}><span className={`qubely-quote-icon ${quoteIcon}`}/></div>
                         }
 
                         <div className="qubely-testimonial-content" onClick={() => this.handlePanelOpenings('Message')} >
@@ -482,7 +488,7 @@ class Edit extends Component {
                         {layout == 1 && authorInfo}
 
                         {(quoteIcon && (layout == 2)) &&
-                            <div className="qubely-testimonial-quote qubely-position-bottom" onClick={() => this.handlePanelOpenings('Quote Icon')}><span className={`qubely-quote-icon ${quoteIcon}`}></span></div>
+                            <div className="qubely-testimonial-quote qubely-position-bottom" onClick={() => this.handlePanelOpenings('Quote Icon')}><span className={`qubely-quote-icon ${quoteIcon}`}/></div>
                         }
 
                         <div ref="qubelyContextMenu" className={`qubely-context-menu-wraper`} >

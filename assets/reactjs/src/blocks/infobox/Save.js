@@ -1,12 +1,12 @@
 const { Fragment, Component } = wp.element;
-const { RichText } = wp.editor
+const { RichText } = wp.blockEditor
 import svg from '../heading/separators';
 const { QubelyButtonSave } = wp.qubelyComponents
-const { HelperFunction: { animationAttr } } = wp.qubelyComponents;
+const { HelperFunction: { animationAttr, IsInteraction } } = wp.qubelyComponents;
 
 class Save extends Component {
 	render() {
-		const { uniqueId, layout, mediaType, titleLevel, title, separatorStyle, separatorPosition, enableContent, content, iconName, image, image2x, imgAlt, number, enableButton, animation, subTitle, subTitleLevel, subTitleContent, buttonFillType, buttonSize, buttonText, buttonUrl, buttonIconName, buttonIconPosition, useMediaBg } = this.props.attributes
+		const { uniqueId, layout, mediaType, titleLevel, title, separatorStyle, separatorPosition, enableContent, content, iconName, image, image2x, imgAlt, number, enableButton, animation, subTitle, subTitleLevel, subTitleContent, buttonFillType, buttonSize, buttonText, buttonUrl, buttonIconName, buttonIconPosition, useMediaBg, interaction } = this.props.attributes
 
 		const separators = {
 			solid: { type: 'css', separator: 'solid', width: 300, stroke: 10 },
@@ -23,7 +23,7 @@ class Save extends Component {
 			{separatorStyle &&
 				<Fragment>
 					{separators[separatorStyle].type == 'css' &&
-						<span className={`qubely-separator-type-css qubely-separator-${separatorStyle}`}></span>
+						<span className={`qubely-separator-type-css qubely-separator-${separatorStyle}`}/>
 					}
 					{separators[separatorStyle].type == 'svg' &&
 						<span className={`qubely-separator-type-svg qubely-separator-${separatorStyle}`}>{separators[separatorStyle].svg}</span>
@@ -34,10 +34,11 @@ class Save extends Component {
 
 		const titleTagName = 'h' + titleLevel;
 		const subTitleTagName = 'h' + subTitleLevel;
+		const interactionClass = IsInteraction(interaction) ? 'qubley-block-interaction' : '';
 
 		return (
 			<div className={`qubely-block-${uniqueId}`} {...animationAttr(animation)}>
-				<div className={`qubely-block-info-box qubely-info-box-layout-${layout}`}>
+				<div className={`qubely-block-info-box ${interactionClass} qubely-info-box-layout-${layout}`}>
 					{(layout != 4 && mediaType) &&
 						<div className={`qubely-info-box-media${useMediaBg ? ' qubely-media-has-bg' : ''}`}>
 							{(mediaType == 'icon' && iconName) &&
@@ -48,7 +49,7 @@ class Save extends Component {
 									{image.url != undefined ?
 										<img className="qubely-info-box-image" src={image.url} srcset={image2x.url != undefined ? image.url + ' 1x, ' + image2x.url + ' 2x' : '' } alt={imgAlt && imgAlt} />
 										:
-										<div className="qubely-info-box-image qubely-image-placeholder"><i className="far fa-image"></i></div>
+										<div className="qubely-info-box-image qubely-image-placeholder"><i className="far fa-image"/></div>
 									}
 								</Fragment>
 							}

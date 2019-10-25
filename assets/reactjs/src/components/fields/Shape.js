@@ -67,7 +67,7 @@ class Shape extends Component {
                             value.style &&
                             <Tooltip text={__('Clear')}>
                                 <div className="qubely-ml-10">
-                                    <span className="qubely-shape-clear" onClick={() => this.setSettings('style', '')} role="button"><i className="fas fa-undo"></i></span>
+                                    <span className="qubely-shape-clear" onClick={() => this.setSettings('style', '')} role="button"><i className="fas fa-undo"/></span>
                                 </div>
                             </Tooltip>
                         }

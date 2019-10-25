@@ -1,6 +1,6 @@
 const { Component } = wp.element
-const { RichText } = wp.editor
-const { HelperFunction: { animationAttr } } = wp.qubelyComponents
+const { RichText } = wp.blockEditor
+const { HelperFunction: { animationAttr, IsInteraction } } = wp.qubelyComponents
 class Save extends Component {
 
   renderTimeline = () => {
@@ -26,7 +26,7 @@ class Save extends Component {
 						<RichText.Content tagName={titleTagName} className="qubely-timeline-title" value={title} />
 						<RichText.Content tagName='div' className="qubely-timeline-description" value={description} />
 					</div>
-					<span className="qubely-timeline-indicator"></span>
+					<span className="qubely-timeline-indicator" />
 				</div>
 				{enableDateTime == 1 &&
 					<div className="qubely-timeline-date-container">
@@ -39,10 +39,11 @@ class Save extends Component {
   }
 
   render() {
-    const { attributes: { uniqueId, orientation, animation } } = this.props
+	const { attributes: { uniqueId, orientation, animation, interaction } } = this.props
+	const interactionClass = IsInteraction(interaction) ? 'qubley-block-interaction' : '';
     return (
       	<div className={`qubely-block-${uniqueId}`} {...animationAttr(animation)}>
-        	<div className={`qubely-block-timeline qubely-timeline-layout-vertical qubely-timeline-orientation-${orientation}`}>
+        	<div className={`qubely-block-timeline ${interactionClass} qubely-timeline-layout-vertical qubely-timeline-orientation-${orientation}`}>
 				<div className={`qubely-timeline-items`}>
 					{this.renderTimeline()}
 				</div >

@@ -1,5 +1,6 @@
 const { Component, Fragment } = wp.element;
-const { RichText } = wp.editor
+const { RichText } = wp.blockEditor
+const { HelperFunction: { IsInteraction } } = wp.qubelyComponents
 
 class Save extends Component {
 
@@ -16,20 +17,21 @@ class Save extends Component {
                         }
                     </Fragment>
                     :
-                    <div className="qubely-image-image qubely-image-placeholder"><i className="far fa-image"></i></div>
+                    <div className="qubely-image-image qubely-image-placeholder"><i className="far fa-image"/></div>
                 }
             </Fragment>
         )
     }
 
     render() {
-        const { attributes: { uniqueId, layout, imageUrl, animateOnHover, titleVisibleOnHover, subTitleVisibleOnHover, title, titleLevel, subTitle, enableSubTitle, imageCaption, enableCaption, contentAnimation, contentVerticalAlign, contentAlignment, enableFrame, frameAnimateOnHover } } = this.props
+        const { attributes: { uniqueId, layout, imageUrl, animateOnHover, titleVisibleOnHover, subTitleVisibleOnHover, title, titleLevel, subTitle, enableSubTitle, imageCaption, enableCaption, contentAnimation, contentVerticalAlign, contentAlignment, enableFrame, frameAnimateOnHover, interaction } } = this.props
 
         const titleTagName = 'h' + titleLevel;
+        const interactionClass = IsInteraction(interaction) ? 'qubley-block-interaction' : '';
 
         return (
             <div className={`qubely-block-${uniqueId}`}>
-                <div className={`qubely-block-image qubely-image-layout-${layout}`}>
+                <div className={`qubely-block-image ${interactionClass} qubely-image-layout-${layout}`}>
                     <div className={`qubely-image-media${(layout == 'blurb' && animateOnHover == 1) ? ' qubely-hover-animation-on' : ''}${(layout == 'blurb' && animateOnHover == 1) ? ' qubely-hover-animation-type-' + contentAnimation : ''} qubely-vertical-alignment-${contentVerticalAlign} qubely-horizontal-alignment-${contentAlignment}${enableFrame == 1 ? ((animateOnHover == 1 && frameAnimateOnHover == 1) ? ' qubely-has-frame qubely-frame-animate-on-hover' : ' qubely-has-frame') : ''}`}>
                         <figure>
                             <div className="qubely-image-container">

@@ -1,8 +1,8 @@
 const { __ } = wp.i18n
 const { Fragment, Component } = wp.element;
 const { PanelBody, Toolbar, SelectControl } = wp.components
-const { RichText, InspectorControls, BlockControls } = wp.editor
-const { Typography, Color, Alignment, Headings, Toggle, Range, Separator, gloalSettings: { globalSettingsPanel, animationSettings }, Inline: { InlineToolbar, InlineSelector }, CssGenerator: { CssGenerator }, ContextMenu: { ContextMenu, handleContextMenu }, } = wp.qubelyComponents
+const { RichText, InspectorControls, BlockControls } = wp.blockEditor
+const { Typography, Color, Alignment, Headings, Toggle, Range, Separator, gloalSettings: { globalSettingsPanel, animationSettings, interactionSettings }, Inline: { InlineToolbar, InlineSelector }, CssGenerator: { CssGenerator }, ContextMenu: { ContextMenu, handleContextMenu }, } = wp.qubelyComponents
 import '../../components/fields/inline/editorInline'
 import svg from '../heading/separators'
 
@@ -63,12 +63,16 @@ class Edit extends Component {
             //animation
             animation,
             globalZindex,
+            enablePosition, 
+            selectPosition, 
+            positionXaxis, 
+            positionYaxis,
             hideTablet,
             hideMobile,
-            globalCss
-
+            globalCss,
+            interaction
         } = this.props.attributes
-        const { name, clientId, attributes, setAttributes } = this.props
+        const { name, clientId, attributes, setAttributes ,isSelected } = this.props
         const { device, openPanelSetting } = this.state
         const separators = {
             solid: { type: 'css', separator: 'solid', width: 300, stroke: 10 },
@@ -184,7 +188,11 @@ class Edit extends Component {
                             }
                         </PanelBody>
                     }
+
                     {animationSettings(uniqueId, animation, setAttributes)}
+
+                    {interactionSettings(uniqueId, interaction, setAttributes)}
+
                 </InspectorControls>
 
                 <BlockControls>
@@ -200,7 +208,7 @@ class Edit extends Component {
                     </Toolbar>
                 </BlockControls>
 
-                {globalSettingsPanel(globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
+                {globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
                 <div className={`qubely-block-${uniqueId}`}>
                     <div
