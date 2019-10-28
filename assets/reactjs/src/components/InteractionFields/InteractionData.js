@@ -99,6 +99,19 @@ const interactionActions = [
         } 
     },
     {
+        name: 'skew', 
+        title: "Skew",
+        property: {
+            x: 0,
+            y: -100
+        },
+        range: {
+            max: 80,
+            min: -80,
+            step: 1
+        } 
+    },
+    {
         name: 'opacity', 
         title: "Opacity",
         property: {
