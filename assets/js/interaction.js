@@ -637,6 +637,7 @@
       //Cache the global animation action object
       let scrollActionList = qubelyInteraction['while_scroll_view']         
       let $window = $(window)
+      
       /**
        * Set the initial position of each element when page load
        * Hide the element to avoid zigzag trouble for the element
@@ -744,17 +745,21 @@
         IM.bindCustomAnimation()
         IM.actionProperty.map(key=> {
             let action = IM.getCustomAnimationActionByName(key, scrollPercentage) // Grater than current keyframe/scrollPercentage
+            
             if( action.from !== null ) {
+              
                 Object.assign(nextTriggerActions[key].from, action.from.property)
+                
                 nextTriggerActions[key].from.f = true
                 nextTriggerActions[key].from.keyframe = parseInt(action.from.keyframe)
 
                 if( typeof nextTriggerActions[key].from.x !== "undefined" )
-                    nextTriggerActions[key].from.x = nextTriggerActions[key].from.x === "" ? 0 : parseFloat(nextTriggerActions[key].from.x)
+                    nextTriggerActions[key].from.x = nextTriggerActions[key].from.x === "" || nextTriggerActions[key].from.x === null ? 0 : parseFloat(nextTriggerActions[key].from.x)
                 if( typeof nextTriggerActions[key].from.y !== "undefined" )
-                    nextTriggerActions[key].from.y = nextTriggerActions[key].from.y === "" ? 0 : parseFloat(nextTriggerActions[key].from.y)
-                if( typeof nextTriggerActions[key].from.z !== "undefined" )
-                    nextTriggerActions[key].from.z = nextTriggerActions[key].from.z === "" ? 0 : parseFloat(nextTriggerActions[key].from.z)
+                    nextTriggerActions[key].from.y = nextTriggerActions[key].from.y === "" || nextTriggerActions[key].from.y === null ? 0 : parseFloat(nextTriggerActions[key].from.y)
+                if( typeof nextTriggerActions[key].from.z !== "undefined" ){ 
+                    nextTriggerActions[key].from.z = nextTriggerActions[key].from.z === "" || nextTriggerActions[key].from.z === null ? 0 : parseFloat(nextTriggerActions[key].from.z)
+                }
                 if( typeof nextTriggerActions[key].from.value !== "undefined" )
                     nextTriggerActions[key].from.value = nextTriggerActions[key].from.value === "" ? 0 : parseFloat(nextTriggerActions[key].from.value)
             }
@@ -762,19 +767,19 @@
                 Object.assign(nextTriggerActions[key].to, action.to.property)
                 
                 if( typeof nextTriggerActions[key].to.x !== "undefined" ) {
-                    nextTriggerActions[key].to.x = nextTriggerActions[key].to.x === "" ? 0 : parseFloat(nextTriggerActions[key].to.x)
+                    nextTriggerActions[key].to.x = nextTriggerActions[key].to.x === "" || nextTriggerActions[key].to.x === null ? 0 : parseFloat(nextTriggerActions[key].to.x)
                     nextTriggerActions[key].goal.x = nextTriggerActions[key].to.x
                 }
                 if( typeof nextTriggerActions[key].to.y !== "undefined" ) {
-                    nextTriggerActions[key].to.y = nextTriggerActions[key].to.y === "" ? 0 : parseFloat(nextTriggerActions[key].to.y)
+                    nextTriggerActions[key].to.y = nextTriggerActions[key].to.y === "" || nextTriggerActions[key].to.y === null ? 0 : parseFloat(nextTriggerActions[key].to.y)
                     nextTriggerActions[key].goal.y = nextTriggerActions[key].to.y
                 }
                 if( typeof nextTriggerActions[key].to.z !== "undefined" ) {
-                    nextTriggerActions[key].to.z = nextTriggerActions[key].to.z === "" ? 0 : parseFloat(nextTriggerActions[key].to.z)
+                    nextTriggerActions[key].to.z = nextTriggerActions[key].to.z === "" || nextTriggerActions[key].to.z === null? 0 : parseFloat(nextTriggerActions[key].to.z)
                     nextTriggerActions[key].goal.z = nextTriggerActions[key].to.z
                 }
                 if( typeof nextTriggerActions[key].to.value !== "undefined" ) {
-                    nextTriggerActions[key].to.value = nextTriggerActions[key].to.value === "" ? 0 : parseFloat(nextTriggerActions[key].to.value)
+                    nextTriggerActions[key].to.value = nextTriggerActions[key].to.value === "" || nextTriggerActions[key].to.value === null ? 0 : parseFloat(nextTriggerActions[key].to.value)
                     nextTriggerActions[key].goal.value = nextTriggerActions[key].to.value
                 }
                 nextTriggerActions[key].to.keyframe = parseInt(action.to.keyframe)
@@ -792,7 +797,7 @@
             }
 
         })
-
+  
         return {
             "willChange":"transform",
             "transitionDuration": initialLoader ? '0s' : '0.1s',
