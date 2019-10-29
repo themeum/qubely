@@ -13,8 +13,8 @@ const defaultInteraction = {
                     z: 0,
                 },
                 range: {
-                    max: 500,
-                    min: -500,
+                    max: 1000,
+                    min: -1000,
                     step: 1
                 },
                 single: true,
@@ -31,8 +31,8 @@ const defaultInteraction = {
                     z: 0,
                 },
                 range: {
-                    max: 500,
-                    min: -500,
+                    max: 1000,
+                    min: -1000,
                     step: 1
                 },
                 single: true,
@@ -65,8 +65,8 @@ const interactionActions = [
             z: 0,
         },
         range: {
-            max: 500,
-            min: -500,
+            max: 1000,
+            min: -1000,
             step: 1
         },
     },
@@ -93,8 +93,8 @@ const interactionActions = [
             z: 0,
         },
         range: {
-            max: 500,
-            min: -500,
+            max: 1000,
+            min: -1000,
             step: 1
         } 
     },
