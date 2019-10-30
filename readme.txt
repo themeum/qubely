@@ -220,8 +220,8 @@ Found a bug? Please let us know by posting on the support section of this plugin
 
 = 1.2.0 - 30 October, 2019 =
 New: Mouse Movement effect 
-Update: Contact From block - Script  
-Update: Post Grid block - style  
+Update: Contact Form block - Script  
+Update: Post Grid block - Style  
 
 
 = 1.1.6 - 09 October, 2019 =
