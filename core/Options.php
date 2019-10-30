@@ -89,8 +89,8 @@ if (!class_exists('QUBELY_Options')) {
                                 <li><i class="fas fa-check"></i> <?php esc_attr_e('Drag column resizing'); ?></li>
                                 <li><i class="fas fa-check"></i> <?php esc_attr_e('Shape divider/builder'); ?></li>
                                 <li><i class="fas fa-check"></i> <?php esc_attr_e('Device specific responsive controls'); ?></li>
-                                <li><i class="fas fa-check"></i> <?php esc_attr_e('Unlimited Google web fonts & system fonts'); ?></li>
-                                <li><i class="fas fa-check"></i> <?php esc_attr_e('Classic & gradient color and background'); ?></li>
+                                <li><i class="fas fa-check"></i> <?php esc_attr_e('Unlimited Google fonts & system fonts'); ?></li>
+                                <li><i class="fas fa-check"></i> <?php esc_attr_e('Classic & gradient color background'); ?></li>
                                 <li><i class="fas fa-check"></i> <?php esc_attr_e('Built-in animation'); ?></li>
                                 <li><i class="fas fa-check"></i> <?php esc_attr_e('Box-shadow'); ?></li>
                                 <li><i class="fas fa-check"></i> <?php esc_attr_e('Font Awesome 5 Icons and line icons'); ?></li>
