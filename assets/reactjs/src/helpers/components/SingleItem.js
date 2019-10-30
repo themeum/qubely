@@ -16,7 +16,7 @@ export default (props) => {
                             <Fragment>
                                 { props.data.liveurl && <a className="qubely-button" target="_blank" href={props.data.liveurl}><i className="fa fa-share"/> {__('Preview')} </a> }
                                 { (props.types == 'inactive' && props.data.pro == true) ? 
-                                    <a target="_blank" href="https://www.themeum.com/product/qubely/">
+                                    <a className="qubely-button-download" target="_blank" href="https://www.themeum.com/product/qubely/">
                                         <i className="fas fa-upload"/> {__('Upgrade to Pro')}
                                     </a>
                                     :    
