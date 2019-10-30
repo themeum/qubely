@@ -95,18 +95,7 @@ class Save extends Component {
     }
 
     render() {
-        const { uniqueId, pricings, id, title, desc, listType, listAlignment, bulletStyle, listItems, layout,
-            currencyPosition,
-            price, defaulPricePosition,
-            discount, discountPrice,
-            iconColor, enableListIcons,
-            enableDuration, durationPosition,
-            enableFeatures, iconPosition,
-            defaultbuttonPosition,
-            enableBadge, badge,
-            badgeStyle, badgeSize,
-            animation, interaction } = this.props.attributes
-        const listTag = listType == 'ordered' ? 'ol' : 'ul'
+        const { uniqueId, listAlignment, listItems, layout, iconColor, enableListIcons, enableDuration, durationPosition, enableFeatures, iconPosition, enableBadge, badge, badgeStyle, badgeSize, animation, interaction } = this.props.attributes
 
         const interactionClass = IsInteraction(interaction) ? 'qubley-block-interaction' : '';
 
