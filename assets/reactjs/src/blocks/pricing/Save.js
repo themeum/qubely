@@ -105,7 +105,7 @@ class Save extends Component {
             defaultbuttonPosition,
             enableBadge, badge,
             badgeStyle, badgeSize,
-            animation } = this.props.attributes
+            animation, interaction } = this.props.attributes
         const listTag = listType == 'ordered' ? 'ol' : 'ul'
 
         const interactionClass = IsInteraction(interaction) ? 'qubley-block-interaction' : '';
