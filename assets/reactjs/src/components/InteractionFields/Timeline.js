@@ -517,7 +517,7 @@ class Timeline extends Component {
                                     <i className="fa fa-send"/>
                                     <h3 className="qubely-timeline-placeholder-title"> Animation </h3>
                                     <p> Apply various actions on one or multiple elements to create a sequenced animation. </p>
-                                    <a href="#" className="qubely-timeline-tutorial-button"> <i className="fa fa-video-camera"/> Video Tutorial </a>
+                                    {/* <a href="#" className="qubely-timeline-tutorial-button"> <i className="fa fa-video-camera"/> Video Tutorial </a> */}
                                 </div>
                             </div> }
                         </div>

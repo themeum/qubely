@@ -1,10 +1,10 @@
-=== Advanced Gutenberg Blocks – Qubely ===
-Contributors: themeum, kawshar, mhshohel, jakirhasan, anik4e, faisalahmed29, delowardev, rejuancse, fahimmurshed, badsha_eee, joomcoder, sksaaju, mehedih
+=== Gutenberg Blocks – Qubely ===
+Contributors: themeum, kawshar, jakirhasan, anik4e, faisalahmed29, delowardev, rejuancse, fahimmurshed, badsha_eee, joomcoder, sksaaju, mehedih, mhshohel
 Donate link: https://www.themeum.com
 Tags: Blocks, Gutenberg editor, Block editor, Block, Gutenberg, Gutenberg Blocks
 Requires at least: 5.0
 Tested up to: 5.2
-Stable tag: 1.1.6
+Stable tag: 1.2.0
 Requires PHP: 5.4.0
 License: GPL-2.0+
 License URI: http://www.gnu.org/licenses/gpl-2.0.txt
@@ -216,6 +216,11 @@ Found a bug? Please let us know by posting on the support section of this plugin
 
 
 == Changelog ==
+
+= 1.1.7 - 30 October, 2019 =
+Fix: Contact Form block - CSS issue in input fields  
+Fix: Image block - CSS issue  
+Fix: Video Popup block - fixed layout naming issue  
 
 = 1.1.6 - 09 October, 2019 =
 Fix: Contact Form block - CSS issue in input fields  
