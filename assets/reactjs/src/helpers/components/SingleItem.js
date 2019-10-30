@@ -20,7 +20,7 @@ export default (props) => {
                                         <i className="fas fa-upload"/> {__('Upgrade to Pro')}
                                     </a>
                                     :    
-                                    <a className="qubely-button" onClick={(e) => { props.importLayoutBlock( props.data, props.data.pro ) } }> 
+                                    <a className="qubely-button qubely-button-download" onClick={(e) => { props.importLayoutBlock( props.data, props.data.pro ) } }> 
                                         { props.spinner == props.data.ID ? <i className="fas fa-spinner fa-pulse"/> : <i className="fas fa-download"/>}{__('Import')} 
                                     </a>
                                 }

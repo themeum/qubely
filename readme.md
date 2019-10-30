@@ -202,6 +202,11 @@ Found a bug? Please let us know by posting on the support section of this plugin
 
 # Changelog
 
+**1.2.0 - 30 October, 2019**
+New: Mouse Movement effect 
+Update: Contact From block - Script  
+Update: Post Grid block - style  
+
 **1.1.6 - 09 October, 2019**
 Fix: Contact Form block - CSS issue in input fields  
 Fix: Image block - CSS issue  

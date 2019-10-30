@@ -429,10 +429,10 @@
   height: 33px;
   line-height: 32px;
   font-size: 13px;
-  color: #555;
-  border:1px solid #ccc;
+  color: #353535;
+  border:1px solid #f7f7f7;
   background: #f7f7f7;
-  box-shadow: inset 0 -1px 0 #ccc;
+  box-shadow:  0 1px 0 #ccc;
   vertical-align: top;
   border-radius: 3px;
   text-decoration: none;
@@ -452,6 +452,13 @@
   color: #fff;
   text-decoration: none;
   text-shadow: 0 -1px 1px #005d82, 1px 0 1px #005d82, 0 1px 1px #005d82, -1px 0 1px #005d82;
+}
+
+.qubely-import-button-group a.qubely-button-download {
+    border: 1px solid #1e70d6;
+    background: #1e70d6;
+    box-shadow:  0 1px 0 #165cb4;
+    color: #fff;
 }
 
 /*multiple box*/
