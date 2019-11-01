@@ -6,7 +6,7 @@ Donate link: <a href=" https://www.themeum.com">https://www.themeum.com</a>
 Tags: Qubely, website builder, gutenberg block, gutenberg, page builder, drag and drop editor, responsive, site editor, editor, drag-and-drop, visual editor, landing page, frontend editor, wordpress page builder, free page builder, layout builder  
 Requires at least: 5.0  
 Tested up to: 5.2  
-Stable tag: 1.2.0  
+Stable tag: 1.2.1  
 Requires PHP: 5.4.0  
 License: GPL-2.0+  
 License URI: http://www.gnu.org/licenses/gpl-2.0.txt
@@ -201,6 +201,10 @@ Found a bug? Please let us know by posting on the support section of this plugin
 
 
 # Changelog
+
+**1.2.1 - 01 November, 2019**
+Fix: Import Layout - Sections & Starter Packs count & search issue fixed  
+Update: Import Layout - Recategorized Sections & Starter Packs  
 
 **1.2.0 - 30 October, 2019**
 New: Mouse Movement effect 

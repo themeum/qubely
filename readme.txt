@@ -4,7 +4,7 @@ Donate link: https://www.themeum.com
 Tags: Blocks, Gutenberg editor, Block editor, Block, Gutenberg, Gutenberg Blocks
 Requires at least: 5.0
 Tested up to: 5.2
-Stable tag: 1.2.0
+Stable tag: 1.2.1
 Requires PHP: 5.4.0
 License: GPL-2.0+
 License URI: http://www.gnu.org/licenses/gpl-2.0.txt
@@ -216,6 +216,11 @@ Found a bug? Please let us know by posting on the support section of this plugin
 
 
 == Changelog ==
+
+
+= 1.2.1 - 01 November, 2019 =
+Fix: Import Layout - Sections & Starter Packs count & search issue fixed  
+Update: Import Layout - Recategorized Sections & Starter Packs  
 
 
 = 1.2.0 - 30 October, 2019 =
