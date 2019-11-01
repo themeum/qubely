@@ -278,7 +278,8 @@ class PageListModal extends Component {
         this.setState({
             itemType: 'block',
             layer: 'single',
-            parent_id: ''
+            parent_id: '',
+            searchContext: ''
         })
     }
 
@@ -328,8 +329,8 @@ class PageListModal extends Component {
                                         }
                                     }
                                 });
-                                if (index === -1) {
-                                    layoutCategories.push({ name: cat.name, slug: cat.slug, count: 0 })
+                                if (index == -1) {
+                                    layoutCategories.push({ name: cat.name, slug: cat.slug, count: item.parentID == 0 ? 1 : 0 })
                                 }
                             })
                         }
@@ -365,7 +366,8 @@ class PageListModal extends Component {
         this.setState({
             itemType: 'layout',
             layer: 'multiple',
-            parent_id: ''
+            parent_id: '',
+            searchContext: ''
         })
     }
 
@@ -385,18 +387,21 @@ class PageListModal extends Component {
                     layer: 'block',
                     itemType: 'saved_blocks',
                     savedBlocks: response.data,
+                    searchContext:''
                 });
             }).catch(error => {
                 requestFailedMsg.push(error.code + ' : ' + error.message);
                 this.setState({
                     loading: false,
-                    requestFailedMsg
+                    requestFailedMsg,
+                    searchContext:''
                 });
             });
         } else {
             this.setState({
                 layer: 'block',
-                itemType: 'saved_blocks'
+                itemType: 'saved_blocks',
+                searchContext: ''
             });
         }
     }
@@ -501,7 +506,8 @@ class PageListModal extends Component {
         if (type == 'heading') {
             if (itemType == 'block') {
                 if (selectedBlockCategory == '') {
-                    blockCategories.forEach(function (data) { count = count + data.count; });
+                    count = singleCount
+                    //blockCategories.forEach(function (data) { count = count + data.count; });
                 } else {
                     blockCategories.forEach(function (data) {
                         if (data.slug == selectedBlockCategory) {
@@ -513,7 +519,8 @@ class PageListModal extends Component {
             } else {
                 if (this.state.layer == 'multiple') {
                     if (selectedLayoutCategory == '') {
-                        layoutCategories.forEach(function (data) { count = count + data.count; });
+                        //layoutCategories.forEach(function (data) { count = count + data.count; });
+                        count = singleCount
                     } else {
                         layoutCategories.forEach(function (data) {
                             if (data.slug == selectedLayoutCategory) {
@@ -531,8 +538,8 @@ class PageListModal extends Component {
                 Object.keys(blockData).forEach(function (key) { count = count + blockData[key].length; });
                 return count;
             } else {
-                layoutCategories.forEach(function (data) { count = count + data.count; });
-                return count
+                // layoutCategories.forEach(function (data) { count = count + data.count; });
+                return singleCount
             }
         }
     }
@@ -582,7 +589,7 @@ class PageListModal extends Component {
                                     onClick={() => this._OnChangeCategory('')}>
                                     {__('All ')}{itemType == 'block' ? 'Sections' : 'Bundles'}
                                     <span>
-                                        {this._getDataLength('category')}
+                                        {this._getDataLength('category', currentPageData.length)}
                                     </span>
                                 </li>
                                 {
