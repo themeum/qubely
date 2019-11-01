@@ -30,7 +30,7 @@ class PageListModal extends Component {
             layer: 'single',
             searchContext: '',
             isSearchEnable: false,
-            notFoundMessage: 'Sorry, we couldn’t find the match.',
+            notFoundMessage: 'Sorry, we couldn\'t find the match.',
             requestFailedMsg: '',
             spinner: false,
             lazyloadThrottleTimeout: 0,
@@ -541,10 +541,10 @@ class PageListModal extends Component {
         } else {
             if (itemType == 'block') {
                 Object.keys(blockData).forEach(function (key) { count = count + blockData[key].length; });
-                return count;
+                return count
             } else {
-                // layoutCategories.forEach(function (data) { count = count + data.count; });
-                return singleCount
+                layoutCategories.forEach(function (data) { count = count + data.count; });
+                return count
             }
         }
     }
