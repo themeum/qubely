@@ -198,7 +198,7 @@ class PageListModal extends Component {
         }
 
         if (itemType != 'saved_blocks') {
-            currentPageData = priceFilter == 'pro' ? currentPageData.filter(item => item.pro == true) : priceFilter == 'pro' ? currentPageData.filter(item => item.pro == false) : currentPageData;
+            currentPageData = priceFilter == 'pro' ? currentPageData.filter(item => item.pro == true) : (priceFilter == 'free' ? currentPageData.filter(item => item.pro == false) : currentPageData);
         }
 
         if (this.state.isSearchEnable) {
@@ -279,7 +279,8 @@ class PageListModal extends Component {
             itemType: 'block',
             layer: 'single',
             parent_id: '',
-            searchContext: ''
+            searchContext: '',
+            priceFilter: ''
         })
     }
 
@@ -367,7 +368,8 @@ class PageListModal extends Component {
             itemType: 'layout',
             layer: 'multiple',
             parent_id: '',
-            searchContext: ''
+            searchContext: '',
+            priceFilter: ''
         })
     }
 
@@ -387,21 +389,24 @@ class PageListModal extends Component {
                     layer: 'block',
                     itemType: 'saved_blocks',
                     savedBlocks: response.data,
-                    searchContext:''
+                    searchContext:'',
+                    priceFilter: ''
                 });
             }).catch(error => {
                 requestFailedMsg.push(error.code + ' : ' + error.message);
                 this.setState({
                     loading: false,
                     requestFailedMsg,
-                    searchContext:''
+                    searchContext:'',
+                    priceFilter: ''
                 });
             });
         } else {
             this.setState({
                 layer: 'block',
                 itemType: 'saved_blocks',
-                searchContext: ''
+                searchContext: '',
+                priceFilter: ''
             });
         }
     }
@@ -567,7 +572,7 @@ class PageListModal extends Component {
 
                     <div className="qubely-template-list-header">
                         <button className={this.state.itemType == 'block' ? 'active' : ''} onClick={e => this._onlickBlocksTab()}> {__('Sections')} </button>
-                        <button className={this.state.itemType == 'layout' ? 'active' : ''} onClick={e => this._onlickLayoutsTab()}> {__('Bundles')} </button>
+                        <button className={this.state.itemType == 'layout' ? 'active' : ''} onClick={e => this._onlickLayoutsTab()}> {__('Starter Packs')} </button>
                         <button className={this.state.itemType == 'saved_blocks' ? 'active' : ''} onClick={e => this._onlickSavedBlocksTab()}> {__('Saved')} </button>
                         <button className="qubely-builder-close-modal" onClick={e => { ModalManager.close() }} >
                             <i className={"fas fa-times"} />
@@ -587,7 +592,7 @@ class PageListModal extends Component {
                                 <li
                                     className={itemType == 'block' ? '' == selectedBlockCategory ? 'active' : '' : '' == selectedLayoutCategory ? 'active' : ''}
                                     onClick={() => this._OnChangeCategory('')}>
-                                    {__('All ')}{itemType == 'block' ? 'Sections' : 'Bundles'}
+                                    {__('All ')}{itemType == 'block' ? 'Sections' : 'Starter Packs'}
                                     <span>
                                         {this._getDataLength('category', currentPageData.length)}
                                     </span>
@@ -618,16 +623,16 @@ class PageListModal extends Component {
                                 <span className={"qubely-template-back"} onClick={() => this.setState({ layer: 'multiple', parent_id: '' })}><span className="dashicons dashicons-arrow-left-alt" />&nbsp;</span>
                             }
                             {this._getDataLength('heading', currentPageData.length)}&nbsp;
-                            {itemType == 'block' ? __('Sections') : this.state.layer == 'single' ? __('Layouts') : __('Layout Bundles')}
+                            {itemType == 'block' ? __('Sections') : this.state.layer == 'single' ? __('Layouts') : __('Starter Packs')}
                         </h4>
-                        {/* <div className="qubely-template-filter-button-group">
+                        <div className="qubely-template-filter-button-group">
                             <button onClick={() => this._changePriceFilter()} className={'' == this.state.priceFilter ? 'active' : ''}>{__('All')}</button>
                             <button onClick={() => this._changePriceFilter('free')} className={'free' == this.state.priceFilter ? 'active' : ''}>{__('Free')}</button>
                             <button onClick={() => this._changePriceFilter('pro')} className={'pro' == this.state.priceFilter ? 'active' : ''}>
                                 <img src={qubely_admin.plugin+'assets/img/icon-premium.svg'} alt=""/>
                                 {__('Premium')}
                             </button>
-                        </div> */}
+                        </div>
                     </div>}
 
                     {!this.state.loading ?
