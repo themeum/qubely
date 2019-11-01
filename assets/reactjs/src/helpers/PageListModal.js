@@ -30,7 +30,7 @@ class PageListModal extends Component {
             layer: 'single',
             searchContext: '',
             isSearchEnable: false,
-            notFoundMessage: 'Sorry we couldn\'t find your match request!',
+            notFoundMessage: 'Sorry, we couldn’t find the match.',
             requestFailedMsg: '',
             spinner: false,
             lazyloadThrottleTimeout: 0,
