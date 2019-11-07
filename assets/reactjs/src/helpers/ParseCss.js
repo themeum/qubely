@@ -98,11 +98,9 @@ const ParseCss = (setDatabase = true) => {
     let parseData = innerBlocks(getBlocks(), true)
     __blocks.interaction = parseData.interaction
     __blocks.css += parseData.css
-    if (__blocks.css !== '') {
-        localStorage.setItem('qubelyCSS', __blocks)
-        if (setDatabase) {
-            API_fetch(getCurrentPostId(), __blocks, isRemain ).then(data => { })
-        }
+    localStorage.setItem('qubelyCSS', __blocks)
+    if (setDatabase) {
+        API_fetch(getCurrentPostId(), __blocks, isRemain ).then(data => { })
     }
     setTimeout(() => {
         window.bindCss = false
