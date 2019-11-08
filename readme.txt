@@ -217,6 +217,10 @@ Found a bug? Please let us know by posting on the support section of this plugin
 
 == Changelog ==
 
+= 1.2.2 - 08 November, 2019 =
+Fix: CSS loading issue fixed
+Fix: Typography Issue fixed
+Update: Now CSS load form File System
 
 = 1.2.1 - 01 November, 2019 =
 Fix: Import Layout - Sections & Starter Packs count & search issue fixed  
