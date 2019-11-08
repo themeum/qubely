@@ -99,6 +99,10 @@ class Edit extends Component {
                 //animation
                 animation,
                 //global
+                enablePosition,
+                selectPosition,
+                positionXaxis,
+                positionYaxis,
                 globalZindex,
                 hideTablet,
                 hideMobile,
@@ -312,9 +316,10 @@ class Edit extends Component {
                 <InspectorAdvancedControls>
                     <Toggle label={__('Column Reverse')} responsive value={rowReverse.values} onChange={val => setAttributes({ rowReverse: { values: val, openRowReverse: true } })} />
                     <TextControl label={__('CSS ID')} value={rowId} onChange={val => setAttributes({ rowId: val })} />
+                    {globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes, true)}
                 </InspectorAdvancedControls>
 
-                {globalSettingsPanel(globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
+                
 
                 <div className={`qubely-section qubely-block-${uniqueId} ${(rowBg.bgimgParallax && rowBg.bgimgParallax == 'animated') ? 'qubely-section-parallax' : ''}`} {...rowId ? { id: rowId } : ''}>
                     <div className="qubley-padding-indicator">

@@ -24,77 +24,79 @@ export const globalAttributes = {
     globalCss: { type: 'string', default: '', style: [{ selector: '' }] },
 }
 
-export function globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes) {
-    return (
-        <InspectorAdvancedControls>
-            <Toggle
-                label={__('Enable Custom Position')}
-                value={enablePosition}
-                onChange={() => setAttributes({ enablePosition: !enablePosition })} 
-            />
-            {enablePosition &&
-                <Fragment>
-                    <SelectControl
-                        label={__('Select Position')}
-                        value={selectPosition || ''}
-                        options={[
-                            { label: __('Relative'), value: 'relative' },
-                            { label: __('Absolute'), value: 'absolute' },
-                            { label: __('Fixed'), value: 'fixed' }
-                        ]}
-                        onChange={val => setAttributes({ selectPosition: val })}
+export function globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes, isReturn = false) {
+
+    const Output = <Fragment>
+                    <Toggle
+                        label={__('Enable Custom Position')}
+                        value={enablePosition}
+                        onChange={() => setAttributes({ enablePosition: !enablePosition })} 
                     />
+                    {enablePosition &&
+                        <Fragment>
+                            <SelectControl
+                                label={__('Select Position')}
+                                value={selectPosition || ''}
+                                options={[
+                                    { label: __('Relative'), value: 'relative' },
+                                    { label: __('Absolute'), value: 'absolute' },
+                                    { label: __('Fixed'), value: 'fixed' }
+                                ]}
+                                onChange={val => setAttributes({ selectPosition: val })}
+                            />
+                            <Range
+                                label={__('From X-axis')}
+                                min={-2000}
+                                max={2000}
+                                step={1}
+                                unit={['px', 'em', '%']}
+                                responsive
+                                // device={this.state.device}
+                                // onDeviceChange={value => this.setState({ device: value })}
+                                value={positionXaxis}
+                                onChange={value => setAttributes({ positionXaxis: value })} 
+                            />
+                            <Range
+                                label={__('From Y-axis')}
+                                min={-2000}
+                                max={2000}
+                                step={1}
+                                unit={['px', 'em', '%']}
+                                responsive
+                                // device={this.state.device}
+                                // onDeviceChange={value => this.setState({ device: value })}
+                                value={positionYaxis}
+                                onChange={value => setAttributes({ positionYaxis: value })} 
+                            />
+                        </Fragment>
+                    }
                     <Range
-                        label={__('From X-axis')}
-                        min={-2000}
-                        max={2000}
-                        step={1}
-                        unit={['px', 'em', '%']}
-                        responsive
-                        // device={this.state.device}
-                        // onDeviceChange={value => this.setState({ device: value })}
-                        value={positionXaxis}
-                        onChange={value => setAttributes({ positionXaxis: value })} 
+                        label={__('Z-Index')}
+                        min={1}
+                        max={10000}
+                        value={globalZindex}
+                        onChange={value => setAttributes({ globalZindex: value })} 
                     />
-                    <Range
-                        label={__('From Y-axis')}
-                        min={-2000}
-                        max={2000}
-                        step={1}
-                        unit={['px', 'em', '%']}
-                        responsive
-                        // device={this.state.device}
-                        // onDeviceChange={value => this.setState({ device: value })}
-                        value={positionYaxis}
-                        onChange={value => setAttributes({ positionYaxis: value })} 
+                    <Toggle
+                        label={__('Hide on Tablet')}
+                        value={hideTablet}
+                        onChange={() => setAttributes({ hideTablet: !hideTablet })} 
                     />
-                </Fragment>
-            }
-            <Range
-                label={__('Z-Index')}
-                min={1}
-                max={10000}
-                value={globalZindex}
-                onChange={value => setAttributes({ globalZindex: value })} 
-            />
-            <Toggle
-                label={__('Hide on Tablet')}
-                value={hideTablet}
-                onChange={() => setAttributes({ hideTablet: !hideTablet })} 
-            />
-            <Toggle
-                label={__('Hide on Phone')}
-                value={hideMobile}
-                onChange={() => setAttributes({ hideMobile: !hideMobile })} />
-            <Separator
-                label={__('Block Raw CSS')} />
-            <TextareaControl
-                value={globalCss}
-                rows={5}
-                placeholder={__('Use {{QUBELY}} before the selector to wrap element. Otherwise it works globally.')}
-                onChange={val => setAttributes({ globalCss: val })} />
-        </InspectorAdvancedControls>
-    )
+                    <Toggle
+                        label={__('Hide on Phone')}
+                        value={hideMobile}
+                        onChange={() => setAttributes({ hideMobile: !hideMobile })} />
+                    <Separator
+                        label={__('Block Raw CSS')} />
+                    <TextareaControl
+                        value={globalCss}
+                        rows={5}
+                        placeholder={__('Use {{QUBELY}} before the selector to wrap element. Otherwise it works globally.')}
+                        onChange={val => setAttributes({ globalCss: val })} />
+            </Fragment>
+
+    return  isReturn ? Output : <InspectorAdvancedControls>{Output}</InspectorAdvancedControls>
+    
 }
 
 export function animationSettings(uniqueId, animation, setAttributes) {
