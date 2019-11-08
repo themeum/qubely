@@ -12,13 +12,12 @@ const blockAttrs = {
 	h6: {type: 'object',default:{}, style: [{ selector: 'body:not(.wp-admin) h6, .editor-styles-wrapper h6' }] },
 	button: {type: 'object',default:{}, style: [{ selector: 'body:not(.wp-admin) .quebly-button, .editor-styles-wrapper .quebly-button' }] },
 
-	colorPreset1: {type: 'string', default: '#062040' },
-	colorPreset2: {type: 'string', default: '#566372' },
-	colorPreset3: {type: 'string', default: '#2084F9' },
-	colorPreset4: {type: 'string', default: '#F3F3F3' },
-	colorPreset5: {type: 'string', default: '#EEEEEE' },
-	colorPreset6: {type: 'string', default: '#FFFFFF' },
-
+	colorPreset1: {type: 'string', default: qubely_admin.palette[0]},
+	colorPreset2: {type: 'string', default: qubely_admin.palette[1]},
+	colorPreset3: {type: 'string', default: qubely_admin.palette[2]},
+	colorPreset4: {type: 'string', default: qubely_admin.palette[3]},
+	colorPreset5: {type: 'string', default: qubely_admin.palette[4]},
+	colorPreset6: {type: 'string', default: qubely_admin.palette[5]},
 }
 
 /**

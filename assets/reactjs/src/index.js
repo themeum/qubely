@@ -41,12 +41,12 @@ window.qubelyDevice = 'md'
 window.bindCss = false
 window.globalData = {
     settings: {
-        colorPreset1: '#456bed',
-        colorPreset2: '#30ac3d',
-        colorPreset3: '#fa9200',
-        colorPreset4: '#006fbf',
-        colorPreset5: '#ff1818',
-        colorPreset6: '#941f90',
+        colorPreset1: qubely_admin.palette[0],
+        colorPreset2: qubely_admin.palette[1],
+        colorPreset3: qubely_admin.palette[2],
+        colorPreset4: qubely_admin.palette[3],
+        colorPreset5: qubely_admin.palette[4],
+        colorPreset6: qubely_admin.palette[5],
     }
 };
 window.globalSaving = false

@@ -13,12 +13,12 @@ class Color extends Component {
     defColors() {
         let val = [];
         const colors = window.globalData.settings;
-        val.push(colors.colorPreset1 || '#062040')
-        val.push(colors.colorPreset2 || '#566372')
-        val.push(colors.colorPreset3 || '#2084F9')
-        val.push(colors.colorPreset4 || '#F3F3F3')
-        val.push(colors.colorPreset5 || '#EEEEEE')
-        val.push(colors.colorPreset6 || '#FFFFFF')
+        val.push(colors.colorPreset1 || qubely_admin.palette[0])
+        val.push(colors.colorPreset2 || qubely_admin.palette[1])
+        val.push(colors.colorPreset3 || qubely_admin.palette[2])
+        val.push(colors.colorPreset4 || qubely_admin.palette[3])
+        val.push(colors.colorPreset5 || qubely_admin.palette[4])
+        val.push(colors.colorPreset6 || qubely_admin.palette[5])
         return val;
     }
 
