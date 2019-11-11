@@ -81,6 +81,20 @@ function isQubelyBlock(blocks){
         if(block.name.indexOf('qubely/')!= -1){
             isQubely = true;
         }
+        if (block.innerBlocks && (block.innerBlocks).length > 0 && isQubely != true) {
+            block.innerBlocks.forEach( bl => {
+                if(bl.name.indexOf('qubely/')!= -1){
+                    isQubely = true;
+                }
+                if (bl.innerBlocks && (bl.innerBlocks).length > 0 && isQubely != true) {
+                    bl.innerBlocks.forEach( b => {
+                        if(b.name.indexOf('qubely/')!= -1){
+                            isQubely = true;
+                        }
+                    })
+                }
+            })
+        }
     })
     return isQubely;
 }
