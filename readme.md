@@ -201,10 +201,12 @@ Found a bug? Please let us know by posting on the support section of this plugin
 
 
 # Changelog
-**1.2.2 - 08 November, 2019**
-Fix: CSS loading issue fixed
-Fix: Typography Issue fixed
-Update: Now CSS load form File System
+**1.2.2 - 11 November, 2019**
+New: add_theme_support added to qubely-color-palette  
+Fix: CSS loading from file issue  
+Fix: Qubely CSS loading in non-Qubely pages  
+Fix: Global settings issue  
+Update: Few label texts  
 
 **1.2.1 - 01 November, 2019**
 Fix: Import Layout - Sections & Starter Packs count & search issue fixed  
