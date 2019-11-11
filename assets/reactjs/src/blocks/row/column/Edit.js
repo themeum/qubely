@@ -5,8 +5,10 @@ const { Component, Fragment } = wp.element
 const { InnerBlocks, InspectorControls, BlockControls } = wp.blockEditor
 const { createBlock } = wp.blocks
 const { select, dispatch } = wp.data
+
 const { Background, Border, BorderRadius, BoxShadow, Range, Separator, Dimension, gloalSettings: { globalSettingsPanel, animationSettings }, CssGenerator: { CssGenerator } } = wp.qubelyComponents
 
+$ = jQuery;
 class Edit extends Component {
     constructor() {
         super(...arguments);
