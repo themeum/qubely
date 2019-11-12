@@ -201,6 +201,11 @@ Found a bug? Please let us know by posting on the support section of this plugin
 
 
 # Changelog
+
+**1.2.3 - 12 November, 2019**
+Update: WordPress 5.3 compatibility added
+Update: Heading block - Replaced deprecated components: RichText, InspectorControls, BlockControls 
+
 **1.2.2 - 11 November, 2019**
 New: add_theme_support added to qubely-color-palette  
 Fix: CSS loading from file issue  
