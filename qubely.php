@@ -24,7 +24,7 @@ function qubely_language_load()
 }
 
 // Define Version
-define('QUBELY_VERSION', '1.2.2');
+define('QUBELY_VERSION', '1.2.3');
 
 // Define License
 define('QUBELY_LICENSE', 'free');
