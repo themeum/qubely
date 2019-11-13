@@ -11,7 +11,12 @@ registerBlockType('qubely/heading', {
 	category: 'qubely',
 	icon: <img src={qubely_admin.plugin + 'assets/img/blocks/block-heading.svg'} alt={__('Heading Block')} />,
 	supports: { align: false },
-	keywords: [__('heading'), __('head'), __('title')],
+    keywords: [__('heading'), __('head'), __('title')],
+    example: {
+		attributes: {
+			content: __( 'Make headlines/titles that attract users with Qubely Heading.', 'qubely' )
+		},
+	},
 	attributes: {
 		uniqueId: { type: 'string', default: '' },
 		...globalAttributes,

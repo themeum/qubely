@@ -11,6 +11,16 @@ if(!qubely_admin.pro_enable){
         icon: <img src={qubely_admin.plugin + 'assets/img/blocks/block-post-grid.svg'} alt={__('Postgrid Block')} />,
         category: 'qubely',
         keywords: [__('Post'), __('Post Grid')],
+        example: {
+            attributes: {
+                layout: 2,
+                column: {
+                    md: 1
+                },
+                showExcerpt: false,
+                postsToShow: 1
+            },
+        },
         edit: Edit,
         save: function( props ) {
             return null;

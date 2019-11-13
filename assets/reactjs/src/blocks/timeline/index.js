@@ -14,7 +14,26 @@ registerBlockType('qubely/timeline', {
 		__('Timeline'),
 		__('Content'),
 		__('Roadmap'),
-	],
+    ],
+    example: {
+        attributes: {
+            timelineItems: 1,
+            orientation:'left',
+            enableDateTime:false,
+            verticalSpacing: {
+                md: 50,
+                unit:'px'
+            },
+            timelineContents: [
+                {
+                    description: __( 'Make headlines/titles that attract users with Qubely Heading.', 'qubely' )
+                },
+                {
+                    description: __( 'Make headlines/title', 'qubely' )
+                }
+            ]
+        },
+    },
 	attributes: {
 		uniqueId: { type: 'string', default: '' },
 		// Global

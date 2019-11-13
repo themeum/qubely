@@ -11,6 +11,10 @@ registerBlockType('qubely/iconlist', {
     category: 'qubely',
     icon: <img src={qubely_admin.plugin + 'assets/img/blocks/block-icon-list.svg'} alt={__('Icon List')} />,
     keywords: [__('icon', 'list', 'icon list')],
+    example: {
+		attributes: {},
+	},
+
     attributes: {
         uniqueId: { type: 'string', default: '' },
         ...globalAttributes,

@@ -155,6 +155,9 @@ registerBlockType('qubely/row', {
     icon: <img src={qubely_admin.plugin + 'assets/img/blocks/block-row.svg'} alt={__('Row Block')} />,
     supports: { align: ['wide', 'center', 'full'] },
     keywords: [__('Row'), __('rw'), __('Layout')],
+    example: {
+        attributes: {},
+    },
     attributes,
     edit: Edit,
     save: Save,

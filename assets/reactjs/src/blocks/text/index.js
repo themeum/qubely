@@ -15,6 +15,14 @@ registerBlockType('qubely/text', {
     icon: <img src={qubely_admin.plugin + 'assets/img/blocks/block-text.svg'} alt={__('Advanced Text Block')} />,
     supports: { align: false },
     keywords: [__('text'), __('paragraph'), __('heading')],
+    example: {
+		attributes: {
+            enableTitle: true,
+            title: __( 'Advanced Text Block', 'qubely' ),
+            dropCap: true,
+			content: __( 'Qubely blocks is added to the Gutenberg editor as soon as you install the plugin. You can start using it as any other Gutenberg block. Add ready blocks using the plus sign where you’ll find a new section of blocks under the Qubely icon.', 'qubely' ),
+		},
+	},
     attributes: {
         uniqueId: { type: 'string', default: '' },
         // Global

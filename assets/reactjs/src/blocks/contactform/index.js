@@ -18,6 +18,9 @@ registerBlockType('qubely/contactform', {
     category: 'qubely',
     icon: <img src={qubely_admin.plugin + 'assets/img/blocks/block-contact-form.svg'} alt={__('Contact Form')} />,
     keywords: [__('Contact'), __('Form')],
+    example: {
+        attributes: {},
+    },
     attributes: {
         uniqueId: { type: 'string', default: '' },
         ...globalAttributes,

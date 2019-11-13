@@ -12,6 +12,9 @@ registerBlockType('qubely/accordion', {
     icon: <img src={qubely_admin.plugin + 'assets/img/blocks/block-accordion.svg'} alt={__('Accordion Block')} />,
     keywords: [__('accordion'), __('collapsible'), __('collapse')],
     supports: { html: false, className: false },
+    example: {
+        attributes: {},
+    },
     attributes: {
         uniqueId: { type: 'string', default: '' },
         defaultItems: { type: 'number', default: 2 },

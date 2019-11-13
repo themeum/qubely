@@ -11,7 +11,12 @@ registerBlockType('qubely/icon', {
 	category: 'qubely',
 	icon: <img src={qubely_admin.plugin + 'assets/img/blocks/block-icon.svg'} alt={__('Icon Block')} />,
 	supports: { align: false },
-	keywords: [__('Icon'), __('Font Awesome'), __('Line Icon')],
+    keywords: [__('Icon'), __('Font Awesome'), __('Line Icon')],
+    example: {
+		attributes: {
+            name: 'fas fa-rocket',
+		},
+	},
 	attributes: {
 		uniqueId: { type: 'string', default: '' },
 		...globalAttributes,

@@ -12,6 +12,12 @@ registerBlockType('qubely/team', {
     category: 'qubely',
     supports: { align: false },
     keywords: [__('Team'), __('profile')],
+    example: {
+		attributes: {
+            contentBg: '',
+            image: { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/St_Pancras_Railway_Station_2012-06-23.jpg/711px-St_Pancras_Railway_Station_2012-06-23.jpg' },
+        },
+	},
     attributes: {
         uniqueId: { type: 'string', default: '' },
         // Global

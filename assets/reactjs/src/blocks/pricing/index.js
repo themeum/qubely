@@ -10,8 +10,10 @@ registerBlockType('qubely/pricing', {
     description: 'Showcase Pricing in beautiful pre-designed Pricing Table with Qubely Pricing.',
     category: 'qubely',
     icon: <img src={qubely_admin.plugin + 'assets/img/blocks/block-pricing.svg'} alt={__('Pricing Block')} />,
-
     keywords: [__('Pricing'), __('Pricing Table')],
+    example: {
+		attributes: {},
+	},
     attributes: {
         uniqueId: { type: 'string', default: '' },
         ...globalAttributes,

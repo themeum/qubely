@@ -11,6 +11,13 @@ registerBlockType('qubely/image', {
     category: 'qubely',
     icon: <img src={qubely_admin.plugin + 'assets/img/blocks/block-image.svg'} alt={__('Image')} />,
     keywords: [__('image', 'advanced image', 'fancy image'), 'image overlay'],
+    example: {
+		attributes: {
+            image: { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/St_Pancras_Railway_Station_2012-06-23.jpg/711px-St_Pancras_Railway_Station_2012-06-23.jpg' },
+            enableCaption: true,
+            imageCaption: __( 'Make headlines/titles that attract users with Qubely Heading.', 'qubely' ),
+		},
+	},
     attributes: {
 
         uniqueId: {

@@ -12,6 +12,9 @@ registerBlockType('qubely/infobox', {
     category: 'qubely',
     supports: { align: false },
     keywords: [__('service'), __('feature'), __('info')],
+    example: {
+		attributes: {},
+	},
     attributes: {
         uniqueId: { type: 'string', default: '' },
          // Global
