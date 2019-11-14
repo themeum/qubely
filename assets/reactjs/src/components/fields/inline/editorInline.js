@@ -7,6 +7,17 @@ const { RichTextToolbarButton } = wp.blockEditor;
 const { registerFormatType } = wp.richText;
 const { ColorPicker, Popover } = wp.components;
 
+function defColors() {
+    let val = [];
+    const colors = window.globalData.settings;
+    val.push(colors.colorPreset1 || qubely_admin.palette[0])
+    val.push(colors.colorPreset2 || qubely_admin.palette[1])
+    val.push(colors.colorPreset3 || qubely_admin.palette[2])
+    val.push(colors.colorPreset4 || qubely_admin.palette[3])
+    val.push(colors.colorPreset5 || qubely_admin.palette[4])
+    val.push(colors.colorPreset6 || qubely_admin.palette[5])
+    return val;
+}
 
 function registerFormat() {
 
@@ -133,7 +144,19 @@ function registerFormat() {
                                             endIndex: value.end
                                         }))
                                     }} />
-
+                                    <div className="qubely-rgba-palette" style={{ padding: '0px 0px 15px 15px' }}>
+                                        {defColors().map(color => <button style={{ color: color }} onClick={() => {
+                                            onChange(applyFormat(value, {
+                                                type: 'qubely/inlinecolor',
+                                                attributes: {
+                                                    style: `color: ${color};`,
+                                                    data: color
+                                                },
+                                                startIndex: value.start,
+                                                endIndex: value.end
+                                            }))
+                                        }} />)}
+                                    </div>
                             </Popover>
                         }
                     </Fragment>
@@ -231,6 +254,20 @@ function registerFormat() {
                                             endIndex: value.end
                                         }))
                                     }} />
+
+                                <div className="qubely-rgba-palette" style={{ padding: '0px 0px 15px 15px' }}>
+                                    {defColors().map(color => <button style={{ color: color }} onClick={() => {
+                                        onChange(applyFormat(value, {
+                                            type: 'qubely/backgroundcolor',
+                                            attributes: {
+                                                style: `background-color: ${color};`,
+                                                data: color
+                                            },
+                                            startIndex: value.start,
+                                            endIndex: value.end
+                                        }))
+                                    }} />)}
+                                </div>
 
                             </Popover>
                         }
