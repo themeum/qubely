@@ -161,7 +161,7 @@ class Edit extends Component {
                                 {((style == 'fill') || (style == 'dot') || (style == 'dash')) ?
                                     <div className={`qubely-block-divider-style-${style}`} />
                                     :
-                                    <span data-name={style}>{icons[style]}</span>
+                                    <span>{icons[style]}</span>
                                 }
                             </div>
                         }
