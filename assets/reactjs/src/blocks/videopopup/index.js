@@ -11,7 +11,10 @@ registerBlockType('qubely/videopopup', {
 	icon: <img src={qubely_admin.plugin + 'assets/img/blocks/block-videopopup.svg'} alt={__('Video popup Block')} />,
 	category: 'qubely',
 	supports: { align: false },
-	keywords: [__('video'), __('popup'), __('video popup')],
+    keywords: [__('video'), __('popup'), __('video popup')],
+    example: {
+        attributes: {},
+    },
 	attributes: {
 		uniqueId: { type: 'string', default: '' },
 		// Global

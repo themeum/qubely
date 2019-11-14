@@ -15,7 +15,7 @@ registerBlockType('qubely/team', {
     example: {
 		attributes: {
             contentBg: '',
-            image: { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/St_Pancras_Railway_Station_2012-06-23.jpg/711px-St_Pancras_Railway_Station_2012-06-23.jpg' },
+            image: { url: 'https://builder.themeum.com/wp-content/uploads/2019/02/video-popup-bg.jpg' },
         },
 	},
     attributes: {

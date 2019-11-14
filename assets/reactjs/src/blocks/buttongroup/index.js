@@ -12,6 +12,9 @@ registerBlockType('qubely/buttongroup', {
     icon: <img src={qubely_admin.plugin + 'assets/img/blocks/block-button-group.svg'} alt={__('Button Group Block')} />,
     supports: { align: false },
     keywords: [__('button'), __('link'), __('button group')],
+    example: {
+        attributes: {},
+    },
     attributes: {
         uniqueId: { type: 'string', default: '' },
         ...globalAttributes,

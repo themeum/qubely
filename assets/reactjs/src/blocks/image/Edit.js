@@ -1,6 +1,6 @@
 const { __ } = wp.i18n
 const { Fragment, Component } = wp.element;
-const { PanelBody, TextControl, Toolbar } = wp.components
+const { PanelBody, TextControl, Toolbar, SelectControl } = wp.components
 const { RichText, InspectorControls, BlockControls } = wp.blockEditor
 const { Media, Range, BoxShadow, Tabs, Tab, RadioAdvanced, Typography, Toggle, Styles, Alignment, ColorAdvanced, Color, Headings, Border, BorderRadius, Padding, Separator, Select, Margin, Url, gloalSettings: { globalSettingsPanel, animationSettings, interactionSettings }, Inline: { InlineToolbar }, CssGenerator: { CssGenerator }, ContextMenu: { ContextMenu, handleContextMenu }, } = wp.qubelyComponents
 import icons from '../../helpers/icons'
@@ -49,7 +49,8 @@ class Edit extends Component {
             contentPadding,
             contentVerticalAlign,
             contentAlignment,
-
+            
+            imgSize,
             image,
             image2x,
             imgAlt,
@@ -110,13 +111,18 @@ class Edit extends Component {
                         />
                         <Alignment label={__('Alignment')} value={alignment} alignmentType="content" onChange={val => setAttributes({ alignment: val })} alignmentType="content" disableJustify responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
                         <Separator />
+                        <SelectControl
+							label={__("Image Sizes")}
+							value={imgSize}
+							onChange={(value) => setAttributes({ imgSize: value })}
+							options={qubely_admin.image_sizes}
+						/>
                         <Media label={__('Image')} multiple={false} type={['image']} panel={true} value={image} onChange={val => setAttributes({ image: val })} />
                         <Media label={__('Retina Image (@2x)')} multiple={false} type={['image']} panel={true} value={image2x} onChange={val => setAttributes({ image2x: val })} />
                         {
                             layout === 'simple' &&
                             <Url label={__('URL')} value={imageUrl} onChange={(value) => setAttributes({ imageUrl: value })} />
                         }
-
                         <TextControl label={__('Alt Text')} value={imgAlt} onChange={val => setAttributes({ imgAlt: val })} />
                         <RadioAdvanced label={__('Size')} value={imageSize} onChange={(value) => setAttributes({ imageSize: value })}
                             options={[

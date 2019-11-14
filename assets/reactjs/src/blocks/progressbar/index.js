@@ -11,7 +11,10 @@ registerBlockType( 'qubely/progressbar', {
 	category: 'qubely',
 	icon: <img src={qubely_admin.plugin+'assets/img/blocks/block-progressbar.svg'} alt={__('Progress Bar Block')} />,
 	supports: { align: false },
-	keywords: [__('progress'), __('bar'), __('bar progress')],
+    keywords: [__('progress'), __('bar'), __('bar progress')],
+    example: {
+        attributes: {},
+    },
 	attributes: {
 		uniqueId: { type: 'string', default: '' },
 		...globalAttributes,  // Global Settings
