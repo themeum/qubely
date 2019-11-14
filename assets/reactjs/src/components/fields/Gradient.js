@@ -7,8 +7,6 @@ import Range from "./Range"
 
 const defaultState = { color1: '#16d03e', color2: '#1f91f3', type: 'linear', direction: '90', start: 5, stop: 80, radial: 'center', clip: false };
 
-const colors = [ qubely_admin.palette[0], qubely_admin.palette[1], qubely_admin.palette[2], qubely_admin.palette[3], qubely_admin.palette[4], qubely_admin.palette[5] ];
-
 
 class Gradient extends Component {
 
@@ -17,6 +15,18 @@ class Gradient extends Component {
         this.state = {
             enableGradient: false,
         }
+    }
+
+    defColors() {
+        let val = [];
+        const colors = window.globalData.settings;
+        val.push(colors.colorPreset1 || qubely_admin.palette[0])
+        val.push(colors.colorPreset2 || qubely_admin.palette[1])
+        val.push(colors.colorPreset3 || qubely_admin.palette[2])
+        val.push(colors.colorPreset4 || qubely_admin.palette[3])
+        val.push(colors.colorPreset5 || qubely_admin.palette[4])
+        val.push(colors.colorPreset6 || qubely_admin.palette[5])
+        return val;
     }
 
     componentWillMount() {
@@ -37,7 +47,7 @@ class Gradient extends Component {
                     }
                 }} />
                 <div className="qubely-rgba-palette" style={{ padding: '0px 0px 15px 15px' }}>
-                    {colors.map(
+                    {this.defColors().map(
                         color => <button style={{ color: color }} onClick={() => this.setSettings(color, colorType)} />
                     )}
                 </div>
