@@ -41,18 +41,29 @@ registerBlockType('qubely/team', {
             style: [
                 {
                     condition: [
-                        { key: 'layout', relation: '!=', value: 2 },
+                        { key: 'layout', relation: '==', value: 1 },
                     ],
-                    selector: '{{QUBELY}} .qubely-team-image-wrapper img {width: {{imageWidth}};}'
+                    selector: '{{QUBELY}} .qubely-team-image-wrapper {width: {{imageWidth}};} {{QUBELY}} .qubely-team-image-wrapper img {width: 100%;}'
+                },
+                {
+                    condition: [
+                        { key: 'layout', relation: '==', value: 3 },
+                    ],
+                    selector: '{{QUBELY}} .qubely-block-team.qubely-team-layout-3 > div {flex: 0 0 {{imageWidth}}; max-width: {{imageWidth}}} {{QUBELY}} .qubely-team-image-wrapper img {width: 100%;}'
                 }
             ]
         },
+
         imageSpacing: {
             type: 'object', default: { md: 20, unit: 'px' },
             style: [
                 {
                     condition: [{ key: 'layout', relation: '==', value: 1 }],
                     selector: '{{QUBELY}} .qubely-team-image-wrapper {margin-bottom: {{imageSpacing}};}'
+                },
+                {
+                    condition: [{ key: 'layout', relation: '==', value: 3 }],
+                    selector: '{{QUBELY}} .qubely-team-image-wrapper {margin-right: {{imageSpacing}};}'
                 }
             ]
         },
