@@ -10,7 +10,7 @@ export default (props) => {
                 }</div>
                 <div className="qubely-tmpl-info">
                     <h5 className="qubely-tmpl-title" dangerouslySetInnerHTML={{__html:props.data.name}}/>
-                    <span className="qubely-temp-count">{ props.totalLayouts } {__('Layout')}</span>
+                    <span className="qubely-temp-count">{ props.totalLayouts } {__('Layouts')}</span>
                 </div>
             </div>
         </div>
