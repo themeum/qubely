@@ -144,27 +144,30 @@ if (!function_exists('qubely_get_category_list')) {
 //feature image
 function qubely_get_featured_image_url($object)
 {
-    $image = wp_get_attachment_image_src($object['featured_media'], 'full', false);
+    
 
     $featured_images = array();
     if (!isset($object['featured_media'])) {
         return $featured_images;
-    } else if (is_array($image)) {
-        $featured_images['full'] = $image;
-        $featured_images['landscape'] = wp_get_attachment_image_src($object['featured_media'], 'qubely_landscape', false);
-        $featured_images['portraits'] = wp_get_attachment_image_src($object['featured_media'], 'qubely_portrait', false);
-        $featured_images['thumbnail'] =  wp_get_attachment_image_src($object['featured_media'], 'qubely_thumbnail', false);
-        
-        $image_sizes = QUBELY::get_all_image_sizes();
-        foreach ($image_sizes as $key => $value) {
-            $size = $value['value'];
-            $featured_images[$size] = wp_get_attachment_image_src(
-                $object['featured_media'],
-                $size,
-                false
-            );
+    } else {
+        $image = wp_get_attachment_image_src($object['featured_media'], 'full', false);
+        if (is_array($image)) {
+            $featured_images['full'] = $image;
+            $featured_images['landscape'] = wp_get_attachment_image_src($object['featured_media'], 'qubely_landscape', false);
+            $featured_images['portraits'] = wp_get_attachment_image_src($object['featured_media'], 'qubely_portrait', false);
+            $featured_images['thumbnail'] =  wp_get_attachment_image_src($object['featured_media'], 'qubely_thumbnail', false);
+            
+            $image_sizes = QUBELY::get_all_image_sizes();
+            foreach ($image_sizes as $key => $value) {
+                $size = $value['value'];
+                $featured_images[$size] = wp_get_attachment_image_src(
+                    $object['featured_media'],
+                    $size,
+                    false
+                );
+            }
+            return $featured_images;
         }
-        return $featured_images;
     }
 }
 add_action('rest_api_init', 'qubely_register_rest_fields');
