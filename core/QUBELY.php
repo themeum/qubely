@@ -670,6 +670,7 @@ class QUBELY
 		$upload_dir     = wp_get_upload_dir();
 		$upload_css_dir = trailingslashit($upload_dir['basedir']);
 		$css_path       = $upload_css_dir . "qubely/qubely-css-{$post_id}.css";
+		$json_path      = $upload_css_dir . "qubely/qubely-json-{$post_id}.json";
 
 		$content_post = get_post($post_id);
 		$content = $content_post->post_content;
@@ -698,6 +699,15 @@ class QUBELY
 			wp_register_style('qubely-post-data', false);
 			wp_enqueue_style('qubely-post-data');
 			wp_add_inline_style('qubely-post-data', get_post_meta(get_the_ID(), '_qubely_css', true));
+		}
+
+		if ( !file_exists( $json_path ) ) {
+			$this->print_interaction_json_to_header();
+		}else{
+			$blockJson = file_get_contents($json_path);
+			if( $blockJson != "{}" ){
+				echo '<script type="text/javascript"> var qubelyInteraction = '.$blockJson.'</script>';
+			}
 		}
 	}
 
