@@ -98,6 +98,18 @@
     display: flex;
     justify-content: space-between;
     width: 100%;
+    input {
+        &.qubely-font-family-search {
+            border: none !important;
+            background-color: transparent !important;
+            &:focus,
+            &:active,
+            &:hover{
+                outline: 0;
+                box-shadow: none;
+            }
+        }
+    }
 }
 .qubely-font-weight-picker-wrapper{
     display: flex;

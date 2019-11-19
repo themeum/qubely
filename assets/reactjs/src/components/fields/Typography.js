@@ -1,7 +1,6 @@
 const { __ } = wp.i18n
 import Range from './Range'
 import Toggle from './Toggle'
-const { RichText } = wp.blockEditor
 import '../css/typography.scss'
 const { Component, Fragment } = wp.element
 const { Dropdown, Tooltip } = wp.components
@@ -147,18 +146,17 @@ class Typography extends Component {
                             <div className="qubely-field qubely-field-font-family">
                                 <label>{__('Font Family')}</label>
                                 <div className="qubely-font-family-picker" ref="qubelySelectedFontFamily"
-                                    onClick={() => { this.setState({ showFontFamiles: !showFontFamiles }) }}>
+                                    onClick={() => { 
+                                        this.setState({ showFontFamiles: !showFontFamiles }) 
+                                        }}>
                                     <span className="qubely-font-family-search-wrapper">
-                                        <RichText
-                                            tagName="span"
+                                        <input 
+                                            type="text" 
                                             className={`qubely-font-family-search${!showFontFamiles ? ' selected-font-family' : ''}`}
                                             placeholder={__(showFontFamiles ? 'Search' : value.family || 'Select')}
                                             value={filterText}
-                                            keepPlaceholderOnFocus
-                                            onChange={value => this.setState({ filterText: value })}
-                                        />
+                                            onChange={e => this.setState({ filterText: e.target.value })}/>
                                         <span className="qubely-font-select-icon">   {showFontFamiles ? icons.arrow_up : icons.arrow_down}  </span>
-
                                     </span>
                                 </div>
                             </div>
