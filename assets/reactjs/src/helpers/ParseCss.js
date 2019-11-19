@@ -100,18 +100,60 @@ function isQubelyBlock(blocks){
 }
 
 
+function getData(pId) {
+    wp.apiFetch({
+        path: 'qubely/v1/qubely_get_content',
+        method: 'POST',
+        data: { postId: pId }
+    }).then( response => {
+        if (response.success) {
+            const innerBlock = innerBlocks(wp.blocks.parse(response.data), true)
+            if(innerBlock.css){
+                wp.apiFetch({
+                    path: 'qubely/v1/append_qubely_css',
+                    method: 'POST',
+                    data: { css: innerBlock.css, post_id: select('core/editor').getCurrentPostId() }
+                }).then( res => {
+                    if (res.success) {
+                        // Save Data
+                    }
+                })
+            }
+        }
+    })
+};
+
+
+function parseBlock(blocks){
+    blocks.forEach( block => {
+        if (block.name.indexOf('core/block')!= -1) {
+            getData(block.attributes.ref)
+        }
+        if (block.innerBlocks && (block.innerBlocks).length > 0) {
+            parseBlock(block.innerBlocks)
+        }
+    })
+}
+
+
 const ParseCss = (setDatabase = true) => {
     window.bindCss = true
-    const { getBlocks } = select('core/block-editor')
-    const isRemain = isQubelyBlock(getBlocks())
+    const all_blocks = select('core/block-editor').getBlocks()
+    const isRemain = isQubelyBlock(all_blocks)
     const { getCurrentPostId } = select('core/editor')
     let __blocks = { css: '', interaction: {} };
     if (typeof window.globalData != 'undefined') {
         __blocks.css += CssGenerator(window.globalData.settings, 'pagesettings', '8282882', true)
     }
-    let parseData = innerBlocks(getBlocks(), true)
+
+    // Inner Blocks
+    let parseData = innerBlocks(all_blocks, true)
     __blocks.interaction = parseData.interaction
     __blocks.css += parseData.css
+
+    // reusable Block
+    parseBlock(all_blocks);
+
     localStorage.setItem('qubelyCSS', __blocks)
     if (setDatabase) {
         API_fetch(getCurrentPostId(), __blocks, isRemain ).then(data => { })

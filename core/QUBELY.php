@@ -357,6 +357,79 @@ class QUBELY
 				)
 			)
 		);
+		// Get the Content by ID
+		register_rest_route(
+			'qubely/v1',
+			'/qubely_get_content/',
+			array(
+				array(
+					'methods'  => 'POST',
+					'callback' => array($this, 'qubely_get_content'),
+					'permission_callback' => function () {
+						return current_user_can('edit_posts');
+					},
+					'args' => array()
+				)
+			)
+		);
+		// Append Qubely CSS
+		register_rest_route(
+			'qubely/v1',
+			'/append_qubely_css/',
+			array(
+				array(
+					'methods'  => 'POST',
+					'callback' => array($this, 'append_qubely_css_callback'),
+					'permission_callback' => function () {
+						return current_user_can('edit_posts');
+					},
+					'args' => array()
+				)
+			)
+		);
+
+	}
+
+	
+	public function  append_qubely_css_callback($request)
+	{
+		try {
+			global $wp_filesystem;
+			if (!$wp_filesystem) {
+				require_once(ABSPATH . 'wp-admin/includes/file.php');
+			}
+			$params = $request->get_params();
+			$css = $params['css'];
+			$post_id = (int) sanitize_text_field($params['post_id']);
+			if( $post_id ){
+				$filename = "qubely-css-{$post_id}.css";
+				$upload_dir = wp_upload_dir();
+				$dir = trailingslashit($upload_dir['basedir']) . 'qubely/';
+				if(file_exists($dir.$filename)) {
+					$file = fopen($dir.$filename, "a");
+					fwrite($file, $css);
+					fclose($file);
+				}
+				$get_data = get_post_meta($post_id, '_qubely_css', true);
+				update_post_meta($post_id, '_qubely_css', $get_data.$css);
+
+				wp_send_json_success(['success' => true, 'message' => 'Update done'.$get_data]);
+			}
+		} catch (Exception $e) {
+			wp_send_json_error(['success' => false, 'message' => $e->getMessage()]);
+		}
+	}
+
+	public function  qubely_get_content($request)
+	{
+		$params = $request->get_params();
+        try{
+			if (isset($params['postId'])) {
+				return ['success' => true, 'data'=> get_post($params['postId'])->post_content, 'message' => 'Get Data Success!!'];
+			}
+		} catch (Exception $e){
+			return ['success' => false, 'message' => $e->getMessage()];
+		}
 	}
 
 	/**
@@ -365,7 +438,6 @@ class QUBELY
 	 */
 	public function update_global_option($request)
 	{
-
 		try {
 			$params = $request->get_params();
 			if (!isset($params['settings']))
@@ -565,9 +637,32 @@ class QUBELY
 	}
 
 	/**
+	 *
+	 * Return reference id
+	 *
+	 * @since 1.2.5
+	 * @return bool
+	 */
+	public function reference_id($parse_blocks) {
+		$extra_id = array();
+		if (!empty($parse_blocks)) {
+			foreach ($parse_blocks as $key => $block) {
+				if( $block['blockName'] == 'core/block') {
+					$extra_id[] = $block['attrs']['ref'];
+				}
+				if (count($block['innerBlocks']) > 0) {
+					$extra_id = array_merge( $this->reference_id($block['innerBlocks']), $extra_id );
+				}
+			}
+		}
+		return $extra_id;
+	}
+
+
+	/**
 	 * Enqueue block css file 
 	 * Check if css path exists and it has current post page
-	 * Then enqueue file
+	 * Then enqueue file 
 	 */
 	public function enqueue_block_css_file()
 	{
@@ -575,11 +670,29 @@ class QUBELY
 		$upload_dir     = wp_get_upload_dir();
 		$upload_css_dir = trailingslashit($upload_dir['basedir']);
 		$css_path       = $upload_css_dir . "qubely/qubely-css-{$post_id}.css";
+
+		$content_post = get_post($post_id);
+		$content = $content_post->post_content;
+		$parse_blocks = parse_blocks($content);
+		$css_id = $this->reference_id($parse_blocks);
+
 		if (file_exists($css_path)) {
 			$css_dir_url = trailingslashit($upload_dir['baseurl']);
 			$css_url     = $css_dir_url . "qubely/qubely-css-{$post_id}.css";
 			if (!$this->is_editor_screen()) {
 				wp_enqueue_style("qubely-post-{$post_id}", $css_url, false, QUBELY_VERSION);
+			}
+			// Reusable Blocks CSS add
+			if (is_array($css_id)) {
+				if (!empty($css_id)) {
+					$css_id = array_unique($css_id);
+					foreach ($css_id as $value) {
+						$css = $upload_css_dir . "qubely/qubely-css-{$value}.css";
+						if (file_exists($upload_css_dir . "qubely/qubely-css-{$value}.css")) {
+							wp_enqueue_style("qubely-post-{$value}", trailingslashit($upload_dir['baseurl'])."qubely/qubely-css-{$value}.css", false, QUBELY_VERSION);
+						}
+					}
+				}
 			}
 		} else {
 			wp_register_style('qubely-post-data', false);
