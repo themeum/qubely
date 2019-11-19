@@ -115,7 +115,14 @@ registerBlockType('qubely/iconlist', {
                 custom:{md: '5 10 5 10'},
                 unit:'px'
             },
-            style: [  { selector: '{{QUBELY}} .qubely-list .qubely-list-li ' }   ]
+            style: [  
+                { 
+                    condition: [
+                        { key: 'layout', relation: '==', value: 'fill' }
+                    ],
+                    selector: '{{QUBELY}} .qubely-list .qubely-list-li ' 
+                }   
+            ]
         },
         background: {
             type: 'string', default: '#f5f5f5',
