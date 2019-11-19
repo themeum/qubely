@@ -52,6 +52,7 @@ class Save extends Component {
 
         return (
             <div className={`qubely-block-${uniqueId}`}  {...animationAttr(animation)}>
+            {/* <div className={`qubely-block-${uniqueId}`}> */}
                 <div className={`qubely-block-image ${interactionClass} qubely-image-layout-${layout}`}>
                     <div className={`qubely-image-media${(layout == 'blurb' && animateOnHover == 1) ? ' qubely-hover-animation-on' : ''}${(layout == 'blurb' && animateOnHover == 1) ? ' qubely-hover-animation-type-' + contentAnimation : ''} qubely-vertical-alignment-${contentVerticalAlign} qubely-horizontal-alignment-${contentAlignment}${enableFrame == 1 ? ((animateOnHover == 1 && frameAnimateOnHover == 1) ? ' qubely-has-frame qubely-frame-animate-on-hover' : ' qubely-has-frame') : ''}`}>
                         <figure>
