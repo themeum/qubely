@@ -111,12 +111,6 @@ class Edit extends Component {
                         />
                         <Alignment label={__('Alignment')} value={alignment} alignmentType="content" onChange={val => setAttributes({ alignment: val })} alignmentType="content" disableJustify responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
                         <Separator />
-                        <SelectControl
-							label={__("Image Sizes")}
-							value={imgSize}
-							onChange={(value) => setAttributes({ imgSize: value })}
-							options={qubely_admin.image_sizes}
-						/>
                         <Media label={__('Image')} multiple={false} type={['image']} panel={true} value={image} onChange={val => setAttributes({ image: val })} />
                         <Media label={__('Retina Image (@2x)')} multiple={false} type={['image']} panel={true} value={image2x} onChange={val => setAttributes({ image2x: val })} />
                         {
