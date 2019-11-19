@@ -113,7 +113,7 @@ registerBlockType('qubely/timeline', {
 			},
 			style: [
 				{
-					selector: '{{QUBELY}} .qubely-timeline-item:not(:last-child) {margin-bottom: {{verticalSpacing}};}'
+					selector: '{{QUBELY}} .qubely-timeline-item:not(:last-child) {margin-bottom: {{verticalSpacing}};} '
 				}
 			]
 		},
@@ -433,7 +433,7 @@ registerBlockType('qubely/timeline', {
 					condition: [
 						{ key: 'orientation', relation: '==', value: 'center' }
 					],
-					selector: '@media (max-width: 767px) { {{QUBELY}} .qubely-timeline-connector {left: calc(-{{connectorSize}}/2);} }' + // Phone
+					selector: '@media (max-width: 767px) { {{QUBELY}} .qubely-timeline-connector {left: calc(-{{connectorSize}}/2);margin-top: calc(-{{connectorSize}}/2);} }' + // Phone
 						'@media (min-width: 768px) { {{QUBELY}} .qubely-timeline-left .qubely-timeline-connector {right: calc(-{{connectorSize}}/2);} }' +
 						'@media (min-width: 768px) { {{QUBELY}} .qubely-timeline-right .qubely-timeline-connector {left: calc(-{{connectorSize}}/2);} }'
 				},
@@ -441,13 +441,13 @@ registerBlockType('qubely/timeline', {
 					condition: [
 						{ key: 'orientation', relation: '==', value: 'left' }
 					],
-					selector: '{{QUBELY}} .qubely-timeline-connector {left: calc(-{{connectorSize}}/2);}'
+					selector: '{{QUBELY}} .qubely-timeline-connector {left: calc(-{{connectorSize}}/2); margin-top: calc(-{{connectorSize}}/2)}'
 				},
 				{
 					condition: [
 						{ key: 'orientation', relation: '==', value: 'right' }
 					],
-					selector: '{{QUBELY}} .qubely-timeline-connector {right: calc(-{{connectorSize}}/2);}'
+					selector: '{{QUBELY}} .qubely-timeline-connector {right: calc(-{{connectorSize}}/2); margin-top: calc(-{{connectorSize}}/2)}'
 				}
 			]
 		},

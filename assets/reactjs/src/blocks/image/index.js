@@ -13,7 +13,7 @@ registerBlockType('qubely/image', {
     keywords: [__('image', 'advanced image', 'fancy image'), 'image overlay'],
     example: {
 		attributes: {
-            image: { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/St_Pancras_Railway_Station_2012-06-23.jpg/711px-St_Pancras_Railway_Station_2012-06-23.jpg' },
+            image: { url: 'https://builder.themeum.com/wp-content/uploads/2019/02/video-popup-bg.jpg' },
             enableCaption: true,
             imageCaption: __( 'Make headlines/titles that attract users with Qubely Heading.', 'qubely' ),
 		},
@@ -60,6 +60,10 @@ registerBlockType('qubely/image', {
         layout: {
             type: 'string',
             default: 'simple'
+        },
+        imgSize: {
+            type: 'string',
+            default: 'full'
         },
 
         image: {

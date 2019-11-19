@@ -22,6 +22,11 @@
         overflow: hidden;
         font-size: 0;
     }
+    &.qubely-team-layout-1 {
+        .qubely-team-image-wrapper {
+            display: inline-block;
+        }
+    }
 
     &.qubely-team-layout-2 {
         .qubely-team-image-wrapper {
@@ -49,10 +54,6 @@
 
     &.qubely-team-layout-3 {
         display: flex;
-        >div {
-            flex: 0 0 50%;
-            max-width: 50%;
-        }
         .qubely-team-content {
             display: flex;
             .qubely-team-content-inner {

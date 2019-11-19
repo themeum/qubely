@@ -15,7 +15,7 @@ registerBlockType('qubely/team', {
     example: {
 		attributes: {
             contentBg: '',
-            image: { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/St_Pancras_Railway_Station_2012-06-23.jpg/711px-St_Pancras_Railway_Station_2012-06-23.jpg' },
+            image: { url: 'https://builder.themeum.com/wp-content/uploads/2019/02/video-popup-bg.jpg' },
         },
 	},
     attributes: {
@@ -41,18 +41,29 @@ registerBlockType('qubely/team', {
             style: [
                 {
                     condition: [
-                        { key: 'layout', relation: '!=', value: 2 },
+                        { key: 'layout', relation: '==', value: 1 },
                     ],
-                    selector: '{{QUBELY}} .qubely-team-image-wrapper img {width: {{imageWidth}};}'
+                    selector: '{{QUBELY}} .qubely-team-image-wrapper {width: {{imageWidth}};} {{QUBELY}} .qubely-team-image-wrapper img {width: 100%;}'
+                },
+                {
+                    condition: [
+                        { key: 'layout', relation: '==', value: 3 },
+                    ],
+                    selector: '{{QUBELY}} .qubely-block-team.qubely-team-layout-3 > div {flex: 0 0 {{imageWidth}}; max-width: {{imageWidth}}} {{QUBELY}} .qubely-team-image-wrapper img {width: 100%;}'
                 }
             ]
         },
+
         imageSpacing: {
             type: 'object', default: { md: 20, unit: 'px' },
             style: [
                 {
                     condition: [{ key: 'layout', relation: '==', value: 1 }],
                     selector: '{{QUBELY}} .qubely-team-image-wrapper {margin-bottom: {{imageSpacing}};}'
+                },
+                {
+                    condition: [{ key: 'layout', relation: '==', value: 3 }],
+                    selector: '{{QUBELY}} .qubely-team-image-wrapper {margin-right: {{imageSpacing}};}'
                 }
             ]
         },

@@ -8,9 +8,8 @@ export default (props) => {
                 <div className="qubely-default-template-image">
                     <img className="lazy" alt={__('Lazy Loading')} src={ qubely_admin.plugin+'assets/img/image-loader.gif'} data-src={props.backgroundImage(props.data.image)} />
                     { props.data.pro && <span className="qubely-pro">{__('Pro')}</span> }
-                </div>
+                </div>{/* qubely-default-template-image */}
                 <div className="qubely-tmpl-info">
-                    <h4 className="qubely-tmpl-title" dangerouslySetInnerHTML={{__html:props.data.name}}/>
                     <div className="qubely-import-button-group">
                         { props.itemType != 'comming' ?
                             <Fragment>
@@ -28,9 +27,10 @@ export default (props) => {
                             :
                             <div className="qubely-coming-soon" style={{color:'#ffffff'}}>{__('Coming Soon.')}</div>
                         }
-                    </div>
-                </div>
-            </div>
+                    </div>{/* qubely-import-button-group */}
+                </div>{/* qubely-tmpl-info */}
+            </div>{/* qubely-single-item-inner */}
+            <h4 className="qubely-tmpl-title" dangerouslySetInnerHTML={{__html:props.data.name}}/>
         </div>
     )
 }

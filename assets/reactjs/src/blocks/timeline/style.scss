@@ -21,10 +21,14 @@
 			right: 0;
 		}
 	}
-
 	.qubely-timeline-date-container {
-		position: absolute;
-	}
+		position: relative;
+    }
+    &.qubely-timeline-orientation-center {
+        .qubely-timeline-date-container {
+            position: absolute;
+        }
+    }
 
 	// Image
 	.qubely-timeline-image-container {
@@ -191,7 +195,8 @@
 			}
 
 			.qubely-timeline-date-container {
-				margin-top: 10px;
+				margin-top: 5px;
+				margin-bottom: 5px;
 				left: 0;
 			}
 		}
@@ -224,14 +229,21 @@
 
 			.qubely-timeline-date-container {
 				margin-top: 10px;
-			}
-		}
+            }
+            .qubely-timeline-date-container {
+                position: relative;
+            }
+        }
 
 		&.qubely-timeline-orientation-center,
 		&.qubely-timeline-orientation-left {
 			margin-left: 20px;
-		}
-
+        }
+        &.qubely-timeline-orientation-left {
+            .qubely-timeline-date-container {
+				position: absolute;
+			}  
+        }
 		&.qubely-timeline-orientation-right {
 			margin-right: 20px;
 		}
