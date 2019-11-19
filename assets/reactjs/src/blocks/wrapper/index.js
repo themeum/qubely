@@ -14,6 +14,16 @@ registerBlockType('qubely/wrapper', {
     keywords: [__('Block'), __('Block Wraper'), __('Wraper')],
     example: {
         attributes: {},
+        innerBlocks: [
+            {
+                name: 'qubely/icon',
+                attributes: {
+                    iconStyle: "fill",
+                    name: "fas fa-rocket"
+                },
+            },
+        ],
+
     },
     attributes: {
         uniqueId: { type: 'string', default: '' },

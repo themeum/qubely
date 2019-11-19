@@ -11,6 +11,28 @@ registerBlockType('qubely/tabs', {
     icon: <img src={qubely_admin.plugin + 'assets/img/blocks/block-tabs.svg'} alt={__('Tabs Block')} />,
     description: __('Showcase features in beautiful pre-designed tabs with Qubely Tabs.'),
     supports: { html: false, className: false },
+    example: {
+        attributes: {
+            tabTitles: [
+                { title: "Tab 1" },
+                { title: "Tab 2" },
+                { title: "Tab 3" }
+            ]
+        },
+        innerBlocks: [
+			{
+				name: 'qubely/tab',
+				innerBlocks: [
+					{
+						name: 'qubely/image',
+						attributes: {
+                            image: { url: 'https://builder.themeum.com/wp-content/uploads/2019/02/video-popup-bg.jpg' },
+						},
+					},
+				],
+			}
+		],
+    },
     attributes: {
         uniqueId: { type: 'string', default: '' },
         ...globalAttributes,  // Global Settings
