@@ -15,12 +15,15 @@ const defaultData = {
 };
 
 class BoxShadow extends Component {
-    componentWillMount(){
-        this.props.onChange( Object.assign( {}, defaultData, ( this.props.value || {} ) ));
-	}
 
-    setSettings( type, value ){
-        this.props.onChange( Object.assign( {}, this.props.value , {[type]:value||0} ) )
+    // componentWillMount(){
+    //     const {value} = this.props
+    //     this.props.onChange(Object.assign( {}, defaultData, ( value || {} )));
+	// }
+
+    setSettings( type, val ){
+        const {value, onChange} = this.props
+        onChange( Object.assign( {}, defaultData ,( value || {} ) , {[type]:val||0} ) )
     }
 
     render(){

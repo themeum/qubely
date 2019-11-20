@@ -64,7 +64,7 @@ export class ContextMenu extends Component {
         Object.keys(blockDefaultAttributes).forEach(key => {
             if (blockDefaultAttributes[key].hasOwnProperty('style')) {
                 newStyles.copiedStyles[key] = JSON.parse(JSON.stringify(blockAttributes[key]))
-            } else if (key.toLowerCase() == 'layout' || key.toLowerCase() == 'filltype' || key == 'iconStyle' || key.toLowerCase() == 'buttonfilltype') {
+            } else if (key.toLowerCase() == 'layout' ||key.toLowerCase() == 'style' || key.toLowerCase() == 'filltype' || key == 'iconStyle' || key.toLowerCase() == 'buttonfilltype') {
                 newStyles.copiedStyles[key] = JSON.parse(JSON.stringify(blockAttributes[key]))
             }
         })

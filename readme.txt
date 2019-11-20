@@ -4,7 +4,7 @@ Donate link: https://www.themeum.com
 Tags: block, blocks, gutenberg, gutenberg blocks, page builder, editor
 Requires at least: 5.0
 Tested up to: 5.2
-Stable tag: 1.2.3
+Stable tag: 1.2.4
 Requires PHP: 5.4.0
 License: GPL-2.0+
 License URI: http://www.gnu.org/licenses/gpl-2.0.txt
@@ -231,6 +231,23 @@ You can report bugs on the [support forum here](https://wordpress.org/support/pl
 
 
 == Changelog ==
+
+= 1.2.4 - 20 November, 2019 =
+New: Block preview option added  
+New: Post Grid block - context menu  
+Fix: CSS issue fixed in Reusable blocks  
+Fix: Interaction issue fixed  
+Fix: Typography field - Search option  
+Fix: Divider block - Divider color issue  
+Fix: Icon list block - Padding issue  
+Fix: Team block - Alignment issue   
+Fix: Icon list block - Animation issue  
+Fix: Button Group block - Animation issue  
+Fix: Timeline block - Responsive issue  
+Fix: Infobox block - Image width issue  
+Fix: Image block - Animation issue  
+Update: Team block - Image width  
+Update: Import layout design  
 
 = 1.2.3 - 12 November, 2019 =
 Update: WordPress 5.3 compatibility added
