@@ -1,6 +1,6 @@
 <?php
 /*
- * Plugin Name:       Advanced Gutenberg Blocks – Qubely
+ * Plugin Name:       Qubely - Advanced Gutenberg Blocks
  * Plugin URI:        https://www.themeum.com/
  * Description:       The one and only Gutenberg block plugin you will ever need.
  * Version: 		  1.2.4
