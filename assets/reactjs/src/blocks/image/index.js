@@ -529,7 +529,7 @@ registerBlockType('qubely/image', {
     keywords: [__('image', 'advanced image', 'fancy image'), 'image overlay'],
     example: {
         attributes: {
-            image: { url: 'https://builder.themeum.com/wp-content/uploads/2019/02/video-popup-bg.jpg' },
+            image: { url: 'http://qubely.io/wp-content/uploads/qubely-assets/demo/image8.jpg' },
             enableCaption: true,
             imageCaption: __('Make headlines/titles that attract users with Qubely Heading.', 'qubely'),
         },

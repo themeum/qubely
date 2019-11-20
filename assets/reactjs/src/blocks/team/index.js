@@ -15,7 +15,7 @@ registerBlockType('qubely/team', {
     example: {
 		attributes: {
             contentBg: '',
-            image: { url: 'https://builder.themeum.com/wp-content/uploads/2019/02/video-popup-bg.jpg' },
+            image: { url: 'http://qubely.io/wp-content/uploads/qubely-assets/demo/team1.jpg' },
         },
 	},
     attributes: {
@@ -449,7 +449,7 @@ registerBlockType('qubely/team', {
                         { key: 'layout', relation: '==', value: 3 },
                         { key: 'contentPosition', relation: '==', value: 'left' }
                     ],
-                    selector: '{{QUBELY}} .qubely-block-team {flex-direction: row-reverse; -webkit-flex-direction: row-reverse;}'
+                    selector: '{{QUBELY}} .qubely-block-team {flex-direction: row-reverse; -webkit-flex-direction: row-reverse;} {{QUBELY}} .qubely-team-layout-3 .qubely-team-content {margin-right: auto;}'
                 }
             ]
         },
