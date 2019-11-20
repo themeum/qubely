@@ -13,14 +13,14 @@ const defaultData = {
 
 class ColorAdvanced extends Component {
     
-    componentWillMount(){
-        const { value } = this.props
-        this.props.onChange( Object.assign( {}, defaultData,(this.props.clip?{clip:true}:{}), ( value || {} ) ));
-	}
+    // componentWillMount(){
+    //     const { value } = this.props
+    //     this.props.onChange( Object.assign( {}, defaultData,(this.props.clip?{clip:true}:{}), ( value || {} ) ));
+	// }
 
     setSettings( val, type ){
-        const { value } = this.props
-        this.props.onChange( Object.assign( {}, this.props.value, { openColor: 1 }, { [type]: val } ) );
+        const { value, onChange } = this.props
+        onChange( Object.assign( {}, defaultData, ( value || {} ), { openColor: 1 }, { [type]: val } ) );
     }
 
     render(){

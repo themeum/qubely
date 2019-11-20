@@ -17,6 +17,7 @@ function register_block_qubely_postgrid()
 			'attributes' => array(
 				'uniqueId' => array(
 					'type' => 'string',
+					'default' => '',
 				),
 				//general
 				'postType' => array(
