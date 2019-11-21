@@ -36,6 +36,7 @@ import Dropdown from './fields/DropDown'
 import Padding from './fields/Padding'
 import Margin from './fields/Margin'
 import Carousel from './fields/Carousel'
+import icons from '../helpers/icons'
 import { QubelyButtonEdit, QubelyButtonSave } from './fields/QubelyButton'
 import { QubelyIconListEdit, QubelyIconListSave } from './fields/QubelyIconList'
 
@@ -150,5 +151,6 @@ wp.qubelyComponents = {
     QubelyButtonEdit,
     QubelyButtonSave,
     QubelyIconListEdit,
-    QubelyIconListSave
+    QubelyIconListSave,
+    QubelyFreeIcons: icons
 }
