@@ -109,7 +109,7 @@ registerBlockType('qubely/infobox', {
                         { key: 'layout', relation: '!=', value: 4 },
                         { key: 'mediaType', relation: '==', value: 'image' }
                     ],
-                    selector: '{{QUBELY}} .qubely-info-box-media {width: {{imageWidth}};} {{QUBELY}} .qubely-info-box-media img {width: 100%;} {{QUBELY}} .qubely-info-box-media .qubely-image-placeholder {height: {{imageWidth}}; width: {{imageWidths}};}'
+                    selector: '{{QUBELY}} .qubely-info-box-media {width: {{imageWidth}};} {{QUBELY}} .qubely-info-box-media img {width: 100%;} {{QUBELY}} .qubely-info-box-media .qubely-image-placeholder {height: {{imageWidth}}; width: {{imageWidth}};}'
                 }
             ]
         },
