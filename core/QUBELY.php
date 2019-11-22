@@ -672,25 +672,29 @@ class QUBELY
 		$css_path       = $upload_css_dir . "qubely/qubely-css-{$post_id}.css";
 		$json_path      = $upload_css_dir . "qubely/qubely-json-{$post_id}.json";
 
-		$content_post = get_post($post_id);
-		$content = $content_post->post_content;
-		$parse_blocks = parse_blocks($content);
-		$css_id = $this->reference_id($parse_blocks);
-
 		if (file_exists($css_path)) {
 			$css_dir_url = trailingslashit($upload_dir['baseurl']);
 			$css_url     = $css_dir_url . "qubely/qubely-css-{$post_id}.css";
 			if (!$this->is_editor_screen()) {
 				wp_enqueue_style("qubely-post-{$post_id}", $css_url, false, QUBELY_VERSION);
 			}
+
 			// Reusable Blocks CSS add
-			if (is_array($css_id)) {
-				if (!empty($css_id)) {
-					$css_id = array_unique($css_id);
-					foreach ($css_id as $value) {
-						$css = $upload_css_dir . "qubely/qubely-css-{$value}.css";
-						if (file_exists($upload_css_dir . "qubely/qubely-css-{$value}.css")) {
-							wp_enqueue_style("qubely-post-{$value}", trailingslashit($upload_dir['baseurl'])."qubely/qubely-css-{$value}.css", false, QUBELY_VERSION);
+			if( $post_id ) {
+				$content_post = get_post($post_id);
+				if(isset($content_post->post_content)) {
+					$content = $content_post->post_content;
+					$parse_blocks = parse_blocks($content);
+					$css_id = $this->reference_id($parse_blocks);
+					if (is_array($css_id)) {
+						if (!empty($css_id)) {
+							$css_id = array_unique($css_id);
+							foreach ($css_id as $value) {
+								$css = $upload_css_dir . "qubely/qubely-css-{$value}.css";
+								if (file_exists($upload_css_dir . "qubely/qubely-css-{$value}.css")) {
+									wp_enqueue_style("qubely-post-{$value}", trailingslashit($upload_dir['baseurl'])."qubely/qubely-css-{$value}.css", false, QUBELY_VERSION);
+								}
+							}
 						}
 					}
 				}
