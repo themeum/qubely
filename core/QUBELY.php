@@ -678,27 +678,7 @@ class QUBELY
 			if (!$this->is_editor_screen()) {
 				wp_enqueue_style("qubely-post-{$post_id}", $css_url, false, QUBELY_VERSION);
 			}
-
-			// Reusable Blocks CSS add
-			if( $post_id ) {
-				$content_post = get_post($post_id);
-				if(isset($content_post->post_content)) {
-					$content = $content_post->post_content;
-					$parse_blocks = parse_blocks($content);
-					$css_id = $this->reference_id($parse_blocks);
-					if (is_array($css_id)) {
-						if (!empty($css_id)) {
-							$css_id = array_unique($css_id);
-							foreach ($css_id as $value) {
-								$css = $upload_css_dir . "qubely/qubely-css-{$value}.css";
-								if (file_exists($upload_css_dir . "qubely/qubely-css-{$value}.css")) {
-									wp_enqueue_style("qubely-post-{$value}", trailingslashit($upload_dir['baseurl'])."qubely/qubely-css-{$value}.css", false, QUBELY_VERSION);
-								}
-							}
-						}
-					}
-				}
-			}
+			$this->add_reusable_css();
 		} else {
 			wp_register_style('qubely-post-data', false);
 			wp_enqueue_style('qubely-post-data');
@@ -711,6 +691,31 @@ class QUBELY
 			$blockJson = file_get_contents($json_path);
 			if( $blockJson != "{}" ){
 				echo '<script type="text/javascript"> var qubelyInteraction = '.$blockJson.'</script>';
+			}
+		}
+	}
+
+	public function add_reusable_css() {
+		$post_id 		= $this->is_qubely_single();
+		$upload_dir     = wp_get_upload_dir();
+		$upload_css_dir = trailingslashit($upload_dir['basedir']);
+		if( $post_id ) {
+			$content_post = get_post($post_id);
+			if(isset($content_post->post_content)) {
+				$content = $content_post->post_content;
+				$parse_blocks = parse_blocks($content);
+				$css_id = $this->reference_id($parse_blocks);
+				if (is_array($css_id)) {
+					if (!empty($css_id)) {
+						$css_id = array_unique($css_id);
+						foreach ($css_id as $value) {
+							$css = $upload_css_dir . "qubely/qubely-css-{$value}.css";
+							if (file_exists($upload_css_dir . "qubely/qubely-css-{$value}.css")) {
+								wp_enqueue_style("qubely-post-{$value}", trailingslashit($upload_dir['baseurl'])."qubely/qubely-css-{$value}.css", false, QUBELY_VERSION);
+							}
+						}
+					}
+				}
 			}
 		}
 	}
@@ -746,6 +751,7 @@ class QUBELY
 				}
 			}
 		}
+		$this->add_reusable_css();
 	}
 
 	/**
