@@ -79,17 +79,13 @@ jQuery(document).ready(function ($) {
     $('.qubely-tab-title').on('click', function (event) {
         var $qubelyTab = $(this).parent();
         var qubelyIndex = $qubelyTab.index();
-
         if ($qubelyTab.hasClass('qubely-active')) {
             return;
         }
-
         $qubelyTab.closest('.qubely-tab-nav').find('.qubely-active').removeClass('qubely-active');
         $qubelyTab.addClass('qubely-active');
-        $qubelyTab.closest('.qubely-block-tab').find('.qubely-tab-content.qubely-active').hide().removeClass('qubely-active');
-        $qubelyTab.closest('.qubely-block-tab').find('.qubely-tab-content').eq(qubelyIndex).fadeIn(400, function () {
-            $(this).addClass('qubely-active');
-        });
+        $qubelyTab.closest('.qubely-block-tab').find('.qubely-tab-content.qubely-active').removeClass('qubely-active');
+        $qubelyTab.closest('.qubely-block-tab').find('.qubely-tab-content').eq(qubelyIndex).addClass('qubely-active')
     });
 
     //Carousel BLOCK

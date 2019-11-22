@@ -98,10 +98,15 @@
 		}
 	}
 	.wp-block-qubely-tab.qubely-tab-content {	
-		display: none;	
+		position: absolute;
+		visibility: hidden;
+		opacity: 0;
+		transition: opacity 400ms ease-in;
 	   &.qubely-active {	
-		   display: block;	
-	   }	
+			position: static;
+			visibility: visible;
+			opacity: 1;
+	   }
    }
 	&.qubely-tab-style-pills,&.qubely-tab-style-tabs{
 		.qubely-tab-item {
