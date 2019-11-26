@@ -285,7 +285,7 @@ registerBlockType('qubely/timeline', {
 			default: {},
 			style: [
 				{
-					selector: '{{QUBELY}} .qubely-timeline-title'
+					selector: '{{QUBELY}} .qubely-block-timeline .qubely-timeline-items .qubely-timeline-item .qubely-timeline-content .qubely-timeline-description .qubely-timeline-title'
 				}
 			]
 		},
@@ -294,7 +294,7 @@ registerBlockType('qubely/timeline', {
 			type: 'string',
 			default: '',
 			style: [
-				{ selector: '{{QUBELY}} .qubely-timeline-title {color: {{headingColor}};}' }
+				{ selector: '{{QUBELY}} .qubely-block-timeline .qubely-timeline-items .qubely-timeline-item .qubely-timeline-content .qubely-timeline-description .qubely-timeline-title {color: {{headingColor}};}' }
 			]
 		},
 
