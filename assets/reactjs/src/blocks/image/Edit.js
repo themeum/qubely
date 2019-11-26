@@ -291,7 +291,6 @@ class Edit extends Component {
                                         <div className="qubely-image-content">
                                             <div className="qubely-image-content-inner">
                                                 <RichText
-                                                    identifier="content"
                                                     className={`qubely-image-title${(animateOnHover == 1 && subTitleVisibleOnHover == 1 && titleVisibleOnHover != 1) ? ' qubely-visible-on-hover-enabled' : ''}${(animateOnHover == 1 && titleVisibleOnHover == 1) ? ' qubely-visible-on-hover' : ''}`}
                                                     tagName={titleTagName}
                                                     value={title}
@@ -301,7 +300,6 @@ class Edit extends Component {
 
                                                 {enableSubTitle == 1 &&
                                                     <RichText
-                                                        identifier="content"
                                                         className={`qubely-image-sub-title${(animateOnHover == 1 && subTitleVisibleOnHover == 1 && titleVisibleOnHover != 1) ? ' qubely-visible-on-hover-enabled' : ''}${titleVisibleOnHover == 1 ? ' qubely-visible-on-hover' : (animateOnHover == 1 && subTitleVisibleOnHover == 1) ? ' qubely-visible-on-hover' : ''}`}
                                                         tagName='div'
                                                         value={subTitle}
@@ -309,6 +307,8 @@ class Edit extends Component {
                                                         placeholder={__('Add Sub Title…')}
                                                     />
                                                 }
+
+                                                
                                             </div>
                                         </div>
                                     }
