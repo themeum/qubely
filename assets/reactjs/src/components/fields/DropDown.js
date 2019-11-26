@@ -32,9 +32,12 @@ export default function ({ label, enableSearch, defaultOptionsLabel, value, opti
     }
     useEffect(() => {
         document.addEventListener('mousedown', handleClickOutside);
-        setOptions(options.filter(option => filterOut(option.value)))
         return () => document.removeEventListener('mousedown', handleClickOutside);
     });
+
+    useEffect(() => {
+        setOptions(options.filter(option => filterOut(option.value)))
+    }, [options]);
 
     const findArrayIndex = (value) => {
         let index = 0
@@ -70,24 +73,28 @@ export default function ({ label, enableSearch, defaultOptionsLabel, value, opti
             <label>{__(label)}</label>
             <div className="qubely-dropdown" ref={qubelySelectedOptions}
                 onClick={() => !showOptions && toggleOptions(true)}  >
+
                 <span className="qubely-dropdown-selected-options-wrapper">
                     {
                         value.length ? renderSelectedOptions() : <span className="qubely-selected-value-label" role="option" aria-selected="true">{__(defaultOptionsLabel) || __('Default')}</span>
                     }
                     {
                         (enableSearch && showOptions) &&
-                        <RichText
-                            placeholder={__('Search...')}
+                        <input
+                            type="text"
                             className={`qubely-dropdown-options-search`}
+                            placeholder={__('Search...')}
                             value={filteredText}
-                            keepPlaceholderOnFocus
-                            onChange={value => setFilteredText(value)}
-                            onSplit={typedText => {
-                                toggleOptions(false)
-                                setFilteredText('')
-                                onChange([...value, options[findArrayIndex(avaiableOptions.filter(option => !typedText ? true : option.label.toLowerCase().search(typedText.toLowerCase()) !== -1)[0].value)]])
+                            onKeyPress={event => {
+                                if (event.key === 'Enter') {
+                                    toggleOptions(false)
+                                    setFilteredText('')
+                                    onChange([...value, options[findArrayIndex(avaiableOptions.filter(option => !event.target.value ? true : option.label.toLowerCase().search(event.target.value.toLowerCase()) !== -1)[0].value)]])
+                                }
                             }}
+                            onChange={event => setFilteredText(event.target.value)}
                         />
+
                     }
                 </span>
                 <span className="qubely-dropdown-icon" onClick={() => showOptions && toggleOptions(false)}> {showOptions ? icons.arrow_up : icons.arrow_down}  </span>
