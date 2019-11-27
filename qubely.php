@@ -8,7 +8,7 @@
  * Author URI:        https://themeum.com/
  * Text Domain:       qubely
  * Requires at least: 5.0
- * Tested up to: 	  5.2
+ * Tested up to: 	  5.3
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  */

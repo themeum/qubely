@@ -3,7 +3,7 @@ Contributors: themeum, kawshar, jakirhasan, anik4e, faisalahmed29, delowardev, r
 Donate link: https://www.themeum.com
 Tags: block, blocks, gutenberg, gutenberg blocks, page builder, editor
 Requires at least: 5.0
-Tested up to: 5.2
+Tested up to: 5.3
 Stable tag: 1.2.4
 Requires PHP: 5.4.0
 License: GPL-2.0+
