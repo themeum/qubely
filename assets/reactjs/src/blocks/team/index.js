@@ -13,11 +13,11 @@ registerBlockType('qubely/team', {
     supports: { align: false },
     keywords: [__('Team'), __('profile')],
     example: {
-		attributes: {
+        attributes: {
             contentBg: '',
             image: { url: 'http://qubely.io/wp-content/uploads/qubely-assets/demo/team1.jpg' },
         },
-	},
+    },
     attributes: {
         uniqueId: { type: 'string', default: '' },
         // Global
@@ -68,6 +68,15 @@ registerBlockType('qubely/team', {
             ]
         },
 
+        imageBorder: {
+            type: 'object',
+            default: {},
+            style: [
+                {
+                    selector: '{{QUBELY}} .qubely-team-image-wrapper img, {{QUBELY}} .qubely-team-image-wrapper .qubely-image-placeholder'
+                }
+            ]
+        },
         imageBorderRadius: {
             type: 'object',
             default: {
