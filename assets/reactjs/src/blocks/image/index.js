@@ -531,7 +531,7 @@ registerBlockType('qubely/image', {
         attributes: {
             image: { url: 'http://qubely.io/wp-content/uploads/qubely-assets/demo/image8.jpg' },
             enableCaption: true,
-            imageCaption: __('Make headlines/titles that attract users with Qubely Heading.', 'qubely'),
+            imageCaption: __('Qubely is a full-fledged Gutenberg block toolkit.', 'qubely'),
         },
     },
     attributes,
