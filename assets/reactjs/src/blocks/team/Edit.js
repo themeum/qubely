@@ -45,6 +45,7 @@ class Edit extends Component {
             imageSpacing,
             imageBorder,
             imageBorderRadius,
+            imageBoxShadow,
 
             enableDescription,
             description,
@@ -163,7 +164,11 @@ class Edit extends Component {
                             onDeviceChange={value => this.setState({ device: value })}
                             onChange={val => setAttributes({ imageBorderRadius: val })}
                         />
-
+                        <BoxShadow
+                            label={__('Box-Shadow')}
+                            value={imageBoxShadow}
+                            onChange={(value) => setAttributes({ imageBoxShadow: value })}
+                        />
                     </PanelBody>
 
                     <PanelBody title={__('Name')} opened={'Name' === openPanelSetting} onToggle={() => this.handlePanelOpenings(openPanelSetting !== 'Name' ? 'Name' : '')}>

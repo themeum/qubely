@@ -88,6 +88,15 @@ registerBlockType('qubely/team', {
                 }
             ]
         },
+        imageBoxShadow: {
+            type: 'object',
+            default: {},
+            style: [
+                {
+                    selector: '{{QUBELY}} .qubely-team-image-wrapper img, {{QUBELY}} .qubely-team-image-wrapper .qubely-image-placeholder'
+                }
+            ]
+        },
 
         // Name
         name: { type: 'string', default: 'John Doe' },
