@@ -20,18 +20,19 @@ registerBlockType('qubely/tabs', {
             ]
         },
         innerBlocks: [
-			{
-				name: 'qubely/tab',
-				innerBlocks: [
-					{
-						name: 'qubely/image',
-						attributes: {
-                            image: { url: 'https://builder.themeum.com/wp-content/uploads/2019/02/video-popup-bg.jpg' },
-						},
-					},
-				],
-			}
-		],
+            {
+                name: 'qubely/tab',
+                innerBlocks: [
+                    {
+                        name: 'qubely/heading',
+                        attributes: {
+                            content: 'Qubely - A Full-fledged Gutenberg Builder',
+                            alignment: {md: "center"}
+                        },
+                    },
+                ],
+            }
+        ],
     },
     attributes: {
         uniqueId: { type: 'string', default: '' },
