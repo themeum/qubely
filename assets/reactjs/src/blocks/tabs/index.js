@@ -20,18 +20,19 @@ registerBlockType('qubely/tabs', {
             ]
         },
         innerBlocks: [
-			{
-				name: 'qubely/tab',
-				innerBlocks: [
-					{
-						name: 'qubely/image',
-						attributes: {
-                            image: { url: 'http://qubely.io/wp-content/uploads/qubely-assets/demo/image8.jpg' },
-						},
-					},
-				],
-			}
-		],
+            {
+                name: 'qubely/tab',
+                innerBlocks: [
+                    {
+                        name: 'qubely/heading',
+                        attributes: {
+                            content: 'Qubely - A Full-fledged Gutenberg Builder',
+                            alignment: {md: "center"}
+                        },
+                    },
+                ],
+            }
+        ],
     },
     attributes: {
         uniqueId: { type: 'string', default: '' },

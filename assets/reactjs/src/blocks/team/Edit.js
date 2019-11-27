@@ -43,7 +43,9 @@ class Edit extends Component {
             image2x,
             imageWidth,
             imageSpacing,
+            imageBorder,
             imageBorderRadius,
+            imageBoxShadow,
 
             enableDescription,
             description,
@@ -108,9 +110,9 @@ class Edit extends Component {
             //animation
             animation,
             globalZindex,
-            enablePosition, 
-            selectPosition, 
-            positionXaxis, 
+            enablePosition,
+            selectPosition,
+            positionXaxis,
             positionYaxis,
             hideTablet,
             hideMobile,
@@ -141,9 +143,32 @@ class Edit extends Component {
                         <Media label={__('Team Member Image')} multiple={false} type={['image']} panel={true} value={image} onChange={val => setAttributes({ image: val })} />
                         <Media label={__('Team Member Image @2x')} multiple={false} type={['image']} panel={true} value={image2x} onChange={val => setAttributes({ image2x: val })} />
                         {layout != 2 && <Range label={__('Image Width')} value={imageWidth} onChange={val => setAttributes({ imageWidth: val })} min={32} max={500} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />}
-                        <BorderRadius label={__('Radius')} value={imageBorderRadius} onChange={val => setAttributes({ imageBorderRadius: val })} min={0} max={100} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
-                        { (layout == 1 || layout == 3) && <Range label={__('Image Spacing')} value={imageSpacing} onChange={val => setAttributes({ imageSpacing: val })} min={0} max={500} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />}
-
+                        {(layout == 1 || layout == 3) && <Range label={__('Image Spacing')} value={imageSpacing} onChange={val => setAttributes({ imageSpacing: val })} min={0} max={500} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />}
+                        <Border
+                            responsive
+                            device={device}
+                            value={imageBorder}
+                            unit={['px', 'em', '%']}
+                            label={__('Border')}
+                            onChange={value => setAttributes({ imageBorder: value })}
+                            onDeviceChange={value => this.setState({ device: value })}
+                        />
+                        <BorderRadius
+                            min={0}
+                            max={100}
+                            responsive
+                            device={device}
+                            unit={['px', 'em', '%']}
+                            value={imageBorderRadius}
+                            label={__('Border Radius')}
+                            onDeviceChange={value => this.setState({ device: value })}
+                            onChange={val => setAttributes({ imageBorderRadius: val })}
+                        />
+                        <BoxShadow
+                            label={__('Box-Shadow')}
+                            value={imageBoxShadow}
+                            onChange={(value) => setAttributes({ imageBoxShadow: value })}
+                        />
                     </PanelBody>
 
                     <PanelBody title={__('Name')} opened={'Name' === openPanelSetting} onToggle={() => this.handlePanelOpenings(openPanelSetting !== 'Name' ? 'Name' : '')}>
@@ -340,9 +365,9 @@ class Edit extends Component {
                         <BorderRadius label={__('Radius')} value={bodyBorderRadius} onChange={val => setAttributes({ bodyBorderRadius: val })} min={0} max={100} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
                         <BoxShadow label={__('Box-Shadow')} value={bodyBoxShadow} onChange={(value) => setAttributes({ bodyBoxShadow: value })} />
                     </PanelBody>
-                    
+
                     {animationSettings(uniqueId, animation, setAttributes)}
-                    
+
                     {interactionSettings(uniqueId, interaction, setAttributes)}
 
                 </InspectorControls>
@@ -365,7 +390,7 @@ class Edit extends Component {
                             {image.url != undefined ?
                                 <img className="qubely-team-image" src={image.url} srcset={image2x.url != undefined ? image.url + ' 1x, ' + image2x.url + ' 2x' : ''} alt={name} />
                                 :
-                                <div className="qubely-image-placeholder"><i className="far fa-image"/></div>
+                                <div className="qubely-image-placeholder"><i className="far fa-image" /></div>
                             }
                         </div>
                         <div className="qubely-team-content">

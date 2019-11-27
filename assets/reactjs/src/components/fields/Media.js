@@ -88,7 +88,13 @@ class Media extends Component {
 									:
 									((value && value.url) ?
 										<span className="qubely-media-image-parent">
-											<video controls autoPlay loop src={value.url} />
+											{
+												video ?
+													<video controls autoPlay loop src={value.url} />
+													:
+													<img src={this.isUrl(value.url)} alt={__('image')} />
+											}
+
 											{panel &&
 												<div className="qubely-media-actions qubely-field-button-list">
 													<Tooltip text={__('Edit')}>

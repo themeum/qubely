@@ -77,9 +77,9 @@ class Edit extends Component {
                 //animation
                 animation,
                 globalZindex,
-                enablePosition, 
-                selectPosition, 
-                positionXaxis, 
+                enablePosition,
+                selectPosition,
+                positionXaxis,
                 positionYaxis,
                 hideTablet,
                 hideMobile,
@@ -114,7 +114,15 @@ class Edit extends Component {
                                 setAttributes({ url: val })
                             }} />
                             :
-                            <Media label={__('Path')} multiple={false} type={['video']} panel={true} value={bgVideo} onChange={val => setAttributes({ bgVideo: val })} />
+                            <Media
+                                video
+                                panel={true}
+                                value={bgVideo}
+                                multiple={false}
+                                type={['video']}
+                                label={__('Path')}
+                                onChange={val => setAttributes({ bgVideo: val })}
+                            />
                         }
                     </PanelBody>
 
@@ -223,7 +231,7 @@ class Edit extends Component {
                             </PanelBody>
                         </Fragment>
                     }
-                    
+
                     {animationSettings(uniqueId, animation, setAttributes)}
 
                     {interactionSettings(uniqueId, interaction, setAttributes)}
@@ -251,7 +259,7 @@ class Edit extends Component {
                                 {icon &&
                                     <span className="qubely-btn-icon-wrapper">
                                         <i className={`qubely-btn-icon ${icon}`}>
-                                            {(iconBgColor && isRipple) && <span className="qubely-ripple"/>}
+                                            {(iconBgColor && isRipple) && <span className="qubely-ripple" />}
                                         </i>
                                     </span>
                                 }
