@@ -1,6 +1,6 @@
 {
   "name": "qubely",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "description": "Gutenberg Blocks with Layout Packs & Readymade Blocks Collection - Qubely",
   "main": "index.js",
   "scripts": {
