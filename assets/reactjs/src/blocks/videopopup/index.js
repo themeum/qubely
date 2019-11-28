@@ -26,7 +26,7 @@ registerBlockType('qubely/videopopup', {
 		bgVideo: { type: 'object', default: {} },
 		url: { type: 'string', default: 'https://www.youtube.com/watch?v=HY3sut8LTSw' },
 		height: { type: 'object', default: { md: 500, unit: 'px' }, style: [{ condition: [{ key: 'layout', relation: '==', value: 'fill' }], selector: '{{QUBELY}} .qubely-block-videopopup-wrapper{ height:{{height}};}' }] },
-		background: { type: 'object', default: { bgType: 'image', openBg: 1, bgimgSize: 'cover', bgimgPosition: 'center center', bgImage: { url: 'https://builder.themeum.com/wp-content/uploads/2019/02/video-popup-bg.jpg' } }, style: [{ condition: [{ key: 'layout', relation: '==', value: 'fill' }], selector: '{{QUBELY}} .qubely-block-videopopup-wrapper' }] },
+		background: { type: 'object', default: { bgType: 'image', openBg: 1, bgimgSize: 'cover', bgimgPosition: 'center center', bgImage: { url: 'http://qubely.io/wp-content/uploads/qubely-assets/demo/image8.jpg' } }, style: [{ condition: [{ key: 'layout', relation: '==', value: 'fill' }], selector: '{{QUBELY}} .qubely-block-videopopup-wrapper' }] },
 		isRipple: { type: 'boolean', default: true },
 
 		// Icon
