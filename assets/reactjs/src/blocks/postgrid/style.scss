@@ -45,6 +45,175 @@
   }
 }
 
+//style 4
+.qubely-postgrid-style-4 {
+    position: relative;
+    overflow: hidden;
+    .qubely-post-grid-img,
+    .qubely-post-list-img {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 2;
+      -webkit-background-size: cover;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      overflow: hidden;
+      img {
+        position: absolute;
+        width: auto;
+        height: auto;
+        min-width: 100%;
+        max-width: none;
+        left: 50%;
+        top: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        min-height: 100%;
+      }
+    }
+    .qubely-post-grid-content,
+    .qubely-post-list-content {
+      opacity: 1;
+      position: relative;
+      z-index: 10;
+      overflow: hidden;
+      width: 100%;
+      max-width: 100%;
+      padding: 20px;
+    }
+    > div {
+      .qubely-post-grid-img,
+      .qubely-post-list-img {
+        width: 100%;
+        max-width: 100%;
+      }
+    }
+  
+    &:before {
+      position: absolute;
+      content: "";
+      left: 0;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      z-index: 3;
+      transition: 400ms;
+    }
+  
+    .qubely-post-list-top,
+    .qubely-post-grid-top {
+      .qubely-post-list-content,
+      .qubely-post-grid-content {
+        top: 0;
+        height: 100%;
+        position: absolute;
+        display: grid;
+        align-content: flex-start;
+      }
+    }
+    .qubely-post-list-center,
+    .qubely-post-grid-center {
+      .qubely-post-list-content,
+      .qubely-post-grid-content {
+        top: 0;
+        height: 100%;
+        position: absolute;
+        display: grid;
+        align-content: center;
+      }
+    }
+    .qubely-post-list-bottom,
+    .qubely-post-grid-bottom {
+      .qubely-post-list-content,
+      .qubely-post-grid-content {
+        top: 0;
+        height: 100%;
+        position: absolute;
+        display: grid;
+        align-content: flex-end;
+      }
+    }
+  }
+  
+  //image
+  .qubely-postgrid:not(.qubely-postgrid-style-4) {
+    .qubely-post-img {
+      &.qubely-post-img-zoom-out {
+        .qubely-post-image {
+          transition: transform 0.35s;
+          transform: scale(1.2);
+        }
+      }
+      &.qubely-post-img-zoom-in {
+        .qubely-post-image {
+          transition: transform 0.35s;
+          transform: scale(1);
+        }
+      }
+      &.qubely-post-img-slide-bottom {
+        .qubely-post-image {
+          transition: transform 0.35s;
+          transform: translate3d(0, 20px, 0) scale3d(1.2, 1.2, 1);
+        }
+      }
+      &.qubely-post-img-slide-top {
+        .qubely-post-image {
+          transition: transform 0.35s;
+          transform: translate3d(0, -20px, 0) scale3d(1.2, 1.2, 1);
+        }
+      }
+      &.qubely-post-img-slide-right {
+        .qubely-post-image {
+          transition: transform 0.35s;
+          transform: translate3d(20px, 0, 0) scale3d(1.2, 1.2, 1);
+        }
+      }
+      &.qubely-post-img-slide-left {
+        .qubely-post-image {
+          transition: transform 0.35s;
+          transform: translate3d(-20px, 0, 0) scale3d(1.2, 1.2, 1);
+        }
+      }
+    }
+  }
+  .qubely-postgrid:hover:not(.qubely-postgrid-style-4) {
+    .qubely-post-img-zoom-out {
+      .qubely-post-image {
+        transform: scale(1);
+      }
+    }
+    .qubely-post-img-zoom-in {
+      .qubely-post-image {
+        transform: scale(1.2);
+      }
+    }
+    .qubely-post-img-slide-bottom {
+      .qubely-post-image {
+        transform: translate3d(0, 0px, 0) scale3d(1.2, 1.2, 1);
+      }
+    }
+    .qubely-post-img-slide-top {
+      .qubely-post-image {
+        transform: translate3d(0, 0px, 0) scale3d(1.2, 1.2, 1);
+      }
+    }
+    .qubely-post-img-slide-right {
+      .qubely-post-image {
+        transform: translate3d(0, 0, 0) scale3d(1.2, 1.2, 1);
+      }
+    }
+    .qubely-post-img-slide-left {
+      .qubely-post-image {
+        transform: translate3d(0, 0, 0) scale3d(1.2, 1.2, 1);
+      }
+    }
+  }
+
 .qubely-postgrid {
   position: relative;
   img {
