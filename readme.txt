@@ -239,10 +239,12 @@ New: Media field - Local video preview option in Panel
 Fix: Dropdown field - Search  
 Fix: Post Grid block - Stack background in style 3   
 Fix: InfoBox block - Placeholder image width adjustment issue  
+Fix: Contact Form block - Input field background Material layout    
 Fix: Broken CSS issue after editing original Reusable blocks  
 Update: Tabs block - Frontend script  
 Update: Tabs block - Block preview  
 Update: Tabs block, Video popup block - Preview image path   
+
 
 = 1.2.4 - 20 November, 2019 =
 New: Block preview option added  
