@@ -6,7 +6,7 @@ const defaultProps = {
     percent: 20,
     totalDuration: 1200,
     emptyFill: '#dddddd',
-    fill: 'red'
+    fill: '#007bff'
 }
 
 const Progress = (props) => {
@@ -24,7 +24,7 @@ const Progress = (props) => {
     const offset = circumference * percent / 100
 
     const fillStyle = {
-        transitionDuration: duration + 'ms',
+        // transition: `stroke-dashoffset ${duration}ms linear`,
         stroke: fill
     }
 
@@ -32,16 +32,23 @@ const Progress = (props) => {
         stroke: emptyFill,
     }
 
+    const progressStyle = {
+        transition: '0ms',
+        width: size + 'px',
+        height: size + 'px',
+    }
+
     return (
-        <div className="qubely-pie-progress" role="progressbar" style={{width: size + 'px', height: size + 'px'}}>
+        <div className="qubely-pie-progress" style={progressStyle} role="progressbar">
             <svg
+                xmlns="http://www.w3.org/2000/svg"
                 viewBox={`${size / 2} ${size / 2} ${size} ${size}`}
                 style={{transform: 'rotate(-90deg)'}}>
                 <circle
                     cx={size}
                     cy={size}
                     r={(size - thickness) / 2}
-                    strokeWidth={thickness}
+                    stroke-width={thickness}
                     style={emptyStyle}
                     fill="none"
                 />
@@ -49,10 +56,10 @@ const Progress = (props) => {
                     cx={size}
                     cy={size}
                     r={(size - thickness) / 2}
-                    strokeDasharray={circumference}
-                    strokeDashoffset={circumference - offset}
-                    strokeWidth={thickness}
-                    strokeLinecap="round"
+                    stroke-dasharray={circumference}
+                    stroke-dashoffset={circumference - offset}
+                    stroke-width={thickness}
+                    stroke-linecap="round"
                     fill="none"
                     style={fillStyle}
                 />

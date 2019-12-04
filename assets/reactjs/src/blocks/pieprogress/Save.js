@@ -1,12 +1,17 @@
 import React from 'react'
-const {Content} = wp.editor.RichText
+import Progress from './Progress'
+const { __ } = wp.i18n
+
 const Save = (props) => {
-    const {attributes} = props
+    const { uniqueId, progress, size, thickness } = props.attributes
+    const progressAttr = {
+        size,
+        percent: progress,
+        uniqueId,
+        thickness
+    }
     return (
-        <Content
-            tagName='h2'
-            value={ attributes.content }
-        />
+        <Progress {...progressAttr} />
     )
 }
 
