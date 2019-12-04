@@ -1,5 +1,6 @@
-import React, {Fragment, Component} from 'react'
+
 import Progress from './Progress'
+const { Fragment, Component } = wp.element;
 const { PanelBody } = wp.components
 const { InspectorControls } = wp.blockEditor
 const { __ } = wp.i18n
@@ -74,7 +75,7 @@ class Edit extends Component {
 
         return (
             <Fragment>
-                <InspectorControls key="inspector">
+                <InspectorControls>
                     <PanelBody title="">
                         <Range label={__('Progress')} value={progress} onChange={(value) => setAttributes({ progress: value })} min={0} max={100} />
                         <Range label={__('Thickness')} value={thickness} onChange={(value) => setAttributes({ thickness: value })} min={1} max={100} />
