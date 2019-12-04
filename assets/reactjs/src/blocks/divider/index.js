@@ -11,6 +11,9 @@ registerBlockType ( 'qubely/divider', {
 	icon: <img src={qubely_admin.plugin+'assets/img/blocks/block-divider.svg'} alt={__('Divider Block')}/>,
     category: 'qubely',
     keywords: [ __( 'Divider' ), __( 'Separator' ) ],
+    supports: {
+        align: ['center', 'wide', 'full'],
+    },
     example: {
         attributes: {},
     },

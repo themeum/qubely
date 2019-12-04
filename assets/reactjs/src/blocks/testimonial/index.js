@@ -11,6 +11,9 @@ registerBlockType('qubely/testimonial', {
     icon: <img src={qubely_admin.plugin + 'assets/img/blocks/block-testimonial.svg'} alt={__('Testimonial')} />,
     category: 'qubely',
     keywords: [__('testimonial'), __('Quote')],
+    supports: {
+        align: ['center', 'wide', 'full'],
+    },
     example: {
 		attributes: {},
 	},

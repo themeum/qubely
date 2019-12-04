@@ -10,7 +10,9 @@ registerBlockType('qubely/icon', {
 	description: 'Place icons of various preset styles with Qubely icons.',
 	category: 'qubely',
 	icon: <img src={qubely_admin.plugin + 'assets/img/blocks/block-icon.svg'} alt={__('Icon Block')} />,
-	supports: { align: false },
+	supports: {
+		align: ['center', 'wide', 'full'],
+	},
     keywords: [__('Icon'), __('Font Awesome'), __('Line Icon')],
     example: {
 		attributes: {

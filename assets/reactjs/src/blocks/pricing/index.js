@@ -11,6 +11,9 @@ registerBlockType('qubely/pricing', {
     category: 'qubely',
     icon: <img src={qubely_admin.plugin + 'assets/img/blocks/block-pricing.svg'} alt={__('Pricing Block')} />,
     keywords: [__('Pricing'), __('Pricing Table')],
+    supports: {
+        align: ['center', 'wide', 'full'],
+    },
     example: {
 		attributes: {},
 	},

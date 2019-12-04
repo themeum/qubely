@@ -527,6 +527,9 @@ registerBlockType('qubely/image', {
     category: 'qubely',
     icon: <img src={qubely_admin.plugin + 'assets/img/blocks/block-image.svg'} alt={__('Image')} />,
     keywords: [__('image', 'advanced image', 'fancy image'), 'image overlay'],
+    supports: {
+        align: ['center', 'wide', 'full'],
+    },
     example: {
         attributes: {
             image: { url: 'http://qubely.io/wp-content/uploads/qubely-assets/demo/image8.jpg' },

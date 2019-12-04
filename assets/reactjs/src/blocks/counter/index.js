@@ -10,6 +10,9 @@ registerBlockType( 'qubely/counter', {
     category: 'qubely',
     icon: <img src={qubely_admin.plugin+'assets/img/blocks/block-counter.svg'} alt={__('Counter Block')} />,
     keywords: [ __('Counter'), __('Animated Number'), __('Count up'), ],
+    supports: {
+        align: ['center', 'wide', 'full'],
+    },
     example: {
         attributes: {
             counterLimit: 9999,
