@@ -1,4 +1,4 @@
-.qubely-block-text {
+.editor-styles-wrapper .qubely-block-text {
     h1, h2, h3, h4, h5, h6 {
         padding: 0;
         margin: 0;
@@ -8,7 +8,6 @@
         &::after {
             display: none !important;
         }
-
         .qubely-text-has-bgcolor {
             padding-left: 10px;
             padding-right: 10px;
@@ -20,7 +19,6 @@
             display: table;
             clear: both;
         }
-
         p::first-letter {
             float: left;
             line-height: .68;
@@ -33,14 +31,12 @@
     p {
         padding: 0;
         margin: 0;
-        transition: color 200ms ease-in-out, background-color 200ms ease-in-out, border-color 200ms ease-in-out, box-shadow 200ms ease-in-out;
+        transition: color 300ms ease-in-out, background-color 300ms ease-in-out, border-color 300ms ease-in-out, box-shadow 300ms ease-in-out;
     }
-
     .qubely-block-text-title {
         margin: 0;
         transition: color 400ms, border-color 400ms, background-color 400ms, box-shadow 400ms;
     }
-
     .qubely-separator {
         font-size: 0;
         .qubely-separator-type-css,
@@ -48,7 +44,6 @@
             display: inline-block;
         }
     }
-
     .qubely-separator-position-left,
     .qubely-separator-position-right,
     .qubely-separator-position-leftright {
@@ -63,7 +58,6 @@
         }
     }
 }
-
 .wp-block-qubely-text .qubely-block-text .qubely-block-text-title-container{
     color: inherit;
 }

@@ -319,8 +319,6 @@ class Edit extends Component {
                     {globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes, true)}
                 </InspectorAdvancedControls>
 
-                
-
                 <div className={`qubely-section qubely-block-${uniqueId} ${(rowBg.bgimgParallax && rowBg.bgimgParallax == 'animated') ? 'qubely-section-parallax' : ''}`} {...rowId ? { id: rowId } : ''}>
                     <div className="qubley-padding-indicator">
                         <span className="qubely-indicator-top" style={{ height: padding.md.top ? padding.md.top + padding.unit : 0 }} >
