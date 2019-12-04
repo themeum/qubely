@@ -1,5 +1,3 @@
-import React from 'react';
-
 const defaultProps = {
     size: 150,
     thickness: 8,
