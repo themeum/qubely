@@ -10,7 +10,9 @@ registerBlockType('qubely/team', {
     description: 'Display team member with social profiles.',
     icon: <img src={qubely_admin.plugin + 'assets/img/blocks/block-team.svg'} alt={__('Team Block')} />,
     category: 'qubely',
-    supports: { align: false },
+    supports: {
+        align: ['center', 'wide', 'full'],
+    },
     keywords: [__('Team'), __('profile')],
     example: {
         attributes: {

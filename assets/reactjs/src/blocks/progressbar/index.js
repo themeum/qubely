@@ -10,7 +10,9 @@ registerBlockType( 'qubely/progressbar', {
 	description: 'Showcase stats using progress bars with Qubely Progress Bar.',
 	category: 'qubely',
 	icon: <img src={qubely_admin.plugin+'assets/img/blocks/block-progressbar.svg'} alt={__('Progress Bar Block')} />,
-	supports: { align: false },
+	supports: {
+        align: ['center', 'wide', 'full'],
+    },
     keywords: [__('progress'), __('bar'), __('bar progress')],
     example: {
         attributes: {},

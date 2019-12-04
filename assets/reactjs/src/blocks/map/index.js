@@ -11,7 +11,9 @@ registerBlockType ( 'qubely/map', {
     category: 'qubely',
     icon: <img src={qubely_admin.plugin+'assets/img/blocks/block-map.svg'} alt={__('Map Block')} />,
     keywords: [ __( 'Google Map' ), __( 'Map' ), __( 'Location' ) ],
-    supports: { align: ['full'] },
+    supports: {
+        align: ['center', 'wide', 'full'],
+    },
     example: {
         attributes: {},
     },

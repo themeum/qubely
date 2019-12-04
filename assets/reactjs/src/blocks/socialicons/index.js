@@ -10,10 +10,17 @@ registerBlockType('qubely/socialicons', {
     description: '',
     category: 'qubely',
     icon: <img src={qubely_admin.plugin + 'assets/img/blocks/block-social-icons.svg'} alt={__('Social Icons Block')} />,
-    keywords: [__('Social Icons')],
+    keywords: [
+        __('Social Icons'),
+        __('Social'),
+        __('Icons'),
+    ],
     description: __('Add all your social media profiles in one place with Qubely Social Icons.'),
     example: {
         attributes: {},
+    },
+    supports: {
+        align: ['center', 'wide', 'full'],
     },
     attributes: {
         uniqueId: { type: 'string', default: '' },

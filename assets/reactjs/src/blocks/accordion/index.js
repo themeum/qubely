@@ -11,7 +11,11 @@ registerBlockType('qubely/accordion', {
     category: 'qubely',
     icon: <img src={qubely_admin.plugin + 'assets/img/blocks/block-accordion.svg'} alt={__('Accordion Block')} />,
     keywords: [__('accordion'), __('collapsible'), __('collapse')],
-    supports: { html: false, className: false },
+    supports: {
+        html: false,
+        className: false,
+        align: ['center', 'wide', 'full'],
+    },
     example: {
         attributes: {},
     },

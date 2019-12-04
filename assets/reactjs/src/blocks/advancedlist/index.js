@@ -11,6 +11,9 @@ registerBlockType('qubely/advancedlist', {
     category: 'qubely',
     icon: <img src={qubely_admin.plugin + 'assets/img/blocks/block-advanced-list.svg'} alt={__('Advanced List')} />,
     keywords: [__('Advanced', 'list', 'advanced list', 'Advanced List')],
+    supports: {
+        align: ['center', 'wide', 'full'],
+    },
     example: {
         attributes: {
             background: '#fff'

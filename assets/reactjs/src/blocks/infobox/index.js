@@ -11,8 +11,7 @@ registerBlockType('qubely/infobox', {
     icon: <img src={qubely_admin.plugin + 'assets/img/blocks/block-info-box.svg'} alt={__('Video popup Block')} />,
     category: 'qubely',
     supports: {
-        // align: ['center', 'wide', 'full'],
-        align:true,
+        align: ['center', 'wide', 'full'],
     },
     keywords: [__('service'), __('feature'), __('info')],
     example: {

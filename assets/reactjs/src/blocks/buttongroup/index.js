@@ -29,7 +29,9 @@ registerBlockType('qubely/buttongroup', {
     description: 'Bunch together a group of useful buttons with Qubely Button Group.',
     category: 'qubely',
     icon: <img src={qubely_admin.plugin + 'assets/img/blocks/block-button-group.svg'} alt={__('Button Group Block')} />,
-    supports: { align: false },
+    supports: {
+        align: ['center', 'wide', 'full'],
+    },
     keywords: [__('button'), __('link'), __('button group')],
     example: {
         attributes: {
