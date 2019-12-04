@@ -801,7 +801,7 @@
         return {
             "willChange":"transform",
             // "transitionDuration": initialLoader ? '0s' : '0.1s',
-            '-webkit-transition-timing-function':'ease',
+            '-webkit-transition-timing-function':'linear',
             "transitionProperty": "transform, opacity, filter",
             "transformOrigin":`${origin.x_offset} ${origin.y_offset}`,
             "transformStyle":"preserve-3d",
