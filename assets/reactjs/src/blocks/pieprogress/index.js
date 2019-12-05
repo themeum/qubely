@@ -22,8 +22,8 @@ registerBlockType('qubely/pieprogress', {
         thickness: {type: 'string', default: 12 },
         size: {type: 'string', default: 150 },
         background: {type: 'string', default: '#e9ecef' },
-        fillColor: {type: 'string', default: '#007bff' },
-        // fillColor: { type: 'object', default: {openColor: 1, type: 'color', color: '#007bff', gradient: {}} },
+        fillColor: { type: 'object', default: {openColor: 1, type: 'color', color: '#007bff', gradient: {}} },
+        spacer: { type: 'object', default:{spaceTop: { md: '10', unit: "px"}, spaceBottom: { md: '10', unit: "px"}}, style: [{ selector: '{{QUBELY}}' }] },
         ...globalAttributes,
         content: {
             source: 'html',

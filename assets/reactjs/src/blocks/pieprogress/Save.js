@@ -2,15 +2,18 @@ import Progress from './Progress'
 const { __ } = wp.i18n
 
 const Save = (props) => {
-    const { uniqueId, progress, size, thickness } = props.attributes
+    const { uniqueId, progress, size, thickness, background, fillColor, } = props.attributes
     const progressAttr = {
         size,
         percent: progress,
-        uniqueId,
-        thickness
+        thickness,
+        emptyFill: background,
+        fill: fillColor
     }
     return (
-        <Progress {...progressAttr} />
+        <div className={`qubely-block-${uniqueId}`}>
+            <Progress {...progressAttr} />
+        </div>
     )
 }
 
