@@ -123,10 +123,10 @@ export default class Carousel extends Component {
                     {nav &&
                         <Fragment>
                             <span className={`next-control nav-control ${arrowPosition}`} onClick={() => this.$qubelyCarousel.navigate('next')}>
-                                {(arrowStyle == 'arrowright2') ? <span className={`dashicons dashicons-arrow-right-alt2`} /> : <span className={`dashicons dashicons-arrow-right-alt`} />}
+                                {(arrowStyle == 'arrowright2') ? <span className={`fas fa-angle-right`} /> : <span className={`fas fa-arrow-right`} />}
                             </span>
                             <span className={`prev-control nav-control ${arrowPosition}`} onClick={() => this.$qubelyCarousel.navigate('prev')}>
-                                {(arrowStyle == 'arrowright2') ? <span className={`dashicons dashicons-arrow-left-alt2`} /> : <span className={`dashicons dashicons-arrow-left-alt`}/>}
+                                {(arrowStyle == 'arrowright2') ? <span className={`fas fa-angle-left`} /> : <span className={`fas fa-arrow-left`}/>}
                             </span>
                         </Fragment>
                     }
