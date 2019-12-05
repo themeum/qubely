@@ -4,7 +4,7 @@ Donate link: https://www.themeum.com
 Tags: block, blocks, gutenberg, gutenberg blocks, page builder, editor
 Requires at least: 5.0
 Tested up to: 5.3
-Stable tag: 1.2.5
+Stable tag: 1.2.6
 Requires PHP: 5.4.0
 License: GPL-2.0+
 License URI: http://www.gnu.org/licenses/gpl-2.0.txt
@@ -231,6 +231,12 @@ You can report bugs on the [support forum here](https://wordpress.org/support/pl
 
 
 == Changelog ==
+
+= 1.2.6 - 05 December, 2019 =
+New: Full Width, Wide Width alignment option in all blocks  
+Update: Navigation icons in all carousels  
+Update: Improvement in Interaction  
+Fix: Team block - Social icons hover issue    
 
 = 1.2.5 - 28 November, 2019 =
 New: Team block - Image border  
