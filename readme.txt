@@ -234,7 +234,6 @@ You can report bugs on the [support forum here](https://wordpress.org/support/pl
 
 = 1.2.6 - 05 December, 2019 =
 New: Full Width, Wide Width alignment option in all blocks  
-Update: Navigation icons in all carousels  
 Update: Improvement in Interaction  
 Fix: Team block - Social icons hover issue    
 
