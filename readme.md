@@ -208,6 +208,19 @@ Update: Navigation icons in all carousels
 Update: Improvement in Interaction  
 Fix: Team block - Social icons hover issue    
 
+**1.2.5 - 28 November, 2019**
+New: Team block - Image border  
+New: Team block - Image box shadow  
+New: Media field - Local video preview option in Panel  
+Fix: Dropdown field - Search  
+Fix: Post Grid block - Stack background in style 3   
+Fix: InfoBox block - Placeholder image width adjustment issue  
+Fix: Contact Form block - Input field background Material layout    
+Fix: Broken CSS issue after editing original Reusable blocks  
+Update: Tabs block - Frontend script  
+Update: Tabs block - Block preview  
+Update: Tabs block, Video popup block - Preview image path   
+
 **1.2.4 - 20 November, 2019**
 New: Block preview option added  
 New: Post Grid block - context menu  
