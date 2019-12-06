@@ -35,10 +35,10 @@ class QUBELY
 		// Add Styles and Scripts
 		add_action('wp_enqueue_scripts', array($this, 'qubely_enqueue_style'));
 
-		// Add post meta key 
+		// Add post meta key
 		$this->add_global_settings_post_meta();
 
-		// Common style 
+		// Common style
 
 		$this->enqueue_block_css();
 
@@ -77,7 +77,7 @@ class QUBELY
 	{
 		wp_enqueue_script('qubely-blocks-js', QUBELY_DIR_URL . 'assets/js/qubely.dev.js', array('wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor'), QUBELY_VERSION, true);
 
-		$palette = get_theme_support( 'qubely-color-palette' );
+        $palette = get_theme_support( 'qubely-color-palette' );
 		$palette = array_replace( array('#062040','#566372','#2084F9','#F3F3F3','#EEEEEE','#FFFFFF'), ($palette ? $palette[0] : array()) );
 		wp_localize_script('qubely-blocks-js', 'qubely_admin', array(
 			'plugin' => QUBELY_DIR_URL,
@@ -137,6 +137,8 @@ class QUBELY
 		wp_enqueue_style('qubely-options', QUBELY_DIR_URL . 'assets/css/options.css', false, QUBELY_VERSION);
 		wp_enqueue_script('qubely-magnific-popup', QUBELY_DIR_URL . 'assets/js/jquery.magnific-popup.min.js', array('jquery'), QUBELY_VERSION, true);
 		wp_enqueue_style('qubely-magnific-popup-style', QUBELY_DIR_URL . 'assets/css/magnific-popup.css', false, QUBELY_VERSION);
+        wp_enqueue_style('jquery-animatedHeadline-style', QUBELY_DIR_URL. 'assets/css/jquery.animatedheadline.css', false, QUBELY_VERSION);
+        wp_enqueue_script('jquery-animatedHeadline', QUBELY_DIR_URL . 'assets/js/jquery.animatedheadline.min.js', array('jquery'), QUBELY_VERSION, true);
 	}
 
 
@@ -271,6 +273,8 @@ class QUBELY
 			wp_enqueue_style('qubely-magnific-popup-style', QUBELY_DIR_URL . 'assets/css/magnific-popup.css', false, QUBELY_VERSION);
 			wp_enqueue_script('qubely-interaction', QUBELY_DIR_URL .'assets/js/interaction.js', array('jquery'), QUBELY_VERSION, true );
 			wp_enqueue_script('common-script', QUBELY_DIR_URL . 'assets/js/common-script.js', array('jquery'), QUBELY_VERSION);
+            wp_enqueue_style('jquery-animatedHeadline-style', QUBELY_DIR_URL. 'assets/css/jquery.animatedheadline.css', false, QUBELY_VERSION);
+            wp_enqueue_script('jquery-animatedHeadline', QUBELY_DIR_URL . 'assets/js/jquery.animatedheadline.min.js', array('jquery'), QUBELY_VERSION, true);
 			wp_localize_script('common-script', 'qubely_urls', array(
 				'plugin' => QUBELY_DIR_URL,
 				'ajax' => admin_url('admin-ajax.php')
@@ -390,7 +394,7 @@ class QUBELY
 
 	}
 
-	
+
 	public function  append_qubely_css_callback($request)
 	{
 		try {
@@ -470,7 +474,7 @@ class QUBELY
 			$settings = $settings == false ? json_decode('{}') : json_decode($settings);
 
 			$palette = get_theme_support( 'qubely-color-palette' );
-			
+
 			if ($palette) {
 				$palette = array_replace( array('#062040','#566372','#2084F9','#F3F3F3','#EEEEEE','#FFFFFF'), ($palette ? $palette[0] : array()) );
 				$settings->colorPreset1 = $palette[0];
@@ -504,24 +508,24 @@ class QUBELY
 			if( $params['is_remain'] ) {
 				$qubely_block_css = $params['block_css'];
 				$filename = "qubely-css-{$post_id}.css";
-	
+
 				$qubely_block_json = $params['interaction'];
 				$jsonfilename = "qubely-json-{$post_id}.json";
-	
+
 				$upload_dir = wp_upload_dir();
 				$dir = trailingslashit($upload_dir['basedir']) . 'qubely/';
-	
+
 				// Add Import in first
 				$import_first = $this->set_import_url_to_top_css($qubely_block_css);
-	
+
 				//development
 				update_post_meta($post_id, '_qubely_css', $import_first);
 				if( $qubely_block_json ){
 					update_post_meta($post_id,'_qubely_interaction_json',$qubely_block_json);
 				}
-	
+
 				WP_Filesystem(false, $upload_dir['basedir'], true);
-	
+
 				if (!$wp_filesystem->is_dir($dir)) {
 					$wp_filesystem->mkdir($dir);
 				}
@@ -529,12 +533,12 @@ class QUBELY
 				if (!$wp_filesystem->put_contents($dir . $filename, $import_first)) {
 					throw new Exception(__('CSS can not be saved due to permission!!!', 'qubely'));
 				}
-	
+
 				//If fail to save css in directory, then it will show a message to user
 				if ( ! $wp_filesystem->put_contents( $dir . $jsonfilename, $qubely_block_json ) ) {
-					throw new Exception(__('JSON can not be saved due to permission!!!', 'qubely')); 
+					throw new Exception(__('JSON can not be saved due to permission!!!', 'qubely'));
 				}
-	
+
 				return ['success' => true, 'message' => __('Qubely block css file has been updated.', 'qubely')];
 			} else {
 				delete_post_meta($post_id, '_qubely_css');
@@ -619,8 +623,8 @@ class QUBELY
 
 
 	/**
-	 * Enqueue post style 
-	 * If css save option fileSystem then enqueue file 
+	 * Enqueue post style
+	 * If css save option fileSystem then enqueue file
 	 * Or add inline to the header
 	 */
 	public function enqueue_block_css()
@@ -660,9 +664,9 @@ class QUBELY
 
 
 	/**
-	 * Enqueue block css file 
+	 * Enqueue block css file
 	 * Check if css path exists and it has current post page
-	 * Then enqueue file 
+	 * Then enqueue file
 	 */
 	public function enqueue_block_css_file()
 	{
@@ -721,14 +725,14 @@ class QUBELY
 	}
 
 	/**
-	 * Check current post page open and css path exists 
-	 * Then read the css file content from css path 
+	 * Check current post page open and css path exists
+	 * Then read the css file content from css path
 	 * Then add inline css to the header
 	 */
 	public function add_block_inline_css()
 	{
 		$post_id = $this->is_qubely_single();
-		
+
 		if ($post_id) {
 			$upload_dir     = wp_get_upload_dir();
 			$upload_css_dir = trailingslashit($upload_dir['basedir']);
@@ -774,7 +778,7 @@ class QUBELY
 		// $this->delete_post_resource();
 	}
 	/**
-	 * Delete post releated data 
+	 * Delete post releated data
 	 * @delete post css file
 	 */
 	private function delete_post_resource( $post_id = '' )

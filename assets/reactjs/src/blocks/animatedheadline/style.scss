@@ -1,12 +1,12 @@
 .qubely-animated-heading{
 	display: flex;
 	flex-wrap: wrap;
-}
-
-.ah-words-wrapper b:not(.is-visible){
-	display: none;
+	.editor-rich-text{
+		padding: 0 8px;
+	}
 }
 
 .ah-words-wrapper{
 	padding: 0 6px;
+	color: red;
 }

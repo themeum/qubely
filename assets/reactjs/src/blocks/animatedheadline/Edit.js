@@ -5,6 +5,15 @@ const { Component, Fragment } = wp.element
 const { PanelBody, TextareaControl } = wp.components;
 
 class Edit extends Component {
+
+    componentDidMount() {
+        this.$el = $(this.el)
+        console.log(this.$el)
+        this.$el.animatedHeadline({
+            animationType: 'rotate-3'
+        })
+    }
+
     render() {
         const { className, attributes, attributes: {animatedText, titleBefore, titleAfter}, setAttributes } = this.props
 
@@ -21,7 +30,7 @@ class Edit extends Component {
                     </PanelBody>
                 </InspectorControls>
 
-                <div className={`qubely-animated-heading-wrap ${className}`}>
+                <div className={`qubely-animated-heading-wrap ${className}`} ref={el => this.el = el} >
                     <h1 className="qubely-animated-heading ah-headline">
                         <RichText
                             placeholder="Before"
