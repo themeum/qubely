@@ -55,6 +55,7 @@ class Edit extends Component {
                 progress,
                 size,
                 thickness,
+                thicknessBg,
                 background,
                 fillColor,
 
@@ -78,6 +79,7 @@ class Edit extends Component {
             uniqueId,
             percent: progress,
             thickness,
+            thicknessBg,
             emptyFill: background,
             fill: fillColor
         }
@@ -90,6 +92,7 @@ class Edit extends Component {
                     <PanelBody title="">
                         <Range label={__('Progress')} value={progress} onChange={(value) => setAttributes({ progress: value })} min={0} max={100} />
                         <Range label={__('Thickness')} value={thickness} onChange={(value) => setAttributes({ thickness: value })} min={1} max={100} />
+                        <Range label={__('Background Thickness')} value={thicknessBg} onChange={(value) => setAttributes({ thicknessBg: value })} min={1} max={100} />
                         <Range label={__('Size')} value={size} onChange={(value) => setAttributes({ size: value })} min={20} max={500} />
                     </PanelBody>
                     <PanelBody title="Bar" initialOpen={false}>

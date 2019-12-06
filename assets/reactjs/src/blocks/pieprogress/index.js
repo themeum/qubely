@@ -20,6 +20,7 @@ registerBlockType('qubely/pieprogress', {
         uniqueId: { type: 'string', default: '' },
         progress: {type: 'string', default: 25 },
         thickness: {type: 'string', default: 12 },
+        thicknessBg: {type: 'string', default: 6 },
         size: {type: 'string', default: 150 },
         background: {type: 'string', default: '#e9ecef' },
         fillColor: { type: 'object', default: {openColor: 1, type: 'color', color: '#007bff', gradient: {}} },

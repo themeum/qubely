@@ -1,6 +1,7 @@
 const defaultProps = {
     size: 150,
     thickness: 8,
+    thicknessBg: 6,
     percent: 20,
     totalDuration: 1200,
     emptyFill: '#dddddd',
@@ -25,6 +26,7 @@ const Progress = (props) => {
 
     const size = parseInt(props.size)
     const thickness = parseInt(props.thickness)
+    const thicknessBg = parseInt(props.thicknessBg)
     const percent = parseInt(props.percent)
     const totalDuration = parseInt(props.totalDuration)
 
@@ -46,6 +48,18 @@ const Progress = (props) => {
         width: size + 'px',
         height: size + 'px',
     }
+
+    let circleRadiusBg = (size - thicknessBg) * .5
+    let circleRadiusFg = (size - thickness) * .5
+
+    if(thickness > thicknessBg) {
+        circleRadiusBg -= (thickness - thicknessBg) * .5
+    }
+
+    if(thicknessBg > thickness) {
+        circleRadiusFg -= (thicknessBg - thickness) * .5
+    }
+
 
     return (
         <div className="qubely-pie-progress" style={progressStyle} role="progressbar">
@@ -72,19 +86,19 @@ const Progress = (props) => {
                 <circle
                     cx={size}
                     cy={size}
-                    r={(size - thickness) / 2}
-                    stroke-width={thickness}
+                    r={circleRadiusBg}
+                    stroke-width={thicknessBg}
                     style={emptyStyle}
                     fill="none"
                 />
                 <circle
                     cx={size}
                     cy={size}
-                    r={(size - thickness) / 2}
+                    r={circleRadiusFg}
                     stroke-dasharray={circumference}
                     stroke-dashoffset={circumference - offset}
                     stroke-width={thickness}
-                    stroke-linecap="round"
+                    // stroke-linecap="round"
                     fill="none"
                     style={fillStyle}
                     stroke={fill.type === 'color' ? fill.color : `url(#qgrd-${uniqueId})`}
