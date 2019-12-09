@@ -38,7 +38,7 @@ class Edit extends Component {
                 }
                 setTimeout(()=>{
                     this.anim = new animatedHeading({ heading: $(this.animatedHeading)})
-                },500)
+                },100)
                 
             }
         }
