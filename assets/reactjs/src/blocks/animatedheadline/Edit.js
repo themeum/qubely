@@ -11,15 +11,13 @@ class Edit extends Component {
         this._handleTextChange = this._handleTextChange.bind(this)
         this._getAnimationClass = this._getAnimationClass.bind(this)
         this._handleTypeChange = this._handleTypeChange.bind(this)
-
+        this.timer = 0;
         this.state = {
             animationClass: this._getAnimationClass(this.props.attributes.animationType)
         }
     }
 
     componentDidMount(){
-        console.log($(this.animatedHeading))
-        // new window.qubelyHeadline({heading: $(this.animatedHeading)})
       this.anim  = new animatedHeading({ heading: $(this.animatedHeading)})
     }
 
@@ -31,24 +29,24 @@ class Edit extends Component {
         const { animationType } = this.props.attributes
         const { attributes } = prevProps
         if (animationType !== attributes.animationType) {
-            console.log("update")
-            setTimeout(()=>{
-                // new window.qubelyHeadline({heading: $(this.animatedHeading)})
-                // if (this.animate )
-                    //this.animate.type = animationType;  //.reset($(this.animatedHeading));
-                const heading = $(".animated-heading-text")
-                this.anim.animateHeadline(heading)
-                // console.log(animatedHeading)
-                // new animatedHeading({ heading: heading })
-            }, 500)
+            if (this.anim) {
+                this.anim.destroy();
+                delete this.anim;
+                if (this.timer > 0 ){
+                    clearTimeout(this.timer);
+                    this.timer = 0;
+                }
+                setTimeout(()=>{
+                    this.anim = new animatedHeading({ heading: $(this.animatedHeading)})
+                },500)
+                
+            }
         }
     }
 
     _handleTypeChange(val) {
         this.setState({ animationClass: this._getAnimationClass(val) })
         this.props.setAttributes({ animationType: val })
-
-
     }
     _getAnimationClass(value = '') {
         let animationClass = ''
@@ -87,7 +85,7 @@ class Edit extends Component {
 
     render() {
         const { className, attributes: {animatedText, titleBefore, titleAfter, animationType}, setAttributes } = this.props
-
+        
         return (
             <Fragment>
                 <InspectorControls>
