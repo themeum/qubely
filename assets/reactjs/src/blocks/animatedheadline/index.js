@@ -21,7 +21,7 @@ registerBlockType( 'qubely/animatedheadline', {
         ...globalAttributes,  // Global Settings
         spacer: { type: 'object', default:{spaceTop: { md: '10', unit: 'px'}, spaceBottom: { md: '10', unit: 'px'}}, style: [{ selector: '{{QUBELY}}' }] },
         animatedText: { type: 'object', default: ['Apple', 'Banana', 'Orange'] },
-        animationType: { type: 'string', default: 'blinds' },
+        animationType: { type: 'string', default: 'text-clip' },
         titleBefore: {
             type: 'string',
             default: __('Before Text')

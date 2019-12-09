@@ -9,31 +9,47 @@ class Edit extends Component {
     constructor(props) {
         super(props);
         this._handleTextChange = this._handleTextChange.bind(this)
-        // this._callQubelyHeadingAnimation = this._callQubelyHeadingAnimation.bind(this)
         this._getAnimationClass = this._getAnimationClass.bind(this)
         this._handleTypeChange = this._handleTypeChange.bind(this)
 
         this.state = {
-            animationClass: this._getAnimationClass(this.props.animationType)
+            animationClass: this._getAnimationClass(this.props.attributes.animationType)
         }
     }
 
-    componentDidMount() {
-        this.qubelyAnimatedHeading = new window.qubelyAnimatedHeading({
-            heading: $(this.animatedHeading)
-        })
+    componentDidMount(){
+        console.log($(this.animatedHeading))
+        // new window.qubelyHeadline({heading: $(this.animatedHeading)})
+      this.anim  = new animatedHeading({ heading: $(this.animatedHeading)})
     }
 
     _handleTextChange(val) {
-        console.log(this.qubelyAnimatedHeading)
         return this.props.setAttributes({ animatedText: val.split('\n') })
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        const { animationType } = this.props.attributes
+        const { attributes } = prevProps
+        if (animationType !== attributes.animationType) {
+            console.log("update")
+            setTimeout(()=>{
+                // new window.qubelyHeadline({heading: $(this.animatedHeading)})
+                // if (this.animate )
+                    //this.animate.type = animationType;  //.reset($(this.animatedHeading));
+                const heading = $(".animated-heading-text")
+                this.anim.animateHeadline(heading)
+                // console.log(animatedHeading)
+                // new animatedHeading({ heading: heading })
+            }, 500)
+        }
     }
 
     _handleTypeChange(val) {
         this.setState({ animationClass: this._getAnimationClass(val) })
-        return this.props.setAttributes({ animationType: val })
-    }
+        this.props.setAttributes({ animationType: val })
 
+
+    }
     _getAnimationClass(value = '') {
         let animationClass = ''
         switch (value) {
@@ -47,14 +63,14 @@ class Edit extends Component {
                 animationClass = 'text-animation-flip'
                 break
             case 'fade-in':
-                animationClass = 'fade-in'
+                animationClass = 'zoom'
                 break
             case 'loading-bar':
                 animationClass = 'loading-bar'
                 break
             case 'scale':
             case 'slide':
-                animationClass = 'letters slide'
+                animationClass = 'letters scale'
                 break
             case 'push':
                 animationClass = 'push'
