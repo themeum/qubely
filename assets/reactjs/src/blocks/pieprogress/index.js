@@ -18,6 +18,7 @@ registerBlockType('qubely/pieprogress', {
     },
     attributes: {
         uniqueId: { type: 'string', default: '' },
+        layout: { type: 'string', default: 'outline' },
         progress: {type: 'string', default: 25 },
         thickness: {type: 'string', default: 12 },
         thicknessBg: {type: 'string', default: 6 },

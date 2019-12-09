@@ -28,13 +28,9 @@ const Progress = (props) => {
     const thickness = parseInt(props.thickness)
     const thicknessBg = parseInt(props.thicknessBg)
     const percent = parseInt(props.percent)
-    const totalDuration = parseInt(props.totalDuration)
 
-    const duration = totalDuration * percent / 100
-    const circumference = 2 * Math.PI * ((size - thickness) / 2)
-    const offset = circumference * percent / 100
-    const radialPercent = (size /2 * thickness / 100) * .5
-
+    // const totalDuration = parseInt(props.totalDuration)
+    // const duration = totalDuration * percent / 100
     const fillStyle = {
         // transition: `stroke-dashoffset ${duration}ms linear`,
     }
@@ -59,6 +55,10 @@ const Progress = (props) => {
     if(thicknessBg > thickness) {
         circleRadiusFg -= (thicknessBg - thickness) * .5
     }
+    
+    const circumference = 2 * Math.PI * circleRadiusFg
+    const offset = circumference * percent / 100
+    const radialPercent = (size /2 * thickness / 100) * .5
 
 
     return (

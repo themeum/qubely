@@ -1,10 +1,12 @@
 
 import Progress from './Progress'
+import icons from "../../helpers/icons";
 const { Fragment, Component } = wp.element;
 const { PanelBody, Toolbar } = wp.components
 const { InspectorControls, BlockControls } = wp.blockEditor
 const { __ } = wp.i18n
 const {
+    Styles,
     Range,
     Color,
     ColorAdvanced,
@@ -58,7 +60,7 @@ class Edit extends Component {
                 thicknessBg,
                 background,
                 fillColor,
-
+                layout,
                 //animation
                 animation,
                 //global
@@ -89,6 +91,15 @@ class Edit extends Component {
         return (
             <Fragment>
                 <InspectorControls>
+                    <Styles
+                        value={layout}
+                        onChange={val => setAttributes({ layout: val })}
+                        options={[
+                            { value: 'outline', img: icons.pie_outline, label: __('Layout 1') },
+                            { value: 'outline_fill', img: icons.pie_outline_fill, label: __('Layout 2') },
+                            { value: 'fill', img: icons.pie_fill, label: __('Layout 3') },
+                        ]}
+                    />
                     <PanelBody title="">
                         <Range label={__('Progress')} value={progress} onChange={(value) => setAttributes({ progress: value })} min={0} max={100} />
                         <Range label={__('Thickness')} value={thickness} onChange={(value) => setAttributes({ thickness: value })} min={1} max={100} />
