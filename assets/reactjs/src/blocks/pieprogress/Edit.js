@@ -14,6 +14,7 @@ const {
     Toggle,
     Typography,
     IconList,
+    Media,
     Inline: { InlineToolbar },
     CssGenerator: { CssGenerator },
     ContextMenu: {
@@ -73,6 +74,9 @@ class Edit extends Component {
                 iconTypography,
                 iconName,
                 iconSize,
+                image,
+                imageAlt,
+                imageSize,
                 //animation
                 animation,
                 //global
@@ -160,9 +164,6 @@ class Edit extends Component {
                                     ]}
                                     value={iconStyle}
                                     onChange={(value) => setAttributes({ iconStyle: value })} />
-
-
-
                                 {
                                     iconStyle === 'icon' && (
                                         <Fragment>
@@ -171,6 +172,17 @@ class Edit extends Component {
                                                 onChange={iconName => setAttributes({ iconName })} />
                                             <Range label={__('Icon Size')} value={iconSize} onChange={(iconSize) => setAttributes({ iconSize })} min={10} max={100} />
 
+                                        </Fragment>
+                                    )
+                                }
+
+                                {
+                                    iconStyle === 'image' && (
+
+                                        <Fragment>
+                                            <Media label={__('Image')} multiple={false} type={['image']} panel={true} value={image} onChange={image => setAttributes({ image })} />
+                                            {image.url && <TextControl label={__('Alt Text')} value={imageAlt} onChange={imageAlt => setAttributes({ imageAlt })} />}
+                                            <Range label={__('Image Width')} value={imageSize} onChange={imageSize => setAttributes({ imageSize })} min={1} max={200} unit={['px', 'em', '%']} />
                                         </Fragment>
                                     )
                                 }

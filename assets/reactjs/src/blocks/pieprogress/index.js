@@ -29,6 +29,17 @@ registerBlockType('qubely/pieprogress', {
         iconText: { type: 'string', default: 'Text Here' },
         background: {type: 'string', default: '#e9ecef' },
         iconName: { type: 'string', default: 'fas fa-rocket' },
+        image: { type: 'object', default: {} },
+        imageAlt: {type: 'string', default: ''},
+        imageSize: {
+            type: 'object',
+            default: {},
+            style: [
+                {
+                    selector: '{{QUBELY}} .qubely-progress-inner-text .icon-image{ max-width: {{imageSize}} }'
+                }
+            ]
+        },
         iconSize: {
             type: 'string', default: 20,
             style: [
