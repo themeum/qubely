@@ -171,6 +171,22 @@ export const cssSize = (v) => {
     return { md: data.md, sm: data.sm, xs: data.xs };
 }
 
+
+// CSS transfrom
+export const cssTransform = (v) => {
+    let data = { md: [], sm: [], xs: [] }
+    if ((v.translateX && v.translateX.md) || (v.translateY && v.translateY.md)) {
+        data.md = `transform: translateX({{key}}${(v.translateX && v.translateX.unit ? v.translateX.unit : 'px')}) `.replace(new RegExp('{{key}}', "g"), v.translateX ? v.translateX.md || '0' : '0') + `translateY({{key}}${(v.translateY && v.translateY.unit ? v.translateY.unit : 'px')})`.replace(new RegExp('{{key}}', "g"), v.translateY ? v.translateY.md || '0' : '0')
+    }
+    if ((v.translateX && v.translateX.sm) || (v.translateY && v.translateY.sm)) {
+        data.sm = `transform: translateX({{key}}${(v.translateX && v.translateX.unit ? v.translateX.unit : 'px')}) `.replace(new RegExp('{{key}}', "g"), v.translateX ? v.translateX.sm || '0' : '0') + `translateY({{key}}${(v.translateY && v.translateY.unit ? v.translateY.unit : 'px')})`.replace(new RegExp('{{key}}', "g"), v.translateY ? v.translateY.sm || '0' : '0')
+    }
+    if ((v.translateX && v.translateX.xs) || (v.translateY && v.translateY.xs)) {
+        data.xs = `transform: translateX({{key}}${(v.translateX && v.translateX.unit ? v.translateX.unit : 'px')}) `.replace(new RegExp('{{key}}', "g"), v.translateX ? v.translateX.xs || '0' : '0') + `translateY({{key}}${(v.translateY && v.translateY.unit ? v.translateY.unit : 'px')})`.replace(new RegExp('{{key}}', "g"), v.translateY ? v.translateY.xs || '0' : '0')
+    }
+    return { md: [data.md], sm: [data.sm], xs: [data.xs] };
+}
+
 const _customDevice = (val, selector) => {
     let data = {}
     if (val && val.md) {
