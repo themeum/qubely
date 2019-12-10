@@ -10,6 +10,7 @@ const {
     Range,
     Color,
     ColorAdvanced,
+    RadioAdvanced,
     Inline: { InlineToolbar },
     CssGenerator: { CssGenerator },
     ContextMenu: {
@@ -56,6 +57,7 @@ class Edit extends Component {
                 uniqueId,
                 progress,
                 size,
+                corner,
                 thickness,
                 thicknessBg,
                 background,
@@ -91,26 +93,37 @@ class Edit extends Component {
         return (
             <Fragment>
                 <InspectorControls>
-                    <Styles
-                        value={layout}
-                        onChange={val => setAttributes({ layout: val })}
-                        options={[
-                            { value: 'outline', img: icons.pie_outline, label: __('Layout 1') },
-                            { value: 'outline_fill', img: icons.pie_outline_fill, label: __('Layout 2') },
-                            { value: 'fill', img: icons.pie_fill, label: __('Layout 3') },
-                        ]}
-                    />
                     <PanelBody title="">
-                        <Range label={__('Progress')} value={progress} onChange={(value) => setAttributes({ progress: value })} min={0} max={100} />
-                        <Range label={__('Thickness')} value={thickness} onChange={(value) => setAttributes({ thickness: value })} min={1} max={100} />
-                        <Range label={__('Background Thickness')} value={thicknessBg} onChange={(value) => setAttributes({ thicknessBg: value })} min={1} max={100} />
-                        <Range label={__('Size')} value={size} onChange={(value) => setAttributes({ size: value })} min={20} max={500} />
+                        <Styles
+                            value={layout}
+                            onChange={val => setAttributes({ layout: val })}
+                            options={[
+                                { value: 'outline', img: icons.pie_outline, label: __('Layout 1') },
+                                { value: 'outline_fill', img: icons.pie_outline_fill, label: __('Layout 2') },
+                                { value: 'fill', img: icons.pie_fill, label: __('Layout 3') },
+                            ]}
+                        />
+                        <Range label={__('Progress Size')} value={size} onChange={(value) => setAttributes({ size: value })} min={20} max={500} />
                     </PanelBody>
-                    <PanelBody title="Bar" initialOpen={false}>
-                        <ColorAdvanced label={__('Bar Background')} value={fillColor} onChange={val => setAttributes({ fillColor: val })} />
+                    <PanelBody title={__('Progress')}>
+                        <Range label={__('Progress Count')} value={progress} onChange={(value) => setAttributes({ progress: value })} min={0} max={100} />
+                        <ColorAdvanced label={__('Progress Color')} value={fillColor} onChange={val => setAttributes({ fillColor: val })} />
+
+                        <RadioAdvanced
+                            label={__('Corner')}
+                            options={[
+                                { label: 'Sharp', value: 'unset', title: 'Sharp' },
+                                { label: 'Round', value: 'round', title: 'Round' },
+                            ]}
+                            value={corner}
+                            onChange={(value) => setAttributes({ corner: value })} />
+                        <Range label={__('Progress Width')} value={thickness} onChange={(value) => setAttributes({ thickness: value })} min={1} max={100} />
+
                     </PanelBody>
-                    <PanelBody title={__('Background')} initialOpen={false}>
-                        <Color label={__('Empty Background')} value={background} onChange={val => setAttributes({ background: val })} />
+
+                    <PanelBody title={__('Circle')}>
+                        <Range label={__('Circle Width')} value={thicknessBg} onChange={(value) => setAttributes({ thicknessBg: value })} min={1} max={100} />
+                        <Color label={__('Circle Background')} value={background} onChange={val => setAttributes({ background: val })} />
                     </PanelBody>
 
                     {animationSettings(uniqueId, animation, setAttributes)}

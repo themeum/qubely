@@ -9,7 +9,7 @@ const { registerBlockType } = wp.blocks
 
 registerBlockType('qubely/pieprogress', {
     title: __('Pie Progress'),
-    description: 'Simple pie progress demo',
+    description: '',
     category: 'qubely',
     icon: 'universal-access-alt',
     keywords: [__('progress'), __('bar'), __('bar progress')],
@@ -20,6 +20,7 @@ registerBlockType('qubely/pieprogress', {
         uniqueId: { type: 'string', default: '' },
         layout: { type: 'string', default: 'outline' },
         progress: {type: 'string', default: 25 },
+        corner: {type: 'string', default: 'unset' },
         thickness: {type: 'string', default: 12 },
         thicknessBg: {type: 'string', default: 6 },
         size: {type: 'string', default: 150 },
