@@ -1,0 +1,17 @@
+.qubely-progress-parent{
+  display: inline-flex;
+  position: relative;
+  .qubely-progress-inner-text{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    font-size: 16px;
+    width: 90%;
+    height: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

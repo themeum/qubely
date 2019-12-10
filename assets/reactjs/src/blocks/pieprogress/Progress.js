@@ -4,7 +4,9 @@ const defaultProps = {
     thicknessBg: 6,
     percent: 20,
     totalDuration: 1200,
+    corner: 'unset',
     emptyFill: '#dddddd',
+    layout: 'outline',
     fill: {
         color: '#007bff',
         openColor: 0,
@@ -22,7 +24,7 @@ const defaultProps = {
 
 const Progress = (props) => {
     props = {...defaultProps, ...props}
-    const { emptyFill, fill, uniqueId} = props
+    const { emptyFill, fill, uniqueId, corner, layout} = props
 
     const size = parseInt(props.size)
     const thickness = parseInt(props.thickness)
@@ -89,7 +91,7 @@ const Progress = (props) => {
                     r={circleRadiusBg}
                     stroke-width={thicknessBg}
                     style={emptyStyle}
-                    fill="none"
+                    fill={layout !== 'outline' ? emptyFill : 'none'}
                 />
                 <circle
                     cx={size}
@@ -98,7 +100,7 @@ const Progress = (props) => {
                     stroke-dasharray={circumference}
                     stroke-dashoffset={circumference - offset}
                     stroke-width={thickness}
-                    // stroke-linecap="round"
+                    stroke-linecap={corner}
                     fill="none"
                     style={fillStyle}
                     stroke={fill.type === 'color' ? fill.color : `url(#qgrd-${uniqueId})`}
