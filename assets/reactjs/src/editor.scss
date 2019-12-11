@@ -104,11 +104,15 @@ div[data-type="qubely/row"].is-resizing .components-resizable-box__container.qub
         // border-radius: 1.5px;
         background: #e3e4e7;
         border: none;
+        opacity: 1;
+        border-radius: 30px;
+        width: 3.5px;
+        right: calc(50% - 2px);
     }
 }
 
 .components-resizable-box__container.qubely-column-resizer > span > .components-resizable-box__handle {
-    width: 10px;
+    width: 8px;
 }
 
 .qubely-flex-box {
