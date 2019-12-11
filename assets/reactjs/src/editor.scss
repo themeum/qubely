@@ -625,13 +625,13 @@ div[data-type="qubely/row"].is-resizing .components-resizable-box__container.qub
     position: relative;
 }
 .editor-block-list__layout .editor-block-list__block .qubely-row .editor-block-list__block-edit::before {
-    right: 0;
-    left: 0;
+    right: 1px;
+    left: 1px;
 }
-.editor-block-list__layout .editor-block-list__block .qubely-row .editor-block-drop-zone + .editor-block-list__block-edit::before {
-    right: -14px;
-    left: -14px;
-}
+// .editor-block-list__layout .editor-block-list__block .qubely-row .editor-block-drop-zone + .editor-block-list__block-edit::before {
+//     right: -14px;
+//     left: -14px;
+// }
 .qubely-row .editor-block-list__layout .editor-block-list__block.is_hovered[data-type="qubely/columns"] > .editor-block-list__block-edit::before {
     outline:1px solid green;
 }
@@ -640,16 +640,16 @@ div[data-type="qubely/row"].is-resizing .components-resizable-box__container.qub
 }
 
 .qubely-row .editor-block-list__layout .editor-block-list__block .editor-block-list__block-edit > .editor-block-contextual-toolbar + [data-block] .components-resizable-box__container::before {
-    z-index: 0;
-    content: "";
-    position: absolute;
-    outline: 1px solid #e2e4e7;
-    transition: outline .1s linear;
-    pointer-events: none;
-    right: -14px;
-    left: -14px;
-    top: -14px;
-    bottom: -14px;
+    // z-index: 0;
+    // content: "";
+    // position: absolute;
+    // outline: 1px solid #e2e4e7;
+    // transition: outline .1s linear;
+    // pointer-events: none;
+    // right: -14px;
+    // left: -14px;
+    // top: -14px;
+    // bottom: -14px;
 }
 
 
@@ -991,4 +991,18 @@ div[data-type="qubely/row"].is-resizing .components-resizable-box__container.qub
 .not-clickable, .disable-slide .qubely-field-child{
     filter: opacity(.3);
     pointer-events: none;
+}
+
+.qubely-section .qubely-row .editor-inner-blocks {
+    padding: 0 14px;
+}
+.qubely-row * > [data-type="qubely/column"].has-child-selected .editor-inner-blocks  {
+    padding: 14px;
+}
+
+.block-editor-block-list__block .qubely-row * > [data-type="qubely/column"] .block-list-appender {
+    margin: 0;
+}
+.qubely-row * > [data-type="qubely/column"].has-child-selected {
+    z-index: 1;
 }
