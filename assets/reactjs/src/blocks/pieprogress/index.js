@@ -6,7 +6,14 @@ const { gloalSettings: { globalAttributes } } = wp.qubelyComponents
 const { __ } = wp.i18n
 const { registerBlockType } = wp.blocks
 
-
+//
+// enableHeading,
+//     heading,
+//     headingColor,
+//     headingPosition,
+//     headingTypography,
+//
+//
 registerBlockType('qubely/pieprogress', {
     title: __('Pie Progress'),
     description: '',
@@ -22,10 +29,19 @@ registerBlockType('qubely/pieprogress', {
         progress: {type: 'string', default: 25 },
         corner: {type: 'string', default: 'unset' },
         enableIcon: {type: 'boolean', default: true },
-        iconStyle: {type: 'string', default: 'text' },
+        iconStyle: {type: 'string', default: 'icon' },
         thickness: {type: 'string', default: 12 },
         thicknessBg: {type: 'string', default: 6 },
-        size: {type: 'string', default: 150 },
+        fillColor: { type: 'object', default: {openColor: 1, type: 'color', color: '#007bff', gradient: {}} },
+        size: {
+            type: 'string',
+            default: 250 ,
+            style: [
+                {
+                    selector: '{{QUBELY}} .qubely-progress-parent, {{QUBELY}} qubely-pie-progress-heading{width: {{size}}px}'
+                }
+            ]
+        },
         iconText: { type: 'string', default: 'Text Here' },
         background: {type: 'string', default: '#e9ecef' },
         iconName: { type: 'string', default: 'fas fa-rocket' },
@@ -41,18 +57,18 @@ registerBlockType('qubely/pieprogress', {
             ]
         },
         iconSize: {
-            type: 'string', default: 20,
+            type: 'string', default: 60,
             style: [
                 {
                     condition: [
                         { key: 'iconStyle', relation: '==', value: 'icon' },
                     ],
-                    selector: '{{QUBELY}} span{font-size: {{iconSize}}px }'
+                    selector: '{{QUBELY}} span.qubely-pie-icon{font-size: {{iconSize}}px }'
                 }
             ]
         },
         iconTextColor: {
-            type: 'string', default: '#000000',
+            type: 'string', default: '#222222',
             style: [
                 {
                     condition: [
@@ -78,13 +94,42 @@ registerBlockType('qubely/pieprogress', {
             style: [
                 {
                     condition: [
+                        { key: 'enableIcon', relation: '==', value: true },
                         { key: 'iconStyle', relation: '!=', value: 'image' },
                     ],
                     selector: '{{QUBELY}} .qubely-progress-inner-text'
                 }
             ]
         },
-        fillColor: { type: 'object', default: {openColor: 1, type: 'color', color: '#007bff', gradient: {}} },
+        enableHeading: {type: 'boolean', default: false},
+        heading: {type: 'string', default: '' },
+        headingColor: {type: 'string', default: '#222222'},
+        headingPosition: {type: 'string', default: 'inside'},
+        headingSpacing: {type: 'string', default: 10},
+        headingTypography: {
+            type: 'object',
+            default: {
+                openTypography: 1,
+                size: {
+                    md: 20,
+                    unit: 'px'
+                },
+                height: {
+                    md: 1.1,
+                    unit: 'em'
+                }
+            },
+            style: [
+                {
+                    condition: [
+                        {
+                            key: 'enableHeading', relation: '==', value: true
+                        }
+                    ],
+                    selector: '{{QUBELY}} .qubely-pie-progress-heading'
+                }
+            ]
+         },
         spacer: { type: 'object', default:{spaceTop: { md: '10', unit: 'px'}, spaceBottom: { md: '10', unit: 'px'}}, style: [{ selector: '{{QUBELY}}' }] },
         ...globalAttributes,
         content: {

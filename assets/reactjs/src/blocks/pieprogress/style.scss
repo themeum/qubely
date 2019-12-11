@@ -1,5 +1,6 @@
 .qubely-progress-parent{
-  display: inline-flex;
+  display: flex;
+
   position: relative;
   .qubely-progress-inner-text{
     position: absolute;
@@ -13,18 +14,30 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-wrap: wrap;
+    > * {
+      width: 100%;
+      &:first-child{
+        margin-top: auto;
+      }
+      &:last-child{
+        margin-bottom: auto;
+      }
+    }
     .icon-image{
       height: 100%;
       width: 100%;
       align-items: center;
       justify-content: center;
       display: flex;
+      flex-wrap: wrap;
       img{
         max-width: 100%;
         max-height: 100%;
         object-fit: cover;
       }
       .qubely-pie-placeholder{
+        border-radius: 4px;
         height: 60px;
         width: 80px;
         max-width: 90%;
@@ -37,4 +50,9 @@
       }
     }
   }
+}
+
+.qubely-pie-progress-heading{
+  font-size: 20px;
+  line-height: 1.1;
 }

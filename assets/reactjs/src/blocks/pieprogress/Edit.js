@@ -79,6 +79,11 @@ class Edit extends Component {
                 image,
                 imageAlt,
                 imageSize,
+                enableHeading,
+                heading,
+                headingColor,
+                headingPosition,
+                headingTypography,
                 //animation
                 animation,
                 //global
@@ -140,8 +145,6 @@ class Edit extends Component {
                                     onChange={(value) => setAttributes({ corner: value })} />
                             )
                         }
-
-
                         {
                             layout !== 'fill' && <Range label={__('Progress Width')} value={thickness} onChange={(value) => setAttributes({ thickness: value })} min={1} max={100} />
                         }
@@ -155,16 +158,16 @@ class Edit extends Component {
                         <Color label={__('Circle Background')} value={background} onChange={val => setAttributes({ background: val })} />
                     </PanelBody>
 
-                    <PanelBody title={__('Percentage/Icon')}>
+                    <PanelBody title={__('Percentage / Icon')}>
                         <Toggle label={__('Enable Icon')} value={enableIcon} onChange={val => setAttributes({ enableIcon: val })} />
                         { enableIcon &&
                             <Fragment>
                                 <RadioAdvanced
                                     label={__('Type')}
                                     options={[
-                                        { label: 'Text', value: 'text', title: 'Text' },
-                                        { label: 'Image', value: 'image', title: 'Image' },
                                         { label: 'Icon', value: 'icon', title: 'Icon' },
+                                        { label: 'Image', value: 'image', title: 'Image' },
+                                        { label: 'Text', value: 'text', title: 'Text' }
                                     ]}
                                     value={iconStyle}
                                     onChange={(value) => setAttributes({ iconStyle: value })} />
@@ -174,12 +177,10 @@ class Edit extends Component {
                                             <IconList
                                                 value={iconName}
                                                 onChange={iconName => setAttributes({ iconName })} />
-                                            <Range label={__('Icon Size')} value={iconSize} onChange={(iconSize) => setAttributes({ iconSize })} min={10} max={100} />
-
+                                            <Range label={__('Icon Size')} value={iconSize} onChange={(iconSize) => setAttributes({ iconSize })} min={10} max={200} />
                                         </Fragment>
                                     )
                                 }
-
                                 {
                                     iconStyle === 'image' && (
 
@@ -213,6 +214,28 @@ class Edit extends Component {
                             </Fragment>
                         }
                     </PanelBody>
+                    <PanelBody title={__('Heading')}>
+                        <Toggle label={__('Enable Heading')} value={enableHeading} onChange={val => setAttributes({ enableHeading: val })} />
+                        { enableHeading && (
+                            <Fragment>
+                                <TextControl label={__('Heading text')} value={heading} onChange={heading => setAttributes({ heading })} />
+                                {heading && <Color label={__('Heading Color')} value={headingColor} onChange={headingColor => setAttributes({ headingColor })} />}
+                                <RadioAdvanced
+                                    label={__('Type')}
+                                    options={[
+                                        { label: 'Inside', value: 'inside', title: 'Inside' },
+                                        { label: 'Outside', value: 'outside', title: 'Outside' },
+                                    ]}
+                                    value={headingPosition}
+                                    onChange={(headingPosition) => setAttributes({ headingPosition })} />
+
+                                { heading &&  (
+                                    <Typography value={headingTypography} onChange={(headingTypography) => setAttributes({ headingTypography })} />
+                                )}
+                            </Fragment>
+                        )
+                        }
+                    </PanelBody>
                     {animationSettings(uniqueId, animation, setAttributes)}
                     {interactionSettings(uniqueId, interaction, setAttributes)}
                 </InspectorControls>
@@ -231,31 +254,52 @@ class Edit extends Component {
                 <div className={`qubely-block-${uniqueId}`} onContextMenu={event => handleContextMenu(event, this.refs.qubelyContextMenu)}>
                     <div className="qubely-progress-parent">
                         <Progress {...progressAttr} />
-                        {enableIcon && <div className="qubely-progress-inner-text">
-                            {iconStyle === 'text' && (
-                                <RichText
-                                    value={ iconText }
-                                    placeholder={__('Text Here')}
-                                    onChange={ ( iconText ) => setAttributes( { iconText } ) }
-                                />
-                            )}
-                            {iconStyle === 'icon' && (
-                                <span className={`qubely-pie-icon ${iconName}`} />
-                            )}
-                            {iconStyle === 'image' && (
-                                <div className={'icon-image ' + (image.url === undefined && 'pie-placeholder')}>
-                                    {
-                                        image.url !== undefined ? (
-                                            <img className="qubely-pie-image" src={image.url} alt={imageAlt && imageAlt}/>
-                                        ) : (
-                                            <span className="qubely-pie-placeholder far fa-image" />
-                                        )
-                                    }
-                                </div>
-                            )}
+                        {enableIcon && (
+                            <div className="qubely-progress-inner-text">
+                                {iconStyle === 'text' && (
+                                    <RichText
+                                        value={ iconText }
+                                        placeholder={__('Text Here')}
+                                        onChange={ ( iconText ) => setAttributes( { iconText } ) }
+                                    />
+                                )}
+                                {iconStyle === 'icon' && (
+                                    <span className={`qubely-pie-icon ${iconName}`} />
+                                )}
+                                {iconStyle === 'image' && (
+                                    <div className={'icon-image ' + (image.url === undefined && 'pie-placeholder')}>
+                                        {
+                                            image.url !== undefined ? (
+                                                <img className="qubely-pie-image" src={image.url} alt={imageAlt && imageAlt}/>
+                                            ) : (
+                                                <span className="qubely-pie-placeholder far fa-image" />
+                                            )
+                                        }
+                                    </div>
+                                )}
 
-                        </div>}
+                                {(enableHeading && headingPosition === 'inside') && (
+                                    <RichText
+                                        value={ heading }
+                                        className="qubely-pie-progress-heading"
+                                        placeholder={__('Heading Here')}
+                                        onChange={ ( heading ) => setAttributes( { heading } ) }
+                                    />
+                                )}
+
+                            </div>
+                        )}
+
                     </div>
+
+                    {(enableHeading && headingPosition === 'outside') && (
+                        <RichText
+                            value={ heading }
+                            className="qubely-pie-progress-heading"
+                            placeholder={__('Heading Here')}
+                            onChange={ ( heading ) => setAttributes( { heading } ) }
+                        />
+                    )}
                     <div ref="qubelyContextMenu" className="qubely-context-menu-wraper">
                         <ContextMenu
                             name={name}
