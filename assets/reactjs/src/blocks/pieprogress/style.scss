@@ -14,9 +14,26 @@
     align-items: center;
     justify-content: center;
     .icon-image{
+      height: 100%;
+      width: 100%;
+      align-items: center;
+      justify-content: center;
+      display: flex;
       img{
         max-width: 100%;
-        height: auto;
+        max-height: 100%;
+        object-fit: cover;
+      }
+      .qubely-pie-placeholder{
+        height: 60px;
+        width: 80px;
+        max-width: 90%;
+        max-height: 90%;
+        line-height: 60px;
+        font-size: 30px;
+        background: #dddddd;
+        text-align: center;
+        color: #666666;
       }
     }
   }

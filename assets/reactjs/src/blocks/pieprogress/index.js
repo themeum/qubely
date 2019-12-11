@@ -36,7 +36,7 @@ registerBlockType('qubely/pieprogress', {
             default: {},
             style: [
                 {
-                    selector: '{{QUBELY}} .qubely-progress-inner-text .icon-image{ max-width: {{imageSize}} }'
+                    selector: '{{QUBELY}} .qubely-progress-inner-text .icon-image:not(.pie-placeholder){ max-width: {{imageSize}} }'
                 }
             ]
         },
@@ -44,6 +44,9 @@ registerBlockType('qubely/pieprogress', {
             type: 'string', default: 20,
             style: [
                 {
+                    condition: [
+                        { key: 'iconStyle', relation: '==', value: 'icon' },
+                    ],
                     selector: '{{QUBELY}} span{font-size: {{iconSize}}px }'
                 }
             ]
@@ -52,6 +55,9 @@ registerBlockType('qubely/pieprogress', {
             type: 'string', default: '#000000',
             style: [
                 {
+                    condition: [
+                        { key: 'iconStyle', relation: '!=', value: 'image' },
+                    ],
                     selector: '{{QUBELY}} .qubely-progress-inner-text {color: {{iconTextColor}}}'
                 }
             ]
@@ -71,10 +77,9 @@ registerBlockType('qubely/pieprogress', {
             },
             style: [
                 {
-                    // condition: [
-                    //     { key: 'layout', relation: '!=', value: 4 },
-                    //     { key: 'mediaType', relation: '==', value: 'number' }
-                    // ],
+                    condition: [
+                        { key: 'iconStyle', relation: '!=', value: 'image' },
+                    ],
                     selector: '{{QUBELY}} .qubely-progress-inner-text'
                 }
             ]

@@ -1,6 +1,6 @@
 
 import Progress from './Progress'
-import icons from "../../helpers/icons";
+import icons from '../../helpers/icons';
 const { Fragment, Component } = wp.element;
 const { PanelBody, Toolbar, TextControl } = wp.components
 const { InspectorControls, BlockControls, RichText } = wp.blockEditor
@@ -35,7 +35,9 @@ class Edit extends Component {
         super(props)
         this.state = {
             device: 'md',
-            spacer: true
+            selector: true,
+            spacer: true,
+            openPanelSetting: ''
         }
     }
 
@@ -92,6 +94,8 @@ class Edit extends Component {
             }
         } = this.props
 
+        const {openPanelSetting, device} = this.state
+
         const progressAttr = {
             size,
             layout,
@@ -122,7 +126,7 @@ class Edit extends Component {
                         <Range label={__('Progress Size')} value={size} onChange={(value) => setAttributes({ size: value })} min={20} max={500} />
                     </PanelBody>
                     <PanelBody title={__('Progress')}>
-                        <Range label={__('Progress Count')} value={progress} onChange={(value) => setAttributes({ progress: value })} min={0} max={100} />
+                        <Range label={__('Progress Percent')} value={progress} onChange={(value) => setAttributes({ progress: value })} min={0} max={100} />
                         <ColorAdvanced label={__('Progress Color')} value={fillColor} onChange={val => setAttributes({ fillColor: val })} />
 
                         {layout !== 'fill' && (
@@ -181,8 +185,13 @@ class Edit extends Component {
 
                                         <Fragment>
                                             <Media label={__('Image')} multiple={false} type={['image']} panel={true} value={image} onChange={image => setAttributes({ image })} />
-                                            {image.url && <TextControl label={__('Alt Text')} value={imageAlt} onChange={imageAlt => setAttributes({ imageAlt })} />}
-                                            <Range label={__('Image Width')} value={imageSize} onChange={imageSize => setAttributes({ imageSize })} min={1} max={200} unit={['px', 'em', '%']} />
+                                            {image.url &&
+                                                <Fragment>
+                                                    <TextControl label={__('Alt Text')} value={imageAlt} onChange={imageAlt => setAttributes({ imageAlt })} />
+                                                    <Range label={__('Image Width')} value={imageSize} onChange={imageSize => setAttributes({ imageSize })} min={imageSize.unit !== 'px' ? 0 : 10} max={imageSize.unit === '%' ? 100 : 500} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
+                                                </Fragment>
+                                            }
+
                                         </Fragment>
                                     )
                                 }
@@ -222,7 +231,7 @@ class Edit extends Component {
                 <div className={`qubely-block-${uniqueId}`} onContextMenu={event => handleContextMenu(event, this.refs.qubelyContextMenu)}>
                     <div className="qubely-progress-parent">
                         <Progress {...progressAttr} />
-                        <div className="qubely-progress-inner-text">
+                        {enableIcon && <div className="qubely-progress-inner-text">
                             {iconStyle === 'text' && (
                                 <RichText
                                     value={ iconText }
@@ -233,7 +242,19 @@ class Edit extends Component {
                             {iconStyle === 'icon' && (
                                 <span className={`qubely-pie-icon ${iconName}`} />
                             )}
-                        </div>
+                            {iconStyle === 'image' && (
+                                <div className={'icon-image ' + (image.url === undefined && 'pie-placeholder')}>
+                                    {
+                                        image.url !== undefined ? (
+                                            <img className="qubely-pie-image" src={image.url} alt={imageAlt && imageAlt}/>
+                                        ) : (
+                                            <span className="qubely-pie-placeholder far fa-image" />
+                                        )
+                                    }
+                                </div>
+                            )}
+
+                        </div>}
                     </div>
                     <div ref="qubelyContextMenu" className="qubely-context-menu-wraper">
                         <ContextMenu
