@@ -1,6 +1,9 @@
+.qubely-block-pie-progress{
+  display: flex;
+  flex-direction: column;
+}
 .qubely-progress-parent{
   display: flex;
-
   position: relative;
   .qubely-progress-inner-text{
     position: absolute;
@@ -25,7 +28,6 @@
       }
     }
     .icon-image{
-      height: 100%;
       width: 100%;
       align-items: center;
       justify-content: center;
@@ -55,4 +57,5 @@
 .qubely-pie-progress-heading{
   font-size: 20px;
   line-height: 1.1;
+  width: 100%;
 }

@@ -26,6 +26,15 @@ registerBlockType('qubely/pieprogress', {
     attributes: {
         uniqueId: { type: 'string', default: '' },
         layout: { type: 'string', default: 'outline' },
+        alignment: {
+            type: 'string',
+            value: 'flex-start',
+            style: [
+                {
+                    selector: '{{QUBELY}} {align-items: {{alignment}}}'
+                }
+            ]
+        },
         progress: {type: 'string', default: 25 },
         corner: {type: 'string', default: 'unset' },
         enableIcon: {type: 'boolean', default: true },
@@ -38,7 +47,7 @@ registerBlockType('qubely/pieprogress', {
             default: 250 ,
             style: [
                 {
-                    selector: '{{QUBELY}} .qubely-progress-parent, {{QUBELY}} qubely-pie-progress-heading{width: {{size}}px}'
+                    selector: '{{QUBELY}} .qubely-progress-parent, {{QUBELY}} .qubely-pie-progress-heading.qubely-outside{width: {{size}}px}'
                 }
             ]
         },
@@ -49,7 +58,10 @@ registerBlockType('qubely/pieprogress', {
         imageAlt: {type: 'string', default: ''},
         imageSize: {
             type: 'object',
-            default: {},
+            default: {
+                md: '80',
+                unit: 'px',
+            },
             style: [
                 {
                     selector: '{{QUBELY}} .qubely-progress-inner-text .icon-image:not(.pie-placeholder){ max-width: {{imageSize}} }'
@@ -103,9 +115,32 @@ registerBlockType('qubely/pieprogress', {
         },
         enableHeading: {type: 'boolean', default: false},
         heading: {type: 'string', default: '' },
-        headingColor: {type: 'string', default: '#222222'},
+        headingColor: {
+            type: 'string',
+            default: '#222222',
+            style: [
+                {
+                    selector: '{{QUBELY}} .qubely-pie-progress-heading {color: {{headingColor}} }'
+                }
+            ]
+        },
         headingPosition: {type: 'string', default: 'inside'},
-        headingSpacing: {type: 'string', default: 10},
+        headingSpacing: {
+            type: 'string',
+            default: 10,
+            style: [
+                {
+                    selector: '{{QUBELY}} .qubely-pie-progress-heading {margin-top: {{headingSpacing}}px}'
+                }
+            ]
+        },
+        headingAlignment: {
+            type: 'object',
+            default: {},
+            style: [
+                { selector: '{{QUBELY}} .qubely-pie-progress-heading {text-align: {{headingAlignment}}; }' }
+            ],
+        },
         headingTypography: {
             type: 'object',
             default: {

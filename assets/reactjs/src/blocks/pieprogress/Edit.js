@@ -15,6 +15,7 @@ const {
     Typography,
     IconList,
     Media,
+    Alignment,
     Inline: { InlineToolbar },
     CssGenerator: { CssGenerator },
     ContextMenu: {
@@ -62,6 +63,7 @@ class Edit extends Component {
             attributes: {
                 uniqueId,
                 progress,
+                alignment,
                 size,
                 corner,
                 thickness,
@@ -84,6 +86,8 @@ class Edit extends Component {
                 headingColor,
                 headingPosition,
                 headingTypography,
+                headingSpacing,
+                headingAlignment,
                 //animation
                 animation,
                 //global
@@ -129,8 +133,19 @@ class Edit extends Component {
                             ]}
                         />
                         <Range label={__('Progress Size')} value={size} onChange={(value) => setAttributes({ size: value })} min={20} max={500} />
+
+                        <RadioAdvanced
+                            label={__('Alignment')}
+                            options={[
+                                { label: <span style={{padding: '0 5px'}} class='fas fa-align-left' />, value: 'flex-start', title: 'Left' },
+                                { label: <span style={{padding: '0 5px'}} class='fas fa-align-center' />, value: 'center', title: 'Center' },
+                                { label: <span style={{padding: '0 5px'}} class='fas fa-align-right' />, value: 'flex-end', title: 'Right' },
+                            ]}
+                            value={alignment}
+                            onChange={(alignment) => setAttributes({ alignment })} />
+
                     </PanelBody>
-                    <PanelBody title={__('Progress')}>
+                    <PanelBody title={__('Progress')} initialOpen={false}>
                         <Range label={__('Progress Percent')} value={progress} onChange={(value) => setAttributes({ progress: value })} min={0} max={100} />
                         <ColorAdvanced label={__('Progress Color')} value={fillColor} onChange={val => setAttributes({ fillColor: val })} />
 
@@ -151,14 +166,14 @@ class Edit extends Component {
 
                     </PanelBody>
 
-                    <PanelBody title={__('Circle')}>
+                    <PanelBody title={__('Circle')} initialOpen={false}>
                         {
                             layout === 'outline' && <Range label={__('Circle Width')} value={thicknessBg} onChange={(value) => setAttributes({ thicknessBg: value })} min={1} max={100} />
                         }
                         <Color label={__('Circle Background')} value={background} onChange={val => setAttributes({ background: val })} />
                     </PanelBody>
 
-                    <PanelBody title={__('Percentage / Icon')}>
+                    <PanelBody title={__('Percentage / Icon')} initialOpen={false}>
                         <Toggle label={__('Enable Icon')} value={enableIcon} onChange={val => setAttributes({ enableIcon: val })} />
                         { enableIcon &&
                             <Fragment>
@@ -214,7 +229,7 @@ class Edit extends Component {
                             </Fragment>
                         }
                     </PanelBody>
-                    <PanelBody title={__('Heading')}>
+                    <PanelBody title={__('Heading')} initialOpen={false}>
                         <Toggle label={__('Enable Heading')} value={enableHeading} onChange={val => setAttributes({ enableHeading: val })} />
                         { enableHeading && (
                             <Fragment>
@@ -228,9 +243,14 @@ class Edit extends Component {
                                     ]}
                                     value={headingPosition}
                                     onChange={(headingPosition) => setAttributes({ headingPosition })} />
-
-                                { heading &&  (
-                                    <Typography value={headingTypography} onChange={(headingTypography) => setAttributes({ headingTypography })} />
+                                {heading && (
+                                    <Fragment>
+                                        {headingPosition === 'outside' && (
+                                            <Alignment label={__('Alignment')} value={headingAlignment} onChange={headingAlignment => setAttributes({ headingAlignment })} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
+                                        )}
+                                        <Range label={__('Spacing')} value={headingSpacing} onChange={(headingSpacing) => setAttributes({ headingSpacing })} min={10} max={200} />
+                                        <Typography value={headingTypography} onChange={(headingTypography) => setAttributes({ headingTypography })} />
+                                    </Fragment>
                                 )}
                             </Fragment>
                         )
@@ -251,7 +271,7 @@ class Edit extends Component {
                 </BlockControls>
 
                 {globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
-                <div className={`qubely-block-${uniqueId}`} onContextMenu={event => handleContextMenu(event, this.refs.qubelyContextMenu)}>
+                <div className={`qubely-block-${uniqueId} qubely-block-pie-progress`} onContextMenu={event => handleContextMenu(event, this.refs.qubelyContextMenu)}>
                     <div className="qubely-progress-parent">
                         <Progress {...progressAttr} />
                         {enableIcon && (
@@ -295,7 +315,7 @@ class Edit extends Component {
                     {(enableHeading && headingPosition === 'outside') && (
                         <RichText
                             value={ heading }
-                            className="qubely-pie-progress-heading"
+                            className="qubely-pie-progress-heading qubely-outside"
                             placeholder={__('Heading Here')}
                             onChange={ ( heading ) => setAttributes( { heading } ) }
                         />
