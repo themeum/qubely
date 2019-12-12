@@ -91,7 +91,7 @@ class Edit extends Component {
                 headingAlignment,
                 progressShadow,
                 circleShadow,
-                position,
+                circleShrink,
                 //animation
                 animation,
                 //global
@@ -109,49 +109,20 @@ class Edit extends Component {
 
         const {device} = this.state
 
-        /*
         const thicknessCalc = {
             fill: (size / 2),
             outline: (size * (thickness * .5)) / 100,
             outline_fill: (size * (thickness * .5)) / 100,
         }
-        */
 
-        const thickPosition = {
-            inside: (size * (thickness * .5)) / 100,
-            center: (size * (thickness * .5)) / 100,
-            outside: (size * (thickness * .5)) / 100
-        }
-
-        const thicknessCalc = {
-            fill: (size / 2),
-            outline: thickPosition[position],
-            outline_fill: thickPosition[position],
-        }
-
-        /*
         const thicknessBgCalc = {
             fill: size / 2,
             outline: (size * (thicknessBg * .5)) / 100,
             outline_fill: (size * (thickness * .5)) / 100
         }
-        */
-
-        const thickBgPosition = {
-            inside: size * (thickness * .5) / 100,
-            center: size / 100,
-            outside: (size * (thickness * .5)) / 100
-        }
-
-        const thicknessBgCalc = {
-            fill: size / 2,
-            outline: (size * (thicknessBg * .5)) / 100,
-            outline_fill: thickBgPosition[position]
-        }
 
         const progressAttr = {
             size,
-            circleSize: size,
             layout,
             corner: layout === 'fill' ? 'unset' : corner,
             uniqueId,
@@ -161,7 +132,8 @@ class Edit extends Component {
             emptyFill: background,
             fill: fillColor,
             circleShadow,
-            progressShadow
+            progressShadow,
+            circleShrink: ((size - thickness) * .5) * circleShrink / 100
         }
 
         if (uniqueId) { CssGenerator(this.props.attributes, 'pieprogress', uniqueId); }
@@ -195,7 +167,6 @@ class Edit extends Component {
                     <PanelBody title={__('Progress')} initialOpen={false}>
                         <Range label={__('Progress Percent')} value={progress} onChange={(value) => setAttributes({ progress: value })} min={0} max={100} />
                         <ColorAdvanced label={__('Progress Color')} value={fillColor} onChange={val => setAttributes({ fillColor: val })} />
-
                         {layout !== 'fill' && (
                                 <RadioAdvanced
                                     label={__('Corner')}
@@ -207,34 +178,21 @@ class Edit extends Component {
                                     onChange={(value) => setAttributes({ corner: value })} />
                             )
                         }
-
-
-                        <RadioAdvanced
-                            label={__('Position')}
-                            options={[
-                                { label: 'Inside', value: 'inside', title: 'Inside' },
-                                { label: 'Center', value: 'center', title: 'Center' },
-                                { label: 'Outside', value: 'outside', title: 'Outside' },
-                            ]}
-                            value={position}
-                            onChange={(position) => setAttributes({ position })} />
-
                         {
                             layout !== 'fill' && <Range label={__('Progress Width')} value={thickness} onChange={(value) => setAttributes({ thickness: value })} min={1} max={100} />
                         }
 
                         <BoxShadow label={__('Shadow')} value={progressShadow} onChange={value => setAttributes({ progressShadow: value })} />
-
                     </PanelBody>
 
                     <PanelBody title={__('Circle')} initialOpen={false}>
                         {
                             layout === 'outline' && <Range label={__('Circle Width')} value={thicknessBg} onChange={(value) => setAttributes({ thicknessBg: value })} min={1} max={100} />
                         }
+                        <Range label={__('Circle Shrink (%)')} value={circleShrink} onChange={circleShrink => setAttributes({ circleShrink})} min={0} max={100} />
                         <Color label={__('Circle Background')} value={background} onChange={val => setAttributes({ background: val })} />
                         <BoxShadow label={__('Shadow')} value={circleShadow} onChange={value => setAttributes({ circleShadow : value})} />
                     </PanelBody>
-
                     <PanelBody title={__('Percentage / Icon')} initialOpen={false}>
                         <Toggle label={__('Enable Icon')} value={enableIcon} onChange={val => setAttributes({ enableIcon: val })} />
                         { enableIcon &&
@@ -310,7 +268,7 @@ class Edit extends Component {
                                         {headingPosition === 'outside' && (
                                             <Alignment label={__('Alignment')} value={headingAlignment} onChange={headingAlignment => setAttributes({ headingAlignment })} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
                                         )}
-                                        <Range label={__('Spacing')} value={headingSpacing} onChange={(headingSpacing) => setAttributes({ headingSpacing })} min={10} max={200} />
+                                        <Range label={__('Spacing')} value={headingSpacing} onChange={(headingSpacing) => setAttributes({ headingSpacing })} min={0} max={200} />
                                         <Typography value={headingTypography} onChange={(headingTypography) => setAttributes({ headingTypography })} />
                                     </Fragment>
                                 )}

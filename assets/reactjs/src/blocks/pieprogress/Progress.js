@@ -1,22 +1,22 @@
 const defaultProps = {
     size: 150,
-    circleSize: 150,
-    thickness: 8,
-    thicknessBg: 6,
-    percent: 20,
+    circleShrink: 0,
+    thickness: 11,
+    thicknessBg: 21,
+    percent: 55,
     totalDuration: 1200,
-    corner: 'unset',
-    emptyFill: '#dddddd',
+    corner: 'round',
+    emptyFill: '#eff4f8',
     layout: 'outline',
     fill: {
-        color: '#007bff',
-        openColor: 0,
-        type: 'color',
+        color: '#25b5e1',
+        openColor: 1,
+        type: 'gradient',
         gradient: {
             type: 'linear',
-            color1: '#16d03e',
-            color2: '#1f91f3',
-            direction: '0',
+            color1: '#25b5e1',
+            color2: '#45dbca',
+            direction: '47',
             start: '0',
             stop: '100'
         }
@@ -32,10 +32,10 @@ const defaultProps = {
     },
     circleShadow: {
         blur: 3,
-        color: 'rgba(0, 0, 0, .2)',
-        horizontal: '7',
-        inset: '',
-        openShadow: false,
+        color: 'rgba(100, 121, 130, .43)',
+        horizontal: '2',
+        inset: 'inset',
+        openShadow: true,
         spread: 0,
         vertical: 2,
     }
@@ -46,6 +46,7 @@ const Progress = (props) => {
     const { emptyFill, fill, uniqueId, corner, layout, circleShadow, progressShadow} = props
 
     const size = parseInt(props.size)
+    const circleShrink = parseInt(props.circleShrink)
     const thickness = parseInt(props.thickness)
     const thicknessBg = parseInt(props.thicknessBg)
     const percent = parseInt(props.percent)
@@ -95,11 +96,11 @@ const Progress = (props) => {
                     progressShadow.openShadow === true && (
                         progressShadow.inset !== 'inset' ? (
                             <filter id={`progress-shadow-${uniqueId}`} width="500%" height="500%" x="-250%" y="-250%">
-                                <feDropShadow dx={progressShadow.horizontal} dy={progressShadow.vertical} stdDeviation={progressShadow.blur} flood-color={progressShadow.color} flood-opacity="1" />
+                                <feDropShadow dx={progressShadow.vertical} dy={progressShadow.horizontal} stdDeviation={progressShadow.blur} flood-color={progressShadow.color} flood-opacity="1" />
                             </filter>
                         ) : (
                             <filter id={`progress-shadow-${uniqueId}`} width="500%" height="500%" x="-250%" y="-250%">
-                                <feOffset dx={progressShadow.horizontal} dy={progressShadow.vertical} />
+                                <feOffset dx={progressShadow.vertical} dy={progressShadow.horizontal} />
                                 <feGaussianBlur stdDeviation={progressShadow.blur} />
                                 <feComposite operator="out" in="SourceGraphic" result="inverse"/>
                                 <feFlood flood-color={progressShadow.color} flood-opacity="1" result="color"/>
@@ -117,11 +118,11 @@ const Progress = (props) => {
                     circleShadow.openShadow === true && (
                         circleShadow.inset !== 'inset' ? (
                             <filter id={`circle-shadow-${uniqueId}`} width="500%" height="500%" x="-250%" y="-250%">
-                                <feDropShadow dx={circleShadow.horizontal} dy={circleShadow.vertical} stdDeviation={circleShadow.blur} flood-color={circleShadow.color} flood-opacity="1" />
+                                <feDropShadow dx={circleShadow.vertical} dy={circleShadow.horizontal} stdDeviation={circleShadow.blur} flood-color={circleShadow.color} flood-opacity="1" />
                             </filter>
                         ) : (
                             <filter id={`circle-shadow-${uniqueId}`} width="500%" height="500%" x="-250%" y="-250%">
-                                <feOffset dx={circleShadow.horizontal} dy={circleShadow.vertical} />
+                                <feOffset dx={circleShadow.vertical} dy={circleShadow.horizontal} />
                                 <feGaussianBlur stdDeviation={circleShadow.blur} />
                                 <feComposite operator="out" in="SourceGraphic" result="inverse"/>
                                 <feFlood flood-color={circleShadow.color} flood-opacity="1" result="color"/>
@@ -148,19 +149,17 @@ const Progress = (props) => {
                 }
 
                 {/* Circle / Background */}
-
                 <circle
                     {...(circleShadow.openShadow === true && {filter: `url(#circle-shadow-${uniqueId})`})}
                     cx={size}
                     cy={size}
-                    r={circleRadiusBg}
+                    r={circleRadiusBg - circleShrink}
                     stroke-width={thicknessBg}
                     style={emptyStyle}
                     fill={layout !== 'outline' ? emptyFill : 'none'}
                 />
 
                 {/* Progress / Forground */}
-
                 <circle
                     {...(progressShadow.openShadow === true && {filter: `url(#progress-shadow-${uniqueId})`})}
                     cx={size}
