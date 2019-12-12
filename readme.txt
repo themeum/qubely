@@ -4,7 +4,7 @@ Donate link: https://www.themeum.com
 Tags: block, blocks, gutenberg, gutenberg blocks, page builder, editor
 Requires at least: 5.0
 Tested up to: 5.3
-Stable tag: 1.2.6
+Stable tag: 1.2.7
 Requires PHP: 5.4.0
 License: GPL-2.0+
 License URI: http://www.gnu.org/licenses/gpl-2.0.txt
@@ -231,6 +231,12 @@ You can report bugs on the [support forum here](https://wordpress.org/support/pl
 
 
 == Changelog ==
+
+= 1.2.7 - 12 December, 2019 =
+New: Transform function in css generator  
+Update: Column block default UI   
+Update: Block control css issue for Blocks inside Column    
+
 
 = 1.2.6 - 05 December, 2019 =
 New: Full Width, Wide Width alignment option in all blocks  
