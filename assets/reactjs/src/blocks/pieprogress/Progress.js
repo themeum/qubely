@@ -1,5 +1,6 @@
 const defaultProps = {
     size: 150,
+    circleSize: 150,
     thickness: 8,
     thicknessBg: 6,
     percent: 20,
@@ -130,8 +131,6 @@ const Progress = (props) => {
                         )
                     )
                 }
-
-
                 {
                     fill.type !== 'color' && (
                         fill.gradient.type == 'radial' ? (
@@ -147,6 +146,9 @@ const Progress = (props) => {
                         )
                     )
                 }
+
+                {/* Circle / Background */}
+
                 <circle
                     {...(circleShadow.openShadow === true && {filter: `url(#circle-shadow-${uniqueId})`})}
                     cx={size}
@@ -156,6 +158,9 @@ const Progress = (props) => {
                     style={emptyStyle}
                     fill={layout !== 'outline' ? emptyFill : 'none'}
                 />
+
+                {/* Progress / Forground */}
+
                 <circle
                     {...(progressShadow.openShadow === true && {filter: `url(#progress-shadow-${uniqueId})`})}
                     cx={size}

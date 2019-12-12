@@ -91,6 +91,7 @@ class Edit extends Component {
                 headingAlignment,
                 progressShadow,
                 circleShadow,
+                position,
                 //animation
                 animation,
                 //global
@@ -108,20 +109,49 @@ class Edit extends Component {
 
         const {device} = this.state
 
+        /*
         const thicknessCalc = {
             fill: (size / 2),
             outline: (size * (thickness * .5)) / 100,
             outline_fill: (size * (thickness * .5)) / 100,
         }
+        */
 
+        const thickPosition = {
+            inside: (size * (thickness * .5)) / 100,
+            center: (size * (thickness * .5)) / 100,
+            outside: (size * (thickness * .5)) / 100
+        }
+
+        const thicknessCalc = {
+            fill: (size / 2),
+            outline: thickPosition[position],
+            outline_fill: thickPosition[position],
+        }
+
+        /*
         const thicknessBgCalc = {
             fill: size / 2,
             outline: (size * (thicknessBg * .5)) / 100,
             outline_fill: (size * (thickness * .5)) / 100
         }
+        */
+
+        const thickBgPosition = {
+            inside: size * (thickness * .5) / 100,
+            center: size / 100,
+            outside: (size * (thickness * .5)) / 100
+        }
+
+        const thicknessBgCalc = {
+            fill: size / 2,
+            outline: (size * (thicknessBg * .5)) / 100,
+            outline_fill: thickBgPosition[position]
+        }
 
         const progressAttr = {
             size,
+            circleSize: size,
             layout,
             corner: layout === 'fill' ? 'unset' : corner,
             uniqueId,
@@ -177,6 +207,18 @@ class Edit extends Component {
                                     onChange={(value) => setAttributes({ corner: value })} />
                             )
                         }
+
+
+                        <RadioAdvanced
+                            label={__('Position')}
+                            options={[
+                                { label: 'Inside', value: 'inside', title: 'Inside' },
+                                { label: 'Center', value: 'center', title: 'Center' },
+                                { label: 'Outside', value: 'outside', title: 'Outside' },
+                            ]}
+                            value={position}
+                            onChange={(position) => setAttributes({ position })} />
+
                         {
                             layout !== 'fill' && <Range label={__('Progress Width')} value={thickness} onChange={(value) => setAttributes({ thickness: value })} min={1} max={100} />
                         }

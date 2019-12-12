@@ -37,6 +37,7 @@ registerBlockType('qubely/pieprogress', {
         },
         progress: {type: 'string', default: 25 },
         corner: {type: 'string', default: 'unset' },
+        position: {type: 'string', default: 'center' },
         enableIcon: {type: 'boolean', default: true },
         iconStyle: {type: 'string', default: 'icon' },
         thickness: {type: 'string', default: 12 },
