@@ -617,10 +617,10 @@ div[data-type="qubely/row"].is-resizing .components-resizable-box__container.qub
     margin-right: 0;
 }
 
-.qubely-row .editor-block-list__block .editor-block-contextual-toolbar {
-    margin-left: 0;
-    margin-right: 0;
-}
+// .qubely-row .editor-block-list__block .editor-block-contextual-toolbar {
+//     margin-left: 0;
+//     margin-right: 0;
+// }
 
 //.qubely-row .editor-block-list__layout .editor-block-list__block.is-selected >.editor-block-list__block-edit::before {
 //    outline: 0;
@@ -628,10 +628,10 @@ div[data-type="qubely/row"].is-resizing .components-resizable-box__container.qub
 .qubely-row .editor-block-list__layout .editor-block-list__block .editor-block-list__block-edit > .editor-block-contextual-toolbar + [data-block] .components-resizable-box__container {
     position: relative;
 }
-.editor-block-list__layout .editor-block-list__block .qubely-row .editor-block-list__block-edit::before {
-    right: 1px;
-    left: 1px;
-}
+// .editor-block-list__layout .editor-block-list__block .qubely-row .editor-block-list__block-edit::before {
+//     right: 1px;
+//     left: 1px;
+// }
 // .editor-block-list__layout .editor-block-list__block .qubely-row .editor-block-drop-zone + .editor-block-list__block-edit::before {
 //     right: -14px;
 //     left: -14px;
@@ -997,11 +997,20 @@ div[data-type="qubely/row"].is-resizing .components-resizable-box__container.qub
     pointer-events: none;
 }
 
-.qubely-section .qubely-row .editor-inner-blocks {
-    padding: 0 14px;
-}
+// .qubely-section .qubely-row .editor-inner-blocks {
+//     padding: 14px;
+// }
 .qubely-row * > [data-type="qubely/column"].has-child-selected .editor-inner-blocks  {
     padding: 14px;
+}
+
+.editor-styles-wrapper .qubely-row * > [data-type="qubely/column"] [data-block] {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+.editor-styles-wrapper .qubely-row * > [data-type="qubely/column"].has-child-selected [data-block] {
+    margin-top: 28px;
+    margin-bottom: 28px;
 }
 
 .block-editor-block-list__block .qubely-row * > [data-type="qubely/column"] .block-list-appender {
@@ -1009,4 +1018,8 @@ div[data-type="qubely/row"].is-resizing .components-resizable-box__container.qub
 }
 .qubely-row * > [data-type="qubely/column"].has-child-selected {
     z-index: 1;
+}
+
+.block-editor-block-list__layout .block-editor-block-list__block[data-type="qubely/row"].is-selected {
+    z-index: inherit;
 }
