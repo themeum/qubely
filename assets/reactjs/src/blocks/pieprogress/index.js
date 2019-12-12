@@ -165,6 +165,12 @@ registerBlockType('qubely/pieprogress', {
                 }
             ]
          },
+        progressShadow: {
+            type: 'object', default: {},
+        },
+        circleShadow: {
+            type: 'object', default: {},
+        },
         spacer: { type: 'object', default:{spaceTop: { md: '10', unit: 'px'}, spaceBottom: { md: '10', unit: 'px'}}, style: [{ selector: '{{QUBELY}}' }] },
         ...globalAttributes,
         content: {

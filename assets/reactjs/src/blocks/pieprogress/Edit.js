@@ -15,6 +15,7 @@ const {
     Typography,
     IconList,
     Media,
+    BoxShadow,
     Alignment,
     Inline: { InlineToolbar },
     CssGenerator: { CssGenerator },
@@ -88,6 +89,8 @@ class Edit extends Component {
                 headingTypography,
                 headingSpacing,
                 headingAlignment,
+                progressShadow,
+                circleShadow,
                 //animation
                 animation,
                 //global
@@ -103,7 +106,19 @@ class Edit extends Component {
             }
         } = this.props
 
-        const {openPanelSetting, device} = this.state
+        const {device} = this.state
+
+        const thicknessCalc = {
+            fill: (size / 2),
+            outline: (size * (thickness * .5)) / 100,
+            outline_fill: (size * (thickness * .5)) / 100,
+        }
+
+        const thicknessBgCalc = {
+            fill: size / 2,
+            outline: (size * (thicknessBg * .5)) / 100,
+            outline_fill: (size * (thickness * .5)) / 100
+        }
 
         const progressAttr = {
             size,
@@ -111,10 +126,12 @@ class Edit extends Component {
             corner: layout === 'fill' ? 'unset' : corner,
             uniqueId,
             percent: progress,
-            thickness: layout === 'fill' ? (size / 2) : (size * (thickness * .5)) / 100,
-            thicknessBg: layout === 'outline_fill' ? ((size * (thickness * .5)) / 100) : layout === 'fill' ? (size / 2) : (size * (thicknessBg * .5)) / 100,
+            thickness: thicknessCalc[layout],
+            thicknessBg: thicknessBgCalc[layout],
             emptyFill: background,
-            fill: fillColor
+            fill: fillColor,
+            circleShadow,
+            progressShadow
         }
 
         if (uniqueId) { CssGenerator(this.props.attributes, 'pieprogress', uniqueId); }
@@ -164,6 +181,8 @@ class Edit extends Component {
                             layout !== 'fill' && <Range label={__('Progress Width')} value={thickness} onChange={(value) => setAttributes({ thickness: value })} min={1} max={100} />
                         }
 
+                        <BoxShadow label={__('Shadow')} value={progressShadow} onChange={value => setAttributes({ progressShadow: value })} />
+
                     </PanelBody>
 
                     <PanelBody title={__('Circle')} initialOpen={false}>
@@ -171,6 +190,7 @@ class Edit extends Component {
                             layout === 'outline' && <Range label={__('Circle Width')} value={thicknessBg} onChange={(value) => setAttributes({ thicknessBg: value })} min={1} max={100} />
                         }
                         <Color label={__('Circle Background')} value={background} onChange={val => setAttributes({ background: val })} />
+                        <BoxShadow label={__('Shadow')} value={circleShadow} onChange={value => setAttributes({ circleShadow : value})} />
                     </PanelBody>
 
                     <PanelBody title={__('Percentage / Icon')} initialOpen={false}>
