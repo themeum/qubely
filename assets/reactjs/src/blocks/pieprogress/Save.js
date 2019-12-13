@@ -1,6 +1,6 @@
 import Progress from './Progress'
-const { __ } = wp.i18n
 const { RichText } = wp.editor;
+const { HelperFunction: { animationAttr, IsInteraction } } = wp.qubelyComponents
 
 const Save = (props) => {
     const {
@@ -17,7 +17,9 @@ const Save = (props) => {
         imageAlt,
         enableHeading,
         headingPosition,
-        heading
+        heading,
+        animation, 
+        interaction
     } = props.attributes
 
     const progressAttr = {
@@ -27,15 +29,16 @@ const Save = (props) => {
         uniqueId,
         percent: progress
     }
-
+    const interactionClass = IsInteraction(interaction) ? 'qubley-block-interaction' : '';
     return (
-        <div className={`qubely-block-${uniqueId} qubely-block-pie-progress`}>
+        <div className={`qubely-block-${uniqueId} qubely-block-pie-progress ${interactionClass}`} {...animationAttr(animation)}>
             <div className="qubely-progress-parent">
                 <Progress {...progressAttr} />
                 {enableIcon && (
                     <div className="qubely-progress-inner-text">
                         {iconStyle === 'text' && (
                             <RichText.Content
+                                tagName="div"
                                 value={iconText}
                             />
                         )}
@@ -56,6 +59,7 @@ const Save = (props) => {
 
                         {(enableHeading && headingPosition === 'inside') && (
                             <RichText.Content
+                                tagName="div"
                                 value={heading}
                                 className="qubely-pie-progress-heading"
                             />
