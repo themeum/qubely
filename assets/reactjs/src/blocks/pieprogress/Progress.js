@@ -42,16 +42,16 @@ const defaultProps = {
     }
 }
 
+
 const Progress = (props) => {
     props = {...defaultProps, ...props}
-    const { emptyFill, fill, uniqueId, corner, layout, circleShadow, progressShadow} = props
-
+    const { emptyFill, fill, uniqueId, corner, layout, circleShadow, progressShadow, isSaveMode} = props
     const size = parseInt(props.size)
     const circleShrink = parseInt(props.circleShrink)
     const thickness = parseInt(props.thickness)
     const thicknessBg = parseInt(props.thicknessBg)
     const percent = parseInt(props.percent)
-    const duration = parseInt(props.duration)
+    const duration = isSaveMode ? parseInt(props.duration) : 0
 
     const fillStyle = {
         transition: `stroke-dashoffset ${duration}ms linear`,
@@ -172,7 +172,6 @@ const Progress = (props) => {
         </div>
     );
 }
-
 
 export default Progress;
 

@@ -110,7 +110,7 @@ jQuery(document).ready(function ($) {
         let $nav = $(this);
         let direction = $nav.attr('data-direction');
         let items = $nav.attr('data-items');
-        
+
         let activeItemlIndex = $('.qubely-carousel-item-indicator.qubely-active').index('.qubely-carousel-item-indicator')
         let nextActiveItem = direction === 'next' ? activeItemlIndex < items - 1 ? activeItemlIndex + 1 : 0 : activeItemlIndex > 0 ? activeItemlIndex - 1 : items - 1
 
@@ -269,7 +269,7 @@ jQuery(document).ready(function ($) {
         });
         return isRequired;
     }
-    
+
     function checkFields($field, fieldErrorMessage) {
         let isRequired = false;
         const $parent = $field.parents('.qubely-form-group-inner');
@@ -285,7 +285,7 @@ jQuery(document).ready(function ($) {
                     return isRequired = true;
                 }
             }
-            if ($field.val().length === 0) { 
+            if ($field.val().length === 0) {
                 if( hasNoError ) {
                     $parent.append( fieldErrorMessage );
                 }
@@ -505,5 +505,30 @@ function loadScriptAsync(src) {
             })
         })
     }
+
+
+
+    // check if element in viewport
+     function isElementInViewport (el) {
+        var rect = el.getBoundingClientRect();
+        return (
+            rect.top >= 0 &&
+            rect.left >= 0 &&
+            rect.bottom <= (window.innerHeight || document. documentElement.clientHeight) &&
+            rect.right <= (window.innerWidth || document. documentElement.clientWidth)
+        );
+    }
+/*
+    var qubely_pie = document.querySelectorAll('.qubely-block-pie-progress')
+    console.log(qubely_pie)
+
+    setTimeout(function() {
+        var qubely_pie = document.querySelectorAll('.qubely-block-pie-progress')
+        console.log(qubely_pie)
+    }, 1000)
+
+    */
+
+
 
 })(jQuery);
