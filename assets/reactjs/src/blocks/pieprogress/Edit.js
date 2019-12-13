@@ -54,8 +54,6 @@ class Edit extends Component {
     }
 
     render() {
-
-
         const {
             name,
             clientId,
@@ -105,23 +103,15 @@ class Edit extends Component {
                 globalCss,
                 interaction
             }
-        } = this.props
-
-        const {device} = this.state
-
-        const thicknessCalc = {
+        } = this.props, {device} = this.state, thicknessCalc = {
             fill: (size / 2),
             outline: (size * (thickness * .5)) / 100,
             outline_fill: (size * (thickness * .5)) / 100,
-        }
-
-        const thicknessBgCalc = {
+        }, thicknessBgCalc = {
             fill: size / 2,
             outline: (size * (thicknessBg * .5)) / 100,
             outline_fill: (size * (thickness * .5)) / 100
-        }
-
-        const progressAttr = {
+        }, progressAttr = {
             size,
             layout,
             corner: layout === 'fill' ? 'unset' : corner,
@@ -134,7 +124,8 @@ class Edit extends Component {
             circleShadow,
             progressShadow,
             circleShrink: ((size - thickness) * .5) * circleShrink / 100
-        }
+        };
+
 
         if (uniqueId) { CssGenerator(this.props.attributes, 'pieprogress', uniqueId); }
 
@@ -179,10 +170,10 @@ class Edit extends Component {
                             )
                         }
                         {
-                            layout !== 'fill' && <Range label={__('Progress Width')} value={thickness} onChange={(value) => setAttributes({ thickness: value })} min={1} max={100} />
+                            layout !== 'fill' && <Range label={__('Progress Width')} value={thickness} onChange={thickness => setAttributes({ thickness: thickness })} min={1} max={100} />
                         }
 
-                        <BoxShadow label={__('Shadow')} value={progressShadow} onChange={value => setAttributes({ progressShadow: value })} />
+                        <BoxShadow label={__('Shadow')} value={progressShadow} onChange={progressShadow => setAttributes({ progressShadow })} />
                     </PanelBody>
 
                     <PanelBody title={__('Circle')} initialOpen={false}>
@@ -190,11 +181,11 @@ class Edit extends Component {
                             layout === 'outline' && <Range label={__('Circle Width')} value={thicknessBg} onChange={(value) => setAttributes({ thicknessBg: value })} min={1} max={100} />
                         }
                         <Range label={__('Circle Shrink (%)')} value={circleShrink} onChange={circleShrink => setAttributes({ circleShrink})} min={0} max={100} />
-                        <Color label={__('Circle Background')} value={background} onChange={val => setAttributes({ background: val })} />
-                        <BoxShadow label={__('Shadow')} value={circleShadow} onChange={value => setAttributes({ circleShadow : value})} />
+                        <Color label={__('Circle Background')} value={background} onChange={background => setAttributes({ background })} />
+                        <BoxShadow label={__('Shadow')} value={circleShadow} onChange={circleShadow => setAttributes({ circleShadow})} />
                     </PanelBody>
                     <PanelBody title={__('Percentage / Icon')} initialOpen={false}>
-                        <Toggle label={__('Enable Icon')} value={enableIcon} onChange={val => setAttributes({ enableIcon: val })} />
+                        <Toggle label={__('Enable Icon')} value={enableIcon} onChange={enableIcon => setAttributes({ enableIcon })} />
                         { enableIcon &&
                             <Fragment>
                                 <RadioAdvanced
@@ -205,14 +196,14 @@ class Edit extends Component {
                                         { label: 'Text', value: 'text', title: 'Text' }
                                     ]}
                                     value={iconStyle}
-                                    onChange={(value) => setAttributes({ iconStyle: value })} />
+                                    onChange={iconStyle => setAttributes({ iconStyle })} />
                                 {
                                     iconStyle === 'icon' && (
                                         <Fragment>
                                             <IconList
                                                 value={iconName}
                                                 onChange={iconName => setAttributes({ iconName })} />
-                                            <Range label={__('Icon Size')} value={iconSize} onChange={(iconSize) => setAttributes({ iconSize })} min={10} max={200} />
+                                            <Range label={__('Icon Size')} value={iconSize} onChange={iconSize => setAttributes({ iconSize })} min={10} max={200} />
                                         </Fragment>
                                     )
                                 }
@@ -243,14 +234,14 @@ class Edit extends Component {
                                     <Color label={__('Text Color')} value={iconTextColor} onChange={iconTextColor => setAttributes({ iconTextColor })} />
                                 )}
                                 {iconStyle === 'text' && (
-                                    <Typography value={iconTypography} onChange={(value) => setAttributes({ iconTypography: value })} />
+                                    <Typography value={iconTypography} onChange={iconTypography => setAttributes({ iconTypography })} />
                                 )}
 
                             </Fragment>
                         }
                     </PanelBody>
                     <PanelBody title={__('Heading')} initialOpen={false}>
-                        <Toggle label={__('Enable Heading')} value={enableHeading} onChange={val => setAttributes({ enableHeading: val })} />
+                        <Toggle label={__('Enable Heading')} value={enableHeading} onChange={enableHeading => setAttributes({ enableHeading })} />
                         { enableHeading && (
                             <Fragment>
                                 <TextControl label={__('Heading text')} value={heading} onChange={heading => setAttributes({ heading })} />
@@ -268,8 +259,8 @@ class Edit extends Component {
                                         {headingPosition === 'outside' && (
                                             <Alignment label={__('Alignment')} value={headingAlignment} onChange={headingAlignment => setAttributes({ headingAlignment })} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
                                         )}
-                                        <Range label={__('Spacing')} value={headingSpacing} onChange={(headingSpacing) => setAttributes({ headingSpacing })} min={0} max={200} />
-                                        <Typography value={headingTypography} onChange={(headingTypography) => setAttributes({ headingTypography })} />
+                                        <Range label={__('Spacing')} value={headingSpacing} onChange={headingSpacing => setAttributes({ headingSpacing })} min={0} max={200} />
+                                        <Typography value={headingTypography} onChange={headingTypography => setAttributes({ headingTypography })} />
                                     </Fragment>
                                 )}
                             </Fragment>
@@ -300,7 +291,7 @@ class Edit extends Component {
                                     <RichText
                                         value={ iconText }
                                         placeholder={__('Text Here')}
-                                        onChange={ ( iconText ) => setAttributes( { iconText } ) }
+                                        onChange={ iconText  => setAttributes( { iconText } ) }
                                     />
                                 )}
                                 {iconStyle === 'icon' && (
@@ -323,7 +314,7 @@ class Edit extends Component {
                                         value={ heading }
                                         className="qubely-pie-progress-heading"
                                         placeholder={__('Heading Here')}
-                                        onChange={ ( heading ) => setAttributes( { heading } ) }
+                                        onChange={ heading  => setAttributes( { heading } ) }
                                     />
                                 )}
 
@@ -337,7 +328,7 @@ class Edit extends Component {
                             value={ heading }
                             className="qubely-pie-progress-heading qubely-outside"
                             placeholder={__('Heading Here')}
-                            onChange={ ( heading ) => setAttributes( { heading } ) }
+                            onChange={ heading  => setAttributes( { heading } ) }
                         />
                     )}
                     <div ref="qubelyContextMenu" className="qubely-context-menu-wraper">

@@ -1,10 +1,11 @@
 const defaultProps = {
+    isSaveMode: false,
     size: 150,
     circleShrink: 0,
     thickness: 11,
     thicknessBg: 21,
     percent: 55,
-    totalDuration: 1200,
+    duration: 1200,
     corner: 'round',
     emptyFill: '#eff4f8',
     layout: 'outline',
@@ -50,15 +51,10 @@ const Progress = (props) => {
     const thickness = parseInt(props.thickness)
     const thicknessBg = parseInt(props.thicknessBg)
     const percent = parseInt(props.percent)
+    const duration = parseInt(props.duration)
 
-    // const totalDuration = parseInt(props.totalDuration)
-    // const duration = totalDuration * percent / 100
     const fillStyle = {
-        // transition: `stroke-dashoffset ${duration}ms linear`,
-    }
-
-    const emptyStyle = {
-        stroke: emptyFill,
+        transition: `stroke-dashoffset ${duration}ms linear`,
     }
 
     const progressStyle = {
@@ -77,11 +73,10 @@ const Progress = (props) => {
     if(thicknessBg > thickness) {
         circleRadiusFg -= (thicknessBg - thickness) * .5
     }
-    
+
     const circumference = 2 * Math.PI * circleRadiusFg
     const offset = circumference * percent / 100
     const radialPercent = (size /2 * thickness / 100) * .5
-
 
     return (
         <div className="qubely-pie-progress" style={progressStyle} role="progressbar">
@@ -96,11 +91,11 @@ const Progress = (props) => {
                     progressShadow.openShadow === true && (
                         progressShadow.inset !== 'inset' ? (
                             <filter id={`progress-shadow-${uniqueId}`} width="500%" height="500%" x="-250%" y="-250%">
-                                <feDropShadow dx={progressShadow.vertical} dy={progressShadow.horizontal} stdDeviation={progressShadow.blur} flood-color={progressShadow.color} flood-opacity="1" />
+                                <feDropShadow dx={progressShadow.vertical * -1} dy={progressShadow.horizontal} stdDeviation={progressShadow.blur} flood-color={progressShadow.color} flood-opacity="1" />
                             </filter>
                         ) : (
                             <filter id={`progress-shadow-${uniqueId}`} width="500%" height="500%" x="-250%" y="-250%">
-                                <feOffset dx={progressShadow.vertical} dy={progressShadow.horizontal} />
+                                <feOffset dx={progressShadow.vertical * -1} dy={progressShadow.horizontal} />
                                 <feGaussianBlur stdDeviation={progressShadow.blur} />
                                 <feComposite operator="out" in="SourceGraphic" result="inverse"/>
                                 <feFlood flood-color={progressShadow.color} flood-opacity="1" result="color"/>
@@ -118,11 +113,11 @@ const Progress = (props) => {
                     circleShadow.openShadow === true && (
                         circleShadow.inset !== 'inset' ? (
                             <filter id={`circle-shadow-${uniqueId}`} width="500%" height="500%" x="-250%" y="-250%">
-                                <feDropShadow dx={circleShadow.vertical} dy={circleShadow.horizontal} stdDeviation={circleShadow.blur} flood-color={circleShadow.color} flood-opacity="1" />
+                                <feDropShadow dx={circleShadow.vertical * -1} dy={circleShadow.horizontal} stdDeviation={circleShadow.blur} flood-color={circleShadow.color} flood-opacity="1" />
                             </filter>
                         ) : (
                             <filter id={`circle-shadow-${uniqueId}`} width="500%" height="500%" x="-250%" y="-250%">
-                                <feOffset dx={circleShadow.vertical} dy={circleShadow.horizontal} />
+                                <feOffset dx={circleShadow.vertical * -1} dy={circleShadow.horizontal} />
                                 <feGaussianBlur stdDeviation={circleShadow.blur} />
                                 <feComposite operator="out" in="SourceGraphic" result="inverse"/>
                                 <feFlood flood-color={circleShadow.color} flood-opacity="1" result="color"/>
@@ -154,8 +149,8 @@ const Progress = (props) => {
                     cx={size}
                     cy={size}
                     r={circleRadiusBg - circleShrink}
+                    stroke={emptyFill}
                     stroke-width={thicknessBg}
-                    style={emptyStyle}
                     fill={layout !== 'outline' ? emptyFill : 'none'}
                 />
 
@@ -171,7 +166,7 @@ const Progress = (props) => {
                     stroke-linecap={corner}
                     fill="none"
                     style={fillStyle}
-                    stroke={fill.type === 'color' ? fill.color : `url(#qgrd-${uniqueId})`}
+                    stroke={fill.openColor ? (fill.type === 'color' ? fill.color : `url(#qgrd-${uniqueId})`) : defaultProps.fill.color}
                 />
             </svg>
         </div>

@@ -1,5 +1,6 @@
 import Progress from './Progress'
-const { RichText } = wp.editor;
+const { __ } = wp.i18n
+const { RichText } = wp.blockEditor;
 const { HelperFunction: { animationAttr, IsInteraction } } = wp.qubelyComponents
 
 const Save = (props) => {
@@ -18,16 +19,44 @@ const Save = (props) => {
         enableHeading,
         headingPosition,
         heading,
-        animation, 
-        interaction
+        animation,
+        interaction,
+        thickness,
+        thicknessBg,
+        background,
+        fillColor,
+        circleShadow,
+        progressShadow,
+        circleShrink
     } = props.attributes
+
+
+    const thicknessCalc = {
+        fill: (size / 2),
+        outline: (size * (thickness * .5)) / 100,
+        outline_fill: (size * (thickness * .5)) / 100,
+    }
+
+    const thicknessBgCalc = {
+        fill: size / 2,
+        outline: (size * (thicknessBg * .5)) / 100,
+        outline_fill: (size * (thickness * .5)) / 100
+    }
 
     const progressAttr = {
         size,
         layout,
         corner: layout === 'fill' ? 'unset' : corner,
         uniqueId,
-        percent: progress
+        percent: progress,
+        thickness: thicknessCalc[layout],
+        thicknessBg: thicknessBgCalc[layout],
+        emptyFill: background,
+        fill: fillColor,
+        circleShadow,
+        progressShadow,
+        circleShrink: ((size - thickness) * .5) * circleShrink / 100,
+        isSaveMode: true
     }
     const interactionClass = IsInteraction(interaction) ? 'qubley-block-interaction' : '';
     return (
@@ -38,7 +67,7 @@ const Save = (props) => {
                     <div className="qubely-progress-inner-text">
                         {iconStyle === 'text' && (
                             <RichText.Content
-                                tagName="div"
+                            tagName="div"
                                 value={iconText}
                             />
                         )}
