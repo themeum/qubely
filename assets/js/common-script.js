@@ -518,16 +518,32 @@ function loadScriptAsync(src) {
             rect.right <= (window.innerWidth || document. documentElement.clientWidth)
         );
     }
-/*
-    var qubely_pie = document.querySelectorAll('.qubely-block-pie-progress')
-    console.log(qubely_pie)
 
-    setTimeout(function() {
-        var qubely_pie = document.querySelectorAll('.qubely-block-pie-progress')
-        console.log(qubely_pie)
-    }, 1000)
 
-    */
+    $(document).on('ready', function() {
+
+        $('.qubely-block-pie-progress').each(function () {
+            var $that = $(this);
+            var circle = $that.find('circle:last-child');
+            var pieOffset = circle.data('dashoffset');
+            var transition = circle.data('transition')
+
+            var pieEvent = function () {
+                if(isElementInViewport($that[0])){
+                    circle.css('transition', transition)
+                    circle.attr('stroke-dashoffset', pieOffset);
+                    window.removeEventListener('scroll', pieEvent, true)
+                }
+            }
+
+            window.addEventListener('scroll', pieEvent, true);
+
+            // pieEvent()
+        })
+
+    });
+
+
 
 
 

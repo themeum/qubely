@@ -1,3 +1,5 @@
+const {CSSProperties} = wp.element
+
 const defaultProps = {
     isSaveMode: false,
     size: 150,
@@ -53,9 +55,6 @@ const Progress = (props) => {
     const percent = parseInt(props.percent)
     const duration = isSaveMode ? parseInt(props.duration) : 0
 
-    const fillStyle = {
-        transition: `stroke-dashoffset ${duration}ms linear`,
-    }
 
     const progressStyle = {
         transition: '0ms',
@@ -156,16 +155,18 @@ const Progress = (props) => {
 
                 {/* Progress / Forground */}
                 <circle
+                    className='qubely-pie-circle-fg'
                     {...(progressShadow.openShadow === true && {filter: `url(#progress-shadow-${uniqueId})`})}
                     cx={size}
                     cy={size}
                     r={circleRadiusFg}
                     stroke-dasharray={circumference}
-                    stroke-dashoffset={circumference - offset}
+                    stroke-dashoffset={isSaveMode === true ? circumference : circumference - offset}
+                    data-dashoffset={circumference - offset}
                     stroke-width={thickness}
                     stroke-linecap={corner}
                     fill="none"
-                    style={fillStyle}
+                    data-transition={`stroke-dashoffset ${duration}ms linear`}
                     stroke={fill.openColor ? (fill.type === 'color' ? fill.color : `url(#qgrd-${uniqueId})`) : defaultProps.fill.color}
                 />
             </svg>
