@@ -537,8 +537,7 @@ function loadScriptAsync(src) {
             }
 
             window.addEventListener('scroll', pieEvent, true);
-
-            // pieEvent()
+            pieEvent()
         })
 
     });
