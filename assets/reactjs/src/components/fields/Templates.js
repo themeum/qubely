@@ -30,7 +30,7 @@ class Templates extends Component {
     // }
 
     handleTemplateSelection = (selectedTemplate) => {
-        const { updateStyle, attributes, templates } = this.props
+        const { updateStyle, attributes } = this.props
         updateStyle({ attributes, ...selectedTemplate })
 
     }
@@ -53,7 +53,7 @@ class Templates extends Component {
                             return (
                                 <div className="qubely-template"
                                     onClick={() => this.handleTemplateSelection(templates[key])}>
-                                    Template{_index + 1}
+                                    {key}
                                 </div>
                             )
                         })
