@@ -127,7 +127,6 @@ class Edit extends Component {
             circleShrink: ((size - thickness) * .5) * circleShrink / 100
         };
 
-
         if (uniqueId) { CssGenerator(this.props.attributes, 'pieprogress', uniqueId); }
 
         return (
@@ -137,10 +136,11 @@ class Edit extends Component {
                         <Styles
                             value={layout}
                             onChange={val => setAttributes({ layout: val })}
+                            proUpgradation
                             options={[
                                 { value: 'outline', img: icons.pie_outline, label: __('Layout 1') },
-                                { value: 'outline_fill', img: icons.pie_outline_fill, label: __('Layout 2') },
-                                { value: 'fill', img: icons.pie_fill, label: __('Layout 3') },
+                                { value: 'outline_fill', img: icons.pie_outline_fill, label: __('Layout 2'),  pro: true  },
+                                { value: 'fill', img: icons.pie_fill, label: __('Layout 3'),  pro: true  },
                             ]}
                         />
                         <Range label={__('Progress Size')} value={size} onChange={(value) => setAttributes({ size: value })} min={20} max={500} />
