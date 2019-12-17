@@ -61,3 +61,13 @@
   letter-spacing: normal;
   text-transform: none;
 }
+
+
+.qubely-progress-parent,
+.qubely-pie-progress{
+  max-width: 100%;
+}
+
+.qubely-pie-progress svg{
+  display: block;
+}

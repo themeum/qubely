@@ -59,7 +59,7 @@ const Progress = (props) => {
     const progressStyle = {
         transition: '0ms',
         width: size + 'px',
-        height: size + 'px',
+        // height: size + 'px',
     }
 
     let circleRadiusBg = (size - thicknessBg) * .5

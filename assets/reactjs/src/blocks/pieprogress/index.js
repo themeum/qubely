@@ -111,7 +111,7 @@ registerBlockType('qubely/pieprogress', {
                     unit: 'px'
                 },
                 height: {
-                    md: 1.1,
+                    md: 1,
                     unit: 'em'
                 }
             },
