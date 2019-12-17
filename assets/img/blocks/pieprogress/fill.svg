@@ -1,42 +1,29 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="75px" height="82px" viewBox="0 0 75 82" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 61 (89581) - https://sketch.com -->
-    <title>fill</title>
-    <desc>Created with Sketch.</desc>
+<svg width="75" height="82" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <defs>
-        <rect id="path-1" x="0" y="0" width="52" height="52" rx="26"></rect>
-        <linearGradient x1="7.73930713%" y1="41.6655773%" x2="91.0278595%" y2="58.6454113%" id="linearGradient-3">
-            <stop stop-color="#F70000" offset="0%"></stop>
-            <stop stop-color="#0549E6" offset="48.984743%"></stop>
-            <stop stop-color="#5AE6FF" offset="100%"></stop>
+        <linearGradient x1="27.221%" y1="40.243%" x2="74.942%" y2="60.233%" id="c">
+            <stop stop-color="#EA0081" offset="0%"/>
+            <stop stop-color="#240DE9" offset="49.206%"/>
+            <stop stop-color="#00FEFF" offset="100%"/>
         </linearGradient>
+        <rect id="a" x="0" y="0" width="52" height="52" rx="26"/>
     </defs>
-    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="fill">
-            <g id="Group">
-                <rect id="Rectangle" fill="#FFFFFF" fill-rule="nonzero" x="0" y="0" width="75" height="82" rx="3"></rect>
-                <rect id="Rectangle" fill="#F2F3F7" fill-rule="nonzero" x="11" y="10" width="52" height="52" rx="26"></rect>
-                <g transform="translate(11.000000, 10.000000)">
-                    <g id="a-link" fill="#F2F3F7" fill-rule="nonzero">
-                        <rect id="a" x="0" y="0" width="52" height="52" rx="26"></rect>
-                    </g>
-                    <g id="Clipped">
-                        <mask id="mask-2" fill="white">
-                            <use xlink:href="#path-1"></use>
-                        </mask>
-                        <g id="a"></g>
-                        <polygon id="Path" fill="#E4E9EF" fill-rule="nonzero" mask="url(#mask-2)" points="26 26 26 -4.307 62 -8 62 26"></polygon>
-                    </g>
-                    <rect id="Rectangle" fill="#D6D9DD" fill-rule="nonzero" x="13" y="59" width="27" height="3" rx="1.5"></rect>
-                    <rect id="Rectangle" fill="#D6D9DD" fill-rule="nonzero" x="9" y="24" width="33.333" height="5" rx="2.5"></rect>
-                </g>
-            </g>
-            <g id="pro-tag-copy" transform="translate(23.000000, 30.000000)">
-                <rect id="Rectangle" fill="url(#linearGradient-3)" x="0" y="0" width="28" height="13" rx="6.5"></rect>
-                <text id="PRO" font-family="Helvetica-Bold, Helvetica" font-size="6" font-weight="bold" line-spacing="8" fill="#FFFFFF">
-                    <tspan x="7.49902344" y="9">PRO</tspan>
-                </text>
-            </g>
+    <g fill="none" fill-rule="evenodd">
+        <rect fill="#FFF" fill-rule="nonzero" width="75" height="82" rx="3"/>
+        <rect fill="#F2F3F7" fill-rule="nonzero" x="11" y="10" width="52" height="52" rx="26"/>
+        <g transform="translate(11 10)">
+            <rect width="52" height="52" rx="26" fill="#F2F3F7" fill-rule="nonzero"/>
+            <mask id="b" fill="#fff">
+                <use xlink:href="#a"/>
+            </mask>
+            <path fill="#E4E9EF" fill-rule="nonzero" mask="url(#b)" d="M26 26V-4.307L62-8v34z"/>
+            <rect fill="#D6D9DD" fill-rule="nonzero" x="13" y="59" width="27" height="3" rx="1.5"/>
+            <rect fill="#D6D9DD" fill-rule="nonzero" x="9" y="24" width="33.333" height="5" rx="2.5"/>
+        </g>
+        <g transform="translate(20 31)">
+            <rect fill="url(#c)" fill-rule="nonzero" width="33.735" height="13.342" rx="6.671"/>
+            <text transform="translate(7 2)" fill="#FFF" font-family="Helvetica" font-size="8">
+                <tspan x="0" y="8">PRO</tspan>
+            </text>
         </g>
     </g>
 </svg>

@@ -12,7 +12,7 @@ if(!qubely_admin.pro_enable) {
         title: __('Pie Progress'),
         description: 'Animated circular progress bar',
         category: 'qubely',
-        icon: 'universal-access-alt',
+        icon: <img src={qubely_admin.plugin + 'assets/img/blocks/block-pie-progress.svg'} alt={__('Pie Porgress Block')} />,
         keywords: [__('progress'), __('bar'), __('bar progress')],
         example: {
             attributes: {},
