@@ -10,7 +10,7 @@ if(!qubely_admin.pro_enable) {
 
     registerBlockType('qubely/pieprogress', {
         title: __('Pie Progress'),
-        description: '',
+        description: 'Animated circular progress bar',
         category: 'qubely',
         icon: 'universal-access-alt',
         keywords: [__('progress'), __('bar'), __('bar progress')],
