@@ -100,7 +100,6 @@ class Edit extends Component {
 		return (
 			<Fragment>
 				<InspectorControls key="inspector">
-
 					<PanelBody title=''>
 						<Styles
 							value={iconStyle}

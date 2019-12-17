@@ -20,6 +20,10 @@ icons.icon_line = <img src={`${img_path}/icon/outline.svg`} alt={__('Underline')
 icons.btn_fill = <img src={`${img_path}/button/fill.svg`} alt={__('Fill')} />;
 icons.btn_outline = <img src={`${img_path}/button/outline.svg`} alt={__('Outline')} />;
 
+icons.pie_fill = <img src={`${img_path}/pieprogress/fill.svg`} alt={__('Fill')} />;
+icons.pie_outline = <img src={`${img_path}/pieprogress/outline.svg`} alt={__('Outline')} />;
+icons.pie_outline_fill = <img src={`${img_path}/pieprogress/outline-fill.svg`} alt={__('Outline Fill')} />;
+
 icons.corner_square = <svg width="12" height="12" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><path d="M0 1h10.967v10.763" stroke-width="2" className="qubely-svg-stroke" fill="none" /></svg>;
 icons.corner_rounded = <svg width="12" height="12" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><path d="M0 1h6.967c2.209 0 4 1.791 4 4v6.763" stroke-width="2" className="qubely-svg-stroke" fill="none" /></svg>;
 icons.corner_round = <svg width="12" height="12" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><path d="M0 1h1.967c4.971 0 9 4.029 9 9v1.763" stroke-width="2" className="qubely-svg-stroke" fill="none" /></svg>;

@@ -22,7 +22,7 @@ registerBlockType( 'qubely/progressbar', {
 		...globalAttributes,  // Global Settings
 		spacer: { type: 'object', default:{spaceTop: { md: '10', unit: "px"}, spaceBottom: { md: '10', unit: "px"}}, style: [{ selector: '{{QUBELY}}' }] },
 		progress: {type: 'string', default: 50, style: [{ selector: '{{QUBELY}} .qubely-progress-bar {width: {{progress}}%;}' }] },
-		
+
 		// Labels
 		title: {type: 'string', default: 'Progress'},
 		showTitle: {type: 'boolean', default: true},
@@ -43,7 +43,7 @@ registerBlockType( 'qubely/progressbar', {
 				radiusType: 'global',
 				global: {md: 10},
 				unit: 'px',
-				
+
 			},
 			style: [{selector: '{{QUBELY}} .qubely-progress, {{QUBELY}} .qubely-progress-bar' }]
 		},
