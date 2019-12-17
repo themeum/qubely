@@ -28,6 +28,7 @@ registerBlockType('qubely/pieprogress', {
             ]
         },
         progress: {type: 'string', default: 60 },
+        speed: {type: 'string', default: 1000 },
         corner: {type: 'string', default: 'round' },
         enableIcon: {type: 'boolean', default: true },
         iconStyle: {type: 'string', default: 'text' },

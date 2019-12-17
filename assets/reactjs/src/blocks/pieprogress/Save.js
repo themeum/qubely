@@ -27,7 +27,8 @@ const Save = (props) => {
         fillColor,
         circleShadow,
         progressShadow,
-        circleShrink
+        circleShrink,
+        speed
     } = props.attributes
 
 
@@ -56,7 +57,7 @@ const Save = (props) => {
         circleShadow,
         progressShadow,
         circleShrink: ((size - thickness) * .5) * circleShrink / 100,
-        isSaveMode: true
+        isSaveMode: parseInt(speed) > 0
     }
     const interactionClass = IsInteraction(interaction) ? 'qubley-block-interaction' : '';
     return (

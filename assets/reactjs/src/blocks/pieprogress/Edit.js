@@ -90,6 +90,7 @@ class Edit extends Component {
                 progressShadow,
                 circleShadow,
                 circleShrink,
+                speed,
                 //animation
                 animation,
                 //global
@@ -174,6 +175,7 @@ class Edit extends Component {
                         }
 
                         <BoxShadow label={__('Shadow')} value={progressShadow} onChange={progressShadow => setAttributes({ progressShadow })} />
+                        <Range label={__('Speed (ms)')} value={speed} onChange={(speed) => setAttributes({ speed })} min={0} max={2000} />
                     </PanelBody>
 
                     <PanelBody title={__('Circle')} initialOpen={false}>

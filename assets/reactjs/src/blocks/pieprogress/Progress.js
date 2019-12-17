@@ -7,7 +7,7 @@ const defaultProps = {
     thickness: 11,
     thicknessBg: 21,
     percent: 55,
-    duration: 1200,
+    duration: 1000,
     corner: 'round',
     emptyFill: '#eff4f8',
     layout: 'outline',
