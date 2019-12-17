@@ -10,8 +10,10 @@ registerBlockType('qubely/wrapper', {
     description: 'Make Blocks more attractive with Block Wraper.',
     category: 'qubely',
     icon: <img src={qubely_admin.plugin + 'assets/img/blocks/block-wrapper.svg'} alt={__('Icon Block')} />,
-    supports: { align: false },
-    keywords: [__('Block'), __('Block Wraper'), __('Wraper')],
+    supports: {
+        align: ['center', 'wide', 'full'],
+    },
+    keywords: [__('Block'), __('Block Wrapper'), __('Wrapper')],
     example: {
         attributes: {},
         innerBlocks: [

@@ -10,7 +10,11 @@ registerBlockType('qubely/tabs', {
     category: 'qubely',
     icon: <img src={qubely_admin.plugin + 'assets/img/blocks/block-tabs.svg'} alt={__('Tabs Block')} />,
     description: __('Showcase features in beautiful pre-designed tabs with Qubely Tabs.'),
-    supports: { html: false, className: false },
+    supports: {
+        html: false,
+        className: false,
+        align: ['center', 'wide', 'full'],
+    },
     example: {
         attributes: {
             tabTitles: [
@@ -27,7 +31,7 @@ registerBlockType('qubely/tabs', {
                         name: 'qubely/heading',
                         attributes: {
                             content: 'Qubely - A Full-fledged Gutenberg Builder',
-                            alignment: {md: "center"}
+                            alignment: { md: "center" }
                         },
                     },
                 ],

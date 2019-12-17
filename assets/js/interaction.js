@@ -620,19 +620,19 @@
 
     if(typeof qubelyInteraction['while_scroll_view'] !== 'undefined'){
 
-    /**
-     * Do auto scroll 5 px up and down for fix the element position with jquery animate function on window.load
-     * set initialLoader = false and when element position fixed then enable it to true for load element smothly in view
-     * Make initialLoader = true on second animation
-     */
-    let initialLoader = false
-    window.onload = function() {
-        var doc = document.documentElement;
-        var top = (window.pageYOffset || doc.scrollTop)  - (doc.clientTop || 0);
-        $('html, body').animate({ scrollTop: top-5 }, 10, function(){
-          $('html, body').animate({ scrollTop: top },'slow', ()=> { initialLoader = true })
-        })
-     }
+    // /**
+    //  * Do auto scroll 5 px up and down for fix the element position with jquery animate function on window.load
+    //  * set initialLoader = false and when element position fixed then enable it to true for load element smothly in view
+    //  * Make initialLoader = true on second animation
+    //  */
+    // let initialLoader = false
+    // window.onload = function() {
+    //     var doc = document.documentElement;
+    //     var top = (window.pageYOffset || doc.scrollTop)  - (doc.clientTop || 0);
+    //     $('html, body').animate({ scrollTop: top-5 }, 10, function(){
+    //       $('html, body').animate({ scrollTop: top },'slow', ()=> { initialLoader = true })
+    //     })
+    //  }
 
       //Cache the global animation action object
       let scrollActionList = qubelyInteraction['while_scroll_view']         
@@ -800,7 +800,7 @@
   
         return {
             "willChange":"transform",
-            "transitionDuration": initialLoader ? '0s' : '0.1s',
+            // "transitionDuration": initialLoader ? '0s' : '0.1s',
             '-webkit-transition-timing-function':'linear',
             "transitionProperty": "transform, opacity, filter",
             "transformOrigin":`${origin.x_offset} ${origin.y_offset}`,

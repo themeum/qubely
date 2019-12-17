@@ -10,6 +10,9 @@ registerBlockType('qubely/timeline', {
 	category: 'qubely',
 	description: 'Showcase detailed timelines/roadmaps with Qubely Timeline.',
 	icon: <img src={qubely_admin.plugin + 'assets/img/blocks/block-timeline.svg'} alt={__('Timeline')} />,
+	supports: { 
+		align: ['center', 'wide', 'full'],
+	},
 	keywords: [
 		__('Timeline'),
 		__('Content'),

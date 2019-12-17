@@ -13,16 +13,23 @@ registerBlockType('qubely/text', {
     description: 'Apply texts and tweak designs with Qubely Advanced Text.',
     category: 'qubely',
     icon: <img src={qubely_admin.plugin + 'assets/img/blocks/block-text.svg'} alt={__('Advanced Text Block')} />,
-    supports: { align: false },
-    keywords: [__('text'), __('paragraph'), __('heading')],
+    supports: {
+        align: ['center', 'wide', 'full'],
+    },
+    keywords: [
+        __('text'),
+        __('paragraph'),
+        __('heading'),
+        __('Advanced'),
+    ],
     example: {
-		attributes: {
+        attributes: {
             enableTitle: true,
-            title: __( 'Advanced Text Block', 'qubely' ),
+            title: __('Advanced Text Block', 'qubely'),
             dropCap: true,
-			content: __( 'Qubely blocks is added to the Gutenberg editor as soon as you install the plugin. You can start using it as any other Gutenberg block. Add ready blocks using the plus sign where you’ll find a new section of blocks under the Qubely icon.', 'qubely' ),
-		},
-	},
+            content: __('Qubely blocks is added to the Gutenberg editor as soon as you install the plugin. You can start using it as any other Gutenberg block. Add ready blocks using the plus sign where you’ll find a new section of blocks under the Qubely icon.', 'qubely'),
+        },
+    },
     attributes: {
         uniqueId: { type: 'string', default: '' },
         // Global
@@ -231,7 +238,7 @@ registerBlockType('qubely/text', {
                     {separatorStyle &&
                         <Fragment>
                             {separators[separatorStyle].type == 'css' &&
-                                <span className={`qubely-separator-type-css qubely-separator-${separatorStyle}`}/>
+                                <span className={`qubely-separator-type-css qubely-separator-${separatorStyle}`} />
                             }
                             {separators[separatorStyle].type == 'svg' &&
                                 <span className={`qubely-separator-type-svg qubely-separator-${separatorStyle}`}>{separators[separatorStyle].svg}</span>

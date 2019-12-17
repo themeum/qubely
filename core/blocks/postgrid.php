@@ -1149,9 +1149,13 @@ function render_block_qubely_postgrid($att)
 	} else {
 		$col = "";
 	}
+	$class = 'wp-block-qubely-postgrid qubely-block-'.$uniqueId;
+	if ( isset( $att['align'] ) ) {
+		$class .= ' align' . $att['align'];
+	}
 
 	if ($query->have_posts()) {
-		$html .= '<div class="qubely-block-' . $uniqueId . '">';
+		$html .= '<div class="' . $class . '">';
 		$html .= '<div class="qubely-postgrid-wrapper '.$interaction.' qubely-postgrid-layout-' . esc_attr($layout) . esc_attr($col) . '" '.$animation.'>';
 		while ($query->have_posts()) {
 			$query->the_post();

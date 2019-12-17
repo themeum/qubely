@@ -10,16 +10,18 @@ registerBlockType('qubely/infobox', {
     description: 'Be creatively informative with Qubely Info Box.',
     icon: <img src={qubely_admin.plugin + 'assets/img/blocks/block-info-box.svg'} alt={__('Video popup Block')} />,
     category: 'qubely',
-    supports: { align: false },
+    supports: {
+        align: ['center', 'wide', 'full'],
+    },
     keywords: [__('service'), __('feature'), __('info')],
     example: {
-		attributes: {},
-	},
+        attributes: {},
+    },
     attributes: {
         uniqueId: { type: 'string', default: '' },
-         // Global
-         ...globalAttributes,
-         ...buttonAttributes,
+        // Global
+        ...globalAttributes,
+        ...buttonAttributes,
         layout: { type: 'number', default: 1 },
         alignment: {
             type: 'object', default: { md: 'left' },

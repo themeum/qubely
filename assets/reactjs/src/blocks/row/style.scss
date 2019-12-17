@@ -114,9 +114,9 @@
             .components-dropdown-menu.components-toolbar {
                 border-right: none;
                 padding: 0;
-                button.components-dropdown-menu__toggle.has-text {
-                    display: none;
-                }
+                // button.components-dropdown-menu__toggle.has-text {
+                //     display: none; 
+                // }
             
             }
             .wp-block[data-align="full"] {
@@ -129,3 +129,6 @@
         }
     }
 } 
+// .editor-styles-wrapper .wp-block .qubely-backend-row .wp-block {
+//     z-index: 3;
+// }
