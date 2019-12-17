@@ -101,6 +101,7 @@ const Save = (props) => {
 
             {(enableHeading && headingPosition === 'outside') && (
                 <RichText.Content
+                    tagName="div"
                     value={heading}
                     className="qubely-pie-progress-heading qubely-outside"
                 />
