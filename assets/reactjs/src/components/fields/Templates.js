@@ -12,22 +12,33 @@ class Templates extends Component {
         }
     }
 
-    // componentDidMount() {
-    //     const {
-    //         endPoint
-    //     } = this.props
 
-    //     fetch(`https://jsonplaceholder.typicode.com/${endPoint}`)
-    //         .then(response => {
-    //             response.json().then(values =>
-    //                 this.setState({
-    //                     templates: values
-    //                 }))
-    //         }).catch(error => {
-    //             console.log('could not retrieve templates : ', error)
-    //         });
+    componentDidMount() {
 
-    // }
+
+        /**
+         * Fetch Template JSON from Server
+         * @Warning: Please don't remove this code without asking @delowardev or @faisal
+         */
+
+        /*
+            const {
+                endPoint
+            } = this.props
+
+            fetch(`https://jsonplaceholder.typicode.com/${endPoint}`)
+            .then(response => {
+                response.json().then(values =>
+                    this.setState({
+                        templates: values
+                    }))
+            }).catch(error => {
+                console.log('could not retrieve templates : ', error)
+            });
+        */
+
+    }
+
 
     handleTemplateSelection = (selectedTemplate) => {
         const { updateStyle, attributes } = this.props
@@ -38,27 +49,23 @@ class Templates extends Component {
         // const { templates } = this.state
         const { label, templates } = this.props
         return (
-            <div className="qubely-templates">
-                <div className="qubely-d-flex qubely-align-center qubely-mb-10">
-                    <div className="qubely-label">
-                        <label htmlFor={'input'}>
-                            {label || __('Templates')}
-                        </label>
-                    </div>
-                </div>
-
+            <div className="qubely-templates-container">
+                <h4>{label || __('Templates')}</h4>
                 {
-                    templates ?
-                        Object.keys(templates).map((key, _index) => {
-                            return (
-                                <div className="qubely-template"
-                                    onClick={() => this.handleTemplateSelection(templates[key])}>
-                                    {key}
-                                </div>
-                            )
-                        })
-                        :
-                        <div className="qubely-is_loading"><Spinner /></div>
+                    templates ? (
+                        <div className='qubely-predefined-template-slides'>
+                            {
+                                Object.keys(templates).map((key, _index) => {
+                                    return (
+                                        <div className="qubely-predefined-template"
+                                             onClick={() => this.handleTemplateSelection(templates[key])}>
+                                            {key}
+                                        </div>
+                                    )
+                                })
+                            }
+                        </div>
+                    ) : <div className="qubely-is_loading"><Spinner /></div>
                 }
             </div>
         );
