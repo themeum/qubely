@@ -233,10 +233,13 @@ You can report bugs on the [support forum here](https://wordpress.org/support/pl
 
 == Changelog ==
 
-= 1.2.7 - 12 December, 2019 =
+= 1.2.7 - 18 December, 2019 =
+New: Pie Progress block  
+New: Template field  
 New: Transform function in css generator  
 Update: Column block default UI   
 Update: Block control css issue for Blocks inside Column    
+Fix: Reusable block issue in Row  
 
 
 = 1.2.6 - 05 December, 2019 =
