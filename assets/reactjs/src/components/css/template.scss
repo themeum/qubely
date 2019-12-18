@@ -1,0 +1,16 @@
+.qubely-templates-container{
+  background: #D6D9DD;
+  padding: 15px 7px;
+}
+
+.qubely-template-slider{
+  overflow: hidden;
+  .qubely-template-slider-inner{
+    width: 1400px;
+    display: flex;
+    transition: 300ms;
+    .qubely-template-slide{
+      padding: 0 7px;
+    }
+  }
+}
