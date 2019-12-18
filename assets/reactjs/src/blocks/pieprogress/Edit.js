@@ -78,6 +78,7 @@ class Edit extends Component {
                 iconName,
                 iconSize,
                 image,
+                image2x,
                 imageAlt,
                 imageSize,
                 enableHeading,
@@ -213,7 +214,20 @@ class Edit extends Component {
                                     iconStyle === 'image' && (
 
                                         <Fragment>
-                                            <Media label={__('Image')} multiple={false} type={['image']} panel={true} value={image} onChange={image => setAttributes({ image })} />
+                                            <Media
+                                                label={__('Image')}
+                                                multiple={false}
+                                                type={['image']}
+                                                panel
+                                                value={image} onChange={image => setAttributes({ image })} />
+                                            <Media
+                                                panel
+                                                value={image2x}
+                                                multiple={false}
+                                                type={['image']}
+                                                label={__('Retina Image')}
+                                                onChange={image2x => setAttributes({ image2x })} />
+
                                             {image.url &&
                                                 <Fragment>
                                                     <TextControl label={__('Alt Text')} value={imageAlt} onChange={imageAlt => setAttributes({ imageAlt })} />
@@ -227,13 +241,13 @@ class Edit extends Component {
 
                                 {iconStyle === 'text' && (
                                     <TextControl
-                                        label="Icon Text"
+                                        label="Text"
                                         value={iconText}
                                         onChange={ ( iconText ) => setAttributes({iconText}) }
                                     />
                                 )}
                                 {iconStyle !== 'image' && (
-                                    <Color label={__('Text Color')} value={iconTextColor} onChange={iconTextColor => setAttributes({ iconTextColor })} />
+                                    <Color label={__('Color')} value={iconTextColor} onChange={iconTextColor => setAttributes({ iconTextColor })} />
                                 )}
                                 {iconStyle === 'text' && (
                                     <Typography value={iconTypography} onChange={iconTypography => setAttributes({ iconTypography })} />
@@ -303,7 +317,12 @@ class Edit extends Component {
                                     <div className={'icon-image ' + (image.url === undefined && 'pie-placeholder')}>
                                         {
                                             image.url !== undefined ? (
-                                                <img className="qubely-pie-image" src={image.url} alt={imageAlt && imageAlt}/>
+                                                <img
+                                                    className="qubely-pie-image"
+                                                    src={image.url}
+                                                    alt={imageAlt && imageAlt}
+                                                    srcSet={image2x.url !== undefined ? image.url + ' 1x, ' + image2x.url + ' 2x' : ''}
+                                                />
                                             ) : (
                                                 <span className="qubely-pie-placeholder far fa-image" />
                                             )

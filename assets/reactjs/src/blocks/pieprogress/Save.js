@@ -15,6 +15,7 @@ const Save = (props) => {
         iconText,
         iconName,
         image,
+        image2x,
         imageAlt,
         enableHeading,
         headingPosition,
@@ -79,7 +80,12 @@ const Save = (props) => {
                             <div className={'icon-image ' + (image.url === undefined && 'pie-placeholder')}>
                                 {
                                     image.url !== undefined ? (
-                                        <img className="qubely-pie-image" src={image.url} alt={imageAlt && imageAlt} />
+                                        <img
+                                            className="qubely-pie-image"
+                                            src={image.url}
+                                            alt={imageAlt && imageAlt}
+                                            srcSet={image2x.url !== undefined ? image.url + ' 1x, ' + image2x.url + ' 2x' : ''}
+                                        />
                                     ) : (
                                             <span className="qubely-pie-placeholder far fa-image" />
                                         )
