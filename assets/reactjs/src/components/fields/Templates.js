@@ -131,10 +131,11 @@ class Templates extends Component {
                                         }}>
                                         {
                                             Object.keys(templates).map((key, _index) => {
+                                                const thumbnail = templates[key].thumbnail
                                                 return (
                                                     <div className="qubely-template-slide" style={{width: `${this.state.slideWidth}px`}}>
                                                         <div className="qubely-template-slide-inner">
-                                                            <img src={templates[key].thumbnail !== undefined ? templates[key].thumbnail : 'https://i.ibb.co/ss6Jq2z/circle2'} alt={key}/>
+                                                            <img src={(thumbnail && thumbnail !== undefined) ? thumbnail : 'https://i.ibb.co/ss6Jq2z/circle2.png'} alt={key}/>
                                                             <button onClick={() => this.handleTemplateSelection(templates[key])}>{__('Apply')}</button>
                                                         </div>
                                                     </div>
@@ -145,19 +146,19 @@ class Templates extends Component {
                                 </div>
 
                             </div>
-                            <div className="template-slider-controls">
-                                <button className='template-slider-nav' onClick={() => this._handlePrev()} disabled={this.state.currentPage === 1}><span className='fas fa-chevron-left' /></button>
-                                {
-                                    this.state.maxPage > 1 && (
+                            { this.state.maxPage > 1 && (
+                                <div className="template-slider-controls">
+                                    <button className='template-slider-nav' onClick={() => this._handlePrev()} disabled={this.state.currentPage === 1}><span className='fas fa-chevron-left' /></button>
+                                    {
                                         Array.from({length: this.state.maxPage}, (val, index) => {
                                             return (
                                                 <button className={'template-slider-dot ' + (this.state.currentPage === index + 1 ? 'active' : '')} onClick={() => this._handleDot(index)}><span>{index+1}</span></button>
                                             )
                                         })
-                                    )
-                                }
-                                <button className='template-slider-nav' onClick={() => this._handleNext()} disabled={this.state.currentPage === this.state.maxPage}><span className='fas fa-chevron-right' /></button>
-                            </div>
+                                    }
+                                    <button className='template-slider-nav' onClick={() => this._handleNext()} disabled={this.state.currentPage === this.state.maxPage}><span className='fas fa-chevron-right' /></button>
+                                </div>
+                            )}
                         </div>
                     ) : <div className="qubely-is_loading"><Spinner /></div>
                 }
