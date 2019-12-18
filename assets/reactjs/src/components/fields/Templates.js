@@ -64,9 +64,13 @@ class Templates extends Component {
     _handlePrev = () => {
         if(this.state.currentPage > 1){
             this.setState((state) => {
+                let currentMargin = state.currentMargin - (state.slideWidth * 2)
+                if(currentMargin < 0) {
+                    currentMargin = 0
+                }
                 return {
                     currentPage: state.currentPage - 1,
-                    currentMargin: state.currentMargin - (state.slideWidth * 2)
+                    currentMargin
                 }
             })
         }
@@ -75,18 +79,30 @@ class Templates extends Component {
     _handleNext = () => {
         if(this.state.currentPage < this.state.maxPage){
             this.setState((state) => {
+                let currentMargin = state.currentMargin + (state.slideWidth * 2)
+                if(currentMargin > state.maxMargin) {
+                    currentMargin = state.maxMargin
+                }
                 return {
                     currentPage: state.currentPage + 1,
-                    currentMargin: state.currentMargin + (state.slideWidth * 2)
+                    currentMargin
                 }
             })
         }
     }
 
     _handleDot = (index) => {
+        let currentMargin = index * this.state.slideWidth * 2
+
+        if(currentMargin < 0){
+            currentMargin = 0
+        } else if(currentMargin > this.state.maxMargin){
+            currentMargin = this.state.maxMargin
+        }
+
         this.setState({
             currentPage: index + 1,
-            currentMargin: index * this.state.slideWidth * 2
+            currentMargin
         })
     }
 
@@ -104,47 +120,44 @@ class Templates extends Component {
                 <h4>{label || __('Templates')}</h4>
                 {
                     templates ? (
-                        <div className='qubely-template-slider-wrap'>
-                            <div className='qubely-template-slider' ref={slider => this.slider = slider}>
-                                <div
-                                    className="qubely-template-slider-inner"
-                                    style={{
-                                        width: `${this.state.sliderWidth}px`,
-                                        marginLeft: `-${this.state.currentMargin}px`
-                                    }}
-                                >
-                                    {
-                                        Object.keys(templates).map((key, _index) => {
-                                            return (
-                                                <div className="qubely-template-slide"
-                                                     style={{width: `${this.state.slideWidth}px`}}
-                                                     onClick={() => this.handleTemplateSelection(templates[key])}>
-                                                    <div>
-                                                        {key}
-                                                        <img src="https://picsum.photos/id/192/200/250" alt=""/>
-                                                    </div>
-                                                </div>
-                                            )
-                                        })
-                                    }
-                                </div>
-                            </div>
-                            <div className="template-slider-controls">
-                                <div className="template-slider-navigations">
-                                    <button onClick={() => this._handlePrev()}>Prev</button>
-                                    <button onClick={() => this._handleNext()}>Next</button>
-                                </div>
-                                <div className="template-slider-dots">
-                                    {
-                                        this.state.maxPage > 1 && (
-                                            Array.from({length: this.state.maxPage}, (val, index) => {
+                        <div className='qubely-template-slider-container'>
+                            <div className="qubely-template-slider-wrap">
+                                <div className='qubely-template-slider' ref={slider => this.slider = slider}>
+                                    <div
+                                        className="qubely-template-slider-inner"
+                                        style={{
+                                            width: `${this.state.sliderWidth}px`,
+                                            marginLeft: `-${this.state.currentMargin}px`
+                                        }}>
+                                        {
+                                            Object.keys(templates).map((key, _index) => {
                                                 return (
-                                                    <button onClick={() => this._handleDot(index)}>{index}</button>
+                                                    <div className="qubely-template-slide" style={{width: `${this.state.slideWidth}px`}}>
+                                                        <div className="qubely-template-slide-inner">
+                                                            <img src={`https://picsum.photos/id/${191 + _index}/200/250`} alt={key}/>
+                                                            <button onClick={() => this.handleTemplateSelection(templates[key])}>{__('Apply')}</button>
+                                                        </div>
+                                                    </div>
                                                 )
                                             })
-                                        )
-                                    }
+                                        }
+                                    </div>
                                 </div>
+                                <div className="template-slider-navigations">
+                                    <button onClick={() => this._handlePrev()} disabled={this.state.currentPage === 1}><span className='fas fa-chevron-left' /></button>
+                                    <button onClick={() => this._handleNext()} disabled={this.state.currentPage === this.state.maxPage}><span className='fas fa-chevron-right' /></button>
+                                </div>
+                            </div>
+                            <div className="template-slider-dots">
+                                {
+                                    this.state.maxPage > 1 && (
+                                        Array.from({length: this.state.maxPage}, (val, index) => {
+                                            return (
+                                                <button className={this.state.currentPage === index + 1 ? 'active' : ''} onClick={() => this._handleDot(index)}><span>{index+1}</span></button>
+                                            )
+                                        })
+                                    )
+                                }
                             </div>
                         </div>
                     ) : <div className="qubely-is_loading"><Spinner /></div>
