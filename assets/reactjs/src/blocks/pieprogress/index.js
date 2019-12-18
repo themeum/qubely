@@ -66,6 +66,7 @@ if(!qubely_admin.pro_enable) {
             background: {type: 'string', default: '#eff4f8'},
             iconName: {type: 'string', default: 'fas fa-rocket'},
             image: {type: 'object', default: {}},
+            image2x: {type: 'object', default: {}},
             imageAlt: {type: 'string', default: ''},
             imageSize: {
                 type: 'object',
