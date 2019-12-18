@@ -81,10 +81,11 @@ More advanced Gutenberg blocks, pre-designed sections and starter packs are comi
 * [Image Gallery](https://qubely.io/block/image-gallery/)
 * [Image Carousel](https://qubely.io/block/image-carousel/)
 * [Post Carousel](https://qubely.io/block/post-carousel/)
-* [Post Grid](https://qubely.io/block/advanced-post-grid/)
+* [Advanced Post Grid](https://qubely.io/block/advanced-post-grid/)
 * [Pricing List](https://qubely.io/block/pricing-list/)
 * [Team Carousel](https://qubely.io/block/team-carousel/)
 * [Testimonial Carousel](https://qubely.io/block/testimonial-carousel/)
+* [Media Card](https://qubely.io/block/media-card/)
 
 ⭐️ [Ready Sections](https://qubely.io/section/) ⭐️ [Starter Packs](https://qubely.io/starter-packs/)
 
