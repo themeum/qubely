@@ -143,21 +143,20 @@ class Templates extends Component {
                                         }
                                     </div>
                                 </div>
-                                <div className="template-slider-navigations">
-                                    <button onClick={() => this._handlePrev()} disabled={this.state.currentPage === 1}><span className='fas fa-chevron-left' /></button>
-                                    <button onClick={() => this._handleNext()} disabled={this.state.currentPage === this.state.maxPage}><span className='fas fa-chevron-right' /></button>
-                                </div>
+
                             </div>
-                            <div className="template-slider-dots">
+                            <div className="template-slider-controls">
+                                <button className='template-slider-nav' onClick={() => this._handlePrev()} disabled={this.state.currentPage === 1}><span className='fas fa-chevron-left' /></button>
                                 {
                                     this.state.maxPage > 1 && (
                                         Array.from({length: this.state.maxPage}, (val, index) => {
                                             return (
-                                                <button className={this.state.currentPage === index + 1 ? 'active' : ''} onClick={() => this._handleDot(index)}><span>{index+1}</span></button>
+                                                <button className={'template-slider-dot ' + (this.state.currentPage === index + 1 ? 'active' : '')} onClick={() => this._handleDot(index)}><span>{index+1}</span></button>
                                             )
                                         })
                                     )
                                 }
+                                <button className='template-slider-nav' onClick={() => this._handleNext()} disabled={this.state.currentPage === this.state.maxPage}><span className='fas fa-chevron-right' /></button>
                             </div>
                         </div>
                     ) : <div className="qubely-is_loading"><Spinner /></div>
