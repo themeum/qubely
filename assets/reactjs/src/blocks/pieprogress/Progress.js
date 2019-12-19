@@ -167,6 +167,8 @@ const Progress = (props) => {
                     stroke-linecap={corner}
                     fill="none"
                     data-transition={`stroke-dashoffset ${duration}ms linear`}
+                    data-transition-duration={duration}
+                    data-percent={percent}
                     stroke={fill.openColor ? (fill.type === 'color' ? fill.color : `url(#qgrd-${uniqueId})`) : defaultProps.fill.color}
                 />
             </svg>

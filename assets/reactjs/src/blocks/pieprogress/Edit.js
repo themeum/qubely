@@ -187,12 +187,13 @@ class Edit extends Component {
                         <BoxShadow label={__('Shadow')} value={circleShadow} onChange={circleShadow => setAttributes({ circleShadow})} />
                     </PanelBody>
                     <PanelBody title={__('Percentage / Icon')} initialOpen={false}>
-                        <Toggle label={__('Enable Icon')} value={enableIcon} onChange={enableIcon => setAttributes({ enableIcon })} />
+                        <Toggle label={__('Enable')} value={enableIcon} onChange={enableIcon => setAttributes({ enableIcon })} />
                         { enableIcon &&
                             <Fragment>
                                 <RadioAdvanced
                                     label={__('Type')}
                                     options={[
+                                        { label: '%', value: 'percent', title: 'Percent' },
                                         { label: 'Icon', value: 'icon', title: 'Icon' },
                                         { label: 'Image', value: 'image', title: 'Image' },
                                         { label: 'Text', value: 'text', title: 'Text' }
@@ -248,7 +249,7 @@ class Edit extends Component {
                                 {iconStyle !== 'image' && (
                                     <Color label={__('Color')} value={iconTextColor} onChange={iconTextColor => setAttributes({ iconTextColor })} />
                                 )}
-                                {iconStyle === 'text' && (
+                                {(iconStyle === 'text' || iconStyle === 'percent') && (
                                     <Typography value={iconTypography} onChange={iconTypography => setAttributes({ iconTypography })} />
                                 )}
 
@@ -310,6 +311,11 @@ class Edit extends Component {
                                                 placeholder={__('Text Here')}
                                                 onChange={ iconText  => setAttributes( { iconText } ) }
                                             />
+                                        )}
+                                         {iconStyle === 'percent' && (
+                                            <div>
+                                                <span className='qubely-pie-counter'>{progress}</span>%
+                                            </div>
                                         )}
                                         {iconStyle === 'icon' && (
                                             <span className={`qubely-pie-icon ${iconName}`} />

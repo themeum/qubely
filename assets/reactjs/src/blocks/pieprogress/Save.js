@@ -77,6 +77,11 @@ const Save = (props) => {
                                             value={iconText}
                                         />
                                     )}
+                                    {iconStyle === 'percent' && (
+                                        <div>
+                                            <span className='qubely-pie-counter'>{progress}</span>%
+                                        </div>
+                                    )}
                                     {iconStyle === 'icon' && (
                                         <span className={`qubely-pie-icon ${iconName}`} />
                                     )}
