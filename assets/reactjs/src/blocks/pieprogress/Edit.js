@@ -125,7 +125,8 @@ class Edit extends Component {
             fill: fillColor,
             circleShadow,
             progressShadow,
-            circleShrink: ((size - thickness) * .5) * circleShrink / 100
+            circleShrink: ((size - thickness) * .5) * circleShrink / 100,
+            duration: speed
         };
 
         if (uniqueId) { CssGenerator(this.props.attributes, 'pieprogress', uniqueId); }
