@@ -235,7 +235,7 @@ You can report bugs on the [support forum here](https://wordpress.org/support/pl
 
 == Changelog ==
 
-= 1.2.7 - 18 December, 2019 =
+= 1.2.7 - 19 December, 2019 =
 New: Pie Progress block  
 New: Template field  
 New: Transform function in css generator  
