@@ -526,14 +526,34 @@ function loadScriptAsync(src) {
             var $that = $(this);
             var circle = $that.find('circle:last-child');
             var pieOffset = circle.data('dashoffset');
-            var transition = circle.data('transition')
+            var transition = circle.data('transition');
+            var duration = circle.data('transition-duration');
+            var progressCount = $that.find('.qubely-pie-counter');
+            var number = parseInt(circle.data('percent'));
+            progressCount.html(0);
 
             var pieEvent = function () {
                 if(isElementInViewport($that[0])){
                     circle.css('transition', transition)
                     circle.attr('stroke-dashoffset', pieOffset);
+                    progressCounter();
                     window.removeEventListener('scroll', pieEvent, true)
                 }
+            }
+
+            var progressCounter = function () {
+                var current = 0;
+                var time = parseInt(duration);
+                var interval = Math.ceil(time / number);
+
+                var timer = function() {
+                    if(current >= number){
+                        intvlId && clearInterval(intvlId)
+                    }
+                    progressCount.html(current)
+                    current++;
+                }
+                var intvlId = setInterval(timer, interval)
             }
 
             window.addEventListener('scroll', pieEvent, true);
