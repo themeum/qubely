@@ -145,7 +145,6 @@ class Edit extends Component {
                             ]}
                         />
                         <Range label={__('Progress Size')} value={size} onChange={(value) => setAttributes({ size: value })} min={20} max={500} />
-
                         <RadioAdvanced
                             label={__('Alignment')}
                             options={[
@@ -155,7 +154,7 @@ class Edit extends Component {
                             ]}
                             value={alignment}
                             onChange={(alignment) => setAttributes({ alignment })} />
-
+                        <img src={qubely_admin.plugin + 'assets/img/blocks/pieprogress/template-pro-notice.jpg'} alt={__('Pie Porgress Templates')} />
                     </PanelBody>
                     <PanelBody title={__('Progress')} initialOpen={false}>
                         <Range label={__('Progress Percent')} value={progress} onChange={(value) => setAttributes({ progress: value })} min={0} max={100} />
