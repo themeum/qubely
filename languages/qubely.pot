@@ -1,62 +1,191 @@
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Qubely Blocks - Full-fledged Gutenberg Toolkit\n"
-"POT-Creation-Date: 2019-03-01 11:56+0600\n"
-"PO-Revision-Date: 2019-03-01 11:56+0600\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"Project-Id-Version: Qubely - Advanced Gutenberg Blocks\n"
+"POT-Creation-Date: 2019-12-20 11:19+0600\n"
+"PO-Revision-Date: 2019-12-20 11:18+0600\n"
 "Last-Translator: \n"
 "Language-Team: \n"
-"Language: en_US\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.7.4\n"
+"X-Generator: Poedit 1.8.12\n"
 "X-Poedit-Basepath: ..\n"
+"X-Poedit-WPHeader: qubely.php\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
-"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;"
-"_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 
-#: core/Options.php:21 core/Options.php:22 core/Options.php:60
+#: core/Options.php:24 core/Options.php:25
 msgid "Qubely Options"
 msgstr ""
 
-#: core/Options.php:70
-msgid "CSS Save Method"
+#: core/Options.php:69
+msgid "Welcome to Qubely! - Version "
 msgstr ""
 
-#: core/Options.php:76
-msgid "File System"
+#: core/Options.php:71
+msgid "Full-Fledged Gutenburg Toolkit"
 msgstr ""
 
-#: core/Options.php:77
-msgid "Header"
+#: core/Options.php:79
+msgid "Qubely Core Features"
 msgstr ""
 
 #: core/Options.php:85
+msgid "Predefined sections"
+msgstr ""
+
+#: core/Options.php:86
+msgid "Modern layout packs"
+msgstr ""
+
+#: core/Options.php:87
+msgid "Highly customizable row columns"
+msgstr ""
+
+#: core/Options.php:88
+msgid "Row video background & blend mode"
+msgstr ""
+
+#: core/Options.php:89
+msgid "Drag column resizing"
+msgstr ""
+
+#: core/Options.php:90
+msgid "Shape divider/builder"
+msgstr ""
+
+#: core/Options.php:91
+msgid "Device specific responsive controls"
+msgstr ""
+
+#: core/Options.php:92
+msgid "Unlimited Google fonts & system fonts"
+msgstr ""
+
+#: core/Options.php:93
+msgid "Classic & gradient color background"
+msgstr ""
+
+#: core/Options.php:94
+msgid "Built-in animation"
+msgstr ""
+
+#: core/Options.php:95
+msgid "Box-shadow"
+msgstr ""
+
+#: core/Options.php:96
+msgid "Font Awesome 5 Icons and line icons"
+msgstr ""
+
+#: core/Options.php:97
+msgid "Custom CSS"
+msgstr ""
+
+#: core/Options.php:100
+msgid "Documentation"
+msgstr ""
+
+#: core/Options.php:113
+msgid "CSS Save Method"
+msgstr ""
+
+#: core/Options.php:119
+msgid "Header"
+msgstr ""
+
+#: core/Options.php:120
+msgid "File System"
+msgstr ""
+
+#: core/Options.php:128
 msgid "Select where you want to save CSS."
 msgstr ""
 
-#: core/QUBELY.php:139
+#: core/QUBELY.php:235
+msgid "Full"
+msgstr ""
+
+#: core/QUBELY.php:291
 msgid "Qubely"
 msgstr ""
 
-#: core/QUBELY.php:275
+#: core/QUBELY.php:530
 msgid "CSS can not be saved due to permission!!!"
 msgstr ""
 
-#: core/QUBELY.php:278
+#: core/QUBELY.php:535
+msgid "JSON can not be saved due to permission!!!"
+msgstr ""
+
+#: core/QUBELY.php:538
 msgid "Qubely block css file has been updated."
 msgstr ""
 
-#: core/initial-setup.php:18
+#: core/QUBELY.php:1053
+msgid "Cannot validate captcha"
+msgstr ""
+
+#: core/QUBELY.php:1058
+msgid "Captcha validation error"
+msgstr ""
+
+#: core/Template.php:47
+msgid "Qubely Full Width"
+msgstr ""
+
+#: core/Template.php:48
+msgid "Qubely Canvas"
+msgstr ""
+
+#: core/blocks/postgrid.php:1167
+msgid "By "
+msgstr ""
+
+#: core/initial-setup.php:31
 #, php-format
 msgid "QUBELY Blocks requires PHP version %s or more."
 msgstr ""
 
-#: core/initial-setup.php:25
+#: core/initial-setup.php:38
 #, php-format
 msgid "QUBELY Blocks requires WordPress version %s or more."
+msgstr ""
+
+#: qubely.php:79
+msgid "Different sized featured images"
+msgstr ""
+
+#: qubely.php:114
+msgid "Category list links"
+msgstr ""
+
+#: qubely.php:140
+msgid " "
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "Qubely - Advanced Gutenberg Blocks"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "https://www.themeum.com/"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "The one and only Gutenberg block plugin you will ever need."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Themeum.com"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "https://themeum.com/"
 msgstr ""
