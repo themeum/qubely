@@ -514,8 +514,8 @@ function loadScriptAsync(src) {
         return (
             rect.top >= 0 &&
             rect.left >= 0 &&
-            rect.bottom <= (window.innerHeight || document. documentElement.clientHeight) &&
-            rect.right <= (window.innerWidth || document. documentElement.clientWidth)
+            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
         );
     }
 
@@ -530,13 +530,18 @@ function loadScriptAsync(src) {
             var duration = circle.data('transition-duration');
             var progressCount = $that.find('.qubely-pie-counter');
             var number = parseInt(circle.data('percent'));
-            progressCount.html(0);
+
+            if(parseInt(duration) > 0){
+                progressCount.html(0);
+            }
 
             var pieEvent = function () {
                 if(isElementInViewport($that[0])){
                     circle.css('transition', transition)
                     circle.attr('stroke-dashoffset', pieOffset);
-                    progressCounter();
+                    if(parseInt(duration) > 0){
+                        progressCounter();
+                    }
                     window.removeEventListener('scroll', pieEvent, true)
                 }
             }
