@@ -202,7 +202,7 @@ Found a bug? Please let us know by posting on the support section of this plugin
 
 # Changelog
 
-**1.2.7 - 18 December, 2019**
+**1.2.7 - 20 December, 2019**
 New: Pie Progress block  
 New: Template field  
 New: Transform function in css generator  

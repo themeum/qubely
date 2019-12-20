@@ -177,5 +177,3 @@ const Progress = (props) => {
 }
 
 export default Progress;
-
-
