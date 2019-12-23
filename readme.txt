@@ -144,6 +144,9 @@ More advanced Gutenberg blocks, pre-designed sections and starter packs are comi
 
 - **Post Grid:** Display posts in different grid and list layouts. Define post number, style the feature image, tweak typography, control spacing, determine post excerpts, and do many more.
 
+- **Media Card:** Easily create responsive, organized Card design with this block. Choose from a set of predefined designs, customize it to your needs and publish.
+
+- **Pie Progress:** Display complex information and visualize them in circular progress with easy configuration. Choose style from available templates and make it your own.
 
 ## SOME EXCITING QUBELY FEATURES IN DETAILS
 
@@ -237,12 +240,12 @@ You can report bugs on the [support forum here](https://wordpress.org/support/pl
 
 = 1.2.7 - 23 December, 2019 =
 New: Pie Progress block  
-New: Template field  
-New: Transform function in css generator  
-Update: Column block default UI   
-Update: Block control CSS issue for Blocks inside Column    
-Fix: Reusable block issue in Row  
-Fix: Post Grid block - Excerpt issue  
+New: Predesigned block template feature  
+New: Transform function in CSS generator  
+Update: Column block default UI  
+Fix: Block control CSS issue for blocks inside columns  
+Fix: Reusable block issue in rows  
+Fix: Post Grid block - Excerpt issue 
 
 
 = 1.2.6 - 05 December, 2019 =
