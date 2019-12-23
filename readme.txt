@@ -242,6 +242,7 @@ New: Transform function in css generator
 Update: Column block default UI   
 Update: Block control CSS issue for Blocks inside Column    
 Fix: Reusable block issue in Row  
+Fix: Post Grid block - Excerpt issue  
 
 
 = 1.2.6 - 05 December, 2019 =
