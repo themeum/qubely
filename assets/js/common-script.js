@@ -536,7 +536,7 @@ function loadScriptAsync(src) {
             }
 
             var pieEvent = function () {
-                if(isElementInViewport($that[0])){
+                if(isElementInViewport($that.find('svg')[0])){
                     circle.css('transition', transition)
                     circle.attr('stroke-dashoffset', pieOffset);
                     if(parseInt(duration) > 0){
