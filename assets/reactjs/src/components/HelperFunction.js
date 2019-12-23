@@ -71,7 +71,7 @@ export const _equal = ( value, other ) => {
     const isEqual = (value, other) => {
         const type = Object.prototype.toString.call(value);
         if (type !== Object.prototype.toString.call(other)) return false;
-    
+
         if (['[object Array]', '[object Object]'].indexOf(type) < 0) return false;
 
         const valueLen = type === '[object Array]' ? value.length : Object.keys(value).length;
@@ -89,7 +89,7 @@ export const _equal = ( value, other ) => {
                 } else {
                     if (item1 !== item2) return false;
                 }
-    
+
             }
         }
         if (type === '[object Array]') {
@@ -128,4 +128,13 @@ export const parseResponsiveViewPort = () => {
         activeView = responsive[responsive.length - 1]
     }
     return activeView.viewport <= 1199 ? activeView.viewport <= 991 ? 'xs' : 'sm' : 'md'
+}
+
+export const copyToClipboard = (string) => {
+    const textField = document.createElement('textarea')
+    textField.innerText = string
+    document.body.appendChild(textField)
+    textField.select()
+    document.execCommand('copy')
+    textField.remove()
 }

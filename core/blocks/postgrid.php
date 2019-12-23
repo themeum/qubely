@@ -1140,6 +1140,7 @@ function render_block_qubely_postgrid($att)
 				$text = substr($excerpt, 0, $pos[$limit]);
 				return $text;
 			}
+			return $excerpt;
 		}
 	endif;
 

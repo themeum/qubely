@@ -88,6 +88,19 @@ jQuery(document).ready(function ($) {
         $qubelyTab.closest('.qubely-block-tab').find('.qubely-tab-content').eq(qubelyIndex).addClass('qubely-active')
     });
 
+    //TAB BLOCK
+    $('.qubely-vertical-tab-title').on('click', function (event) {
+        var $qubelyVerticalTab = $(this).parent();
+        var qubelyVerticalIndex = $qubelyVerticalTab.index();
+        if ($qubelyVerticalTab.hasClass('qubely-vertical-active')) {
+            return;
+        }
+        $qubelyVerticalTab.closest('.qubely-vertical-tab-nav').find('.qubely-vertical-active').removeClass('qubely-vertical-active');
+        $qubelyVerticalTab.addClass('qubely-vertical-active');
+        $qubelyVerticalTab.closest('.qubely-block-vertical-tab').find('.qubely-vertical-tab-content.qubely-vertical-active').removeClass('qubely-vertical-active');
+        $qubelyVerticalTab.closest('.qubely-block-vertical-tab').find('.qubely-vertical-tab-content').eq(qubelyVerticalIndex).addClass('qubely-vertical-active')
+    });
+
     //Carousel BLOCK
     $('.qubely-carousel-title').on('click', function (event) {
         var $qubelyCarousel = $(this).parent();
@@ -110,7 +123,7 @@ jQuery(document).ready(function ($) {
         let $nav = $(this);
         let direction = $nav.attr('data-direction');
         let items = $nav.attr('data-items');
-        
+
         let activeItemlIndex = $('.qubely-carousel-item-indicator.qubely-active').index('.qubely-carousel-item-indicator')
         let nextActiveItem = direction === 'next' ? activeItemlIndex < items - 1 ? activeItemlIndex + 1 : 0 : activeItemlIndex > 0 ? activeItemlIndex - 1 : items - 1
 
@@ -269,7 +282,7 @@ jQuery(document).ready(function ($) {
         });
         return isRequired;
     }
-    
+
     function checkFields($field, fieldErrorMessage) {
         let isRequired = false;
         const $parent = $field.parents('.qubely-form-group-inner');
@@ -285,7 +298,7 @@ jQuery(document).ready(function ($) {
                     return isRequired = true;
                 }
             }
-            if ($field.val().length === 0) { 
+            if ($field.val().length === 0) {
                 if( hasNoError ) {
                     $parent.append( fieldErrorMessage );
                 }
@@ -505,5 +518,70 @@ function loadScriptAsync(src) {
             })
         })
     }
+
+
+
+    // check if element in viewport
+     function isElementInViewport (el) {
+        var rect = el.getBoundingClientRect();
+        return (
+            rect.top >= 0 &&
+            rect.left >= 0 &&
+            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+        );
+    }
+
+
+    $(document).on('ready', function() {
+
+        $('.qubely-block-pie-progress').each(function () {
+            var $that = $(this);
+            var circle = $that.find('circle:last-child');
+            var pieOffset = circle.data('dashoffset');
+            var transition = circle.data('transition');
+            var duration = circle.data('transition-duration');
+            var progressCount = $that.find('.qubely-pie-counter');
+            var number = parseInt(circle.data('percent'));
+
+            if(parseInt(duration) > 0){
+                progressCount.html(0);
+            }
+
+            var pieEvent = function () {
+                if(isElementInViewport($that.find('svg')[0])){
+                    circle.css('transition', transition)
+                    circle.attr('stroke-dashoffset', pieOffset);
+                    if(parseInt(duration) > 0){
+                        progressCounter();
+                    }
+                    window.removeEventListener('scroll', pieEvent, true)
+                }
+            }
+
+            var progressCounter = function () {
+                var current = 0;
+                var time = parseInt(duration);
+                var interval = Math.ceil(time / number);
+
+                var timer = function() {
+                    if(current >= number){
+                        intvlId && clearInterval(intvlId)
+                    }
+                    progressCount.html(current)
+                    current++;
+                }
+                var intvlId = setInterval(timer, interval)
+            }
+
+            window.addEventListener('scroll', pieEvent, true);
+            pieEvent()
+        })
+
+    });
+
+
+
+
 
 })(jQuery);

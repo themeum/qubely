@@ -57,16 +57,16 @@ class Edit extends Component {
 		let currentTabBlock = $(`#block-${clientId}`)
 		const { showIconPicker } = this.state
 		return tabTitles.map((title, index) =>
-			<span tabIndex="0" className={`qubely-tab-item ${(this.state.activeTab == index + 1) ? 'qubely-active' : ''}`}>
-				<span className={`qubely-tab-title ${title.iconName ? 'qubely-has-icon-' + iconPosition : ''}`} onClick={() => {
+			<span tabIndex="0" className={`qubely-vertical-tab-item ${(this.state.activeTab == index + 1) ? 'qubely-vertical-active' : ''}`}>
+				<span className={`qubely-vertical-tab-title ${title.iconName ? 'qubely-has-icon-' + iconPosition : ''}`} onClick={() => {
 					let activeTab = $(`#block-${block.innerBlocks[index].clientId}`, currentTabBlock)
-					$('.qubely-tab-content.qubely-active', currentTabBlock).removeClass('qubely-active')
-					activeTab.addClass("qubely-active")
+					$('.qubely-vertical-tab-content.qubely-vertical-active', currentTabBlock).removeClass('qubely-vertical-active')
+					activeTab.addClass('qubely-vertical-active')
 					this.setState({ activeTab: index + 1, initialRender: false, showIconPicker: !showIconPicker })
 				}}
 					role="button"
 				>
-					{title.iconName && (iconPosition == 'top' || iconPosition == 'left') && (<i className={`qubely-tab-icon ${title.iconName}`} />)}
+					{title.iconName && (iconPosition == 'top' || iconPosition == 'left') && (<i className={`qubely-vertical-tab-icon ${title.iconName}`} />)}
 					<RichText
 						key="editable"
 						keepPlaceholderOnFocus
@@ -74,10 +74,10 @@ class Edit extends Component {
 						value={title.title}
 						onChange={value => this.updateTitles({ title: value }, index)}
 					/>
-					{title.iconName && (iconPosition == 'right') && (<i className={`qubely-tab-icon ${title.iconName}`} />)}
+					{title.iconName && (iconPosition == 'right') && (<i className={`qubely-vertical-tab-icon ${title.iconName}`} />)}
 				</span>
 				<Tooltip text={__('Delete this tab')}>
-					<span className="qubely-action-tab-remove" onClick={() => this.deleteTab(index)} role="button">
+					<span className="qubely-action-vertical-tab-remove" onClick={() => this.deleteTab(index)} role="button">
 						<i className="fas fa-times" />
 					</span>
 				</Tooltip>
@@ -336,11 +336,11 @@ class Edit extends Component {
                 {globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
 				<div className={`qubely-block-${uniqueId}`}>
-					<div className={`qubely-block-tab qubely-tab-style-${tabStyle}`}>
-						<div className={`qubely-tab-nav qubely-alignment-${navAlignment}`}>
+					<div className={`qubely-block-vertical-tab qubely-vertical-tab-style-${tabStyle}`}>
+						<div className={`qubely-vertical-tab-nav qubely-alignment-${navAlignment}`}>
 							{this.renderTabTitles()}
 							<Tooltip text={__('Add new tab')}>
-								<span className="qubely-add-new-tab" onClick={() => {
+								<span className="qubely-add-new-vertical-tab" onClick={() => {
 									this.setState({ activeTab: tabs + 1, initialRender: false })
 									setAttributes({
 										tabs: tabs + 1,
@@ -351,12 +351,12 @@ class Edit extends Component {
 								</span>
 							</Tooltip>
 						</div>
-						<div className={`qubely-tab-body`}>
+						<div className={`qubely-vertical-tab-body`}>
 							<InnerBlocks
 								tagName="div"
-								template={iterator.map(tabIndex => ['qubely/tab', { id: tabIndex + 1, customClassName: tabIndex == 0 ? `qubely-tab-content qubely-active` : `qubely-tab-content` }])}
+								template={iterator.map(tabIndex => ['qubely/verticaltab', { id: tabIndex + 1, customClassName: tabIndex == 0 ? `qubely-vertical-tab-content qubely-vertical-active` : `qubely-vertical-tab-content` }])}
 								templateLock="all"
-								allowedBlocks={['qubely/tab']} />
+								allowedBlocks={['qubely/verticaltab']} />
 						</div>
 					</div>
 				</div>

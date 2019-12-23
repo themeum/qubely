@@ -70,21 +70,24 @@ Qubely adds numerous custom Gutenberg blocks to the Gutenberg block editor and t
 * Icon
 * Divider
 * Block Wrapper
+* Pie Progress
 
 More advanced Gutenberg blocks, pre-designed sections and starter packs are coming every month! [Signup on our site]() to receive updates via email.
 
 ## Pro Features
 
-8 New blocks that help you build more sophisticated designs-
+10 blocks that help you build more sophisticated designs-
 
 * [Form Builder](https://qubely.io/block/form-builder/)
 * [Image Gallery](https://qubely.io/block/image-gallery/)
 * [Image Carousel](https://qubely.io/block/image-carousel/)
 * [Post Carousel](https://qubely.io/block/post-carousel/)
-* [Post Grid](https://qubely.io/block/advanced-post-grid/)
+* [Advanced Post Grid](https://qubely.io/block/advanced-post-grid/)
 * [Pricing List](https://qubely.io/block/pricing-list/)
 * [Team Carousel](https://qubely.io/block/team-carousel/)
 * [Testimonial Carousel](https://qubely.io/block/testimonial-carousel/)
+* [Media Card](https://qubely.io/block/media-card/)
+* [Pie Progress](https://qubely.io/block/pie-progress/)
 
 ⭐️ [Ready Sections](https://qubely.io/section/) ⭐️ [Starter Packs](https://qubely.io/starter-packs/)
 
@@ -232,10 +235,14 @@ You can report bugs on the [support forum here](https://wordpress.org/support/pl
 
 == Changelog ==
 
-= 1.2.7 - 12 December, 2019 =
+= 1.2.7 - 20 December, 2019 =
+New: Pie Progress block  
+New: Template field  
 New: Transform function in css generator  
 Update: Column block default UI   
-Update: Block control css issue for Blocks inside Column    
+Update: Block control CSS issue for Blocks inside Column    
+Fix: Reusable block issue in Row  
+Fix: Post Grid block - Excerpt issue  
 
 
 = 1.2.6 - 05 December, 2019 =
