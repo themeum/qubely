@@ -55,12 +55,12 @@ registerBlockType('qubely/verticaltabs', {
             ]
         },
 
-        typography: { type: 'object', default: {}, style: [{ selector: '{{QUBELY}} .qubely-block-tab .qubely-tab-nav .qubely-tab-item .qubely-tab-title' }] },
+        typography: { type: 'object', default: {}, style: [{ selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-nav .qubely-vertical-tab-item .qubely-vertical-tab-title' }] },
 
         //icons
         iconPosition: { type: 'string', default: 'right' },
-        iconSize: { type: 'object', default: {}, style: [{ selector: '{{QUBELY}} .qubely-tab-icon {font-size: {{iconSize}}}' }] },
-        iconGap: { type: 'object', default: { md: 8, unit: 'px' }, style: [{ selector: '{{QUBELY}} .qubely-tab-title.qubely-has-icon-left .qubely-tab-icon { margin-right: {{iconGap}}; } {{QUBELY}} .qubely-tab-title.qubely-has-icon-right .qubely-tab-icon  { margin-left: {{iconGap}};} {{QUBELY}} .qubely-tab-title.qubely-has-icon-top .qubely-tab-icon  { margin-bottom: {{iconGap}};}' }] },
+        iconSize: { type: 'object', default: {}, style: [{ selector: '{{QUBELY}} .qubely-vertical-tab-icon {font-size: {{iconSize}}}' }] },
+        iconGap: { type: 'object', default: { md: 8, unit: 'px' }, style: [{ selector: '{{QUBELY}} .qubely-vertical-tab-title.qubely-has-icon-left .qubely-vertical-tab-icon { margin-right: {{iconGap}}; } {{QUBELY}} .qubely-vertical-tab-title.qubely-has-icon-right .qubely-vertical-tab-icon  { margin-left: {{iconGap}};} {{QUBELY}} .qubely-vertical-tab-title.qubely-has-icon-top .qubely-vertical-tab-icon  { margin-bottom: {{iconGap}};}' }] },
 
         // Size
         navSize: {
@@ -70,7 +70,7 @@ registerBlockType('qubely/verticaltabs', {
                     condition: [
                         { key: 'navSize', relation: '!=', value: 'custom' }
                     ],
-                    selector: '{{QUBELY}} .qubely-block-tab .qubely-tab-nav .qubely-tab-item .qubely-tab-title {padding: {{navSize}};}'
+                    selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-nav .qubely-vertical-tab-item .qubely-vertical-tab-title {padding: {{navSize}};}'
                 }
             ]
         },
@@ -81,7 +81,7 @@ registerBlockType('qubely/verticaltabs', {
                     condition: [
                         { key: 'navSize', relation: '==', value: 'custom' }
                     ],
-                    selector: '{{QUBELY}} .qubely-block-tab .qubely-tab-nav .qubely-tab-item .qubely-tab-title {padding-top: {{navPaddingY}}; padding-bottom: {{navPaddingY}};}'
+                    selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-nav .qubely-vertical-tab-item .qubely-vertical-tab-title {padding-top: {{navPaddingY}}; padding-bottom: {{navPaddingY}};}'
                 }
             ]
         },
@@ -92,16 +92,16 @@ registerBlockType('qubely/verticaltabs', {
                     condition: [
                         { key: 'navSize', relation: '==', value: 'custom' }
                     ],
-                    selector: '{{QUBELY}} .qubely-block-tab .qubely-tab-nav .qubely-tab-item .qubely-tab-title {padding-left: {{navPaddingX}}; padding-right: {{navPaddingX}};}'
+                    selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-nav .qubely-vertical-tab-item .qubely-vertical-tab-title {padding-left: {{navPaddingX}}; padding-right: {{navPaddingX}};}'
                 }
             ]
         },
 
         // Spacing
-        navSpacing: { type: 'object', default: { md: 10, unit: 'px' }, style: [{ selector: '{{QUBELY}} .qubely-block-tab .qubely-tab-nav {margin-left: calc(-{{navSpacing}}/2); margin-right: calc(-{{navSpacing}}/2);} {{QUBELY}} .qubely-block-tab .qubely-tab-nav .qubely-tab-item {margin-left: calc({{navSpacing}}/2); margin-right: calc({{navSpacing}}/2);}' }] },
+        navSpacing: { type: 'object', default: { md: 10, unit: 'px' }, style: [{ selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-nav {margin-left: calc(-{{navSpacing}}/2); margin-right: calc(-{{navSpacing}}/2);} {{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-nav .qubely-vertical-tab-item {margin-left: calc({{navSpacing}}/2); margin-right: calc({{navSpacing}}/2);}' }] },
 
         //Color
-        navColor: { type: 'string', default: '#999999', style: [{ selector: '{{QUBELY}} .qubely-block-tab .qubely-tab-nav .qubely-tab-item .qubely-tab-title { color:{{navColor}}; }' }] },
+        navColor: { type: 'string', default: '#999999', style: [{ selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-nav .qubely-vertical-tab-item .qubely-vertical-tab-title { color:{{navColor}}; }' }] },
         navBg: {
             type: 'string', default: '#F5F5F5',
             style: [
@@ -109,11 +109,11 @@ registerBlockType('qubely/verticaltabs', {
                     condition: [
                         { key: 'tabStyle', relation: '!=', value: 'underline' }
                     ],
-                    selector: '{{QUBELY}} .qubely-block-tab .qubely-tab-nav .qubely-tab-item .qubely-tab-title {background-color: {{navBg}};}'
+                    selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-nav .qubely-vertical-tab-item .qubely-vertical-tab-title {background-color: {{navBg}};}'
                 }
             ]
         },
-        navColorActive: { type: 'string', default: '#2184F9', style: [{ selector: '{{QUBELY}} .qubely-block-tab .qubely-tab-nav .qubely-tab-item.qubely-active .qubely-tab-title { color:{{navColorActive}}; }' }] },
+        navColorActive: { type: 'string', default: '#2184F9', style: [{ selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-nav .qubely-vertical-tab-item.qubely-vertical-active .qubely-vertical-tab-title { color:{{navColorActive}}; }' }] },
         navBgActive: {
             type: 'string', default: '#e5e5e5',
             style: [
@@ -121,7 +121,7 @@ registerBlockType('qubely/verticaltabs', {
                     condition: [
                         { key: 'tabStyle', relation: '!=', value: 'underline' }
                     ],
-                    selector: '{{QUBELY}} .qubely-block-tab .qubely-tab-nav .qubely-tab-item.qubely-active .qubely-tab-title {background-color : {{navBgActive}};} {{QUBELY}} .qubely-block-tab.qubely-tab-style-tabs .qubely-tab-nav .qubely-tab-item.qubely-active .qubely-tab-title:after {background-color : {{navBgActive}};}'
+                    selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-nav .qubely-vertical-tab-item.qubely-vertical-active .qubely-vertical-tab-title {background-color : {{navBgActive}};} {{QUBELY}} .qubely-block-vertical-tab.qubely-tab-style-tabs .qubely-vertical-tab-nav .qubely-vertical-tab-item.qubely-vertical-active .qubely-vertical-tab-title:after {background-color : {{navBgActive}};}'
                 }
             ]
         },
@@ -138,7 +138,7 @@ registerBlockType('qubely/verticaltabs', {
                     condition: [
                         { key: 'tabStyle', relation: '!=', value: 'underline' }
                     ],
-                    selector: '{{QUBELY}} .qubely-block-tab .qubely-tab-nav .qubely-tab-item .qubely-tab-title'
+                    selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-nav .qubely-vertical-tab-item .qubely-vertical-tab-title'
                 }
             ]
         },
@@ -153,7 +153,7 @@ registerBlockType('qubely/verticaltabs', {
                     condition: [
                         { key: 'tabStyle', relation: '!=', value: 'underline' }
                     ],
-                    selector: '{{QUBELY}} .qubely-block-tab .qubely-tab-nav .qubely-tab-item.qubely-active .qubely-tab-title'
+                    selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-nav .qubely-vertical-tab-item.qubely-vertical-active .qubely-vertical-tab-title'
                 }
             ]
         },
@@ -170,7 +170,7 @@ registerBlockType('qubely/verticaltabs', {
                     condition: [
                         { key: 'tabStyle', relation: '==', value: 'underline' }
                     ],
-                    selector: '{{QUBELY}} .qubely-block-tab .qubely-tab-nav .qubely-tab-item .qubely-tab-title {border-bottom: {{navUnderlineBorderWidth}} solid transparent;}'
+                    selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-nav .qubely-vertical-tab-item .qubely-vertical-tab-title {border-bottom: {{navUnderlineBorderWidth}} solid transparent;}'
                 }
             ]
         },
@@ -181,7 +181,7 @@ registerBlockType('qubely/verticaltabs', {
                     condition: [
                         { key: 'tabStyle', relation: '==', value: 'underline' }
                     ],
-                    selector: '{{QUBELY}} .qubely-block-tab .qubely-tab-nav .qubely-tab-item .qubely-tab-title { border-bottom-color:{{navUnderlineBorderColor}}; }'
+                    selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-nav .qubely-vertical-tab-item .qubely-vertical-tab-title { border-bottom-color:{{navUnderlineBorderColor}}; }'
                 }
             ]
         },
@@ -192,7 +192,7 @@ registerBlockType('qubely/verticaltabs', {
                     condition: [
                         { key: 'tabStyle', relation: '==', value: 'underline' }
                     ],
-                    selector: '{{QUBELY}} .qubely-block-tab .qubely-tab-nav .qubely-tab-item.qubely-active .qubely-tab-title { border-bottom-color:{{navUnderlineBorderColorActive}}; }'
+                    selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-nav .qubely-vertical-tab-item.qubely-vertical-active .qubely-vertical-tab-title { border-bottom-color:{{navUnderlineBorderColorActive}}; }'
                 }
             ]
         },
@@ -213,7 +213,7 @@ registerBlockType('qubely/verticaltabs', {
                     condition: [
                         { key: 'tabStyle', relation: '==', value: 'tabs' }
                     ],
-                    selector: '{{QUBELY}} .qubely-block-tab.qubely-tab-style-tabs .qubely-tab-nav .qubely-tab-item .qubely-tab-title'
+                    selector: '{{QUBELY}} .qubely-block-vertical-tab.qubely-tab-style-tabs .qubely-vertical-tab-nav .qubely-vertical-tab-item .qubely-vertical-tab-title'
                 }
             ]
         },
@@ -233,7 +233,7 @@ registerBlockType('qubely/verticaltabs', {
                     condition: [
                         { key: 'tabStyle', relation: '==', value: 'pills' }
                     ],
-                    selector: '{{QUBELY}} .qubely-block-tab.qubely-tab-style-pills .qubely-tab-nav .qubely-tab-item .qubely-tab-title'
+                    selector: '{{QUBELY}} .qubely-block-vertical-tab.qubely-tab-style-pills .qubely-vertical-tab-nav .qubely-vertical-tab-item .qubely-vertical-tab-title'
                 }
             ]
         },
@@ -246,7 +246,7 @@ registerBlockType('qubely/verticaltabs', {
                     condition: [
                         { key: 'tabStyle', relation: '==', value: 'tabs' }
                     ],
-                    selector: '{{QUBELY}} .qubely-block-tab .qubely-tab-body {background-color: {{bodyBg}};}'
+                    selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-tab-body {background-color: {{bodyBg}};}'
                 }
             ]
         },
@@ -265,7 +265,7 @@ registerBlockType('qubely/verticaltabs', {
                     condition: [
                         { key: 'tabStyle', relation: '==', value: 'tabs' }
                     ],
-                    selector: '{{QUBELY}} .qubely-block-tab .qubely-tab-body'
+                    selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-tab-body'
                 }
             ]
         },
@@ -279,7 +279,7 @@ registerBlockType('qubely/verticaltabs', {
                     condition: [
                         { key: 'tabStyle', relation: '==', value: 'tabs' }
                     ],
-                    selector: '{{QUBELY}} .qubely-block-tab .qubely-tab-body'
+                    selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-tab-body'
                 }
             ]
         },
@@ -290,7 +290,7 @@ registerBlockType('qubely/verticaltabs', {
                     condition: [
                         { key: 'tabStyle', relation: '==', value: 'tabs' }
                     ],
-                    selector: '{{QUBELY}} .qubely-block-tab .qubely-tab-body'
+                    selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-tab-body'
                 }
             ]
         },
@@ -304,7 +304,7 @@ registerBlockType('qubely/verticaltabs', {
                     condition: [
                         { key: 'tabStyle', relation: '==', value: 'tabs' }
                     ],
-                    selector: '{{QUBELY}} .qubely-block-tab .qubely-tab-body'
+                    selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-tab-body'
                 }
             ]
         },
@@ -320,7 +320,7 @@ registerBlockType('qubely/verticaltabs', {
                     condition: [
                         { key: 'tabStyle', relation: '==', value: 'underline' }
                     ],
-                    selector: '{{QUBELY}} .qubely-block-tab .qubely-tab-body {border-top: {{bodySeparatorHeight}} solid transparent;}'
+                    selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-tab-body {border-top: {{bodySeparatorHeight}} solid transparent;}'
                 }
             ]
         },
@@ -331,7 +331,7 @@ registerBlockType('qubely/verticaltabs', {
                     condition: [
                         { key: 'tabStyle', relation: '==', value: 'underline' }
                     ],
-                    selector: '{{QUBELY}} .qubely-block-tab .qubely-tab-body { border-top-color:{{bodySeparatorColor}}; }'
+                    selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-tab-body { border-top-color:{{bodySeparatorColor}}; }'
                 }
             ]
         },
@@ -342,7 +342,7 @@ registerBlockType('qubely/verticaltabs', {
                     condition: [
                         { key: 'tabStyle', relation: '!=', value: 'tabs' }
                     ],
-                    selector: '{{QUBELY}} .qubely-block-tab .qubely-tab-body {padding-top: {{bodyTopSpacing}};}'
+                    selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-tab-body {padding-top: {{bodyTopSpacing}};}'
                 }
             ]
         }
