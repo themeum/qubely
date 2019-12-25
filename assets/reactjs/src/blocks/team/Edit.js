@@ -26,6 +26,7 @@ class Edit extends Component {
     render() {
         const {
             uniqueId,
+            className,
             layout,
             alignment,
             name,
@@ -384,7 +385,7 @@ class Edit extends Component {
 
                 {globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
-                <div className={`qubely-block-${uniqueId}`}>
+                <div className={`qubely-block-${uniqueId}${className ? ` ${className}` : ''}`}>
                     <div className={`qubely-block-team qubely-team-layout-${layout}`} onContextMenu={event => handleContextMenu(event, this.refs.qubelyContextMenu)}>
                         <div className="qubely-team-image-wrapper" onClick={() => this.handlePanelOpenings('Image')}>
                             {image.url != undefined ?

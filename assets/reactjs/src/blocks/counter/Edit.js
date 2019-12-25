@@ -43,7 +43,9 @@ class Edit extends Component {
 			isSelected,
 			setAttributes,
 			attributes: {
-				uniqueId, alignment,
+				uniqueId,
+				className,
+				alignment,
 				counterLimit,
 				counterDuration,
 				counterTypo,
@@ -55,11 +57,11 @@ class Edit extends Component {
 				prepostColor,
 				interaction,
 				animation,
-                globalZindex,
-                enablePosition, 
-                selectPosition, 
-                positionXaxis, 
-                positionYaxis,
+				globalZindex,
+				enablePosition,
+				selectPosition,
+				positionXaxis,
+				positionYaxis,
 				hideTablet,
 				hideMobile,
 				globalCss
@@ -137,7 +139,7 @@ class Edit extends Component {
 							}
 						</PanelBody>
 					}
-					
+
 					{animationSettings(uniqueId, animation, setAttributes)}
 
 					{interactionSettings(uniqueId, interaction, setAttributes)}
@@ -156,7 +158,7 @@ class Edit extends Component {
 
 				{globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
-				<div className={`qubely-block-${uniqueId}`}>
+				<div className={`qubely-block-${uniqueId}${className ? ` ${className}` : ''}`}>
 					<div className="qubely-block-counter" onContextMenu={event => handleContextMenu(event, this.refs.qubelyContextMenu)}>
 						{counterLimit <= 0 && <div>Please enter counter number</div>}
 						{counterDuration <= 0 && <div>Please enter counter Duration</div>}

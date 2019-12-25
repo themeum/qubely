@@ -61,6 +61,7 @@ class Edit extends Component {
             setAttributes,
             attributes: {
                 uniqueId,
+                className,
                 progress,
                 alignment,
                 size,
@@ -299,7 +300,7 @@ class Edit extends Component {
                 </BlockControls>
 
                 {globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
-                <div className={`qubely-block-${uniqueId} qubely-block-pie-progress`} onContextMenu={event => handleContextMenu(event, this.refs.qubelyContextMenu)}>
+                <div className={`qubely-block-${uniqueId} qubely-block-pie-progress${className ? ` ${className}` : ''}`} onContextMenu={event => handleContextMenu(event, this.refs.qubelyContextMenu)}>
                     <div className="qubely-progress-parent">
                         <Progress {...progressAttr} />
                         {(enableIcon || enableHeading) && (

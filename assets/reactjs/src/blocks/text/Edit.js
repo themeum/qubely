@@ -29,6 +29,7 @@ class Edit extends Component {
     render() {
         const {
             uniqueId,
+            className,
             content,
             typography,
             alignment,
@@ -210,7 +211,7 @@ class Edit extends Component {
 
                 {globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
-                <div className={`qubely-block-${uniqueId}`}>
+                <div className={`qubely-block-${uniqueId}${className ? ` ${className}` : ''}`}>
                     <div
                         onContextMenu={event => handleContextMenu(event, this.refs.qubelyContextMenu)}
                         className={`qubely-block-text ${(dropCap == 1) ? 'qubely-has-drop-cap' : ''}`} >

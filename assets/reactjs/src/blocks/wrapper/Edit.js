@@ -27,6 +27,7 @@ class Edit extends Component {
 			isSelected,
 			attributes: {
 				uniqueId,
+				className,
 				bgColor,
 				bgColorHover,
 				bgShadow,
@@ -102,7 +103,7 @@ class Edit extends Component {
 
 				{globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
-				<div className={`qubely-block-${uniqueId}`}>
+				<div className={`qubely-block-${uniqueId}${className ? ` ${className}` : ''}`}>
 					<div className="qubely-block-wrapper-block">
 						<InnerBlocks templateLock={false} />
 					</div>

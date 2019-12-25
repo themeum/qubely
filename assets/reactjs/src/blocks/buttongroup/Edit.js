@@ -27,6 +27,7 @@ class Edit extends Component {
         const {
             attributes: {
                 uniqueId,
+                className,
                 alignment,
                 buttons,
                 spacing,
@@ -88,7 +89,7 @@ class Edit extends Component {
 
                 {globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
-                <div className={`qubely-block-${uniqueId}`}>
+                <div className={`qubely-block-${uniqueId}${className ? ` ${className}` : ''}`}>
                     <div className={`qubely-block-button-group`}>
                         <InnerBlocks
                             tagName="div"

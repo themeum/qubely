@@ -24,8 +24,58 @@ class Edit extends Component {
     }
 
     render() {
-        const { uniqueId, parentClientId, buttonGroup, fillType, buttonSize, buttonWidthType, buttonWidth, buttonPadding, typography, textField, url, enableAlignment, alignment, buttonBorderRadius, iconName, iconPosition, iconSize, iconGap, buttonBorder, borderHoverColor, buttonColor, buttonColor2, buttonHoverColor, buttonHoverColor2, bgColor, bgHoverColor, buttonShadow, buttonHoverShadow, animation, interaction, enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss } = this.props.attributes
-        const { name, clientId, attributes, removeBlock, updateBlockAttributes, buttonGroupAttributes, setAttributes, isSelected } = this.props
+
+        const {
+            name,
+            clientId,
+            attributes,
+            removeBlock,
+            updateBlockAttributes,
+            buttonGroupAttributes,
+            setAttributes,
+            isSelected,
+            attributes: {
+                uniqueId,
+                className,
+                parentClientId,
+                buttonGroup,
+                fillType,
+                buttonSize,
+                buttonWidthType,
+                buttonWidth,
+                buttonPadding,
+                typography,
+                textField,
+                url,
+                enableAlignment,
+                alignment,
+                buttonBorderRadius,
+                iconName,
+                iconPosition,
+                iconSize,
+                iconGap,
+                buttonBorder,
+                borderHoverColor,
+                buttonColor,
+                buttonColor2,
+                buttonHoverColor,
+                buttonHoverColor2,
+                bgColor,
+                bgHoverColor,
+                buttonShadow,
+                buttonHoverShadow,
+                animation,
+                interaction,
+                enablePosition,
+                selectPosition,
+                positionXaxis,
+                positionYaxis,
+                globalZindex,
+                hideTablet,
+                hideMobile,
+                globalCss
+            }
+        } = this.props
         const { device } = this.state
 
         if (uniqueId) { CssGenerator(this.props.attributes, 'button', uniqueId); }
@@ -188,7 +238,7 @@ class Edit extends Component {
                 {globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
 
-                <div className={`qubely-block-${uniqueId}`}>
+                <div className={`qubely-block-${uniqueId}${className ? ` ${className}` : ''}`}>
                     <div className="qubely-block-btn-wrapper" onContextMenu={event => handleContextMenu(event, this.refs.qubelyContextMenu)}>
                         <div className={`qubely-block-btn`}>
                             <span className={`qubely-block-btn-anchor is-${buttonSize}`}>

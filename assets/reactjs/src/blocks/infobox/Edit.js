@@ -29,6 +29,7 @@ class Edit extends Component {
     render() {
         const {
             uniqueId,
+            className,
             layout,
             mediaType,
             alignment,
@@ -397,7 +398,7 @@ class Edit extends Component {
 
                 {globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
-                <div className={`qubely-block-${uniqueId}`}>
+                <div className={`qubely-block-${uniqueId}${className ? ` ${className}` : ''}`}>
                     <div className={`qubely-block-info-box qubely-info-box-layout-${layout}`} onContextMenu={event => handleContextMenu(event, this.refs.qubelyContextMenu)}>
                         {(layout != 4 && mediaType) &&
                             <div className={`qubely-info-box-media${useMediaBg ? ' qubely-media-has-bg' : ''}`} onClick={() => this.handlePanelOpenings('Media')}>
