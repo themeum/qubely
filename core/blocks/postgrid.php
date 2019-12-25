@@ -1063,6 +1063,7 @@ function render_block_qubely_postgrid($att)
 {
 	$layout 		        = isset($att['layout']) ? $att['layout'] : 3;
 	$uniqueId 		        = isset($att['uniqueId']) ? $att['uniqueId'] : '';
+	$className 		        = isset($att['className']) ? $att['className'] : '';
 	$style 		            = isset($att['style']) ? $att['style'] : 3;
 	$column 		        = isset($att['column']) ? $att['column'] : 3;
 	$numbers 		        = isset($att['postsToShow']) ? $att['postsToShow'] : 3;
@@ -1153,6 +1154,9 @@ function render_block_qubely_postgrid($att)
 	$class = 'wp-block-qubely-postgrid qubely-block-'.$uniqueId;
 	if ( isset( $att['align'] ) ) {
 		$class .= ' align' . $att['align'];
+	}
+	if ( isset( $att['className'] ) ) {
+		$class .= $att['className'];
 	}
 
 	if ($query->have_posts()) {
