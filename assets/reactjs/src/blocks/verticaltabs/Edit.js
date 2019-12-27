@@ -1,10 +1,10 @@
 const { __ } = wp.i18n
-const { Tooltip, PanelBody, Toolbar } = wp.components;
+const { Tooltip, PanelBody, Toolbar, TextareaControl } = wp.components;
 const { compose } = wp.compose
 const { withSelect, withDispatch } = wp.data
 const { Component, Fragment } = wp.element;
 const { InnerBlocks, RichText, InspectorControls, BlockControls } = wp.blockEditor
-const { Color, IconList, Select, Styles, Typography, Range, RadioAdvanced, gloalSettings: { globalSettingsPanel, animationSettings, interactionSettings }, Inline: { InlineToolbar }, BoxShadow, Alignment, Tabs, Tab, Separator, Border, Padding, BorderRadius, CssGenerator: { CssGenerator } } = wp.qubelyComponents
+const { Color,ColorAdvanced, IconList, Select, Styles, Typography, Range, RadioAdvanced, gloalSettings: { globalSettingsPanel, animationSettings, interactionSettings }, Inline: { InlineToolbar }, BoxShadow, Alignment, Tabs, Tab, Separator, Border, Padding, BorderRadius, CssGenerator: { CssGenerator }, Toggle } = wp.qubelyComponents
 import icons from '../../helpers/icons';
 
 class Edit extends Component {
@@ -52,37 +52,77 @@ class Edit extends Component {
 		setAttributes({ tabTitles: modifiedTitles })
 	}
 
-	renderTabTitles = () => {
-		const { attributes: { tabTitles, iconPosition }, block, clientId } = this.props
+	_handleTabChange = (e, index) => {
+		const {block, clientId} = this.props
 		let currentTabBlock = $(`#block-${clientId}`)
 		const { showIconPicker } = this.state
-		return tabTitles.map((title, index) =>
-			<span tabIndex="0" className={`qubely-vertical-tab-item ${(this.state.activeTab == index + 1) ? 'qubely-vertical-active' : ''}`}>
-				<span className={`qubely-vertical-tab-title ${title.iconName ? 'qubely-has-icon-' + iconPosition : ''}`} onClick={() => {
-					let activeTab = $(`#block-${block.innerBlocks[index].clientId}`, currentTabBlock)
-					$('.qubely-vertical-tab-content.qubely-vertical-active', currentTabBlock).removeClass('qubely-vertical-active')
-					activeTab.addClass('qubely-vertical-active')
-					this.setState({ activeTab: index + 1, initialRender: false, showIconPicker: !showIconPicker })
-				}}
-					role="button"
-				>
-					{title.iconName && (iconPosition == 'top' || iconPosition == 'left') && (<i className={`qubely-vertical-tab-icon ${title.iconName}`} />)}
-					<RichText
-						key="editable"
-						keepPlaceholderOnFocus
-						placeholder={__('Add Tab Title')}
-						value={title.title}
-						onChange={value => this.updateTitles({ title: value }, index)}
-					/>
-					{title.iconName && (iconPosition == 'right') && (<i className={`qubely-vertical-tab-icon ${title.iconName}`} />)}
-				</span>
-				<Tooltip text={__('Delete this tab')}>
-					<span className="qubely-action-vertical-tab-remove" onClick={() => this.deleteTab(index)} role="button">
-						<i className="fas fa-times" />
-					</span>
-				</Tooltip>
-			</span>
-		)
+		let activeTab = $(`#block-${block.innerBlocks[index].clientId}`, currentTabBlock)
+		$('.qubely-vertical-tab-content.qubely-vertical-active', currentTabBlock).removeClass('qubely-vertical-active')
+		activeTab.addClass('qubely-vertical-active');
+		this.setState({ activeTab: index + 1, initialRender: false, showIconPicker: !showIconPicker })
+	}
+
+	renderTabTitles = () => {
+		const { tabTitles, iconPosition, navText, navLayout, navSubHeading } = this.props.attributes
+		return tabTitles.map((title, index) => {
+			const buttonClass = `qubely-vertical-tab-item-button ${title.iconName ? 'qubely-has-icon-' + iconPosition : ''} ${(this.state.activeTab == index + 1) ? 'qubely-vertical-active' : ''}`
+			const Icon = () => (title.iconName !== 0 && title.iconName !== undefined && title.iconName.toString().trim() !== '') ? <span className={`qubely-vertical-tab-icon ${title.iconName}`} /> : ''
+			return (
+				<div class='qubely-vertical-tab-item'>
+					<button onClick={(e) => this._handleTabChange(e, index)} className={buttonClass}>
+						{
+							(navLayout === 2 && iconPosition === 'left') && <Icon />
+						}
+						<div>
+							<h5 className='qubely-vertical-tab-title'>
+								{
+									( navLayout === 1 && iconPosition === 'left') && <Icon />
+								}
+								<RichText
+									key="editable"
+									keepPlaceholderOnFocus
+									placeholder={__('Add Tab Title')}
+									value={title.title}
+									onChange={value => this.updateTitles({ title: value }, index)}
+								/>
+								{
+									( navLayout === 1 && iconPosition === 'right') &&  <Icon />
+								}
+							</h5>
+							{navSubHeading && (
+								<RichText
+									key="editable"
+									tagName="h6"
+									className="qubely-vertical-tab-nav-sub-heading"
+									keepPlaceholderOnFocus
+									placeholder={__('Add Subheading')}
+									value={title.navSubHeading}
+									onChange={navSubHeading => this.updateTitles({ navSubHeading }, index)}
+								/>
+							)}
+							{navText && (
+								<RichText
+									style={{display: ((this.state.activeTab === index + 1) ? '' : 'none')}}
+									key="editable"
+									tagName="p"
+									className="qubely-vertical-tab-nav-text"
+									keepPlaceholderOnFocus
+									placeholder={__('Add Nav Text')}
+									value={title.navText}
+									onChange={navText => this.updateTitles({ navText }, index)}
+								/>
+							)}
+						</div>
+						{
+							(navLayout === 2 && iconPosition === 'right') &&  <Icon />
+						}
+					</button>
+					<Tooltip text={__('Delete this tab')}>
+						<span className="fas fa-times qubely-action-vertical-tab-remove" onClick={() => this.deleteTab(index)} role="button" tabIndex="0" />
+					</Tooltip>
+				</div>
+			)
+		})
 	}
 
 	deleteTab = (tabIndex) => {
@@ -123,21 +163,36 @@ class Edit extends Component {
 			tabs,
 			tabTitles,
 			tabStyle,
+			navLayout,
+			navWidth,
 			navSpacing,
-			navSize,
+			// navSize,
 			navPaddingX,
 			navPaddingY,
+			// navPadding,
 			navAlignment,
 			typography,
 			navColor,
 			navColorActive,
+			navColorHover,
 			navBg,
+			navBgHover,
 			navBgActive,
 			navBorder,
 			navBorderActive,
 			navBorderRadiusTabs,
+			navBorderRadiusTabsActive,
+			navBorderRadiusTabsHover,
+			navShadow,
+			navShadowActive,
 			navBorderRadiusPills,
 			navUnderlineBorderWidth,
+			navSubHeading,
+			navSubHeadingTypography,
+			navSubHeadingSpacing,
+			navText,
+			textTypography,
+			textSpacing,
 			navUnderlineBorderColor,
 			navUnderlineBorderColorActive,
 			iconSize,
@@ -167,7 +222,7 @@ class Edit extends Component {
 		} = this.props.attributes
 		const { name, setAttributes, isSelected } = this.props
 		const { activeTab, device } = this.state
-		if (uniqueId) { CssGenerator(this.props.attributes, 'tabs', uniqueId); }
+		if (uniqueId) { CssGenerator(this.props.attributes, 'verticaltabs', uniqueId); }
 		let iterator = [], index = 0
 		while (index < tabs) {
 			iterator.push(index)
@@ -186,84 +241,79 @@ class Edit extends Component {
 							]}
 						/>
 						<Separator />
-						<Alignment label={__('Alignment')} value={navAlignment} alignmentType="content" onChange={val => setAttributes({ navAlignment: val })} disableJustify />
+						<Range label={__('Menu Width')} value={navWidth} onChange={navWidth => setAttributes({ navWidth })} max={600} min={0} unit={['px', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
+						<RadioAdvanced
+							label={__('Type')}
+							options={[
+								{ label: 'Left', value: 'left', title: 'Left' },
+								{ label: 'Right', value: 'right', title: 'Right' },
+							]}
+							value={navAlignment}
+							onChange={(navAlignment) => setAttributes({ navAlignment })} />
+					</PanelBody>
+
+					<PanelBody title={__('Tabs Menu')} initialOpen={false}>
+						<Tabs>
+							<Tab tabTitle={__('Normal')}>
+								<ColorAdvanced label={__('Background')} value={navBg} onChange={navBg => setAttributes({ navBg })} />
+								<Separator />
+								<Color label={__('Color')} value={navColor} onChange={(navColor) => setAttributes({ navColor })} />
+								<Range label={__('Padding Y')} value={navPaddingY} onChange={navPaddingY => setAttributes({ navPaddingY })} max={100} min={0} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
+								<Range label={__('Padding X')} value={navPaddingX} onChange={navPaddingX => setAttributes({ navPaddingX })} max={100} min={0} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
+								<Separator />
+								<BorderRadius label={__('Corner')} value={navBorderRadiusTabs} onChange={(navBorderRadiusTabs) => setAttributes({ navBorderRadiusTabs })} min={0} max={100} unit={['px', 'em', '%']} {/*responsive device={device} onDeviceChange={value => this.setState({ device: value })}*/} />
+								<Border label={__('Border')} value={navBorder} onChange={(value) => setAttributes({ navBorder: value })} min={0} max={100} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
+								<Range label={__('Gap')} value={navSpacing} onChange={navSpacing => setAttributes({ navSpacing })} max={100} min={0} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
+								<BoxShadow label={__('Shadow')} value={navShadow} onChange={navShadow => setAttributes({ navShadow})} />
+							</Tab>
+							<Tab tabTitle={__('Active')}>
+								<ColorAdvanced label={__('Background')} value={navBgActive} onChange={navBgActive => setAttributes({ navBgActive })} />
+								<Separator />
+								<Color label={__('Color')} value={navColorActive} onChange={(navColorActive) => setAttributes({ navColorActive })} />
+								<BorderRadius label={__('Corner')} value={navBorderRadiusTabsActive} onChange={(navBorderRadiusTabsActive) => setAttributes({ navBorderRadiusTabsActive })} min={0} max={100} unit={['px', 'em', '%']} />
+								{/*<Border label={__('Border')} value={navBorderActive} onChange={(value) => setAttributes({ navBorderActive: value })} min={0} max={100} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />*/}
+								<BoxShadow label={__('Shadow')} value={navShadowActive} onChange={navShadowActive => setAttributes({ navShadowActive})} />
+							</Tab>
+							<Tab tabTitle={__('Hover')}>
+								<ColorAdvanced label={__('Background')} value={navBgHover} onChange={navBgHover => setAttributes({ navBgHover })} />
+								<Separator />
+								<Color label={__('Color')} value={navColorHover} onChange={(navColorHover) => setAttributes({ navColorHover })} />
+								<BorderRadius label={__('Corner')} value={navBorderRadiusTabsHover} onChange={(navBorderRadiusTabsHover) => setAttributes({ navBorderRadiusTabsHover })} min={0} max={100} unit={['px', 'em', '%']} />
+							</Tab>
+						</Tabs>
 					</PanelBody>
 
 					<PanelBody title={__('Nav')} initialOpen={false}>
-						<RadioAdvanced label={__('Nav Size')}
+						<RadioAdvanced
+							label={__('Type')}
 							options={[
-								{ label: 'S', value: '4px 12px', title: 'Small' },
-								{ label: 'M', value: '6px 15px', title: 'Medium' },
-								{ label: 'L', value: '10px 20px', title: 'Large' },
-								{ icon: 'fas fa-cog', value: 'custom', title: 'Custom' }
+								{ label: 'Layout 1', value: 1, title: 'Layout 1' },
+								{ label: 'Layout 2', value: 2, title: 'Layout 2' },
 							]}
-							value={navSize} onChange={(value) => setAttributes({ navSize: value })} />
-
-						{navSize == 'custom' &&
-							<Fragment>
-								<Range label={<span className="dashicons dashicons-sort" title="X Spacing" />} value={navPaddingY} onChange={(value) => setAttributes({ navPaddingY: value })} unit={['px', 'em', '%']} max={100} min={0} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
-								<Range label={<span className="dashicons dashicons-leftright" title="Y Spacing" />} value={navPaddingX} onChange={(value) => setAttributes({ navPaddingX: value })} unit={['px', 'em', '%']} max={100} min={0} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
-							</Fragment>
-						}
-
-						<Range label={__('Gap')} value={navSpacing} onChange={(value) => setAttributes({ navSpacing: value })} max={50} min={0} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
-
-						{tabStyle == 'tabs' &&
-							<Fragment>
-								<BorderRadius label={__('Radius')} value={navBorderRadiusTabs} onChange={(value) => setAttributes({ navBorderRadiusTabs: value })} min={0} max={100} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
-							</Fragment>
-						}
-						{tabStyle == 'pills' &&
-							<Fragment>
-								<BorderRadius label={__('Radius')} value={navBorderRadiusPills} onChange={(value) => setAttributes({ navBorderRadiusPills: value })} min={0} max={100} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
-							</Fragment>
-						}
-						{tabStyle == 'underline' &&
-							<Range label={__('Underline Height')} value={navUnderlineBorderWidth} onChange={(value) => setAttributes({ navUnderlineBorderWidth: value })} min={1} max={10} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
-						}
-
-						<Tabs>
+							value={navLayout}
+							onChange={(navLayout) => setAttributes({ navLayout })} />
+						{/*<Tabs>
 							<Tab tabTitle={__('Normal')}>
-								<Color label={__('Color')} value={navColor} onChange={(value) => setAttributes({ navColor: value })} />
-								{tabStyle != 'underline' &&
-									<Fragment>
-										<Color label={__('Background')} value={navBg} onChange={(value) => setAttributes({ navBg: value })} />
-										<Border label={__('Border')} value={navBorder} onChange={(value) => setAttributes({ navBorder: value })} min={0} max={100} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
-									</Fragment>
-								}
-								{tabStyle == 'underline' &&
-									<Fragment>
-										<Color label={__('Line Color')} value={navUnderlineBorderColor} onChange={(value) => setAttributes({ navUnderlineBorderColor: value })} />
-									</Fragment>
-								}
+								<Color label={__('Background')} value={navBg} onChange={(value) => setAttributes({ navBg: value })} />
+								<Border label={__('Border')} value={navBorder} onChange={(value) => setAttributes({ navBorder: value })} min={0} max={100} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
+								<BoxShadow label={__('Shadow')} value={navShadow} onChange={navShadow => setAttributes({ navShadow})} />
 							</Tab>
 							<Tab tabTitle={__('Active')}>
-								<Color label={__('Color')} value={navColorActive} onChange={(value) => setAttributes({ navColorActive: value })} />
-								{tabStyle != 'underline' &&
-									<Fragment>
-										<Color label={__('Background')} value={navBgActive} onChange={(value) => setAttributes({ navBgActive: value })} />
-										<Border label={__('Border')} value={navBorderActive} onChange={(value) => setAttributes({ navBorderActive: value })} min={0} max={100} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
-									</Fragment>
-								}
-
-								{tabStyle == 'underline' &&
-									<Fragment>
-										<Color label={__('Line Color')} value={navUnderlineBorderColorActive} onChange={(value) => setAttributes({ navUnderlineBorderColorActive: value })} />
-									</Fragment>
-								}
+								<Color label={__('Background')} value={navBgActive} onChange={(value) => setAttributes({ navBgActive: value })} />
+								<Border label={__('Border')} value={navBorderActive} onChange={(value) => setAttributes({ navBorderActive: value })} min={0} max={100} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
+								<BoxShadow label={__('Shadow')} value={navShadowActive} onChange={navShadowActive => setAttributes({ navShadowActive})} />
 							</Tab>
-						</Tabs>
+						</Tabs>*/}
 						<Typography label={__('Typography')} value={typography} onChange={(value) => setAttributes({ typography: value })} disableLineHeight device={device} onDeviceChange={value => this.setState({ device: value })} />
 					</PanelBody>
-					<PanelBody title={__('Icon')} initialOpen={false}>
-
+					<PanelBody title={__('Nav Icon')} initialOpen={false}>
 						<IconList
 							label={__('Icon')}
 							value={tabTitles[activeTab - 1] && tabTitles[activeTab - 1].iconName}
 							onChange={(value) => this.updateTitles({ iconName: value }, activeTab - 1)} />
 						<Select
 							label={__('Icon Position')}
-							options={[['left', __('Left')], ['right', __('Right')], ['top', __('Top')]]}
+							options={[['left', __('Left')], ['right', __('Right')]]}
 							value={iconPosition}
 							onChange={(value) => setAttributes({ iconPosition: value })} />
 						<Range
@@ -279,7 +329,7 @@ class Edit extends Component {
 						<Range
 							label={__('Icon Gap')}
 							value={iconGap}
-							onChange={value => setAttributes({ iconGap: value })}
+							onChange={iconGap => setAttributes({ iconGap })}
 							unit={['px', 'em', '%']}
 							min={0}
 							max={64}
@@ -287,6 +337,22 @@ class Edit extends Component {
 							device={device}
 							onDeviceChange={value => this.setState({ device: value })} />
 
+					</PanelBody>
+					<PanelBody title={__('Nav Content')} initialOpen={false}>
+						<Toggle label={__('Enable Sub Heading')} value={navSubHeading} onChange={navSubHeading => setAttributes({ navSubHeading })} />
+						{navSubHeading && (
+							<Fragment>
+								<Range label={__('Gap')} value={navSubHeadingSpacing} onChange={navSubHeadingSpacing => setAttributes({ navSubHeadingSpacing })} max={100} min={0} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
+								<Typography label={__('Text Typography')} value={navSubHeadingTypography} onChange={navSubHeadingTypography => setAttributes({ navSubHeadingTypography })} device={device} onDeviceChange={value => this.setState({ device: value })} />
+							</Fragment>
+						)}
+						<Toggle label={__('Enable Text')} value={navText} onChange={navText => setAttributes({ navText })} />
+						{navText && (
+							<Fragment>
+								<Range label={__('Gap')} value={textSpacing} onChange={textSpacing => setAttributes({ textSpacing })} max={100} min={0} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
+								<Typography label={__('Text Typography')} value={textTypography} onChange={textTypography => setAttributes({ textTypography })} device={device} onDeviceChange={value => this.setState({ device: value })} />
+							</Fragment>
+						)}
 					</PanelBody>
 					<PanelBody title={__('Body')} initialOpen={false}>
 						{tabStyle == 'tabs' &&
@@ -336,11 +402,11 @@ class Edit extends Component {
                 {globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
 				<div className={`qubely-block-${uniqueId}`}>
-					<div className={`qubely-block-vertical-tab qubely-vertical-tab-style-${tabStyle}`}>
-						<div className={`qubely-vertical-tab-nav qubely-alignment-${navAlignment}`}>
+					<div className={`qubely-block-vertical-tab qubely-vertical-tab-style-${tabStyle} qubely-alignment-${navAlignment}`}>
+						<div className={`qubely-vertical-tab-nav`}>
 							{this.renderTabTitles()}
 							<Tooltip text={__('Add new tab')}>
-								<span className="qubely-add-new-vertical-tab" onClick={() => {
+								<button className="qubely-add-new-vertical-tab" onClick={() => {
 									this.setState({ activeTab: tabs + 1, initialRender: false })
 									setAttributes({
 										tabs: tabs + 1,
@@ -348,7 +414,7 @@ class Edit extends Component {
 									})
 								}} role="button" areaLabel={__('Add new tab')}>
 									<i className="fas fa-plus-circle" />
-								</span>
+								</button>
 							</Tooltip>
 						</div>
 						<div className={`qubely-vertical-tab-body`}>

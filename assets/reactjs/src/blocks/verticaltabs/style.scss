@@ -1,0 +1,98 @@
+:root{
+  --qubely-vertical-tab-nav-width: 250px;
+}
+
+.qubely-block-vertical-tab {
+  display: flex;
+  align-items: flex-start;
+  &.qubely-alignment-right{
+    flex-direction: row-reverse;
+  }
+  /** Tab Navigation **/
+  .qubely-vertical-tab-nav {
+    flex-grow: 0;
+    flex-basis: var(--qubely-vertical-tab-nav-width);
+    max-width: var(--qubely-vertical-tab-nav-width);
+    button{
+      border: none;
+      transition: background 300ms, color 300ms;
+    }
+    .qubely-vertical-tab-nav-sub-heading,
+    .qubely-vertical-tab-title{
+      font-weight: inherit;
+    }
+    .qubely-vertical-tab-nav-sub-heading{
+      font-size: 16px;
+      margin: 0;
+    }
+    .qubely-vertical-tab-nav-text{
+      font-size: 15px;
+      line-height: 1.2;
+      text-align: left;
+      margin-bottom: 0;
+    }
+    //.qubely-vertical-active{
+    //  .qubely-vertical-tab-nav-text{
+    //    display: block;
+    //  }
+    //}
+    .qubely-vertical-tab-item{
+      position: relative;
+      button{
+        width: 100%;
+        text-align: left;
+        h5{
+          margin: 0;
+          display: flex;
+          align-items: center;
+          width: 100%;
+        }
+        .qubely-vertical-tab-icon{
+          max-width: 1.3em;
+          flex-basis: 1.3em;
+          min-width: 1.3em;
+        }
+        &:focus{
+          outline: none;
+        }
+        &.qubely-vertical-tab-item-button{
+          display: flex;
+          &.qubely-has-icon-right{
+            justify-content: space-between;
+          }
+        }
+      }
+      .qubely-action-vertical-tab-remove{
+        display: none;
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translate(-100%, -50%);
+      }
+    }
+  }
+
+  /** Tab Body **/
+  .qubely-vertical-tab-body {
+    flex-grow: 1;
+    flex-basis: calc(100% - var(--qubely-vertical-tab-nav-width));
+    max-width: calc(100% - var(--qubely-vertical-tab-nav-width));
+    .editor-inner-blocks{
+      padding-left: 14px;
+      padding-right: 14px;
+    }
+    .qubely-vertical-tab-content {
+      position: absolute;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 400ms;
+      margin-top: -28px;
+      margin-bottom: -28px;
+      &.qubely-vertical-active{
+        position: relative;
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+  }
+}
