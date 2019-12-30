@@ -37,9 +37,9 @@ class Edit extends Component {
                 animation,
                 //global
                 globalZindex,
-                enablePosition, 
-                selectPosition, 
-                positionXaxis, 
+                enablePosition,
+                selectPosition,
+                positionXaxis,
                 positionYaxis,
                 hideTablet,
                 hideMobile,
@@ -103,7 +103,8 @@ class Edit extends Component {
                                         spaceTop: { md: '0', unit: "px" },
                                         spaceBottom: { md: '0', unit: "px" }
                                     },
-                                    customClassName: 'qubely-group-button'
+                                    customClassName: 'qubely-group-button',
+                                    disableFullWidth: true
                                 }
                             ])}
                             templateLock="all"

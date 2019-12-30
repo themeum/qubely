@@ -39,6 +39,7 @@ class Edit extends Component {
                 className,
                 parentClientId,
                 buttonGroup,
+                disableFullWidth,
                 fillType,
                 buttonSize,
                 buttonWidthType,
@@ -124,7 +125,7 @@ class Edit extends Component {
                             label={__('Button Width')}
                             options={[
                                 { label: __('Auto'), value: 'auto', title: __('Auto') },
-                                { label: __('Full'), value: 'block', title: __('Full') },
+                                ...(!disableFullWidth && [{ label: __('Full'), value: 'block', title: __('Full') }]),
                                 { label: __('Fixed'), value: 'fixed', title: __('Fixed') }
                             ]}
                             value={buttonWidthType}
@@ -135,8 +136,8 @@ class Edit extends Component {
                                 value={buttonWidth}
                                 onChange={(value) => setAttributes({ buttonWidth: value })}
                                 unit={['px', 'em', '%']}
-                                min={30}
-                                max={800}
+                                min={buttonWidth.unit === '%' ? 5 : 30}
+                                max={buttonWidth.unit === '%' ? 100 : 800}
                                 responsive
                                 device={device}
                                 onDeviceChange={value => this.setState({ device: value })} />
