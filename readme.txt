@@ -238,10 +238,11 @@ You can report bugs on the [support forum here](https://wordpress.org/support/pl
 
 == Changelog ==
 
-= 1.2.8 - 23 December, 2019 =
+= 1.2.8 - 02 January, 2020 =
 Fix: Contact form block -  Recaptcha issue  
 Fix: Additional CSS class in backend   
 Fix: Button Group block - Button width issue  
+Fix: Carousel blocks - Active item dot indicator in Backend  
 
 = 1.2.7 - 23 December, 2019 =
 New: Pie Progress block  
