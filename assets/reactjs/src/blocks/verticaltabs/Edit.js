@@ -179,25 +179,36 @@ class Edit extends Component {
 			navBgHover,
 			navBgActive,
 			navBorder,
-			navBorderActive,
+			navBorderColorActive,
+			navBorderColorHover,
 			navBorderRadiusTabs,
 			navBorderRadiusTabsActive,
 			navBorderRadiusTabsHover,
 			navShadow,
 			navShadowActive,
-			navBorderRadiusPills,
-			navUnderlineBorderWidth,
+			navShadowHover,
+
 			navSubHeading,
 			navSubHeadingTypography,
 			navSubHeadingSpacing,
+			navSubHeadingColor,
+			navSubHeadingColorActive,
+			navSubHeadingColorHover,
+
 			navText,
 			textTypography,
 			textSpacing,
-			navUnderlineBorderColor,
-			navUnderlineBorderColorActive,
 			iconSize,
 			iconGap,
 			iconPosition,
+			iconColor,
+			iconColorActive,
+			iconColorHover,
+
+			textColor,
+			textColorActive,
+			textColorHover,
+
 			bodyBg,
 			bodyPadding,
 			bodyBorder,
@@ -257,33 +268,46 @@ class Edit extends Component {
 							<Tab tabTitle={__('Normal')}>
 								<ColorAdvanced label={__('Background')} value={navBg} onChange={navBg => setAttributes({ navBg })} />
 								<Separator />
-								<Color label={__('Color')} value={navColor} onChange={(navColor) => setAttributes({ navColor })} />
 								<Range label={__('Padding Y')} value={navPaddingY} onChange={navPaddingY => setAttributes({ navPaddingY })} max={100} min={0} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
 								<Range label={__('Padding X')} value={navPaddingX} onChange={navPaddingX => setAttributes({ navPaddingX })} max={100} min={0} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
 								<Separator />
-								<BorderRadius label={__('Corner')} value={navBorderRadiusTabs} onChange={(navBorderRadiusTabs) => setAttributes({ navBorderRadiusTabs })} min={0} max={100} unit={['px', 'em', '%']} {/*responsive device={device} onDeviceChange={value => this.setState({ device: value })}*/} />
+								<BorderRadius label={__('Corner')} value={navBorderRadiusTabs} onChange={(navBorderRadiusTabs) => setAttributes({ navBorderRadiusTabs })} min={0} max={100} unit={['px', 'em', '%']}/>  {/*responsive device={device} onDeviceChange={value => this.setState({ device: value })}*/}
 								<Border label={__('Border')} value={navBorder} onChange={(value) => setAttributes({ navBorder: value })} min={0} max={100} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
-								<Range label={__('Gap')} value={navSpacing} onChange={navSpacing => setAttributes({ navSpacing })} max={100} min={0} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
+								<Range label={__('Gap / Spacing')} value={navSpacing} onChange={navSpacing => setAttributes({ navSpacing })} max={100} min={0} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
 								<BoxShadow label={__('Shadow')} value={navShadow} onChange={navShadow => setAttributes({ navShadow})} />
 							</Tab>
 							<Tab tabTitle={__('Active')}>
 								<ColorAdvanced label={__('Background')} value={navBgActive} onChange={navBgActive => setAttributes({ navBgActive })} />
 								<Separator />
-								<Color label={__('Color')} value={navColorActive} onChange={(navColorActive) => setAttributes({ navColorActive })} />
+								<Color label={__('Border Color')} value={navBorderColorActive} onChange={(navBorderColorActive) => setAttributes({ navBorderColorActive })} />
 								<BorderRadius label={__('Corner')} value={navBorderRadiusTabsActive} onChange={(navBorderRadiusTabsActive) => setAttributes({ navBorderRadiusTabsActive })} min={0} max={100} unit={['px', 'em', '%']} />
-								{/*<Border label={__('Border')} value={navBorderActive} onChange={(value) => setAttributes({ navBorderActive: value })} min={0} max={100} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />*/}
 								<BoxShadow label={__('Shadow')} value={navShadowActive} onChange={navShadowActive => setAttributes({ navShadowActive})} />
 							</Tab>
 							<Tab tabTitle={__('Hover')}>
 								<ColorAdvanced label={__('Background')} value={navBgHover} onChange={navBgHover => setAttributes({ navBgHover })} />
 								<Separator />
-								<Color label={__('Color')} value={navColorHover} onChange={(navColorHover) => setAttributes({ navColorHover })} />
+								<Color label={__('Border Color')} value={navBorderColorHover} onChange={(navBorderColorHover) => setAttributes({ navBorderColorHover })} />
 								<BorderRadius label={__('Corner')} value={navBorderRadiusTabsHover} onChange={(navBorderRadiusTabsHover) => setAttributes({ navBorderRadiusTabsHover })} min={0} max={100} unit={['px', 'em', '%']} />
+								<BoxShadow label={__('Shadow')} value={navShadowHover} onChange={navShadowHover => setAttributes({ navShadowHover})} />
 							</Tab>
 						</Tabs>
 					</PanelBody>
 
-					<PanelBody title={__('Nav')} initialOpen={false}>
+					<PanelBody title={__('Text Label')} initialOpen={false}>
+						<Tabs>
+							<Tab tabTitle={__('Normal')}>
+								<Typography label={__('Typography')} value={typography} onChange={(value) => setAttributes({ typography: value })} disableLineHeight device={device} onDeviceChange={value => this.setState({ device: value })} />
+								<Color label={__('Color')} value={navColor} onChange={(navColor) => setAttributes({ navColor })} />
+							</Tab>
+							<Tab tabTitle={__('Active')}>
+								<Color label={__('Color')} value={navColorActive} onChange={(navColorActive) => setAttributes({ navColorActive })} />
+							</Tab>
+							<Tab tabTitle={__('Hover')}>
+								<Color label={__('Color')} value={navColorHover} onChange={(navColorHover) => setAttributes({ navColorHover })} />
+							</Tab>
+						</Tabs>
+					</PanelBody>
+					<PanelBody title={__('Nav Icon')} initialOpen={false}>
 						<RadioAdvanced
 							label={__('Type')}
 							options={[
@@ -292,25 +316,21 @@ class Edit extends Component {
 							]}
 							value={navLayout}
 							onChange={(navLayout) => setAttributes({ navLayout })} />
-						{/*<Tabs>
-							<Tab tabTitle={__('Normal')}>
-								<Color label={__('Background')} value={navBg} onChange={(value) => setAttributes({ navBg: value })} />
-								<Border label={__('Border')} value={navBorder} onChange={(value) => setAttributes({ navBorder: value })} min={0} max={100} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
-								<BoxShadow label={__('Shadow')} value={navShadow} onChange={navShadow => setAttributes({ navShadow})} />
-							</Tab>
-							<Tab tabTitle={__('Active')}>
-								<Color label={__('Background')} value={navBgActive} onChange={(value) => setAttributes({ navBgActive: value })} />
-								<Border label={__('Border')} value={navBorderActive} onChange={(value) => setAttributes({ navBorderActive: value })} min={0} max={100} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
-								<BoxShadow label={__('Shadow')} value={navShadowActive} onChange={navShadowActive => setAttributes({ navShadowActive})} />
-							</Tab>
-						</Tabs>*/}
-						<Typography label={__('Typography')} value={typography} onChange={(value) => setAttributes({ typography: value })} disableLineHeight device={device} onDeviceChange={value => this.setState({ device: value })} />
-					</PanelBody>
-					<PanelBody title={__('Nav Icon')} initialOpen={false}>
 						<IconList
 							label={__('Icon')}
 							value={tabTitles[activeTab - 1] && tabTitles[activeTab - 1].iconName}
 							onChange={(value) => this.updateTitles({ iconName: value }, activeTab - 1)} />
+						<Tabs>
+							<Tab tabTitle={__('Normal')}>
+								<Color label={__('Color')} value={iconColor} onChange={(iconColor) => setAttributes({ iconColor })} />
+							</Tab>
+							<Tab tabTitle={__('Active')}>
+								<Color label={__('Color')} value={iconColorActive} onChange={(iconColorActive) => setAttributes({ iconColorActive })} />
+							</Tab>
+							<Tab tabTitle={__('Hover')}>
+								<Color label={__('Color')} value={iconColorHover} onChange={(iconColorHover) => setAttributes({ iconColorHover })} />
+							</Tab>
+						</Tabs>
 						<Select
 							label={__('Icon Position')}
 							options={[['left', __('Left')], ['right', __('Right')]]}
@@ -338,20 +358,40 @@ class Edit extends Component {
 							onDeviceChange={value => this.setState({ device: value })} />
 
 					</PanelBody>
-					<PanelBody title={__('Nav Content')} initialOpen={false}>
+					<PanelBody title={__('Sub Heading')} initialOpen={false}>
 						<Toggle label={__('Enable Sub Heading')} value={navSubHeading} onChange={navSubHeading => setAttributes({ navSubHeading })} />
 						{navSubHeading && (
-							<Fragment>
-								<Range label={__('Gap')} value={navSubHeadingSpacing} onChange={navSubHeadingSpacing => setAttributes({ navSubHeadingSpacing })} max={100} min={0} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
-								<Typography label={__('Text Typography')} value={navSubHeadingTypography} onChange={navSubHeadingTypography => setAttributes({ navSubHeadingTypography })} device={device} onDeviceChange={value => this.setState({ device: value })} />
-							</Fragment>
+							<Tabs>
+								<Tab tabTitle={__('Normal')}>
+									<Color label={__('Color')} value={navSubHeadingColor} onChange={(navSubHeadingColor) => setAttributes({ navSubHeadingColor })} />
+									<Range label={__('Gap')} value={navSubHeadingSpacing} onChange={navSubHeadingSpacing => setAttributes({ navSubHeadingSpacing })} max={100} min={0} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
+									<Typography label={__('Text Typography')} value={navSubHeadingTypography} onChange={navSubHeadingTypography => setAttributes({ navSubHeadingTypography })} device={device} onDeviceChange={value => this.setState({ device: value })} />
+								</Tab>
+								<Tab tabTitle={__('Active')}>
+									<Color label={__('Color')} value={navSubHeadingColorActive} onChange={(navSubHeadingColor) => setAttributes({ navSubHeadingColor })} />
+								</Tab>
+								<Tab tabTitle={__('Hover')}>
+									<Color label={__('Color')} value={navSubHeadingColorHover} onChange={(navSubHeadingColorHover) => setAttributes({ navSubHeadingColorHover })} />
+								</Tab>
+							</Tabs>
 						)}
+					</PanelBody>
+					<PanelBody title={__('Text Content')} initialOpen={false}>
 						<Toggle label={__('Enable Text')} value={navText} onChange={navText => setAttributes({ navText })} />
 						{navText && (
-							<Fragment>
-								<Range label={__('Gap')} value={textSpacing} onChange={textSpacing => setAttributes({ textSpacing })} max={100} min={0} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
-								<Typography label={__('Text Typography')} value={textTypography} onChange={textTypography => setAttributes({ textTypography })} device={device} onDeviceChange={value => this.setState({ device: value })} />
-							</Fragment>
+							<Tabs>
+								<Tab tabTitle={__('Normal')}>
+									<Color label={__('Color')} value={textColor} onChange={(textColor) => setAttributes({ textColor })} />
+									<Range label={__('Gap')} value={textSpacing} onChange={textSpacing => setAttributes({ textSpacing })} max={100} min={0} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
+									<Typography label={__('Text Typography')} value={textTypography} onChange={textTypography => setAttributes({ textTypography })} device={device} onDeviceChange={value => this.setState({ device: value })} />
+								</Tab>
+								<Tab tabTitle={__('Active')}>
+									<Color label={__('Color')} value={textColorActive} onChange={(textColorActive) => setAttributes({ textColorActive })} />
+								</Tab>
+								<Tab tabTitle={__('Hover')}>
+									<Color label={__('Color')} value={textColorHover} onChange={(textColorHover) => setAttributes({ textColorHover })} />
+								</Tab>
+							</Tabs>
 						)}
 					</PanelBody>
 					<PanelBody title={__('Body')} initialOpen={false}>

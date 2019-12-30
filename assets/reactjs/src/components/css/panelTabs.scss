@@ -1,9 +1,10 @@
 .qubely-field-tabs {
     margin-left: -16px;
     margin-right: -16px;
-    padding-bottom: 20px;
-    border-bottom: 1px solid #E9E9E9;
-
+    &:not(:last-child){
+        padding-bottom: 20px;
+        border-bottom: 1px solid #E9E9E9;
+    }
     &.qubely-has-label {
         border-top: 1px solid #E9E9E9;
         .qubely-field-tab-header {
@@ -40,4 +41,10 @@
     .qubely-field-tab-items {
         padding: 15px 15px 0;
     }
+}
+
+.qubely-field.qubely-field-typography {
+    border: 1px solid #E9E9E9;
+    padding: 12px;
+    border-radius: 5px;
 }
