@@ -240,7 +240,8 @@ You can report bugs on the [support forum here](https://wordpress.org/support/pl
 
 = 1.2.8 - 23 December, 2019 =
 Fix: Contact form block -  Recaptcha issue  
-Fix: Additional CSS class issue in backend   
+Fix: Additional CSS class in backend   
+Fix: Button Group block - Button width issue  
 
 = 1.2.7 - 23 December, 2019 =
 New: Pie Progress block  
