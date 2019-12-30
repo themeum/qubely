@@ -67,6 +67,7 @@ class Edit extends Component {
 		return tabTitles.map((title, index) => {
 			const buttonClass = `qubely-vertical-tab-item-button ${title.iconName ? 'qubely-has-icon-' + iconPosition : ''} ${(this.state.activeTab == index + 1) ? 'qubely-vertical-active' : ''}`
 			const Icon = () => (title.iconName !== 0 && title.iconName !== undefined && title.iconName.toString().trim() !== '') ? <span className={`qubely-vertical-tab-icon ${title.iconName}`} /> : ''
+			console.log(this.props.attributes)
 			return (
 				<div class='qubely-vertical-tab-item'>
 					<button onClick={(e) => this._handleTabChange(e, index)} className={buttonClass}>
