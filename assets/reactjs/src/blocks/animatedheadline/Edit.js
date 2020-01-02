@@ -123,6 +123,7 @@ class Edit extends Component {
                         <RichText
                             placeholder="Before"
                             value={titleBefore}
+                            keepPlaceholderOnFocus
                             onChange={ ( titleBefore ) => setAttributes( { titleBefore } ) }
                             className="animated-heading-before-part"
                         />
@@ -140,6 +141,7 @@ class Edit extends Component {
                         <RichText
                             placeholder="After"
                             value={titleAfter}
+                            keepPlaceholderOnFocus
                             onChange={ ( titleAfter ) => setAttributes( { titleAfter } ) }
                             className="animated-heading-after-part"
                         />
