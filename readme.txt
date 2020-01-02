@@ -240,7 +240,7 @@ You can report bugs on the [support forum here](https://wordpress.org/support/pl
 
 = 1.2.8 - 02 January, 2020 =
 Fix: Contact form block -  reCAPTCHA issue  
-Fix: Additional CSS class in Back-end    
+Fix: Additional CSS class issue in Back-end    
 Fix: Button Group block - Button width issue  
 Fix: Carousel blocks - Active item dot indicator in Back-end   
 Update: Block specific script loading in Front-end  
