@@ -89,16 +89,35 @@ jQuery(document).ready(function ($) {
     });
 
     //TAB BLOCK
-    $('.qubely-vertical-tab-title').on('click', function (event) {
-        var $qubelyVerticalTab = $(this).parent();
-        var qubelyVerticalIndex = $qubelyVerticalTab.index();
-        if ($qubelyVerticalTab.hasClass('qubely-vertical-active')) {
+    $('.qubely-vertical-tab-item-button').on('click', function (event) {
+        var $that = $(this);
+        if($that.hasClass('qubely-vertical-active')){
             return;
-        }
-        $qubelyVerticalTab.closest('.qubely-vertical-tab-nav').find('.qubely-vertical-active').removeClass('qubely-vertical-active');
-        $qubelyVerticalTab.addClass('qubely-vertical-active');
-        $qubelyVerticalTab.closest('.qubely-block-vertical-tab').find('.qubely-vertical-tab-content.qubely-vertical-active').removeClass('qubely-vertical-active');
-        $qubelyVerticalTab.closest('.qubely-block-vertical-tab').find('.qubely-vertical-tab-content').eq(qubelyVerticalIndex).addClass('qubely-vertical-active')
+        };
+
+        var $parentTab = $that.closest('.qubely-block-vertical-tab');
+        var $currentNav = $that.parent();
+        var $currentNavIndex = $currentNav.index();
+
+        // nav
+        $parentTab.find('.qubely-vertical-tab-item-button').removeClass('qubely-vertical-active');
+        $that.addClass('qubely-vertical-active');
+
+        // nav content
+
+        $parentTab.find('.qubely-vertical-tab-nav-text').slideUp(300);
+        $that.find('.qubely-vertical-tab-nav-text').slideDown(300);
+
+        // body
+        var $currentTabBody = $currentNav.closest('.qubely-vertical-tab-nav').next();
+        var $currentVerticalContent = $currentTabBody.find('.qubely-tab-content').eq($currentNavIndex);
+
+        $parentTab.find('.qubely-tab-content').removeClass('qubely-vertical-active').fadeOut(0);
+        $currentVerticalContent.addClass('qubely-vertical-active').fadeIn();
+
+
+
+
     });
 
     //Carousel BLOCK
