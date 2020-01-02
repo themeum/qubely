@@ -1,14 +1,13 @@
-const {RichText} = wp.editor
+const { RichText } = wp.editor
 const { __ } = wp.i18n
 const { InspectorControls, BlockControls } = wp.blockEditor
 const { Component, Fragment } = wp.element
-const { PanelBody, TextareaControl, SelectControl } = wp.components;
+const { PanelBody, TextareaControl, SelectControl, FormTokenField } = wp.components;
 
 class Edit extends Component {
 
     constructor(props) {
         super(props);
-        this._handleTextChange = this._handleTextChange.bind(this)
         this._getAnimationClass = this._getAnimationClass.bind(this)
         this._handleTypeChange = this._handleTypeChange.bind(this)
         this.timer = 0;
@@ -17,12 +16,8 @@ class Edit extends Component {
         }
     }
 
-    componentDidMount(){
-      this.anim  = new animatedHeading({ heading: $(this.animatedHeading)})
-    }
-
-    _handleTextChange(val) {
-        return this.props.setAttributes({ animatedText: val.split('\n') })
+    componentDidMount() {
+        this.anim = new animatedHeading({ heading: $(this.animatedHeading) })
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -32,14 +27,14 @@ class Edit extends Component {
             if (this.anim) {
                 this.anim.destroy();
                 delete this.anim;
-                if (this.timer > 0 ){
+                if (this.timer > 0) {
                     clearTimeout(this.timer);
                     this.timer = 0;
                 }
-                setTimeout(()=>{
-                    this.anim = new animatedHeading({ heading: $(this.animatedHeading)})
-                },100)
-                
+                setTimeout(() => {
+                    this.anim = new animatedHeading({ heading: $(this.animatedHeading) })
+                }, 100)
+
             }
         }
     }
@@ -84,17 +79,17 @@ class Edit extends Component {
     }
 
     render() {
-        const { className, attributes: {animatedText, titleBefore, titleAfter, animationType}, setAttributes } = this.props
-        
+        const { className, attributes: { animatedText, titleBefore, titleAfter, animationType }, setAttributes } = this.props
+
         return (
             <Fragment>
                 <InspectorControls>
                     <PanelBody title="Animated Text">
-                        <TextareaControl
-                            onChange={val => this._handleTextChange(val)}
-                            label={__('Animated Text')}
-                            value={animatedText.join('\n')}
-                            help={__('Set your desired message after successful form submission. Leave blank for default.')}
+                        <FormTokenField
+                            label={__('Animated Texts')}
+                            value={animatedText}
+                            placeholder={__("Add new text")}
+                            onChange={tokens => setAttributes({ animatedText: tokens })}
                         />
 
                         <SelectControl
@@ -112,7 +107,7 @@ class Edit extends Component {
                                 { label: __('Push'), value: 'push' },
                                 { label: __('Twist/Wave'), value: 'wave' },
                             ]}
-                            onChange={val => this._handleTypeChange(val) }
+                            onChange={val => this._handleTypeChange(val)}
                         />
 
                     </PanelBody>
@@ -124,7 +119,7 @@ class Edit extends Component {
                             placeholder="Before"
                             value={titleBefore}
                             keepPlaceholderOnFocus
-                            onChange={ ( titleBefore ) => setAttributes( { titleBefore } ) }
+                            onChange={(titleBefore) => setAttributes({ titleBefore })}
                             className="animated-heading-before-part"
                         />
 
@@ -142,7 +137,7 @@ class Edit extends Component {
                             placeholder="After"
                             value={titleAfter}
                             keepPlaceholderOnFocus
-                            onChange={ ( titleAfter ) => setAttributes( { titleAfter } ) }
+                            onChange={(titleAfter) => setAttributes({ titleAfter })}
                             className="animated-heading-after-part"
                         />
                     </h2>

@@ -20,7 +20,7 @@ registerBlockType( 'qubely/animatedheadline', {
         uniqueId: { type: 'string', default: '' },
         ...globalAttributes,  // Global Settings
         spacer: { type: 'object', default:{spaceTop: { md: '10', unit: 'px'}, spaceBottom: { md: '10', unit: 'px'}}, style: [{ selector: '{{QUBELY}}' }] },
-        animatedText: { type: 'object', default: ['Apple', 'Banana', 'Orange'] },
+        animatedText: { type: 'array', default: ['Apple', 'Banana', 'Orange'] },
         animationType: { type: 'string', default: 'text-clip' },
         titleBefore: {
             type: 'string',
