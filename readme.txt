@@ -245,6 +245,7 @@ Fix: Button Group block - Button width issue
 Fix: Carousel blocks - Active item dot indicator in Backend  
 Update: Block specific script loading in Front-end  
 
+
 = 1.2.7 - 23 December, 2019 =
 New: Pie Progress block  
 New: Predesigned block template feature  
