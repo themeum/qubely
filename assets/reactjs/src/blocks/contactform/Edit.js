@@ -115,7 +115,7 @@ class Edit extends Component {
             hideTablet,
             hideMobile,
             globalCss } = attributes;
-            
+
         if (uniqueId) { CssGenerator(this.props.attributes, 'contactform', uniqueId); }
 
         return (
@@ -362,6 +362,9 @@ class Edit extends Component {
                                             onChange={val => setAttributes({ reCaptchaSecretKey: val })}
                                             placeholder={__('Enter Google Secret Key')}
                                         />
+                                        <span className="qubely-recaptcha-help">
+                                            Get reCAPTCHA(v2) keys from <a href='www.google.com/recaptcha/admin/' >{__('www.google.com/recaptcha/admin/')} </a>
+                                        </span>
                                     </div>
                                 }
                             </Tab>
