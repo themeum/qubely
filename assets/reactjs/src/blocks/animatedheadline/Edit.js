@@ -2,7 +2,29 @@ const { RichText } = wp.editor
 const { __ } = wp.i18n
 const { InspectorControls, BlockControls } = wp.blockEditor
 const { Component, Fragment } = wp.element
-const { PanelBody, TextareaControl, SelectControl, FormTokenField } = wp.components;
+const { PanelBody, SelectControl, FormTokenField } = wp.components;
+const {
+    Color,
+    ColorAdvanced,
+    Padding,
+    BoxShadow,
+    Tabs,
+    Tab,
+    Border,
+    BorderRadius,
+    Background,
+    gloalSettings: {
+        globalSettingsPanel,
+        animationSettings,
+        interactionSettings
+    },
+    Inline: {
+        InlineToolbar
+    },
+    CssGenerator: {
+        CssGenerator
+    }
+} = wp.qubelyComponents
 
 class Edit extends Component {
 
@@ -12,11 +34,18 @@ class Edit extends Component {
         this._handleTypeChange = this._handleTypeChange.bind(this)
         this.timer = 0;
         this.state = {
+            device: 'md',
             animationClass: this._getAnimationClass(this.props.attributes.animationType)
         }
     }
-
     componentDidMount() {
+        const { setAttributes, clientId, attributes: { uniqueId } } = this.props
+        const _client = clientId.substr(0, 6)
+        if (!uniqueId) {
+            setAttributes({ uniqueId: _client });
+        } else if (uniqueId && uniqueId != _client) {
+            setAttributes({ uniqueId: _client });
+        }
         this.anim = new animatedHeading({ heading: $(this.animatedHeading) })
     }
 
@@ -79,7 +108,30 @@ class Edit extends Component {
     }
 
     render() {
-        const { className, attributes: { animatedText, titleBefore, titleAfter, animationType }, setAttributes } = this.props
+        const {
+            className,
+            setAttributes,
+            attributes: {
+                uniqueId,
+                animatedText,
+                titleBefore,
+                titleAfter,
+                animationType,
+
+                bgColor,
+                bgColorHover,
+                bgShadow,
+                bgShadowHover,
+                bgBorderColorHover,
+                padding,
+                borderRadius,
+                border,
+            }
+        } = this.props
+
+        const { device } = this.state
+
+        if (uniqueId) { CssGenerator(this.props.attributes, 'animatedheadline', uniqueId); }
 
         return (
             <Fragment>
@@ -109,11 +161,29 @@ class Edit extends Component {
                             ]}
                             onChange={val => this._handleTypeChange(val)}
                         />
+                    </PanelBody>
+
+                    <PanelBody title={__('Design')} initialOpen={false}>
+                        <ColorAdvanced label={__('Background')} value={bgColor} onChange={val => setAttributes({ bgColor: val })} />
+                        <Padding
+                            label={__('Padding')}
+                            value={padding}
+                            min={0}
+                            max={300}
+                            responsive
+                            device={device}
+                            unit={['px', 'em', '%']}
+                            onChange={val => setAttributes({ padding: val })}
+                            onDeviceChange={value => this.setState({ device: value })}
+                        />
+                        <Border label={__('Border')} value={border} onChange={val => setAttributes({ border: val })} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
+                        <BoxShadow label={__('Box-Shadow')} value={bgShadow} onChange={(value) => setAttributes({ bgShadow: value })} />
+                        <BorderRadius label={__('Radius')} value={borderRadius} onChange={(value) => setAttributes({ borderRadius: value })} min={0} max={100} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
 
                     </PanelBody>
                 </InspectorControls>
 
-                <div className={`qubely-addon-animated-heading ${className}`} >
+                <div className={`qubely-block-${uniqueId} qubely-addon-animated-heading ${className}`} >
                     <h2 className={`animated-heading-text ${this.state.animationClass}`} ref={el => this.animatedHeading = el}>
                         <RichText
                             placeholder="Before"

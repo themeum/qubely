@@ -1,13 +1,12 @@
 import './style.scss'
 import Edit from './Edit'
 import Save from './Save'
+import { attributes } from './attributes';
 
 const { registerBlockType } = wp.blocks
 const { __ } = wp.i18n
-const { gloalSettings: { globalAttributes } } = wp.qubelyComponents
 
-
-registerBlockType( 'qubely/animatedheadline', {
+registerBlockType('qubely/animatedheadline', {
     title: __('Animated Headline'),
     description: '', //@TODO: _QUBELY Description
     category: 'qubely',
@@ -16,21 +15,7 @@ registerBlockType( 'qubely/animatedheadline', {
     example: {
         attributes: {},
     },
-    attributes: {
-        uniqueId: { type: 'string', default: '' },
-        ...globalAttributes,  // Global Settings
-        spacer: { type: 'object', default:{spaceTop: { md: '10', unit: 'px'}, spaceBottom: { md: '10', unit: 'px'}}, style: [{ selector: '{{QUBELY}}' }] },
-        animatedText: { type: 'array', default: ['Apple', 'Banana', 'Orange'] },
-        animationType: { type: 'string', default: 'text-clip' },
-        titleBefore: {
-            type: 'string',
-            default: __('Before Text')
-        },
-        titleAfter: {
-            type: 'string',
-            default: __('After Text')
-        }
-    },
+    attributes,
     edit: Edit,
     save: Save
 })
