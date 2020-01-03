@@ -51,6 +51,7 @@ class Edit extends Component {
             setAttributes,
             attributes: {
                 uniqueId,
+                className,
                 progress,
                 title,
                 labelTypography,
@@ -151,7 +152,7 @@ class Edit extends Component {
 
                 {globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
-                <div className={`qubely-block-${uniqueId}`}>
+                <div className={`qubely-block-${uniqueId}${className ? ` ${className}` : ''}`}>
                     <div className="qubely-block-progress-bar" onContextMenu={event => handleContextMenu(event, this.refs.qubelyContextMenu)}>
                         {labelPosition == 'outside' && labelsContent}
                         <div className="qubely-progress">

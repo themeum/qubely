@@ -120,6 +120,7 @@ class Edit extends Component {
 	render() {
 		const {
 			uniqueId,
+			className,
 			tabs,
 			tabTitles,
 			tabStyle,
@@ -335,7 +336,7 @@ class Edit extends Component {
 
                 {globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
-				<div className={`qubely-block-${uniqueId}`}>
+				<div className={`qubely-block-${uniqueId}${className ? ` ${className}` : ''}`}>
 					<div className={`qubely-block-tab qubely-tab-style-${tabStyle}`}>
 						<div className={`qubely-tab-nav qubely-alignment-${navAlignment}`}>
 							{this.renderTabTitles()}

@@ -24,8 +24,59 @@ class Edit extends Component {
     }
 
     render() {
-        const { uniqueId, parentClientId, buttonGroup, fillType, buttonSize, buttonWidthType, buttonWidth, buttonPadding, typography, textField, url, enableAlignment, alignment, buttonBorderRadius, iconName, iconPosition, iconSize, iconGap, buttonBorder, borderHoverColor, buttonColor, buttonColor2, buttonHoverColor, buttonHoverColor2, bgColor, bgHoverColor, buttonShadow, buttonHoverShadow, animation, interaction, enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss } = this.props.attributes
-        const { name, clientId, attributes, removeBlock, updateBlockAttributes, buttonGroupAttributes, setAttributes, isSelected } = this.props
+
+        const {
+            name,
+            clientId,
+            attributes,
+            removeBlock,
+            updateBlockAttributes,
+            buttonGroupAttributes,
+            setAttributes,
+            isSelected,
+            attributes: {
+                uniqueId,
+                className,
+                parentClientId,
+                buttonGroup,
+                disableFullWidth,
+                fillType,
+                buttonSize,
+                buttonWidthType,
+                buttonWidth,
+                buttonPadding,
+                typography,
+                textField,
+                url,
+                enableAlignment,
+                alignment,
+                buttonBorderRadius,
+                iconName,
+                iconPosition,
+                iconSize,
+                iconGap,
+                buttonBorder,
+                borderHoverColor,
+                buttonColor,
+                buttonColor2,
+                buttonHoverColor,
+                buttonHoverColor2,
+                bgColor,
+                bgHoverColor,
+                buttonShadow,
+                buttonHoverShadow,
+                animation,
+                interaction,
+                enablePosition,
+                selectPosition,
+                positionXaxis,
+                positionYaxis,
+                globalZindex,
+                hideTablet,
+                hideMobile,
+                globalCss
+            }
+        } = this.props
         const { device } = this.state
 
         if (uniqueId) { CssGenerator(this.props.attributes, 'button', uniqueId); }
@@ -74,7 +125,7 @@ class Edit extends Component {
                             label={__('Button Width')}
                             options={[
                                 { label: __('Auto'), value: 'auto', title: __('Auto') },
-                                { label: __('Full'), value: 'block', title: __('Full') },
+                                ...(!disableFullWidth && [{ label: __('Full'), value: 'block', title: __('Full') }]),
                                 { label: __('Fixed'), value: 'fixed', title: __('Fixed') }
                             ]}
                             value={buttonWidthType}
@@ -85,8 +136,8 @@ class Edit extends Component {
                                 value={buttonWidth}
                                 onChange={(value) => setAttributes({ buttonWidth: value })}
                                 unit={['px', 'em', '%']}
-                                min={30}
-                                max={800}
+                                min={buttonWidth.unit === '%' ? 5 : 30}
+                                max={buttonWidth.unit === '%' ? 100 : 800}
                                 responsive
                                 device={device}
                                 onDeviceChange={value => this.setState({ device: value })} />
@@ -188,7 +239,7 @@ class Edit extends Component {
                 {globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
 
-                <div className={`qubely-block-${uniqueId}`}>
+                <div className={`qubely-block-${uniqueId}${className ? ` ${className}` : ''}`}>
                     <div className="qubely-block-btn-wrapper" onContextMenu={event => handleContextMenu(event, this.refs.qubelyContextMenu)}>
                         <div className={`qubely-block-btn`}>
                             <span className={`qubely-block-btn-anchor is-${buttonSize}`}>

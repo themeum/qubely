@@ -170,6 +170,7 @@ class Edit extends Component {
             setAttributes,
             attributes: {
                 uniqueId,
+                className,
                 alignment,
                 layout,
                 listType,
@@ -374,7 +375,7 @@ class Edit extends Component {
 
                 {globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
-                <div className={`qubely-block-${uniqueId}`}>
+                <div className={`qubely-block-${uniqueId}${className ? ` ${className}` : ''}`}>
                     <div className={`qubely-block-advanced-list qubely-alignment-${alignment}`} onContextMenu={event => handleContextMenu(event, this.refs.qubelyContextMenu)}>
                         {this.renderListItems()}
 

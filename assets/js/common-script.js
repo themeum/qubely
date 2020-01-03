@@ -14,7 +14,7 @@ jQuery(document).ready(function ($) {
 
     // Set Preview CSS
     const cussrent_url = window.location.href;
-    if( cussrent_url.includes('preview=true') ) {
+    if (cussrent_url.includes('preview=true')) {
         let cssInline = document.createElement('style');
         cssInline.type = 'text/css';
         cssInline.id = 'qubely-block-js-preview';
@@ -226,7 +226,7 @@ jQuery(document).ready(function ($) {
     }
 
 
-    //FORM BLOCK
+    //CONTACT FORM BLOCK
     $('.qubely-block-contact-form form.qubely-form:not(.qubely-form-ready)').each(function () {
         const $form = $(this);
         $form.addClass('qubely-form-ready');
@@ -234,27 +234,13 @@ jQuery(document).ready(function ($) {
             if (e.which === 13) { e.preventDefault(); return false; };
         });
         checkFormValidation($form, true); //add validation
-        const reCaptcha = $form.find('input[name="recaptcha"]').val();
-        const reCaptchaSiteKey = $form.find('input[name="recaptcha-site-key"]').val();
-        if (reCaptcha == 'true') {
-            const apiURL = 'https://www.google.com/recaptcha/api.js?onload=initGoogleReChaptcha&render=explicit';
-            loadScriptAsync(apiURL).then(() => {
-                window.initGoogleReChaptcha = () => {
-                    const qubelyContactForms = document.querySelectorAll('.qubely-block-form form .qubely-google-recaptcha');
-                    qubelyContactForms.forEach((form) => {
-                        grecaptcha.render(form, {
-                            sitekey: reCaptchaSiteKey
-                        });
-                    });
-                };
-            });
-        }
+    
         //FORM SUBMIT EVENT
         $form.submit((e) => {
             e.preventDefault();
             let formData = $form.serializeArray();
             const isRequired = checkFormValidation($form); //check validation
-            if( !isRequired ) {
+            if (!isRequired) {
                 formData.push({ name: 'captcha', value: (typeof grecaptcha !== "undefined") ? grecaptcha.getResponse() : undefined });
                 jQuery.ajax({
                     url: qubely_urls.ajax + '?action=qubely_send_form_data',
@@ -267,8 +253,8 @@ jQuery(document).ready(function ($) {
                     success: (response) => {
                         $form.find('button[type="submit"]').removeClass('disable').attr('disabled', false);
                         $form.find(".qubely-form-message").html(`<div class="qubely-alert qubely-alert-success">${response.data.msg}</div>`);
-                        setTimeout( () => $form.find('.qubely-form-message').html(''), 4000);
-                        if( response.data.status == 1 ) $form.trigger("reset");
+                        setTimeout(() => $form.find('.qubely-form-message').html(''), 4000);
+                        if (response.data.status == 1) $form.trigger("reset");
                     },
                     error: (jqxhr, textStatus, error) => {
                         $form.find('button[type="submit"]').removeClass('disable').attr('disabled', false);
@@ -279,12 +265,33 @@ jQuery(document).ready(function ($) {
         });
     });
 
+    //CONTACT FORM RECAPTCHA
+    const apiURL = 'https://www.google.com/recaptcha/api.js?onload=initGoogleReChaptcha&render=explicit';
+    loadScriptAsync(apiURL).then(() => {
+        window.initGoogleReChaptcha = () => {
+            $('form.qubely-form').each(function () {
+                const $form = $(this);
+                const reCaptcha = $form.find('input[name="recaptcha"]').val();
+                const reCaptchaSiteKey = $form.find('input[name="recaptcha-site-key"]').val();
+                if (reCaptcha == 'true') {
+                    const qubelyRecaptcha = this.querySelector('form .qubely-google-recaptcha');
+                    grecaptcha.render(qubelyRecaptcha, {
+                        sitekey: reCaptchaSiteKey
+                    });
+                }
+            });
+
+        };
+    });
+
+
+
     //FORM VALIDATION
     function checkFormValidation($form) {
         const fieldErrorMessage = atob($form.find('input[name="field-error-message"]').val());
         let onChange = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
         let isRequired = false;
-        $form.find(' input[type=text], input[type=email], input[type=radio], input[type=checkbox], textarea, select').each( function () {
+        $form.find(' input[type=text], input[type=email], input[type=radio], input[type=checkbox], textarea, select').each(function () {
             if (onChange === true) {
                 $(this).on('change keyup', function () {
                     isRequired = checkFields($(this), fieldErrorMessage);
@@ -305,17 +312,17 @@ jQuery(document).ready(function ($) {
         const hasNoError = $parent.find("p.qubely-form-required-field").length === 0;
 
         if (typeof $field.prop('required') !== 'undefined') {
-            if( $field.attr('type') === 'email' ) {
-                if ( !validateEmail($field.val()) ) {
-                    if( hasNoError ) {
-                        $parent.append( fieldErrorMessage );
+            if ($field.attr('type') === 'email') {
+                if (!validateEmail($field.val())) {
+                    if (hasNoError) {
+                        $parent.append(fieldErrorMessage);
                     }
                     return isRequired = true;
                 }
             }
             if ($field.val().length === 0) {
-                if( hasNoError ) {
-                    $parent.append( fieldErrorMessage );
+                if (hasNoError) {
+                    $parent.append(fieldErrorMessage);
                 }
                 isRequired = true;
             }
@@ -326,10 +333,10 @@ jQuery(document).ready(function ($) {
         }
         if ($field.attr('type') === 'radio' || $field.attr('type') === 'checkbox') {
             const parentElem = $field.parent().parent();
-            if( parentElem.attr('data-required') == 'true' ) {
-                if ( parentElem.find( 'input:checked' ).length === 0 ) {
-                    if( hasNoError ) {
-                        $parent.append( fieldErrorMessage );
+            if (parentElem.attr('data-required') == 'true') {
+                if (parentElem.find('input:checked').length === 0) {
+                    if (hasNoError) {
+                        $parent.append(fieldErrorMessage);
                     }
                     isRequired = true;
                 } else {
@@ -537,7 +544,7 @@ function loadScriptAsync(src) {
 
 
     // check if element in viewport
-     function isElementInViewport (el) {
+    function isElementInViewport(el) {
         var rect = el.getBoundingClientRect();
         return (
             rect.top >= 0 &&
@@ -548,7 +555,7 @@ function loadScriptAsync(src) {
     }
 
 
-    $(document).on('ready', function() {
+    $(document).on('ready', function () {
 
         $('.qubely-block-pie-progress').each(function () {
             var $that = $(this);
@@ -559,15 +566,15 @@ function loadScriptAsync(src) {
             var progressCount = $that.find('.qubely-pie-counter');
             var number = parseInt(circle.data('percent'));
 
-            if(parseInt(duration) > 0){
+            if (parseInt(duration) > 0) {
                 progressCount.html(0);
             }
 
             var pieEvent = function () {
-                if(isElementInViewport($that.find('svg')[0])){
+                if (isElementInViewport($that.find('svg')[0])) {
                     circle.css('transition', transition)
                     circle.attr('stroke-dashoffset', pieOffset);
-                    if(parseInt(duration) > 0){
+                    if (parseInt(duration) > 0) {
                         progressCounter();
                     }
                     window.removeEventListener('scroll', pieEvent, true)
@@ -579,8 +586,8 @@ function loadScriptAsync(src) {
                 var time = parseInt(duration);
                 var interval = Math.ceil(time / number);
 
-                var timer = function() {
-                    if(current >= number){
+                var timer = function () {
+                    if (current >= number) {
                         intvlId && clearInterval(intvlId)
                     }
                     progressCount.html(current)

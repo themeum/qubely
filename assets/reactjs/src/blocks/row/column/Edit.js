@@ -278,6 +278,7 @@ class Edit extends Component {
         const {
             attributes: {
                 uniqueId,
+                className,
                 colWidth,
                 padding,
                 margin,
@@ -417,7 +418,7 @@ class Edit extends Component {
                         onResizeStop={(event, direction, elt, delta) => this.onResizeStop(event, direction, elt, delta)}
                         onResizeStart={(event, direction, elt) => this.onResizeStartEvent(event, direction, elt)} >
 
-                        <div className={`qubely-column qubely-column-admin qubely-block-${uniqueId}`} data-column-width={this.props.attributes.colWidth.md}>
+                        <div className={`qubely-column qubely-column-admin qubely-block-${uniqueId}${className ? ` ${className}` : ''}`} data-column-width={this.props.attributes.colWidth.md}>
                             <div className={`qubely-column-inner`}>
                                 <InnerBlocks
                                     templateLock={false}

@@ -85,6 +85,7 @@ class Edit extends Component {
         const { name, clientId, attributes, setAttributes, isSelected } = this.props;
         const {
             uniqueId,
+            className,
             alignment,
             socialIcons,
             iconLabel,
@@ -262,7 +263,7 @@ class Edit extends Component {
 
                 {globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
-                <div className={`qubely-block-${uniqueId}`}>
+                <div className={`qubely-block-${uniqueId}${className ? ` ${className}` : ''}`}>
                     <div
                         onContextMenu={event => handleContextMenu(event, this.refs.qubelyContextMenu)}
                         className={`qubely-block-social-icons qubely-layout-${layout} qubely-style-${useDefaultStyle ? 'default' : 'custom'}`} >
