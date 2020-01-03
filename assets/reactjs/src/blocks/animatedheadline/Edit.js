@@ -119,7 +119,8 @@ class Edit extends Component {
                 animationType,
 
                 bgColor,
-                bgColorHover,
+                color,
+                animatedTextColor,
                 bgShadow,
                 bgShadowHover,
                 bgBorderColorHover,
@@ -144,6 +145,8 @@ class Edit extends Component {
                             onChange={tokens => setAttributes({ animatedText: tokens })}
                         />
 
+                        <Color label={__('Aniamated-text Color')} value={animatedTextColor} onChange={val => setAttributes({ animatedTextColor: val })} />
+
                         <SelectControl
                             label={__('Animation Type')}
                             value={animationType}
@@ -164,6 +167,7 @@ class Edit extends Component {
                     </PanelBody>
 
                     <PanelBody title={__('Design')} initialOpen={false}>
+                        <Color label={__('Color')} value={color} onChange={val => setAttributes({ color: val })} />
                         <ColorAdvanced label={__('Background')} value={bgColor} onChange={val => setAttributes({ bgColor: val })} />
                         <Padding
                             label={__('Padding')}

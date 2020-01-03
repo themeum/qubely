@@ -21,6 +21,24 @@ export const attributes = {
         type: 'string',
         default: 'After Text'
     },
+    color: {
+        type: 'string', default: '#fff',
+        style: [
+            {
+
+                selector: '{{QUBELY}}.qubely-addon-animated-heading { color:{{color}}; }'
+            }
+        ]
+    },
+    animatedTextColor: {
+        type: 'string', default: '#26c4f1',
+        style: [
+            {
+
+                selector: '{{QUBELY}}.qubely-addon-animated-heading .animated-text-words-wrapper{ color:{{animatedTextColor}}; }'
+            }
+        ]
+    },
     bgColor: {
         type: 'object',
         default: {
