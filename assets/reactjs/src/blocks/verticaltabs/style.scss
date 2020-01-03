@@ -57,6 +57,7 @@
         }
         &.qubely-vertical-tab-item-button{
           display: flex;
+          background: transparent;
           &.qubely-has-icon-right{
             justify-content: space-between;
           }

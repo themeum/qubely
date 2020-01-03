@@ -66,7 +66,7 @@ class Edit extends Component {
 	renderTabTitles = () => {
 		const { tabTitles, iconPosition, navText, navLayout, navSubHeading, iconType, enableIcon, navTextAlignment } = this.props.attributes
 		return tabTitles.map((title, index) => {
-			const buttonClass = `qubely-vertical-tab-item-button ${enableIcon ? 'qubely-has-icon-' + iconPosition : ''} ${(this.state.activeTab == index + 1) ? 'qubely-vertical-active' : ''}`
+			const buttonClass = `qubely-vertical-tab-item-button ${enableIcon ? 'qubely-has-icon-' + iconPosition : ''}`
 			const hasIcon = title.iconName !== 0 && title.iconName !== undefined && title.iconName.toString().trim() !== ''
 			const IconImage = () => {
 				return <div className={'qubely-icon-image qubely-vertical-tab-icon ' + ((title.image !== undefined && title.image.url) ? '' : 'qubely-vertical-placeholder')}>
@@ -88,7 +88,7 @@ class Edit extends Component {
 			const Icon = () => enableIcon ? (iconType === 1 ? <IconFont /> : <IconImage />) : ''
 
 			return (
-				<div class='qubely-vertical-tab-item'>
+				<div class={`qubely-vertical-tab-item ${(this.state.activeTab == index + 1) ? 'qubely-vertical-active' : ''}`}>
 					<button onClick={(e) => this._handleTabChange(e, index)} className={buttonClass}>
 						{
 							(navLayout === 2 && iconPosition === 'left') && <Icon />
@@ -210,6 +210,9 @@ class Edit extends Component {
 			navShadow,
 			navShadowActive,
 			navShadowHover,
+			navShadow2,
+			navShadowActive2,
+			navShadowHover2,
 
 			navSubHeading,
 			navSubHeadingTypography,
@@ -235,11 +238,11 @@ class Edit extends Component {
 			bodyBg,
 			bodyPadding,
 			bodyBorder,
+			bodyShadow,
 			bodyBorderRadius,
 			// bodySeparatorHeight,
 			// bodySeparatorColor,
 			bodySpacing,
-			bodyShadow,
 
 			//animation
 			animation,
@@ -297,6 +300,7 @@ class Edit extends Component {
 								<Border label={__('Border')} value={navBorder} onChange={(value) => setAttributes({ navBorder: value })} min={0} max={100} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
 								<Range label={__('Gap / Spacing')} value={navSpacing} onChange={navSpacing => setAttributes({ navSpacing })} max={100} min={0} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
 								<BoxShadow label={__('Shadow')} value={navShadow} onChange={navShadow => setAttributes({ navShadow})} />
+								<BoxShadow label={__('Shadow 2')} value={navShadow2} onChange={navShadow2 => setAttributes({ navShadow2})} />
 							</Tab>
 							<Tab tabTitle={__('Active')}>
 								<ColorAdvanced label={__('Background')} value={navBgActive} onChange={navBgActive => setAttributes({ navBgActive })} />
@@ -304,6 +308,7 @@ class Edit extends Component {
 								<Color label={__('Border Color')} value={navBorderColorActive} onChange={(navBorderColorActive) => setAttributes({ navBorderColorActive })} />
 								<BorderRadius label={__('Corner')} value={navBorderRadiusTabsActive} onChange={(navBorderRadiusTabsActive) => setAttributes({ navBorderRadiusTabsActive })} min={0} max={100} unit={['px', 'em', '%']} />
 								<BoxShadow label={__('Shadow')} value={navShadowActive} onChange={navShadowActive => setAttributes({ navShadowActive})} />
+								<BoxShadow label={__('Shadow 2')} value={navShadowActive2} onChange={navShadowActive2 => setAttributes({ navShadowActive2})} />
 							</Tab>
 							<Tab tabTitle={__('Hover')}>
 								<ColorAdvanced label={__('Background')} value={navBgHover} onChange={navBgHover => setAttributes({ navBgHover })} />
@@ -311,6 +316,7 @@ class Edit extends Component {
 								<Color label={__('Border Color')} value={navBorderColorHover} onChange={(navBorderColorHover) => setAttributes({ navBorderColorHover })} />
 								<BorderRadius label={__('Corner')} value={navBorderRadiusTabsHover} onChange={(navBorderRadiusTabsHover) => setAttributes({ navBorderRadiusTabsHover })} min={0} max={100} unit={['px', 'em', '%']} />
 								<BoxShadow label={__('Shadow')} value={navShadowHover} onChange={navShadowHover => setAttributes({ navShadowHover})} />
+								<BoxShadow label={__('Shadow 2')} value={navShadowHover2} onChange={navShadowHover2 => setAttributes({ navShadowHover2})} />
 							</Tab>
 						</Tabs>
 					</PanelBody>

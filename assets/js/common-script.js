@@ -91,20 +91,19 @@ jQuery(document).ready(function ($) {
     //TAB BLOCK
     $('.qubely-vertical-tab-item-button').on('click', function (event) {
         var $that = $(this);
-        if($that.hasClass('qubely-vertical-active')){
+        var $currentNav = $that.parent();
+        if($currentNav.hasClass('qubely-vertical-active')){
             return;
         };
 
         var $parentTab = $that.closest('.qubely-block-vertical-tab');
-        var $currentNav = $that.parent();
         var $currentNavIndex = $currentNav.index();
 
         // nav
-        $parentTab.find('.qubely-vertical-tab-item-button').removeClass('qubely-vertical-active');
-        $that.addClass('qubely-vertical-active');
+        $parentTab.find('.qubely-vertical-tab-item').removeClass('qubely-vertical-active');
+        $currentNav.addClass('qubely-vertical-active');
 
         // nav content
-
         $parentTab.find('.qubely-vertical-tab-nav-text').slideUp(300);
         $that.find('.qubely-vertical-tab-nav-text').slideDown(300);
 
@@ -114,9 +113,6 @@ jQuery(document).ready(function ($) {
 
         $parentTab.find('.qubely-tab-content').removeClass('qubely-vertical-active').fadeOut(0);
         $currentVerticalContent.addClass('qubely-vertical-active').fadeIn();
-
-
-
 
     });
 

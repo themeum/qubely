@@ -112,16 +112,16 @@ registerBlockType('qubely/verticaltabs', {
         //Color
         navColor: { type: 'string', default: '#999999', style: [{ selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-item-button { color:{{navColor}}; }' }] },
         iconColor: { type: 'string', default: '#999999', style: [{ selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-item-button .qubely-vertical-tab-icon { color:{{iconColor}}; }' }] },
-        iconColorActive: { type: 'string', default: '', style: [{ selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-item-button.qubely-vertical-active .qubely-vertical-tab-icon { color:{{iconColorActive}}; }' }] },
-        iconColorHover: { type: 'string', default: '', style: [{ selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-item-button:hover .qubely-vertical-tab-icon, {{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-item-button.qubely-vertical-active:hover .qubely-vertical-tab-icon { color:{{iconColorHover}}; }' }] },
+        iconColorActive: { type: 'string', default: '', style: [{ selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-item.qubely-vertical-active .qubely-vertical-tab-item-button .qubely-vertical-tab-icon { color:{{iconColorActive}}; }' }] },
+        iconColorHover: { type: 'string', default: '', style: [{ selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-item-button:hover .qubely-vertical-tab-icon, {{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-item.qubely-vertical-active .qubely-vertical-tab-item-button:hover .qubely-vertical-tab-icon { color:{{iconColorHover}}; }' }] },
 
         navSubHeadingColor: { type: 'string', default: '#999999', style: [{ selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-item-button .qubely-vertical-tab-nav-sub-heading{ color:{{navSubHeadingColor}}; }' }] },
-        navSubHeadingColorActive: { type: 'string', default: '', style: [{ selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-item-button.qubely-vertical-active .qubely-vertical-tab-nav-sub-heading{ color:{{navSubHeadingColorActive}}; }' }] },
-        navSubHeadingColorHover: { type: 'string', default: '', style: [{ selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-item-button:hover .qubely-vertical-tab-nav-sub-heading, {{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-item-button.qubely-vertical-active:hover .qubely-vertical-tab-nav-sub-heading{ color:{{navSubHeadingColorHover}}; }' }] },
+        navSubHeadingColorActive: { type: 'string', default: '', style: [{ selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-item.qubely-vertical-active .qubely-vertical-tab-item-button .qubely-vertical-tab-nav-sub-heading{ color:{{navSubHeadingColorActive}}; }' }] },
+        navSubHeadingColorHover: { type: 'string', default: '', style: [{ selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-item-button:hover .qubely-vertical-tab-nav-sub-heading, {{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-item.qubely-vertical-active .qubely-vertical-tab-item-button:hover .qubely-vertical-tab-nav-sub-heading{ color:{{navSubHeadingColorHover}}; }' }] },
 
         textColor: { type: 'string', default: '#999999', style: [{ selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-item-button .qubely-vertical-tab-nav-text{ color:{{textColor}}; }' }] },
-        textColorActive: { type: 'string', default: '', style: [{ selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-item-button.qubely-vertical-active .qubely-vertical-tab-nav-text{ color:{{textColorActive}}; }' }] },
-        TextColorHover: { type: 'string', default: '', style: [{ selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-item-button:hover .qubely-vertical-tab-nav-text, {{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-item-button.qubely-vertical-active:hover .qubely-vertical-tab-nav-text{ color:{{TextColorHover}}; }' }] },
+        textColorActive: { type: 'string', default: '', style: [{ selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-item.qubely-vertical-active .qubely-vertical-tab-item-button .qubely-vertical-tab-nav-text{ color:{{textColorActive}}; }' }] },
+        TextColorHover: { type: 'string', default: '', style: [{ selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-item-button:hover .qubely-vertical-tab-nav-text, {{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-item.qubely-vertical-active .qubely-vertical-tab-item-button:hover .qubely-vertical-tab-nav-text{ color:{{TextColorHover}}; }' }] },
 
 
         navBg: {
@@ -141,14 +141,14 @@ registerBlockType('qubely/verticaltabs', {
             },
             style: [
                 {
-                    selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-item-button'
+                    selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-item'
                 }
             ]
         },
 
-        navColorActive: { type: 'string', default: '', style: [{ selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-item-button.qubely-vertical-active { color:{{navColorActive}}; }' }] },
-        navBorderColorActive: { type: 'string', default: '', style: [{ selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-item-button.qubely-vertical-active { border-color:{{navBorderColorActive}}; }' }] },
-        navBorderColorHover: { type: 'string', default: '', style: [{ selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-item-button.qubely-vertical-active:hover, {{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-item-button:hover { border-color:{{navBorderColorHover}}; }' }] },
+        navColorActive: { type: 'string', default: '', style: [{ selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-item.qubely-vertical-active .qubely-vertical-tab-item-button { color:{{navColorActive}}; }' }] },
+        navBorderColorActive: { type: 'string', default: '', style: [{ selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-item.qubely-vertical-active .qubely-vertical-tab-item-button { border-color:{{navBorderColorActive}}; }' }] },
+        navBorderColorHover: { type: 'string', default: '', style: [{ selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-item.qubely-vertical-active .qubely-vertical-tab-item-button:hover, {{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-item-button:hover { border-color:{{navBorderColorHover}}; }' }] },
 
         navBgActive: {
             type: 'object',
@@ -167,7 +167,7 @@ registerBlockType('qubely/verticaltabs', {
             },
             style: [
                 {
-                    selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-item-button.qubely-vertical-active'
+                    selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-item.qubely-vertical-active .qubely-vertical-tab-item-button'
                 }
             ]
         },
@@ -176,7 +176,7 @@ registerBlockType('qubely/verticaltabs', {
             type: 'string',
             default: '',
             style: [{
-                selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-item-button.qubely-vertical-active:hover, {{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-item-button:hover { color:{{navColorActive}}; }'
+                selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-item.qubely-vertical-active .qubely-vertical-tab-item-button:hover, {{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-item-button:hover { color:{{navColorActive}}; }'
             }]
         },
 
@@ -197,7 +197,7 @@ registerBlockType('qubely/verticaltabs', {
             },
             style: [
                 {
-                    selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-item-button:hover, {{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-item-button.qubely-vertical-active:hover'
+                    selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-item-button:hover, {{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-item.qubely-vertical-active .qubely-vertical-tab-item-button:hover'
                 }
             ]
         },
@@ -221,46 +221,7 @@ registerBlockType('qubely/verticaltabs', {
                 }
             ]
         },
-        // navBorderActive: {
-        //     type: 'object',
-        //     default: {
-        //         widthType: 'global',
-        //         unit: 'px',
-        //         openBorder: 0,
-        //         type: '',
-        //         global: {
-        //             md: '1'
-        //         },
-        //         color: '#566372',
-        //     },
-        //     style: [
-        //         {
-        //             selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-item .qubely-vertical-tab-item-button.qubely-vertical-active'
-        //         }
-        //     ]
-        // },
-        // navUnderlineBorderColor: {
-        //     type: 'string', default: '',
-        //     style: [
-        //         {
-        //             condition: [
-        //                 { key: 'tabStyle', relation: '==', value: 'underline' }
-        //             ],
-        //             selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-nav .qubely-vertical-tab-item-button .qubely-vertical-tab-title { border-bottom-color:{{navUnderlineBorderColor}}; }'
-        //         }
-        //     ]
-        // },
-        // navUnderlineBorderColorActive: {
-        //     type: 'string', default: '#2184F9',
-        //     style: [
-        //         {
-        //             condition: [
-        //                 { key: 'tabStyle', relation: '==', value: 'underline' }
-        //             ],
-        //             selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-nav .qubely-vertical-tab-item-button.qubely-vertical-active .qubely-vertical-tab-title { border-bottom-color:{{navUnderlineBorderColorActive}}; }'
-        //         }
-        //     ]
-        // },
+
 
         // Radius
         navBorderRadiusTabs: {
@@ -275,7 +236,7 @@ registerBlockType('qubely/verticaltabs', {
             },
             style: [
                 {
-                    selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-item-button'
+                    selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-item-button, {{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-item'
                 }
             ]
         },
@@ -331,7 +292,7 @@ registerBlockType('qubely/verticaltabs', {
             type: 'object', default: {},
             style: [
                 {
-                    selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-item-button.qubely-vertical-active'
+                    selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-item.qubely-vertical-active .qubely-vertical-tab-item-button'
                 }
             ]
         },
@@ -339,7 +300,32 @@ registerBlockType('qubely/verticaltabs', {
             type: 'object', default: {},
             style: [
                 {
-                    selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-item-button:hover, {{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-item-button.qubely-vertical-active:hover',
+                    selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-item-button:hover, {{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-item.qubely-vertical-active .qubely-vertical-tab-item-button:hover',
+                }
+            ]
+        },
+
+        navShadow2: {
+            type: 'object', default: {},
+            style: [
+                {
+                    selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-item'
+                }
+            ]
+        },
+        navShadowActive2: {
+            type: 'object', default: {},
+            style: [
+                {
+                    selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-item.qubely-vertical-active'
+                }
+            ]
+        },
+        navShadowHover2: {
+            type: 'object', default: {},
+            style: [
+                {
+                    selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-item:hover, {{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-item.qubely-vertical-active:hover',
                 }
             ]
         },
@@ -403,7 +389,7 @@ registerBlockType('qubely/verticaltabs', {
             type: 'object', default: { md: 20, unit: 'px' },
             style: [
                 {
-                    selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-body {margin-left: {{bodySpacing}};}'
+                    selector: '{{QUBELY}} .qubely-block-vertical-tab.qubely-alignment-left .qubely-vertical-tab-body {margin-left: {{bodySpacing}};} {{QUBELY}} .qubely-block-vertical-tab.qubely-alignment-right .qubely-vertical-tab-body {margin-right: {{bodySpacing}};}'
                 }
             ]
         }

@@ -7,7 +7,7 @@ class Save extends Component {
     renderTabTitles = () => {
         const { tabTitles, iconPosition, navText, navLayout, navSubHeading, iconType, enableIcon, navTextAlignment } = this.props.attributes
         return tabTitles.map((title, index) => {
-            const buttonClass = `qubely-vertical-tab-item-button ${enableIcon ? 'qubely-has-icon-' + iconPosition : ''} ${(index === 0) ? 'qubely-vertical-active' : ''}`
+            const buttonClass = `qubely-vertical-tab-item-button ${enableIcon ? 'qubely-has-icon-' + iconPosition : ''}`
             const hasIcon = title.iconName !== 0 && title.iconName !== undefined && title.iconName.toString().trim() !== ''
             const IconImage = () => {
                 return <div className={'qubely-icon-image qubely-vertical-tab-icon ' + ((title.image !== undefined && title.image.url) ? '' : 'qubely-vertical-placeholder')}>
@@ -28,7 +28,7 @@ class Save extends Component {
             const IconFont = () => hasIcon ? <span className={`qubely-vertical-tab-icon ${title.iconName}`} /> : ''
             const Icon = () => enableIcon ? (iconType === 1 ? <IconFont /> : <IconImage />) : ''
             return (
-                <div class='qubely-vertical-tab-item'>
+                <div class={`qubely-vertical-tab-item ${(index === 0) ? 'qubely-vertical-active' : ''}`}>
                     <button className={buttonClass}>
                         {
                             (navLayout === 2 && iconPosition === 'left') && <Icon />
