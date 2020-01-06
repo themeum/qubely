@@ -238,7 +238,7 @@ You can report bugs on the [support forum here](https://wordpress.org/support/pl
 
 == Changelog ==
 
-= 1.2.8 - 02 January, 2020 =
+= 1.2.8 - 06 January, 2020 =
 Fix: Contact form block -  reCAPTCHA issue  
 Fix: Additional CSS class issue in Back-end    
 Fix: Button Group block - Button width issue  
