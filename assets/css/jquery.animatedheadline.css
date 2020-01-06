@@ -3,7 +3,7 @@
 .animated-text-words-wrapper {
 	position: relative;
 	text-align: center;
-	display: flex;
+	display: inline-flex;
 	flex-wrap: wrap;
 }
 .animated-text-words-wrapper .animated-text {

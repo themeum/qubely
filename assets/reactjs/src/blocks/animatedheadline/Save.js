@@ -36,7 +36,40 @@ class Save extends Component {
 
         return animationClass
     }
+    _getAnimationClass(value = '') {
+        let animationClass = ''
+        switch (value) {
+            case 'blinds':
+                animationClass = 'letters animation-blinds'
+                break
+            case 'delete-typing':
+                animationClass = 'letters type'
+                break
+            case 'flip':
+                animationClass = 'text-animation-flip'
+                break
+            case 'fade-in':
+                animationClass = 'zoom'
+                break
+            case 'loading-bar':
+                animationClass = 'loading-bar'
+                break
+            case 'scale':
+            case 'slide':
+                animationClass = 'letters scale'
+                break
+            case 'push':
+                animationClass = 'push'
+                break
+            case 'wave':
+                animationClass = 'letters animation-wave'
+                break
+            default:
+                animationClass = 'text-clip'
+        }
 
+        return animationClass
+    }
     render() {
         const {
             className,

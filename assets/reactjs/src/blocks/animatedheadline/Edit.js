@@ -130,7 +130,7 @@ class Edit extends Component {
             }
         } = this.props
 
-        const { device } = this.state
+        const { device, animationClass } = this.state
 
         if (uniqueId) { CssGenerator(this.props.attributes, 'animatedheadline', uniqueId); }
 
@@ -188,9 +188,9 @@ class Edit extends Component {
                 </InspectorControls>
 
                 <div className={`qubely-block-${uniqueId} qubely-addon-animated-heading ${className}`} >
-                    <h2 className={`animated-heading-text ${this.state.animationClass}`} ref={el => this.animatedHeading = el}>
+                    <h2 className={`animated-heading-text ${animationClass}`} ref={el => this.animatedHeading = el}>
                         <RichText
-                            placeholder="Before"
+                            placeholder={__("Before")}
                             value={titleBefore}
                             keepPlaceholderOnFocus
                             onChange={(titleBefore) => setAttributes({ titleBefore })}
@@ -208,7 +208,7 @@ class Edit extends Component {
                         </span>
 
                         <RichText
-                            placeholder="After"
+                            placeholder={__("After")}
                             value={titleAfter}
                             keepPlaceholderOnFocus
                             onChange={(titleAfter) => setAttributes({ titleAfter })}

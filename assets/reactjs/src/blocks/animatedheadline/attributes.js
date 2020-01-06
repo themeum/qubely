@@ -22,7 +22,7 @@ export const attributes = {
         default: 'After Text'
     },
     color: {
-        type: 'string', default: '#fff',
+        type: 'string', default: '#000',
         style: [
             {
 
@@ -43,7 +43,7 @@ export const attributes = {
         type: 'object',
         default: {
             type: 'color',
-            openColor: 1,
+            openColor: 0,
             color: '#2184F9',
             gradient: {
                 color1: '#1066CC',
