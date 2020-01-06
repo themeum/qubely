@@ -13,6 +13,7 @@ const {
     Border,
     BorderRadius,
     Background,
+    Typography,
     gloalSettings: {
         globalSettingsPanel,
         animationSettings,
@@ -118,15 +119,29 @@ class Edit extends Component {
                 titleAfter,
                 animationType,
 
+                typography,
                 bgColor,
                 color,
                 animatedTextColor,
+                animatedTextTypography,
                 bgShadow,
                 bgShadowHover,
                 bgBorderColorHover,
                 padding,
                 borderRadius,
                 border,
+
+                animation,
+                interaction,
+                enablePosition,
+                selectPosition,
+                positionXaxis,
+                positionYaxis,
+                globalZindex,
+                hideTablet,
+                hideMobile,
+                globalCss
+
             }
         } = this.props
 
@@ -146,7 +161,13 @@ class Edit extends Component {
                         />
 
                         <Color label={__('Aniamated-text Color')} value={animatedTextColor} onChange={val => setAttributes({ animatedTextColor: val })} />
-
+                        <Typography
+                            device={device}
+                            label={__('Typography')}
+                            value={animatedTextTypography}
+                            onChange={value => setAttributes({ animatedTextTypography: value })}
+                            onDeviceChange={value => this.setState({ device: value })}
+                        />
                         <SelectControl
                             label={__('Animation Type')}
                             value={animationType}
@@ -167,6 +188,14 @@ class Edit extends Component {
                     </PanelBody>
 
                     <PanelBody title={__('Design')} initialOpen={false}>
+                        <Typography
+                            device={device}
+                            value={typography}
+                            label={__('Typography')}
+                            onChange={(value) => setAttributes({ typography: value })}
+                            onDeviceChange={value => this.setState({ device: value })}
+                        />
+
                         <Color label={__('Color')} value={color} onChange={val => setAttributes({ color: val })} />
                         <ColorAdvanced label={__('Background')} value={bgColor} onChange={val => setAttributes({ bgColor: val })} />
                         <Padding
@@ -185,8 +214,12 @@ class Edit extends Component {
                         <BorderRadius label={__('Radius')} value={borderRadius} onChange={(value) => setAttributes({ borderRadius: value })} min={0} max={100} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
 
                     </PanelBody>
-                </InspectorControls>
 
+                    {animationSettings(uniqueId, animation, setAttributes)}
+
+                    {interactionSettings(uniqueId, interaction, setAttributes)}
+                </InspectorControls>
+                {globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
                 <div className={`qubely-block-${uniqueId} qubely-addon-animated-heading ${className}`} >
                     <h2 className={`animated-heading-text ${animationClass}`} ref={el => this.animatedHeading = el}>
                         <RichText

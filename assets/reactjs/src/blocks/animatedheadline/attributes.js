@@ -13,6 +13,16 @@ export const attributes = {
     spacer: { type: 'object', default: { spaceTop: { md: '10', unit: 'px' }, spaceBottom: { md: '10', unit: 'px' } }, style: [{ selector: '{{QUBELY}}' }] },
     animatedText: { type: 'array', default: ['Apple', 'Banana', 'Orange'] },
     animationType: { type: 'string', default: 'text-clip' },
+    typography: {
+        type: 'object',
+        default: {},
+        style: [{ selector: '{{QUBELY}}.qubely-addon-animated-heading' }]
+    },
+    animatedTextTypography: {
+        type: 'object',
+        default: {},
+        style: [{ selector: '{{QUBELY}}.qubely-addon-animated-heading .animated-text-words-wrapper' }]
+    },
     titleBefore: {
         type: 'string',
         default: 'Before Text'
@@ -70,9 +80,8 @@ export const attributes = {
     borderRadius: {
         type: 'object',
         default: {
-            openBorderRadius: 1,
             radiusType: 'global',
-            global: { md: 4 },
+            global: {},
             unit: 'px'
         },
         style: [
@@ -82,7 +91,7 @@ export const attributes = {
     border: { type: 'object', default: {}, style: [{ selector: '{{QUBELY}}.qubely-addon-animated-heading' }] },
     bgBorderColorHover: { type: 'string', default: '', style: [{ selector: '{{QUBELY}}.qubely-addon-animated-heading:hover {border-color: {{bgBorderColorHover}};}' }] },
 
-    bgShadow: { type: 'object', default: { openShadow: 1, horizontal: 1, vertical: 1, blur: 2, color: 'rgba(0, 0, 0, .2)', spread: 0 }, style: [{ selector: '{{QUBELY}}.qubely-addon-animated-heading' }] },
+    bgShadow: { type: 'object', default: { openShadow: 0, horizontal: 1, vertical: 1, blur: 2, color: 'rgba(0, 0, 0, .2)', spread: 0 }, style: [{ selector: '{{QUBELY}}.qubely-addon-animated-heading' }] },
     bgShadowHover: { type: 'object', default: { color: '' }, style: [{ selector: '{{QUBELY}}.qubely-addon-animated-heading:hover' }] },
 
     showGlobalSettings: {

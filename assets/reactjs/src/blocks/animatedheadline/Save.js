@@ -1,5 +1,6 @@
 const { Component } = wp.element
 const { RichText } = wp.editor
+const { HelperFunction: { animationAttr, IsInteraction } } = wp.qubelyComponents
 class Save extends Component {
 
     _getAnimationClass(value = '') {
@@ -75,16 +76,17 @@ class Save extends Component {
             className,
             attributes: {
                 uniqueId,
+                animation,
                 animatedText,
                 titleBefore,
                 titleAfter,
-                animationType
-
+                animationType,
+                interaction,
             }
         } = this.props
-
+        const interactionClass = IsInteraction(interaction) ? 'qubley-block-interaction' : '';
         return (
-            <div className={`qubely-block-${uniqueId} qubely-addon-animated-heading ${className ? className : ''}`} >
+            <div className={`qubely-block-${uniqueId} qubely-addon-animated-heading ${className ? className : ''} ${interactionClass} `} {...animationAttr(animation)} >
                 <h2 className={`animated-heading-text ${this._getAnimationClass(animationType)}`} ref={el => this.animatedHeading = el}>
                     <RichText.Content
                         tagName='div'
