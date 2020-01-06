@@ -44,6 +44,13 @@ registerBlockType('qubely/verticaltabs', {
         spacer: { type: 'object', default: { spaceTop: { md: '10', unit: 'px' }, spaceBottom: { md: '10', unit: 'px' } }, style: [{ selector: '{{QUBELY}}' }] },
         navAlignment: { type: 'string', default: 'left' },
         navTextAlignment: { type: 'string', default: 'left' },
+        tabVerticalAlign: {
+            type: 'string',
+            default: 'flex-start' ,
+            style: [{
+                selector: '{{QUBELY}} .qubely-block-vertical-tab {align-items: {{tabVerticalAlign}}}'
+            }]
+        },
         tabs: { type: 'number', default: 3 },
         tabStyle: { type: 'string', default: 'pills' },
 
@@ -197,7 +204,7 @@ registerBlockType('qubely/verticaltabs', {
             },
             style: [
                 {
-                    selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-item-button:hover, {{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-item.qubely-vertical-active .qubely-vertical-tab-item-button:hover'
+                    selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-item .qubely-vertical-tab-item-button:hover, {{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-item.qubely-vertical-active .qubely-vertical-tab-item-button:hover'
                 }
             ]
         },

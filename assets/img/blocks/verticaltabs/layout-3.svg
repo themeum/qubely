@@ -1,0 +1,15 @@
+<svg width="83" height="61" xmlns="http://www.w3.org/2000/svg">
+  <g fill="none" fill-rule="evenodd">
+    <rect fill="#D6D9DD" x="7.545" y="4.575" width="16.6" height="3.05" rx="1.525"/>
+    <path d="M83 0v61H31.69V12.717H0V0h83z" fill="#D0D1D3"/>
+    <path fill="#F2F3F7" d="M31.69 12.2H0v12.2h31.69zM31.69 24.4H0v12.2h31.69z"/>
+    <rect fill="#F2F3F7" x="4.527" y="4.575" width="22.636" height="3.05" rx="1.525"/>
+    <rect fill="#D6D9DD" x="4.527" y="16.775" width="22.636" height="3.05" rx="1.525"/>
+    <rect fill="#D6D9DD" x="4.527" y="28.975" width="22.636" height="3.05" rx="1.525"/>
+    <rect fill="#F2F3F7" x="39.236" y="7.625" width="25.655" height="3.05" rx="1.525"/>
+    <rect fill="#F2F3F7" x="39.236" y="16.775" width="34.709" height="3.05" rx="1.525"/>
+    <rect fill="#F2F3F7" x="39.236" y="25.925" width="34.709" height="3.05" rx="1.525"/>
+    <rect fill="#F2F3F7" x="39.236" y="35.075" width="34.709" height="3.05" rx="1.525"/>
+    <rect fill="#F2F3F7" x="39.236" y="44.225" width="34.709" height="3.05" rx="1.525"/>
+  </g>
+</svg>

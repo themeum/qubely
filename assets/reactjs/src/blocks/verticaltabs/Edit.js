@@ -184,6 +184,7 @@ class Edit extends Component {
 			tabTitles,
 			tabStyle,
 			navLayout,
+			tabVerticalAlign,
 			iconType,
 			enableIcon,
 			navWidth,
@@ -271,13 +272,13 @@ class Edit extends Component {
 					<PanelBody title={__('Styles')} initialOpen={true}>
 						<Styles value={tabStyle} onChange={val => setAttributes({ tabStyle: val })}
 							options={[
-								{ value: 'tabs', svg: icons.tab_tabs, label: __('Tabs') },
-								{ value: 'pills', svg: icons.tab_pills, label: __('Pills') },
-								{ value: 'underline', svg: icons.tab_underline, label: __('Underline') },
+								{ value: 'layout1', svg: icons.verticaltabs_1, label: __('Layout 1') },
+								{ value: 'layout2', svg: icons.verticaltabs_2, label: __('Layout 2') },
+								{ value: 'layout3', svg: icons.verticaltabs_3, label: __('Layout 3') },
 							]}
 						/>
 						<Separator />
-						<Range label={__('Menu Width')} value={navWidth} onChange={navWidth => setAttributes({ navWidth })} max={600} min={0} unit={['px', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
+						<Range label={__('Menu Width')} value={navWidth} onChange={navWidth => setAttributes({ navWidth })} max={600} min={0} unit={['px', '%']} />
 						<RadioAdvanced
 							label={__('Type')}
 							options={[
@@ -286,6 +287,15 @@ class Edit extends Component {
 							]}
 							value={navAlignment}
 							onChange={(navAlignment) => setAttributes({ navAlignment })} />
+						<RadioAdvanced
+							label={__('Vertical Alignmet')}
+							options={[
+								{ label: <span style={{padding: '0 5px', transform: 'rotate(90deg)'}} className='fas fa-outdent'/>, value: 'flex-start', title: 'Top' },
+								{ label: <span style={{padding: '0 5px', transform: 'rotate(90deg)'}} className='fas fa-align-center'/>, value: 'center', title: 'Center' },
+								{ label: <span style={{padding: '0 5px', transform: 'rotate(90deg)'}} className='fas fa-indent'/>, value: 'flex-end', title: 'Bottom' },
+							]}
+							value={tabVerticalAlign}
+							onChange={(tabVerticalAlign) => setAttributes({ tabVerticalAlign })} />
 					</PanelBody>
 
 					<PanelBody title={__('Tabs Menu')} initialOpen={false}>
