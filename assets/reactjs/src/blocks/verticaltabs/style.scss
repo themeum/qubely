@@ -1,174 +1,175 @@
 :root{
-  --qubely-vertical-tab-nav-width: 250px;
-}
-
-.qubely-block-vertical-tab {
-  display: flex;
-  align-items: flex-start;
-  &.qubely-alignment-right{
-    flex-direction: row-reverse;
+	--qubely-vertical-tab-nav-width: 250px;
   }
-  /** Tab Navigation **/
+  
+  .qubely-block-vertical-tab {
+	display: flex;
+	align-items: flex-start;
+	&.qubely-alignment-right{
+	  flex-direction: row-reverse;
+	}
+	/** Tab Navigation **/
+	.qubely-vertical-tab-nav {
+	  flex-grow: 0;
+	  button{
+		border: none;
+		transition: background 300ms, color 300ms;
+	  }
+	  .qubely-vertical-tab-nav-sub-heading,
+	  .qubely-vertical-tab-title{
+		font-weight: inherit;
+	  }
+	  .qubely-icon-image{
+		width: 1em;
+	  }
+	  .qubely-vertical-tab-nav-sub-heading{
+		font-size: 16px;
+		margin: 0;
+	  }
+	  .qubely-vertical-tab-nav-text{
+		font-size: 15px;
+		line-height: 1.2;
+		text-align: inherit;
+		margin-bottom: 0;
+	  }
+	  .qubely-vertical-tab-item{
+		position: relative;
+		button{
+		  width: 100%;
+		  text-align: left;
+		  h5{
+			margin: 0;
+			display: flex;
+			align-items: center;
+			width: 100%;
+			justify-content: flex-start;
+		  }
+		  .qubely-vertical-tab-icon{
+			max-width: 1.3em;
+			flex-basis: 1.3em;
+			min-width: 1.3em;
+		  }
+		  &:focus{
+			outline: none;
+		  }
+		  &.qubely-vertical-tab-item-button{
+			display: flex;
+			background: transparent;
+			&.qubely-has-icon-right{
+			  justify-content: space-between;
+			}
+			.qubely-vertical-tab-item-content{
+			  flex-grow: 1;
+			  text-align: inherit;
+			  &.qubely-text-right{
+				text-align: right;
+				.qubely-vertical-tab-title{
+				  justify-content: flex-end;
+				}
+			  }
+			}
+		  }
+		  &:hover,
+		  &:focus{
+			+ .qubely-action-vertical-tab-remove{
+			  opacity: 1;
+			  visibility: visible;
+			}
+		  }
+		}
+		.qubely-action-vertical-tab-remove{
+		  position: absolute;
+		  top: 0;
+		  right: 0;
+		  transform: translate(50%, -50%);
+		  width: 20px;
+		  height: 20px;
+		  line-height: 20px;
+		  text-align: center;
+		  background: #fff;
+		  border-radius: 50%;
+		  font-size: 14px;
+		  box-shadow: 0 3px 15px rgba(0,0,0,.1);
+		  opacity: 0;
+		  visibility: hidden;
+		  transition: 200ms;
+		  cursor: pointer;
+		  z-index: 2;
+		  &::after{
+			content: '';
+			background: transparent;
+			width: 150%;
+			height: 150%;
+			position: absolute;
+			left: -25%;
+			top: -25%;
+			z-index: 2;
+		  }
+		}
+	  }
+	}
+  
+	.qubely-vertical-tab-item:hover .qubely-action-vertical-tab-remove{
+	  opacity: 1;
+	  visibility: visible;
+	}
+  
+	/** Tab Body **/
+	.qubely-vertical-tab-body {
+	  flex-grow: 1;
+	  > .editor-inner-blocks{
+		margin-top: -36px;
+		margin-bottom: -36px;
+	  }
+	  .qubely-tab-content > div:first-child{
+		padding-top: 0;
+	  }
+	  .qubely-tab-content > div:last-child{
+		padding-bottom: 0;
+	  }
+	}
+  }
+  
+  .qubely-vertical-hidden{
+	display: none;
+  }
+  
+  .qubely-add-new-vertical-tab{
+	width: 100%;
+	padding: 10px;
+	background: transparent;
+	border: 1px dashed #d0d0d0 !important;
+	i{
+	  background: rgba(#fff, .8);
+	  color: #222222;
+	  padding: 1px;
+	  border-radius: 50%;
+	}
+  }
+  
+  /** Tab Size **/
+  
   .qubely-vertical-tab-nav {
-    flex-grow: 0;
-    button{
-      border: none;
-      transition: background 300ms, color 300ms;
-    }
-    .qubely-vertical-tab-nav-sub-heading,
-    .qubely-vertical-tab-title{
-      font-weight: inherit;
-    }
-    .qubely-icon-image{
-      width: 1em;
-    }
-    .qubely-vertical-tab-nav-sub-heading{
-      font-size: 16px;
-      margin: 0;
-    }
-    .qubely-vertical-tab-nav-text{
-      font-size: 15px;
-      line-height: 1.2;
-      text-align: inherit;
-      margin-bottom: 0;
-    }
-    .qubely-vertical-tab-item{
-      position: relative;
-      button{
-        width: 100%;
-        text-align: left;
-        h5{
-          margin: 0;
-          display: flex;
-          align-items: center;
-          width: 100%;
-          justify-content: flex-start;
-        }
-        .qubely-vertical-tab-icon{
-          max-width: 1.3em;
-          flex-basis: 1.3em;
-          min-width: 1.3em;
-        }
-        &:focus{
-          outline: none;
-        }
-        &.qubely-vertical-tab-item-button{
-          display: flex;
-          background: transparent;
-          &.qubely-has-icon-right{
-            justify-content: space-between;
-          }
-          .qubely-vertical-tab-item-content{
-            flex-grow: 1;
-            text-align: inherit;
-            &.qubely-text-right{
-              text-align: right;
-              .qubely-vertical-tab-title{
-                justify-content: flex-end;
-              }
-            }
-          }
-        }
-        &:hover,
-        &:focus{
-          + .qubely-action-vertical-tab-remove{
-            opacity: 1;
-            visibility: visible;
-          }
-        }
-      }
-      .qubely-action-vertical-tab-remove{
-        position: absolute;
-        top: 0;
-        right: 0;
-        transform: translate(50%, -50%);
-        width: 20px;
-        height: 20px;
-        line-height: 20px;
-        text-align: center;
-        background: #fff;
-        border-radius: 50%;
-        font-size: 14px;
-        box-shadow: 0 3px 15px rgba(0,0,0,.1);
-        opacity: 0;
-        visibility: hidden;
-        transition: 200ms;
-        cursor: pointer;
-        z-index: 2;
-        &::after{
-          content: '';
-          background: transparent;
-          width: 150%;
-          height: 150%;
-          position: absolute;
-          left: -25%;
-          top: -25%;
-          z-index: 2;
-        }
-      }
-    }
+	flex-basis: var(--qubely-vertical-tab-nav-width);
+	max-width: var(--qubely-vertical-tab-nav-width);
+	min-width: var(--qubely-vertical-tab-nav-width);
   }
-
-  .qubely-vertical-tab-item:hover .qubely-action-vertical-tab-remove{
-    opacity: 1;
-    visibility: visible;
+  
+  .qubely-vertical-tab-body{
+	flex-basis: calc(100% - var(--qubely-vertical-tab-nav-width));
+	max-width: calc(100% - var(--qubely-vertical-tab-nav-width));
   }
-
-  /** Tab Body **/
-  .qubely-vertical-tab-body {
-    flex-grow: 1;
-    > .editor-inner-blocks{
-      margin-top: -36px;
-      margin-bottom: -36px;
-    }
-    .qubely-tab-content > div:first-child{
-      padding-top: 0;
-    }
-    .qubely-tab-content > div:last-child{
-      padding-bottom: 0;
-    }
+  // Responsive
+  @media (max-width: 991px) {
+	.qubely-block-vertical-tab{
+	  flex-wrap: wrap;
+	  .qubely-vertical-tab-nav,
+	  .qubely-vertical-tab-body{
+		flex-basis: 100%;
+		max-width: 100%;
+		min-width: 100%;
+		margin-left: 0 !important;
+		margin-right: 0 !important;
+	  }
+	}
   }
-}
-
-.qubely-vertical-hidden{
-  display: none;
-}
-
-.qubely-add-new-vertical-tab{
-  width: 100%;
-  padding: 10px;
-  background: transparent;
-  border: 1px dashed #d0d0d0 !important;
-  i{
-    background: rgba(#fff, .8);
-    color: #222222;
-    padding: 1px;
-    border-radius: 50%;
-  }
-}
-
-/** Tab Size **/
-
-.qubely-vertical-tab-nav {
-  flex-basis: var(--qubely-vertical-tab-nav-width);
-  max-width: var(--qubely-vertical-tab-nav-width);
-  min-width: var(--qubely-vertical-tab-nav-width);
-}
-
-.qubely-vertical-tab-body{
-  flex-basis: calc(100% - var(--qubely-vertical-tab-nav-width));
-  max-width: calc(100% - var(--qubely-vertical-tab-nav-width));
-}
-// Responsive
-@media (max-width: 991px) {
-  .qubely-block-vertical-tab{
-    flex-wrap: wrap;
-    .qubely-vertical-tab-nav,
-    .qubely-vertical-tab-body{
-      flex-basis: 100%;
-      max-width: 100%;
-      min-width: 100%;
-      margin: 0;
-    }
-  }
-}
