@@ -46,7 +46,7 @@ class Edit extends Component {
         } else if (uniqueId && uniqueId != _client) {
             setAttributes({ uniqueId: _client });
         }
-        this.anim = new animatedHeading({ heading: $(this.animatedHeading) })
+        this.anim = new window.animatedHeading({ heading: $(this.animatedHeading) })
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -61,7 +61,7 @@ class Edit extends Component {
                     this.timer = 0;
                 }
                 setTimeout(() => {
-                    this.anim = new animatedHeading({ heading: $(this.animatedHeading) })
+                    this.anim = new window.animatedHeading({ heading: $(this.animatedHeading) })
                 }, 100)
 
             }

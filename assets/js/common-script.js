@@ -14,7 +14,7 @@ jQuery(document).ready(function ($) {
 
     // Set Preview CSS
     const cussrent_url = window.location.href;
-    if( cussrent_url.includes('preview=true') ) {
+    if (cussrent_url.includes('preview=true')) {
         let cssInline = document.createElement('style');
         cssInline.type = 'text/css';
         cssInline.id = 'qubely-block-js-preview';
@@ -75,6 +75,16 @@ jQuery(document).ready(function ($) {
         });
     });
 
+
+    //ANIMATED HEADLINE BLOCK
+    $('.qubely-addon-animated-heading .animated-heading-text').each(function () {
+        let animatedHeadline = $(this)
+        if (window.animatedHeading) {
+            new window.animatedHeading({ heading: $(animatedHeadline) })
+        }
+
+    });
+
     //TAB BLOCK
     $('.qubely-tab-title').on('click', function (event) {
         var $qubelyTab = $(this).parent();
@@ -110,7 +120,7 @@ jQuery(document).ready(function ($) {
         let $nav = $(this);
         let direction = $nav.attr('data-direction');
         let items = $nav.attr('data-items');
-        
+
         let activeItemlIndex = $('.qubely-carousel-item-indicator.qubely-active').index('.qubely-carousel-item-indicator')
         let nextActiveItem = direction === 'next' ? activeItemlIndex < items - 1 ? activeItemlIndex + 1 : 0 : activeItemlIndex > 0 ? activeItemlIndex - 1 : items - 1
 
@@ -226,7 +236,7 @@ jQuery(document).ready(function ($) {
             e.preventDefault();
             let formData = $form.serializeArray();
             const isRequired = checkFormValidation($form); //check validation
-            if( !isRequired ) {
+            if (!isRequired) {
                 formData.push({ name: 'captcha', value: (typeof grecaptcha !== "undefined") ? grecaptcha.getResponse() : undefined });
                 jQuery.ajax({
                     url: qubely_urls.ajax + '?action=qubely_send_form_data',
@@ -239,8 +249,8 @@ jQuery(document).ready(function ($) {
                     success: (response) => {
                         $form.find('button[type="submit"]').removeClass('disable').attr('disabled', false);
                         $form.find(".qubely-form-message").html(`<div class="qubely-alert qubely-alert-success">${response.data.msg}</div>`);
-                        setTimeout( () => $form.find('.qubely-form-message').html(''), 4000);
-                        if( response.data.status == 1 ) $form.trigger("reset");
+                        setTimeout(() => $form.find('.qubely-form-message').html(''), 4000);
+                        if (response.data.status == 1) $form.trigger("reset");
                     },
                     error: (jqxhr, textStatus, error) => {
                         $form.find('button[type="submit"]').removeClass('disable').attr('disabled', false);
@@ -256,7 +266,7 @@ jQuery(document).ready(function ($) {
         const fieldErrorMessage = atob($form.find('input[name="field-error-message"]').val());
         let onChange = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
         let isRequired = false;
-        $form.find(' input[type=text], input[type=email], input[type=radio], input[type=checkbox], textarea, select').each( function () {
+        $form.find(' input[type=text], input[type=email], input[type=radio], input[type=checkbox], textarea, select').each(function () {
             if (onChange === true) {
                 $(this).on('change keyup', function () {
                     isRequired = checkFields($(this), fieldErrorMessage);
@@ -269,7 +279,7 @@ jQuery(document).ready(function ($) {
         });
         return isRequired;
     }
-    
+
     function checkFields($field, fieldErrorMessage) {
         let isRequired = false;
         const $parent = $field.parents('.qubely-form-group-inner');
@@ -277,17 +287,17 @@ jQuery(document).ready(function ($) {
         const hasNoError = $parent.find("p.qubely-form-required-field").length === 0;
 
         if (typeof $field.prop('required') !== 'undefined') {
-            if( $field.attr('type') === 'email' ) {
-                if ( !validateEmail($field.val()) ) {
-                    if( hasNoError ) {
-                        $parent.append( fieldErrorMessage );
+            if ($field.attr('type') === 'email') {
+                if (!validateEmail($field.val())) {
+                    if (hasNoError) {
+                        $parent.append(fieldErrorMessage);
                     }
                     return isRequired = true;
                 }
             }
-            if ($field.val().length === 0) { 
-                if( hasNoError ) {
-                    $parent.append( fieldErrorMessage );
+            if ($field.val().length === 0) {
+                if (hasNoError) {
+                    $parent.append(fieldErrorMessage);
                 }
                 isRequired = true;
             }
@@ -298,10 +308,10 @@ jQuery(document).ready(function ($) {
         }
         if ($field.attr('type') === 'radio' || $field.attr('type') === 'checkbox') {
             const parentElem = $field.parent().parent();
-            if( parentElem.attr('data-required') == 'true' ) {
-                if ( parentElem.find( 'input:checked' ).length === 0 ) {
-                    if( hasNoError ) {
-                        $parent.append( fieldErrorMessage );
+            if (parentElem.attr('data-required') == 'true') {
+                if (parentElem.find('input:checked').length === 0) {
+                    if (hasNoError) {
+                        $parent.append(fieldErrorMessage);
                     }
                     isRequired = true;
                 } else {

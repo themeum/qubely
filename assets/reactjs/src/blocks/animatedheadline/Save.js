@@ -84,9 +84,10 @@ class Save extends Component {
         } = this.props
 
         return (
-            <div className={`qubely-block-${uniqueId} qubely-addon-animated-heading ${className}`} >
+            <div className={`qubely-block-${uniqueId} qubely-addon-animated-heading ${className ? className : ''}`} >
                 <h2 className={`animated-heading-text ${this._getAnimationClass(animationType)}`} ref={el => this.animatedHeading = el}>
                     <RichText.Content
+                        tagName='div'
                         value={titleBefore}
                         className="animated-heading-before-part"
                     />
@@ -102,6 +103,7 @@ class Save extends Component {
                     </span>
 
                     <RichText.Content
+                        tagName='div'
                         value={titleAfter}
                         className="animated-heading-after-part"
                     />
