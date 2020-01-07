@@ -120,16 +120,12 @@ class Edit extends Component {
                 animationType,
 
                 typography,
-                bgColor,
                 color,
                 animatedTextColor,
+                animatedTextBgColor,
                 animatedTextTypography,
-                bgShadow,
-                bgShadowHover,
-                bgBorderColorHover,
-                padding,
-                borderRadius,
-                border,
+                animatedTextPadding,
+                animatedTextBorderRadius,
 
                 animation,
                 interaction,
@@ -159,15 +155,6 @@ class Edit extends Component {
                             placeholder={__("Add new text")}
                             onChange={tokens => setAttributes({ animatedText: tokens })}
                         />
-
-                        <Color label={__('Aniamated-text Color')} value={animatedTextColor} onChange={val => setAttributes({ animatedTextColor: val })} />
-                        <Typography
-                            device={device}
-                            label={__('Typography')}
-                            value={animatedTextTypography}
-                            onChange={value => setAttributes({ animatedTextTypography: value })}
-                            onDeviceChange={value => this.setState({ device: value })}
-                        />
                         <SelectControl
                             label={__('Animation Type')}
                             value={animationType}
@@ -185,6 +172,48 @@ class Edit extends Component {
                             ]}
                             onChange={val => this._handleTypeChange(val)}
                         />
+                        <ColorAdvanced
+                            textColor
+                            label={__('Aniamated-text Color')}
+                            value={animatedTextColor}
+                            onChange={val => setAttributes({ animatedTextColor: val })}
+                        />
+                        <ColorAdvanced
+                            textColor
+                            label={__('Background')}
+                            value={animatedTextBgColor}
+                            onChange={val => setAttributes({ animatedTextBgColor: val })}
+                        />
+
+                        <Typography
+                            device={device}
+                            label={__('Typography')}
+                            value={animatedTextTypography}
+                            onChange={value => setAttributes({ animatedTextTypography: value })}
+                            onDeviceChange={value => this.setState({ device: value })}
+                        />
+                        <Padding
+                            label={__('Padding')}
+                            value={animatedTextPadding}
+                            min={0}
+                            max={300}
+                            responsive
+                            device={device}
+                            unit={['px', 'em', '%']}
+                            onChange={val => setAttributes({ animatedTextPadding: val })}
+                            onDeviceChange={value => this.setState({ device: value })}
+                        />
+                        {/* <BorderRadius
+                            min={0}
+                            max={100}
+                            responsive
+                            label={__('Radius')}
+                            unit={['px', 'em', '%']}
+                            value={animatedTextBorderRadius}
+                            onChange={(value) => setAttributes({ animatedTextBorderRadius: value })}
+                            device={device} onDeviceChange={value => this.setState({ device: value })}
+                        /> */}
+
                     </PanelBody>
 
                     <PanelBody title={__('Design')} initialOpen={false}>
@@ -195,24 +224,7 @@ class Edit extends Component {
                             onChange={(value) => setAttributes({ typography: value })}
                             onDeviceChange={value => this.setState({ device: value })}
                         />
-
                         <Color label={__('Color')} value={color} onChange={val => setAttributes({ color: val })} />
-                        <ColorAdvanced label={__('Background')} value={bgColor} onChange={val => setAttributes({ bgColor: val })} />
-                        <Padding
-                            label={__('Padding')}
-                            value={padding}
-                            min={0}
-                            max={300}
-                            responsive
-                            device={device}
-                            unit={['px', 'em', '%']}
-                            onChange={val => setAttributes({ padding: val })}
-                            onDeviceChange={value => this.setState({ device: value })}
-                        />
-                        <Border label={__('Border')} value={border} onChange={val => setAttributes({ border: val })} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
-                        <BoxShadow label={__('Box-Shadow')} value={bgShadow} onChange={(value) => setAttributes({ bgShadow: value })} />
-                        <BorderRadius label={__('Radius')} value={borderRadius} onChange={(value) => setAttributes({ borderRadius: value })} min={0} max={100} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
-
                     </PanelBody>
 
                     {animationSettings(uniqueId, animation, setAttributes)}
@@ -229,17 +241,17 @@ class Edit extends Component {
                             onChange={(titleBefore) => setAttributes({ titleBefore })}
                             className="animated-heading-before-part"
                         />
-
-                        <span className="animated-text-words-wrapper">
-                            {
-                                animatedText.map((item, index) => {
-                                    let isVisible = index === 0 ? 'is-visible' : 'is-hidden'
-                                    let className = `animated-text ${isVisible}`
-                                    return <span className={className}>{item}</span>
-                                })
-                            }
+                        <span className="qubely-animated-text">
+                            <span className="animated-text-words-wrapper">
+                                {
+                                    animatedText.map((item, index) => {
+                                        let isVisible = index === 0 ? 'is-visible' : 'is-hidden'
+                                        let className = `animated-text ${isVisible}`
+                                        return <span className={className}>{item}</span>
+                                    })
+                                }
+                            </span>
                         </span>
-
                         <RichText
                             placeholder={__("After")}
                             value={titleAfter}

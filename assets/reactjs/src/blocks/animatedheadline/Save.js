@@ -37,40 +37,7 @@ class Save extends Component {
 
         return animationClass
     }
-    _getAnimationClass(value = '') {
-        let animationClass = ''
-        switch (value) {
-            case 'blinds':
-                animationClass = 'letters animation-blinds'
-                break
-            case 'delete-typing':
-                animationClass = 'letters type'
-                break
-            case 'flip':
-                animationClass = 'text-animation-flip'
-                break
-            case 'fade-in':
-                animationClass = 'zoom'
-                break
-            case 'loading-bar':
-                animationClass = 'loading-bar'
-                break
-            case 'scale':
-            case 'slide':
-                animationClass = 'letters scale'
-                break
-            case 'push':
-                animationClass = 'push'
-                break
-            case 'wave':
-                animationClass = 'letters animation-wave'
-                break
-            default:
-                animationClass = 'text-clip'
-        }
 
-        return animationClass
-    }
     render() {
         const {
             className,
@@ -93,17 +60,17 @@ class Save extends Component {
                         value={titleBefore}
                         className="animated-heading-before-part"
                     />
-
-                    <span className="animated-text-words-wrapper">
-                        {
-                            animatedText.map((item, index) => {
-                                let isVisible = index === 0 ? 'is-visible' : 'is-hidden'
-                                let className = `animated-text ${isVisible}`
-                                return <span className={className}>{item}</span>
-                            })
-                        }
+                    <span className="qubely-animated-text">
+                        <span className="animated-text-words-wrapper">
+                            {
+                                animatedText.map((item, index) => {
+                                    let isVisible = index === 0 ? 'is-visible' : 'is-hidden'
+                                    let className = `animated-text ${isVisible}`
+                                    return <span className={className}>{item}</span>
+                                })
+                            }
+                        </span>
                     </span>
-
                     <RichText.Content
                         tagName='div'
                         value={titleAfter}

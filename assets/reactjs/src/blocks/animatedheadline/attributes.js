@@ -41,15 +41,28 @@ export const attributes = {
         ]
     },
     animatedTextColor: {
-        type: 'string', default: '#26c4f1',
+        type: 'object',
+        default: {
+            type: 'color',
+            textColor: true,
+            openColor: 0,
+            color: '#2184F9',
+            gradient: {
+                color1: '#1066CC',
+                color2: '#55cd37',
+                direction: 0,
+                start: 0,
+                stop: 100
+            }
+        },
         style: [
             {
 
-                selector: '{{QUBELY}}.qubely-addon-animated-heading .animated-text-words-wrapper{ color:{{animatedTextColor}}; }'
+                selector: '{{QUBELY}}.qubely-addon-animated-heading .animated-text-words-wrapper span'
             }
         ]
     },
-    bgColor: {
+    animatedTextBgColor: {
         type: 'object',
         default: {
             type: 'color',
@@ -63,30 +76,28 @@ export const attributes = {
                 stop: 100
             }
         },
-        style: [{ selector: '{{QUBELY}}.qubely-addon-animated-heading' }]
+        style: [{ selector: '{{QUBELY}}.qubely-addon-animated-heading .animated-text-words-wrapper' }]
     },
 
-    padding: {
+    animatedTextPadding: {
         type: 'object',
         default: {
-            openPadding: 1,
+            openPadding: 0,
             paddingType: 'global',
-            global: { md: '30' },
-            custom: { md: '30 30 30 30' },
+            global: { md: '5' },
+            custom: { md: '5 5 5 5' },
             unit: 'px'
         },
-        style: [{ selector: '{{QUBELY}}.qubely-addon-animated-heading ' }]
+        style: [{ selector: '{{QUBELY}}.qubely-addon-animated-heading .qubely-animated-text' }]
     },
-    borderRadius: {
+    animatedTextBorderRadius: {
         type: 'object',
         default: {
             radiusType: 'global',
             global: {},
             unit: 'px'
         },
-        style: [
-            { selector: '{{QUBELY}}.qubely-addon-animated-heading' }
-        ]
+        style: [{ selector: '{{QUBELY}}.qubely-addon-animated-heading .animated-text-words-wrapper' }]
     },
     border: { type: 'object', default: {}, style: [{ selector: '{{QUBELY}}.qubely-addon-animated-heading' }] },
     bgBorderColorHover: { type: 'string', default: '', style: [{ selector: '{{QUBELY}}.qubely-addon-animated-heading:hover {border-color: {{bgBorderColorHover}};}' }] },
