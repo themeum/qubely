@@ -13,7 +13,7 @@
 	  flex-grow: 0;
 	  font-size: 18px;
 	  font-weight: 400;
-	  button{
+	  .qubely-vertical-tab-item-button{
 		border: none;
 		transition: background 300ms, color 300ms;
 		border-radius: 0;
@@ -41,45 +41,43 @@
 	  }
 	  .qubely-vertical-tab-item{
 		position: relative;
-		button{
-		  width: 100%;
-		  text-align: left;
-		  h5{
-			margin: 0;
-			display: flex;
-			align-items: center;
+		.qubely-vertical-tab-item-button{
 			width: 100%;
-			justify-content: flex-start;
-		  }
-		  .qubely-vertical-tab-icon{
-			max-width: 1.3em;
-			flex-basis: 1.3em;
-			min-width: 1.3em;
-		  }
-		  &.qubely-vertical-tab-item-button{
+			text-align: left;
 			display: flex;
 			background: transparent;
 			&.qubely-has-icon-right{
-			  justify-content: space-between;
+				justify-content: space-between;
 			}
 			.qubely-vertical-tab-item-content{
-			  flex-grow: 1;
-			  text-align: inherit;
-			  &.qubely-text-right{
-				text-align: right;
-				.qubely-vertical-tab-title{
-				  justify-content: flex-end;
+				flex-grow: 1;
+				text-align: inherit;
+				&.qubely-text-right{
+					text-align: right;
+					.qubely-vertical-tab-title{
+						justify-content: flex-end;
+					}
 				}
-			  }
 			}
-		  }
-		  &:hover,
-		  &:focus{
-			+ .qubely-action-vertical-tab-remove{
-			  opacity: 1;
-			  visibility: visible;
+			h5{
+				margin: 0;
+				display: flex;
+				align-items: center;
+				width: 100%;
+				justify-content: flex-start;
 			}
-		  }
+			.qubely-vertical-tab-icon{
+				max-width: 1.3em;
+				flex-basis: 1.3em;
+				min-width: 1.3em;
+			}
+			&:hover,
+			&:focus{
+				+ .qubely-action-vertical-tab-remove{
+					opacity: 1;
+					visibility: visible;
+				}
+			}
 		}
 		.qubely-action-vertical-tab-remove{
 		  position: absolute;

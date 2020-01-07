@@ -89,7 +89,7 @@ class Edit extends Component {
 
 			return (
 				<div class={`qubely-vertical-tab-item ${(this.state.activeTab == index + 1) ? 'qubely-vertical-active' : ''}`}>
-					<button onClick={(e) => this._handleTabChange(e, index)} className={buttonClass}>
+					<div onClick={(e) => this._handleTabChange(e, index)} className={buttonClass}>
 						{
 							(navLayout === 2 && iconPosition === 'left') && <Icon />
 						}
@@ -136,7 +136,7 @@ class Edit extends Component {
 						{
 							(navLayout === 2 && iconPosition === 'right') &&  <Icon />
 						}
-					</button>
+					</div>
 					<Tooltip text={__('Delete this tab')}>
 						<span className="fas fa-times qubely-action-vertical-tab-remove" onClick={() => this.deleteTab(index)} role="button" tabIndex="0" />
 					</Tooltip>
@@ -306,7 +306,7 @@ class Edit extends Component {
 							]}
 						/>
 						<Separator />
-						<Range label={__('Menu Width')} value={navWidth} onChange={navWidth => setAttributes({ navWidth })} max={600} min={0} unit={['px', '%']} />
+						<Range label={__('Menu Width')} value={navWidth} onChange={navWidth => setAttributes({ navWidth })} max={600} min={30} />
 						<RadioAdvanced
 							label={__('Type')}
 							options={[

@@ -29,7 +29,7 @@ class Save extends Component {
             const Icon = () => enableIcon ? (iconType === 1 ? <IconFont /> : <IconImage />) : ''
             return (
                 <div class={`qubely-vertical-tab-item ${(index === 0) ? 'qubely-vertical-active' : ''}`}>
-                    <button className={buttonClass}>
+                    <div className={buttonClass}>
                         {
                             (navLayout === 2 && iconPosition === 'left') && <Icon />
                         }
@@ -55,7 +55,7 @@ class Save extends Component {
                         {
                             (navLayout === 2 && iconPosition === 'right') &&  <Icon />
                         }
-                    </button>
+                    </div>
                 </div>
             )
         })
