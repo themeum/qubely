@@ -67,7 +67,7 @@ export const attributes = {
         default: {
             type: 'color',
             openColor: 0,
-            color: '#2184F9',
+            color: '#eae212',
             gradient: {
                 color1: '#1066CC',
                 color2: '#55cd37',
@@ -76,7 +76,7 @@ export const attributes = {
                 stop: 100
             }
         },
-        style: [{ selector: '{{QUBELY}}.qubely-addon-animated-heading .animated-text-words-wrapper' }]
+        style: [{ selector: '{{QUBELY}}.qubely-addon-animated-heading .qubely-animated-text' }]
     },
 
     animatedTextPadding: {
