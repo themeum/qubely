@@ -70,8 +70,9 @@ class Edit extends Component {
     }
 
     _handleTypeChange(val) {
+        const { attributes: { animatedTextColor }, setAttributes } = this.props
         this.setState({ animationClass: this._getAnimationClass(val) })
-        this.props.setAttributes({ animationType: val })
+        setAttributes(!(val === 'clip' || val === 'flip' || val === 'fade-in' || val === 'loading-bar' || val === 'push') ? { animationType: val, animatedTextColor: { ...animatedTextColor, type: 'color' } } : { animationType: val })
     }
     _getAnimationClass(value = '') {
         let animationClass = ''
@@ -145,6 +146,8 @@ class Edit extends Component {
 
         if (uniqueId) { CssGenerator(this.props.attributes, 'animatedheadline', uniqueId); }
 
+        let gradientTextColor = animationType === 'clip' || animationType === 'flip' || animationType === 'fade-in' || animationType === 'loading-bar' || animationType === 'push'
+
         return (
             <Fragment>
                 <InspectorControls>
@@ -172,12 +175,17 @@ class Edit extends Component {
                             ]}
                             onChange={val => this._handleTypeChange(val)}
                         />
-                        <ColorAdvanced
-                            textColor
-                            label={__('Aniamated-text Color')}
-                            value={animatedTextColor}
-                            onChange={val => setAttributes({ animatedTextColor: val })}
-                        />
+                        {
+                            gradientTextColor ?
+                                <ColorAdvanced
+                                    textColor
+                                    label={__('Aniamated-text Color')}
+                                    value={animatedTextColor}
+                                    onChange={val => setAttributes({ animatedTextColor: val })}
+                                />
+                                :
+                                <Color label={__('Aniamated-text Color')} value={animatedTextColor.color} onChange={val => setAttributes({ animatedTextColor: { ...animatedTextColor, color: val } })} />
+                        }
                         <ColorAdvanced
                             textColor
                             label={__('Background')}
@@ -203,16 +211,6 @@ class Edit extends Component {
                             onChange={val => setAttributes({ animatedTextPadding: val })}
                             onDeviceChange={value => this.setState({ device: value })}
                         />
-                        {/* <BorderRadius
-                            min={0}
-                            max={100}
-                            responsive
-                            label={__('Radius')}
-                            unit={['px', 'em', '%']}
-                            value={animatedTextBorderRadius}
-                            onChange={(value) => setAttributes({ animatedTextBorderRadius: value })}
-                            device={device} onDeviceChange={value => this.setState({ device: value })}
-                        /> */}
 
                     </PanelBody>
 

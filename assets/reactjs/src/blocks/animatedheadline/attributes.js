@@ -45,7 +45,7 @@ export const attributes = {
         default: {
             type: 'color',
             textColor: true,
-            openColor: 0,
+            openColor: 1,
             color: '#2184F9',
             gradient: {
                 color1: '#1066CC',
