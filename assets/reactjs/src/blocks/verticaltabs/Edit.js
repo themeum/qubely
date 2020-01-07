@@ -189,6 +189,7 @@ class Edit extends Component {
 			enableIcon,
 			navWidth,
 			navSpacing,
+			navSpacing3,
 			// navSize,
 			navPaddingX,
 			navPaddingY,
@@ -197,14 +198,29 @@ class Edit extends Component {
 			navTextAlignment,
 			typography,
 			navColor,
+			navColor3,
 			navColorActive,
+			navColorActive3,
 			navColorHover,
+			navColorHover3,
 			navBg,
+			navBg2,
+			navBg3,
 			navBgHover,
+			navBgHover2,
+			navBgHover3,
 			navBgActive,
+			navBgActive2,
+			navBgActive3,
 			navBorder,
+			navBorder2,
+			navBorder3,
 			navBorderColorActive,
+			navBorderColorActive2,
+			navBorderColorActive3,
 			navBorderColorHover,
+			navBorderColorHover2,
+			navBorderColorHover3,
 			navBorderRadiusTabs,
 			navBorderRadiusTabsActive,
 			navBorderRadiusTabsHover,
@@ -237,6 +253,8 @@ class Edit extends Component {
 			textColorHover,
 
 			bodyBg,
+			bodyBg2,
+			bodyBg3,
 			bodyPadding,
 			bodyBorder,
 			bodyShadow,
@@ -244,6 +262,8 @@ class Edit extends Component {
 			// bodySeparatorHeight,
 			// bodySeparatorColor,
 			bodySpacing,
+			bodySpacing2,
+			bodySpacing3,
 
 			//animation
 			animation,
@@ -266,6 +286,8 @@ class Edit extends Component {
 			iterator.push(index)
 			index++
 		}
+ 
+
 		return (
 			<Fragment>
 				<InspectorControls key="inspector">
@@ -301,29 +323,63 @@ class Edit extends Component {
 					<PanelBody title={__('Tabs Menu')} initialOpen={false}>
 						<Tabs>
 							<Tab tabTitle={__('Normal')}>
-								<ColorAdvanced label={__('Background')} value={navBg} onChange={navBg => setAttributes({ navBg })} />
+								<ColorAdvanced 
+									label = {__('Background')} 
+									value = { tabStyle === 'layout1' ? navBg : (tabStyle === 'layout2' ? navBg2 : navBg3) } 
+									onChange = { value => setAttributes(tabStyle === 'layout1' ? {navBg: value} : (tabStyle === 'layout2' ? {navBg2: value} : {navBg3: value}))} 
+								/>
 								<Separator />
 								<Range label={__('Padding Y')} value={navPaddingY} onChange={navPaddingY => setAttributes({ navPaddingY })} max={100} min={0} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
 								<Range label={__('Padding X')} value={navPaddingX} onChange={navPaddingX => setAttributes({ navPaddingX })} max={100} min={0} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
 								<Separator />
 								<BorderRadius label={__('Corner')} value={navBorderRadiusTabs} onChange={(navBorderRadiusTabs) => setAttributes({ navBorderRadiusTabs })} min={0} max={100} unit={['px', 'em', '%']}/>  {/*responsive device={device} onDeviceChange={value => this.setState({ device: value })}*/}
-								<Border label={__('Border')} value={navBorder} onChange={(value) => setAttributes({ navBorder: value })} min={0} max={100} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
-								<Range label={__('Gap / Spacing')} value={navSpacing} onChange={navSpacing => setAttributes({ navSpacing })} max={100} min={0} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
+								<Border 
+									label={__('Border')} 
+									value={tabStyle === 'layout1' ? navBorder : (tabStyle === 'layout2' ? navBorder2 : navBorder3 )} 
+									onChange={value => setAttributes(tabStyle === 'layout1' ? {navBorder: value} : (tabStyle === 'layout2' ? {navBorder2: value} : {navBorder3: value} ))} 
+									min={0} max={100} 
+									onDeviceChange={value => this.setState({ device: value })}
+									unit={['px', 'em', '%']} responsive device={device}
+								/>
+								<Range 
+									label={__('Gap / Spacing')} 
+									value={tabStyle === 'layout3' ? navSpacing : navSpacing3} 
+									onChange={value => setAttributes(tabStyle === 'layout3' ? {navSpacing3: value} : {navSpacing: value})} 
+									max={100} min={0} unit={['px', 'em', '%']} 
+									responsive device={device} 
+									onDeviceChange={value => this.setState({ device: value })} 
+								/>
 								<BoxShadow label={__('Shadow')} value={navShadow} onChange={navShadow => setAttributes({ navShadow})} />
 								<BoxShadow label={__('Shadow 2')} value={navShadow2} onChange={navShadow2 => setAttributes({ navShadow2})} />
 							</Tab>
 							<Tab tabTitle={__('Active')}>
-								<ColorAdvanced label={__('Background')} value={navBgActive} onChange={navBgActive => setAttributes({ navBgActive })} />
+								<ColorAdvanced 
+									label={__('Background')} 
+									value = {tabStyle === 'layout1' ? navBgActive : (tabStyle === 'layout2' ? navBgActive2 : navBgActive3)}
+									onChange = { value => setAttributes(tabStyle === 'layout1' ? {navBgActive: value} : (tabStyle === 'layout2' ? {navBgActive2: value} : {navBgActive3: value}))}
+								/>
 								<Separator />
-								<Color label={__('Border Color')} value={navBorderColorActive} onChange={(navBorderColorActive) => setAttributes({ navBorderColorActive })} />
+								<Color 
+									label={__('Border Color')} 
+									value={tabStyle === 'layout1' ? navBorderColorActive : (tabStyle === 'layout2' ? navBorderColorActive2 : navBorderColorActive3)} 
+									onChange = { value => setAttributes(tabStyle === 'layout1' ? {navBorderColorActive: value} : (tabStyle === 'layout2' ? {navBorderColorActive2: value} : {navBorderColorActive3: value}))}
+								/>
 								<BorderRadius label={__('Corner')} value={navBorderRadiusTabsActive} onChange={(navBorderRadiusTabsActive) => setAttributes({ navBorderRadiusTabsActive })} min={0} max={100} unit={['px', 'em', '%']} />
 								<BoxShadow label={__('Shadow')} value={navShadowActive} onChange={navShadowActive => setAttributes({ navShadowActive})} />
 								<BoxShadow label={__('Shadow 2')} value={navShadowActive2} onChange={navShadowActive2 => setAttributes({ navShadowActive2})} />
 							</Tab>
 							<Tab tabTitle={__('Hover')}>
-								<ColorAdvanced label={__('Background')} value={navBgHover} onChange={navBgHover => setAttributes({ navBgHover })} />
+								<ColorAdvanced 
+									label={__('Background')} 
+									value = {tabStyle === 'layout1' ? navBgHover : (tabStyle === 'layout2' ? navBgHover2 : navBgHover3)}
+									onChange = { value => setAttributes(tabStyle === 'layout1' ? {navBgHover: value} : (tabStyle === 'layout2' ? {navBgHover2: value} : {navBgHover3: value}))}
+								/>
 								<Separator />
-								<Color label={__('Border Color')} value={navBorderColorHover} onChange={(navBorderColorHover) => setAttributes({ navBorderColorHover })} />
+								<Color 
+									label={__('Border Color')} 
+									value={tabStyle === 'layout1' ? navBorderColorHover : (tabStyle === 'layout2' ? navBorderColorHover2 : navBorderColorHover3)} 
+									onChange = { value => setAttributes(tabStyle === 'layout1' ? {navBorderColorHover: value} : (tabStyle === 'layout2' ? {navBorderColorHover2: value} : {navBorderColorHover3: value}))}
+								/>
 								<BorderRadius label={__('Corner')} value={navBorderRadiusTabsHover} onChange={(navBorderRadiusTabsHover) => setAttributes({ navBorderRadiusTabsHover })} min={0} max={100} unit={['px', 'em', '%']} />
 								<BoxShadow label={__('Shadow')} value={navShadowHover} onChange={navShadowHover => setAttributes({ navShadowHover})} />
 								<BoxShadow label={__('Shadow 2')} value={navShadowHover2} onChange={navShadowHover2 => setAttributes({ navShadowHover2})} />
@@ -334,7 +390,11 @@ class Edit extends Component {
 					<PanelBody title={__('Text Label')} initialOpen={false}>
 						<Tabs>
 							<Tab tabTitle={__('Normal')}>
-								<Color label={__('Color')} value={navColor} onChange={(navColor) => setAttributes({ navColor })} />
+								<Color 
+									label={__('Color')} 
+									value={tabStyle === 'layout3' ? navColor3 : navColor } 
+									onChange={(value) => setAttributes(tabStyle === 'layout3' ? {navColor3: value} : {navColor: value})} 
+								/>
 								<RadioAdvanced
 									label={__('Alignment')}
 									options={[
@@ -346,10 +406,18 @@ class Edit extends Component {
 								<Typography label={__('Typography')} value={typography} onChange={(value) => setAttributes({ typography: value })} disableLineHeight device={device} onDeviceChange={value => this.setState({ device: value })} />
 							</Tab>
 							<Tab tabTitle={__('Active')}>
-								<Color label={__('Color')} value={navColorActive} onChange={(navColorActive) => setAttributes({ navColorActive })} />
+								<Color 
+									label={__('Color')} 
+									value={tabStyle === 'layout3' ? navColorActive3 : navColorActive } 
+									onChange={(value) => setAttributes(tabStyle === 'layout3' ? {navColorActive3: value} : {navColorActive: value})} 
+								/>
 							</Tab>
 							<Tab tabTitle={__('Hover')}>
-								<Color label={__('Color')} value={navColorHover} onChange={(navColorHover) => setAttributes({ navColorHover })} />
+								<Color 
+									label={__('Color')} 
+									value={tabStyle === 'layout3' ? navColorHover3 : navColorHover } 
+									onChange={(value) => setAttributes(tabStyle === 'layout3' ? {navColorHover3: value} : {navColorHover: value})} 
+								/>
 							</Tab>
 						</Tabs>
 						<Fragment>
@@ -488,19 +556,18 @@ class Edit extends Component {
 						)}
 					</PanelBody>
 					<PanelBody title={__('Body')} initialOpen={false}>
-						{/*{tabStyle == 'underline' &&*/}
-						{/*	<Fragment>*/}
-						{/*		<Range label={__('Separator Height')} value={bodySeparatorHeight} onChange={(value) => setAttributes({ bodySeparatorHeight: value })} min={0} max={5} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />*/}
-						{/*		{bodySeparatorHeight.md > 0 &&*/}
-						{/*			<Color label={__('Separator Color')} value={bodySeparatorColor} onChange={(value) => setAttributes({ bodySeparatorColor: value })} />*/}
-						{/*		}*/}
-						{/*		<Separator />*/}
-						{/*	</Fragment>*/}
-						{/*}*/}
-
-						<Color label={__('Background Color')} value={bodyBg} onChange={(value) => setAttributes({ bodyBg: value })} />
+						<Color 
+							label={__('Background Color')} 
+							value = { tabStyle === 'layout1' ? bodyBg : (tabStyle === 'layout2' ? bodyBg2 : bodyBg3) } 
+							onChange = { value => setAttributes(tabStyle === 'layout1' ? {bodyBg: value} : (tabStyle === 'layout2' ? {bodyBg2: value} : {bodyBg3: value}))} 
+						/>
 						<Padding label={__('Padding')} value={bodyPadding} onChange={(value) => setAttributes({ bodyPadding: value })} unit={['px', 'em', '%']} max={100} min={0} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
-						<Range label={__('Spacing')} value={bodySpacing} onChange={(value) => setAttributes({ bodySpacing: value })} unit={['px', 'em', '%']} max={100} min={0} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
+						<Range 
+							label={__('Spacing')} 
+							value = { tabStyle === 'layout1' ? bodySpacing : (tabStyle === 'layout2' ? bodySpacing2 : bodySpacing3) } 
+							onChange = { value => setAttributes(tabStyle === 'layout1' ? {bodySpacing: value} : (tabStyle === 'layout2' ? {bodySpacing2: value} : {bodySpacing3: value}))}  
+							unit={['px', 'em', '%']} max={100} min={0} responsive device={device} 
+						/>
 						<Border label={__('Border')} separator value={bodyBorder} onChange={(value) => setAttributes({ bodyBorder: value })} unit={['px', 'em', '%']} max={100} min={0} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
 						<BoxShadow label={__('Box-Shadow')} value={bodyShadow} onChange={(value) => setAttributes({ bodyShadow: value })} />
 						<BorderRadius label={__('Radius')} separator value={bodyBorderRadius} onChange={(value) => setAttributes({ bodyBorderRadius: value })} unit={['px', 'em', '%']} max={100} min={0} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />

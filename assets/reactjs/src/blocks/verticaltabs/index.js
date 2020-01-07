@@ -52,14 +52,15 @@ registerBlockType('qubely/verticaltabs', {
             }]
         },
         tabs: { type: 'number', default: 3 },
-        tabStyle: { type: 'string', default: 'pills' },
+        tabStyle: { type: 'string', default: 'layout1' },
 
         tabTitles: {
             type: 'array',
             default: [
-                { title: 'Tab 1' },
-                { title: 'Tab 2' },
-                { title: 'Tab 3' }
+                { title: 'Automatic Night Modes', iconName: 'fab fa-facebook' },
+                { title: 'Incident impact', iconName: 'fab fa-twitter' },
+                { title: 'Powers Matters', iconName: 'fab fa-linkedin' }
+
             ]
         },
 
@@ -89,7 +90,26 @@ registerBlockType('qubely/verticaltabs', {
         // Spacing
         textSpacing: { type: 'object', default: { md: 12, unit: 'px' }, style: [{ selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-nav .qubely-vertical-tab-nav-text{margin-top: {{textSpacing}}}' }] },
         navSubHeadingSpacing: { type: 'object', default: { md: 12, unit: 'px' }, style: [{ selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-nav .qubely-vertical-tab-nav-sub-heading{margin-top: {{navSubHeadingSpacing}}}' }] },
-        navSpacing: { type: 'object', default: { md: 0.01, unit: 'px' }, style: [{ selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-item:not(:last-child){margin-bottom: {{navSpacing}};}' }] },
+        navSpacing: { 
+            type: 'object', 
+            default: { md: 8, unit: 'px' }, 
+            style: [{
+                condition: [{ key: 'tabStyle', relation: '!=', value: 'layout3' }],
+                selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-item:not(:last-child){margin-bottom: {{navSpacing}};}' 
+            }] 
+        }, 
+        navSpacing3: {
+            type: 'object',
+            default: {
+                md: 0,
+                unit: 'px'
+            },
+            style: [{
+                condition: [{ key: 'tabStyle', relation: '==', value: 'layout3' }],
+                selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-item:not(:last-child){margin-bottom: {{navSpacing3}};}'
+            }]
+        },
+        
         navWidth: {
             type: 'object',
             default: {
@@ -117,7 +137,41 @@ registerBlockType('qubely/verticaltabs', {
         },
 
         //Color
-        navColor: { type: 'string', default: '#999999', style: [{ selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-item-button { color:{{navColor}}; }' }] },
+        navColor: { 
+            type: 'string', 
+            default: '#999999', 
+            style: [{ 
+                condition: [{ key: 'tabStyle', relation: '!=', value: 'layout3' }],
+                selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-item-button { color:{{navColor}}; }' 
+            }] 
+        },
+        navColor3: {
+            type: 'string',
+            default: '#ffffff',
+            style: [{
+                condition: [{ key: 'tabStyle', relation: '==', value: 'layout3' }],
+                selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-item-button { color:{{navColor3}}; }'
+            }]
+        },
+
+        navColorActive: {
+            type: 'string',
+            default: '#3979FF',
+            style: [{
+                condition: [{ key: 'tabStyle', relation: '!=', value: 'layout3' }],
+                selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-item.qubely-vertical-active .qubely-vertical-tab-item-button { color:{{navColorActive}}; }'
+            }]
+        },
+
+        navColorActive3: {
+            type: 'string',
+            default: '#ffffff',
+            style: [{
+                condition: [{ key: 'tabStyle', relation: '==', value: 'layout3' }],
+                selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-item.qubely-vertical-active .qubely-vertical-tab-item-button { color:{{navColorActive3}}; }'
+            }]
+        },
+
         iconColor: { type: 'string', default: '#999999', style: [{ selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-item-button .qubely-vertical-tab-icon { color:{{iconColor}}; }' }] },
         iconColorActive: { type: 'string', default: '', style: [{ selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-item.qubely-vertical-active .qubely-vertical-tab-item-button .qubely-vertical-tab-icon { color:{{iconColorActive}}; }' }] },
         iconColorHover: { type: 'string', default: '', style: [{ selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-item-button:hover .qubely-vertical-tab-icon, {{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-item.qubely-vertical-active .qubely-vertical-tab-item-button:hover .qubely-vertical-tab-icon { color:{{iconColorHover}}; }' }] },
@@ -148,21 +202,60 @@ registerBlockType('qubely/verticaltabs', {
             },
             style: [
                 {
+                    condition: [{ key: 'tabStyle', relation: '==', value: 'layout1' }],
                     selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-item'
                 }
             ]
         },
 
-        navColorActive: { type: 'string', default: '', style: [{ selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-item.qubely-vertical-active .qubely-vertical-tab-item-button { color:{{navColorActive}}; }' }] },
-        navBorderColorActive: { type: 'string', default: '', style: [{ selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-item.qubely-vertical-active .qubely-vertical-tab-item-button { border-color:{{navBorderColorActive}}; }' }] },
-        navBorderColorHover: { type: 'string', default: '', style: [{ selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-item.qubely-vertical-active .qubely-vertical-tab-item-button:hover, {{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-item-button:hover { border-color:{{navBorderColorHover}}; }' }] },
+        navBg2: {
+            type: 'object',
+            default: {
+                openColor: 1,
+                type: 'color',
+                color: '',
+                gradient: {
+                    type: 'linear',
+                    color1: '#25b5e1',
+                    color2: '#45dbca',
+                    direction: '47',
+                    start: '0',
+                    stop: '100'
+                }
+            },
+            style: [{
+                condition: [{ key: 'tabStyle', relation: '==', value: 'layout2' }],
+                selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-item'
+            }]
+        },
+
+        navBg3: {
+            type: 'object',
+            default: {
+                openColor: 1,
+                type: 'color',
+                color: '#5A13FE',
+                gradient: {
+                    type: 'linear',
+                    color1: '#25b5e1',
+                    color2: '#45dbca',
+                    direction: '47',
+                    start: '0',
+                    stop: '100'
+                }
+            },
+            style: [{
+                condition: [{ key: 'tabStyle', relation: '==', value: 'layout3' }],
+                selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-item'
+            }]
+        },
 
         navBgActive: {
             type: 'object',
             default: {
-                openColor: 0,
+                openColor: 1,
                 type: 'color',
-                color: '#f3f3f3',
+                color: '#EBF1FF',
                 gradient: {
                     type: 'linear',
                     color1: '#45dbca',
@@ -172,12 +265,54 @@ registerBlockType('qubely/verticaltabs', {
                     stop: '100'
                 }
             },
-            style: [
-                {
-                    selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-item.qubely-vertical-active .qubely-vertical-tab-item-button'
-                }
-            ]
+            style: [{
+                condition: [{ key: 'tabStyle', relation: '==', value: 'layout1' }],
+                selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-item.qubely-vertical-active .qubely-vertical-tab-item-button'
+            }]
         },
+
+        navBgActive2: {
+            type: 'object',
+            default: {
+                openColor: 0,
+                type: 'color',
+                color: '',
+                gradient: {
+                    type: 'linear',
+                    color1: '#45dbca',
+                    color2: '#25b5e1',
+                    direction: '47',
+                    start: '0',
+                    stop: '100'
+                }
+            },
+            style: [{
+                condition: [{ key: 'tabStyle', relation: '==', value: 'layout2' }],
+                selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-item.qubely-vertical-active .qubely-vertical-tab-item-button'
+            }]
+        },
+
+        navBgActive3: {
+            type: 'object',
+            default: {
+                openColor: 1,
+                type: 'color',
+                color: '#3902B8',
+                gradient: {
+                    type: 'linear',
+                    color1: '#45dbca',
+                    color2: '#25b5e1',
+                    direction: '47',
+                    start: '0',
+                    stop: '100'
+                }
+            },
+            style: [{
+                condition: [{ key: 'tabStyle', relation: '==', value: 'layout3' }],
+                selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-item.qubely-vertical-active .qubely-vertical-tab-item-button'
+            }]
+        },
+
 
         navColorHover: {
             type: 'string',
@@ -213,22 +348,108 @@ registerBlockType('qubely/verticaltabs', {
         navBorder: {
             type: 'object',
             default: {
-                widthType: 'global',
+                widthType: 'custom',
                 unit: 'px',
-                openBorder: 0,
-                type: '',
-                global: {
-                    md: '1'
+                openBorder: 1,
+                type: 'solid',
+                color: 'transparent',
+                custom: {
+                    md: '0 3 0 0'
                 },
-                color: '#566372',
             },
             style: [
                 {
+                    condition: [{ key: 'tabStyle', relation: '==', value: 'layout1' }],
                     selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-item .qubely-vertical-tab-item-button'
                 }
             ]
         },
 
+        navBorder2: {
+            type: 'object',
+            default: {
+                widthType: 'custom',
+                unit: 'px',
+                openBorder: 1,
+                type: 'solid',
+                color: 'transparent',
+                custom: {
+                    md: '0 0 2 0'
+                },
+            },
+            style: [{
+                condition: [{ key: 'tabStyle', relation: '==', value: 'layout2' }],
+                selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-item .qubely-vertical-tab-item-button'
+            }]
+        },
+
+        navBorder3: {
+            type: 'object',
+            default: {
+                widthType: 'custom',
+                unit: 'px',
+                openBorder: 1,
+                type: 'solid',
+                color: 'transparent',
+                custom: {
+                    md: '0 0 0 3'
+                },
+            },
+            style: [{
+                condition: [{ key: 'tabStyle', relation: '==', value: 'layout3' }],
+                selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-item .qubely-vertical-tab-item-button'
+            }]
+        },
+
+        navBorderColorActive: {
+            type: 'string',
+            default: '#2084f9',
+            style: [{
+                condition: [{ key: 'tabStyle', relation: '==', value: 'layout1' }],
+                selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-item.qubely-vertical-active .qubely-vertical-tab-item-button { border-color:{{navBorderColorActive}}; }'
+            }]
+        },
+        navBorderColorActive2: {
+            type: 'string',
+            default: '#222222',
+            style: [{
+                condition: [{ key: 'tabStyle', relation: '==', value: 'layout2' }],
+                selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-item.qubely-vertical-active .qubely-vertical-tab-item-button { border-color:{{navBorderColorActive2}}; }'
+            }]
+        },
+        navBorderColorActive3: {
+            type: 'string',
+            default: '#50E3C2',
+            style: [{
+                condition: [{ key: 'tabStyle', relation: '==', value: 'layout3' }],
+                selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-item.qubely-vertical-active .qubely-vertical-tab-item-button { border-color:{{navBorderColorActive3}}; }'
+            }]
+        },
+
+        navBorderColorHover: {
+            type: 'string',
+            default: '',
+            style: [{
+                condition: [{ key: 'tabStyle', relation: '==', value: 'layout1' }],
+                selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-item.qubely-vertical-active .qubely-vertical-tab-item-button:hover, {{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-item-button:hover { border-color:{{navBorderColorHover}}; }'
+            }]
+        },
+        navBorderColorHover2: {
+            type: 'string',
+            default: '',
+            style: [{
+                condition: [{ key: 'tabStyle', relation: '==', value: 'layout2' }],
+                selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-item.qubely-vertical-active .qubely-vertical-tab-item-button:hover, {{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-item-button:hover { border-color:{{navBorderColorHover2}}; }'
+            }]
+        },
+        navBorderColorHover3: {
+            type: 'string',
+            default: '',
+            style: [{
+                condition: [{ key: 'tabStyle', relation: '==', value: 'layout3' }],
+                selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-item.qubely-vertical-active .qubely-vertical-tab-item-button:hover, {{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-item-button:hover { border-color:{{navBorderColorHover3}}; }'
+            }]
+        },
 
         // Radius
         navBorderRadiusTabs: {
@@ -237,13 +458,13 @@ registerBlockType('qubely/verticaltabs', {
                 openBorderRadius: 1,
                 radiusType: 'global',
                 global: {
-                    md: 4,
+                    md: 0,
                 },
                 unit: 'px'
             },
             style: [
                 {
-                    selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-item-button, {{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-item'
+                    selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-nav .qubely-vertical-tab-item .qubely-vertical-tab-item-button, {{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-nav .qubely-vertical-tab-item'
                 }
             ]
         },
@@ -261,7 +482,8 @@ registerBlockType('qubely/verticaltabs', {
             },
             style: [
                 {
-                    selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-item-button'
+                    selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-nav .qubely-vertical-tab-item.qubely-vertical-active .qubely-vertical-tab-item-button,'
+                            +'{{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-nav .qubely-vertical-tab-item.qubely-vertical-active'
                 }
             ]
         },
@@ -279,14 +501,17 @@ registerBlockType('qubely/verticaltabs', {
             },
             style: [
                 {
-                    selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-item-button'
+                    selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-nav .qubely-vertical-tab-item:hover .qubely-vertical-tab-item-button,' +
+                        '{{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-nav .qubely-vertical-tab-item:hover,' +
+                        '{{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-nav .qubely-vertical-tab-item.qubely-vertical-active:hover .qubely-vertical-tab-item-button,' +
+                        '{{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-nav .qubely-vertical-tab-item.qubely-vertical-active:hover'
                 }
             ]
         },
 
         navText: { type: 'boolean', default: false },
         navSubHeading: { type: 'boolean', default: false },
-        enableIcon: { type: 'boolean', default: false },
+        enableIcon: { type: 'boolean', default: true },
         navShadow: {
             type: 'object', default: {},
             style: [
@@ -342,9 +567,26 @@ registerBlockType('qubely/verticaltabs', {
             type: 'string', default: '#FFFFFF',
             style: [
                 {
+                    condition: [{key: 'tabStyle', relation: '==', value: 'layout1'}],
                     selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-body {background-color: {{bodyBg}};}'
                 }
             ]
+        },
+        bodyBg2: {
+            type: 'string',
+            default: '#f7f7f7',
+            style: [{
+                condition: [{key: 'tabStyle', relation: '==', value: 'layout2'}],
+                selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-body {background-color: {{bodyBg2}};}'
+            }]
+        },
+        bodyBg3: {
+            type: 'string',
+            default: '#3902B8',
+            style: [{
+                condition: [{key: 'tabStyle', relation: '==', value: 'layout3'}],
+                selector: '{{QUBELY}} .qubely-block-vertical-tab .qubely-vertical-tab-body {background-color: {{bodyBg3}};}'
+            }]
         },
         bodyPadding: {
             type: 'object',
@@ -396,7 +638,26 @@ registerBlockType('qubely/verticaltabs', {
             type: 'object', default: { md: 20, unit: 'px' },
             style: [
                 {
+                    condition: [{key: 'tabStyle', 'relation': '==', value: 'layout1'}],
                     selector: '{{QUBELY}} .qubely-block-vertical-tab.qubely-alignment-left .qubely-vertical-tab-body {margin-left: {{bodySpacing}};} {{QUBELY}} .qubely-block-vertical-tab.qubely-alignment-right .qubely-vertical-tab-body {margin-right: {{bodySpacing}};}'
+                }
+            ]
+        },
+        bodySpacing2: {
+            type: 'object', default: { md: 20, unit: 'px' },
+            style: [
+                {
+                    condition: [{key: 'tabStyle', 'relation': '==', value: 'layout2'}],
+                    selector: '{{QUBELY}} .qubely-block-vertical-tab.qubely-alignment-left .qubely-vertical-tab-body {margin-left: {{bodySpacing2}};} {{QUBELY}} .qubely-block-vertical-tab.qubely-alignment-right .qubely-vertical-tab-body {margin-right: {{bodySpacing2}};}'
+                }
+            ]
+        },
+        bodySpacing3: {
+            type: 'object', default: { md: 0, unit: 'px' },
+            style: [
+                {
+                    condition: [{key: 'tabStyle', 'relation': '==', value: 'layout3'}],
+                    selector: '{{QUBELY}} .qubely-block-vertical-tab.qubely-alignment-left .qubely-vertical-tab-body {margin-left: {{bodySpacing3}};} {{QUBELY}} .qubely-block-vertical-tab.qubely-alignment-right .qubely-vertical-tab-body {margin-right: {{bodySpacing3}};}'
                 }
             ]
         }

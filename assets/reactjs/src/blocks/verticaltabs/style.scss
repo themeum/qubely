@@ -11,9 +11,11 @@
 	/** Tab Navigation **/
 	.qubely-vertical-tab-nav {
 	  flex-grow: 0;
+	  font-size: 17px;
 	  button{
 		border: none;
 		transition: background 300ms, color 300ms;
+		border-radius: 0;
 	  }
 	  .qubely-vertical-tab-nav-sub-heading,
 	  .qubely-vertical-tab-title{
@@ -48,9 +50,6 @@
 			max-width: 1.3em;
 			flex-basis: 1.3em;
 			min-width: 1.3em;
-		  }
-		  &:focus{
-			outline: none;
 		  }
 		  &.qubely-vertical-tab-item-button{
 			display: flex;
