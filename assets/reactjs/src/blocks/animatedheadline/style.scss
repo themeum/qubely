@@ -1,13 +1,18 @@
-.animated-heading-text {
-  display: flex;
-  flex-wrap: wrap;
-  .editor-rich-text {
-    padding: 0 8px;
-  }
-  .animated-heading-after-part {
-    padding-left: 8px;
-  }
-  .animated-heading-before-part {
-    padding-right: 8px;
+.qubely-addon-animated-heading {
+  .animated-heading-text {
+    &::before {
+      display: none;
+    }
+    display: flex;
+    flex-wrap: wrap;
+    .editor-rich-text {
+      padding: 0 8px;
+    }
+    .animated-heading-after-part {
+      padding-left: 8px;
+    }
+    .animated-heading-before-part {
+      padding-right: 8px;
+    }
   }
 }
