@@ -245,8 +245,14 @@ class Edit extends Component {
 			iconGap,
 			iconPosition,
 			iconColor,
+			iconColor2,
+			iconColor3,
 			iconColorActive,
+			iconColorActive2,
+			iconColorActive3,
 			iconColorHover,
+			iconColorHover2,
+			iconColorHover3,
 
 			textColor,
 			textColorActive,
@@ -474,13 +480,23 @@ class Edit extends Component {
 														onChange={(value) => this.updateTitles({ iconName: value }, activeTab - 1)} />
 													<Tabs>
 														<Tab tabTitle={__('Normal')}>
-															<Color label={__('Color')} value={iconColor} onChange={(iconColor) => setAttributes({ iconColor })} />
+															<Color label={__('Color')} 
+															value={tabStyle === 'layout1' ? iconColor : (tabStyle === 'layout2' ? iconColor2 : iconColor3 )} 
+															onChange={value => setAttributes(tabStyle === 'layout1' ? {iconColor: value} : (tabStyle === 'layout2' ? {iconColor2: value} : {iconColor3: value} ))} 
+														/>
 														</Tab>
 														<Tab tabTitle={__('Active')}>
-															<Color label={__('Color')} value={iconColorActive} onChange={(iconColorActive) => setAttributes({ iconColorActive })} />
+															<Color 
+																label={__('Color')} 
+																value={tabStyle === 'layout1' ? iconColorActive : (tabStyle === 'layout2' ? iconColorActive2 : iconColorActive3 )} 
+																onChange={value => setAttributes(tabStyle === 'layout1' ? {iconColorActive: value} : (tabStyle === 'layout2' ? {iconColorActive2: value} : {iconColorActive3: value} ))} 
+															/>
 														</Tab>
 														<Tab tabTitle={__('Hover')}>
-															<Color label={__('Color')} value={iconColorHover} onChange={(iconColorHover) => setAttributes({ iconColorHover })} />
+															<Color label={__('Color')} 
+																value={tabStyle === 'layout1' ? iconColorHover : (tabStyle === 'layout2' ? iconColorHover2 : iconColorHover3 )} 
+																onChange={value => setAttributes(tabStyle === 'layout1' ? {iconColorHover: value} : (tabStyle === 'layout2' ? {iconColorHover2: value} : {iconColorHover3: value} ))} 
+															/>
 														</Tab>
 													</Tabs>
 												</Fragment>
@@ -555,7 +571,7 @@ class Edit extends Component {
 							</Tabs>
 						)}
 					</PanelBody>
-					<PanelBody title={__('Body')} initialOpen={false}>
+					<PanelBody title={__('Tab Body')} initialOpen={false}>
 						<Color 
 							label={__('Background Color')} 
 							value = { tabStyle === 'layout1' ? bodyBg : (tabStyle === 'layout2' ? bodyBg2 : bodyBg3) } 

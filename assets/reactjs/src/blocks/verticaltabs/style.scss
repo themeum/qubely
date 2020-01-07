@@ -11,11 +11,16 @@
 	/** Tab Navigation **/
 	.qubely-vertical-tab-nav {
 	  flex-grow: 0;
-	  font-size: 17px;
+	  font-size: 18px;
+	  font-weight: 400;
 	  button{
 		border: none;
 		transition: background 300ms, color 300ms;
 		border-radius: 0;
+		font-weight: inherit;
+		&:focus{
+			outline-offset: -2px;
+		}
 	  }
 	  .qubely-vertical-tab-nav-sub-heading,
 	  .qubely-vertical-tab-title{
