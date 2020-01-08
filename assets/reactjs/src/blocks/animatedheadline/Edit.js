@@ -1,31 +1,33 @@
 const { RichText } = wp.editor
 const { __ } = wp.i18n
-const { InspectorControls, BlockControls } = wp.blockEditor
+const {
+    AlignmentToolbar,
+    BlockControls,
+    InspectorControls,
+} = wp.blockEditor
 const { Component, Fragment } = wp.element
 const { PanelBody, SelectControl, FormTokenField } = wp.components;
 const {
     Color,
     ColorAdvanced,
+    ContextMenu: {
+        ContextMenu,
+        handleContextMenu
+    },
     Padding,
-    BoxShadow,
-    Tabs,
-    Tab,
-    Border,
-    BorderRadius,
-    Background,
     Typography,
     gloalSettings: {
         globalSettingsPanel,
         animationSettings,
         interactionSettings
     },
-    Inline: {
-        InlineToolbar
-    },
+    HeadingToolbar,
     CssGenerator: {
         CssGenerator
     }
 } = wp.qubelyComponents
+
+const defaultTexts = ['Demo-one', 'Demo-two']
 
 class Edit extends Component {
 
@@ -51,7 +53,7 @@ class Edit extends Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        const { animationType } = this.props.attributes
+        const { animationType, animatedText, level } = this.props.attributes
         const { attributes } = prevProps
         if (animationType !== attributes.animationType) {
             if (this.anim) {
@@ -64,8 +66,13 @@ class Edit extends Component {
                 setTimeout(() => {
                     this.anim = new window.animatedHeading({ heading: $(this.animatedHeading) })
                 }, 100)
-
             }
+        }
+
+        if ((animatedText.length !== attributes.animatedText.length) || (level !== attributes.level)) {
+            this.anim.destroy();
+            delete this.anim;
+            this.anim = new window.animatedHeading({ heading: $(this.animatedHeading) })
         }
     }
 
@@ -111,10 +118,15 @@ class Edit extends Component {
 
     render() {
         const {
+            name,
+            clientId,
             className,
+            attributes,
             setAttributes,
             attributes: {
                 uniqueId,
+                align,
+                level,
                 animatedText,
                 titleBefore,
                 titleAfter,
@@ -122,11 +134,11 @@ class Edit extends Component {
 
                 typography,
                 color,
+                barColor,
                 animatedTextColor,
                 animatedTextBgColor,
                 animatedTextTypography,
                 animatedTextPadding,
-                animatedTextBorderRadius,
 
                 animation,
                 interaction,
@@ -145,19 +157,24 @@ class Edit extends Component {
         const { device, animationClass } = this.state
 
         if (uniqueId) { CssGenerator(this.props.attributes, 'animatedheadline', uniqueId); }
-
-        let gradientTextColor = animationType === 'clip' || animationType === 'flip' || animationType === 'fade-in' || animationType === 'loading-bar' || animationType === 'push'
+        let gradientTextColor = animationType === 'clip' || animationType === 'flip' || animationType === 'fade-in' || animationType === 'loading-bar' || animationType === 'push';
+        const CustomHeadingTag = `h${level}`;
 
         return (
             <Fragment>
                 <InspectorControls>
-                    <PanelBody title="Animated Text">
+                    <PanelBody title={__('Headline level')} opened={true}>
+                        <HeadingToolbar minLevel={1} maxLevel={6} selectedLevel={level} isCollapsed={false} onChange={(newLevel) => setAttributes({ level: newLevel })} />
+                    </PanelBody>
+                    <PanelBody title={__('Animated Text')}>
                         <FormTokenField
                             label={__('Animated Texts')}
                             value={animatedText}
                             placeholder={__("Add new text")}
                             onChange={tokens => setAttributes({ animatedText: tokens })}
                         />
+
+
                         <SelectControl
                             label={__('Animation Type')}
                             value={animationType}
@@ -176,6 +193,10 @@ class Edit extends Component {
                             onChange={val => this._handleTypeChange(val)}
                         />
                         {
+                            animationType === 'loading-bar' &&
+                            <Color label={__('Bar Color')} value={barColor} onChange={val => setAttributes({ barColor: val })} />
+                        }
+                        {
                             gradientTextColor ?
                                 <ColorAdvanced
                                     textColor
@@ -192,7 +213,6 @@ class Edit extends Component {
                             value={animatedTextBgColor}
                             onChange={val => setAttributes({ animatedTextBgColor: val })}
                         />
-
                         <Typography
                             device={device}
                             label={__('Typography')}
@@ -229,9 +249,14 @@ class Edit extends Component {
 
                     {interactionSettings(uniqueId, interaction, setAttributes)}
                 </InspectorControls>
+                <BlockControls>
+                    <HeadingToolbar minLevel={1} maxLevel={6} selectedLevel={level} onChange={(newLevel) => setAttributes({ level: newLevel })} />
+                    <AlignmentToolbar value={align} onChange={nextAlign => setAttributes({ align: nextAlign })} />
+                </BlockControls>
                 {globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
-                <div className={`qubely-block-${uniqueId} qubely-addon-animated-heading ${className}`} >
-                    <h2 className={`animated-heading-text ${animationClass}`} ref={el => this.animatedHeading = el}>
+
+                <div className={`qubely-block-${uniqueId} qubely-block-animated-heading ${className}`} onContextMenu={event => handleContextMenu(event, this.refs.qubelyContextMenu)} >
+                    <CustomHeadingTag className={`animated-heading-text ${animationClass} ${align?` has-text-align-${ align }`:''}`} ref={el => this.animatedHeading = el}>
                         <RichText
                             placeholder={__("Before")}
                             value={titleBefore}
@@ -242,7 +267,7 @@ class Edit extends Component {
                         <span className="qubely-animated-text">
                             <span className="animated-text-words-wrapper">
                                 {
-                                    animatedText.map((item, index) => {
+                                    [...animatedText.length > 0 ? animatedText : defaultTexts].map((item, index) => {
                                         let isVisible = index === 0 ? 'is-visible' : 'is-hidden'
                                         let className = `animated-text ${isVisible}`
                                         return <span className={className}>{item}</span>
@@ -257,7 +282,16 @@ class Edit extends Component {
                             onChange={(titleAfter) => setAttributes({ titleAfter })}
                             className="animated-heading-after-part"
                         />
-                    </h2>
+                    </CustomHeadingTag>
+                    <div ref="qubelyContextMenu" className={`qubely-context-menu-wraper`} >
+                        <ContextMenu
+                            name={name}
+                            clientId={clientId}
+                            attributes={attributes}
+                            setAttributes={setAttributes}
+                            qubelyContextMenu={this.refs.qubelyContextMenu}
+                        />
+                    </div>
                 </div>
 
             </Fragment>

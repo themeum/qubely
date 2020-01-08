@@ -77,7 +77,7 @@ jQuery(document).ready(function ($) {
 
 
     //ANIMATED HEADLINE BLOCK
-    $('.qubely-addon-animated-heading .animated-heading-text').each(function () {
+    $('.qubely-block-animated-heading .animated-heading-text').each(function () {
         let animatedHeadline = $(this)
         if (window.animatedHeading) {
             new window.animatedHeading({ heading: $(animatedHeadline) })

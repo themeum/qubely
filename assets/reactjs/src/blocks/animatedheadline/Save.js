@@ -43,6 +43,7 @@ class Save extends Component {
             className,
             attributes: {
                 uniqueId,
+                align,
                 animation,
                 animatedText,
                 titleBefore,
@@ -53,8 +54,8 @@ class Save extends Component {
         } = this.props
         const interactionClass = IsInteraction(interaction) ? 'qubley-block-interaction' : '';
         return (
-            <div className={`qubely-block-${uniqueId} qubely-addon-animated-heading ${className ? className : ''} ${interactionClass} `} {...animationAttr(animation)} >
-                <h2 className={`animated-heading-text ${this._getAnimationClass(animationType)}`} ref={el => this.animatedHeading = el}>
+            <div className={`qubely-block-${uniqueId} qubely-block-animated-heading ${className ? className : ''} ${interactionClass} `} {...animationAttr(animation)} >
+                <h2 className={`animated-heading-text ${this._getAnimationClass(animationType)}${align?` has-text-align-${ align }`:''}`} ref={el => this.animatedHeading = el}>
                     <RichText.Content
                         tagName='div'
                         value={titleBefore}
