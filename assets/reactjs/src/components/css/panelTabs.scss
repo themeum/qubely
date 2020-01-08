@@ -1,9 +1,9 @@
 .qubely-field-tabs {
     margin-left: -16px;
     margin-right: -16px;
-    &:not(:last-child){
-        padding-bottom: 20px;
-        border-bottom: 1px solid #E9E9E9;
+    background: #F7F8FC;
+    &:last-child{
+        margin-bottom: -16px !important;
     }
     &.qubely-has-label {
         border-top: 1px solid #E9E9E9;
@@ -39,12 +39,14 @@
     }
 
     .qubely-field-tab-items {
-        padding: 15px 15px 0;
+        padding: 15px;
     }
 }
 
+.qubely-field .qubely-field-boxshadow,
 .qubely-field.qubely-field-typography {
     border: 1px solid #E9E9E9;
     padding: 12px;
     border-radius: 5px;
+    background-color: #ffffff;
 }

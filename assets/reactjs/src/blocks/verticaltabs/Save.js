@@ -62,7 +62,7 @@ class Save extends Component {
     }
 
     render() {
-        const { uniqueId, tabs, tabStyle, navAlignment, animation, interaction } = this.props.attributes
+        const { uniqueId, tabs, tabStyle, navAlignment, animation, interaction, enableArrow } = this.props.attributes
         const interactionClass = IsInteraction(interaction) ? 'qubley-block-interaction' : '';
         let iterator = [], index = 0
         while (index < tabs) {
@@ -71,7 +71,7 @@ class Save extends Component {
         }
         return (
             <div className={`qubely-block-${uniqueId}`} {...animationAttr(animation)}>
-                <div className={`qubely-block-vertical-tab ${interactionClass} qubely-vertical-tab-style-${tabStyle} qubely-alignment-${navAlignment}`}>
+                <div className={`qubely-block-vertical-tab ${interactionClass} qubely-vertical-tab-style-${tabStyle} qubely-alignment-${navAlignment} ${enableArrow === true ? 'qubely-block-has-arrow' : ''}`}>
                     <div className={`qubely-vertical-tab-nav`}>
                         {this.renderTabTitles(iterator)}
                     </div>
