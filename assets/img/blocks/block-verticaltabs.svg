@@ -1,0 +1,20 @@
+<svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 38 38">
+  <defs>
+    <linearGradient id="a" x1="1.56" y1="18.64" x2="36.56" y2="18.64" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#00d1ff"/>
+      <stop offset="1" stop-color="#0a00d1"/>
+    </linearGradient>
+    <linearGradient id="b" x1="1.57" y1="22.26" x2="8.45" y2="22.26" gradientTransform="matrix(1 0 0 -1 0 40)" xlink:href="#a"/>
+    <linearGradient id="c" x1="1.54" y1="26.93" x2="8.43" y2="26.93" gradientTransform="matrix(1 0 0 -1 0 40)" xlink:href="#a"/>
+    <linearGradient id="d" x1="9.45" y1="18.64" x2="29.73" y2="18.64" gradientTransform="matrix(1 0 0 -1 0 40)" xlink:href="#a"/>
+    <linearGradient id="e" x1="3688.71" y1="32.86" x2="3697.03" y2="32.86" gradientTransform="rotate(180 1849.305 20)" xlink:href="#a"/>
+    <linearGradient id="f" x1="18.36" y1="23.05" x2="36.56" y2="23.05" gradientTransform="matrix(1 0 0 -1 0 40)" xlink:href="#a"/>
+  </defs>
+  <path d="M36.56 7.6v22.07a1 1 0 01-1 1h-25a1 1 0 01-1.05-1v-18.4a1 1 0 00-1-1h-5.9a1 1 0 01-1-1.05V7.6a1 1 0 011-1h32.91a1 1 0 011.04 1z" fill="url(#a)"/>
+  <path d="M2.28 15.91h5.49a.71.71 0 01.71.71v2.25a.71.71 0 01-.71.71H2.28a.71.71 0 01-.71-.71v-2.25a.71.71 0 01.71-.71z" fill="url(#b)"/>
+  <path d="M2.28 11.23h5.49a.71.71 0 01.71.71v2.25a.71.71 0 01-.71.71H2.28a.71.71 0 01-.71-.71v-2.25a.71.71 0 01.71-.71z" fill="url(#c)"/>
+  <path d="M29.24 30.72a.49.49 0 00.1-1C10 25.73 9.45 12 9.45 12v17.7a1 1 0 001 1z" fill="url(#d)"/>
+  <path d="M1.57 7.72a1.17 1.17 0 011.16-1.17H9.9a47.94 47.94 0 00-8.33 1.17z" fill="url(#e)"/>
+  <path d="M18.67 7.66A36 36 0 0135.42 27a.59.59 0 001.14-.2V7.65a1.1 1.1 0 00-1.1-1.1H19a.59.59 0 00-.33 1.11z" fill="url(#f)"/>
+  <path d="M33.3 13.44H12.78c-.36 0-.67-.41-.67-.91s.31-.92.67-.92H33.3c.37 0 .67.42.67.92s-.3.91-.67.91zm-2.79 4.25H12.78c-.36 0-.67-.41-.67-.91s.31-.92.67-.92h17.73c.37 0 .67.42.67.92s-.3.91-.67.91zM27 22.36H12.9a.87.87 0 01-.79-.92.86.86 0 01.79-.91H27a.86.86 0 01.78.91.87.87 0 01-.78.92zm-2.2 4.19h-12c-.36 0-.67-.41-.67-.91s.31-.92.67-.92h12c.37 0 .67.42.67.92s-.3.91-.67.91z" fill="#fff"/>
+</svg>

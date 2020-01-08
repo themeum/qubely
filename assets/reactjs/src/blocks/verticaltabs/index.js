@@ -8,7 +8,7 @@ const { gloalSettings: { globalAttributes } } = wp.qubelyComponents
 registerBlockType('qubely/verticaltabs', {
     title: __('Vertical Tabs'),
     category: 'qubely',
-    icon: <img src={qubely_admin.plugin + 'assets/img/blocks/block-tabs.svg'} alt={__('Tabs Block')} />,
+    icon: <img src={qubely_admin.plugin + 'assets/img/blocks/block-verticaltabs.svg'} alt={__('Vertical Tabs Block')} />,
     description: __('Showcase features in beautiful pre-designed tabs with Qubely Tabs.'),
     supports: {
         html: false,

@@ -208,6 +208,9 @@
   @media (max-width: 991px) {
 	.qubely-block-vertical-tab{
 	  flex-wrap: wrap;
+	  .qubely-vertical-tab-item::after{
+		  display: none !important;
+	  }
 	  .qubely-vertical-tab-nav,
 	  .qubely-vertical-tab-body{
 		flex-basis: 100%;
