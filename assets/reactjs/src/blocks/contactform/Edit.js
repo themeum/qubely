@@ -60,16 +60,62 @@ class Edit extends Component {
     render() {
         const { selectedItem, device } = this.state;
         const { name, clientId, attributes, setAttributes } = this.props;
-        const { uniqueId, formItems, labelTypography, labelColor, labelColorFocus,
-            inputTypography, inputColor, inputColorFocus, inputColorHover,
-            inputBg, inputBgFocus, inputBgHover, inputBorder, inputBorderMaterial,
-            inputBorderColorFocus, inputBorderColorHover, inputBorderRadius, inputSize,
-            inputPaddingX, inputPaddingY, textareaHeight, placeholderColor, placeholderColorFocus,
-            placeholderColorHover, enableButton, buttonTag, buttonSize, buttonFillType,
-            buttonText, buttonIconName, buttonIconPosition, spacing, gutter, fieldErrorMessage,
-            formSuccessMessage, formErrorMessage, reCaptcha, reCaptchaSiteKey, reCaptchaSecretKey,
-            emailReceiver, emailHeaders, emailFrom, emailSubject, emailBody, layout,
-            animation, enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss } = attributes;
+        const {
+            uniqueId,
+            className,
+            formItems,
+            labelTypography,
+            labelColor,
+            labelColorFocus,
+            inputTypography,
+            inputColor,
+            inputColorFocus,
+            inputColorHover,
+            inputBg,
+            inputBgFocus,
+            inputBgHover,
+            inputBorder,
+            inputBorderMaterial,
+            inputBorderColorFocus,
+            inputBorderColorHover,
+            inputBorderRadius,
+            inputSize,
+            inputPaddingX,
+            inputPaddingY,
+            textareaHeight,
+            placeholderColor,
+            placeholderColorFocus,
+            placeholderColorHover,
+            enableButton,
+            buttonTag,
+            buttonSize,
+            buttonFillType,
+            buttonText,
+            buttonIconName,
+            buttonIconPosition,
+            spacing, gutter,
+            fieldErrorMessage,
+            formSuccessMessage,
+            formErrorMessage,
+            reCaptcha,
+            reCaptchaSiteKey,
+            reCaptchaSecretKey,
+            emailReceiver,
+            emailHeaders,
+            emailFrom,
+            emailSubject,
+            emailBody,
+            layout,
+            animation,
+            enablePosition,
+            selectPosition,
+            positionXaxis,
+            positionYaxis,
+            globalZindex,
+            hideTablet,
+            hideMobile,
+            globalCss } = attributes;
+
         if (uniqueId) { CssGenerator(this.props.attributes, 'contactform', uniqueId); }
 
         return (
@@ -301,7 +347,7 @@ class Edit extends Component {
                                     onChange={val => setAttributes({ formErrorMessage: val })}
                                     help={__('Set your desired message for form submission error. Leave blank for default.')}
                                 />
-                                <Toggle label={__('Enable Captcha')} value={reCaptcha} onChange={val => setAttributes({ reCaptcha: val })} />
+                                <Toggle label={__('Enable reCAPTCHA')} value={reCaptcha} onChange={val => setAttributes({ reCaptcha: val })} />
                                 {reCaptcha &&
                                     <div>
                                         <TextControl
@@ -316,6 +362,9 @@ class Edit extends Component {
                                             onChange={val => setAttributes({ reCaptchaSecretKey: val })}
                                             placeholder={__('Enter Google Secret Key')}
                                         />
+                                        <span className="qubely-recaptcha-help">
+                                            Get reCAPTCHA(v2) keys from <a href='www.google.com/recaptcha/admin/' >{__('www.google.com/recaptcha/admin/')} </a>
+                                        </span>
                                     </div>
                                 }
                             </Tab>
@@ -368,7 +417,7 @@ class Edit extends Component {
 
                 {globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
-                <div className={`qubely-block-${uniqueId}`}>
+                <div className={`qubely-block-${uniqueId}${className ? ` ${className}` : ''}`}>
                     <div className={`qubely-block-contact-form qubely-layout-${layout}`} onContextMenu={event => handleContextMenu(event, this.refs.qubelyContextMenu)}>
                         <form className="qubely-form">
                             {formItems.map((item, index) =>

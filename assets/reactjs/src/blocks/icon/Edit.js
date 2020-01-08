@@ -64,6 +64,7 @@ class Edit extends Component {
 			setAttributes,
 			attributes: {
 				uniqueId,
+				className,
 				name,
 				url,
 				alignment,
@@ -100,7 +101,6 @@ class Edit extends Component {
 		return (
 			<Fragment>
 				<InspectorControls key="inspector">
-
 					<PanelBody title=''>
 						<Styles
 							value={iconStyle}
@@ -262,7 +262,7 @@ class Edit extends Component {
 
 				{globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
-				<div className={`qubely-block-${uniqueId}`}>
+				<div className={`qubely-block-${uniqueId}${className ? ` ${className}` : ''}`}>
 					<div className="qubely-block-icon-wrapper" onContextMenu={event => handleContextMenu(event, this.refs.qubelyContextMenu)}>
 						<div className="qubely-block-icon">
 							<i className={name} />

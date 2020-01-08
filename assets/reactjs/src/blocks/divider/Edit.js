@@ -61,6 +61,7 @@ class Edit extends Component {
             setAttributes,
             attributes: {
                 uniqueId,
+                className,
                 color,
                 height,
                 width,
@@ -151,7 +152,7 @@ class Edit extends Component {
 
                 {globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
-                <div className={`qubely-block-${uniqueId}`} onContextMenu={event => handleContextMenu(event, this.refs.qubelyContextMenu)}>
+                <div className={`qubely-block-${uniqueId}${className ? ` ${className}` : ''}`} onContextMenu={event => handleContextMenu(event, this.refs.qubelyContextMenu)}>
                     <Dropdown
                         className={"qubely-divider-picker"}
                         contentClassName={"qubely-divider-picker-content"}

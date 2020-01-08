@@ -1,4 +1,20 @@
-import { cssSize, cssBorderRadius, cssGradient, cssBorder, cssBoxShadow, cssTypography, cssDimension, cssBackground, cssShape, cssColor, cssSpacer, cssPadding, cssMargin, cssRowReverse } from './CssHelper'
+import {
+    cssSize,
+    cssBorderRadius,
+    cssGradient,
+    cssBorder,
+    cssBoxShadow,
+    cssTypography,
+    cssDimension,
+    cssBackground,
+    cssShape,
+    cssColor,
+    cssSpacer,
+    cssPadding,
+    cssMargin,
+    cssRowReverse,
+    cssTransform
+} from './CssHelper'
 
 // Replace Value
 const replaceData = (selector, key, value) => {
@@ -90,6 +106,8 @@ const objectField = (data) => {
         return { data: cssMargin(data), action: 'append' }; //margin
     } else if (data.openRowReverse) {
         return { data: cssRowReverse(data), action: 'append' }; //column reverse
+    } else if (data.openTransfrom) {
+        return { data: cssTransform(data), action: 'append' }; //transform 
     } else {
         return { data: '', action: 'append' };
     }

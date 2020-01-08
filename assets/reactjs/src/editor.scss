@@ -98,13 +98,22 @@ div[data-type="qubely/row"].is-resizing .components-resizable-box__container.qub
     transform: translateX(50%);
     background: transparent;
     &::before{
-        width: 6px;
-        height: 34px;
-        border: 0;
-        border-radius: 1.5px;
+        // width: 6px;
+        // height: 34px;
+        // border: 0;
+        // border-radius: 1.5px;
+        background: #e3e4e7;
+        border: none;
+        opacity: 1;
+        border-radius: 30px;
+        width: 3.5px;
+        right: calc(50% - 2px);
     }
 }
 
+.components-resizable-box__container.qubely-column-resizer > span > .components-resizable-box__handle {
+    width: 8px;
+}
 
 .qubely-flex-box {
     display: flex;
@@ -146,25 +155,6 @@ div[data-type="qubely/row"].is-resizing .components-resizable-box__container.qub
     padding-bottom: 12px;
     padding-left: 3px;
 }
-/*
-.qubely-palette-controller span{
-    border: 1px solid #efefef;
-    margin-right: 2px;
-    padding: 0 5px;
-    text-align: center;
-    display: inline-block;
-    font-size: 12px;
-    border-radius: 3px;
-    cursor: pointer;
-}
-.qubely-palette-controller span:last-child {
-    margin-right: 0;
-}
-.qubely-palette-controller span.qubely-active-lock {
-    background: #0085ba;
-    color: white;
-}
-*/
 
 [data-type="qubely/columns"] .editor-block-list__layout .editor-block-list__block .editor-block-list__block-edit{
     margin-top: 14px;
@@ -627,10 +617,10 @@ div[data-type="qubely/row"].is-resizing .components-resizable-box__container.qub
     margin-right: 0;
 }
 
-.qubely-row .editor-block-list__block .editor-block-contextual-toolbar {
-    margin-left: 0;
-    margin-right: 0;
-}
+// .qubely-row .editor-block-list__block .editor-block-contextual-toolbar {
+//     margin-left: 0;
+//     margin-right: 0;
+// }
 
 //.qubely-row .editor-block-list__layout .editor-block-list__block.is-selected >.editor-block-list__block-edit::before {
 //    outline: 0;
@@ -638,14 +628,14 @@ div[data-type="qubely/row"].is-resizing .components-resizable-box__container.qub
 .qubely-row .editor-block-list__layout .editor-block-list__block .editor-block-list__block-edit > .editor-block-contextual-toolbar + [data-block] .components-resizable-box__container {
     position: relative;
 }
-.editor-block-list__layout .editor-block-list__block .qubely-row .editor-block-list__block-edit::before {
-    right: 0;
-    left: 0;
-}
-.editor-block-list__layout .editor-block-list__block .qubely-row .editor-block-drop-zone + .editor-block-list__block-edit::before {
-    right: -14px;
-    left: -14px;
-}
+// .editor-block-list__layout .editor-block-list__block .qubely-row .editor-block-list__block-edit::before {
+//     right: 1px;
+//     left: 1px;
+// }
+// .editor-block-list__layout .editor-block-list__block .qubely-row .editor-block-drop-zone + .editor-block-list__block-edit::before {
+//     right: -14px;
+//     left: -14px;
+// }
 .qubely-row .editor-block-list__layout .editor-block-list__block.is_hovered[data-type="qubely/columns"] > .editor-block-list__block-edit::before {
     outline:1px solid green;
 }
@@ -654,16 +644,16 @@ div[data-type="qubely/row"].is-resizing .components-resizable-box__container.qub
 }
 
 .qubely-row .editor-block-list__layout .editor-block-list__block .editor-block-list__block-edit > .editor-block-contextual-toolbar + [data-block] .components-resizable-box__container::before {
-    z-index: 0;
-    content: "";
-    position: absolute;
-    outline: 1px solid #e2e4e7;
-    transition: outline .1s linear;
-    pointer-events: none;
-    right: -14px;
-    left: -14px;
-    top: -14px;
-    bottom: -14px;
+    // z-index: 0;
+    // content: "";
+    // position: absolute;
+    // outline: 1px solid #e2e4e7;
+    // transition: outline .1s linear;
+    // pointer-events: none;
+    // right: -14px;
+    // left: -14px;
+    // top: -14px;
+    // bottom: -14px;
 }
 
 
@@ -943,7 +933,7 @@ div[data-type="qubely/row"].is-resizing .components-resizable-box__container.qub
         align-items: center;
         font-size: 13px;
         color: #222;
-        z-index: 3;
+        z-index: 1;
     }
     .qubely-indicator-bottom,
     .qubely-indicator-top{
@@ -1005,4 +995,31 @@ div[data-type="qubely/row"].is-resizing .components-resizable-box__container.qub
 .not-clickable, .disable-slide .qubely-field-child{
     filter: opacity(.3);
     pointer-events: none;
+}
+
+// .qubely-section .qubely-row .editor-inner-blocks {
+//     padding: 14px;
+// }
+.qubely-row * > [data-type="qubely/column"].has-child-selected .editor-inner-blocks  {
+    padding: 14px;
+}
+
+.editor-styles-wrapper .qubely-row * > [data-type="qubely/column"] [data-block] {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+.editor-styles-wrapper .qubely-row * > [data-type="qubely/column"].has-child-selected [data-block] {
+    margin-top: 28px;
+    margin-bottom: 28px;
+}
+
+.block-editor-block-list__block .qubely-row * > [data-type="qubely/column"] .block-list-appender {
+    margin: 0;
+}
+.qubely-row * > [data-type="qubely/column"].has-child-selected {
+    z-index: 1;
+}
+
+.block-editor-block-list__layout .block-editor-block-list__block[data-type="qubely/row"].is-selected {
+    z-index: inherit;
 }

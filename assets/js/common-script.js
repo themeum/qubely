@@ -208,7 +208,7 @@ jQuery(document).ready(function ($) {
     }
 
 
-    //FORM BLOCK
+    //CONTACT FORM BLOCK
     $('.qubely-block-contact-form form.qubely-form:not(.qubely-form-ready)').each(function () {
         const $form = $(this);
         $form.addClass('qubely-form-ready');
@@ -216,21 +216,7 @@ jQuery(document).ready(function ($) {
             if (e.which === 13) { e.preventDefault(); return false; };
         });
         checkFormValidation($form, true); //add validation
-        const reCaptcha = $form.find('input[name="recaptcha"]').val();
-        const reCaptchaSiteKey = $form.find('input[name="recaptcha-site-key"]').val();
-        if (reCaptcha == 'true') {
-            const apiURL = 'https://www.google.com/recaptcha/api.js?onload=initGoogleReChaptcha&render=explicit';
-            loadScriptAsync(apiURL).then(() => {
-                window.initGoogleReChaptcha = () => {
-                    const qubelyContactForms = document.querySelectorAll('.qubely-block-form form .qubely-google-recaptcha');
-                    qubelyContactForms.forEach((form) => {
-                        grecaptcha.render(form, {
-                            sitekey: reCaptchaSiteKey
-                        });
-                    });
-                };
-            });
-        }
+    
         //FORM SUBMIT EVENT
         $form.submit((e) => {
             e.preventDefault();
@@ -260,6 +246,27 @@ jQuery(document).ready(function ($) {
             }
         });
     });
+
+    //CONTACT FORM RECAPTCHA
+    const apiURL = 'https://www.google.com/recaptcha/api.js?onload=initGoogleReChaptcha&render=explicit';
+    loadScriptAsync(apiURL).then(() => {
+        window.initGoogleReChaptcha = () => {
+            $('form.qubely-form').each(function () {
+                const $form = $(this);
+                const reCaptcha = $form.find('input[name="recaptcha"]').val();
+                const reCaptchaSiteKey = $form.find('input[name="recaptcha-site-key"]').val();
+                if (reCaptcha == 'true') {
+                    const qubelyRecaptcha = this.querySelector('form .qubely-google-recaptcha');
+                    grecaptcha.render(qubelyRecaptcha, {
+                        sitekey: reCaptchaSiteKey
+                    });
+                }
+            });
+
+        };
+    });
+
+
 
     //FORM VALIDATION
     function checkFormValidation($form) {
@@ -515,5 +522,70 @@ function loadScriptAsync(src) {
             })
         })
     }
+
+
+
+    // check if element in viewport
+    function isElementInViewport(el) {
+        var rect = el.getBoundingClientRect();
+        return (
+            rect.top >= 0 &&
+            rect.left >= 0 &&
+            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+        );
+    }
+
+
+    $(document).on('ready', function () {
+
+        $('.qubely-block-pie-progress').each(function () {
+            var $that = $(this);
+            var circle = $that.find('circle:last-child');
+            var pieOffset = circle.data('dashoffset');
+            var transition = circle.data('transition');
+            var duration = circle.data('transition-duration');
+            var progressCount = $that.find('.qubely-pie-counter');
+            var number = parseInt(circle.data('percent'));
+
+            if (parseInt(duration) > 0) {
+                progressCount.html(0);
+            }
+
+            var pieEvent = function () {
+                if (isElementInViewport($that.find('svg')[0])) {
+                    circle.css('transition', transition)
+                    circle.attr('stroke-dashoffset', pieOffset);
+                    if (parseInt(duration) > 0) {
+                        progressCounter();
+                    }
+                    window.removeEventListener('scroll', pieEvent, true)
+                }
+            }
+
+            var progressCounter = function () {
+                var current = 0;
+                var time = parseInt(duration);
+                var interval = Math.ceil(time / number);
+
+                var timer = function () {
+                    if (current >= number) {
+                        intvlId && clearInterval(intvlId)
+                    }
+                    progressCount.html(current)
+                    current++;
+                }
+                var intvlId = setInterval(timer, interval)
+            }
+
+            window.addEventListener('scroll', pieEvent, true);
+            pieEvent()
+        })
+
+    });
+
+
+
+
 
 })(jQuery);

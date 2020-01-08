@@ -33,6 +33,9 @@ import './blocks/pricing'       // pricing
 import './blocks/timeline'      // Timeline
 import './blocks/postgrid'      // Postgrid
 import './blocks/animatedheadline' // Animated Headline
+import './blocks/pieprogress'   // PieProgress
+
+
 
 // Global Settings
 import './blocks/pagesettings'

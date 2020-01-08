@@ -79,15 +79,56 @@ class AccordionItemBlockEdit extends Component {
     }
 
     render() {
-        const { rootBlock, attributes, setAttributes, isSelected, isSelectedBlockInRoot } = this.props;
-        const { uniqueId, itemNumber, defaultText, fillType, heading, panelColor, panelColorActive, iconColor, iconColorActive, panelColorActive2, panelBg, panelBgActive, active, panelIcon, typography, bodyBoxShadow, spacing, spacingBorder, spacingBorderColor, panelPadding, iconSize, customIconSize, iconPosition, borderRadius, bodyBg, bodyPadding, bodyPaddingAlt, iconSpacing, openFirstItem,
-            panelBorder, panelBorderColorActive, panelBorderRadius, panelBorderRadiusActive, panelBoxShadow, panelBoxShadowActive,
-            bodyBorder } = attributes;
+        const {
+            rootBlock,
+            attributes,
+            setAttributes,
+            isSelected,
+            isSelectedBlockInRoot
+        } = this.props;
+        const {
+            uniqueId,
+            className,
+            itemNumber,
+            defaultText,
+            fillType,
+            heading,
+            panelColor,
+            panelColorActive,
+            iconColor,
+            iconColorActive,
+            panelColorActive2,
+            panelBg,
+            panelBgActive,
+            active,
+            panelIcon,
+            typography,
+            bodyBoxShadow,
+            spacing,
+            spacingBorder,
+            spacingBorderColor,
+            panelPadding,
+            iconSize,
+            customIconSize,
+            iconPosition,
+            borderRadius,
+            bodyBg,
+            bodyPadding,
+            bodyPaddingAlt,
+            iconSpacing,
+            openFirstItem,
+            panelBorder,
+            panelBorderColorActive,
+            panelBorderRadius,
+            panelBorderRadiusActive,
+            panelBoxShadow,
+            panelBoxShadowActive,
+            bodyBorder
+        } = attributes;
         const { itemToggle } = rootBlock.attributes;
         const { device } = this.state;
 
         if (uniqueId) { CssGenerator(this.props.attributes, 'accordion-item', uniqueId); }
-        const className = `qubely-accordion-item qubely-type-${fillType} ${(active) ? `qubely-accordion-active` : ``}`
         return (
             <Fragment >
                 <InspectorControls>
@@ -273,8 +314,8 @@ class AccordionItemBlockEdit extends Component {
                     </PanelBody>
                 </InspectorControls>
 
-                <div className={`qubely-block-${uniqueId}`}>
-                    <div className={className}>
+                <div className={`qubely-block-${uniqueId}${className ? ` ${className}` : ''}`}>
+                    <div className={`qubely-accordion-item qubely-type-${fillType} ${(active) ? `qubely-accordion-active` : ''}`}>
                         <div className={`qubely-accordion-panel ${panelIcon && 'qubely-icon-position-' + iconPosition}`}>
                             <span className="qubely-accordion-panel-handler" onClick={() => this._onClickLabel()} role="button">
                                 {(panelIcon && iconPosition == 'left') && <span className={`qubely-accordion-icon ${panelIcon}`} />}

@@ -191,36 +191,85 @@ class Edit extends Component {
 			attributes,
 			setAttributes,
 			attributes: {
-				uniqueId, pricings, alignment, titleSpacing, layout,
+				uniqueId,
+				className,
+				pricings,
+				alignment,
+				titleSpacing,
+				layout,
 				// Title 
-				title, titleColor, titleTypography,
+				title,
+				titleColor,
+				titleTypography,
 				//sub title 
-				subTitleSpacing, subTitleColor, subTitleTypography,
+				subTitleSpacing,
+				subTitleColor,
+				subTitleTypography,
 				// Price
-				price, priceColor, priceTypography, discount, discountPrice, discountColor, discountTypography, pricingSpacing,
+				price,
+				priceColor,
+				priceTypography,
+				discount,
+				discountPrice,
+				discountColor,
+				discountTypography,
+				pricingSpacing,
 				// Currency
-				currency, currencyCustom, currencyPosition, currencyAlign, currencyColor, currencyTypography,
+				currency,
+				currencyCustom,
+				currencyPosition,
+				currencyAlign,
+				currencyColor,
+				currencyTypography,
 				// Duration
-				enableDuration, duration, durationPosition, durationColor, durationTypography, durationAlign, durationPadding, durationPaddingTop, durationPaddingBottom,
+				enableDuration,
+				duration,
+				durationPosition,
+				durationColor,
+				durationTypography,
+				durationAlign,
+				durationPadding,
+				durationPaddingTop,
+				durationPaddingBottom,
 				// Background
-				bgColor, bgPadding, bgBorderRadius, bgBorder, bgShadow,
+				bgColor,
+				bgPadding,
+				bgBorderRadius,
+				bgBorder,
+				bgShadow,
 				// features
-				enableFeatures, listItems, iconPosition, iconColor, enableListIcons,
+				enableFeatures,
+				listItems,
+				iconPosition,
+				iconColor,
+				enableListIcons,
 				//Header
-				headerBg, headerBorder, headerPadding,
+				headerBg,
+				headerBorder,
+				headerPadding,
 				//postButton text
 				enablePostButtonText,
 				//Badge
-				enableBadge, badge, badgeStyle, badgeSize, badgePosition, badgeSpacing, badgeSpacingTop, badgeColor, badgeBg, badgeTypography, badgeRadius,
+				enableBadge,
+				badge,
+				badgeStyle,
+				badgeSize,
+				badgePosition,
+				badgeSpacing,
+				badgeSpacingTop,
+				badgeColor,
+				badgeBg,
+				badgeTypography,
+				badgeRadius,
 
 				//animation
 				animation,
 				//global
-                globalZindex,
-                enablePosition, 
-                selectPosition, 
-                positionXaxis, 
-                positionYaxis,
+				globalZindex,
+				enablePosition,
+				selectPosition,
+				positionXaxis,
+				positionYaxis,
 				hideTablet,
 				hideMobile,
 				globalCss,
@@ -651,7 +700,7 @@ class Edit extends Component {
 
 					</PanelBody>
 
-					{buttonSettings(this.props.attributes, device, (key, value) => { setAttributes({ [key]: value }) }, (key, value) => { this.setState({ [key]: value }) },showPostTextTypography)}
+					{buttonSettings(this.props.attributes, device, (key, value) => { setAttributes({ [key]: value }) }, (key, value) => { this.setState({ [key]: value }) }, showPostTextTypography)}
 
 					{listSettings(this.props.attributes, device, setAttributes)}
 
@@ -673,7 +722,7 @@ class Edit extends Component {
 
 				{globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
-				<div className={`qubely-block-${uniqueId}`} >
+				<div className={`qubely-block-${uniqueId}${className ? ` ${className}` : ''}`} >
 					<div className={`qubely-block-pricing`} onContextMenu={event => handleContextMenu(event, this.refs.qubelyContextMenu)}>
 						{enableBadge && <span className={`qubely-pricing-badge qubely-badge-style-${badgeStyle} qubely-badge-size-${badgeSize}`} contenteditable="true" onBlur={(e) => setAttributes({ 'badge': e.target.innerText })} onClick={() => this.handlePanelOpenings('Badge')}><span>{badge}</span></span>}
 						<div className="qubely-block-pricing-content">

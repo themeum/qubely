@@ -50,7 +50,10 @@ class Edit extends Component {
 		this.isStillMounted = false;
 	}
 	truncate(value, limit) {
-		return value.split(' ').splice(0, limit).join(' ');
+		if (value.split(' ').length > limit) {
+			return value.split(' ').splice(0, limit).join(' ');
+		}
+		return value;
 	}
 
 	renderFeaturedImage = (post) => {
@@ -106,6 +109,7 @@ class Edit extends Component {
 			taxonomyList,
 			attributes: {
 				uniqueId,
+				className,
 				//general
 				taxonomy,
 				categories,
@@ -629,7 +633,7 @@ class Edit extends Component {
 
 				{globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
-				<div className={`qubely-block-${uniqueId}`}>
+				<div className={`qubely-block-${uniqueId}${className ? ` ${className}` : ''}`}>
 					{
 						(posts && posts.length) ?
 

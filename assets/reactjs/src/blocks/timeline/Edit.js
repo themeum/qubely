@@ -152,6 +152,7 @@ class Edit extends Component {
 			setAttributes,
 			attributes: {
 				uniqueId,
+				className,
 				timelineItems,
 
 				orientation,
@@ -306,7 +307,7 @@ class Edit extends Component {
 
 				{globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
-				<div className={`qubely-block-${uniqueId}`}>
+				<div className={`qubely-block-${uniqueId}${className ? ` ${className}` : ''}`}>
 					<div className={`qubely-block-timeline qubely-timeline-layout-vertical qubely-timeline-orientation-${orientation}`}>
 						<div className={`qubely-timeline-items`}>
 							{this.renderTimeline()}

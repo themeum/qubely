@@ -455,7 +455,7 @@
 
             let reminder = Math.floor(((startIndex - this._clones) / this.options.items)) + 1
             if (this.options.dots) {
-                this.$dotContainer.find('.qubely-carousel-item.active').removeClass('active')
+                this.$dotContainer.find('.active').removeClass('active')
                 this.$dotContainer.find('li:nth-child(' + reminder + ')').addClass('active')
             }
         },

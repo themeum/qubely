@@ -167,6 +167,7 @@ class Edit extends Component {
             setAttributes,
             attributes: {
                 uniqueId,
+                className,
                 zoom,
                 height,
                 apiKey,
@@ -302,7 +303,7 @@ class Edit extends Component {
 
                 {globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
-                <div className={`qubely-block-${uniqueId}`}>
+                <div className={`qubely-block-${uniqueId}${className ? ` ${className}` : ''}`}>
                     <div className={apiKey ? 'qubely-google-map' : 'qubely-gmap-hide'}>
                         <input ref="mapAddress" type="text" className="qubely-google-gmap-input" placeholder={__('Find your location…')} />
                         <div ref="qubelyGoogleMap" style={{ height: parseInt(height, 10) + 'px', width: '100%' }} />

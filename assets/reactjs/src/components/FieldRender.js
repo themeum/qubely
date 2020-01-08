@@ -59,7 +59,8 @@ import {
     setValue,
     videoBackground,
     parseResponsiveViewPort,
-    IsInteraction
+    IsInteraction,
+    copyToClipboard
 } from './HelperFunction'
 
 //hooks
@@ -121,7 +122,8 @@ wp.qubelyComponents = {
         setValue,
         videoBackground,
         parseResponsiveViewPort,
-        IsInteraction
+        IsInteraction,
+        copyToClipboard
     },
     IconList,
     IconSelector,

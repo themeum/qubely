@@ -15,13 +15,25 @@ registerBlockType('qubely/button', {
     },
     keywords: [__('button'), __('link')],
     example: {
-		attributes: {},
-	},
+        attributes: {},
+    },
     attributes: {
         uniqueId: { type: 'string', default: '' },
-          // Global
-          ...globalAttributes,
+        // Global
+        ...globalAttributes,
         buttonGroup: { type: 'boolean', default: false },
+        disableFullWidth: {
+            type: 'boolean',
+            default: false,
+            style: [
+                {
+                    condition: [
+                        { key: 'disableFullWidth', relation: '==', value: true }
+                    ],
+                    selector: '{{QUBELY}}  {width:fit-content;}'
+                }
+            ]
+        },
         parentClientId: { type: 'string', default: '' },
         spacer: { type: 'object', default: { spaceTop: { md: '10', unit: "px" }, spaceBottom: { md: '10', unit: "px" } }, style: [{ selector: '{{QUBELY}}' }] },
         enableAlignment: { type: 'boolean', default: true },
@@ -49,10 +61,18 @@ registerBlockType('qubely/button', {
             style: [
                 {
                     condition: [
-                        { key: 'buttonWidthType', relation: '==', value: 'fixed' }
+                        { key: 'buttonWidthType', relation: '==', value: 'fixed' },
+                        { key: 'disableFullWidth', relation: '==', value: false },
                     ],
                     selector: '{{QUBELY}} .qubely-block-btn-anchor {width: {{buttonWidth}};}'
-                }
+                },
+                {
+                    condition: [
+                        { key: 'buttonWidthType', relation: '==', value: 'fixed' },
+                        { key: 'disableFullWidth', relation: '==', value: true },
+                    ],
+                    selector: '{{QUBELY}}, {{QUBELY}} .qubely-block-btn-anchor {width: {{buttonWidth}};}'
+                },
             ]
         },
         alignment: {

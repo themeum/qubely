@@ -1063,6 +1063,7 @@ function render_block_qubely_postgrid($att)
 {
 	$layout 		        = isset($att['layout']) ? $att['layout'] : 3;
 	$uniqueId 		        = isset($att['uniqueId']) ? $att['uniqueId'] : '';
+	$className 		        = isset($att['className']) ? $att['className'] : '';
 	$style 		            = isset($att['style']) ? $att['style'] : 3;
 	$column 		        = isset($att['column']) ? $att['column'] : 3;
 	$numbers 		        = isset($att['postsToShow']) ? $att['postsToShow'] : 3;
@@ -1140,6 +1141,7 @@ function render_block_qubely_postgrid($att)
 				$text = substr($excerpt, 0, $pos[$limit]);
 				return $text;
 			}
+			return $excerpt;
 		}
 	endif;
 
@@ -1149,9 +1151,16 @@ function render_block_qubely_postgrid($att)
 	} else {
 		$col = "";
 	}
+	$class = 'wp-block-qubely-postgrid qubely-block-'.$uniqueId;
+	if ( isset( $att['align'] ) ) {
+		$class .= ' align' . $att['align'];
+	}
+	if ( isset( $att['className'] ) ) {
+		$class .= $att['className'];
+	}
 
 	if ($query->have_posts()) {
-		$html .= '<div class="qubely-block-' . $uniqueId . '">';
+		$html .= '<div class="' . $class . '">';
 		$html .= '<div class="qubely-postgrid-wrapper '.$interaction.' qubely-postgrid-layout-' . esc_attr($layout) . esc_attr($col) . '" '.$animation.'>';
 		while ($query->have_posts()) {
 			$query->the_post();

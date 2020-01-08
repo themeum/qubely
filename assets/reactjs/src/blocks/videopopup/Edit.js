@@ -41,6 +41,7 @@ class Edit extends Component {
             setAttributes,
             attributes: {
                 uniqueId,
+                className,
                 videoSource,
                 bgVideo,
                 url,
@@ -250,7 +251,7 @@ class Edit extends Component {
 
                 {globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
-                <div className={`qubely-block-${uniqueId}`}>
+                <div className={`qubely-block-${uniqueId}${className ? ` ${className}` : ''}`}>
                     <div className={`qubely-block-videopopup-wrapper qubely-alignment-${alignment}`} onContextMenu={event => handleContextMenu(event, this.refs.qubelyContextMenu)}>
                         {layout == 'fill' && <div className="qubely-block-videopopup-overlay"></div>}
                         <div className={`qubely-block-videopopup qubely-size-${iconSize}`} >
