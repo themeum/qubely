@@ -56,11 +56,12 @@ class Save extends Component {
         return (
             <div className={`qubely-block-${uniqueId} qubely-block-animated-heading ${className ? className : ''} ${interactionClass} `} {...animationAttr(animation)} >
                 <h2 className={`animated-heading-text ${this._getAnimationClass(animationType)}${align?` has-text-align-${ align }`:''}`} ref={el => this.animatedHeading = el}>
-                    <RichText.Content
+                    {/* <RichText.Content
                         tagName='div'
                         value={titleBefore}
                         className="animated-heading-before-part"
-                    />
+                    /> */}
+                    {titleBefore}
                     <span className="qubely-animated-text">
                         <span className="animated-text-words-wrapper">
                             {
@@ -72,11 +73,12 @@ class Save extends Component {
                             }
                         </span>
                     </span>
-                    <RichText.Content
+                    {titleAfter}
+                    {/* <RichText.Content
                         tagName='div'
                         value={titleAfter}
                         className="animated-heading-after-part"
-                    />
+                    /> */}
                 </h2>
             </div>
         );

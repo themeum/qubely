@@ -268,7 +268,7 @@ class Edit extends Component {
                 </BlockControls>
                 {globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
-                <div className={`qubely-block-${uniqueId} qubely-block-animated-heading ${className}`} onContextMenu={event => handleContextMenu(event, this.refs.qubelyContextMenu)} >
+                <div className={`qubely-block-${uniqueId} qubely-block-animated-heading qubely-block-animated-heading-backend ${className}`} onContextMenu={event => handleContextMenu(event, this.refs.qubelyContextMenu)} >
                     <CustomHeadingTag className={`animated-heading-text ${animationClass} ${align ? ` has-text-align-${align}` : ''}`} ref={el => this.animatedHeading = el}>
                         <RichText
                             placeholder={__("Before")}

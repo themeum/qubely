@@ -12,19 +12,18 @@
     &::before {
       display: none;
     }
-    display: flex;
-    flex-wrap: wrap;
-    .editor-rich-text {
-      padding: 0 8px;
-    }
-    .animated-heading-after-part {
-      padding-left: 8px;
-    }
-    .animated-heading-before-part {
-      padding-right: 8px;
-    }
     .qubely-animated-text{
       padding-left: 5px;
+      padding-right: 5px;
+      line-height: 1.2;
+      display: inline-flex;
+      vertical-align: middle;
     }
   }
+  &.qubely-block-animated-heading-backend .animated-heading-text{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+  }
 }
+
