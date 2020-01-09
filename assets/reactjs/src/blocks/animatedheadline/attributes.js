@@ -19,7 +19,7 @@ export const attributes = {
     },
     spacer: { type: 'object', default: { spaceTop: { md: '10', unit: 'px' }, spaceBottom: { md: '10', unit: 'px' } }, style: [{ selector: '{{QUBELY}}' }] },
     animatedText: { type: 'array', default: ['Apple', 'Banana', 'Orange'] },
-    animationType: { type: 'string', default: 'text-clip' },
+    animationType: { type: 'string', default: 'blinds' },
     typography: {
         type: 'object',
         default: {
@@ -30,6 +30,20 @@ export const attributes = {
             }
         },
         style: [{ selector: '{{QUBELY}}.qubely-block-animated-heading .animated-heading-text' }]
+    },
+    textBorderRadius: {
+        type: 'object',
+        default: {
+            openBorderRadius: 0,
+            radiusType: 'global',
+            global: { },
+            unit: 'px',
+        },
+        style: [
+            {
+                selector: '{{QUBELY}}.qubely-block-animated-heading .qubely-animated-text'
+            }
+        ]
     },
     animatedTextTypography: {
         type: 'object',
@@ -105,9 +119,9 @@ export const attributes = {
         type: 'object',
         default: {
             openPadding: 0,
-            paddingType: 'global',
+            paddingType: 'custom',
             global: { md: '5' },
-            custom: { md: '5 5 5 5' },
+            custom: { },
             unit: 'px'
         },
         style: [{ selector: '{{QUBELY}}.qubely-block-animated-heading .qubely-animated-text' }]

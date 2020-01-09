@@ -8,23 +8,24 @@ const {
 const { Component, Fragment } = wp.element
 const { PanelBody, SelectControl, FormTokenField } = wp.components;
 const {
+    BorderRadius,
     Color,
     ColorAdvanced,
     ContextMenu: {
         ContextMenu,
         handleContextMenu
     },
-    Padding,
-    Typography,
+    CssGenerator: {
+        CssGenerator
+    },
     gloalSettings: {
         globalSettingsPanel,
         animationSettings,
         interactionSettings
     },
     HeadingToolbar,
-    CssGenerator: {
-        CssGenerator
-    }
+    Padding,
+    Typography,
 } = wp.qubelyComponents
 
 const defaultTexts = ['Demo-one', 'Demo-two']
@@ -139,6 +140,7 @@ class Edit extends Component {
                 animatedTextBgColor,
                 animatedTextTypography,
                 animatedTextPadding,
+                textBorderRadius,
 
                 animation,
                 interaction,
@@ -213,6 +215,17 @@ class Edit extends Component {
                             value={animatedTextBgColor}
                             onChange={val => setAttributes({ animatedTextBgColor: val })}
                         />
+                        <BorderRadius
+                            min={0}
+                            max={100}
+                            responsive
+                            device={device}
+                            label={__('Radius')}
+                            value={textBorderRadius}
+                            unit={['px', 'em', '%']}
+                            onDeviceChange={value => this.setState({ device: value })}
+                            onChange={val => setAttributes({ textBorderRadius: val })}
+                        />
                         <Typography
                             device={device}
                             label={__('Typography')}
@@ -256,7 +269,7 @@ class Edit extends Component {
                 {globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
                 <div className={`qubely-block-${uniqueId} qubely-block-animated-heading ${className}`} onContextMenu={event => handleContextMenu(event, this.refs.qubelyContextMenu)} >
-                    <CustomHeadingTag className={`animated-heading-text ${animationClass} ${align?` has-text-align-${ align }`:''}`} ref={el => this.animatedHeading = el}>
+                    <CustomHeadingTag className={`animated-heading-text ${animationClass} ${align ? ` has-text-align-${align}` : ''}`} ref={el => this.animatedHeading = el}>
                         <RichText
                             placeholder={__("Before")}
                             value={titleBefore}
