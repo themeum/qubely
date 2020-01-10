@@ -10,7 +10,7 @@ registerBlockType('qubely/animatedheadline', {
     title: __('Animated Headline'),
     description: '', //@TODO: _QUBELY Description
     category: 'qubely',
-    icon: 'dashicons-universal-access',
+    icon: <img src={qubely_admin.plugin + 'assets/img/blocks/block-animatedheadline.svg'} alt={__('Animated Headline')} />,
     keywords: [__('headline'), __('animated'), __('heading'), __('title')],
     example: {
         attributes: {},

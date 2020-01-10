@@ -18,8 +18,8 @@ export const attributes = {
         type: 'string',
     },
     spacer: { type: 'object', default: { spaceTop: { md: '10', unit: 'px' }, spaceBottom: { md: '10', unit: 'px' } }, style: [{ selector: '{{QUBELY}}' }] },
-    animatedText: { type: 'array', default: ['Apple', 'Banana', 'Orange'] },
-    animationType: { type: 'string', default: 'blinds' },
+    animatedText: { type: 'array', default: ['imagination', 'fascination', 'attention', 'passion', 'curiosity'] },
+    animationType: { type: 'string', default: 'clip' },
     typography: {
         type: 'object',
         default: {
@@ -27,6 +27,10 @@ export const attributes = {
             height: {
                 md: "1.2",
                 unit: "em"
+            },
+            size: {
+                md: "28",
+                unit: "px"
             }
         },
         style: [{ selector: '{{QUBELY}}.qubely-block-animated-heading .animated-heading-text' }]
@@ -50,13 +54,14 @@ export const attributes = {
     //     default: {},
     //     style: [{ selector: '{{QUBELY}}.qubely-block-animated-heading .animated-text-words-wrapper' }]
     // },
+
     titleBefore: {
         type: 'string',
-        default: 'Before Text'
+        default: 'The power of'
     },
     titleAfter: {
         type: 'string',
-        default: 'After Text'
+        default: 'makes us infinite'
     },
     color: {
         type: 'string', default: '#000',
@@ -115,17 +120,41 @@ export const attributes = {
         style: [{ selector: '{{QUBELY}}.qubely-block-animated-heading .qubely-animated-text' }]
     },
 
-    animatedTextPadding: {
-        type: 'object',
-        default: {
-            openPadding: 0,
-            paddingType: 'custom',
-            global: { md: '5' },
-            custom: { },
+    // animatedTextPadding: {
+    //     type: 'object',
+    //     default: {
+    //         openPadding: 0,
+    //         paddingType: 'custom',
+    //         global: { md: '5' },
+    //         custom: { },
+    //         unit: 'px'
+    //     },
+    //     style: [{ selector: '{{QUBELY}}.qubely-block-animated-heading .qubely-animated-text' }]
+    // },
+
+    animatedTextPadding: { 
+        type: 'object', 
+        default: { 
+            md: 0, 
             unit: 'px'
-        },
-        style: [{ selector: '{{QUBELY}}.qubely-block-animated-heading .qubely-animated-text' }]
+        }, 
+        style: [{ 
+            selector: '{{QUBELY}}.qubely-block-animated-heading .qubely-animated-text {padding: 0 {{animatedTextPadding}};}' 
+        }] 
     },
+
+    animatedTextSpacing: { 
+        type: 'object', 
+        default: { 
+            md: 0, 
+            unit: 'px'
+        }, 
+        style: [{ 
+            selector: '{{QUBELY}}.qubely-block-animated-heading .qubely-animated-text {margin: 0 {{animatedTextSpacing}};}' 
+        }] 
+    },
+    
+
     animatedTextBorderRadius: {
         type: 'object',
         default: {

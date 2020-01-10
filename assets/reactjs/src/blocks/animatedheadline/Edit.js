@@ -24,8 +24,8 @@ const {
         interactionSettings
     },
     HeadingToolbar,
-    Padding,
     Typography,
+    Range
 } = wp.qubelyComponents
 
 const defaultTexts = ['Demo-one', 'Demo-two']
@@ -140,6 +140,7 @@ class Edit extends Component {
                 animatedTextBgColor,
                 // animatedTextTypography,
                 animatedTextPadding,
+                animatedTextSpacing,
                 textBorderRadius,
 
                 animation,
@@ -202,12 +203,12 @@ class Edit extends Component {
                             gradientTextColor ?
                                 <ColorAdvanced
                                     textColor
-                                    label={__('Aniamated-text Color')}
+                                    label={__('Color')}
                                     value={animatedTextColor}
                                     onChange={val => setAttributes({ animatedTextColor: val })}
                                 />
                                 :
-                                <Color label={__('Aniamated-text Color')} value={animatedTextColor.color} onChange={val => setAttributes({ animatedTextColor: { ...animatedTextColor, color: val } })} />
+                                <Color label={__('Color')} value={animatedTextColor.color} onChange={val => setAttributes({ animatedTextColor: { ...animatedTextColor, color: val } })} />
                         }
                         <ColorAdvanced
                             textColor
@@ -226,24 +227,26 @@ class Edit extends Component {
                             onDeviceChange={value => this.setState({ device: value })}
                             onChange={val => setAttributes({ textBorderRadius: val })}
                         />
-                        {/* <Typography
-                            device={device}
-                            label={__('Typography')}
-                            value={animatedTextTypography}
-                            onChange={value => setAttributes({ animatedTextTypography: value })}
-                            onDeviceChange={value => this.setState({ device: value })}
-                        /> */}
-                        <Padding
-                            label={__('Padding')}
+
+                        <Range
+                            label={__('Padding X')}
                             value={animatedTextPadding}
-                            min={0}
-                            max={300}
+                            onChange={animatedTextPadding => setAttributes({ animatedTextPadding })}
+                            min={0} max={100}
+                            unit={['px', 'em', '%']}
                             responsive
                             device={device}
+                            onDeviceChange={value => this.setState({ device: value })} />
+
+                        <Range
+                            label={__('Spacing X')}
+                            value={animatedTextSpacing}
+                            onChange={animatedTextSpacing => setAttributes({ animatedTextSpacing })}
+                            min={0} max={100}
                             unit={['px', 'em', '%']}
-                            onChange={val => setAttributes({ animatedTextPadding: val })}
-                            onDeviceChange={value => this.setState({ device: value })}
-                        />
+                            responsive
+                            device={device}
+                            onDeviceChange={value => this.setState({ device: value })} />
 
                     </PanelBody>
 
