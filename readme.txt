@@ -4,7 +4,7 @@ Donate link: https://www.themeum.com
 Tags: block, blocks, gutenberg, gutenberg blocks, page builder, editor
 Requires at least: 5.0
 Tested up to: 5.3
-Stable tag: 1.2.8
+Stable tag: 1.2.9
 Requires PHP: 5.4.0
 License: GPL-2.0+
 License URI: http://www.gnu.org/licenses/gpl-2.0.txt
@@ -237,6 +237,10 @@ You can report bugs on the [support forum here](https://wordpress.org/support/pl
 
 
 == Changelog ==
+
+= 1.2.9 - 13 January, 2020 =
+New: Animated Headline block  
+
 
 = 1.2.8 - 06 January, 2020 =
 Fix: Contact form block -  reCAPTCHA issue  

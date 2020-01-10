@@ -75,6 +75,16 @@ jQuery(document).ready(function ($) {
         });
     });
 
+
+    //ANIMATED HEADLINE BLOCK
+    $('.qubely-block-animated-heading .animated-heading-text').each(function () {
+        let animatedHeadline = $(this)
+        if (window.animatedHeading) {
+            new window.animatedHeading({ heading: $(animatedHeadline) })
+        }
+
+    });
+
     //TAB BLOCK
     $('.qubely-tab-title').on('click', function (event) {
         var $qubelyTab = $(this).parent();

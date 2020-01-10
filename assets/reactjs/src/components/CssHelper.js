@@ -139,12 +139,25 @@ export const cssShape = (v) => {
 export const cssColor = (v) => {
     let data = (v.clip ? '-webkit-background-clip: text; -webkit-text-fill-color: transparent;' : '');
     if (v.type == 'color') {
-        data += (v.color ? 'background-image: none; background-color: ' + v.color + ';' : '')
+        if (v.textColor) {
+            data += (v.color ? 'color: ' + v.color + ';' : '')
+        } else {
+            data += (v.color ? 'background-image: none; background-color: ' + v.color + ';' : '')
+        }
+
     } else if (v.type == 'gradient') {
         if (v.gradient && v.gradient.type == 'linear') {
-            data += 'background-image : linear-gradient(' + v.gradient.direction + 'deg, ' + v.gradient.color1 + ' ' + v.gradient.start + '%,' + v.gradient.color2 + ' ' + v.gradient.stop + '%);'
+            if (v.textColor) {
+                data += 'background : -webkit-linear-gradient(' + v.gradient.direction + 'deg, ' + v.gradient.color1 + ' ' + v.gradient.start + '%,' + v.gradient.color2 + ' ' + v.gradient.stop + '%);-webkit-background-clip: text;-webkit-text-fill-color: transparent;'
+            } else {
+                data += 'background-image : linear-gradient(' + v.gradient.direction + 'deg, ' + v.gradient.color1 + ' ' + v.gradient.start + '%,' + v.gradient.color2 + ' ' + v.gradient.stop + '%);'
+            }
         } else {
-            data += 'background-image : radial-gradient( circle at ' + v.gradient.radial + ' , ' + v.gradient.color1 + ' ' + v.gradient.start + '%,' + v.gradient.color2 + ' ' + v.gradient.stop + '%);'
+            if (v.textColor) {
+                data += 'background : radial-gradient(circle at ' + v.gradient.radial + ' , ' + v.gradient.color1 + ' ' + v.gradient.start + '%,' + v.gradient.color2 + ' ' + v.gradient.stop + '%);-webkit-background-clip: text;-webkit-text-fill-color: transparent;'
+            } else {
+                data += 'background-image : radial-gradient( circle at ' + v.gradient.radial + ' , ' + v.gradient.color1 + ' ' + v.gradient.start + '%,' + v.gradient.color2 + ' ' + v.gradient.stop + '%);'
+            }
         }
     }
     return '{' + data + '}';

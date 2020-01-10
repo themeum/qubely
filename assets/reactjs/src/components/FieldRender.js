@@ -37,6 +37,7 @@ import Padding from './fields/Padding'
 import Margin from './fields/Margin'
 import Carousel from './fields/Carousel'
 import icons from '../helpers/icons'
+import HeadingToolbar from './fields/headingToolbar'
 import { QubelyButtonEdit, QubelyButtonSave } from './fields/QubelyButton'
 import { QubelyIconListEdit, QubelyIconListSave } from './fields/QubelyIconList'
 
@@ -113,6 +114,7 @@ wp.qubelyComponents = {
     },
     Gradient,
     Headings,
+    HeadingToolbar,
     HelperFunction: {
         _equal,
         animationAttr,
