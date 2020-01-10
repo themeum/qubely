@@ -32,8 +32,8 @@ import './blocks/team'                  // Team
 import './blocks/pricing'               // pricing
 import './blocks/timeline'              // Timeline
 import './blocks/postgrid'              // Postgrid
-import './blocks/verticaltabs'          // Vertical Tabs
-import './blocks/verticaltabs/verticaltab' // Vertical Inner Tabs
+// import './blocks/verticaltabs'          // Vertical Tabs
+// import './blocks/verticaltabs/verticaltab' // Vertical Inner Tabs
 import './blocks/row/column'    // Column
 import './blocks/button'        // Button
 import './blocks/text'          // Text
