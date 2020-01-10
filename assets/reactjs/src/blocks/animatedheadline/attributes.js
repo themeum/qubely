@@ -45,11 +45,11 @@ export const attributes = {
             }
         ]
     },
-    animatedTextTypography: {
-        type: 'object',
-        default: {},
-        style: [{ selector: '{{QUBELY}}.qubely-block-animated-heading .animated-text-words-wrapper' }]
-    },
+    // animatedTextTypography: {
+    //     type: 'object',
+    //     default: {},
+    //     style: [{ selector: '{{QUBELY}}.qubely-block-animated-heading .animated-text-words-wrapper' }]
+    // },
     titleBefore: {
         type: 'string',
         default: 'Before Text'

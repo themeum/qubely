@@ -138,7 +138,7 @@ class Edit extends Component {
                 barColor,
                 animatedTextColor,
                 animatedTextBgColor,
-                animatedTextTypography,
+                // animatedTextTypography,
                 animatedTextPadding,
                 textBorderRadius,
 
@@ -226,13 +226,13 @@ class Edit extends Component {
                             onDeviceChange={value => this.setState({ device: value })}
                             onChange={val => setAttributes({ textBorderRadius: val })}
                         />
-                        <Typography
+                        {/* <Typography
                             device={device}
                             label={__('Typography')}
                             value={animatedTextTypography}
                             onChange={value => setAttributes({ animatedTextTypography: value })}
                             onDeviceChange={value => this.setState({ device: value })}
-                        />
+                        /> */}
                         <Padding
                             label={__('Padding')}
                             value={animatedTextPadding}
