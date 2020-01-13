@@ -6,7 +6,7 @@ Donate link: <a href=" https://www.themeum.com">https://www.themeum.com</a>
 Tags: Qubely, website builder, gutenberg block, gutenberg, page builder, drag and drop editor, responsive, site editor, editor, drag-and-drop, visual editor, landing page, frontend editor, wordpress page builder, free page builder, layout builder  
 Requires at least: 5.0  
 Tested up to: 5.2  
-Stable tag: 1.2.7   
+Stable tag: 1.2.9   
 Requires PHP: 5.4.0  
 License: GPL-2.0+  
 License URI: http://www.gnu.org/licenses/gpl-2.0.txt
@@ -201,6 +201,17 @@ Found a bug? Please let us know by posting on the support section of this plugin
 
 
 # Changelog
+
+**1.2.9 - 13 January, 2020**
+New: Animated Headline block
+Fix: Contact form block focus border issue
+
+**1.2.8 - 06 January, 2020**
+Fix: Contact form block -  reCAPTCHA issue  
+Fix: Additional CSS class issue in Back-end    
+Fix: Button Group block - Button width issue  
+Fix: Carousel blocks - Active item dot indicator in Back-end   
+Update: Block specific script loading in Front-end  
 
 **1.2.7 - 20 December, 2019**
 New: Pie Progress block  

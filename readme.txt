@@ -239,7 +239,8 @@ You can report bugs on the [support forum here](https://wordpress.org/support/pl
 == Changelog ==
 
 = 1.2.9 - 13 January, 2020 =
-New: Animated Headline block  
+New: Animated Headline block
+Fix: Contact form block focus border issue
 
 
 = 1.2.8 - 06 January, 2020 =
