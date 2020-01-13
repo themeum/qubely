@@ -133,7 +133,7 @@ class Edit extends Component {
                                     <Media label={__('Retina Image (@2x)')} multiple={false} type={['image']} panel={true} value={image2x} onChange={val => setAttributes({ image2x: val })} />
                                 </Fragment>
                                 :
-                                <Url label={__('Image Source')} value={externalImageUrl} onChange={newUrl => setAttributes({ externalImageUrl: newUrl })} />
+                                <Url label={__('Image Source')} disableAdvanced value={externalImageUrl} onChange={newUrl => setAttributes({ externalImageUrl: newUrl })} />
                         }
                         {
                             layout === 'simple' &&
