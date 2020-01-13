@@ -84,7 +84,7 @@ export const attributes = {
     animatedTextColor: {
         type: 'object',
         default: {
-            type: 'color',
+            type: 'gradient',
             textColor: true,
             openColor: 1,
             color: '#2184F9',
@@ -93,7 +93,9 @@ export const attributes = {
                 color2: '#55cd37',
                 direction: 0,
                 start: 0,
-                stop: 100
+                stop: 100,
+                clip: false,
+                radial: "center"
             }
         },
         style: [

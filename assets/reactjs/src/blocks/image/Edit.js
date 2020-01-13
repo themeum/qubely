@@ -99,7 +99,7 @@ class Edit extends Component {
         const titleTagName = 'h' + titleLevel;
 
         if (uniqueId) { CssGenerator(this.props.attributes, 'image', uniqueId); }
-        console.log(image)
+
         return (
             <Fragment>
                 <InspectorControls key="inspector">
