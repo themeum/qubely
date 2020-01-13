@@ -19,7 +19,10 @@ export const attributes = {
     },
     spacer: { type: 'object', default: { spaceTop: { md: '10', unit: 'px' }, spaceBottom: { md: '10', unit: 'px' } }, style: [{ selector: '{{QUBELY}}' }] },
     animatedText: { type: 'array', default: ['imagination', 'fascination', 'attention', 'passion', 'curiosity'] },
-    animationType: { type: 'string', default: 'clip' },
+    animationType: {
+        type: 'string',
+        default: 'clip'
+    },
     typography: {
         type: 'object',
         default: {
@@ -40,7 +43,7 @@ export const attributes = {
         default: {
             openBorderRadius: 0,
             radiusType: 'global',
-            global: { },
+            global: {},
             unit: 'px',
         },
         style: [
@@ -134,28 +137,28 @@ export const attributes = {
     //     style: [{ selector: '{{QUBELY}}.qubely-block-animated-heading .qubely-animated-text' }]
     // },
 
-    animatedTextPadding: { 
-        type: 'object', 
-        default: { 
-            md: 0, 
+    animatedTextPadding: {
+        type: 'object',
+        default: {
+            md: 0,
             unit: 'px'
-        }, 
-        style: [{ 
-            selector: '{{QUBELY}}.qubely-block-animated-heading .qubely-animated-text {padding: 0 {{animatedTextPadding}};}' 
-        }] 
+        },
+        style: [{
+            selector: '{{QUBELY}}.qubely-block-animated-heading .qubely-animated-text {padding: 0 {{animatedTextPadding}};}'
+        }]
     },
 
-    animatedTextSpacing: { 
-        type: 'object', 
-        default: { 
-            md: 0, 
+    animatedTextSpacing: {
+        type: 'object',
+        default: {
+            md: 0,
             unit: 'px'
-        }, 
-        style: [{ 
-            selector: '{{QUBELY}}.qubely-block-animated-heading .qubely-animated-text {margin: 0 {{animatedTextSpacing}};}' 
-        }] 
+        },
+        style: [{
+            selector: '{{QUBELY}}.qubely-block-animated-heading .qubely-animated-text {margin: 0 {{animatedTextSpacing}};}'
+        }]
     },
-    
+
 
     animatedTextBorderRadius: {
         type: 'object',
