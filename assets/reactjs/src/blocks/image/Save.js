@@ -5,19 +5,23 @@ const { HelperFunction: { IsInteraction, animationAttr } } = wp.qubelyComponents
 class Save extends Component {
 
     renderImage = () => {
-        const { attributes: { image, image2x, imgAlt } } = this.props
+        const { attributes: { image, imageType, image2x, imgAlt, externalImageUrl } } = this.props
         return (
             <Fragment>
-                {image.url != undefined ?
-                    <Fragment>
-                        {image2x.url != undefined ?
-                            <img className="qubely-image-image" src={image.url} srcset={image.url + ' 1x, ' + image2x.url + ' 2x'} alt={imgAlt && imgAlt} />
+                {
+                    (imageType === 'local' && image.url != undefined) ?
+                        <Fragment>
+                            {image2x.url != undefined ?
+                                <img className="qubely-image-image" src={image.url} srcset={image.url + ' 1x, ' + image2x.url + ' 2x'} alt={imgAlt && imgAlt} />
+                                :
+                                <img className="qubely-image-image" src={image.url} alt={imgAlt && imgAlt} />
+                            }
+                        </Fragment>
+                        :
+                        (imageType === 'external' && externalImageUrl.url != undefined) ?
+                            <img className="qubely-image-image" src={externalImageUrl.url} alt={imgAlt && imgAlt} />
                             :
-                            <img className="qubely-image-image" src={image.url} alt={imgAlt && imgAlt} />
-                        }
-                    </Fragment>
-                    :
-                    <div className="qubely-image-image qubely-image-placeholder"><i className="far fa-image" /></div>
+                            <div className="qubely-image-image qubely-image-placeholder"><i className="far fa-image" /></div>
                 }
             </Fragment>
         )
@@ -52,14 +56,14 @@ class Save extends Component {
 
         return (
             <div className={`qubely-block-${uniqueId}`}  {...animationAttr(animation)}>
-            {/* <div className={`qubely-block-${uniqueId}`}> */}
+                {/* <div className={`qubely-block-${uniqueId}`}> */}
                 <div className={`qubely-block-image ${interactionClass} qubely-image-layout-${layout}`}>
                     <div className={`qubely-image-media${(layout == 'blurb' && animateOnHover == 1) ? ' qubely-hover-animation-on' : ''}${(layout == 'blurb' && animateOnHover == 1) ? ' qubely-hover-animation-type-' + contentAnimation : ''} qubely-vertical-alignment-${contentVerticalAlign} qubely-horizontal-alignment-${contentAlignment}${enableFrame == 1 ? ((animateOnHover == 1 && frameAnimateOnHover == 1) ? ' qubely-has-frame qubely-frame-animate-on-hover' : ' qubely-has-frame') : ''}`}>
                         <figure>
                             <div className="qubely-image-container">
                                 {
                                     (imageUrl.url && layout === 'simple') ?
-                                        <a href={imageUrl.url ? imageUrl.url : '#'} {...(imageUrl.target && { target: '_blank' })} {...(imageUrl.nofollow ? { rel: 'nofollow noopener noreferrer' } : { ...imageUrl.target && { rel: 'noopener noreferrer' } })}>
+                                        <a href={imageUrl.url ? `//${imageUrl.url}` : '#'} {...(imageUrl.target && { target: '_blank' })} {...(imageUrl.nofollow ? { rel: 'nofollow noopener noreferrer' } : { ...imageUrl.target && { rel: 'noopener noreferrer' } })}>
                                             {this.renderImage()}
                                         </a>
                                         : this.renderImage()

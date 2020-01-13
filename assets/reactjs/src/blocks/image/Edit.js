@@ -2,7 +2,7 @@ const { __ } = wp.i18n
 const { Fragment, Component } = wp.element;
 const { PanelBody, TextControl, Toolbar, SelectControl } = wp.components
 const { RichText, InspectorControls, BlockControls } = wp.blockEditor
-const { Media, Range, BoxShadow, Tabs, Tab, RadioAdvanced, Typography, Toggle, Styles, Alignment, ColorAdvanced, Color, Headings, Border, BorderRadius, Padding, Separator, Select, Margin, Url, gloalSettings: { globalSettingsPanel, animationSettings, interactionSettings }, Inline: { InlineToolbar }, CssGenerator: { CssGenerator }, ContextMenu: { ContextMenu, handleContextMenu }, } = wp.qubelyComponents
+const { Media, Range, BoxShadow, ButtonGroup, Tabs, Tab, RadioAdvanced, Typography, Toggle, Styles, Alignment, ColorAdvanced, Color, Headings, Border, BorderRadius, Padding, Separator, Select, Margin, Url, gloalSettings: { globalSettingsPanel, animationSettings, interactionSettings }, Inline: { InlineToolbar }, CssGenerator: { CssGenerator }, ContextMenu: { ContextMenu, handleContextMenu }, } = wp.qubelyComponents
 import icons from '../../helpers/icons'
 class Edit extends Component {
 
@@ -50,9 +50,11 @@ class Edit extends Component {
             contentPadding,
             contentVerticalAlign,
             contentAlignment,
-            
+
             imgSize,
             image,
+            imageType,
+            externalImageUrl,
             image2x,
             imgAlt,
             imageUrl,
@@ -83,9 +85,9 @@ class Edit extends Component {
 
             animation,
             globalZindex,
-            enablePosition, 
-            selectPosition, 
-            positionXaxis, 
+            enablePosition,
+            selectPosition,
+            positionXaxis,
             positionYaxis,
             hideTablet,
             hideMobile,
@@ -112,8 +114,27 @@ class Edit extends Component {
                         />
                         <Alignment label={__('Alignment')} value={alignment} alignmentType="content" onChange={val => setAttributes({ alignment: val })} alignmentType="content" disableJustify responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
                         <Separator />
-                        <Media label={__('Image')} multiple={false} type={['image']} panel={true} value={image} onChange={val => setAttributes({ image: val })} />
-                        <Media label={__('Retina Image (@2x)')} multiple={false} type={['image']} panel={true} value={image2x} onChange={val => setAttributes({ image2x: val })} />
+
+                        <ButtonGroup
+                            label={__('Image Type')}
+                            options={
+                                [
+                                    [__('Local'), 'local'],
+                                    [__('External'), 'external']
+                                ]
+                            }
+                            value={imageType}
+                            onChange={value => setAttributes({ imageType: value })}
+                        />
+                        {
+                            imageType === 'local' ?
+                                <Fragment>
+                                    <Media label={__('Image')} multiple={false} type={['image']} panel={true} value={image} onChange={val => setAttributes({ image: val })} />
+                                    <Media label={__('Retina Image (@2x)')} multiple={false} type={['image']} panel={true} value={image2x} onChange={val => setAttributes({ image2x: val })} />
+                                </Fragment>
+                                :
+                                <Url label={__('Image Source')} value={externalImageUrl} onChange={newUrl => setAttributes({ externalImageUrl: newUrl })} />
+                        }
                         {
                             layout === 'simple' &&
                             <Url label={__('URL')} value={imageUrl} onChange={(value) => setAttributes({ imageUrl: value })} />
@@ -276,16 +297,20 @@ class Edit extends Component {
                             <figure>
                                 <div className="qubely-image-container">
 
-                                    {image.url != undefined ?
-                                        <Fragment>
-                                            {image2x.url != undefined ?
-                                                <img className="qubely-image-image" src={image.url} srcset={image.url + ' 1x, ' + image2x.url + ' 2x'} alt={imgAlt && imgAlt} />
+                                    {
+                                        (imageType === 'local' && image.url != undefined) ?
+                                            <Fragment>
+                                                {image2x.url != undefined ?
+                                                    <img className="qubely-image-image" src={image.url} srcset={image.url + ' 1x, ' + image2x.url + ' 2x'} alt={imgAlt && imgAlt} />
+                                                    :
+                                                    <img className="qubely-image-image" src={image.url} alt={imgAlt && imgAlt} />
+                                                }
+                                            </Fragment>
+                                            :
+                                            (imageType === 'external' && externalImageUrl.url !=undefined ) ?
+                                                <img className="qubely-image-image" src={externalImageUrl.url} alt={imgAlt && imgAlt} />
                                                 :
-                                                <img className="qubely-image-image" src={image.url} alt={imgAlt && imgAlt} />
-                                            }
-                                        </Fragment>
-                                        :
-                                        <div className="qubely-image-image qubely-image-placeholder"><i className="far fa-image"/></div>
+                                                <div className="qubely-image-image qubely-image-placeholder"><i className="far fa-image" /></div>
                                     }
 
                                     {layout == 'blurb' &&
@@ -309,7 +334,7 @@ class Edit extends Component {
                                                     />
                                                 }
 
-                                                
+
                                             </div>
                                         </div>
                                     }
