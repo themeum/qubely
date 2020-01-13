@@ -44,6 +44,7 @@ class Save extends Component {
             attributes: {
                 uniqueId,
                 align,
+                level,
                 animation,
                 animatedText,
                 titleBefore,
@@ -53,9 +54,10 @@ class Save extends Component {
             }
         } = this.props
         const interactionClass = IsInteraction(interaction) ? 'qubley-block-interaction' : '';
+        const CustomHeadingTag = `h${level}`;
         return (
             <div className={`qubely-block-${uniqueId} qubely-block-animated-heading ${className ? className : ''} ${interactionClass} `} {...animationAttr(animation)} >
-                <h2 className={`animated-heading-text ${this._getAnimationClass(animationType)}${align?` has-text-align-${ align }`:''}`} ref={el => this.animatedHeading = el}>
+                <CustomHeadingTag className={`animated-heading-text ${this._getAnimationClass(animationType)}${align?` has-text-align-${ align }`:''}`} ref={el => this.animatedHeading = el}>
                     {titleBefore}
                     <span className="qubely-animated-text">
                         <span className="animated-text-words-wrapper">
@@ -69,7 +71,7 @@ class Save extends Component {
                         </span>
                     </span>
                     {titleAfter}
-                </h2>
+                </CustomHeadingTag>
             </div>
         );
     }
