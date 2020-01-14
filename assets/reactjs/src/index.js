@@ -5,7 +5,7 @@ import './components/FieldRender'
 import './editor.scss'
 import './blocks/scss/style.scss'
 
-import './blocks/row'           // Row
+import './blocks/row'                   // Row
 import './blocks/row/column'            // Column
 import './blocks/button'                // Button
 import './blocks/text'                  // Text
@@ -32,34 +32,34 @@ import './blocks/team'                  // Team
 import './blocks/pricing'               // pricing
 import './blocks/timeline'              // Timeline
 import './blocks/postgrid'              // Postgrid
-import './blocks/row/column'    // Column
-import './blocks/button'        // Button
-import './blocks/text'          // Text
-import './blocks/icon'          // Icon
-import './blocks/map'           // Map
-import './blocks/divider'       // Divider
-import './blocks/infobox'       // Info Box
-import './blocks/image'         // Image
-import './blocks/testimonial'   // Testimonial
-import './blocks/accordion'     // Accordion
-import './blocks/heading'       // Heading Box
-import './blocks/videopopup'    // Video popup
-import './blocks/progressbar'   // Progress Bar
-import './blocks/counter'       // counter
-import './blocks/tabs'          // Tabs
-import './blocks/tabs/tab'      // Inner Tabs
-import './blocks/socialicons'   // Social Icons
-import './blocks/contactform'   // Contact Form
-import './blocks/buttongroup'   // Button Group
-import './blocks/advancedlist'  // Advanced List
-import './blocks/iconlist'      // Icon List
-import './blocks/wrapper'       // Wrapper
-import './blocks/team'          // Team
-import './blocks/pricing'       // pricing
-import './blocks/timeline'      // Timeline
-import './blocks/postgrid'      // Postgrid
-// import './blocks/animatedheadline' // Animated Headline
-import './blocks/pieprogress'   // PieProgress
+import './blocks/row/column'            // Column
+import './blocks/button'                // Button
+import './blocks/text'                  // Text
+import './blocks/icon'                  // Icon
+import './blocks/map'                   // Map
+import './blocks/divider'               // Divider
+import './blocks/infobox'               // Info Box
+import './blocks/image'                 // Image
+import './blocks/testimonial'           // Testimonial
+import './blocks/accordion'             // Accordion
+import './blocks/heading'               // Heading Box
+import './blocks/videopopup'            // Video popup
+import './blocks/progressbar'           // Progress Bar
+import './blocks/counter'               // counter
+import './blocks/tabs'                  // Tabs
+import './blocks/tabs/tab'              // Inner Tabs
+import './blocks/socialicons'           // Social Icons
+import './blocks/contactform'           // Contact Form
+import './blocks/buttongroup'           // Button Group
+import './blocks/advancedlist'          // Advanced List
+import './blocks/iconlist'              // Icon List
+import './blocks/wrapper'               // Wrapper
+import './blocks/team'                  // Team
+import './blocks/pricing'               // pricing
+import './blocks/timeline'              // Timeline
+import './blocks/postgrid'              // Postgrid
+import './blocks/animatedheadline'      // Animated Headline
+import './blocks/pieprogress'           // PieProgress
 
 
 
