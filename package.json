@@ -3,9 +3,6 @@
   "version": "1.2.7",
   "description": "Contributors: **themeum**",
   "main": "gulpfile.js",
-  "dependencies": {
-    "deep-copy": "^1.4.2"
-  },
   "devDependencies": {
     "gulp": "^4.0.2",
     "gulp-clean": "^0.4.0",
