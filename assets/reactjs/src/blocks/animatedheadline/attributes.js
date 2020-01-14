@@ -119,7 +119,9 @@ export const attributes = {
                 color2: '#55cd37',
                 direction: 0,
                 start: 0,
-                stop: 100
+                stop: 100,
+                type: "linear",
+                radial: "center"
             }
         },
         style: [{ selector: '{{QUBELY}}.qubely-block-animated-heading .qubely-animated-text' }]

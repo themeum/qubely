@@ -57,8 +57,11 @@ class Save extends Component {
         const CustomHeadingTag = `h${level}`;
         return (
             <div className={`qubely-block-${uniqueId} qubely-block-animated-heading ${className ? className : ''} ${interactionClass} `} {...animationAttr(animation)} >
-                <CustomHeadingTag className={`animated-heading-text ${this._getAnimationClass(animationType)}${align?` has-text-align-${ align }`:''}`} ref={el => this.animatedHeading = el}>
-                    {titleBefore}
+                <CustomHeadingTag className={`animated-heading-text ${this._getAnimationClass(animationType)}${align ? ` has-text-align-${align}` : ''}`} ref={el => this.animatedHeading = el}>
+                    <RichText.Content
+                        value={titleBefore}
+                    />
+
                     <span className="qubely-animated-text">
                         <span className="animated-text-words-wrapper">
                             {
@@ -70,7 +73,9 @@ class Save extends Component {
                             }
                         </span>
                     </span>
-                    {titleAfter}
+                    <RichText.Content
+                        value={titleAfter}
+                    />
                 </CustomHeadingTag>
             </div>
         );
