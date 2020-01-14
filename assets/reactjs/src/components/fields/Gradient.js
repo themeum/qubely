@@ -29,9 +29,9 @@ class Gradient extends Component {
         return val;
     }
 
-    componentWillMount() {
-        this.props.onChange(Object.assign({}, defaultState, (this.props.clip ? { clip: this.props.clip } : {}), this.props.value))
-    }
+    // componentWillMount() {
+    //     this.props.onChange(Object.assign({}, defaultState, (this.props.clip ? { clip: this.props.clip } : {}), this.props.value))
+    // }
 
     setSettings(value, type) {
         this.props.onChange(Object.assign({}, this.props.value, { [type]: value }))

@@ -62,6 +62,14 @@ const attributes = {
         type: 'object',
         default: {}
     },
+    imageType: {
+        type: 'string',
+        default: 'local'
+    },
+    externalImageUrl: {
+        type: 'object',
+        default: {}
+    },
 
     image2x: {
         type: 'object',

@@ -35,10 +35,10 @@ class QUBELY
 		// Add Styles and Scripts
 		add_action('wp_enqueue_scripts', array($this, 'qubely_enqueue_style'));
 
-		// Add post meta key 
+		// Add post meta key
 		$this->add_global_settings_post_meta();
 
-		// Common style 
+		// Common style
 
 		$this->enqueue_block_css();
 
@@ -137,6 +137,8 @@ class QUBELY
 		wp_enqueue_style('qubely-options', QUBELY_DIR_URL . 'assets/css/options.css', false, QUBELY_VERSION);
 		wp_enqueue_script('qubely-magnific-popup', QUBELY_DIR_URL . 'assets/js/jquery.magnific-popup.min.js', array('jquery'), QUBELY_VERSION, true);
 		wp_enqueue_style('qubely-magnific-popup-style', QUBELY_DIR_URL . 'assets/css/magnific-popup.css', false, QUBELY_VERSION);
+		wp_enqueue_style('jquery-animatedHeadline-style', QUBELY_DIR_URL . 'assets/css/jquery.animatedheadline.css', false, QUBELY_VERSION);
+		wp_enqueue_script('jquery-animatedHeadline', QUBELY_DIR_URL . 'assets/js/jquery.animatedheadline.min.js', array('jquery'), QUBELY_VERSION, true);
 	}
 
 
@@ -273,6 +275,12 @@ class QUBELY
 			}
 			wp_enqueue_script('qubely-interaction', QUBELY_DIR_URL . 'assets/js/interaction.js', array('jquery'), QUBELY_VERSION, true);
 			wp_enqueue_script('common-script', QUBELY_DIR_URL . 'assets/js/common-script.js', array('jquery'), QUBELY_VERSION);
+
+			if (has_block('qubely/animatedheadline')) {
+				wp_enqueue_style('jquery-animatedHeadline-style', QUBELY_DIR_URL . 'assets/css/jquery.animatedheadline.css', false, QUBELY_VERSION);
+				wp_enqueue_script('jquery-animatedHeadline', QUBELY_DIR_URL . 'assets/js/jquery.animatedheadline.min.js', array('jquery'), QUBELY_VERSION, true);
+			}
+
 			wp_localize_script('common-script', 'qubely_urls', array(
 				'plugin' => QUBELY_DIR_URL,
 				'ajax' => admin_url('admin-ajax.php')
@@ -622,8 +630,8 @@ class QUBELY
 
 
 	/**
-	 * Enqueue post style 
-	 * If css save option fileSystem then enqueue file 
+	 * Enqueue post style
+	 * If css save option fileSystem then enqueue file
 	 * Or add inline to the header
 	 */
 	public function enqueue_block_css()
@@ -664,9 +672,9 @@ class QUBELY
 
 
 	/**
-	 * Enqueue block css file 
+	 * Enqueue block css file
 	 * Check if css path exists and it has current post page
-	 * Then enqueue file 
+	 * Then enqueue file
 	 */
 	public function enqueue_block_css_file()
 	{
@@ -726,8 +734,8 @@ class QUBELY
 	}
 
 	/**
-	 * Check current post page open and css path exists 
-	 * Then read the css file content from css path 
+	 * Check current post page open and css path exists
+	 * Then read the css file content from css path
 	 * Then add inline css to the header
 	 */
 	public function add_block_inline_css()
@@ -780,7 +788,7 @@ class QUBELY
 		// $this->delete_post_resource();
 	}
 	/**
-	 * Delete post releated data 
+	 * Delete post releated data
 	 * @delete post css file
 	 */
 	private function delete_post_resource($post_id = '')

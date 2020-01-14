@@ -32,6 +32,10 @@ icons.tab_tabs = <img src={`${img_path}/tab/tabs.svg`} alt={__('Tabs')} />;
 icons.tab_pills = <img src={`${img_path}/tab/pills.svg`} alt={__('Pills')} />;
 icons.tab_underline = <img src={`${img_path}/tab/underline.svg`} alt={__('Underline')} />;
 
+icons.verticaltabs_1 = <img src={`${img_path}/verticaltabs/layout-1.svg`} alt={__('Layout 1')} />;
+icons.verticaltabs_2 = <img src={`${img_path}/verticaltabs/layout-2.svg`} alt={__('Layout 2')} />;
+icons.verticaltabs_3 = <img src={`${img_path}/verticaltabs/layout-3.svg`} alt={__('Layout 3')} />;
+
 icons.social_normal = <img src={`${img_path}//socialicon/normal.svg`} alt={__('Normal')} />;
 icons.social_fill = <img src={`${img_path}//socialicon/fill.svg`} alt={__('Fill')} />;
 

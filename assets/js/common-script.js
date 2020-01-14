@@ -75,6 +75,16 @@ jQuery(document).ready(function ($) {
         });
     });
 
+
+    //ANIMATED HEADLINE BLOCK
+    $('.qubely-block-animated-heading .animated-heading-text').each(function () {
+        let animatedHeadline = $(this)
+        if (window.animatedHeading) {
+            new window.animatedHeading({ heading: $(animatedHeadline) })
+        }
+
+    });
+
     //TAB BLOCK
     $('.qubely-tab-title').on('click', function (event) {
         var $qubelyTab = $(this).parent();
@@ -86,6 +96,34 @@ jQuery(document).ready(function ($) {
         $qubelyTab.addClass('qubely-active');
         $qubelyTab.closest('.qubely-block-tab').find('.qubely-tab-content.qubely-active').removeClass('qubely-active');
         $qubelyTab.closest('.qubely-block-tab').find('.qubely-tab-content').eq(qubelyIndex).addClass('qubely-active')
+    });
+
+    //TAB BLOCK
+    $('.qubely-vertical-tab-item-button').on('click', function (event) {
+        var $that = $(this);
+        var $currentNav = $that.parent();
+        if($currentNav.hasClass('qubely-vertical-active')){
+            return;
+        };
+
+        var $parentTab = $that.closest('.qubely-block-vertical-tab');
+        var $currentNavIndex = $currentNav.index();
+
+        // nav
+        $parentTab.find('.qubely-vertical-tab-item').removeClass('qubely-vertical-active');
+        $currentNav.addClass('qubely-vertical-active');
+
+        // nav content
+        $parentTab.find('.qubely-vertical-tab-nav-text').slideUp(300);
+        $that.find('.qubely-vertical-tab-nav-text').slideDown(300);
+
+        // body
+        var $currentTabBody = $currentNav.closest('.qubely-vertical-tab-nav').next();
+        var $currentVerticalContent = $currentTabBody.find('.qubely-tab-content').eq($currentNavIndex);
+
+        $parentTab.find('.qubely-tab-content').removeClass('qubely-vertical-active').fadeOut(0);
+        $currentVerticalContent.addClass('qubely-vertical-active').fadeIn();
+
     });
 
     //Carousel BLOCK
@@ -571,11 +609,6 @@ function loadScriptAsync(src) {
             window.addEventListener('scroll', pieEvent, true);
             pieEvent()
         })
-
     });
-
-
-
-
 
 })(jQuery);
