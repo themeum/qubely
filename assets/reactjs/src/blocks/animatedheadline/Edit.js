@@ -101,7 +101,6 @@ class Edit extends Component {
                 animationClass = 'loading-bar'
                 break
             case 'scale':
-            case 'slide':
                 animationClass = 'letters scale'
                 break
             case 'push':
@@ -189,7 +188,6 @@ class Edit extends Component {
                                 { label: __('Fade In'), value: 'fade-in' },
                                 { label: __('Loading Bar'), value: 'loading-bar' },
                                 { label: __('Scale'), value: 'scale' },
-                                { label: __('Slide'), value: 'slide' },
                                 { label: __('Push'), value: 'push' },
                                 { label: __('Twist/Wave'), value: 'wave' },
                             ]}
