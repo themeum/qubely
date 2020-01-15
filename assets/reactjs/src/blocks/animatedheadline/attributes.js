@@ -71,7 +71,7 @@ export const attributes = {
         style: [
             {
 
-                selector: '{{QUBELY}}.qubely-block-animated-heading { color:{{color}}; }'
+                selector: '{{QUBELY}}.qubely-block-animated-heading .animated-heading-text{ color:{{color}}; }'
             }
         ]
     },
