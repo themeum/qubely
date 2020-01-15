@@ -1858,3 +1858,18 @@ $.magnificPopup.registerModule(RETINA_NS, {
 
 /*>>retina*/
  _checkInstance(); }));
+
+
+ jQuery(document).ready(function ($) {
+	'use strict';
+	if (typeof $(document).magnificPopup !== 'undefined') {
+        $('.qubely-video-popup').magnificPopup({
+            type: 'iframe',
+            rtl: true,
+            mainClass: 'mfp-fade',
+            removalDelay: 300,
+            preloader: false,
+            fixedContentPos: false
+        });
+    }
+ });

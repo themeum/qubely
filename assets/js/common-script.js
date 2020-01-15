@@ -1,16 +1,17 @@
 jQuery(document).ready(function ($) {
     'use strict';
+
     // Magnific Popup
-    if (typeof $(document).magnificPopup !== 'undefined') {
-        $('.qubely-video-popup').magnificPopup({
-            type: 'iframe',
-            rtl: true,
-            mainClass: 'mfp-fade',
-            removalDelay: 300,
-            preloader: false,
-            fixedContentPos: false
-        });
-    }
+    // if (typeof $(document).magnificPopup !== 'undefined') {
+    //     $('.qubely-video-popup').magnificPopup({
+    //         type: 'iframe',
+    //         rtl: true,
+    //         mainClass: 'mfp-fade',
+    //         removalDelay: 300,
+    //         preloader: false,
+    //         fixedContentPos: false
+    //     });
+    // }
 
     // Set Preview CSS
     const cussrent_url = window.location.href;
