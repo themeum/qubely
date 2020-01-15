@@ -23,28 +23,28 @@ jQuery(document).ready(function ($) {
         window.document.getElementsByTagName("head")[0].appendChild(cssInline);
     }
 
-    if ($('.qubely-block-counter-number').length > 0) {
-        const counterElement = $('.qubely-block-counter-number')
-        let indexOfCounterElement = 0
-        while (indexOfCounterElement < counterElement.length) {
-            let currentElement = counterElement[indexOfCounterElement]
-            let start = parseInt(currentElement.dataset.start)
-            let limit = parseInt(currentElement.dataset.limit)
-            let counterDuration = parseInt(currentElement.dataset.counterduration)
-            let increment = Math.ceil((limit / counterDuration) * 10)
-            if (start < limit) {
-                let intervalId = setInterval(function () {
-                    let difference = limit - start
-                    difference >= increment ? start += increment : difference >= 50 ? start += 50 : start++
-                    currentElement.innerText = start
-                    if (start >= limit) {
-                        clearInterval(intervalId)
-                    }
-                }, 10);
-            }
-            indexOfCounterElement++
-        }
-    }
+    // if ($('.qubely-block-counter-number').length > 0) {
+    //     const counterElement = $('.qubely-block-counter-number')
+    //     let indexOfCounterElement = 0
+    //     while (indexOfCounterElement < counterElement.length) {
+    //         let currentElement = counterElement[indexOfCounterElement]
+    //         let start = parseInt(currentElement.dataset.start)
+    //         let limit = parseInt(currentElement.dataset.limit)
+    //         let counterDuration = parseInt(currentElement.dataset.counterduration)
+    //         let increment = Math.ceil((limit / counterDuration) * 10)
+    //         if (start < limit) {
+    //             let intervalId = setInterval(function () {
+    //                 let difference = limit - start
+    //                 difference >= increment ? start += increment : difference >= 50 ? start += 50 : start++
+    //                 currentElement.innerText = start
+    //                 if (start >= limit) {
+    //                     clearInterval(intervalId)
+    //                 }
+    //             }, 10);
+    //         }
+    //         indexOfCounterElement++
+    //     }
+    // }
 
     //ACCORDION BLOCK
     $('.qubely-block-accordion:not(.qubely-accordion-ready)').each(function () {

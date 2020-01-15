@@ -139,6 +139,8 @@ class QUBELY
 		wp_enqueue_style('qubely-magnific-popup-style', QUBELY_DIR_URL . 'assets/css/magnific-popup.css', false, QUBELY_VERSION);
 		wp_enqueue_style('jquery-animatedHeadline-style', QUBELY_DIR_URL . 'assets/css/jquery.animatedheadline.css', false, QUBELY_VERSION);
 		wp_enqueue_script('jquery-animatedHeadline', QUBELY_DIR_URL . 'assets/js/jquery.animatedheadline.min.js', array('jquery'), QUBELY_VERSION, true);
+		
+		wp_enqueue_script('qubely-block-counter', QUBELY_DIR_URL . 'assets/js/blocks/counter.js', array(), QUBELY_VERSION, true);
 	}
 
 
@@ -279,6 +281,10 @@ class QUBELY
 			if (has_block('qubely/animatedheadline')) {
 				wp_enqueue_style('jquery-animatedHeadline-style', QUBELY_DIR_URL . 'assets/css/jquery.animatedheadline.css', false, QUBELY_VERSION);
 				wp_enqueue_script('jquery-animatedHeadline', QUBELY_DIR_URL . 'assets/js/jquery.animatedheadline.min.js', array('jquery'), QUBELY_VERSION, true);
+			}
+
+			if(has_block('qubely/counter')) {
+				wp_enqueue_script('qubely-block-counter', QUBELY_DIR_URL . 'assets/js/blocks/counter.js', array(), QUBELY_VERSION, true);
 			}
 
 			wp_localize_script('common-script', 'qubely_urls', array(
