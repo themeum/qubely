@@ -9,7 +9,7 @@ class TableOfContents extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            headers: props.headers
+            headers: props.headers || []
         };
     }
 
@@ -68,10 +68,41 @@ class TableOfContents extends Component {
         setHeaders();
     }
 
+    createHierarchy = () => {
+
+    }
     render() {
+        const { headers } = this.state;
+        if (headers.length === 0) {
+            return (
+                <div className="qubely-message">
+                    {__("No header found, Please add headers before generating Table of Contents")}
+                </div>
+            );
+        }
+
+        console.log(this.createHierarchy())
         return (
-            <div>
-                Table of Contents
+            <div className="qubely-table-of-contents-wrapper">
+                <ul className="qubely-table-of-contents qubely-unordered-list">
+                    {
+                        headers.map(({ content, anchor, level }, index) => {
+                            return (
+                                <li className="item" key={anchor}>
+                                    <a
+                                        href={`#${anchor}`}
+                                        dangerouslySetInnerHTML={{
+                                            __html: content.replace(
+                                                /(<a.+?>|<\/a>)/g,
+                                                ''
+                                            )
+                                        }}
+                                    />
+                                </li>
+                            );
+                        })
+                    }
+                </ul>
             </div>
         );
     }
