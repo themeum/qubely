@@ -18,6 +18,7 @@ const API_fetch = (post_id, block_css, is_remain) => {
 let __CSS = ''
 let interaction = {}
 function innerBlocks(blocks, type = false) {
+    const post_id = select('core/editor').getCurrentPostId();
     if (type == true) {
         __CSS = ''
         interaction = {}
@@ -28,7 +29,6 @@ function innerBlocks(blocks, type = false) {
         const blockName = name.split('/')
         if (blockName[0] === 'qubely' && attributes.uniqueId) {
             __CSS += CssGenerator(attributes, blockName[1], attributes.uniqueId, true)
-
             if (typeof attributes['interaction'] !== 'undefined') {
                 const { while_scroll_into_view, mouse_movement } = attributes.interaction
 
@@ -66,6 +66,23 @@ function innerBlocks(blocks, type = false) {
                     }
                 }
             }
+
+            // if has animation
+            if(typeof attributes.animation !== 'undefined' ) {
+                if(Object.keys(attributes.animation).length) {
+                    console.log('Animation>>>', attributes.animation, post_id)
+                }
+            }else {
+
+            }
+            // if has interaction
+            if(typeof attributes.interaction !== 'undefined' ) {
+                if(Object.keys(attributes.interaction).length) {
+                    console.log('Interaction>>>', attributes.interaction, post_id)
+                }
+            }
+
+
         }
         if (row.innerBlocks && (row.innerBlocks).length > 0) {
             innerBlocks(row.innerBlocks)

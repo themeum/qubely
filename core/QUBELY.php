@@ -12,6 +12,8 @@ class QUBELY
 
 	protected $option_keyword = 'qubely_global_options';
 
+
+
 	/**
 	 * QUBELY constructor
 	 */
@@ -34,6 +36,11 @@ class QUBELY
 
 		// Add Styles and Scripts
 		add_action('wp_enqueue_scripts', array($this, 'qubely_enqueue_style'));
+
+		// Load Inline Scripts
+        add_action('wp_head', array($this, 'qubely_inline_header_scripts'));
+        add_action('admin_head', array($this, 'qubely_inline_admin_header_scripts'));
+        add_action('wp_footer', array($this, 'qubely_inline_footer_scripts'));
 
 		// Add post meta key
 		$this->add_global_settings_post_meta();
@@ -141,6 +148,13 @@ class QUBELY
 		wp_enqueue_script('jquery-animatedHeadline', QUBELY_DIR_URL . 'assets/js/jquery.animatedheadline.min.js', array('jquery'), QUBELY_VERSION, true);
 		
 		wp_enqueue_script('qubely-block-counter', QUBELY_DIR_URL . 'assets/js/blocks/counter.js', array(), QUBELY_VERSION, true);
+        wp_enqueue_script('qubely-block-accordion', QUBELY_DIR_URL . 'assets/js/blocks/accordion.js', array('jquery'), QUBELY_VERSION, true);
+
+        wp_enqueue_script('qubely-block-tabs', QUBELY_DIR_URL . 'assets/js/blocks/tabs.js', array('jquery'), QUBELY_VERSION, true);
+        wp_enqueue_script('qubely-block-verticaltabs', QUBELY_DIR_URL . 'assets/js/blocks/verticaltabs.js', array('jquery'), QUBELY_VERSION, true);
+        wp_enqueue_script('qubely-block-map', QUBELY_DIR_URL . 'assets/js/blocks/map.js', array('jquery'), QUBELY_VERSION, true);
+        wp_enqueue_script('qubely-block-pieprogress', QUBELY_DIR_URL . 'assets/js/blocks/pieprogress.js', array('jquery'), QUBELY_VERSION, true);
+        wp_enqueue_script('qubely-block-contactform', QUBELY_DIR_URL . 'assets/js/blocks/contactform.js', array('jquery'), QUBELY_VERSION, true);
 	}
 
 
@@ -287,12 +301,108 @@ class QUBELY
 				wp_enqueue_script('qubely-block-counter', QUBELY_DIR_URL . 'assets/js/blocks/counter.js', array(), QUBELY_VERSION, true);
 			}
 
+			if(has_block('qubely/accordion')) {
+				wp_enqueue_script('qubely-block-accordion', QUBELY_DIR_URL . 'assets/js/blocks/accordion.js', array('jquery'), QUBELY_VERSION, true);
+			}
+
+			if(has_block('qubely/tabs')) {
+                wp_enqueue_script('qubely-block-tabs', QUBELY_DIR_URL . 'assets/js/blocks/tabs.js', array('jquery'), QUBELY_VERSION, true);
+			}
+
+			// must move to pro
+			if(has_block('qubely/verticaltabs')) {
+                wp_enqueue_script('qubely-block-verticaltabs', QUBELY_DIR_URL . 'assets/js/blocks/verticaltabs.js', array('jquery'), QUBELY_VERSION, true);
+			}
+
+			if(has_block('qubely/map')) {
+                wp_enqueue_script('qubely-block-map', QUBELY_DIR_URL . 'assets/js/blocks/map.js', array('jquery'), QUBELY_VERSION, true);
+			}
+
+			if(has_block('qubely/pieprogress')) {
+                wp_enqueue_script('qubely-block-pieprogress', QUBELY_DIR_URL . 'assets/js/blocks/pieprogress.js', array('jquery'), QUBELY_VERSION, true);
+			}
+
+			if(has_block('qubely/contactform')) {
+                wp_enqueue_script('qubely-block-contactform', QUBELY_DIR_URL . 'assets/js/blocks/contactform.js', array('jquery'), QUBELY_VERSION, true);
+			}
+
 			wp_localize_script('common-script', 'qubely_urls', array(
 				'plugin' => QUBELY_DIR_URL,
 				'ajax' => admin_url('admin-ajax.php')
 			));
 		}
 	}
+
+    /**
+     * Load Inline Footer Script
+     * @since 1.3.0
+     */
+	public function qubely_inline_footer_scripts()
+    {
+        ?>
+            <script>
+                // Set Preview CSS
+                document.addEventListener("DOMContentLoaded", function() {
+                    const cussrent_url = window.location.href;
+                    if (cussrent_url.includes('preview=true')) {
+                        let cssInline = document.createElement('style');
+                        cssInline.type = 'text/css';
+                        cssInline.id = 'qubely-block-js-preview';
+                        cssInline.innerHTML = localStorage.getItem('qubelyCSS');
+                        window.document.getElementsByTagName("head")[0].appendChild(cssInline);
+                    }
+                })
+            </script>
+        <?php
+    }
+
+    /**
+     * Load Inline Header Script
+     * @since 1.3.0
+     */
+    public function qubely_inline_header_scripts()
+    {
+        ?>
+        <script>
+            function loadScriptAsync(src) {
+                return new Promise((resolve, reject) => {
+                    const tag = document.createElement('script');
+                    tag.src = src;
+                    tag.async = true;
+                    tag.onload = () => {
+                        resolve();
+                    };
+                    const firstScriptTag = document.getElementsByTagName('script')[0];
+                    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+                });
+            }
+        </script>
+        <?php
+    }
+
+    /**
+     * Load Inline Admin Header Script
+     * @since 1.3.0
+     */
+    public function qubely_inline_admin_header_scripts()
+    {
+        ?>
+        <script>
+            function loadScriptAsync(src) {
+                return new Promise((resolve, reject) => {
+                    const tag = document.createElement('script');
+                    tag.src = src;
+                    tag.async = true;
+                    tag.onload = () => {
+                        resolve();
+                    };
+                    const firstScriptTag = document.getElementsByTagName('script')[0];
+                    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+                });
+            }
+        </script>
+        <?php
+    }
 
 	/**
 	 * Block Category Add
