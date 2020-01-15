@@ -82,7 +82,7 @@ class Edit extends Component {
             attributes: {
                 uniqueId,
                 className,
-                headers,
+                headerLinks,
                 animation,
                 interaction
             }
@@ -96,7 +96,7 @@ class Edit extends Component {
         const classes = classnames(className,
             `qubely-block-${uniqueId}`
         );
-
+        console.log('headerLinks : ', headerLinks)
         return (
             <Fragment>
                 <InspectorControls key="inspector">
@@ -112,7 +112,8 @@ class Edit extends Component {
 
                 <div className={classes}>
                     <TableOfContents
-                        // headers={headers}
+                        headers={headerLinks && JSON.parse(headerLinks)}
+                        blockProp={this.props}
                     />
                     <div ref="qubelyContextMenu" className={`qubely-context-menu-wraper`} >
                         <ContextMenu
