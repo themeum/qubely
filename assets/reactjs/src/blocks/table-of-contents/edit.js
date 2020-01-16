@@ -96,7 +96,6 @@ class Edit extends Component {
         const classes = classnames(className,
             `qubely-block-${uniqueId}`
         );
-        console.log('headerLinks : ', headerLinks)
         return (
             <Fragment>
                 <InspectorControls key="inspector">

@@ -1,5 +1,6 @@
-import './style.scss'
-import Edit from './Edit'
+import './style.scss';
+import Edit from './Edit';
+import Save from './save';
 import attributes from './attributes';
 const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
@@ -23,7 +24,8 @@ registerBlockType('qubely/table-of-contents', {
     },
     attributes,
     edit: Edit,
-    save: function (props) {
-        return null
-    },
+    save: Save,
+    // save: function (props) {
+    //     return null
+    // },
 });
