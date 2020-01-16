@@ -4,6 +4,7 @@ const replace = require('gulp-replace');
 const clean = require('gulp-clean');
 const minifyCSS = require('gulp-csso');
 const minifyJS = require('gulp-minify');
+const concatCss = require('gulp-concat-css')
 
 function cleanBuild() {
     return src('./build', {read: false, allowEmpty: true})
@@ -35,9 +36,20 @@ function makeBuild() {
 
 function productionMode() {
     return src(['./build/qubely/core/QUBELY.php'])
-      .pipe(replace(/qubely.dev.js/g, 'qubely.min.js'))
-      .pipe(replace(/common-script.js/g, 'common-script.min.js'))
-      .pipe(dest('./build/qubely/core/'));
+        .pipe(replace(/qubely.dev.js/g, 'qubely.min.js'))
+        .pipe(replace(/common-script.js/g, 'common-script.min.js'))
+        .pipe(replace(/(?<=#START_REPLACE)([^]*?)(?=#END_REPLACE)/g, 'wp_enqueue_style(\'qubely-bundle\', QUBELY_DIR_URL . \'assets/css/qubely.bundle.min.css\', false, QUBELY_VERSION);'))
+        .pipe(dest('./build/qubely/core/'));
+}
+
+function gulpConcatCss() {
+    return src([
+        './build/qubely/assets/css/animation.css',
+        './build/qubely/assets/css/magnific-popup.css',
+        './build/qubely/assets/css/qubely.animatedheadline.css',
+    ])
+        .pipe(concatCss('qubely.bundle.css'))
+        .pipe(dest('./build/qubely/assets/css/'))
 }
 
 function minify_css() {
@@ -72,10 +84,11 @@ function makeZip() {
 
 exports.makeBuild = makeBuild;
 exports.productionMode = productionMode;
+exports.gulpConcatCss = gulpConcatCss;
 exports.minify_css = minify_css;
 exports.minify_js = minify_js;
 exports.cleanBuild = cleanBuild;
 exports.cleanZip = cleanZip;
 exports.removeJsFiles = removeJsFiles;
 exports.makeZip = makeZip;
-exports.default = series(cleanBuild, cleanZip, makeBuild, productionMode, minify_css, minify_js, removeJsFiles, makeZip, cleanBuild);
+exports.default = series(cleanBuild, cleanZip, makeBuild, productionMode,gulpConcatCss, minify_css, minify_js, removeJsFiles, makeZip, cleanBuild);

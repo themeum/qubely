@@ -37,6 +37,9 @@ class QUBELY
 		// Add Styles and Scripts
 		add_action('wp_enqueue_scripts', array($this, 'qubely_enqueue_style'));
 
+
+		add_action('wp_enqueue_scripts', array($this, 'qubely_conditional_block_scripts'));
+
 		// Load Inline Scripts
         add_action('wp_head', array($this, 'qubely_inline_header_scripts'));
         add_action('admin_head', array($this, 'qubely_inline_admin_header_scripts'));
@@ -144,17 +147,13 @@ class QUBELY
 		wp_enqueue_style('qubely-options', QUBELY_DIR_URL . 'assets/css/options.css', false, QUBELY_VERSION);
 		wp_enqueue_script('qubely-magnific-popup', QUBELY_DIR_URL . 'assets/js/qubely.magnific-popup.min.js', array('jquery'), QUBELY_VERSION, true);
 		wp_enqueue_style('qubely-magnific-popup-style', QUBELY_DIR_URL . 'assets/css/magnific-popup.css', false, QUBELY_VERSION);
-		wp_enqueue_style('jquery-animatedHeadline-style', QUBELY_DIR_URL . 'assets/css/jquery.animatedheadline.css', false, QUBELY_VERSION);
+		wp_enqueue_style('jquery-animatedHeadline-style', QUBELY_DIR_URL . 'assets/css/qubely.animatedheadline.css', false, QUBELY_VERSION);
 		wp_enqueue_script('jquery-animatedHeadline', QUBELY_DIR_URL . 'assets/js/jquery.animatedheadline.min.js', array('jquery'), QUBELY_VERSION, true);
-		
 		wp_enqueue_script('qubely-block-counter', QUBELY_DIR_URL . 'assets/js/blocks/counter.js', array(), QUBELY_VERSION, true);
-        wp_enqueue_script('qubely-block-accordion', QUBELY_DIR_URL . 'assets/js/blocks/accordion.js', array('jquery'), QUBELY_VERSION, true);
-
-        wp_enqueue_script('qubely-block-tabs', QUBELY_DIR_URL . 'assets/js/blocks/tabs.js', array('jquery'), QUBELY_VERSION, true);
-        wp_enqueue_script('qubely-block-verticaltabs', QUBELY_DIR_URL . 'assets/js/blocks/verticaltabs.js', array('jquery'), QUBELY_VERSION, true);
         wp_enqueue_script('qubely-block-map', QUBELY_DIR_URL . 'assets/js/blocks/map.js', array('jquery'), QUBELY_VERSION, true);
-        wp_enqueue_script('qubely-block-pieprogress', QUBELY_DIR_URL . 'assets/js/blocks/pieprogress.js', array('jquery'), QUBELY_VERSION, true);
         wp_enqueue_script('qubely-block-contactform', QUBELY_DIR_URL . 'assets/js/blocks/contactform.js', array('jquery'), QUBELY_VERSION, true);
+        wp_enqueue_script('qubely-block-common', QUBELY_DIR_URL . 'assets/js/blocks/common.js', array('jquery'), QUBELY_VERSION, true);
+
 	}
 
 
@@ -282,56 +281,81 @@ class QUBELY
 	public function qubely_enqueue_style()
 	{
 		if (get_post_meta(get_the_ID(), '_qubely_css', true) != '') {
+
+		    /*
+		     * @warning: Don't Remove `START_REPLACE` and `START_REPLACE` comments. These comments are required for gulp build
+		     */
+
+            #START_REPLACE
+            wp_enqueue_style('qubley-animated-headline-style', QUBELY_DIR_URL . 'assets/css/qubely.animatedheadline.css', false, QUBELY_VERSION);
 			wp_enqueue_style('qubely-animation', QUBELY_DIR_URL . 'assets/css/animation.css', false, QUBELY_VERSION);
-			wp_enqueue_style('qubely-font-awesome', QUBELY_DIR_URL . 'assets/css/font-awesome.min.css', false, QUBELY_VERSION);
+            wp_enqueue_style('qubely-magnific-popup-style', QUBELY_DIR_URL . 'assets/css/magnific-popup.css', false, QUBELY_VERSION);
 			wp_enqueue_style('qubely-style-min', QUBELY_DIR_URL . 'assets/css/style.min.css', false, QUBELY_VERSION);
-			if (has_block('qubely/videopopup') || has_block('qubely/gallery')) {
-				wp_enqueue_script('qubely-magnific-popup-script', QUBELY_DIR_URL . 'assets/js/qubely.magnific-popup.min.js', array('jquery'), QUBELY_VERSION);
-				wp_enqueue_style('qubely-magnific-popup-style', QUBELY_DIR_URL . 'assets/css/magnific-popup.css', false, QUBELY_VERSION);
-			}
-			wp_enqueue_script('qubely-interaction', QUBELY_DIR_URL . 'assets/js/interaction.js', array('jquery'), QUBELY_VERSION, true);
-			wp_enqueue_script('common-script', QUBELY_DIR_URL . 'assets/js/common-script.js', array('jquery'), QUBELY_VERSION);
+            #END_REPLACE
 
-			if (has_block('qubely/animatedheadline')) {
-				wp_enqueue_style('jquery-animatedHeadline-style', QUBELY_DIR_URL . 'assets/css/jquery.animatedheadline.css', false, QUBELY_VERSION);
-				wp_enqueue_script('jquery-animatedHeadline', QUBELY_DIR_URL . 'assets/js/jquery.animatedheadline.min.js', array('jquery'), QUBELY_VERSION, true);
-			}
-
-			if(has_block('qubely/counter')) {
-				wp_enqueue_script('qubely-block-counter', QUBELY_DIR_URL . 'assets/js/blocks/counter.js', array(), QUBELY_VERSION, true);
-			}
-
-			if(has_block('qubely/accordion')) {
-				wp_enqueue_script('qubely-block-accordion', QUBELY_DIR_URL . 'assets/js/blocks/accordion.js', array('jquery'), QUBELY_VERSION, true);
-			}
-
-			if(has_block('qubely/tabs')) {
-                wp_enqueue_script('qubely-block-tabs', QUBELY_DIR_URL . 'assets/js/blocks/tabs.js', array('jquery'), QUBELY_VERSION, true);
-			}
-
-			// must move to pro
-			if(has_block('qubely/verticaltabs')) {
-                wp_enqueue_script('qubely-block-verticaltabs', QUBELY_DIR_URL . 'assets/js/blocks/verticaltabs.js', array('jquery'), QUBELY_VERSION, true);
-			}
-
-			if(has_block('qubely/map')) {
-                wp_enqueue_script('qubely-block-map', QUBELY_DIR_URL . 'assets/js/blocks/map.js', array('jquery'), QUBELY_VERSION, true);
-			}
-
-			if(has_block('qubely/pieprogress')) {
-                wp_enqueue_script('qubely-block-pieprogress', QUBELY_DIR_URL . 'assets/js/blocks/pieprogress.js', array('jquery'), QUBELY_VERSION, true);
-			}
-
-			if(has_block('qubely/contactform')) {
-                wp_enqueue_script('qubely-block-contactform', QUBELY_DIR_URL . 'assets/js/blocks/contactform.js', array('jquery'), QUBELY_VERSION, true);
-			}
-
-			wp_localize_script('common-script', 'qubely_urls', array(
-				'plugin' => QUBELY_DIR_URL,
-				'ajax' => admin_url('admin-ajax.php')
-			));
+            wp_enqueue_style('qubely-font-awesome', QUBELY_DIR_URL . 'assets/css/font-awesome.min.css', false, QUBELY_VERSION);
 		}
 	}
+
+	public function qubely_conditional_block_scripts ()
+    {
+
+        wp_register_script('qubely_local_script', '');
+        wp_localize_script('qubely_local_script', 'qubely_urls', array(
+            'plugin' => QUBELY_DIR_URL,
+            'ajax' => admin_url('admin-ajax.php')
+        ));
+        wp_enqueue_script('qubely_local_script');
+
+
+	    $blocks_meta_data = get_post_meta(get_the_ID(), '__qubely_available_blocks', true);
+
+	    if(is_array($blocks_meta_data) && count($blocks_meta_data)) {
+            $blocks_meta_data = unserialize(current($blocks_meta_data));
+            $available_blocks = $blocks_meta_data['available_blocks'];
+
+            $has_interaction = $blocks_meta_data['interaction'];
+            $has_animation = $blocks_meta_data['animation'];
+            $has_parallax = $blocks_meta_data['parallax'];
+
+            if (in_array('qubely/animatedheadline', $available_blocks)) {
+                wp_enqueue_script('qubley-animated-headline-script', QUBELY_DIR_URL . 'assets/js/jquery.animatedheadline.min.js', array('jquery'), QUBELY_VERSION, true);
+            }
+
+            if(in_array('qubely/counter', $available_blocks)) {
+                wp_enqueue_script('qubely-block-counter', QUBELY_DIR_URL . 'assets/js/blocks/counter.js', array(), QUBELY_VERSION, true);
+            }
+
+            if(in_array('qubely/map', $available_blocks)) {
+                wp_enqueue_script('qubely-block-map', QUBELY_DIR_URL . 'assets/js/blocks/map.js', array('jquery'), QUBELY_VERSION, true);
+            }
+
+            if (in_array('qubely/videopopup', $available_blocks) || in_array('qubely/gallery', $available_blocks)) {
+                wp_enqueue_script('qubely-magnific-popup-script', QUBELY_DIR_URL . 'assets/js/qubely.magnific-popup.min.js', array('jquery'), QUBELY_VERSION);
+            }
+
+            if (in_array('qubely/contactform', $available_blocks) || in_array('qubely/gallery', $available_blocks)) {
+                wp_enqueue_script('qubely-block-contactform', QUBELY_DIR_URL . 'assets/js/blocks/contactform.js', array('jquery'), QUBELY_VERSION);
+            }
+
+            if($has_interaction) {
+                wp_enqueue_script('qubely-interaction', QUBELY_DIR_URL . 'assets/js/interaction.js', array('jquery'), QUBELY_VERSION, true);
+            }
+
+            if(
+                $has_interaction ||
+                $has_parallax ||
+                $has_animation ||
+                in_array('qubely/accordion', $available_blocks) ||
+                in_array('qubely/pieprogress', $available_blocks) ||
+                in_array('qubely/tabs', $available_blocks) ||
+                in_array('qubely/verticaltabs', $available_blocks)
+            ) {
+                wp_enqueue_script('qubely-block-common', QUBELY_DIR_URL . 'assets/js/blocks/common.js', array('jquery', 'qubely-interaction'), QUBELY_VERSION, true);
+            }
+
+        }
+    }
 
     /**
      * Load Inline Footer Script
@@ -513,7 +537,40 @@ class QUBELY
 				)
 			)
 		);
+
+		// for set available blocks meta, @since 1.3.0
+        register_rest_route(
+            'qubely/v1',
+            '/set_qubely_available_blocks_meta/',
+            array(
+                array(
+                    'methods' => 'POST',
+                    'callback' => array($this, 'set_qubely_available_blocks_meta'),
+                    'permission_callback' => function() {
+                        return current_user_can('edit_posts');
+                    },
+                    'args' => array()
+                )
+            )
+        );
 	}
+
+    /**
+     * Api for set/update available blocks meta
+     * @since 1.3.0
+     * @param $request
+     */
+
+    public function set_qubely_available_blocks_meta(WP_REST_Request $request)
+    {
+        try {
+            $request_body = json_decode($request->get_body(), true);
+            update_post_meta($request_body['post_id'], '__qubely_available_blocks', serialize($request_body));
+            return ['success' => true, 'message' => 'Available blocks meta added ', 'data' => $request_body];
+        } catch (Exception $e) {
+            return ['success' => false, 'message' => $e->getMessage()];
+        }
+    }
 
 
 	public function  append_qubely_css_callback($request)

@@ -24,6 +24,15 @@ function innerBlocks(blocks, type = false) {
         interaction = {}
         type = false
     }
+
+    const blocks_flag = {
+        post_id,
+        available_blocks: [],
+        interaction: false,
+        animation: false,
+        parallax: false
+    }
+
     blocks.map(row => {
         const { attributes, name } = row
         const blockName = name.split('/')
@@ -68,27 +77,47 @@ function innerBlocks(blocks, type = false) {
             }
 
             // if has animation
-            if(typeof attributes.animation !== 'undefined' ) {
-                if(Object.keys(attributes.animation).length) {
-                    console.log('Animation>>>', attributes.animation, post_id)
+            if(blocks_flag.animation === false && typeof attributes.animation !== 'undefined' ) {
+                if(Object.keys(attributes.animation).length && attributes.animation.animation !== '') {
+                    blocks_flag.animation = true
                 }
-            }else {
-
             }
+
             // if has interaction
-            if(typeof attributes.interaction !== 'undefined' ) {
-                if(Object.keys(attributes.interaction).length) {
-                    console.log('Interaction>>>', attributes.interaction, post_id)
+            if(blocks_flag.interaction === false && typeof attributes.interaction !== 'undefined' ) {
+                if(Object.keys(attributes.interaction).length && (attributes.interaction.while_scroll_into_view.enable === true || attributes.interaction.mouse_movement.enable === true)) {
+                    blocks_flag.interaction = true
                 }
             }
 
+            // if has block parallax
+            if(blocks_flag.parallax === false && name === 'qubely/row') {
+                if(typeof attributes.rowBg !== 'undefined' && typeof attributes.rowBg.bgimgParallax !== 'undefined' && attributes.rowBg.bgimgParallax === 'animated'){
+                    blocks_flag.parallax = true
+                }
+            }
 
+            blocks_flag.available_blocks.push(name)
         }
+
+        setAvailableBlocksMeta(blocks_flag)
+
         if (row.innerBlocks && (row.innerBlocks).length > 0) {
             innerBlocks(row.innerBlocks)
         }
+
     })
+
+    blocks_flag.available_blocks = [...new Set(blocks_flag.available_blocks)]
     return { css: __CSS, interaction }
+}
+
+function setAvailableBlocksMeta(data) {
+    wp.apiFetch({
+        path: 'qubely/v1/set_qubely_available_blocks_meta',
+        method: 'POST',
+        data
+    })
 }
 
 
