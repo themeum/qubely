@@ -1,11 +1,12 @@
-const { RichText } = wp.editor
-const { __ } = wp.i18n
+
+const { RichText } = wp.editor;
+const { __ } = wp.i18n;
 const {
     AlignmentToolbar,
     BlockControls,
     InspectorControls,
-} = wp.blockEditor
-const { Component, Fragment } = wp.element
+} = wp.blockEditor;
+const { Component, Fragment } = wp.element;
 const { PanelBody, SelectControl, FormTokenField } = wp.components;
 const {
     BorderRadius,
@@ -23,7 +24,11 @@ const {
         animationSettings,
         interactionSettings
     },
+    HelperFunction: {
+        copyToClipboard
+    },
     HeadingToolbar,
+    Templates,
     Typography,
     Range
 } = wp.qubelyComponents
@@ -43,13 +48,14 @@ class Edit extends Component {
         }
     }
     componentDidMount() {
-        const { setAttributes, clientId, attributes: { uniqueId } } = this.props
+        const { setAttributes, name, clientId, attributes, attributes: { uniqueId } } = this.props
         const _client = clientId.substr(0, 6)
         if (!uniqueId) {
             setAttributes({ uniqueId: _client });
         } else if (uniqueId && uniqueId != _client) {
             setAttributes({ uniqueId: _client });
         }
+
         this.anim = new window.animatedHeading({ heading: $(this.animatedHeading) })
     }
 
