@@ -1,5 +1,4 @@
-(function ($) {
-    'use strict';
+jQuery(document).ready(function ($) {
 
     //GOOGLE MAP BLOCK
     $('.qubely-google-map:not(.qubely-google-map-ready)').each(function () {
@@ -75,6 +74,5 @@
             }
         });
     }
-
 
 })(jQuery);
