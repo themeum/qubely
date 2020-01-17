@@ -155,7 +155,6 @@ class QUBELY
 		wp_enqueue_style('qubely-options', QUBELY_DIR_URL . 'assets/css/options.css', false, QUBELY_VERSION);
 		wp_enqueue_script('qubely-magnific-popup', QUBELY_DIR_URL . 'assets/js/qubely.magnific-popup.js', array('jquery'), QUBELY_VERSION, true);
 		wp_enqueue_script('jquery-animatedHeadline', QUBELY_DIR_URL . 'assets/js/jquery.animatedheadline.js', array('jquery'), QUBELY_VERSION, true);
-		wp_enqueue_script('qubely-block-counter', QUBELY_DIR_URL . 'assets/js/blocks/counter.js', array(), QUBELY_VERSION, true);
         wp_enqueue_script('qubely-block-map', QUBELY_DIR_URL . 'assets/js/blocks/map.js', array('jquery'), QUBELY_VERSION, true);
         wp_enqueue_script('qubely-block-contactform', QUBELY_DIR_URL . 'assets/js/blocks/contactform.js', array('jquery'), QUBELY_VERSION, true);
         wp_enqueue_script('qubely-block-common', QUBELY_DIR_URL . 'assets/js/blocks/common.js', array('jquery'), QUBELY_VERSION, true);
@@ -313,13 +312,8 @@ class QUBELY
         ));
         wp_enqueue_script('qubely_local_script');
 
-
 	    $blocks_meta_data = get_post_meta(get_the_ID(), '__qubely_available_blocks', true);
         $blocks_meta_data = unserialize($blocks_meta_data);
-
-	    echo "<pre>";
-	    var_dump($blocks_meta_data);
-	    echo "</pre>";
 
 	    if(is_array($blocks_meta_data) && count($blocks_meta_data)) {
             $available_blocks = $blocks_meta_data['available_blocks'];
@@ -329,10 +323,6 @@ class QUBELY
 
             if (in_array('qubely/animatedheadline', $available_blocks)) {
                 wp_enqueue_script('qubley-animated-headline-script', QUBELY_DIR_URL . 'assets/js/jquery.animatedheadline.js', array('jquery'), QUBELY_VERSION, true);
-            }
-
-            if(in_array('qubely/counter', $available_blocks)) {
-                wp_enqueue_script('qubely-block-counter', QUBELY_DIR_URL . 'assets/js/blocks/counter.js', array(), QUBELY_VERSION, true);
             }
 
             if(in_array('qubely/map', $available_blocks)) {
@@ -547,7 +537,7 @@ class QUBELY
 			)
 		);
 
-		// for set available blocks meta, @since 1.3.0
+		/*// for set available blocks meta, @since 1.3.0
         register_rest_route(
             'qubely/v1',
             '/set_qubely_available_blocks_meta/',
@@ -561,7 +551,7 @@ class QUBELY
                     'args' => array()
                 )
             )
-        );
+        );*/
 	}
 
     /**
@@ -570,7 +560,7 @@ class QUBELY
      * @param $request
      */
 
-    public function set_qubely_available_blocks_meta(WP_REST_Request $request)
+    /*public function set_qubely_available_blocks_meta(WP_REST_Request $request)
     {
         try {
             $request_body = json_decode($request->get_body(), true);
@@ -579,7 +569,7 @@ class QUBELY
         } catch (Exception $e) {
             return ['success' => false, 'message' => $e->getMessage()];
         }
-    }
+    }*/
 
 
 	public function  append_qubely_css_callback($request)
@@ -726,12 +716,16 @@ class QUBELY
 					throw new Exception(__('JSON can not be saved due to permission!!!', 'qubely'));
 				}
 
-				return ['success' => true, 'message' => __('Qubely block css file has been updated.', 'qubely')];
 			} else {
 				delete_post_meta($post_id, '_qubely_css');
 				delete_post_meta($post_id, '_qubely_interaction_json');
 				$this->delete_post_resource($post_id);
 			}
+
+			// set block meta
+            update_post_meta($post_id, '__qubely_available_blocks', serialize($params['available_blocks']));
+            return ['success' => true, 'message' => __('Qubely block css file has been updated.', 'qubely'), 'data' => $params];
+
 		} catch (Exception $e) {
 			return ['success' => false, 'message' => $e->getMessage()];
 		}

@@ -44,7 +44,6 @@ function productionMode() {
         .pipe(replace(/qubely.dev.js/g, 'qubely.min.js'))
         .pipe(replace(/common-script.js/g, 'common-script.min.js'))
         .pipe(replace(/jquery.animatedheadline.js/g, 'jquery.animatedheadline.min.js'))
-        .pipe(replace(/counter.js/g, 'counter.min.js'))
         .pipe(replace(/map.js/g, 'map.min.js'))
         .pipe(replace(/qubely.magnific-popup.js/g, 'qubely.magnific-popup.min.js'))
         .pipe(replace(/contactform.js/g, 'contactform.min.js'))

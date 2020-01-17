@@ -3,25 +3,13 @@ const { CssGenerator: { CssGenerator } } = wp.qubelyComponents
 
 const endpoint = '/qubely/v1/save_block_css'
 
-const API_fetch = (post_id, block_css, is_remain) => {
+const API_fetch = (post_id, block_css, is_remain, available_blocks) => {
     const json = JSON.stringify(block_css.interaction)
     return wp.apiFetch({
         path: endpoint,
         method: 'POST',
-        data: { block_css: block_css.css, interaction: json, post_id, is_remain }
+        data: { block_css: block_css.css, interaction: json, post_id, is_remain, available_blocks }
     }).then(data => data)
-}
-
-
-function setAvailableBlocksMeta(data) {
-    wp.apiFetch({
-        path: 'qubely/v1/set_qubely_available_blocks_meta',
-        method: 'POST',
-        data
-    })
-        .then(response  => {
-            console.log(response)
-        })
 }
 
 /**
@@ -30,20 +18,12 @@ function setAvailableBlocksMeta(data) {
  */
 let __CSS = ''
 let interaction = {}
+
 function innerBlocks(blocks, type = false) {
-    const post_id = select('core/editor').getCurrentPostId();
     if (type == true) {
         __CSS = ''
         interaction = {}
         type = false
-    }
-
-    const blocks_flag = {
-        post_id,
-        available_blocks: [],
-        interaction: false,
-        animation: false,
-        parallax: false
     }
 
     blocks.map(row => {
@@ -73,6 +53,7 @@ function innerBlocks(blocks, type = false) {
                     } else {
                         interaction.while_scroll_view.push(interactionObj)
                     }
+                    // blocks_flag.interaction = true
                 }
                 if (typeof mouse_movement !== 'undefined' && mouse_movement.enable === true) {
                     const interactionObj = {
@@ -88,38 +69,12 @@ function innerBlocks(blocks, type = false) {
                     }
                 }
             }
-
-            // if has animation
-            if(blocks_flag.animation === false && typeof attributes.animation !== 'undefined' ) {
-                if(Object.keys(attributes.animation).length && attributes.animation.animation !== '') {
-                    blocks_flag.animation = true
-                }
-            }
-
-            // if has interaction
-            if(blocks_flag.interaction === false && typeof attributes.interaction !== 'undefined' ) {
-                if(Object.keys(attributes.interaction).length && (attributes.interaction.while_scroll_into_view.enable === true || attributes.interaction.mouse_movement.enable === true)) {
-                    blocks_flag.interaction = true
-                }
-            }
-
-            // if has block parallax
-            if(blocks_flag.parallax === false && name === 'qubely/row') {
-                if(typeof attributes.rowBg !== 'undefined' && typeof attributes.rowBg.bgimgParallax !== 'undefined' && attributes.rowBg.bgimgParallax === 'animated'){
-                    blocks_flag.parallax = true
-                }
-            }
-
-            blocks_flag.available_blocks.push(name)
         }
 
         if (row.innerBlocks && (row.innerBlocks).length > 0) {
             innerBlocks(row.innerBlocks)
         }
-
     })
-
-    setAvailableBlocksMeta(blocks_flag)
     return { css: __CSS, interaction }
 }
 
@@ -185,6 +140,72 @@ function parseBlock(blocks){
 }
 
 
+/*function setAvailableBlocksMeta(data) {
+    wp.apiFetch({
+        path: 'qubely/v1/set_qubely_available_blocks_meta',
+        method: 'POST',
+        data
+    })
+        .then(response  => {
+            console.log(response)
+        })
+}*/
+
+
+function availableBlocksMeta (all_blocks) {
+    const blocks_flag = {
+        available_blocks: [],
+        interaction: false,
+        animation: false,
+        parallax: false
+    }
+    function recursive_block_map(blocks) {
+        if(!blocks.length){
+            return
+        }
+        blocks.map(block => {
+            const {attributes, innerBlocks, name} = block
+            blocks_flag.available_blocks.push(name)
+
+            // check if has interaction
+            if(blocks_flag.interaction === false && typeof attributes.interaction !== 'undefined'){
+                const { while_scroll_into_view, mouse_movement } = attributes.interaction
+                if (
+                    (typeof while_scroll_into_view !== 'undefined' && while_scroll_into_view.enable === true) ||
+                    (typeof mouse_movement !== 'undefined' && mouse_movement.enable === true)
+                ) {
+                    blocks_flag.interaction = true
+                }
+            }
+
+            // if has block animation
+            if(
+                blocks_flag.animation === false &&
+                typeof attributes.animation !== 'undefined' &&
+                typeof attributes.animation.animation !== 'undefined' &&
+                attributes.animation.animation !== ''
+            ) {
+                blocks_flag.animation = true
+            }
+
+            // if has block parallax
+            if(blocks_flag.parallax === false && name === 'qubely/row') {
+                if(
+                    typeof attributes.rowBg !== 'undefined' &&
+                    typeof attributes.rowBg.bgimgParallax !== 'undefined' &&
+                    attributes.rowBg.bgimgParallax === 'animated'
+                ){
+                    blocks_flag.parallax = true
+                }
+            }
+
+            recursive_block_map(innerBlocks)
+        })
+    }
+    recursive_block_map(all_blocks)
+    return blocks_flag
+}
+
 const ParseCss = (setDatabase = true) => {
     window.bindCss = true
     const all_blocks = select('core/block-editor').getBlocks()
@@ -204,8 +225,12 @@ const ParseCss = (setDatabase = true) => {
     parseBlock(all_blocks);
 
     localStorage.setItem('qubelyCSS', __blocks)
+
+    // available blocks meta
+    const available_blocks = availableBlocksMeta(all_blocks);
+
     if (setDatabase) {
-        API_fetch(getCurrentPostId(), __blocks, isRemain ).then(data => { })
+        API_fetch(getCurrentPostId(), __blocks, isRemain, available_blocks ).then(data => { console.log(data)})
     }
     setTimeout(() => {
         window.bindCss = false
