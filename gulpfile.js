@@ -4,7 +4,8 @@ const replace = require('gulp-replace');
 const clean = require('gulp-clean');
 const minifyCSS = require('gulp-csso');
 const minifyJS = require('gulp-minify');
-const concatCss = require('gulp-concat-css')
+const concatCss = require('gulp-concat-css');
+const merge = require('merge-stream');
 
 function cleanBuild() {
     return src('./build', {read: false, allowEmpty: true})
@@ -23,7 +24,9 @@ function makeBuild() {
         '!./assets/reactjs/**/*.*',
         '!./assets/js/qubely.dev.js.map',
         '!./assets/js/qubely.dev.js',
-        '!./assets/js/jquery.magnific-popup.js',
+        '!./assets/css/animation.css',
+        '!./assets/css/magnific-popup.css',
+        '!./assets/css/qubely.animatedheadline.css',
         '!./node_modules/**/*.*',
         '!./**/*.zip',
         '!./gulpfile.js',
@@ -35,18 +38,26 @@ function makeBuild() {
 }
 
 function productionMode() {
+    const replacement_string = '\n\t\t\twp_enqueue_style(\'qubely-bundle\', QUBELY_DIR_URL . \'assets/css/qubely.bundle.css\', false, QUBELY_VERSION);\n\t\t\t';
     return src(['./build/qubely/core/QUBELY.php'])
+        .pipe(replace(/(?<=#START_REPLACE)([^]*?)(?=#END_REPLACE)/g, replacement_string))
         .pipe(replace(/qubely.dev.js/g, 'qubely.min.js'))
         .pipe(replace(/common-script.js/g, 'common-script.min.js'))
-        .pipe(replace(/(?<=#START_REPLACE)([^]*?)(?=#END_REPLACE)/g, 'wp_enqueue_style(\'qubely-bundle\', QUBELY_DIR_URL . \'assets/css/qubely.bundle.min.css\', false, QUBELY_VERSION);'))
+        .pipe(replace(/jquery.animatedheadline.js/g, 'jquery.animatedheadline.min.js'))
+        .pipe(replace(/counter.js/g, 'counter.min.js'))
+        .pipe(replace(/map.js/g, 'map.min.js'))
+        .pipe(replace(/qubely.magnific-popup.js/g, 'qubely.magnific-popup.min.js'))
+        .pipe(replace(/contactform.js/g, 'contactform.min.js'))
+        .pipe(replace(/common.js/g, 'common.min.js'))
         .pipe(dest('./build/qubely/core/'));
 }
 
 function gulpConcatCss() {
     return src([
-        './build/qubely/assets/css/animation.css',
-        './build/qubely/assets/css/magnific-popup.css',
-        './build/qubely/assets/css/qubely.animatedheadline.css',
+        './assets/css/animation.css',
+        './assets/css/magnific-popup.css',
+        './assets/css/qubely.animatedheadline.css',
+        './assets/css/style.min.css',
     ])
         .pipe(concatCss('qubely.bundle.css'))
         .pipe(dest('./build/qubely/assets/css/'))
@@ -59,7 +70,7 @@ function minify_css() {
 }
 
 function minify_js() {
-    return src(['./build/qubely/assets/js/*.js'])
+    const commonjs =  src(['./build/qubely/assets/js/*.js'])
         .pipe(minifyJS({
             ext:{
                 src:'.js',
@@ -68,7 +79,20 @@ function minify_js() {
             exclude: ['tasks'],
             ignoreFiles: ['qubely.min.js', '*-min.js', '*.min.js']
         }))
-        .pipe(dest('./build/qubely/assets/js/'));
+        .pipe(dest(['./build/qubely/assets/js/']));
+
+    const blocksjs = src(['./build/qubely/assets/js/blocks/*.js'])
+        .pipe(minifyJS({
+            ext:{
+                src:'.js',
+                min:'.min.js'
+            },
+            exclude: ['tasks'],
+            ignoreFiles: ['qubely.min.js', '*-min.js', '*.min.js']
+        }))
+        .pipe(dest(['./build/qubely/assets/js/blocks/']));
+
+    return merge(commonjs, blocksjs);
 }
 
 function removeJsFiles() {

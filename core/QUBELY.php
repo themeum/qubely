@@ -41,8 +41,8 @@ class QUBELY
 		add_action('wp_enqueue_scripts', array($this, 'qubely_conditional_block_scripts'));
 
 		// Load Inline Scripts
-        add_action('wp_head', array($this, 'qubely_inline_header_scripts'));
-        add_action('admin_head', array($this, 'qubely_inline_admin_header_scripts'));
+        add_action('wp_enqueue_scripts', array($this, 'qubely_inline_header_scripts'), 0);
+        add_action('admin_head', array($this, 'qubely_inline_admin_header_scripts'), 0);
         add_action('wp_footer', array($this, 'qubely_inline_footer_scripts'));
 
 		// Add post meta key
@@ -142,13 +142,19 @@ class QUBELY
 	 */
 	public function qubely_admin_assets()
 	{
-		wp_enqueue_style('qubely-animation', QUBELY_DIR_URL . 'assets/css/animation.css', false, QUBELY_VERSION);
+
+
+        #START_REPLACE
+        wp_enqueue_style('qubley-animated-headline-style', QUBELY_DIR_URL . 'assets/css/qubely.animatedheadline.css', false, QUBELY_VERSION);
+        wp_enqueue_style('qubely-animation', QUBELY_DIR_URL . 'assets/css/animation.css', false, QUBELY_VERSION);
+        wp_enqueue_style('qubely-magnific-popup-style', QUBELY_DIR_URL . 'assets/css/magnific-popup.css', false, QUBELY_VERSION);
+        wp_enqueue_style('qubely-style-min', QUBELY_DIR_URL . 'assets/css/style.min.css', false, QUBELY_VERSION);
+        #END_REPLACE
+
 		wp_enqueue_style('font-awesome', QUBELY_DIR_URL . 'assets/css/font-awesome.min.css', false, QUBELY_VERSION);
 		wp_enqueue_style('qubely-options', QUBELY_DIR_URL . 'assets/css/options.css', false, QUBELY_VERSION);
-		wp_enqueue_script('qubely-magnific-popup', QUBELY_DIR_URL . 'assets/js/qubely.magnific-popup.min.js', array('jquery'), QUBELY_VERSION, true);
-		wp_enqueue_style('qubely-magnific-popup-style', QUBELY_DIR_URL . 'assets/css/magnific-popup.css', false, QUBELY_VERSION);
-		wp_enqueue_style('jquery-animatedHeadline-style', QUBELY_DIR_URL . 'assets/css/qubely.animatedheadline.css', false, QUBELY_VERSION);
-		wp_enqueue_script('jquery-animatedHeadline', QUBELY_DIR_URL . 'assets/js/jquery.animatedheadline.min.js', array('jquery'), QUBELY_VERSION, true);
+		wp_enqueue_script('qubely-magnific-popup', QUBELY_DIR_URL . 'assets/js/qubely.magnific-popup.js', array('jquery'), QUBELY_VERSION, true);
+		wp_enqueue_script('jquery-animatedHeadline', QUBELY_DIR_URL . 'assets/js/jquery.animatedheadline.js', array('jquery'), QUBELY_VERSION, true);
 		wp_enqueue_script('qubely-block-counter', QUBELY_DIR_URL . 'assets/js/blocks/counter.js', array(), QUBELY_VERSION, true);
         wp_enqueue_script('qubely-block-map', QUBELY_DIR_URL . 'assets/js/blocks/map.js', array('jquery'), QUBELY_VERSION, true);
         wp_enqueue_script('qubely-block-contactform', QUBELY_DIR_URL . 'assets/js/blocks/contactform.js', array('jquery'), QUBELY_VERSION, true);
@@ -309,17 +315,20 @@ class QUBELY
 
 
 	    $blocks_meta_data = get_post_meta(get_the_ID(), '__qubely_available_blocks', true);
+        $blocks_meta_data = unserialize($blocks_meta_data);
+
+	    echo "<pre>";
+	    var_dump($blocks_meta_data);
+	    echo "</pre>";
 
 	    if(is_array($blocks_meta_data) && count($blocks_meta_data)) {
-            $blocks_meta_data = unserialize(current($blocks_meta_data));
             $available_blocks = $blocks_meta_data['available_blocks'];
-
             $has_interaction = $blocks_meta_data['interaction'];
             $has_animation = $blocks_meta_data['animation'];
             $has_parallax = $blocks_meta_data['parallax'];
 
             if (in_array('qubely/animatedheadline', $available_blocks)) {
-                wp_enqueue_script('qubley-animated-headline-script', QUBELY_DIR_URL . 'assets/js/jquery.animatedheadline.min.js', array('jquery'), QUBELY_VERSION, true);
+                wp_enqueue_script('qubley-animated-headline-script', QUBELY_DIR_URL . 'assets/js/jquery.animatedheadline.js', array('jquery'), QUBELY_VERSION, true);
             }
 
             if(in_array('qubely/counter', $available_blocks)) {
@@ -331,10 +340,10 @@ class QUBELY
             }
 
             if (in_array('qubely/videopopup', $available_blocks) || in_array('qubely/gallery', $available_blocks)) {
-                wp_enqueue_script('qubely-magnific-popup-script', QUBELY_DIR_URL . 'assets/js/qubely.magnific-popup.min.js', array('jquery'), QUBELY_VERSION);
+                wp_enqueue_script('qubely-magnific-popup-script', QUBELY_DIR_URL . 'assets/js/qubely.magnific-popup.js', array('jquery'), QUBELY_VERSION);
             }
 
-            if (in_array('qubely/contactform', $available_blocks) || in_array('qubely/gallery', $available_blocks)) {
+            if (in_array('qubely/contactform', $available_blocks)) {
                 wp_enqueue_script('qubely-block-contactform', QUBELY_DIR_URL . 'assets/js/blocks/contactform.js', array('jquery'), QUBELY_VERSION);
             }
 
@@ -351,7 +360,7 @@ class QUBELY
                 in_array('qubely/tabs', $available_blocks) ||
                 in_array('qubely/verticaltabs', $available_blocks)
             ) {
-                wp_enqueue_script('qubely-block-common', QUBELY_DIR_URL . 'assets/js/blocks/common.js', array('jquery', 'qubely-interaction'), QUBELY_VERSION, true);
+                wp_enqueue_script('qubely-block-common', QUBELY_DIR_URL . 'assets/js/blocks/common.js', array('jquery'), QUBELY_VERSION, true);
             }
 
         }

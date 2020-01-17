@@ -11,6 +11,19 @@ const API_fetch = (post_id, block_css, is_remain) => {
         data: { block_css: block_css.css, interaction: json, post_id, is_remain }
     }).then(data => data)
 }
+
+
+function setAvailableBlocksMeta(data) {
+    wp.apiFetch({
+        path: 'qubely/v1/set_qubely_available_blocks_meta',
+        method: 'POST',
+        data
+    })
+        .then(response  => {
+            console.log(response)
+        })
+}
+
 /**
  * Parse css for stylesheet
  * Create css file for each post. Call api for update css file each time hit save button
@@ -100,24 +113,14 @@ function innerBlocks(blocks, type = false) {
             blocks_flag.available_blocks.push(name)
         }
 
-        setAvailableBlocksMeta(blocks_flag)
-
         if (row.innerBlocks && (row.innerBlocks).length > 0) {
             innerBlocks(row.innerBlocks)
         }
 
     })
 
-    blocks_flag.available_blocks = [...new Set(blocks_flag.available_blocks)]
+    setAvailableBlocksMeta(blocks_flag)
     return { css: __CSS, interaction }
-}
-
-function setAvailableBlocksMeta(data) {
-    wp.apiFetch({
-        path: 'qubely/v1/set_qubely_available_blocks_meta',
-        method: 'POST',
-        data
-    })
 }
 
 
