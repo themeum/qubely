@@ -1,12 +1,11 @@
-const { RichText } = wp.editor
-const { __ } = wp.i18n
+const { __ } = wp.i18n;
 const {
     AlignmentToolbar,
     BlockControls,
     InspectorControls,
-} = wp.blockEditor
-const { Component, Fragment } = wp.element
-const { PanelBody, SelectControl, FormTokenField } = wp.components;
+} = wp.blockEditor;
+const { Component, Fragment, RawHTML } = wp.element;
+const { PanelBody, SelectControl, FormTokenField, TextControl } = wp.components;
 const {
     BorderRadius,
     Color,
@@ -43,13 +42,14 @@ class Edit extends Component {
         }
     }
     componentDidMount() {
-        const { setAttributes, clientId, attributes: { uniqueId } } = this.props
+        const { setAttributes, name, clientId, attributes, attributes: { uniqueId } } = this.props
         const _client = clientId.substr(0, 6)
         if (!uniqueId) {
             setAttributes({ uniqueId: _client });
         } else if (uniqueId && uniqueId != _client) {
             setAttributes({ uniqueId: _client });
         }
+
         this.anim = new window.animatedHeading({ heading: $(this.animatedHeading) })
     }
 
@@ -169,13 +169,23 @@ class Edit extends Component {
                         <HeadingToolbar minLevel={1} maxLevel={6} selectedLevel={level} isCollapsed={false} onChange={(newLevel) => setAttributes({ level: newLevel })} />
                     </PanelBody>
                     <PanelBody title={__('Animated Text')}>
+
+                        <TextControl
+                            label={__('Title Before')}
+                            value={titleBefore}
+                            onChange={titleBefore => setAttributes({titleBefore})}
+                        />
+                        <TextControl
+                            label={__('After Before')}
+                            value={titleAfter}
+                            onChange={titleAfter => setAttributes({titleAfter})}
+                        />
                         <FormTokenField
                             label={__('Animated Texts')}
                             value={animatedText}
-                            placeholder={__("Add new text")}
+                            placeholder={__('Add new text')}
                             onChange={tokens => setAttributes({ animatedText: tokens })}
                         />
-
 
                         <SelectControl
                             label={__('Animation Type')}
@@ -271,13 +281,7 @@ class Edit extends Component {
 
                 <div className={`qubely-block-${uniqueId} qubely-block-animated-heading qubely-block-animated-heading-backend ${className}`} onContextMenu={event => handleContextMenu(event, this.refs.qubelyContextMenu)} >
                     <CustomHeadingTag className={`animated-heading-text ${animationClass} ${align ? ` has-text-align-${align}` : ''}`} ref={el => this.animatedHeading = el}>
-                        <RichText
-                            placeholder={__("Before")}
-                            value={titleBefore}
-                            keepPlaceholderOnFocus
-                            onChange={(titleBefore) => setAttributes({ titleBefore })}
-                            className="animated-heading-before-part"
-                        />
+                        <RawHTML>{`${titleBefore}`}</RawHTML>
                         <span className="qubely-animated-text">
                             <span className="animated-text-words-wrapper">
                                 {
@@ -289,13 +293,7 @@ class Edit extends Component {
                                 }
                             </span>
                         </span>
-                        <RichText
-                            placeholder={__("After")}
-                            value={titleAfter}
-                            keepPlaceholderOnFocus
-                            onChange={(titleAfter) => setAttributes({ titleAfter })}
-                            className="animated-heading-after-part"
-                        />
+                        <RawHTML>{`${titleAfter}`}</RawHTML>
                     </CustomHeadingTag>
                     <div ref="qubelyContextMenu" className={`qubely-context-menu-wraper`} >
                         <ContextMenu

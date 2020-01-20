@@ -6,9 +6,6 @@ const {
 
 export const attributes = {
     uniqueId: { type: 'string', default: '' },
-    // Global
-    ...globalAttributes,
-    uniqueId: { type: 'string', default: '' },
     ...globalAttributes,  // Global Settings
     level: {
         type: 'number',
@@ -16,8 +13,16 @@ export const attributes = {
     },
     align: {
         type: 'string',
+        style: []
     },
-    spacer: { type: 'object', default: { spaceTop: { md: '10', unit: 'px' }, spaceBottom: { md: '10', unit: 'px' } }, style: [{ selector: '{{QUBELY}}' }] },
+    spacer: {
+        type: 'object',
+        default: {
+            spaceTop: { md: '10', unit: 'px' },
+            spaceBottom: { md: '10', unit: 'px' }
+        },
+        style: [{ selector: '{{QUBELY}}' }]
+    },
     animatedText: { type: 'array', default: ['imagination', 'fascination', 'attention', 'passion', 'curiosity'] },
     animationType: {
         type: 'string',
@@ -70,7 +75,6 @@ export const attributes = {
         type: 'string', default: '#000',
         style: [
             {
-
                 selector: '{{QUBELY}}.qubely-block-animated-heading .animated-heading-text{ color:{{color}}; }'
             }
         ]
