@@ -171,12 +171,12 @@ class Edit extends Component {
                     <PanelBody title={__('Animated Text')}>
 
                         <TextControl
-                            label={__('Title Before')}
+                            label={__('Text Before')}
                             value={titleBefore}
                             onChange={titleBefore => setAttributes({titleBefore})}
                         />
                         <TextControl
-                            label={__('After Before')}
+                            label={__('Text Before')}
                             value={titleAfter}
                             onChange={titleAfter => setAttributes({titleAfter})}
                         />

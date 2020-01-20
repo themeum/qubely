@@ -150,7 +150,6 @@ jQuery(document).ready(function ($) {
         $qubelyCarouselBlock.find('.qubely-carousel-item-indicator').eq(nextActiveItem).addClass('qubely-active');
     });
 
-
 });
 
 
