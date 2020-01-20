@@ -176,7 +176,7 @@ class Edit extends Component {
                             onChange={titleBefore => setAttributes({titleBefore})}
                         />
                         <TextControl
-                            label={__('Text Before')}
+                            label={__('Text After')}
                             value={titleAfter}
                             onChange={titleAfter => setAttributes({titleAfter})}
                         />
@@ -281,7 +281,7 @@ class Edit extends Component {
 
                 <div className={`qubely-block-${uniqueId} qubely-block-animated-heading qubely-block-animated-heading-backend ${className}`} onContextMenu={event => handleContextMenu(event, this.refs.qubelyContextMenu)} >
                     <CustomHeadingTag className={`animated-heading-text ${animationClass} ${align ? ` has-text-align-${align}` : ''}`} ref={el => this.animatedHeading = el}>
-                        <RawHTML>{`${titleBefore}`}</RawHTML>
+                        {titleBefore}
                         <span className="qubely-animated-text">
                             <span className="animated-text-words-wrapper">
                                 {
@@ -293,7 +293,7 @@ class Edit extends Component {
                                 }
                             </span>
                         </span>
-                        <RawHTML>{`${titleAfter}`}</RawHTML>
+                        {titleAfter}
                     </CustomHeadingTag>
                     <div ref="qubelyContextMenu" className={`qubely-context-menu-wraper`} >
                         <ContextMenu
