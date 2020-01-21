@@ -35,7 +35,6 @@ class Edit extends Component {
         super(props);
         this._getAnimationClass = this._getAnimationClass.bind(this)
         this._handleTypeChange = this._handleTypeChange.bind(this)
-        this.timer = 0;
         this.state = {
             device: 'md',
             animationClass: this._getAnimationClass(this.props.attributes.animationType)
@@ -56,24 +55,14 @@ class Edit extends Component {
     componentDidUpdate(prevProps, prevState) {
         const { animationType, animatedText, level } = this.props.attributes
         const { attributes } = prevProps
-        if (animationType !== attributes.animationType) {
+        if ((animationType !== attributes.animationType) || (animatedText.length !== attributes.animatedText.length) || (level !== attributes.level)) {
             if (this.anim) {
                 this.anim.destroy();
                 delete this.anim;
-                if (this.timer > 0) {
-                    clearTimeout(this.timer);
-                    this.timer = 0;
-                }
                 setTimeout(() => {
                     this.anim = new window.animatedHeading({ heading: $(this.animatedHeading) })
                 }, 100)
             }
-        }
-
-        if ((animatedText.length !== attributes.animatedText.length) || (level !== attributes.level)) {
-            this.anim.destroy();
-            delete this.anim;
-            this.anim = new window.animatedHeading({ heading: $(this.animatedHeading) })
         }
     }
 
@@ -173,12 +162,12 @@ class Edit extends Component {
                         <TextControl
                             label={__('Text Before')}
                             value={titleBefore}
-                            onChange={titleBefore => setAttributes({titleBefore})}
+                            onChange={titleBefore => setAttributes({ titleBefore })}
                         />
                         <TextControl
                             label={__('Text After')}
                             value={titleAfter}
-                            onChange={titleAfter => setAttributes({titleAfter})}
+                            onChange={titleAfter => setAttributes({ titleAfter })}
                         />
                         <FormTokenField
                             label={__('Animated Texts')}
