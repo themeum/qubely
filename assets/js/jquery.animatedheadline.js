@@ -16,7 +16,7 @@
         this.typeAnimationDelay = this.selectionDuration + 800;
         //text-clip effect
         this.revealDuration = 600;
-        this.revealAnimationDelay = 1000;
+        this.revealAnimationDelay = 1500;
         this.interval = 0;
         this._destroy = false;
         this.init()
