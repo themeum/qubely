@@ -41,13 +41,13 @@ function productionMode() {
     const replacement_string = '\n\t\t\twp_enqueue_style(\'qubely-bundle\', QUBELY_DIR_URL . \'assets/css/qubely.bundle.min.css\', false, QUBELY_VERSION);\n\t\t\t';
     return src(['./build/qubely/core/QUBELY.php'])
         .pipe(replace(/(?<=#START_REPLACE)([^]*?)(?=#END_REPLACE)/g, replacement_string))
-        .pipe(replace(/qubely.dev.js/g, 'qubely.min.js'))
-        .pipe(replace(/jquery.animatedheadline.js/g, 'jquery.animatedheadline.min.js'))
-        .pipe(replace(/map.js/g, 'map.min.js'))
-        .pipe(replace(/qubely.magnific-popup.js/g, 'qubely.magnific-popup.min.js'))
-        .pipe(replace(/contactform.js/g, 'contactform.min.js'))
-        .pipe(replace(/interaction.js/g, 'interaction.min.js'))
-        .pipe(replace(/common-script.js/g, 'common-script.min.js'))
+        .pipe(replace(/qubely\.dev\.js/g, 'qubely.min.js'))
+        .pipe(replace(/jquery\.animatedheadline\.js/g, 'jquery.animatedheadline.min.js'))
+        .pipe(replace(/map\.js/g, 'map.min.js'))
+        .pipe(replace(/qubely\.magnific-popup\.js/g, 'qubely.magnific-popup.min.js'))
+        .pipe(replace(/contactform\.js/g, 'contactform.min.js'))
+        .pipe(replace(/interaction\.js/g, 'interaction.min.js'))
+        .pipe(replace(/common-script\.js/g, 'common-script.min.js'))
         .pipe(dest('./build/qubely/core/'));
 }
 
