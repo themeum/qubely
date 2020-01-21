@@ -9,7 +9,7 @@ export const attributes = {
     ...globalAttributes,  // Global Settings
     level: {
         type: 'number',
-        default: 2
+        default: 4
     },
     align: {
         type: 'string',
@@ -31,7 +31,7 @@ export const attributes = {
     typography: {
         type: 'object',
         default: {
-            openTypography: true,
+            openTypography: false,
             height: {
                 md: "1.2",
                 unit: "em"
