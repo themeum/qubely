@@ -16,7 +16,7 @@
         this.typeAnimationDelay = this.selectionDuration + 800;
         //text-clip effect
         this.revealDuration = 600;
-        this.revealAnimationDelay = 1500;
+        this.revealAnimationDelay = 1000;
         this.interval = 0;
         this._destroy = false;
         this.init()
@@ -73,7 +73,10 @@
             } else if (headline.hasClass('text-clip')) {
                 var spanWrapper = headline.find('.qubely-animated-text .animated-text-words-wrapper'),
                     newWidth = spanWrapper.width() + 5
-                spanWrapper.css('width', newWidth);
+                if(!$('.block-editor-block-list__layout').length){
+                    spanWrapper.css('width', newWidth);
+                }
+
             } else if (!headline.hasClass('type')) {
                 //assign to .animated-text-words-wrapper the width of its longest word
                 var words = headline.find('.qubely-animated-text .animated-text-words-wrapper .animated-text.is-visible');
@@ -226,7 +229,7 @@
 
 
     //ANIMATED HEADLINE BLOCK
-    $('.qubely-block-animated-heading .animated-heading-text').each(function () {
+    $(':not(.editor-block-list__layout) .qubely-block-animated-heading .animated-heading-text').each(function () {
         let animatedHeadline = $(this)
         if (window.animatedHeading) {
             new window.animatedHeading({ heading: $(animatedHeadline) })
