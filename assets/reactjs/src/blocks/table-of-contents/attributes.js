@@ -1,3 +1,4 @@
+const { __ } = wp.i18n;
 const {
     gloalSettings: {
         globalAttributes
@@ -12,6 +13,17 @@ const attributes = {
     showTitle: {
         type: 'boolean',
         default: true
+    },
+    allowedAnchors: {
+        type: 'object',
+        default: {
+            h1: true,
+            h2: true,
+            h3: true,
+            h4: true,
+            h5: true,
+            h6: true,
+        }
     },
     title: {
         type: 'string',

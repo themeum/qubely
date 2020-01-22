@@ -83,7 +83,7 @@ class TableOfContents extends Component {
     }
     render() {
         const { headers } = this.state;
-        const { tableType } = this.props.blockProp.attributes;
+        const { tableType, allowedAnchors } = this.props.blockProp.attributes;
         let ListTag = 'ul';
         if (tableType === 'ordered') {
             ListTag = 'ol'
@@ -109,7 +109,7 @@ class TableOfContents extends Component {
 
         const formatHeaders = allHeaders => {
             let formattedHeaders2 = [];
-            allHeaders.forEach(header => createHierarchy(formattedHeaders2, header));
+            allHeaders.filter((_, index) => allowedAnchors[`h${index + 1}`]).forEach(header => createHierarchy(formattedHeaders2, header));
             return formattedHeaders2;
         };
 

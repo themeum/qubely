@@ -9,7 +9,8 @@ const {
 const {
     PanelBody,
     TextControl,
-    Toolbar
+    Toolbar,
+    FormTokenField
 } = wp.components;
 
 const {
@@ -23,6 +24,7 @@ const {
     Media,
     Tabs,
     Tab,
+    Dropdown,
     Range,
     Separator,
     RadioAdvanced,
@@ -85,6 +87,8 @@ class Edit extends Component {
                 className,
                 tableType,
                 showTitle,
+                allowedAnchors,
+                allowedAnchors2,
                 title,
                 headerLinks,
                 animation,
@@ -102,6 +106,14 @@ class Edit extends Component {
             'qubely-block-table-of-contents',
             `qubely-align-${align}`,
         );
+        let defaultTags = {
+            h1: false,
+            h2: false,
+            h3: false,
+            h4: false,
+            h5: false,
+            h6: false,
+        }
         return (
             <Fragment>
                 <BlockControls>
@@ -127,6 +139,17 @@ class Edit extends Component {
 
                 <InspectorControls key="inspector">
                     <PanelBody title={__('')} initialOpen={true}>
+                        <FormTokenField
+                            maxLength={6}
+                            label={__('Anchors by Tags')}
+                            placeholder={__("Add anchor")}
+                            suggestions={['H1', 'H2', 'H3', 'H4', 'H5', 'H6']}
+                            onChange={value => {
+                                value.forEach(item => defaultTags[item] = true)
+                                setAttributes({ allowedAnchors: defaultTags })
+                            }}
+                            value={Object.keys(allowedAnchors).filter(item => allowedAnchors[item])}
+                        />
                     </PanelBody>
 
 
