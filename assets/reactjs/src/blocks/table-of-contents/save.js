@@ -1,4 +1,5 @@
-import { TableOfContents,TableOfContents2 } from './components';
+import classnames from 'classnames';
+import { TableOfContents } from './components';
 const { Component } = wp.element;
 const { RichText } = wp.blockEditor
 const {
@@ -14,6 +15,9 @@ class Save extends Component {
         const {
             uniqueId,
             className,
+            align,
+            showTitle,
+            title,
             headerLinks,
             animation,
             interaction
@@ -21,9 +25,21 @@ class Save extends Component {
 
         const interactionClass = IsInteraction(interaction) ? 'qubley-block-interaction' : '';
 
+        const classes = classnames(
+            `qubely-block-${uniqueId}`,
+            'qubely-block-table-of-contents',
+            `qubely-align-${align}`,
+        );
         return (
-            <div className={`qubely-block-${uniqueId}`} {...animationAttr(animation)}>
-                <div className={`qubely-block-table-of-contents ${interactionClass}`}>
+            <div className={classes} {...animationAttr(animation)}>
+                <div className={`qubely-table-of-contents ${interactionClass}`}>
+                    {
+                        showTitle &&
+                        <RichText.Content
+                            className='title'
+                            value={title}
+                        />
+                    }
                     <TableOfContents
                         headers={headerLinks && JSON.parse(headerLinks)}
                         blockProp={this.props}

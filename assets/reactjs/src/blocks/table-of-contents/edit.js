@@ -1,5 +1,4 @@
 import classnames from 'classnames';
-import icons from '../../helpers/icons';
 import { TableOfContents } from './components';
 
 const { __ } = wp.i18n;
@@ -16,7 +15,8 @@ const {
 const {
     RichText,
     InspectorControls,
-    BlockControls
+    BlockControls,
+    BlockAlignmentToolbar,
 } = wp.blockEditor;
 
 const {
@@ -81,7 +81,11 @@ class Edit extends Component {
             setAttributes,
             attributes: {
                 uniqueId,
+                align,
                 className,
+                tableType,
+                showTitle,
+                title,
                 headerLinks,
                 animation,
                 interaction
@@ -93,11 +97,34 @@ class Edit extends Component {
         if (uniqueId) { CssGenerator(attributes, 'table-of-contents', uniqueId); }
 
 
-        const classes = classnames(className,
-            `qubely-block-${uniqueId}`
+        const classes = classnames(
+            `qubely-block-${uniqueId}`,
+            'qubely-block-table-of-contents',
+            `qubely-align-${align}`,
         );
         return (
             <Fragment>
+                <BlockControls>
+                    <BlockAlignmentToolbar
+                        value={align}
+                        controls={['left', 'center', 'right']}
+                        onChange={value => setAttributes({ align: value })}
+                    />
+                    <Toolbar controls={
+                        [{
+                            icon: 'editor-ul',
+                            title: 'Convert to unordered list',
+                            onClick: () => setAttributes({ tableType: 'unordered' }),
+                            className: `qubely-action-change-listype ${tableType == 'unordered' ? 'is-active' : ''}`,
+                        }, {
+                            icon: 'editor-ol',
+                            title: 'Convert to ordered list',
+                            onClick: () => setAttributes({ tableType: 'ordered' }),
+                            className: `qubely-action-change-listype ${tableType == 'ordered' ? 'is-active' : ''}`,
+                        }]}
+                    />
+                </BlockControls>
+
                 <InspectorControls key="inspector">
                     <PanelBody title={__('')} initialOpen={true}>
                     </PanelBody>
@@ -110,10 +137,24 @@ class Edit extends Component {
                 </InspectorControls>
 
                 <div className={classes}>
-                    <TableOfContents
-                        headers={headerLinks && JSON.parse(headerLinks)}
-                        blockProp={this.props}
-                    />
+                    <div className="qubely-table-of-contents">
+                        {
+                            showTitle &&
+                            <RichText
+                                tagName="div"
+                                value={title}
+                                className="title"
+                                keepPlaceholderOnFocus
+                                placeholder={__('Add Title')}
+                                onChange={newTitle => setAttributes({ title: newTitle })}
+                            />
+                        }
+                        <TableOfContents
+                            headers={headerLinks && JSON.parse(headerLinks)}
+                            blockProp={this.props}
+                        />
+                    </div>
+
                     <div ref="qubelyContextMenu" className={`qubely-context-menu-wraper`} >
                         <ContextMenu
                             name={this.props.name}

@@ -11,7 +11,6 @@ registerBlockType('qubely/table-of-contents', {
     icon: <img src={qubely_admin.plugin + 'assets/img/blocks/block-team.svg'} alt={__('Team Block')} />,
     category: 'qubely',
     supports: {
-        align: ['center', 'wide', 'full'],
     },
     keywords: [
         __('Table of Contents'),

@@ -4,10 +4,26 @@ const {
     }
 } = wp.qubelyComponents
 
- const attributes = {
+const attributes = {
     uniqueId: {
         type: 'string',
         default: ''
+    },
+    showTitle: {
+        type: 'boolean',
+        default: true
+    },
+    title: {
+        type: 'string',
+        default: 'Table of Contents'
+    },
+    align: {
+        type: 'string',
+        default: 'left',
+    },
+    tableType: {
+        type: 'string',
+        default: 'unordered'
     },
     headerLinks: {
         type: 'string',
