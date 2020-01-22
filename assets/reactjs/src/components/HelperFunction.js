@@ -1,38 +1,38 @@
 
-export const animationAttr = ( data ) => {
-    if( typeof data !== 'undefined' && typeof data.name !== 'undefined' && data.openAnimation ){
-        return { 'data-qubelyanimation': JSON.stringify( data ) }
-    }else{
+export const animationAttr = (data) => {
+    if (typeof data !== 'undefined' && typeof data.name !== 'undefined' && data.openAnimation) {
+        return { 'data-qubelyanimation': JSON.stringify(data) }
+    } else {
         return {}
     }
 }
 
 // Select Option Generator
-export const selectValue = ( data ) => {
-    return data.map( (val) => { return { value: val, label: val } })
+export const selectValue = (data) => {
+    return data.map((val) => { return { value: val, label: val } })
 }
 
-export const isObject = ( obj ) => typeof obj === 'function' || typeof obj === 'object' && !!obj;
+export const isObject = (obj) => typeof obj === 'function' || typeof obj === 'object' && !!obj;
 export const isArray = (arg) => Object.prototype.toString.call(arg) === '[object Array]';
 
 
-export const setValue = ( defaultVal, key ) => {
+export const setValue = (defaultVal, key) => {
     let data = {}
-    defaultVal.forEach(val=>data[val]=false)
-    if( key ){
+    defaultVal.forEach(val => data[val] = false)
+    if (key) {
         let innerData = {}
-        key.forEach(val=>innerData[val]=true)
-        return Object.assign( {}, data, innerData )
-    }else{
+        key.forEach(val => innerData[val] = true)
+        return Object.assign({}, data, innerData)
+    } else {
         return data
     }
 }
 
 
-export const videoBackground = ( settings ) => {
-    if( settings.bgType == 'video' ){
-        if( settings.videoSource == 'local' ){
-            if( settings.bgVideo && settings.bgVideo.url ){
+export const videoBackground = (settings) => {
+    if (settings.bgType == 'video') {
+        if (settings.videoSource == 'local') {
+            if (settings.bgVideo && settings.bgVideo.url) {
                 return (
                     <div className="qubely-video-bg-wrap">
                         <video className="qubely-video-bg" autoPlay muted loop>
@@ -42,18 +42,21 @@ export const videoBackground = ( settings ) => {
                 )
             }
         }
-        if( settings.videoSource == 'external' ){
-            if( settings.bgExternalVideo ){
+        if (settings.videoSource == 'external') {
+            if (settings.bgExternalVideo) {
                 let video = settings.bgExternalVideo,
                     src = '';
-                if ( video.match('youtube|youtu\.be') ) {
+                if (video.match('youtube|youtu\.be')) {
                     let id = 0;
-                    if( video.match('embed') ) { id = video.split(/embed\//)[1].split('"')[0]; }
-                    else{ id = video.split(/v\/|v=|youtu\.be\//)[1].split(/[?&]/)[0]; }
-                    src = '//www.youtube.com/embed/'+id+'?playlist='+id+'&iv_load_policy=3&enablejsapi=1&disablekb=1&autoplay=1&mute=1&controls=0&showinfo=0&rel=0&loop=1&wmode=transparent&widgetid=1';
+                    if (video.match('embed') && video.split(/embed\//)[1]) {
+                        id = video.split(/embed\//)[1].split('"')[0];
+                    } else if (video.split(/v\/|v=|youtu\.be\//)[1]) {
+                        id = video.split(/v\/|v=|youtu\.be\//)[1].split(/[?&]/)[0];
+                    }
+                    src = '//www.youtube.com/embed/' + id + '?playlist=' + id + '&iv_load_policy=3&enablejsapi=1&disablekb=1&autoplay=1&mute=1&controls=0&showinfo=0&rel=0&loop=1&wmode=transparent&widgetid=1';
                 } else if (video.match('vimeo\.com')) {
                     let id = video.split(/video\/|https:\/\/vimeo\.com\//)[1].split(/[?&]/)[0];
-                    src = "//player.vimeo.com/video/"+id+"?autoplay=1&loop=1&title=0&byline=0&portrait=0"
+                    src = "//player.vimeo.com/video/" + id + "?autoplay=1&loop=1&title=0&byline=0&portrait=0"
                 }
                 return (
                     <div className="qubely-video-bg-wrap"><iframe src={src} frameBorder="0" allowFullScreen></iframe></div>
@@ -67,7 +70,7 @@ export const IsInteraction = (interaction) => {
     return (typeof interaction.while_scroll_into_view !== 'undefined' && interaction.while_scroll_into_view.enable === true) || (typeof interaction.mouse_movement !== 'undefined' && interaction.mouse_movement.enable === true)
 }
 
-export const _equal = ( value, other ) => {
+export const _equal = (value, other) => {
     const isEqual = (value, other) => {
         const type = Object.prototype.toString.call(value);
         if (type !== Object.prototype.toString.call(other)) return false;

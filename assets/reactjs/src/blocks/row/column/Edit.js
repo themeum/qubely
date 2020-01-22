@@ -36,8 +36,8 @@ class Edit extends Component {
         } else if (uniqueId && uniqueId != _client) {
             setAttributes({ uniqueId: _client });
         }
-        if(typeof $ === 'undefined') {
-            $ = jQuery
+        if (typeof $ === 'undefined') {
+            $ = jQuery;
         }
         this.updateColumnWidthAttribute();
     }

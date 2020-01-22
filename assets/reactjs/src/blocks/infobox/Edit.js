@@ -2,7 +2,7 @@ const { __ } = wp.i18n
 const { Fragment, Component } = wp.element;
 const { PanelBody, SelectControl, TextControl, Toolbar } = wp.components
 const { RichText, InspectorControls, BlockControls } = wp.blockEditor
-const { QubelyButtonEdit, Media, Tabs, Tab, Range, BoxShadow, ContextMenu: { ContextMenu, handleContextMenu }, RadioAdvanced, Typography, Toggle, Styles, Alignment, IconList, ColorAdvanced, Color, Headings, Border, BorderRadius, Padding, gloalSettings: { globalSettingsPanel, animationSettings, interactionSettings }, Inline: { InlineToolbar }, CssGenerator: { CssGenerator }, QubelyButton: { buttonSettings } } = wp.qubelyComponents
+const { QubelyButtonEdit, ButtonGroup, Url, Media, Tabs, Tab, Range, BoxShadow, ContextMenu: { ContextMenu, handleContextMenu }, RadioAdvanced, Typography, Toggle, Styles, Alignment, IconList, ColorAdvanced, Color, Headings, Border, BorderRadius, Padding, gloalSettings: { globalSettingsPanel, animationSettings, interactionSettings }, Inline: { InlineToolbar }, CssGenerator: { CssGenerator }, QubelyButton: { buttonSettings } } = wp.qubelyComponents
 import icons from '../../helpers/icons';
 import svg from '../heading/separators';
 class Edit extends Component {
@@ -84,7 +84,9 @@ class Edit extends Component {
             image,
             image2x,
             imgAlt,
+            imageType,
             imageWidth,
+            externalImageUrl,
 
             number,
             numberColor,
@@ -110,9 +112,9 @@ class Edit extends Component {
             buttonUrl,
 
             animation,
-            enablePosition, 
-            selectPosition, 
-            positionXaxis, 
+            enablePosition,
+            selectPosition,
+            positionXaxis,
             positionYaxis,
             globalZindex,
             hideTablet,
@@ -199,9 +201,27 @@ class Edit extends Component {
 
                                     {mediaType == 'image' &&
                                         <Fragment>
-                                            <Media label={__('Image')} multiple={false} type={['image']} panel={true} value={image} onChange={val => setAttributes({ image: val })} />
-                                            <Media label={__('Retina Image')} multiple={false} type={['image']} panel={true} value={image2x} onChange={val => setAttributes({ image2x: val })} />
-                                            {image.url && <TextControl label={__('Alt Text')} value={imgAlt} onChange={val => setAttributes({ imgAlt: val })} />}
+                                            <ButtonGroup
+                                                label={__('Image Type')}
+                                                options={
+                                                    [
+                                                        [__('Local'), 'local'],
+                                                        [__('External'), 'external']
+                                                    ]
+                                                }
+                                                value={imageType}
+                                                onChange={value => setAttributes({ imageType: value })}
+                                            />
+                                            {
+                                                imageType === 'local' ?
+                                                    <Fragment>
+                                                        <Media label={__('Image')} multiple={false} type={['image']} panel={true} value={image} onChange={val => setAttributes({ image: val })} />
+                                                        <Media label={__('Retina Image')} multiple={false} type={['image']} panel={true} value={image2x} onChange={val => setAttributes({ image2x: val })} />
+                                                    </Fragment>
+                                                    :
+                                                    <Url label={__('Image Source')} disableAdvanced value={externalImageUrl} onChange={newUrl => setAttributes({ externalImageUrl: newUrl })} />
+                                            }
+                                            <TextControl label={__('Alt Text')} value={imgAlt} onChange={val => setAttributes({ imgAlt: val })} />
                                             <Range label={__('Image Width')} value={imageWidth} onChange={val => setAttributes({ imageWidth: val })} min={0} max={2000} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
                                         </Fragment>
                                     }
@@ -407,10 +427,14 @@ class Edit extends Component {
                                 }
                                 {(mediaType == 'image') &&
                                     <Fragment>
-                                        {image.url != undefined ?
-                                            <img className="qubely-info-box-image" src={image.url} srcset={image2x.url != undefined ? image.url + ' 1x, ' + image2x.url + ' 2x' : ''} alt={imgAlt && imgAlt} />
-                                            :
-                                            <div className="qubely-info-box-image qubely-image-placeholder"><i className="far fa-image"/></div>
+                                        {
+                                            (imageType === 'local' && image.url != undefined) ?
+                                                <img className="qubely-info-box-image" src={image.url} srcset={image2x.url != undefined ? image.url + ' 1x, ' + image2x.url + ' 2x' : ''} alt={imgAlt && imgAlt} />
+                                                :
+                                                (imageType === 'external' && externalImageUrl.url != undefined) ?
+                                                    <img className="qubely-info-box-image" src={externalImageUrl.url} alt={imgAlt && imgAlt} />
+                                                    :
+                                                    <div className="qubely-info-box-image qubely-image-placeholder"><i className="far fa-image" /></div>
                                         }
                                     </Fragment>
                                 }

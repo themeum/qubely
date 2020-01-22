@@ -1,12 +1,11 @@
-const { RichText } = wp.editor
-const { __ } = wp.i18n
+const { __ } = wp.i18n;
 const {
     AlignmentToolbar,
     BlockControls,
     InspectorControls,
-} = wp.blockEditor
-const { Component, Fragment } = wp.element
-const { PanelBody, SelectControl, FormTokenField } = wp.components;
+} = wp.blockEditor;
+const { Component, Fragment, RawHTML } = wp.element;
+const { PanelBody, SelectControl, FormTokenField, TextControl } = wp.components;
 const {
     BorderRadius,
     Color,
@@ -36,44 +35,34 @@ class Edit extends Component {
         super(props);
         this._getAnimationClass = this._getAnimationClass.bind(this)
         this._handleTypeChange = this._handleTypeChange.bind(this)
-        this.timer = 0;
         this.state = {
             device: 'md',
             animationClass: this._getAnimationClass(this.props.attributes.animationType)
         }
     }
     componentDidMount() {
-        const { setAttributes, clientId, attributes: { uniqueId } } = this.props
+        const { setAttributes, name, clientId, attributes, attributes: { uniqueId } } = this.props
         const _client = clientId.substr(0, 6)
         if (!uniqueId) {
             setAttributes({ uniqueId: _client });
         } else if (uniqueId && uniqueId != _client) {
             setAttributes({ uniqueId: _client });
         }
+
         this.anim = new window.animatedHeading({ heading: $(this.animatedHeading) })
     }
 
     componentDidUpdate(prevProps, prevState) {
         const { animationType, animatedText, level } = this.props.attributes
         const { attributes } = prevProps
-        if (animationType !== attributes.animationType) {
+        if ((animationType !== attributes.animationType) || (animatedText.length !== attributes.animatedText.length) || (level !== attributes.level)) {
             if (this.anim) {
                 this.anim.destroy();
                 delete this.anim;
-                if (this.timer > 0) {
-                    clearTimeout(this.timer);
-                    this.timer = 0;
-                }
                 setTimeout(() => {
                     this.anim = new window.animatedHeading({ heading: $(this.animatedHeading) })
                 }, 100)
             }
-        }
-
-        if ((animatedText.length !== attributes.animatedText.length) || (level !== attributes.level)) {
-            this.anim.destroy();
-            delete this.anim;
-            this.anim = new window.animatedHeading({ heading: $(this.animatedHeading) })
         }
     }
 
@@ -101,7 +90,6 @@ class Edit extends Component {
                 animationClass = 'loading-bar'
                 break
             case 'scale':
-            case 'slide':
                 animationClass = 'letters scale'
                 break
             case 'push':
@@ -170,13 +158,23 @@ class Edit extends Component {
                         <HeadingToolbar minLevel={1} maxLevel={6} selectedLevel={level} isCollapsed={false} onChange={(newLevel) => setAttributes({ level: newLevel })} />
                     </PanelBody>
                     <PanelBody title={__('Animated Text')}>
+
+                        <TextControl
+                            label={__('Text Before')}
+                            value={titleBefore}
+                            onChange={titleBefore => setAttributes({ titleBefore })}
+                        />
+                        <TextControl
+                            label={__('Text After')}
+                            value={titleAfter}
+                            onChange={titleAfter => setAttributes({ titleAfter })}
+                        />
                         <FormTokenField
                             label={__('Animated Texts')}
                             value={animatedText}
-                            placeholder={__("Add new text")}
+                            placeholder={__('Add new text')}
                             onChange={tokens => setAttributes({ animatedText: tokens })}
                         />
-
 
                         <SelectControl
                             label={__('Animation Type')}
@@ -189,7 +187,6 @@ class Edit extends Component {
                                 { label: __('Fade In'), value: 'fade-in' },
                                 { label: __('Loading Bar'), value: 'loading-bar' },
                                 { label: __('Scale'), value: 'scale' },
-                                { label: __('Slide'), value: 'slide' },
                                 { label: __('Push'), value: 'push' },
                                 { label: __('Twist/Wave'), value: 'wave' },
                             ]}
@@ -273,13 +270,7 @@ class Edit extends Component {
 
                 <div className={`qubely-block-${uniqueId} qubely-block-animated-heading qubely-block-animated-heading-backend ${className}`} onContextMenu={event => handleContextMenu(event, this.refs.qubelyContextMenu)} >
                     <CustomHeadingTag className={`animated-heading-text ${animationClass} ${align ? ` has-text-align-${align}` : ''}`} ref={el => this.animatedHeading = el}>
-                        <RichText
-                            placeholder={__("Before")}
-                            value={titleBefore}
-                            keepPlaceholderOnFocus
-                            onChange={(titleBefore) => setAttributes({ titleBefore })}
-                            className="animated-heading-before-part"
-                        />
+                        {titleBefore}
                         <span className="qubely-animated-text">
                             <span className="animated-text-words-wrapper">
                                 {
@@ -291,13 +282,7 @@ class Edit extends Component {
                                 }
                             </span>
                         </span>
-                        <RichText
-                            placeholder={__("After")}
-                            value={titleAfter}
-                            keepPlaceholderOnFocus
-                            onChange={(titleAfter) => setAttributes({ titleAfter })}
-                            className="animated-heading-after-part"
-                        />
+                        {titleAfter}
                     </CustomHeadingTag>
                     <div ref="qubelyContextMenu" className={`qubely-context-menu-wraper`} >
                         <ContextMenu

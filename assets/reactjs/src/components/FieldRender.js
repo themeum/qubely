@@ -38,6 +38,7 @@ import Margin from './fields/Margin'
 import Carousel from './fields/Carousel'
 import icons from '../helpers/icons'
 import HeadingToolbar from './fields/headingToolbar'
+import Templates from './fields/Templates';
 import { QubelyButtonEdit, QubelyButtonSave } from './fields/QubelyButton'
 import { QubelyIconListEdit, QubelyIconListSave } from './fields/QubelyIconList'
 
@@ -148,6 +149,7 @@ wp.qubelyComponents = {
     Separator,
     Tabs,
     Tab,
+    Templates,
     Toggle,
     Typography,
     Wrapper,

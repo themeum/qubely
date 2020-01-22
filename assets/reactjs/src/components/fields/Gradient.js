@@ -1,22 +1,29 @@
-const { __ } = wp.i18n
-import '../css/gradient.scss'
-const { Component, Fragment } = wp.element
+import Range from "./Range";
+import Select from "./Select";
+import '../css/gradient.scss';
+const { __ } = wp.i18n;
+const { Component, Fragment } = wp.element;
 const { Dropdown, ColorPicker, Tooltip } = wp.components;
-import Select from "./Select"
-import Range from "./Range"
 
-const defaultState = { color1: '#16d03e', color2: '#1f91f3', type: 'linear', direction: '90', start: 5, stop: 80, radial: 'center', clip: false };
+const defaultState = {
+    color1: '#16d03e',
+    color2: '#1f91f3',
+    type: 'linear',
+    direction: '90',
+    start: 5,
+    stop: 80,
+    radial: 'center',
+    clip: false
+};
 
 
 class Gradient extends Component {
-
-    constructor(props) {
-        super(props)
-        this.state = {
-            enableGradient: false,
+    componentDidMount() {
+        const { value } = this.props
+        if (!Object.keys(value).length > 0) {
+            this.props.onChange(defaultState)
         }
     }
-
     defColors() {
         let val = [];
         const colors = window.globalData.settings;
@@ -28,10 +35,6 @@ class Gradient extends Component {
         val.push(colors.colorPreset6 || qubely_admin.palette[5])
         return val;
     }
-
-    // componentWillMount() {
-    //     this.props.onChange(Object.assign({}, defaultState, (this.props.clip ? { clip: this.props.clip } : {}), this.props.value))
-    // }
 
     setSettings(value, type) {
         this.props.onChange(Object.assign({}, this.props.value, { [type]: value }))

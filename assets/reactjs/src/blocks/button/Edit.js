@@ -245,7 +245,6 @@ class Edit extends Component {
                             <span className={`qubely-block-btn-anchor is-${buttonSize}`}>
                                 {(iconName.trim() != "") && (iconPosition == 'left') && (<i className={`qubely-btn-icon ${iconName}`} />)}
                                 <RichText
-                                    key="editable"
                                     keepPlaceholderOnFocus
                                     className="qubely-button-text"
                                     placeholder={__('Add Text...')}
