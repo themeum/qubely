@@ -35,6 +35,30 @@ jQuery(document).ready(function ($) {
         }
     }
 
+    //Table of Contents
+    if (document.getElementsByClassName("qubely-table-of-contents").length > 0) {
+
+        let node = document.createElement('div');
+        node.addEventListener("click", function () {
+            console.log('clicked')
+            $("html, body").animate({
+                scrollTop: 0
+            }, 800)
+        });
+        if ($('.qubely-scroll-top').length === 0) {
+            node.setAttribute('class', 'qubely-scroll-top');
+            document.body.appendChild(node)
+        }
+
+        if ($('.qubely-table-of-contents').attr('data-scroll') === 'true') {
+            if ($('.qubely-show-scroll').length === 0) {
+                node.classList.add("qubely-show-scroll")
+            }
+
+        } else {
+            node.classList.remove("qubely-show-scroll")
+        }
+    }
     //ACCORDION BLOCK
     $('.qubely-block-accordion:not(.qubely-accordion-ready)').each(function () {
         const $accordion = $(this);
@@ -92,7 +116,7 @@ jQuery(document).ready(function ($) {
     $('.qubely-vertical-tab-item-button').on('click', function (event) {
         var $that = $(this);
         var $currentNav = $that.parent();
-        if($currentNav.hasClass('qubely-vertical-active')){
+        if ($currentNav.hasClass('qubely-vertical-active')) {
             return;
         };
 

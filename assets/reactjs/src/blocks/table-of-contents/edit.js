@@ -86,6 +86,7 @@ class Edit extends Component {
                 align,
                 className,
                 tableType,
+                scrollToTop,
                 showTitle,
                 allowedAnchors,
                 allowedAnchors2,
@@ -150,6 +151,7 @@ class Edit extends Component {
                             }}
                             value={Object.keys(allowedAnchors).filter(item => allowedAnchors[item])}
                         />
+                        <Toggle label={__('Enable Scroll To Top')} value={scrollToTop} onChange={value => setAttributes({ scrollToTop: value })} />
                     </PanelBody>
 
 

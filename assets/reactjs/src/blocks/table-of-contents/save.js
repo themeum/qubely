@@ -17,6 +17,7 @@ class Save extends Component {
             className,
             align,
             showTitle,
+            scrollToTop,
             title,
             headerLinks,
             animation,
@@ -32,7 +33,7 @@ class Save extends Component {
         );
         return (
             <div className={classes} {...animationAttr(animation)}>
-                <div className={`qubely-table-of-contents ${interactionClass}`}>
+                <div className={`qubely-table-of-contents ${interactionClass}`} data-scroll={scrollToTop}>
                     {
                         showTitle &&
                         <RichText.Content

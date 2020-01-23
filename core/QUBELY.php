@@ -348,6 +348,7 @@ class QUBELY
 				in_array('qubely/pieprogress', $available_blocks) ||
 				in_array('qubely/counter', $available_blocks) ||
 				in_array('qubely/tabs', $available_blocks) ||
+				in_array('qubely/table-of-contents', $available_blocks) ||
 				in_array('qubely/verticaltabs', $available_blocks)
 			) {
 				wp_enqueue_script('qubely-block-common', QUBELY_DIR_URL . 'assets/js/common-script.js', array('jquery'), QUBELY_VERSION, true);

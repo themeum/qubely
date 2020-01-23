@@ -25,6 +25,10 @@ const attributes = {
             h6: true,
         }
     },
+    scrollToTop: {
+        type: 'boolean',
+        default: true
+    },
     title: {
         type: 'string',
         default: 'Table of Contents'
