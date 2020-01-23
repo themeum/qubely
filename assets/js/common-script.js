@@ -38,25 +38,28 @@ jQuery(document).ready(function ($) {
     //Table of Contents
     if (document.getElementsByClassName("qubely-table-of-contents").length > 0) {
 
-        let node = document.createElement('div');
-        node.addEventListener("click", function () {
-            console.log('clicked')
-            $("html, body").animate({
-                scrollTop: 0
-            }, 800)
-        });
-        if ($('.qubely-scroll-top').length === 0) {
-            node.setAttribute('class', 'qubely-scroll-top');
-            document.body.appendChild(node)
+        let scrollElement = document.createElement('div');
+        scrollElement.setAttribute('class', 'qubely-scroll-top');
+
+        if ($('.qubely-table-of-contents').attr('data-scroll') === 'false') {
+            return;
         }
 
-        if ($('.qubely-table-of-contents').attr('data-scroll') === 'true') {
-            if ($('.qubely-show-scroll').length === 0) {
-                node.classList.add("qubely-show-scroll")
-            }
+        if ($('.qubely-show-scroll').length === 0) {
+            document.body.appendChild(scrollElement);
+            scrollElement.addEventListener("click", function () {
+                $("html, body").animate({
+                    scrollTop: 0
+                }, 800);
+            });
+        }
 
-        } else {
-            node.classList.remove("qubely-show-scroll")
+        window.onscroll = () => {
+            if ($(window).scrollTop() > 300) {
+                scrollElement.classList.add("qubely-show-scroll")
+            } else {
+                scrollElement.classList.remove("qubely-show-scroll")
+            }
         }
     }
     //ACCORDION BLOCK
