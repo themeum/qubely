@@ -6,18 +6,23 @@ const {
 
 export const attributes = {
     uniqueId: { type: 'string', default: '' },
-    // Global
-    ...globalAttributes,
-    uniqueId: { type: 'string', default: '' },
     ...globalAttributes,  // Global Settings
     level: {
         type: 'number',
-        default: 2
+        default: 4
     },
     align: {
         type: 'string',
+        style: []
     },
-    spacer: { type: 'object', default: { spaceTop: { md: '10', unit: 'px' }, spaceBottom: { md: '10', unit: 'px' } }, style: [{ selector: '{{QUBELY}}' }] },
+    spacer: {
+        type: 'object',
+        default: {
+            spaceTop: { md: '10', unit: 'px' },
+            spaceBottom: { md: '10', unit: 'px' }
+        },
+        style: [{ selector: '{{QUBELY}}' }]
+    },
     animatedText: { type: 'array', default: ['imagination', 'fascination', 'attention', 'passion', 'curiosity'] },
     animationType: {
         type: 'string',
@@ -26,7 +31,7 @@ export const attributes = {
     typography: {
         type: 'object',
         default: {
-            openTypography: true,
+            openTypography: false,
             height: {
                 md: "1.2",
                 unit: "em"
@@ -70,8 +75,7 @@ export const attributes = {
         type: 'string', default: '#000',
         style: [
             {
-
-                selector: '{{QUBELY}}.qubely-block-animated-heading { color:{{color}}; }'
+                selector: '{{QUBELY}}.qubely-block-animated-heading .animated-heading-text{ color:{{color}}; }'
             }
         ]
     },
@@ -119,7 +123,9 @@ export const attributes = {
                 color2: '#55cd37',
                 direction: 0,
                 start: 0,
-                stop: 100
+                stop: 100,
+                type: "linear",
+                radial: "center"
             }
         },
         style: [{ selector: '{{QUBELY}}.qubely-block-animated-heading .qubely-animated-text' }]

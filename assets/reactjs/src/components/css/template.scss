@@ -1,0 +1,132 @@
+.qubely-templates-container{
+    background: #D6D9DD;
+    padding: 14px 8px 18px;
+    margin: 0 -16px;
+    margin-bottom: -16px;
+    h4{
+      margin: 0;
+      font-size: 13px;
+      color: #565D66;
+      padding: 0 7px;
+    }
+  }
+  
+  .qubely-template-slider{
+    overflow: hidden;
+    .qubely-template-slider-inner{
+      width: 1400px;
+      display: flex;
+      transition: 300ms;
+      .qubely-template-slide{
+        padding: 12px 7px 18px;
+        .qubely-template-slide-inner{
+          background: #ffffff;
+          box-shadow: 0 9px 10px rgba(163, 175, 216, 0.5);
+          border-radius: 3px;
+          overflow: hidden;
+          position: relative;
+          button{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border: none;
+            padding: 0 11px;
+            font-size: 11px;
+            height: 21px;
+            line-height: 21px;
+            border-radius: 2px;
+            background: #2184F9;
+            color: #ffffff;
+            opacity: 0;
+            z-index: 2;
+            transition: 200ms;
+          }
+          &::before{
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,.6);
+            z-index: 1;
+            opacity: 0;
+            transition: 200ms;
+          }
+          &:hover {
+            button,
+            &::before{
+              opacity: 1;
+            }
+          }
+          svg,
+          img{
+            display: block;
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+  
+  .qubely-template-slider-wrap{
+    position: relative;
+    .template-slider-navigations{
+      position: absolute;
+      width: calc(100% - 10px);
+      top: 50%;
+      left: 5px;
+      transform: translateY(-50%);
+      display: flex;
+      justify-content: space-between;
+      opacity: 0;
+      transition: 200ms;
+      z-index: 3;
+    }
+  }
+  
+  .template-slider-controls{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    button.template-slider-dot{
+      background: #BCC1C7;
+      box-shadow: none;
+      height: 17px;
+      width: 17px;
+      border-radius: 50%;
+      display: inline-block;
+      padding: 0;
+      margin: 0;
+      border: 4px solid #D6D9DD;
+      transition: 300ms;
+      &:focus{
+        outline: none;
+      }
+      &.active{
+        background: #616871;
+        height: 19px;
+        width: 19px;
+      }
+      span{
+        display: none;
+      }
+    }
+    button.template-slider-nav{
+      background: none;
+      border: none;
+      box-shadow: none;
+      height: 25px;
+      width: 25px;
+      color: #616871;
+      cursor: pointer;
+      pointer-events: all;
+      transition: 200ms;
+      font-size: 17px;
+      &:focus{
+        outline: none;
+      }
+      &[disabled]{
+        color: #BCC1C7;
+      }
+    }
+  }

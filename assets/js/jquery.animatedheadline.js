@@ -38,7 +38,7 @@
             $(this).attr('style', '')
         })
 
-        const $wrapperElement = this.$heading.children('.qubely-animated-text .animated-text-words-wrapper');
+        const $wrapperElement = this.$heading.find('.qubely-animated-text .animated-text-words-wrapper');
         $wrapperElement.attr('style', '');
         this._destroy = true;
         this.$heading = null;
@@ -69,14 +69,17 @@
 
             if (headline.hasClass('loading-bar')) {
                 duration = self.barAnimationDelay;
-                setTimeout(function () { headline.children('.qubely-animated-text .animated-text-words-wrapper').addClass('is-loading') }, self.barWaiting);
+                setTimeout(function () { headline.find('.qubely-animated-text .animated-text-words-wrapper').addClass('is-loading') }, self.barWaiting);
             } else if (headline.hasClass('text-clip')) {
-                var spanWrapper = headline.children('.qubely-animated-text .animated-text-words-wrapper'),
+                var spanWrapper = headline.find('.qubely-animated-text .animated-text-words-wrapper'),
                     newWidth = spanWrapper.width() + 5
-                spanWrapper.css('width', newWidth);
+                if(!$('.block-editor-block-list__layout').length){
+                    spanWrapper.css('width', newWidth);
+                }
+
             } else if (!headline.hasClass('type')) {
                 //assign to .animated-text-words-wrapper the width of its longest word
-                var words = headline.children('.qubely-animated-text .animated-text-words-wrapper .animated-text.is-visible');
+                var words = headline.find('.qubely-animated-text .animated-text-words-wrapper .animated-text.is-visible');
                 self.setParentClassWidth(words, delay = false);
             };
 
@@ -223,5 +226,14 @@
         }, customDuration);
     };
     window.animatedHeading = animatedHeading;
+
+
+    //ANIMATED HEADLINE BLOCK
+    $(':not(.editor-block-list__layout) .qubely-block-animated-heading .animated-heading-text').each(function () {
+        let animatedHeadline = $(this)
+        if (window.animatedHeading) {
+            new window.animatedHeading({ heading: $(animatedHeadline) })
+        }
+    });
 
 })(jQuery);

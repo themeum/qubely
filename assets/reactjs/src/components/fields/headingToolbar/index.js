@@ -11,7 +11,7 @@ class HeadingToolbar extends Component {
         const isActive = targetLevel === selectedLevel;
         return {
             icon: <HeadingLevelIcon level={targetLevel} isPressed={isActive} />,
-            title: __(targetLevel),
+            title: __(`Heading ${targetLevel}`),
             isActive,
             onClick: () => onChange(targetLevel),
         };
