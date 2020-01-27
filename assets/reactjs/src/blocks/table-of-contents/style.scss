@@ -1,4 +1,31 @@
 .qubely-block-table-of-contents {
+  .qubely-table-of-contents{
+    overflow: hidden;
+  }
+  // toc header
+
+  .qubely-table-of-contents-header{
+    display: flex;
+    align-items: center;
+    &.qubely-justify-start{
+      justify-content: flex-start;
+    }
+    &.qubely-justify-between{
+      justify-content: space-between;
+    }
+    &.qubely-justify-around{
+      justify-content: space-around;
+    }
+    &.qubely-justify-end{
+      justify-content: flex-end;
+    }
+    .qubely-table-of-contents-toggle{
+      box-sizing: border-box;
+      margin-left: 5px;
+    }
+  }
+
+
   &.qubely-align-left {
     text-align: left;
   }
@@ -7,10 +34,6 @@
   }
   &.qubely-align-right {
     text-align: right;
-  }
-
-  .qubely-table-of-contents {
-    display: inline-block;
   }
 
   .ordered-list,
@@ -43,4 +66,5 @@
       }
     }
   }
+
 }
