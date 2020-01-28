@@ -183,12 +183,14 @@ class PageListModal extends Component {
                 })
             } else {
                 for (let key in pageData) {
-                    pageData[key].map(value => {
-                        if (!value.parentID && !(tempDataID.indexOf(value.ID) > -1)) {
-                            tempDataID.push(value.ID);
-                            currentPageData.push(value);
-                        }
-                    })
+                    if (typeof pageData[key] === 'object') {
+                        pageData[key].map(value => {
+                            if (!value.parentID && !(tempDataID.indexOf(value.ID) > -1)) {
+                                tempDataID.push(value.ID);
+                                currentPageData.push(value);
+                            }
+                        });
+                    }
                 }
             }
         }
@@ -389,7 +391,7 @@ class PageListModal extends Component {
                     layer: 'block',
                     itemType: 'saved_blocks',
                     savedBlocks: response.data,
-                    searchContext:'',
+                    searchContext: '',
                     priceFilter: ''
                 });
             }).catch(error => {
@@ -397,7 +399,7 @@ class PageListModal extends Component {
                 this.setState({
                     loading: false,
                     requestFailedMsg,
-                    searchContext:'',
+                    searchContext: '',
                     priceFilter: ''
                 });
             });
@@ -566,7 +568,7 @@ class PageListModal extends Component {
 
                 <div className="qubely-builder-modal-header">
                     <div className="template-search-box">
-                        <i className="fas fa-search"/>
+                        <i className="fas fa-search" />
                         <input type="search" onChange={this._OnSearchTemplate.bind(this)} value={this.state.searchContext} placeholder={__('Type to search')} className="form-control" />
                     </div>
 
@@ -629,7 +631,7 @@ class PageListModal extends Component {
                             <button onClick={() => this._changePriceFilter()} className={'' == this.state.priceFilter ? 'active' : ''}>{__('All')}</button>
                             <button onClick={() => this._changePriceFilter('free')} className={'free' == this.state.priceFilter ? 'active' : ''}>{__('Free')}</button>
                             <button onClick={() => this._changePriceFilter('pro')} className={'pro' == this.state.priceFilter ? 'active' : ''}>
-                                <img src={qubely_admin.plugin+'assets/img/icon-premium.svg'} alt=""/>
+                                <img src={qubely_admin.plugin + 'assets/img/icon-premium.svg'} alt="" />
                                 {__('Premium')}
                             </button>
                         </div>
