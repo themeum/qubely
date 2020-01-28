@@ -43,8 +43,6 @@ jQuery(document).ready(function ($) {
 
         $('.qubely-table-of-contents ul a').on('click', function () {
             let currentAnchor = $(this).attr('href');
-            console.log('currentAnchor : ',currentAnchor)
-            console.log(' $(`${currentAnchor}`)[ : ', $(`${currentAnchor}`))
             currentAnchor = $(`${currentAnchor}`)[0].offsetTop
             $("html, body").animate({
                 scrollTop: currentAnchor > 30 ? currentAnchor - 20 : currentAnchor
