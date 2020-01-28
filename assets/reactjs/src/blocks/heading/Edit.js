@@ -15,6 +15,7 @@ const {
         animationSettings,
         interactionSettings
     },
+    HeadingToolbar,
     Inline: {
         InlineToolbar,
         InlineSelector
@@ -56,6 +57,7 @@ class Edit extends Component {
                 typography,
                 alignment,
                 selector,
+                level,
                 textColor,
 
                 separatorStyle,
@@ -75,9 +77,9 @@ class Edit extends Component {
 
                 animation,
                 globalZindex,
-                enablePosition, 
-                selectPosition, 
-                positionXaxis, 
+                enablePosition,
+                selectPosition,
+                positionXaxis,
                 positionYaxis,
                 hideTablet,
                 hideMobile,
@@ -105,7 +107,7 @@ class Edit extends Component {
             {separatorStyle &&
                 <Fragment>
                     {separators[separatorStyle].type == 'css' &&
-                        <span className={`qubely-separator-type-css qubely-separator-${separatorStyle}`}/>
+                        <span className={`qubely-separator-type-css qubely-separator-${separatorStyle}`} />
                     }
                     {separators[separatorStyle].type == 'svg' &&
                         <span className={`qubely-separator-type-svg qubely-separator-${separatorStyle}`}>{separators[separatorStyle].svg}</span>
@@ -191,16 +193,7 @@ class Edit extends Component {
                 </InspectorControls>
 
                 <BlockControls>
-                    <InlineSelector
-                        options={[
-                            ['h1', 'Heading 1'],
-                            ['h2', 'Heading 2'],
-                            ['h3', 'Heading 3'],
-                            ['h4', 'Heading 4'],
-                            ['h5', 'Heading 5'],
-                            ['h6', 'Heading 6']]}
-                        selector={selector}
-                        setAttributes={setAttributes} />
+                    <HeadingToolbar minLevel={1} maxLevel={6} selectedLevel={level} onChange={newLevel => setAttributes({ level: newLevel, selector: `h${newLevel}` })} />
                     <Toolbar>
                         <InlineToolbar
                             data={[{ name: 'InlineSpacer', key: 'spacer', responsive: true, unit: ['px', 'em', '%'] }]}

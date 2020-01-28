@@ -41,6 +41,15 @@ jQuery(document).ready(function ($) {
         let scrollElement = document.createElement('div');
         scrollElement.setAttribute('class', 'qubely-scroll-top');
 
+        $('.qubely-table-of-contents ul a').on('click', function () {
+            let currentAnchor = $(this).attr('href');
+            currentAnchor = $(`${currentAnchor}`)[0].offsetTop
+            $("html, body").animate({
+                scrollTop: currentAnchor > 30 ? currentAnchor - 20 : currentAnchor
+            }, 800);
+
+        })
+
         if ($('.qubely-table-of-contents').attr('data-scroll') === 'false') {
             return;
         }
