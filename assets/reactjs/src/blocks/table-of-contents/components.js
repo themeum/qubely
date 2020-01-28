@@ -46,7 +46,6 @@ class TableOfContents extends Component {
         const setHeaders = () => {
             let headings = getsHeadingBlocks().map(header => header.attributes);
             headings.forEach((heading, key) => {
-                console.log('heading : ', heading)
                 if (!heading.anchor) {
                     heading.anchor =
                         `qubely-` +
