@@ -39,7 +39,7 @@ const attributes = {
     },
     tableType: {
         type: 'string',
-        default: 'unordered'
+        default: 'ordered'
     },
     minimizeBox: {type: 'boolean', default: false},
 
@@ -56,11 +56,21 @@ const attributes = {
     headingSize: {
         type: 'number',
         default: {
-            md: 20,
+            md: 22,
             unit: 'px'
         },
         style: [{
             selector: '{{QUBELY}} .qubely-table-of-contents-header{font-size: {{headingSize}}}'
+        }]
+    },
+    bodyFontSize: {
+        type: 'number',
+        default: {
+            md: 18,
+            unit: 'px'
+        },
+        style: [{
+            selector: '{{QUBELY}} .qubely-table-of-contents-body{font-size: {{bodyFontSize}}}'
         }]
     },
     headerPaddingX: {
@@ -76,11 +86,50 @@ const attributes = {
     headerPaddingY: {
         type: 'number',
         default: {
-            md: 10,
+            md: 15,
             unit: 'px'
         },
         style: [{
             selector: '{{QUBELY}} .qubely-table-of-contents-header{padding-top: {{headerPaddingY}}; padding-bottom: {{headerPaddingY}}}'
+        }]
+    },
+    enableHeaderBorder: {
+        type: 'boolean',
+        default: true,
+        style: [{
+            condition: [{
+                key: 'enableHeaderBorder',
+                relation: '==',
+                value: true
+            }],
+            selector: '{{QUBELY}} .qubely-table-of-contents-header{border-bottom-style: solid}'
+        }]
+    },
+    headerBorderWidth: {
+        type: 'number',
+        default: {
+            md: 1,
+            unit: 'px'
+        },
+        style: [{
+            condition: [{
+                key: 'enableHeaderBorder',
+                relation: '==',
+                value: true
+            }],
+            selector: '{{QUBELY}} .qubely-table-of-contents-header{ border-bottom-width: {{headerBorderWidth}}}'
+        }]
+    },
+    headerBorderColor: {
+        type: 'string',
+        default: '#EFEFEF',
+        style: [{
+            condition: [{
+                key: 'enableHeaderBorder',
+                relation: '==',
+                value: true
+            }],
+            selector: '{{QUBELY}} .qubely-table-of-contents-header{ border-bottom-color: {{headerBorderColor}}}'
         }]
     },
     bodyBg: {
@@ -120,6 +169,7 @@ const attributes = {
             openBorder: 1,
             type: 'solid',
             unit: 'px',
+            color: '#EFEFEF',
             global: {
                 md: 1
             }
@@ -162,6 +212,12 @@ const attributes = {
         type: 'string',
         default: ''
     },
+
+    collapsibleAlignment: {
+        type: 'string',
+        default: 'left'
+    },
+
     // Global
     ...globalAttributes
 }

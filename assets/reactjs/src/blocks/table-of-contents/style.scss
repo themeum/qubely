@@ -13,8 +13,8 @@
     &.qubely-justify-between{
       justify-content: space-between;
     }
-    &.qubely-justify-around{
-      justify-content: space-around;
+    &.qubely-justify-center{
+      justify-content: center;
     }
     &.qubely-justify-end{
       justify-content: flex-end;
@@ -39,6 +39,7 @@
   .ordered-list,
   .unordered-list {
     text-align: left;
+    margin: 0;
   }
   ul.child-list {
     padding-left: 1.5em;

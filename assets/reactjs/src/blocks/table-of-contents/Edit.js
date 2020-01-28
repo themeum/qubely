@@ -28,6 +28,8 @@ const {
     Border,
     BoxShadow,
     BorderRadius,
+    RadioAdvanced,
+    Color,
     gloalSettings: {
         globalSettingsPanel,
         animationSettings,
@@ -91,11 +93,21 @@ class Edit extends Component {
                 headerPaddingX,
 
                 bodyBg,
+                bodyFontSize,
                 bodyPaddingY,
                 bodyPaddingX,
                 bodyBorder,
                 bodyShadow,
-                bodyBorderRadius
+                bodyBorderRadius,
+                enableHeaderBorder,
+                headerBorderColor,
+                headerBorderWidth,
+
+                collapsibleAlignment,
+                collapsibleIcon,
+                collapsibleType,
+                collapsibleOpen,
+                collapsibleClose
             }
         } = this.props
 
@@ -157,7 +169,6 @@ class Edit extends Component {
                     </PanelBody>
 
                     <PanelBody title={__('Header')} initialOpen={false}>
-                        <Toggle label={__('Minimize Box')} value={minimizeBox} onChange={minimizeBox => setAttributes({ minimizeBox })} />
                         <Background
                             label={__('Background')}
                             sources={['image', 'gradient']}
@@ -187,6 +198,84 @@ class Edit extends Component {
                             min={0} max={100} responsive device={device}
                             onDeviceChange={value => this.setState({ device: value })}
                         />
+                        <Toggle
+                            label={__('Border Separator')}
+                            value={enableHeaderBorder}
+                            onChange={headerBorderWidth => setAttributes({ headerBorderWidth })}
+                        />
+                        {
+                            enableHeaderBorder && (
+                                <Fragment>
+                                    <Range
+                                        label={__('Border Width')}
+                                        value={headerBorderWidth}
+                                        onChange={(headerBorderWidth) => setAttributes({ headerBorderWidth })}
+                                        unit={['px']}
+                                        min={0} max={100} responsive device={device}
+                                        onDeviceChange={headerBorderWidth => this.setState({ headerBorderWidth })}
+                                    />
+                                    <Color
+                                        label={__('Border Color')}
+                                        value={headerBorderColor}
+                                        onChange={headerBorderColor => setAttributes({ headerBorderColor })}
+                                    />
+                                </Fragment>
+                            )
+                        }
+                    </PanelBody>
+
+                    <PanelBody title={__('Collapsible')} initialOpen={false}>
+                        <Toggle label={__('Enable Collapsible')} value={minimizeBox} onChange={minimizeBox => setAttributes({ minimizeBox })} />
+                        {
+                            minimizeBox && (
+                                <Fragment>
+                                    <RadioAdvanced
+                                        label={__('Alignment')}
+                                        options={[
+                                            { icon: 'fas fa-align-justify', value: 'qubely-justify-between', title: __('Justify') },
+                                            { icon: 'fas fa-align-left', value: 'qubely-justify-start', title: __('Start') },
+                                            { icon: 'fas fa-align-center', value: 'qubely-justify-center', title: __('Center') },
+                                            { icon: 'fas fa-align-right', value: 'qubely-justify-end', title: __('End') }
+                                        ]}
+                                        value={collapsibleAlignment}
+                                        onChange={collapsibleAlignment => setAttributes({ collapsibleAlignment })} />
+                                    <RadioAdvanced
+                                        label={__('Type')}
+                                        options={[
+                                            { label: __('Text'), value: 'text', title: __('Text') },
+                                            { label: __('Icon'), value: 'icon', title: __('Icon') }
+                                        ]}
+                                        value={collapsibleType}
+                                        onChange={collapsibleType => setAttributes({ collapsibleType })} />
+                                    {
+                                        collapsibleType === 'icon' ? (
+                                            <RadioAdvanced
+                                                label={__('Icon')}
+                                                options={[
+                                                    { icon: 'fas fa-angle-up', value: 'angle', title: __('Angle') },
+                                                    { icon: 'fas fa-chevron-circle-up', value: 'chevron-cirlce', title: __('Chevron Circle') },
+                                                    { icon: 'fas fa-plus', value: 'plus', title: __('Plus/Minus') },
+                                                    { icon: 'fas fa-plus-square', value: 'plus-square', title: __('Plus/Minus Square') }
+                                                ]}
+                                                value={collapsibleIcon}
+                                                onChange={collapsibleIcon => setAttributes({ collapsibleIcon })} />
+                                        ) : (
+                                            <Fragment>
+                                                <TextControl
+                                                    label="Open Text"
+                                                    value={ collapsibleOpen }
+                                                    onChange={ ( collapsibleOpen ) => setState( { collapsibleOpen } ) } />
+                                                <TextControl
+                                                    label="Close Text"
+                                                    value={ collapsibleClose }
+                                                    onChange={ ( collapsibleClose ) => setState( { collapsibleClose } ) } />
+                                            </Fragment>
+
+                                        )
+                                    }
+                                </Fragment>
+                            )
+                        }
                     </PanelBody>
 
                     <PanelBody title={__('Body')} initialOpen={false}>
@@ -194,6 +283,14 @@ class Edit extends Component {
                             label={__('Background')}
                             sources={['image', 'gradient']}
                             value={bodyBg} onChange={bodyBg => setAttributes({ bodyBg })}
+                        />
+                        <Range
+                            label={__('Font Size')}
+                            value={bodyFontSize}
+                            onChange={(bodyFontSize) => setAttributes({ bodyFontSize })}
+                            unit={['px']}
+                            min={10} max={100} responsive device={device}
+                            onDeviceChange={value => this.setState({ device: value })}
                         />
                         <Range
                             label={__('Padding X')}
@@ -246,7 +343,12 @@ class Edit extends Component {
 
                 <div className={classes}>
                     <div className="qubely-table-of-contents">
-                        <div className="qubely-table-of-contents-header">
+                        <div className={
+                            classnames([
+                                'qubely-table-of-contents-header',
+                                collapsibleAlignment
+                            ])
+                        }>
                             {
                                 showTitle && (
                                     <div class="qubely-table-of-contents-heading">
@@ -281,6 +383,7 @@ class Edit extends Component {
                             setAttributes={setAttributes}
                             qubelyContextMenu={this.refs.qubelyContextMenu}
                         />
+
                     </div>
                 </div>
             </Fragment>
