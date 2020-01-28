@@ -46,19 +46,22 @@ class TableOfContents extends Component {
         const setHeaders = () => {
             let headings = getsHeadingBlocks().map(header => header.attributes);
             headings.forEach((heading, key) => {
-                heading.anchor =
-                    `${key + 1}` +
-                    "-" +
-                    heading.content
-                        .toString()
-                        .toLowerCase()
-                        .replace(/( |<.+?>|&nbsp;)/g, "-");
-                heading.anchor = encodeURIComponent(
-                    heading.anchor.replace(
-                        /[^\w\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF\s-]/g,
-                        ""
-                    )
-                );
+                if (!heading.anchor) {
+                    heading.anchor =
+                        `${key + 1}` +
+                        "-" +
+                        heading.content
+                            .toString()
+                            .toLowerCase()
+                            .replace(/( |<.+?>|&nbsp;)/g, "-");
+                    heading.anchor = encodeURIComponent(
+                        heading.anchor.replace(
+                            /[^\w\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF\s-]/g,
+                            ""
+                        )
+                    );
+                }
+
             });
             if (JSON.stringify(headings) !== JSON.stringify(this.state.headers)) {
                 this.setState({ headers: headings });
@@ -91,7 +94,7 @@ class TableOfContents extends Component {
         if (headers.length === 0) {
             return (
                 <div className="qubely-message">
-                    {__("No header found, Please add headers before generating Table of Contents")}
+                    {__("No header found")}
                 </div>
             );
         }
@@ -109,7 +112,7 @@ class TableOfContents extends Component {
 
         const formatHeaders = allHeaders => {
             let formattedHeaders2 = [];
-            allHeaders.filter((_, index) => allowedAnchors[`h${index + 1}`]).forEach(header => createHierarchy(formattedHeaders2, header));
+            allHeaders.filter(header => allowedAnchors[`h${header.level}`]).forEach(header => createHierarchy(formattedHeaders2, header));
             return formattedHeaders2;
         };
 
