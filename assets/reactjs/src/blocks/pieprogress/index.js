@@ -22,7 +22,7 @@ if(!qubely_admin.pro_enable) {
             layout: {type: 'string', default: 'outline'},
             alignment: {
                 type: 'string',
-                value: 'flex-start',
+                default: 'flex-start',
                 style: [
                     {
                         selector: '{{QUBELY}} {align-items: {{alignment}}}'
@@ -33,10 +33,10 @@ if(!qubely_admin.pro_enable) {
             speed: {type: 'string', default: 1000},
             corner: {type: 'string', default: 'round'},
             enableIcon: {type: 'boolean', default: true},
-            iconStyle: {type: 'string', default: 'percent'},
-            thickness: {type: 'string', default: 11},
+            iconStyle: {type: 'string', default: 'percent', style: []},
+            thickness: {type: 'string', default: 11, style: []},
             circleShrink: {type: 'string', default: 0},
-            thicknessBg: {type: 'string', default: 21},
+            thicknessBg: {type: 'string', default: 21, style: []},
             fillColor: {
                 type: 'object',
                 default: {
@@ -51,7 +51,8 @@ if(!qubely_admin.pro_enable) {
                         start: '0',
                         stop: '100'
                     }
-                }
+                },
+                style: []
             },
             size: {
                 type: 'string',
@@ -186,7 +187,7 @@ if(!qubely_admin.pro_enable) {
                 ]
             },
             progressShadow: {
-                type: 'object', default: {},
+                type: 'object', default: {}, style: []
             },
             circleShadow: {
                 type: 'object', default: {
@@ -198,6 +199,7 @@ if(!qubely_admin.pro_enable) {
                     spread: 0,
                     vertical: 2
                 },
+                style: []
             },
             spacer: {
                 type: 'object',
