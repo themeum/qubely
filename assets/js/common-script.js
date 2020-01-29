@@ -37,16 +37,18 @@ jQuery(document).ready(function ($) {
 
     //Table of Contents
     if (document.getElementsByClassName("qubely-table-of-contents").length > 0) {
-
         let scrollElement = document.createElement('div');
         scrollElement.setAttribute('class', 'qubely-scroll-top');
 
-        $('.qubely-table-of-contents ul a').on('click', function () {
+        let tocOffsetTop = $('.qubely-table-of-contents').data('scroll-offset');
+        tocOffsetTop =  typeof tocOffsetTop !== "undefined" && tocOffsetTop ? parseInt(tocOffsetTop) : 0
+
+        $('.qubely-table-of-contents-body a').on('click', function () {
             let currentAnchor = $(this).attr('href');
             currentAnchor = $(`${currentAnchor}`)[0].offsetTop
             $("html, body").animate({
-                scrollTop: currentAnchor > 30 ? currentAnchor - 20 : currentAnchor
-            }, 800);
+                scrollTop: currentAnchor > tocOffsetTop ? currentAnchor - tocOffsetTop : currentAnchor
+            }, 400);
 
         })
 

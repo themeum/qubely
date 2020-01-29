@@ -28,7 +28,8 @@ class Save extends Component {
             collapsibleType,
             collapsibleOpen,
             collapsibleIcon,
-            collapsibleClose
+            collapsibleClose,
+            scrollOffset
         } = this.props.attributes
 
 
@@ -66,7 +67,7 @@ class Save extends Component {
 
         return (
             <div className={classes} {...animationAttr(animation)}>
-                <div className={tocClasses} data-scroll={scrollToTop}>
+                <div className={tocClasses} data-scroll={scrollToTop} data-scroll-offset={scrollOffset}>
                     <div className={classnames([
                         'qubely-table-of-contents-header',
                         collapsibleAlignment

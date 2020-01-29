@@ -228,6 +228,16 @@ const attributes = {
         default: false
     },
 
+    smoothScroll: {
+        type: 'boolean',
+        default: true
+    },
+
+    scrollOffset: {
+        type: 'number',
+        default: 20
+    },
+
     // Global
     ...globalAttributes
 }

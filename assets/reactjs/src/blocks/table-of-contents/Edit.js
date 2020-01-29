@@ -108,7 +108,10 @@ class Edit extends Component {
                 collapsibleType,
                 collapsibleOpen,
                 collapsibleClose,
-                isCollapsed
+                isCollapsed,
+
+                smoothScroll,
+                scrollOffset
             }
         } = this.props
 
@@ -186,7 +189,6 @@ class Edit extends Component {
                             }}
                             value={Object.keys(allowedAnchors).filter(item => allowedAnchors[item])}
                         />
-                        <Toggle label={__('Enable Scroll To Top')} value={scrollToTop} onChange={value => setAttributes({ scrollToTop: value })} />
                     </PanelBody>
 
                     <PanelBody title={__('Header')} initialOpen={false}>
@@ -354,6 +356,27 @@ class Edit extends Component {
                             responsive device={device}
                             onDeviceChange={value => this.setState({ device: value })}
                         />
+                    </PanelBody>
+
+                    <PanelBody title={__('Smooth Scroll')}>
+                        <Toggle
+                            label={__('Enable Smooth Scroll')}
+                            value={smoothScroll}
+                            onChange={smoothScroll => setAttributes({ smoothScroll })}
+                        />
+                        {
+                            smoothScroll === true && (
+                                <Range
+                                    label={__('Scroll offset')}
+                                    value={scrollOffset}
+                                    min={0}
+                                    max={100}
+                                    onChange={scrollOffset => setAttributes({scrollOffset})}
+                                />
+                            )
+                        }
+
+                        <Toggle label={__('Enable Scroll To Top')} value={scrollToTop} onChange={value => setAttributes({ scrollToTop: value })} />
                     </PanelBody>
 
 
