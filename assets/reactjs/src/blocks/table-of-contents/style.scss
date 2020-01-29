@@ -30,6 +30,21 @@
     .qubely-table-of-contents-toggle{
       box-sizing: border-box;
       margin-left: 5px;
+      .qubely-toc-close-icon,
+      .qubely-toc-close-text{
+        display: none;
+      }
+      &.qubely-toc-collapsed {
+        .qubely-toc-open-icon,
+        .qubely-toc-open-text{
+          display: none;
+        }
+        .qubely-toc-close-icon,
+        .qubely-toc-close-text{
+          display: block;
+        }
+      }
+
       a{
         text-decoration: none;
       }

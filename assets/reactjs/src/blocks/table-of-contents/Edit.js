@@ -131,7 +131,7 @@ class Edit extends Component {
             h6: false,
         }
 
-        let currentIconClass = {};
+        const currentIconClass = {};
         switch(collapsibleIcon) {
             case 'chevron-cirlce':
                 currentIconClass.open = 'fas fa-chevron-circle-up';
@@ -368,12 +368,10 @@ class Edit extends Component {
                         'qubely-table-of-contents',
                         ...(isCollapsed ? ['qubely-toc-collapsed'] : [])
                     ])}>
-                        <div className={
-                            classnames([
+                        <div className={classnames([
                                 'qubely-table-of-contents-header',
                                 collapsibleAlignment
-                            ])
-                        }>
+                            ])}>
                             {
                                 showTitle && (
                                     <div class="qubely-table-of-contents-heading">
