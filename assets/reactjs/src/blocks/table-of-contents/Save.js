@@ -29,7 +29,8 @@ class Save extends Component {
             collapsibleOpen,
             collapsibleIcon,
             collapsibleClose,
-            scrollOffset
+            scrollOffset,
+            backToTopIcon
         } = this.props.attributes
 
 
@@ -70,6 +71,7 @@ class Save extends Component {
                 <div className={tocClasses} data-scroll={scrollToTop} data-scroll-offset={scrollOffset}>
                     <div className={classnames([
                         'qubely-table-of-contents-header',
+                        'qubely-toc-header-frontend',
                         collapsibleAlignment
                     ])}>
                         {
@@ -85,7 +87,7 @@ class Save extends Component {
                         }
                         {
                             minimizeBox && (
-                                <div className={`qubely-table-of-contents-toggle ${isCollapsed ? 'qubely-toc-collapsed': 'qubely-toc-not-collapsed'}`}>
+                                <div className={`qubely-table-of-contents-toggle ${isCollapsed ? 'qubely-toc-collapsed': ''}`}>
                                     {
                                         collapsibleType !== 'icon' ? (
                                             <Fragment>
@@ -117,6 +119,7 @@ class Save extends Component {
                             frontend
                         />
                     </div>
+                    <a href="#" className={`qubely-back-to-top-button ${backToTopIcon}`} />
                 </div>
             </div>
         )

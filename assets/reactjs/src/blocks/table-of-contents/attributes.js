@@ -238,6 +238,72 @@ const attributes = {
         default: 20
     },
 
+    backToTopIcon: {
+        type: 'string',
+        default: 'fas fa-angle-up'
+    },
+
+    btiPosition: {
+        type: 'string',
+        default: 'right',
+        style: [
+            {
+                condition: [{
+                    key: 'btiPosition',
+                    relation: '==',
+                    value: 'right'
+                }],
+                selector: '{{QUBELY}} .qubely-back-to-top-button {left: auto; right: 330px}'
+            },
+            {
+                condition: [{
+                    key: 'btiPosition',
+                    relation: '==',
+                    value: 'left'
+                }],
+                selector: '{{QUBELY}} .qubely-back-to-top-button {right: auto; left: 330px}'
+            }
+        ]
+    },
+
+    btiOffset: {
+        type: 'number',
+        default: 30,
+        style: [{
+            selector: '{{QUBELY}} .qubely-back-to-top-button{bottom: {{btiOffset}}px}'
+        }]
+    },
+
+    btiColor: {
+        type: 'string',
+        default: '#ffffff',
+        style: [{
+            selector: '{{QUBELY}} .qubely-back-to-top-button{color: {{btiColor}}}'
+        }]
+    },
+
+    btiBg: {
+        type: 'string',
+        default: '#222222',
+        style: [{
+            selector: '{{QUBELY}} .qubely-back-to-top-button{background: {{btiBg}}}'
+        }]
+    },
+    btiRadius: {
+        type: 'number',
+        default: 4,
+        style: [{
+            selector: '{{QUBELY}} .qubely-back-to-top-button{border-radius: {{btiRadius}}px}'
+        }]
+    },
+    btiSize: {
+        type: 'number',
+        default: 35,
+        style: [{
+            selector: '{{QUBELY}} .qubely-back-to-top-button{height: {{btiSize}}px; width: {{btiSize}}px; line-height: {{btiSize}}px}'
+        }]
+    },
+
     // Global
     ...globalAttributes
 }

@@ -15,6 +15,7 @@
   .qubely-table-of-contents-header{
     display: flex;
     align-items: center;
+    position: relative;
     &.qubely-justify-start{
       justify-content: flex-start;
     }
@@ -44,10 +45,19 @@
           display: block;
         }
       }
-
       a{
         text-decoration: none;
+        display: block;
       }
+    }
+    &.qubely-toc-header-frontend .qubely-table-of-contents-toggle a::after{
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      z-index: 2;
+      left: 0;
+      top: 0;
     }
   }
 
@@ -94,4 +104,20 @@
     }
   }
 
+}
+
+.qubely-back-to-top-button{
+  position: fixed;
+  bottom: 50px;
+  right: 310px;
+  z-index: 99999999;
+  background: red;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  text-decoration: none;
+  &:hover{
+    color: inherit;
+    text-decoration: none;
+  }
 }

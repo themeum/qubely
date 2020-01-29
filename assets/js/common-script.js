@@ -37,8 +37,6 @@ jQuery(document).ready(function ($) {
 
     //Table of Contents
     if (document.getElementsByClassName("qubely-table-of-contents").length > 0) {
-        let scrollElement = document.createElement('div');
-        scrollElement.setAttribute('class', 'qubely-scroll-top');
 
         let tocOffsetTop = $('.qubely-table-of-contents').data('scroll-offset');
         tocOffsetTop =  typeof tocOffsetTop !== "undefined" && tocOffsetTop ? parseInt(tocOffsetTop) : 0
@@ -52,6 +50,18 @@ jQuery(document).ready(function ($) {
 
         })
 
+
+        $('.qubely-table-of-contents-toggle a').on('click', function () {
+            const parentElem = $(this).parent('.qubely-table-of-contents-toggle');
+            parentElem.toggleClass('qubely-toc-collapsed');
+
+            parentElem.closest('.qubely-table-of-contents').find('.qubely-table-of-contents-body').slideToggle(300)
+
+        });
+
+
+        let scrollElement = document.createElement('div');
+        scrollElement.setAttribute('class', 'qubely-scroll-top');
         if ($('.qubely-table-of-contents').attr('data-scroll') === 'false') {
             return;
         }

@@ -1,5 +1,6 @@
 import classnames from 'classnames';
 import { TableOfContents } from './components';
+import Separator from "../../components/fields/Separator";
 
 const { __ } = wp.i18n;
 const {
@@ -111,7 +112,14 @@ class Edit extends Component {
                 isCollapsed,
 
                 smoothScroll,
-                scrollOffset
+                scrollOffset,
+                backToTopIcon,
+                btiPosition,
+                btiSize,
+                btiOffset,
+                btiColor,
+                btiBg,
+                btiRadius
             }
         } = this.props
 
@@ -125,6 +133,7 @@ class Edit extends Component {
             'qubely-block-table-of-contents',
             `qubely-align-${align}`,
         );
+
         let defaultTags = {
             h1: false,
             h2: false,
@@ -132,7 +141,7 @@ class Edit extends Component {
             h4: false,
             h5: false,
             h6: false,
-        }
+        };
 
         const currentIconClass = {};
         switch(collapsibleIcon) {
@@ -376,7 +385,67 @@ class Edit extends Component {
                             )
                         }
 
-                        <Toggle label={__('Enable Scroll To Top')} value={scrollToTop} onChange={value => setAttributes({ scrollToTop: value })} />
+                        <Separator/>
+
+                        <Toggle label={__('Enable Back To Top')} value={scrollToTop} onChange={value => setAttributes({ scrollToTop: value })} />
+
+                        {
+                            scrollToTop !== false && (
+                                <Fragment>
+                                    <RadioAdvanced
+                                        label={__('Icon')}
+                                        options={[
+                                            { icon: 'fas fa-angle-up', value: 'fas fa-angle-up', title: __('Angle') },
+                                            { icon: 'fas fa-angle-double-up', value: 'fas fa-angle-double-up', title: __('Angle Double') },
+                                            { icon: 'fas fa-caret-up', value: 'fas fa-caret-up', title: __('Caret') },
+                                        ]}
+                                        value={backToTopIcon}
+                                        onChange={backToTopIcon => setAttributes({ backToTopIcon })}
+                                    />
+                                    <RadioAdvanced
+                                        label={__('Button Position')}
+                                        options={[
+                                            { label: 'Left', value: 'left', title: __('Left') },
+                                            { label: 'Right', value: 'right', title: __('Right') },
+                                        ]}
+                                        value={btiPosition}
+                                        onChange={btiPosition => setAttributes({ btiPosition })}
+                                    />
+                                    <Range
+                                        label={__('Button Offset')}
+                                        value={btiOffset}
+                                        min={0}
+                                        max={250}
+                                        onChange={btiOffset => setAttributes({btiOffset})}
+                                    />
+                                    <Range
+                                        label={__('Button Size')}
+                                        value={btiSize}
+                                        min={30}
+                                        max={80}
+                                        onChange={btiSize => setAttributes({btiSize})}
+                                    />
+                                    <Color
+                                        label={__('Button Color')}
+                                        value={btiColor}
+                                        onChange={btiColor => setAttributes({btiColor})}
+                                    />
+                                    <Color
+                                        label={__('Button Background')}
+                                        value={btiBg}
+                                        onChange={btiBg => setAttributes({btiBg})}
+                                    />
+                                    <Range
+                                        label={__('Button Radius')}
+                                        value={btiRadius}
+                                        min={0}
+                                        max={100}
+                                        onChange={btiRadius => setAttributes({btiRadius})}
+                                    />
+                                </Fragment>
+                            )
+                        }
+
                     </PanelBody>
 
 
@@ -432,6 +501,7 @@ class Edit extends Component {
                                 blockProp={this.props}
                             />
                         </div>
+                        <a href="#" className={`qubely-back-to-top-button ${backToTopIcon}`} />
                     </div>
 
                     <div ref="qubelyContextMenu" className="qubely-context-menu-wraper" >
