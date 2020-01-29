@@ -44,13 +44,9 @@ const attributes = {
     minimizeBox: {type: 'boolean', default: false},
 
     headerBg: {
-        type: 'object',
-        default: {
-            openColor: 1,
-            type: 'color',
-            color: '#F7FCFF',
-        },
-        style: [{ selector: '{{QUBELY}} .qubely-table-of-contents-header' }]
+        type: 'string',
+        default: '#F7FCFF',
+        style: [{ selector: '{{QUBELY}} .qubely-table-of-contents-header { background-color: {{headerBg}} }' }]
     },
 
     headingSize: {
@@ -93,18 +89,7 @@ const attributes = {
             selector: '{{QUBELY}} .qubely-table-of-contents-header{padding-top: {{headerPaddingY}}; padding-bottom: {{headerPaddingY}}}'
         }]
     },
-    enableHeaderBorder: {
-        type: 'boolean',
-        default: true,
-        style: [{
-            condition: [{
-                key: 'enableHeaderBorder',
-                relation: '==',
-                value: true
-            }],
-            selector: '{{QUBELY}} .qubely-table-of-contents-header{border-bottom-style: solid}'
-        }]
-    },
+    enableHeaderBorder: {type: 'boolean', default: true},
     headerBorderWidth: {
         type: 'number',
         default: {
@@ -117,7 +102,7 @@ const attributes = {
                 relation: '==',
                 value: true
             }],
-            selector: '{{QUBELY}} .qubely-table-of-contents-header{ border-bottom-width: {{headerBorderWidth}}}'
+            selector: '{{QUBELY}} .qubely-table-of-contents-header{ border-bottom: {{headerBorderWidth}} solid}'
         }]
     },
     headerBorderColor: {
@@ -215,7 +200,32 @@ const attributes = {
 
     collapsibleAlignment: {
         type: 'string',
-        default: 'left'
+        default: 'qubely-justify-between'
+    },
+
+    collapsibleType: {
+        type: 'string',
+        default: 'text'
+    },
+
+    collapsibleOpen: {
+        type: 'string',
+        default: __('[Show]')
+    },
+
+    collapsibleClose: {
+        type: 'string',
+        default: __('[Hide]')
+    },
+
+    collapsibleIcon: {
+        type: 'string',
+        default: 'angle'
+    },
+
+    isCollapsed: {
+        type: 'boolean',
+        default: false
     },
 
     // Global

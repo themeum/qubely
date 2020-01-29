@@ -1,6 +1,14 @@
 .qubely-block-table-of-contents {
   .qubely-table-of-contents{
     overflow: hidden;
+    &.qubely-toc-collapsed{
+      .qubely-table-of-contents-header{
+        border-bottom-width: 0;
+      }
+      .qubely-table-of-contents-body{
+        display: none;
+      }
+    }
   }
   // toc header
 
@@ -22,6 +30,9 @@
     .qubely-table-of-contents-toggle{
       box-sizing: border-box;
       margin-left: 5px;
+      a{
+        text-decoration: none;
+      }
     }
   }
 

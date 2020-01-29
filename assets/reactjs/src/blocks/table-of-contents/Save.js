@@ -14,7 +14,6 @@ class Save extends Component {
     render() {
         const {
             uniqueId,
-            className,
             align,
             showTitle,
             scrollToTop,

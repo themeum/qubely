@@ -107,7 +107,8 @@ class Edit extends Component {
                 collapsibleIcon,
                 collapsibleType,
                 collapsibleOpen,
-                collapsibleClose
+                collapsibleClose,
+                isCollapsed
             }
         } = this.props
 
@@ -129,6 +130,26 @@ class Edit extends Component {
             h5: false,
             h6: false,
         }
+
+        let currentIconClass = {};
+        switch(collapsibleIcon) {
+            case 'chevron-cirlce':
+                currentIconClass.open = 'fas fa-chevron-circle-up';
+                currentIconClass.close = 'fas fa-chevron-circle-down';
+                break;
+            case 'plus':
+                currentIconClass.open = 'fas fa-plus';
+                currentIconClass.close = 'fas fa-minus';
+                break;
+            case 'plus-square':
+                currentIconClass.open = 'fas fa-plus-square';
+                currentIconClass.close = 'fas fa-minus-square';
+                break;
+            default:
+                currentIconClass.open = 'fas fa-angle-up';
+                currentIconClass.close = 'fas fa-angle-down';
+        }
+
         return (
             <Fragment>
                 <BlockControls>
@@ -169,10 +190,10 @@ class Edit extends Component {
                     </PanelBody>
 
                     <PanelBody title={__('Header')} initialOpen={false}>
-                        <Background
+                        <Color
                             label={__('Background')}
-                            sources={['image', 'gradient']}
-                            value={headerBg} onChange={headerBg => setAttributes({ headerBg })}
+                            value={headerBg}
+                            onChange={headerBg => setAttributes({ headerBg })}
                         />
                         <Range
                             label={__('Font Size')}
@@ -240,13 +261,14 @@ class Edit extends Component {
                                         value={collapsibleAlignment}
                                         onChange={collapsibleAlignment => setAttributes({ collapsibleAlignment })} />
                                     <RadioAdvanced
-                                        label={__('Type')}
+                                        label={__('Button Type')}
                                         options={[
                                             { label: __('Text'), value: 'text', title: __('Text') },
                                             { label: __('Icon'), value: 'icon', title: __('Icon') }
                                         ]}
                                         value={collapsibleType}
                                         onChange={collapsibleType => setAttributes({ collapsibleType })} />
+
                                     {
                                         collapsibleType === 'icon' ? (
                                             <RadioAdvanced
@@ -264,11 +286,11 @@ class Edit extends Component {
                                                 <TextControl
                                                     label="Open Text"
                                                     value={ collapsibleOpen }
-                                                    onChange={ ( collapsibleOpen ) => setState( { collapsibleOpen } ) } />
+                                                    onChange={ ( collapsibleOpen ) => setAttributes( { collapsibleOpen } ) } />
                                                 <TextControl
                                                     label="Close Text"
                                                     value={ collapsibleClose }
-                                                    onChange={ ( collapsibleClose ) => setState( { collapsibleClose } ) } />
+                                                    onChange={ ( collapsibleClose ) => setAttributes( { collapsibleClose } ) } />
                                             </Fragment>
 
                                         )
@@ -342,7 +364,10 @@ class Edit extends Component {
                 </InspectorControls>
 
                 <div className={classes}>
-                    <div className="qubely-table-of-contents">
+                    <div className={classnames([
+                        'qubely-table-of-contents',
+                        ...(isCollapsed ? ['qubely-toc-collapsed'] : [])
+                    ])}>
                         <div className={
                             classnames([
                                 'qubely-table-of-contents-header',
@@ -364,10 +389,23 @@ class Edit extends Component {
                                 )
                             }
                             {
-                                minimizeBox && <div class='qubely-table-of-contents-toggle'>[<a href='#'>{__('hide')}</a>]</div>
+                                minimizeBox && (
+                                    <div
+                                        className='qubely-table-of-contents-toggle'
+                                        onClick={() => setAttributes({isCollapsed: !isCollapsed})}
+                                    >
+                                        {
+                                            isCollapsed === true ? (
+                                                collapsibleType !== 'icon' ? <a href='javascript:;'>{collapsibleOpen}</a> : <a href="javascript:;" className={currentIconClass.close}></a>
+                                            ) : (
+                                                collapsibleType !== 'icon' ? <a href='javascript:;'>{collapsibleClose}</a> : <a href="javascript:;" className={currentIconClass.open}></a>
+                                            )
+                                        }
+                                    </div>
+                                )
                             }
                         </div>
-                        <div class='qubely-table-of-contents-body'>
+                        <div className='qubely-table-of-contents-body'>
                             <TableOfContents
                                 headers={headerLinks && JSON.parse(headerLinks)}
                                 blockProp={this.props}
@@ -375,7 +413,7 @@ class Edit extends Component {
                         </div>
                     </div>
 
-                    <div ref="qubelyContextMenu" className={`qubely-context-menu-wraper`} >
+                    <div ref="qubelyContextMenu" className="qubely-context-menu-wraper" >
                         <ContextMenu
                             name={this.props.name}
                             clientId={clientId}
