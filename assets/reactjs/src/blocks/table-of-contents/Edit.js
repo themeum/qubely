@@ -120,7 +120,19 @@ class Edit extends Component {
                 btiOffset,
                 btiColor,
                 btiBg,
-                btiRadius
+                btiRadius,
+
+                // Global
+
+                //global
+                enablePosition,
+                selectPosition,
+                positionXaxis,
+                positionYaxis,
+                globalZindex,
+                hideTablet,
+                hideMobile,
+                globalCss
             }
         } = this.props
 
@@ -166,11 +178,11 @@ class Edit extends Component {
         return (
             <Fragment>
                 <BlockControls>
-                    <BlockAlignmentToolbar
+                    {/*<BlockAlignmentToolbar
                         value={align}
                         controls={['left', 'center', 'right']}
                         onChange={value => setAttributes({ align: value })}
-                    />
+                    />*/}
                     <Toolbar controls={
                         [{
                             icon: 'editor-ul',
@@ -459,8 +471,10 @@ class Edit extends Component {
 
                     {interactionSettings(uniqueId, interaction, setAttributes)}
 
-                </InspectorControls>
 
+
+                </InspectorControls>
+                {globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
                 <div className={classes}>
                     <div className={classnames([
                         'qubely-table-of-contents',
