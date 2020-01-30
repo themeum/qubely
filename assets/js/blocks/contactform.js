@@ -42,6 +42,21 @@
             });
         });
 
+        if (typeof loadScriptAsync === 'undefined') {
+            function loadScriptAsync(src) {
+                return new Promise((resolve, reject) => {
+                    const tag = document.createElement('script');
+                    tag.src = src;
+                    tag.async = true;
+                    tag.onload = () => {
+                        resolve();
+                    };
+                    const firstScriptTag = document.getElementsByTagName('script')[0];
+                    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+                });
+            }
+        }
+
         //CONTACT FORM RECAPTCHA
         const apiURL = 'https://www.google.com/recaptcha/api.js?onload=initGoogleReChaptcha&render=explicit';
         loadScriptAsync(apiURL).then(() => {

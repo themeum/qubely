@@ -35,6 +35,50 @@ jQuery(document).ready(function ($) {
         }
     }
 
+    //Table of Contents
+    if (document.getElementsByClassName("qubely-table-of-contents").length > 0) {
+
+        let tocOffsetTop = $('.qubely-table-of-contents').data('scroll-offset');
+        tocOffsetTop =  typeof tocOffsetTop !== "undefined" && tocOffsetTop ? parseInt(tocOffsetTop) : 0
+
+        $('.qubely-table-of-contents-body a').on('click', function () {
+            let currentAnchor = $(this).attr('href');
+            currentAnchor = $(`${currentAnchor}`)[0].offsetTop
+            $("html, body").animate({
+                scrollTop: currentAnchor > tocOffsetTop ? currentAnchor - tocOffsetTop : currentAnchor
+            }, 400);
+
+        })
+
+
+        $('.qubely-table-of-contents-toggle a').on('click', function () {
+            const parentElem = $(this).parent('.qubely-table-of-contents-toggle');
+            parentElem.toggleClass('qubely-toc-collapsed');
+
+            parentElem.closest('.qubely-table-of-contents').find('.qubely-table-of-contents-body').slideToggle(300)
+
+        });
+
+        if(!$('.editor-block-list__layout').length) {
+
+            const backToTop = $('.qubely-back-to-top-button');
+            $('.qubely-back-to-top-button').on("click", function (e) {
+                e.preventDefault();
+                $("html, body").animate({
+                    scrollTop: 0
+                }, 800);
+            });
+
+            window.onscroll = () => {
+                if ($(window).scrollTop() > 300) {
+                    backToTop[0].classList.add("qubely-show-scroll")
+                } else {
+                    backToTop[0].classList.remove("qubely-show-scroll")
+                }
+            }
+        }
+
+    }
     //ACCORDION BLOCK
     $('.qubely-block-accordion:not(.qubely-accordion-ready)').each(function () {
         const $accordion = $(this);
@@ -92,7 +136,7 @@ jQuery(document).ready(function ($) {
     $('.qubely-vertical-tab-item-button').on('click', function (event) {
         var $that = $(this);
         var $currentNav = $that.parent();
-        if($currentNav.hasClass('qubely-vertical-active')){
+        if ($currentNav.hasClass('qubely-vertical-active')) {
             return;
         };
 

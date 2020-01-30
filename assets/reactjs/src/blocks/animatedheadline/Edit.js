@@ -175,7 +175,6 @@ class Edit extends Component {
                             placeholder={__('Add new text')}
                             onChange={tokens => setAttributes({ animatedText: tokens })}
                         />
-
                         <SelectControl
                             label={__('Animation Type')}
                             value={animationType}
@@ -266,6 +265,7 @@ class Edit extends Component {
                     <HeadingToolbar minLevel={1} maxLevel={6} selectedLevel={level} onChange={(newLevel) => setAttributes({ level: newLevel })} />
                     <AlignmentToolbar value={align} onChange={nextAlign => setAttributes({ align: nextAlign })} />
                 </BlockControls>
+               
                 {globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
                 <div className={`qubely-block-${uniqueId} qubely-block-animated-heading qubely-block-animated-heading-backend ${className}`} onContextMenu={event => handleContextMenu(event, this.refs.qubelyContextMenu)} >

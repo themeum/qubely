@@ -12,11 +12,12 @@ registerBlockType('qubely/heading', {
 	icon: <img src={qubely_admin.plugin + 'assets/img/blocks/block-heading.svg'} alt={__('Heading Block')} />,
 	supports: {
 		align: ['center', 'wide', 'full'],
+		anchor: true
 	},
-    keywords: [__('heading'), __('head'), __('title')],
-    example: {
+	keywords: [__('heading'), __('head'), __('title')],
+	example: {
 		attributes: {
-			content: __( 'Make headlines/titles that attract users with Qubely Heading.', 'qubely' )
+			content: __('Make headlines/titles that attract users with Qubely Heading.', 'qubely')
 		},
 	},
 	attributes: {
@@ -147,7 +148,14 @@ registerBlockType('qubely/heading', {
 			],
 		},
 
-		selector: { type: 'string', default: 'h2' },
+		selector: {
+			type: 'string',
+			default: 'h2'
+		},
+		level: {
+			type: 'number',
+			default: 2
+		},
 		textColor: {
 			type: 'string', default: '',
 			style: [

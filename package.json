@@ -1,11 +1,8 @@
 {
   "name": "qubely",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "description": "Contributors: **themeum**",
   "main": "gulpfile.js",
-  "dependencies": {
-    "deep-copy": "^1.4.2"
-  },
   "devDependencies": {
     "gulp": "^4.0.2",
     "gulp-clean": "^0.4.0",
