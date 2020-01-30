@@ -51,7 +51,7 @@ const attributes = {
 
     headerColor: {
         type: 'string',
-        default: '#ffffff',
+        default: '#222222',
         style: [{ selector: '{{QUBELY}} .qubely-table-of-contents-header { color: {{headerColor}} }' }]
     },
 

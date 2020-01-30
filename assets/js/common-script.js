@@ -59,21 +59,25 @@ jQuery(document).ready(function ($) {
 
         });
 
-        const backToTop = $('.qubely-back-to-top-button');
-        $('.qubely-back-to-top-button').on("click", function (e) {
-            e.preventDefault();
-            $("html, body").animate({
-                scrollTop: 0
-            }, 800);
-        });
+        if(!$('.editor-block-list__layout').length) {
 
-        window.onscroll = () => {
-            if ($(window).scrollTop() > 300) {
-                backToTop[0].classList.add("qubely-show-scroll")
-            } else {
-                backToTop[0].classList.remove("qubely-show-scroll")
+            const backToTop = $('.qubely-back-to-top-button');
+            $('.qubely-back-to-top-button').on("click", function (e) {
+                e.preventDefault();
+                $("html, body").animate({
+                    scrollTop: 0
+                }, 800);
+            });
+
+            window.onscroll = () => {
+                if ($(window).scrollTop() > 300) {
+                    backToTop[0].classList.add("qubely-show-scroll")
+                } else {
+                    backToTop[0].classList.remove("qubely-show-scroll")
+                }
             }
         }
+
     }
     //ACCORDION BLOCK
     $('.qubely-block-accordion:not(.qubely-accordion-ready)').each(function () {
