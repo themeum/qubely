@@ -49,6 +49,12 @@ const attributes = {
         style: [{ selector: '{{QUBELY}} .qubely-table-of-contents-header { background-color: {{headerBg}} }' }]
     },
 
+    headerColor: {
+        type: 'string',
+        default: '#ffffff',
+        style: [{ selector: '{{QUBELY}} .qubely-table-of-contents-header { color: {{headerColor}} }' }]
+    },
+
     headingSize: {
         type: 'number',
         default: {
@@ -253,7 +259,7 @@ const attributes = {
                     relation: '==',
                     value: 'right'
                 }],
-                selector: '{{QUBELY}} .qubely-back-to-top-button {left: auto; right: 330px}'
+                selector: '{{QUBELY}} .qubely-back-to-top-button {left: auto; right: 30px}'
             },
             {
                 condition: [{
@@ -261,7 +267,7 @@ const attributes = {
                     relation: '==',
                     value: 'left'
                 }],
-                selector: '{{QUBELY}} .qubely-back-to-top-button {right: auto; left: 330px}'
+                selector: '{{QUBELY}} .qubely-back-to-top-button {right: auto; left: 30px}'
             }
         ]
     },

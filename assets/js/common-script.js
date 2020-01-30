@@ -59,27 +59,19 @@ jQuery(document).ready(function ($) {
 
         });
 
-
-        let scrollElement = document.createElement('div');
-        scrollElement.setAttribute('class', 'qubely-scroll-top');
-        if ($('.qubely-table-of-contents').attr('data-scroll') === 'false') {
-            return;
-        }
-
-        if ($('.qubely-show-scroll').length === 0) {
-            document.body.appendChild(scrollElement);
-            scrollElement.addEventListener("click", function () {
-                $("html, body").animate({
-                    scrollTop: 0
-                }, 800);
-            });
-        }
+        const backToTop = $('.qubely-back-to-top-button');
+        $('.qubely-back-to-top-button').on("click", function (e) {
+            e.preventDefault();
+            $("html, body").animate({
+                scrollTop: 0
+            }, 800);
+        });
 
         window.onscroll = () => {
             if ($(window).scrollTop() > 300) {
-                scrollElement.classList.add("qubely-show-scroll")
+                backToTop[0].classList.add("qubely-show-scroll")
             } else {
-                scrollElement.classList.remove("qubely-show-scroll")
+                backToTop[0].classList.remove("qubely-show-scroll")
             }
         }
     }

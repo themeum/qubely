@@ -90,6 +90,7 @@ class Edit extends Component {
                 minimizeBox,
                 headingSize,
                 headerBg,
+                headerColor,
                 headerPaddingY,
                 headerPaddingX,
 
@@ -201,6 +202,11 @@ class Edit extends Component {
                     </PanelBody>
 
                     <PanelBody title={__('Header')} initialOpen={false}>
+                        <Color
+                            label={__('Background')}
+                            value={headerColor}
+                            onChange={headerColor => setAttributes({ headerColor })}
+                        />
                         <Color
                             label={__('Background')}
                             value={headerBg}
@@ -501,7 +507,12 @@ class Edit extends Component {
                                 blockProp={this.props}
                             />
                         </div>
-                        <a href="#" className={`qubely-back-to-top-button ${backToTopIcon}`} />
+                        {
+                            scrollToTop !== false && (
+                                <a href="#" className={`qubely-back-to-top-button ${backToTopIcon}`} />
+                            )
+                        }
+
                     </div>
 
                     <div ref="qubelyContextMenu" className="qubely-context-menu-wraper" >

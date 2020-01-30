@@ -1,6 +1,6 @@
 import classnames from 'classnames';
 import { TableOfContents } from './components';
-import {Fragment} from "react";
+import {Fragment} from 'react';
 const { Component } = wp.element;
 const { RichText } = wp.blockEditor
 const {
@@ -68,7 +68,7 @@ class Save extends Component {
 
         return (
             <div className={classes} {...animationAttr(animation)}>
-                <div className={tocClasses} data-scroll={scrollToTop} data-scroll-offset={scrollOffset}>
+                <div className={tocClasses} data-scroll-offset={scrollOffset}>
                     <div className={classnames([
                         'qubely-table-of-contents-header',
                         'qubely-toc-header-frontend',
@@ -119,7 +119,11 @@ class Save extends Component {
                             frontend
                         />
                     </div>
-                    <a href="#" className={`qubely-back-to-top-button ${backToTopIcon}`} />
+                    {
+                        scrollToTop !== false && (
+                            <a href="#" className={`qubely-back-to-top-button ${backToTopIcon}`} />
+                        )
+                    }
                 </div>
             </div>
         )
