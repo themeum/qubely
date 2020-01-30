@@ -8,7 +8,7 @@ const { __ } = wp.i18n
 
 registerBlockType('qubely/animatedheadline', {
     title: __('Animated Headline'),
-    description: '', //@TODO: _QUBELY Description
+    description: 'Grab the attention of your users with animating texts in headlines',
     category: 'qubely',
     icon: <img src={qubely_admin.plugin + 'assets/img/blocks/block-animatedheadline.svg'} alt={__('Animated Headline')} />,
     keywords: [__('headline'), __('animated'), __('heading'), __('title')],
