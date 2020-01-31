@@ -91,8 +91,8 @@ class Save extends Component {
                                     {
                                         collapsibleType !== 'icon' ? (
                                             <Fragment>
-                                                <a className='qubely-collapsible-text qubely-toc-open-text' href='javascript:;'>{collapsibleOpen}</a>
-                                                <a className='qubely-collapsible-text qubely-toc-close-text' href='javascript:;'>{collapsibleClose}</a>
+                                                <a className='qubely-collapsible-text qubely-toc-close-text' href='javascript:;'>{collapsibleOpen}</a>
+                                                <a className='qubely-collapsible-text qubely-toc-open-text' href='javascript:;'>{collapsibleClose}</a>
                                             </Fragment>
                                         ) : (
                                             <Fragment>
