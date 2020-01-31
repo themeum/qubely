@@ -23,7 +23,7 @@ registerBlockType ( 'qubely/map', {
         spacer: { type: 'object', default:{spaceTop: { md: '10', unit: "px"}, spaceBottom: { md: '10', unit: "px"}}, style: [ { selector: '{{QUBELY}}' }] },
         zoom: { type: 'number', default: '16'},
         height: { type: 'number', default: '350'},
-        placeID: { type: 'string', default: ''},
+        placeID: { type: 'string', default: 'ChIJgWsCh7C4VTcRwgRZ3btjpY8'},
         mapAddress: { type: 'string', default: ''},
         apiKey: { type: 'string', default: ''},
         iconPointer: { type: 'string', default: '' },
