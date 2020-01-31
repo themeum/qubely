@@ -76,29 +76,35 @@
   .unordered-list {
     text-align: left;
     margin: 0;
+    padding: 0 0 0 1.5em;
+    ul,
+    ol{
+      padding-left: 20px;
+      margin: 0;
+      li{
+        position: relative;
+      }
+    }
   }
+
   ul.child-list {
-    padding-left: 1.5em;
     list-style-type: circle;
   }
 
   ol {
-    list-style-type: none;
     counter-reset: item;
-    margin: 0;
-    padding: 0;
+    list-style: none !important;
     > li {
-      display: table;
       counter-increment: item;
-      &:before {
-        content: counters(item, ".") ". ";
-        display: table-cell;
-        padding-right: 0.6em;
-      }
     }
-    li ol > li {
-      margin: 0;
-      &:before {
+    li{
+      position: relative;
+      &::before{
+        content: counters(item, ".") ". ";
+        position: absolute;
+        right: calc(100% + 7px);
+      }
+      ol > li::before{
         content: counters(item, ".") " ";
       }
     }
@@ -132,7 +138,7 @@
 }
 
 
-.editor-block-list__layout .qubely-back-to-top-button{
+.block-editor-page .qubely-back-to-top-button{
   margin-right: 280px;
   margin-left: 160px;
   opacity: 1;
