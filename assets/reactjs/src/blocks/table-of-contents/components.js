@@ -48,7 +48,7 @@ class TableOfContents extends Component {
             headings.forEach((heading, key) => {
                 if (!heading.anchor) {
                     heading.anchor =
-                        `qubely-` +
+                        // `qubely-` +
                         `${key + 1}-` +
                         heading.content
                             .toString()

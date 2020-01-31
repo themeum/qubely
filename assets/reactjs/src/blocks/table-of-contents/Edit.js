@@ -12,7 +12,7 @@ const {
     TextControl,
     Toolbar,
     FormTokenField,
-    RangeControl
+    CheckboxControl
 } = wp.components;
 
 const {
@@ -82,7 +82,6 @@ class Edit extends Component {
                 scrollToTop,
                 showTitle,
                 allowedAnchors,
-                allowedAnchors2,
                 title,
                 headerLinks,
                 animation,
@@ -157,7 +156,7 @@ class Edit extends Component {
         };
 
         const currentIconClass = {};
-        switch(collapsibleIcon) {
+        switch (collapsibleIcon) {
             case 'chevron-cirlce':
                 currentIconClass.open = 'fas fa-chevron-circle-up';
                 currentIconClass.close = 'fas fa-chevron-circle-down';
@@ -200,7 +199,7 @@ class Edit extends Component {
 
                 <InspectorControls key="inspector">
                     <PanelBody title={__('')} initialOpen={true}>
-                        <FormTokenField
+                        {/* <FormTokenField
                             maxLength={6}
                             label={__('Anchors by Tags')}
                             placeholder={__('Add anchor')}
@@ -210,12 +209,47 @@ class Edit extends Component {
                                 setAttributes({ allowedAnchors: defaultTags })
                             }}
                             value={Object.keys(allowedAnchors).filter(item => allowedAnchors[item])}
-                        />
+                        /> */}
+                        <div className="qubely-field qubely-d-flex ">
+                            <label className="qubely-mb-0">{__('Select headings')}</label>
+                            <div className="">
+                                <CheckboxControl
+                                    label={__('H1')}
+                                    checked={allowedAnchors['h1']}
+                                    onChange={value => setAttributes({ allowedAnchors: { ...allowedAnchors, h1: value } })}
+                                />
+                                <CheckboxControl
+                                    label={__('H2')}
+                                    checked={allowedAnchors['h2']}
+                                    onChange={value => setAttributes({ allowedAnchors: { ...allowedAnchors, h2: value } })}
+                                />
+                                <CheckboxControl
+                                    label={__('H3')}
+                                    checked={allowedAnchors['h3']}
+                                    onChange={value => setAttributes({ allowedAnchors: { ...allowedAnchors, h3: value } })}
+                                />
+                                <CheckboxControl
+                                    label={__('H4')}
+                                    checked={allowedAnchors['h4']}
+                                    onChange={value => setAttributes({ allowedAnchors: { ...allowedAnchors, h4: value } })}
+                                />
+                                <CheckboxControl
+                                    label={__('H5')}
+                                    checked={allowedAnchors['h5']}
+                                    onChange={value => setAttributes({ allowedAnchors: { ...allowedAnchors, h5: value } })}
+                                />
+                                <CheckboxControl
+                                    label={__('H6')}
+                                    checked={allowedAnchors['h6']}
+                                    onChange={value => setAttributes({ allowedAnchors: { ...allowedAnchors, h6: value } })}
+                                />
+                            </div>
+                        </div>
                     </PanelBody>
 
                     <PanelBody title={__('Header')} initialOpen={false}>
                         <Color
-                            label={__('Background')}
+                            label={__('Color')}
                             value={headerColor}
                             onChange={headerColor => setAttributes({ headerColor })}
                         />
@@ -311,18 +345,18 @@ class Edit extends Component {
                                                 value={collapsibleIcon}
                                                 onChange={collapsibleIcon => setAttributes({ collapsibleIcon })} />
                                         ) : (
-                                            <Fragment>
-                                                <TextControl
-                                                    label="Open Text"
-                                                    value={ collapsibleOpen }
-                                                    onChange={ ( collapsibleOpen ) => setAttributes( { collapsibleOpen } ) } />
-                                                <TextControl
-                                                    label="Close Text"
-                                                    value={ collapsibleClose }
-                                                    onChange={ ( collapsibleClose ) => setAttributes( { collapsibleClose } ) } />
-                                            </Fragment>
+                                                <Fragment>
+                                                    <TextControl
+                                                        label="Open Text"
+                                                        value={collapsibleOpen}
+                                                        onChange={(collapsibleOpen) => setAttributes({ collapsibleOpen })} />
+                                                    <TextControl
+                                                        label="Close Text"
+                                                        value={collapsibleClose}
+                                                        onChange={(collapsibleClose) => setAttributes({ collapsibleClose })} />
+                                                </Fragment>
 
-                                        )
+                                            )
                                     }
                                 </Fragment>
                             )
@@ -370,8 +404,8 @@ class Edit extends Component {
                             onDeviceChange={value => this.setState({ device: value })}
                         />
                         <BoxShadow label={__('Box-Shadow')}
-                               value={bodyShadow}
-                               onChange={(value) => setAttributes({ bodyShadow: value })}
+                            value={bodyShadow}
+                            onChange={(value) => setAttributes({ bodyShadow: value })}
                         />
                         <BorderRadius
                             label={__('Radius')}
@@ -398,12 +432,12 @@ class Edit extends Component {
                                     value={scrollOffset}
                                     min={0}
                                     max={100}
-                                    onChange={scrollOffset => setAttributes({scrollOffset})}
+                                    onChange={scrollOffset => setAttributes({ scrollOffset })}
                                 />
                             )
                         }
 
-                        <Separator/>
+                        <Separator />
 
                         <Toggle label={__('Enable Back To Top')} value={scrollToTop} onChange={value => setAttributes({ scrollToTop: value })} />
 
@@ -434,31 +468,31 @@ class Edit extends Component {
                                         value={btiOffset}
                                         min={0}
                                         max={250}
-                                        onChange={btiOffset => setAttributes({btiOffset})}
+                                        onChange={btiOffset => setAttributes({ btiOffset })}
                                     />
                                     <Range
                                         label={__('Button Size')}
                                         value={btiSize}
                                         min={30}
                                         max={80}
-                                        onChange={btiSize => setAttributes({btiSize})}
+                                        onChange={btiSize => setAttributes({ btiSize })}
                                     />
                                     <Color
                                         label={__('Button Color')}
                                         value={btiColor}
-                                        onChange={btiColor => setAttributes({btiColor})}
+                                        onChange={btiColor => setAttributes({ btiColor })}
                                     />
                                     <Color
                                         label={__('Button Background')}
                                         value={btiBg}
-                                        onChange={btiBg => setAttributes({btiBg})}
+                                        onChange={btiBg => setAttributes({ btiBg })}
                                     />
                                     <Range
                                         label={__('Button Radius')}
                                         value={btiRadius}
                                         min={0}
                                         max={100}
-                                        onChange={btiRadius => setAttributes({btiRadius})}
+                                        onChange={btiRadius => setAttributes({ btiRadius })}
                                     />
                                 </Fragment>
                             )
@@ -481,9 +515,9 @@ class Edit extends Component {
                         ...(isCollapsed ? ['qubely-toc-collapsed'] : [])
                     ])}>
                         <div className={classnames([
-                                'qubely-table-of-contents-header',
-                                collapsibleAlignment
-                            ])}>
+                            'qubely-table-of-contents-header',
+                            collapsibleAlignment
+                        ])}>
                             {
                                 showTitle && (
                                     <div class="qubely-table-of-contents-heading">
@@ -502,14 +536,14 @@ class Edit extends Component {
                                 minimizeBox && (
                                     <div
                                         className='qubely-table-of-contents-toggle'
-                                        onClick={() => setAttributes({isCollapsed: !isCollapsed})}
+                                        onClick={() => setAttributes({ isCollapsed: !isCollapsed })}
                                     >
                                         {
                                             isCollapsed === true ? (
                                                 collapsibleType !== 'icon' ? <a href='javascript:;'>{collapsibleOpen}</a> : <a href="javascript:;" className={currentIconClass.close}></a>
                                             ) : (
-                                                collapsibleType !== 'icon' ? <a href='javascript:;'>{collapsibleClose}</a> : <a href="javascript:;" className={currentIconClass.open}></a>
-                                            )
+                                                    collapsibleType !== 'icon' ? <a href='javascript:;'>{collapsibleClose}</a> : <a href="javascript:;" className={currentIconClass.open}></a>
+                                                )
                                         }
                                     </div>
                                 )
