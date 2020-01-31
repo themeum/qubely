@@ -302,6 +302,17 @@ const attributes = {
             selector: '{{QUBELY}} .qubely-back-to-top-button{border-radius: {{btiRadius}}px}'
         }]
     },
+    indent: {
+        type: 'number',
+        default: {
+            md: 35,
+            unit: 'px'
+        },
+        style: [{
+            selector: '{{QUBELY}} .ordered-list ol, ' +
+                '{{QUBELY}} .unordered-list ul{padding-left: {{indent}}}'
+        }]
+    },
     btiSize: {
         type: 'number',
         default: 35,

@@ -144,3 +144,14 @@
   opacity: 1;
   visibility: visible;
 }
+
+.qubely-toc-allowed-headings{
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -8px;
+  .components-base-control{
+    margin: 6px 15px 0 0 !important;
+    font-weight: 700;
+    font-size: 14px;
+  }
+}

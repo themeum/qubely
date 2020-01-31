@@ -8,7 +8,7 @@ const { registerBlockType } = wp.blocks;
 registerBlockType('qubely/table-of-contents', {
     title: __('Table of Contents'),
     description: 'Organize page/post contents with Qubely Table of Contents',
-    icon: <img src={qubely_admin.plugin + 'assets/img/blocks/block-team.svg'} alt={__('Team Block')} />,
+    icon: <img src={qubely_admin.plugin + 'assets/img/blocks/block-toc.svg'} alt={__('Table of Contents Block')} />,
     category: 'qubely',
     supports: {
     },

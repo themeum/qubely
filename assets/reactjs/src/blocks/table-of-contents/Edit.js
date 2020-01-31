@@ -120,6 +120,7 @@ class Edit extends Component {
                 btiColor,
                 btiBg,
                 btiRadius,
+                indent,
 
                 // Global
 
@@ -210,9 +211,9 @@ class Edit extends Component {
                             }}
                             value={Object.keys(allowedAnchors).filter(item => allowedAnchors[item])}
                         /> */}
-                        <div className="qubely-field qubely-d-flex ">
-                            <label className="qubely-mb-0">{__('Select headings')}</label>
-                            <div className="">
+                        <div className="qubely-field ">
+                            <label>{__('Select headings')}</label>
+                            <div className="qubely-toc-allowed-headings">
                                 <CheckboxControl
                                     label={__('H1')}
                                     checked={allowedAnchors['h1']}
@@ -375,6 +376,14 @@ class Edit extends Component {
                             onChange={(bodyFontSize) => setAttributes({ bodyFontSize })}
                             unit={['px']}
                             min={10} max={100} responsive device={device}
+                            onDeviceChange={value => this.setState({ device: value })}
+                        />
+                        <Range
+                            label={__('Indent')}
+                            value={indent}
+                            onChange={(indent) => setAttributes({ indent })}
+                            unit={['px']}
+                            min={0} max={100} responsive device={device}
                             onDeviceChange={value => this.setState({ device: value })}
                         />
                         <Range
