@@ -55,6 +55,18 @@ const attributes = {
         style: [{ selector: '{{QUBELY}} .qubely-table-of-contents-header { color: {{headerColor}} }' }]
     },
 
+    collapsibleButtonColor: {
+        type: 'string',
+        default: '#222222',
+        style: [{ selector: '{{QUBELY}} .qubely-table-of-contents-header a { color: {{collapsibleButtonColor}} }' }]
+    },
+
+    bodyColor: {
+        type: 'string',
+        default: '#222222',
+        style: [{ selector: '{{QUBELY}} .qubely-table-of-contents-body, {{QUBELY}} .qubely-table-of-contents-body a { color: {{bodyColor}} }' }]
+    },
+
     headingSize: {
         type: 'number',
         default: {
@@ -65,6 +77,18 @@ const attributes = {
             selector: '{{QUBELY}} .qubely-table-of-contents-header{font-size: {{headingSize}}}'
         }]
     },
+
+    bodyLineHeight: {
+        type: 'number',
+        default: {
+            md: 2,
+            unit: 'em'
+        },
+        style: [{
+            selector: '{{QUBELY}} .qubely-table-of-contents-body{line-height: {{bodyLineHeight}}}'
+        }]
+    },
+
     bodyFontSize: {
         type: 'number',
         default: {
@@ -310,7 +334,7 @@ const attributes = {
         },
         style: [{
             selector: '{{QUBELY}} .ordered-list ol, ' +
-                '{{QUBELY}} .unordered-list ul{padding-left: {{indent}}}'
+                '{{QUBELY}} .unordered-list ul{margin-left: {{indent}}}'
         }]
     },
     btiSize: {

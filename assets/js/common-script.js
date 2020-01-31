@@ -45,7 +45,7 @@ jQuery(document).ready(function ($) {
             let currentAnchor = $(this).attr('href');
             currentAnchor = $(`${currentAnchor}`)[0].offsetTop
             $("html, body").animate({
-                scrollTop: currentAnchor > tocOffsetTop ? currentAnchor - tocOffsetTop : currentAnchor
+                scrollTop: currentAnchor > tocOffsetTop ? currentAnchor + tocOffsetTop : currentAnchor
             }, 400);
 
         })

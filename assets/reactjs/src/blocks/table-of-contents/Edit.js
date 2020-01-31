@@ -103,6 +103,8 @@ class Edit extends Component {
                 enableHeaderBorder,
                 headerBorderColor,
                 headerBorderWidth,
+                bodyColor,
+                bodyLineHeight,
 
                 collapsibleAlignment,
                 collapsibleIcon,
@@ -121,6 +123,7 @@ class Edit extends Component {
                 btiBg,
                 btiRadius,
                 indent,
+                collapsibleButtonColor,
 
                 // Global
 
@@ -286,7 +289,7 @@ class Edit extends Component {
                         <Toggle
                             label={__('Border Separator')}
                             value={enableHeaderBorder}
-                            onChange={headerBorderWidth => setAttributes({ headerBorderWidth })}
+                            onChange={enableHeaderBorder => setAttributes({ enableHeaderBorder })}
                         />
                         {
                             enableHeaderBorder && (
@@ -314,6 +317,12 @@ class Edit extends Component {
                         {
                             minimizeBox && (
                                 <Fragment>
+
+                                    <Color
+                                        label={__('Button Color')}
+                                        value={collapsibleButtonColor}
+                                        onChange={collapsibleButtonColor => setAttributes({ collapsibleButtonColor })}
+                                    />
                                     <RadioAdvanced
                                         label={__('Alignment')}
                                         options={[
@@ -365,6 +374,11 @@ class Edit extends Component {
                     </PanelBody>
 
                     <PanelBody title={__('Body')} initialOpen={false}>
+                        <Color
+                            label={__('Color')}
+                            value={bodyColor}
+                            onChange={bodyColor => setAttributes({ bodyColor })}
+                        />
                         <Background
                             label={__('Background')}
                             sources={['image', 'gradient']}
@@ -376,6 +390,14 @@ class Edit extends Component {
                             onChange={(bodyFontSize) => setAttributes({ bodyFontSize })}
                             unit={['px']}
                             min={10} max={100} responsive device={device}
+                            onDeviceChange={value => this.setState({ device: value })}
+                        />
+                        <Range
+                            label={__('Line Height')}
+                            value={bodyLineHeight}
+                            onChange={(bodyLineHeight) => setAttributes({ bodyLineHeight })}
+                            unit={['px', 'em']}
+                            min={0} max={100} responsive device={device}
                             onDeviceChange={value => this.setState({ device: value })}
                         />
                         <Range
