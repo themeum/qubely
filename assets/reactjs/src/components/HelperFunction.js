@@ -67,7 +67,12 @@ export const videoBackground = (settings) => {
 }
 
 export const IsInteraction = (interaction) => {
-    return (typeof interaction.while_scroll_into_view !== 'undefined' && interaction.while_scroll_into_view.enable === true) || (typeof interaction.mouse_movement !== 'undefined' && interaction.mouse_movement.enable === true)
+    if (typeof interaction === 'undefined') {
+        return false
+    } else {
+        return (typeof interaction.while_scroll_into_view !== 'undefined' && interaction.while_scroll_into_view.enable === true) || (typeof interaction.mouse_movement !== 'undefined' && interaction.mouse_movement.enable === true)
+    }
+
 }
 
 export const _equal = (value, other) => {
