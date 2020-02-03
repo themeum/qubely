@@ -4,7 +4,7 @@ const { PanelBody, Tooltip } = wp.components
 const { compose } = wp.compose
 const { withSelect, withDispatch } = wp.data
 const { InnerBlocks, InspectorControls } = wp.blockEditor
-const { Range, Alignment, gloalSettings: { globalSettingsPanel, animationSettings, interactionSettings }, CssGenerator: { CssGenerator } } = wp.qubelyComponents
+const { Range, Alignment, gloalSettings: { globalSettingsPanel, animationSettings, interactionSettings }, CssGenerator: { CssGenerator }, withCSSGenerator } = wp.qubelyComponents
 
 class Edit extends Component {
     constructor(props) {
@@ -51,7 +51,6 @@ class Edit extends Component {
             isSelected,
             name,
             updateBlockAttributes } = this.props
-        if (uniqueId) { CssGenerator(this.props.attributes, 'buttongroup', uniqueId); }
         const { device } = this.state
         let index = 0
         while (index < buttons) {
@@ -136,4 +135,5 @@ export default compose([
             updateBlockAttributes
         }
     }),
+    withCSSGenerator()
 ])(Edit)

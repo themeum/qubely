@@ -5,8 +5,49 @@ const { select, withSelect, withDispatch } = wp.data
 const { Component, Fragment } = wp.element
 const { getBlock } = select('core/block-editor')
 const { RichText, InspectorControls, BlockControls } = wp.blockEditor
-const { Color, Toggle, Border, Padding, Alignment, Typography, QubelyButtonEdit, gloalSettings: { globalSettingsPanel, animationSettings, interactionSettings }, Inline: { InlineToolbar }, ColorAdvanced, Range, RadioAdvanced, Tabs, Tab, Separator, QubelyIconListEdit, BoxShadow, Styles, BorderRadius, CssGenerator: { CssGenerator }, QubelyButton: { buttonSettings }, QubelyList: { listSettings }, ContextMenu: { ContextMenu, handleContextMenu }, } = wp.qubelyComponents
-import icons from '../../helpers/icons'
+const {
+	Color,
+	Toggle,
+	Border,
+	Padding,
+	Alignment,
+	Typography,
+	QubelyButtonEdit,
+	gloalSettings: {
+		globalSettingsPanel,
+		animationSettings,
+		interactionSettings
+	},
+	Inline: {
+		InlineToolbar
+	},
+	ColorAdvanced,
+	Range,
+	RadioAdvanced,
+	Tabs,
+	Tab,
+	Separator,
+	QubelyIconListEdit,
+	BoxShadow,
+	Styles,
+	BorderRadius,
+	CssGenerator: {
+		CssGenerator
+	},
+	QubelyButton: {
+		buttonSettings
+	},
+	QubelyList: {
+		listSettings
+	},
+	ContextMenu: {
+		ContextMenu,
+		handleContextMenu
+	},
+	withCSSGenerator
+} = wp.qubelyComponents;
+
+import icons from '../../helpers/icons';
 
 class Edit extends Component {
 
@@ -276,10 +317,9 @@ class Edit extends Component {
 				interaction
 			}
 
-		} = this.props
+		} = this.props;
 
-		const { device, openPanelSetting, showPostTextTypography } = this.state
-		if (uniqueId) { CssGenerator(this.props.attributes, 'pricing', uniqueId) }
+		const { device, openPanelSetting, showPostTextTypography } = this.state;
 
 		return (
 			<Fragment>
@@ -808,4 +848,5 @@ export default compose([
 			toggleSelection
 		}
 	}),
+	withCSSGenerator()
 ])(Edit)

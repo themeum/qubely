@@ -4,7 +4,7 @@ const { compose } = wp.compose
 const { withSelect, withDispatch } = wp.data
 const { PanelBody, Toolbar, Tooltip } = wp.components
 const { RichText, InspectorControls, BlockControls } = wp.blockEditor
-const { Alignment, Typography, Color, ColorAdvanced, gloalSettings: { globalSettingsPanel, animationSettings, interactionSettings }, IconList, Inline: { InlineToolbar }, Select, Styles, Tabs, Tab, Range, Url, BoxShadow, RadioAdvanced, Separator, Border, BorderRadius, Padding, ContextMenu: { ContextMenu, handleContextMenu }, CssGenerator: { CssGenerator } } = wp.qubelyComponents
+const { Alignment, Typography, Color, ColorAdvanced, gloalSettings: { globalSettingsPanel, animationSettings, interactionSettings }, IconList, Inline: { InlineToolbar }, Select, Styles, Tabs, Tab, Range, Url, BoxShadow, RadioAdvanced, Separator, Border, BorderRadius, Padding, ContextMenu: { ContextMenu, handleContextMenu }, CssGenerator: { CssGenerator }, withCSSGenerator } = wp.qubelyComponents
 import icons from '../../helpers/icons'
 
 class Edit extends Component {
@@ -76,10 +76,9 @@ class Edit extends Component {
                 hideMobile,
                 globalCss
             }
-        } = this.props
-        const { device } = this.state
-
-        if (uniqueId) { CssGenerator(this.props.attributes, 'button', uniqueId); }
+        } = this.props;
+        
+        const { device } = this.state;
 
         return (
             <Fragment>
@@ -297,5 +296,6 @@ export default compose([
             removeBlock,
             updateBlockAttributes
         }
-    })
+    }),
+    withCSSGenerator()
 ])(Edit)

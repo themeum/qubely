@@ -4,7 +4,7 @@ const { withSelect, withDispatch } = wp.data;
 const { Component, Fragment } = wp.element;
 const { PanelBody, SelectControl, Button } = wp.components;
 const { InspectorControls, InnerBlocks, RichText } = wp.blockEditor;
-const { Styles, ColorAdvanced, Range, Typography, BoxShadow, RadioAdvanced, Tabs, Tab, Color, Toggle, Padding, Border, BorderRadius, CssGenerator: { CssGenerator } } = wp.qubelyComponents
+const { Styles, ColorAdvanced, Range, Typography, BoxShadow, RadioAdvanced, Tabs, Tab, Color, Toggle, Padding, Border, BorderRadius, CssGenerator: { CssGenerator }, withCSSGenerator } = wp.qubelyComponents
 import icons from '../../../helpers/icons';
 
 
@@ -128,7 +128,6 @@ class AccordionItemBlockEdit extends Component {
         const { itemToggle } = rootBlock.attributes;
         const { device } = this.state;
 
-        if (uniqueId) { CssGenerator(this.props.attributes, 'accordion-item', uniqueId); }
         return (
             <Fragment >
                 <InspectorControls>
@@ -382,4 +381,5 @@ export default compose([
             updateBlockAttributes
         };
     }),
+    withCSSGenerator()
 ])(AccordionItemBlockEdit);

@@ -20,8 +20,11 @@ const {
         InlineToolbar,
         InlineSelector
     },
-    CssGenerator: { CssGenerator },
-    ContextMenu: { ContextMenu, handleContextMenu },
+    ContextMenu: { 
+        ContextMenu,
+         handleContextMenu 
+    },
+    withCSSGenerator
 } = wp.qubelyComponents
 
 import '../../components/fields/inline/editorInline'
@@ -115,8 +118,6 @@ class Edit extends Component {
                 </Fragment>
             }
         </Fragment>
-
-        if (uniqueId) { CssGenerator(this.props.attributes, 'heading', uniqueId); }
 
         return (
             <Fragment>
@@ -258,4 +259,4 @@ class Edit extends Component {
         )
     }
 }
-export default Edit
+export default withCSSGenerator() (Edit);

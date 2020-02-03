@@ -27,7 +27,8 @@ const {
         globalSettingsPanel,
         animationSettings,
         interactionSettings
-    }
+    },
+    withCSSGenerator
 } = wp.qubelyComponents
 
 import icons from '../../helpers/icons'
@@ -118,7 +119,6 @@ class Edit extends Component {
             globalCss,
             interaction
         } = attributes;
-        if (uniqueId) { CssGenerator(this.props.attributes, 'socialicons', uniqueId); };
 
         return (
             <Fragment>
@@ -361,4 +361,4 @@ class Edit extends Component {
     }
 }
 
-export default Edit;
+export default withCSSGenerator()(Edit);

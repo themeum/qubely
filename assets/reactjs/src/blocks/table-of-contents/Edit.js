@@ -45,7 +45,8 @@ const {
     ContextMenu: {
         ContextMenu,
         handleContextMenu
-    }
+    },
+    withCSSGenerator
 } = wp.qubelyComponents;
 
 
@@ -125,8 +126,6 @@ class Edit extends Component {
                 indent,
                 collapsibleButtonColor,
 
-                // Global
-
                 //global
                 enablePosition,
                 selectPosition,
@@ -137,12 +136,9 @@ class Edit extends Component {
                 hideMobile,
                 globalCss
             }
-        } = this.props
+        } = this.props;
 
-        const { device } = this.state
-
-        if (uniqueId) { CssGenerator(attributes, 'table-of-contents', uniqueId); }
-
+        const { device } = this.state;
 
         const classes = classnames(
             `qubely-block-${uniqueId}`,
@@ -609,4 +605,4 @@ class Edit extends Component {
         )
     }
 }
-export default Edit
+export default withCSSGenerator()(Edit)

@@ -1,11 +1,12 @@
-const { __ } = wp.i18n
-const { Component, Fragment } = wp.element
-const { withSelect } = wp.data
-const { dateI18n, __experimentalGetSettings } = wp.date
-const { addQueryArgs } = wp.url
+const { __ } = wp.i18n;
+const { compose } = wp.compose;
+const { withSelect } = wp.data;
+const { addQueryArgs } = wp.url;
+const { Fragment, Component } = wp.element;
+const { dateI18n, __experimentalGetSettings } = wp.date;
+const { InspectorControls, BlockControls } = wp.blockEditor;
 const { RangeControl, PanelBody, Toolbar, Spinner, TextControl, SelectControl } = wp.components;
-const { InspectorControls, BlockControls } = wp.blockEditor
-const { Range, ButtonGroup, Inline: { InlineToolbar }, Toggle, Dropdown, Select, Separator, ColorAdvanced, Typography, Color, Border, BorderRadius, Padding, BoxShadow, Styles, Tabs, Tab, RadioAdvanced, gloalSettings: { globalSettingsPanel, animationSettings }, CssGenerator: { CssGenerator }, ContextMenu: { ContextMenu, handleContextMenu }, } = wp.qubelyComponents
+const { Range, ButtonGroup, Inline: { InlineToolbar }, Toggle, Dropdown, Select, Separator, ColorAdvanced, Typography, Color, Border, BorderRadius, Padding, BoxShadow, Styles, Tabs, Tab, RadioAdvanced, gloalSettings: { globalSettingsPanel, animationSettings }, CssGenerator: { CssGenerator }, ContextMenu: { ContextMenu, handleContextMenu }, withCSSGenerator } = wp.qubelyComponents
 import icons from '../../helpers/icons'
 
 
@@ -90,9 +91,9 @@ class Edit extends Component {
 				{
 					(showAuthor || showDates || showComment) &&
 					<div className="qubely-postgrid-meta">
-						{showAuthor && <span><i className="fas fa-user"/> {__('By')} <a >{post.qubely_author.display_name}</a></span>}
-						{showDates && <span><i className="far fa-calendar-alt"/> {dateI18n(__experimentalGetSettings().formats.date, post.date_gmt)}</span>}
-						{showComment && <span><i className="fas fa-comment"/> {(post.qubely_comment ? post.qubely_comment : '0')}</span>}
+						{showAuthor && <span><i className="fas fa-user" /> {__('By')} <a >{post.qubely_author.display_name}</a></span>}
+						{showDates && <span><i className="far fa-calendar-alt" /> {dateI18n(__experimentalGetSettings().formats.date, post.date_gmt)}</span>}
+						{showComment && <span><i className="fas fa-comment" /> {(post.qubely_comment ? post.qubely_comment : '0')}</span>}
 					</div>
 				}
 				{showTitle && (titlePosition == false) && title}
@@ -231,11 +232,11 @@ class Edit extends Component {
 				//animation
 				animation,
 				//global
-                globalZindex,
-                enablePosition, 
-                selectPosition, 
-                positionXaxis, 
-                positionYaxis,
+				globalZindex,
+				enablePosition,
+				selectPosition,
+				positionXaxis,
+				positionYaxis,
 				hideTablet,
 				hideMobile,
 				globalCss
@@ -243,9 +244,6 @@ class Edit extends Component {
 			}
 		} = this.props
 		const { device } = this.state
-
-		if (uniqueId) { CssGenerator(this.props.attributes, 'postgrid', uniqueId) }
-
 		return (
 			<Fragment>
 				<InspectorControls key="inspector">
@@ -675,24 +673,28 @@ class Edit extends Component {
 	}
 }
 
-export default withSelect((select, props) => {
-	const { getEntityRecords } = select('core')
-	const { attributes: { taxonomy, order, orderBy, categories, tags, postsToShow } } = props
+export default compose([
+	withSelect((select, props) => {
+		const { getEntityRecords } = select('core')
+		const { attributes: { taxonomy, order, orderBy, categories, tags, postsToShow } } = props
 
-	let allTaxonomy = qubely_admin.all_taxonomy
+		let allTaxonomy = qubely_admin.all_taxonomy
 
-	let seletedTaxonomy = taxonomy === 'categories' ? 'categories' : 'tags'
-	let activeTaxes = taxonomy === 'categories' ? categories : tags
+		let seletedTaxonomy = taxonomy === 'categories' ? 'categories' : 'tags'
+		let activeTaxes = taxonomy === 'categories' ? categories : tags
 
-	let query = {
-		order: order,
-		orderby: orderBy,
-		per_page: postsToShow,
-		[seletedTaxonomy]: activeTaxes.map(({ value, label }) => value),
-	}
-	return {
-		posts: getEntityRecords('postType', 'post', query),
-		taxonomyList: allTaxonomy.post.terms ? allTaxonomy.post.terms[taxonomy === 'categories' ? 'category' : 'post_tag'] ? allTaxonomy.post.terms[taxonomy === 'categories' ? 'category' : 'post_tag'] : [] : [],
-	};
-})
-	(Edit)
+		let query = {
+			order: order,
+			orderby: orderBy,
+			per_page: postsToShow,
+			[seletedTaxonomy]: activeTaxes.map(({ value, label }) => value),
+		}
+		return {
+			posts: getEntityRecords('postType', 'post', query),
+			taxonomyList: allTaxonomy.post.terms ? allTaxonomy.post.terms[taxonomy === 'categories' ? 'category' : 'post_tag'] ? allTaxonomy.post.terms[taxonomy === 'categories' ? 'category' : 'post_tag'] : [] : [],
+		};
+	}),
+	withCSSGenerator()
+])(Edit)
+
+

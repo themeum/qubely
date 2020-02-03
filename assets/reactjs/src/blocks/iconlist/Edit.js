@@ -17,7 +17,6 @@ const {
     BorderRadius,
     BoxShadow,
     Separator,
-    CssGenerator: { CssGenerator },
     gloalSettings: {
         globalSettingsPanel,
         animationSettings,
@@ -27,6 +26,7 @@ const {
         ContextMenu,
         handleContextMenu
     },
+    withCSSGenerator
 } = wp.qubelyComponents
 
 import icons from '../../helpers/icons'
@@ -207,11 +207,10 @@ class Edit extends Component {
                 hideMobile,
                 globalCss,
                 interaction
-            } } = this.props
+            } 
+        } = this.props;
 
-        const { device } = this.state
-
-        if (uniqueId) { CssGenerator(this.props.attributes, 'iconlist', uniqueId) }
+        const { device } = this.state;
 
         return (
             <Fragment>
@@ -361,4 +360,4 @@ class Edit extends Component {
     }
 }
 
-export default Edit;
+export default withCSSGenerator() (Edit);

@@ -2,7 +2,7 @@ const { __ } = wp.i18n
 const { Fragment, Component } = wp.element;
 const { PanelBody, TextControl, Toolbar, SelectControl } = wp.components
 const { RichText, InspectorControls, BlockControls } = wp.blockEditor
-const { Media, Range, BoxShadow, ButtonGroup, Tabs, Tab, RadioAdvanced, Typography, Toggle, Styles, Alignment, ColorAdvanced, Color, Headings, Border, BorderRadius, Padding, Separator, Select, Margin, Url, gloalSettings: { globalSettingsPanel, animationSettings, interactionSettings }, Inline: { InlineToolbar }, CssGenerator: { CssGenerator }, ContextMenu: { ContextMenu, handleContextMenu }, } = wp.qubelyComponents
+const { Media, Range, BoxShadow, ButtonGroup, Tabs, Tab, RadioAdvanced, Typography, Toggle, Styles, Alignment, ColorAdvanced, Color, Headings, Border, BorderRadius, Padding, Separator, Select, Margin, Url, gloalSettings: { globalSettingsPanel, animationSettings, interactionSettings }, Inline: { InlineToolbar }, CssGenerator: { CssGenerator }, ContextMenu: { ContextMenu, handleContextMenu }, withCSSGenerator } = wp.qubelyComponents
 import icons from '../../helpers/icons'
 class Edit extends Component {
 
@@ -99,9 +99,6 @@ class Edit extends Component {
         const { openPanelSetting, device } = this.state
 
         const titleTagName = 'h' + titleLevel;
-
-        if (uniqueId) { CssGenerator(this.props.attributes, 'image', uniqueId); }
-
         return (
             <Fragment>
                 <InspectorControls key="inspector">
@@ -307,7 +304,7 @@ class Edit extends Component {
                                                 }
                                             </Fragment>
                                             :
-                                            (imageType === 'external' && externalImageUrl.url !=undefined ) ?
+                                            (imageType === 'external' && externalImageUrl.url != undefined) ?
                                                 <img className="qubely-image-image" src={externalImageUrl.url} alt={imgAlt && imgAlt} />
                                                 :
                                                 <div className="qubely-image-image qubely-image-placeholder"><i className="far fa-image" /></div>
@@ -370,4 +367,4 @@ class Edit extends Component {
         )
     }
 }
-export default Edit
+export default withCSSGenerator()(Edit);

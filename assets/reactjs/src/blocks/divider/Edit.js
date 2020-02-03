@@ -13,7 +13,10 @@ const {
         interactionSettings
     },
     Inline: { InlineToolbar },
-    CssGenerator: { CssGenerator }
+    CssGenerator: { 
+        CssGenerator
+     },
+     withCSSGenerator
 } = wp.qubelyComponents
 
 import icons from '../divider/icon'
@@ -80,9 +83,7 @@ class Edit extends Component {
             }
         } = this.props
 
-        const { device } = this.state
-        if (uniqueId) { CssGenerator(this.props.attributes, 'divider', uniqueId); }
-
+        const { device } = this.state;
         return (
             <Fragment>
                 <InspectorControls key="inspector">
@@ -183,4 +184,4 @@ class Edit extends Component {
     }
 }
 
-export default Edit;
+export default withCSSGenerator()(Edit);

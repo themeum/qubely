@@ -2,7 +2,7 @@ const { __ } = wp.i18n
 const { Fragment, Component } = wp.element;
 const { PanelBody, SelectControl, TextControl, Toolbar } = wp.components
 const { RichText, InspectorControls, BlockControls } = wp.blockEditor
-const { QubelyButtonEdit, ButtonGroup, Url, Media, Tabs, Tab, Range, BoxShadow, ContextMenu: { ContextMenu, handleContextMenu }, RadioAdvanced, Typography, Toggle, Styles, Alignment, IconList, ColorAdvanced, Color, Headings, Border, BorderRadius, Padding, gloalSettings: { globalSettingsPanel, animationSettings, interactionSettings }, Inline: { InlineToolbar }, CssGenerator: { CssGenerator }, QubelyButton: { buttonSettings } } = wp.qubelyComponents
+const { QubelyButtonEdit, ButtonGroup, Url, Media, Tabs, Tab, Range, BoxShadow, ContextMenu: { ContextMenu, handleContextMenu }, RadioAdvanced, Typography, Toggle, Styles, Alignment, IconList, ColorAdvanced, Color, Headings, Border, BorderRadius, Padding, gloalSettings: { globalSettingsPanel, animationSettings, interactionSettings }, Inline: { InlineToolbar }, CssGenerator: { CssGenerator }, QubelyButton: { buttonSettings }, withCSSGenerator } = wp.qubelyComponents
 import icons from '../../helpers/icons';
 import svg from '../heading/separators';
 class Edit extends Component {
@@ -151,8 +151,6 @@ class Edit extends Component {
                 </Fragment>
             }
         </Fragment>
-
-        if (uniqueId) { CssGenerator(this.props.attributes, 'infobox', uniqueId); }
 
         return (
             <Fragment>
@@ -517,4 +515,4 @@ class Edit extends Component {
         )
     }
 }
-export default Edit
+export default withCSSGenerator()(Edit);

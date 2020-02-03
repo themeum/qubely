@@ -15,7 +15,10 @@ const {
 	},
 	Inline: { InlineToolbar },
 	CssGenerator: { CssGenerator },
-	ContextMenu: { ContextMenu, handleContextMenu },
+	ContextMenu: {
+		ContextMenu,
+		handleContextMenu },
+	withCSSGenerator
 } = wp.qubelyComponents
 
 class Edit extends Component {
@@ -67,8 +70,6 @@ class Edit extends Component {
 				globalCss
 			} } = this.props
 		const { device } = this.state
-
-		if (uniqueId) { CssGenerator(this.props.attributes, 'counter', uniqueId); }
 
 		return (
 			<Fragment>
@@ -192,4 +193,4 @@ class Edit extends Component {
 	}
 }
 
-export default Edit;
+export default withCSSGenerator()(Edit);

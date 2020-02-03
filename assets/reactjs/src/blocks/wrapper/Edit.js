@@ -2,7 +2,28 @@ const { __ } = wp.i18n;
 const { Component, Fragment } = wp.element;
 const { PanelBody, Toolbar } = wp.components
 const { InspectorControls, BlockControls, InnerBlocks } = wp.blockEditor
-const { Color, Padding, BoxShadow, Tabs, Tab, Border, BorderRadius, Background, gloalSettings: { globalSettingsPanel, animationSettings, interactionSettings }, Inline: { InlineToolbar }, CssGenerator: { CssGenerator } } = wp.qubelyComponents
+const {
+	Tabs,
+	Tab,
+	Color,
+	Border,
+	Padding,
+	BoxShadow,
+	Background,
+	BorderRadius,
+	gloalSettings: {
+		globalSettingsPanel,
+		animationSettings,
+		interactionSettings
+	},
+	Inline: {
+		InlineToolbar
+	},
+	CssGenerator: {
+		CssGenerator
+	},
+	withCSSGenerator
+} = wp.qubelyComponents
 
 class Edit extends Component {
 	constructor() {
@@ -21,7 +42,7 @@ class Edit extends Component {
 	}
 
 	render() {
-		const { 
+		const {
 			name,
 			setAttributes,
 			isSelected,
@@ -36,14 +57,14 @@ class Edit extends Component {
 				padding,
 				borderRadius,
 				border,
-				
+
 				//animation
 				animation,
-                globalZindex,
-                enablePosition, 
-                selectPosition, 
-                positionXaxis, 
-                positionYaxis,
+				globalZindex,
+				enablePosition,
+				selectPosition,
+				positionXaxis,
+				positionYaxis,
 				hideTablet,
 				hideMobile,
 				globalCss,
@@ -51,7 +72,6 @@ class Edit extends Component {
 			}
 		} = this.props
 		const { device } = this.state
-		if (uniqueId) { CssGenerator(this.props.attributes, 'wrapper', uniqueId); }
 
 		return (
 			<Fragment>
@@ -113,4 +133,4 @@ class Edit extends Component {
 	}
 }
 
-export default Edit;
+export default withCSSGenerator()(Edit);

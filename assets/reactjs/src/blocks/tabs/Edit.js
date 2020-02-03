@@ -4,7 +4,7 @@ const { compose } = wp.compose
 const { withSelect, withDispatch } = wp.data
 const { Component, Fragment } = wp.element;
 const { InnerBlocks, RichText, InspectorControls, BlockControls } = wp.blockEditor
-const { Color, IconList, Select, Styles, Typography, Range, RadioAdvanced, gloalSettings: { globalSettingsPanel, animationSettings, interactionSettings }, Inline: { InlineToolbar }, BoxShadow, Alignment, Tabs, Tab, Separator, Border, Padding, BorderRadius, CssGenerator: { CssGenerator } } = wp.qubelyComponents
+const { Color, IconList, Select, Styles, Typography, Range, RadioAdvanced, gloalSettings: { globalSettingsPanel, animationSettings, interactionSettings }, Inline: { InlineToolbar }, BoxShadow, Alignment, Tabs, Tab, Separator, Border, Padding, BorderRadius, CssGenerator: { CssGenerator } ,withCSSGenerator} = wp.qubelyComponents
 import icons from '../../helpers/icons';
 
 class Edit extends Component {
@@ -167,8 +167,7 @@ class Edit extends Component {
 			interaction
 		} = this.props.attributes
 		const { name, setAttributes, isSelected } = this.props
-		const { activeTab, device } = this.state
-		if (uniqueId) { CssGenerator(this.props.attributes, 'tabs', uniqueId); }
+		const { activeTab, device } = this.state;
 		let iterator = [], index = 0
 		while (index < tabs) {
 			iterator.push(index)
@@ -382,4 +381,5 @@ export default compose([
 			updateBlockAttributes
 		};
 	}),
+	withCSSGenerator()
 ])(Edit)

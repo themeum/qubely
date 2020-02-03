@@ -2,9 +2,35 @@ const { __ } = wp.i18n
 const { Fragment, Component } = wp.element;
 const { PanelBody, Toolbar, SelectControl } = wp.components
 const { RichText, InspectorControls, BlockControls } = wp.blockEditor
-const { Typography, Color, Alignment, Headings, Toggle, Range, Separator, gloalSettings: { globalSettingsPanel, animationSettings, interactionSettings }, Inline: { InlineToolbar, InlineSelector }, CssGenerator: { CssGenerator }, ContextMenu: { ContextMenu, handleContextMenu }, } = wp.qubelyComponents
-import '../../components/fields/inline/editorInline'
-import svg from '../heading/separators'
+const {
+    Typography,
+    Color,
+    Alignment,
+    Headings,
+    Toggle,
+    Range,
+    Separator,
+    gloalSettings: {
+        globalSettingsPanel,
+        animationSettings,
+        interactionSettings
+    },
+    Inline: {
+        InlineToolbar,
+        InlineSelector
+    },
+    CssGenerator: {
+        CssGenerator
+    },
+    ContextMenu: {
+        ContextMenu,
+        handleContextMenu
+    },
+    withCSSGenerator
+} = wp.qubelyComponents;
+
+import '../../components/fields/inline/editorInline';
+import svg from '../heading/separators';
 
 class Edit extends Component {
     constructor() {
@@ -64,16 +90,16 @@ class Edit extends Component {
             //animation
             animation,
             globalZindex,
-            enablePosition, 
-            selectPosition, 
-            positionXaxis, 
+            enablePosition,
+            selectPosition,
+            positionXaxis,
             positionYaxis,
             hideTablet,
             hideMobile,
             globalCss,
             interaction
         } = this.props.attributes
-        const { name, clientId, attributes, setAttributes ,isSelected } = this.props
+        const { name, clientId, attributes, setAttributes, isSelected } = this.props
         const { device, openPanelSetting } = this.state
         const separators = {
             solid: { type: 'css', separator: 'solid', width: 300, stroke: 10 },
@@ -102,7 +128,6 @@ class Edit extends Component {
             }
         </Fragment>
 
-        if (uniqueId) { CssGenerator(this.props.attributes, 'text', uniqueId); }
         return (
             <Fragment>
                 <InspectorControls key="inspector">
@@ -272,4 +297,4 @@ class Edit extends Component {
         )
     }
 }
-export default Edit
+export default withCSSGenerator()(Edit);

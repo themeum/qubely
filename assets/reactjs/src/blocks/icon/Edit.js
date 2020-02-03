@@ -20,6 +20,7 @@ const {
 	Inline: { InlineToolbar },
 	CssGenerator: { CssGenerator },
 	ContextMenu: { ContextMenu, handleContextMenu },
+	withCSSGenerator
 } = wp.qubelyComponents
 
 import icons from '../../helpers/icons'
@@ -93,10 +94,9 @@ class Edit extends Component {
 				hideTablet,
 				hideMobile,
 				globalCss,
-				interaction }
-		} = this.props
-
-		if (uniqueId) { CssGenerator(this.props.attributes, 'icon', uniqueId); }
+				interaction 
+			}
+		} = this.props;
 
 		return (
 			<Fragment>
@@ -283,4 +283,4 @@ class Edit extends Component {
 	}
 }
 
-export default Edit;
+export default withCSSGenerator() (Edit);

@@ -20,7 +20,9 @@ const {
         globalSettingsPanel,
         animationSettings,
         interactionSettings
-    } } = wp.qubelyComponents
+    },
+    withCSSGenerator
+} = wp.qubelyComponents
 
 class Edit extends Component {
 
@@ -68,9 +70,9 @@ class Edit extends Component {
                 //animation
                 animation,
                 //global
-                enablePosition, 
-                selectPosition, 
-                positionXaxis, 
+                enablePosition,
+                selectPosition,
+                positionXaxis,
                 positionYaxis,
                 globalZindex,
                 hideTablet,
@@ -79,9 +81,6 @@ class Edit extends Component {
                 interaction }
         } = this.props
         const { device } = this.state
-
-        if (uniqueId) { CssGenerator(this.props.attributes, 'progressbar', uniqueId); }
-
         const labelsContent = <Fragment>
             {title != '' &&
                 <div className={`qubely-block-progress-labels qubely-position-${labelPosition}`}>
@@ -178,4 +177,4 @@ class Edit extends Component {
         )
     }
 }
-export default Edit
+export default withCSSGenerator()(Edit);

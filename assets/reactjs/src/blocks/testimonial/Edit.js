@@ -2,7 +2,7 @@ const { __ } = wp.i18n
 const { Fragment, Component } = wp.element;
 const { PanelBody, TextControl, Toolbar } = wp.components
 const { RichText, BlockControls, InspectorControls, AlignmentToolbar } = wp.blockEditor
-const { Media, RadioAdvanced, Range, Color, Typography, Toggle, Separator, ColorAdvanced, Border, BorderRadius, BoxShadow, Styles, Alignment, Padding, Tabs, Tab, gloalSettings: { globalSettingsPanel, animationSettings, interactionSettings }, Inline: { InlineToolbar }, CssGenerator: { CssGenerator }, ContextMenu: { ContextMenu, handleContextMenu }, } = wp.qubelyComponents
+const { Media, RadioAdvanced, Range, Color, Typography, Toggle, Separator, ColorAdvanced, Border, BorderRadius, BoxShadow, Styles, Alignment, Padding, Tabs, Tab, gloalSettings: { globalSettingsPanel, animationSettings, interactionSettings }, Inline: { InlineToolbar }, CssGenerator: { CssGenerator }, ContextMenu: { ContextMenu, handleContextMenu }, withCSSGenerator } = wp.qubelyComponents
 import icons from '../../helpers/icons'
 
 class Edit extends Component {
@@ -84,9 +84,8 @@ class Edit extends Component {
             interaction
         } = this.props.attributes
 
-        const { clientId, attributes, setAttributes, isSelected } = this.props
-        const { openPanelSetting, device } = this.state
-        if (uniqueId) { CssGenerator(this.props.attributes, 'testimonial', uniqueId); }
+        const { clientId, attributes, setAttributes, isSelected } = this.props;
+        const { openPanelSetting, device } = this.state;
 
         const testimonialTitle = <RichText
             key="editable"
@@ -509,4 +508,4 @@ class Edit extends Component {
     }
 }
 
-export default Edit
+export default withCSSGenerator() (Edit);

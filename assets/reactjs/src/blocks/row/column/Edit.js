@@ -6,7 +6,20 @@ const { InnerBlocks, InspectorControls, BlockControls } = wp.blockEditor
 const { createBlock } = wp.blocks
 const { select, dispatch } = wp.data
 
-const { Background, Border, BorderRadius, BoxShadow, Range, Separator, Dimension, gloalSettings: { globalSettingsPanel, animationSettings }, CssGenerator: { CssGenerator } } = wp.qubelyComponents
+const {
+    Background,
+    Border,
+    BorderRadius,
+    BoxShadow,
+    Range,
+    Separator,
+    Dimension,
+    gloalSettings: {
+        globalSettingsPanel,
+        animationSettings
+    },
+    withCSSGenerator
+} = wp.qubelyComponents
 
 $ = jQuery;
 class Edit extends Component {
@@ -330,7 +343,6 @@ class Edit extends Component {
         }
         const { getBlockOrder } = select('core/block-editor')
         let hasChildBlocks = getBlockOrder(clientId).length > 0
-        if (uniqueId) { CssGenerator(this.props.attributes, 'column', uniqueId); }
 
         return (
             <Fragment>
@@ -440,4 +452,4 @@ class Edit extends Component {
     }
 }
 
-export default Edit;
+export default withCSSGenerator()(Edit);

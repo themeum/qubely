@@ -2,8 +2,42 @@ const { __ } = wp.i18n
 const { Fragment, Component } = wp.element;
 const { PanelBody, RangeControl, TextControl, Toolbar } = wp.components
 const { InspectorControls, BlockControls } = wp.blockEditor
-const { Media, Background, Tabs, Tab, Range, BoxShadow, Separator, RadioAdvanced, Typography, Select, Color, Styles, Toggle, Border, Alignment, BorderRadius, gloalSettings: { globalSettingsPanel, animationSettings, interactionSettings }, Inline: { InlineToolbar }, CssGenerator: { CssGenerator }, ContextMenu: { ContextMenu, handleContextMenu }, } = wp.qubelyComponents
-import icons from '../../helpers/icons'
+const {
+    Media,
+    Background,
+    Tabs,
+    Tab,
+    Range,
+    BoxShadow,
+    Separator,
+    RadioAdvanced,
+    Typography,
+    Select,
+    Color,
+    Styles,
+    Toggle,
+    Border,
+    Alignment,
+    BorderRadius,
+    gloalSettings: {
+        globalSettingsPanel,
+        animationSettings,
+        interactionSettings
+    },
+    Inline: {
+        InlineToolbar
+    },
+    CssGenerator: {
+        CssGenerator
+    },
+    ContextMenu: {
+        ContextMenu,
+        handleContextMenu
+    },
+    withCSSGenerator
+} = wp.qubelyComponents;
+
+import icons from '../../helpers/icons';
 
 class Edit extends Component {
 
@@ -90,7 +124,6 @@ class Edit extends Component {
         } = this.props
 
         const { device } = this.state
-        if (uniqueId) { CssGenerator(this.props.attributes, 'videopopup', uniqueId); }
 
         return (
             <Fragment>
@@ -284,4 +317,4 @@ class Edit extends Component {
         )
     }
 }
-export default Edit
+export default withCSSGenerator()(Edit);

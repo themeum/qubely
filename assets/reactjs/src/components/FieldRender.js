@@ -63,7 +63,9 @@ import {
     parseResponsiveViewPort,
     IsInteraction,
     copyToClipboard
-} from './HelperFunction'
+} from './HelperFunction';
+
+import {withCSSGenerator} from '../hooks'
 
 //hooks
 
@@ -158,5 +160,6 @@ wp.qubelyComponents = {
     QubelyButtonSave,
     QubelyIconListEdit,
     QubelyIconListSave,
-    QubelyFreeIcons: icons
+    QubelyFreeIcons: icons,
+    withCSSGenerator
 }

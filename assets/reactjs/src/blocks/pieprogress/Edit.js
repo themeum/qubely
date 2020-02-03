@@ -27,7 +27,8 @@ const {
         globalSettingsPanel,
         animationSettings,
         interactionSettings
-    }
+    },
+    withCSSGenerator
 } = wp.qubelyComponents
 
 
@@ -106,7 +107,7 @@ class Edit extends Component {
                 globalCss,
                 interaction
             }
-        } = this.props, {device} = this.state, thicknessCalc = {
+        } = this.props, { device } = this.state, thicknessCalc = {
             fill: (size / 2),
             outline: (size * (thickness * .5)) / 100,
             outline_fill: (size * (thickness * .5)) / 100,
@@ -130,8 +131,6 @@ class Edit extends Component {
             duration: speed
         };
 
-        if (uniqueId) { CssGenerator(this.props.attributes, 'pieprogress', uniqueId); }
-
         return (
             <Fragment>
                 <InspectorControls>
@@ -142,17 +141,17 @@ class Edit extends Component {
                             proUpgradation
                             options={[
                                 { value: 'outline', img: icons.pie_outline, label: __('Layout 1') },
-                                { value: 'outline_fill', img: icons.pie_outline_fill, label: __('Layout 2'),  pro: true  },
-                                { value: 'fill', img: icons.pie_fill, label: __('Layout 3'),  pro: true  },
+                                { value: 'outline_fill', img: icons.pie_outline_fill, label: __('Layout 2'), pro: true },
+                                { value: 'fill', img: icons.pie_fill, label: __('Layout 3'), pro: true },
                             ]}
                         />
                         <Range label={__('Progress Size')} value={size} onChange={(value) => setAttributes({ size: value })} min={20} max={500} />
                         <RadioAdvanced
                             label={__('Alignment')}
                             options={[
-                                { label: <span style={{padding: '0 5px'}} class='fas fa-align-left' />, value: 'flex-start', title: 'Left' },
-                                { label: <span style={{padding: '0 5px'}} class='fas fa-align-center' />, value: 'center', title: 'Center' },
-                                { label: <span style={{padding: '0 5px'}} class='fas fa-align-right' />, value: 'flex-end', title: 'Right' },
+                                { label: <span style={{ padding: '0 5px' }} class='fas fa-align-left' />, value: 'flex-start', title: 'Left' },
+                                { label: <span style={{ padding: '0 5px' }} class='fas fa-align-center' />, value: 'center', title: 'Center' },
+                                { label: <span style={{ padding: '0 5px' }} class='fas fa-align-right' />, value: 'flex-end', title: 'Right' },
                             ]}
                             value={alignment}
                             onChange={(alignment) => setAttributes({ alignment })} />
@@ -162,15 +161,15 @@ class Edit extends Component {
                         <Range label={__('Progress Percent')} value={progress} onChange={(value) => setAttributes({ progress: value })} min={0} max={100} />
                         <ColorAdvanced label={__('Progress Color')} value={fillColor} onChange={val => setAttributes({ fillColor: val })} />
                         {layout !== 'fill' && (
-                                <RadioAdvanced
-                                    label={__('Corner')}
-                                    options={[
-                                        { label: 'Sharp', value: 'unset', title: 'Sharp' },
-                                        { label: 'Round', value: 'round', title: 'Round' },
-                                    ]}
-                                    value={corner}
-                                    onChange={(value) => setAttributes({ corner: value })} />
-                            )
+                            <RadioAdvanced
+                                label={__('Corner')}
+                                options={[
+                                    { label: 'Sharp', value: 'unset', title: 'Sharp' },
+                                    { label: 'Round', value: 'round', title: 'Round' },
+                                ]}
+                                value={corner}
+                                onChange={(value) => setAttributes({ corner: value })} />
+                        )
                         }
                         {
                             layout !== 'fill' && <Range label={__('Progress Width')} value={thickness} onChange={thickness => setAttributes({ thickness: thickness })} min={1} max={100} />
@@ -184,13 +183,13 @@ class Edit extends Component {
                         {
                             layout === 'outline' && <Range label={__('Circle Width')} value={thicknessBg} onChange={(value) => setAttributes({ thicknessBg: value })} min={1} max={100} />
                         }
-                        <Range label={__('Circle Shrink (%)')} value={circleShrink} onChange={circleShrink => setAttributes({ circleShrink})} min={0} max={100} />
+                        <Range label={__('Circle Shrink (%)')} value={circleShrink} onChange={circleShrink => setAttributes({ circleShrink })} min={0} max={100} />
                         <Color label={__('Circle Background')} value={background} onChange={background => setAttributes({ background })} />
-                        <BoxShadow label={__('Shadow')} value={circleShadow} onChange={circleShadow => setAttributes({ circleShadow})} />
+                        <BoxShadow label={__('Shadow')} value={circleShadow} onChange={circleShadow => setAttributes({ circleShadow })} />
                     </PanelBody>
                     <PanelBody title={__('Percentage / Icon')} initialOpen={false}>
                         <Toggle label={__('Enable')} value={enableIcon} onChange={enableIcon => setAttributes({ enableIcon })} />
-                        { enableIcon &&
+                        {enableIcon &&
                             <Fragment>
                                 <RadioAdvanced
                                     label={__('Type')}
@@ -245,7 +244,7 @@ class Edit extends Component {
                                     <TextControl
                                         label="Text"
                                         value={iconText}
-                                        onChange={ ( iconText ) => setAttributes({iconText}) }
+                                        onChange={(iconText) => setAttributes({ iconText })}
                                     />
                                 )}
                                 {iconStyle !== 'image' && (
@@ -260,7 +259,7 @@ class Edit extends Component {
                     </PanelBody>
                     <PanelBody title={__('Heading')} initialOpen={false}>
                         <Toggle label={__('Enable Heading')} value={enableHeading} onChange={enableHeading => setAttributes({ enableHeading })} />
-                        { enableHeading && (
+                        {enableHeading && (
                             <Fragment>
                                 <TextControl label={__('Heading text')} value={heading} onChange={heading => setAttributes({ heading })} />
                                 {heading && <Color label={__('Heading Color')} value={headingColor} onChange={headingColor => setAttributes({ headingColor })} />}
@@ -309,12 +308,12 @@ class Edit extends Component {
                                     <Fragment>
                                         {iconStyle === 'text' && (
                                             <RichText
-                                                value={ iconText }
+                                                value={iconText}
                                                 placeholder={__('Text Here')}
-                                                onChange={ iconText  => setAttributes( { iconText } ) }
+                                                onChange={iconText => setAttributes({ iconText })}
                                             />
                                         )}
-                                         {iconStyle === 'percent' && (
+                                        {iconStyle === 'percent' && (
                                             <div>
                                                 <span className='qubely-pie-counter'>{progress}</span>%
                                             </div>
@@ -333,8 +332,8 @@ class Edit extends Component {
                                                             srcSet={image2x.url !== undefined ? image.url + ' 1x, ' + image2x.url + ' 2x' : ''}
                                                         />
                                                     ) : (
-                                                        <span className="qubely-pie-placeholder far fa-image" />
-                                                    )
+                                                            <span className="qubely-pie-placeholder far fa-image" />
+                                                        )
                                                 }
                                             </div>
                                         )}
@@ -342,10 +341,10 @@ class Edit extends Component {
                                 )}
                                 {(enableHeading && headingPosition === 'inside') && (
                                     <RichText
-                                        value={ heading }
+                                        value={heading}
                                         className="qubely-pie-progress-heading"
                                         placeholder={__('Heading Here')}
-                                        onChange={ heading  => setAttributes( { heading } ) }
+                                        onChange={heading => setAttributes({ heading })}
                                     />
                                 )}
                             </div>
@@ -354,10 +353,10 @@ class Edit extends Component {
 
                     {(enableHeading && headingPosition === 'outside') && (
                         <RichText
-                            value={ heading }
+                            value={heading}
                             className="qubely-pie-progress-heading qubely-outside"
                             placeholder={__('Heading Here')}
-                            onChange={ heading  => setAttributes( { heading } ) }
+                            onChange={heading => setAttributes({ heading })}
                         />
                     )}
                     <div ref="qubelyContextMenu" className="qubely-context-menu-wraper">
@@ -375,4 +374,4 @@ class Edit extends Component {
     }
 }
 
-export default Edit
+export default withCSSGenerator()(Edit);

@@ -24,7 +24,8 @@ const {
     },
     HeadingToolbar,
     Typography,
-    Range
+    Range,
+    withCSSGenerator
 } = wp.qubelyComponents
 
 const defaultTexts = ['Demo-one', 'Demo-two']
@@ -146,8 +147,6 @@ class Edit extends Component {
         } = this.props
 
         const { device, animationClass } = this.state
-
-        if (uniqueId) { CssGenerator(this.props.attributes, 'animatedheadline', uniqueId); }
         let gradientTextColor = animationType === 'clip' || animationType === 'flip' || animationType === 'fade-in' || animationType === 'loading-bar' || animationType === 'push';
         const CustomHeadingTag = `h${level}`;
 
@@ -265,7 +264,7 @@ class Edit extends Component {
                     <HeadingToolbar minLevel={1} maxLevel={6} selectedLevel={level} onChange={(newLevel) => setAttributes({ level: newLevel })} />
                     <AlignmentToolbar value={align} onChange={nextAlign => setAttributes({ align: nextAlign })} />
                 </BlockControls>
-               
+
                 {globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
                 <div className={`qubely-block-${uniqueId} qubely-block-animated-heading qubely-block-animated-heading-backend ${className}`} onContextMenu={event => handleContextMenu(event, this.refs.qubelyContextMenu)} >
@@ -300,4 +299,4 @@ class Edit extends Component {
     }
 }
 
-export default Edit;
+export default withCSSGenerator()(Edit);
