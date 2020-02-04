@@ -3,7 +3,7 @@ import Device from './Device'
 const { useState } = wp.element
 const { Button, ButtonGroup } = wp.components
 
-export default function ({ label, options, value, onChange, responsive, device: activeDevice, onDeviceChange }) {
+export default function ({ label, options, value, onChange, additionalClass, responsive, device: activeDevice, onDeviceChange }) {
 
     const [device, setDevice] = useState('md')
     let responsiveDevice = responsive ? activeDevice ? activeDevice : device : window.qubelyDevice
@@ -31,7 +31,7 @@ export default function ({ label, options, value, onChange, responsive, device: 
             <ButtonGroup className="qubely-field-child qubely-d-flex">
                 {options.map(([title, option]) => {
                     const activeBtn = option === getValue() ? 'qubley-active-group-btn' : ''
-                    return (<Button className={`qubley-group-button ${activeBtn}`} onClick={() => onButtonClick(option)}>{title}</Button>)
+                    return (<Button className={`qubley-group-button ${activeBtn}${additionalClass ? ` ${additionalClass}` : ''}`} onClick={() => onButtonClick(option)}>{title}</Button>)
                 })}
             </ButtonGroup>
         </div>
