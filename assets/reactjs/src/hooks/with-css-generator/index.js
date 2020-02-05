@@ -58,18 +58,20 @@ export default function withCSSGenerator() {
                 if (responsiveAttributes.length > 0) {
                     responsiveAttributes.forEach(attr => {
                         const currentAttribute = responsiveCSS[attr];
-                        if (typeof currentAttribute[0] !== 'undefined' && currentAttribute[0].md && currentAttribute[0].md.length > 0) {
-                            _CSS += currentAttribute[0].md;
-                        }
-                        if (typeof currentAttribute[1] !== 'undefined' && currentAttribute[1].sm && currentAttribute[1].sm.length > 0) {
-                            _CSS += '@media (max-width: 1199px) {' + currentAttribute[1].sm + '}';
-                        }
-                        if (typeof currentAttribute[2] !== 'undefined' && currentAttribute[2].xs && currentAttribute[2].xs.length > 0) {
-                            _CSS += '@media (max-width: 991px) {' + currentAttribute[2].xs + '}';
-                        }
-                        if (typeof currentAttribute.nonResponsiveCSS !== 'undefined' && currentAttribute.nonResponsiveCSS.length > 0) {
-                            _CSS += currentAttribute.nonResponsiveCSS.join('');
-                        }
+                        let attbrTypes = Object.keys(currentAttribute);
+                        attbrTypes.forEach(key => {
+                            if (key !== 'nonResponsiveCSS' && typeof currentAttribute[key] === 'object' && Object.keys(currentAttribute[key]).length > 0) {
+                                if (currentAttribute[key].hasOwnProperty('md') && typeof currentAttribute[key].md !== 'undefined') {
+                                    _CSS += currentAttribute[key].md;
+                                } else if (currentAttribute[key].hasOwnProperty('sm') && typeof currentAttribute[key].sm !== 'undefined') {
+                                    _CSS += '@media (max-width: 1199px) {' + currentAttribute[key].sm + '}';
+                                } else if (currentAttribute[key].hasOwnProperty('xs') && typeof currentAttribute[key].xs !== 'undefined') {
+                                    _CSS += '@media (max-width: 991px) {' + currentAttribute[key].xs + '}';
+                                }
+                            } else if (key === 'nonResponsiveCSS' && currentAttribute.nonResponsiveCSS.length > 0) {
+                                _CSS += currentAttribute.nonResponsiveCSS.join(' ');
+                            }
+                        });
                     });
                 }
 
@@ -160,11 +162,12 @@ export default function withCSSGenerator() {
             }
 
             render() {
+                // this.state && console.log('hello from hoc : ', this.state.responsiveCSS.titleTypography)
                 return (
                     <OriginalComponent
                         {...this.props}
                         {...this.state}
-                        setState={ this.setState }
+                        setState={this.setState}
                     />
                 );
             }

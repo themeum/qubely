@@ -189,6 +189,7 @@ const handleObjects = (settings, key, cssSelector, updateStyle, isInline, sendBa
     }
 
     if (!device) { 
+
         const objectCss = objectField(settings[key]);
         if (typeof objectCss.data == 'object') {
 
@@ -211,9 +212,8 @@ const handleObjects = (settings, key, cssSelector, updateStyle, isInline, sendBa
                     nonResponsiveCSS.push(cssSelector + objectCss.data.simple);
                 }
                 if (objectCss.data.font) {
-                    temp.unshift(objectCss.data.font)
+                    nonResponsiveCSS.push(objectCss.data.font);
                 }
-
                 if (objectCss.data.shape) {
                     (objectCss.data.shape).forEach(
                         function (el) {
