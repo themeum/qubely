@@ -1,9 +1,11 @@
-const { __ } = wp.i18n
-import Media from './Media'
-import Select from './Select'
-import Gradient from './Gradient'
+import Url from "./Url";
+import Media from './Media';
 import Color from "./Color";
-const { Component, Fragment } = wp.element
+import Select from './Select';
+import Gradient from './Gradient';
+import ButtonGroup from "./ButtonGroup";
+const { __ } = wp.i18n;
+const { Component, Fragment } = wp.element;
 const { Tooltip, TextControl, Dropdown } = wp.components;
 
 const control = {
@@ -38,9 +40,28 @@ class Background extends Component {
         }
     }
 
+    localImagePicker = () => {
+        const { value } = this.props
+        return (
+            <Media
+                panel={true}
+                multiple={false}
+                type={['image']}
+                value={value.bgImage}
+                label={__('Background Image')}
+                onChange={(val) => this.setSettings(val, 'bgImage')}
+            />
+        );
+    }
+
     render() {
-        const { value, label } = this.props
+        const {
+            value,
+            label,
+            externalImage = false,
+        } = this.props
         const fieldLabel = label ? label : __('Background');
+
         return (
             <div className="qubely-field-background qubely-field-color-advanced qubely-field">
                 <Color label={fieldLabel + ' ' + __('Color')} value={value.bgDefaultColor} onChange={(val) => this.setSettings(val, 'bgDefaultColor')} />
@@ -82,9 +103,32 @@ class Background extends Component {
 
                 {(value && value.openBg == 1) && (value.bgType === 'image') &&
                     <div className="qubely-background-inner">
-                        <Media label={__('Background Image')} multiple={false} type={['image']} panel={true} value={value.bgImage} onChange={(val) => this.setSettings(val, 'bgImage')} />
+                        {
+                            externalImage ?
+                                <Fragment>
+                                    <ButtonGroup
+                                        value={typeof value.bgimageSource !== 'undefined' ? value.bgimageSource : 'local'}
+                                        label={__('Image Type')}
+                                        options={
+                                            [
+                                                [__('Local'), 'local'],
+                                                [__('External'), 'external']
+                                            ]
+                                        }
+                                        onChange={value => this.setSettings(value, 'bgimageSource')}
+                                    />
+                                    {
+                                        (value.bgimageSource === 'local' || typeof value.bgimageSource === 'undefined') ?
+                                            this.localImagePicker()
+                                            :
+                                            <Url label={__('Image Source')} disableAdvanced value={typeof value.externalImageUrl !== 'undefined' ? value.externalImageUrl : {}} onChange={newUrl => this.setSettings(newUrl, 'externalImageUrl')} />
+                                    }
+                                </Fragment>
+                                :
+                                this.localImagePicker()
+                        }
 
-                        {(value.bgImage && value.bgImage.url) &&
+                        {(!externalImage && value.bgImage && value.bgImage.url) &&
                             <Fragment>
                                 {this.props.parallax &&
                                     <div className="qubely-field qubely-d-flex qubely-align-center">

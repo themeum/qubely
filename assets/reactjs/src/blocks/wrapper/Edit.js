@@ -21,7 +21,7 @@ class Edit extends Component {
 	}
 
 	render() {
-		const { 
+		const {
 			name,
 			setAttributes,
 			isSelected,
@@ -36,14 +36,14 @@ class Edit extends Component {
 				padding,
 				borderRadius,
 				border,
-				
+
 				//animation
 				animation,
-                globalZindex,
-                enablePosition, 
-                selectPosition, 
-                positionXaxis, 
-                positionYaxis,
+				globalZindex,
+				enablePosition,
+				selectPosition,
+				positionXaxis,
+				positionYaxis,
 				hideTablet,
 				hideMobile,
 				globalCss,
@@ -59,7 +59,13 @@ class Edit extends Component {
 					<PanelBody title={__('Background')} initialOpen={false}>
 						<Tabs>
 							<Tab tabTitle={__('Normal')}>
-								<Background label={__('Background')} sources={['image', 'gradient']} value={bgColor} onChange={val => setAttributes({ bgColor: val })} />
+								<Background
+									externalImage
+									value={bgColor}
+									label={__('Background')}
+									sources={['image', 'gradient']}
+									onChange={val => setAttributes({ bgColor: val })}
+								/>
 								<Padding
 									label={__('Padding')}
 									value={padding}
