@@ -179,7 +179,7 @@ export default compose([
         }
         const makePostDarty = () => {
             const currentMeta = select( 'core/editor' ).getCurrentPostAttribute( 'meta' );
-            currentMeta.qubely_global_settings = currentMeta.qubely_global_settings === "true" ? "false" : "true"
+            // currentMeta.qubely_global_settings = currentMeta.qubely_global_settings === "true" ? "false" : "true"
             const meta = {...currentMeta, qubely_global_settings: "true" }
             dispatch( 'core/editor' ).editPost( { meta } );
         }
