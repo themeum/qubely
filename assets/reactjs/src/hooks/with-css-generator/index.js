@@ -100,9 +100,8 @@ export default function withCSSGenerator() {
                 const blockAttributes = wp.blocks.getBlockType(this.props.name).attributes;
 
                 if (Object.keys(diff(prevProps.attributes, attributes)).length > 0) {
-                    const changeAttribute = Object.keys(diff(prevProps.attributes, attributes))[0];
-
-                    if (changeAttribute === 'uniqueId') {
+                    const changedAttribute = Object.keys(diff(prevProps.attributes, attributes))[0];
+                    if (changedAttribute === 'uniqueId') {
                         let currentStyleElement = window.document.getElementById('qubely-block-' + prevProps.attributes.uniqueId)
 
                         if (currentStyleElement) {
@@ -110,8 +109,10 @@ export default function withCSSGenerator() {
                             let newStyle = currentStyleElement.innerHTML.replace(new RegExp(`${prevProps.attributes.uniqueId}`, "g"), `${attributes.uniqueId}`);
                             currentStyleElement.innerHTML = newStyle;
                         } else {
-                            this.saveCSS(responsiveCSS, nonResponsiveCSS)
+                            this.saveCSS(responsiveCSS, nonResponsiveCSS);
                         }
+                    } else if (changedAttribute.toLowerCase() == 'layout' || changedAttribute.toLowerCase() == 'style' || changedAttribute.toLowerCase() == 'filltype' || changedAttribute == 'iconStyle' || changedAttribute.toLowerCase() == 'buttonfilltype') {
+                        this.saveStyleAttributes();
                     } else {
                         let newState = {
                             nonResponsiveCSS: nonResponsiveCSS,
@@ -162,7 +163,6 @@ export default function withCSSGenerator() {
             }
 
             render() {
-                // this.state && console.log('hello from hoc : ', this.state.responsiveCSS.titleTypography)
                 return (
                     <OriginalComponent
                         {...this.props}
