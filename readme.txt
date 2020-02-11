@@ -70,7 +70,7 @@ Qubely adds numerous custom Gutenberg blocks to the Gutenberg block editor and t
 * Icon
 * Divider
 * Block Wrapper
-* Pie Progress
+* [Pie Progress](https://qubely.io/block/pie-progress/)
 
 More advanced Gutenberg blocks, pre-designed sections and starter packs are coming every month! [Signup on our site]() to receive updates via email.
 
@@ -143,8 +143,6 @@ More advanced Gutenberg blocks, pre-designed sections and starter packs are comi
 - **Timeline:** Display the timelines of various events with this WordPress Gutenberg block plugin. Showcase detailed road maps and style them with images, texts, headings, icons, and more.
 
 - **Post Grid:** Display posts in different grid and list layouts. Define post number, style the feature image, tweak typography, control spacing, determine post excerpts, and do many more.
-
-- **Media Card:** Easily create responsive, organized Card design with this block. Choose from a set of predefined designs, customize it to your needs and publish.
 
 - **Pie Progress:** Display complex information and visualize them in circular progress with easy configuration. Choose style from available templates and make it your own.
 
@@ -237,6 +235,10 @@ You can report bugs on the [support forum here](https://wordpress.org/support/pl
 
 
 == Changelog ==
+
+= 1.3.2 - 12 February, 2020 =
+Update : Performance update in CSS generator  
+Update : Background field - external image option  
 
 = 1.3.1 - 31 January, 2020 =
 New: Table of Contents block  
