@@ -101,3 +101,7 @@ z-index: 100;
     }
 }
 }
+
+div.is-selected[data-type*="qubely/"]{
+    z-index: 1;
+}

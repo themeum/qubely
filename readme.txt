@@ -237,8 +237,9 @@ You can report bugs on the [support forum here](https://wordpress.org/support/pl
 == Changelog ==
 
 = 1.3.2 - 12 February, 2020 =
-Update : Performance update in CSS generator  
-Update : Background field - external image option  
+Update : Performance improvement in CSS generator
+Update : Background field - external image option
+Fix: Context menu z-index issue
 
 = 1.3.1 - 31 January, 2020 =
 New: Table of Contents block  
