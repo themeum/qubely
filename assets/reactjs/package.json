@@ -12,7 +12,8 @@
   "license": "ISC",
   "dependencies": {
     "classnames": "^2.2.6",
-    "deep-copy": "^1.4.2"
+    "deep-copy": "^1.4.2",
+    "deep-object-diff": "^1.1.0"
   },
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "^7.2.3",
