@@ -124,7 +124,7 @@ export default function withCSSGenerator() {
                         } else {
                             this.saveCSS(responsiveCSS, nonResponsiveCSS);
                         }
-                    } else if (changedAttribute.toLowerCase() == 'layout' || changedAttribute.toLowerCase() == 'style' || changedAttribute.toLowerCase() == 'filltype' || changedAttribute == 'iconStyle' || changedAttribute.toLowerCase() == 'buttonfilltype') {
+                    } else if (changedAttribute.toLowerCase() == 'layout' || changedAttribute.toLowerCase() == 'style' || changedAttribute.toLowerCase() == 'filltype' || changedAttribute == 'iconStyle' || changedAttribute.toLowerCase() == 'buttonfilltype' || changedAttribute.toLowerCase() == 'tabStyle') {
                         this.saveStyleAttributes();
                     } else {
                         let newState = {
