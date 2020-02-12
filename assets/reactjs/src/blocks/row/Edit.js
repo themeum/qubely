@@ -256,7 +256,14 @@ class Edit extends Component {
                     </PanelBody>
 
                     <PanelBody initialOpen={false} title={__('Background')}>
-                        <Background label={__('Background')} sources={['image', 'gradient', 'video']} parallax value={rowBg} onChange={val => setAttributes({ rowBg: val })} />
+                        <Background
+                            parallax
+                            value={rowBg}
+                            label={__('Background')}
+                            externalImage
+                            sources={['image', 'gradient', 'video']}
+                            onChange={val => setAttributes({ rowBg: val })}
+                        />
                         <Separator />
                         <Border
                             label={__('Border')}

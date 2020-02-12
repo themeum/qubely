@@ -89,10 +89,10 @@ export const cssDimension = (v) => {
 }
 
 // CSS Background
-const split_bg = (type, image = {}, imgPosition, imgAttachment, imgRepeat, imgSize, DefaultColor, bgGradient) => {
+const split_bg = (type, image = {}, imgPosition, imgAttachment, imgRepeat, imgSize, DefaultColor, bgGradient, bgimageSource = 'local', externalImageUrl = {}) => {
     let bgData = (DefaultColor ? 'background-color:' + DefaultColor + ';' : '');
     if (type == 'image') {
-        bgData += (image.hasOwnProperty('url') ? 'background-image:url(' + image.url + ');' : '') + (imgPosition ? 'background-position:' + imgPosition + ';' : '') + (imgAttachment ? 'background-attachment:' + imgAttachment + ';' : '') +
+        bgData += (bgimageSource === 'local' ? image.hasOwnProperty('url') ? 'background-image:url(' + image.url + ');' : '' : externalImageUrl.hasOwnProperty('url') ? 'background-image:url(' + externalImageUrl.url + ');' : '') + (imgPosition ? 'background-position:' + imgPosition + ';' : '') + (imgAttachment ? 'background-attachment:' + imgAttachment + ';' : '') +
             (imgRepeat ? 'background-repeat:' + imgRepeat + ';' : '') + (imgSize ? 'background-size:' + imgSize + ';' : '')
     }
     else if (type == 'gradient') {
@@ -106,7 +106,7 @@ const split_bg = (type, image = {}, imgPosition, imgAttachment, imgRepeat, imgSi
 }
 export const cssBackground = (v) => {
     let background = '{'
-    background += split_bg(v.bgType, v.bgImage, v.bgimgPosition, v.bgimgAttachment, v.bgimgRepeat, v.bgimgSize, v.bgDefaultColor, v.bgGradient)
+    background += split_bg(v.bgType, v.bgImage, v.bgimgPosition, v.bgimgAttachment, v.bgimgRepeat, v.bgimgSize, v.bgDefaultColor, v.bgGradient, v.bgimageSource, v.externalImageUrl)
     background += '}'
     if (v.bgType == 'video') {
         if (v.bgVideoFallback) {

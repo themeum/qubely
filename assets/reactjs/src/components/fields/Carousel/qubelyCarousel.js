@@ -181,19 +181,29 @@
          * @_minL = minimum length of items
          */
         itemProfessor: function () {
-            const cloneItems = this.$element.find('.clone').length
-            this._numberOfItems = this.$element.find('.qubely-carousel-item').length - cloneItems
+            const cloneItems = this.$element.find('.clone').length;
+            let centerPadding = this.options.centerPadding, margin = this.options.margin;
+            this._numberOfItems = this.$element.find('.qubely-carousel-item').length - cloneItems;
             let viewPort = null
-            if (typeof this.options.responsive !== 'undefined')
+            if (typeof this.options.responsive !== 'undefined') {
                 viewPort = this.parseResponsiveViewPort()
+            }
+            if (viewPort !== null) {
+                if (this.options.centerPaddingMode) {
+                    centerPadding = typeof viewPort.centerPadding === 'undefined' ? this.options.centerPadding : viewPort.centerPadding;
+                }
+                if (viewPort.margin) {
+                    margin = parseInt(viewPort.margin);
+                }
+            }
 
             this.options.items = viewPort === null ? this.options.items : typeof viewPort.items === 'undefined' ? this.options.items : viewPort.items
 
-            this.elementWidth = this.$element.outerWidth() + this.options.margin
-            this.itemWidth = this.options.center ? Math.abs((this.elementWidth - this.options.centerPadding) / this.options.items) : Math.abs(this.elementWidth / this.options.items)
+            this.elementWidth = this.$element.outerWidth() + margin;
+            this.itemWidth = this.options.center ? Math.abs((this.elementWidth - centerPadding) / this.options.items) : Math.abs(this.elementWidth / this.options.items)
             this._clones = this._numberOfItems > this.options.items ? Math.ceil(this._numberOfItems / 2) : this.options.items
             this._maxL = this.itemWidth * (this._numberOfItems + (this._clones - 1))
-            this._minL = this.options.center === false ? this.itemWidth * this._clones : (this.itemWidth * this._clones) - (this.options.centerPadding / 2)
+            this._minL = this.options.center === false ? this.itemWidth * this._clones : (this.itemWidth * this._clones) - (centerPadding / 2)
         },
 
 
@@ -264,11 +274,28 @@
          * Apply base css property on initial hook 
          */
         applyBasicStyle: function () {
-            let totalItems = 0;
-            let cssPropety = {}
-            cssPropety.width = this.itemWidth - (this.options.margin) + 'px'
-            if (this.options.margin > 0) {
-                cssPropety.marginRight = this.options.margin + 'px'
+            let totalItems = 0,
+                cssPropety = {},
+                margin = this.options.margin,
+                viewPort = null,
+                centerPadding = this.options.centerPadding;
+
+            if (typeof this.options.responsive !== 'undefined') {
+                viewPort = this.parseResponsiveViewPort();
+            }
+            if (viewPort !== null) {
+                if (this.options.centerPaddingMode) {
+                    centerPadding = typeof viewPort.centerPadding === 'undefined' ? this.options.centerPadding : viewPort.centerPadding;
+                }
+                if (viewPort.margin) {
+                    margin = parseInt(viewPort.margin);
+                }
+
+            }
+
+            cssPropety.width = this.itemWidth - margin + 'px';
+            if (margin > 0) {
+                cssPropety.marginRight = margin + 'px'
             }
 
             this.$element.find('.qubely-carousel-item').each(function () {
@@ -276,9 +303,10 @@
                 $(this).css(cssPropety)
             })
 
-            this._currentPosition = this._clones * this.itemWidth
+            this._currentPosition = this._clones * this.itemWidth;
+
             if (this.options.center === true) {
-                this._currentPosition = this._clones * this.itemWidth - (this.options.centerPadding / 2)
+                this._currentPosition = this._clones * this.itemWidth - (centerPadding / 2)
             }
             this.$outerStage.css({
                 '-webkit-transition-duration': '0s',
@@ -668,6 +696,7 @@
         center: false,
 
         centerPadding: 150,
+        centerPaddingMode: false,
 
         // Margin between items 
         margin: 10,

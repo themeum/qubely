@@ -62,7 +62,18 @@ const attributes = {
     position: { type: 'string', default: '', style: [{ selector: '{{QUBELY}} .qubely-row, {{QUBELY}} .qubely-row .editor-block-list__layout {-webkit-box-align: {{position}}; -ms-flex-align: {{position}}; align-items: {{position}}; }' }] },
 
     // Background
-    rowBg: { type: 'object', default: { bgimgPosition: 'center center', bgimgSize: 'cover', bgimgRepeat: 'no-repeat', bgDefaultColor: '#f5f5f5' }, style: [{ selector: '{{QUBELY}}.qubely-section' }] },
+    rowBg: {
+        type: 'object',
+        default: {
+            bgimgPosition: 'center center',
+            bgimgSize: 'cover',
+            bgimgRepeat: 'no-repeat',
+            bgDefaultColor: '#f5f5f5',
+            bgimageSource: 'local',
+            externalImageUrl: {}
+        },
+        style: [{ selector: '{{QUBELY}}.qubely-section' }]
+    },
     heightOptions: { type: 'string', default: 'auto' },
     rowHeight: {
         type: 'object', default: {},

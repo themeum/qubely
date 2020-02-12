@@ -79,7 +79,13 @@ class Edit extends Component {
 					<PanelBody title={__('Background')} initialOpen={false}>
 						<Tabs>
 							<Tab tabTitle={__('Normal')}>
-								<Background label={__('Background')} sources={['image', 'gradient']} value={bgColor} onChange={val => setAttributes({ bgColor: val })} />
+								<Background
+									externalImage
+									value={bgColor}
+									label={__('Background')}
+									sources={['image', 'gradient']}
+									onChange={val => setAttributes({ bgColor: val })}
+								/>
 								<Padding
 									label={__('Padding')}
 									value={padding}
