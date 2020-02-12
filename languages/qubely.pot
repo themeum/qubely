@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: Qubely - Advanced Gutenberg Blocks\n"
-"POT-Creation-Date: 2019-12-20 11:19+0600\n"
-"PO-Revision-Date: 2019-12-20 11:18+0600\n"
+"POT-Creation-Date: 2020-02-12 18:09+0600\n"
+"PO-Revision-Date: 2020-02-12 18:09+0600\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -108,31 +108,31 @@ msgstr ""
 msgid "Select where you want to save CSS."
 msgstr ""
 
-#: core/QUBELY.php:235
+#: core/QUBELY.php:256
 msgid "Full"
 msgstr ""
 
-#: core/QUBELY.php:291
+#: core/QUBELY.php:465
 msgid "Qubely"
 msgstr ""
 
-#: core/QUBELY.php:530
+#: core/QUBELY.php:736
 msgid "CSS can not be saved due to permission!!!"
 msgstr ""
 
-#: core/QUBELY.php:535
+#: core/QUBELY.php:741
 msgid "JSON can not be saved due to permission!!!"
 msgstr ""
 
-#: core/QUBELY.php:538
+#: core/QUBELY.php:751
 msgid "Qubely block css file has been updated."
 msgstr ""
 
-#: core/QUBELY.php:1053
+#: core/QUBELY.php:1266
 msgid "Cannot validate captcha"
 msgstr ""
 
-#: core/QUBELY.php:1058
+#: core/QUBELY.php:1271
 msgid "Captcha validation error"
 msgstr ""
 
@@ -144,7 +144,7 @@ msgstr ""
 msgid "Qubely Canvas"
 msgstr ""
 
-#: core/blocks/postgrid.php:1167
+#: core/blocks/postgrid.php:1172
 msgid "By "
 msgstr ""
 
