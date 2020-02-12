@@ -100,7 +100,7 @@ export default function withCSSGenerator() {
                 const blockAttributes = wp.blocks.getBlockType(this.props.name).attributes;
 
                 const isDuplicating = () => {
-                    if(prevProps.attributes.uniqueId===uniqueId){
+                    if (prevProps.attributes.uniqueId === uniqueId) {
                         return false
                     }
                     const allBlocks = wp.data.select('core/block-editor').getBlocks();
@@ -124,7 +124,7 @@ export default function withCSSGenerator() {
                         } else {
                             this.saveCSS(responsiveCSS, nonResponsiveCSS);
                         }
-                    } else if (changedAttribute.toLowerCase() == 'layout' || changedAttribute.toLowerCase() == 'style' || changedAttribute.toLowerCase() == 'filltype' || changedAttribute == 'iconStyle' || changedAttribute.toLowerCase() == 'buttonfilltype' || changedAttribute.toLowerCase() == 'tabStyle') {
+                    } else if (changedAttribute.toLowerCase() == 'layout' || changedAttribute.toLowerCase() == 'style' || changedAttribute.toLowerCase() == 'filltype' || changedAttribute.toLowerCase() == 'iconstyle' || changedAttribute.toLowerCase() == 'buttonfilltype' || changedAttribute.toLowerCase() == 'tabstyle') {
                         this.saveStyleAttributes();
                     } else {
                         let newState = {
