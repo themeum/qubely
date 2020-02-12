@@ -4,7 +4,7 @@ const { select, withDispatch } = wp.data
 const { PanelBody, TextControl, SelectControl, Tooltip, Button, RangeControl } = wp.components
 const { Component, Fragment } = wp.element
 const { InspectorControls, InnerBlocks, InspectorAdvancedControls } = wp.blockEditor
-const { Background, Select, Range, Toggle, Shape, BoxShadow, Tab, Tabs, Separator, Border, BorderRadius, RadioAdvanced, Dimension, gloalSettings: { globalSettingsPanel, animationSettings }, HelperFunction: { videoBackground }, CssGenerator: { CssGenerator },withCSSGenerator } = wp.qubelyComponents
+const { Background, Select, Range, Toggle, Shape, BoxShadow, Tab, Tabs, Separator, Border, BorderRadius, RadioAdvanced, Dimension, gloalSettings: { globalSettingsPanel, animationSettings }, HelperFunction: { videoBackground }, CssGenerator: { CssGenerator }, withCSSGenerator } = wp.qubelyComponents
 import { ModalManager } from '../../helpers/ModalManager';
 import PageListModal from '../../helpers/PageListModal';
 import icons from '../../helpers/icons';
@@ -143,7 +143,6 @@ class Edit extends Component {
                 </Fragment>
             )
         }
-
         return (
             <Fragment>
                 <InspectorControls>

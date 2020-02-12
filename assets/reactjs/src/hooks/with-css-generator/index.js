@@ -99,12 +99,25 @@ export default function withCSSGenerator() {
                 const { responsiveCSS, nonResponsiveCSS } = this.state;
                 const blockAttributes = wp.blocks.getBlockType(this.props.name).attributes;
 
+                const isDuplicating = () => {
+                    if(prevProps.attributes.uniqueId===uniqueId){
+                        return false
+                    }
+                    const allBlocks = wp.data.select('core/block-editor').getBlocks();
+                    for (let index = 0; index < allBlocks.length; index++) {
+                        if (allBlocks[index].attributes.uniqueId === prevProps.attributes.uniqueId) {
+                            return true;
+                        }
+                    }
+                    return false
+                }
+
                 if (Object.keys(diff(prevProps.attributes, attributes)).length > 0) {
                     const changedAttribute = Object.keys(diff(prevProps.attributes, attributes))[0];
                     if (changedAttribute === 'uniqueId') {
                         let currentStyleElement = window.document.getElementById('qubely-block-' + prevProps.attributes.uniqueId)
 
-                        if (currentStyleElement) {
+                        if (currentStyleElement && !isDuplicating()) {
                             currentStyleElement.id = 'qubely-block-' + attributes.uniqueId;
                             let newStyle = currentStyleElement.innerHTML.replace(new RegExp(`${prevProps.attributes.uniqueId}`, "g"), `${attributes.uniqueId}`);
                             currentStyleElement.innerHTML = newStyle;
