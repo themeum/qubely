@@ -18,7 +18,10 @@
                 let formData = $form.serializeArray();
                 const isRequired = checkFormValidation($form); //check validation
                 if (!isRequired) {
-                    formData.push({ name: 'captcha', value: (typeof grecaptcha !== "undefined") ? grecaptcha.getResponse() : undefined });
+                    const reCaptcha = $form.find('input[name="recaptcha"]').val();
+                    if (reCaptcha == 'true') {
+                        formData.push({ name: 'captcha', value: (typeof grecaptcha !== "undefined") ? grecaptcha.getResponse() : undefined });
+                    }
                     jQuery.ajax({
                         url: qubely_urls.ajax + '?action=qubely_send_form_data',
                         type: "POST",
