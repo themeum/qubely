@@ -109,7 +109,7 @@ class Templates extends Component {
 
     handleTemplateSelection = (selectedTemplate) => {
         const { updateStyle, attributes } = this.props
-        updateStyle({ attributes, ...selectedTemplate })
+        updateStyle({ ...attributes, ...selectedTemplate })
 
     }
     render() {

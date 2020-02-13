@@ -97,9 +97,11 @@ export default function withCSSGenerator() {
             componentDidUpdate(prevProps, prevState) {
                 const { attributes, attributes: { uniqueId } } = this.props;
                 const { responsiveCSS, nonResponsiveCSS } = this.state;
-                const blockAttributes = wp.blocks.getBlockType(this.props.name).attributes;
+                let isLayoutChanged = false,
+                    blockAttributes = wp.blocks.getBlockType(this.props.name).attributes,
+                    changedAttributes = Object.keys(diff(prevProps.attributes, attributes));
 
-                const isDuplicating = () => {
+                const isDuplicatingBlock = () => {
                     if (prevProps.attributes.uniqueId === uniqueId) {
                         return false
                     }
@@ -112,66 +114,76 @@ export default function withCSSGenerator() {
                     return false
                 }
 
-                if (Object.keys(diff(prevProps.attributes, attributes)).length > 0) {
-                    const changedAttribute = Object.keys(diff(prevProps.attributes, attributes))[0];
-                    if (changedAttribute === 'uniqueId') {
-                        let currentStyleElement = window.document.getElementById('qubely-block-' + prevProps.attributes.uniqueId)
-
-                        if (currentStyleElement && !isDuplicating()) {
-                            currentStyleElement.id = 'qubely-block-' + attributes.uniqueId;
-                            let newStyle = currentStyleElement.innerHTML.replace(new RegExp(`${prevProps.attributes.uniqueId}`, "g"), `${attributes.uniqueId}`);
-                            currentStyleElement.innerHTML = newStyle;
-                        } else {
-                            this.saveCSS(responsiveCSS, nonResponsiveCSS);
-                        }
-                    } else if (changedAttribute.toLowerCase() == 'layout' || changedAttribute.toLowerCase() == 'style' || changedAttribute.toLowerCase() == 'filltype' || changedAttribute.toLowerCase() == 'iconstyle' || changedAttribute.toLowerCase() == 'buttonfilltype' || changedAttribute.toLowerCase() == 'tabstyle') {
+                if (changedAttributes.length > 0) {
+                    if (changedAttributes.indexOf('layout') !== -1 || changedAttributes.indexOf('style') !== -1 || changedAttributes.indexOf('fillType') !== -1 || changedAttributes.indexOf('iconStyle') !== -1 || changedAttributes.indexOf('buttonFillType') !== -1 || changedAttributes.indexOf('tabStyle') !== -1) {
+                        isLayoutChanged = true;
                         this.saveStyleAttributes();
-                    } else {
+                    }
+
+                    if (!isLayoutChanged) {
+
+                        if (changedAttributes.indexOf('uniqueId') !== -1) {
+                            let currentStyleElement = window.document.getElementById('qubely-block-' + prevProps.attributes.uniqueId);
+                            if (currentStyleElement && !isDuplicatingBlock()) {
+                                currentStyleElement.id = 'qubely-block-' + attributes.uniqueId;
+                                let newStyle = currentStyleElement.innerHTML.replace(new RegExp(`${prevProps.attributes.uniqueId}`, "g"), `${attributes.uniqueId}`);
+                                currentStyleElement.innerHTML = newStyle;
+                            } else {
+                                this.saveCSS(responsiveCSS, nonResponsiveCSS);
+                            }
+                        }
+
+                        changedAttributes = changedAttributes.filter(attr => attr !== 'uniqueId');
+
                         let newState = {
                             nonResponsiveCSS: nonResponsiveCSS,
                             responsiveCSS: responsiveCSS
                         };
-                        const updateState = (attribute, key, value) => {
 
-                            if (typeof key === 'undefined') {
-                                newState = {
-                                    ...newState,
-                                    nonResponsiveCSS: {
-                                        ...this.state.nonResponsiveCSS,
-                                        ...{ [attribute]: value }
+                        if (changedAttributes.length > 0) {
+                            const updateState = (attribute, key, value) => {
+                                if (typeof key === 'undefined') {
+                                    newState = {
+                                        ...newState,
+                                        nonResponsiveCSS: {
+                                            ...newState.nonResponsiveCSS,
+                                            ...{ [attribute]: value }
+                                        }
                                     }
-                                }
-                            } else {
-                                newState = {
-                                    ...newState,
-                                    responsiveCSS: {
-                                        ...this.state.responsiveCSS,
-                                        ...{
-                                            [attribute]: {
-                                                ...this.state.responsiveCSS[attribute],
-                                                ...(key === 'simple') ?
-                                                    {
-                                                        simple: value
-                                                    } :
-                                                    {
-                                                        ...value,
-                                                    }
+                                } else {
+                                    newState = {
+                                        ...newState,
+                                        responsiveCSS: {
+                                            ...newState.responsiveCSS,
+                                            ...{
+                                                [attribute]: {
+                                                    ...newState.responsiveCSS[attribute],
+                                                    ...(key === 'simple') ?
+                                                        {
+                                                            simple: value
+                                                        } :
+                                                        {
+                                                            ...value
+                                                        }
+                                                }
                                             }
                                         }
                                     }
                                 }
-                            }
 
-                            if (typeof key === 'undefined') {
-                                this.setState({ nonResponsiveCSS: newState.nonResponsiveCSS })
-                            } else {
-                                this.setState({ responsiveCSS: newState.responsiveCSS })
                             }
-
+                            changedAttributes.forEach(changedAttribute => {
+                                updateCSS(blockAttributes, attributes, (attribute, key, value) => updateState(attribute, key, value), changedAttribute);
+                                this.saveCSS(newState.responsiveCSS, newState.nonResponsiveCSS, 'update');
+                            });
+                            this.setState({
+                                responsiveCSS: newState.responsiveCSS,
+                                nonResponsiveCSS: newState.nonResponsiveCSS
+                            });
                         }
-                        updateCSS(blockAttributes, attributes, (attribute, key, value) => updateState(attribute, key, value), Object.keys(diff(prevProps.attributes, attributes))[0]);
-                        this.saveCSS(newState.responsiveCSS, newState.nonResponsiveCSS, 'update');
+
                     }
+
                 }
             }
 
