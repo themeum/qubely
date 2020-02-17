@@ -39,9 +39,6 @@ const {
     Inline: {
         InlineToolbar
     },
-    CssGenerator: {
-        CssGenerator
-    },
     ContextMenu: {
         ContextMenu,
         handleContextMenu

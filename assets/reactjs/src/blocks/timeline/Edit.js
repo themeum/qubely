@@ -24,9 +24,6 @@ const {
 		animationSettings,
 		interactionSettings
 	},
-	CssGenerator: {
-		CssGenerator
-	},
 	withCSSGenerator
 } = wp.qubelyComponents;
 

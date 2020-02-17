@@ -19,9 +19,6 @@ const {
         InlineToolbar,
         InlineSelector
     },
-    CssGenerator: {
-        CssGenerator
-    },
     ContextMenu: {
         ContextMenu,
         handleContextMenu

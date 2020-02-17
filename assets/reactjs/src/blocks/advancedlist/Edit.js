@@ -2,7 +2,7 @@ const { __ } = wp.i18n;
 const { RichText, InspectorControls, BlockControls } = wp.blockEditor
 const { Component, Fragment } = wp.element;
 const { PanelBody, Toolbar, Tooltip } = wp.components;
-const { Typography, Alignment, ContextMenu: { ContextMenu, handleContextMenu }, gloalSettings: { globalSettingsPanel, animationSettings, interactionSettings }, Styles, Range, Tabs, Tab, Border, Inline: { InlineToolbar }, RadioAdvanced, Color, BoxShadow, Toggle, Separator, IconSelector, BorderRadius, Padding, CssGenerator: { CssGenerator }, withCSSGenerator } = wp.qubelyComponents
+const { Typography, Alignment, ContextMenu: { ContextMenu, handleContextMenu }, gloalSettings: { globalSettingsPanel, animationSettings, interactionSettings }, Styles, Range, Tabs, Tab, Border, Inline: { InlineToolbar }, RadioAdvanced, Color, BoxShadow, Toggle, Separator, IconSelector, BorderRadius, Padding, withCSSGenerator } = wp.qubelyComponents
 import icons from '../../helpers/icons'
 
 class Edit extends Component {

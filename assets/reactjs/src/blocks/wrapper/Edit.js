@@ -19,9 +19,6 @@ const {
 	Inline: {
 		InlineToolbar
 	},
-	CssGenerator: {
-		CssGenerator
-	},
 	withCSSGenerator
 } = wp.qubelyComponents
 

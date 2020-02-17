@@ -18,7 +18,6 @@ const {
     Padding,
     BorderRadius,
     Inline: { InlineToolbar },
-    CssGenerator: { CssGenerator },
     ContextMenu: {
         ContextMenu,
         handleContextMenu

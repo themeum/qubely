@@ -11,7 +11,6 @@ const {
     Color,
     BorderRadius,
     Inline: { InlineToolbar },
-    CssGenerator: { CssGenerator },
     ContextMenu: {
         ContextMenu,
         handleContextMenu

@@ -31,9 +31,6 @@ const {
 	BoxShadow,
 	Styles,
 	BorderRadius,
-	CssGenerator: {
-		CssGenerator
-	},
 	QubelyButton: {
 		buttonSettings
 	},
