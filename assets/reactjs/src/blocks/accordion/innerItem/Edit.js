@@ -4,7 +4,7 @@ const { withSelect, withDispatch } = wp.data;
 const { Component, Fragment } = wp.element;
 const { PanelBody, SelectControl, Button } = wp.components;
 const { InspectorControls, InnerBlocks, RichText } = wp.blockEditor;
-const { Styles, ColorAdvanced, Range, Typography, BoxShadow, RadioAdvanced, Tabs, Tab, Color, Toggle, Padding, Border, BorderRadius, CssGenerator: { CssGenerator }, withCSSGenerator } = wp.qubelyComponents
+const { Styles, ColorAdvanced, Range, Typography, BoxShadow, RadioAdvanced, Tabs, Tab, Color, Toggle, Padding, Border, BorderRadius, withCSSGenerator } = wp.qubelyComponents
 import icons from '../../../helpers/icons';
 
 

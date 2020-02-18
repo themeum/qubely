@@ -21,7 +21,6 @@ const {
     },
     Inline: { InlineToolbar },
     QubelyButton: { buttonSettings },
-    CssGenerator: { CssGenerator },
     ContextMenu: {
         ContextMenu,
         handleContextMenu

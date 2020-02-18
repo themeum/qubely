@@ -14,9 +14,6 @@ const {
         ContextMenu,
         handleContextMenu
     },
-    CssGenerator: {
-        CssGenerator
-    },
     gloalSettings: {
         globalSettingsPanel,
         animationSettings,

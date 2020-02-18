@@ -1,6 +1,8 @@
 import { generateCSS, updateCSS } from './generateCSS';
-const { Component } = wp.element;
+const { Fragment, Component } = wp.element;
 const diff = require("deep-object-diff").diff;
+const { PluginBlockSettingsMenuItem } = wp.editPost;
+const { InspectorControls, BlockControls, RichText } = wp.blockEditor
 
 const { createHigherOrderComponent } = wp.compose;
 
@@ -187,13 +189,43 @@ export default function withCSSGenerator() {
                 }
             }
 
+            copyAttributes = () => {
+                const {
+                    attributes,
+                    attributes: {
+                        qubelyStyleAttributes
+                    }
+                } = this.props;
+                const { copyToClipboard } = wp.qubelyComponents.HelperFunction;
+                let template = {}
+                qubelyStyleAttributes.forEach(key => {
+                    template[key] = attributes[key]
+                })
+
+                copyToClipboard(JSON.stringify(template))
+
+            }
             render() {
+                const { attributes: { showCopyAttr } } = this.props;
                 return (
-                    <OriginalComponent
-                        {...this.props}
-                        {...this.state}
-                        setState={this.setState}
-                    />
+                    <Fragment>
+                        {
+                            showCopyAttr &&
+                            <BlockControls>
+                                <PluginBlockSettingsMenuItem
+                                    icon={'editor-code'}
+                                    label={'Copy Attributes'}
+                                    onClick={() => this.copyAttributes()}
+                                />
+                            </BlockControls>
+                        }
+                        <OriginalComponent
+                            {...this.props}
+                            {...this.state}
+                            setState={this.setState}
+                        />
+                    </Fragment>
+
                 );
             }
         };

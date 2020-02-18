@@ -13,9 +13,6 @@ const {
         interactionSettings
     },
     Inline: { InlineToolbar },
-    CssGenerator: { 
-        CssGenerator
-     },
      withCSSGenerator
 } = wp.qubelyComponents
 

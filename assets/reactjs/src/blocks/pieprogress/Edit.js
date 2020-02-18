@@ -18,7 +18,6 @@ const {
     BoxShadow,
     Alignment,
     Inline: { InlineToolbar },
-    CssGenerator: { CssGenerator },
     ContextMenu: {
         ContextMenu,
         handleContextMenu

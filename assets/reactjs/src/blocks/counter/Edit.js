@@ -14,10 +14,10 @@ const {
 		interactionSettings
 	},
 	Inline: { InlineToolbar },
-	CssGenerator: { CssGenerator },
 	ContextMenu: {
 		ContextMenu,
-		handleContextMenu },
+		handleContextMenu 
+	},
 	withCSSGenerator
 } = wp.qubelyComponents
 

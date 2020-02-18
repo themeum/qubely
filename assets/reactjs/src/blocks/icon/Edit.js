@@ -18,7 +18,6 @@ const {
 	BorderRadius,
 	gloalSettings: { globalSettingsPanel, animationSettings, interactionSettings },
 	Inline: { InlineToolbar },
-	CssGenerator: { CssGenerator },
 	ContextMenu: { ContextMenu, handleContextMenu },
 	withCSSGenerator
 } = wp.qubelyComponents
