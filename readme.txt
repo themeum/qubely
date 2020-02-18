@@ -236,6 +236,11 @@ You can report bugs on the [support forum here](https://wordpress.org/support/pl
 
 == Changelog ==
 
+= 1.3.3 - 18 February, 2020 =
+Fix: Post Grid block - Translation issue of the dates
+Fix: CSS issue on template selection
+Update: Performance improvement
+
 = 1.3.2 - 12 February, 2020 =
 New : Background field - external image option
 Update : Performance improvement in CSS generator
