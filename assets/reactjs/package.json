@@ -13,7 +13,8 @@
   "dependencies": {
     "classnames": "^2.2.6",
     "deep-copy": "^1.4.2",
-    "deep-object-diff": "^1.1.0"
+    "deep-object-diff": "^1.1.0",
+    "prop-types": "^15.7.2"
   },
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "^7.2.3",
