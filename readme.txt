@@ -4,7 +4,7 @@ Donate link: https://www.themeum.com
 Tags: block, blocks, gutenberg, gutenberg blocks, page builder, editor
 Requires at least: 5.0
 Tested up to: 5.3
-Stable tag: 1.3.2
+Stable tag: 1.3.3
 Requires PHP: 5.4.0
 License: GPL-2.0+
 License URI: http://www.gnu.org/licenses/gpl-2.0.txt
@@ -76,7 +76,7 @@ More advanced Gutenberg blocks, pre-designed sections and starter packs are comi
 
 ## Pro Features
 
-10 blocks that help you build more sophisticated designs-
+11 blocks that help you build more sophisticated designs-
 
 * [Form Builder](https://qubely.io/block/form-builder/)
 * [Image Gallery](https://qubely.io/block/image-gallery/)
@@ -88,6 +88,7 @@ More advanced Gutenberg blocks, pre-designed sections and starter packs are comi
 * [Testimonial Carousel](https://qubely.io/block/testimonial-carousel/)
 * [Media Card](https://qubely.io/block/media-card/)
 * [Pie Progress](https://qubely.io/block/pie-progress/)
+* [Countdown](https://qubely.io/block/countdown/)
 
 ⭐️ [Ready Sections](https://qubely.io/section/) ⭐️ [Starter Packs](https://qubely.io/starter-packs/)
 
@@ -235,6 +236,12 @@ You can report bugs on the [support forum here](https://wordpress.org/support/pl
 
 
 == Changelog ==
+
+= 1.3.3 - 18 February, 2020 =
+Fix: Post Grid block - Translation issue of the dates
+Fix: Post Grid block - Post title position settings in frontend
+Fix: CSS issue on template selection
+Update: Performance improvement
 
 = 1.3.2 - 12 February, 2020 =
 New : Background field - external image option
