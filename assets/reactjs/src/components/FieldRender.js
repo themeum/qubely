@@ -45,6 +45,10 @@ import { QubelyIconListEdit, QubelyIconListSave } from './fields/QubelyIconList'
 //inline
 import { InlineToolbar, InlineSpacer, InlineSelector } from './fields/inline'
 
+// component s
+
+import InspectorTabs from '../components/InspectorTabs'
+
 //functions
 import {
     CssGenerator,
@@ -161,5 +165,6 @@ wp.qubelyComponents = {
     QubelyIconListEdit,
     QubelyIconListSave,
     QubelyFreeIcons: icons,
-    withCSSGenerator
+    withCSSGenerator,
+    InspectorTabs
 }

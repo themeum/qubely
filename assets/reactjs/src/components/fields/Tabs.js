@@ -18,30 +18,30 @@ export default class Tabs extends Component {
             { activeTab } = this.state,
             { label, panelGroup } = this.props;
 
-        const classes = classnames(
+        const className = classnames(
             'qubely-field',
             'qubely-field-tabs',
-            { 'panel-group': panelGroup },
-            { 'qubely-has-label': typeof label !== 'undefined' }
+            {'panel-group': panelGroup},
+            {'qubely-has-label': typeof label !== 'undefined'}
         );
+
         if (panelGroup) {
             TEMPTAG = 'Div'
         }
         return (
-            <div className={classes}>
+            <div className={className}>
                 <div className="qubely-field-tab-header">
                     {label && <label>{label}</label>}
                     <div className="qubely-field-tab-menus">
                         {tabs.map(tab =>
                             <Tooltip text={__(tab.props.tabTitle)} >
-                                <TEMPTAG {...panelGroup && { className: "tab-menu-wrapper" }}>
+                                <TEMPTAG {...panelGroup && { className: 'tab-menu-wrapper' }}>
                                     {
-                                        panelGroup &&
-                                        <svg width="21" height="18" viewBox="0 0 21 18" xmlns="http://www.w3.org/2000/svg"><g transform="translate(-29 -4) translate(29 4)" fill="none"><path d="M1 .708v15.851" className="qubely-svg-stroke" stroke-linecap="square" /><rect className="qubely-svg-fill" x="5" y="5" width="16" height="7" rx="1" /></g></svg>
+                                        panelGroup && <svg width="21" height="18" viewBox="0 0 21 18" xmlns="http://www.w3.org/2000/svg"><g transform="translate(-29 -4) translate(29 4)" fill="none"><path d="M1 .708v15.851" className="qubely-svg-stroke" stroke-linecap="square" /><rect className="qubely-svg-fill" x="5" y="5" width="16" height="7" rx="1" /></g></svg>
                                     }
                                     <button
                                         onClick={() => this.setState({ activeTab: tab.props.tabTitle })}
-                                        className={"qubely-tab-menu " + (tab.props.tabTitle === activeTab ? 'active' : '')}
+                                        className={'qubely-tab-menu ' + (tab.props.tabTitle === activeTab ? 'active' : '')}
                                     >
                                         {tab.props.tabTitle}
                                     </button>
@@ -51,7 +51,7 @@ export default class Tabs extends Component {
                     </div>
                 </div>
                 <div className="qubely-field-tab-items">
-                    {tabs.map(tab => tab.props.tabTitle === activeTab ? tab : "")}
+                    {tabs.map(tab => tab.props.tabTitle === activeTab ? tab : '')}
                 </div>
             </div>
         )
