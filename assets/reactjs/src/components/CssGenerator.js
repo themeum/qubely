@@ -1,4 +1,20 @@
-import { cssSize, cssBorderRadius, cssGradient, cssBorder, cssBoxShadow, cssTypography, cssDimension, cssBackground, cssShape, cssColor, cssSpacer, cssPadding, cssMargin } from './CssHelper'
+import {
+    cssSize,
+    cssBorderRadius,
+    cssGradient,
+    cssBorder,
+    cssBoxShadow,
+    cssTypography,
+    cssDimension,
+    cssBackground,
+    cssShape,
+    cssColor,
+    cssSpacer,
+    cssPadding,
+    cssMargin,
+    cssRowReverse,
+    cssTransform
+} from './CssHelper'
 
 // Replace Value
 const replaceData = (selector, key, value) => {
@@ -72,7 +88,7 @@ const objectField = (data) => {
         return { data: cssBoxShadow(data), action: 'append' }; //Shadow
     } else if (data.direction) {
         return { data: cssGradient(data, 'return'), action: 'append' }; //Gradient
-    } else if (data.top || data.left || data.right || data.bottom) {
+    } else if (typeof (data.top) != 'undefined' || typeof (data.left) != 'undefined' || typeof (data.right) != 'undefined' || typeof (data.bottom) != 'undefined') {
         return { data: cssDimension(data), action: 'replace' }; //Dimension
     } else if (data.openShape) {
         return { data: cssShape(data), action: 'append' }; //Shape
@@ -88,6 +104,10 @@ const objectField = (data) => {
         return { data: cssPadding(data), action: 'append' }; //padding
     } else if (data.openMargin) {
         return { data: cssMargin(data), action: 'append' }; //margin
+    } else if (data.openRowReverse) {
+        return { data: cssRowReverse(data), action: 'append' }; //column reverse
+    } else if (data.openTransfrom) {
+        return { data: cssTransform(data), action: 'append' }; //transform 
     } else {
         return { data: '', action: 'append' };
     }
@@ -150,6 +170,7 @@ export const CssGenerator = (settings, blockName, blockID, isInline = false) => 
                     if (typeof settings[key] == 'object') {
                         let device = false;
                         let dimension = '';
+
                         if (settings[key].md) { // Desktop
                             device = true
                             dimension = typeof settings[key].md == 'object' ? objectField(settings[key].md).data : settings[key].md + (settings[key].unit || '')
@@ -165,6 +186,7 @@ export const CssGenerator = (settings, blockName, blockID, isInline = false) => 
                             dimension = typeof settings[key].xs == 'object' ? objectField(settings[key].xs).data : settings[key].xs + (settings[key].unit || '')
                             xs = xs.concat(singleField(cssSelecor, blockID, key, dimension))
                         }
+
                         if (!device) { // Object Field Type Only
                             const objectCss = objectField(settings[key])
                             const repWarp = replaceWarp(cssSelecor, blockID)
@@ -214,8 +236,8 @@ export const CssGenerator = (settings, blockName, blockID, isInline = false) => 
 
     // Join CSS
     if (md.length > 0) { __CSS += md.join('') }
-    if (sm.length > 0) { __CSS += '@media (min-width: 768px) and (max-width: 991px) {' + sm.join('') + '}' }
-    if (xs.length > 0) { __CSS += '@media (max-width: 767px) {' + xs.join('') + '}' }
+    if (sm.length > 0) { __CSS += '@media (max-width: 1199px) {' + sm.join('') + '}' }
+    if (xs.length > 0) { __CSS += '@media (max-width: 991px) {' + xs.join('') + '}' }
     if (notResponsiveCss.length > 0) { __CSS += notResponsiveCss.join('') }
 
     if (isInline) {

@@ -3,11 +3,8 @@ const { Tooltip, PanelBody, Toolbar } = wp.components;
 const { compose } = wp.compose
 const { withSelect, withDispatch } = wp.data
 const { Component, Fragment } = wp.element;
-const { InnerBlocks, RichText, InspectorControls, BlockControls } = wp.editor
-import { Color, IconList, Select, Styles, Typography, Range, RadioAdvanced, Wrapper, BoxShadow, Alignment, Tabs, Tab, Separator, Border, Padding, BorderRadius } from "../../components/FieldRender"
-import InlineToolbar from '../../components/fields/inline/InlineToolbar'
-import '../../components/GlobalSettings'
-import { CssGenerator } from '../../components/CssGenerator'
+const { InnerBlocks, RichText, InspectorControls, BlockControls } = wp.blockEditor
+const { Color, IconList, Select, Styles, Typography, Range, RadioAdvanced, gloalSettings: { globalSettingsPanel, animationSettings, interactionSettings }, Inline: { InlineToolbar }, BoxShadow, Alignment, Tabs, Tab, Separator, Border, Padding, BorderRadius, CssGenerator: { CssGenerator } ,withCSSGenerator} = wp.qubelyComponents
 import icons from '../../helpers/icons';
 
 class Edit extends Component {
@@ -15,10 +12,11 @@ class Edit extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
+			device: 'md',
 			initialRender: true,
 			activeTab: 1,
 			spacer: true,
-			showIconPicker:false,
+			showIconPicker: false,
 		}
 	}
 
@@ -57,14 +55,14 @@ class Edit extends Component {
 	renderTabTitles = () => {
 		const { attributes: { tabTitles, iconPosition }, block, clientId } = this.props
 		let currentTabBlock = $(`#block-${clientId}`)
-		const {activeTab,showIconPicker}=this.state
+		const { showIconPicker } = this.state
 		return tabTitles.map((title, index) =>
 			<span className={`qubely-tab-item ${(this.state.activeTab == index + 1) ? 'qubely-active' : ''}`}>
-				<span class={`qubely-tab-title ${title.iconName ? 'qubely-has-icon-' + iconPosition : ''}`} onClick={() => {
+				<span className={`qubely-tab-title ${title.iconName ? 'qubely-has-icon-' + iconPosition : ''}`} onClick={() => {
 					let activeTab = $(`#block-${block.innerBlocks[index].clientId}`, currentTabBlock)
 					$('.qubely-tab-content.qubely-active', currentTabBlock).removeClass('qubely-active')
 					activeTab.addClass("qubely-active")
-					this.setState({ activeTab: index + 1, initialRender: false ,showIconPicker:!showIconPicker})
+					this.setState({ activeTab: index + 1, initialRender: false, showIconPicker: !showIconPicker })
 				}}
 					role="button"
 				>
@@ -80,17 +78,9 @@ class Edit extends Component {
 				</span>
 				<Tooltip text={__('Delete this tab')}>
 					<span className="qubely-action-tab-remove" onClick={() => this.deleteTab(index)} role="button">
-						<i class="fas fa-times" />
+						<i className="fas fa-times" />
 					</span>
 				</Tooltip>
-				{( activeTab == index + 1 && showIconPicker) &&
-					<Wrapper inline>
-						<IconList
-							label={__('Icon')}
-							value={tabTitles[this.state.activeTab - 1].iconName}
-							onChange={(value) => this.updateTitles({ iconName: value }, this.state.activeTab - 1)} />
-					</Wrapper>
-				}
 			</span>
 		)
 	}
@@ -128,26 +118,56 @@ class Edit extends Component {
 		return newTitles
 	}
 	render() {
-		const { uniqueId, tabs, tabTitles, tabStyle,
-			navSpacing, navSize, navPaddingX, navPaddingY,
+		const {
+			uniqueId,
+			className,
+			tabs,
+			tabTitles,
+			tabStyle,
+			navSpacing,
+			navSize,
+			navPaddingX,
+			navPaddingY,
 			navAlignment,
 			typography,
-			navColor, navColorActive,
-			navBg, navBgActive,
-			navBorder, navBorderActive,
+			navColor,
+			navColorActive,
+			navBg,
+			navBgActive,
+			navBorder,
+			navBorderActive,
 			navBorderRadiusTabs,
 			navBorderRadiusPills,
-			navUnderlineBorderWidth, navUnderlineBorderColor, navUnderlineBorderColorActive,
-			iconSize, iconGap, iconPosition,
-			bodyBg, bodyPadding, bodyBorder, bodyBorderRadius,
-			bodySeparatorHeight, bodySeparatorColor,
+			navUnderlineBorderWidth,
+			navUnderlineBorderColor,
+			navUnderlineBorderColorActive,
+			iconSize,
+			iconGap,
+			iconPosition,
+			bodyBg,
+			bodyPadding,
+			bodyBorder,
+			bodyBorderRadius,
+			bodySeparatorHeight,
+			bodySeparatorColor,
 			bodyTopSpacing,
 			bodyShadow,
 
+			//animation
+			animation,
+			//global
+            globalZindex,
+            enablePosition, 
+            selectPosition, 
+            positionXaxis, 
+            positionYaxis,
+			hideTablet,
+			hideMobile,
+			globalCss,
+			interaction
 		} = this.props.attributes
-		const { setAttributes } = this.props
-		const { activeTab } = this.state
-		if (uniqueId) { CssGenerator(this.props.attributes, 'tabs', uniqueId); }
+		const { name, setAttributes, isSelected } = this.props
+		const { activeTab, device } = this.state;
 		let iterator = [], index = 0
 		while (index < tabs) {
 			iterator.push(index)
@@ -181,25 +201,25 @@ class Edit extends Component {
 
 						{navSize == 'custom' &&
 							<Fragment>
-								<Range label={<span className="dashicons dashicons-sort" title="X Spacing" />} value={navPaddingY} onChange={(value) => setAttributes({ navPaddingY: value })} unit={['px', 'em', '%']} max={100} min={0} responsive />
-								<Range label={<span className="dashicons dashicons-leftright" title="Y Spacing" />} value={navPaddingX} onChange={(value) => setAttributes({ navPaddingX: value })} unit={['px', 'em', '%']} max={100} min={0} responsive />
+								<Range label={<span className="dashicons dashicons-sort" title="X Spacing" />} value={navPaddingY} onChange={(value) => setAttributes({ navPaddingY: value })} unit={['px', 'em', '%']} max={100} min={0} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
+								<Range label={<span className="dashicons dashicons-leftright" title="Y Spacing" />} value={navPaddingX} onChange={(value) => setAttributes({ navPaddingX: value })} unit={['px', 'em', '%']} max={100} min={0} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
 							</Fragment>
 						}
 
-						<Range label={__('Gap')} value={navSpacing} onChange={(value) => setAttributes({ navSpacing: value })} max={50} min={0} unit={['px', 'em', '%']} responsive />
+						<Range label={__('Gap')} value={navSpacing} onChange={(value) => setAttributes({ navSpacing: value })} max={50} min={0} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
 
 						{tabStyle == 'tabs' &&
 							<Fragment>
-								<BorderRadius label={__('Radius')} value={navBorderRadiusTabs} onChange={(value) => setAttributes({ navBorderRadiusTabs: value })} min={0} max={100} unit={['px', 'em', '%']} responsive />
+								<BorderRadius label={__('Radius')} value={navBorderRadiusTabs} onChange={(value) => setAttributes({ navBorderRadiusTabs: value })} min={0} max={100} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
 							</Fragment>
 						}
 						{tabStyle == 'pills' &&
 							<Fragment>
-								<BorderRadius label={__('Radius')} value={navBorderRadiusPills} onChange={(value) => setAttributes({ navBorderRadiusPills: value })} min={0} max={100} unit={['px', 'em', '%']} responsive />
+								<BorderRadius label={__('Radius')} value={navBorderRadiusPills} onChange={(value) => setAttributes({ navBorderRadiusPills: value })} min={0} max={100} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
 							</Fragment>
 						}
 						{tabStyle == 'underline' &&
-							<Range label={__('Underline Height')} value={navUnderlineBorderWidth} onChange={(value) => setAttributes({ navUnderlineBorderWidth: value })} min={1} max={10} unit={['px', 'em', '%']} responsive />
+							<Range label={__('Underline Height')} value={navUnderlineBorderWidth} onChange={(value) => setAttributes({ navUnderlineBorderWidth: value })} min={1} max={10} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
 						}
 
 						<Tabs>
@@ -208,7 +228,7 @@ class Edit extends Component {
 								{tabStyle != 'underline' &&
 									<Fragment>
 										<Color label={__('Background')} value={navBg} onChange={(value) => setAttributes({ navBg: value })} />
-										<Border label={__('Border')} value={navBorder} onChange={(value) => setAttributes({ navBorder: value })} min={0} max={100} unit={['px', 'em', '%']} responsive />
+										<Border label={__('Border')} value={navBorder} onChange={(value) => setAttributes({ navBorder: value })} min={0} max={100} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
 									</Fragment>
 								}
 								{tabStyle == 'underline' &&
@@ -222,7 +242,7 @@ class Edit extends Component {
 								{tabStyle != 'underline' &&
 									<Fragment>
 										<Color label={__('Background')} value={navBgActive} onChange={(value) => setAttributes({ navBgActive: value })} />
-										<Border label={__('Border')} value={navBorderActive} onChange={(value) => setAttributes({ navBorderActive: value })} min={0} max={100} unit={['px', 'em', '%']} responsive />
+										<Border label={__('Border')} value={navBorderActive} onChange={(value) => setAttributes({ navBorderActive: value })} min={0} max={100} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
 									</Fragment>
 								}
 
@@ -233,9 +253,14 @@ class Edit extends Component {
 								}
 							</Tab>
 						</Tabs>
-						<Typography label={__('Typography')} value={typography} onChange={(value) => setAttributes({ typography: value })} disableLineHeight />
+						<Typography label={__('Typography')} value={typography} onChange={(value) => setAttributes({ typography: value })} disableLineHeight device={device} onDeviceChange={value => this.setState({ device: value })} />
 					</PanelBody>
 					<PanelBody title={__('Icon')} initialOpen={false}>
+
+						<IconList
+							label={__('Icon')}
+							value={tabTitles[activeTab - 1] && tabTitles[activeTab - 1].iconName}
+							onChange={(value) => this.updateTitles({ iconName: value }, activeTab - 1)} />
 						<Select
 							label={__('Icon Position')}
 							options={[['left', __('Left')], ['right', __('Right')], ['top', __('Top')]]}
@@ -248,7 +273,9 @@ class Edit extends Component {
 							unit={['px', 'em', '%']}
 							min={5}
 							max={48}
-							responsive />
+							responsive
+							device={device}
+							onDeviceChange={value => this.setState({ device: value })} />
 						<Range
 							label={__('Icon Gap')}
 							value={iconGap}
@@ -256,18 +283,21 @@ class Edit extends Component {
 							unit={['px', 'em', '%']}
 							min={0}
 							max={64}
-							responsive />
+							responsive
+							device={device}
+							onDeviceChange={value => this.setState({ device: value })} />
+
 					</PanelBody>
 					<PanelBody title={__('Body')} initialOpen={false}>
 						{tabStyle == 'tabs' &&
 							<Fragment>
 								<Color label={__('Background Color')} value={bodyBg} onChange={(value) => setAttributes({ bodyBg: value })} />
-								<Padding label={__('Padding')} value={bodyPadding} onChange={(value) => setAttributes({ bodyPadding: value })} unit={['px', 'em', '%']} max={100} min={0} responsive />
+								<Padding label={__('Padding')} value={bodyPadding} onChange={(value) => setAttributes({ bodyPadding: value })} unit={['px', 'em', '%']} max={100} min={0} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
 							</Fragment>
 						}
 						{tabStyle == 'underline' &&
 							<Fragment>
-								<Range label={__('Separator Height')} value={bodySeparatorHeight} onChange={(value) => setAttributes({ bodySeparatorHeight: value })} min={0} max={5} unit={['px', 'em', '%']} responsive />
+								<Range label={__('Separator Height')} value={bodySeparatorHeight} onChange={(value) => setAttributes({ bodySeparatorHeight: value })} min={0} max={5} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
 								{bodySeparatorHeight.md > 0 &&
 									<Color label={__('Separator Color')} value={bodySeparatorColor} onChange={(value) => setAttributes({ bodySeparatorColor: value })} />
 								}
@@ -275,17 +305,22 @@ class Edit extends Component {
 							</Fragment>
 						}
 						{tabStyle != 'tabs' &&
-							<Range label={__('Spacing')} value={bodyTopSpacing} onChange={(value) => setAttributes({ bodyTopSpacing: value })} unit={['px', 'em', '%']} max={100} min={0} responsive />
+							<Range label={__('Spacing')} value={bodyTopSpacing} onChange={(value) => setAttributes({ bodyTopSpacing: value })} unit={['px', 'em', '%']} max={100} min={0} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
 						}
 
 						{tabStyle == 'tabs' &&
 							<Fragment>
-								<Border label={__('Border')} separator value={bodyBorder} onChange={(value) => setAttributes({ bodyBorder: value })} unit={['px', 'em', '%']} max={100} min={0} responsive />
+								<Border label={__('Border')} separator value={bodyBorder} onChange={(value) => setAttributes({ bodyBorder: value })} unit={['px', 'em', '%']} max={100} min={0} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
 								<BoxShadow label={__('Box-Shadow')} value={bodyShadow} onChange={(value) => setAttributes({ bodyShadow: value })} />
-								<BorderRadius label={__('Radius')} separator value={bodyBorderRadius} onChange={(value) => setAttributes({ bodyBorderRadius: value })} unit={['px', 'em', '%']} max={100} min={0} responsive />
+								<BorderRadius label={__('Radius')} separator value={bodyBorderRadius} onChange={(value) => setAttributes({ bodyBorderRadius: value })} unit={['px', 'em', '%']} max={100} min={0} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
 							</Fragment>
 						}
 					</PanelBody>
+					
+					{animationSettings(uniqueId, animation, setAttributes)}
+
+					{interactionSettings(uniqueId, interaction, setAttributes)}
+
 				</InspectorControls>
 
 				<BlockControls>
@@ -298,7 +333,9 @@ class Edit extends Component {
 					</Toolbar>
 				</BlockControls>
 
-				<div className={`qubely-block-${uniqueId}`}>
+                {globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
+
+				<div className={`qubely-block-${uniqueId}${className ? ` ${className}` : ''}`}>
 					<div className={`qubely-block-tab qubely-tab-style-${tabStyle}`}>
 						<div className={`qubely-tab-nav qubely-alignment-${navAlignment}`}>
 							{this.renderTabTitles()}
@@ -310,7 +347,7 @@ class Edit extends Component {
 										tabTitles: this.newTitles()
 									})
 								}} role="button" areaLabel={__('Add new tab')}>
-									<i class="fas fa-plus-circle" />
+									<i className="fas fa-plus-circle" />
 								</span>
 							</Tooltip>
 						</div>
@@ -331,17 +368,18 @@ class Edit extends Component {
 export default compose([
 	withSelect((select, ownProps) => {
 		const { clientId } = ownProps
-		const { getBlock } = select('core/editor');
+		const { getBlock } = select('core/block-editor');
 		return {
 			block: getBlock(clientId)
 		};
 	}),
 	withDispatch((dispatch) => {
-		const { insertBlock, removeBlock, updateBlockAttributes } = dispatch('core/editor');
+		const { insertBlock, removeBlock, updateBlockAttributes } = dispatch('core/block-editor');
 		return {
 			insertBlock,
 			removeBlock,
 			updateBlockAttributes
 		};
 	}),
+	withCSSGenerator()
 ])(Edit)

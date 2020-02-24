@@ -1,9 +1,9 @@
 const { Fragment, Component } = wp.element;
-const { RichText } = wp.editor
+const { RichText } = wp.blockEditor
 import svg from '../heading/separators';
-import { animationAttr } from '../../components/HelperFunction'
+const { HelperFunction: { animationAttr, IsInteraction } } = wp.qubelyComponents
 class Save extends Component {
-    render() {
+	render() {
 
 		const separators = {
 			solid: { type: 'css', separator: 'solid', width: 300, stroke: 10 },
@@ -16,15 +16,16 @@ class Save extends Component {
 			zigzag_large: { type: 'svg', separator: 'zigzag_large', svg: svg['zigzag_large'], style: 'fill', width: 161, stroke: 5 },
 		}
 
-		const { uniqueId, content, selector, dropCap, enableTitle, titleLevel, subTitleLevel, separatorStyle, separatorPosition, title, subTitle, subTitleContent, animation } = this.props.attributes
+		const { uniqueId, content, selector, dropCap, enableTitle, titleLevel, subTitleLevel, separatorStyle, separatorPosition, title, subTitle, subTitleContent, animation, interaction } = this.props.attributes
 		const titleTagName = 'h' + titleLevel;
 		const subTitleTagName = 'h' + subTitleLevel;
+		const interactionClass = IsInteraction(interaction) ? 'qubley-block-interaction' : '';
 
 		const renderSeparators = <Fragment>
-			{separatorStyle &&
+			{ separatorStyle &&
 				<Fragment>
 					{separators[separatorStyle].type == 'css' &&
-						<span className={`qubely-separator-type-css qubely-separator-${separatorStyle}`}></span>
+						<span className={`qubely-separator-type-css qubely-separator-${separatorStyle}`}/>
 					}
 					{separators[separatorStyle].type == 'svg' &&
 						<span className={`qubely-separator-type-svg qubely-separator-${separatorStyle}`}>{separators[separatorStyle].svg}</span>
@@ -32,10 +33,9 @@ class Save extends Component {
 				</Fragment>
 			}
 		</Fragment>
-
 		return (
 			<div className={`qubely-block-${uniqueId}`} {...animationAttr(animation)}>
-				<div className={`qubely-block-text ${ (dropCap == 1) ? 'qubely-has-drop-cap' : '' }`}>
+				<div className={`qubely-block-text ${interactionClass} ${(dropCap == 1) ? 'qubely-has-drop-cap' : ''}`}>
 					{enableTitle == 1 &&
 						<div className={`qubely-block-text-title-container ${separatorStyle ? 'qubely-has-separator' : ''} ${separatorPosition ? 'qubely-separator-position-' + separatorPosition : ''}`} >
 							<div className="qubely-block-text-title-inner">
@@ -50,12 +50,12 @@ class Save extends Component {
 								</div>
 							}
 						</div>
-                    }
+					}
 
-					<RichText.Content tagName={selector} value={content} />
+						<RichText.Content tagName={selector} value={content} />
 				</div>
 			</div>
 		)
-    }
+	}
 }
 export default Save

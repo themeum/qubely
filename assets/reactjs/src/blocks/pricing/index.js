@@ -3,56 +3,45 @@ const { __ } = wp.i18n
 import Save from './Save'
 import Edit from './Edit'
 const { registerBlockType } = wp.blocks
+const { gloalSettings: { globalAttributes }, QubelyButton: { buttonAttributes }, QubelyList: { listAttributes } } = wp.qubelyComponents
 
 registerBlockType('qubely/pricing', {
     title: __('Pricing'),
     description: 'Showcase Pricing in beautiful pre-designed Pricing Table with Qubely Pricing.',
     category: 'qubely',
     icon: <img src={qubely_admin.plugin + 'assets/img/blocks/block-pricing.svg'} alt={__('Pricing Block')} />,
-
-    keywords: [__('Pricing'), __('Pricing table')],
+    keywords: [__('Pricing'), __('Pricing Table')],
+    supports: {
+        align: ['center', 'wide', 'full'],
+    },
+    example: {
+		attributes: {},
+	},
     attributes: {
         uniqueId: { type: 'string', default: '' },
+        ...globalAttributes,
+        ...buttonAttributes,
+        ...listAttributes,
         layout: {
-            type: 'string',
-            default: '1'
+            type: 'number',
+            default: 3
         },
 
         defaultItems: { type: 'number', default: 2 },
-        alignment: { type: 'string', default: 'center' },
+        alignment: { type: 'object', default: { md: 'center' }, style: [{ selector: '{{QUBELY}} .qubely-block-pricing {text-align: {{alignment}};}' }] },
         spacer: { type: 'object', default: { spaceTop: { md: '10', unit: "px" }, spaceBottom: { md: '10', unit: "px" } }, style: [{ selector: '{{QUBELY}}' }] },
 
-        navAlignment: { type: 'string', default: 'left' },
         copyStyle: { type: 'boolean', default: false },
 
         // Title__
-        title: { type: 'string', default: 'PERSONAL' },
-        titleColor: { type: 'string', default: '#2184F9', style: [{ selector: '{{QUBELY}} .qubely-pricing-title{color: {{titleColor}};}' }] },
-        titleTypography: { type: 'object', default: { openTypography: 1, size: { md: 20, unit: 'px' } }, style: [{ selector: '{{QUBELY}} .qubely-pricing-title' }] },
-
-        titleAlignment: {
-            type: 'string', default: 'center',
-            style: [
-                {
-                    condition: [
-                        { key: 'titleAlignment', relation: '==', value: 'left' },
-                    ],
-                    selector: '{{QUBELY}} .qubely-pricing-title {justify-content: flex-start;}'
-                },
-                {
-                    condition: [
-                        { key: 'titleAlignment', relation: '==', value: 'center' },
-                    ],
-                    selector: '{{QUBELY}} .qubely-pricing-title {justify-content: center;}'
-                },
-                {
-                    condition: [
-                        { key: 'titleAlignment', relation: '==', value: 'right' },
-                    ],
-                    selector: '{{QUBELY}} .qubely-pricing-title {justify-content: flex-end;}'
-                }
-            ]
+        title: {
+            type: 'string',
+            source: 'html',
+            selector: '.qubely-pricing-title',
+            default: 'Basic'
         },
+        titleColor: { type: 'string', default: '#0081FF', style: [{ selector: '{{QUBELY}} .qubely-pricing-title{color: {{titleColor}};}' }] },
+        titleTypography: { type: 'object', default: { openTypography: 1, size: { md: 20, unit: 'px' } }, style: [{ selector: '{{QUBELY}} .qubely-pricing-title' }] },
 
         titleSpacing: {
             type: 'object',
@@ -64,7 +53,12 @@ registerBlockType('qubely/pricing', {
         },
 
         //Sub Title
-        subTitle: { type: 'string', default: 'Best Choice for Individuals' },
+        subTitle: {
+            type: 'string',
+            source: 'html',
+            selector: '.qubely-sub-title',
+            default: 'Best Choice for Individuals'
+        },
         subTitleSpacing: {
             type: 'object',
             default: {
@@ -74,30 +68,6 @@ registerBlockType('qubely/pricing', {
             style: [
                 {
                     selector: '{{QUBELY}} .qubely-sub-title-wrapper {margin-bottom: {{subTitleSpacing}};}'
-                }
-            ]
-        },
-
-        subTitleAlignment: {
-            type: 'string', default: 'center',
-            style: [
-                {
-                    condition: [
-                        { key: 'subTitleAlignment', relation: '==', value: 'left' },
-                    ],
-                    selector: '{{QUBELY}} .qubely-sub-title-wrapper {justify-content: flex-start;}'
-                },
-                {
-                    condition: [
-                        { key: 'subTitleAlignment', relation: '==', value: 'center' },
-                    ],
-                    selector: '{{QUBELY}} .qubely-sub-title-wrapper {justify-content: center;}'
-                },
-                {
-                    condition: [
-                        { key: 'subTitleAlignment', relation: '==', value: 'right' },
-                    ],
-                    selector: '{{QUBELY}} .qubely-sub-title-wrapper {justify-content: flex-end;}'
                 }
             ]
         },
@@ -153,17 +123,15 @@ registerBlockType('qubely/pricing', {
             ]
         },
         priceColor: { type: 'string', default: '#ccc', style: [{ selector: '{{QUBELY}} .qubely-pricing-price{color: {{priceColor}};}' }] },
-        priceHoverColor: { type: 'string', default: '#ccc', style: [{ selector: '{{QUBELY}}:hover .qubely-pricing-price{color: {{priceHoverColor}};}' }] },
         priceTypography: { type: 'object', default: { openTypography: 1, height: { md: 70, unit: 'px' }, size: { md: 70, unit: 'px' } }, style: [{ selector: '{{QUBELY}} .qubely-pricing-price' }] },
         discount: { type: 'boolean', default: false },
         discountPrice: { type: 'string', default: '69' },
         discountColor: { type: 'string', default: '#ccc', style: [{ selector: '{{QUBELY}} .qubely-pricing-price strike{color: {{discountColor}};}' }] },
-        discountHoverColor: { type: 'string', default: '#ccc', style: [{ selector: '{{QUBELY}}:hover .qubely-pricing-price strike{color: {{discountHoverColor}};}' }] },
         discountTypography: { type: 'object', default: { openTypography: 1, size: { md: 20, unit: 'px' } }, style: [{ selector: '{{QUBELY}} .qubely-pricing-price strike' }] },
         pricingSpacing: {
             type: 'object',
             default: {
-                md: 30,
+                md: 20,
                 unit: 'px'
             },
             style: [{ selector: '{{QUBELY}} .qubely-pricing-wrapper {margin-bottom: {{pricingSpacing}};}' }]
@@ -238,7 +206,6 @@ registerBlockType('qubely/pricing', {
         currencyPosition: { type: 'string', default: 'before' },
         currencyAlign: { type: 'string', default: '10', style: [{ selector: '{{QUBELY}} .qubely-pricing-currency{ display: inline-block; transform: translateY({{currencyAlign}}px); }' }] },
         currencyColor: { type: 'string', default: '#CACCCE', style: [{ selector: '{{QUBELY}} .qubely-pricing-currency{color: {{currencyColor}}; }' }] },
-        currencyHoverColor: { type: 'string', default: '', style: [{ selector: '{{QUBELY}}:hover .qubely-pricing-currency{color: {{currencyHoverColor}};}' }] },
         currencyTypography: { type: 'object', default: { openTypography: 1, size: { md: 34, unit: 'px' } }, style: [{ selector: '{{QUBELY}} .qubely-pricing-currency' }] },
 
         // Duration__
@@ -246,188 +213,241 @@ registerBlockType('qubely/pricing', {
         duration: { type: 'string', default: '/Month' },
         durationPosition: { type: 'string', default: 'side' },
         durationColor: { type: 'string', default: '#CACCCE', style: [{ selector: '{{QUBELY}} .qubely-pricing-duration{color: {{durationColor}};}' }] },
-        durationHoverColor: { type: 'string', default: '', style: [{ selector: '{{QUBELY}}:hover .qubely-pricing-duration{color: {{durationHoverColor}};}' }] },
         durationAlign: { type: 'string', default: '10', style: [{ condition: [{ key: 'durationPosition', relation: '==', value: 'side' }], selector: '{{QUBELY}} .qubely-pricing-duration{transform: translateY({{durationAlign}}px); display: inline-block; }' }, { condition: [{ key: 'durationPosition', relation: '==', value: 'bottom' }], selector: '{{QUBELY}} .qubely-pricing-duration{ display: block; }' }] },
         durationTypography: { type: 'object', default: { openTypography: 1, size: { md: 21, unit: 'px' } }, style: [{ selector: '{{QUBELY}} .qubely-pricing-duration' }] },
-        // durationPaddingTop: { type: 'object', default: {}, style: [{ selector: '{{QUBELY}} .qubely-pricing-duration{ padding-top: {{durationPaddingTop}};}' }] },
-        // durationPaddingBottom: { type: 'object', default: {}, style: [{ selector: '{{QUBELY}} .qubely-pricing-duration{ padding-bottom: {{durationPaddingBottom}};}' }] },
-        durationPaddingTop: { type: 'object', default: {}, style: [{ condition: [{ key: 'durationPosition', relation: '==', value: 'bottom' }], selector: '{{QUBELY}} .qubely-pricing-duration{ padding-top: {{durationPaddingTop}};}' }] },
-        durationPaddingBottom: { type: 'object', default: {}, style: [{ condition: [{ key: 'durationPosition', relation: '==', value: 'bottom' }], selector: '{{QUBELY}} .qubely-pricing-duration{ padding-bottom: {{durationPaddingBottom}};}' }] },
 
-
+        durationPadding: {
+            type: 'object',
+            default: {
+                openPadding: 1,
+                paddingType: 'custom',
+                custom: { md: '10 0 10 0' }
+            },
+            style: [{ condition: [{ key: 'durationPosition', relation: '==', value: 'bottom' }], selector: '{{QUBELY}} .qubely-pricing-duration' }]
+        },
         // Badge__
         enableBadge: { type: 'boolean', default: false },
-        badge: { type: 'string', default: 'SALE', style: [{ selector: '{{QUBELY}} .qubely-pricing-badge{text-align:center;position:absolute;overflow:hidden; top:0; }' }] },
-        badgeStyle: { type: 'string', default: 'corner' },
-        enableBadgeOverflow: {
-            type: 'boolean',
-            default: true,
-            style: [{
-                condition: [{ key: 'enableBadgeOverflow', relation: '==', value: true }],
-                selector: '{{QUBELY}} .qubely-block-pricing{ position:relative; }'
-            },
+        badge: { type: 'string', default: 'Sale' },
+        badgeStyle: {
+            type: 'number',
+            default: 1,
+            style: [
+                {
+                    condition: [
+                        { key: 'badgeStyle', relation: '!=', value: 3 }
+                    ],
+                    selector: '{{QUBELY}} .qubely-block-pricing {overflow: hidden;}'
+                }
             ]
         },
         badgePosition: {
-            type: 'string', default: 'left', style: [
-                { selector: '{{QUBELY}} .qubely-pricing-badge{ {{badgePosition}}:0; }' },
-                { condition: [{ key: 'badgeStyle', relation: '==', value: 'corner' }, { key: 'badgePosition', relation: '==', value: 'left' }], selector: '{{QUBELY}} .qubely-pricing-badge{ left:0; transform: rotate(-45deg); }' },
-                { condition: [{ key: 'badgeStyle', relation: '==', value: 'corner' }, { key: 'badgePosition', relation: '==', value: 'right' }], selector: '{{QUBELY}} .qubely-pricing-badge{ right:0; transform: rotate(45deg); }' },
+            type: 'string',
+            default: 'left',
+            style: [
+                {
+                    condition: [
+                        { key: 'badgeStyle', relation: '==', value: 1 },
+                        { key: 'badgePosition', relation: '==', value: 'left' }
+                    ],
+                    selector: '{{QUBELY}} .qubely-block-pricing .qubely-pricing-badge {left: -73px; transform: rotate(-45deg);}'
+                },
+                {
+                    condition: [
+                        { key: 'badgeStyle', relation: '==', value: 1 },
+                        { key: 'badgePosition', relation: '==', value: 'right' }
+                    ],
+                    selector: '{{QUBELY}} .qubely-block-pricing .qubely-pricing-badge {right: -73px; transform: rotate(45deg);}'
+                },
+                {
+                    condition: [
+                        { key: 'badgeStyle', relation: '==', value: 2 },
+                        { key: 'badgePosition', relation: '==', value: 'left' }
+                    ],
+                    selector: '{{QUBELY}} .qubely-block-pricing .qubely-pricing-badge {left: -50px; transform: rotate(-45deg);}'
+                },
+                {
+                    condition: [
+                        { key: 'badgeStyle', relation: '==', value: 2 },
+                        { key: 'badgePosition', relation: '==', value: 'right' }
+                    ],
+                    selector: '{{QUBELY}} .qubely-block-pricing .qubely-pricing-badge {right: -50px; transform: rotate(45deg);}'
+                },
             ]
         },
-        badgeColor: { type: 'string', default: '#FF494A', style: [{ selector: '{{QUBELY}} .qubely-pricing-badge{background-color: {{badgeColor}};}' }] },
-        badgeTextColor: { type: 'string', default: '#ffffff', style: [{ selector: '{{QUBELY}} .qubely-pricing-badge{color: {{badgeTextColor}};}' }] },
-        badgeHoverColor: { type: 'string', default: '', style: [{ selector: '{{QUBELY}}:hover .qubely-pricing-badge:hover{background-color: {{badgeHoverColor}};}' }] },
-        badgeTextHoverColor: { type: 'string', default: '', style: [{ selector: '{{QUBELY}}:hover .qubely-pricing-badge:hover{color: {{badgeTextHoverColor}};}' }] },
-        badgeTypography: { type: 'object', default: { openTypography: 1, size: { md: 12, unit: 'px' } }, style: [{ selector: '{{QUBELY}} .qubely-pricing-badge' }] },
-        badgeRadius: {
+        badgeSize: {
             type: 'string',
-            default: '70',
-            style: [
-                {
-                    condition: [
-                        { key: 'badgeStyle', relation: '==', value: 'circle' }
-                    ],
-                    selector: '{{QUBELY}} .qubely-pricing-badge{height: {{badgeRadius}}px;width: {{badgeRadius}}px;border-radius:50%}'
-                }]
+            default: 'regular'
         },
-        badgeCircleRotation: {
-            type: 'string',
-            default: '-90',
-            style: [
-                {
-                    condition: [
-                        { key: 'badgeStyle', relation: '==', value: 'circle' }
-                    ],
-                    selector: '{{QUBELY}} .qubely-pricing-badge{transform: rotate({{badgeCircleRotation}}deg);}'
-                }]
-        },
-        badgePaddingX: {
+        badgeSpacing: {
             type: 'object',
-            default: { md: 15, unit: 'px' },
-            style: [
-                {
-                    condition: [
-                        { key: 'enableBadgeOverflow', relation: '==', value: false }
-                    ],
-                    selector: '{{QUBELY}} .qubely-pricing-badge{padding-left: {{badgePaddingX}}; padding-right: {{badgePaddingX}};}'
-                }]
+            default: {
+                md: 20,
+                unit: 'px'
+            },
+            style:
+                [
+                    {
+                        condition: [
+                            { key: 'enableBadge', relation: '==', value: true },
+                            { key: 'badgeStyle', relation: '==', value: 3 },
+                        ],
+                        selector: '{{QUBELY}} .qubely-block-pricing .qubely-pricing-badge {margin-top: {{badgeSpacing}};}'
+                    },
+                    {
+                        condition: [
+                            { key: 'enableBadge', relation: '==', value: true },
+                            { key: 'badgeStyle', relation: '==', value: 5 },
+                            { key: 'badgePosition', relation: '==', value: 'left' }
+                        ],
+                        selector: '{{QUBELY}} .qubely-block-pricing .qubely-pricing-badge {left: {{badgeSpacing}};}'
+                    },
+                    {
+                        condition: [
+                            { key: 'enableBadge', relation: '==', value: true },
+                            { key: 'badgeStyle', relation: '==', value: 5 },
+                            { key: 'badgePosition', relation: '==', value: 'right' }
+                        ],
+                        selector: '{{QUBELY}} .qubely-block-pricing .qubely-pricing-badge {right: {{badgeSpacing}};}'
+                    },
+                    {
+                        condition: [
+                            { key: 'enableBadge', relation: '==', value: true },
+                            { key: 'badgeStyle', relation: '==', value: 6 },
+                            { key: 'badgePosition', relation: '==', value: 'left' }
+                        ],
+                        selector: '{{QUBELY}} .qubely-block-pricing .qubely-pricing-badge {left: {{badgeSpacing}};}'
+                    },
+                    {
+                        condition: [
+                            { key: 'enableBadge', relation: '==', value: true },
+                            { key: 'badgeStyle', relation: '==', value: 6 },
+                            { key: 'badgePosition', relation: '==', value: 'right' }
+                        ],
+                        selector: '{{QUBELY}} .qubely-block-pricing .qubely-pricing-badge {right: {{badgeSpacing}};}'
+                    }
+                ]
         },
-        badgePaddingY: {
+        badgeSpacingTop: {
             type: 'object',
-            default: { md: 3, unit: 'px' },
-            style: [
-                {
-                    condition: [
-                        { key: 'enableBadgeOverflow', relation: '==', value: false }
-                    ],
-                    selector: '{{QUBELY}} .qubely-pricing-badge{padding-top: {{badgePaddingY}}; padding-bottom: {{badgePaddingY}};}'
-                }]
+            default: {
+                md: 20,
+                unit: 'px'
+            },
+            style:
+                [
+                    {
+                        condition: [
+                            { key: 'enableBadge', relation: '==', value: true },
+                            { key: 'badgeStyle', relation: '==', value: 5 }
+                        ],
+                        selector: '{{QUBELY}} .qubely-block-pricing .qubely-pricing-badge {top: {{badgeSpacingTop}};}'
+                    }
+                ]
         },
-        badgeTop: {
+        badgeBg: {
             type: 'string',
-            default: '20',
-            style: [{
-                condition: [
-                    { key: 'enableBadgeOverflow', relation: '==', value: false }
-                ],
-                selector: '{{QUBELY}} .qubely-pricing-badge { top: {{badgeTop}}px;}'
-            }]
-        },
-        badgeRight: {
-            type: 'string',
-            default: '-5',
-            style: [
-                {
-                    condition: [
-                        { key: 'badgePosition', relation: '==', value: 'left' },
-                        { key: 'enableBadgeOverflow', relation: '==', value: false }],
-                    selector: '{{QUBELY}} .qubely-pricing-badge { left: {{badgeRight}}px;}'
-                }]
-        },
-        badgeLeft: {
-            type: 'string',
-            default: '-5',
-            style: [
-                {
-                    condition: [
-                        { key: 'badgePosition', relation: '==', value: 'right' },
-                        { key: 'enableBadgeOverflow', relation: '==', value: false }
-                        ,],
-                    selector: '{{QUBELY}} .qubely-pricing-badge { right: {{badgeLeft}}px;}'
-                }]
-        },
-        //badge with overflow
-        badgeOverflowPaddingX: {
-            type: 'object',
-            default: { md: 35, unit: 'px' },
-            style: [{
-                condition: [
-                    { key: 'enableBadgeOverflow', relation: '==', value: true }
-                ],
-                selector: '{{QUBELY}} .qubely-pricing-badge{padding-left: {{badgeOverflowPaddingX}}; padding-right: {{badgeOverflowPaddingX}};}'
-            }]
-        },
-        badgeOverflowPaddingY: {
-            type: 'object',
-            default: { md: 5, unit: 'px' },
-            style: [{
-                condition: [
-                    { key: 'enableBadgeOverflow', relation: '==', value: true }
-                ],
-                selector: '{{QUBELY}} .qubely-pricing-badge{padding-top: {{badgeOverflowPaddingY}}; padding-bottom: {{badgeOverflowPaddingY}};}'
-            }]
-        },
-        badgeOverflowTop: {
-            type: 'string',
-            default: '10',
-            style: [
-                {
-                    condition: [
-                        { key: 'enableBadgeOverflow', relation: '==', value: true }
-                    ],
-                    selector: '{{QUBELY}} .qubely-pricing-badge { top: {{badgeOverflowTop}}px;}'
-                }]
-        },
-        badgeOverflowRight: {
-            type: 'string',
-            default: '-25',
-            style: [
-                {
-                    condition: [
-                        { key: 'badgePosition', relation: '==', value: 'left' },
-                        { key: 'enableBadgeOverflow', relation: '==', value: true }
-                    ],
-                    selector: '{{QUBELY}} .qubely-pricing-badge { left: {{badgeOverflowRight}}px;}'
-                }]
-        },
-        badgeOverflowLeft: {
-            type: 'string',
-            default: '-25',
-            style: [
-                {
-                    condition: [
-                        { key: 'badgePosition', relation: '==', value: 'right' },
-                        { key: 'enableBadgeOverflow', relation: '==', value: true }],
-                    selector: '{{QUBELY}} .qubely-pricing-badge { right: {{badgeOverflowLeft}}px;}'
-                }]
+            default: '#50E3C2',
+            style:
+                [
+                    {
+                        condition: [
+                            { key: 'enableBadge', relation: '==', value: true }
+                        ],
+                        selector: '{{QUBELY}} .qubely-block-pricing .qubely-pricing-badge {background-color: {{badgeBg}};}'
+                    },
+                    {
+                        condition: [
+                            { key: 'enableBadge', relation: '==', value: true },
+                            { key: 'badgeStyle', relation: '==', value: 3 }
+                        ],
+                        selector: '{{QUBELY}} .qubely-block-pricing .qubely-pricing-badge::before {border-color: {{badgeBg}} {{badgeBg}} transparent transparent;} {{QUBELY}} .qubely-block-pricing .qubely-pricing-badge::after {border-color: {{badgeBg}} transparent transparent {{badgeBg}};}'
+                    },
+                    {
+                        condition: [
+                            { key: 'enableBadge', relation: '==', value: true },
+                            { key: 'badgeStyle', relation: '==', value: 6 }
+                        ],
+                        selector: '{{QUBELY}} .qubely-block-pricing .qubely-pricing-badge::before {border-color: {{badgeBg}} {{badgeBg}} transparent {{badgeBg}};}'
+                    }
+                ]
         },
 
+        badgeColor: {
+            type: 'string',
+            default: '#FFFFFF',
+            style:
+                [
+                    {
+                        condition:
+                            [
+                                { key: 'enableBadge', relation: '==', value: true }
+                            ],
+                        selector: '{{QUBELY}} .qubely-block-pricing .qubely-pricing-badge {color: {{badgeColor}};}'
+                    }
+                ]
+        },
+
+        badgeTypography: {
+            type: 'object',
+            default: {
+                openTypography: 1,
+                size: {
+                    md: 14,
+                    unit: 'px'
+                }
+            },
+            style:
+                [
+                    {
+                        condition:
+                            [
+                                { key: 'enableBadge', relation: '==', value: true }
+                            ],
+                        selector: '{{QUBELY}} .qubely-block-pricing .qubely-pricing-badge'
+                    }
+                ]
+        },
+
+        badgeRadius: {
+            type: 'object',
+            default: {
+                paddingType: 'global',
+            },
+            style: [
+                {
+                    condition:
+                        [
+                            { key: 'enableBadge', relation: '==', value: true },
+                            { key: 'badgeStyle', relation: '==', value: 5 }
+                        ],
+                    selector: '{{QUBELY}} .qubely-block-pricing .qubely-pricing-badge'
+                }
+            ]
+        },
 
         // Background
         bgColor: {
             type: 'object',
-            default: {},
+            default: {
+                openColor: 1,
+                type: 'color',
+                color: '#FFFFFF',
+            },
             style: [{ selector: '{{QUBELY}} .qubely-block-pricing' }]
         },
         bgPadding: {
             type: 'object',
             default: {
-                paddingType: 'global'
+                openPadding: 1,
+                paddingType: 'global',
+                global: {
+                    md: 30
+                },
+                unit: 'px'
             },
             style: [
                 {
-                    selector: '{{QUBELY}} .qubely-block-pricing'
+                    selector: '{{QUBELY}} .qubely-block-pricing .qubely-block-pricing-content'
                 }
             ]
         },
@@ -435,7 +455,12 @@ registerBlockType('qubely/pricing', {
         bgBorderRadius: {
             type: 'object',
             default: {
-                borderRadiusType: 'global'
+                openBorderRadius: 1,
+                radiusType: 'global',
+                global: {
+                    md: 10
+                },
+                unit: 'px'
             },
             style: [
                 {
@@ -447,7 +472,14 @@ registerBlockType('qubely/pricing', {
         bgBorder: {
             type: 'object',
             default: {
-                borderType: 'global'
+                openBorder: 1,
+                widthType: 'global',
+                type: 'solid',
+                color: '#E5E7EA',
+                global: {
+                    md: 1
+                },
+                unit: 'px',
             },
             style: [
                 {
@@ -455,15 +487,11 @@ registerBlockType('qubely/pricing', {
                 }
             ]
         },
-        bgColorHover: { type: 'object', default: {}, style: [{ selector: '{{QUBELY}} .qubely-block-pricing:hover' }] },
-        bgBorderColorHover: { type: 'string', default: '#e5e5e5', style: [{ selector: '{{QUBELY}} .qubely-block-pricing:hover { border-color: {{bgBorderColorHover}}; }' }] },
-        bgShadow: { type: 'object', default: {}, style: [{ selector: '{{QUBELY}} .qubely-block-pricing' }] },
-        bgShadowHover: { type: 'object', default: { color: '' }, style: [{ selector: '{{QUBELY}} .qubely-block-pricing:hover' }] },
 
+        bgShadow: { type: 'object', default: {}, style: [{ selector: '{{QUBELY}} .qubely-block-pricing' }] },
 
         //button
-        buttonComponent: { type: 'boolean', default: true },
-        buttonGap:    {
+        buttonGap: {
             type: 'object',
             default: {
                 md: 0,
@@ -475,33 +503,9 @@ registerBlockType('qubely/pricing', {
         controlledButtonPanel: { type: 'boolean', default: true },
         showButtonPanel: { type: 'boolean', default: false },
         buttonText: { type: 'string', default: 'Subscribe Now' },
-        buttonPadding: { type: 'boolean', default: true },
+
         buttonPaddingTop: { type: 'object', default: { md: 30, unit: 'px' }, style: [{ selector: '{{QUBELY}} .qubely-pricing-button{ padding-top: {{buttonPaddingTop}};}' }] },
         buttonPaddingBottom: { type: 'object', default: { md: 10, unit: 'px' }, style: [{ selector: '{{QUBELY}} .qubely-pricing-button{ padding-bottom: {{buttonPaddingBottom}};}' }] },
-        enableButtonAlignment: { type: 'boolean', default: false },
-        buttonAlignment: {
-            type: 'string', default: 'center',
-            style: [
-                {
-                    condition: [
-                        { key: 'buttonAlignment', relation: '==', value: 'left' },
-                    ],
-                    selector: '{{QUBELY}} .qubely-block-btn-wrapper {justify-content: flex-start;} {{QUBELY}} .qubely-pricing-postbutton-text{text-align: left;}'
-                },
-                {
-                    condition: [
-                        { key: 'buttonAlignment', relation: '==', value: 'center' },
-                    ],
-                    selector: '{{QUBELY}} .qubely-block-btn-wrapper {justify-content: center;} {{QUBELY}} .qubely-pricing-postbutton-text{text-align: center;}'
-                },
-                {
-                    condition: [
-                        { key: 'buttonAlignment', relation: '==', value: 'right' },
-                    ],
-                    selector: '{{QUBELY}} .qubely-block-btn-wrapper {justify-content: flex-end;} {{QUBELY}} .qubely-pricing-postbutton-text{text-align: right;}'
-                }
-            ]
-        },
 
         //postButtonText
         enablePostButtonText: { type: 'boolean', default: false },
@@ -515,16 +519,6 @@ registerBlockType('qubely/pricing', {
                     { key: 'enablePostButtonText', relation: '==', value: true },
                 ],
                 selector: '{{QUBELY}} .qubely-pricing-postbutton-text{ color: {{postButtonTextColor}};}'
-            }]
-        },
-        postButtonTextHoverColor: {
-            type: 'string',
-            default: '',
-            style: [{
-                condition: [
-                    { key: 'enablePostButtonText', relation: '==', value: true },
-                ],
-                selector: '{{QUBELY}} .qubely-pricing-postbutton-text:hover{ color: {{postButtonTextHoverColor}};}'
             }]
         },
         postButtonTextPaddingTop: {
@@ -553,7 +547,7 @@ registerBlockType('qubely/pricing', {
         enableFeatures: { type: 'boolean', default: true },
         controlledFeaturesPanel: { type: 'boolean', default: true },
         showFeaturesPanel: { type: 'boolean', default: false },
-        blockFeatures: {
+        listItems: {
             type: 'array',
             default: [
                 {
@@ -579,37 +573,10 @@ registerBlockType('qubely/pricing', {
             ]
 
         },
-
-        listComponent: { type: 'boolean', default: true },
+        clickedListItem: { type: 'number', default: 0 },
         listType: { type: 'string', default: 'unordered' },
         bulletStyle: { type: 'string', default: 'check-circle-outline' },
-        enableListAlignment: { type: 'boolean', default: false },
-        listAlignment: {
-            type: 'string',
-            default: 'center',
-            style: [
-                {
-                    condition: [
-                        { key: 'listAlignment', relation: '==', value: 'left' },
-                    ],
-                    selector: '{{QUBELY}} .qubely-pricing-features {align-items: flex-start;}'
-                },
-                {
-                    condition: [
-                        { key: 'listAlignment', relation: '==', value: 'center' },
-                    ],
-                    selector: '{{QUBELY}} .qubely-pricing-features {align-items: center;}'
-                },
-                {
-                    condition: [
-                        { key: 'listAlignment', relation: '==', value: 'right' },
-                    ],
-                    selector: '{{QUBELY}} .qubely-pricing-features {align-items: flex-end;}'
-                }
-            ]
-        },
-        showGlobalSettings: { type: 'boolean', default: true },
-        showContextMenu: { type: 'boolean', default: true },
+        sourceOfCopiedStyle: { type: 'boolean', default: false },
 
     },
     edit: Edit,

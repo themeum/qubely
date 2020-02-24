@@ -20,7 +20,7 @@ registerBlockType('qubely/tab', {
         customClassName: { type: 'string', default: '' }
     },
     getEditWrapperProps(attributes) {
-        return { 'data-tab': attributes.id, className: `wp-block editor-block-list__block ${attributes.customClassName}` }
+        return { 'data-tab': attributes.id, className: `wp-block editor-block-list__block block-editor-block-list__block ${attributes.customClassName}` }
     },
     edit: Edit,
     save: Save

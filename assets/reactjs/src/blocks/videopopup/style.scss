@@ -3,6 +3,7 @@
     z-index: 1;
     display: flex;
     align-items: center;
+    transition: 400ms;
     &.qubely-alignment-left {
         justify-content: flex-start;
     }
@@ -39,7 +40,6 @@
                 z-index: -1;
                 box-shadow: 0 0 0 15px rgba(white, .8), 0 0 0 30px rgba(white, .6), 0 0 0 45px rgba(white, .4);
                 animation: qubelyRipple 2s infinite;
-                border-radius: var(--qubely-ripple-radius);
             }
         }
         &.qubely-size-small .qubely-btn-icon{
@@ -59,14 +59,14 @@
         }
     }
 
-    .qubely-block-videopopup-overlay{
+    .qubely-block-videopopup-overlay {
         position: absolute;
         z-index: -1;
         height: 100%;
         width: 100%;
         left: 0;
         top: 0;
-        transition: 300ms;
+        transition: 400ms;
     }
 }
 
@@ -85,4 +85,7 @@
         opacity: 0;
         transform: scale(1);
     }
+}
+.edit-post-visual-editor i {
+    font-style: initial !important;
 }

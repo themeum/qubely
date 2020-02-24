@@ -65,7 +65,7 @@ export const cssTypography = (v) => {
     let font = ''
     if (v.family) {
         if (!['Arial', 'Tahoma', 'Verdana', 'Helvetica', 'Times New Roman', 'Trebuchet MS', 'Georgia'].includes(v.family)) {
-            font = "@import url('https://fonts.googleapis.com/css?family=" + v.family.replace(' ', '+') + "');"
+            font = "@import url('https://fonts.googleapis.com/css?family=" + v.family.replace(/\s/g, '+') + ':' + (v.weight || 400) + "');"
         }
     }
     let data = { md: [], sm: [], xs: [] }
@@ -84,15 +84,15 @@ export const cssTypography = (v) => {
 
 // CSS Dimension
 export const cssDimension = (v) => {
-    const unit = v.unit
+    const unit = v.unit ? v.unit : 'px'
     return (v.top || 0) + unit + ' ' + (v.right || 0) + unit + ' ' + (v.bottom || 0) + unit + ' ' + (v.left || 0) + unit
 }
 
 // CSS Background
-const split_bg = (type, image = {}, imgPosition, imgAttachment, imgRepeat, imgSize, DefaultColor, bgGradient) => {
+const split_bg = (type, image = {}, imgPosition, imgAttachment, imgRepeat, imgSize, DefaultColor, bgGradient, bgimageSource = 'local', externalImageUrl = {}) => {
     let bgData = (DefaultColor ? 'background-color:' + DefaultColor + ';' : '');
     if (type == 'image') {
-        bgData += (image.hasOwnProperty('url') ? 'background-image:url(' + image.url + ');' : '') + (imgPosition ? 'background-position:' + imgPosition + ';' : '') + (imgAttachment ? 'background-attachment:' + imgAttachment + ';' : '') +
+        bgData += (bgimageSource === 'local' ? image.hasOwnProperty('url') ? 'background-image:url(' + image.url + ');' : '' : externalImageUrl.hasOwnProperty('url') ? 'background-image:url(' + externalImageUrl.url + ');' : '') + (imgPosition ? 'background-position:' + imgPosition + ';' : '') + (imgAttachment ? 'background-attachment:' + imgAttachment + ';' : '') +
             (imgRepeat ? 'background-repeat:' + imgRepeat + ';' : '') + (imgSize ? 'background-size:' + imgSize + ';' : '')
     }
     else if (type == 'gradient') {
@@ -106,7 +106,7 @@ const split_bg = (type, image = {}, imgPosition, imgAttachment, imgRepeat, imgSi
 }
 export const cssBackground = (v) => {
     let background = '{'
-    background += split_bg(v.bgType, v.bgImage, v.bgimgPosition, v.bgimgAttachment, v.bgimgRepeat, v.bgimgSize, v.bgDefaultColor, v.bgGradient)
+    background += split_bg(v.bgType, v.bgImage, v.bgimgPosition, v.bgimgAttachment, v.bgimgRepeat, v.bgimgSize, v.bgDefaultColor, v.bgGradient, v.bgimageSource, v.externalImageUrl)
     background += '}'
     if (v.bgType == 'video') {
         if (v.bgVideoFallback) {
@@ -139,12 +139,25 @@ export const cssShape = (v) => {
 export const cssColor = (v) => {
     let data = (v.clip ? '-webkit-background-clip: text; -webkit-text-fill-color: transparent;' : '');
     if (v.type == 'color') {
-        data += (v.color ? 'background-image: none; background-color: ' + v.color + ';' : '')
+        if (v.textColor) {
+            data += (v.color ? 'color: ' + v.color + ';' : '')
+        } else {
+            data += (v.color ? 'background-image: none; background-color: ' + v.color + ';' : '')
+        }
+
     } else if (v.type == 'gradient') {
         if (v.gradient && v.gradient.type == 'linear') {
-            data += 'background-image : linear-gradient(' + v.gradient.direction + 'deg, ' + v.gradient.color1 + ' ' + v.gradient.start + '%,' + v.gradient.color2 + ' ' + v.gradient.stop + '%);'
+            if (v.textColor) {
+                data += 'background : -webkit-linear-gradient(' + v.gradient.direction + 'deg, ' + v.gradient.color1 + ' ' + v.gradient.start + '%,' + v.gradient.color2 + ' ' + v.gradient.stop + '%);-webkit-background-clip: text;-webkit-text-fill-color: transparent;'
+            } else {
+                data += 'background-image : linear-gradient(' + v.gradient.direction + 'deg, ' + v.gradient.color1 + ' ' + v.gradient.start + '%,' + v.gradient.color2 + ' ' + v.gradient.stop + '%);'
+            }
         } else {
-            data += 'background-image : radial-gradient( circle at ' + v.gradient.radial + ' , ' + v.gradient.color1 + ' ' + v.gradient.start + '%,' + v.gradient.color2 + ' ' + v.gradient.stop + '%);'
+            if (v.textColor) {
+                data += 'background : radial-gradient(circle at ' + v.gradient.radial + ' , ' + v.gradient.color1 + ' ' + v.gradient.start + '%,' + v.gradient.color2 + ' ' + v.gradient.stop + '%);-webkit-background-clip: text;-webkit-text-fill-color: transparent;'
+            } else {
+                data += 'background-image : radial-gradient( circle at ' + v.gradient.radial + ' , ' + v.gradient.color1 + ' ' + v.gradient.start + '%,' + v.gradient.color2 + ' ' + v.gradient.stop + '%);'
+            }
         }
     }
     return '{' + data + '}';
@@ -169,6 +182,22 @@ export const cssSize = (v) => {
         data = _push(_device(v.paddingY, 'padding-top:{{key}}' + (v.paddingY.unit || '') + ';padding-bottom:{{key}}'), data)
     }
     return { md: data.md, sm: data.sm, xs: data.xs };
+}
+
+
+// CSS transfrom
+export const cssTransform = (v) => {
+    let data = { md: [], sm: [], xs: [] }
+    if ((v.translateX && v.translateX.md) || (v.translateY && v.translateY.md)) {
+        data.md = `transform: translateX({{key}}${(v.translateX && v.translateX.unit ? v.translateX.unit : 'px')}) `.replace(new RegExp('{{key}}', "g"), v.translateX ? v.translateX.md || '0' : '0') + `translateY({{key}}${(v.translateY && v.translateY.unit ? v.translateY.unit : 'px')})`.replace(new RegExp('{{key}}', "g"), v.translateY ? v.translateY.md || '0' : '0')
+    }
+    if ((v.translateX && v.translateX.sm) || (v.translateY && v.translateY.sm)) {
+        data.sm = `transform: translateX({{key}}${(v.translateX && v.translateX.unit ? v.translateX.unit : 'px')}) `.replace(new RegExp('{{key}}', "g"), v.translateX ? v.translateX.sm || '0' : '0') + `translateY({{key}}${(v.translateY && v.translateY.unit ? v.translateY.unit : 'px')})`.replace(new RegExp('{{key}}', "g"), v.translateY ? v.translateY.sm || '0' : '0')
+    }
+    if ((v.translateX && v.translateX.xs) || (v.translateY && v.translateY.xs)) {
+        data.xs = `transform: translateX({{key}}${(v.translateX && v.translateX.unit ? v.translateX.unit : 'px')}) `.replace(new RegExp('{{key}}', "g"), v.translateX ? v.translateX.xs || '0' : '0') + `translateY({{key}}${(v.translateY && v.translateY.unit ? v.translateY.unit : 'px')})`.replace(new RegExp('{{key}}', "g"), v.translateY ? v.translateY.xs || '0' : '0')
+    }
+    return { md: [data.md], sm: [data.sm], xs: [data.xs] };
 }
 
 const _customDevice = (val, selector) => {
@@ -262,4 +291,16 @@ export const cssMargin = (v) => {
         return '{' + data + '}';
     }
 
+}
+
+// CSS cssRowReverse
+export const cssRowReverse = (v) => {
+    let data = { md: [], sm: [], xs: [] }
+    if (v.values.md) { data.md.push(`flex-direction:row-reverse`) }
+    if (v.values.sm) { data.sm.push(`flex-direction:column-reverse`) }
+    if (v.values.xs) { data.xs.push(`flex-direction:column-reverse`) }
+
+
+
+    return { md: data.md, sm: data.sm, xs: data.xs };
 }

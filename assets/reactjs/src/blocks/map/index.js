@@ -3,6 +3,7 @@ import Edit from './Edit'
 import Save from './Save';
 const { __ } = wp.i18n
 const { registerBlockType } = wp.blocks
+const { gloalSettings: { globalAttributes } } = wp.qubelyComponents
 
 registerBlockType ( 'qubely/map', {
     title: __( 'Google Map' ),
@@ -10,13 +11,19 @@ registerBlockType ( 'qubely/map', {
     category: 'qubely',
     icon: <img src={qubely_admin.plugin+'assets/img/blocks/block-map.svg'} alt={__('Map Block')} />,
     keywords: [ __( 'Google Map' ), __( 'Map' ), __( 'Location' ) ],
-    supports: { align: ['full'] },
+    supports: {
+        align: ['center', 'wide', 'full'],
+    },
+    example: {
+        attributes: {},
+    },
     attributes: {
         uniqueId: { type: 'string', default: '' },
+        ...globalAttributes,  // Global Settings
         spacer: { type: 'object', default:{spaceTop: { md: '10', unit: "px"}, spaceBottom: { md: '10', unit: "px"}}, style: [ { selector: '{{QUBELY}}' }] },
         zoom: { type: 'number', default: '16'},
         height: { type: 'number', default: '350'},
-        placeID: { type: 'string', default: ''},
+        placeID: { type: 'string', default: 'ChIJgWsCh7C4VTcRwgRZ3btjpY8'},
         mapAddress: { type: 'string', default: ''},
         apiKey: { type: 'string', default: ''},
         iconPointer: { type: 'string', default: '' },
@@ -29,7 +36,6 @@ registerBlockType ( 'qubely/map', {
         showMarker: { type: 'boolean', default: true },
         mapStyle: { type: 'string', default: '' },
         selectedStyle: { type: 'string', default: 'default' },
-        showGlobalSettings: { type: 'boolean', default: true },  // Global Settings
     },
     edit: Edit,
     save: Save,

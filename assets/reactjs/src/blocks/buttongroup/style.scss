@@ -1,12 +1,22 @@
 .qubely-block-button-group{
     display: flex;
-    .editor-inner-blocks .editor-block-list__layout{
-        display: flex;
+    flex-wrap: wrap;
+    .editor-inner-blocks{
+        width: auto !important;
+        .editor-block-list__layout{
+            display: block;
+            width: fit-content;
+            .qubely-group-button{
+                display: inline-block;
+                width: auto;
+            }
+        }
     }
     .qubely-add-new{
         display: flex;
         align-items: center;
         justify-content: center;
         width: fit-content;
+        z-index: 100;
     }
 }

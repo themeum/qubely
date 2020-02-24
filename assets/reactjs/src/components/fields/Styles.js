@@ -1,24 +1,22 @@
 import '../css/styles.scss'
-const { Button, Tooltip } = wp.components
+const { __ } = wp.i18n
 const { Component } = wp.element
 
 class Styles extends Component {
-
-    setSettings(val){
-        this.props.onChange( val )
-    }
-
     render() {
-        const { value, options, columns = 2 } = this.props
-        return(
+        const { label, value, options, columns = 2, proUpgradation, onChange } = this.props
+
+        return (
             <div className="qubely-field qubely-field-styles">
-                { this.props.label &&
-                    <label>{this.props.label}</label>
-                }
+                {label && <label>{label}</label>}
                 <div className={`qubely-field-style-list qubely-field-style-columns-${columns}`}>
-                    {options.map( data =>
+                    {options.map(data =>
                         (
-                            <div onClick={ () => this.setSettings(data.value) } className={ value == data.value && 'qubely-active' } role="button" tabindex="0" aria-label={data.label ? data.label : ''}>
+                            <div
+                                role="button" tabindex="0" aria-label={data.label ? data.label : ''}
+                                {...(!data.pro && { onClick: () => onChange(data.value) })}
+                                className={`${value == data.value ? 'qubely-active' : ''}${data.pro ? ' qubely-pro-layout' : ''}`}
+                            >
                                 {data.icon && <span className="qubely-layout-style qubely-field-style-icon">{data.icon}</span>}
                                 {data.svg && <span className="qubely-layout-style qubely-field-style-svg">{data.svg}</span>}
                                 {data.img && <span className="qubely-layout-style qubely-field-style-img">{data.img}</span>}
@@ -27,6 +25,20 @@ class Styles extends Component {
                         )
                     )}
                 </div>
+                {
+                    proUpgradation &&
+                    <div className='qubely-field-pro-upgrade'>
+                        <div className='qubely-logo'>
+                            <img src={qubely_admin.plugin + 'assets/img/Qubely-Q.svg'} alt={__('Qubely-Q')} />
+                        </div>
+                        <div className='qubely-upgrade-message'>
+                            <span className='qubely-upgrade-message-title'>{__('Upgrade to Pro')}</span>
+                            <span className='qubely-upgrade-message-description'>{__('Get all features of post grid at your disposal by upgrading to pro version')}</span>
+                        </div>
+                        <a className='qubely-upgrade-button' href={'https://www.themeum.com/product/qubely'} target='_blank' >{__('Upgrade Now')}</a>
+                    </div>
+                }
+
             </div>
         )
     }

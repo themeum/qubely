@@ -3,6 +3,7 @@ import Edit from './Edit'
 import Save from './Save';
 const { __ } = wp.i18n
 const { registerBlockType } = wp.blocks
+const { gloalSettings: { globalAttributes } } = wp.qubelyComponents
 
 registerBlockType('qubely/advancedlist', {
     title: __('Advanced List'),
@@ -10,11 +11,21 @@ registerBlockType('qubely/advancedlist', {
     category: 'qubely',
     icon: <img src={qubely_admin.plugin + 'assets/img/blocks/block-advanced-list.svg'} alt={__('Advanced List')} />,
     keywords: [__('Advanced', 'list', 'advanced list', 'Advanced List')],
+    supports: {
+        align: ['center', 'wide', 'full'],
+    },
+    example: {
+        attributes: {
+            background: '#fff'
+        },
+    },
     attributes: {
         uniqueId: { type: 'string', default: '' },
+          // Global
+          ...globalAttributes,
         listType: { type: 'string', default: 'unordered' },
         spacer: { type: 'object', default: { spaceTop: { md: '10', unit: "px" }, spaceBottom: { md: '10', unit: "px" } }, style: [{ selector: '{{QUBELY}}' }] },
-        alignment: { type: 'string', default: 'left' },
+        alignment: { type: 'string', default: 'left', style: [{ selector: '{{QUBELY}} .qubely-block-advanced-list {text-align: {{alignment}};}' }] },
         layout: { type: 'string', default: 'fill' },
 
         listItems: {
@@ -22,7 +33,7 @@ registerBlockType('qubely/advancedlist', {
             default: ['Create advanced list items', 'Options to choose list design', 'Beautiful interaction transitions']
         },
 
-        bulletStyle: { type: 'string', default: 'check-circle-outline' },
+        bulletStyle: { type: 'object', default: { name: 'check-circle-outline', value: 'far fa-check-circle' }, },
         bulletSize: {
             type: 'string', default: '16px',
             style: [
@@ -69,12 +80,19 @@ registerBlockType('qubely/advancedlist', {
 
         useNumberBg: { type: 'boolean', default: true },
         numberFontSize: { type: 'string', default: '14', style: [{ condition: [{ key: 'listType', relation: '==', value: 'ordered' }], selector: '{{QUBELY}} .qubely-list li::before, {{QUBELY}} .qubely-list li::after { font-size: {{numberFontSize}}px;}' }] },
-        numberBgSize: { type: 'string', default: '22', style: [{ condition: [{ key: 'listType', relation: '==', value: 'ordered' }, { key: 'useNumberBg', relation: '==', value: true }], selector: '{{QUBELY}} .qubely-list li::before, {{QUBELY}} .qubely-list li::after { width: {{numberBgSize}}px; height: {{numberBgSize}}px; line-height: {{numberBgSize}}px;}' }] },
+        numberBgSize: { type: 'string', default: '5', style: [{ condition: [{ key: 'listType', relation: '==', value: 'ordered' }, { key: 'useNumberBg', relation: '==', value: true }], selector: '{{QUBELY}} .qubely-list li::before, {{QUBELY}} .qubely-list li::after { padding: {{numberBgSize}}px; }' }] },
         numberBg: { type: 'string', default: '#c2e5ff', style: [{ condition: [{ key: 'listType', relation: '==', value: 'ordered' }, { key: 'useNumberBg', relation: '==', value: true }], selector: '{{QUBELY}} .qubely-list li::before, {{QUBELY}} .qubely-list li::after { background-color: {{numberBg}};}' }] },
         numberBgHover: { type: 'string', default: '', style: [{ condition: [{ key: 'listType', relation: '==', value: 'ordered' }, { key: 'useNumberBg', relation: '==', value: true }], selector: '{{QUBELY}} .qubely-list li:hover::before, {{QUBELY}} .qubely-list li:hover::after { background-color: {{numberBgHover}};}' }] },
-        numberCorner: { type: 'string', default: '50px', style: [{ condition: [{ key: 'listType', relation: '==', value: 'ordered' }, { key: 'useNumberBg', relation: '==', value: true }], selector: '{{QUBELY}} .qubely-list li::before, {{QUBELY}} .qubely-list li::after { border-radius: {{numberCorner}};}' }] },
+        numberCorner: { type: 'string', default: '50', style: [{ condition: [{ key: 'listType', relation: '==', value: 'ordered' }, { key: 'useNumberBg', relation: '==', value: true }], selector: '{{QUBELY}} .qubely-list li::before, {{QUBELY}} .qubely-list li::after { border-radius: {{numberCorner}}%;}' }] },
 
-        typography: { type: 'object', default: { openTypography: 1, size: { md: 16, unit: 'px' } }, style: [{ selector: '{{QUBELY}} .qubely-list' }] },
+        typography: {
+            type: 'object',
+            default: { openTypography: 1, size: { md: 16, unit: 'px' } },
+            style: [
+                { selector: '{{QUBELY}} .qubely-list li' },
+                { condition: [{ key: 'listType', relation: '==', value: 'ordered' }], selector: '{{QUBELY}} .qubely-list li::before, {{QUBELY}} .qubely-list li::after ' }
+            ]
+        },
         color: { type: 'string', default: '#333', style: [{ selector: '{{QUBELY}} .qubely-list li {color: {{color}};}' }] },
         colorHover: { type: 'string', default: '', style: [{ selector: '{{QUBELY}} .qubely-list li:hover {color: {{colorHover}};}' }] },
         spacing: { type: 'object', default: { md: 5, unit: 'px' }, style: [{ selector: '{{QUBELY}} .qubely-list li:not(:last-child) {margin-bottom: {{spacing}};}' }] },
@@ -97,8 +115,7 @@ registerBlockType('qubely/advancedlist', {
         },
         borderColorHover: { type: 'string', default: '', style: [{ selector: '{{QUBELY}} .qubely-list li:hover {border-bottom-color: {{borderColorHover}};}' }] },
 
-        // Global
-        showGlobalSettings: { type: 'boolean', default: true },
+        sourceOfCopiedStyle: { type: 'boolean', default: false } 
     },
     edit: Edit,
     save: Save,

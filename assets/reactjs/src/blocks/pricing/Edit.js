@@ -1,19 +1,50 @@
 const { __ } = wp.i18n
-const { PanelBody, Toolbar, SelectControl, TextControl, ColorPalette, Button, ButtonGroup, Popover } = wp.components
+const { PanelBody, Toolbar, SelectControl, TextControl } = wp.components
 const { compose } = wp.compose
 const { select, withSelect, withDispatch } = wp.data
 const { Component, Fragment } = wp.element
-const { createBlock } = wp.blocks
-const { getBlock } = select('core/editor')
-const { InnerBlocks, RichText, InspectorControls, BlockControls } = wp.editor
-import { Color, Toggle, Border, Padding, Alignment, Typography, QubelyButtonEdit, Select, ColorAdvanced, Range, RadioAdvanced, Tabs, Tab, Separator, QubelyIconListEdit, BoxShadow, Styles, BorderRadius } from "../../components/FieldRender"
-import InlineToolbar from '../../components/fields/inline/InlineToolbar'
-import { CssGenerator } from '../../components/CssGenerator'
-import '../../components/ListComponent'
-import '../../components/ButtonComponent'
-import '../../components/GlobalSettings'
-import '../../components/ContextMenu'
-import icons from '../../helpers/icons'
+const { getBlock } = select('core/block-editor')
+const { RichText, InspectorControls, BlockControls } = wp.blockEditor
+const {
+	Color,
+	Toggle,
+	Border,
+	Padding,
+	Alignment,
+	Typography,
+	QubelyButtonEdit,
+	gloalSettings: {
+		globalSettingsPanel,
+		animationSettings,
+		interactionSettings
+	},
+	Inline: {
+		InlineToolbar
+	},
+	ColorAdvanced,
+	Range,
+	RadioAdvanced,
+	Tabs,
+	Tab,
+	Separator,
+	QubelyIconListEdit,
+	BoxShadow,
+	Styles,
+	BorderRadius,
+	QubelyButton: {
+		buttonSettings
+	},
+	QubelyList: {
+		listSettings
+	},
+	ContextMenu: {
+		ContextMenu,
+		handleContextMenu
+	},
+	withCSSGenerator
+} = wp.qubelyComponents;
+
+import icons from '../../helpers/icons';
 
 class Edit extends Component {
 
@@ -32,6 +63,7 @@ class Edit extends Component {
 			showPricingTitleSettings: false,
 			openContextMenu: false,
 			disablePasteStyle: false,
+			showPostTextTypography: false
 		}
 	}
 
@@ -43,7 +75,6 @@ class Edit extends Component {
 		} else if (uniqueId && uniqueId != _client) {
 			setAttributes({ uniqueId: _client })
 		}
-
 	}
 	renderCurrencyContent = () => {
 		const { attributes: { currency, currencyCustom } } = this.props
@@ -158,7 +189,7 @@ class Edit extends Component {
 
 	handleCardDeletion = () => {
 		const { clientId, removeBlock, updateBlockAttributes, rootBlock, rootBlockClientId, rootBlockAttributes, attributes: { id, pricings } } = this.props
-		const editorSelector = select('core/editor')
+		const editorSelector = select('core/block-editor')
 		let updatedRootBlock = getBlock(rootBlockClientId)
 		let updatedRootBlockAttributes = editorSelector.getBlockAttributes(rootBlockClientId)
 
@@ -192,35 +223,100 @@ class Edit extends Component {
 
 	render() {
 		const {
-			isSelected, clientId, setAttributes,
+			name,
+			isSelected,
+			clientId,
+			attributes,
+			setAttributes,
 			attributes: {
-				uniqueId, pricings, alignment, titleSpacing, layout,
+				uniqueId,
+				className,
+				pricings,
+				alignment,
+				titleSpacing,
+				layout,
 				// Title 
-				title, titleColor, titleTypography, titleAlignment,
+				title,
+				titleColor,
+				titleTypography,
 				//sub title 
-				subTitleAlignment, subTitleSpacing, subTitleColor, subTitleTypography,
+				subTitleSpacing,
+				subTitleColor,
+				subTitleTypography,
 				// Price
-				price, priceAlignment, priceColor, priceTypography, discount, discountPrice, discountColor, discountTypography, pricingSpacing,
+				price,
+				priceColor,
+				priceTypography,
+				discount,
+				discountPrice,
+				discountColor,
+				discountTypography,
+				pricingSpacing,
 				// Currency
-				currency, currencyCustom, currencyPosition, currencyAlign, currencyColor, currencyTypography,
+				currency,
+				currencyCustom,
+				currencyPosition,
+				currencyAlign,
+				currencyColor,
+				currencyTypography,
 				// Duration
-				enableDuration, duration, durationPosition, durationColor, durationTypography, durationAlign, durationPaddingTop, durationPaddingBottom,
-				// Badge
-				enableBadge, badge, badgeStyle, enableBadgeOverflow, badgeCircleRotation, badgePosition, badgeColor, badgeTextColor, badgeHoverColor, badgeTextHoverColor, badgeTypography, badgeRadius, badgeTop, badgeRight, badgeLeft, badgePaddingY, badgePaddingX, badgeOverflowTop, badgeOverflowLeft, badgeOverflowRight, badgeOverflowPaddingX, badgeOverflowPaddingY,
+				enableDuration,
+				duration,
+				durationPosition,
+				durationColor,
+				durationTypography,
+				durationAlign,
+				durationPadding,
+				durationPaddingTop,
+				durationPaddingBottom,
 				// Background
-				bgColor, bgPadding, bgBorderRadius, bgBorder, bgColorHover, bgBorderColorHover, bgShadow, bgShadowHover,
+				bgColor,
+				bgPadding,
+				bgBorderRadius,
+				bgBorder,
+				bgShadow,
 				// features
-				enableFeatures, blockFeatures, listAlignment, iconPosition, iconColor, enableListIcons,
+				enableFeatures,
+				listItems,
+				iconPosition,
+				iconColor,
+				enableListIcons,
 				//Header
-				headerBg, headerBorder, headerPadding,
+				headerBg,
+				headerBorder,
+				headerPadding,
 				//postButton text
 				enablePostButtonText,
+				//Badge
+				enableBadge,
+				badge,
+				badgeStyle,
+				badgeSize,
+				badgePosition,
+				badgeSpacing,
+				badgeSpacingTop,
+				badgeColor,
+				badgeBg,
+				badgeTypography,
+				badgeRadius,
+
+				//animation
+				animation,
+				//global
+				globalZindex,
+				enablePosition,
+				selectPosition,
+				positionXaxis,
+				positionYaxis,
+				hideTablet,
+				hideMobile,
+				globalCss,
+				interaction
 			}
 
-		} = this.props
+		} = this.props;
 
-		const { device, openPanelSetting, showpriceTypography, showDurationTypography, showBadgeTypography, showTitleTypography, showSubTitleTypography } = this.state
-		if (uniqueId) { CssGenerator(this.props.attributes, 'pricing', uniqueId) }
+		const { device, openPanelSetting, showPostTextTypography } = this.state;
 
 		return (
 			<Fragment>
@@ -235,28 +331,20 @@ class Edit extends Component {
 								{ value: 5, svg: icons.pricing[5], label: __('Layout 5') }
 							]}
 						/>
+
+						<Alignment
+							label={__('Alignment')}
+							alignmentType="content"
+							value={alignment}
+							disableJustify
+							onChange={val => setAttributes({ alignment: val })}
+							responsive
+							device={device}
+							onDeviceChange={value => this.setState({ device: value })} />
 						<Toggle
 							value={enableFeatures}
 							label={__('Show Features')}
 							onChange={val => setAttributes({ enableFeatures: val })} />
-						<Toggle
-							value={enableBadge}
-							label={__('Show Badge')}
-							onChange={val => setAttributes({ enableBadge: val })} />
-						<Toggle
-							value={enablePostButtonText}
-							label={__('Show PostButtonText')}
-							onChange={val => setAttributes({ enablePostButtonText: val })} />
-
-						<Alignment label={__('Alignment')} alignmentType="content" value={alignment} disableJustify
-							onChange={val => setAttributes({
-								alignment: val,
-								titleAlignment: val,
-								subTitleAlignment: val,
-								priceAlignment: val,
-								listAlignment: val,
-								buttonAlignment: val,
-							})} />
 					</PanelBody>
 
 					<PanelBody title={__('Title')} opened={'Title' === openPanelSetting} onToggle={() => this.handlePanelOpenings(openPanelSetting !== 'Title' ? 'Title' : '')}>
@@ -469,26 +557,17 @@ class Edit extends Component {
 										onChange={val => setAttributes({ durationAlign: val })} />
 									:
 									<Fragment>
-										<Range
+										<Padding
 											min={0}
-											max={200}
+											max={100}
+											value={durationPadding}
+											label={__('Padding')}
+											onChange={val => setAttributes({ durationPadding: val })}
+											unit={['px', 'em', '%']}
 											responsive
 											device={device}
 											onDeviceChange={value => this.setState({ device: value })}
-											value={durationPaddingTop}
-											unit={['px', 'em', '%']}
-											label={<span className="dashicons dashicons-sort" title="Padding Top" />}
-											onChange={val => setAttributes({ durationPaddingTop: val })} />
-										<Range
-											min={0}
-											max={200}
-											responsive
-											device={device}
-											onDeviceChange={value => this.setState({ device: value })}
-											unit={['px', 'em', '%']}
-											value={durationPaddingBottom}
-											label={<span className="dashicons dashicons-leftright" title="Padding Bottom" />}
-											onChange={val => setAttributes({ durationPaddingBottom: val })} />
+										/>
 									</Fragment>
 								}
 
@@ -515,6 +594,8 @@ class Edit extends Component {
 								onChange={val => setAttributes({ headerBorder: val })}
 								unit={['px', 'em', '%']}
 								responsive
+								device={device}
+								onDeviceChange={value => this.setState({ device: value })}
 							/>
 							<Padding
 								min={30}
@@ -524,136 +605,16 @@ class Edit extends Component {
 								onChange={val => setAttributes({ headerPadding: val })}
 								unit={['px', 'em', '%']}
 								responsive
+								device={device}
+								onDeviceChange={value => this.setState({ device: value })}
 							/>
 						</PanelBody>
 					}
 
-					{
-						enableBadge &&
-						<PanelBody title={__('Badge')} opened={'Badge' === openPanelSetting} onToggle={() => this.handlePanelOpenings(openPanelSetting !== 'Badge' ? 'Badge' : '')}>
-							<Select
-								label={__('Badge Style')}
-								options={['corner', 'half-', 'circle', 'ribbon']}
-								value={badgeStyle}
-								onChange={val => setAttributes({ badgeStyle: val })} />
-							{
-								badgeStyle == 'circle' &&
-								<Fragment>
-									<Range
-										min={30}
-										max={100}
-										value={badgeRadius}
-										label={__('Circle Radius')}
-										onChange={val => setAttributes({ badgeRadius: val })} />
-									<Range
-										min={-180}
-										max={180}
-										value={badgeCircleRotation}
-										label={__('Rotate Circle')}
-										onChange={val => setAttributes({ badgeCircleRotation: val })} />
-								</Fragment>
-
-							}
-							<Toggle
-								value={enableBadgeOverflow}
-								label={__('Overflow')}
-								onChange={val => setAttributes({ enableBadgeOverflow: val })} />
-							<Tabs>
-								<Tab tabTitle={__('Normal')}>
-									<Color
-										label={__('Background color')}
-										value={badgeColor}
-										onChange={val => setAttributes({ badgeColor: val })} />
-									<Color
-										label={__('Text Color')}
-										value={badgeTextColor}
-										onChange={val => setAttributes({ badgeTextColor: val })} />
-								</Tab>
-								<Tab tabTitle={__('Hover')}>
-									<Color
-										label={__('Badge color')}
-										value={badgeHoverColor}
-										onChange={val => setAttributes({ badgeHoverColor: val })} />
-									<Color
-										label={__('Text Color')}
-										value={badgeTextHoverColor}
-										onChange={val => setAttributes({ badgeTextHoverColor: val })} />
-								</Tab>
-							</Tabs>
-							<RadioAdvanced
-								label={__('Badge Position')}
-								options={[
-									{ label: __('Left'), value: 'left', title: __('Left') },
-									{ label: __('Right'), value: 'right', title: __('Right') },
-								]}
-								value={badgePosition}
-								onChange={val => setAttributes({ badgePosition: val })} />
-							<Separator label={__('Custom Alignment')} />
-							<Range
-								min={-200}
-								max={200}
-								value={enableBadgeOverflow ? badgeOverflowTop : badgeTop}
-								label={__('Position Top')}
-								onChange={val => setAttributes(enableBadgeOverflow ? { badgeOverflowTop: val } : { badgeTop: val })} />
-							{badgePosition == 'left' ?
-								<Range
-									min={-200}
-									max={200}
-									value={enableBadgeOverflow ? badgeOverflowRight : badgeRight}
-									label={__('Right')}
-									onChange={val => setAttributes(enableBadgeOverflow ? { badgeOverflowRight: val } : { badgeRight: val })} />
-								:
-								<Range
-									min={-200}
-									max={200}
-									value={enableBadgeOverflow ? badgeOverflowLeft : badgeLeft}
-									label={__('Left')}
-									onChange={val => setAttributes(enableBadgeOverflow ? { badgeOverflowLeft: val } : { badgeLeft: val })} />
-							}
-
-							<Typography
-								value={badgeTypography}
-								disableLineHeight
-								onChange={val => setAttributes({ badgeTypography: val })}
-								device={device}
-								onDeviceChange={value => this.setState({ device: value })} />
-
-							<Range
-								min={0}
-								max={150}
-								value={enableBadgeOverflow ? badgeOverflowPaddingY : badgePaddingY}
-								unit={['px', 'em', '%']}
-								label={<span className="dashicons dashicons-sort" title="X Spacing" />}
-								onChange={val => setAttributes(enableBadgeOverflow ? { badgeOverflowPaddingY: val } : { badgePaddingY: val })}
-								responsive
-								device={device}
-								onDeviceChange={value => this.setState({ device: value })} />
-							<Range
-								min={0}
-								max={150}
-								value={enableBadgeOverflow ? badgeOverflowPaddingX : badgePaddingX}
-								unit={['px', 'em', '%']}
-								label={<span className="dashicons dashicons-leftright" title="Y Spacing" />}
-								onChange={val => setAttributes(enableBadgeOverflow ? { badgeOverflowPaddingX: val } : { badgePaddingX: val })}
-								responsive
-								device={device}
-								onDeviceChange={value => this.setState({ device: value })} />
-						</PanelBody>
-					}
-
 					<PanelBody title={__('Background')} initialOpen={false}>
-						<Tabs>
-							<Tab tabTitle={__('Normal')}>
-								<ColorAdvanced label={__('Background Color')} value={bgColor} onChange={val => setAttributes({ bgColor: val })} />
-								<Border label={__('Border')} value={bgBorder} onChange={val => setAttributes({ bgBorder: val })} min={0} max={10} />
-								<BoxShadow label={__('Box-Shadow')} value={bgShadow} onChange={(value) => setAttributes({ bgShadow: value })} />
-							</Tab>
-							<Tab tabTitle={__('Hover')}>
-								<ColorAdvanced label={__('Background Color')} value={bgColorHover} onChange={val => setAttributes({ bgColorHover: val })} />
-								<Color label={__('Border Color')} value={bgBorderColorHover} onChange={(value) => setAttributes({ bgBorderColorHover: value })} />
-								<BoxShadow label={__('Box-Shadow')} value={bgShadowHover} onChange={(value) => setAttributes({ bgShadowHover: value })} />
-							</Tab>
-						</Tabs>
+						<ColorAdvanced label={__('Background Color')} value={bgColor} onChange={val => setAttributes({ bgColor: val })} />
+						<Border label={__('Border')} value={bgBorder} onChange={val => setAttributes({ bgBorder: val })} min={0} max={10} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
+						<BoxShadow label={__('Box-Shadow')} value={bgShadow} onChange={(value) => setAttributes({ bgShadow: value })} />
 						<Padding
 							label={__('Padding')}
 							value={bgPadding}
@@ -665,6 +626,125 @@ class Edit extends Component {
 							onDeviceChange={value => this.setState({ device: value })} />
 						<BorderRadius label={__('Radius')} value={bgBorderRadius} onChange={(value) => setAttributes({ bgBorderRadius: value })} min={0} max={100} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
 					</PanelBody>
+
+					<PanelBody title={__('Badge')} opened={'Badge' === openPanelSetting} onToggle={() => this.handlePanelOpenings(openPanelSetting !== 'Badge' ? 'Badge' : '')}>
+						<Toggle
+							value={enableBadge}
+							label={__('Enable')}
+							onChange={val => setAttributes({ enableBadge: val })}
+						/>
+
+						{enableBadge &&
+							<Fragment>
+								<Styles value={badgeStyle} onChange={val => setAttributes({ badgeStyle: val })}
+									options={[
+										{ value: 1, svg: icons.pricing.badge[1], label: __('Style 1') },
+										{ value: 2, svg: icons.pricing.badge[2], label: __('Style 2') },
+										{ value: 3, svg: icons.pricing.badge[3], label: __('Style 3') },
+										{ value: 4, svg: icons.pricing.badge[4], label: __('Style 4') },
+										{ value: 5, svg: icons.pricing.badge[5], label: __('Style 5') },
+										{ value: 6, svg: icons.pricing.badge[6], label: __('Style 6') },
+									]}
+								/>
+
+								<RadioAdvanced
+									label={__('Size')}
+									options={[
+										{ label: __('Small'), value: 'small', title: __('Small') },
+										{ label: __('Regular'), value: 'regular', title: __('Regular') },
+										{ label: __('Large'), value: 'large', title: __('Large') },
+									]}
+									value={badgeSize}
+									onChange={val => setAttributes({ badgeSize: val })}
+								/>
+
+								{(badgeStyle == 1 || badgeStyle == 2 || badgeStyle == 5 || badgeStyle == 6) &&
+									<RadioAdvanced
+										label={__('Position')}
+										options={[
+											{ label: __('Left'), value: 'left', title: __('Left') },
+											{ label: __('Right'), value: 'right', title: __('Right') },
+										]}
+										value={badgePosition}
+										onChange={val => setAttributes({ badgePosition: val })}
+									/>
+								}
+
+								<Color
+									label={__('Background color')}
+									value={badgeBg}
+									onChange={val => setAttributes({ badgeBg: val })}
+								/>
+
+								<Color
+									label={__('Text color')}
+									value={badgeColor}
+									onChange={val => setAttributes({ badgeColor: val })}
+								/>
+
+								{badgeStyle == 5 &&
+									<BorderRadius
+										label={__('Radius')}
+										value={badgeRadius}
+										onChange={(value) => setAttributes({ badgeRadius: value })}
+										min={0}
+										max={100}
+										unit={['px', 'em', '%']}
+										responsive
+										device={device}
+										onDeviceChange={value => this.setState({ device: value })}
+									/>
+								}
+
+								{(badgeStyle == 3 || badgeStyle == 5 || badgeStyle == 6) &&
+									<Range
+										label={badgeStyle == 5 ? __('Side Spacing') : __('Spacing')}
+										value={badgeSpacing}
+										onChange={(value) => setAttributes({ badgeSpacing: value })}
+										min={0}
+										max={100}
+										unit={['px', 'em', '%']}
+										responsive
+										device={device}
+										onDeviceChange={value => this.setState({ device: value })}
+									/>
+								}
+
+								{badgeStyle == 5 &&
+									<Range
+										label={__('Top Spacing')}
+										value={badgeSpacingTop}
+										onChange={(value) => setAttributes({ badgeSpacingTop: value })}
+										min={0}
+										max={100}
+										unit={['px', 'em', '%']}
+										responsive
+										device={device}
+										onDeviceChange={value => this.setState({ device: value })}
+									/>
+								}
+
+								<Separator />
+
+								<Typography
+									value={badgeTypography}
+									disableLineHeight
+									onChange={val => setAttributes({ badgeTypography: val })}
+									device={device}
+									onDeviceChange={value => this.setState({ device: value })} />
+							</Fragment>
+						}
+
+					</PanelBody>
+
+					{buttonSettings(this.props.attributes, device, (key, value) => { setAttributes({ [key]: value }) }, (key, value) => { this.setState({ [key]: value }) }, showPostTextTypography)}
+
+					{listSettings(this.props.attributes, device, setAttributes)}
+
+					{animationSettings(uniqueId, animation, setAttributes)}
+
+					{interactionSettings(uniqueId, interaction, setAttributes)}
+
 				</InspectorControls>
 
 				<BlockControls>
@@ -677,51 +757,63 @@ class Edit extends Component {
 					</Toolbar>
 				</BlockControls>
 
-				<div className={`qubely-block-${uniqueId}`} >
-					<div className={`qubely-block-pricing`}>
-						<div className="qubely-block-pricing-header">
-							{this.renderPricingTitle()}
-							
-							{ (layout == 3 || layout == 4) &&
-								this.renderPricingSubTitle()
+				{globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
+
+				<div className={`qubely-block-${uniqueId}${className ? ` ${className}` : ''}`} >
+					<div className={`qubely-block-pricing`} onContextMenu={event => handleContextMenu(event, this.refs.qubelyContextMenu)}>
+						{enableBadge && <span className={`qubely-pricing-badge qubely-badge-style-${badgeStyle} qubely-badge-size-${badgeSize}`} contenteditable="true" onBlur={(e) => setAttributes({ 'badge': e.target.innerText })} onClick={() => this.handlePanelOpenings('Badge')}><span>{badge}</span></span>}
+						<div className="qubely-block-pricing-content">
+							<div className="qubely-block-pricing-header">
+								{this.renderPricingTitle()}
+
+								{(layout == 3 || layout == 4) &&
+									this.renderPricingSubTitle()
+								}
+
+								{this.renderPricingPrice()}
+								{enableDuration && durationPosition == 'bottom' && this.renderDuration()}
+
+								{(layout == 2) &&
+									this.renderPricingSubTitle()
+								}
+							</div>
+
+							{(layout == 4) &&
+								this.renderPricingButton()
 							}
 
-							{this.renderPricingPrice()}
-							{enableDuration && durationPosition == 'bottom' && this.renderDuration()}
+							{enableFeatures &&
+								<div ref={this.contextRef} className={`qubely-pricing-features`} onClick={() => this.handlePanelOpenings('Features')}>
+									<QubelyIconListEdit
+										parentBlock={`qubely-block-${uniqueId}`}
+										disableButton={listItems.length > 0 ? true : false}
+										buttonText={__('Add New Feature')}
+										enableListIcons={enableListIcons}
+										listItems={listItems}
+										iconColor={iconColor}
+										iconPosition={iconPosition}
+										listWrapperClassName={`qubely-list icon-position-${iconPosition}`}
+										newListItemPlaceHolder={__('Add New Feature')}
+										onListItemModification={newValues => setAttributes({ listItems: newValues })}
+										onChange={(key, value) => setAttributes({ [key]: value })}
+										onIconColorChange={(color, currentListItemIndex) => setAttributes({ iconColor: color })}
+									/>
+								</div>
+							}
 
-							{ (layout == 2) &&
-								this.renderPricingSubTitle()
+							{(layout == 1 || layout == 2 || layout == 3 || layout == 5) &&
+								this.renderPricingButton()
 							}
 						</div>
-
-						{ (layout == 4) &&
-							this.renderPricingButton()
-						}
-
-						{
-							enableFeatures &&
-							<div ref={this.contextRef} className={`qubely-pricing-features qubely-alignment-${listAlignment}`} onClick={() => this.handlePanelOpenings('Features')}>
-								<QubelyIconListEdit
-									parentBlock={`qubely-block-${uniqueId}`}
-									disableButton={blockFeatures.length > 0 ? true : false}
-									buttonText={__('Add New Feature')}
-									enableListIcons={enableListIcons}
-									listItems={blockFeatures}
-									iconColor={iconColor}
-									iconPosition={iconPosition}
-									listWrapperClassName={`qubely-list icon-position-${iconPosition}`}
-									newListItemPlaceHolder={__('Add New Feature')}
-									onListItemModification={newValues => setAttributes({ blockFeatures: newValues })}
-									onIconColorChange={(color, currentListItemIndex) => setAttributes({ iconColor: color })}
-								/>
-							</div>
-						}
-
-						{ (layout == 1 || layout == 2 || layout == 3 || layout == 5) &&
-							this.renderPricingButton()
-						}
-
-						{enableBadge && <span className={`qubely-pricing-badge`} contenteditable="true" onBlur={(e) => setAttributes({ 'badge': e.target.innerText })} onClick={() => this.handlePanelOpenings('Badge')}> {badge} </span>}
+						<div ref="qubelyContextMenu" className={`qubely-context-menu-wraper`} >
+							<ContextMenu
+								name={name}
+								clientId={clientId}
+								attributes={attributes}
+								setAttributes={setAttributes}
+								qubelyContextMenu={this.refs.qubelyContextMenu}
+							/>
+						</div>
 
 					</div>
 				</div>
@@ -732,7 +824,7 @@ class Edit extends Component {
 export default compose([
 	withSelect((select, ownProps) => {
 		const { clientId } = ownProps
-		const { getBlock, getBlockRootClientId, getBlockAttributes } = select('core/editor')
+		const { getBlock, getBlockRootClientId, getBlockAttributes } = select('core/block-editor')
 		let block = getBlock(clientId),
 			rootBlockClientId = getBlockRootClientId(clientId),
 			rootBlock = getBlock(rootBlockClientId),
@@ -745,7 +837,7 @@ export default compose([
 		}
 	}),
 	withDispatch((dispatch) => {
-		const { insertBlock, removeBlock, updateBlockAttributes, toggleSelection } = dispatch('core/editor')
+		const { insertBlock, removeBlock, updateBlockAttributes, toggleSelection } = dispatch('core/block-editor')
 		return {
 			insertBlock,
 			removeBlock,
@@ -753,4 +845,5 @@ export default compose([
 			toggleSelection
 		}
 	}),
+	withCSSGenerator()
 ])(Edit)

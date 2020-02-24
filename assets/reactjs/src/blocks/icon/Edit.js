@@ -1,12 +1,28 @@
 const { __ } = wp.i18n;
 const { Component, Fragment } = wp.element;
 const { PanelBody, Toolbar } = wp.components
-const { InspectorControls, BlockControls } = wp.editor
-import { Color, IconList, Styles, ColorAdvanced, Range, RadioAdvanced, Url, BoxShadow, Alignment, Tabs, Tab, Separator, Border, BorderRadius } from "../../components/FieldRender"
-import { CssGenerator } from '../../components/CssGenerator'
-import InlineToolbar from '../../components/fields/inline/InlineToolbar'
-import '../../components/GlobalSettings'
-import icons from '../../helpers/icons';
+const { InspectorControls, BlockControls } = wp.blockEditor
+const {
+	Color,
+	IconList,
+	Styles,
+	ColorAdvanced,
+	Range,
+	RadioAdvanced,
+	Url,
+	BoxShadow,
+	Alignment,
+	Tabs,
+	Tab,
+	Border,
+	BorderRadius,
+	gloalSettings: { globalSettingsPanel, animationSettings, interactionSettings },
+	Inline: { InlineToolbar },
+	ContextMenu: { ContextMenu, handleContextMenu },
+	withCSSGenerator
+} = wp.qubelyComponents
+
+import icons from '../../helpers/icons'
 
 class Edit extends Component {
 	constructor() {
@@ -41,15 +57,49 @@ class Edit extends Component {
 		setAttributes({ iconStyle: newStyle, border: newBorder })
 	}
 	render() {
-		const { uniqueId, name, url, alignment, iconSize, iconSizeCustom, iconBorderRadius, iconBackgroundSize, iconColor, iconHoverColor, bgColor, bgHoverColor, borderWidth, border, borderHoverColor, iconShadow, iconHoverShadow, iconStyle } = this.props.attributes
-		const { setAttributes } = this.props
+		const {
+			clientId,
+			isSelected,
+			attributes,
+			setAttributes,
+			attributes: {
+				uniqueId,
+				className,
+				name,
+				url,
+				alignment,
 
-		if (uniqueId) { CssGenerator(this.props.attributes, 'icon', uniqueId); }
+				iconSize,
+				iconSizeCustom,
+				iconBorderRadius,
+				iconBackgroundSize,
+				iconColor,
+				iconHoverColor,
+
+				bgColor,
+				bgHoverColor,
+				border,
+				borderHoverColor,
+				iconShadow,
+				iconHoverShadow,
+				iconStyle,
+
+                animation,
+                enablePosition, 
+                selectPosition, 
+                positionXaxis, 
+                positionYaxis,
+				globalZindex,
+				hideTablet,
+				hideMobile,
+				globalCss,
+				interaction 
+			}
+		} = this.props;
 
 		return (
 			<Fragment>
 				<InspectorControls key="inspector">
-
 					<PanelBody title=''>
 						<Styles
 							value={iconStyle}
@@ -64,7 +114,7 @@ class Edit extends Component {
 						<Alignment
 							label={__('Alignment')}
 							value={alignment}
-							onChange={val => setAttributes({ alignment: val })} alignmentType="content" disableJustify responsive />
+							onChange={val => setAttributes({ alignment: val })} alignmentType="content" disableJustify responsive device={this.state.device} onDeviceChange={value => this.setState({ device: value })} />
 					</PanelBody>
 
 					<PanelBody title={__('Icon')} initialOpen={false}>
@@ -89,7 +139,7 @@ class Edit extends Component {
 								min={12}
 								max={300}
 								unit={['px', 'em', '%']}
-								responsive 
+								responsive
 								device={this.state.device}
 								onDeviceChange={value => this.setState({ device: value })} />
 						}
@@ -128,8 +178,9 @@ class Edit extends Component {
 										value={border}
 										unit={['px', 'em']}
 										responsive
-										device={this.state.device}
+										min={0} max={10}
 										onChange={val => setAttributes({ border: val })}
+										device={this.state.device}
 										onDeviceChange={value => this.setState({ device: value })} />
 								</Tab>
 								<Tab tabTitle={__('Hover')}>
@@ -137,13 +188,17 @@ class Edit extends Component {
 										label={__('Background Color')}
 										value={bgHoverColor}
 										onChange={val => setAttributes({ bgHoverColor: val })} />
-									<Color
-										label={__('Border Color')}
-										value={borderHoverColor}
-										onChange={val => setAttributes({ borderHoverColor: val })} />
+									{
+										border.type &&
+										<Color
+											label={__('Border Color')}
+											value={borderHoverColor}
+											onChange={val => setAttributes({ borderHoverColor: val })} />
+									}
+
 								</Tab>
 							</Tabs>
-							
+
 							<Range
 								label={__('Background Size')}
 								value={iconBackgroundSize}
@@ -152,7 +207,7 @@ class Edit extends Component {
 								unit={['px', 'em', '%']}
 								responsive
 								device={this.state.device}
-								onDeviceChange={value => this.setState({ device: value })} 
+								onDeviceChange={value => this.setState({ device: value })}
 								onChange={val => setAttributes({ iconBackgroundSize: val })}
 							/>
 							<BorderRadius
@@ -187,6 +242,11 @@ class Edit extends Component {
 							</Tabs>
 						</PanelBody>
 					}
+
+					{animationSettings(uniqueId, animation, setAttributes)}
+
+					{interactionSettings(uniqueId, interaction, setAttributes)}
+
 				</InspectorControls>
 
 				<BlockControls>
@@ -199,10 +259,21 @@ class Edit extends Component {
 					</Toolbar>
 				</BlockControls>
 
-				<div className={`qubely-block-${uniqueId}`}>
-					<div className="qubely-block-icon-wrapper">
+				{globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
+
+				<div className={`qubely-block-${uniqueId}${className ? ` ${className}` : ''}`}>
+					<div className="qubely-block-icon-wrapper" onContextMenu={event => handleContextMenu(event, this.refs.qubelyContextMenu)}>
 						<div className="qubely-block-icon">
 							<i className={name} />
+						</div>
+						<div ref="qubelyContextMenu" className={`qubely-context-menu-wraper`} >
+							<ContextMenu
+								name={this.props.name}
+								clientId={clientId}
+								attributes={attributes}
+								setAttributes={setAttributes}
+								qubelyContextMenu={this.refs.qubelyContextMenu}
+							/>
 						</div>
 					</div>
 				</div>
@@ -211,4 +282,4 @@ class Edit extends Component {
 	}
 }
 
-export default Edit;
+export default withCSSGenerator() (Edit);

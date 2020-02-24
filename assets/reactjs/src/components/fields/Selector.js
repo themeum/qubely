@@ -2,6 +2,7 @@ import '../css/selector.scss'
 const { Component } = wp.element
 import Select from "./Select"
 import icons from '../../helpers/icons'
+
 class Selector extends Component {
     setSettings(value) {
         this.props.onChange(value.target.getAttribute('data-value'))

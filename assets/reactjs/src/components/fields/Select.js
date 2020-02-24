@@ -1,7 +1,8 @@
 const { __ } = wp.i18n
 import '../css/select.scss'
-import Device from '../Device'
+import Device from './Device'
 const { Component, Fragment } = wp.element
+
 class Select extends Component {
     constructor(props) {
         super(props)
@@ -35,7 +36,7 @@ class Select extends Component {
                 }
                 {label && <label>{label}</label>}
                 
-                <div className="qubely-field-chield">
+                <div className="qubely-field-child">
                     <div className={"qubely-popup-select " + direction} ref={node => this.node = node}>
                         {(this.props.clear && this._filterValue() != '') &&
                             <span className={'qubely-clear'} onClick={() => this.setSettings("")}><i className="fas fa-times" /></span>

@@ -1,5 +1,5 @@
 const { Component } = wp.element;
-import { animationAttr } from '../../components/HelperFunction'
+const { HelperFunction: { animationAttr } } = wp.qubelyComponents
 class Save extends Component {
     render() {
         const { uniqueId, animation, placeID, mapAddress, zoom, height, apiKey, mapStyle, showZoomButtons, showMapTypeButtons, showStreetViewButton, showFullscreenButton, optionDraggable, showMarker, iconPointer } = this.props.attributes;

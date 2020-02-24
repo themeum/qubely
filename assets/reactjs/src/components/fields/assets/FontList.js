@@ -1,4 +1,5 @@
 export default [
+    { n: 'Default', f: 'default', v: [] },
     {n:'Arial',f:'sans-serif',v:[100,200,300,400,500,600,700,800,900]},
     {n:'Tahoma',f:'sans-serif',v:[100,200,300,400,500,600,700,800,900]},
     {n:'Verdana',f:'sans-serif',v:[100,200,300,400,500,600,700,800,900]},

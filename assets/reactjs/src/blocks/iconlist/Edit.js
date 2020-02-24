@@ -1,10 +1,36 @@
 const { __ } = wp.i18n;
-const { InspectorControls } = wp.editor
+const { InspectorControls } = wp.blockEditor
 const { Component, Fragment } = wp.element;
-const { PanelBody, Tooltip } = wp.components;
-import { Typography, Alignment, Wrapper,Padding, Styles, Range, Tabs, Tab, IconList, Color, RadioAdvanced, Border, BorderRadius, BoxShadow, Spacing, Separator } from '../../components/FieldRender'
-import { CssGenerator } from '../../components/CssGenerator'
+const { PanelBody, Tooltip, Popover } = wp.components;
+const {
+    Typography,
+    Alignment,
+    Padding,
+    Styles,
+    Range,
+    Tabs,
+    Tab,
+    IconList,
+    Color,
+    RadioAdvanced,
+    Border,
+    BorderRadius,
+    BoxShadow,
+    Separator,
+    gloalSettings: {
+        globalSettingsPanel,
+        animationSettings,
+        interactionSettings
+    },
+    ContextMenu: {
+        ContextMenu,
+        handleContextMenu
+    },
+    withCSSGenerator
+} = wp.qubelyComponents
+
 import icons from '../../helpers/icons'
+
 class Edit extends Component {
     constructor(props) {
         super(props)
@@ -13,7 +39,7 @@ class Edit extends Component {
             device: 'md',
             currentListItemIndex: 0,
             openIconPopUp: false,
-            removeItemViaBackSpace: 999,
+            removeItemViaBackSpace: -1,
             focusedItem: this.props.attributes.listItems.length - 1
         }
     }
@@ -25,15 +51,15 @@ class Edit extends Component {
         } else if (uniqueId && uniqueId != _client) {
             setAttributes({ uniqueId: _client });
         }
-        this.placeCaretAtEnd(document.querySelector(`.qubely-list-item-text-${this.state.focusedItem}`))
+        this.placeCaretAtEnd(document.querySelector(`.qubely-block-${uniqueId} .qubely-list-item-text-${this.state.focusedItem}`))
     }
     componentDidUpdate(prevProps, prevState) {
         if (this.props.attributes.listItems.length > prevProps.attributes.listItems.length) {
-            let focusedListItem = document.getElementById(`qubely-list-item-text-${this.state.focusedItem}`)
+            let focusedListItem = document.querySelector(`.qubely-block-${prevProps.attributes.uniqueId} .qubely-list-item-text-${this.state.focusedItem}`)
             focusedListItem.focus();
         } else if (this.props.attributes.listItems.length < prevProps.attributes.listItems.length) {
             const { focusedItem } = this.state
-            let focusedListItem = document.querySelector(`.qubely-list-item-text-${focusedItem}`)
+            let focusedListItem = document.querySelector(`.qubely-block-${prevProps.attributes.uniqueId} .qubely-list-item-text-${focusedItem}`)
             focusedListItem && this.placeCaretAtEnd(focusedListItem)
         }
     }
@@ -73,12 +99,12 @@ class Edit extends Component {
     }
     renderListItems = () => {
         const { isSelected, attributes: { iconPosition, listItems } } = this.props
-        const { focusedItem, removeItemViaBackSpace } = this.state
+        const { focusedItem, removeItemViaBackSpace, currentListItemIndex, openIconPopUp } = this.state
         return listItems.map((item, index) => {
             return (
                 <li className="qubely-list-li qubely-list-li-editor" >
                     <div ref="avoidOnClick" className={`qubely-list-item qubely-list-item-${index}`} onClick={() => this.setState({ currentListItemIndex: index })}>
-                        {iconPosition == 'left' && <span className={`qubely-list-item-icon ${item.icon} fa-fw`} onClick={() => this.setState({ openIconPopUp: this.state.currentListItemIndex == index ? !this.state.openIconPopUp : true })} />}
+                        {iconPosition == 'left' && <span className={`qubely-list-item-icon ${item.icon} fa-fw`} onClick={() => this.setState({ openIconPopUp: openIconPopUp ? (currentListItemIndex == index) ? false : true : true })} />}
                         <div
                             className={`qubely-list-item-text-${index}`}
                             id={`qubely-list-item-text-${index}`}
@@ -89,7 +115,7 @@ class Edit extends Component {
                                 if (event.key == 'Enter') {
                                     event.preventDefault()
                                     this.updateListItems(index, 'add')
-                                    this.setState({ focusedItem: index + 1 == listItems.length ? listItems.length : this.state.focusedItem + 1 })
+                                    this.setState({ focusedItem: index + 1 == listItems.length ? listItems.length : focusedItem + 1 })
                                 }
                             }
                             }
@@ -98,45 +124,42 @@ class Edit extends Component {
                                     event.target.innerText.length == 0 && this.setState({ removeItemViaBackSpace: index })
                                     if (removeItemViaBackSpace == index) {
                                         this.updateListItems(index, 'delete')
-                                        this.setState({ focusedItem: index > 0 ? index - 1 : index })
+                                        this.setState({ focusedItem: index > 0 ? index - 1 : index, removeItemViaBackSpace: -1 })
                                     }
                                 }
                             }}
                             onClick={() => this.setState({ focusedItem: index })}>
                             {item.text}
                         </div>
-                        {iconPosition == 'right' && <span className={`qubely-list-item-icon ${item.icon} fa-fw`} onClick={() => this.setState({ openIconPopUp: this.state.currentListItemIndex == index ? !this.state.openIconPopUp : true })} />}
-                    </div>
-                    {
-                        item.text.length > 0 &&
-                        <Tooltip text={__('Delete this item')}>
-                            <span className="qubely-action-remove" role="button"
-                                onClick={() => {
-                                    this.updateListItems(index, 'delete')
-                                    index == focusedItem ? this.setState({ focusedItem: index > 0 ? index - 1 : index })
-                                        :
-                                        this.setState({ focusedItem: focusedItem > 0 ? focusedItem - 1 : focusedItem })
+                        {iconPosition == 'right' && <span className={`qubely-list-item-icon ${item.icon} fa-fw`} onClick={() => this.setState({ openIconPopUp: openIconPopUp ? (currentListItemIndex == index) ? false : true : true })} />}
+                        {
+                            item.text.length > 0 &&
+                            <Tooltip text={__('Delete this item')}>
+                                <span className="qubely-action-remove" role="button"
+                                    onClick={() => {
+                                        this.updateListItems(index, 'delete')
+                                        index == focusedItem ? this.setState({ focusedItem: index > 0 ? index - 1 : index })
+                                            :
+                                            this.setState({ focusedItem: focusedItem > 0 ? focusedItem - 1 : focusedItem })
 
-                                }}>
-                                <i class="fas fa-times" />
-                            </span>
-                        </Tooltip>
-                    }
-                    {(this.state.currentListItemIndex == index && this.state.openIconPopUp && isSelected) &&
-                        <Wrapper inline
-                            domNodetobeAvoided={this.refs.avoidOnClick}
-                            onClickOutside={() => {
-                                this.setState({
-                                    openIconPopUp: false
-                                })
-                            }}
-                            customClass="qubely-padding-0">
-                            <IconList
-                                disableToggle={true}
-                                value={listItems.length > 0 && listItems[index].icon}
-                                onChange={(value) => this.modifySpecificItem({ icon: value }, index)} />
-                        </Wrapper>
-                    }
+                                    }}>
+                                    <i className="fas fa-times" />
+                                </span>
+                            </Tooltip>
+                        }
+                        {(currentListItemIndex == index && openIconPopUp && isSelected) &&
+
+                            <Popover
+                                position={`bottom ${iconPosition}`}
+                                className="qubely-iconlist-icons-popover"
+                            >
+                                <IconList
+                                    disableToggle={true}
+                                    value={listItems.length > 0 && listItems[index].icon}
+                                    onChange={(value) => this.modifySpecificItem({ icon: value }, index)} />
+                            </Popover>
+                        }
+                    </div>
                 </li>
             )
         })
@@ -144,16 +167,51 @@ class Edit extends Component {
     }
 
     render() {
-        const { setAttributes, attributes: { uniqueId,
-            iconSize, iconSizeCustom, iconSpacing, layout, iconPosition,
-            listItems, typography, alignment, iconColor, iconHoverColor,
-            spacing, color, colorHover,padding, backgroundSizeX, backgroundSizeY, background, backgroundHover, border, borderRadius, borderColorHover, shadow, shadowHover,
-        } } = this.props
-        
-        const { device } = this.state
+        const {
+            name,
+            clientId,
+            attributes,
+            isSelected,
+            setAttributes,
+            attributes: {
+                uniqueId,
+                className,
+                iconSize,
+                iconSizeCustom,
+                iconSpacing,
+                layout,
+                iconPosition,
+                listItems,
+                typography,
+                alignment,
+                iconColor,
+                iconHoverColor,
+                spacing,
+                color,
+                colorHover,
+                padding,
+                background,
+                backgroundHover,
+                border,
+                borderRadius,
+                borderColorHover,
+                shadow,
+                shadowHover,
+                animation,
+                globalZindex,
+                enablePosition, 
+                selectPosition, 
+                positionXaxis, 
+                positionYaxis,
+                hideTablet,
+                hideMobile,
+                globalCss,
+                interaction
+            } 
+        } = this.props;
 
-        if (uniqueId) { CssGenerator(this.props.attributes, 'iconlist', uniqueId) }
-        
+        const { device } = this.state;
+
         return (
             <Fragment>
                 <InspectorControls key="inspector">
@@ -164,11 +222,11 @@ class Edit extends Component {
                                 { value: 'classic', svg: icons.list_classic, label: __('Classic') }
                             ]}
                         />
-                        <Alignment label={__('Alignment')} value={alignment} alignmentType="content" onChange={val => setAttributes({ alignment: val })} disableJustify />
+                        <Alignment label={__('Alignment')} value={alignment} alignmentType="content" onChange={val => setAttributes({ alignment: val })} disableJustify responsive />
                     </PanelBody>
 
                     <PanelBody title={__('Typography')} initialOpen={false}>
-                        <Typography label={__('Typography')} value={typography} onChange={val => setAttributes({ typography: val })} device={device} onDeviceChange={value => this.setState({ device: value })}/>
+                        <Typography label={__('Typography')} value={typography} onChange={val => setAttributes({ typography: val })} device={device} onDeviceChange={value => this.setState({ device: value })} />
                     </PanelBody>
 
 
@@ -183,7 +241,7 @@ class Edit extends Component {
                             ]}
                         />
                         {iconSize == 'custom' &&
-                            <Range label={__('Custom Size')} value={iconSizeCustom} onChange={(value) => setAttributes({ iconSizeCustom: value })} min={0} max={100} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })}/>
+                            <Range label={__('Custom Size')} value={iconSizeCustom} onChange={(value) => setAttributes({ iconSizeCustom: value })} min={0} max={100} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
                         }
                         <RadioAdvanced label={__('Position')} value={iconPosition} onChange={val => setAttributes({ iconPosition: val })}
                             options={[
@@ -191,7 +249,7 @@ class Edit extends Component {
                                 { label: 'Right', value: 'right', title: __('Right') }
                             ]}
                         />
-                        <Range label={__('Spacing')} value={iconSpacing} onChange={val => setAttributes({ iconSpacing: val })} min={0} max={60} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })}/>
+                        <Range label={__('Spacing')} value={iconSpacing} onChange={val => setAttributes({ iconSpacing: val })} min={0} max={60} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
                         <Tabs>
                             <Tab tabTitle={__('Normal')}>
                                 <Color label={__(' Color')} value={iconColor} onChange={value => setAttributes({ iconColor: value })} />
@@ -207,16 +265,16 @@ class Edit extends Component {
                         {layout == 'fill' &&
                             <Fragment>
                                 <Padding
-										label={__('Padding')}
-										value={padding}
-										min={0}
-										max={100}
-										responsive
-										device={device}
-										unit={['px', 'em', '%']}
-										onChange={val => setAttributes({ padding: val })}
-										onDeviceChange={value => this.setState({ device: value })}
-									/>
+                                    label={__('Padding')}
+                                    value={padding}
+                                    min={0}
+                                    max={100}
+                                    responsive
+                                    device={device}
+                                    unit={['px', 'em', '%']}
+                                    onChange={val => setAttributes({ padding: val })}
+                                    onDeviceChange={value => this.setState({ device: value })}
+                                />
                                 <Separator />
                                 <BorderRadius
                                     label={__('Radius')}
@@ -226,7 +284,7 @@ class Edit extends Component {
                                     max={100}
                                     unit={['px', 'em', '%']}
                                     responsive
-                                    device={device} 
+                                    device={device}
                                     onDeviceChange={value => this.setState({ device: value })}
                                 />
                             </Fragment>
@@ -234,14 +292,14 @@ class Edit extends Component {
 
                         <Tabs>
                             <Tab tabTitle={__('Normal')}>
-                                <Color label={__('Color')} value={color} onChange={val => setAttributes({ color: val })} />
+                                <Color label={__('Text Color')} value={color} onChange={val => setAttributes({ color: val })} />
                                 {layout == 'fill' &&
                                     <Color label={__('Background Color')} value={background} onChange={val => setAttributes({ background: val })} />
                                 }
-                                <Border label={__('Border')} value={border} onChange={val => setAttributes({ border: val })} min={0} max={10} responsive device={device} onDeviceChange={value => this.setState({ device: value })}/>
+                                <Border label={__('Border')} value={border} onChange={val => setAttributes({ border: val })} min={0} max={10} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
                             </Tab>
                             <Tab tabTitle={__('Hover')}>
-                                <Color label={__('Color')} value={colorHover} onChange={val => setAttributes({ colorHover: val })} />
+                                <Color label={__('Text Color')} value={colorHover} onChange={val => setAttributes({ colorHover: val })} />
                                 {layout == 'fill' &&
                                     <Color label={__('Background Color')} value={backgroundHover} onChange={val => setAttributes({ backgroundHover: val })} />
                                 }
@@ -265,9 +323,16 @@ class Edit extends Component {
                         </PanelBody>
                     }
 
+                    {animationSettings(uniqueId, animation, setAttributes)}
+
+                    {interactionSettings(uniqueId, interaction, setAttributes)}
+
                 </InspectorControls>
-                <div className={`qubely-block-${uniqueId}`}>
-                    <div className="qubely-block-icon-list">
+
+                {globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
+
+                <div className={`qubely-block-${uniqueId}${className ? ` ${className}` : ''}`}>
+                    <div className="qubely-block-icon-list" onContextMenu={event => handleContextMenu(event, this.refs.qubelyContextMenu)}>
                         <ul className="qubely-list">
                             {this.renderListItems()}
                         </ul>
@@ -275,8 +340,19 @@ class Edit extends Component {
                             this.setState({ currentListItemIndex: listItems.length, focusedItem: listItems.length })
                             this.updateListItems(listItems.length, 'add')
                         }} className="button is-default qubely-action-button" role="button">
-                            <i class="fas fa-plus" /> {__('Add New')}
+                            <i className="fas fa-plus" /> {__('Add New')}
                         </button>
+
+                        <div ref="qubelyContextMenu" className={`qubely-context-menu-wraper`} >
+                            <ContextMenu
+                                name={name}
+                                clientId={clientId}
+                                attributes={attributes}
+                                setAttributes={setAttributes}
+                                qubelyContextMenu={this.refs.qubelyContextMenu}
+                            />
+                        </div>
+
                     </div>
                 </div>
             </Fragment>
@@ -284,4 +360,4 @@ class Edit extends Component {
     }
 }
 
-export default Edit;
+export default withCSSGenerator() (Edit);

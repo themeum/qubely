@@ -1,10 +1,10 @@
 const { __ } = wp.i18n
 import Range from './Range'
-import Device from '../Device'
+import Device from './Device'
 import icons from '../../helpers/icons'
 const { Fragment, Component } = wp.element
 const { Tooltip } = wp.components
-const LABEL = 'Padding'
+
 class Padding extends Component {
     constructor(props) {
         super(props)
@@ -37,7 +37,7 @@ class Padding extends Component {
 
         unit && value.unit ? newPadding.unit = value.unit : newPadding.unit = defaultUnit
         newPadding.paddingType = value.paddingType ? value.paddingType : defaultPaddingType
-        newPadding.openPadding = value.openPadding ? value.openPadding : 1
+        newPadding.openPadding = 1
         onChange(newPadding)
     }
 
@@ -80,7 +80,7 @@ class Padding extends Component {
                 }
                 <div className="qubely-d-flex qubely-align-center qubely-mb-10">
 
-                    <label htmlFor={'input'}>   {label ? label : LABEL}  </label>
+                    <label htmlFor={'input'}>   {label ? label : 'Padding'}  </label>
                     {responsive && <Device device={responsiveDevice} commonResponsiveDevice={device} className="qubely-ml-10" onChange={(val) => { device ? onDeviceChange(val) : this.setState({ device: val }) }} />}
 
                     <div className="qubely-field-button-list qubely-ml-auto">

@@ -1,15 +1,27 @@
 
 const { __ } = wp.i18n;
-const { PanelBody, Toolbar, ResizableBox, IconButton, Tooltip } = wp.components
+const { PanelBody, Toolbar, ResizableBox, IconButton } = wp.components
 const { Component, Fragment } = wp.element
-const { InnerBlocks, InspectorControls, BlockControls } = wp.editor
+const { InnerBlocks, InspectorControls, BlockControls } = wp.blockEditor
 const { createBlock } = wp.blocks
 const { select, dispatch } = wp.data
-import { Dimension, Background, Border, BorderRadius, BoxShadow, Range, Separator, DragDimension, RadioAdvanced } from '../../../components/FieldRender'
-import { CssGenerator } from '../../../components/CssGenerator'
-import '../../../components/GlobalSettings';
-import icons from '../../../helpers/icons';
 
+const {
+    Background,
+    Border,
+    BorderRadius,
+    BoxShadow,
+    Range,
+    Separator,
+    Dimension,
+    gloalSettings: {
+        globalSettingsPanel,
+        animationSettings
+    },
+    withCSSGenerator
+} = wp.qubelyComponents
+
+$ = jQuery;
 class Edit extends Component {
     constructor() {
         super(...arguments);
@@ -37,6 +49,9 @@ class Edit extends Component {
         } else if (uniqueId && uniqueId != _client) {
             setAttributes({ uniqueId: _client });
         }
+        if (typeof $ === 'undefined') {
+            $ = jQuery;
+        }
         this.updateColumnWidthAttribute();
     }
 
@@ -46,7 +61,7 @@ class Edit extends Component {
      */
     updateColumnWidthAttribute() {
         const { attributes: { colWidth }, clientId } = this.props
-        const { getPreviousBlockClientId, getNextBlockClientId } = select('core/editor')
+        const { getPreviousBlockClientId, getNextBlockClientId } = select('core/block-editor')
         const currentColumn = $(`#block-${clientId}`)
         const rowWidth = currentColumn.parents('.qubely-backend-row').width()
         const nextBlockId = getNextBlockClientId(clientId)
@@ -70,7 +85,7 @@ class Edit extends Component {
         const { rowWidth, nextColWidth, prevColWidth } = this.state
         toggleSelection(false)
 
-        const editorSelector = select('core/editor')
+        const editorSelector = select('core/block-editor')
         const colWidth = editorSelector.getBlockAttributes(clientId).colWidth
         const nextBlockClientId = editorSelector.getNextBlockClientId(clientId)
         const prevBlockClientId = editorSelector.getPreviousBlockClientId(clientId)
@@ -133,7 +148,7 @@ class Edit extends Component {
                 if (nextBlockWidth > 10 && calWidth > 10) {
                     nextBlockWidth = Math.abs(nextBlockWidth)
                     NextColumn.css({ width: nextBlockWidth.toFixed(2) + '%' })
-                    const editorSelector = select('core/editor')
+                    const editorSelector = select('core/block-editor')
                     const nextBlockClientId = editorSelector.getNextBlockClientId(clientId)
                     if (nextBlockClientId !== null) {
                         const nextBlock = editorSelector.getBlock(nextBlockClientId)
@@ -156,63 +171,40 @@ class Edit extends Component {
     }
 
     /**
-     * Add column to the next index 
-     * Update column width by equal divided (columns/100)
-     * 
-     * Also update resize box width by their root/row width
-     * 
-     * Update parent columns number
-     */
-    addColumnToNext() {
+         * Updates the column count, including necessary revisions to child Column
+         *
+         * @param {string} updateType operation type 'add' || 'delete'
+         */
+    updateColumns(updateType) {
+
         const { clientId } = this.props
-        const { getBlockRootClientId, getBlock, getBlockIndex } = select('core/editor')
-        const { insertBlock, updateBlockAttributes } = dispatch('core/editor')
+        const { getBlockRootClientId, getBlock, getBlocks, getBlockIndex } = select('core/block-editor')
+        const { replaceInnerBlocks, updateBlockAttributes } = dispatch('core/block-editor')
 
         const rootClientId = getBlockRootClientId(clientId)
         const rootBlock = getBlock(rootClientId)
         const selectedBlockIndex = getBlockIndex(clientId, rootClientId)
-        const columns = rootBlock.attributes.columns + 1
+        const columns = updateType === 'add' ? rootBlock.attributes.columns + 1 : rootBlock.attributes.columns - 1
         const columnFixedWidth = parseFloat((100 / columns).toFixed(3))
         const equalWidth = { ...this.state.colWidth, ...{ md: columnFixedWidth, sm: 100, xs: 100 } }
-        const currentBlock = createBlock('qubely/column', { colWidth: equalWidth })
 
-        insertBlock(currentBlock, selectedBlockIndex + 1, rootClientId, true)
+        let innerBlocks = [...getBlocks(rootClientId)]
+        if (updateType === 'delete') {
+            innerBlocks.splice(selectedBlockIndex, 1)
+        } else {
+            innerBlocks.splice(selectedBlockIndex + 1, 0, createBlock('qubely/column', { colWidth: equalWidth }))
+        }
+
+        replaceInnerBlocks(rootClientId, innerBlocks, false);
 
         updateBlockAttributes(rootClientId, Object.assign(rootBlock.attributes, { columns: columns }))
 
-        let innerBlocks = rootBlock.innerBlocks
-        innerBlocks.splice(selectedBlockIndex + 1, 0, currentBlock)
-        innerBlocks.map(block => {
+        getBlocks(rootClientId).forEach(block => {
             updateBlockAttributes(block.clientId, Object.assign(block.attributes, { colWidth: { ...equalWidth } }))
             $(`#block-${block.clientId}`).css({ width: equalWidth.md + '%' }) //update next block width
         })
     }
 
-    /**
-     * Delete a single column with resize all column with equal width (columns/100)
-     * 
-     * Update resize box width 
-     * Update parent columns number
-     */
-    onDeleteColumn() {
-        const { clientId } = this.props
-        const { getBlockRootClientId, getBlock, getBlockIndex } = select('core/editor')
-        const { updateBlockAttributes, removeBlock } = dispatch('core/editor')
-        const rootClientId = getBlockRootClientId(clientId)
-        const rootBlock = getBlock(rootClientId)
-        const selectedBlockIndex = getBlockIndex(clientId, rootClientId)
-        const columns = rootBlock.attributes.columns - 1
-        const columnFixedWidth = parseFloat((100 / columns).toFixed(3))
-        const equalWidth = { ...this.state.colWidth, ...{ md: columnFixedWidth, sm: 100, xs: 100 } }
-        removeBlock(clientId, false)
-        updateBlockAttributes(rootClientId, Object.assign(rootBlock.attributes, { columns: columns }))
-        let innerBlocks = rootBlock.innerBlocks
-        innerBlocks.splice(selectedBlockIndex, 1)
-        innerBlocks.map(block => {
-            updateBlockAttributes(block.clientId, Object.assign(block.attributes, { colWidth: { ...equalWidth } }))
-            $(`#block-${block.clientId}`).css({ width: equalWidth.md + '%' })
-        })
-    }
 
     /**
      * Check current row columns status 
@@ -220,20 +212,19 @@ class Edit extends Component {
      */
     checkColumnStatus() {
         const { clientId } = this.props
-        const { getBlockRootClientId, getBlockAttributes, getPreviousBlockClientId, getNextBlockClientId, getBlockIndex, getBlock } = select('core/editor')
+        const { getBlockRootClientId, getPreviousBlockClientId, getNextBlockClientId, getBlockIndex, getBlock } = select('core/block-editor')
         const rootClientId = getBlockRootClientId(clientId)
-        const rootBlockAttributes = getBlockAttributes(rootClientId)
         const nextBlockId = getNextBlockClientId(clientId)
         const prevBlockId = getPreviousBlockClientId(clientId)
         const blockIndex = getBlockIndex(clientId, rootClientId)
 
-        return { columns: rootBlockAttributes.columns, nextBlockId, prevBlockId, blockIndex }
+        return { nextBlockId, prevBlockId, blockIndex }
     }
 
 
     _isActiveRow() {
-        const rootClientId = select('core/editor').getBlockRootClientId(this.props.clientId)
-        const selected = select('core/editor').getSelectedBlock()
+        const rootClientId = select('core/block-editor').getBlockRootClientId(this.props.clientId)
+        const selected = select('core/block-editor').getSelectedBlock()
         if (selected && rootClientId && selected.clientId) {
             return rootClientId == selected.clientId ? true : false
         } else {
@@ -259,8 +250,8 @@ class Edit extends Component {
         let different = calWidth - parseFloat(attributes.colWidth.md)
         // If direction right then update next and current column
 
-        const { getPreviousBlockClientId, getNextBlockClientId, getBlock } = select('core/editor')
-        const { updateBlockAttributes } = dispatch('core/editor')
+        const { getPreviousBlockClientId, getNextBlockClientId, getBlock } = select('core/block-editor')
+        const { updateBlockAttributes } = dispatch('core/block-editor')
         let nextColumnNewWidth = 0
         if (NextColumn.length > 0) {
             const nextBlockClientId = getNextBlockClientId(clientId)
@@ -300,9 +291,48 @@ class Edit extends Component {
 
 
     render() {
-        const { attributes: { uniqueId, colWidth, padding, margin, colBg, colBorder, colRadius, colShadow, corner, borderRadius }, setAttributes, isSelected, clientId } = this.props
+        const {
+            attributes: {
+                uniqueId,
+                className,
+                colWidth,
+                padding,
+                margin,
+                colBg,
+                colBorder,
+                colRadius,
+                colShadow,
+                corner,
+                borderRadius,
+                //animation
+                animation,
+                //global
+                enablePosition,
+                selectPosition,
+                positionXaxis,
+                positionYaxis,
+                globalZindex,
+                hideTablet,
+                hideMobile,
+                globalCss
+            },
+            setAttributes,
+            isSelected,
+            clientId
+        } = this.props
+
         const { rowWidth, resizing, responsiveDevice } = this.state
-        const { columns, nextBlockId, blockIndex } = this.checkColumnStatus()
+        const { getBlockRootClientId, getBlockAttributes } = select('core/block-editor')
+        const rootClientId = getBlockRootClientId(clientId)
+        const rootBlockAttributes = getBlockAttributes(rootClientId)
+        let columns, nextBlockId, blockIndex;
+        if (rootBlockAttributes) {
+            let columnStatus = this.checkColumnStatus()
+            columns = rootBlockAttributes.columns
+            nextBlockId = columnStatus.nextBlockId
+            blockIndex = columnStatus.blockIndex
+        }
+
 
         let resigingClass = 'qubely-column-resizer'
         if (nextBlockId !== null && isSelected) {
@@ -311,7 +341,8 @@ class Edit extends Component {
         if (resizing) {
             resigingClass += ' is-resizing'
         }
-        if (uniqueId) { CssGenerator(this.props.attributes, 'column', uniqueId); }
+        const { getBlockOrder } = select('core/block-editor')
+        let hasChildBlocks = getBlockOrder(clientId).length > 0
 
         return (
             <Fragment>
@@ -320,25 +351,42 @@ class Edit extends Component {
                         <div className={columns === (blockIndex + 1) && responsiveDevice === 'md' ? 'qubely-mb-20 disable-slide' : 'qubely-mb-20'}>
                             <Range label={__('Width')} value={colWidth} onChange={val => this.updateColumnWidth(val)} min={15} max={this.state.colWidthMax} unit={['%']} responsive device={this.state.responsiveDevice} />
                         </div>
-                        <Separator />
-                        <DragDimension
-                            uniqueId={uniqueId}
-                            label={__('Column Spacing')}
-                            value={{ padding: padding, margin: margin }}
-                            onChange={val => setAttributes(val)}
+                        <Dimension
+                            label={__('Padding')}
+                            value={padding}
+                            onChange={val => setAttributes({ padding: val })}
+                            min={0}
+                            max={600}
+                            unit={['px', 'em', '%']}
                             responsive
-                            unit
+                            device={this.state.responsiveDevice}
+                            onDeviceChange={value => this.setState({ responsiveDevice: value })}
+                        />
+
+                        <Dimension
+                            label={__('Margin')}
+                            value={margin}
+                            onChange={val => setAttributes({ margin: val })}
+                            min={-600}
+                            max={600}
+                            unit={['px', 'em', '%']}
+                            responsive
+                            device={this.state.responsiveDevice}
+                            onDeviceChange={value => this.setState({ responsiveDevice: value })}
                         />
                     </PanelBody>
                     <PanelBody initialOpen={false} title={__('Design')}>
                         <Background label={__('Background')} sources={['image', 'gradient']} value={colBg} onChange={val => setAttributes({ colBg: val })} />
                         <Separator />
-                        <Border label={__('Border')} value={colBorder} onChange={val => setAttributes({ colBorder: val })} />
+                        <Border label={__('Border')} value={colBorder} onChange={val => setAttributes({ colBorder: val })} min={0} max={10} />
                         <Separator />
                         <BoxShadow label={__('Box-Shadow')} value={colShadow} onChange={val => setAttributes({ colShadow: val })} />
                         <Separator />
-                        <BorderRadius label={__('Radius')} value={borderRadius} onChange={val => setAttributes({ borderRadius: val })} min={0} max={100} unit={['px', 'em', '%']} responsive  device={this.state.responsiveDevice}  onDeviceChange={value => this.setState({ responsiveDevice: value })}/>
+                        <BorderRadius label={__('Radius')} value={borderRadius} onChange={val => setAttributes({ borderRadius: val })} min={0} max={100} unit={['px', 'em', '%']} responsive device={this.state.responsiveDevice} onDeviceChange={value => this.setState({ responsiveDevice: value })} />
                     </PanelBody>
+
+                    {animationSettings(uniqueId, animation, setAttributes)}
+
                 </InspectorControls>
 
                 <BlockControls>
@@ -347,7 +395,7 @@ class Edit extends Component {
                             <IconButton
                                 className="components-icon-button components-toolbar__control"
                                 label={__('Add Column')}
-                                onClick={this.addColumnToNext.bind(this)}
+                                onClick={() => this.updateColumns('add')}
                                 icon="plus"
                             />
                         }
@@ -355,12 +403,14 @@ class Edit extends Component {
                             <IconButton
                                 className="components-icon-button components-toolbar__control"
                                 label={__('Delete Column')}
-                                onClick={this.onDeleteColumn.bind(this)}
+                                onClick={() => this.updateColumns('delete')}
                                 icon="trash"
                             />
                         }
                     </Toolbar>
                 </BlockControls>
+
+                {globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
                 {rowWidth !== 0 &&
                     <ResizableBox
@@ -383,9 +433,16 @@ class Edit extends Component {
                         onResizeStop={(event, direction, elt, delta) => this.onResizeStop(event, direction, elt, delta)}
                         onResizeStart={(event, direction, elt) => this.onResizeStartEvent(event, direction, elt)} >
 
-                        <div className={`qubely-column qubely-column-admin qubely-block-${uniqueId}`} data-column-width={this.props.attributes.colWidth.md}>
+                        <div className={`qubely-column qubely-column-admin qubely-block-${uniqueId}${className ? ` ${className}` : ''}`} data-column-width={this.props.attributes.colWidth.md}>
                             <div className={`qubely-column-inner`}>
-                                <InnerBlocks templateLock={false} />
+                                <InnerBlocks
+                                    templateLock={false}
+                                    renderAppender={(
+                                        hasChildBlocks ?
+                                            undefined :
+                                            () => <InnerBlocks.ButtonBlockAppender />
+                                    )}
+                                />
                             </div>
                         </div>
                     </ResizableBox>
@@ -395,4 +452,4 @@ class Edit extends Component {
     }
 }
 
-export default Edit;
+export default withCSSGenerator()(Edit);

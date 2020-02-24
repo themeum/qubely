@@ -1,6 +1,6 @@
 const { __ } = wp.i18n
 import Range from './Range'
-import Device from '../Device'
+import Device from './Device'
 import icons from '../../helpers/icons'
 const { Fragment, Component } = wp.element;
 const { Tooltip } = wp.components;
@@ -39,7 +39,7 @@ class Margin extends Component {
 
         unit && value.unit ? newMargin.unit = value.unit : newMargin.unit = defaultUnit
         newMargin.marginType = value.marginType ? value.marginType : defaultMarginType
-        newMargin.openMargin = value.openMargin ? value.openMargin : 1
+        newMargin.openMargin = 1
         onChange(newMargin)
     }
     updateMarginType = (newType) => {

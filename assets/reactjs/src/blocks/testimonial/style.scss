@@ -1,49 +1,48 @@
 .qubely-block-testimonial {
+    transition: all 400ms;
     // Editor line height hack
     .editor-rich-text {
         .editor-rich-text__tinymce {
             line-height: inherit;
         }
     }
+    
     .qubely-testimonial-quote {
         .qubely-quote-icon {
             line-height: 1;
             width: auto;
             height: auto;
         }
+
         &.qubely-position-bottom {
             .qubely-quote-icon {
                 transform: scaleY(-1);
             }
         }
     }
+
+    .qubely-testimonial-avatar {
+        &.qubely-image-placeholder i {
+            font-style: normal;
+            font-size: .5em;
+        }
+    }
     
-    .qubely-testimonial-avatar-layout-left {
-        display: flex;
+    .qubely-testimonial-avatar-layout-left,
+    .qubely-testimonial-avatar-layout-right {
+        display: inline-flex;
         align-items: center;
         .qubely-testimonial-author-info {
-            text-align: initial;
+            text-align: left;
         }
     }
 
-    &.qubely-alignment-center {
-        .qubely-testimonial-avatar-layout-left {
-            justify-content: center;
+    .qubely-testimonial-avatar-layout-right {
+        .qubely-testimonial-author-info {
+            text-align: right;
         }
     }
 
-    &.qubely-alignment-right {
-        .qubely-testimonial-avatar-layout-left {
-            flex-direction: row-reverse;
-            .qubely-testimonial-author-info {
-                text-align: right;
-            }
-        }
-    }
-    
-    .qubely-testimonial-author-name {
-        font-weight: 700;
-    }
     //rating
     .qubely-testimonial-ratings {
         unicode-bidi: bidi-override;
@@ -51,17 +50,21 @@
         position: relative;
         letter-spacing: 5px;
         &:before, &:after{
-            content: "\f154\f154\f154\f154\f154";
-            font-family: dashicons;
+            content: "\f005\f005\f005\f005\f005";
+            font-family: 'Font Awesome\ 5 Free';
+            font-weight: 400;
             display: block;
             white-space: nowrap;
         }
+        
         &:before{
             position: absolute;
             z-index: 1;
             left: 0px;
             overflow: hidden;
-            content: "\f155\f155\f155\f155\f155";
+            font-family: 'Font Awesome\ 5 Free';
+            font-weight: 900;
+            content: "\f005\f005\f005\f005\f005";
         }
         &:after{
             z-index: 0;

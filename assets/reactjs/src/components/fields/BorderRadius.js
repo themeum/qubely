@@ -1,6 +1,6 @@
 const { __ } = wp.i18n
 import Range from './Range'
-import Device from '../Device'
+import Device from './Device'
 import icons from '../../helpers/icons';
 const { Component, Fragment } = wp.element
 const { Tooltip } = wp.components
@@ -33,7 +33,7 @@ class BorderRadius extends Component {
         }
         unit && value.unit ? newBorderRadius.unit = value.unit : newBorderRadius.unit = defaultUnit
         newBorderRadius.radiusType = value.radiusType ? value.radiusType : defaultRadiusType
-        newBorderRadius.openBorderRadius = value.openBorderRadius ? value.openBorderRadius : 1
+        newBorderRadius.openBorderRadius = 1
         onChange(newBorderRadius)
     }
 

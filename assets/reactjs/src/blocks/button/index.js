@@ -3,23 +3,78 @@ import Edit from './Edit'
 import Save from './Save';
 const { __ } = wp.i18n
 const { registerBlockType } = wp.blocks
+const { gloalSettings: { globalAttributes } } = wp.qubelyComponents
 
 registerBlockType('qubely/button', {
     title: __('Button'),
-    description: 'Create stylish call-to-action buttons with Qubely Buttons.',
+    description: __('Create stylish call-to-action buttons with Qubely Buttons.'),
     category: 'qubely',
     icon: <img src={qubely_admin.plugin + 'assets/img/blocks/block-button.svg'} alt={__('Button Block')} />,
-    supports: { align: false },
+    supports: {
+        align: ['center', 'wide', 'full'],
+    },
     keywords: [__('button'), __('link')],
+    example: {
+        attributes: {},
+    },
     attributes: {
         uniqueId: { type: 'string', default: '' },
+        // Global
+        ...globalAttributes,
         buttonGroup: { type: 'boolean', default: false },
+        disableFullWidth: {
+            type: 'boolean',
+            default: false,
+            style: [
+                {
+                    condition: [
+                        { key: 'disableFullWidth', relation: '==', value: true }
+                    ],
+                    selector: '{{QUBELY}}  {width:fit-content;}'
+                }
+            ]
+        },
         parentClientId: { type: 'string', default: '' },
         spacer: { type: 'object', default: { spaceTop: { md: '10', unit: "px" }, spaceBottom: { md: '10', unit: "px" } }, style: [{ selector: '{{QUBELY}}' }] },
         enableAlignment: { type: 'boolean', default: true },
         customClassName: { type: 'string', default: '' },
         spacer: { type: 'object', default: { spaceTop: { md: '10', unit: "px" }, spaceBottom: { md: '10', unit: "px" } }, style: [{ selector: '{{QUBELY}}' }] },
         textField: { type: 'string', default: '' },
+        buttonWidthType: {
+            type: 'string',
+            default: 'auto',
+            style: [
+                {
+                    condition: [
+                        { key: 'buttonWidthType', relation: '==', value: 'block' }
+                    ],
+                    selector: '{{QUBELY}} .qubely-block-btn-anchor {display: -webkit-box; display: -ms-flexbox; display: flex;}'
+                }
+            ]
+        },
+        buttonWidth: {
+            type: 'object',
+            default: {
+                md: 260,
+                unit: 'px'
+            },
+            style: [
+                {
+                    condition: [
+                        { key: 'buttonWidthType', relation: '==', value: 'fixed' },
+                        { key: 'disableFullWidth', relation: '==', value: false },
+                    ],
+                    selector: '{{QUBELY}} .qubely-block-btn-anchor {width: {{buttonWidth}};}'
+                },
+                {
+                    condition: [
+                        { key: 'buttonWidthType', relation: '==', value: 'fixed' },
+                        { key: 'disableFullWidth', relation: '==', value: true },
+                    ],
+                    selector: '{{QUBELY}}, {{QUBELY}} .qubely-block-btn-anchor {width: {{buttonWidth}};}'
+                },
+            ]
+        },
         alignment: {
             type: 'object', default: { md: 'center' },
             style: [
@@ -78,7 +133,17 @@ registerBlockType('qubely/button', {
             type: 'string', default: '#fff',
             style: [
                 {
+                    condition: [{ key: 'fillType', relation: '==', value: 'fill' }],
                     selector: '{{QUBELY}} .qubely-block-btn-anchor:hover { color:{{buttonHoverColor}}; }'
+                }
+            ]
+        },
+        buttonHoverColor2: {
+            type: 'string', default: '#fff',
+            style: [
+                {
+                    condition: [{ key: 'fillType', relation: '!=', value: 'fill' }],
+                    selector: '{{QUBELY}} .qubely-block-btn-anchor:hover { color:{{buttonHoverColor2}}; }'
                 }
             ]
         },
@@ -94,11 +159,9 @@ registerBlockType('qubely/button', {
             ]
         },
         bgHoverColor: {
-            type: 'object', default: { type: 'color', openColor: 1, color: '#1066CC', gradient: { color1: '#2184F9', color2: '#1066CC', direction: 0, start: 0, stop: 100 } },
+            type: 'object', default: { type: 'color', openColor: 1, color: '#1066CC', gradient: { color1: '#16d03e', color2: '#1f91f3', direction: 0, start: 0, stop: 100 } },
             style: [
-                {
-                    selector: '{{QUBELY}} .qubely-block-btn-anchor:hover'
-                }
+                { selector: '{{QUBELY}} .qubely-block-btn-anchor:before' }
             ]
         },
         buttonBorder: {
@@ -176,11 +239,11 @@ registerBlockType('qubely/button', {
                 },
             ]
         },
-        showGlobalSettings: { type: 'boolean', default: true },  // Global Settings
+        sourceOfCopiedStyle: { type: 'boolean', default: false }
     },
     getEditWrapperProps(attributes) {
         if (attributes.customClassName != '') {
-            return { className: `wp-block editor-block-list__block ${attributes.customClassName}` }
+            return { className: `wp-block editor-block-list__block block-editor-block-list__block ${attributes.customClassName}` }
         }
     },
     edit: Edit,

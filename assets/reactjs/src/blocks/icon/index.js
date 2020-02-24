@@ -3,16 +3,25 @@ const { __ } = wp.i18n
 import Edit from './Edit'
 import Save from './Save';
 const { registerBlockType } = wp.blocks
+const { gloalSettings: { globalAttributes } } = wp.qubelyComponents
 
 registerBlockType('qubely/icon', {
 	title: __('Icon'),
 	description: 'Place icons of various preset styles with Qubely icons.',
 	category: 'qubely',
 	icon: <img src={qubely_admin.plugin + 'assets/img/blocks/block-icon.svg'} alt={__('Icon Block')} />,
-	supports: { align: false },
-	keywords: [__('Icon'), __('Font Awesome'), __('Line Icon')],
+	supports: {
+		align: ['center', 'wide', 'full'],
+	},
+    keywords: [__('Icon'), __('Font Awesome'), __('Line Icon')],
+    example: {
+		attributes: {
+            name: 'fas fa-rocket',
+		},
+	},
 	attributes: {
 		uniqueId: { type: 'string', default: '' },
+		...globalAttributes,
 		spacer: { type: 'object', default: { spaceTop: { md: '10', unit: "px" }, spaceBottom: { md: '10', unit: "px" } }, style: [{ selector: '{{QUBELY}}' }] },
 		name: { type: 'string', default: 'fas fa-rocket' },
 		url: { type: 'object', default: {} },
@@ -49,9 +58,33 @@ registerBlockType('qubely/icon', {
 			}]
 		},
 
-		iconShadow: { type: 'object', default: {}, style: [{ condition: [{ key: 'iconStyle', relation: '==', value: 'nofill' }], selector: '{{QUBELY}} .qubely-block-icon' }] },
-		iconHoverShadow: { type: 'object', default: {}, style: [{ condition: [{ key: 'iconStyle', relation: '==', value: 'nofill' }], selector: '{{QUBELY}} .qubely-block-icon:hover' }] },
-		showGlobalSettings: { type: 'boolean', default: true }, // Global Settings
+		iconShadow: {
+			type: 'object',
+			default: {},
+			style: [
+				{
+					condition:
+						[
+							{ key: 'iconStyle', relation: '!=', value: 'nofill' }
+						],
+					selector: '{{QUBELY}} .qubely-block-icon'
+				}
+			]
+		},
+		iconHoverShadow: {
+			type: 'object',
+			default: {},
+			style: [
+				{
+					condition:
+						[
+							{ key: 'iconStyle', relation: '!=', value: 'nofill' }
+						],
+					selector: '{{QUBELY}} .qubely-block-icon:hover'
+				}
+			]
+		},
+		sourceOfCopiedStyle: { type: 'boolean', default: false }
 	},
 	edit: Edit,
 	save: Save,

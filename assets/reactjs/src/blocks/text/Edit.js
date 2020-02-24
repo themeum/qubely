@@ -1,14 +1,32 @@
 const { __ } = wp.i18n
 const { Fragment, Component } = wp.element;
 const { PanelBody, Toolbar, SelectControl } = wp.components
-const { RichText, InspectorControls, BlockControls } = wp.editor
-import { Typography, ColorAdvanced, Tabs, Tab, Dimension, separatorStyle, Wrapper, Color, Alignment, Headings, Toggle, Range, Separator } from "../../components/FieldRender"
-import { CssGenerator } from '../../components/CssGenerator'
-import '../../components/GlobalSettings'
-import '../../components/fields/inline/editorInline'
-import InlineSelector from '../../components/fields/inline/Selector'
-import InlineToolbar from '../../components/fields/inline/InlineToolbar'
-import icons from '../../helpers/icons';
+const { RichText, InspectorControls, BlockControls } = wp.blockEditor
+const {
+    Typography,
+    Color,
+    Alignment,
+    Headings,
+    Toggle,
+    Range,
+    Separator,
+    gloalSettings: {
+        globalSettingsPanel,
+        animationSettings,
+        interactionSettings
+    },
+    Inline: {
+        InlineToolbar,
+        InlineSelector
+    },
+    ContextMenu: {
+        ContextMenu,
+        handleContextMenu
+    },
+    withCSSGenerator
+} = wp.qubelyComponents;
+
+import '../../components/fields/inline/editorInline';
 import svg from '../heading/separators';
 
 class Edit extends Component {
@@ -32,7 +50,18 @@ class Edit extends Component {
     }
 
     render() {
-        const { uniqueId, content, typography, alignment, selector, textColor, dropCap, dropCapSize, dropCapColor, dropCapSpacing,
+        const {
+            uniqueId,
+            className,
+            content,
+            typography,
+            alignment,
+            selector,
+            textColor,
+            dropCap,
+            dropCapSize,
+            dropCapColor,
+            dropCapSpacing,
 
             titleLevel,
             title,
@@ -55,8 +84,19 @@ class Edit extends Component {
             separatorWidth,
             separatorSpacing,
 
+            //animation
+            animation,
+            globalZindex,
+            enablePosition,
+            selectPosition,
+            positionXaxis,
+            positionYaxis,
+            hideTablet,
+            hideMobile,
+            globalCss,
+            interaction
         } = this.props.attributes
-        const { setAttributes } = this.props
+        const { name, clientId, attributes, setAttributes, isSelected } = this.props
         const { device, openPanelSetting } = this.state
         const separators = {
             solid: { type: 'css', separator: 'solid', width: 300, stroke: 10 },
@@ -84,8 +124,6 @@ class Edit extends Component {
                 </Fragment>
             }
         </Fragment>
-
-        if (uniqueId) { CssGenerator(this.props.attributes, 'text', uniqueId); }
 
         return (
             <Fragment>
@@ -138,7 +176,7 @@ class Edit extends Component {
                                     <Fragment>
                                         <Color label={__('Separator Color')} value={separatorColor} onChange={val => setAttributes({ separatorColor: val })} />
                                         {(separatorStyle != 'pin' && separatorStyle != 'pin_filled') &&
-                                            <Range label={__('Stroke')} value={separatorStroke} onChange={val => setAttributes({ separatorStroke: val })} min={1} max={separators[separatorStyle].stroke} />
+                                            <Range label={__('Stroke')} value={separatorStroke} onChange={val => setAttributes({ separatorStroke: parseInt(val) })} min={1} max={separators[separatorStyle].stroke} />
                                         }
                                         <Range label={__('Width')} value={separatorWidth} onChange={val => setAttributes({ separatorWidth: val })} min={20} max={separators[separatorStyle].width} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
                                         <Range label={__('Spacing')} value={separatorSpacing} onChange={val => setAttributes({ separatorSpacing: val })} min={0} max={100} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
@@ -174,10 +212,14 @@ class Edit extends Component {
                         </PanelBody>
                     }
 
+                    {animationSettings(uniqueId, animation, setAttributes)}
+
+                    {interactionSettings(uniqueId, interaction, setAttributes)}
+
                 </InspectorControls>
 
                 <BlockControls>
-                    <InlineSelector options={[['p', 'Paragraph'], ['span', 'span'], ['div', 'div']]} icons={icons} selector={selector} setAttributes={setAttributes} />
+                    <InlineSelector options={[['p', 'Paragraph'], ['span', 'span'], ['div', 'div']]} selector={selector} setAttributes={setAttributes} />
                     <Toolbar>
                         <InlineToolbar
                             data={[{ name: 'InlineSpacer', key: 'spacer', responsive: true, unit: ['px', 'em', '%'] }]}
@@ -189,8 +231,12 @@ class Edit extends Component {
                     </Toolbar>
                 </BlockControls>
 
-                <div className={`qubely-block-${uniqueId}`}>
-                    <div className={`qubely-block-text ${(dropCap == 1) ? 'qubely-has-drop-cap' : ''}`}>
+                {globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
+
+                <div className={`qubely-block-${uniqueId}${className ? ` ${className}` : ''}`}>
+                    <div
+                        onContextMenu={event => handleContextMenu(event, this.refs.qubelyContextMenu)}
+                        className={`qubely-block-text ${(dropCap == 1) ? 'qubely-has-drop-cap' : ''}`} >
                         {enableTitle == 1 &&
                             <div className={`qubely-block-text-title-container ${separatorStyle ? 'qubely-has-separator' : ''} ${separatorPosition ? 'qubely-separator-position-' + separatorPosition : ''}`} >
                                 <div className="qubely-block-text-title-inner">
@@ -222,7 +268,6 @@ class Edit extends Component {
                                 }
                             </div>
                         }
-
                         <RichText
                             key="editable"
                             tagName={selector}
@@ -231,6 +276,17 @@ class Edit extends Component {
                             onChange={value => setAttributes({ content: value })}
                             value={content}
                         />
+
+                        <div ref="qubelyContextMenu" className={`qubely-context-menu-wraper`} >
+                            <ContextMenu
+                                name={name}
+                                clientId={clientId}
+                                attributes={attributes}
+                                setAttributes={setAttributes}
+                                qubelyContextMenu={this.refs.qubelyContextMenu}
+                            />
+                        </div>
+
                     </div>
                 </div>
 
@@ -238,4 +294,4 @@ class Edit extends Component {
         )
     }
 }
-export default Edit
+export default withCSSGenerator()(Edit);

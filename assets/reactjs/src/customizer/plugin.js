@@ -3,12 +3,45 @@ const { Component, Fragment } = wp.element;
 const { compose } = wp.compose;
 const { PanelBody } = wp.components
 const { withDispatch, select } = wp.data;
-import { _equal } from '../components/HelperFunction'
-import { CssGenerator } from '../components/CssGenerator'
-import { Typography, Color } from '../components/FieldRender'
+const {CssGenerator: { CssGenerator }, Typography, Color, Separator,HelperFunction: { _equal }  } = wp.qubelyComponents
 const { PluginSidebar, PluginSidebarMoreMenuItem } = wp.editPost;
-import { getInitialSettings, updateGlobalData, saveGlobalData } from './action'
 
+
+const path = { 
+    fetch: '/qubely/v1/global_settings',
+    post: '/qubely/v1/global_settings'
+}
+
+async function fetchFromApi() {
+    return await wp.apiFetch({path: path.fetch })
+}
+
+const getInitialSettings = () => {
+    return fetchFromApi().then( data => {
+        window.globalData = { ...data }
+        return data
+    } )
+}
+
+const updateGlobalData = ( updateData ) => {
+    const settings = {...window.globalData.settings}
+    window.globalData.settings = {...settings, ...updateData }
+}
+
+const saveGlobalData = () =>  {
+    window.globalSaving = true
+    const settings  = typeof window.globalData.settings === 'undefined' ? null : window.globalData.settings
+    if( settings !== null ){
+        wp.apiFetch({
+                path: path.post,
+                method: 'POST',
+                data: { settings: JSON.stringify(settings) }
+            }).then( data =>  {
+                window.globalSaving = false
+                return data 
+            })
+    }
+}
 
 class Plugin extends Component {
     constructor(){
@@ -41,50 +74,84 @@ class Plugin extends Component {
         }
     }
 
+    setPresetColor( blocks, prev, next ){
+        const { updateBlockAttributes } = wp.data.dispatch('core/block-editor')
+        if( prev && next ){
+            blocks.map( row => {
+                const { attributes, name, clientId } = row
+                const blockName = name.split('/')
+                if( blockName[0] === 'qubely' && attributes.uniqueId ){
+                    Object.keys(attributes).forEach(function(key) {
+                        if( typeof attributes[key] == 'string' ){
+                            if( attributes[key] == prev ){
+                                updateBlockAttributes( clientId, { [key]: next } )
+                            }
+                        }else if( typeof attributes[key] == 'object' ){
+                            if( attributes[key].color && attributes[key].color == prev ){
+                                updateBlockAttributes( clientId, { [key]: Object.assign( {}, attributes[key], { color: next } ) } )
+                            }
+                        }
+                    });
+                }
+                if( row.innerBlocks && (row.innerBlocks).length > 0 ){
+                    this.setPresetColor(row.innerBlocks)
+                }
+            })
+        }
+    }
+
     updateField( attrValue ){
         const {  setAttributes } = this.props 
         const { globalSettings } = this.state
         const newSettings = {...globalSettings, ...attrValue }
+        
+        if( attrValue.colorPreset1 ){
+            this.setPresetColor( wp.data.select('core/block-editor').getBlocks(), globalSettings.colorPreset1, attrValue.colorPreset1 )
+        }
+        if( attrValue.colorPreset2 ){
+            this.setPresetColor( wp.data.select('core/block-editor').getBlocks(), globalSettings.colorPreset2, attrValue.colorPreset2 )
+        }
+        if( attrValue.colorPreset3 ){
+            this.setPresetColor( wp.data.select('core/block-editor').getBlocks(), globalSettings.colorPreset3, attrValue.colorPreset3 )
+        }
+        if( attrValue.colorPreset4 ){
+            this.setPresetColor( wp.data.select('core/block-editor').getBlocks(), globalSettings.colorPreset4, attrValue.colorPreset4 )
+        }
+        if( attrValue.colorPreset5 ){
+            this.setPresetColor( wp.data.select('core/block-editor').getBlocks(), globalSettings.colorPreset5, attrValue.colorPreset5 )
+        }
+        if( attrValue.colorPreset6 ){
+            this.setPresetColor( wp.data.select('core/block-editor').getBlocks(), globalSettings.colorPreset6, attrValue.colorPreset6 )
+        }
+
         setAttributes( attrValue )
         this.setState({globalSettings : {...newSettings}, fetched: false })
     }
 
     renderFields(){
-        const { body, p, h1, h2, h3, h4, h5, h6, a_color, a_typography } = this.state.globalSettings
+        const { body, p, h1, h2, h3, h4, h5, h6, button, colorPreset1, colorPreset2, colorPreset3, colorPreset4, colorPreset5, colorPreset6 } = this.state.globalSettings
         
         return (
             <Fragment>
-                {/* Body ( Font+Color )
-                Heading ( Font + Color )
-                Link ( Color + Hover Color )
-                Button (  ) feb-29 */}
-                <PanelBody initialOpen={false} title={__('body Style')}>
-                    <Typography label={__('Body')} color value={body} onChange={ val => this.updateField({ body: val }) } />
+                <PanelBody title={__('Color Palette')} initialOpen={true}>
+                    <div className="qubely-d-flex qubely-align-justified">
+                        <Color disableClear disablePalette value={colorPreset1} onChange={ val => this.updateField({ colorPreset1: val }) } />
+                        <Color disableClear disablePalette value={colorPreset2} onChange={ val => this.updateField({ colorPreset2: val }) } />
+                        <Color disableClear disablePalette value={colorPreset3} onChange={ val => this.updateField({ colorPreset3: val }) } />
+                        <Color disableClear disablePalette value={colorPreset4} onChange={ val => this.updateField({ colorPreset4: val }) } />
+                        <Color disableClear disablePalette value={colorPreset5} onChange={ val => this.updateField({ colorPreset5: val }) } />
+                        <Color disableClear disablePalette value={colorPreset6} onChange={ val => this.updateField({ colorPreset6: val }) } />
+                    </div>
                 </PanelBody>
-                <PanelBody initialOpen={false} title={__('P Style')}>
-                    <Typography label={__('P')} color value={p} onChange={ val => this.updateField({ p: val }) } />
-                </PanelBody>
-                <PanelBody initialOpen={false} title={__('H1 Style')}>
-                    <Typography label={__('H1')} color value={h1} onChange={ val => this.updateField({ h1: val }) } />
-                </PanelBody>
-                <PanelBody initialOpen={false} title={__('H2 Style')}>
-                    <Typography label={__('H2')} color value={h2} onChange={ val => this.updateField({ h2: val }) } />
-                </PanelBody>
-                <PanelBody initialOpen={false} title={__('H3 Style')}>
-                    <Typography label={__('H3')} color value={h3} onChange={ val => this.updateField({ h3: val }) } />
-                </PanelBody>
-                <PanelBody initialOpen={false} title={__('H4 Style')}>
-                    <Typography label={__('H4')} color value={h4} onChange={ val => this.updateField({ h4: val }) } />
-                </PanelBody>
-                <PanelBody initialOpen={false} title={__('H5 Style')}>
-                    <Typography label={__('H5')} color value={h5} onChange={ val => this.updateField({ h5: val }) } />
-                </PanelBody>
-                <PanelBody initialOpen={false} title={__('H6 Style')}>
-                    <Typography label={__('H6')} color value={h6} onChange={ val => this.updateField({ h6: val }) } />
-                </PanelBody>
-                <PanelBody initialOpen={false} title={__('Link Style')}>
-                    <Typography label={__('Link')} color value={a_typography} onChange={ val => this.updateField({ a_typography: val }) } />
-                    <Color label={__('Hover Color')} value={a_color}  onChange={ val => this.updateField({ a_color: val }) } />
+                <PanelBody title={__('Typography')} initialOpen={false}>
+                    <Typography label={__('Body')} value={body} onChange={ val => this.updateField({ body: val }) } /><Separator />
+                    <Typography label={__('Heading 1')} value={h1} onChange={ val => this.updateField({ h1: val }) } /><Separator />
+                    <Typography label={__('Heading 2')} value={h2} onChange={ val => this.updateField({ h2: val }) } /><Separator />
+                    <Typography label={__('Heading 3')} value={h3} onChange={ val => this.updateField({ h3: val }) } /><Separator />
+                    <Typography label={__('Heading 4')} value={h4} onChange={ val => this.updateField({ h4: val }) } /><Separator />
+                    <Typography label={__('Heading 5')} value={h5} onChange={ val => this.updateField({ h5: val }) } /><Separator />
+                    <Typography label={__('Heading 6')} value={h6} onChange={ val => this.updateField({ h6: val }) } /><Separator />
+                    <Typography label={__('Button')} value={button} onChange={ val => this.updateField({ button: val }) } />
                 </PanelBody>
             </Fragment>
         )
@@ -92,9 +159,6 @@ class Plugin extends Component {
 
     render() {
         const { globalSettings } = this.state
-        if( globalSettings !== null ){
-            CssGenerator( globalSettings, 'pagesettings', '82982429487' )
-        }
         return (
             <Fragment>
                 <PluginSidebarMoreMenuItem target="qubely-customizer">
@@ -115,7 +179,7 @@ export default compose([
         }
         const makePostDarty = () => {
             const currentMeta = select( 'core/editor' ).getCurrentPostAttribute( 'meta' );
-            currentMeta.qubely_global_settings = currentMeta.qubely_global_settings === "true" ? "false" : "true"
+            // currentMeta.qubely_global_settings = currentMeta.qubely_global_settings === "true" ? "false" : "true"
             const meta = {...currentMeta, qubely_global_settings: "true" }
             dispatch( 'core/editor' ).editPost( { meta } );
         }
@@ -129,4 +193,8 @@ wp.data.subscribe( () => {
     if( isSavingPost() && (!isAutosavingPost()) && window.globalSaving === false ){
         saveGlobalData()
     }
-  } );
+} );
+
+// -----------------------------
+// -----------------------------
+// -----------------------------

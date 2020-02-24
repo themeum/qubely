@@ -1,7 +1,8 @@
+const { __ } = wp.i18n
 import '../css/panelTabs.scss'
 const { Component } = wp.element
 const { Tooltip } = wp.components
-const { __ } = wp.i18n
+
 class Tabs extends Component {
     constructor(props) {
         super(props)

@@ -1,12 +1,12 @@
 const { Component, Fragment } = wp.element;
-import { animationAttr } from '../../components/HelperFunction'
-
+const { HelperFunction: { animationAttr, IsInteraction } } = wp.qubelyComponents
 class Save extends Component {
     render() {
-        const { uniqueId, counterLimit, counterDuration, postfix, prefix, animation } = this.props.attributes
+        const { uniqueId, counterLimit, counterDuration, postfix, prefix, animation, interaction } = this.props.attributes
+        const interactionClass = IsInteraction(interaction) ? 'qubley-block-interaction' : '';
         return (
             <div className={`qubely-block-${uniqueId}`} {...animationAttr(animation)}>   
-                <div className="qubely-block-counter">
+                <div className={`qubely-block-counter ${interactionClass}`}>
                     <div className="qubely-block-counter-content">
                         {counterLimit > 0 &&
                             <Fragment>

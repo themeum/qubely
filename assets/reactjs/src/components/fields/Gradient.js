@@ -1,87 +1,93 @@
-const { __ } = wp.i18n
-import '../css/gradient.scss'
-const { Component, Fragment } = wp.element
+import Range from "./Range";
+import Select from "./Select";
+import '../css/gradient.scss';
+const { __ } = wp.i18n;
+const { Component, Fragment } = wp.element;
 const { Dropdown, ColorPicker, Tooltip } = wp.components;
-import Select from "./Select"
-import GradientAngle from './GradientAngle'
-import Range from "./Range"
 
-const defaultState = { color1: '#16d03e', color2: '#1f91f3', type: 'linear', direction: '90', start: 5, stop: 80, radial: 'center', clip: false };
+const defaultState = {
+    color1: '#16d03e',
+    color2: '#1f91f3',
+    type: 'linear',
+    direction: '90',
+    start: 5,
+    stop: 80,
+    radial: 'center',
+    clip: false
+};
 
-const colors = ['#30ac3d', '#fa9200', '#006fbf', '#ff1818', '#941f90']
-
-const mm = '';
 
 class Gradient extends Component {
-
-    constructor(props) {
-        super(props)
-        this.state = {
-            enableGradient: false,
+    componentDidMount() {
+        const { value } = this.props
+        if (!Object.keys(value).length > 0) {
+            this.props.onChange(defaultState)
         }
     }
-
-    componentWillMount() {
-        this.props.onChange(Object.assign({}, defaultState, (this.props.clip ? { clip: this.props.clip } : {}), this.props.value))
+    defColors() {
+        let val = [];
+        const colors = window.globalData.settings;
+        val.push(colors.colorPreset1 || qubely_admin.palette[0])
+        val.push(colors.colorPreset2 || qubely_admin.palette[1])
+        val.push(colors.colorPreset3 || qubely_admin.palette[2])
+        val.push(colors.colorPreset4 || qubely_admin.palette[3])
+        val.push(colors.colorPreset5 || qubely_admin.palette[4])
+        val.push(colors.colorPreset6 || qubely_admin.palette[5])
+        return val;
     }
 
     setSettings(value, type) {
         this.props.onChange(Object.assign({}, this.props.value, { [type]: value }))
     }
 
+    renderColorPicker = (colorType, defaultColor) => {
+        const { value } = this.props
+        return (
+            <Fragment>
+                <ColorPicker color={value[colorType] || defaultColor} onChangeComplete={val => {
+                    if (val.rgb) {
+                        this.setSettings((val.rgb.a != 1 ? 'rgba(' + val.rgb.r + ', ' + val.rgb.g + ', ' + val.rgb.b + ', ' + val.rgb.a + ')' : val.hex), colorType);
+                    }
+                }} />
+                <div className="qubely-rgba-palette" style={{ padding: '0px 0px 15px 15px' }}>
+                    {this.defColors().map(
+                        color => <button style={{ color: color }} onClick={() => this.setSettings(color, colorType)} />
+                    )}
+                </div>
+            </Fragment>
+        )
+    }
+
     render() {
         const { value } = this.props
+        let gradientColors = [['color1', __('Color 1'), '#cccccc', 'left'], ['color2', __('Color 2'), '#1f91f3', 'right']]
+
         return (
             <div className={"qubely-gradient qubely-field inline"}>
 
                 <div className="qubely-field-gradient-preview qubely-mb-20" style={{ background: '-webkit-linear-gradient(' + (value.direction > 90 ? (90 - value.direction + 360) : 90 - value.direction) + 'deg,' + value.color1 + ' ' + value.start + '%, ' + value.color2 + ' ' + value.stop + '%' + ')', background: 'linear-gradient(' + value.direction + 'deg,' + value.color1 + ' ' + value.start + '%, ' + value.color2 + ' ' + value.stop + '%' + ')' }}>
-                    <Dropdown
-                        renderToggle={({ isOpen, onToggle }) => (
-                            <Fragment>
-                                <span className="qubely-color-picker-container qubely-position-left">
-                                    <span className="qubely-color-picker" style={{ backgroundColor: value.color1 || '#cccccc' }} isPrimary onClick={onToggle} aria-expanded={isOpen} />
-                                </span>
-                            </Fragment>
-                        )}
-                        renderContent={() => (
-                            <span>
-                                <ColorPicker color={value.color1 || '#cccccc'} onChangeComplete={val => {
-                                    if (val.rgb) {
-                                        this.setSettings((val.rgb.a != 1 ? 'rgba(' + val.rgb.r + ', ' + val.rgb.g + ', ' + val.rgb.b + ', ' + val.rgb.a + ')' : val.hex), 'color1');
-                                    }
-                                }} />
-                                <div className="qubely-rgba-palette" style={{ padding: '0px 0px 15px 15px' }}>
-                                    {colors.map(
-                                        color => <button style={{ color: color }} onClick={() => this.setSettings(color, 'color1')} />
+                    {
+                        gradientColors.map(gradientColor => {
+                            let [color, label, defaultColor, customClassName] = gradientColor
+                            return (
+                                <Dropdown
+                                    position="bottom left"
+                                    className={`qubely-gradient-color gradient-color-position-${customClassName}`}
+                                    contentClassName="qubely-gradient-color-picker"
+                                    renderToggle={({ isOpen, onToggle }) => (
+                                        <span className={`qubely-color-picker-container qubely-position-${customClassName}`}>
+                                            <Tooltip text={label}>
+                                                <span className="qubely-color-picker" style={{ backgroundColor: value[color] || defaultColor }} isPrimary onClick={onToggle} aria-expanded={isOpen} />
+                                            </Tooltip>
+                                        </span>
                                     )}
-                                </div>
-                            </span>
-                        )}
-                    />
 
-                    <Dropdown
-                        renderToggle={({ isOpen, onToggle }) => (
-                            <Fragment>
-                                <span className="qubely-color-picker-container qubely-position-right">
-                                    <span className="qubely-color-picker" style={{ backgroundColor: value.color2 || '#1f91f3' }} isPrimary onClick={onToggle} aria-expanded={isOpen} />
-                                </span>
-                            </Fragment>
-                        )}
-                        renderContent={() => (
-                            <span>
-                                <ColorPicker color={value.color2 || '#1f91f3'} onChangeComplete={val => {
-                                    if (val.rgb) {
-                                        this.setSettings((val.rgb.a != 1 ? 'rgba(' + val.rgb.r + ', ' + val.rgb.g + ', ' + val.rgb.b + ', ' + val.rgb.a + ')' : val.hex), 'color2');
-                                    }
-                                }} />
-                                <div className="qubely-rgba-palette" style={{ padding: '0px 0px 15px 15px' }}>
-                                    {colors.map(
-                                        color => <button style={{ color: color }} onClick={() => this.setSettings(color, 'color2')} />
-                                    )}
-                                </div>
-                            </span>
-                        )}
-                    />
+                                    renderContent={() => this.renderColorPicker(color, defaultColor)}
+                                />
+                            )
+                        })
+                    }
+
                 </div>
 
                 <div className="qubely-d-flex qubely-align-center qubely-mb-20">
@@ -116,33 +122,25 @@ class Gradient extends Component {
                 </div>
 
                 {value.type == 'radial' ?
-                    <Select
+                    <Select label={__('Gradient Position')}
                         label={__('Radial Pointer')}
+                        value={value.radial}
                         className={(value.type && value.type == 'radial') ? 'half' : ''}
                         value={value.radial ? value.radial : 'center'}
                         options={['center', 'top left', 'top', 'top right', 'right', 'bottom right', 'bottom', 'bottom left', 'left']}
                         onChange={radial => this.setSettings(radial, 'radial')}
                     />
                     :
-                    <Fragment>
-                        <Range
-                            label={__('Gradient Angle')}
-                            value={value.direction || 90}
-                            onChange={direction => this.setSettings(direction, 'direction')}
-                            min={0}
-                            max={360}
-                            step={1}
-                            beforeIcon="image-rotate"
-                            allowReset
-                        />
-                        <GradientAngle
-                            label={__('Gradient Angle')}
-                            value={value.direction || 90}
-                            onChange={value => this.setSettings(value, 'direction')}
-                        />
-                    </Fragment>
-
-
+                    <Range
+                        label={__('Gradient Angle')}
+                        min={0}
+                        max={360}
+                        step={1}
+                        beforeIcon="image-rotate"
+                        allowReset
+                        value={value.direction || 90}
+                        onChange={direction => this.setSettings(direction, 'direction')}
+                    />
                 }
                 <Range
                     label={__('Color 1 Stop')}

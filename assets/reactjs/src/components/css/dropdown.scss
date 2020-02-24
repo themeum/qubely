@@ -1,0 +1,99 @@
+.qubely-field-dropdown {
+  .qubely-dropdown {
+    cursor: default;
+    display: flex;
+    display: -ms-flexbox;
+    align-items: center;
+    justify-content: space-between;
+    outline: 0px !important;
+    padding: 6px 8px;
+    box-shadow: 0 0 0 transparent;
+    transition: box-shadow 0.1s linear;
+    border-radius: 4px;
+    border: 1px solid #8d96a0;
+    background-color: white;
+    .qubely-dropdown-selected-options-wrapper {
+      width: 100%;
+      display:flex;
+      cursor: pointer;
+      flex-wrap: wrap;
+      align-items: center;
+      .qubely-selected-value-label{
+        padding: 2px 0px;
+      }
+      .qubely-dropdown-selected-value {
+        padding: 4px 5px ;
+        margin: 0px 5px 5px 0px;
+        border-radius: 15px;
+        vertical-align: top;
+        display: inline-block;
+        border: 1px solid #c2e0ff;
+        border: 1px solid rgba(0, 126, 255, 0.24);
+        background-color: #ebf5ff;
+        background-color: rgba(0, 126, 255, 0.08);
+        .qubely-selected-value-label {
+          border-bottom-right-radius: 2px;
+          border-top-right-radius: 2px;
+          cursor: default;
+          padding: 2px 5px;
+          display: inline;
+          color: #007eff;
+        }
+        .qubely-selected-value-icon {
+          cursor: pointer;
+          padding: 3px 6px;
+          color: #fff;
+          background-color: #007eff;
+          border-radius: 50%;
+          font-size: 12px;
+        }
+      }
+      .qubely-dropdown-options-search{
+        min-width: 70px;
+        cursor: default;
+        padding: 2px 10px;
+        width: auto;
+        margin: 0px 8px;
+        border: none;
+    }
+    }
+    .qubely-dropdown-icon{
+        display: flex;
+        cursor: pointer;
+        align-items: center;
+        padding-right: 3px;
+    }
+  }
+  .qubely-dropdown-options-wrapper {
+    top: 100%;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 0px 1px, rgba(0, 0, 0, 0.1) 0px 4px 11px;
+    margin-bottom: 8px;
+    margin-top: 8px;
+    position: absolute;
+    width: 70%;
+    box-sizing: border-box;
+    border-radius: 4px;
+    z-index: 100;
+    .qubely-dropdown-options {
+      max-height: 270px;
+      overflow-y: auto;
+      padding-bottom: 4px;
+      padding-top: 4px;
+      position: relative;
+      box-sizing: border-box;
+      .qubely-dropdown-option {
+        background-color: transparent;
+        color: inherit;
+        cursor: pointer;
+        display: block;
+        font-size: inherit;
+        width: 100%;
+        user-select: none;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        box-sizing: border-box;
+        padding: 8px 12px;
+      }
+    }
+  }
+}

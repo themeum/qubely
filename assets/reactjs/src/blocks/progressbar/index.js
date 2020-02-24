@@ -3,19 +3,26 @@ import Edit from './Edit'
 import Save from './Save'
 const { registerBlockType } = wp.blocks
 const { __ } = wp.i18n
+const { gloalSettings: { globalAttributes } } = wp.qubelyComponents
 
 registerBlockType( 'qubely/progressbar', {
 	title: __('Progress Bar'),
 	description: 'Showcase stats using progress bars with Qubely Progress Bar.',
 	category: 'qubely',
 	icon: <img src={qubely_admin.plugin+'assets/img/blocks/block-progressbar.svg'} alt={__('Progress Bar Block')} />,
-	supports: { align: false },
-	keywords: [__('progress'), __('bar'), __('bar progress')],
+	supports: {
+        align: ['center', 'wide', 'full'],
+    },
+    keywords: [__('progress'), __('bar'), __('bar progress')],
+    example: {
+        attributes: {},
+    },
 	attributes: {
 		uniqueId: { type: 'string', default: '' },
+		...globalAttributes,  // Global Settings
 		spacer: { type: 'object', default:{spaceTop: { md: '10', unit: "px"}, spaceBottom: { md: '10', unit: "px"}}, style: [{ selector: '{{QUBELY}}' }] },
 		progress: {type: 'string', default: 50, style: [{ selector: '{{QUBELY}} .qubely-progress-bar {width: {{progress}}%;}' }] },
-		
+
 		// Labels
 		title: {type: 'string', default: 'Progress'},
 		showTitle: {type: 'boolean', default: true},
@@ -36,13 +43,12 @@ registerBlockType( 'qubely/progressbar', {
 				radiusType: 'global',
 				global: {md: 10},
 				unit: 'px',
-				
+
 			},
 			style: [{selector: '{{QUBELY}} .qubely-progress, {{QUBELY}} .qubely-progress-bar' }]
 		},
 		showProgress: {type: 'boolean', default: true},
-		
-		showGlobalSettings: { type: 'boolean', default: true },
+		sourceOfCopiedStyle: { type: 'boolean', default: false }
 	},
 	edit: Edit,
 	save: Save

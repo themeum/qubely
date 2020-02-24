@@ -1,5 +1,5 @@
 import '../css/range.scss'
-import Device from '../Device'
+import Device from './Device'
 const { Component } = wp.element
 
 class Range extends Component {
@@ -9,23 +9,23 @@ class Range extends Component {
     }
 
     _filterValue(type) {
-        const { value, responsive, responsiveGroup } = this.props
+        const { value, responsive } = this.props
         if (type == 'unit') {
             return value ? (value.unit || 'px') : 'px'
         } else {
-            return value ? ((responsive || responsiveGroup) ? (value[window.qubelyDevice] || '') : value) : ''
+            return value ? (responsive ? (value[window.qubelyDevice] || '') : value) : ''
         }
     }
 
     setSettings(val, type) {
-        const { value, onChange, responsive, responsiveGroup, min, max, unit } = this.props
+        const { value, onChange, responsive, min, max, unit } = this.props
         let final = value || {}
         if (unit && (!final.hasOwnProperty('unit'))) { final.unit = 'px' }
-        if (type == 'unit' && (responsive || responsiveGroup)) {
+        if (type == 'unit' && responsive) {
             final = value || {};
             final.unit = val;
         } else {
-            final = (responsive || responsiveGroup) ? Object.assign({}, value, { [window.qubelyDevice]: val }) : val
+            final = (responsive) ? Object.assign({}, value, { [window.qubelyDevice]: val }) : val
             final = min ? (final < min ? min : final) : (final < 0 ? 0 : final)
             final = max ? (final > max ? max : final) : (final > 1000 ? 1000 : final)
         }
@@ -71,18 +71,12 @@ class Range extends Component {
                         {unit &&
                             <div className="qubely-unit-btn-group qubely-ml-auto">
                                 {(typeof unit == 'object' ? unit : ['px', 'em', '%']).map((value) => (
-                                    <button className={(this.props.value && value == this.props.value.unit) ? 'active' : ''} onClick={() => {
-                                        this.setSettings(value, 'unit')
-                                        let data = this._filterValue()
-                                        if (data) {
-                                            if (value == 'em') {
-                                                this.setSettings((data / 16).toFixed(3), 'range')
-                                            }
-                                            if (value == 'px') {
-                                                this.setSettings(Math.floor(data * 16), 'range')
-                                            }
-                                        }
-                                    }}>{value}</button>
+                                    <button className={(this.props.value && value == this.props.value.unit) ? 'active' : ''}
+                                        onClick={() => {
+                                            this.setSettings(value, 'unit')
+                                            this.setSettings(this._filterValue(), 'range')
+                                        }}
+                                    >{value}</button>
                                 ))}
                             </div>
                         }

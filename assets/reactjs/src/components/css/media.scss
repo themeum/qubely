@@ -1,43 +1,35 @@
-.qubely-media{ 
+.qubely-media{
+	margin-bottom: 15px;
 	label{
 		margin-bottom: 10px;
 		display: block;
 	}
-	margin-bottom: 10px;
-	.qubely-single-img{
+	.qubely-media-actions {
+		position: absolute;
+		top: 10px;
+		right: 10px;
+	}
+	.qubely-single-img {
 		.qubely-media-image-parent{
 			position: relative;
 			display: inline-block;
+			min-height: 140px;
+			min-width: 140px;
 			img{
-				margin-bottom: 10px;
-			}
-			.qubely-image-close-icon{
-				position: absolute;
-				top: 5px;
-				right: 5px;
-				color: red;
-				background: white;
-				width: 22px;
-				line-height: 22px;
-				text-align: center;
-				border-radius: 50%;
-				box-shadow: 0px 1px 2px rgba(#000000, .45);
-				height: 22px;
-				cursor: pointer;
-				border: none;
+				margin: 0;
 			}
 		}
 	}
-	.qubely-placeholder-image{
+	.qubely-placeholder-image {
 		border: 1px dashed #dddd;
-		padding: 20px 20px 15px;
+		padding: 20px 20px 25px;
 		text-align: center;
 		background: #ffffff;
 		cursor: copy;
 		border-radius: 5px;
 		span{
 			display: block;
-			margin-top: 0;
+			margin-top: 8px;
 			text-align: center;
 		}
 	}

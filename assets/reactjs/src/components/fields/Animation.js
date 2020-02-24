@@ -1,8 +1,6 @@
-import Separator from "./Separator";
 const { __ } = wp.i18n
 import '../css/animation.scss'
 const { Component, Fragment } = wp.element
-const { Tooltip } = wp.components
 import Range from './Range'
 import Select from './Select'
 

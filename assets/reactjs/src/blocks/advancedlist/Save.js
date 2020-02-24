@@ -1,5 +1,5 @@
 const { Component } = wp.element;
-import { animationAttr } from '../../components/HelperFunction';
+const { HelperFunction: { animationAttr, IsInteraction } } = wp.qubelyComponents
 
 class Save extends Component {
     renderListItems = () => {
@@ -9,15 +9,15 @@ class Save extends Component {
 
     }
     render() {
-        const { attributes: { uniqueId, alignment, bulletStyle, listType, animation } } = this.props
+        const { attributes: { uniqueId, alignment, bulletStyle, listType, animation, interaction } } = this.props
+        const interactionClass = IsInteraction(interaction) ? 'qubley-block-interaction' : '';
         const ListTag = listType == 'ordered' ? 'ol' : 'ul'
         return (
             <div className={`qubely-block-${uniqueId}`} {...animationAttr(animation)}>
-                <div className={`qubely-block-advanced-list qubely-alignment-${alignment}`}>
-                    <ListTag className={`qubely-list qubely-list-type-${listType} qubely-list-bullet-${bulletStyle}`}>
+                <div className={`qubely-block-advanced-list ${interactionClass} qubely-alignment-${alignment}`}>
+                    <ListTag className={`qubely-list qubely-list-type-${listType} qubely-list-bullet-${bulletStyle.name}`}>
                         {this.renderListItems()}
                     </ListTag>
-
                 </div>
             </div>
         );

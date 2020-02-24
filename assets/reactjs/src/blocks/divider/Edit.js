@@ -1,12 +1,22 @@
 const { __ } = wp.i18n;
-const { InspectorControls, BlockControls } = wp.editor
+const { InspectorControls, BlockControls } = wp.blockEditor
 const { Component, Fragment } = wp.element;
 const { PanelBody, Toolbar, Dropdown } = wp.components;
-import { Range, Color, Alignment, Selector, QubelyDropdown } from '../../components/FieldRender'
-import { CssGenerator } from '../../components/CssGenerator'
-import InlineToolbar from '../../components/fields/inline/InlineToolbar'
-import icons from '../divider/icon';
-import '../../components/GlobalSettings';
+const {
+    Alignment,
+    Range,
+    Color,
+    ContextMenu: { ContextMenu, handleContextMenu },
+    gloalSettings: {
+        globalSettingsPanel,
+        animationSettings,
+        interactionSettings
+    },
+    Inline: { InlineToolbar },
+     withCSSGenerator
+} = wp.qubelyComponents
+
+import icons from '../divider/icon'
 const dividerOptions = ['fill', 'dot', 'dash', 'branch', 'dashes', 'leaf', 'line1', 'line2', 'line3', 'line4', 'line5', 'line6', 'line7', 'line8', 'line9', 'line10', 'line11', 'line12', 'line13', 'liner', 'mustache', 'shadow', 'slash', 'spring', 'valla', 'wave1', 'wave2', 'wave3']
 class Edit extends Component {
 
@@ -43,22 +53,47 @@ class Edit extends Component {
     }
 
     render() {
-        const { setAttributes, attributes: { uniqueId, color, height, width, alignment, style } } = this.props
+        const {
+            name,
+            clientId,
+            attributes,
+            isSelected,
+            setAttributes,
+            attributes: {
+                uniqueId,
+                className,
+                color,
+                height,
+                width,
+                alignment,
+                style,
+                animation,
+                globalZindex,
+                enablePosition, 
+                selectPosition, 
+                positionXaxis, 
+                positionYaxis,
+                hideTablet,
+                hideMobile,
+                globalCss,
+                interaction
+            }
+        } = this.props
 
-        const { device } = this.state
-        if (uniqueId) { CssGenerator(this.props.attributes, 'divider', uniqueId); }
+        const { device } = this.state;
         return (
             <Fragment>
                 <InspectorControls key="inspector">
                     <PanelBody title={__('Divider Options')} initialOpen={true}>
-                        <QubelyDropdown
-                            dropDownClassName="qubely-divider-picker"
-                            contentClassName="qubely-divider-picker-content"
+                        <Dropdown
+                            className={"qubely-divider-picker"}
+                            contentClassName={"qubely-divider-picker-content"}
                             position="bottom center"
-                        >
-                            <span >{icons[style]}</span>
-                            {this.renderDividerOptions()}
-                        </QubelyDropdown>
+                            renderToggle={({ isOpen, onToggle }) =>
+                                <span onClick={onToggle} aria-expanded={isOpen}> {icons[style]}</span>
+                            }
+                            renderContent={() => this.renderDividerOptions()}
+                        />
                         <Alignment
                             label={__('Alignment')}
                             alignmentType="content"
@@ -66,7 +101,7 @@ class Edit extends Component {
                             value={alignment}
                             onChange={val => setAttributes({ alignment: val })}
                             responsive
-                            device={device} 
+                            device={device}
                             onDeviceChange={value => this.setState({ device: value })} />
                     </PanelBody >
 
@@ -82,9 +117,9 @@ class Edit extends Component {
                             min={0}
                             max={15}
                             unit={['px', 'em', '%']}
-                            responsive 
-                            device={device} 
-                            onDeviceChange={value => this.setState({ device: value })}/>
+                            responsive
+                            device={device}
+                            onDeviceChange={value => this.setState({ device: value })} />
                         <Range
                             label={__('Width')}
                             value={width}
@@ -93,9 +128,13 @@ class Edit extends Component {
                             max={1000}
                             unit={['px', 'em', '%']}
                             responsive
-                            device={device} 
+                            device={device}
                             onDeviceChange={value => this.setState({ device: value })} />
                     </PanelBody>
+
+                    {animationSettings(uniqueId, animation, setAttributes)}
+
+                    {interactionSettings(uniqueId, interaction, setAttributes)}
 
                 </InspectorControls >
 
@@ -109,25 +148,37 @@ class Edit extends Component {
                     </Toolbar>
                 </BlockControls>
 
-                <div className={`qubely-block-${uniqueId}`}>
-                    <QubelyDropdown
-                        dropDownClassName="qubely-divider-picker"
-                        contentClassName="qubely-divider-picker-content"
+                {globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
+
+                <div className={`qubely-block-${uniqueId}${className ? ` ${className}` : ''}`} onContextMenu={event => handleContextMenu(event, this.refs.qubelyContextMenu)}>
+                    <Dropdown
+                        className={"qubely-divider-picker"}
+                        contentClassName={"qubely-divider-picker-content"}
                         position="bottom center"
-                    >
-                        <div className={`qubely-block-divider`}>
-                            {((style == 'fill') || (style == 'dot') || (style == 'dash')) ?
-                                <div className={`qubely-block-divider-style-${style}`} />
-                                :
-                                <span >{icons[style]}</span>
-                            }
-                        </div>
-                        {this.renderDividerOptions()}
-                    </QubelyDropdown>
+                        renderToggle={({ isOpen, onToggle }) =>
+                            <div className={`qubely-block-divider`} onClick={onToggle} aria-expanded={isOpen}>
+                                {((style == 'fill') || (style == 'dot') || (style == 'dash')) ?
+                                    <div className={`qubely-block-divider-style-${style}`} />
+                                    :
+                                    <span>{icons[style]}</span>
+                                }
+                            </div>
+                        }
+                        renderContent={() => this.renderDividerOptions()}
+                    />
+                    <div ref="qubelyContextMenu" className={`qubely-context-menu-wraper`} >
+                        <ContextMenu
+                            name={name}
+                            clientId={clientId}
+                            attributes={attributes}
+                            setAttributes={setAttributes}
+                            qubelyContextMenu={this.refs.qubelyContextMenu}
+                        />
+                    </div>
                 </div>
             </Fragment >
         );
     }
 }
 
-export default Edit;
+export default withCSSGenerator()(Edit);

@@ -1,11 +1,8 @@
 const { __ } = wp.i18n;
-const { RichText, InspectorControls, BlockControls } = wp.editor
+const { RichText, InspectorControls, BlockControls } = wp.blockEditor
 const { Component, Fragment } = wp.element;
 const { PanelBody, Toolbar, Tooltip } = wp.components;
-import { Typography, Alignment, Styles, Range, Tabs, Tab, Border, RadioAdvanced, Color, Wrapper, BoxShadow, CustomIcons, Toggle, Separator, BorderRadius, Padding } from '../../components/FieldRender'
-import { CssGenerator } from '../../components/CssGenerator'
-import InlineToolbar from '../../components/fields/inline/InlineToolbar'
-import '../../components/GlobalSettings';
+const { Typography, Alignment, ContextMenu: { ContextMenu, handleContextMenu }, gloalSettings: { globalSettingsPanel, animationSettings, interactionSettings }, Styles, Range, Tabs, Tab, Border, Inline: { InlineToolbar }, RadioAdvanced, Color, BoxShadow, Toggle, Separator, IconSelector, BorderRadius, Padding, withCSSGenerator } = wp.qubelyComponents
 import icons from '../../helpers/icons'
 
 class Edit extends Component {
@@ -28,15 +25,15 @@ class Edit extends Component {
         } else if (uniqueId && uniqueId != _client) {
             setAttributes({ uniqueId: _client });
         }
-        this.placeCaretAtEnd(document.querySelector(`.qubely-list-item-text-${this.state.focusedItem}`))
+        this.placeCaretAtEnd(document.querySelector(`.qubely-block-${uniqueId} .qubely-list-item-text-${this.state.focusedItem}`))
     }
     componentDidUpdate(prevProps, prevState) {
         if (this.props.attributes.listItems.length > prevProps.attributes.listItems.length) {
-            let focusedListItem = document.getElementById(`qubely-list-item-text-${this.state.focusedItem}`)
+            let focusedListItem = document.querySelector(`.qubely-block-${prevProps.attributes.uniqueId} .qubely-list-item-text-${this.state.focusedItem}`)
             focusedListItem.focus()
         } else if (this.props.attributes.listItems.length < prevProps.attributes.listItems.length) {
             const { focusedItem } = this.state
-            let focusedListItem = document.querySelector(`.qubely-list-item-text-${focusedItem}`)
+            let focusedListItem = document.querySelector(`.qubely-block-${prevProps.attributes.uniqueId} .qubely-list-item-text-${focusedItem}`)
             focusedListItem && this.placeCaretAtEnd(focusedListItem)
         }
     }
@@ -86,19 +83,19 @@ class Edit extends Component {
                             this.setState({ focusedItem: focusedItem > 0 ? focusedItem - 1 : focusedItem })
 
                     }}>
-                    <i class="fas fa-times" />
+                    <i className="fas fa-times" />
                 </span>
             </Tooltip>
         )
 
     }
     renderListItems = () => {
-        const { attributes: { listItems, alignment, listType, listIcon, bulletStyle } } = this.props
+        const { attributes: { listItems, alignment, listType, bulletStyle } } = this.props
         const { focusedItem, removeItemViaBackSpace } = this.state
         const ListTag = (listType == 'ordered') ? 'ol' : 'ul'
         return (
             listItems.length > 0 ?
-                <ListTag className={`qubely-list qubely-list-type-${listType} qubely-list-bullet-${bulletStyle}`}>
+                <ListTag className={`qubely-list qubely-list-type-${listType} qubely-list-bullet-${bulletStyle.name}`}>
                     {listItems.map((item, index) => {
                         return (
                             <li className={`qubely-list-item`}  >
@@ -140,7 +137,7 @@ class Edit extends Component {
                     this.setState({ focusedItem: listItems.length })
                     this.updateListItems(listItems.length, 'add')
                 }} className="button is-default qubely-action-button" role="button">
-                    <i class="fas fa-plus" /> {__('Add List Item')}
+                    <i className="fas fa-plus" /> {__('Add List Item')}
                 </button>
         )
 
@@ -165,15 +162,59 @@ class Edit extends Component {
     }
 
     render() {
-        const { attributes: { uniqueId, alignment, layout, listType, typography,
-            spacing, color, colorHover, backgroundSize, background, backgroundHover, borderRadius,
-            border, borderColorHover, shadow, shadowHover,
-            bulletStyle, bulletSize, bulletSizeCustom, bulletColor, bulletColorHover, bulletSpacing,
-            numberCorner, numberFontSize, numberBgSize, useNumberBg, numberBg, numberBgHover,
-        }, setAttributes, onReplace } = this.props
-        const { device } = this.state
+        const {
+            name,
+            clientId,
+            isSelected,
+            attributes,
+            setAttributes,
+            attributes: {
+                uniqueId,
+                className,
+                alignment,
+                layout,
+                listType,
+                typography,
+                spacing,
+                color,
+                colorHover,
+                backgroundSize,
+                background,
+                backgroundHover,
+                borderRadius,
+                border,
+                borderColorHover,
+                shadow,
+                shadowHover,
 
-        if (uniqueId) { CssGenerator(this.props.attributes, 'advancedlist', uniqueId) }
+                bulletStyle,
+                bulletSize,
+                bulletSizeCustom,
+                bulletColor,
+                bulletColorHover,
+                bulletSpacing,
+                numberCorner,
+                numberFontSize,
+                numberBgSize,
+                useNumberBg,
+                numberBg,
+                numberBgHover,
+
+                //animation
+                animation,
+                //global
+                globalZindex,
+                enablePosition,
+                selectPosition,
+                positionXaxis,
+                positionYaxis,
+                hideTablet,
+                hideMobile,
+                globalCss,
+                interaction
+            }
+        } = this.props;
+        const { device } = this.state;
 
         return (
             <Fragment>
@@ -193,34 +234,35 @@ class Edit extends Component {
                     <PanelBody title={(listType == 'unordered') ? __('Bullet') : __('Number')} initialOpen={false}>
                         {listType == 'unordered' &&
                             <Fragment>
-                                <CustomIcons
+                                <IconSelector
                                     label="Icon"
-                                    value={bulletStyle}
+                                    value={bulletStyle.name}
+                                    enableSearch
                                     icons={[
-                                        { value: 'check', name: 'fas fa-check' },
-                                        { value: 'check-square', name: 'fas fa-check-square' },
-                                        { value: 'check-square-outline', name: 'far fa-check-square' },
-                                        { value: 'check-double', name: 'fas fa-check-double' },
-                                        { value: 'check-circle', name: 'fas fa-check-circle' },
-                                        { value: 'check-circle-outline', name: 'far fa-check-circle' },
-                                        { value: 'square', name: 'fas fa-square' },
-                                        { value: 'square-outline', name: 'far fa-square' },
-                                        { value: 'circle', name: 'fas fa-circle' },
-                                        { value: 'circle-outline', name: 'far fa-circle' },
-                                        { value: 'arrow-right', name: 'fas fa-arrow-right' },
-                                        { value: 'arrow-left', name: 'fas fa-arrow-left' },
-                                        { value: 'arrow-circle-right', name: 'fas fa-arrow-circle-right' },
-                                        { value: 'arrow-circle-left', name: 'fas fa-arrow-circle-left' },
-                                        { value: 'arrow-alt-circle-right', name: 'far fa-arrow-alt-circle-right' },
-                                        { value: 'arrow-alt-circle-left', name: 'far fa-arrow-alt-circle-left' },
-                                        { value: 'long-arrow-alt-right', name: 'fas fa-long-arrow-alt-right' },
-                                        { value: 'long-arrow-alt-left', name: 'fas fa-long-arrow-alt-left' },
-                                        { value: 'chevron-right', name: 'fas fa-chevron-right' },
-                                        { value: 'chevron-left', name: 'fas fa-chevron-left' },
-                                        { value: 'angle-right', name: 'fas fa-angle-right' },
-                                        { value: 'angle-left', name: 'fas fa-angle-left' },
-                                        { value: 'star', name: 'fas fa-star' },
-                                        { value: 'star-outline', name: 'far fa-star' },
+                                        { name: 'check', value: 'fas fa-check' },
+                                        { name: 'check-square', value: 'fas fa-check-square' },
+                                        { name: 'check-square-outline', value: 'far fa-check-square' },
+                                        { name: 'check-double', value: 'fas fa-check-double' },
+                                        { name: 'check-circle', value: 'fas fa-check-circle' },
+                                        { name: 'check-circle-outline', value: 'far fa-check-circle' },
+                                        { name: 'square', value: 'fas fa-square' },
+                                        { name: 'square-outline', value: 'far fa-square' },
+                                        { name: 'circle', value: 'fas fa-circle' },
+                                        { name: 'circle-outline', value: 'far fa-circle' },
+                                        { name: 'arrow-right', value: 'fas fa-arrow-right' },
+                                        { name: 'arrow-left', value: 'fas fa-arrow-left' },
+                                        { name: 'arrow-circle-right', value: 'fas fa-arrow-circle-right' },
+                                        { name: 'arrow-circle-left', value: 'fas fa-arrow-circle-left' },
+                                        { name: 'arrow-alt-circle-right', value: 'far fa-arrow-alt-circle-right' },
+                                        { name: 'arrow-alt-circle-left', value: 'far fa-arrow-alt-circle-left' },
+                                        { name: 'long-arrow-alt-right', value: 'fas fa-long-arrow-alt-right' },
+                                        { name: 'long-arrow-alt-left', value: 'fas fa-long-arrow-alt-left' },
+                                        { name: 'chevron-right', value: 'fas fa-chevron-right' },
+                                        { name: 'chevron-left', value: 'fas fa-chevron-left' },
+                                        { name: 'angle-right', value: 'fas fa-angle-right' },
+                                        { name: 'angle-left', value: 'fas fa-angle-left' },
+                                        { name: 'star', value: 'fas fa-star' },
+                                        { name: 'star-outline', value: 'far fa-star' },
                                     ]}
                                     onChange={val => setAttributes({ bulletStyle: val })}
                                 />
@@ -244,14 +286,8 @@ class Edit extends Component {
                                 <Toggle label={__('Use Background')} value={useNumberBg} onChange={val => setAttributes({ useNumberBg: val })} />
                                 {useNumberBg == 1 &&
                                     <Fragment>
-                                        <Range label={__('Background Size')} value={numberBgSize} onChange={(value) => setAttributes({ numberBgSize: value })} min={14} max={100} />
-                                        <RadioAdvanced label={__('Corner')} value={numberCorner} onChange={val => setAttributes({ numberCorner: val })}
-                                            options={[
-                                                { svg: icons.corner_square, value: '0px', title: __('Square') },
-                                                { svg: icons.corner_rounded, value: '5px', title: __('Rounded') },
-                                                { svg: icons.corner_round, value: '50px', title: __('Round') }
-                                            ]}
-                                        />
+                                        <Range label={__('Background Size')} value={numberBgSize} onChange={(value) => setAttributes({ numberBgSize: value })} min={1} max={15} />
+                                        <Range label={__('Corner')} value={numberCorner} onChange={(value) => setAttributes({ numberCorner: value })} min={0} max={100} />
                                     </Fragment>
                                 }
                             </Fragment>
@@ -259,13 +295,13 @@ class Edit extends Component {
                         <Range label={__('Spacing')} value={bulletSpacing} onChange={val => setAttributes({ bulletSpacing: val })} min={0} max={60} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
                         <Tabs>
                             <Tab tabTitle={__('Normal')}>
-                                <Color label={__('Color')} value={bulletColor} onChange={val => setAttributes({ bulletColor: val })} />
+                                <Color label={__('Color')} disableAlpha value={bulletColor} onChange={val => setAttributes({ bulletColor: val })} />
                                 {(listType == 'ordered' && useNumberBg == 1) &&
                                     <Color label={__('Background Color')} value={numberBg} onChange={val => setAttributes({ numberBg: val })} />
                                 }
                             </Tab>
                             <Tab tabTitle={__('Hover')}>
-                                <Color label={__('Color')} value={bulletColorHover} onChange={val => setAttributes({ bulletColorHover: val })} />
+                                <Color label={__('Color')} disableAlpha value={bulletColorHover} onChange={val => setAttributes({ bulletColorHover: val })} />
                                 {listType == 'ordered' && useNumberBg == 1 &&
                                     <Color label={__('Background Color')} value={numberBgHover} onChange={val => setAttributes({ numberBgHover: val })} />
                                 }
@@ -309,6 +345,10 @@ class Edit extends Component {
                         </Tabs>
                     </PanelBody>
 
+                    {animationSettings(uniqueId, animation, setAttributes)}
+
+                    {interactionSettings(uniqueId, interaction, setAttributes)}
+
                 </InspectorControls>
 
                 <BlockControls>
@@ -332,13 +372,21 @@ class Edit extends Component {
                         }]} />
                 </BlockControls>
 
+                {globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
-                <div className={`qubely-block-${uniqueId}`}>
-                    <div className={`qubely-block-advanced-list qubely-alignment-${alignment}`}>
-                        <div className={`qubely-block-advanced-list qubely-alignment-${alignment}`}>
-                            {this.renderListItems()}
+                <div className={`qubely-block-${uniqueId}${className ? ` ${className}` : ''}`}>
+                    <div className={`qubely-block-advanced-list qubely-alignment-${alignment}`} onContextMenu={event => handleContextMenu(event, this.refs.qubelyContextMenu)}>
+                        {this.renderListItems()}
+
+                        <div ref="qubelyContextMenu" className={`qubely-context-menu-wraper`} >
+                            <ContextMenu
+                                name={name}
+                                clientId={clientId}
+                                attributes={attributes}
+                                setAttributes={setAttributes}
+                                qubelyContextMenu={this.refs.qubelyContextMenu}
+                            />
                         </div>
-
                     </div>
                 </div>
             </Fragment>
@@ -346,4 +394,4 @@ class Edit extends Component {
     }
 }
 
-export default Edit
+export default withCSSGenerator()(Edit);

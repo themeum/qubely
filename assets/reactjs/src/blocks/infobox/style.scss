@@ -20,26 +20,38 @@
         display: inline-block;
         line-height: 1;
         text-align: center;
+        overflow: hidden;
         i,
         span,
         img {
+            font-style: normal;
             position: relative;
             display: block;
             transition: 400ms;
         }
-        i {
-            width: 1em;
-            height: 1em;
-            &:before {
-                position: absolute;
-                left: 50%;
-                transform: translateX(-50%);
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+    
+        &.qubely-media-has-bg {
+            i,
+            .qubely-info-box-number {
+                min-width: 1em;
+                height: 1em;
+                white-space: nowrap;
+                &:before {
+                    position: absolute;
+                    left: 50%;
+                    transform: translateX(-50%);
+                }
             }
         }
     }
 
     .qubely-info-box-title {
-        margin: 0;
+        margin: 0 !important;
     }
 
     .qubely-info-box-media,

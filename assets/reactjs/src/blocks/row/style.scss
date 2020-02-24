@@ -1,19 +1,30 @@
 .qubely-section {
     position: relative;
-    &.alignfull {
-        margin: 0 !important;
-    }
-    .qubely-container{
+    .qubely-container {
         position: relative;
-        @media only screen and (max-width: 991px) {
-            padding-left: 15px;
-            padding-right: 15px;
+        width: 100%;
+        margin-right: auto;
+        margin-left: auto;
+        
+        @media (min-width: 576px) {
+            max-width: 540px;
+        }
+          
+        @media (min-width: 768px) {
+            max-width: 720px;
+        }
+          
+        @media (min-width: 992px) {
+            max-width: 960px;
         }
     }
     .qubely-row {
         display: flex;
         flex-wrap: wrap;
         position: relative;
+        > .wp-block-qubely-column {
+            box-sizing: border-box;
+        }
         &.qubely-row-height-window {
             min-height: 100vh;
         }
@@ -96,3 +107,28 @@
         }
     }
 }
+
+.editor-styles-wrapper {
+    .qubely-section {
+        .qubely-column-inner {
+            .components-dropdown-menu.components-toolbar {
+                border-right: none;
+                padding: 0;
+                // button.components-dropdown-menu__toggle.has-text {
+                //     display: none; 
+                // }
+            
+            }
+            .wp-block[data-align="full"] {
+                left: auto;
+                width: 100%;
+                max-width: 100%;
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+    }
+} 
+// .editor-styles-wrapper .wp-block .qubely-backend-row .wp-block {
+//     z-index: 3;
+// }

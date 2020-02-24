@@ -1,15 +1,15 @@
 const { Component } = wp.element
-const { InnerBlocks } = wp.editor
-import { animationAttr } from '../../components/HelperFunction'
+const { InnerBlocks } = wp.blockEditor
+const { HelperFunction: { animationAttr, IsInteraction } } = wp.qubelyComponents
 
 class Save extends Component {
     renderTabTitles = () => {
-        const { attributes: { tabTitles, tabs, iconPosition } } = this.props
+        const { attributes: { tabTitles, iconPosition } } = this.props
 
         return tabTitles.map((title, index) =>
             <span className={`qubely-tab-item ${(index == 0) ? 'qubely-active' : ''}`}>
                 <span class={`qubely-tab-title ${title.iconName ? 'qubely-has-icon-' + iconPosition : ''}`} role="button">
-                    {title.iconName && ( iconPosition == 'top' || iconPosition == 'left' ) && (<i className={`qubely-tab-icon ${title.iconName}`} />)}
+                    {title.iconName && (iconPosition == 'top' || iconPosition == 'left') && (<i className={`qubely-tab-icon ${title.iconName}`} />)}
                     {title.title}
                     {title.iconName && (iconPosition == 'right') && (<i className={`qubely-tab-icon ${title.iconName}`} />)}
                 </span>
@@ -17,8 +17,8 @@ class Save extends Component {
         )
     }
     render() {
-        const { uniqueId, tabs, tabStyle, navAlignment, animation } = this.props.attributes
-
+        const { uniqueId, tabs, tabStyle, navAlignment, animation, interaction } = this.props.attributes
+        const interactionClass = IsInteraction(interaction) ? 'qubley-block-interaction' : '';
         let iterator = [], index = 0
         while (index < tabs) {
             iterator.push(index)
@@ -26,7 +26,7 @@ class Save extends Component {
         }
         return (
             <div className={`qubely-block-${uniqueId}`} {...animationAttr(animation)}>
-                <div className={`qubely-block-tab qubely-tab-style-${tabStyle}`}>
+                <div className={`qubely-block-tab ${interactionClass} qubely-tab-style-${tabStyle}`}>
                     <div className={`qubely-tab-nav qubely-alignment-${navAlignment}`}>
                         {this.renderTabTitles(iterator)}
                     </div>

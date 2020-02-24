@@ -1,34 +1,68 @@
 const { __ } = wp.i18n;
+
+import './components/FieldRender'
+
 import './editor.scss'
 import './blocks/scss/style.scss'
 
-import './blocks/row'           // Row
-import './blocks/row/column'    // Column
-import './blocks/button'        // Button
-import './blocks/text'          // Text
-import './blocks/icon'          // Icon
-import './blocks/map'           // Map
-import './blocks/divider'       // Divider
-import './blocks/infobox'       // Info Box
-import './blocks/testimonial'   // Testimonial
-import './blocks/accordion'     // Accordion
-import './blocks/heading'       // Heading Box
-import './blocks/videopopup'    // Video popup
-import './blocks/progressbar'   // Progress Bar
-import './blocks/counter'       // counter
-import './blocks/tabs'          // Tabs
-import './blocks/tabs/tab'      // Inner Tabs
-import './blocks/socialicons'   // Social Icons
-import './blocks/form'          // Form
-import './blocks/contactform'   // Contact Form
-import './blocks/buttongroup'   // Button Group
-import './blocks/advancedlist'  // Advanced List
-import './blocks/iconlist'      // Icon List
-import './blocks/wrapper'       // Wrapper
-import './blocks/team'          // Team
-import './blocks/pricing'       // pricing 
-// import './blocks/carousel'      //carousel
-// import './blocks/carousel/carouselitem' //carousel item
+import './blocks/row'                   // Row
+import './blocks/row/column'            // Column
+import './blocks/button'                // Button
+import './blocks/text'                  // Text
+import './blocks/icon'                  // Icon
+import './blocks/map'                   // Map
+import './blocks/divider'               // Divider
+import './blocks/infobox'               // Info Box
+import './blocks/image'                 // Image
+import './blocks/testimonial'           // Testimonial
+import './blocks/accordion'             // Accordion
+import './blocks/heading'               // Heading Box
+import './blocks/videopopup'            // Video popup
+import './blocks/progressbar'           // Progress Bar
+import './blocks/counter'               // counter
+import './blocks/tabs'                  // Tabs
+import './blocks/tabs/tab'              // Inner Tabs
+import './blocks/socialicons'           // Social Icons
+import './blocks/contactform'           // Contact Form
+import './blocks/buttongroup'           // Button Group
+import './blocks/advancedlist'          // Advanced List
+import './blocks/iconlist'              // Icon List
+import './blocks/wrapper'               // Wrapper
+import './blocks/team'                  // Team
+import './blocks/pricing'               // pricing
+import './blocks/timeline'              // Timeline
+import './blocks/postgrid'              // Postgrid
+import './blocks/row/column'            // Column
+import './blocks/button'                // Button
+import './blocks/text'                  // Text
+import './blocks/icon'                  // Icon
+import './blocks/map'                   // Map
+import './blocks/divider'               // Divider
+import './blocks/infobox'               // Info Box
+import './blocks/image'                 // Image
+import './blocks/testimonial'           // Testimonial
+import './blocks/accordion'             // Accordion
+import './blocks/heading'               // Heading Box
+import './blocks/videopopup'            // Video popup
+import './blocks/progressbar'           // Progress Bar
+import './blocks/counter'               // counter
+import './blocks/tabs'                  // Tabs
+import './blocks/tabs/tab'              // Inner Tabs
+import './blocks/socialicons'           // Social Icons
+import './blocks/contactform'           // Contact Form
+import './blocks/buttongroup'           // Button Group
+import './blocks/advancedlist'          // Advanced List
+import './blocks/iconlist'              // Icon List
+import './blocks/wrapper'               // Wrapper
+import './blocks/team'                  // Team
+import './blocks/pricing'               // pricing
+import './blocks/timeline'              // Timeline
+import './blocks/postgrid'              // Postgrid
+import './blocks/animatedheadline'      // Animated Headline
+import './blocks/pieprogress'           // PieProgress
+import './blocks/table-of-contents'
+
+
 
 // Global Settings
 import './blocks/pagesettings'
@@ -36,16 +70,25 @@ import './customizer'
 
 window.qubelyDevice = 'md'
 window.bindCss = false
-window.globalData = {}
+window.globalData = {
+    settings: {
+        colorPreset1: qubely_admin.palette[0],
+        colorPreset2: qubely_admin.palette[1],
+        colorPreset3: qubely_admin.palette[2],
+        colorPreset4: qubely_admin.palette[3],
+        colorPreset5: qubely_admin.palette[4],
+        colorPreset6: qubely_admin.palette[5],
+    }
+};
 window.globalSaving = false
 
 // Save CSS in Database/File
 import ParseCss from './helpers/ParseCss'
 wp.data.subscribe(() => {
-    const { isSavingPost, isAutosavingPost } = wp.data.select("core/editor")
-    if (isSavingPost() && (!isAutosavingPost())) {
+    const { isPreviewingPost, isSavingPost, isAutosavingPost } = wp.data.select("core/editor")
+    if (isPreviewingPost() || (isSavingPost() && (!isAutosavingPost()))) {
         if (window.bindCss === false) {
-            ParseCss();
+            ParseCss( isPreviewingPost() ? false : true );
         }
     }
 });
@@ -69,13 +112,4 @@ function appendImportButton() {
 }
 function qubelyImportLayout() {
     ModalManager.open(<PageListModal rowClientId={false} />);
-}
-
-//DEACTIVATE BLOCKS
-let qubely_deactivated_blocks = qubely_admin.unregistered_blocks;
-if ( ! qubely_deactivated_blocks.length ) { // convert object into an array.
-	qubely_deactivated_blocks = Object.keys( qubely_deactivated_blocks ).map( key => qubely_deactivated_blocks[ key ] )
-}
-if ( typeof wp.blocks.unregisterBlockType !== "undefined" ) {
-	qubely_deactivated_blocks.forEach( block => wp.blocks.unregisterBlockType( block ) )
 }

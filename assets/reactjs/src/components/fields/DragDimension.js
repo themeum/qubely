@@ -1,7 +1,7 @@
 import '../css/dragdimension.scss'
 const { __ } = wp.i18n;
 const { Component } = wp.element;
-import Device from "../../components/Device";
+import Device from "./Device";
 
 export default class DragDimension extends Component{
     constructor(props){

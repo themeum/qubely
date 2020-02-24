@@ -1,0 +1,297 @@
+.qubely-block-image {
+    &.qubely-image-layout-blurb {
+        line-height: 0;
+        .qubely-image-media {
+            display: inline-block;
+        }
+    }
+	figure {
+		padding: 0;
+		margin: 0;
+		position: relative;
+		
+		.qubely-image-image {
+			margin: 0;
+			padding: 0;
+			display: inline-block;
+			&.qubely-image-placeholder {
+				display: inline-flex;
+			}
+		}
+		
+		.qubely-image-container {
+			overflow: hidden;
+			position: relative;
+			z-index: 0;
+			transition: box-shadow 0.35s;
+			.qubely-image-content {
+				display: flex;
+				position: absolute;
+				top: 0;
+				left: 0;
+				bottom: 0;
+				right: 0;
+                z-index: 10;
+                line-height: normal;
+			}
+		}
+	}
+
+	.qubely-has-frame {
+		figure:after {
+			content: " ";
+			position: absolute;
+			top: 0px;
+			left: 0px;
+			bottom: 0px;
+			right: 0px;
+			z-index: 4;
+			pointer-events: none;
+		}
+
+		&.qubely-frame-animate-on-hover {
+			figure:after {
+				opacity: 0;
+				transition: opacity 0.35s;
+			}
+
+			&:hover {
+				figure:after {
+					opacity: 1;
+				}
+			}
+		}
+	}
+
+	.qubely-hover-animation-on {
+
+		.qubely-image-title {
+			margin: 0;
+			line-height: 1;
+		}
+		
+		&:hover {
+			.qubely-image-container:after {
+				opacity: 1;
+			}
+		}
+
+		// Animation Zoom Out
+		&.qubely-hover-animation-type-zoom-out {
+			.qubely-image-image {
+				transition: transform 0.35s;
+				transform: scale(1.2);
+			}
+			&:hover {
+				.qubely-image-image {
+					transform: scale(1);
+				}
+			}
+		}
+
+		// Animation Zoom In
+		&.qubely-hover-animation-type-zoom-in {
+			.qubely-image-image {
+				transition: transform 0.35s;
+				transform: scale(1);
+			}
+			&:hover {
+				.qubely-image-image {
+					transform: scale(1.2);
+				}
+			}
+		}
+
+		// Animation Scale
+		&.qubely-hover-animation-type-scale {
+			transform: scale(1);
+			transition: transform 0.35s;
+			&:hover {
+				transform: scale(1.02);
+			}
+		}
+
+		// Animation Slide from Top
+		&.qubely-hover-animation-type-slide-top {
+			.qubely-image-image {
+				transform: translate3d(0, -40px, 0) scale3d(1.2, 1.2, 1);
+				transition: transform 0.35s;
+			}
+
+			&:hover {
+				.qubely-image-image {
+					transform: translate3d(0, 0, 0) scale3d(1.2, 1.2, 1);
+				}
+			}
+		}
+
+		// Animation Slide from Bottom
+		&.qubely-hover-animation-type-slide-bottom {
+			.qubely-image-image {
+				transform: translate3d(0, 40px, 0) scale3d(1.2, 1.2, 1);
+				transition: transform 0.35s;
+			}
+			&:hover {
+				.qubely-image-image {
+					transform: translate3d(0, 0, 0) scale3d(1.2, 1.2, 1);
+				}
+			}
+		}
+
+		// Animation Slide from Left
+		&.qubely-hover-animation-type-slide-left {
+			.qubely-image-image {
+				max-width: initial;
+				max-height: 100%;
+				width: calc(100% + 50px);
+				transition: opacity 0.35s, transform 0.35s;
+				transform: translate3d(-40px, 0, 0);
+			}
+			&:hover {
+				.qubely-image-image {
+					transform: translate3d(0, 0, 0);
+				}
+			}
+		}
+
+		// Animation Slide from Right
+		&.qubely-hover-animation-type-slide-right {
+			.qubely-image-image {
+				max-width: initial;
+				max-height: 100%;
+				width: calc(100% + 50px);
+				transition: opacity 0.35s, transform 0.35s;
+				transform: translate3d(-10px, 0, 0);
+			}
+			&:hover {
+				.qubely-image-image {
+					transform: translate3d(-40px, 0, 0);
+				}
+			}
+		}
+
+		// Vertical Align Top
+		&.qubely-vertical-alignment-top {
+			.qubely-image-title {
+				&.qubely-visible-on-hover {
+					opacity: 0;
+					transform: translate3d(0, -30px, 0);
+					transition: transform 0.35s;
+				}
+				&.qubely-visible-on-hover-enabled {
+					transform: translate3d(0, 0px, 0);
+					transition: transform 0.35s;
+				}
+			}
+	
+			.qubely-image-sub-title {
+                line-height: 1;
+				&.qubely-visible-on-hover {
+					transform: translate3d(0, -30px, 0);
+					opacity: 0;
+					transition: opacity 0.2s, transform 0.35s;
+				}
+
+				&.qubely-visible-on-hover-enabled {
+					transform: translate3d(0, 0px, 0);
+					opacity: 0;
+					transition: opacity 0.2s, transform 0.35s;
+				}
+			}
+
+			&:hover {
+				.qubely-image-title {
+					&.qubely-visible-on-hover {
+						opacity: 1;
+						transform: translate3d(0, 0px, 0);
+					}
+	
+					&.qubely-visible-on-hover-enabled {
+						transform: translate3d(0, 30px, 0);
+					}
+				}
+	
+				.qubely-image-sub-title {
+					&.qubely-visible-on-hover {
+						transform: translate3d(0, 0px, 0);
+						opacity: 1;
+						transition-delay: 0.05s;
+						transition-duration: 0.35s;
+					}
+
+					&.qubely-visible-on-hover-enabled {
+						transform: translate3d(0, 30px, 0);
+					}
+				}
+			}
+		}
+
+		// Vertical Align Middle & Bottom
+		&.qubely-vertical-alignment-center,
+		&.qubely-vertical-alignment-bottom {
+			.qubely-image-title {
+				&.qubely-visible-on-hover {
+					opacity: 0;
+					transform: translate3d(0, 40px, 0);
+					transition: transform 0.35s;
+				}
+				&.qubely-visible-on-hover-enabled {
+					transform: translate3d(0, 30px, 0);
+					transition: transform 0.35s;
+				}
+			}
+	
+			.qubely-image-sub-title {
+				&.qubely-visible-on-hover {
+					transform: translate3d(0, 40px, 0);
+					opacity: 0;
+					transition: opacity 0.2s, transform 0.35s;
+				}
+			}
+
+			&:hover {
+				.qubely-image-title {
+					&.qubely-visible-on-hover {
+						opacity: 1;
+						transform: translate3d(0, 0, 0);
+					}
+	
+					&.qubely-visible-on-hover-enabled {
+						transform: translate3d(0, 0, 0);
+					}
+				}
+	
+				.qubely-image-sub-title {
+					&.qubely-visible-on-hover {
+						transform: translate3d(0, 0, 0);
+						opacity: 1;
+						transition-delay: 0.05s;
+						transition-duration: 0.35s;
+					}
+				}
+			}
+		}
+    }
+    
+    &.qubely-image-layout-blurb {
+        figure {
+            .qubely-image-container {
+                &:before,
+                &:after {
+                    content: " ";
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    bottom: 0;
+                    right: 0;
+                    z-index: 1;
+                }
+                &:after {
+                    z-index: 2;
+                    opacity: 0;
+                    transition: opacity 600ms;
+                }
+            }
+        }
+    }
+}

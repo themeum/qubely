@@ -1,18 +1,31 @@
 const { __ } = wp.i18n;
-const { InspectorControls, BlockControls } = wp.editor
+const { InspectorControls, BlockControls } = wp.blockEditor
 const { Component, Fragment } = wp.element;
 const { PanelBody, TextControl, Toolbar } = wp.components;
-import { Counter, Range, Alignment, Typography, Color } from '../../components/FieldRender'
-import InlineToolbar from '../../components/fields/inline/InlineToolbar'
-import { CssGenerator } from '../../components/CssGenerator'
-import '../../components/GlobalSettings'
+const {
+	Counter,
+	Range,
+	Alignment,
+	Typography,
+	Color,
+	gloalSettings: {
+		globalSettingsPanel,
+		animationSettings,
+		interactionSettings
+	},
+	Inline: { InlineToolbar },
+	ContextMenu: {
+		ContextMenu,
+		handleContextMenu 
+	},
+	withCSSGenerator
+} = wp.qubelyComponents
 
 class Edit extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
 			device: 'md',
-			counterUpperLevel: this.props.attributes.count,
 			spacer: true
 		}
 	}
@@ -26,9 +39,37 @@ class Edit extends Component {
 		}
 	}
 	render() {
-		const { attributes: { uniqueId, alignment, counterLimit, counterDuration, counterTypo, counterColor, postfix, prefix, prepostTypo, prepostSpacing, prepostColor }, setAttributes } = this.props
+		const {
+			name,
+			clientId,
+			attributes,
+			isSelected,
+			setAttributes,
+			attributes: {
+				uniqueId,
+				className,
+				alignment,
+				counterLimit,
+				counterDuration,
+				counterTypo,
+				counterColor,
+				postfix,
+				prefix,
+				prepostTypo,
+				prepostSpacing,
+				prepostColor,
+				interaction,
+				animation,
+				globalZindex,
+				enablePosition,
+				selectPosition,
+				positionXaxis,
+				positionYaxis,
+				hideTablet,
+				hideMobile,
+				globalCss
+			} } = this.props
 		const { device } = this.state
-		if (uniqueId) { CssGenerator(this.props.attributes, 'counter', uniqueId); }
 
 		return (
 			<Fragment>
@@ -99,6 +140,11 @@ class Edit extends Component {
 							}
 						</PanelBody>
 					}
+
+					{animationSettings(uniqueId, animation, setAttributes)}
+
+					{interactionSettings(uniqueId, interaction, setAttributes)}
+
 				</InspectorControls>
 
 				<BlockControls>
@@ -111,8 +157,10 @@ class Edit extends Component {
 					</Toolbar>
 				</BlockControls>
 
-				<div className={`qubely-block-${uniqueId}`}>
-					<div className="qubely-block-counter">
+				{globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
+
+				<div className={`qubely-block-${uniqueId}${className ? ` ${className}` : ''}`}>
+					<div className="qubely-block-counter" onContextMenu={event => handleContextMenu(event, this.refs.qubelyContextMenu)}>
 						{counterLimit <= 0 && <div>Please enter counter number</div>}
 						{counterDuration <= 0 && <div>Please enter counter Duration</div>}
 						<div className="qubely-block-counter-content">
@@ -126,6 +174,17 @@ class Edit extends Component {
 								</Fragment>
 							}
 						</div>
+
+						<div ref="qubelyContextMenu" className={`qubely-context-menu-wraper`} >
+							<ContextMenu
+								name={name}
+								clientId={clientId}
+								attributes={attributes}
+								setAttributes={setAttributes}
+								qubelyContextMenu={this.refs.qubelyContextMenu}
+							/>
+						</div>
+
 					</div>
 				</div>
 
@@ -134,4 +193,4 @@ class Edit extends Component {
 	}
 }
 
-export default Edit;
+export default withCSSGenerator()(Edit);

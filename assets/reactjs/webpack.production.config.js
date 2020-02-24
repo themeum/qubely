@@ -6,11 +6,11 @@ var webpack = require('webpack');
 module.exports = {
     mode: 'production',
     entry: {
-        'blocks.build.min': path.join( __dirname, 'src/index.js')
+        'qubely': path.join( __dirname, 'src/index.js')
     },
     output: {
         path: path.join( __dirname, '../js'),
-        filename: '[name].js'
+        filename: '[name].min.js'
     },
     module: {
         rules: [

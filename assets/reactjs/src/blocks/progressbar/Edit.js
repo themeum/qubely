@@ -1,11 +1,27 @@
 const { __ } = wp.i18n
 const { Fragment, Component } = wp.element;
 const { PanelBody, TextControl, Toolbar } = wp.components
-const { InspectorControls, BlockControls } = wp.editor
-import { RadioAdvanced, Range, Typography, Separator, ColorAdvanced, Toggle, Color, BorderRadius } from '../../components/FieldRender'
-import InlineToolbar from '../../components/fields/inline/InlineToolbar'
-import { CssGenerator } from '../../components/CssGenerator'
-import '../../components/GlobalSettings'
+const { InspectorControls, BlockControls } = wp.blockEditor
+const {
+    RadioAdvanced,
+    Range,
+    Typography,
+    ColorAdvanced,
+    Toggle,
+    Color,
+    BorderRadius,
+    Inline: { InlineToolbar },
+    ContextMenu: {
+        ContextMenu,
+        handleContextMenu
+    },
+    gloalSettings: {
+        globalSettingsPanel,
+        animationSettings,
+        interactionSettings
+    },
+    withCSSGenerator
+} = wp.qubelyComponents
 
 class Edit extends Component {
 
@@ -28,11 +44,42 @@ class Edit extends Component {
     }
 
     render() {
-        const { uniqueId, progress, title, labelTypography, labelPosition, labelColor, labelSpacing, showProgress, barHeight, barBackground, progressBackground, striped, borderRadius } = this.props.attributes
-        const { setAttributes } = this.props
-        const { device } = this.state
-        if (uniqueId) { CssGenerator(this.props.attributes, 'progressbar', uniqueId); }
+        const {
+            name,
+            clientId,
+            attributes,
+            isSelected,
+            setAttributes,
+            attributes: {
+                uniqueId,
+                className,
+                progress,
+                title,
+                labelTypography,
+                labelPosition,
+                labelColor,
+                labelSpacing,
+                showProgress,
+                barHeight,
+                barBackground,
+                progressBackground,
+                striped,
+                borderRadius,
 
+                //animation
+                animation,
+                //global
+                enablePosition,
+                selectPosition,
+                positionXaxis,
+                positionYaxis,
+                globalZindex,
+                hideTablet,
+                hideMobile,
+                globalCss,
+                interaction }
+        } = this.props
+        const { device } = this.state
         const labelsContent = <Fragment>
             {title != '' &&
                 <div className={`qubely-block-progress-labels qubely-position-${labelPosition}`}>
@@ -84,6 +131,11 @@ class Edit extends Component {
                             value={barBackground}
                             onChange={val => setAttributes({ barBackground: val })} />
                     </PanelBody>
+
+                    {animationSettings(uniqueId, animation, setAttributes)}
+
+                    {interactionSettings(uniqueId, interaction, setAttributes)}
+
                 </InspectorControls>
 
                 <BlockControls>
@@ -96,14 +148,26 @@ class Edit extends Component {
                     </Toolbar>
                 </BlockControls>
 
-                <div className={`qubely-block-${uniqueId}`}>
-                    <div className="qubely-block-progress-bar">
+                {globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
+
+                <div className={`qubely-block-${uniqueId}${className ? ` ${className}` : ''}`}>
+                    <div className="qubely-block-progress-bar" onContextMenu={event => handleContextMenu(event, this.refs.qubelyContextMenu)}>
                         {labelPosition == 'outside' && labelsContent}
                         <div className="qubely-progress">
                             <div className="qubely-progress-bar" role="progressbar">
                                 {striped && <div className="qubely-progress-striped"></div>}
                                 {labelPosition == 'inside' && labelsContent}
                             </div>
+                        </div>
+
+                        <div ref="qubelyContextMenu" className={`qubely-context-menu-wraper`} >
+                            <ContextMenu
+                                name={name}
+                                clientId={clientId}
+                                attributes={attributes}
+                                setAttributes={setAttributes}
+                                qubelyContextMenu={this.refs.qubelyContextMenu}
+                            />
                         </div>
                     </div>
                 </div>
@@ -112,4 +176,4 @@ class Edit extends Component {
         )
     }
 }
-export default Edit
+export default withCSSGenerator()(Edit);

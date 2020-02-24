@@ -1,13 +1,27 @@
-const { __ } = wp.i18n;
 import '../../css/editorinline.scss'
+import icons from '../../../helpers/icons'
+const { __ } = wp.i18n;
 const { Component, Fragment } = wp.element
 const { toggleFormat, applyFormat } = wp.richText;
-const { RichTextToolbarButton, RichTextShortcut } = wp.editor;
+const { RichTextToolbarButton } = wp.blockEditor;
 const { registerFormatType } = wp.richText;
-const { ColorPicker } = wp.components;
-const { Dropdown } = wp.components
+const { ColorPicker, Popover } = wp.components;
+
+function defColors() {
+    let val = [];
+    const colors = window.globalData.settings;
+    val.push(colors.colorPreset1 || qubely_admin.palette[0])
+    val.push(colors.colorPreset2 || qubely_admin.palette[1])
+    val.push(colors.colorPreset3 || qubely_admin.palette[2])
+    val.push(colors.colorPreset4 || qubely_admin.palette[3])
+    val.push(colors.colorPreset5 || qubely_admin.palette[4])
+    val.push(colors.colorPreset6 || qubely_admin.palette[5])
+    return val;
+}
 
 function registerFormat() {
+
+    //inline text transform
     registerFormatType('qubely/uppercase', {
         name: 'qubely/uppercase',
         title: __('Uppercase'),
@@ -29,7 +43,7 @@ function registerFormat() {
                     {
                         (isSelected || isActive) &&
                         <RichTextToolbarButton
-                            icon={upperCaseIcon}
+                            icon={icons.upperCaseIcon}
                             title={__('Uppercase')}
                             onClick={onToggle}
                             isActive={isActive}
@@ -40,7 +54,7 @@ function registerFormat() {
 
         },
     })
-    
+
 
     //inline color
     registerFormatType('qubely/inlinecolor', {
@@ -52,6 +66,12 @@ function registerFormat() {
             data: 'data'
         },
         edit: class ChangeInlineColor extends Component {
+            constructor(props) {
+                super(props)
+                this.state = {
+                    showColorPicker: false
+                }
+            }
             findCurrentActiveColor = (value) => {
                 let color
                 let index = value.start
@@ -67,6 +87,7 @@ function registerFormat() {
 
             render() {
                 const { isActive, value, onChange } = this.props
+                const { showColorPicker } = this.state
                 let activeColor = this.findCurrentActiveColor(value)
                 let isSelected = value.end - value.start > 0 ? true : false
                 return (
@@ -75,41 +96,26 @@ function registerFormat() {
                             (isSelected || isActive) &&
                             <RichTextToolbarButton
                                 icon={
-                                    <Dropdown
-                                        className="qubely-richtext-color"
-                                        contentClassName="qubely-richtext-color-picker"
-                                        position="bottom right"
-                                        renderToggle={({ isOpen, onToggle }) => (
-                                            <button className="qubely-color-picker-icon-wraper" onClick={() => { value.start !== value.end && onToggle() }} aria-expanded={isOpen} style={{ backgroundColor: isActive && '#555d66', color: isActive && '#fff' }}  >
-                                                {inlineColorIcon}
-                                                <hr 
-                                                    style={{
-                                                        color: activeColor ? activeColor : '#000',
-                                                        backgroundColor: activeColor ? activeColor : '#000',
-                                                        height: 6,
-                                                        margin: '0px -1px 3px -1px',
-                                                        border: '0px'
-                                                    }}
-                                                />
-                                            </button>
-                                        )}
-                                        renderContent={() => (
-                                            <ColorPicker color={'#de1515'} onChangeComplete={newColor => {
-                                                onChange(applyFormat(value, {
-                                                    type: 'qubely/inlinecolor',
-                                                    attributes: {
-                                                        style: `color: ${newColor.hex};`,
-                                                        data: newColor.hex
-                                                    },
-                                                    startIndex: value.start,
-                                                    endIndex: value.end
-                                                }))
-                                            }} />
-                                        )}
-                                    />
+                                    <Fragment>
+                                        <span
+                                            classname="qubely-inline qubely-inline-color"
+                                            style={{ marginRight: '4px' }}>
+                                            {icons.inlineColorIcon}
+                                            <hr
+                                                style={{
+                                                    color: activeColor ? activeColor : '#000',
+                                                    backgroundColor: activeColor ? activeColor : '#000',
+                                                    height: 5,
+                                                    margin: '0px 3px 0px 0px',
+                                                    border: '0px'
+                                                }}
+                                            />
+                                        </span>
+                                    </Fragment>
                                 }
                                 title={__('Color')}
                                 onClick={() => {
+                                    !activeColor && this.setState({ showColorPicker: !showColorPicker })
                                     if (activeColor == '#fff' || value.start === value.end) {
                                         onChange(toggleFormat(value, {
                                             type: 'qubely/inlinecolor',
@@ -119,12 +125,46 @@ function registerFormat() {
                                 isActive={isActive}
                             />
                         }
+                        {
+                            showColorPicker &&
+                            <Popover
+                                onClickOutside={() => this.setState({ showColorPicker: false })}
+                                noArrow={true}
+                            >
+                                <ColorPicker
+                                    color={'#de1515'}
+                                    onChangeComplete={newColor => {
+                                        onChange(applyFormat(value, {
+                                            type: 'qubely/inlinecolor',
+                                            attributes: {
+                                                style: `color: ${newColor.hex};`,
+                                                data: newColor.hex
+                                            },
+                                            startIndex: value.start,
+                                            endIndex: value.end
+                                        }))
+                                    }} />
+                                    <div className="qubely-rgba-palette" style={{ padding: '0px 0px 15px 15px' }}>
+                                        {defColors().map(color => <button style={{ color: color }} onClick={() => {
+                                            onChange(applyFormat(value, {
+                                                type: 'qubely/inlinecolor',
+                                                attributes: {
+                                                    style: `color: ${color};`,
+                                                    data: color
+                                                },
+                                                startIndex: value.start,
+                                                endIndex: value.end
+                                            }))
+                                        }} />)}
+                                    </div>
+                            </Popover>
+                        }
                     </Fragment>
                 );
             }
         }
     })
-
+    //inline background-color
     registerFormatType('qubely/backgroundcolor', {
         title: __('BackgroundColor'),
         tagName: 'span',
@@ -134,6 +174,12 @@ function registerFormat() {
             data: 'data'
         },
         edit: class ChangeBackgroundColor extends Component {
+            constructor(props) {
+                super(props)
+                this.state = {
+                    showColorPicker: false
+                }
+            }
             findCurrentBgActiveColor = (value) => {
                 let color
                 let index = value.start
@@ -148,7 +194,8 @@ function registerFormat() {
             }
 
             render() {
-                const { isActive, value, onChange } = this.props;
+                const { isActive, value, onChange } = this.props
+                const { showColorPicker } = this.state
                 let activeBackgroundColor = this.findCurrentBgActiveColor(value)
                 let isSelected = value.end - value.start > 0 ? true : false
                 return (
@@ -157,42 +204,28 @@ function registerFormat() {
                             (isSelected || isActive) &&
                             <RichTextToolbarButton
                                 icon={
-                                    <Dropdown
-                                        className="qubely-richtext-background-color"
-                                        contentClassName="qubely-richtext-backgroundcolor-picker"
-                                        position="bottom right"
-                                        renderToggle={({ isOpen, onToggle }) => (
-                                            <button className="qubely-color-picker-icon-wraper" onClick={() => { value.start !== value.end && onToggle() }} aria-expanded={isOpen} style={{ paddingTop: '2px', backgroundColor: isActive && '#555d66', color: isActive && '#fff' }} >
-                                                {highlighterIcon}
-                                                <hr
-                                                    style={{
-                                                        color: activeBackgroundColor ? activeBackgroundColor : '#000',
-                                                        backgroundColor: activeBackgroundColor ? activeBackgroundColor : '#000',
-                                                        height: 6,
-                                                        margin: '1px -1px 3px -1px',
-                                                        border: '0px'
-                                                    }}
-                                                />
-                                            </button>
+                                    <Fragment>
+                                        <span
+                                            classname="qubely-inline qubely-inline-color"
+                                            style={{ marginRight: '4px' }}
+                                        >
+                                            {icons.highlighterIcon}
+                                            <hr
+                                                style={{
+                                                    color: activeBackgroundColor ? activeBackgroundColor : '#000',
+                                                    backgroundColor: activeBackgroundColor ? activeBackgroundColor : '#000',
+                                                    height: 5,
+                                                    margin: '0px 3px 0px 0px',
+                                                    border: '0px'
+                                                }}
+                                            />
+                                        </span>
+                                    </Fragment>
 
-                                        )}
-                                        renderContent={() => (
-                                            <ColorPicker color={'#15e0c5'} onChangeComplete={newColor => {
-                                                onChange(applyFormat(value, {
-                                                    type: 'qubely/backgroundcolor',
-                                                    attributes: {
-                                                        style: `background-color: ${newColor.hex};`,
-                                                        data: newColor.hex
-                                                    },
-                                                    startIndex: value.start,
-                                                    endIndex: value.end
-                                                }))
-                                            }} />
-                                        )}
-                                    />
                                 }
                                 title={__('Background Color')}
                                 onClick={() => {
+                                    !activeBackgroundColor && this.setState({ showColorPicker: !showColorPicker })
                                     if (activeBackgroundColor == '#fff' || value.start === value.end) {
                                         onChange(toggleFormat(value, {
                                             type: 'qubely/backgroundcolor',
@@ -202,6 +235,42 @@ function registerFormat() {
                                 isActive={isActive}
                             />
                         }
+                        {
+                            showColorPicker &&
+                            <Popover
+                                onClickOutside={() => this.setState({ showColorPicker: false })}
+                                noArrow={true}
+                            >
+                                <ColorPicker
+                                    color={'#15e0c5'}
+                                    onChangeComplete={newColor => {
+                                        onChange(applyFormat(value, {
+                                            type: 'qubely/backgroundcolor',
+                                            attributes: {
+                                                style: `background-color: ${newColor.hex};`,
+                                                data: newColor.hex
+                                            },
+                                            startIndex: value.start,
+                                            endIndex: value.end
+                                        }))
+                                    }} />
+
+                                <div className="qubely-rgba-palette" style={{ padding: '0px 0px 15px 15px' }}>
+                                    {defColors().map(color => <button style={{ color: color }} onClick={() => {
+                                        onChange(applyFormat(value, {
+                                            type: 'qubely/backgroundcolor',
+                                            attributes: {
+                                                style: `background-color: ${color};`,
+                                                data: color
+                                            },
+                                            startIndex: value.start,
+                                            endIndex: value.end
+                                        }))
+                                    }} />)}
+                                </div>
+
+                            </Popover>
+                        }
                     </Fragment>
                 );
             }
@@ -210,7 +279,3 @@ function registerFormat() {
 
 }
 registerFormat();
-
-const inlineColorIcon = <svg aria-hidden="true" role="img" focusable="false" class="dashicon dashicons-editor-textcolor" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><path d="M13.23 15h1.9L11 4H9L5 15h1.88l1.07-3h4.18zm-1.53-4.54H8.51L10 5.6z"></path></svg>
-const highlighterIcon = <svg aria-hidden="true" role="img" focusable="false" class="dashicon dashicons-admin-customizer" xmlns="http://www.w3.org/2000/svg" width="18" height="17" viewBox="0 0 20 20"><path d="M18.33 3.57s.27-.8-.31-1.36c-.53-.52-1.22-.24-1.22-.24-.61.3-5.76 3.47-7.67 5.57-.86.96-2.06 3.79-1.09 4.82.92.98 3.96-.17 4.79-1 2.06-2.06 5.21-7.17 5.5-7.79zM1.4 17.65c2.37-1.56 1.46-3.41 3.23-4.64.93-.65 2.22-.62 3.08.29.63.67.8 2.57-.16 3.46-1.57 1.45-4 1.55-6.15.89z"></path></svg>
-const upperCaseIcon = <svg viewBox="0 0 20 20" height="25" width="25" xmlns="http://www.w3.org/2000/svg" ><mask id="a" fill="#fff"><path d="m20 20h-20v-20h20z" fill="#fff" fill-rule="evenodd" /></mask><path d="m2 3v2.5h4.16666667v10.5h2.5v-10.5h4.16666663v-2.5zm16 4.5h-7.5v2.5h2.5v6h2.5v-6h2.5z" mask="url(#a)" /></svg>

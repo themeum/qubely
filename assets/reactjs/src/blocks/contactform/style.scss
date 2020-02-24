@@ -4,6 +4,9 @@
 		flex-wrap: wrap;
 		.qubely-form-group {
 			position: relative;
+			.qubely-form-group-inner{
+				text-align: left;
+			}
 			.qubely-form-label {
 				margin: 0;
 				line-height: 1;
@@ -36,6 +39,9 @@
 				color: red;
 				margin: 0;
 			}
+			.qubely-block-btn-anchor:hover{
+				background-color: transparent;
+			}
 		}
 	}
 
@@ -55,7 +61,8 @@
 					border-radius: 0;
 					box-shadow: none;
 					padding-left: 0;
-					padding-right: 0;
+                    padding-right: 0;
+                    background: none;
 					&:focus,
 					&:valid {
 						outline:none;

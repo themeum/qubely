@@ -3,7 +3,7 @@ import '../css/border.scss'
 import Range from './Range'
 import Separator from './Separator'
 import Color from './Color'
-import Device from '../Device'
+import Device from './Device'
 import icons from '../../helpers/icons'
 const { Component, Fragment } = wp.element
 const { Tooltip } = wp.components;
@@ -42,7 +42,7 @@ class Border extends Component {
 
         unit && value.unit ? newBorder.unit = value.unit : newBorder.unit = defaultUnit
         newBorder.widthType = value.widthType ? value.widthType : defaultWidthType
-        newBorder.openBorder = value.openBorder ? value.openBorder : 1
+        newBorder.openBorder = 1
         onChange(newBorder)
     }
     setSettings(type, newValue) {
@@ -73,7 +73,7 @@ class Border extends Component {
     }
 
     render() {
-        const { value, unit, label, responsive, device, onDeviceChange, responsiveGroup } = this.props
+        const { value, unit, label, min, max, responsive, device, onDeviceChange, responsiveGroup } = this.props
         const { defaultUnit, defaultWidthType } = this.state
         let responsiveDevice = responsive ? device ? device : this.state.device : window.qubelyDevice
         const values = responsive || responsiveGroup ? value.custom && value.custom[responsiveDevice] ? value.custom[responsiveDevice].split(" ") : ['', '', '', ''] : value.custom ? value.custom.split(" ") : ['', '', '', '']
@@ -91,10 +91,10 @@ class Border extends Component {
                     </div>
                     <div className="qubely-field-button-list qubely-ml-auto">
                         {
-                            [ ['solid', __('Solid')], ['dotted', __('Dotted')], ['dashed', __('Dashed')], ['double', __('Double')]].map((data, index) => {
+                            [['solid', __('Solid')], ['dotted', __('Dotted')], ['dashed', __('Dashed')], ['double', __('Double')]].map((data, index) => {
                                 return (
                                     <Tooltip text={data[1]}>
-                                        <button className={(value.type == data[0] ? 'active' : '') + ' qubely-button'} key={index} onClick={() => this.setSettings('type', data[0] )}>
+                                        <button className={(value.type == data[0] ? 'active' : '') + ' qubely-button'} key={index} onClick={() => this.setSettings('type', data[0])}>
                                             <span className={`qubely-field-border-type qubely-field-border-type-${data[0]}`} />
                                         </button>
                                     </Tooltip>
@@ -105,7 +105,7 @@ class Border extends Component {
                     {(value.type) &&
                         <Tooltip text={__('Clear')}>
                             <div className="qubely-ml-10">
-                                <a className="qubely-border-clear" href="javascript:;" onClick={() => this.setSettings('type', '')} role="button"><i className="fas fa-undo"></i></a>
+                                <span className="qubely-border-clear" onClick={() => this.setSettings('type', '')} role="button"><i className="fas fa-undo"/></span>
                             </div>
                         </Tooltip>
                     }
@@ -114,7 +114,7 @@ class Border extends Component {
                 {value.type &&
                     <Fragment>
                         <Color
-                            label={__('Border Color')}
+                            label={this.props.label ? this.props.label + __(' Color') : __('Border Color')}
                             value={value.color}
                             onChange={val => this.setSettings('color', val)}
                         />
@@ -130,7 +130,7 @@ class Border extends Component {
                         }
                         <div className="qubely-field qubely-field-border qubely-d-flex qubely-align-center">
                             <div>
-                                {__('Border Width')}
+                                {this.props.label ? this.props.label + __(' Width') : __('Border Width')}
                             </div>
                             {responsive && <Device device={responsiveDevice} commonResponsiveDevice={device} className="qubely-ml-10" onChange={val => { device ? onDeviceChange(val) : this.setState({ device: val }) }} />}
                             <div className="qubely-field-button-list qubely-ml-auto">
@@ -155,10 +155,9 @@ class Border extends Component {
                                 <div className="qubely-w-100">
                                     <Range
                                         value={global}
-                                        // onChange={val => this.setWidth('all', val)}
                                         onChange={val => this.updateBorder('global', val)}
-                                        min={1}
-                                        max={20}
+                                        min={min || 0}
+                                        max={max || 10}
                                         step={1}
                                     />
                                 </div>
@@ -175,11 +174,9 @@ class Border extends Component {
                                                 <div className="qubely-w-100">
                                                     <Range
                                                         value={values[index] || ''}
-                                                        // value={value.width[iterator[index]] || ''}
-                                                        // onChange={val => this.setWidth(iterator[index], val)}
                                                         onChange={val => this.updateBorder(iterator[index], val)}
-                                                        min={0}
-                                                        max={20}
+                                                        min={min || 0}
+                                                        max={max || 10}
                                                         step={1}
                                                     />
                                                 </div>

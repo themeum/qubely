@@ -97,11 +97,31 @@
 			border-color: #0085ba;
 		}
 	}
-
-	.qubely-tab-content {
-		display: none;
-		&.qubely-active {
-			display: block;
+	.wp-block-qubely-tab.qubely-tab-content {	
+		position: absolute;
+		visibility: hidden;
+		opacity: 0;
+		transition: opacity 400ms ease-in;
+	   &.qubely-active {	
+			position: static;
+			visibility: visible;
+			opacity: 1;
+	   }
+   }
+	&.qubely-tab-style-pills,&.qubely-tab-style-tabs{
+		.qubely-tab-item {
+			margin-bottom: 10px;
 		}
+	}
+}
+.wp-block.qubely-tab-content {
+	visibility: hidden;
+	opacity: 0;
+	position: absolute;
+	&.qubely-active {
+		position: relative;
+		opacity: 1;
+		visibility: visible;
+		transition: opacity 400ms;
 	}
 }

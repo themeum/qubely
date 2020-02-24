@@ -1,16 +1,13 @@
 const { __ } = wp.i18n
 const { Component, Fragment } = wp.element
-const { RichText } = wp.editor
-const { Tooltip, ColorPalette } = wp.components;
-import { Wrapper, IconList, Color } from '../FieldRender'
-const listWraperGlobalClassName = 'qubely-list', listItemGloblaPlaceHolder = 'Enter new list item'
+const { Tooltip } = wp.components;
+const listWraperGlobalClassName = 'qubely-list'
 
 class QubelyIconListEdit extends Component {
     constructor(props) {
         super(props)
         this.state = {
             currentListItemIndex: 0,
-            openIconPopUp: false,
             removeItemViaBackSpace: 999,
             focusedItem: this.props.listItems.length - 1,
         }
@@ -55,23 +52,23 @@ class QubelyIconListEdit extends Component {
                             this.setState({ focusedItem: focusedItem > 0 ? focusedItem - 1 : focusedItem })
 
                     }}>
-                    <i class="fas fa-times" />
+                    <i className="fas fa-times" />
                 </span>
             </Tooltip>
         )
     }
 
     renderListItems = () => {
-        const { enableListIcons, iconPosition, listItems, newListItemPlaceHolder, disableButton, iconColor, onIconColorChange } = this.props
+        const { enableListIcons, iconPosition, listItems, newListItemPlaceHolder, disableButton, iconColor, onIconColorChange, onChange } = this.props
         const { focusedItem, removeItemViaBackSpace } = this.state
         return listItems.map((item, index) => {
             return (
                 <li className={`qubely-list-li qubely-list-li-editor qubely-icon-position-${iconPosition}`}>
-                    {iconPosition == 'right' && item.text.length > 0 && this.renderDeleteIcon(index)}
                     <div ref="avoidOnClick" className={`qubely-list-item qubely-list-item-${index}`} onClick={() => this.setState({ currentListItemIndex: index })}>
-                        {enableListIcons && iconPosition == 'left' && <span className={`qubely-list-item-icon ${item.icon} fa-fw`} style={item.customColor ? { color: item.customColor } : {}} onClick={() => this.setState({ openIconPopUp: this.state.currentListItemIndex == index ? !this.state.openIconPopUp : true })} />}
+                        {iconPosition == 'right' && item.text.length > 0 && this.renderDeleteIcon(index)}
+                        {enableListIcons && iconPosition == 'left' && <span className={`qubely-list-item-icon ${item.icon} fa-fw`} style={item.customColor ? { color: item.customColor } : {}} />}
                         <div
-                            className={`qubely-list-item-text-${index}`}
+                            className={`qubely-list-item-text-${index} qubely-text `}
                             id={`qubely-list-item-text-${index}`}
                             contenteditable="true"
                             placeholder={newListItemPlaceHolder}
@@ -89,32 +86,17 @@ class QubelyIconListEdit extends Component {
                                     event.target.innerText.length == 0 && this.setState({ removeItemViaBackSpace: index })
                                     if (removeItemViaBackSpace == index) {
                                         this.updateListItems(index, 'delete')
-                                        this.setState({ focusedItem: index > 0 ? index - 1 : index })
+                                        this.setState({ focusedItem: index > 0 ? index - 1 : index, removeItemViaBackSpace: -1 })
                                     }
                                 }
                             }}
                             onClick={() => this.setState({ focusedItem: index })}>
                             {item.text}
                         </div>
-                        {enableListIcons && iconPosition == 'right' && <span className={`qubely-list-item-icon ${item.icon} fa-fw`} style={item.customColor ? { color: item.customColor } : {}} onClick={() => this.setState({ openIconPopUp: this.state.currentListItemIndex == index ? !this.state.openIconPopUp : true })} />}
+                        {enableListIcons && iconPosition == 'right' && <span className={`qubely-list-item-icon ${item.icon} fa-fw`} style={item.customColor ? { color: item.customColor } : {}} />}
+                        {iconPosition == 'left' && item.text.length > 0 && this.renderDeleteIcon(index)}
+                        {this.state.currentListItemIndex == index && onChange('clickedListItem', index)}
                     </div>
-                    {iconPosition == 'left' && item.text.length > 0 && this.renderDeleteIcon(index)}
-                    {(this.state.currentListItemIndex == index && this.state.openIconPopUp) &&
-                        <Wrapper inline
-                            domNodetobeAvoided={this.refs.avoidOnClick}
-                            onClickOutside={() => {
-                                this.setState({
-                                    openIconPopUp: false
-                                })
-                            }}
-                            customClass="">
-                            <Color label={__(' Color')} value={item.customColor ? item.customColor : '#ccc'} onChange={(color) => this.modifySpecificItem({ customColor: color }, index)} />
-                            <IconList
-                                disableToggle={true}
-                                value={listItems.length > 0 && listItems[index].icon}
-                                onChange={(value) => this.modifySpecificItem({ icon: value }, index)} />
-                        </Wrapper>
-                    }
                 </li>
             )
         })
@@ -135,7 +117,6 @@ class QubelyIconListEdit extends Component {
         let newList = JSON.parse(JSON.stringify(listItems))
         operation == 'add' ? newList.splice(index + 1, 0, { icon: 'fas fa-check', text: '', customColor: false }) : newList.splice(index, 1)
 
-        this.setState({ openIconPopUp: false })
         onListItemModification(newList)
     }
     render() {
@@ -151,7 +132,7 @@ class QubelyIconListEdit extends Component {
                         this.setState({ currentListItemIndex: listItems.length })
                         this.updateListItems(listItems.length, 'add')
                     }} className="button is-default qubely-action-button" role="button">
-                        <i class="fas fa-plus" />{buttonText || __('Add New')}
+                        <i className="fas fa-plus" />{buttonText || __('Add New')}
                     </button>
 
                 }
@@ -170,21 +151,24 @@ class QubelyIconListSave extends Component {
                 <ul className={listWraperClassName || listWraperGlobalClassName}>
                     {
                         listItems.map((item, index) => {
-                            return (
-                                <li className={`qubely-list-li qubely-icon-position-${iconPosition}`}>
-                                    <div className={`qubely-list-item qubely-list-item-${index}`} >
-                                        {enableListIcons && iconPosition == 'left' && <span className={`qubely-list-item-icon ${item.icon} fa-fw`} style={item.customColor ? { color: item.customColor } : {}} />}
-                                        <div
-                                            className={`qubely-list-item-text-${index}`}
-                                            id={`qubely-list-item-text-${index}`}
-                                        >
-                                            {item.text}
+                            if (item.text.length > 0) {
+                                return (
+                                    <li className={`qubely-list-li qubely-icon-position-${iconPosition}`}>
+                                        <div className={`qubely-list-item qubely-list-item-${index}`} >
+                                            {enableListIcons && iconPosition == 'left' && <span className={`qubely-list-item-icon ${item.icon} fa-fw`} style={item.customColor ? { color: item.customColor } : {}} />}
+                                            <div
+                                                className={`qubely-list-item-text-${index} qubely-text `}
+                                                id={`qubely-list-item-text-${index}`}
+                                            >
+                                                {item.text}
+                                            </div>
+                                            {enableListIcons && iconPosition == 'right' && <span className={`qubely-list-item-icon ${item.icon} fa-fw`} style={item.customColor ? { color: item.customColor } : {}} />}
                                         </div>
-                                        {enableListIcons && iconPosition == 'right' && <span className={`qubely-list-item-icon ${item.icon} fa-fw`} style={item.customColor ? { color: item.customColor } : {}} />}
-                                    </div>
 
-                                </li>
-                            )
+                                    </li>
+                                )
+                            } else return null
+
                         })
                     }
                 </ul>
