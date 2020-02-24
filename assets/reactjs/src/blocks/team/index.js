@@ -36,8 +36,16 @@ registerBlockType('qubely/team', {
         spacer: { type: 'object', default: { spaceTop: { md: '10', unit: "px" }, spaceBottom: { md: '10', unit: "px" } }, style: [{ selector: '{{QUBELY}}' }] },
 
         // Image
+        imageType: {
+            type: 'string',
+            default: 'local'
+        },
         image: { type: 'object', default: {} },
         image2x: { type: 'object', default: {} },
+        externalImageUrl: {
+            type: 'object',
+            default: {}
+        },
         imageWidth: {
             type: 'object', default: {},
             style: [

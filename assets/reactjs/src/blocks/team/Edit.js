@@ -1,19 +1,57 @@
+import icons from '../../helpers/icons';
 const { __ } = wp.i18n
 const { Fragment, Component } = wp.element;
-const { PanelBody, TextControl, Toolbar } = wp.components
-const { RichText, InspectorControls, BlockControls } = wp.blockEditor
-const { Media, Tabs, Tab, Range, Separator, RadioAdvanced, Typography, Toggle, Styles, Alignment, ColorAdvanced, Color, Border, BoxShadow, BorderRadius, Padding, gloalSettings: { globalSettingsPanel, animationSettings, interactionSettings }, Inline: { InlineToolbar }, ContextMenu: { ContextMenu, handleContextMenu }, withCSSGenerator} = wp.qubelyComponents
-import icons from '../../helpers/icons'
+const { PanelBody, TextControl, Toolbar } = wp.components;
+const { RichText, InspectorControls, BlockControls } = wp.blockEditor;
+const {
+    Media,
+    Tabs,
+    Tab,
+    Range,
+    Separator,
+    RadioAdvanced,
+    Typography,
+    Toggle,
+    Styles,
+    Alignment,
+    ColorAdvanced,
+    Color,
+    Border,
+    ButtonGroup,
+    BoxShadow,
+    BorderRadius,
+    Padding,
+    Url,
+    gloalSettings: {
+        globalSettingsPanel,
+        animationSettings,
+        interactionSettings
+    },
+    Inline: {
+        InlineToolbar
+    },
+    ContextMenu: {
+        ContextMenu,
+        handleContextMenu
+    },
+    withCSSGenerator
+} = wp.qubelyComponents;
+
 class Edit extends Component {
 
     constructor(props) {
         super(props)
-        this.state = { device: 'md', selector: true, spacer: true, openPanelSetting: '' };
+        this.state = {
+            device: 'md',
+            selector: true,
+            spacer: true,
+            openPanelSetting: ''
+        };
     }
 
     componentDidMount() {
         const { setAttributes, clientId, attributes: { uniqueId } } = this.props
-        const _client = clientId.substr(0, 6)
+        const _client = clientId.substr(0, 6);
         if (!uniqueId) {
             setAttributes({ uniqueId: _client });
         } else if (uniqueId && uniqueId != _client) {
@@ -40,8 +78,10 @@ class Edit extends Component {
             designationColor,
             designationSpacing,
 
+            imageType,
             image,
             image2x,
+            externalImageUrl,
             imageWidth,
             imageSpacing,
             imageBorder,
@@ -139,8 +179,42 @@ class Edit extends Component {
                     </PanelBody>
 
                     <PanelBody title={__('Image')} opened={'Image' === openPanelSetting} onToggle={() => this.handlePanelOpenings(openPanelSetting !== 'Image' ? 'Image' : '')}>
-                        <Media label={__('Team Member Image')} multiple={false} type={['image']} panel={true} value={image} onChange={val => setAttributes({ image: val })} />
-                        <Media label={__('Team Member Image @2x')} multiple={false} type={['image']} panel={true} value={image2x} onChange={val => setAttributes({ image2x: val })} />
+
+                        <ButtonGroup
+                            label={__('Image Type')}
+                            options={
+                                [
+                                    [__('Local'), 'local'],
+                                    [__('External'), 'external']
+                                ]
+                            }
+                            value={imageType}
+                            onChange={value => setAttributes({ imageType: value })}
+                        />
+                        {
+                            imageType === 'local' ?
+                                <Fragment>
+                                    <Media
+                                        panel={true}
+                                        value={image}
+                                        type={['image']}
+                                        multiple={false}
+                                        label={__('Team Member Image')}
+                                        onChange={val => setAttributes({ image: val })}
+                                    />
+                                    <Media
+                                        panel={true}
+                                        value={image2x}
+                                        multiple={false}
+                                        type={['image']}
+                                        label={__('Team Member Image @2x')}
+                                        onChange={val => setAttributes({ image2x: val })}
+                                    />
+                                </Fragment>
+                                :
+                                <Url label={__('Image Source')} disableAdvanced value={externalImageUrl} onChange={newUrl => setAttributes({ externalImageUrl: newUrl })} />
+                        }
+
                         {layout != 2 && <Range label={__('Image Width')} value={imageWidth} onChange={val => setAttributes({ imageWidth: val })} min={32} max={500} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />}
                         {(layout == 1 || layout == 3) && <Range label={__('Image Spacing')} value={imageSpacing} onChange={val => setAttributes({ imageSpacing: val })} min={0} max={500} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />}
                         <Border
@@ -386,10 +460,13 @@ class Edit extends Component {
                 <div className={`qubely-block-${uniqueId}${className ? ` ${className}` : ''}`}>
                     <div className={`qubely-block-team qubely-team-layout-${layout}`} onContextMenu={event => handleContextMenu(event, this.refs.qubelyContextMenu)}>
                         <div className="qubely-team-image-wrapper" onClick={() => this.handlePanelOpenings('Image')}>
-                            {image.url != undefined ?
+                            {imageType === 'local' && image.url != undefined ?
                                 <img className="qubely-team-image" src={image.url} srcset={image2x.url != undefined ? image.url + ' 1x, ' + image2x.url + ' 2x' : ''} alt={name} />
                                 :
-                                <div className="qubely-image-placeholder"><i className="far fa-image" /></div>
+                                (imageType === 'external' && externalImageUrl.url != undefined) ?
+                                    <img className="qubely-team-image" src={externalImageUrl.url} alt={name} />
+                                    :
+                                    <div className="qubely-image-placeholder"><i className="far fa-image" /></div>
                             }
                         </div>
                         <div className="qubely-team-content">
