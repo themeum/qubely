@@ -1,5 +1,10 @@
-const {__} = wp.i18n
+const { Fragment} = wp.element;
 
 const InspectorTab = props => {
-    return <span>Tab</span>
+    const {children} = props
+    return (
+        <Fragment>{Array.isArray(children) ? children.map(item => item) : children} </Fragment>
+    )
 }
+
+export default InspectorTab
