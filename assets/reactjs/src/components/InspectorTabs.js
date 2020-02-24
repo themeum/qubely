@@ -21,6 +21,12 @@ const InspectorTabs = props => {
     });
 
     useEffect(() => {
+        return () => {
+            sidebarPanel && sidebarPanel.removeAttribute('data-qubely-tab')
+        }
+    }, []);
+
+    useEffect(() => {
         sidebarPanel.setAttribute('data-qubely-tab', defaultTab)
     }, [defaultTab]);
 
