@@ -158,7 +158,9 @@ class Edit extends Component {
 
                 <InspectorControls key="inspector">
 
-                    <InspectorTabs onTabChange={tab => this.setState({currentTab: tab})} />
+                    <InspectorTabs onTabChange={tab => this.setState({currentTab: tab})} >
+                        
+                    </InspectorTabs>
 
                     {/*layout*/}
                     {
