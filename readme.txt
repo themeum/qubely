@@ -1,7 +1,7 @@
 === Gutenberg Blocks and Page Builder – Qubely ===
 Contributors: themeum, kawshar, jakirhasan, anik4e, faisalahmed29, delowardev, rejuancse, fahimmurshed, badsha_eee, joomcoder, sksaaju, mehedih, mhshohel
-Donate link: https://www.themeum.com
-Tags: block, blocks, gutenberg, gutenberg blocks, page builder, editor
+Donate link: https://www.themeum.com/product/qubely/
+Tags: gutenberg, blocks, gutenberg blocks, editor, block
 Requires at least: 5.0
 Tested up to: 5.3
 Stable tag: 1.3.3
@@ -9,177 +9,70 @@ Requires PHP: 5.4.0
 License: GPL-2.0+
 License URI: http://www.gnu.org/licenses/gpl-2.0.txt
 
-Gutenberg Blocks and readymade sections with rich customization options. Enhance Gutenberg editor with easy UI and functional blocks.
+Gutenberg Blocks Library with the Highest Number of Blocks and pre-designed sections. Best Support Guaranteed.
 
 == Description ==
 
-[Qubely](https://www.themeum.com/product/qubely?utm_source=wporg&utm_medium=link&utm_campaign=orglanding&utm_term=description&utm_content=qubely) is a full-fledged Gutenberg block toolkit with plenty of custom blocks, predefined sections and starter packs to create beautiful web pages. It minimizes the limitations of the Gutenberg editor and opens unlimited possibilities for any simple to complex design on Gutenberg. Qubely is a user-friendly Gutenberg plugin with necessary customization features and advanced functionalities.
+<strong>Gutenberg Blocks Library with the Highest Number of Blocks!</strong>
 
-Extend the default WordPress Gutenberg editor with many [custom blocks](https://qubely.io/blocks/?utm_source=wporg&utm_medium=link&utm_campaign=orglanding&utm_content=customblocks) that are missing in there. Take control of your website design and apply out of the box styling options offered in Qubely. Create web pages that are stunning as well as mobile optimized.
+[Qubely Gutenberg Blocks Plugin](https://www.themeum.com/product/qubely?utm_source=wporg&utm_medium=link&utm_campaign=orglanding&utm_term=description&utm_content=qubely) has some of the best looking Gutenberg Blocks with multiple design options. It's pre-designed sections and starter packs are also unique. Our goal is to save your time and give you the best Gutenberg editor experience.
 
-[Qubely Blocks Pro](https://www.themeum.com/product/qubely/?utm_source=wporg&utm_medium=link&utm_campaign=orglanding&utm_content=qubelyblockspro) || [Live Demo](https://qubely.io/) || [Documentation](https://www.themeum.com/docs/qubely-introduction/?utm_source=wporg&utm_medium=link&utm_campaign=orglanding&utm_content=documentation)
+One of the greatest features is that you can set a custom width for mobile devices and tabs from every single element. We also have [starter packs](https://qubely.io/starter-packs/) that work like themes!
+
+✅ [Check out the Live Demo](https://qubely.io/)
 
 [youtube https://www.youtube.com/watch?v=_aRAQkHZiUQ]
 
-## QUBELY GUTENBERG BLOCKS CORE FEATURES AT A GLANCE
 
-* Predefined sections
-* Modern layout packs
-* Highly customizable row columns
-* Row video background & blend mode
-* Drag column resizing
-* Shape divider/builder
-* Device specific responsive controls
-* Unlimited Google web fonts & system fonts
-* Classic & gradient color and background
-* Built-in animation
-* Box-shadow
-* Font Awesome 5 Icons and line icons
-* Custom CSS
+Check out the hundreds of ready sections and starter packs from the links below 👇
 
-Want to know all the latest news and be part of the Qubely community? [Join our Facebook group](https://www.facebook.com/groups/qubely/)!
+⭐️ [Ready Sections](https://qubely.io/section/) ⭐️ [Starter Packs](https://qubely.io/starter-packs/) ⭐️
 
+## List of Available Gutenberg Blocks
 
-## ADVANCED GUTENBERG BLOCKS INSIDE QUBELY
-
-Qubely adds numerous custom Gutenberg blocks to the Gutenberg block editor and takes Gutenberg editor to the next level. The available custom advanced Gutenberg blocks inside Qubely are:
-
-* [Row](https://qubely.io/block/row-advanced-text/)
-* [Button](https://qubely.io/block/button/)
-* [Testimonial](https://qubely.io/block/testimonial/)
-* [Heading](https://qubely.io/block/heading/)
-* [Counter](https://qubely.io/block/counters/)
-* [Tabs](https://qubely.io/block/tabs/)
-* [Accordion/Toggle](https://qubely.io/block/accordion/)
-* [Advanced Text](https://qubely.io/block/row-advanced-text/)
-* [Video Popup](https://qubely.io/block/video-popup/)
-* [Google Map](https://qubely.io/block/google-map/)
-* [Progress Bar](https://qubely.io/block/progress-bar/)
-* [Social Icons](https://qubely.io/block/social-icons/)
-* [Button Group](https://qubely.io/block/button-group/)
-* [Button](https://qubely.io/block/button/)
-* [Info Box](https://qubely.io/block/info-box/)
-* [Advanced List](https://qubely.io/block/advanced-list/)
-* [Contact Form](https://qubely.io/block/contact/)
-* [Icon List](https://qubely.io/block/icon-list/)
-* [Pricing](https://qubely.io/block/pricing/)
-* [Team](https://qubely.io/block/team/)
-* [Image](https://qubely.io/block/image/)
-* [Timeline](https://qubely.io/block/timeline/)
-* [Post Grid](https://qubely.io/block/post-grid/)
-* Icon
-* Divider
-* Block Wrapper
-* [Pie Progress](https://qubely.io/block/pie-progress/)
-
-More advanced Gutenberg blocks, pre-designed sections and starter packs are coming every month! [Signup on our site]() to receive updates via email.
-
-## Pro Features
-
-11 blocks that help you build more sophisticated designs-
-
-* [Form Builder](https://qubely.io/block/form-builder/)
-* [Image Gallery](https://qubely.io/block/image-gallery/)
-* [Image Carousel](https://qubely.io/block/image-carousel/)
-* [Post Carousel](https://qubely.io/block/post-carousel/)
-* [Advanced Post Grid](https://qubely.io/block/advanced-post-grid/)
-* [Pricing List](https://qubely.io/block/pricing-list/)
-* [Team Carousel](https://qubely.io/block/team-carousel/)
-* [Testimonial Carousel](https://qubely.io/block/testimonial-carousel/)
-* [Media Card](https://qubely.io/block/media-card/)
-* [Pie Progress](https://qubely.io/block/pie-progress/)
-* [Countdown](https://qubely.io/block/countdown/)
-
-⭐️ [Ready Sections](https://qubely.io/section/) ⭐️ [Starter Packs](https://qubely.io/starter-packs/)
+1. [Row Block](https://qubely.io/block/row-advanced-text/)
+2. [Button Block](https://qubely.io/block/button/)
+3. [Testimonial Block](https://qubely.io/block/testimonial/)
+4. [Heading Block](https://qubely.io/block/heading/)
+5. [Count up Block](https://qubely.io/block/counters/)
+6. [Tabs Block](https://qubely.io/block/tabs/)
+7. [Accordion Block](https://qubely.io/block/accordion/)
+8. [Advanced Text Block](https://qubely.io/block/row-advanced-text/)
+9. [Video Popup Block](https://qubely.io/block/video-popup/)
+10. [Google Map Block](https://qubely.io/block/google-map/)
+11. [Progress Bar Block](https://qubely.io/block/progress-bar/)
+12. [Social Icons Block](https://qubely.io/block/social-icons/)
+13. [Button Group Block](https://qubely.io/block/button-group/)
+14. [Animated Headline Block](https://qubely.io/block/animated-headline/)
+15. [Info Box Block](https://qubely.io/block/info-box/)
+16. [Advanced List Block](https://qubely.io/block/advanced-list/)
+17. [Contact Form Block](https://qubely.io/block/contact/)
+18. [Icon List Block](https://qubely.io/block/icon-list/)
+19. [Pricing Block](https://qubely.io/block/pricing/)
+20. [Team Block](https://qubely.io/block/team/)
+21. [Image Block](https://qubely.io/block/image/)
+22. [Timeline Block](https://qubely.io/block/timeline/)
+23. [Post Grid Block](https://qubely.io/block/post-grid/)
+24. Icon Block
+25. Divider Block
+26. Block Wrapper
+27. [Pie Progress Block](https://qubely.io/block/pie-progress/)
+28. [Form Builder Block](https://qubely.io/block/form-builder/) (Pro)
+29. [Image Gallery Block](https://qubely.io/block/image-gallery/)(Pro)
+30. [Image Carousel Block](https://qubely.io/block/image-carousel/)(pro)
+31. [Post Carousel Block](https://qubely.io/block/post-carousel/) (Pro)
+32. [Vertical Tab Block](https://qubely.io/block/vertical-tab/)(Pro)
+33. [Pricing List Block](https://qubely.io/block/pricing-list/)(Pro)
+34. [Team Carousel Block](https://qubely.io/block/team-carousel/)(Pro)
+35. [Testimonial Carousel Block](https://qubely.io/block/testimonial-carousel/)(Pro)
+36. [Media Card Block](https://qubely.io/block/media-card/)(Pro)
+37. [Table of Content Block](https://qubely.io/block/table-of-contents/)(Pro)
+38. [Countdown Block](https://qubely.io/block/countdown/)(Pro)
 
 
- ## QUBELY GUTENBERG BLOCKS FEATURES AND FUNCTIONALITIES IN DETAILS
+We post all the updates and communicate with the users via our Facebook group. [ 👉 Join Now!](https://www.facebook.com/groups/qubely/)
 
-- **Row:** Create a row and resize columns using mouse drag to achieve the desired layout with this Gutenberg block.
-
-- **Button:** Design a flat, gradient or a line button on Gutenberg block editor. Set button icon and change icon position & size along with its spacing.
-
-- **Testimonial:** Design testimonials with quote icon, message, name, designation, avatar, ratings, etcetera and set them up in the settings unlike no other Gutenberg blocks.
-
-- **Icon:** Choose icons from the rich collection of Font Awesome and Qubely Line Icons. Apply a world of style options using this Icon Gutenberg block.
-
-- **Google Map:** Embed Google Maps with Qubely Google Map block that gives you the controls to add map address, customize height, and zoom the map on a scale of 1 to 20.
-
-- **Divider:** This WordPress gutenberg block plugin lets you separate content with the stunning 28 pre-designed dividers of Qubely’s Divider Gutenberg block.
-
-- **Advanced Text:** Add advanced text with Qubely Gutenberg plugin. Apply advanced styling options. Change the typography, tweak the design and add border & box-shadow.
-
-- **Counter:** Have an animated number/counter on your site with the Counter Gutenberg block to show your milestones in an attractive manner.
-
-- **Tabs:** Display texts in beautiful predesigned tabs. Design tabs with preferred width and spacing. Create responsive tabs to showcase features and trends.
-
-- **Accordion:**  Place collapsible text contents on your site with the Accordion Gutenberg block. Setup items to reveal the hidden content in an aesthetic manner.
-
-- **Video Popup:** Create a nice video popup with Qubely Video Popup block. Change the typography and apply the overlay, box shadow and animation.
-
-- **Heading:** Create stunning titles with the advanced Heading Gutenberg block. Style heading text by tweaking typography, color, and other options.
-
-- **Progress Bar:** Present your skills, experiences, or the progress of an ongoing project using Qubely’s Progress Bar Gutenberg block.
-
-- **Social Icons:** Add and style all your social media profiles in one place with Qubely Social Icons Gutenberg block. Display popular social media channels with a label, icon or both.
-
-- **Button Group:** Create and design trendy button groups. Qubely’s Button Group Gutenberg block comes with predefined layouts, size options, and more.
-
-- **Info Box:** Place engaging information with Info Box. Choose design from the 3 predefined layouts and then personalize it with the settings.
-
-- **Advanced List:** Get 2 list layouts- Classic and Fill in this WordPress gutenberg block plugin. Select the number of columns and design flexibly by defining space, background size, shadow and more.
-
-- **Contact Form:** Design contact forms with 2 layouts and many other styling options. Enter receiver email right from the block settings and enable captcha.
-
-- **Icon List:** Get 2 icon list layouts and customize them using the Qubely Icon List block. Chose icons and modify design with colour, spacing and border options.
-
-- **Pricing:** Design pricing plans with 5 layouts. Show features, badges, and post button text in the plan. Set up the plan’s duration, typography, and style badges easily.
-
-- **Block Wrapper:** Wrap up blocks with a background. Set up a gradient background by defining Gradient Angle and Type.
-
-- **Team:** Enlist team members with details. Showcase member’s profile in 3 layouts. Display designation and description with the member profiles.
-
-- **Image:** Insert and beautify images with Qubely Image Block. Get 2 layouts and style images by defining opacity, alignment, border-radius, box-shadow, and many more. 
-
-- **Timeline:** Display the timelines of various events with this WordPress Gutenberg block plugin. Showcase detailed road maps and style them with images, texts, headings, icons, and more.
-
-- **Post Grid:** Display posts in different grid and list layouts. Define post number, style the feature image, tweak typography, control spacing, determine post excerpts, and do many more.
-
-- **Pie Progress:** Display complex information and visualize them in circular progress with easy configuration. Choose style from available templates and make it your own.
-
-## SOME EXCITING QUBELY FEATURES IN DETAILS
-
-Let’s dig deep into the exciting features of this advanced Gutenberg block plugin.
-
-= PREDESIGNED SECTIONS =
-
-Qubely has a rich library of pre designed sections those can be imported and used as blocks on the Gutenberg editor. You no longer need to style them from scratch. Also, With this Gutenberg plugin, you can modify their look if you ever want to.
-
-= ROW-COLUMN STRUCTURE =
-
-Take 1 to as many as 6 columns in a single row at a time. Get multiple combinations of columns. Most importantly, you can adjust the column size by flexibly dragging the columns. The widely used row-column concept of major page builders is with Gutenberg editor thanks to Qubely.
-
-
-= ADVANCED ROW-COLUMN SETTINGS =
-
-Apply padding and margin to columns and set column background with single color, image, and gradient. Give column border, apply border-radius, and animate columns.
-
-= DEVICE SPECIFIC RESPONSIVE CONTROLS =
-
-Create responsive designs with Qubely Gutenberg block plugin. Control the entire responsiveness by defining the breakpoint for small screens. Also, you can hide blocks on different devices.
-
-= CUSTOM TYPOGRAPHY CONTROLS =
-
-This Gutenberg page builder gives you full control over the typography. You can choose the font, apply font weight, font transform, set font size, line height, letter spacing in px, em, and percentage on the basis of the devices.
-
-> You may find the documentation here
-> [Documentation](https://www.themeum.com/docs/qubely-introduction/)
-
-
-<strong>Want To Contribute To The Plugin?</strong>
-
-You may now contribute to the plugin on Github: <a href="https://github.com/themeum/qubely" target="_blank" rel="">Qubely Blocks on Github</a>
-
+<strong>We offer live chat service.  [💬Talk to us](https://www.themeum.com) </strong>
 
 == Installation ==
 
@@ -221,7 +114,7 @@ You can post your questions on the [support forum here](https://wordpress.org/su
 
 = Where can I report a bug? =
 
-You can report bugs on the [support forum here](https://wordpress.org/support/plugin/qubely/) or send us an email using the contact form on [our website](https://www.themeum.com).
+You can report bugs on the [support forum here](https://wordpress.org/support/plugin/qubely/) or send us an email using the contact form on [our website](https://www.themeum.com/contact/).
 
 
 == Screenshots ==
