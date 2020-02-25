@@ -38,6 +38,11 @@ const InspectorTabs = props => {
     return (
         <Fragment>
             <div ref={tabContainer} className={'qubely-inspector-tabs ' + currentTab}>
+                {
+                    /*
+                     * The tabs is static, you must use layout, style & advance
+                     */
+                }
                 <Tooltip text={__('Layout')}>
                     <button className={currentTab === LAYOUT ? 'qubely-active' : ''} onClick={() => _onTabChange(LAYOUT)}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="15"><path fill="#565D66" fill-rule="nonzero" d="M14.346 0H1.654C1.017 0 .5.517.5 1.154v12.692C.5 14.483 1.017 15 1.654 15h12.692c.637 0 1.154-.517 1.154-1.154V1.154C15.5.517 14.983 0 14.346 0zm-5.77 13.846v-5.77h5.77v5.77h-5.77z"/></svg>
@@ -59,6 +64,10 @@ const InspectorTabs = props => {
             </div>
             {
                 Array.isArray(children) && children.map(child => {
+                    if(typeof child.key === 'undefined'){
+                        throw new Error('props.key not found in <InspectorTab />');
+                        return;
+                    }
                     if(child.key === currentTab) {
                         return child;
                     }

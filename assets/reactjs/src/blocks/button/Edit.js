@@ -159,6 +159,9 @@ class Edit extends Component {
                 <InspectorControls key="inspector">
                     <InspectorTabs>
                         <InspectorTab key='layout'>
+                            Dummy
+                        </InspectorTab>
+                        <InspectorTab key='style'>
                             <PanelBody title={__('')} opened={true}>
                                 <Styles value={fillType}
                                         onChange={(value) => setAttributes({ fillType: value })}
@@ -183,8 +186,7 @@ class Edit extends Component {
                                     />
                                 }
                             </PanelBody>
-                        </InspectorTab>
-                        <InspectorTab key='style'>
+
                             <PanelBody title={__('Size')} initialOpen={false}>
                                 <RadioAdvanced
                                     label={__('Button Size')}
@@ -220,7 +222,7 @@ class Edit extends Component {
                                 {buttonWidthType == 'fixed' &&
                                 <Range
                                     label={__('Fixed Width')}
-                                    value={buttonWidth}
+                                    valInspectorTabue={buttonWidth}
                                     onChange={(value) => setAttributes({ buttonWidth: value })}
                                     unit={['px', 'em', '%']}
                                     min={buttonWidth.unit === '%' ? 5 : 30}
