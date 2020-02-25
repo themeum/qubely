@@ -1,7 +1,7 @@
 === Gutenberg Blocks and Page Builder – Qubely ===
 Contributors: themeum, kawshar, jakirhasan, anik4e, faisalahmed29, delowardev, rejuancse, fahimmurshed, badsha_eee, joomcoder, sksaaju, mehedih, mhshohel
 Donate link: https://www.themeum.com
-Tags: block, blocks, gutenberg, gutenberg blocks, page builder, editor
+Tags: blocks, gutenberg, gutenberg blocks, editor, block, page builder
 Requires at least: 5.0
 Tested up to: 5.3
 Stable tag: 1.3.3
