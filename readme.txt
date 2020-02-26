@@ -237,6 +237,9 @@ You can report bugs on the [support forum here](https://wordpress.org/support/pl
 
 == Changelog ==
 
+= 1.3.4 - 27 February, 2020 =
+Fix: Image Block whitespace issue
+
 = 1.3.3 - 18 February, 2020 =
 Fix: Post Grid block - Translation issue of the dates
 Fix: Post Grid block - Post title position settings in frontend
