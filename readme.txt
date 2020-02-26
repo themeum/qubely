@@ -1,7 +1,7 @@
 === Gutenberg Blocks and Page Builder – Qubely ===
 Contributors: themeum, kawshar, jakirhasan, anik4e, faisalahmed29, delowardev, rejuancse, fahimmurshed, badsha_eee, joomcoder, sksaaju, mehedih, mhshohel
 Donate link: https://www.themeum.com
-Tags: block, blocks, gutenberg, gutenberg blocks, page builder, editor
+Tags: blocks, gutenberg, gutenberg blocks, editor, block, page builder
 Requires at least: 5.0
 Tested up to: 5.3
 Stable tag: 1.3.3
@@ -236,6 +236,9 @@ You can report bugs on the [support forum here](https://wordpress.org/support/pl
 
 
 == Changelog ==
+
+= 1.3.4 - 27 February, 2020 =
+Fix: Image Block whitespace issue
 
 = 1.3.3 - 18 February, 2020 =
 Fix: Post Grid block - Translation issue of the dates
