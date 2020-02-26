@@ -49,28 +49,14 @@ const MyAlignmentComponent = () => {
 * One important prop to refer is `value`, if `responsive` is true, value should be an Object & Object key should be device name.
 * Another important prop `responsive` requires `device` state, device value can be `md` (Desktop) | `sm` (Tablet)  | `xs` (Mobile), ex: `this.state = {device: 'md'}`
 
-#### label
-If this property is added, a label will be generated using label property as the content.
-
-* Type: String
-* Required: `No`
-
-#### value
-* Type: String | Object
-* Required: `Yes`
-
-#### onChange
-* Type: Function
-* Required: `Yes`
-
-#### responsive
-* Type: Boolean
-* Required: `No`
-
-#### device
-* Type: String
-* Required: `No`
-
-#### onDeviceChange
-* Type: Function
-* Required: `No`
+|Prop |Type|Required |
+|:---|:---|:---|
+|label|`String`|No|
+|value|`String`/`Object`|Yes|
+|onChange|`Function`|Yes|
+|responsive|`Boolean`|No|
+|device|`String`|No|
+|onDeviceChange|`Function`|No|
+|flex|`String`|No|
+|disableJustify|`String`|No|
+|disableCenter|`String`|No|
