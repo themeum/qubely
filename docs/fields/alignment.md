@@ -51,12 +51,12 @@ const MyAlignmentComponent = () => {
 
 |Prop |Type|Required |
 |:---|:---|:---|
-|label|`String`|No|
-|value|`String`/`Object`|Yes|
-|onChange|`Function`|Yes|
-|responsive|`Boolean`|No|
-|device|`String`|No|
-|onDeviceChange|`Function`|No|
-|flex|`String`|No|
-|disableJustify|`String`|No|
-|disableCenter|`String`|No|
+|`label`|String|No|
+|`value`|String/Object|Yes|
+|`onChange`|Function|Yes|
+|`responsive`|Boolean|No|
+|`device`|String|No|
+|`onDeviceChange`|Function|No|
+|`flex`|String|No|
+|`disableJustify`|String|No|
+|`disableCenter`|String|No|
