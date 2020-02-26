@@ -4,7 +4,6 @@ Developer Documentation of Qubely Blocks.
 ## Field Types: 
 
 1. Alignment
-2. Animation
 3. Background
 4. Border
 5. Border Radius
