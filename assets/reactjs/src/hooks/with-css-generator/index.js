@@ -136,7 +136,14 @@ export default function withCSSGenerator() {
                 }
 
                 if (changedAttributes.length > 0) {
-                    if (changedAttributes.indexOf('layout') !== -1 || changedAttributes.indexOf('style') !== -1 || changedAttributes.indexOf('fillType') !== -1 || changedAttributes.indexOf('iconStyle') !== -1 || changedAttributes.indexOf('buttonFillType') !== -1 || changedAttributes.indexOf('tabStyle') !== -1) {
+                    if (changedAttributes.indexOf('layout') !== -1
+                        || changedAttributes.indexOf('style') !== -1
+                        || changedAttributes.indexOf('fillType') !== -1
+                        || changedAttributes.indexOf('iconStyle') !== -1
+                        || changedAttributes.indexOf('buttonFillType') !== -1
+                        || changedAttributes.indexOf('tabStyle') !== -1
+                        || changedAttributes.indexOf('separatorStyle') !== -1
+                    ) {
                         isLayoutChanged = true;
                         this.saveStyleAttributes();
                     }
