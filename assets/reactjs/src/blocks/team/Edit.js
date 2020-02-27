@@ -215,7 +215,19 @@ class Edit extends Component {
                                 <Url label={__('Image Source')} disableAdvanced value={externalImageUrl} onChange={newUrl => setAttributes({ externalImageUrl: newUrl })} />
                         }
 
-                        {layout != 2 && <Range label={__('Image Width')} value={imageWidth} onChange={val => setAttributes({ imageWidth: val })} min={32} max={500} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />}
+                        {layout != 2 &&
+                            <Range
+                                min={32}
+                                max={500}
+                                responsive
+                                device={device}
+                                value={imageWidth}
+                                label={__('Image Width')}
+                                unit={['px', 'em', '%']}
+                                onChange={val => setAttributes({ imageWidth: val })}
+                                onDeviceChange={value => this.setState({ device: value })}
+                            />
+                        }
                         {(layout == 1 || layout == 3) && <Range label={__('Image Spacing')} value={imageSpacing} onChange={val => setAttributes({ imageSpacing: val })} min={0} max={500} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />}
                         <Border
                             responsive

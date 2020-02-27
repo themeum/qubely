@@ -44,7 +44,7 @@ class Range extends Component {
         if (type === 'unit' && responsive) {
             newValue.unit = val;
         } else {
-            newValue = responsive ? Object.assign({}, value, { [window.qubelyDevice]: val }) : val;
+            newValue = responsive ? Object.assign(newValue, value, { [window.qubelyDevice]: val }) : val;
             newValue = min ? (newValue < min ? min : newValue) : (newValue < 0 ? 0 : newValue);
             newValue = max ? (newValue > max ? max : newValue) : (newValue > 1000 ? 1000 : newValue);
         }
