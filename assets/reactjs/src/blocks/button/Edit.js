@@ -45,6 +45,7 @@ const {
     withCSSGenerator,
     InspectorTabs,
     InspectorTab,
+    InspectorSections,
     Inline: {
         InlineToolbar
     },
@@ -159,7 +160,9 @@ class Edit extends Component {
                 <InspectorControls key="inspector">
                     <InspectorTabs>
                         <InspectorTab key='layout'>
-                            Dummy
+                            <PanelBody title={__('Sections')} opened={true}>
+                                <InspectorSections block='button'/>
+                            </PanelBody>
                         </InspectorTab>
                         <InspectorTab key='style'>
                             <PanelBody title={__('')} opened={true}>

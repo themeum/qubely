@@ -49,6 +49,7 @@ import { InlineToolbar, InlineSpacer, InlineSelector } from './fields/inline'
 
 import InspectorTabs from '../components/InspectorTabs'
 import InspectorTab from '../components/InspectorTab'
+import InspectorSections from '../components/InspectorSections'
 
 //functions
 import {
@@ -168,5 +169,6 @@ wp.qubelyComponents = {
     QubelyFreeIcons: icons,
     withCSSGenerator,
     InspectorTabs,
-    InspectorTab
+    InspectorTab,
+    InspectorSections
 }
