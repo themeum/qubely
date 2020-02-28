@@ -19,8 +19,14 @@ const attributes = {
     },
     spacing: {
         type: 'object',
-        default: { unit: "px", md: "5" },
-        style: [{ selector: '{{QUBELY}} .qubely-block-button-group {margin: -{{spacing}};} {{QUBELY}} .qubely-block-button-group .qubely-block-btn-wrapper {margin: {{spacing}};}' }]
+        default: {
+            unit: "px",
+            md: "10"
+        },
+        style: [
+            // { selector: '{{QUBELY}} .qubely-block-button-group {margin: -{{spacing}};} {{QUBELY}} .qubely-block-button-group.qubely-backend .block-editor-block-list__layout > div[data-type="qubely/button"]:not(:nth-last-child(2)), {{QUBELY}} .qubely-block-button-group .wp-block-qubely-button{margin: {{spacing}};}' }
+            { selector: '{{QUBELY}} .qubely-block-button-group {margin: -{{spacing}};} {{QUBELY}} .qubely-block-button-group.qubely-backend .block-editor-block-list__layout > div[data-type="qubely/button"], {{QUBELY}} .qubely-block-button-group .wp-block-qubely-button{margin: {{spacing}};}' }
+        ]
     }
 }
 
@@ -32,7 +38,12 @@ registerBlockType('qubely/buttongroup', {
     supports: {
         align: ['center', 'wide', 'full'],
     },
-    keywords: [__('button'), __('link'), __('button group')],
+    keywords: [
+        __('button'),
+        __('buttons'),
+        __('link'),
+        __('button group')
+    ],
     example: {
         attributes: {
             buttons: 2,

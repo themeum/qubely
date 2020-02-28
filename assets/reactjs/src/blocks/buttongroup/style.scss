@@ -1,22 +1,29 @@
-.qubely-block-button-group{
-    display: flex;
-    flex-wrap: wrap;
-    .block-editor-inner-blocks{
-        width: auto !important;
-        .block-editor-block-list__layout{
-            display: block;
-            width: fit-content;
-            .qubely-group-button{
-                display: inline-block;
-                width: auto;
-            }
+.qubely-block-button-group {
+  display: flex;
+  flex-wrap: wrap;
+  .block-editor-inner-blocks {
+    width: auto !important;
+    .block-editor-block-list__layout {
+      display: block;
+      width: fit-content;
+      > div {
+        display: inline-block;
+        width: auto;
+        &:last-child{
+            margin: 10px;
         }
+      }
+      .block-editor-button-block-appender {
+        background: none;
+        outline: none;
+      }
     }
-    .qubely-add-new{
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: fit-content;
-        z-index: 100;
-    }
+  }
+  .qubely-add-new {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    z-index: 100;
+  }
 }

@@ -1,3 +1,4 @@
+import classnames from 'classnames';
 const { __ } = wp.i18n
 const { Fragment, Component } = wp.element;
 const { PanelBody, Tooltip } = wp.components
@@ -5,6 +6,10 @@ const { compose } = wp.compose
 const { withSelect, withDispatch } = wp.data
 const { InnerBlocks, InspectorControls } = wp.blockEditor
 const { Range, Alignment, gloalSettings: { globalSettingsPanel, animationSettings, interactionSettings }, withCSSGenerator } = wp.qubelyComponents
+
+const UI_PARTS = {
+    hasSelectedUI: false,
+};
 
 class Edit extends Component {
     constructor(props) {
@@ -63,7 +68,13 @@ class Edit extends Component {
             iterator.push(index)
             index++
         }
+        const { getBlockOrder } = wp.data.select('core/block-editor');
+        let hasChildBlocks = getBlockOrder(clientId).length > 0;
 
+        const classes = classnames(
+            `qubely-block-${uniqueId}`,
+            { className: className }
+        );
         return (
             <Fragment>
                 <InspectorControls key="inspector">
@@ -88,8 +99,8 @@ class Edit extends Component {
 
                 {globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
-                <div className={`qubely-block-${uniqueId}${className ? ` ${className}` : ''}`}>
-                    <div className={`qubely-block-button-group`}>
+                <div className={classes}>
+                    <div className={`qubely-block-button-group qubely-backend`}>
                         <InnerBlocks
                             tagName="div"
                             className=""
@@ -99,21 +110,36 @@ class Edit extends Component {
                                     parentClientId: clientId,
                                     enableAlignment: false,
                                     spacer: {
-                                        spaceTop: { md: '0', unit: "px" },
-                                        spaceBottom: { md: '0', unit: "px" }
+                                        spaceTop: { md: '10', unit: "px" },
+                                        spaceBottom: { md: '10', unit: "px" }
                                     },
                                     customClassName: 'qubely-group-button',
                                     disableFullWidth: true
                                 }
                             ])}
-                            templateLock="all"
-                            allowedBlocks={['qubely/button']} />
+                            templateLock={false}
+                            renderAppender={false}
+                            __experimentalUIParts={UI_PARTS}
+                            __experimentalMoverDirection="horizontal"
+                            allowedBlocks={['qubely/button']}
+                            renderAppender={(
+                                hasChildBlocks ?
+                                    undefined :
+                                    () => <InnerBlocks.ButtonBlockAppender
+                                        className={'faisala'} />
+                            )}
+                        />
 
-                        <Tooltip text={__('Add new Button')}>
-                            <span className="qubely-add-new" onClick={() => setAttributes({ buttons: buttons + 1 })} role="button" areaLabel={__('Add new button')}>
+                        {/* <Tooltip text={__('Add new Button')}>
+                            <div className="qubely-add-new"
+                                role="button"
+                                areaLabel={__('Add new button')}
+                                onClick={() => console.log('add new button')}
+                            // onClick={() => setAttributes({ buttons: buttons + 1 })}
+                            >
                                 <i className="fas fa-plus-circle" />
-                            </span>
-                        </Tooltip>
+                            </div>
+                        </Tooltip> */}
                     </div>
                 </div>
 
