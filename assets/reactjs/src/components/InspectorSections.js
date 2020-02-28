@@ -1,31 +1,114 @@
-const {__} = wp.i18n;
-const {useEffect, useState} = wp.element;
+import './css/inspectorSections.scss';
+const {
+    element: {
+        useEffect,
+        useState
+    },
+    i18n: {__},
+    components: {Button},
+    data: {withDispatch},
+    blocks: {parse}
+} = wp;
+
 
 const Sections = (props) => {
-    const endpoint = 'http://qubely.io/wp-json/restapi/v2/sections',
-        block = typeof props.block !== 'undefined' ? props.block : '';
+    const [sections, setSections] = useState([]);
+    const block = typeof props.block !== 'undefined' ? props.block : '';
+    const storeName = '__qubely_section_blocks_' + block;
+    const storeNameDate = '__qubely_section_blocks_date_' + block;
+
     useEffect(() => {
-        fetch(endpoint, {
-            method: 'POST'
-        })
+        const today = new Date();
+        const endpoint = 'http://qubely.io/wp-json/restapi/v2/sections';
+
+        const _fetchData = () => {
+            fetch(endpoint, {
+                method: 'POST'
+            })
             .then(response => response.ok ? response.json() : Promise.reject(response))
             .then(response => {
-                console.log('Previous: >>>', response);
+                const cacheExp = new Date().setDate(today.getDate() + 7);
                 const filteredResponse = response.filter(item => (
-                    typeof item.included_blocks !== 'undefined' &&
-                    item.included_blocks.length &&
-                    item.included_blocks.filter(item => item.value === block).length
+                    typeof item.included_blocks !== 'undefined' //&& item.included_blocks.length && item.included_blocks.filter(item => item.value === (block)).length
                 ));
-                console.log('Previous: >>>', filteredResponse);
+                setSections(filteredResponse);
+                _syncSections(filteredResponse);
+                window.localStorage.setItem(storeName, JSON.stringify(filteredResponse));
+                window.localStorage.setItem(storeNameDate, JSON.stringify(cacheExp));
             })
             .catch( (err) => {
-                // There was an error
-                setLoaded(true);
                 console.warn('Something went wrong.', err);
             });
+        };
+
+        const sectionData = JSON.parse(window.localStorage.getItem(storeName));
+        if(sectionData !== null) {
+            const sectionExpDate = JSON.parse(window.localStorage.getItem(storeNameDate));
+            if(sectionExpDate !== null && today > sectionExpDate ){
+                window.localStorage.clear(storeName);
+                window.localStorage.clear(storeNameDate);
+                _fetchData();
+            }else{
+                setSections(sectionData)
+            }
+        }else{
+            window.localStorage.clear(storeName);
+            window.localStorage.clear(storeNameDate);
+            _fetchData();
+        }
+
+        const _syncSections = sections => {
+            sections.forEach(section => {
+                _fetchSection(section.ID);
+            })
+        }
+
     }, []);
 
-    return <span>I'm Sections</span>
+    const _fetchSection = (section_id, callback) => {
+        const endpoint = 'https://qubely.io/wp-json/restapi/v2/single-section';
+        fetch(endpoint, {
+            method: 'POST',
+            body: new URLSearchParams('section_id='+ section_id)
+        })
+        .then(response => response.ok ? response.json() : Promise.reject(response))
+        .then(response => {
+            window.localStorage.setItem(storeName + section_id, JSON.stringify(response.rawData));
+            callback && callback();
+        })
+        .catch( err => {
+            console.warn('Something went wrong.', err);
+        });
+    }
+
+
+    const _insertSection = section_id => {
+        const {insertBlocks} = props
+        const sectionData = JSON.parse(window.localStorage.getItem(storeName + section_id));
+        if(sectionData !== null){
+            insertBlocks(parse(sectionData));
+        }else{
+            _fetchSection(section_id, () => {
+                const sectionData = JSON.parse(window.localStorage.getItem(storeName + section_id));
+                insertBlocks(parse(sectionData));
+            })
+        }
+    }
+
+    return (
+        <div className='qubely-block-sections'>
+            {
+                sections.map(section => (
+                    <div className='qubely-block-section'>
+                        <img src={section.image} alt={section.name} />
+                        <div className="qubely-block-section-btns">
+                            <Button onClick={() => _insertSection(section.ID)} isDefault isLarge>{__('Import Section')}</Button>
+                        </div>
+                    </div>
+                ))
+            }
+        </div>
+    )
 };
 
-export default Sections
+export default withDispatch((dispatch) => ({ insertBlocks : dispatch('core/block-editor').insertBlocks }))(Sections)
