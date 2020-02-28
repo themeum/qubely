@@ -59,7 +59,7 @@ const attributes = {
             }
         ]
     },
-    position: { type: 'string', default: '', style: [{ selector: '{{QUBELY}} .qubely-row, {{QUBELY}} .qubely-row .editor-block-list__layout {-webkit-box-align: {{position}}; -ms-flex-align: {{position}}; align-items: {{position}}; }' }] },
+    position: { type: 'string', default: '', style: [{ selector: '{{QUBELY}} .qubely-row, {{QUBELY}} .qubely-row .block-editor-block-list__layout {-webkit-box-align: {{position}}; -ms-flex-align: {{position}}; align-items: {{position}}; }' }] },
 
     // Background
     rowBg: {
@@ -153,7 +153,7 @@ const attributes = {
     rowReverse: {
         type: 'object',
         default: { openRowReverse: false, values: {} },
-        style: [{ selector: '{{QUBELY}}.qubely-section >.qubely-container >.qubely-row,{{QUBELY}}.qubely-section >.qubely-container-fluid >.qubely-row, {{QUBELY}} >.qubely-container-fluid >.qubely-row > .editor-inner-blocks > .editor-block-list__layout, {{QUBELY}} >.qubely-container >.qubely-row > .editor-inner-blocks > .editor-block-list__layout' }]
+        style: [{ selector: '{{QUBELY}}.qubely-section >.qubely-container >.qubely-row,{{QUBELY}}.qubely-section >.qubely-container-fluid >.qubely-row, {{QUBELY}} >.qubely-container-fluid >.qubely-row > .block-editor-inner-blocks > .block-editor-block-list__layout, {{QUBELY}} >.qubely-container >.qubely-row > .block-editor-inner-blocks > .block-editor-block-list__layout' }]
     },
 
     rowCss: { type: 'string', default: '', style: [{ selector: '' }] },

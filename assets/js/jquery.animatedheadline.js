@@ -229,7 +229,7 @@
 
 
     //ANIMATED HEADLINE BLOCK
-    $(':not(.editor-block-list__layout) .qubely-block-animated-heading .animated-heading-text').each(function () {
+    $(':not(.block-editor-block-list__layout) .qubely-block-animated-heading .animated-heading-text').each(function () {
         let animatedHeadline = $(this)
         if (window.animatedHeading) {
             new window.animatedHeading({ heading: $(animatedHeadline) })
