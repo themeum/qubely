@@ -35,7 +35,20 @@ registerBlockType('qubely/button', {
             ]
         },
         parentClientId: { type: 'string', default: '' },
-        spacer: { type: 'object', default: { spaceTop: { md: '10', unit: "px" }, spaceBottom: { md: '10', unit: "px" } }, style: [{ selector: '{{QUBELY}}' }] },
+        spacer: {
+            type: 'object',
+            default: {
+                spaceTop: {
+                    md: '10',
+                    unit: "px"
+                },
+                spaceBottom: {
+                    md: '10',
+                    unit: "px"
+                }
+            },
+            style: [{ selector: '{{QUBELY}}' }]
+        },
         enableAlignment: { type: 'boolean', default: true },
         customClassName: { type: 'string', default: '' },
         spacer: { type: 'object', default: { spaceTop: { md: '10', unit: "px" }, spaceBottom: { md: '10', unit: "px" } }, style: [{ selector: '{{QUBELY}}' }] },
@@ -242,8 +255,9 @@ registerBlockType('qubely/button', {
         sourceOfCopiedStyle: { type: 'boolean', default: false }
     },
     getEditWrapperProps(attributes) {
+
         if (attributes.customClassName != '') {
-            return { className: `wp-block editor-block-list__block block-editor-block-list__block ${attributes.customClassName}` }
+            return { className: `wp-block block-editor-block-list__block ${attributes.customClassName}` }
         }
     },
     edit: Edit,

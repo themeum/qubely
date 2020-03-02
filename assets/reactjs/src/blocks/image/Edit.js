@@ -132,10 +132,9 @@ class Edit extends Component {
                                 :
                                 <Url label={__('Image Source')} disableAdvanced value={externalImageUrl} onChange={newUrl => setAttributes({ externalImageUrl: newUrl })} />
                         }
-                        {
-                            layout === 'simple' &&
-                            <Url label={__('URL')} value={imageUrl} onChange={(value) => setAttributes({ imageUrl: value })} />
-                        }
+
+                        <Url label={__('URL')} value={imageUrl} onChange={(value) => setAttributes({ imageUrl: value })} />
+
                         <TextControl label={__('Alt Text')} value={imgAlt} onChange={val => setAttributes({ imgAlt: val })} />
                         <RadioAdvanced label={__('Size')} value={imageSize} onChange={(value) => setAttributes({ imageSize: value })}
                             options={[

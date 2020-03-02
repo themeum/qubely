@@ -37,7 +37,7 @@ jQuery(document).ready(function ($) {
 
         });
 
-        if (!$('.editor-block-list__layout').length) {
+        if (!$('.block-editor-block-list__layout').length) {
 
             const backToTop = $('.qubely-back-to-top-button');
             $('.qubely-back-to-top-button').on("click", function (e) {

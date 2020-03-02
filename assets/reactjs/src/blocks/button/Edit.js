@@ -253,19 +253,6 @@ class Edit extends Component {
                                 {(iconName.trim() != "") && (iconPosition == 'right') && (<i className={`qubely-btn-icon ${iconName}`} />)}
                             </span>
                         </div>
-                        {
-                            buttonGroup &&
-                            <Tooltip text={__('Delete this button')}>
-                                <span className="qubely-action-button-remove"
-                                    onClick={() => {
-                                        updateBlockAttributes(parentClientId, Object.assign(buttonGroupAttributes, { buttons: buttonGroupAttributes.buttons - 1 }))
-                                        removeBlock(clientId)
-                                    }}
-                                    role="button">
-                                    <i className="fas fa-times" />
-                                </span>
-                            </Tooltip>
-                        }
 
                         <div ref="qubelyContextMenu" className={`qubely-context-menu-wraper`} >
                             <ContextMenu
