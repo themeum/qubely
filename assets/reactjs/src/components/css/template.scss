@@ -5,5 +5,18 @@
     position: relative;
     margin-bottom: 8px;
     cursor: pointer;
+    border: 1.5px solid transparent;
+    border-radius: 4px;
+    box-sizing: border-box;
+    overflow: hidden;
+    &:hover{
+      border-color: #2184F9;
+    }
+    img{
+      display: block;
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+    }
   }
 }
