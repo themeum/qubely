@@ -20,7 +20,6 @@ const Sections = (props) => {
     useEffect(() => {
         const today = new Date();
         const endpoint = 'http://qubely.io/wp-json/restapi/v2/sections';
-
         const _fetchData = () => {
             fetch(endpoint, {
                 method: 'POST'
