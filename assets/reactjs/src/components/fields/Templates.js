@@ -33,9 +33,8 @@ class Templates extends Component {
                                         }
                                     }
                                     return (
-                                        <div className="qubely-design-template">
+                                        <div className="qubely-design-template" role='button' onClick={() => this.handleTemplateSelection(templates[key])}>
                                             <img src={thumbnail_src} alt={key} height="240" width="210"/>
-                                            <button onClick={() => this.handleTemplateSelection(templates[key])}>{__('Apply')}</button>
                                         </div>
                                     )
                                 })
