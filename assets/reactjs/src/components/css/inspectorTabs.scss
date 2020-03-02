@@ -161,7 +161,9 @@ $border-color: #D6D9DD;
       }
     }
   }
-  + .components-panel__body{
-    border-top: none !important;
-  }
+}
+
+.edit-post-settings-sidebar__panel-block .qubely-inspector-tab .components-panel__body:first-child{
+  margin-top: 0;
+  border-top: none;
 }

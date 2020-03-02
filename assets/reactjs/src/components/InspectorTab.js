@@ -1,9 +1,16 @@
 const { Fragment} = wp.element;
 
 const InspectorTab = props => {
-    const {children} = props;
+    const {children, isActive} = props;
     return (
-        <Fragment>{Array.isArray(children) ? children.map(item => item) : children} </Fragment>
+        <div
+            style={{
+                display: isActive ? 'block' : 'none'
+            }}
+            className='qubely-inspector-tab'
+        >
+            {Array.isArray(children) ? children.map(item => item) : children}
+        </div>
     )
 }
 

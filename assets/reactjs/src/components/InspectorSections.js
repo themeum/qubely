@@ -22,17 +22,18 @@ const Sections = (props) => {
         const endpoint = 'http://qubely.io/wp-json/restapi/v2/sections';
         const _fetchData = () => {
             fetch(endpoint, {
-                method: 'POST'
+                method: 'POST',
+                body: block ? new URLSearchParams('block_name='+block) : ''
             })
             .then(response => response.ok ? response.json() : Promise.reject(response))
             .then(response => {
                 const cacheExp = new Date().setDate(today.getDate() + 7);
-                const filteredResponse = response.filter(item => (
-                    typeof item.included_blocks !== 'undefined' //&& item.included_blocks.length && item.included_blocks.filter(item => item.value === (block)).length
-                ));
-                setSections(filteredResponse);
-                _syncSections(filteredResponse);
-                window.localStorage.setItem(storeName, JSON.stringify(filteredResponse));
+                // const filteredResponse = response.filter(item => (
+                //     typeof item.included_blocks !== 'undefined' && item.included_blocks.length && item.included_blocks.filter(item => item.value === (block)).length
+                // ));
+                setSections(response);
+                _syncSections(response);
+                window.localStorage.setItem(storeName, JSON.stringify(response));
                 window.localStorage.setItem(storeNameDate, JSON.stringify(cacheExp));
             })
             .catch( (err) => {
@@ -99,7 +100,7 @@ const Sections = (props) => {
             {
                 sections.map(section => (
                     <div className='qubely-block-section'>
-                        <img src={section.image} alt={section.name} />
+                        <img width='330' height='230' loading='lazy' src={section.image} alt={section.name} />
                         <div className="qubely-block-section-btns">
                             <Button onClick={() => _insertSection(section.ID)} isDefault isLarge>{__('Import Section')}</Button>
                         </div>

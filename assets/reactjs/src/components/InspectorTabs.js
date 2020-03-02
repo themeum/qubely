@@ -1,6 +1,6 @@
 import './css/inspectorTabs.scss';
 const {__} = wp.i18n;
-const { Fragment} = wp.element;
+const { Fragment, cloneElement, Children} = wp.element;
 const {Tooltip} = wp.components;
 
 const { useState, useRef, useEffect } = wp.element,
@@ -63,15 +63,16 @@ const InspectorTabs = props => {
                 </Tooltip>
             </div>
             {
-                Array.isArray(children) && children.map(child => {
+                Array.isArray(children) && Children.map(children, (child, index) => {
                     if(typeof child.key === 'undefined'){
                         throw new Error('props.key not found in <InspectorTab />');
                         return;
                     }
-                    if(child.key === currentTab) {
-                        return child;
-                    }
-                    return;
+                    return cloneElement(child, {
+                        index,
+                        isActive: child.key === currentTab
+                    })
+
                 })
             }
         </Fragment>
