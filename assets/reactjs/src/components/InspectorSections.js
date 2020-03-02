@@ -5,7 +5,6 @@ const {
         useState
     },
     i18n: {__},
-    components: {Button},
     data: {withDispatch},
     blocks: {parse}
 } = wp;
@@ -102,7 +101,7 @@ const Sections = (props) => {
                     <div className='qubely-block-section'>
                         <img width='330' height='230' loading='lazy' src={section.image} alt={section.name} />
                         <div className="qubely-block-section-btns">
-                            <Button onClick={() => _insertSection(section.ID)} isDefault isLarge>{__('Import Section')}</Button>
+                            <button onClick={() => _insertSection(section.ID)}>{__('Import Section')}</button>
                         </div>
                     </div>
                 ))

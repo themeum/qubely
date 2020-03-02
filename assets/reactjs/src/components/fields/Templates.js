@@ -5,6 +5,13 @@ import '../css/template.scss'
 
 class Templates extends Component {
 
+    constructor() {
+        super();
+        this.state = {
+            activeTemplate: -1
+        }
+    }
+
     handleTemplateSelection = (selectedTemplate) => {
         const { updateStyle, attributes } = this.props
         updateStyle({ ...attributes, ...selectedTemplate })
@@ -33,7 +40,10 @@ class Templates extends Component {
                                         }
                                     }
                                     return (
-                                        <div className="qubely-design-template" role='button' onClick={() => this.handleTemplateSelection(templates[key])}>
+                                        <div className={'qubely-design-template ' + (this.state.activeTemplate === _index ? 'active' : '')} role='button' onClick={() => {
+                                            this.setState({activeTemplate: _index})
+                                            return this.handleTemplateSelection(templates[key]);
+                                        }}>
                                             <img src={thumbnail_src} alt={key} height="240" width="210"/>
                                         </div>
                                     )
