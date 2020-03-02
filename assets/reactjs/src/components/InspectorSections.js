@@ -101,7 +101,7 @@ const Sections = (props) => {
                     <div className='qubely-block-section'>
                         <img width='330' height='230' loading='lazy' src={section.image} alt={section.name} />
                         <div className="qubely-block-section-btns">
-                            <button onClick={() => _insertSection(section.ID)}>{__('Import Section')}</button>
+                            <button onClick={() => _insertSection(section.ID)}>{__('Import')}</button>
                         </div>
                     </div>
                 ))

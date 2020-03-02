@@ -19,8 +19,26 @@
     justify-content: center;
     opacity: 0;
     visibility: hidden;
-    background: rgba(255, 255, 255, .6);
+    background: rgba(33, 132, 249, 0.8);
     transition: 300ms;
+    button{
+      font-size: 10px;
+      line-height: 20px;
+      height: 20px;
+      padding: 0 15px;
+      background: #ffffff;
+      border-radius: 30px;
+      color: #565D66;
+      display: block;
+      border: none;
+      font-weight: 500;
+      cursor: pointer;
+      transition: 300ms;
+      &:hover{
+        color: #2184F9;
+        box-shadow: 0 8px 10px -3px rgba(0,0,0,.3);
+      }
+    }
   }
   &:hover{
     .qubely-block-section-btns{
