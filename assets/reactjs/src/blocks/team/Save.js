@@ -1,14 +1,18 @@
+import classnames from 'classnames';
 const { Component } = wp.element;
 const { RichText } = wp.blockEditor
 const { HelperFunction: { animationAttr, IsInteraction } } = wp.qubelyComponents;
 
 class Save extends Component {
 	render() {
-		const { uniqueId, layout, imageType, image, image2x, externalImageUrl, name, designation, description, useInfoIcon, phone, email, website, showSociallinks, facebook, twitter, instagram, linkedin, youtube, github, flickr, pinterest, dribbble, behance, iconStyle, iconUseDefaultStyle, enableDesignation, enableDescription, animation, interaction } = this.props.attributes
+		const { uniqueId, layout, imageType, alignmentLayout3, image, image2x, externalImageUrl, name, designation, description, useInfoIcon, phone, email, website, showSociallinks, facebook, twitter, instagram, linkedin, youtube, github, flickr, pinterest, dribbble, behance, iconStyle, iconUseDefaultStyle, enableDesignation, enableDescription, animation, interaction } = this.props.attributes
 		const interactionClass = IsInteraction(interaction) ? 'qubley-block-interaction' : '';
-
+		const wrapperClasses = classnames(
+			{ [`qubely-block-${uniqueId}`]: uniqueId },
+			{ ['right-alignment']: alignmentLayout3 === 'right' }
+		);
 		return (
-			<div className={`qubely-block-${uniqueId}`} {...animationAttr(animation)}>
+			<div className={wrapperClasses} {...animationAttr(animation)}>
 				<div className={`qubely-block-team ${interactionClass} qubely-team-layout-${layout}`}>
 					<div className="qubely-team-image-wrapper">
 						{(imageType === 'local' && image.url != undefined) ?

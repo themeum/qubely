@@ -138,6 +138,7 @@ export default function withCSSGenerator() {
                 if (changedAttributes.length > 0) {
                     if (changedAttributes.indexOf('layout') !== -1
                         || changedAttributes.indexOf('style') !== -1
+                        || changedAttributes.indexOf('recreateStyles') !== -1
                         || changedAttributes.indexOf('fillType') !== -1
                         || changedAttributes.indexOf('iconStyle') !== -1
                         || changedAttributes.indexOf('buttonFillType') !== -1

@@ -1,4 +1,5 @@
 import icons from '../../helpers/icons';
+import classnames from 'classnames';
 const { __ } = wp.i18n
 const { Fragment, Component } = wp.element;
 const { PanelBody, TextControl, Toolbar } = wp.components;
@@ -66,7 +67,9 @@ class Edit extends Component {
             uniqueId,
             className,
             layout,
+            recreateStyles,
             alignment,
+            alignmentLayout3,
             name,
             nameTypo,
             nameColor,
@@ -164,18 +167,40 @@ class Edit extends Component {
         const { clientId, attributes, setAttributes, isSelected } = this.props
         const { openPanelSetting, device } = this.state
 
+        const wrapperClasses = classnames(
+            className,
+            { [`qubely-block-${uniqueId}`]: uniqueId },
+            { ['right-alignment']: alignmentLayout3 === 'right' }
+        );
         return (
             <Fragment>
                 <InspectorControls key="inspector">
                     <PanelBody title={__('')} initialOpen={true}>
-                        <Styles columns={21} value={layout} onChange={val => setAttributes({ layout: val })}
+                        <Styles
+                            columns={21}
+                            value={layout}
                             options={[
                                 { value: 1, svg: icons.team_1, label: __('Basic') },
                                 { value: 2, svg: icons.team_2, label: __('Stack') },
                                 { value: 3, svg: icons.team_3, label: __('Side by Side') }
                             ]}
+                            onChange={val => setAttributes({ layout: val })}
                         />
-                        <Alignment label={__('Alignment')} value={alignment} alignmentType="content" onChange={val => setAttributes({ alignment: val })} disableJustify responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
+                        <Alignment
+                            disableJustify
+                            label={__('Alignment')}
+                            alignmentType="content"
+                            {...(layout === 3 && { disableCenter: true })}
+                            {...(layout !== 3 &&
+                            {
+                                responsive: true,
+                                device: device,
+                                onDeviceChange: value => this.setState({ device: value })
+                            }
+                            )}
+                            value={layout === 3 ? alignmentLayout3 : alignment}
+                            onChange={val => setAttributes(layout === 3 ? { alignmentLayout3: val, recreateStyles: !recreateStyles } : { alignment: val })}
+                        />
                     </PanelBody>
 
                     <PanelBody title={__('Image')} opened={'Image' === openPanelSetting} onToggle={() => this.handlePanelOpenings(openPanelSetting !== 'Image' ? 'Image' : '')}>
@@ -218,7 +243,7 @@ class Edit extends Component {
                         {layout != 2 &&
                             <Range
                                 min={32}
-                                max={500}
+                                max={600}
                                 responsive
                                 device={device}
                                 value={imageWidth}
@@ -228,7 +253,20 @@ class Edit extends Component {
                                 onDeviceChange={value => this.setState({ device: value })}
                             />
                         }
-                        {(layout == 1 || layout == 3) && <Range label={__('Image Spacing')} value={imageSpacing} onChange={val => setAttributes({ imageSpacing: val })} min={0} max={500} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />}
+                        {
+                            (layout == 1 || layout == 3) &&
+                            <Range
+                                min={0}
+                                max={500}
+                                responsive
+                                device={device}
+                                value={imageSpacing}
+                                unit={['px', 'em', '%']}
+                                label={__('Image Spacing')}
+                                onChange={val => setAttributes({ imageSpacing: val })}
+                                onDeviceChange={value => this.setState({ device: value })}
+                            />
+                        }
                         <Border
                             responsive
                             device={device}
@@ -469,7 +507,7 @@ class Edit extends Component {
 
                 {globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
-                <div className={`qubely-block-${uniqueId}${className ? ` ${className}` : ''}`}>
+                <div className={wrapperClasses}>
                     <div className={`qubely-block-team qubely-team-layout-${layout}`} onContextMenu={event => handleContextMenu(event, this.refs.qubelyContextMenu)}>
                         <div className="qubely-team-image-wrapper" onClick={() => this.handlePanelOpenings('Image')}>
                             {imageType === 'local' && image.url != undefined ?

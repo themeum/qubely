@@ -1,26 +1,43 @@
 import classnames from 'classnames';
-const { __ } = wp.i18n
+const { __ } = wp.i18n;
 const { Fragment, Component } = wp.element;
-const { PanelBody, Tooltip } = wp.components
-const { compose } = wp.compose
-const { withSelect, withDispatch } = wp.data
-const { InnerBlocks, InspectorControls } = wp.blockEditor
-const { Range, Alignment, gloalSettings: { globalSettingsPanel, animationSettings, interactionSettings }, withCSSGenerator } = wp.qubelyComponents
+const { PanelBody } = wp.components;
+const { compose } = wp.compose;
+const { withSelect, withDispatch } = wp.data;
+const { InnerBlocks, InspectorControls } = wp.blockEditor;
+const {
+    Range,
+    Alignment,
+    gloalSettings: {
+        globalSettingsPanel,
+        animationSettings,
+        interactionSettings
+    },
+    withCSSGenerator
+} = wp.qubelyComponents;
 
 const UI_PARTS = {
-    hasSelectedUI: false,
+    hasSelectedUI: false
 };
 
 class Edit extends Component {
     constructor(props) {
-        super(props)
+        super(props);
         this.state = {
             device: 'md'
         }
     }
     componentDidMount() {
-        const { setAttributes, clientId, attributes: { uniqueId } } = this.props
-        const _client = clientId.substr(0, 6)
+        const {
+            clientId,
+            setAttributes,
+            attributes: {
+                uniqueId
+            }
+        } = this.props;
+
+        const _client = clientId.substr(0, 6);
+
         if (!uniqueId) {
             setAttributes({ uniqueId: _client });
         } else if (uniqueId && uniqueId != _client) {
@@ -30,6 +47,10 @@ class Edit extends Component {
 
     render() {
         const {
+            block,
+            clientId,
+            setAttributes,
+            updateBlockAttributes,
             attributes: {
                 uniqueId,
                 className,
@@ -49,46 +70,38 @@ class Edit extends Component {
                 hideTablet,
                 hideMobile,
                 globalCss
-            },
-            setAttributes,
-            block,
-            clientId,
-            isSelected,
-            name,
-            updateBlockAttributes } = this.props
-        const { device } = this.state
-        let index = 0
+            }
+        } = this.props;
+
+        const { device } = this.state;
+
+        const { getBlockOrder } = wp.data.select('core/block-editor'),
+            hasChildBlocks = getBlockOrder(clientId).length > 0,
+            classes = classnames(
+                { [`qubely-block-${uniqueId}`]: uniqueId },
+                className
+            );
+        let index = 0;
         while (index < buttons) {
             block.innerBlocks[index] && updateBlockAttributes(block.innerBlocks[index].clientId, Object.assign(block.innerBlocks[index].attributes, { parentClientId: clientId }))
             index++
         }
-        index = 0
-        let iterator = []
-        while (index < buttons) {
-            iterator.push(index)
-            index++
-        }
-        const { getBlockOrder } = wp.data.select('core/block-editor');
-        let hasChildBlocks = getBlockOrder(clientId).length > 0;
-
-        const classes = classnames(
-            `qubely-block-${uniqueId}`,
-            { className: className }
-        );
         return (
             <Fragment>
                 <InspectorControls key="inspector">
                     <PanelBody title="" initialOpen={true}>
                         <Alignment label={__('Alignment')} value={alignment} alignmentType="content" onChange={val => setAttributes({ alignment: val })} flex disableJustify responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
                         <Range
-                            label={__('Button Spacing')}
-                            value={spacing}
-                            onChange={value => setAttributes({ spacing: value })}
-                            min={0} max={100}
-                            unit={['px', 'em', '%']}
+                            min={0}
+                            max={300}
                             responsive
                             device={device}
-                            onDeviceChange={value => this.setState({ device: value })} />
+                            value={spacing}
+                            unit={['px', 'em', '%']}
+                            label={__('Spacing')}
+                            onChange={value => setAttributes({ spacing: value })}
+                            onDeviceChange={value => this.setState({ device: value })}
+                        />
                     </PanelBody>
 
                     {animationSettings(uniqueId, animation, setAttributes)}
@@ -104,19 +117,26 @@ class Edit extends Component {
                         <InnerBlocks
                             tagName="div"
                             className=""
-                            template={iterator.map(buttonIndex => ['qubely/button',
-                                {
-                                    buttonGroup: true,
-                                    parentClientId: clientId,
-                                    enableAlignment: false,
-                                    spacer: {
-                                        spaceTop: { md: '10', unit: "px" },
-                                        spaceBottom: { md: '10', unit: "px" }
-                                    },
-                                    customClassName: 'qubely-group-button',
-                                    disableFullWidth: true
-                                }
-                            ])}
+                            template={
+                                Array(buttons).fill(0).map(() => ['qubely/button',
+                                    {
+                                        buttonGroup: true,
+                                        parentClientId: clientId,
+                                        enableAlignment: false,
+                                        spacer: {
+                                            spaceTop: {
+                                                md: '10',
+                                                unit: "px"
+                                            },
+                                            spaceBottom: {
+                                                md: '10',
+                                                unit: "px"
+                                            }
+                                        },
+                                        customClassName: 'qubely-group-button',
+                                        disableFullWidth: true
+                                    }
+                                ])}
                             templateLock={false}
                             renderAppender={false}
                             __experimentalUIParts={UI_PARTS}
@@ -125,31 +145,18 @@ class Edit extends Component {
                             renderAppender={(
                                 hasChildBlocks ?
                                     undefined :
-                                    () => <InnerBlocks.ButtonBlockAppender
-                                        className={'faisala'} />
+                                    () => <InnerBlocks.ButtonBlockAppender />
                             )}
                         />
-
-                        {/* <Tooltip text={__('Add new Button')}>
-                            <div className="qubely-add-new"
-                                role="button"
-                                areaLabel={__('Add new button')}
-                                onClick={() => console.log('add new button')}
-                            // onClick={() => setAttributes({ buttons: buttons + 1 })}
-                            >
-                                <i className="fas fa-plus-circle" />
-                            </div>
-                        </Tooltip> */}
                     </div>
                 </div>
-
             </Fragment>
         )
     }
 }
 export default compose([
     withSelect((select, ownProps) => {
-        const { clientId } = ownProps
+        const { clientId } = ownProps;
         const { getBlock } = select('core/block-editor');
         return {
             block: getBlock(clientId)
@@ -162,4 +169,4 @@ export default compose([
         }
     }),
     withCSSGenerator()
-])(Edit)
+])(Edit);

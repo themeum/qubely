@@ -62,10 +62,13 @@ export const singleField = (style, key, value) => {
             return [value] // Custom CSS Field
         }
     } else {
-        let output = []
-        style.forEach(sel => {
-            output.push(replaceData(sel, '{{' + key + '}}', value));
-        });
+        let output = [];
+
+        if (style) {
+            style.forEach(sel => {
+                output.push(replaceData(sel, '{{' + key + '}}', value));
+            });
+        }
         return output;
     }
 }
@@ -188,7 +191,7 @@ const handleObjects = (settings, key, cssSelector, updateStyle, isInline, sendBa
         temp.push({ xs: singleField(cssSelector, key, dimension) })
     }
 
-    if (!device) { 
+    if (!device) {
 
         const objectCss = objectField(settings[key]);
         if (typeof objectCss.data == 'object') {
