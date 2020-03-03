@@ -23,19 +23,19 @@
 .wp-block-qubely-row {
     flex-wrap: wrap;
 }
-.wp-block-qubely-row>.editor-inner-blocks>.editor-block-list__layout {
+.wp-block-qubely-row>.block-editor-inner-blocks>.block-editor-block-list__layout {
     flex-wrap: wrap;
     display: flex;
 }
-.wp-block-qubely-row .editor-block-list__layout {
+.wp-block-qubely-row .block-editor-block-list__layout {
     margin-left: 0;
     margin-right: 0;
 }
-.qubely-row > .editor-inner-blocks > .editor-block-list__layout{
+.qubely-row > .block-editor-inner-blocks > .block-editor-block-list__layout{
     display: flex;
     flex-wrap: wrap;    
 }
-.wp-block-qubely-row>.editor-inner-blocks>.editor-block-list__layout>[data-type="qubely/column"] {
+.wp-block-qubely-row>.block-editor-inner-blocks>.block-editor-block-list__layout>[data-type="qubely/column"] {
     display: flex;
     flex-direction: column;
     padding-left: 0;
@@ -44,31 +44,31 @@
     overflow-wrap: break-word;
     width: 100%;
 }
-.wp-block-qubely-row .editor-block-list__layout .editor-block-list__block {
+.wp-block-qubely-row .block-editor-block-list__layout .editor-block-list__block {
     max-width: none;
 }
 .wp-block-qubely-row [data-type="qubely/column"] {
     pointer-events: none;
 }
-.wp-block-qubely-row>.editor-inner-blocks>.editor-block-list__layout>[data-type="qubely/column"]>.editor-block-list__block-edit {
+.wp-block-qubely-row>.block-editor-inner-blocks>.block-editor-block-list__layout>[data-type="qubely/column"]>.editor-block-list__block-edit {
     margin-top: 0;
     margin-bottom: 0;
     margin-left: 0;
     margin-right: 0;
 }
-:not(.components-disabled)>.wp-block-qubely-row>.editor-inner-blocks>.editor-block-list__layout>[data-type="qubely/column"]>.editor-block-list__block-edit>* {
+:not(.components-disabled)>.wp-block-qubely-row>.block-editor-inner-blocks>.block-editor-block-list__layout>[data-type="qubely/column"]>.editor-block-list__block-edit>* {
     pointer-events: all;
 }
-.wp-block-qubely-row>.editor-inner-blocks>.editor-block-list__layout>[data-type="qubely/column"]>.editor-block-list__block-edit>div>.editor-inner-blocks {
+.wp-block-qubely-row>.block-editor-inner-blocks>.block-editor-block-list__layout>[data-type="qubely/column"]>.editor-block-list__block-edit>div>.block-editor-inner-blocks {
     margin-top: -28px;
     margin-bottom: -28px;
 }
-.wp-block-qubely-row .editor-block-list__layout {
+.wp-block-qubely-row .block-editor-block-list__layout {
     margin-left: 0;
     margin-right: 0;
 }
 
-.wp-block-qubely-row .editor-block-list__layout .editor-block-list__block {
+.wp-block-qubely-row .block-editor-block-list__layout .editor-block-list__block {
     max-width: none;
 }
 
@@ -156,11 +156,11 @@ div[data-type="qubely/row"].is-resizing .components-resizable-box__container.qub
     padding-left: 3px;
 }
 
-[data-type="qubely/columns"] .editor-block-list__layout .editor-block-list__block .editor-block-list__block-edit{
+[data-type="qubely/columns"] .block-editor-block-list__layout .editor-block-list__block .editor-block-list__block-edit{
     margin-top: 14px;
     margin-bottom: 14px;
 }
-#wpwrap [data-type="qubely/columns"] .editor-block-list__layout .editor-block-list__block .editor-block-list__block-edit p:last-child{
+#wpwrap [data-type="qubely/columns"] .block-editor-block-list__layout .editor-block-list__block .editor-block-list__block-edit p:last-child{
     margin-bottom: 0;
 }
 
@@ -585,14 +585,14 @@ div[data-type="qubely/row"].is-resizing .components-resizable-box__container.qub
         max-width: 100%;
     }
 }
-.editor-block-list__layout {
+.block-editor-block-list__layout {
     .components-resizable-box__container  {
         //width: 100% !important;
         max-width: 100% !important;
     }
 }
 
-.components-resizable-box__container .editor-inner-blocks {
+.components-resizable-box__container .block-editor-inner-blocks {
     .editor-block-list__block {
       padding-left: 0;
       padding-right: 0;
@@ -603,12 +603,12 @@ div[data-type="qubely/row"].is-resizing .components-resizable-box__container.qub
 }
 
 
-.qubely-row .qubely-column .editor-inner-blocks .editor-block-list__layout {
+.qubely-row .qubely-column .block-editor-inner-blocks .block-editor-block-list__layout {
     margin-left: 0;
     margin-right: 0;
 }
 
-.qubely-row .editor-block-list__layout .editor-block-list__block {
+.qubely-row .block-editor-block-list__layout .editor-block-list__block {
     padding-left: 0;
     padding-right: 0;
 }
@@ -622,28 +622,28 @@ div[data-type="qubely/row"].is-resizing .components-resizable-box__container.qub
 //     margin-right: 0;
 // }
 
-//.qubely-row .editor-block-list__layout .editor-block-list__block.is-selected >.editor-block-list__block-edit::before {
+//.qubely-row .block-editor-block-list__layout .editor-block-list__block.is-selected >.editor-block-list__block-edit::before {
 //    outline: 0;
 //}
-.qubely-row .editor-block-list__layout .editor-block-list__block .editor-block-list__block-edit > .editor-block-contextual-toolbar + [data-block] .components-resizable-box__container {
+.qubely-row .block-editor-block-list__layout .editor-block-list__block .editor-block-list__block-edit > .editor-block-contextual-toolbar + [data-block] .components-resizable-box__container {
     position: relative;
 }
-// .editor-block-list__layout .editor-block-list__block .qubely-row .editor-block-list__block-edit::before {
+// .block-editor-block-list__layout .editor-block-list__block .qubely-row .editor-block-list__block-edit::before {
 //     right: 1px;
 //     left: 1px;
 // }
-// .editor-block-list__layout .editor-block-list__block .qubely-row .editor-block-drop-zone + .editor-block-list__block-edit::before {
+// .block-editor-block-list__layout .editor-block-list__block .qubely-row .editor-block-drop-zone + .editor-block-list__block-edit::before {
 //     right: -14px;
 //     left: -14px;
 // }
-.qubely-row .editor-block-list__layout .editor-block-list__block.is_hovered[data-type="qubely/columns"] > .editor-block-list__block-edit::before {
+.qubely-row .block-editor-block-list__layout .editor-block-list__block.is_hovered[data-type="qubely/columns"] > .editor-block-list__block-edit::before {
     outline:1px solid green;
 }
-.qubely-row .editor-block-list__layout .editor-block-list__block .editor-block-list__block-edit > .editor-block-contextual-toolbar + [data-block] .components-resizable-box__container {
+.qubely-row .block-editor-block-list__layout .editor-block-list__block .editor-block-list__block-edit > .editor-block-contextual-toolbar + [data-block] .components-resizable-box__container {
     position: relative;
 }
 
-.qubely-row .editor-block-list__layout .editor-block-list__block .editor-block-list__block-edit > .editor-block-contextual-toolbar + [data-block] .components-resizable-box__container::before {
+.qubely-row .block-editor-block-list__layout .editor-block-list__block .editor-block-list__block-edit > .editor-block-contextual-toolbar + [data-block] .components-resizable-box__container::before {
     // z-index: 0;
     // content: "";
     // position: absolute;
@@ -659,10 +659,10 @@ div[data-type="qubely/row"].is-resizing .components-resizable-box__container.qub
 
 
 
- .qubely-row .editor-block-list__layout .editor-block-list__block.is_hovered .components-resizable-box__container {
+ .qubely-row .block-editor-block-list__layout .editor-block-list__block.is_hovered .components-resizable-box__container {
      position: relative;
  }
- .qubely-row .editor-block-list__layout .editor-block-list__block.is_hovered .components-resizable-box__container::before {
+ .qubely-row .block-editor-block-list__layout .editor-block-list__block.is_hovered .components-resizable-box__container::before {
      z-index: 9999;
      content: "";
      position: absolute;
@@ -997,10 +997,10 @@ div[data-type="qubely/row"].is-resizing .components-resizable-box__container.qub
     pointer-events: none;
 }
 
-// .qubely-section .qubely-row .editor-inner-blocks {
+// .qubely-section .qubely-row .block-editor-inner-blocks {
 //     padding: 14px;
 // }
-.qubely-row * > [data-type="qubely/column"].has-child-selected .editor-inner-blocks  {
+.qubely-row * > [data-type="qubely/column"].has-child-selected .block-editor-inner-blocks  {
     padding: 14px;
 }
 

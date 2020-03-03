@@ -49,7 +49,7 @@ class Save extends Component {
                     {layout == 2 && authorInfo}
 
                     {(showRatings && ratings > 0 && layout == 2) &&
-                        <div className="qubely-testimonial-ratings" data-qubelyrating={ratings}></div>
+                        <div className="qubely-testimonial-ratings" style={{'--qubely-testimonial-rating': `${ratings * 20}%`}}></div>
                     }
 
                     {(quoteIcon && (layout == 1)) &&
@@ -63,7 +63,7 @@ class Save extends Component {
                     </div>
 
                     {(showRatings && ratings > 0 && layout == 1) &&
-                        <div className="qubely-testimonial-ratings" data-qubelyrating={ratings}></div>
+                        <div className="qubely-testimonial-ratings" style={{'--qubely-testimonial-rating': `${ratings * 20}%`}}></div>
                     }
 
                     {layout == 1 && authorInfo}

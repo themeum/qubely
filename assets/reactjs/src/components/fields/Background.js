@@ -128,7 +128,7 @@ class Background extends Component {
                                 this.localImagePicker()
                         }
 
-                        {(!externalImage && value.bgImage && value.bgImage.url) &&
+                        {(value.bgImage && value.bgImage.url) &&
                             <Fragment>
                                 {this.props.parallax &&
                                     <div className="qubely-field qubely-d-flex qubely-align-center">

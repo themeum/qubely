@@ -48,22 +48,35 @@ class Save extends Component {
                 enableFrame,
                 frameAnimateOnHover,
                 interaction,
-                animation }
+                animation
+            }
         } = this.props
 
         const titleTagName = 'h' + titleLevel;
         const interactionClass = IsInteraction(interaction) ? 'qubley-block-interaction' : '';
-
+        let ContainerTag = 'div';
+        if (layout === 'blurb') {
+            ContainerTag = 'a';
+        }
         return (
             <div className={`qubely-block-${uniqueId}`}  {...animationAttr(animation)}>
-                {/* <div className={`qubely-block-${uniqueId}`}> */}
                 <div className={`qubely-block-image ${interactionClass} qubely-image-layout-${layout}`}>
                     <div className={`qubely-image-media${(layout == 'blurb' && animateOnHover == 1) ? ' qubely-hover-animation-on' : ''}${(layout == 'blurb' && animateOnHover == 1) ? ' qubely-hover-animation-type-' + contentAnimation : ''} qubely-vertical-alignment-${contentVerticalAlign} qubely-horizontal-alignment-${contentAlignment}${enableFrame == 1 ? ((animateOnHover == 1 && frameAnimateOnHover == 1) ? ' qubely-has-frame qubely-frame-animate-on-hover' : ' qubely-has-frame') : ''}`}>
                         <figure>
-                            <div className="qubely-image-container">
+                            <ContainerTag
+                                className="qubely-image-container"
+                                {...(layout === 'blurb') && {
+                                    href: imageUrl.url ? `${imageUrl.url}` : '#',
+                                    ...(imageUrl.target && { target: '_blank' }),
+                                    ...(imageUrl.nofollow ?
+                                        { rel: 'nofollow noopener noreferrer' }
+                                        :
+                                        { ...imageUrl.target && { rel: 'noopener noreferrer' } })
+                                }}
+                            >
                                 {
                                     (imageUrl.url && layout === 'simple') ?
-                                        <a href={imageUrl.url ? `//${imageUrl.url}` : '#'} {...(imageUrl.target && { target: '_blank' })} {...(imageUrl.nofollow ? { rel: 'nofollow noopener noreferrer' } : { ...imageUrl.target && { rel: 'noopener noreferrer' } })}>
+                                        <a href={imageUrl.url ? `${imageUrl.url}` : '#'} {...(imageUrl.target && { target: '_blank' })} {...(imageUrl.nofollow ? { rel: 'nofollow noopener noreferrer' } : { ...imageUrl.target && { rel: 'noopener noreferrer' } })}>
                                             {this.renderImage()}
                                         </a>
                                         : this.renderImage()
@@ -86,7 +99,7 @@ class Save extends Component {
                                         </div>
                                     </div>
                                 }
-                            </div>
+                            </ContainerTag>
 
                             {(layout == 'simple' && enableCaption == 1) &&
                                 <RichText.Content

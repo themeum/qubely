@@ -23,7 +23,16 @@ class Alignment extends Component {
         this.setState({ current: final })
     }
     render() {
-        const { label, responsive, flex, disableJustify, disableCenter, device, onDeviceChange } = this.props
+        const {
+            label,
+            responsive,
+            flex,
+            disableJustify,
+            disableCenter,
+            device,
+            onDeviceChange
+        } = this.props;
+        
         const defData = flex ? ['flex-start', 'center', 'flex-end'] : disableJustify ? (disableCenter ? ['left', 'right'] : ['left', 'center', 'right']) : ['left', 'center', 'right', 'justify'];
 
         return (

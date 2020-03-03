@@ -359,7 +359,7 @@ class Edit extends Component {
                                     label={__('Ratings')}
                                     value={ratings} onChange={(value) => setAttributes({ ratings: value })}
                                     min={0}
-                                    max={5} step={.5} />
+                                    max={5} step={.1} />
                                 {(ratings != 0) &&
                                     <Fragment>
                                         <Color
@@ -470,7 +470,7 @@ class Edit extends Component {
                         {layout == 2 && authorInfo}
 
                         {(showRatings && ratings > 0 && layout == 2) &&
-                            <div className="qubely-testimonial-ratings" data-qubelyrating={ratings} onClick={() => this.handlePanelOpenings('Ratings')}></div>
+                            <div className="qubely-testimonial-ratings" style={{'--qubely-testimonial-rating': `${ratings * 20}%`}} onClick={() => this.handlePanelOpenings('Ratings')}></div>
                         }
 
                         {(quoteIcon && (layout == 1)) &&
@@ -482,7 +482,7 @@ class Edit extends Component {
                         </div>
 
                         {(showRatings && ratings > 0 && layout == 1) &&
-                            <div className="qubely-testimonial-ratings" data-qubelyrating={ratings} onClick={() => this.handlePanelOpenings('Ratings')}></div>
+                            <div className="qubely-testimonial-ratings" style={{'--qubely-testimonial-rating': `${ratings * 20}%`}} onClick={() => this.handlePanelOpenings('Ratings')}></div>
                         }
 
                         {layout == 1 && authorInfo}

@@ -12,34 +12,12 @@ jQuery(document).ready(function ($) {
         });
     }
 
-    if ($('.qubely-block-counter-number').length > 0) {
-        const counterElement = $('.qubely-block-counter-number')
-        let indexOfCounterElement = 0
-        while (indexOfCounterElement < counterElement.length) {
-            let currentElement = counterElement[indexOfCounterElement]
-            let start = parseInt(currentElement.dataset.start)
-            let limit = parseInt(currentElement.dataset.limit)
-            let counterDuration = parseInt(currentElement.dataset.counterduration)
-            let increment = Math.ceil((limit / counterDuration) * 10)
-            if (start < limit) {
-                let intervalId = setInterval(function () {
-                    let difference = limit - start
-                    difference >= increment ? start += increment : difference >= 50 ? start += 50 : start++
-                    currentElement.innerText = start
-                    if (start >= limit) {
-                        clearInterval(intervalId)
-                    }
-                }, 10);
-            }
-            indexOfCounterElement++
-        }
-    }
 
     //Table of Contents
     if (document.getElementsByClassName("qubely-table-of-contents").length > 0) {
 
         let tocOffsetTop = $('.qubely-table-of-contents').data('scroll-offset');
-        tocOffsetTop =  typeof tocOffsetTop !== "undefined" && tocOffsetTop ? parseInt(tocOffsetTop) : 0
+        tocOffsetTop = typeof tocOffsetTop !== "undefined" && tocOffsetTop ? parseInt(tocOffsetTop) : 0
 
         $('.qubely-table-of-contents-body a').on('click', function () {
             let currentAnchor = $(this).attr('href');
@@ -59,7 +37,7 @@ jQuery(document).ready(function ($) {
 
         });
 
-        if(!$('.editor-block-list__layout').length) {
+        if (!$('.block-editor-block-list__layout').length) {
 
             const backToTop = $('.qubely-back-to-top-button');
             $('.qubely-back-to-top-button').on("click", function (e) {
@@ -195,6 +173,7 @@ jQuery(document).ready(function ($) {
     });
 
 });
+
 
 
 (function ($) {
@@ -384,6 +363,7 @@ jQuery(document).ready(function ($) {
 
     $(document).on('ready', function () {
 
+        //Countdown Block
         $('.qubely-block-pie-progress').each(function () {
             var $that = $(this);
             var circle = $that.find('circle:last-child');
@@ -425,7 +405,36 @@ jQuery(document).ready(function ($) {
 
             window.addEventListener('scroll', pieEvent, true);
             pieEvent()
-        })
+        });
+
+        //Counter Block
+        $('.qubely-block-counter-number').each(function () {
+            const currentElement = $(this)[0];
+            let start = parseInt(currentElement.dataset.start),
+                limit = parseInt(currentElement.dataset.limit),
+                counterDuration = parseInt(currentElement.dataset.counterduration),
+                increment = Math.ceil((limit / counterDuration) * 10);
+
+            const invokeCounter = () => {
+                if (isElementInViewport(currentElement)) {
+                    if (start < limit) {
+                        let intervalId = setInterval(function () {
+                            let difference = limit - start;
+                            difference >= increment ? start += increment : difference >= 50 ? start += 50 : start++;
+                            currentElement.innerText = start;
+                            if (start >= limit) {
+                                clearInterval(intervalId);
+                            }
+                        }, 10);
+                    }
+                    window.removeEventListener('scroll', invokeCounter, true);
+                }
+            }
+            invokeCounter();
+            window.addEventListener('scroll', invokeCounter, true);
+        });
     });
+
+
 
 })(jQuery);

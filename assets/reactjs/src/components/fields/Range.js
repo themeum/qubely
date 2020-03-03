@@ -1,11 +1,14 @@
-import '../css/range.scss'
-import Device from './Device'
-const { Component } = wp.element
+import '../css/range.scss';
+import Device from './Device';
+const { Component } = wp.element;
 
 class Range extends Component {
     constructor(props) {
-        super(props)
-        this.state = { current: '', device: 'md' }
+        super(props);
+        this.state = {
+            current: '',
+            device: 'md'
+        };
     }
 
     _filterValue(type) {
@@ -18,19 +21,35 @@ class Range extends Component {
     }
 
     setSettings(val, type) {
-        const { value, onChange, responsive, min, max, unit } = this.props
-        let final = value || {}
-        if (unit && (!final.hasOwnProperty('unit'))) { final.unit = 'px' }
-        if (type == 'unit' && responsive) {
-            final = value || {};
-            final.unit = val;
-        } else {
-            final = (responsive) ? Object.assign({}, value, { [window.qubelyDevice]: val }) : val
-            final = min ? (final < min ? min : final) : (final < 0 ? 0 : final)
-            final = max ? (final > max ? max : final) : (final > 1000 ? 1000 : final)
+
+        const {
+            min,
+            max,
+            unit,
+            value,
+            onChange,
+            responsive
+        } = this.props;
+
+        let newValue = {};
+
+        if (typeof value === 'object' && Object.keys(value).length > 0) {
+            newValue = JSON.parse(JSON.stringify(value));
         }
-        onChange(final)
-        this.setState({ current: final })
+
+        if (unit && !newValue.hasOwnProperty('unit')) {
+            newValue.unit = 'px';
+        }
+
+        if (type === 'unit' && responsive) {
+            newValue.unit = val;
+        } else {
+            newValue = responsive ? Object.assign(newValue, value, { [window.qubelyDevice]: val }) : val;
+            newValue = min ? (newValue < min ? min : newValue) : (newValue < 0 ? 0 : newValue);
+            newValue = max ? (newValue > max ? max : newValue) : (newValue > 1000 ? 1000 : newValue);
+        }
+        onChange(newValue);
+        this.setState({ current: newValue });
     }
 
     _minMax(type) {
@@ -73,10 +92,13 @@ class Range extends Component {
                                 {(typeof unit == 'object' ? unit : ['px', 'em', '%']).map((value) => (
                                     <button className={(this.props.value && value == this.props.value.unit) ? 'active' : ''}
                                         onClick={() => {
-                                            this.setSettings(value, 'unit')
-                                            this.setSettings(this._filterValue(), 'range')
+                                            this.setSettings(value, 'unit');
+                                            // console.log(this._filterValue())
+                                            // this.setSettings(this._filterValue(), 'range');
                                         }}
-                                    >{value}</button>
+                                    >
+                                        {value}
+                                    </button>
                                 ))}
                             </div>
                         }

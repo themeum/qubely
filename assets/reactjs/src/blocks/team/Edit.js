@@ -1,19 +1,58 @@
+import icons from '../../helpers/icons';
+import classnames from 'classnames';
 const { __ } = wp.i18n
 const { Fragment, Component } = wp.element;
-const { PanelBody, TextControl, Toolbar } = wp.components
-const { RichText, InspectorControls, BlockControls } = wp.blockEditor
-const { Media, Tabs, Tab, Range, Separator, RadioAdvanced, Typography, Toggle, Styles, Alignment, ColorAdvanced, Color, Border, BoxShadow, BorderRadius, Padding, gloalSettings: { globalSettingsPanel, animationSettings, interactionSettings }, Inline: { InlineToolbar }, ContextMenu: { ContextMenu, handleContextMenu }, withCSSGenerator} = wp.qubelyComponents
-import icons from '../../helpers/icons'
+const { PanelBody, TextControl, Toolbar } = wp.components;
+const { RichText, InspectorControls, BlockControls } = wp.blockEditor;
+const {
+    Media,
+    Tabs,
+    Tab,
+    Range,
+    Separator,
+    RadioAdvanced,
+    Typography,
+    Toggle,
+    Styles,
+    Alignment,
+    ColorAdvanced,
+    Color,
+    Border,
+    ButtonGroup,
+    BoxShadow,
+    BorderRadius,
+    Padding,
+    Url,
+    gloalSettings: {
+        globalSettingsPanel,
+        animationSettings,
+        interactionSettings
+    },
+    Inline: {
+        InlineToolbar
+    },
+    ContextMenu: {
+        ContextMenu,
+        handleContextMenu
+    },
+    withCSSGenerator
+} = wp.qubelyComponents;
+
 class Edit extends Component {
 
     constructor(props) {
         super(props)
-        this.state = { device: 'md', selector: true, spacer: true, openPanelSetting: '' };
+        this.state = {
+            device: 'md',
+            selector: true,
+            spacer: true,
+            openPanelSetting: ''
+        };
     }
 
     componentDidMount() {
         const { setAttributes, clientId, attributes: { uniqueId } } = this.props
-        const _client = clientId.substr(0, 6)
+        const _client = clientId.substr(0, 6);
         if (!uniqueId) {
             setAttributes({ uniqueId: _client });
         } else if (uniqueId && uniqueId != _client) {
@@ -28,7 +67,9 @@ class Edit extends Component {
             uniqueId,
             className,
             layout,
+            recreateStyles,
             alignment,
+            alignmentLayout3,
             name,
             nameTypo,
             nameColor,
@@ -40,8 +81,10 @@ class Edit extends Component {
             designationColor,
             designationSpacing,
 
+            imageType,
             image,
             image2x,
+            externalImageUrl,
             imageWidth,
             imageSpacing,
             imageBorder,
@@ -124,25 +167,106 @@ class Edit extends Component {
         const { clientId, attributes, setAttributes, isSelected } = this.props
         const { openPanelSetting, device } = this.state
 
+        const wrapperClasses = classnames(
+            className,
+            { [`qubely-block-${uniqueId}`]: uniqueId },
+            { ['right-alignment']: alignmentLayout3 === 'right' }
+        );
         return (
             <Fragment>
                 <InspectorControls key="inspector">
                     <PanelBody title={__('')} initialOpen={true}>
-                        <Styles columns={21} value={layout} onChange={val => setAttributes({ layout: val })}
+                        <Styles
+                            columns={21}
+                            value={layout}
                             options={[
                                 { value: 1, svg: icons.team_1, label: __('Basic') },
                                 { value: 2, svg: icons.team_2, label: __('Stack') },
                                 { value: 3, svg: icons.team_3, label: __('Side by Side') }
                             ]}
+                            onChange={val => setAttributes({ layout: val })}
                         />
-                        <Alignment label={__('Alignment')} value={alignment} alignmentType="content" onChange={val => setAttributes({ alignment: val })} disableJustify responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
+                        <Alignment
+                            disableJustify
+                            label={__('Alignment')}
+                            alignmentType="content"
+                            {...(layout === 3 && { disableCenter: true })}
+                            {...(layout !== 3 &&
+                            {
+                                responsive: true,
+                                device: device,
+                                onDeviceChange: value => this.setState({ device: value })
+                            }
+                            )}
+                            value={layout === 3 ? alignmentLayout3 : alignment}
+                            onChange={val => setAttributes(layout === 3 ? { alignmentLayout3: val, recreateStyles: !recreateStyles } : { alignment: val })}
+                        />
                     </PanelBody>
 
                     <PanelBody title={__('Image')} opened={'Image' === openPanelSetting} onToggle={() => this.handlePanelOpenings(openPanelSetting !== 'Image' ? 'Image' : '')}>
-                        <Media label={__('Team Member Image')} multiple={false} type={['image']} panel={true} value={image} onChange={val => setAttributes({ image: val })} />
-                        <Media label={__('Team Member Image @2x')} multiple={false} type={['image']} panel={true} value={image2x} onChange={val => setAttributes({ image2x: val })} />
-                        {layout != 2 && <Range label={__('Image Width')} value={imageWidth} onChange={val => setAttributes({ imageWidth: val })} min={32} max={500} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />}
-                        {(layout == 1 || layout == 3) && <Range label={__('Image Spacing')} value={imageSpacing} onChange={val => setAttributes({ imageSpacing: val })} min={0} max={500} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />}
+
+                        <ButtonGroup
+                            label={__('Image Type')}
+                            options={
+                                [
+                                    [__('Local'), 'local'],
+                                    [__('External'), 'external']
+                                ]
+                            }
+                            value={imageType}
+                            onChange={value => setAttributes({ imageType: value })}
+                        />
+                        {
+                            imageType === 'local' ?
+                                <Fragment>
+                                    <Media
+                                        panel={true}
+                                        value={image}
+                                        type={['image']}
+                                        multiple={false}
+                                        label={__('Team Member Image')}
+                                        onChange={val => setAttributes({ image: val })}
+                                    />
+                                    <Media
+                                        panel={true}
+                                        value={image2x}
+                                        multiple={false}
+                                        type={['image']}
+                                        label={__('Team Member Image @2x')}
+                                        onChange={val => setAttributes({ image2x: val })}
+                                    />
+                                </Fragment>
+                                :
+                                <Url label={__('Image Source')} disableAdvanced value={externalImageUrl} onChange={newUrl => setAttributes({ externalImageUrl: newUrl })} />
+                        }
+
+                        {layout != 2 &&
+                            <Range
+                                min={32}
+                                max={600}
+                                responsive
+                                device={device}
+                                value={imageWidth}
+                                label={__('Image Width')}
+                                unit={['px', 'em', '%']}
+                                onChange={val => setAttributes({ imageWidth: val })}
+                                onDeviceChange={value => this.setState({ device: value })}
+                            />
+                        }
+                        {
+                            (layout == 1 || layout == 3) &&
+                            <Range
+                                min={0}
+                                max={500}
+                                responsive
+                                device={device}
+                                value={imageSpacing}
+                                unit={['px', 'em', '%']}
+                                label={__('Image Spacing')}
+                                onChange={val => setAttributes({ imageSpacing: val })}
+                                onDeviceChange={value => this.setState({ device: value })}
+                            />
+                        }
                         <Border
                             responsive
                             device={device}
@@ -383,13 +507,16 @@ class Edit extends Component {
 
                 {globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
-                <div className={`qubely-block-${uniqueId}${className ? ` ${className}` : ''}`}>
+                <div className={wrapperClasses}>
                     <div className={`qubely-block-team qubely-team-layout-${layout}`} onContextMenu={event => handleContextMenu(event, this.refs.qubelyContextMenu)}>
                         <div className="qubely-team-image-wrapper" onClick={() => this.handlePanelOpenings('Image')}>
-                            {image.url != undefined ?
+                            {imageType === 'local' && image.url != undefined ?
                                 <img className="qubely-team-image" src={image.url} srcset={image2x.url != undefined ? image.url + ' 1x, ' + image2x.url + ' 2x' : ''} alt={name} />
                                 :
-                                <div className="qubely-image-placeholder"><i className="far fa-image" /></div>
+                                (imageType === 'external' && externalImageUrl.url != undefined) ?
+                                    <img className="qubely-team-image" src={externalImageUrl.url} alt={name} />
+                                    :
+                                    <div className="qubely-image-placeholder"><i className="far fa-image" /></div>
                             }
                         </div>
                         <div className="qubely-team-content">

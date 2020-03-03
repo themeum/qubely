@@ -13,13 +13,14 @@
 		.qubely-image-image {
 			margin: 0;
 			padding: 0;
-			display: inline-block;
+			display: block;
 			&.qubely-image-placeholder {
 				display: inline-flex;
 			}
 		}
 		
 		.qubely-image-container {
+			display: block;
 			overflow: hidden;
 			position: relative;
 			z-index: 0;

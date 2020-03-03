@@ -1,20 +1,27 @@
+import classnames from 'classnames';
 const { Component } = wp.element;
 const { RichText } = wp.blockEditor
 const { HelperFunction: { animationAttr, IsInteraction } } = wp.qubelyComponents;
 
 class Save extends Component {
 	render() {
-		const { uniqueId, layout, image, image2x, name, designation, description, useInfoIcon, phone, email, website, showSociallinks, facebook, twitter, instagram, linkedin, youtube, github, flickr, pinterest, dribbble, behance, iconStyle, iconUseDefaultStyle, enableDesignation, enableDescription, animation, interaction } = this.props.attributes
+		const { uniqueId, layout, imageType, alignmentLayout3, image, image2x, externalImageUrl, name, designation, description, useInfoIcon, phone, email, website, showSociallinks, facebook, twitter, instagram, linkedin, youtube, github, flickr, pinterest, dribbble, behance, iconStyle, iconUseDefaultStyle, enableDesignation, enableDescription, animation, interaction } = this.props.attributes
 		const interactionClass = IsInteraction(interaction) ? 'qubley-block-interaction' : '';
-
+		const wrapperClasses = classnames(
+			{ [`qubely-block-${uniqueId}`]: uniqueId },
+			{ ['right-alignment']: alignmentLayout3 === 'right' }
+		);
 		return (
-			<div className={`qubely-block-${uniqueId}`} {...animationAttr(animation)}>
+			<div className={wrapperClasses} {...animationAttr(animation)}>
 				<div className={`qubely-block-team ${interactionClass} qubely-team-layout-${layout}`}>
 					<div className="qubely-team-image-wrapper">
-						{image.url != undefined ?
-							<img className="qubely-team-image" src={image.url} srcset={image2x.url != undefined ? image.url + ' 1x, ' + image2x.url + ' 2x' : '' } alt={name} />
+						{(imageType === 'local' && image.url != undefined) ?
+							<img className="qubely-team-image" src={image.url} srcset={image2x.url != undefined ? image.url + ' 1x, ' + image2x.url + ' 2x' : ''} alt={name} />
 							:
-							<div className="qubely-image-placeholder"><i className="far fa-image"/></div>
+							(imageType === 'external' && externalImageUrl.url != undefined) ?
+								<img className="qubely-team-image" src={externalImageUrl.url} alt={name} />
+								:
+								<div className="qubely-image-placeholder"><i className="far fa-image" /></div>
 						}
 					</div>
 					<div className="qubely-team-content">

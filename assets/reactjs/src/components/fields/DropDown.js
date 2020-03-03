@@ -71,8 +71,11 @@ export default function ({ label, enableSearch, defaultOptionsLabel, value, opti
         <div className="qubely-field qubely-field-dropdown">
 
             <label>{__(label)}</label>
-            <div className="qubely-dropdown" ref={qubelySelectedOptions}
-                onClick={() => !showOptions && toggleOptions(true)}  >
+            <div
+                className="qubely-dropdown"
+                ref={qubelySelectedOptions}
+                onClick={() => !showOptions && toggleOptions(true)}
+            >
 
                 <span className="qubely-dropdown-selected-options-wrapper">
                     {

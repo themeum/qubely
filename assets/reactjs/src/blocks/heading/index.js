@@ -59,7 +59,7 @@ registerBlockType('qubely/heading', {
 			style: [
 				{
 					condition: [{ key: 'separatorStyle', relation: '!=', value: '' }],
-					selector: '{{QUBELY}} .qubely-block-heading .qubely-separator-type-svg svg .qubely-separator-stroke {stroke: {{separatorColor}};} {{QUBELY}} .qubely-block-heading svg .qubely-separator-fill {fill: {{separatorColor}};} {{QUBELY}} .qubely-separator-type-css {border-top-color: {{separatorColor}};}'
+					selector: '{{QUBELY}} .qubely-block-heading .qubely-separator-type-svg svg .qubely-separator-stroke {stroke: {{separatorColor}};} {{QUBELY}} .qubely-block-heading svg .qubely-separator-fill {fill: {{separatorColor}};} {{QUBELY}} .qubely-block-heading  .qubely-separator-type-css {border-top-color: {{separatorColor}};}'
 				}
 			],
 		},

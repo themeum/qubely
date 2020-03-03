@@ -97,36 +97,61 @@ export default function withCSSGenerator() {
 
 
             componentDidUpdate(prevProps, prevState) {
-                const { attributes, attributes: { uniqueId } } = this.props;
+                const { name, clientId, attributes, attributes: { uniqueId } } = this.props;
                 const { responsiveCSS, nonResponsiveCSS } = this.state;
                 let isLayoutChanged = false,
                     blockAttributes = wp.blocks.getBlockType(this.props.name).attributes,
                     changedAttributes = Object.keys(diff(prevProps.attributes, attributes));
 
-                const isDuplicatingBlock = () => {
-                    if (prevProps.attributes.uniqueId === uniqueId) {
-                        return false
+                const { getBlock, getBlocks, getBlockRootClientId, getBlockIndex } = wp.data.select('core/block-editor');
+                const currentBlock = getBlock(clientId);
+
+                const rootBlockClientID = (clientId) => {
+                    if (getBlockRootClientId(clientId)) {
+                        return rootBlockIndex(getBlockRootClientId(clientId));
+                    } else {
+                        return clientId;
                     }
-                    const allBlocks = wp.data.select('core/block-editor').getBlocks();
-                    for (let index = 0; index < allBlocks.length; index++) {
-                        if (allBlocks[index].attributes.uniqueId === prevProps.attributes.uniqueId) {
-                            return true;
+                }
+                let isDuplicateBlock = false;
+
+                const isDuplicatingBlock = (allBlocks) => {
+                    if (allBlocks.length === 0) {
+                        return;
+                    }
+                    if (prevProps.attributes.uniqueId !== uniqueId) {
+                        for (let index = 0; index < allBlocks.length; index++) {
+                            if (allBlocks[index].attributes.uniqueId === prevProps.attributes.uniqueId) {
+                                isDuplicateBlock = true;
+                                break;
+                            } else if (allBlocks[index].innerBlocks.length > 0) {
+                                isDuplicatingBlock(allBlocks[index].innerBlocks);
+                                if (isDuplicateBlock) {
+                                    break;
+                                }
+                            }
                         }
                     }
-                    return false
+                    return isDuplicateBlock;
                 }
 
                 if (changedAttributes.length > 0) {
-                    if (changedAttributes.indexOf('layout') !== -1 || changedAttributes.indexOf('style') !== -1 || changedAttributes.indexOf('fillType') !== -1 || changedAttributes.indexOf('iconStyle') !== -1 || changedAttributes.indexOf('buttonFillType') !== -1 || changedAttributes.indexOf('tabStyle') !== -1) {
+                    if (changedAttributes.indexOf('layout') !== -1
+                        || changedAttributes.indexOf('style') !== -1
+                        || changedAttributes.indexOf('recreateStyles') !== -1
+                        || changedAttributes.indexOf('fillType') !== -1
+                        || changedAttributes.indexOf('iconStyle') !== -1
+                        || changedAttributes.indexOf('buttonFillType') !== -1
+                        || changedAttributes.indexOf('tabStyle') !== -1
+                        || changedAttributes.indexOf('separatorStyle') !== -1
+                    ) {
                         isLayoutChanged = true;
                         this.saveStyleAttributes();
                     }
-
                     if (!isLayoutChanged) {
-
                         if (changedAttributes.indexOf('uniqueId') !== -1) {
                             let currentStyleElement = window.document.getElementById('qubely-block-' + prevProps.attributes.uniqueId);
-                            if (currentStyleElement && !isDuplicatingBlock()) {
+                            if (currentStyleElement && !isDuplicatingBlock(getBlocks())) {
                                 currentStyleElement.id = 'qubely-block-' + attributes.uniqueId;
                                 let newStyle = currentStyleElement.innerHTML.replace(new RegExp(`${prevProps.attributes.uniqueId}`, "g"), `${attributes.uniqueId}`);
                                 currentStyleElement.innerHTML = newStyle;

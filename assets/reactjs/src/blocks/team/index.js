@@ -25,19 +25,50 @@ registerBlockType('qubely/team', {
         // Global
         ...globalAttributes,
         layout: { type: 'number', default: 1 },
+        recreateStyles: {
+            type: 'boolean',
+            default: true
+        },
         alignment: {
-            type: 'object', default: { md: 'center' },
+            type: 'object',
+            default: {
+                md: 'center'
+            },
             style: [
                 {
+                    condition: [
+                        { key: 'layout', relation: '!=', value: 3 }
+                    ],
                     selector: '{{QUBELY}} .qubely-block-team {text-align: {{alignment}};}'
+                }
+
+            ]
+        },
+        alignmentLayout3: {
+            type: 'string',
+            default: 'left',
+            style: [
+                {
+                    condition: [
+                        { key: 'layout', relation: '==', value: 3 }
+                    ],
+                    selector: '{{QUBELY}}.right-alignment .qubely-block-team{flex-direction:row-reverse}  {{QUBELY}} .qubely-block-team .qubely-team-content {text-align: {{alignmentLayout3}};}'
                 }
             ]
         },
         spacer: { type: 'object', default: { spaceTop: { md: '10', unit: "px" }, spaceBottom: { md: '10', unit: "px" } }, style: [{ selector: '{{QUBELY}}' }] },
 
         // Image
+        imageType: {
+            type: 'string',
+            default: 'local'
+        },
         image: { type: 'object', default: {} },
         image2x: { type: 'object', default: {} },
+        externalImageUrl: {
+            type: 'object',
+            default: {}
+        },
         imageWidth: {
             type: 'object', default: {},
             style: [
@@ -64,9 +95,19 @@ registerBlockType('qubely/team', {
                     selector: '{{QUBELY}} .qubely-team-image-wrapper {margin-bottom: {{imageSpacing}};}'
                 },
                 {
-                    condition: [{ key: 'layout', relation: '==', value: 3 }],
+                    condition: [
+                        { key: 'layout', relation: '==', value: 3 },
+                        { key: 'alignmentLayout3', relation: '==', value: 'left' }
+                    ],
                     selector: '{{QUBELY}} .qubely-team-image-wrapper {margin-right: {{imageSpacing}};}'
-                }
+                },
+                {
+                    condition: [
+                        { key: 'layout', relation: '==', value: 3 },
+                        { key: 'alignmentLayout3', relation: '==', value: 'right' }
+                    ],
+                    selector: '{{QUBELY}} .qubely-team-image-wrapper {margin-left: {{imageSpacing}};}'
+                },
             ]
         },
 

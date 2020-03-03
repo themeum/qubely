@@ -20,9 +20,9 @@ const {
         InlineToolbar,
         InlineSelector
     },
-    ContextMenu: { 
+    ContextMenu: {
         ContextMenu,
-         handleContextMenu 
+        handleContextMenu
     },
     withCSSGenerator
 } = wp.qubelyComponents
@@ -165,7 +165,11 @@ class Edit extends Component {
                         />
                         {separatorStyle &&
                             <Fragment>
-                                <Color label={__('Separator Color')} value={separatorColor} onChange={val => setAttributes({ separatorColor: val })} />
+                                <Color
+                                    label={__('Separator Color')}
+                                    value={separatorColor}
+                                    onChange={val => setAttributes({ separatorColor: val })}
+                                />
                                 {(separatorStyle != 'pin' && separatorStyle != 'pin_filled') &&
                                     <Range label={__('Stroke')} value={separatorStroke} onChange={val => setAttributes({ separatorStroke: parseInt(val) })} min={1} max={separators[separatorStyle].stroke} />
                                 }
@@ -221,7 +225,7 @@ class Edit extends Component {
                                 value={subHeadingContent} />
                         }
                         <div className="qubely-heading-container">
-                            {separatorStyle && (separatorPosition == 'left' || separatorPosition == 'top' || separatorPosition == 'leftright') ? <div className="qubely-separator qubely-separator-before">{renderSeparators}</div> : ''}
+                            {separatorStyle !== '' && (separatorPosition == 'left' || separatorPosition == 'top' || separatorPosition == 'leftright') ? <div className="qubely-separator qubely-separator-before">{renderSeparators}</div> : ''}
                             <RichText
                                 key="editable"
                                 tagName={selector}
@@ -229,7 +233,8 @@ class Edit extends Component {
                                 keepPlaceholderOnFocus
                                 placeholder={__('Add Text...')}
                                 onChange={value => setAttributes({ content: value })}
-                                value={content} />
+                                value={content}
+                            />
                             {separatorStyle != '' && (separatorPosition == 'right' || separatorPosition == 'bottom' || separatorPosition == 'leftright') ? <div className="qubely-separator qubely-separator-after">{renderSeparators}</div> : ''}
                         </div>
                         {(subHeading == 1 && subHeadingPosition == 'after_title') &&
@@ -259,4 +264,4 @@ class Edit extends Component {
         )
     }
 }
-export default withCSSGenerator() (Edit);
+export default withCSSGenerator()(Edit);
