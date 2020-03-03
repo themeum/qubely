@@ -18,48 +18,53 @@ const Sections = (props) => {
 
     useEffect(() => {
         const today = new Date();
-        const endpoint = 'http://qubely.io/wp-json/restapi/v2/sections';
-        const _fetchData = () => {
-            fetch(endpoint, {
-                method: 'POST',
-                body: block ? new URLSearchParams('block_name='+block) : ''
-            })
-            .then(response => response.ok ? response.json() : Promise.reject(response))
-            .then(response => {
-                const cacheExp = new Date().setDate(today.getDate() + 1);
-                setSections(response);
-                _setStore('sections', response);
-                _syncSections(response);
-            })
-            .catch( (err) => {
-                console.warn('Something went wrong.', err);
-            });
-        };
-
         const sectionData = _getStoreData('sections');
+
         if(sectionData) {
-            const sectionExpDate = _getStoreData(storeNameDate);
-            if(sectionExpDate !== null && today > sectionExpDate ){
+            let expDate = _getStoreData(storeNameDate);
+            expDate = expDate ? expDate : 0;
+            console.log(expDate)
+            if(expDate !== null && today > expDate ){
                 _clearStore();
-                _fetchData();
+                _fetchSections(today);
             }else{
                 setSections(sectionData)
             }
         }else{
-            _fetchData();
-        }
-
-        const _syncSections = sections => {
-            sections.forEach(section => {
-                _fetchSection(section.ID);
-            })
+            _fetchSections(today);
         }
 
     }, []);
 
+    // Sync sections in background
+    const _syncSections = sections => {
+        sections.forEach(section => {
+            _fetchSection(section.ID);
+        });
+    };
+
+    // fetch sections
+    const _fetchSections = (today) => {
+        fetch('http://qubely.io/wp-json/restapi/v2/sections', {
+            method: 'POST',
+            body: block ? new URLSearchParams('block_name='+block) : ''
+        })
+        .then(response => response.ok ? response.json() : Promise.reject(response))
+        .then(response => {
+            const cacheExp = new Date().setDate(today.getDate() + 1);
+            setSections(response);
+            _setStore('sections', response);
+            _setStore(storeNameDate, cacheExp);
+            _syncSections(response);
+        })
+        .catch( (err) => {
+            console.warn('Something went wrong.', err);
+        });
+    };
+
+    // fetch section
     const _fetchSection = (section_id, callback) => {
-        const endpoint = 'https://qubely.io/wp-json/restapi/v2/single-section';
-        fetch(endpoint, {
+        fetch('https://qubely.io/wp-json/restapi/v2/single-section', {
             method: 'POST',
             body: new URLSearchParams('section_id='+ section_id)
         })
@@ -71,8 +76,9 @@ const Sections = (props) => {
         .catch( err => {
             console.warn('Something went wrong.', err);
         });
-    }
+    };
 
+    // insert section as block
     const _insertSection = section_id => {
         const {insertBlocks} = props
         const sectionData = _getStoreData(section_id);
@@ -84,7 +90,7 @@ const Sections = (props) => {
                 insertBlocks(parse(sectionData));
             })
         }
-    }
+    };
 
     // Get full storage
     const _getStore = () => {
