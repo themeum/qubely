@@ -1,10 +1,32 @@
-const { Fragment, Component } = wp.element
-const { RichText } = wp.blockEditor
-const { HelperFunction: { animationAttr, IsInteraction } } = wp.qubelyComponents
+const { Fragment, Component } = wp.element;
+const { RichText } = wp.blockEditor;
+const {
+    HelperFunction: {
+        animationAttr,
+        IsInteraction
+    }
+} = wp.qubelyComponents;
 
 class Save extends Component {
     render() {
-        const { uniqueId, layout, animation, message, name, designation, showAvatar, avatar, avatar2x, avatarAlt, avatarLayout, quoteIcon, showRatings, ratings, interaction } = this.props.attributes
+        const {
+            uniqueId,
+            layout,
+            animation,
+            message,
+            name,
+            designation,
+            showAvatar,
+            avatar,
+            avatar2x,
+            avatarAlt,
+            avatarLayout,
+            quoteIcon,
+            showRatings,
+            ratings,
+            interaction
+        } = this.props.attributes;
+        
         const interactionClass = IsInteraction(interaction) ? 'qubley-block-interaction' : '';
 
         const testimonialTitle = <RichText.Content tagName="span" value={name} />
@@ -17,9 +39,9 @@ class Save extends Component {
                     {showAvatar && (avatarLayout == 'left' || avatarLayout == 'top') &&
                         <Fragment>
                             {avatar.url != undefined ?
-                                <img className="qubely-testimonial-avatar" src={avatar.url} srcset={avatar2x.url != undefined ? avatar.url + ' 1x, ' + avatar2x.url + ' 2x' : '' } alt={avatarAlt} />
+                                <img className="qubely-testimonial-avatar" src={avatar.url} srcset={avatar2x.url != undefined ? avatar.url + ' 1x, ' + avatar2x.url + ' 2x' : ''} alt={avatarAlt} />
                                 :
-                                <div className="qubely-image-placeholder qubely-testimonial-avatar"><i className="far fa-user"/></div>
+                                <div className="qubely-image-placeholder qubely-testimonial-avatar"><i className="far fa-user" /></div>
                             }
                         </Fragment>
                     }
@@ -32,9 +54,9 @@ class Save extends Component {
                     {showAvatar && (avatarLayout == 'right' || avatarLayout == 'bottom') &&
                         <Fragment>
                             {avatar.url != undefined ?
-                                <img className="qubely-testimonial-avatar" src={avatar.url} srcset={avatar2x.url != undefined ? avatar.url + ' 1x, ' + avatar2x.url + ' 2x' : '' } alt={avatarAlt} />
+                                <img className="qubely-testimonial-avatar" src={avatar.url} srcset={avatar2x.url != undefined ? avatar.url + ' 1x, ' + avatar2x.url + ' 2x' : ''} alt={avatarAlt} />
                                 :
-                                <div className="qubely-image-placeholder qubely-testimonial-avatar"><i className="far fa-user"/></div>
+                                <div className="qubely-image-placeholder qubely-testimonial-avatar"><i className="far fa-user" /></div>
                             }
                         </Fragment>
                     }
@@ -49,12 +71,12 @@ class Save extends Component {
                     {layout == 2 && authorInfo}
 
                     {(showRatings && ratings > 0 && layout == 2) &&
-                        <div className="qubely-testimonial-ratings" style={{'--qubely-testimonial-rating': `${ratings * 20}%`}}></div>
+                        <div className="qubely-testimonial-ratings" style={{ '--qubely-testimonial-rating': `${ratings * 20}%` }}></div>
                     }
 
                     {(quoteIcon && (layout == 1)) &&
                         <div className="qubely-testimonial-quote">
-                            <span className={`qubely-quote-icon ${quoteIcon}`}/>
+                            <span className={`qubely-quote-icon ${quoteIcon}`} />
                         </div>
                     }
 
@@ -63,14 +85,14 @@ class Save extends Component {
                     </div>
 
                     {(showRatings && ratings > 0 && layout == 1) &&
-                        <div className="qubely-testimonial-ratings" style={{'--qubely-testimonial-rating': `${ratings * 20}%`}}></div>
+                        <div className="qubely-testimonial-ratings" style={{ '--qubely-testimonial-rating': `${ratings * 20}%` }}></div>
                     }
 
                     {layout == 1 && authorInfo}
 
                     {(quoteIcon && (layout == 2)) &&
                         <div className="qubely-testimonial-quote qubely-position-bottom">
-                            <span className={`qubely-quote-icon ${quoteIcon}`}/>
+                            <span className={`qubely-quote-icon ${quoteIcon}`} />
                         </div>
                     }
 
@@ -80,4 +102,4 @@ class Save extends Component {
     }
 }
 
-export default Save
+export default Save;

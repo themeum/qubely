@@ -1,209 +1,144 @@
 import './style.scss'
-import Edit from './Edit'
-import Save from './Save'
-const { __ } = wp.i18n
-const { registerBlockType } = wp.blocks
-const { gloalSettings: { globalAttributes } } = wp.qubelyComponents
+import Edit from './Edit';
+import Save from './Save';
+import attributes from './attributes';
+const { __ } = wp.i18n;
+const { Fragment } = wp.element;
+const { RichText } = wp.blockEditor;
+const { registerBlockType } = wp.blocks;
+const {
+    HelperFunction: {
+        animationAttr,
+        IsInteraction
+    }
+} = wp.qubelyComponents;
+
 
 registerBlockType('qubely/testimonial', {
-    title: __('Testimonial'),
-    description: 'Display testimonials from clients with Qubely Testimonials.',
+    title: __('Testimonial', 'qubely'),
+    description: 'Display client feedbacks with Qubely Testimonials.',
     icon: <img src={qubely_admin.plugin + 'assets/img/blocks/block-testimonial.svg'} alt={__('Testimonial')} />,
     category: 'qubely',
-    keywords: [__('testimonial'), __('Quote')],
+    keywords: [
+        __('testimonial', 'qubely'),
+        __('Quote', 'qubely'),
+        __('Ratings', 'qubely')
+    ],
     supports: {
-        align: ['center', 'wide', 'full'],
+        align: [
+            'center',
+            'wide',
+            'full'
+        ]
     },
     example: {
-		attributes: {},
-	},
-    attributes: {
-        uniqueId: { type: 'string', default: '' },
-        // Global
-        ...globalAttributes,
-        spacer: { type: 'object', default: { spaceTop: { md: '10', unit: "px" }, spaceBottom: { md: '10', unit: "px" } }, style: [{ selector: '{{QUBELY}}' }] },
-        alignment: { type: 'object', default: { md: 'center' }, style: [{ selector: '{{QUBELY}} .qubely-block-testimonial {text-align: {{alignment}};}' }] },
-        layout: { type: 'number', default: 1 },
-
-        //Name
-        name: {
-            type: 'string',
-            source: 'html',
-            selector: '.qubely-testimonial-author-name>span',
-            default: 'JOHN DOE'
-        },
-        nameColor: { type: 'string', default: '', style: [{ selector: '{{QUBELY}} .qubely-testimonial-author-name { color:{{nameColor}}; }' }] },
-        nameTypo: { type: 'object', default: { openTypography: 1, weight: 700, size: { md: 16, unit: 'px' } }, style: [{ selector: '{{QUBELY}} .qubely-testimonial-author-name' }] },
-        nameSpacing: { type: 'object', default: {}, style: [{ selector: '{{QUBELY}} .qubely-testimonial-author-name {margin-bottom: {{nameSpacing}};}' }] },
-
-        //Designation
-        designation: {
-            type: 'string',
-            source: 'html',
-            selector: '.qubely-testimonial-author-designation>span',
-            default: 'WordPress Developer'
-        },
-        designationColor: { type: 'string', default: '', style: [{ selector: '{{QUBELY}} .qubely-testimonial-author-designation { color:{{designationColor}}; }' }] },
-        designationTypo: { type: 'object', default: { openTypography: 1, size: { md: 14, unit: 'px' } }, style: [{ selector: '{{QUBELY}} .qubely-testimonial-author-designation' }] },
-
-        //Messsage
-        message: {
-            type: 'string',
-            source: 'html',
-            selector: '.qubely-testimonial-content>div',
-            default: '“There’s no easier way to add innovative Gutenberg blocks than using Qubely Gutenberg Blocks Toolkit. Instantly raise your website appearance with this stylish new plugin.”'
-        },
-        messagePosition: { type: 'string', default: 'top' },
-        messageTypo: { type: 'object', default: { openTypography: 1, size: { md: 20, unit: 'px' } }, style: [{ selector: '{{QUBELY}} .qubely-testimonial-content' }] },
-        messageSpacingTop: { type: 'object', default: { md: 0, unit: 'px' }, style: [{ selector: '{{QUBELY}} .qubely-testimonial-content {margin-top: {{messageSpacingTop}};}' }] },
-        messageSpacingBottom: { type: 'object', default: { md: 20, unit: 'px' }, style: [{ selector: '{{QUBELY}} .qubely-testimonial-content {margin-bottom: {{messageSpacingBottom}};}' }] },
-
-        //Avatar
-        showAvatar: { type: 'boolean', default: true },
-        avatar: { type: 'object', default: {} },
-        avatar2x: { type: 'object', default: {} },
-        avatarLayout: { type: 'string', default: 'left' },
-        avatarAlt: { type: 'string', default: '' },
-        avatarSize: {
-            type: 'string',
-            default: '64px',
-            style: [
-                {
-                    condition: [
-                        { key: 'avatarSize', relation: '!=', value: 'custom' }
-                    ],
-                    selector: '{{QUBELY}} .qubely-testimonial-avatar { width: {{avatarSize}}; height: {{avatarSize}}; font-size: {{avatarSize}}; }'
-                }
-            ]
-        },
-        avatarWidth: { type: 'object', default: { md: 120, unit: 'px' }, style: [{ condition: [{ key: 'avatarSize', relation: '==', value: 'custom' }], selector: '{{QUBELY}} .qubely-testimonial-avatar {width: {{avatarWidth}}; font-size: {{avatarWidth}};}' }] },
-        avatarHeight: { type: 'object', default: { md: 120, unit: 'px' }, style: [{ condition: [{ key: 'avatarSize', relation: '==', value: 'custom' }], selector: '{{QUBELY}} .qubely-testimonial-avatar {height: {{avatarHeight}};}' }] },
-        avatarSpacing: {
-            type: 'object',
-            default: {
-                md: 20,
-                unit: 'px'
-            },
-            style: [
-                {
-                    condition: [
-                        { key: 'avatarLayout', relation: '==', value: 'left' }
-                    ],
-                    selector: '{{QUBELY}} .qubely-testimonial-avatar {margin-right: {{avatarSpacing}};}'
-                },
-                {
-                    condition: [
-                        { key: 'avatarLayout', relation: '==', value: 'right' }
-                    ],
-                    selector: '{{QUBELY}} .qubely-testimonial-avatar {margin-left: {{avatarSpacing}};}'
-                },
-                {
-                    condition: [
-                        { key: 'avatarLayout', relation: '==', value: 'top' }
-                    ],
-                    selector: '{{QUBELY}} .qubely-testimonial-avatar {margin-bottom: {{avatarSpacing}};}'
-                },
-                {
-                    condition: [
-                        { key: 'avatarLayout', relation: '==', value: 'bottom' }
-                    ],
-                    selector: '{{QUBELY}} .qubely-testimonial-avatar {margin-top: {{avatarSpacing}};}'
-                }
-            ]
-        },
-        avatarBorderRadius: {
-            type: 'object',
-            default: {
-                openBorderRadius: 1,
-                radiusType: 'global',
-                global: { md: 100 },
-                unit: '%'
-            },
-            style: [
-                { selector: '{{QUBELY}} .qubely-testimonial-avatar' }
-            ]
-        },
-
-        avatarBorder: { type: 'object', default: {}, style: [{ selector: '{{QUBELY}} .qubely-testimonial-avatar' }] },
-
-        //Quote
-        quoteIcon: { type: 'string', default: 'fas fa-quote-left' },
-        quoteIconPosition: { type: 'string', default: 'top' },
-        quoteIconSize: { type: 'object', default: { md: 48, unit: 'px' }, style: [{ condition: [{ key: 'quoteIcon', relation: '!=', value: '' }], selector: '{{QUBELY}} .qubely-quote-icon {font-size: {{quoteIconSize}};}' }] },
-        quoteIconColor: { type: 'string', default: '#E2E2E2', style: [{ condition: [{ key: 'quoteIcon', relation: '!=', value: '' }], selector: '{{QUBELY}} .qubely-quote-icon {color: {{quoteIconColor}};}' }] },
-        quoteIconSpacing: {
-            type: 'object',
-            default: {
-                md: 20, unit: 'px'
-            },
-            style: [
-                {
-                    condition:
-                        [
-                            { key: 'layout', relation: '==', value: '1' },
-                            { key: 'quoteIcon', relation: '!=', value: '' }
-                        ],
-                    selector: '{{QUBELY}} .qubely-testimonial-quote {margin-bottom: {{quoteIconSpacing}};}'
-                },
-                {
-                    condition:
-                        [
-                            { key: 'layout', relation: '==', value: '2' },
-                            { key: 'quoteIcon', relation: '!=', value: '' }
-                        ],
-                    selector: '{{QUBELY}} .qubely-testimonial-quote {margin-top: {{quoteIconSpacing}};}'
-                }
-            ]
-        },
-
-        //Ratings
-        showRatings: { type: 'boolean', default: true },
-        ratings: { type: 'string', default: 4.5 },
-        ratingsPosition: { type: 'string', default: 'bottom' },
-        ratingsColor: { type: 'string', default: '#FFB800', style: [{ condition: [{ key: 'ratings', relation: '!=', value: '0' }], selector: '{{QUBELY}} .qubely-testimonial-ratings:before {color: {{ratingsColor}};} {{QUBELY}} .qubely-testimonial-ratings {color: {{ratingsColor}};}' }] },
-        starsSize: { type: 'object', default: { md: 20, unit: 'px' }, style: [{ condition: [{ key: 'ratings', relation: '!=', value: '0' }], selector: '{{QUBELY}} .qubely-testimonial-ratings {font-size:{{starsSize}};}' }] },
-        ratingsSpacing: {
-            type: 'object',
-            default: {
-                md: 30,
-                unit: 'px'
-            },
-            style: [
-                {
-                    condition: [
-                        { key: 'layout', relation: '==', value: '1' },
-                        { key: 'ratings', relation: '!=', value: '0' }
-                    ],
-                    selector: '{{QUBELY}} .qubely-testimonial-ratings {margin-bottom: {{ratingsSpacing}};}'
-                },
-                {
-                    condition: [
-                        { key: 'layout', relation: '==', value: '2' },
-                        { key: 'ratings', relation: '!=', value: '0' }
-                    ],
-                    selector: '{{QUBELY}} .qubely-testimonial-ratings {margin-top: {{ratingsSpacing}};}'
-                }
-            ]
-        },
-
-        // Design
-        bgPadding: { type: 'object', default: {}, style: [{ selector: '{{QUBELY}} .qubely-block-testimonial' }] },
-        textColor: { type: 'string', default: '', style: [{ selector: '{{QUBELY}} .qubely-block-testimonial { color:{{textColor}}; }' }] },
-        bgColor: { type: 'object', default: {}, style: [{ selector: '{{QUBELY}} .qubely-block-testimonial' }] },
-        bgBorderRadius: {
-            type: 'object',
-            default: {
-                openBorderRadius: 1,
-                radiusType: 'global',
-            },
-            style: [{ selector: '{{QUBELY}} .qubely-block-testimonial' }]
-        },
-
-        border: { type: 'object', default: { openTy: 0, color: '#3373dc', width: { bottom: '1', left: '1', right: '1', top: '1', unit: 'px' } }, style: [{ selector: '{{QUBELY}} .qubely-block-testimonial' }] },
-        boxShadow: { type: 'object', default: {}, style: [{ selector: '{{QUBELY}} .qubely-block-testimonial' }] },
-        boxShadowHover: { type: 'object', default: {}, style: [{ selector: '{{QUBELY}} .qubely-block-testimonial:hover' }] },
-        sourceOfCopiedStyle: { type: 'boolean', default: false }
+        attributes: {},
     },
+    attributes,
     edit: Edit,
-    save: Save
+    save: Save,
+    deprecated: [
+        {
+            attributes,
+            save(props) {
+                const {
+                    attributes: {
+                        uniqueId,
+                        layout,
+                        animation,
+                        message,
+                        name,
+                        designation,
+                        showAvatar,
+                        avatar,
+                        avatar2x,
+                        avatarAlt,
+                        avatarLayout,
+                        quoteIcon,
+                        showRatings,
+                        ratings,
+                        interaction
+                    }
+                } = props;
+
+                const interactionClass = IsInteraction(interaction) ? 'qubley-block-interaction' : '';
+
+                const testimonialTitle = <RichText.Content tagName="span" value={name} />
+                const testimonialDesignation = <RichText.Content tagName="span" value={designation} />
+                const testimonialMessage = <RichText.Content tagName="div" value={message} />
+
+                const authorInfo = <Fragment>
+                    <div className={`qubely-testimonial-author`}>
+                        <div className={showAvatar ? `qubely-testimonial-avatar-layout-${avatarLayout}` : ``}>
+                            {showAvatar && (avatarLayout == 'left' || avatarLayout == 'top') &&
+                                <Fragment>
+                                    {avatar.url != undefined ?
+                                        <img className="qubely-testimonial-avatar" src={avatar.url} srcset={avatar2x.url != undefined ? avatar.url + ' 1x, ' + avatar2x.url + ' 2x' : ''} alt={avatarAlt} />
+                                        :
+                                        <div className="qubely-image-placeholder qubely-testimonial-avatar"><i className="far fa-user" /></div>
+                                    }
+                                </Fragment>
+                            }
+
+                            <div className="qubely-testimonial-author-info">
+                                <div className="qubely-testimonial-author-name">{testimonialTitle}</div>
+                                <div className="qubely-testimonial-author-designation">{testimonialDesignation}</div>
+                            </div>
+
+                            {showAvatar && (avatarLayout == 'right' || avatarLayout == 'bottom') &&
+                                <Fragment>
+                                    {avatar.url != undefined ?
+                                        <img className="qubely-testimonial-avatar" src={avatar.url} srcset={avatar2x.url != undefined ? avatar.url + ' 1x, ' + avatar2x.url + ' 2x' : ''} alt={avatarAlt} />
+                                        :
+                                        <div className="qubely-image-placeholder qubely-testimonial-avatar"><i className="far fa-user" /></div>
+                                    }
+                                </Fragment>
+                            }
+                        </div>
+                    </div>
+                </Fragment>
+
+                return (
+                    <div className={`qubely-block-${uniqueId}`} {...animationAttr(animation)}>
+                        <div className={`qubely-block-testimonial ${interactionClass}`}>
+
+                            {layout == 2 && authorInfo}
+
+                            {(showRatings && ratings > 0 && layout == 2) &&
+                                <div
+                                    data-qubelyrating={ratings}
+                                    className="qubely-testimonial-ratings"
+                                    onClick={() => this.handlePanelOpenings('Ratings')}
+                                />
+                            }
+
+                            {(quoteIcon && (layout == 1)) &&
+                                <div className="qubely-testimonial-quote">
+                                    <span className={`qubely-quote-icon ${quoteIcon}`} />
+                                </div>
+                            }
+
+                            <div className="qubely-testimonial-content">{testimonialMessage}</div>
+
+                            {(showRatings && ratings > 0 && layout == 1) &&
+                                <div
+                                    data-qubelyrating={ratings}
+                                    className="qubely-testimonial-ratings"
+                                    onClick={() => this.handlePanelOpenings('Ratings')} />
+                            }
+
+                            {layout == 1 && authorInfo}
+
+                            {(quoteIcon && (layout == 2)) &&
+                                <div className="qubely-testimonial-quote qubely-position-bottom">
+                                    <span className={`qubely-quote-icon ${quoteIcon}`} />
+                                </div>
+                            }
+
+                        </div>
+                    </div>
+                );
+            }
+        }
+    ]
 });
