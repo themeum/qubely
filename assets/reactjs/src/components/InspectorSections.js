@@ -13,8 +13,8 @@ const {
 const Sections = (props) => {
     const [sections, setSections] = useState([]);
     const block = typeof props.block !== 'undefined' ? props.block : '';
-    const storeName = '__qubely_section_blocks_' + block;
-    const storeNameDate = '__qubely_section_blocks_date_' + block;
+    const storeName = '_qubely_local_cache_';
+    const storeNameDate = '_last_update_';
 
     useEffect(() => {
         const today = new Date();
@@ -26,33 +26,26 @@ const Sections = (props) => {
             })
             .then(response => response.ok ? response.json() : Promise.reject(response))
             .then(response => {
-                const cacheExp = new Date().setDate(today.getDate() + 7);
-                // const filteredResponse = response.filter(item => (
-                //     typeof item.included_blocks !== 'undefined' && item.included_blocks.length && item.included_blocks.filter(item => item.value === (block)).length
-                // ));
+                const cacheExp = new Date().setDate(today.getDate() + 1);
                 setSections(response);
+                _setStore('sections', response);
                 _syncSections(response);
-                window.localStorage.setItem(storeName, JSON.stringify(response));
-                window.localStorage.setItem(storeNameDate, JSON.stringify(cacheExp));
             })
             .catch( (err) => {
                 console.warn('Something went wrong.', err);
             });
         };
 
-        const sectionData = JSON.parse(window.localStorage.getItem(storeName));
-        if(sectionData !== null) {
-            const sectionExpDate = JSON.parse(window.localStorage.getItem(storeNameDate));
+        const sectionData = _getStoreData('sections');
+        if(sectionData) {
+            const sectionExpDate = _getStoreData(storeNameDate);
             if(sectionExpDate !== null && today > sectionExpDate ){
-                window.localStorage.clear(storeName);
-                window.localStorage.clear(storeNameDate);
+                _clearStore();
                 _fetchData();
             }else{
                 setSections(sectionData)
             }
         }else{
-            window.localStorage.clear(storeName);
-            window.localStorage.clear(storeNameDate);
             _fetchData();
         }
 
@@ -72,7 +65,7 @@ const Sections = (props) => {
         })
         .then(response => response.ok ? response.json() : Promise.reject(response))
         .then(response => {
-            window.localStorage.setItem(storeName + section_id, JSON.stringify(response.rawData));
+            _setStore(section_id, response.rawData);
             callback && callback();
         })
         .catch( err => {
@@ -82,16 +75,46 @@ const Sections = (props) => {
 
     const _insertSection = section_id => {
         const {insertBlocks} = props
-        const sectionData = JSON.parse(window.localStorage.getItem(storeName + section_id));
+        const sectionData = _getStoreData(section_id);
         if(sectionData !== null){
             insertBlocks(parse(sectionData));
         }else{
             _fetchSection(section_id, () => {
-                const sectionData = JSON.parse(window.localStorage.getItem(storeName + section_id));
+                const sectionData = _getStoreData(section_id);
                 insertBlocks(parse(sectionData));
             })
         }
     }
+
+    // Get full storage
+    const _getStore = () => {
+        let store = window.localStorage.getItem(storeName);
+        store = JSON.parse(store);
+        return store ? store : null;
+    };
+
+    // Get data from storage by key
+    const _getStoreData = key => {
+        let store = _getStore();
+        store = store !== null && typeof store[block] !== 'undefined' && typeof store[block][key] !== 'undefined' ? store[block][key] : null;
+        return store;
+    };
+
+    // Set data to storage
+    const _setStore = (key, newData) => {
+        if(typeof key === 'undefined' || typeof newData === 'undefined') {
+            return false;
+        }
+        let storage = _getStore() ? _getStore() : {};
+        if(typeof storage[block] === 'undefined'){
+            storage[block] = {}
+        }
+        storage[block][key] = newData;
+        storage = JSON.stringify(storage);
+        window.localStorage.setItem(storeName, storage);
+    };
+
+    const _clearStore = () => window.localStorage.setItem(storeName, JSON.stringify({}));
 
     return (
         <div className='qubely-block-sections'>
