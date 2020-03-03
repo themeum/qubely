@@ -23,7 +23,6 @@ const Sections = (props) => {
         if(sectionData) {
             let expDate = _getStoreData(storeNameDate);
             expDate = expDate ? expDate : 0;
-            console.log(expDate)
             if(expDate !== null && today > expDate ){
                 _clearStore();
                 _fetchSections(today);
