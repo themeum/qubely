@@ -80,7 +80,6 @@ const Sections = (props) => {
         });
     }
 
-
     const _insertSection = section_id => {
         const {insertBlocks} = props
         const sectionData = JSON.parse(window.localStorage.getItem(storeName + section_id));
