@@ -31,6 +31,7 @@ class Edit extends Component {
             uniqueId,
             className,
             layout,
+            recreateStyles,
             mediaType,
             alignment,
             titleLevel,
@@ -171,12 +172,15 @@ class Edit extends Component {
 
                     {layout != 4 &&
                         <PanelBody title={__('Media')} opened={'Media' === openPanelSetting} onToggle={() => this.handlePanelOpenings(openPanelSetting !== 'Media' ? 'Media' : '')}>
-                            <RadioAdvanced label={__('Type')} value={mediaType} onChange={val => setAttributes({ mediaType: val })}
+                            <RadioAdvanced
+                                label={__('Type')}
+                                value={mediaType}
                                 options={[
                                     { label: __('Icon'), value: 'icon', title: __('Icon') },
                                     { label: __('Image'), value: 'image', title: __('Image') },
                                     { label: __('Number'), value: 'number', title: __('Number') }
                                 ]}
+                                onChange={val => setAttributes({ mediaType: val, recreateStyles: !recreateStyles })}
                             />
                             {mediaType &&
                                 <Fragment>
@@ -419,7 +423,7 @@ class Edit extends Component {
                 <div className={`qubely-block-${uniqueId}${className ? ` ${className}` : ''}`}>
                     <div className={`qubely-block-info-box qubely-info-box-layout-${layout}`} onContextMenu={event => handleContextMenu(event, this.refs.qubelyContextMenu)}>
                         {(layout != 4 && mediaType) &&
-                            <div className={`qubely-info-box-media${useMediaBg ? ' qubely-media-has-bg' : ''}`} onClick={() => this.handlePanelOpenings('Media')}>
+                            <div className={`qubely-info-box-media${(useMediaBg && mediaType !== 'image') ? ' qubely-media-has-bg' : ''}`} onClick={() => this.handlePanelOpenings('Media')}>
                                 {(mediaType == 'icon' && iconName) &&
                                     <i className={"qubely-info-box-icon " + iconName} />
                                 }

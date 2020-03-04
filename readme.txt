@@ -4,7 +4,7 @@ Donate link: https://www.themeum.com
 Tags: blocks, gutenberg, gutenberg blocks, editor, block, page builder
 Requires at least: 5.0
 Tested up to: 5.3
-Stable tag: 1.3.4
+Stable tag: 1.3.5
 Requires PHP: 5.4.0
 License: GPL-2.0+
 License URI: http://www.gnu.org/licenses/gpl-2.0.txt
@@ -236,6 +236,17 @@ You can report bugs on the [support forum here](https://wordpress.org/support/pl
 
 
 == Changelog ==
+
+= 1.3.5 - 04 March, 2020 =
+New: Team block - External image option
+Update: Counter block - Viewport support added
+Fix: CSS generator block duplication issue
+Fix: Column block - uniqueId issue in case of Row duplication
+Fix: Row block - Advanced background option
+Fix: Image block - Whitespace issue
+Fix: Heading block - Separator color in the backend
+Fix: Range field - CSS updating issue on unit change
+Fix: Typography field - CSS updating issue on unit change
 
 = 1.3.4 - 27 February, 2020 =
 New: Team block - External image option
