@@ -6,12 +6,13 @@ const {
     },
     i18n: {__},
     data: {withDispatch},
-    blocks: {parse}
+    blocks: {parse},
+    components: {Tooltip}
 } = wp;
-
 
 const Sections = (props) => {
     const [sections, setSections] = useState([]);
+    const [loadingState, setLoadingState] = useState('');
     const block = typeof props.block !== 'undefined' ? props.block : '';
     const storeName = '_qubely_local_cache_';
     const storeNameDate = '_last_update_';
@@ -37,13 +38,19 @@ const Sections = (props) => {
 
     // Sync sections in background
     const _syncSections = sections => {
-        sections.forEach(section => {
-            _fetchSection(section.ID);
+        sections.forEach((section, index) => {
+            const isLatest = sections.length === index + 1 ? true : false;
+            _fetchSection(section.ID, () => {
+                if(isLatest){
+                    setLoadingState('qubely-done');
+                }
+            });
         });
     };
 
     // fetch sections
     const _fetchSections = (today) => {
+        setLoadingState('qubely-is-loading');
         fetch('http://qubely.io/wp-json/restapi/v2/sections', {
             method: 'POST',
             body: block ? new URLSearchParams('block_name='+block) : ''
@@ -56,7 +63,7 @@ const Sections = (props) => {
             _setStore(storeNameDate, cacheExp);
             _syncSections(response);
         })
-        .catch( (err) => {
+        .catch((err) => {
             console.warn('Something went wrong.', err);
         });
     };
@@ -121,8 +128,19 @@ const Sections = (props) => {
 
     const _clearStore = () => window.localStorage.setItem(storeName, JSON.stringify({}));
 
+    const _syncBlocks = () => {
+        const today = new Date();
+        _clearStore();
+        _fetchSections(today);
+    }
+
     return (
         <div className='qubely-block-sections'>
+            <Tooltip text={__('Sync blocks')}>
+                <button onClick={_syncBlocks} className={'qubely-block-refresh ' + loadingState}>
+                    <span className="fas fa-sync-alt"></span>
+                </button>
+            </Tooltip>
             {
                 sections.map(section => (
                     <div className='qubely-block-section'>

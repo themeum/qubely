@@ -1,3 +1,42 @@
+.qubely-block-sections{
+  position: relative;
+  button.qubely-block-refresh{
+    position: absolute;
+    top: -41px;
+    right: 20px;
+    z-index: 2;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    background: transparent;
+    height: 24px;
+    width: 24px;
+    text-align: center;
+    line-height: 24px;
+    &:focus{
+      outline: none;
+    }
+    &.qubely-is-loading{
+      animation: qubelySync 1s linear infinite;
+    }
+    &.qubely-done {
+      color: #00cf00;
+      span.fas::before{
+        content: "\f00c";
+      }
+    }
+  }
+}
+
+@keyframes qubelySync {
+  from{
+    transform: rotate(0deg);
+  }
+  to{
+    transform: rotate(360deg);
+  }
+}
+
 .qubely-block-section{
   position: relative;
   margin-bottom: 10px;
