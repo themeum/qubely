@@ -12,7 +12,8 @@ const { useState, useRef, useEffect } = wp.element,
 const InspectorTabs = props => {
     const {defaultTab, children} = props,
         [currentTab, setCurrentTab] = useState(defaultTab),
-        tabContainer =  useRef();
+        tabContainer =  useRef(),
+        scrollEvent = useRef(null);
 
     let sidebarPanel;
 
@@ -20,7 +21,24 @@ const InspectorTabs = props => {
         sidebarPanel =  tabContainer.current.closest('.components-panel');
     });
 
+    const _isScrolling = (elem, tabs,{width, height, top, left}) => {
+        const newTop = tabs.getBoundingClientRect().top;
+        console.log()
+    }
+
     useEffect(() => {
+        const editPostSidebar = document.querySelector('.edit-post-sidebar');
+        const elem = document.querySelector('.components-panel');
+        const defaultBRG = elem.getBoundingClientRect();
+        const tabs = elem.querySelector('.qubely-inspector-tabs');
+        editPostSidebar.addEventListener('scroll', () => {
+            _isScrolling(elem, tabs, {
+                width: defaultBRG.width,
+                height: defaultBRG.height,
+                top: defaultBRG.top,
+                left: defaultBRG.top
+            });
+        });
         return () => {
             sidebarPanel && sidebarPanel.removeAttribute('data-qubely-tab')
         }

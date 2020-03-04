@@ -129,8 +129,10 @@ const Sections = (props) => {
         window.localStorage.setItem(storeName, storage);
     };
 
+    // Clear localStorage data
     const _clearStore = () => window.localStorage.setItem(storeName, JSON.stringify({}));
 
+    // Re-sync blocks
     const _syncBlocks = () => {
         const today = new Date();
         _clearStore();
