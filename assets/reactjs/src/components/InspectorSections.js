@@ -43,6 +43,9 @@ const Sections = (props) => {
             _fetchSection(section.ID, () => {
                 if(isLatest){
                     setLoadingState('qubely-done');
+                    setTimeout(() => {
+                        setLoadingState('');
+                    }, 1000);
                 }
             });
         });
