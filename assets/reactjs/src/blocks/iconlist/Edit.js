@@ -44,7 +44,13 @@ class Edit extends Component {
         }
     }
     componentDidMount() {
-        const { setAttributes, clientId, attributes: { uniqueId } } = this.props
+        const {
+            setAttributes,
+            clientId,
+            attributes: {
+                uniqueId
+            }
+        } = this.props
         const _client = clientId.substr(0, 6)
         if (!uniqueId) {
             setAttributes({ uniqueId: _client });
@@ -60,7 +66,9 @@ class Edit extends Component {
         } else if (this.props.attributes.listItems.length < prevProps.attributes.listItems.length) {
             const { focusedItem } = this.state
             let focusedListItem = document.querySelector(`.qubely-block-${prevProps.attributes.uniqueId} .qubely-list-item-text-${focusedItem}`)
-            focusedListItem && this.placeCaretAtEnd(focusedListItem)
+            if (this.props.isSelected && focusedListItem) {
+                this.placeCaretAtEnd(focusedListItem)
+            }
         }
     }
     modifySpecificItem = (value, index) => {
@@ -199,15 +207,15 @@ class Edit extends Component {
                 shadowHover,
                 animation,
                 globalZindex,
-                enablePosition, 
-                selectPosition, 
-                positionXaxis, 
+                enablePosition,
+                selectPosition,
+                positionXaxis,
                 positionYaxis,
                 hideTablet,
                 hideMobile,
                 globalCss,
                 interaction
-            } 
+            }
         } = this.props;
 
         const { device } = this.state;
@@ -360,4 +368,4 @@ class Edit extends Component {
     }
 }
 
-export default withCSSGenerator() (Edit);
+export default withCSSGenerator()(Edit);

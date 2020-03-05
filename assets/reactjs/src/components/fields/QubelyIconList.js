@@ -19,7 +19,10 @@ class QubelyIconListEdit extends Component {
             focusedListItem.focus();
         } else if (this.props.listItems.length < prevProps.listItems.length) {
             let focusedListItem = document.querySelector(`.${this.props.parentBlock} .qubely-list-item-text-${focusedItem}`)
-            focusedListItem && this.placeCaretAtEnd(focusedListItem)
+          
+            if (this.props.isSelected && focusedListItem) {
+                this.placeCaretAtEnd(focusedListItem);
+            }
         }
     }
     placeCaretAtEnd = (el) => {

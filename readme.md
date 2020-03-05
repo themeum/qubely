@@ -6,7 +6,7 @@ Donate link: <a href=" https://www.themeum.com">https://www.themeum.com</a>
 Tags: Qubely, website builder, gutenberg block, gutenberg, page builder, drag and drop editor, responsive, site editor, editor, drag-and-drop, visual editor, landing page, frontend editor, wordpress page builder, free page builder, layout builder  
 Requires at least: 5.0  
 Tested up to: 5.2  
-Stable tag: 1.3.3   
+Stable tag: 1.3.5   
 Requires PHP: 5.4.0  
 License: GPL-2.0+  
 License URI: http://www.gnu.org/licenses/gpl-2.0.txt
@@ -201,6 +201,46 @@ Found a bug? Please let us know by posting on the support section of this plugin
 
 
 # Changelog
+
+
+**1.3.5 - 12 March, 2020**
+New: Support for WordPress 5.4  
+New: Image block - URL in blurb layout  
+Update: Button Group block - Restructure  
+Fix: Team block - Alignment option in layout 3  
+Fix: Testimonial block - Ratings CSS issue  
+Fix: Contact form block - Value encryption issue  
+Fix: Advanced list block - Number, Bullet size & color not working  
+Fix: CSS generator - String type attributes (Color) value reset not working
+
+
+**1.3.4 - 27 February, 2020**
+New: Team block - External image option
+Update: Counter block - Viewport support added
+Fix: CSS generator block duplication issue
+Fix: Column block - uniqueId issue in case of Row duplication
+Fix: Row block - Advanced background option
+Fix: Image block - Whitespace issue
+Fix: Heading block - Separator color in the backend
+Fix: Range field - CSS updating issue on unit change
+Fix: Typography field - CSS updating issue on unit change
+
+**1.3.3 - 18 February, 2020**
+Fix: Post Grid block - Translation issue of the dates
+Fix: Post Grid block - Post title position settings in frontend
+Fix: CSS issue on template selection
+Update: Performance improvement
+
+**1.3.2 - 12 February, 2020**
+New : Background field - external image option
+Update : Performance improvement in CSS generator
+Fix: Context menu z-index issue
+
+**1.3.1 - 31 January, 2020**
+New: Table of Contents block  
+Update : Map block - Default place id
+Fix: PageModal conflict with Learndash  
+Fix: Customizer - Loading Async script issue  
 
 **1.3.0 - 21 January, 2020**
 New: Animated Headline block

@@ -162,11 +162,8 @@ export default function withCSSGenerator() {
 
                         changedAttributes = changedAttributes.filter(attr => attr !== 'uniqueId');
 
-                        let newState = {
-                            nonResponsiveCSS: nonResponsiveCSS,
-                            responsiveCSS: responsiveCSS
-                        };
-
+                        let newState = JSON.parse(JSON.stringify({ nonResponsiveCSS, responsiveCSS }))
+    
                         if (changedAttributes.length > 0) {
                             const updateState = (attribute, key, value) => {
                                 if (typeof key === 'undefined') {
