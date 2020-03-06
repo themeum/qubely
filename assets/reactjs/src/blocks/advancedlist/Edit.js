@@ -1,9 +1,51 @@
+import icons from '../../helpers/icons';
 const { __ } = wp.i18n;
-const { RichText, InspectorControls, BlockControls } = wp.blockEditor
-const { Component, Fragment } = wp.element;
-const { PanelBody, Toolbar, Tooltip } = wp.components;
-const { Typography, Alignment, ContextMenu: { ContextMenu, handleContextMenu }, gloalSettings: { globalSettingsPanel, animationSettings, interactionSettings }, Styles, Range, Tabs, Tab, Border, Inline: { InlineToolbar }, RadioAdvanced, Color, BoxShadow, Toggle, Separator, IconSelector, BorderRadius, Padding, withCSSGenerator } = wp.qubelyComponents
-import icons from '../../helpers/icons'
+const {
+    InspectorControls,
+    BlockControls
+} = wp.blockEditor;
+
+const {
+    Component,
+    Fragment
+} = wp.element;
+
+const {
+    PanelBody,
+    Toolbar,
+    Tooltip
+} = wp.components;
+
+const {
+    Typography,
+    Alignment,
+    ContextMenu: {
+        ContextMenu,
+        handleContextMenu
+    },
+    gloalSettings: {
+        globalSettingsPanel,
+        animationSettings,
+        interactionSettings
+    },
+    Styles,
+    Range,
+    Tabs,
+    Tab,
+    Border,
+    Inline: {
+        InlineToolbar
+    },
+    RadioAdvanced,
+    Color,
+    BoxShadow,
+    Toggle,
+    Separator,
+    IconSelector,
+    BorderRadius,
+    Padding,
+    withCSSGenerator
+} = wp.qubelyComponents;
 
 class Edit extends Component {
 
@@ -18,14 +60,22 @@ class Edit extends Component {
     }
 
     componentDidMount() {
-        const { setAttributes, clientId, attributes: { uniqueId } } = this.props
-        const _client = clientId.substr(0, 6)
+        const {
+            clientId,
+            isSelected,
+            setAttributes,
+            attributes: {
+                uniqueId
+            }
+        } = this.props;
+        const _client = clientId.substr(0, 6);
+
         if (!uniqueId) {
             setAttributes({ uniqueId: _client });
         } else if (uniqueId && uniqueId != _client) {
             setAttributes({ uniqueId: _client });
         }
-        this.placeCaretAtEnd(document.querySelector(`.qubely-block-${uniqueId} .qubely-list-item-text-${this.state.focusedItem}`))
+        isSelected && this.placeCaretAtEnd(document.querySelector(`.qubely-block-${uniqueId} .qubely-list-item-text-${this.state.focusedItem}`))
     }
     componentDidUpdate(prevProps, prevState) {
         if (this.props.attributes.listItems.length > prevProps.attributes.listItems.length) {
@@ -34,7 +84,9 @@ class Edit extends Component {
         } else if (this.props.attributes.listItems.length < prevProps.attributes.listItems.length) {
             const { focusedItem } = this.state
             let focusedListItem = document.querySelector(`.qubely-block-${prevProps.attributes.uniqueId} .qubely-list-item-text-${focusedItem}`)
-            focusedListItem && this.placeCaretAtEnd(focusedListItem)
+            if (this.props.isSelected && focusedListItem) {
+                this.placeCaretAtEnd(focusedListItem)
+            }
         }
     }
     handleListItemChanges = (newValues) => {
@@ -171,6 +223,7 @@ class Edit extends Component {
             attributes: {
                 uniqueId,
                 className,
+                recreateStyles,
                 alignment,
                 layout,
                 listType,
@@ -283,8 +336,13 @@ class Edit extends Component {
                         {listType == 'ordered' &&
                             <Fragment>
                                 <Range label={__('Font Size')} value={numberFontSize} onChange={(value) => setAttributes({ numberFontSize: value })} min={10} max={100} />
-                                <Toggle label={__('Use Background')} value={useNumberBg} onChange={val => setAttributes({ useNumberBg: val })} />
-                                {useNumberBg == 1 &&
+                                <Toggle
+                                    value={useNumberBg}
+                                    label={__('Use Background')}
+                                    onChange={val => setAttributes({ useNumberBg: val, recreateStyles: !recreateStyles })}
+                                />
+                                {
+                                    useNumberBg == 1 &&
                                     <Fragment>
                                         <Range label={__('Background Size')} value={numberBgSize} onChange={(value) => setAttributes({ numberBgSize: value })} min={1} max={15} />
                                         <Range label={__('Corner')} value={numberCorner} onChange={(value) => setAttributes({ numberCorner: value })} min={0} max={100} />
@@ -358,18 +416,24 @@ class Edit extends Component {
                             {...this.props}
                             prevState={this.state} />
                     </Toolbar>
-                    <Toolbar controls={
-                        [{
-                            icon: 'editor-ul',
-                            title: 'Convert to unordered list',
-                            onClick: () => setAttributes({ listType: 'unordered' }),
-                            className: `qubely-action-change-listype ${listType == 'unordered' ? 'is-active' : ''}`,
-                        }, {
-                            icon: 'editor-ol',
-                            title: 'Convert to ordered list',
-                            onClick: () => setAttributes({ listType: 'ordered' }),
-                            className: `qubely-action-change-listype ${listType == 'ordered' ? 'is-active' : ''}`,
-                        }]} />
+                    <Toolbar
+                        controls={
+                            [
+                                {
+                                    icon: 'editor-ul',
+                                    title: 'Convert to unordered list',
+                                    onClick: () => setAttributes({ listType: 'unordered', recreateStyles: !recreateStyles }),
+                                    className: `qubely-action-change-listype ${listType == 'unordered' ? 'is-active' : ''}`,
+                                },
+                                {
+                                    icon: 'editor-ol',
+                                    title: 'Convert to ordered list',
+                                    onClick: () => setAttributes({ listType: 'ordered', recreateStyles: !recreateStyles }),
+                                    className: `qubely-action-change-listype ${listType == 'ordered' ? 'is-active' : ''}`,
+                                }
+                            ]
+                        }
+                    />
                 </BlockControls>
 
                 {globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}

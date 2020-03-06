@@ -258,12 +258,12 @@ const handleNonObjects = (settings, key, cssSelector, updateStyle, isInline, sen
     } else if (key == 'hideMobile' && isInline) {
         temp.push({ xs: singleField(cssSelector, key, settings[key]) });
         !sendBack && updateStyle(key, 'Object', temp);
-    } else if (settings[key]) {
+    } else if (typeof settings[key] !== 'undefined') {
         !sendBack && updateStyle(key, undefined, singleField(cssSelector, key, settings[key]));
     }
     if (sendBack && temp.length > 0) {
         return temp;
-    } else if (sendBack && settings[key]) {
+    } else if (sendBack && typeof settings[key] !== 'undefined') {
         return singleField(cssSelector, key, settings[key]);
     }
 }
@@ -296,7 +296,6 @@ export const generateCSS = (blockAttributes, settings, updateStyle, isInline = f
 
 
 export const updateCSS = (blockAttributes, settings, updateStyle, key, isInline = false) => {
-
     if (blockAttributes[key] && blockAttributes[key].hasOwnProperty('style')) {
         blockAttributes[key].style.forEach(selectData => {
             let cssSelector = selectData.selector;

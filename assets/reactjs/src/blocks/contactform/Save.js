@@ -5,7 +5,7 @@ const { HelperFunction: { animationAttr } } = wp.qubelyComponents;
 class Save extends Component {
 
     _encrypt(str) {
-        return window.btoa(str);
+        return window.btoa(unescape(encodeURIComponent(str)));
     }
 
     _renderField(item, index, inputSize) {
