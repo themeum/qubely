@@ -26,7 +26,7 @@ $border-color: #D6D9DD;
   margin-right: -16px;
   position: relative;
   background: #F2F4F5;
-  z-index: 1;
+  z-index: 9;
   &::after{
     content: '';
     position: absolute;
@@ -166,6 +166,34 @@ $border-color: #D6D9DD;
           border-bottom-left-radius: 0;
           border-left-color: transparent;
         }
+      }
+    }
+  }
+
+}
+
+.qubely-inspector-tabs-container.qubely-is-sticky{
+  .qubely-inspector-tabs{
+    &::before,
+    &::after{
+      display: none;
+    }
+    border-bottom: 1px solid #e2e4e7;
+    button{
+      border-radius: 0;
+      &::before{
+        display: none;
+      }
+      &::after{
+        border-radius: 0;
+        background: #2184F9;
+        height: 3px;
+        top: auto;
+        bottom: -1px;
+        opacity: 0;
+      }
+      &.qubely-active::after{
+        opacity: 1;
       }
     }
   }

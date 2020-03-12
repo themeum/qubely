@@ -13,7 +13,8 @@ const InspectorTabs = props => {
     const {defaultTab, children} = props,
         [currentTab, setCurrentTab] = useState(defaultTab),
         tabContainer =  useRef(),
-        scrollEvent = useRef(null);
+        offset = useRef(undefined);
+
 
     let sidebarPanel;
 
@@ -22,17 +23,35 @@ const InspectorTabs = props => {
     });
 
     const _isScrolling = () => {
-        console.log('scrolling');
+        const cont = document.querySelector('.qubely-inspector-tabs-container');
+        const tabs = cont.querySelector('.qubely-inspector-tabs');
+        const contRect = cont.getBoundingClientRect();
+        if(contRect.top < offset.current){
+            tabs.style.position = 'fixed';
+            tabs.style.top = offset.current + 'px';
+            tabs.style.width = contRect.width + 32 + 'px';
+            tabs.style.left = contRect.left + 'px';
+            cont.style.paddingTop = contRect.height + 'px';
+            cont.classList.add('qubely-is-sticky');
+        }else{
+            tabs.style.position = '';
+            tabs.style.top = '';
+            tabs.style.width = '';
+            tabs.style.left = '';
+            cont.style.paddingTop = '';
+            cont.classList.remove('qubely-is-sticky');
+        }
     }
 
     useEffect(() => {
+        // sticky tabs menu
+        _isScrolling();
         const editPostSidebar = document.querySelector('.edit-post-sidebar');
-        const elem = document.querySelector('.components-panel');
-        const tabs = elem.querySelector('.qubely-inspector-tabs');
-
+        offset.current = document.querySelector('.components-panel').getBoundingClientRect().top;
         editPostSidebar.addEventListener('scroll', () => {
             _isScrolling();
         });
+
         return () => {
             sidebarPanel && sidebarPanel.removeAttribute('data-qubely-tab')
         }
@@ -44,7 +63,9 @@ const InspectorTabs = props => {
 
     const _onTabChange = tab => {
         setCurrentTab(tab);
-        sidebarPanel.setAttribute('data-qubely-tab', tab)
+        sidebarPanel.setAttribute('data-qubely-tab', tab);
+        _isScrolling();
+        console.log(offset)
     };
 
     return (
