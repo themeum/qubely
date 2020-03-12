@@ -1,4 +1,8 @@
 .qubely-toolber-field{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 48px;
   button{
     padding: 3px;
     height: 36px;
