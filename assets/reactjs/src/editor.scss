@@ -281,15 +281,14 @@ div[data-type="qubely/row"].is-resizing .components-resizable-box__container.qub
         font-variant: normal;
         text-rendering: auto;
         font-family: "Font Awesome 5 Free";
-        font-size: 12px;
-        background: #fff;
-        border: 1px solid #E5E7EA;
-        color: #8D96A0;
-        height: 20px;
-        line-height: 20px;
-        width: 20px;
-        border-radius: 10px;
-
+        font-size: 9px;
+        background: #E5E7EA;
+        color: #4d515a;
+        height: 18px;
+        line-height: 18px;
+        width: 18px;
+        border-radius: 50%;
+        border: none;
         &:not(:last-child) {
             margin-right: 4px;
         }
@@ -310,8 +309,8 @@ div[data-type="qubely/row"].is-resizing .components-resizable-box__container.qub
         }
 
         &.active{
-            background: #E5E7EA;
-            color: #2184F9;
+            background: #2184F9;
+            color: #ffffff;
         }
     }
 }
