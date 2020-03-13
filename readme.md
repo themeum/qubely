@@ -215,7 +215,6 @@ Fix: Advanced list block - Number, Bullet size & color not working
 Fix: CSS generator - String type attributes (Color) value reset not working
 
 
-
 **1.3.4 - 27 February, 2020**
 New: Team block - External image option
 Update: Counter block - Viewport support added
