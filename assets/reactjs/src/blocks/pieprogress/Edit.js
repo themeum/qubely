@@ -27,7 +27,9 @@ const {
         animationSettings,
         interactionSettings
     },
-    withCSSGenerator
+    withCSSGenerator,
+    InspectorTabs,
+    InspectorTab
 } = wp.qubelyComponents
 
 
@@ -133,158 +135,168 @@ class Edit extends Component {
         return (
             <Fragment>
                 <InspectorControls>
-                    <PanelBody title="">
-                        <Styles
-                            value={layout}
-                            onChange={val => setAttributes({ layout: val })}
-                            proUpgradation
-                            options={[
-                                { value: 'outline', img: icons.pie_outline, label: __('Layout 1') },
-                                { value: 'outline_fill', img: icons.pie_outline_fill, label: __('Layout 2'), pro: true },
-                                { value: 'fill', img: icons.pie_fill, label: __('Layout 3'), pro: true },
-                            ]}
-                        />
-                        <Range label={__('Progress Size')} value={size} onChange={(value) => setAttributes({ size: value })} min={20} max={500} />
-                        <RadioAdvanced
-                            label={__('Alignment')}
-                            options={[
-                                { label: <span style={{ padding: '0 5px' }} class='fas fa-align-left' />, value: 'flex-start', title: 'Left' },
-                                { label: <span style={{ padding: '0 5px' }} class='fas fa-align-center' />, value: 'center', title: 'Center' },
-                                { label: <span style={{ padding: '0 5px' }} class='fas fa-align-right' />, value: 'flex-end', title: 'Right' },
-                            ]}
-                            value={alignment}
-                            onChange={(alignment) => setAttributes({ alignment })} />
-                        <img src={qubely_admin.plugin + 'assets/img/blocks/pieprogress/template-pro-notice.jpg'} alt={__('Pie Porgress Templates')} />
-                    </PanelBody>
-                    <PanelBody title={__('Progress')} initialOpen={false}>
-                        <Range label={__('Progress Percent')} value={progress} onChange={(value) => setAttributes({ progress: value })} min={0} max={100} />
-                        <ColorAdvanced label={__('Progress Color')} value={fillColor} onChange={val => setAttributes({ fillColor: val })} />
-                        {layout !== 'fill' && (
-                            <RadioAdvanced
-                                label={__('Corner')}
-                                options={[
-                                    { label: 'Sharp', value: 'unset', title: 'Sharp' },
-                                    { label: 'Round', value: 'round', title: 'Round' },
-                                ]}
-                                value={corner}
-                                onChange={(value) => setAttributes({ corner: value })} />
-                        )
-                        }
-                        {
-                            layout !== 'fill' && <Range label={__('Progress Width')} value={thickness} onChange={thickness => setAttributes({ thickness: thickness })} min={1} max={100} />
-                        }
-
-                        <BoxShadow label={__('Shadow')} value={progressShadow} onChange={progressShadow => setAttributes({ progressShadow })} />
-                        <Range label={__('Speed (ms)')} value={speed} onChange={(speed) => setAttributes({ speed })} min={0} max={2000} />
-                    </PanelBody>
-
-                    <PanelBody title={__('Circle')} initialOpen={false}>
-                        {
-                            layout === 'outline' && <Range label={__('Circle Width')} value={thicknessBg} onChange={(value) => setAttributes({ thicknessBg: value })} min={1} max={100} />
-                        }
-                        <Range label={__('Circle Shrink (%)')} value={circleShrink} onChange={circleShrink => setAttributes({ circleShrink })} min={0} max={100} />
-                        <Color label={__('Circle Background')} value={background} onChange={background => setAttributes({ background })} />
-                        <BoxShadow label={__('Shadow')} value={circleShadow} onChange={circleShadow => setAttributes({ circleShadow })} />
-                    </PanelBody>
-                    <PanelBody title={__('Percentage / Icon')} initialOpen={false}>
-                        <Toggle label={__('Enable')} value={enableIcon} onChange={enableIcon => setAttributes({ enableIcon })} />
-                        {enableIcon &&
-                            <Fragment>
-                                <RadioAdvanced
-                                    label={__('Type')}
+                    <InspectorTabs defaultTab={'style'}>
+                        <InspectorTab key={'layout'}>
+                            <PanelBody title={__('Design Templates')}>
+                                <img src={qubely_admin.plugin + 'assets/img/blocks/pieprogress/template-pro-notice.jpg'} alt={__('Pie Porgress Templates')} />
+                            </PanelBody>
+                        </InspectorTab>
+                        <InspectorTab key={'style'}>
+                            <PanelBody title="">
+                                <Styles
+                                    value={layout}
+                                    onChange={val => setAttributes({ layout: val })}
+                                    proUpgradation
                                     options={[
-                                        { label: '%', value: 'percent', title: 'Percent' },
-                                        { label: 'Icon', value: 'icon', title: 'Icon' },
-                                        { label: 'Image', value: 'image', title: 'Image' },
-                                        { label: 'Text', value: 'text', title: 'Text' }
+                                        { value: 'outline', img: icons.pie_outline, label: __('Layout 1') },
+                                        { value: 'outline_fill', img: icons.pie_outline_fill, label: __('Layout 2'), pro: true },
+                                        { value: 'fill', img: icons.pie_fill, label: __('Layout 3'), pro: true },
                                     ]}
-                                    value={iconStyle}
-                                    onChange={iconStyle => setAttributes({ iconStyle })} />
-                                {
-                                    iconStyle === 'icon' && (
-                                        <Fragment>
-                                            <IconList
-                                                value={iconName}
-                                                onChange={iconName => setAttributes({ iconName })} />
-                                            <Range label={__('Icon Size')} value={iconSize} onChange={iconSize => setAttributes({ iconSize })} min={10} max={200} />
-                                        </Fragment>
-                                    )
+                                />
+                                <Range label={__('Progress Size')} value={size} onChange={(value) => setAttributes({ size: value })} min={20} max={500} />
+                                <RadioAdvanced
+                                    label={__('Alignment')}
+                                    options={[
+                                        { label: <span style={{ padding: '0 5px' }} class='fas fa-align-left' />, value: 'flex-start', title: 'Left' },
+                                        { label: <span style={{ padding: '0 5px' }} class='fas fa-align-center' />, value: 'center', title: 'Center' },
+                                        { label: <span style={{ padding: '0 5px' }} class='fas fa-align-right' />, value: 'flex-end', title: 'Right' },
+                                    ]}
+                                    value={alignment}
+                                    onChange={(alignment) => setAttributes({ alignment })} />
+                            </PanelBody>
+                            <PanelBody title={__('Progress')} initialOpen={false}>
+                                <Range label={__('Progress Percent')} value={progress} onChange={(value) => setAttributes({ progress: value })} min={0} max={100} />
+                                <ColorAdvanced label={__('Progress Color')} value={fillColor} onChange={val => setAttributes({ fillColor: val })} />
+                                {layout !== 'fill' && (
+                                    <RadioAdvanced
+                                        label={__('Corner')}
+                                        options={[
+                                            { label: 'Sharp', value: 'unset', title: 'Sharp' },
+                                            { label: 'Round', value: 'round', title: 'Round' },
+                                        ]}
+                                        value={corner}
+                                        onChange={(value) => setAttributes({ corner: value })} />
+                                )
                                 }
                                 {
-                                    iconStyle === 'image' && (
+                                    layout !== 'fill' && <Range label={__('Progress Width')} value={thickness} onChange={thickness => setAttributes({ thickness: thickness })} min={1} max={100} />
+                                }
 
-                                        <Fragment>
-                                            <Media
-                                                label={__('Image')}
-                                                multiple={false}
-                                                type={['image']}
-                                                panel
-                                                value={image} onChange={image => setAttributes({ image })} />
-                                            <Media
-                                                panel
-                                                value={image2x}
-                                                multiple={false}
-                                                type={['image']}
-                                                label={__('Retina Image')}
-                                                onChange={image2x => setAttributes({ image2x })} />
+                                <BoxShadow label={__('Shadow')} value={progressShadow} onChange={progressShadow => setAttributes({ progressShadow })} />
+                                <Range label={__('Speed (ms)')} value={speed} onChange={(speed) => setAttributes({ speed })} min={0} max={2000} />
+                            </PanelBody>
 
-                                            {image.url &&
+                            <PanelBody title={__('Circle')} initialOpen={false}>
+                                {
+                                    layout === 'outline' && <Range label={__('Circle Width')} value={thicknessBg} onChange={(value) => setAttributes({ thicknessBg: value })} min={1} max={100} />
+                                }
+                                <Range label={__('Circle Shrink (%)')} value={circleShrink} onChange={circleShrink => setAttributes({ circleShrink })} min={0} max={100} />
+                                <Color label={__('Circle Background')} value={background} onChange={background => setAttributes({ background })} />
+                                <BoxShadow label={__('Shadow')} value={circleShadow} onChange={circleShadow => setAttributes({ circleShadow })} />
+                            </PanelBody>
+                            <PanelBody title={__('Percentage / Icon')} initialOpen={false}>
+                                <Toggle label={__('Enable')} value={enableIcon} onChange={enableIcon => setAttributes({ enableIcon })} />
+                                {enableIcon &&
+                                <Fragment>
+                                    <RadioAdvanced
+                                        label={__('Type')}
+                                        options={[
+                                            { label: '%', value: 'percent', title: 'Percent' },
+                                            { label: 'Icon', value: 'icon', title: 'Icon' },
+                                            { label: 'Image', value: 'image', title: 'Image' },
+                                            { label: 'Text', value: 'text', title: 'Text' }
+                                        ]}
+                                        value={iconStyle}
+                                        onChange={iconStyle => setAttributes({ iconStyle })} />
+                                    {
+                                        iconStyle === 'icon' && (
+                                            <Fragment>
+                                                <IconList
+                                                    value={iconName}
+                                                    onChange={iconName => setAttributes({ iconName })} />
+                                                <Range label={__('Icon Size')} value={iconSize} onChange={iconSize => setAttributes({ iconSize })} min={10} max={200} />
+                                            </Fragment>
+                                        )
+                                    }
+                                    {
+                                        iconStyle === 'image' && (
+
+                                            <Fragment>
+                                                <Media
+                                                    label={__('Image')}
+                                                    multiple={false}
+                                                    type={['image']}
+                                                    panel
+                                                    value={image} onChange={image => setAttributes({ image })} />
+                                                <Media
+                                                    panel
+                                                    value={image2x}
+                                                    multiple={false}
+                                                    type={['image']}
+                                                    label={__('Retina Image')}
+                                                    onChange={image2x => setAttributes({ image2x })} />
+
+                                                {image.url &&
                                                 <Fragment>
                                                     <TextControl label={__('Alt Text')} value={imageAlt} onChange={imageAlt => setAttributes({ imageAlt })} />
                                                     <Range label={__('Image Width')} value={imageSize} onChange={imageSize => setAttributes({ imageSize })} min={imageSize.unit !== 'px' ? 0 : 10} max={imageSize.unit === '%' ? 100 : 500} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
                                                 </Fragment>
-                                            }
+                                                }
 
-                                        </Fragment>
-                                    )
+                                            </Fragment>
+                                        )
+                                    }
+
+                                    {iconStyle === 'text' && (
+                                        <TextControl
+                                            label="Text"
+                                            value={iconText}
+                                            onChange={(iconText) => setAttributes({ iconText })}
+                                        />
+                                    )}
+                                    {iconStyle !== 'image' && (
+                                        <Color label={__('Color')} value={iconTextColor} onChange={iconTextColor => setAttributes({ iconTextColor })} />
+                                    )}
+                                    {(iconStyle === 'text' || iconStyle === 'percent') && (
+                                        <Typography value={iconTypography} onChange={iconTypography => setAttributes({ iconTypography })} />
+                                    )}
+
+                                </Fragment>
                                 }
-
-                                {iconStyle === 'text' && (
-                                    <TextControl
-                                        label="Text"
-                                        value={iconText}
-                                        onChange={(iconText) => setAttributes({ iconText })}
-                                    />
-                                )}
-                                {iconStyle !== 'image' && (
-                                    <Color label={__('Color')} value={iconTextColor} onChange={iconTextColor => setAttributes({ iconTextColor })} />
-                                )}
-                                {(iconStyle === 'text' || iconStyle === 'percent') && (
-                                    <Typography value={iconTypography} onChange={iconTypography => setAttributes({ iconTypography })} />
-                                )}
-
-                            </Fragment>
-                        }
-                    </PanelBody>
-                    <PanelBody title={__('Heading')} initialOpen={false}>
-                        <Toggle label={__('Enable Heading')} value={enableHeading} onChange={enableHeading => setAttributes({ enableHeading })} />
-                        {enableHeading && (
-                            <Fragment>
-                                <TextControl label={__('Heading text')} value={heading} onChange={heading => setAttributes({ heading })} />
-                                {heading && <Color label={__('Heading Color')} value={headingColor} onChange={headingColor => setAttributes({ headingColor })} />}
-                                <RadioAdvanced
-                                    label={__('Type')}
-                                    options={[
-                                        { label: 'Inside', value: 'inside', title: 'Inside' },
-                                        { label: 'Outside', value: 'outside', title: 'Outside' },
-                                    ]}
-                                    value={headingPosition}
-                                    onChange={(headingPosition) => setAttributes({ headingPosition })} />
-                                {heading && (
+                            </PanelBody>
+                            <PanelBody title={__('Heading')} initialOpen={false}>
+                                <Toggle label={__('Enable Heading')} value={enableHeading} onChange={enableHeading => setAttributes({ enableHeading })} />
+                                {enableHeading && (
                                     <Fragment>
-                                        {headingPosition === 'outside' && (
-                                            <Alignment label={__('Alignment')} value={headingAlignment} onChange={headingAlignment => setAttributes({ headingAlignment })} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
+                                        <TextControl label={__('Heading text')} value={heading} onChange={heading => setAttributes({ heading })} />
+                                        {heading && <Color label={__('Heading Color')} value={headingColor} onChange={headingColor => setAttributes({ headingColor })} />}
+                                        <RadioAdvanced
+                                            label={__('Type')}
+                                            options={[
+                                                { label: 'Inside', value: 'inside', title: 'Inside' },
+                                                { label: 'Outside', value: 'outside', title: 'Outside' },
+                                            ]}
+                                            value={headingPosition}
+                                            onChange={(headingPosition) => setAttributes({ headingPosition })} />
+                                        {heading && (
+                                            <Fragment>
+                                                {headingPosition === 'outside' && (
+                                                    <Alignment label={__('Alignment')} value={headingAlignment} onChange={headingAlignment => setAttributes({ headingAlignment })} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
+                                                )}
+                                                <Range label={__('Spacing')} value={headingSpacing} onChange={headingSpacing => setAttributes({ headingSpacing })} min={0} max={200} />
+                                                <Typography value={headingTypography} onChange={headingTypography => setAttributes({ headingTypography })} />
+                                            </Fragment>
                                         )}
-                                        <Range label={__('Spacing')} value={headingSpacing} onChange={headingSpacing => setAttributes({ headingSpacing })} min={0} max={200} />
-                                        <Typography value={headingTypography} onChange={headingTypography => setAttributes({ headingTypography })} />
                                     </Fragment>
-                                )}
-                            </Fragment>
-                        )
-                        }
-                    </PanelBody>
-                    {animationSettings(uniqueId, animation, setAttributes)}
-                    {interactionSettings(uniqueId, interaction, setAttributes)}
+                                )
+                                }
+                            </PanelBody>
+                        </InspectorTab>
+                        <InspectorTab key={'advance'}>
+                            {animationSettings(uniqueId, animation, setAttributes)}
+                            {interactionSettings(uniqueId, interaction, setAttributes)}
+                        </InspectorTab>
+                    </InspectorTabs>
                 </InspectorControls>
 
                 <BlockControls>
