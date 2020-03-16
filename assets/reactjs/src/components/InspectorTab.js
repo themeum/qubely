@@ -1,7 +1,7 @@
 const { Fragment} = wp.element;
 
 const InspectorTab = props => {
-    const {children, isActive} = props;
+    const {children, isActive, key} = props;
     return (
         <div
             style={{
