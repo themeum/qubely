@@ -237,7 +237,7 @@ You can report bugs on the [support forum here](https://wordpress.org/support/pl
 
 == Changelog ==
 
-= 1.3.5 - 13 March, 2020 =
+= 1.3.5 - 16 March, 2020 =
 New: Support for WordPress 5.4  
 New: Image block - URL in blurb layout  
 Update: Button Group block - Restructure  
