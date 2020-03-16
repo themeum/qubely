@@ -9,13 +9,12 @@
       > div {
         display: inline-block;
         width: auto;
+        .qubely-block-btn{
+          margin: 4px;
+        }
         &:last-child{
             margin: 10px;
         }
-      }
-      .block-editor-button-block-appender {
-        background: none;
-        outline: none;
       }
     }
   }

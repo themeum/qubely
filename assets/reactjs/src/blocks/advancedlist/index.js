@@ -9,7 +9,7 @@ registerBlockType('qubely/advancedlist', {
     title: __('Advanced List'),
     description: __('Include stylish lists to display in your site with Qubely Advanced List.'),
     category: 'qubely',
-    icon: <img src={qubely_admin.plugin + 'assets/img/blocks/block-advanced-list.svg'} alt={__('Advanced List')} />,
+    icon: <img src={qubely_admin.plugin + 'assets/img/blocks/block-advanced-list.svg'} alt={__('Advanced List')} className="qubely-block-icon small"/>,
     keywords: [
         __('Advanced', 'qubely'),
         __('list', 'qubely'),

@@ -8,7 +8,7 @@ const { gloalSettings: { globalAttributes } } = wp.qubelyComponents
 registerBlockType('qubely/team', {
     title: __('Team'),
     description: 'Display team member with social profiles.',
-    icon: <img src={qubely_admin.plugin + 'assets/img/blocks/block-team.svg'} alt={__('Team Block')} />,
+    icon: <img src={qubely_admin.plugin + 'assets/img/blocks/block-team.svg'} alt={__('Team Block')}  className="qubely-block-icon small"/>,
     category: 'qubely',
     supports: {
         align: ['center', 'wide', 'full'],
