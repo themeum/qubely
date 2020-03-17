@@ -1,3 +1,4 @@
+import InspectorTabs from "../../../components/InspectorTabs";
 
 const { __ } = wp.i18n;
 const { PanelBody, Toolbar, ResizableBox, IconButton } = wp.components
@@ -18,7 +19,9 @@ const {
         globalSettingsPanel,
         animationSettings
     },
-    withCSSGenerator
+    withCSSGenerator,
+    inspectorTabs,
+    InspectorTab
 } = wp.qubelyComponents
 
 $ = jQuery;
@@ -349,46 +352,49 @@ class Edit extends Component {
         return (
             <Fragment>
                 <InspectorControls>
-                    <PanelBody initialOpen={false} title={__('Dimension')}>
-                        <div className={columns === (blockIndex + 1) && responsiveDevice === 'md' ? 'qubely-mb-20 disable-slide' : 'qubely-mb-20'}>
-                            <Range label={__('Width')} value={colWidth} onChange={val => this.updateColumnWidth(val)} min={15} max={this.state.colWidthMax} unit={['%']} responsive device={this.state.responsiveDevice} />
-                        </div>
-                        <Dimension
-                            label={__('Padding')}
-                            value={padding}
-                            onChange={val => setAttributes({ padding: val })}
-                            min={0}
-                            max={600}
-                            unit={['px', 'em', '%']}
-                            responsive
-                            device={this.state.responsiveDevice}
-                            onDeviceChange={value => this.setState({ responsiveDevice: value })}
-                        />
-
-                        <Dimension
-                            label={__('Margin')}
-                            value={margin}
-                            onChange={val => setAttributes({ margin: val })}
-                            min={-600}
-                            max={600}
-                            unit={['px', 'em', '%']}
-                            responsive
-                            device={this.state.responsiveDevice}
-                            onDeviceChange={value => this.setState({ responsiveDevice: value })}
-                        />
-                    </PanelBody>
-                    <PanelBody initialOpen={false} title={__('Design')}>
-                        <Background label={__('Background')} sources={['image', 'gradient']} value={colBg} onChange={val => setAttributes({ colBg: val })} />
-                        <Separator />
-                        <Border label={__('Border')} value={colBorder} onChange={val => setAttributes({ colBorder: val })} min={0} max={10} />
-                        <Separator />
-                        <BoxShadow label={__('Box-Shadow')} value={colShadow} onChange={val => setAttributes({ colShadow: val })} />
-                        <Separator />
-                        <BorderRadius label={__('Radius')} value={borderRadius} onChange={val => setAttributes({ borderRadius: val })} min={0} max={100} unit={['px', 'em', '%']} responsive device={this.state.responsiveDevice} onDeviceChange={value => this.setState({ responsiveDevice: value })} />
-                    </PanelBody>
-
-                    {animationSettings(uniqueId, animation, setAttributes)}
-
+                    <InspectorTabs tabs={['style', 'advance']}>
+                        <InspectorTab key={'style'}>
+                            <PanelBody initialOpen={true} title={__('Dimension')}>
+                                <div className={columns === (blockIndex + 1) && responsiveDevice === 'md' ? 'qubely-mb-20 disable-slide' : 'qubely-mb-20'}>
+                                    <Range label={__('Width')} value={colWidth} onChange={val => this.updateColumnWidth(val)} min={15} max={this.state.colWidthMax} unit={['%']} responsive device={this.state.responsiveDevice} />
+                                </div>
+                                <Dimension
+                                    label={__('Padding')}
+                                    value={padding}
+                                    onChange={val => setAttributes({ padding: val })}
+                                    min={0}
+                                    max={600}
+                                    unit={['px', 'em', '%']}
+                                    responsive
+                                    device={this.state.responsiveDevice}
+                                    onDeviceChange={value => this.setState({ responsiveDevice: value })}
+                                />
+                                <Dimension
+                                    label={__('Margin')}
+                                    value={margin}
+                                    onChange={val => setAttributes({ margin: val })}
+                                    min={-600}
+                                    max={600}
+                                    unit={['px', 'em', '%']}
+                                    responsive
+                                    device={this.state.responsiveDevice}
+                                    onDeviceChange={value => this.setState({ responsiveDevice: value })}
+                                />
+                            </PanelBody>
+                            <PanelBody initialOpen={false} title={__('Design')}>
+                                <Background label={__('Background')} sources={['image', 'gradient']} value={colBg} onChange={val => setAttributes({ colBg: val })} />
+                                <Separator />
+                                <Border label={__('Border')} value={colBorder} onChange={val => setAttributes({ colBorder: val })} min={0} max={10} />
+                                <Separator />
+                                <BoxShadow label={__('Box-Shadow')} value={colShadow} onChange={val => setAttributes({ colShadow: val })} />
+                                <Separator />
+                                <BorderRadius label={__('Radius')} value={borderRadius} onChange={val => setAttributes({ borderRadius: val })} min={0} max={100} unit={['px', 'em', '%']} responsive device={this.state.responsiveDevice} onDeviceChange={value => this.setState({ responsiveDevice: value })} />
+                            </PanelBody>
+                        </InspectorTab>
+                        <InspectorTab key={'advance'}>
+                            {animationSettings(uniqueId, animation, setAttributes)}
+                        </InspectorTab>
+                    </InspectorTabs>
                 </InspectorControls>
 
                 <BlockControls>

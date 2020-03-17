@@ -176,7 +176,6 @@ class Edit extends Component {
                     <InspectorTabs tabs={['style', 'advance']}>
                         <InspectorTab key={'style'}>
                             <PanelBody initialOpen={true} title={__('Dimension')}>
-
                                 <SelectControl
                                     label={__('Height')}
                                     value={heightOptions || ''}
