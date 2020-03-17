@@ -60,13 +60,18 @@ export default function withCSSGenerator() {
                 if (responsiveAttributes.length > 0) {
                     responsiveAttributes.forEach(attr => {
                         const currentAttribute = responsiveCSS[attr];
-                        let attbrTypes = Object.keys(currentAttribute);
-                        attbrTypes.forEach(key => {
+                        let attrKeys = Object.keys(currentAttribute);
+                        attrKeys.forEach(key => {
                             if (key !== 'nonResponsiveCSS' && typeof currentAttribute[key] === 'object' && Object.keys(currentAttribute[key]).length > 0) {
                                 if (currentAttribute[key].hasOwnProperty('md') && typeof currentAttribute[key].md !== 'undefined') {
                                     _CSS += currentAttribute[key].md;
                                 } else if (currentAttribute[key].hasOwnProperty('sm') && typeof currentAttribute[key].sm !== 'undefined') {
-                                    _CSS += '@media (max-width: 1199px) {' + currentAttribute[key].sm + '}';
+                                    // _CSS += '@media (max-width: 1199px) {' + currentAttribute[key].sm + '}';
+                                    if (attr === 'hideTablet') {
+                                        _CSS += '@media (max-width: 1199px) and (min-width: 992px)  {' + currentAttribute[key].sm + '}';
+                                    } else if (attr === 'hideMobile') {
+                                        _CSS += '@media (max-width: 1199px) {' + currentAttribute[key].sm + '}';
+                                    }
                                 } else if (currentAttribute[key].hasOwnProperty('xs') && typeof currentAttribute[key].xs !== 'undefined') {
                                     _CSS += '@media (max-width: 991px) {' + currentAttribute[key].xs + '}';
                                 }
@@ -166,7 +171,7 @@ export default function withCSSGenerator() {
                             nonResponsiveCSS: nonResponsiveCSS,
                             responsiveCSS: responsiveCSS
                         }
-    
+
                         if (changedAttributes.length > 0) {
                             const updateState = (attribute, key, value) => {
                                 if (typeof key === 'undefined') {
@@ -232,6 +237,7 @@ export default function withCSSGenerator() {
             }
             render() {
                 const { attributes: { showCopyAttr } } = this.props;
+                console.log('state : ', this.state);
                 return (
                     <Fragment>
                         {

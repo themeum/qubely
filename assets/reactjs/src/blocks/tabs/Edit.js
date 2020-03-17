@@ -4,7 +4,7 @@ const { compose } = wp.compose
 const { withSelect, withDispatch } = wp.data
 const { Component, Fragment } = wp.element;
 const { InnerBlocks, RichText, InspectorControls, BlockControls } = wp.blockEditor
-const { Color, IconList, Select, Styles, Typography, Range, RadioAdvanced, gloalSettings: { globalSettingsPanel, animationSettings, interactionSettings }, Inline: { InlineToolbar }, BoxShadow, Alignment, Tabs, Tab, Separator, Border, Padding, BorderRadius, CssGenerator: { CssGenerator } ,withCSSGenerator} = wp.qubelyComponents
+const { Color, IconList, Select, Styles, Typography, Range, RadioAdvanced, gloalSettings: { globalSettingsPanel, animationSettings, interactionSettings }, Inline: { InlineToolbar }, BoxShadow, Alignment, Tabs, Tab, Separator, Border, Padding, BorderRadius ,withCSSGenerator} = wp.qubelyComponents
 import icons from '../../helpers/icons';
 
 class Edit extends Component {

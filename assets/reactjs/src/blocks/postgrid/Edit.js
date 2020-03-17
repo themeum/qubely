@@ -6,7 +6,7 @@ const { Fragment, Component } = wp.element;
 const { dateI18n, __experimentalGetSettings } = wp.date;
 const { InspectorControls, BlockControls } = wp.blockEditor;
 const { RangeControl, PanelBody, Toolbar, Spinner, TextControl, SelectControl } = wp.components;
-const { Range, ButtonGroup, Inline: { InlineToolbar }, Toggle, Dropdown, Select, Separator, ColorAdvanced, Typography, Color, Border, BorderRadius, Padding, BoxShadow, Styles, Tabs, Tab, RadioAdvanced, gloalSettings: { globalSettingsPanel, animationSettings }, CssGenerator: { CssGenerator }, ContextMenu: { ContextMenu, handleContextMenu }, withCSSGenerator } = wp.qubelyComponents
+const { Range, ButtonGroup, Inline: { InlineToolbar }, Toggle, Dropdown, Select, Separator, ColorAdvanced, Typography, Color, Border, BorderRadius, Padding, BoxShadow, Styles, Tabs, Tab, RadioAdvanced, gloalSettings: { globalSettingsPanel, animationSettings }, ContextMenu: { ContextMenu, handleContextMenu }, withCSSGenerator } = wp.qubelyComponents
 import icons from '../../helpers/icons'
 
 
