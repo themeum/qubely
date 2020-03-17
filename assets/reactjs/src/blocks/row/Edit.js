@@ -4,34 +4,7 @@ const { select, withDispatch } = wp.data
 const { PanelBody, TextControl, SelectControl, Tooltip, Button, RangeControl } = wp.components
 const { Component, Fragment } = wp.element
 const { InspectorControls, InnerBlocks, InspectorAdvancedControls } = wp.blockEditor
-const {
-    Background,
-    Select,
-    Range,
-    Toggle,
-    Shape,
-    BoxShadow,
-    Tab,
-    Tabs,
-    Separator,
-    Border,
-    BorderRadius,
-    RadioAdvanced,
-    Dimension,
-    gloalSettings: {
-        globalSettingsPanel,
-        animationSettings
-    },
-    HelperFunction: {
-        videoBackground
-    },
-    CssGenerator: {
-        CssGenerator
-    },
-    withCSSGenerator,
-    InspectorTabs,
-    InspectorTab
-} = wp.qubelyComponents
+const { Background, Select, Range, Toggle, Shape, BoxShadow, Tab, Tabs, Separator, Border, BorderRadius, RadioAdvanced, Dimension, gloalSettings: { globalSettingsPanel, animationSettings }, HelperFunction: { videoBackground }, CssGenerator: { CssGenerator }, withCSSGenerator, InspectorTabs, InspectorTab } = wp.qubelyComponents
 import { ModalManager } from '../../helpers/ModalManager';
 import PageListModal from '../../helpers/PageListModal';
 import icons from '../../helpers/icons';
@@ -161,8 +134,8 @@ class Edit extends Component {
                         </div>
                         <div className={`import-layout-btn-container`}>
                             <button type="button"
-                                className={`components-button is-button is-default is-primary is-large`}
-                                onClick={() => this.importLayout()}>
+                                    className={`components-button is-button is-default is-primary is-large`}
+                                    onClick={() => this.importLayout()}>
                                 {__('Import Layout')}
                             </button>
                         </div>
@@ -235,26 +208,6 @@ class Edit extends Component {
 
                                 <Separator />
 
-                                <Dimension
-                                    label={__('Padding')}
-                                    value={padding}
-                                    onChange={val => setAttributes({ padding: val })}
-                                    min={0}
-                                    max={600}
-                                    unit={['px', 'em', '%']}
-                                    responsive
-                                    device={this.state.device}
-                                    onDeviceChange={value => this.setState({ device: value })}
-                                    clientId={this.props.clientId}
-                                />
-
-                                <Separator />
-                                <Range label={__('Margin Top')} value={marginTop} onChange={(value) => setAttributes({ marginTop: value })} unit={['px', 'em', '%']} min={-400} max={500} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
-                                <Range label={__('Margin Bottom')} value={marginBottom} onChange={(value) => setAttributes({ marginBottom: value })} unit={['px', 'em', '%']} min={-400} max={500} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
-
-
-                                <Separator />
-
                                 <div className="qubely-field">
                                     <label>{__('Content Position')}</label>
                                     <div className="qubely-field-button-list qubely-field-button-list-fluid">
@@ -281,6 +234,7 @@ class Edit extends Component {
                                     </div>
                                 </div>
                             </PanelBody>
+
                             <PanelBody initialOpen={false} title={__('Background')}>
                                 <Background
                                     parallax
@@ -330,8 +284,7 @@ class Edit extends Component {
                                 </Fragment>
                                 }
                             </PanelBody>
-                        </InspectorTab>
-                        <InspectorTab key={'advance'}>
+
                             <PanelBody initialOpen={false} title={__('Shape Divider')}>
                                 <Tabs>
                                     <Tab tabTitle={__('Top Shape')}>
@@ -342,18 +295,36 @@ class Edit extends Component {
                                     </Tab>
                                 </Tabs>
                             </PanelBody>
+                        </InspectorTab>
+                        <InspectorTab key={'advance'}>
+                            <PanelBody title={__('Spacing')} initialOpen={true}>
+                                <Dimension
+                                    label={__('Padding')}
+                                    value={padding}
+                                    onChange={val => setAttributes({ padding: val })}
+                                    min={0}
+                                    max={600}
+                                    unit={['px', 'em', '%']}
+                                    responsive
+                                    device={this.state.device}
+                                    onDeviceChange={value => this.setState({ device: value })}
+                                    clientId={this.props.clientId}
+                                />
+                                <Separator />
+                                <Range label={__('Margin Top')} value={marginTop} onChange={(value) => setAttributes({ marginTop: value })} unit={['px', 'em', '%']} min={-400} max={500} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
+                                <Range label={__('Margin Bottom')} value={marginBottom} onChange={(value) => setAttributes({ marginBottom: value })} unit={['px', 'em', '%']} min={-400} max={500} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
+                            </PanelBody>
                             {animationSettings(uniqueId, animation, setAttributes)}
-                            <InspectorAdvancedControls>
-                                {/*
-                                    @TODO: Column Reverse & CSS ID is not showing
-                                */}
-                                <Toggle label={__('Column Reverse')} responsive value={rowReverse.values} onChange={val => setAttributes({ rowReverse: { values: val, openRowReverse: true } })} />
-                                <TextControl label={__('CSS ID')} value={rowId} onChange={val => setAttributes({ rowId: val })} />
-                                {globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes, true)}
-                            </InspectorAdvancedControls>
                         </InspectorTab>
                     </InspectorTabs>
+
                 </InspectorControls>
+
+                <InspectorAdvancedControls>
+                    <Toggle label={__('Column Reverse')} responsive value={rowReverse.values} onChange={val => setAttributes({ rowReverse: { values: val, openRowReverse: true } })} />
+                    <TextControl label={__('CSS ID')} value={rowId} onChange={val => setAttributes({ rowId: val })} />
+                    {globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes, true)}
+                </InspectorAdvancedControls>
 
                 <div className={`qubely-section qubely-block-${uniqueId} ${(rowBg.bgimgParallax && rowBg.bgimgParallax == 'animated') ? 'qubely-section-parallax' : ''}${className ? ` ${className}` : ''}`} {...rowId ? { id: rowId } : ''}>
                     <div className="qubley-padding-indicator">
@@ -380,13 +351,13 @@ class Edit extends Component {
 
                     </div>
                     {(Object.entries(shapeTop).length > 1 && shapeTop.openShape == 1 && shapeTop.style) &&
-                        <div className="qubely-shape-divider qubely-top-shape" dangerouslySetInnerHTML={{ __html: qubely_admin.shapes[shapeTop.style] }} />
+                    <div className="qubely-shape-divider qubely-top-shape" dangerouslySetInnerHTML={{ __html: qubely_admin.shapes[shapeTop.style] }} />
                     }
                     {(Object.entries(rowBg).length > 0 && rowBg.openBg == 1 && rowBg.bgType == 'video') &&
-                        videoBackground(rowBg, 'row')
+                    videoBackground(rowBg, 'row')
                     }
                     {(Object.entries(shapeBottom).length > 1 && shapeBottom.openShape == 1 && shapeBottom.style) &&
-                        <div className="qubely-shape-divider qubely-bottom-shape" dangerouslySetInnerHTML={{ __html: qubely_admin.shapes[shapeBottom.style] }} />
+                    <div className="qubely-shape-divider qubely-bottom-shape" dangerouslySetInnerHTML={{ __html: qubely_admin.shapes[shapeBottom.style] }} />
                     }
                     <div className="qubely-row-overlay"></div>
                     <div className={`${align == 'full' ? ((rowContainerWidth == 'boxed') ? 'qubely-container' : 'qubely-container-fluid') : 'qubely-container-fluid'}`}>
