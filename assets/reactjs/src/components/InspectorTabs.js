@@ -24,6 +24,9 @@ const InspectorTabs = props => {
 
     const _isScrolling = () => {
         const cont = document.querySelector('.qubely-inspector-tabs-container');
+        if(!cont){
+            return;
+        }
         const elemTabs = cont.querySelector('.qubely-inspector-tabs');
         const contRect = cont.getBoundingClientRect();
         if(contRect.top < offset.current){
@@ -43,17 +46,19 @@ const InspectorTabs = props => {
         }
     }
 
+    // component did mount
     useEffect(() => {
         // sticky tabs menu
         _isScrolling();
         const editPostSidebar = document.querySelector('.edit-post-sidebar');
         offset.current = document.querySelector('.components-panel').getBoundingClientRect().top;
-        editPostSidebar.addEventListener('scroll', () => {
-            _isScrolling();
-        });
+        editPostSidebar.addEventListener('scroll', _isScrolling);
 
+        // component will unmount
         return () => {
-            sidebarPanel && sidebarPanel.removeAttribute('data-qubely-tab')
+            sidebarPanel && sidebarPanel.removeAttribute('data-qubely-tab');
+            // remove scroll event listener
+            editPostSidebar.removeEventListener('scroll', _isScrolling);
         }
     }, []);
 

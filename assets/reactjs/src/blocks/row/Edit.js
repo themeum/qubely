@@ -331,6 +331,8 @@ class Edit extends Component {
                                 </Fragment>
                                 }
                             </PanelBody>
+                        </InspectorTab>
+                        <InspectorTab key={'advance'}>
                             <PanelBody initialOpen={false} title={__('Shape Divider')}>
                                 <Tabs>
                                     <Tab tabTitle={__('Top Shape')}>
@@ -341,10 +343,11 @@ class Edit extends Component {
                                     </Tab>
                                 </Tabs>
                             </PanelBody>
-                        </InspectorTab>
-                        <InspectorTab key={'advance'}>
                             {animationSettings(uniqueId, animation, setAttributes)}
                             <InspectorAdvancedControls>
+                                {/*
+                                    @TODO: Column Reverse & CSS ID is not showing
+                                */}
                                 <Toggle label={__('Column Reverse')} responsive value={rowReverse.values} onChange={val => setAttributes({ rowReverse: { values: val, openRowReverse: true } })} />
                                 <TextControl label={__('CSS ID')} value={rowId} onChange={val => setAttributes({ rowId: val })} />
                                 {globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes, true)}
