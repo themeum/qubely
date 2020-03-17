@@ -13,7 +13,9 @@ const {
         animationSettings,
         interactionSettings
     },
-    withCSSGenerator
+    withCSSGenerator,
+    InspectorTabs,
+    InspectorTab
 } = wp.qubelyComponents;
 
 const UI_PARTS = {
@@ -89,25 +91,28 @@ class Edit extends Component {
         return (
             <Fragment>
                 <InspectorControls key="inspector">
-                    <PanelBody title="" initialOpen={true}>
-                        <Alignment label={__('Alignment')} value={alignment} alignmentType="content" onChange={val => setAttributes({ alignment: val })} flex disableJustify responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
-                        <Range
-                            min={0}
-                            max={300}
-                            responsive
-                            device={device}
-                            value={spacing}
-                            unit={['px', 'em', '%']}
-                            label={__('Spacing')}
-                            onChange={value => setAttributes({ spacing: value })}
-                            onDeviceChange={value => this.setState({ device: value })}
-                        />
-                    </PanelBody>
-
-                    {animationSettings(uniqueId, animation, setAttributes)}
-
-                    {interactionSettings(uniqueId, interaction, setAttributes)}
-
+                    <InspectorTabs tabs={['style', 'advance']}>
+                        <InspectorTab key={'style'}>
+                            <PanelBody title="" initialOpen={true}>
+                                <Alignment label={__('Alignment')} value={alignment} alignmentType="content" onChange={val => setAttributes({ alignment: val })} flex disableJustify responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
+                                <Range
+                                    min={0}
+                                    max={300}
+                                    responsive
+                                    device={device}
+                                    value={spacing}
+                                    unit={['px', 'em', '%']}
+                                    label={__('Spacing')}
+                                    onChange={value => setAttributes({ spacing: value })}
+                                    onDeviceChange={value => this.setState({ device: value })}
+                                />
+                            </PanelBody>
+                        </InspectorTab>
+                        <InspectorTab key={'advance'}>
+                            {animationSettings(uniqueId, animation, setAttributes)}
+                            {interactionSettings(uniqueId, interaction, setAttributes)}
+                        </InspectorTab>
+                    </InspectorTabs>
                 </InspectorControls>
 
                 {globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
