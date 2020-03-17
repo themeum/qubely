@@ -16,6 +16,10 @@ const attributes = {
         type: 'string',
         default: ''
     },
+    recreateStyles: {
+        type: 'boolean',
+        default: true
+    },
     ...globalAttributes,
     spacer: {
         type: 'object',

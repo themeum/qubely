@@ -203,7 +203,7 @@ Found a bug? Please let us know by posting on the support section of this plugin
 # Changelog
 
 
-**1.3.5 - 13 March, 2020**
+**1.3.5 - 16 March, 2020**
 New: Support for WordPress 5.4  
 New: Image block - URL in blurb layout  
 Update: Button Group block - Restructure  
@@ -213,7 +213,6 @@ Fix: Contact form block - Value encryption issue
 Fix: Info Box block - Media background CSS issue  
 Fix: Advanced list block - Number, Bullet size & color not working  
 Fix: CSS generator - String type attributes (Color) value reset not working
-
 
 
 **1.3.4 - 27 February, 2020**

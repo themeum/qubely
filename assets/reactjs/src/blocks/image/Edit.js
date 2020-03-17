@@ -28,6 +28,7 @@ class Edit extends Component {
     render() {
         const {
             uniqueId,
+            recreateStyles,
             className,
             layout,
             alignment,
@@ -103,7 +104,9 @@ class Edit extends Component {
             <Fragment>
                 <InspectorControls key="inspector">
                     <PanelBody title=''>
-                        <Styles value={layout} onChange={val => setAttributes({ layout: val })}
+                        <Styles
+                            value={layout}
+                            onChange={val => setAttributes({ layout: val })}
                             options={[
                                 { value: 'simple', svg: icons.image.simple, label: __('Simple') },
                                 { value: 'blurb', svg: icons.image.blurb, label: __('Blurb') }
