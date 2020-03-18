@@ -19,7 +19,9 @@ const {
 	Inline: {
 		InlineToolbar
 	},
-	withCSSGenerator
+	withCSSGenerator,
+	InspectorTabs,
+	InspectorTab
 } = wp.qubelyComponents
 
 class Edit extends Component {
@@ -73,44 +75,48 @@ class Edit extends Component {
 		return (
 			<Fragment>
 				<InspectorControls key="inspector">
-					<PanelBody title={__('Background')} initialOpen={false}>
-						<Tabs>
-							<Tab tabTitle={__('Normal')}>
-								<Background
-									externalImage
-									value={bgColor}
-									label={__('Background')}
-									sources={['image', 'gradient']}
-									onChange={val => setAttributes({ bgColor: val })}
-								/>
-								<Padding
-									label={__('Padding')}
-									value={padding}
-									min={0}
-									max={300}
-									responsive
-									device={device}
-									unit={['px', 'em', '%']}
-									onChange={val => setAttributes({ padding: val })}
-									onDeviceChange={value => this.setState({ device: value })}
-								/>
-								<Border label={__('Border')} value={border} onChange={val => setAttributes({ border: val })} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
-								<BoxShadow label={__('Box-Shadow')} value={bgShadow} onChange={(value) => setAttributes({ bgShadow: value })} />
-								<BorderRadius label={__('Radius')} value={borderRadius} onChange={(value) => setAttributes({ borderRadius: value })} min={0} max={100} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
-							</Tab>
-							<Tab tabTitle={__('Hover')}>
-								<Background label={__('Background')} sources={['image', 'gradient']} value={bgColorHover} onChange={val => setAttributes({ bgColorHover: val })} />
-								{(border.openBorder != undefined && border.openBorder == 1) &&
-									<Color label={__('Border Color')} value={bgBorderColorHover} onChange={(value) => setAttributes({ bgBorderColorHover: value })} />
-								}
-								<BoxShadow label={__('Box-Shadow')} value={bgShadowHover} onChange={(value) => setAttributes({ bgShadowHover: value })} />
-							</Tab>
-						</Tabs>
-					</PanelBody>
-
-					{animationSettings(uniqueId, animation, setAttributes)}
-
-					{interactionSettings(uniqueId, interaction, setAttributes)}
+					<InspectorTabs tabs={['style', 'advance']}>
+						<InspectorTab key={'style'}>
+							<PanelBody title={__('Background')} initialOpen={true}>
+								<Tabs>
+									<Tab tabTitle={__('Normal')}>
+										<Background
+											externalImage
+											value={bgColor}
+											label={__('Background')}
+											sources={['image', 'gradient']}
+											onChange={val => setAttributes({ bgColor: val })}
+										/>
+										<Padding
+											label={__('Padding')}
+											value={padding}
+											min={0}
+											max={300}
+											responsive
+											device={device}
+											unit={['px', 'em', '%']}
+											onChange={val => setAttributes({ padding: val })}
+											onDeviceChange={value => this.setState({ device: value })}
+										/>
+										<Border label={__('Border')} value={border} onChange={val => setAttributes({ border: val })} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
+										<BoxShadow label={__('Box-Shadow')} value={bgShadow} onChange={(value) => setAttributes({ bgShadow: value })} />
+										<BorderRadius label={__('Radius')} value={borderRadius} onChange={(value) => setAttributes({ borderRadius: value })} min={0} max={100} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
+									</Tab>
+									<Tab tabTitle={__('Hover')}>
+										<Background label={__('Background')} sources={['image', 'gradient']} value={bgColorHover} onChange={val => setAttributes({ bgColorHover: val })} />
+										{(border.openBorder != undefined && border.openBorder == 1) &&
+											<Color label={__('Border Color')} value={bgBorderColorHover} onChange={(value) => setAttributes({ bgBorderColorHover: value })} />
+										}
+										<BoxShadow label={__('Box-Shadow')} value={bgShadowHover} onChange={(value) => setAttributes({ bgShadowHover: value })} />
+									</Tab>
+								</Tabs>
+							</PanelBody>
+						</InspectorTab>
+						<InspectorTab key={'advance'}>
+							{animationSettings(uniqueId, animation, setAttributes)}
+							{interactionSettings(uniqueId, interaction, setAttributes)}
+						</InspectorTab>
+					</InspectorTabs>
 
 				</InspectorControls>
 
