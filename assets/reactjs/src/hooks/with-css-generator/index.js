@@ -237,7 +237,6 @@ export default function withCSSGenerator() {
             }
             render() {
                 const { attributes: { showCopyAttr } } = this.props;
-                console.log('state : ', this.state);
                 return (
                     <Fragment>
                         {
