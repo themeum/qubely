@@ -160,9 +160,7 @@ class Edit extends Component {
                 <InspectorControls key="inspector">
                     <InspectorTabs>
                         <InspectorTab key='layout'>
-                            <PanelBody title={__('Sections')} opened={true}>
-                                <InspectorSections block='button'/>
-                            </PanelBody>
+                            <InspectorSections block='button'/>
                         </InspectorTab>
                         <InspectorTab key='style'>
                             <PanelBody title={__('')} opened={true}>
