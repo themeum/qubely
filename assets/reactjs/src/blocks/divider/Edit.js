@@ -13,7 +13,9 @@ const {
         interactionSettings
     },
     Inline: { InlineToolbar },
-     withCSSGenerator
+    withCSSGenerator,
+    InspectorTabs,
+    InspectorTab
 } = wp.qubelyComponents
 
 import icons from '../divider/icon'
@@ -69,9 +71,9 @@ class Edit extends Component {
                 style,
                 animation,
                 globalZindex,
-                enablePosition, 
-                selectPosition, 
-                positionXaxis, 
+                enablePosition,
+                selectPosition,
+                positionXaxis,
                 positionYaxis,
                 hideTablet,
                 hideMobile,
@@ -84,57 +86,61 @@ class Edit extends Component {
         return (
             <Fragment>
                 <InspectorControls key="inspector">
-                    <PanelBody title={__('Divider Options')} initialOpen={true}>
-                        <Dropdown
-                            className={"qubely-divider-picker"}
-                            contentClassName={"qubely-divider-picker-content"}
-                            position="bottom center"
-                            renderToggle={({ isOpen, onToggle }) =>
-                                <span onClick={onToggle} aria-expanded={isOpen}> {icons[style]}</span>
-                            }
-                            renderContent={() => this.renderDividerOptions()}
-                        />
-                        <Alignment
-                            label={__('Alignment')}
-                            alignmentType="content"
-                            disableJustify
-                            value={alignment}
-                            onChange={val => setAttributes({ alignment: val })}
-                            responsive
-                            device={device}
-                            onDeviceChange={value => this.setState({ device: value })} />
-                    </PanelBody >
+                    <InspectorTabs tabs={['style', 'advance']}>
+                        <InspectorTab key={'style'}>
+                            <PanelBody title={__('Divider Options')} initialOpen={true}>
+                                <Dropdown
+                                    className={"qubely-divider-picker"}
+                                    contentClassName={"qubely-divider-picker-content"}
+                                    position="bottom center"
+                                    renderToggle={({ isOpen, onToggle }) =>
+                                        <span onClick={onToggle} aria-expanded={isOpen}> {icons[style]}</span>
+                                    }
+                                    renderContent={() => this.renderDividerOptions()}
+                                />
+                                <Alignment
+                                    label={__('Alignment')}
+                                    alignmentType="content"
+                                    disableJustify
+                                    value={alignment}
+                                    onChange={val => setAttributes({ alignment: val })}
+                                    responsive
+                                    device={device}
+                                    onDeviceChange={value => this.setState({ device: value })} />
+                            </PanelBody >
 
-                    <PanelBody title={__('Divider Settings', 'qubely')} initialOpen={false}>
-                        <Color
-                            label={__('Color')}
-                            value={color}
-                            onChange={val => setAttributes({ color: val })} />
-                        <Range
-                            label={__('Height')}
-                            value={height}
-                            onChange={val => setAttributes({ height: val })}
-                            min={0}
-                            max={15}
-                            unit={['px', 'em', '%']}
-                            responsive
-                            device={device}
-                            onDeviceChange={value => this.setState({ device: value })} />
-                        <Range
-                            label={__('Width')}
-                            value={width}
-                            onChange={val => setAttributes({ width: val })}
-                            min={0}
-                            max={1000}
-                            unit={['px', 'em', '%']}
-                            responsive
-                            device={device}
-                            onDeviceChange={value => this.setState({ device: value })} />
-                    </PanelBody>
-
-                    {animationSettings(uniqueId, animation, setAttributes)}
-
-                    {interactionSettings(uniqueId, interaction, setAttributes)}
+                            <PanelBody title={__('Divider Settings', 'qubely')} initialOpen={true}>
+                                <Color
+                                    label={__('Color')}
+                                    value={color}
+                                    onChange={val => setAttributes({ color: val })} />
+                                <Range
+                                    label={__('Height')}
+                                    value={height}
+                                    onChange={val => setAttributes({ height: val })}
+                                    min={0}
+                                    max={15}
+                                    unit={['px', 'em', '%']}
+                                    responsive
+                                    device={device}
+                                    onDeviceChange={value => this.setState({ device: value })} />
+                                <Range
+                                    label={__('Width')}
+                                    value={width}
+                                    onChange={val => setAttributes({ width: val })}
+                                    min={0}
+                                    max={1000}
+                                    unit={['px', 'em', '%']}
+                                    responsive
+                                    device={device}
+                                    onDeviceChange={value => this.setState({ device: value })} />
+                            </PanelBody>
+                        </InspectorTab>
+                        <InspectorTab key={'advance'}>
+                            {animationSettings(uniqueId, animation, setAttributes)}
+                            {interactionSettings(uniqueId, interaction, setAttributes)}
+                        </InspectorTab>
+                    </InspectorTabs>
 
                 </InspectorControls >
 
