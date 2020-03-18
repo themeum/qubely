@@ -127,9 +127,7 @@ class Edit extends Component {
                 <InspectorControls key="inspector">
                     <InspectorTabs>
                         <InspectorTab key={'layout'}>
-                            <PanelBody title={__('Related Sections')}>
-                                <InspectorSections block={'heading'} />
-                            </PanelBody>
+                            <InspectorSections block={'heading'} />
                         </InspectorTab>
                         <InspectorTab key={'style'}>
                             <PanelBody title="" initialOpen={true}>
