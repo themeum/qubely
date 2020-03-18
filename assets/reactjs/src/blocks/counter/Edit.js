@@ -18,7 +18,9 @@ const {
 		ContextMenu,
 		handleContextMenu 
 	},
-	withCSSGenerator
+	withCSSGenerator,
+	InspectorTabs,
+	InspectorTab
 } = wp.qubelyComponents
 
 class Edit extends Component {
@@ -74,47 +76,49 @@ class Edit extends Component {
 		return (
 			<Fragment>
 				<InspectorControls key="inspector">
-					<PanelBody title={__('Counter Settings')}>
-						<TextControl label={__('Counter Limit')} type="number" value={counterLimit} onChange={value => { setAttributes({ counterLimit: value }) }} />
-						{counterLimit > 0 &&
-							<Fragment>
-								<TextControl label={__('Counter Duration')} type="number" value={counterDuration} onChange={value => { setAttributes({ counterDuration: value }) }} />
-								<Alignment
-									label={__('Alignment')}
-									alignmentType="content"
-									value={alignment}
-									onChange={val => setAttributes({ alignment: val })}
-									disableJustify
-									responsive
-									device={device}
-									onDeviceChange={value => this.setState({ device: value })} />
-							</Fragment>
-						}
-					</PanelBody>
+					<InspectorTabs tabs={['style', 'advance']}>
+						<InspectorTab key={'style'}>
+							<PanelBody title={__('Counter Settings')}>
+								<TextControl label={__('Counter Limit')} type="number" value={counterLimit} onChange={value => { setAttributes({ counterLimit: value }) }} />
+								{counterLimit > 0 &&
+								<Fragment>
+									<TextControl label={__('Counter Duration')} type="number" value={counterDuration} onChange={value => { setAttributes({ counterDuration: value }) }} />
+									<Alignment
+										label={__('Alignment')}
+										alignmentType="content"
+										value={alignment}
+										onChange={val => setAttributes({ alignment: val })}
+										disableJustify
+										responsive
+										device={device}
+										onDeviceChange={value => this.setState({ device: value })} />
+								</Fragment>
+								}
+							</PanelBody>
 
-					{counterLimit > 0 &&
-						<PanelBody title={__('Counter')} initialOpen={false}>
-							<Fragment>
-								<Typography
-									label={__('Typography')}
-									value={counterTypo}
-									onChange={(value) => setAttributes({ counterTypo: value })}
-									device={device}
-									onDeviceChange={value => this.setState({ device: value })} />
+							{counterLimit > 0 &&
+							<PanelBody title={__('Counter')} initialOpen={false}>
+								<Fragment>
+									<Typography
+										label={__('Typography')}
+										value={counterTypo}
+										onChange={(value) => setAttributes({ counterTypo: value })}
+										device={device}
+										onDeviceChange={value => this.setState({ device: value })} />
 
-								<Color
-									label={__('Color')}
-									value={counterColor}
-									onChange={val => setAttributes({ counterColor: val })} />
-							</Fragment>
-						</PanelBody>
-					}
+									<Color
+										label={__('Color')}
+										value={counterColor}
+										onChange={val => setAttributes({ counterColor: val })} />
+								</Fragment>
+							</PanelBody>
+							}
 
-					{counterLimit > 0 &&
-						<PanelBody title={__('Prefix & Postfix')} initialOpen={false}>
-							<TextControl label={__('Prefix')} value={prefix} placeholder={__('Example: $')} onChange={(value) => setAttributes({ prefix: value })} />
-							<TextControl label={__('Postfix')} value={postfix} placeholder={__('Example: +')} onChange={(value) => setAttributes({ postfix: value })} />
-							{(prefix || postfix) &&
+							{counterLimit > 0 &&
+							<PanelBody title={__('Prefix & Postfix')} initialOpen={false}>
+								<TextControl label={__('Prefix')} value={prefix} placeholder={__('Example: $')} onChange={(value) => setAttributes({ prefix: value })} />
+								<TextControl label={__('Postfix')} value={postfix} placeholder={__('Example: +')} onChange={(value) => setAttributes({ postfix: value })} />
+								{(prefix || postfix) &&
 								<Fragment>
 									<Typography
 										label={__('Typography')}
@@ -137,14 +141,15 @@ class Edit extends Component {
 										value={prepostColor}
 										onChange={val => setAttributes({ prepostColor: val })} />
 								</Fragment>
+								}
+							</PanelBody>
 							}
-						</PanelBody>
-					}
-
-					{animationSettings(uniqueId, animation, setAttributes)}
-
-					{interactionSettings(uniqueId, interaction, setAttributes)}
-
+						</InspectorTab>
+						<InspectorTab key={'advance'}>
+							{animationSettings(uniqueId, animation, setAttributes)}
+							{interactionSettings(uniqueId, interaction, setAttributes)}
+						</InspectorTab>
+					</InspectorTabs>
 				</InspectorControls>
 
 				<BlockControls>
