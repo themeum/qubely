@@ -7,7 +7,7 @@ const {
     i18n: {__},
     data: {withDispatch},
     blocks: {parse},
-    components: {Tooltip}
+    components: {Tooltip, PanelBody}
 } = wp;
 
 const Sections = (props) => {
@@ -140,23 +140,25 @@ const Sections = (props) => {
     }
 
     return (
-        <div className='qubely-block-sections'>
-            <Tooltip text={__('Sync blocks')}>
-                <button onClick={_syncBlocks} className={'qubely-block-refresh ' + loadingState}>
-                    <span className="fas fa-sync-alt"></span>
-                </button>
-            </Tooltip>
-            {
-                sections.map(section => (
-                    <div className='qubely-block-section'>
-                        <img width='330' height='230' loading='lazy' src={section.image} alt={section.name} />
-                        <div className="qubely-block-section-btns">
-                            <button onClick={() => _insertSection(section.ID)}>{__('Import')}</button>
+        <PanelBody title={__('Related Sections')} initialOpen={true}>
+            <div className='qubely-block-sections'>
+                <Tooltip text={__('Sync blocks')}>
+                    <button onClick={_syncBlocks} className={'qubely-block-refresh ' + loadingState}>
+                        <span className="fas fa-sync-alt"></span>
+                    </button>
+                </Tooltip>
+                {
+                    sections.map(section => (
+                        <div className='qubely-block-section'>
+                            <img width='330' height='230' loading='lazy' src={section.image} alt={section.name} />
+                            <div className="qubely-block-section-btns">
+                                <button onClick={() => _insertSection(section.ID)}>{__('Import')}</button>
+                            </div>
                         </div>
-                    </div>
-                ))
-            }
-        </div>
+                    ))
+                }
+            </div>
+        </PanelBody>
     )
 };
 
