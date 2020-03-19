@@ -90,19 +90,19 @@ You can get support by posting on the support section of this plugin on the Word
 <tr>
 
 <td align="center">
-<img src="https://www.themeum.com/wp-content/uploads/2019/10/block-form.svg" alt="form" height="60px" >
+<img src="https://www.themeum.com/wp-content/uploads/2019/10/block-form.svg" alt="form" height="40px" >
 <h4>Form Builder</h4>
 Create functional Form using Qubely Form block
 </td>
 
 <td align="center">
-<img src="https://www.themeum.com/wp-content/uploads/2019/10/block-gallery.svg" alt="gallery" height="60px" >
+<img src="https://www.themeum.com/wp-content/uploads/2019/10/block-gallery.svg" alt="gallery" height="40px" >
 <h4>Gallery</h4>
 Display blog posts beautifully in grid or list views
 </td>
 
 <td align="center">
-<img src="https://www.themeum.com/wp-content/uploads/2019/09/post-grid-block.svg" alt="post-grid" height="60px" >
+<img src="https://www.themeum.com/wp-content/uploads/2019/09/post-grid-block.svg" alt="post-grid" height="40px" >
 <h4>Post Grid</h4>
 Showcase detailed with Qubely Gallery
 </td>
@@ -111,19 +111,19 @@ Showcase detailed with Qubely Gallery
 <tr>
 
 <td align="center">
-<img src="https://www.themeum.com/wp-content/uploads/2019/10/block-countdown.svg" alt="countdown" height="60px" >
+<img src="https://www.themeum.com/wp-content/uploads/2019/10/block-countdown.svg" alt="countdown" height="40px" >
 <h4>Countdown</h4>
 Create under construction banners, announce release and more
 </td>
 
 <td align="center">
-<img src="https://www.themeum.com/wp-content/uploads/2019/12/media-card-block.png" alt="mediacard" height="60px" >
+<img src="https://www.themeum.com/wp-content/uploads/2019/12/media-card-block.png" alt="mediacard" height="40px" >
 <h4>Media Card</h4>
 Add an image or video with an offset
 </td>
 
 <td align="center">
-<img src="https://www.themeum.com/wp-content/uploads/2019/12/pie_icon.svg" alt="pieprogress" height="60px" >
+<img src="https://www.themeum.com/wp-content/uploads/2019/12/pie_icon.svg" alt="pieprogress" height="40px" >
 <h4>Pie Progress</h4>
 Animated circular progress bar
 </td>
@@ -133,21 +133,43 @@ Animated circular progress bar
 <tr>
 
 <td align="center">
-<img src="https://www.themeum.com/wp-content/uploads/2019/10/block-testimonial-carousel.svg" alt="testimonial-carousel" height="60px" >
+<img src="https://www.themeum.com/wp-content/uploads/2019/10/block-testimonial-carousel.svg" alt="testimonial-carousel" height="40px" >
 <h4>Testimonial Carousel</h4>
 Design and showcase customer reviews, remarks as testimonials
 </td>
 
 <td align="center">
-<img src="https://www.themeum.com/wp-content/uploads/2019/10/block-image-carousel.svg" alt="image-carousel" height="60px" >
+<img src="https://www.themeum.com/wp-content/uploads/2019/10/block-image-carousel.svg" alt="image-carousel" height="40px" >
 <h4>Image Carousel</h4>
 Add an image or video with an offset
 </td>
 
 <td align="center">
-<img src="https://www.themeum.com/wp-content/uploads/2019/10/block-team-carousel.svg" alt="team-carousel" height="60px" >
+<img src="https://www.themeum.com/wp-content/uploads/2019/10/block-team-carousel.svg" alt="team-carousel" height="40px" >
 <h4>Team Carousel</h4>
-Design and showcase Team Members
+Design and showcase team members
+</td>
+
+</tr>
+
+<tr>
+
+<td align="center">
+<img src="https://www.themeum.com/wp-content/uploads/2019/10/block-post-carousel.svg" alt="price-list" height="40px" >
+<h4>Post Carousel</h4>
+Showcase blog posts in carousel
+</td>
+
+<td align="center">
+<img src="https://www.themeum.com/wp-content/uploads/2019/10/block-price-list.svg" alt="price-list" height="40px" >
+<h4>Price List</h4>
+Showcase detailed Price List
+</td>
+
+<td align="center">
+<img src="https://www.themeum.com/wp-content/uploads/2020/01/vertical-tab.svg" alt="vertical-tabls" height="40px" >
+<h4>Vertical Tabs</h4>
+Showcase features in Beautiful pre-designed tabs 
 </td>
 
 </tr>
