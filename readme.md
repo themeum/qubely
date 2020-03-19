@@ -90,7 +90,7 @@ You can get support by posting on the support section of this plugin on the Word
 <tr>
 
 <td align="center">
-[<img src="https://www.themeum.com/wp-content/uploads/2019/10/block-form.svg" alt="form" height="60px" >](https://qubely.io/block/form-builder/)
+<img src="https://www.themeum.com/wp-content/uploads/2019/10/block-form.svg" alt="form" height="60px" >
 <h4>Form Builder</h4>
 Create functional Form using Qubely Form block
 </td>
