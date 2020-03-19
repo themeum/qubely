@@ -92,16 +92,19 @@ You can get support by posting on the support section of this plugin on the Word
 <td align="center">
 <img src="https://www.themeum.com/wp-content/uploads/2019/10/block-form.svg" alt="form" height="100px" >
 <h4>Form Builder</h4>
+Create functional Form using Qubely Form block
 </td>
 
 <td align="center">
 <img src="https://www.themeum.com/wp-content/uploads/2019/10/block-gallery.svg" alt="gallery" height="100px" >
 <h4>Gallery</h4>
+Fetch blog posts and display them beautifully in grid or list views
 </td>
 
 <td align="center">
 <img src="https://www.themeum.com/wp-content/uploads/2019/09/post-grid-block.svg" alt="post-grid" height="100px" >
 <h4>Post Grid</h4>
+Showcase detailed with Qubely Gallery
 </tr>
 
 
