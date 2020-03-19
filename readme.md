@@ -82,7 +82,7 @@ The WordPress codex contains [instructions on how to do this here](https://codex
 
 You can get support by posting on the support section of this plugin on the WordPress plugin directory, or on the Themeum support forums: https://www.themeum.com/support/ 🙂
 
-### Available Addon's in the [Qubely Pro Version](https://www.themeum.com/product/qubely)
+## [Qubely Pro Blocks](https://www.themeum.com/product/qubely)
 
 
 <table>
