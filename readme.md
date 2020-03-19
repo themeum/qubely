@@ -105,6 +105,51 @@ Display blog posts beautifully in grid or list views
 <img src="https://www.themeum.com/wp-content/uploads/2019/09/post-grid-block.svg" alt="post-grid" height="60px" >
 <h4>Post Grid</h4>
 Showcase detailed with Qubely Gallery
+</td>
+</tr>
+
+<tr>
+
+<td align="center">
+<img src="https://www.themeum.com/wp-content/uploads/2019/10/block-countdown.svg" alt="countdown" height="60px" >
+<h4>Countdown</h4>
+Create under construction banners, announce release and more
+</td>
+
+<td align="center">
+<img src="https://www.themeum.com/wp-content/uploads/2019/12/media-card-block.png" alt="mediacard" height="60px" >
+<h4>Media Card</h4>
+Add an image or video with an offset
+</td>
+
+<td align="center">
+<img src="https://www.themeum.com/wp-content/uploads/2019/12/pie_icon.svg" alt="pieprogress" height="60px" >
+<h4>Pie Progress</h4>
+Animated circular progress bar
+</td>
+
+</tr>
+
+<tr>
+
+<td align="center">
+<img src="https://www.themeum.com/wp-content/uploads/2019/10/block-testimonial-carousel.svg" alt="testimonial-carousel" height="60px" >
+<h4>Testimonial Carousel</h4>
+Design and showcase customer reviews, remarks as testimonials
+</td>
+
+<td align="center">
+<img src="https://www.themeum.com/wp-content/uploads/2019/10/block-image-carousel.svg" alt="image-carousel" height="60px" >
+<h4>Image Carousel</h4>
+Add an image or video with an offset
+</td>
+
+<td align="center">
+<img src="https://www.themeum.com/wp-content/uploads/2019/10/block-team-carousel.svg" alt="team-carousel" height="60px" >
+<h4>Team Carousel</h4>
+Design and showcase Team Members
+</td>
+
 </tr>
 
 
