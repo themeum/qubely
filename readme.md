@@ -111,7 +111,7 @@ Showcase detailed with Qubely Gallery
 <tr>
 
 <td align="center">
-<img src="https://www.themeum.com/wp-content/uploads/2019/10/block-countdown.svg" alt="countdown" height="40px" >
+<img src="https://qubely.io/wp-content/uploads/2020/02/countdown-icon.jpg" alt="countdown" height="40px" >
 <h4>Countdown</h4>
 Create under construction banners, announce release and more
 </td>
