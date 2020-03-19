@@ -2,7 +2,6 @@
 
 [Qubely](https://wordpress.org/plugins/qubely/) is a full-fledged Gutenberg toolkit with plenty of predefined sections and modern layout packs to create beautiful pages and posts on the Gutenberg editor. It offers a whole new experience that minimizes all limitations of the Gutenberg editor and opens unlimited possibilities to create any simple to complex content on a WordPress website. This user-friendly tool has been developed with all necessary customization features to achieve any possible layout.
 
-Qubely extends Gutenberg with many custom blocks that are missing in the editor. Take full control of the WordPress block editor with the ability to apply out of the box styling options. Create web pages and posts using Qubely’s custom Gutenberg blocks that are stunning as well as mobile optimized.
 
 [youtube https://www.youtube.com/watch?v=_aRAQkHZiUQ]
 
@@ -83,3 +82,28 @@ The WordPress codex contains [instructions on how to do this here](https://codex
 
 You can get support by posting on the support section of this plugin on the WordPress plugin directory, or on the Themeum support forums: https://www.themeum.com/support/ 🙂
 
+### Available Addon's in the [Qubely Pro Version](https://www.themeum.com/product/qubely)
+
+
+<table>
+
+<tr>
+
+<td align="center">
+<img src="https://www.themeum.com/wp-content/uploads/2019/10/block-form.svg" alt="form" height="100px" >
+<h4>Form Builder</h4>
+</td>
+
+<td align="center">
+<img src="https://www.themeum.com/wp-content/uploads/2019/10/block-gallery.svg" alt="gallery" height="100px" >
+<h4>Gallery</h4>
+</td>
+
+<td align="center">
+<img src="https://www.themeum.com/wp-content/uploads/2019/09/post-grid-block.svg" alt="post-grid" height="100px" >
+<h4>Post Grid</h4>
+</tr>
+
+
+
+</table>
