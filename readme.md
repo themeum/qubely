@@ -1,4 +1,10 @@
-#  Gutenberg Blocks and Page Builder – Qubely   
+#  Gutenberg Blocks and Page Builder – Qubely  
+
+[![WordPress plugin](https://img.shields.io/wordpress/plugin/v/qubely.svg)](https://wordpress.org/plugins/qubely/)
+[![WordPress](https://img.shields.io/wordpress/v/qubely.svg)](https://wordpress.org/plugins/qubely/)
+[![WordPress rating](https://img.shields.io/wordpress/plugin/r/qubely.svg)](https://wordpress.org/support/plugin/qubely/reviews/)
+[![WordPress](https://img.shields.io/wordpress/plugin/dt/qubely.svg)](https://wordpress.org/plugins/qubely/advanced/)
+[![Wordpress Plugin Active Installs](https://img.shields.io/wordpress/plugin/installs/qubely.svg)](https://wordpress.org/plugins/qubely/) 
 
 [Qubely](https://wordpress.org/plugins/qubely/) is a full-fledged Gutenberg toolkit with plenty of predefined sections and modern layout packs to create beautiful pages and posts on the Gutenberg editor. It offers a whole new experience that minimizes all limitations of the Gutenberg editor and opens unlimited possibilities to create any simple to complex content on a WordPress website. This user-friendly tool has been developed with all necessary customization features to achieve any possible layout.
 
