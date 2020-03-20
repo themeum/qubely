@@ -43,7 +43,9 @@ const {
         ContextMenu,
         handleContextMenu
     },
-    withCSSGenerator
+    withCSSGenerator,
+    InspectorTabs,
+    InspectorTab
 } = wp.qubelyComponents;
 
 
@@ -195,8 +197,10 @@ class Edit extends Component {
                 </BlockControls>
 
                 <InspectorControls key="inspector">
-                    <PanelBody title={__('')} initialOpen={true}>
-                        {/* <FormTokenField
+                    <InspectorTabs tabs={['style', 'advance']}>
+                        <InspectorTab key={'style'}>
+                            <PanelBody title={__('')} initialOpen={true}>
+                                {/* <FormTokenField
                             maxLength={6}
                             label={__('Anchors by Tags')}
                             placeholder={__('Add anchor')}
@@ -207,331 +211,329 @@ class Edit extends Component {
                             }}
                             value={Object.keys(allowedAnchors).filter(item => allowedAnchors[item])}
                         /> */}
-                        <div className="qubely-field ">
-                            <label>{__('Select headings')}</label>
-                            <div className="qubely-toc-allowed-headings">
-                                <CheckboxControl
-                                    label={__('H1')}
-                                    checked={allowedAnchors['h1']}
-                                    onChange={value => setAttributes({ allowedAnchors: { ...allowedAnchors, h1: value } })}
-                                />
-                                <CheckboxControl
-                                    label={__('H2')}
-                                    checked={allowedAnchors['h2']}
-                                    onChange={value => setAttributes({ allowedAnchors: { ...allowedAnchors, h2: value } })}
-                                />
-                                <CheckboxControl
-                                    label={__('H3')}
-                                    checked={allowedAnchors['h3']}
-                                    onChange={value => setAttributes({ allowedAnchors: { ...allowedAnchors, h3: value } })}
-                                />
-                                <CheckboxControl
-                                    label={__('H4')}
-                                    checked={allowedAnchors['h4']}
-                                    onChange={value => setAttributes({ allowedAnchors: { ...allowedAnchors, h4: value } })}
-                                />
-                                <CheckboxControl
-                                    label={__('H5')}
-                                    checked={allowedAnchors['h5']}
-                                    onChange={value => setAttributes({ allowedAnchors: { ...allowedAnchors, h5: value } })}
-                                />
-                                <CheckboxControl
-                                    label={__('H6')}
-                                    checked={allowedAnchors['h6']}
-                                    onChange={value => setAttributes({ allowedAnchors: { ...allowedAnchors, h6: value } })}
-                                />
-                            </div>
-                        </div>
-                    </PanelBody>
+                                <div className="qubely-field ">
+                                    <label>{__('Select headings')}</label>
+                                    <div className="qubely-toc-allowed-headings">
+                                        <CheckboxControl
+                                            label={__('H1')}
+                                            checked={allowedAnchors['h1']}
+                                            onChange={value => setAttributes({ allowedAnchors: { ...allowedAnchors, h1: value } })}
+                                        />
+                                        <CheckboxControl
+                                            label={__('H2')}
+                                            checked={allowedAnchors['h2']}
+                                            onChange={value => setAttributes({ allowedAnchors: { ...allowedAnchors, h2: value } })}
+                                        />
+                                        <CheckboxControl
+                                            label={__('H3')}
+                                            checked={allowedAnchors['h3']}
+                                            onChange={value => setAttributes({ allowedAnchors: { ...allowedAnchors, h3: value } })}
+                                        />
+                                        <CheckboxControl
+                                            label={__('H4')}
+                                            checked={allowedAnchors['h4']}
+                                            onChange={value => setAttributes({ allowedAnchors: { ...allowedAnchors, h4: value } })}
+                                        />
+                                        <CheckboxControl
+                                            label={__('H5')}
+                                            checked={allowedAnchors['h5']}
+                                            onChange={value => setAttributes({ allowedAnchors: { ...allowedAnchors, h5: value } })}
+                                        />
+                                        <CheckboxControl
+                                            label={__('H6')}
+                                            checked={allowedAnchors['h6']}
+                                            onChange={value => setAttributes({ allowedAnchors: { ...allowedAnchors, h6: value } })}
+                                        />
+                                    </div>
+                                </div>
+                            </PanelBody>
 
-                    <PanelBody title={__('Header')} initialOpen={false}>
-                        <Color
-                            label={__('Color')}
-                            value={headerColor}
-                            onChange={headerColor => setAttributes({ headerColor })}
-                        />
-                        <Color
-                            label={__('Background')}
-                            value={headerBg}
-                            onChange={headerBg => setAttributes({ headerBg })}
-                        />
-                        <Range
-                            label={__('Font Size')}
-                            value={headingSize}
-                            onChange={(headingSize) => setAttributes({ headingSize })}
-                            unit={['px']}
-                            min={10} max={100} responsive device={device}
-                            onDeviceChange={value => this.setState({ device: value })}
-                        />
-                        <Range
-                            label={__('Padding X')}
-                            value={headerPaddingX}
-                            onChange={(headerPaddingX) => setAttributes({ headerPaddingX })}
-                            unit={['px']}
-                            min={0} max={100} responsive device={device}
-                            onDeviceChange={value => this.setState({ device: value })}
-                        />
-                        <Range
-                            label={__('Padding Y')}
-                            value={headerPaddingY}
-                            onChange={(headerPaddingY) => setAttributes({ headerPaddingY })}
-                            unit={['px']}
-                            min={0} max={100} responsive device={device}
-                            onDeviceChange={value => this.setState({ device: value })}
-                        />
-                        <Toggle
-                            label={__('Border Separator')}
-                            value={enableHeaderBorder}
-                            onChange={enableHeaderBorder => setAttributes({ enableHeaderBorder })}
-                        />
-                        {
-                            enableHeaderBorder && (
-                                <Fragment>
-                                    <Range
-                                        label={__('Border Width')}
-                                        value={headerBorderWidth}
-                                        onChange={(headerBorderWidth) => setAttributes({ headerBorderWidth })}
-                                        unit={['px']}
-                                        min={0} max={100} responsive device={device}
-                                        onDeviceChange={headerBorderWidth => this.setState({ headerBorderWidth })}
-                                    />
-                                    <Color
-                                        label={__('Border Color')}
-                                        value={headerBorderColor}
-                                        onChange={headerBorderColor => setAttributes({ headerBorderColor })}
-                                    />
-                                </Fragment>
-                            )
-                        }
-                    </PanelBody>
+                            <PanelBody title={__('Header')} initialOpen={false}>
+                                <Color
+                                    label={__('Color')}
+                                    value={headerColor}
+                                    onChange={headerColor => setAttributes({ headerColor })}
+                                />
+                                <Color
+                                    label={__('Background')}
+                                    value={headerBg}
+                                    onChange={headerBg => setAttributes({ headerBg })}
+                                />
+                                <Range
+                                    label={__('Font Size')}
+                                    value={headingSize}
+                                    onChange={(headingSize) => setAttributes({ headingSize })}
+                                    unit={['px']}
+                                    min={10} max={100} responsive device={device}
+                                    onDeviceChange={value => this.setState({ device: value })}
+                                />
+                                <Range
+                                    label={__('Padding X')}
+                                    value={headerPaddingX}
+                                    onChange={(headerPaddingX) => setAttributes({ headerPaddingX })}
+                                    unit={['px']}
+                                    min={0} max={100} responsive device={device}
+                                    onDeviceChange={value => this.setState({ device: value })}
+                                />
+                                <Range
+                                    label={__('Padding Y')}
+                                    value={headerPaddingY}
+                                    onChange={(headerPaddingY) => setAttributes({ headerPaddingY })}
+                                    unit={['px']}
+                                    min={0} max={100} responsive device={device}
+                                    onDeviceChange={value => this.setState({ device: value })}
+                                />
+                                <Toggle
+                                    label={__('Border Separator')}
+                                    value={enableHeaderBorder}
+                                    onChange={enableHeaderBorder => setAttributes({ enableHeaderBorder })}
+                                />
+                                {
+                                    enableHeaderBorder && (
+                                        <Fragment>
+                                            <Range
+                                                label={__('Border Width')}
+                                                value={headerBorderWidth}
+                                                onChange={(headerBorderWidth) => setAttributes({ headerBorderWidth })}
+                                                unit={['px']}
+                                                min={0} max={100} responsive device={device}
+                                                onDeviceChange={headerBorderWidth => this.setState({ headerBorderWidth })}
+                                            />
+                                            <Color
+                                                label={__('Border Color')}
+                                                value={headerBorderColor}
+                                                onChange={headerBorderColor => setAttributes({ headerBorderColor })}
+                                            />
+                                        </Fragment>
+                                    )
+                                }
+                            </PanelBody>
 
-                    <PanelBody title={__('Collapsible')} initialOpen={false}>
-                        <Toggle label={__('Enable Collapsible')} value={minimizeBox} onChange={minimizeBox => setAttributes({ minimizeBox })} />
-                        {
-                            minimizeBox && (
-                                <Fragment>
+                            <PanelBody title={__('Collapsible')} initialOpen={false}>
+                                <Toggle label={__('Enable Collapsible')} value={minimizeBox} onChange={minimizeBox => setAttributes({ minimizeBox })} />
+                                {
+                                    minimizeBox && (
+                                        <Fragment>
 
-                                    <Color
-                                        label={__('Button Color')}
-                                        value={collapsibleButtonColor}
-                                        onChange={collapsibleButtonColor => setAttributes({ collapsibleButtonColor })}
-                                    />
-                                    <RadioAdvanced
-                                        label={__('Alignment')}
-                                        options={[
-                                            { icon: 'fas fa-align-justify', value: 'qubely-justify-between', title: __('Justify') },
-                                            { icon: 'fas fa-align-left', value: 'qubely-justify-start', title: __('Start') },
-                                            { icon: 'fas fa-align-center', value: 'qubely-justify-center', title: __('Center') },
-                                            { icon: 'fas fa-align-right', value: 'qubely-justify-end', title: __('End') }
-                                        ]}
-                                        value={collapsibleAlignment}
-                                        onChange={collapsibleAlignment => setAttributes({ collapsibleAlignment })} />
-                                    <RadioAdvanced
-                                        label={__('Button Type')}
-                                        options={[
-                                            { label: __('Text'), value: 'text', title: __('Text') },
-                                            { label: __('Icon'), value: 'icon', title: __('Icon') }
-                                        ]}
-                                        value={collapsibleType}
-                                        onChange={collapsibleType => setAttributes({ collapsibleType })} />
+                                            <Color
+                                                label={__('Button Color')}
+                                                value={collapsibleButtonColor}
+                                                onChange={collapsibleButtonColor => setAttributes({ collapsibleButtonColor })}
+                                            />
+                                            <RadioAdvanced
+                                                label={__('Alignment')}
+                                                options={[
+                                                    { icon: 'fas fa-align-justify', value: 'qubely-justify-between', title: __('Justify') },
+                                                    { icon: 'fas fa-align-left', value: 'qubely-justify-start', title: __('Start') },
+                                                    { icon: 'fas fa-align-center', value: 'qubely-justify-center', title: __('Center') },
+                                                    { icon: 'fas fa-align-right', value: 'qubely-justify-end', title: __('End') }
+                                                ]}
+                                                value={collapsibleAlignment}
+                                                onChange={collapsibleAlignment => setAttributes({ collapsibleAlignment })} />
+                                            <RadioAdvanced
+                                                label={__('Button Type')}
+                                                options={[
+                                                    { label: __('Text'), value: 'text', title: __('Text') },
+                                                    { label: __('Icon'), value: 'icon', title: __('Icon') }
+                                                ]}
+                                                value={collapsibleType}
+                                                onChange={collapsibleType => setAttributes({ collapsibleType })} />
 
-                                    {
-                                        collapsibleType === 'icon' ? (
+                                            {
+                                                collapsibleType === 'icon' ? (
+                                                    <RadioAdvanced
+                                                        label={__('Icon')}
+                                                        options={[
+                                                            { icon: 'fas fa-angle-up', value: 'angle', title: __('Angle') },
+                                                            { icon: 'fas fa-chevron-circle-up', value: 'chevron-cirlce', title: __('Chevron Circle') },
+                                                            { icon: 'fas fa-plus', value: 'plus', title: __('Plus/Minus') },
+                                                            { icon: 'fas fa-plus-square', value: 'plus-square', title: __('Plus/Minus Square') }
+                                                        ]}
+                                                        value={collapsibleIcon}
+                                                        onChange={collapsibleIcon => setAttributes({ collapsibleIcon })} />
+                                                ) : (
+                                                        <Fragment>
+                                                            <TextControl
+                                                                label="Open Text"
+                                                                value={collapsibleOpen}
+                                                                onChange={(collapsibleOpen) => setAttributes({ collapsibleOpen })} />
+                                                            <TextControl
+                                                                label="Close Text"
+                                                                value={collapsibleClose}
+                                                                onChange={(collapsibleClose) => setAttributes({ collapsibleClose })} />
+                                                        </Fragment>
+
+                                                    )
+                                            }
+                                        </Fragment>
+                                    )
+                                }
+                            </PanelBody>
+
+                            <PanelBody title={__('Body')} initialOpen={false}>
+                                <Color
+                                    label={__('Color')}
+                                    value={bodyColor}
+                                    onChange={bodyColor => setAttributes({ bodyColor })}
+                                />
+                                <Background
+                                    label={__('Background')}
+                                    sources={['image', 'gradient']}
+                                    value={bodyBg} onChange={bodyBg => setAttributes({ bodyBg })}
+                                />
+                                <Range
+                                    label={__('Font Size')}
+                                    value={bodyFontSize}
+                                    onChange={(bodyFontSize) => setAttributes({ bodyFontSize })}
+                                    unit={['px']}
+                                    min={10} max={100} responsive device={device}
+                                    onDeviceChange={value => this.setState({ device: value })}
+                                />
+                                <Range
+                                    label={__('Line Height')}
+                                    value={bodyLineHeight}
+                                    onChange={(bodyLineHeight) => setAttributes({ bodyLineHeight })}
+                                    unit={['px', 'em']}
+                                    min={0} max={100} responsive device={device}
+                                    onDeviceChange={value => this.setState({ device: value })}
+                                />
+                                <Range
+                                    label={__('Indent')}
+                                    value={indent}
+                                    onChange={(indent) => setAttributes({ indent })}
+                                    unit={['px']}
+                                    min={0} max={100} responsive device={device}
+                                    onDeviceChange={value => this.setState({ device: value })}
+                                />
+                                <Range
+                                    label={__('Padding X')}
+                                    value={bodyPaddingX}
+                                    onChange={(bodyPaddingX) => setAttributes({ bodyPaddingX })}
+                                    unit={['px']}
+                                    min={0} max={100} responsive device={device}
+                                    onDeviceChange={value => this.setState({ device: value })}
+                                />
+                                <Range
+                                    label={__('Padding Y')}
+                                    value={bodyPaddingY}
+                                    onChange={(bodyPaddingY) => setAttributes({ bodyPaddingY })}
+                                    unit={['px']}
+                                    min={0} max={100} responsive device={device}
+                                    onDeviceChange={value => this.setState({ device: value })}
+                                />
+                                <Border
+                                    label={__('Border')}
+                                    separator value={bodyBorder}
+                                    onChange={(value) => setAttributes({ bodyBorder: value })}
+                                    unit={['px', 'em', '%']}
+                                    max={100}
+                                    min={0}
+                                    responsive device={device}
+                                    onDeviceChange={value => this.setState({ device: value })}
+                                />
+                                <BoxShadow label={__('Box-Shadow')}
+                                    value={bodyShadow}
+                                    onChange={(value) => setAttributes({ bodyShadow: value })}
+                                />
+                                <BorderRadius
+                                    label={__('Radius')}
+                                    separator value={bodyBorderRadius}
+                                    onChange={(value) => setAttributes({ bodyBorderRadius: value })}
+                                    unit={['px', 'em', '%']}
+                                    max={100}
+                                    min={0}
+                                    responsive device={device}
+                                    onDeviceChange={value => this.setState({ device: value })}
+                                />
+                            </PanelBody>
+
+                            <PanelBody title={__('Smooth Scroll')}>
+                                <Toggle
+                                    label={__('Enable Smooth Scroll')}
+                                    value={smoothScroll}
+                                    onChange={smoothScroll => setAttributes({ smoothScroll })}
+                                />
+                                {
+                                    smoothScroll === true && (
+                                        <Range
+                                            label={__('Scroll offset')}
+                                            value={scrollOffset}
+                                            min={0}
+                                            max={100}
+                                            onChange={scrollOffset => setAttributes({ scrollOffset })}
+                                        />
+                                    )
+                                }
+
+                                <Separator />
+
+                                <Toggle label={__('Enable Back To Top')} value={scrollToTop} onChange={value => setAttributes({ scrollToTop: value })} />
+
+                                {
+                                    scrollToTop !== false && (
+                                        <Fragment>
                                             <RadioAdvanced
                                                 label={__('Icon')}
                                                 options={[
-                                                    { icon: 'fas fa-angle-up', value: 'angle', title: __('Angle') },
-                                                    { icon: 'fas fa-chevron-circle-up', value: 'chevron-cirlce', title: __('Chevron Circle') },
-                                                    { icon: 'fas fa-plus', value: 'plus', title: __('Plus/Minus') },
-                                                    { icon: 'fas fa-plus-square', value: 'plus-square', title: __('Plus/Minus Square') }
+                                                    { icon: 'fas fa-angle-up', value: 'fas fa-angle-up', title: __('Angle') },
+                                                    { icon: 'fas fa-angle-double-up', value: 'fas fa-angle-double-up', title: __('Angle Double') },
+                                                    { icon: 'fas fa-caret-up', value: 'fas fa-caret-up', title: __('Caret') },
                                                 ]}
-                                                value={collapsibleIcon}
-                                                onChange={collapsibleIcon => setAttributes({ collapsibleIcon })} />
-                                        ) : (
-                                                <Fragment>
-                                                    <TextControl
-                                                        label="Open Text"
-                                                        value={collapsibleOpen}
-                                                        onChange={(collapsibleOpen) => setAttributes({ collapsibleOpen })} />
-                                                    <TextControl
-                                                        label="Close Text"
-                                                        value={collapsibleClose}
-                                                        onChange={(collapsibleClose) => setAttributes({ collapsibleClose })} />
-                                                </Fragment>
-
-                                            )
-                                    }
-                                </Fragment>
-                            )
-                        }
-                    </PanelBody>
-
-                    <PanelBody title={__('Body')} initialOpen={false}>
-                        <Color
-                            label={__('Color')}
-                            value={bodyColor}
-                            onChange={bodyColor => setAttributes({ bodyColor })}
-                        />
-                        <Background
-                            label={__('Background')}
-                            sources={['image', 'gradient']}
-                            value={bodyBg} onChange={bodyBg => setAttributes({ bodyBg })}
-                        />
-                        <Range
-                            label={__('Font Size')}
-                            value={bodyFontSize}
-                            onChange={(bodyFontSize) => setAttributes({ bodyFontSize })}
-                            unit={['px']}
-                            min={10} max={100} responsive device={device}
-                            onDeviceChange={value => this.setState({ device: value })}
-                        />
-                        <Range
-                            label={__('Line Height')}
-                            value={bodyLineHeight}
-                            onChange={(bodyLineHeight) => setAttributes({ bodyLineHeight })}
-                            unit={['px', 'em']}
-                            min={0} max={100} responsive device={device}
-                            onDeviceChange={value => this.setState({ device: value })}
-                        />
-                        <Range
-                            label={__('Indent')}
-                            value={indent}
-                            onChange={(indent) => setAttributes({ indent })}
-                            unit={['px']}
-                            min={0} max={100} responsive device={device}
-                            onDeviceChange={value => this.setState({ device: value })}
-                        />
-                        <Range
-                            label={__('Padding X')}
-                            value={bodyPaddingX}
-                            onChange={(bodyPaddingX) => setAttributes({ bodyPaddingX })}
-                            unit={['px']}
-                            min={0} max={100} responsive device={device}
-                            onDeviceChange={value => this.setState({ device: value })}
-                        />
-                        <Range
-                            label={__('Padding Y')}
-                            value={bodyPaddingY}
-                            onChange={(bodyPaddingY) => setAttributes({ bodyPaddingY })}
-                            unit={['px']}
-                            min={0} max={100} responsive device={device}
-                            onDeviceChange={value => this.setState({ device: value })}
-                        />
-                        <Border
-                            label={__('Border')}
-                            separator value={bodyBorder}
-                            onChange={(value) => setAttributes({ bodyBorder: value })}
-                            unit={['px', 'em', '%']}
-                            max={100}
-                            min={0}
-                            responsive device={device}
-                            onDeviceChange={value => this.setState({ device: value })}
-                        />
-                        <BoxShadow label={__('Box-Shadow')}
-                            value={bodyShadow}
-                            onChange={(value) => setAttributes({ bodyShadow: value })}
-                        />
-                        <BorderRadius
-                            label={__('Radius')}
-                            separator value={bodyBorderRadius}
-                            onChange={(value) => setAttributes({ bodyBorderRadius: value })}
-                            unit={['px', 'em', '%']}
-                            max={100}
-                            min={0}
-                            responsive device={device}
-                            onDeviceChange={value => this.setState({ device: value })}
-                        />
-                    </PanelBody>
-
-                    <PanelBody title={__('Smooth Scroll')}>
-                        <Toggle
-                            label={__('Enable Smooth Scroll')}
-                            value={smoothScroll}
-                            onChange={smoothScroll => setAttributes({ smoothScroll })}
-                        />
-                        {
-                            smoothScroll === true && (
-                                <Range
-                                    label={__('Scroll offset')}
-                                    value={scrollOffset}
-                                    min={0}
-                                    max={100}
-                                    onChange={scrollOffset => setAttributes({ scrollOffset })}
-                                />
-                            )
-                        }
-
-                        <Separator />
-
-                        <Toggle label={__('Enable Back To Top')} value={scrollToTop} onChange={value => setAttributes({ scrollToTop: value })} />
-
-                        {
-                            scrollToTop !== false && (
-                                <Fragment>
-                                    <RadioAdvanced
-                                        label={__('Icon')}
-                                        options={[
-                                            { icon: 'fas fa-angle-up', value: 'fas fa-angle-up', title: __('Angle') },
-                                            { icon: 'fas fa-angle-double-up', value: 'fas fa-angle-double-up', title: __('Angle Double') },
-                                            { icon: 'fas fa-caret-up', value: 'fas fa-caret-up', title: __('Caret') },
-                                        ]}
-                                        value={backToTopIcon}
-                                        onChange={backToTopIcon => setAttributes({ backToTopIcon })}
-                                    />
-                                    <RadioAdvanced
-                                        label={__('Button Position')}
-                                        options={[
-                                            { label: 'Left', value: 'left', title: __('Left') },
-                                            { label: 'Right', value: 'right', title: __('Right') },
-                                        ]}
-                                        value={btiPosition}
-                                        onChange={btiPosition => setAttributes({ btiPosition })}
-                                    />
-                                    <Range
-                                        label={__('Button Offset')}
-                                        value={btiOffset}
-                                        min={0}
-                                        max={250}
-                                        onChange={btiOffset => setAttributes({ btiOffset })}
-                                    />
-                                    <Range
-                                        label={__('Button Size')}
-                                        value={btiSize}
-                                        min={30}
-                                        max={80}
-                                        onChange={btiSize => setAttributes({ btiSize })}
-                                    />
-                                    <Color
-                                        label={__('Button Color')}
-                                        value={btiColor}
-                                        onChange={btiColor => setAttributes({ btiColor })}
-                                    />
-                                    <Color
-                                        label={__('Button Background')}
-                                        value={btiBg}
-                                        onChange={btiBg => setAttributes({ btiBg })}
-                                    />
-                                    <Range
-                                        label={__('Button Radius')}
-                                        value={btiRadius}
-                                        min={0}
-                                        max={100}
-                                        onChange={btiRadius => setAttributes({ btiRadius })}
-                                    />
-                                </Fragment>
-                            )
-                        }
-
-                    </PanelBody>
-
-
-                    {animationSettings(uniqueId, animation, setAttributes)}
-
-                    {interactionSettings(uniqueId, interaction, setAttributes)}
-
-
-
+                                                value={backToTopIcon}
+                                                onChange={backToTopIcon => setAttributes({ backToTopIcon })}
+                                            />
+                                            <RadioAdvanced
+                                                label={__('Button Position')}
+                                                options={[
+                                                    { label: 'Left', value: 'left', title: __('Left') },
+                                                    { label: 'Right', value: 'right', title: __('Right') },
+                                                ]}
+                                                value={btiPosition}
+                                                onChange={btiPosition => setAttributes({ btiPosition })}
+                                            />
+                                            <Range
+                                                label={__('Button Offset')}
+                                                value={btiOffset}
+                                                min={0}
+                                                max={250}
+                                                onChange={btiOffset => setAttributes({ btiOffset })}
+                                            />
+                                            <Range
+                                                label={__('Button Size')}
+                                                value={btiSize}
+                                                min={30}
+                                                max={80}
+                                                onChange={btiSize => setAttributes({ btiSize })}
+                                            />
+                                            <Color
+                                                label={__('Button Color')}
+                                                value={btiColor}
+                                                onChange={btiColor => setAttributes({ btiColor })}
+                                            />
+                                            <Color
+                                                label={__('Button Background')}
+                                                value={btiBg}
+                                                onChange={btiBg => setAttributes({ btiBg })}
+                                            />
+                                            <Range
+                                                label={__('Button Radius')}
+                                                value={btiRadius}
+                                                min={0}
+                                                max={100}
+                                                onChange={btiRadius => setAttributes({ btiRadius })}
+                                            />
+                                        </Fragment>
+                                    )
+                                }
+                            </PanelBody>
+                        </InspectorTab>
+                        <InspectorTab key={'advance'}>
+                            {animationSettings(uniqueId, animation, setAttributes)}
+                            {interactionSettings(uniqueId, interaction, setAttributes)}
+                        </InspectorTab>
+                    </InspectorTabs>
                 </InspectorControls>
+                
                 {globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
                 <div className={classes}>
                     <div className={classnames([

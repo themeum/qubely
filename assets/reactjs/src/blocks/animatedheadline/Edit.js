@@ -22,7 +22,9 @@ const {
     HeadingToolbar,
     Typography,
     Range,
-    withCSSGenerator
+    withCSSGenerator,
+    InspectorTabs,
+    InspectorTab
 } = wp.qubelyComponents
 
 const defaultTexts = ['Demo-one', 'Demo-two']
@@ -150,113 +152,119 @@ class Edit extends Component {
         return (
             <Fragment>
                 <InspectorControls>
-                    <PanelBody title={__('Headline level')} opened={true}>
-                        <HeadingToolbar minLevel={1} maxLevel={6} selectedLevel={level} isCollapsed={false} onChange={(newLevel) => setAttributes({ level: newLevel })} />
-                    </PanelBody>
-                    <PanelBody title={__('Animated Text')}>
+                    <InspectorTabs tabs={['style', 'advance']}>
+                        <InspectorTab key={'style'}>
+                            <PanelBody title={__('Headline level')} opened={true}>
+                                <HeadingToolbar minLevel={1} maxLevel={6} selectedLevel={level} isCollapsed={false} onChange={(newLevel) => setAttributes({ level: newLevel })} />
+                            </PanelBody>
+                            <PanelBody title={__('Animated Text')}>
 
-                        <TextControl
-                            label={__('Text Before')}
-                            value={titleBefore}
-                            onChange={titleBefore => setAttributes({ titleBefore })}
-                        />
-                        <TextControl
-                            label={__('Text After')}
-                            value={titleAfter}
-                            onChange={titleAfter => setAttributes({ titleAfter })}
-                        />
-                        <FormTokenField
-                            label={__('Animated Texts')}
-                            value={animatedText}
-                            placeholder={__('Add new text')}
-                            onChange={tokens => setAttributes({ animatedText: tokens })}
-                        />
-                        <SelectControl
-                            label={__('Animation Type')}
-                            value={animationType}
-                            options={[
-                                { label: __('Blinds'), value: 'blinds' },
-                                { label: __('Clip'), value: 'clip' },
-                                { label: __('Delete Typing'), value: 'delete-typing' },
-                                { label: __('Flip'), value: 'flip' },
-                                { label: __('Fade In'), value: 'fade-in' },
-                                { label: __('Loading Bar'), value: 'loading-bar' },
-                                { label: __('Scale'), value: 'scale' },
-                                { label: __('Push'), value: 'push' },
-                                { label: __('Twist/Wave'), value: 'wave' },
-                            ]}
-                            onChange={val => this._handleTypeChange(val)}
-                        />
-                        {
-                            animationType === 'loading-bar' &&
-                            <Color label={__('Bar Color')} value={barColor} onChange={val => setAttributes({ barColor: val })} />
-                        }
-                        {
-                            gradientTextColor ?
+                                <TextControl
+                                    label={__('Text Before')}
+                                    value={titleBefore}
+                                    onChange={titleBefore => setAttributes({ titleBefore })}
+                                />
+                                <TextControl
+                                    label={__('Text After')}
+                                    value={titleAfter}
+                                    onChange={titleAfter => setAttributes({ titleAfter })}
+                                />
+                                <FormTokenField
+                                    label={__('Animated Texts')}
+                                    value={animatedText}
+                                    placeholder={__('Add new text')}
+                                    onChange={tokens => setAttributes({ animatedText: tokens })}
+                                />
+                                <SelectControl
+                                    label={__('Animation Type')}
+                                    value={animationType}
+                                    options={[
+                                        { label: __('Blinds'), value: 'blinds' },
+                                        { label: __('Clip'), value: 'clip' },
+                                        { label: __('Delete Typing'), value: 'delete-typing' },
+                                        { label: __('Flip'), value: 'flip' },
+                                        { label: __('Fade In'), value: 'fade-in' },
+                                        { label: __('Loading Bar'), value: 'loading-bar' },
+                                        { label: __('Scale'), value: 'scale' },
+                                        { label: __('Push'), value: 'push' },
+                                        { label: __('Twist/Wave'), value: 'wave' },
+                                    ]}
+                                    onChange={val => this._handleTypeChange(val)}
+                                />
+                                {
+                                    animationType === 'loading-bar' &&
+                                    <Color label={__('Bar Color')} value={barColor} onChange={val => setAttributes({ barColor: val })} />
+                                }
+                                {
+                                    gradientTextColor ?
+                                        <ColorAdvanced
+                                            textColor
+                                            label={__('Color')}
+                                            value={animatedTextColor}
+                                            onChange={val => setAttributes({ animatedTextColor: val })}
+                                        />
+                                        :
+                                        <Color label={__('Color')} value={animatedTextColor.color} onChange={val => setAttributes({ animatedTextColor: { ...animatedTextColor, color: val } })} />
+                                }
                                 <ColorAdvanced
                                     textColor
-                                    label={__('Color')}
-                                    value={animatedTextColor}
-                                    onChange={val => setAttributes({ animatedTextColor: val })}
+                                    label={__('Background')}
+                                    value={animatedTextBgColor}
+                                    onChange={val => setAttributes({ animatedTextBgColor: val })}
                                 />
-                                :
-                                <Color label={__('Color')} value={animatedTextColor.color} onChange={val => setAttributes({ animatedTextColor: { ...animatedTextColor, color: val } })} />
-                        }
-                        <ColorAdvanced
-                            textColor
-                            label={__('Background')}
-                            value={animatedTextBgColor}
-                            onChange={val => setAttributes({ animatedTextBgColor: val })}
-                        />
-                        <BorderRadius
-                            min={0}
-                            max={100}
-                            responsive
-                            device={device}
-                            label={__('Radius')}
-                            value={textBorderRadius}
-                            unit={['px', 'em', '%']}
-                            onDeviceChange={value => this.setState({ device: value })}
-                            onChange={val => setAttributes({ textBorderRadius: val })}
-                        />
+                                <BorderRadius
+                                    min={0}
+                                    max={100}
+                                    responsive
+                                    device={device}
+                                    label={__('Radius')}
+                                    value={textBorderRadius}
+                                    unit={['px', 'em', '%']}
+                                    onDeviceChange={value => this.setState({ device: value })}
+                                    onChange={val => setAttributes({ textBorderRadius: val })}
+                                />
 
-                        <Range
-                            label={__('Padding X')}
-                            value={animatedTextPadding}
-                            onChange={animatedTextPadding => setAttributes({ animatedTextPadding })}
-                            min={0} max={100}
-                            unit={['px', 'em', '%']}
-                            responsive
-                            device={device}
-                            onDeviceChange={value => this.setState({ device: value })} />
+                                <Range
+                                    label={__('Padding X')}
+                                    value={animatedTextPadding}
+                                    onChange={animatedTextPadding => setAttributes({ animatedTextPadding })}
+                                    min={0} max={100}
+                                    unit={['px', 'em', '%']}
+                                    responsive
+                                    device={device}
+                                    onDeviceChange={value => this.setState({ device: value })} />
 
-                        <Range
-                            label={__('Spacing X')}
-                            value={animatedTextSpacing}
-                            onChange={animatedTextSpacing => setAttributes({ animatedTextSpacing })}
-                            min={0} max={100}
-                            unit={['px', 'em', '%']}
-                            responsive
-                            device={device}
-                            onDeviceChange={value => this.setState({ device: value })} />
+                                <Range
+                                    label={__('Spacing X')}
+                                    value={animatedTextSpacing}
+                                    onChange={animatedTextSpacing => setAttributes({ animatedTextSpacing })}
+                                    min={0} max={100}
+                                    unit={['px', 'em', '%']}
+                                    responsive
+                                    device={device}
+                                    onDeviceChange={value => this.setState({ device: value })} />
 
-                    </PanelBody>
+                            </PanelBody>
 
-                    <PanelBody title={__('Design')} initialOpen={false}>
-                        <Typography
-                            device={device}
-                            value={typography}
-                            label={__('Typography')}
-                            onChange={(value) => setAttributes({ typography: value })}
-                            onDeviceChange={value => this.setState({ device: value })}
-                        />
-                        <Color label={__('Color')} value={color} onChange={val => setAttributes({ color: val })} />
-                    </PanelBody>
+                            <PanelBody title={__('Design')} initialOpen={false}>
+                                <Typography
+                                    device={device}
+                                    value={typography}
+                                    label={__('Typography')}
+                                    onChange={(value) => setAttributes({ typography: value })}
+                                    onDeviceChange={value => this.setState({ device: value })}
+                                />
+                                <Color label={__('Color')} value={color} onChange={val => setAttributes({ color: val })} />
+                            </PanelBody>
+                        </InspectorTab>
+                        <InspectorTab key={'advance'}>
 
-                    {animationSettings(uniqueId, animation, setAttributes)}
-
-                    {interactionSettings(uniqueId, interaction, setAttributes)}
+                            {animationSettings(uniqueId, animation, setAttributes)}
+                            {interactionSettings(uniqueId, interaction, setAttributes)}
+                        </InspectorTab>
+                    </InspectorTabs>
                 </InspectorControls>
+
                 <BlockControls>
                     <HeadingToolbar minLevel={1} maxLevel={6} selectedLevel={level} onChange={(newLevel) => setAttributes({ level: newLevel })} />
                     <AlignmentToolbar value={align} onChange={nextAlign => setAttributes({ align: nextAlign })} />

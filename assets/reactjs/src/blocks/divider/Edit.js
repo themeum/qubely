@@ -13,7 +13,7 @@ const {
         interactionSettings
     },
     Inline: { InlineToolbar },
-     withCSSGenerator,
+    withCSSGenerator,
     InspectorTabs,
     InspectorTab
 } = wp.qubelyComponents
@@ -71,9 +71,9 @@ class Edit extends Component {
                 style,
                 animation,
                 globalZindex,
-                enablePosition, 
-                selectPosition, 
-                positionXaxis, 
+                enablePosition,
+                selectPosition,
+                positionXaxis,
                 positionYaxis,
                 hideTablet,
                 hideMobile,

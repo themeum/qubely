@@ -24,7 +24,9 @@ const {
 		animationSettings,
 		interactionSettings
 	},
-	withCSSGenerator
+	withCSSGenerator,
+	InspectorTabs,
+	InspectorTab
 } = wp.qubelyComponents;
 
 class Edit extends Component {
@@ -235,85 +237,92 @@ class Edit extends Component {
 		return (
 			<Fragment>
 				<InspectorControls key="inspector">
-					<PanelBody title={__('Timeline Settings')}>
-						<Range
-							min={2}
-							max={100}
-							label={__('Number of Items')}
-							value={timelineItems}
-							onChange={value => this.updateTimelineContent(value > timelineItems ? 'add' : 'delete')}
-						/>
-						<Alignment label={__('Orientation')} value={orientation} onChange={val => setAttributes({ orientation: val })} alignmentType="content" disableJustify />
-					</PanelBody>
-
-					<PanelBody title={__('Spacing')} initialOpen={false}>
-						<Range label={__('Horizontal Spacing')} value={horizontalSpacing} onChange={val => setAttributes({ horizontalSpacing: val })} min={0} max={100} responsive unit={['px', 'em', '%']} device={device} onDeviceChange={value => this.setState({ device: value })} />
-						<Range label={__('Vertical Spacing')} value={verticalSpacing} onChange={val => setAttributes({ verticalSpacing: val })} min={0} max={100} responsive unit={['px', 'em', '%']} device={device} onDeviceChange={value => this.setState({ device: value })} />
-					</PanelBody>
-
-					<PanelBody title={__('Content')} initialOpen={false}>
-						<Color label={__('Background Color')} value={contentBg} onChange={(value) => setAttributes({ contentBg: value })} />
-						<Toggle label={__('Enable Border')} value={enableContentBorder} onChange={val => setAttributes({ enableContentBorder: val })} />
-						{enableContentBorder == 1 &&
-							<Fragment>
-								<Range label={__('Border Width')} value={contentBorderWidth} onChange={val => setAttributes({ contentBorderWidth: val })} min={1} max={5} responsive device={device} unit={['px']} onDeviceChange={value => this.setState({ device: value })} />
-								<Color label={__('Border Color')} value={contentBorderColor} onChange={(value) => setAttributes({ contentBorderColor: value })} />
-								<Separator />
-							</Fragment>
-						}
-						<BorderRadius label={__('Radius')} value={contentBorderRadius} onChange={val => setAttributes({ contentBorderRadius: val })} min={0} max={100} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
-						<Padding label={__('Padding')} value={contentPadding} onChange={val => setAttributes({ contentPadding: val })} min={0} max={200} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
-						<BoxShadow label={__('Box-Shadow')} value={contentBoxShadow} onChange={val => setAttributes({ contentBoxShadow: val })} disableInset />
-						<Separator />
-						<Headings label={__('Heading Tag')} selectedLevel={headingLevel} onChange={(value) => setAttributes({ headingLevel: value })} />
-						<Typography label={__('Heading Typography')} value={headingTypography} onChange={val => setAttributes({ headingTypography: val })} device={device} onDeviceChange={value => this.setState({ device: value })} />
-						<Color label={__('Heading Color')} value={headingColor} onChange={(value) => setAttributes({ headingColor: value })} />
-						<Range label={__('Heading Spacing')} value={headingSpacing} onChange={val => setAttributes({ headingSpacing: val })} min={0} max={100} responsive unit={['px', 'em', '%']} device={device} onDeviceChange={value => this.setState({ device: value })} />
-						<Separator />
-						<Color label={__('Content Color')} value={contentColor} onChange={(value) => setAttributes({ contentColor: value })} />
-						<Typography label={__('Content Typography')} value={contentTypography} onChange={val => setAttributes({ contentTypography: val })} device={device} onDeviceChange={value => this.setState({ device: value })} />
-						<Separator />
-						<Toggle label={__('Enable Date/Time')} value={enableDateTime} onChange={val => setAttributes({ enableDateTime: val })} />
-						{enableDateTime == 1 &&
-							<Fragment>
-								<Typography label={__('Date/Time Typography')} value={enableDateTimeTypography} onChange={val => setAttributes({ enableDateTimeTypography: val })} device={device} onDeviceChange={value => this.setState({ device: value })} />
-								<Color label={__('Date/Time Color')} value={enableDateTimeColor} onChange={(value) => setAttributes({ enableDateTimeColor: value })} />
-							</Fragment>
-						}
-					</PanelBody>
-
-					<PanelBody title={__('Image')} initialOpen={false}>
-						<Toggle label={__('Enable')} value={enableImage} onChange={val => setAttributes({ enableImage: val })} />
-						{enableImage == 1 &&
-							<Fragment>
-								<RadioAdvanced label={__('Position')} value={imagePosition} onChange={(value) => setAttributes({ imagePosition: value })}
-									options={[
-										{ label: __('Before'), value: 'before', title: __('Before') },
-										{ label: __('After'), value: 'after', title: __('After') }
-									]}
+					<InspectorTabs tabs={['style', 'advance']}>
+						<InspectorTab key={'style'}>
+							<PanelBody title={__('Timeline Settings')}>
+								<Range
+									min={2}
+									max={100}
+									label={__('Number of Items')}
+									value={timelineItems}
+									onChange={value => this.updateTimelineContent(value > timelineItems ? 'add' : 'delete')}
 								/>
-								<BorderRadius label={__('Radius')} value={imageBorderRadius} onChange={val => setAttributes({ imageBorderRadius: val })} min={0} max={100} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
-								<Range label={__('Spacing')} value={imageSpacing} onChange={val => setAttributes({ imageSpacing: val })} min={0} max={100} responsive unit={['px', 'em', '%']} device={device} onDeviceChange={value => this.setState({ device: value })} />
-							</Fragment>
-						}
-					</PanelBody>
+								<Alignment label={__('Orientation')} value={orientation} onChange={val => setAttributes({ orientation: val })} alignmentType="content" disableJustify />
+							</PanelBody>
 
-					<PanelBody title={__('Connector')} initialOpen={false}>
-						<Color label={__('Color')} value={connectorColor} onChange={(value) => setAttributes({ connectorColor: value })} />
-						<Range label={__('Size')} value={connectorSize} onChange={val => setAttributes({ connectorSize: val })} min={16} max={64} responsive unit={['px', 'em', '%']} device={device} onDeviceChange={value => this.setState({ device: value })} />
-						<Border label={__('Border')} value={connectorBorder} onChange={val => setAttributes({ connectorBorder: val })} responsive unit={['px', 'em', '%']} device={device} onDeviceChange={value => this.setState({ device: value })} />
-						<BoxShadow label={__('Box-Shadow')} value={connectorBoxShadow} onChange={val => setAttributes({ connectorBoxShadow: val })} disableInset />
-						<BorderRadius label={__('Radius')} value={connectorBorderRadius} onChange={val => setAttributes({ connectorBorderRadius: val })} min={0} max={100} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
-						<Separator />
-						<IconList label={__('Icon')} value={connectorIcon} onChange={val => setAttributes({ connectorIcon: val })} />
-						<Range label={__('Icon Size')} value={connectorIconSize} onChange={val => setAttributes({ connectorIconSize: val })} min={16} max={64} responsive unit={['px', 'em', '%']} device={device} onDeviceChange={value => this.setState({ device: value })} />
-						<Color label={__('Icon Color')} value={connectorIconColor} onChange={(value) => setAttributes({ connectorIconColor: value })} />
-						<Separator />
-						<Range label={__('Bar Width')} value={connectorBarWidth} onChange={val => setAttributes({ connectorBarWidth: val })} min={2} max={20} responsive unit={['px', 'em', '%']} device={device} onDeviceChange={value => this.setState({ device: value })} />
-						<Color label={__('Bar Color')} value={connectorBarColor} onChange={(value) => setAttributes({ connectorBarColor: value })} />
-					</PanelBody>
-					{animationSettings(uniqueId, animation, setAttributes)}
-					{interactionSettings(uniqueId, interaction, setAttributes)}
+							<PanelBody title={__('Spacing')} initialOpen={false}>
+								<Range label={__('Horizontal Spacing')} value={horizontalSpacing} onChange={val => setAttributes({ horizontalSpacing: val })} min={0} max={100} responsive unit={['px', 'em', '%']} device={device} onDeviceChange={value => this.setState({ device: value })} />
+								<Range label={__('Vertical Spacing')} value={verticalSpacing} onChange={val => setAttributes({ verticalSpacing: val })} min={0} max={100} responsive unit={['px', 'em', '%']} device={device} onDeviceChange={value => this.setState({ device: value })} />
+							</PanelBody>
+
+							<PanelBody title={__('Content')} initialOpen={false}>
+								<Color label={__('Background Color')} value={contentBg} onChange={(value) => setAttributes({ contentBg: value })} />
+								<Toggle label={__('Enable Border')} value={enableContentBorder} onChange={val => setAttributes({ enableContentBorder: val })} />
+								{enableContentBorder == 1 &&
+									<Fragment>
+										<Range label={__('Border Width')} value={contentBorderWidth} onChange={val => setAttributes({ contentBorderWidth: val })} min={1} max={5} responsive device={device} unit={['px']} onDeviceChange={value => this.setState({ device: value })} />
+										<Color label={__('Border Color')} value={contentBorderColor} onChange={(value) => setAttributes({ contentBorderColor: value })} />
+										<Separator />
+									</Fragment>
+								}
+								<BorderRadius label={__('Radius')} value={contentBorderRadius} onChange={val => setAttributes({ contentBorderRadius: val })} min={0} max={100} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
+								<Padding label={__('Padding')} value={contentPadding} onChange={val => setAttributes({ contentPadding: val })} min={0} max={200} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
+								<BoxShadow label={__('Box-Shadow')} value={contentBoxShadow} onChange={val => setAttributes({ contentBoxShadow: val })} disableInset />
+								<Separator />
+								<Headings label={__('Heading Tag')} selectedLevel={headingLevel} onChange={(value) => setAttributes({ headingLevel: value })} />
+								<Typography label={__('Heading Typography')} value={headingTypography} onChange={val => setAttributes({ headingTypography: val })} device={device} onDeviceChange={value => this.setState({ device: value })} />
+								<Color label={__('Heading Color')} value={headingColor} onChange={(value) => setAttributes({ headingColor: value })} />
+								<Range label={__('Heading Spacing')} value={headingSpacing} onChange={val => setAttributes({ headingSpacing: val })} min={0} max={100} responsive unit={['px', 'em', '%']} device={device} onDeviceChange={value => this.setState({ device: value })} />
+								<Separator />
+								<Color label={__('Content Color')} value={contentColor} onChange={(value) => setAttributes({ contentColor: value })} />
+								<Typography label={__('Content Typography')} value={contentTypography} onChange={val => setAttributes({ contentTypography: val })} device={device} onDeviceChange={value => this.setState({ device: value })} />
+								<Separator />
+								<Toggle label={__('Enable Date/Time')} value={enableDateTime} onChange={val => setAttributes({ enableDateTime: val })} />
+								{enableDateTime == 1 &&
+									<Fragment>
+										<Typography label={__('Date/Time Typography')} value={enableDateTimeTypography} onChange={val => setAttributes({ enableDateTimeTypography: val })} device={device} onDeviceChange={value => this.setState({ device: value })} />
+										<Color label={__('Date/Time Color')} value={enableDateTimeColor} onChange={(value) => setAttributes({ enableDateTimeColor: value })} />
+									</Fragment>
+								}
+							</PanelBody>
+
+							<PanelBody title={__('Image')} initialOpen={false}>
+								<Toggle label={__('Enable')} value={enableImage} onChange={val => setAttributes({ enableImage: val })} />
+								{enableImage == 1 &&
+									<Fragment>
+										<RadioAdvanced label={__('Position')} value={imagePosition} onChange={(value) => setAttributes({ imagePosition: value })}
+											options={[
+												{ label: __('Before'), value: 'before', title: __('Before') },
+												{ label: __('After'), value: 'after', title: __('After') }
+											]}
+										/>
+										<BorderRadius label={__('Radius')} value={imageBorderRadius} onChange={val => setAttributes({ imageBorderRadius: val })} min={0} max={100} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
+										<Range label={__('Spacing')} value={imageSpacing} onChange={val => setAttributes({ imageSpacing: val })} min={0} max={100} responsive unit={['px', 'em', '%']} device={device} onDeviceChange={value => this.setState({ device: value })} />
+									</Fragment>
+								}
+							</PanelBody>
+
+							<PanelBody title={__('Connector')} initialOpen={false}>
+								<Color label={__('Color')} value={connectorColor} onChange={(value) => setAttributes({ connectorColor: value })} />
+								<Range label={__('Size')} value={connectorSize} onChange={val => setAttributes({ connectorSize: val })} min={16} max={64} responsive unit={['px', 'em', '%']} device={device} onDeviceChange={value => this.setState({ device: value })} />
+								<Border label={__('Border')} value={connectorBorder} onChange={val => setAttributes({ connectorBorder: val })} responsive unit={['px', 'em', '%']} device={device} onDeviceChange={value => this.setState({ device: value })} />
+								<BoxShadow label={__('Box-Shadow')} value={connectorBoxShadow} onChange={val => setAttributes({ connectorBoxShadow: val })} disableInset />
+								<BorderRadius label={__('Radius')} value={connectorBorderRadius} onChange={val => setAttributes({ connectorBorderRadius: val })} min={0} max={100} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
+								<Separator />
+								<IconList label={__('Icon')} value={connectorIcon} onChange={val => setAttributes({ connectorIcon: val })} />
+								<Range label={__('Icon Size')} value={connectorIconSize} onChange={val => setAttributes({ connectorIconSize: val })} min={16} max={64} responsive unit={['px', 'em', '%']} device={device} onDeviceChange={value => this.setState({ device: value })} />
+								<Color label={__('Icon Color')} value={connectorIconColor} onChange={(value) => setAttributes({ connectorIconColor: value })} />
+								<Separator />
+								<Range label={__('Bar Width')} value={connectorBarWidth} onChange={val => setAttributes({ connectorBarWidth: val })} min={2} max={20} responsive unit={['px', 'em', '%']} device={device} onDeviceChange={value => this.setState({ device: value })} />
+								<Color label={__('Bar Color')} value={connectorBarColor} onChange={(value) => setAttributes({ connectorBarColor: value })} />
+							</PanelBody>
+						</InspectorTab>
+						<InspectorTab key={'advance'}>
+							{animationSettings(uniqueId, animation, setAttributes)}
+							{interactionSettings(uniqueId, interaction, setAttributes)}
+						</InspectorTab>
+					</InspectorTabs>
+
 				</InspectorControls>
 
 				<BlockControls>
