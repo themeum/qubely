@@ -23,7 +23,10 @@ const {
         ContextMenu,
         handleContextMenu
     },
-    withCSSGenerator
+    withCSSGenerator,
+    InspectorTabs,
+    InspectorTab,
+    InspectorSections
 } = wp.qubelyComponents;
 
 import '../../components/fields/inline/editorInline';
@@ -128,55 +131,58 @@ class Edit extends Component {
         return (
             <Fragment>
                 <InspectorControls key="inspector">
+                    <InspectorTabs>
+                        <InspectorTab key={'layout'}>
+                            <InspectorSections block={'text'}/>
+                        </InspectorTab>
+                        <InspectorTab key={'style'}>
+                            <PanelBody initialOpen={true}>
+                                <Alignment label={__('Alignment')} value={alignment} onChange={val => setAttributes({ alignment: val })} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
+                            </PanelBody>
 
-                    <PanelBody initialOpen={true}>
-                        <Alignment label={__('Alignment')} value={alignment} onChange={val => setAttributes({ alignment: val })} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
-                    </PanelBody>
+                            <PanelBody title={__('Text')} initialOpen={false}>
+                                <Typography label={__('Typography')} value={typography} onChange={val => setAttributes({ typography: val })} device={device} onDeviceChange={value => this.setState({ device: value })} />
+                                <Color label={__('Text Color')} value={textColor} onChange={val => setAttributes({ textColor: val })} />
+                                <Toggle label={__('Drop Cap')} value={dropCap} onChange={val => setAttributes({ dropCap: val })} />
+                                {dropCap == 1 &&
+                                <Fragment>
+                                    <Range label={__('Size')} value={dropCapSize} onChange={(value) => setAttributes({ dropCapSize: value })} min={0} max={200} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
+                                    <Color label={__('Color')} value={dropCapColor} onChange={val => setAttributes({ dropCapColor: val })} />
+                                    <Range label={__('Spacing')} value={dropCapSpacing} onChange={(value) => setAttributes({ dropCapSpacing: value })} min={0} max={100} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
+                                </Fragment>
+                                }
+                            </PanelBody>
 
-                    <PanelBody title={__('Text')} initialOpen={false}>
-                        <Typography label={__('Typography')} value={typography} onChange={val => setAttributes({ typography: val })} device={device} onDeviceChange={value => this.setState({ device: value })} />
-                        <Color label={__('Text Color')} value={textColor} onChange={val => setAttributes({ textColor: val })} />
-                        <Toggle label={__('Drop Cap')} value={dropCap} onChange={val => setAttributes({ dropCap: val })} />
-                        {dropCap == 1 &&
-                            <Fragment>
-                                <Range label={__('Size')} value={dropCapSize} onChange={(value) => setAttributes({ dropCapSize: value })} min={0} max={200} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
-                                <Color label={__('Color')} value={dropCapColor} onChange={val => setAttributes({ dropCapColor: val })} />
-                                <Range label={__('Spacing')} value={dropCapSpacing} onChange={(value) => setAttributes({ dropCapSpacing: value })} min={0} max={100} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
-                            </Fragment>
-                        }
-                    </PanelBody>
-
-
-                    <PanelBody title={__('Title')} opened={'Title' === openPanelSetting} onToggle={() => this.handlePanelOpenings(openPanelSetting !== 'Title' ? 'Title' : '')}>
-                        <Toggle label={__('Enable')} value={enableTitle} onChange={val => setAttributes({ enableTitle: val })} />
-                        {enableTitle == 1 &&
-                            <Fragment>
-                                <Headings selectedLevel={titleLevel} onChange={(value) => setAttributes({ titleLevel: value })} />
-                                <Typography label={__('Typography')} value={titleTypography} onChange={(value) => setAttributes({ titleTypography: value })} device={device} onDeviceChange={value => this.setState({ device: value })} />
-                                <Color label={__('Color')} value={titleColor} onChange={(value) => setAttributes({ titleColor: value })} />
-                                <Range label={<span>{__('Spacing')} <span className="dashicons dashicons-sort" title="Y Spacing" /></span>} value={titleSpacing} onChange={val => setAttributes({ titleSpacing: val })} min={0} max={200} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
-                                <Separator />
-                                <SelectControl
-                                    label={__('Separator')}
-                                    value={separatorStyle}
-                                    options={[
-                                        { label: '--Select--', value: '' },
-                                        { label: 'Line', value: 'solid' },
-                                        { label: 'Line Doubled', value: 'double' },
-                                        { label: 'Dashed', value: 'dashed' },
-                                        { label: 'Dotted', value: 'dotted' },
-                                        { label: 'Pin', value: 'pin' },
-                                        { label: 'Pin Filled', value: 'pin_filled' },
-                                        { label: 'Zigzag', value: 'zigzag' },
-                                        { label: 'Zigzag Large', value: 'zigzag_large' }
-                                    ]}
-                                    onChange={val => setAttributes({ separatorStyle: val })}
-                                />
-                                {separatorStyle &&
+                            <PanelBody title={__('Title')} opened={'Title' === openPanelSetting} onToggle={() => this.handlePanelOpenings(openPanelSetting !== 'Title' ? 'Title' : '')}>
+                                <Toggle label={__('Enable')} value={enableTitle} onChange={val => setAttributes({ enableTitle: val })} />
+                                {enableTitle == 1 &&
+                                <Fragment>
+                                    <Headings selectedLevel={titleLevel} onChange={(value) => setAttributes({ titleLevel: value })} />
+                                    <Typography label={__('Typography')} value={titleTypography} onChange={(value) => setAttributes({ titleTypography: value })} device={device} onDeviceChange={value => this.setState({ device: value })} />
+                                    <Color label={__('Color')} value={titleColor} onChange={(value) => setAttributes({ titleColor: value })} />
+                                    <Range label={<span>{__('Spacing')} <span className="dashicons dashicons-sort" title="Y Spacing" /></span>} value={titleSpacing} onChange={val => setAttributes({ titleSpacing: val })} min={0} max={200} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
+                                    <Separator />
+                                    <SelectControl
+                                        label={__('Separator')}
+                                        value={separatorStyle}
+                                        options={[
+                                            { label: '--Select--', value: '' },
+                                            { label: 'Line', value: 'solid' },
+                                            { label: 'Line Doubled', value: 'double' },
+                                            { label: 'Dashed', value: 'dashed' },
+                                            { label: 'Dotted', value: 'dotted' },
+                                            { label: 'Pin', value: 'pin' },
+                                            { label: 'Pin Filled', value: 'pin_filled' },
+                                            { label: 'Zigzag', value: 'zigzag' },
+                                            { label: 'Zigzag Large', value: 'zigzag_large' }
+                                        ]}
+                                        onChange={val => setAttributes({ separatorStyle: val })}
+                                    />
+                                    {separatorStyle &&
                                     <Fragment>
                                         <Color label={__('Separator Color')} value={separatorColor} onChange={val => setAttributes({ separatorColor: val })} />
                                         {(separatorStyle != 'pin' && separatorStyle != 'pin_filled') &&
-                                            <Range label={__('Stroke')} value={separatorStroke} onChange={val => setAttributes({ separatorStroke: parseInt(val) })} min={1} max={separators[separatorStyle].stroke} />
+                                        <Range label={__('Stroke')} value={separatorStroke} onChange={val => setAttributes({ separatorStroke: parseInt(val) })} min={1} max={separators[separatorStyle].stroke} />
                                         }
                                         <Range label={__('Width')} value={separatorWidth} onChange={val => setAttributes({ separatorWidth: val })} min={20} max={separators[separatorStyle].width} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
                                         <Range label={__('Spacing')} value={separatorSpacing} onChange={val => setAttributes({ separatorSpacing: val })} min={0} max={100} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
@@ -193,29 +199,30 @@ class Edit extends Component {
                                             onChange={val => setAttributes({ separatorPosition: val })}
                                         />
                                     </Fragment>
+                                    }
+                                </Fragment>
                                 }
-                            </Fragment>
-                        }
-                    </PanelBody>
+                            </PanelBody>
 
-                    {enableTitle == 1 &&
-                        <PanelBody title={__('Sub Title')} opened={'Sub Title' === openPanelSetting} onToggle={() => this.handlePanelOpenings(openPanelSetting !== 'Sub Title' ? 'Sub Title' : '')}>
-                            <Toggle label={__('Enable')} value={subTitle} onChange={val => setAttributes({ subTitle: val })} />
-                            {subTitle == 1 &&
+                            {enableTitle == 1 &&
+                            <PanelBody title={__('Sub Title')} opened={'Sub Title' === openPanelSetting} onToggle={() => this.handlePanelOpenings(openPanelSetting !== 'Sub Title' ? 'Sub Title' : '')}>
+                                <Toggle label={__('Enable')} value={subTitle} onChange={val => setAttributes({ subTitle: val })} />
+                                {subTitle == 1 &&
                                 <Fragment>
                                     <Headings selectedLevel={subTitleLevel} onChange={(value) => setAttributes({ subTitleLevel: value })} />
                                     <Typography label={__('Typography')} value={subTitleTypography} onChange={val => setAttributes({ subTitleTypography: val })} device={device} onDeviceChange={value => this.setState({ device: value })} />
                                     <Range label={<span>{__('Spacing')} <span className="dashicons dashicons-sort" title="Y Spacing" /></span>} value={subTitleSpacing} onChange={(value) => setAttributes({ subTitleSpacing: value })} unit={['px', 'em', '%']} min={0} max={100} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
                                     <Color label={__('Color')} value={subTitleColor} onChange={val => setAttributes({ subTitleColor: val })} />
                                 </Fragment>
+                                }
+                            </PanelBody>
                             }
-                        </PanelBody>
-                    }
-
-                    {animationSettings(uniqueId, animation, setAttributes)}
-
-                    {interactionSettings(uniqueId, interaction, setAttributes)}
-
+                        </InspectorTab>
+                        <InspectorTab key={'advance'}>
+                            {animationSettings(uniqueId, animation, setAttributes)}
+                            {interactionSettings(uniqueId, interaction, setAttributes)}
+                        </InspectorTab>
+                    </InspectorTabs>
                 </InspectorControls>
 
                 <BlockControls>

@@ -41,7 +41,9 @@ const {
 		ContextMenu,
 		handleContextMenu
 	},
-	withCSSGenerator
+	withCSSGenerator,
+	InspectorTabs,
+	InspectorTab
 } = wp.qubelyComponents;
 
 import icons from '../../helpers/icons';
@@ -321,429 +323,432 @@ class Edit extends Component {
 		return (
 			<Fragment>
 				<InspectorControls key="inspector">
-					<PanelBody title={__('')} >
-						<Styles value={layout} onChange={val => setAttributes({ layout: val })}
-							options={[
-								{ value: 1, svg: icons.pricing[1], label: __('Layout 1') },
-								{ value: 2, svg: icons.pricing[2], label: __('Layout 2') },
-								{ value: 3, svg: icons.pricing[3], label: __('Layout 3') },
-								{ value: 4, svg: icons.pricing[4], label: __('Layout 4') },
-								{ value: 5, svg: icons.pricing[5], label: __('Layout 5') }
-							]}
-						/>
+					<InspectorTabs tabs={['style', 'advance']}>
+						<InspectorTab key={'style'}>
+							<PanelBody title={__('')} >
+								<Styles value={layout} onChange={val => setAttributes({ layout: val })}
+									options={[
+										{ value: 1, svg: icons.pricing[1], label: __('Layout 1') },
+										{ value: 2, svg: icons.pricing[2], label: __('Layout 2') },
+										{ value: 3, svg: icons.pricing[3], label: __('Layout 3') },
+										{ value: 4, svg: icons.pricing[4], label: __('Layout 4') },
+										{ value: 5, svg: icons.pricing[5], label: __('Layout 5') }
+									]}
+								/>
 
-						<Alignment
-							label={__('Alignment')}
-							alignmentType="content"
-							value={alignment}
-							disableJustify
-							onChange={val => setAttributes({ alignment: val })}
-							responsive
-							device={device}
-							onDeviceChange={value => this.setState({ device: value })} />
-						<Toggle
-							value={enableFeatures}
-							label={__('Show Features')}
-							onChange={val => setAttributes({ enableFeatures: val })} />
-					</PanelBody>
+								<Alignment
+									label={__('Alignment')}
+									alignmentType="content"
+									value={alignment}
+									disableJustify
+									onChange={val => setAttributes({ alignment: val })}
+									responsive
+									device={device}
+									onDeviceChange={value => this.setState({ device: value })} />
+								<Toggle
+									value={enableFeatures}
+									label={__('Show Features')}
+									onChange={val => setAttributes({ enableFeatures: val })} />
+							</PanelBody>
 
-					<PanelBody title={__('Title')} opened={'Title' === openPanelSetting} onToggle={() => this.handlePanelOpenings(openPanelSetting !== 'Title' ? 'Title' : '')}>
-						{title &&
-							<Fragment>
+							<PanelBody title={__('Title')} opened={'Title' === openPanelSetting} onToggle={() => this.handlePanelOpenings(openPanelSetting !== 'Title' ? 'Title' : '')}>
+								{title &&
+									<Fragment>
+										<Color
+											label={__('Color')}
+											value={titleColor}
+											onChange={val => setAttributes({ titleColor: val })} />
+
+										<Range
+											label={__('Gap')}
+											value={titleSpacing}
+											min={0}
+											max={100}
+											responsive
+											device={device}
+											unit={['px', 'em', '%']}
+											onChange={val => setAttributes({ titleSpacing: val })}
+											onDeviceChange={value => this.setState({ device: value })}
+										/>
+
+										<Separator />
+
+										<Typography
+											value={titleTypography}
+											label={__('Typography')}
+											onChange={val => setAttributes({ titleTypography: val })}
+											device={device}
+											onDeviceChange={value => this.setState({ device: value })} />
+
+									</Fragment>
+								}
+							</PanelBody>
+
+							{(layout == 2 || layout == 3 || layout == 4 || layout == 5) &&
+								<PanelBody title={__('Sub Title')} opened={'Sub Title' === openPanelSetting} onToggle={() => this.handlePanelOpenings(openPanelSetting !== 'Sub Title' ? 'Sub Title' : '')}>
+									<Color
+										label={__('Color')}
+										value={subTitleColor}
+										onChange={val => setAttributes({ subTitleColor: val })} />
+									<Range
+										min={0}
+										max={200}
+										responsive
+										device={device}
+										onDeviceChange={value => this.setState({ device: value })}
+										value={subTitleSpacing}
+										unit={['px', 'em', '%']}
+										label={"Gap"}
+										onChange={val => setAttributes({ subTitleSpacing: val })} />
+									<Separator />
+									<Typography
+										value={subTitleTypography}
+										disableLineHeight
+										label={__('Typography')}
+										onChange={val => setAttributes({ subTitleTypography: val })}
+										device={device}
+										onDeviceChange={value => this.setState({ device: value })} />
+								</PanelBody>
+							}
+
+							<PanelBody title={__('Price')} opened={'Price' === openPanelSetting} onToggle={() => this.handlePanelOpenings(openPanelSetting !== 'Price' ? 'Price' : '')}>
 								<Color
 									label={__('Color')}
-									value={titleColor}
-									onChange={val => setAttributes({ titleColor: val })} />
+									value={priceColor}
+									onChange={val => setAttributes({ priceColor: val })} />
 
+								<Typography
+									label={__('Typography')}
+									value={priceTypography}
+									onChange={val => setAttributes({ priceTypography: val })}
+									device={device}
+									onDeviceChange={value => this.setState({ device: value })} />
+								<Separator />
+								<Toggle
+									value={discount}
+									label={__('Discount')}
+									onChange={val => setAttributes({ discount: val })} />
+								{discount &&
+									<Fragment>
+										<TextControl
+											label={__('Original Price')}
+											value={discountPrice}
+											placeholder={__('Price')}
+											onChange={val => setAttributes({ discountPrice: val })} />
+										{discountPrice &&
+											<Fragment>
+												<Color
+													label={__('Color')}
+													value={discountColor}
+													onChange={val => setAttributes({ discountColor: val })} />
+												<Typography
+													value={discountTypography}
+													onChange={val => setAttributes({ discountTypography: val })}
+													device={device}
+													onDeviceChange={value => this.setState({ device: value })} />
+											</Fragment>
+										}
+									</Fragment>
+								}
+								<Separator />
 								<Range
 									label={__('Gap')}
-									value={titleSpacing}
+									value={pricingSpacing}
 									min={0}
 									max={100}
 									responsive
 									device={device}
 									unit={['px', 'em', '%']}
-									onChange={val => setAttributes({ titleSpacing: val })}
+									onChange={val => setAttributes({ pricingSpacing: val })}
 									onDeviceChange={value => this.setState({ device: value })}
 								/>
+							</PanelBody>
 
-								<Separator />
-
-								<Typography
-									value={titleTypography}
-									label={__('Typography')}
-									onChange={val => setAttributes({ titleTypography: val })}
-									device={device}
-									onDeviceChange={value => this.setState({ device: value })} />
-
-							</Fragment>
-						}
-					</PanelBody>
-
-					{(layout == 2 || layout == 3 || layout == 4 || layout == 5) &&
-						<PanelBody title={__('Sub Title')} opened={'Sub Title' === openPanelSetting} onToggle={() => this.handlePanelOpenings(openPanelSetting !== 'Sub Title' ? 'Sub Title' : '')}>
-							<Color
-								label={__('Color')}
-								value={subTitleColor}
-								onChange={val => setAttributes({ subTitleColor: val })} />
-							<Range
-								min={0}
-								max={200}
-								responsive
-								device={device}
-								onDeviceChange={value => this.setState({ device: value })}
-								value={subTitleSpacing}
-								unit={['px', 'em', '%']}
-								label={"Gap"}
-								onChange={val => setAttributes({ subTitleSpacing: val })} />
-							<Separator />
-							<Typography
-								value={subTitleTypography}
-								disableLineHeight
-								label={__('Typography')}
-								onChange={val => setAttributes({ subTitleTypography: val })}
-								device={device}
-								onDeviceChange={value => this.setState({ device: value })} />
-						</PanelBody>
-					}
-
-					<PanelBody title={__('Price')} opened={'Price' === openPanelSetting} onToggle={() => this.handlePanelOpenings(openPanelSetting !== 'Price' ? 'Price' : '')}>
-						<Color
-							label={__('Color')}
-							value={priceColor}
-							onChange={val => setAttributes({ priceColor: val })} />
-
-						<Typography
-							label={__('Typography')}
-							value={priceTypography}
-							onChange={val => setAttributes({ priceTypography: val })}
-							device={device}
-							onDeviceChange={value => this.setState({ device: value })} />
-						<Separator />
-						<Toggle
-							value={discount}
-							label={__('Discount')}
-							onChange={val => setAttributes({ discount: val })} />
-						{discount &&
-							<Fragment>
-								<TextControl
-									label={__('Original Price')}
-									value={discountPrice}
-									placeholder={__('Price')}
-									onChange={val => setAttributes({ discountPrice: val })} />
-								{discountPrice &&
+							<PanelBody title={__('Currency')} opened={'Currency' === openPanelSetting} onToggle={() => this.handlePanelOpenings(openPanelSetting !== 'Currency' ? 'Currency' : '')}>
+								<SelectControl
+									label={__('Symbol')}
+									value={currency}
+									options={[
+										{ label: __('None'), value: '' },
+										{ label: __('$ Dollar'), value: '$' },
+										{ label: __('€ Euro'), value: '€' },
+										{ label: __('£ Pound Sterling'), value: '£' },
+										{ label: __('₣ Franc'), value: '₣' },
+										{ label: __('₤ Lira'), value: '₤' },
+										{ label: __('ƒ Guilder'), value: 'ƒ' },
+										{ label: __('₹ Rupee(Indian)'), value: '₹' },
+										{ label: __('฿ Baht'), value: '฿' },
+										{ label: __('kr Krona'), value: 'kr' },
+										{ label: __('₧ Peseta'), value: '₧' },
+										{ label: __('₱ Peso'), value: '₱' },
+										{ label: __('₩ Won'), value: '₩' },
+										{ label: __('₪ Shekel'), value: '₪' },
+										{ label: __('₨ Rupee'), value: '₨' },
+										{ label: __('R$ Real'), value: 'R$' },
+										{ label: __('₽ Ruble'), value: '₽' },
+										{ label: __('¥ Yen/Yuan'), value: '¥' },
+										{ label: __('Custom'), value: 'custom' },
+									]}
+									onChange={val => setAttributes({ currency: val })} />
+								{currency == 'custom' &&
+									<TextControl
+										label={__('Custom Sysmbol')}
+										value={currencyCustom}
+										placeholder={__('Currency')}
+										onChange={val => setAttributes({ currencyCustom: val })} />
+								}
+								{currency &&
 									<Fragment>
+										<RadioAdvanced
+											label={__('Position')}
+											options={[
+												{ label: __('Before'), value: 'before', title: __('Before') },
+												{ label: __('After'), value: 'after', title: __('After') }
+											]}
+											value={currencyPosition}
+											onChange={val => setAttributes({ currencyPosition: val })} />
+										<Range
+											min={-100}
+											max={100}
+											value={currencyAlign}
+											label={__('Alignment')}
+											onChange={val => setAttributes({ currencyAlign: val })} />
 										<Color
 											label={__('Color')}
-											value={discountColor}
-											onChange={val => setAttributes({ discountColor: val })} />
+											value={currencyColor}
+											onChange={val => setAttributes({ currencyColor: val })} />
+										<Separator />
 										<Typography
-											value={discountTypography}
-											onChange={val => setAttributes({ discountTypography: val })}
+											value={currencyTypography}
+											onChange={val => setAttributes({ currencyTypography: val })}
+											device={device}
+											onDeviceChange={value => this.setState({ device: value })} />
+
+									</Fragment>
+								}
+							</PanelBody>
+
+
+							<PanelBody title={__('Duration')} opened={'Duration' === openPanelSetting} onToggle={() => this.handlePanelOpenings(openPanelSetting !== 'Duration' ? 'Duration' : '')}>
+								<Toggle
+									value={enableDuration}
+									label={__('Enable')}
+									onChange={val => setAttributes({ enableDuration: val })}
+								/>
+								{enableDuration &&
+									<Fragment>
+										<TextControl
+											label={__('Duration')}
+											value={duration}
+											placeholder={__('Duration')}
+											onChange={val => setAttributes({ duration: val })} />
+
+										<RadioAdvanced
+											label={__('Position')}
+											options={[
+												{ label: __('Side'), value: 'side', title: __('Side') },
+												{ label: __('Bottom'), value: 'bottom', title: __('Bottom') }
+											]}
+											value={durationPosition}
+											onChange={val => setAttributes({ durationPosition: val })} />
+
+										{durationPosition == 'side' ?
+											<Range
+												min={-100}
+												max={100}
+												value={durationAlign}
+												label={__('Duration Align')}
+												onChange={val => setAttributes({ durationAlign: val })} />
+											:
+											<Fragment>
+												<Padding
+													min={0}
+													max={100}
+													value={durationPadding}
+													label={__('Padding')}
+													onChange={val => setAttributes({ durationPadding: val })}
+													unit={['px', 'em', '%']}
+													responsive
+													device={device}
+													onDeviceChange={value => this.setState({ device: value })}
+												/>
+											</Fragment>
+										}
+
+										<Color
+											label={__('Color')}
+											value={durationColor}
+											onChange={val => setAttributes({ durationColor: val })} />
+										<Separator />
+										<Typography
+											value={durationTypography}
+											onChange={val => setAttributes({ durationTypography: val })}
 											device={device}
 											onDeviceChange={value => this.setState({ device: value })} />
 									</Fragment>
 								}
-							</Fragment>
-						}
-						<Separator />
-						<Range
-							label={__('Gap')}
-							value={pricingSpacing}
-							min={0}
-							max={100}
-							responsive
-							device={device}
-							unit={['px', 'em', '%']}
-							onChange={val => setAttributes({ pricingSpacing: val })}
-							onDeviceChange={value => this.setState({ device: value })}
-						/>
-					</PanelBody>
+							</PanelBody>
 
-					<PanelBody title={__('Currency')} opened={'Currency' === openPanelSetting} onToggle={() => this.handlePanelOpenings(openPanelSetting !== 'Currency' ? 'Currency' : '')}>
-						<SelectControl
-							label={__('Symbol')}
-							value={currency}
-							options={[
-								{ label: __('None'), value: '' },
-								{ label: __('$ Dollar'), value: '$' },
-								{ label: __('€ Euro'), value: '€' },
-								{ label: __('£ Pound Sterling'), value: '£' },
-								{ label: __('₣ Franc'), value: '₣' },
-								{ label: __('₤ Lira'), value: '₤' },
-								{ label: __('ƒ Guilder'), value: 'ƒ' },
-								{ label: __('₹ Rupee(Indian)'), value: '₹' },
-								{ label: __('฿ Baht'), value: '฿' },
-								{ label: __('kr Krona'), value: 'kr' },
-								{ label: __('₧ Peseta'), value: '₧' },
-								{ label: __('₱ Peso'), value: '₱' },
-								{ label: __('₩ Won'), value: '₩' },
-								{ label: __('₪ Shekel'), value: '₪' },
-								{ label: __('₨ Rupee'), value: '₨' },
-								{ label: __('R$ Real'), value: 'R$' },
-								{ label: __('₽ Ruble'), value: '₽' },
-								{ label: __('¥ Yen/Yuan'), value: '¥' },
-								{ label: __('Custom'), value: 'custom' },
-							]}
-							onChange={val => setAttributes({ currency: val })} />
-						{currency == 'custom' &&
-							<TextControl
-								label={__('Custom Sysmbol')}
-								value={currencyCustom}
-								placeholder={__('Currency')}
-								onChange={val => setAttributes({ currencyCustom: val })} />
-						}
-						{currency &&
-							<Fragment>
-								<RadioAdvanced
-									label={__('Position')}
-									options={[
-										{ label: __('Before'), value: 'before', title: __('Before') },
-										{ label: __('After'), value: 'after', title: __('After') }
-									]}
-									value={currencyPosition}
-									onChange={val => setAttributes({ currencyPosition: val })} />
-								<Range
-									min={-100}
-									max={100}
-									value={currencyAlign}
-									label={__('Alignment')}
-									onChange={val => setAttributes({ currencyAlign: val })} />
-								<Color
-									label={__('Color')}
-									value={currencyColor}
-									onChange={val => setAttributes({ currencyColor: val })} />
-								<Separator />
-								<Typography
-									value={currencyTypography}
-									onChange={val => setAttributes({ currencyTypography: val })}
+							{layout == 5 &&
+								<PanelBody title={__('Header')} opened={'Header' === openPanelSetting} onToggle={() => this.handlePanelOpenings(openPanelSetting !== 'Header' ? 'Header' : '')}>
+									<ColorAdvanced label={__('Background Color')} value={headerBg} onChange={val => setAttributes({ headerBg: val })} />
+									<Border
+										value={headerBorder}
+										label={__('Border')}
+										onChange={val => setAttributes({ headerBorder: val })}
+										unit={['px', 'em', '%']}
+										responsive
+										device={device}
+										onDeviceChange={value => this.setState({ device: value })}
+									/>
+									<Padding
+										min={30}
+										max={100}
+										value={headerPadding}
+										label={__('Padding')}
+										onChange={val => setAttributes({ headerPadding: val })}
+										unit={['px', 'em', '%']}
+										responsive
+										device={device}
+										onDeviceChange={value => this.setState({ device: value })}
+									/>
+								</PanelBody>
+							}
+
+							<PanelBody title={__('Background')} initialOpen={false}>
+								<ColorAdvanced label={__('Background Color')} value={bgColor} onChange={val => setAttributes({ bgColor: val })} />
+								<Border label={__('Border')} value={bgBorder} onChange={val => setAttributes({ bgBorder: val })} min={0} max={10} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
+								<BoxShadow label={__('Box-Shadow')} value={bgShadow} onChange={(value) => setAttributes({ bgShadow: value })} />
+								<Padding
+									label={__('Padding')}
+									value={bgPadding}
+									onChange={val => setAttributes({ bgPadding: val })}
+									min={0} max={200}
+									unit={['px', 'em', '%']}
+									responsive
 									device={device}
 									onDeviceChange={value => this.setState({ device: value })} />
+								<BorderRadius label={__('Radius')} value={bgBorderRadius} onChange={(value) => setAttributes({ bgBorderRadius: value })} min={0} max={100} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
+							</PanelBody>
 
-							</Fragment>
-						}
-					</PanelBody>
+							<PanelBody title={__('Badge')} opened={'Badge' === openPanelSetting} onToggle={() => this.handlePanelOpenings(openPanelSetting !== 'Badge' ? 'Badge' : '')}>
+								<Toggle
+									value={enableBadge}
+									label={__('Enable')}
+									onChange={val => setAttributes({ enableBadge: val })}
+								/>
 
-
-					<PanelBody title={__('Duration')} opened={'Duration' === openPanelSetting} onToggle={() => this.handlePanelOpenings(openPanelSetting !== 'Duration' ? 'Duration' : '')}>
-						<Toggle
-							value={enableDuration}
-							label={__('Enable')}
-							onChange={val => setAttributes({ enableDuration: val })}
-						/>
-						{enableDuration &&
-							<Fragment>
-								<TextControl
-									label={__('Duration')}
-									value={duration}
-									placeholder={__('Duration')}
-									onChange={val => setAttributes({ duration: val })} />
-
-								<RadioAdvanced
-									label={__('Position')}
-									options={[
-										{ label: __('Side'), value: 'side', title: __('Side') },
-										{ label: __('Bottom'), value: 'bottom', title: __('Bottom') }
-									]}
-									value={durationPosition}
-									onChange={val => setAttributes({ durationPosition: val })} />
-
-								{durationPosition == 'side' ?
-									<Range
-										min={-100}
-										max={100}
-										value={durationAlign}
-										label={__('Duration Align')}
-										onChange={val => setAttributes({ durationAlign: val })} />
-									:
+								{enableBadge &&
 									<Fragment>
-										<Padding
-											min={0}
-											max={100}
-											value={durationPadding}
-											label={__('Padding')}
-											onChange={val => setAttributes({ durationPadding: val })}
-											unit={['px', 'em', '%']}
-											responsive
-											device={device}
-											onDeviceChange={value => this.setState({ device: value })}
+										<Styles value={badgeStyle} onChange={val => setAttributes({ badgeStyle: val })}
+											options={[
+												{ value: 1, svg: icons.pricing.badge[1], label: __('Style 1') },
+												{ value: 2, svg: icons.pricing.badge[2], label: __('Style 2') },
+												{ value: 3, svg: icons.pricing.badge[3], label: __('Style 3') },
+												{ value: 4, svg: icons.pricing.badge[4], label: __('Style 4') },
+												{ value: 5, svg: icons.pricing.badge[5], label: __('Style 5') },
+												{ value: 6, svg: icons.pricing.badge[6], label: __('Style 6') },
+											]}
 										/>
+
+										<RadioAdvanced
+											label={__('Size')}
+											options={[
+												{ label: __('Small'), value: 'small', title: __('Small') },
+												{ label: __('Regular'), value: 'regular', title: __('Regular') },
+												{ label: __('Large'), value: 'large', title: __('Large') },
+											]}
+											value={badgeSize}
+											onChange={val => setAttributes({ badgeSize: val })}
+										/>
+
+										{(badgeStyle == 1 || badgeStyle == 2 || badgeStyle == 5 || badgeStyle == 6) &&
+											<RadioAdvanced
+												label={__('Position')}
+												options={[
+													{ label: __('Left'), value: 'left', title: __('Left') },
+													{ label: __('Right'), value: 'right', title: __('Right') },
+												]}
+												value={badgePosition}
+												onChange={val => setAttributes({ badgePosition: val })}
+											/>
+										}
+
+										<Color
+											label={__('Background color')}
+											value={badgeBg}
+											onChange={val => setAttributes({ badgeBg: val })}
+										/>
+
+										<Color
+											label={__('Text color')}
+											value={badgeColor}
+											onChange={val => setAttributes({ badgeColor: val })}
+										/>
+
+										{badgeStyle == 5 &&
+											<BorderRadius
+												label={__('Radius')}
+												value={badgeRadius}
+												onChange={(value) => setAttributes({ badgeRadius: value })}
+												min={0}
+												max={100}
+												unit={['px', 'em', '%']}
+												responsive
+												device={device}
+												onDeviceChange={value => this.setState({ device: value })}
+											/>
+										}
+
+										{(badgeStyle == 3 || badgeStyle == 5 || badgeStyle == 6) &&
+											<Range
+												label={badgeStyle == 5 ? __('Side Spacing') : __('Spacing')}
+												value={badgeSpacing}
+												onChange={(value) => setAttributes({ badgeSpacing: value })}
+												min={0}
+												max={100}
+												unit={['px', 'em', '%']}
+												responsive
+												device={device}
+												onDeviceChange={value => this.setState({ device: value })}
+											/>
+										}
+
+										{badgeStyle == 5 &&
+											<Range
+												label={__('Top Spacing')}
+												value={badgeSpacingTop}
+												onChange={(value) => setAttributes({ badgeSpacingTop: value })}
+												min={0}
+												max={100}
+												unit={['px', 'em', '%']}
+												responsive
+												device={device}
+												onDeviceChange={value => this.setState({ device: value })}
+											/>
+										}
+
+										<Separator />
+
+										<Typography
+											value={badgeTypography}
+											disableLineHeight
+											onChange={val => setAttributes({ badgeTypography: val })}
+											device={device}
+											onDeviceChange={value => this.setState({ device: value })} />
 									</Fragment>
 								}
 
-								<Color
-									label={__('Color')}
-									value={durationColor}
-									onChange={val => setAttributes({ durationColor: val })} />
-								<Separator />
-								<Typography
-									value={durationTypography}
-									onChange={val => setAttributes({ durationTypography: val })}
-									device={device}
-									onDeviceChange={value => this.setState({ device: value })} />
-							</Fragment>
-						}
-					</PanelBody>
+							</PanelBody>
+							{buttonSettings(this.props.attributes, device, (key, value) => { setAttributes({ [key]: value }) }, (key, value) => { this.setState({ [key]: value }) }, showPostTextTypography)}
+							{listSettings(this.props.attributes, device, setAttributes)}
+						</InspectorTab>
 
-					{layout == 5 &&
-						<PanelBody title={__('Header')} opened={'Header' === openPanelSetting} onToggle={() => this.handlePanelOpenings(openPanelSetting !== 'Header' ? 'Header' : '')}>
-							<ColorAdvanced label={__('Background Color')} value={headerBg} onChange={val => setAttributes({ headerBg: val })} />
-							<Border
-								value={headerBorder}
-								label={__('Border')}
-								onChange={val => setAttributes({ headerBorder: val })}
-								unit={['px', 'em', '%']}
-								responsive
-								device={device}
-								onDeviceChange={value => this.setState({ device: value })}
-							/>
-							<Padding
-								min={30}
-								max={100}
-								value={headerPadding}
-								label={__('Padding')}
-								onChange={val => setAttributes({ headerPadding: val })}
-								unit={['px', 'em', '%']}
-								responsive
-								device={device}
-								onDeviceChange={value => this.setState({ device: value })}
-							/>
-						</PanelBody>
-					}
-
-					<PanelBody title={__('Background')} initialOpen={false}>
-						<ColorAdvanced label={__('Background Color')} value={bgColor} onChange={val => setAttributes({ bgColor: val })} />
-						<Border label={__('Border')} value={bgBorder} onChange={val => setAttributes({ bgBorder: val })} min={0} max={10} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
-						<BoxShadow label={__('Box-Shadow')} value={bgShadow} onChange={(value) => setAttributes({ bgShadow: value })} />
-						<Padding
-							label={__('Padding')}
-							value={bgPadding}
-							onChange={val => setAttributes({ bgPadding: val })}
-							min={0} max={200}
-							unit={['px', 'em', '%']}
-							responsive
-							device={device}
-							onDeviceChange={value => this.setState({ device: value })} />
-						<BorderRadius label={__('Radius')} value={bgBorderRadius} onChange={(value) => setAttributes({ bgBorderRadius: value })} min={0} max={100} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
-					</PanelBody>
-
-					<PanelBody title={__('Badge')} opened={'Badge' === openPanelSetting} onToggle={() => this.handlePanelOpenings(openPanelSetting !== 'Badge' ? 'Badge' : '')}>
-						<Toggle
-							value={enableBadge}
-							label={__('Enable')}
-							onChange={val => setAttributes({ enableBadge: val })}
-						/>
-
-						{enableBadge &&
-							<Fragment>
-								<Styles value={badgeStyle} onChange={val => setAttributes({ badgeStyle: val })}
-									options={[
-										{ value: 1, svg: icons.pricing.badge[1], label: __('Style 1') },
-										{ value: 2, svg: icons.pricing.badge[2], label: __('Style 2') },
-										{ value: 3, svg: icons.pricing.badge[3], label: __('Style 3') },
-										{ value: 4, svg: icons.pricing.badge[4], label: __('Style 4') },
-										{ value: 5, svg: icons.pricing.badge[5], label: __('Style 5') },
-										{ value: 6, svg: icons.pricing.badge[6], label: __('Style 6') },
-									]}
-								/>
-
-								<RadioAdvanced
-									label={__('Size')}
-									options={[
-										{ label: __('Small'), value: 'small', title: __('Small') },
-										{ label: __('Regular'), value: 'regular', title: __('Regular') },
-										{ label: __('Large'), value: 'large', title: __('Large') },
-									]}
-									value={badgeSize}
-									onChange={val => setAttributes({ badgeSize: val })}
-								/>
-
-								{(badgeStyle == 1 || badgeStyle == 2 || badgeStyle == 5 || badgeStyle == 6) &&
-									<RadioAdvanced
-										label={__('Position')}
-										options={[
-											{ label: __('Left'), value: 'left', title: __('Left') },
-											{ label: __('Right'), value: 'right', title: __('Right') },
-										]}
-										value={badgePosition}
-										onChange={val => setAttributes({ badgePosition: val })}
-									/>
-								}
-
-								<Color
-									label={__('Background color')}
-									value={badgeBg}
-									onChange={val => setAttributes({ badgeBg: val })}
-								/>
-
-								<Color
-									label={__('Text color')}
-									value={badgeColor}
-									onChange={val => setAttributes({ badgeColor: val })}
-								/>
-
-								{badgeStyle == 5 &&
-									<BorderRadius
-										label={__('Radius')}
-										value={badgeRadius}
-										onChange={(value) => setAttributes({ badgeRadius: value })}
-										min={0}
-										max={100}
-										unit={['px', 'em', '%']}
-										responsive
-										device={device}
-										onDeviceChange={value => this.setState({ device: value })}
-									/>
-								}
-
-								{(badgeStyle == 3 || badgeStyle == 5 || badgeStyle == 6) &&
-									<Range
-										label={badgeStyle == 5 ? __('Side Spacing') : __('Spacing')}
-										value={badgeSpacing}
-										onChange={(value) => setAttributes({ badgeSpacing: value })}
-										min={0}
-										max={100}
-										unit={['px', 'em', '%']}
-										responsive
-										device={device}
-										onDeviceChange={value => this.setState({ device: value })}
-									/>
-								}
-
-								{badgeStyle == 5 &&
-									<Range
-										label={__('Top Spacing')}
-										value={badgeSpacingTop}
-										onChange={(value) => setAttributes({ badgeSpacingTop: value })}
-										min={0}
-										max={100}
-										unit={['px', 'em', '%']}
-										responsive
-										device={device}
-										onDeviceChange={value => this.setState({ device: value })}
-									/>
-								}
-
-								<Separator />
-
-								<Typography
-									value={badgeTypography}
-									disableLineHeight
-									onChange={val => setAttributes({ badgeTypography: val })}
-									device={device}
-									onDeviceChange={value => this.setState({ device: value })} />
-							</Fragment>
-						}
-
-					</PanelBody>
-
-					{buttonSettings(this.props.attributes, device, (key, value) => { setAttributes({ [key]: value }) }, (key, value) => { this.setState({ [key]: value }) }, showPostTextTypography)}
-
-					{listSettings(this.props.attributes, device, setAttributes)}
-
-					{animationSettings(uniqueId, animation, setAttributes)}
-
-					{interactionSettings(uniqueId, interaction, setAttributes)}
+						<InspectorTab key={'advance'}>
+							{animationSettings(uniqueId, animation, setAttributes)}
+							{interactionSettings(uniqueId, interaction, setAttributes)}
+						</InspectorTab>
+					</InspectorTabs>
 
 				</InspectorControls>
 

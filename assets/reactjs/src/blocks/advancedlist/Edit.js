@@ -44,7 +44,9 @@ const {
     IconSelector,
     BorderRadius,
     Padding,
-    withCSSGenerator
+    withCSSGenerator,
+    InspectorTabs,
+    InspectorTab
 } = wp.qubelyComponents;
 
 class Edit extends Component {
@@ -272,141 +274,144 @@ class Edit extends Component {
         return (
             <Fragment>
                 <InspectorControls key="inspector">
-                    <PanelBody title={__('Options')} initialOpen={true}>
-                        <Styles value={layout} onChange={val => setAttributes({ layout: val })}
-                            options={[
-                                { value: 'fill', svg: icons.list_fill, label: __('Fill') },
-                                { value: 'classic', svg: icons.list_classic, label: __('Classic') }
-                            ]}
-                        />
-                        <Alignment label={__('Alignment')} alignmentType="content" value={alignment} onChange={val => setAttributes({ alignment: val })} disableJustify disableToggle />
-                        <Separator />
-                        <Typography label={__('Typography')} value={typography} onChange={val => setAttributes({ typography: val })} device={device} onDeviceChange={value => this.setState({ device: value })} />
-                    </PanelBody>
-
-                    <PanelBody title={(listType == 'unordered') ? __('Bullet') : __('Number')} initialOpen={false}>
-                        {listType == 'unordered' &&
-                            <Fragment>
-                                <IconSelector
-                                    label="Icon"
-                                    value={bulletStyle.name}
-                                    enableSearch
-                                    icons={[
-                                        { name: 'check', value: 'fas fa-check' },
-                                        { name: 'check-square', value: 'fas fa-check-square' },
-                                        { name: 'check-square-outline', value: 'far fa-check-square' },
-                                        { name: 'check-double', value: 'fas fa-check-double' },
-                                        { name: 'check-circle', value: 'fas fa-check-circle' },
-                                        { name: 'check-circle-outline', value: 'far fa-check-circle' },
-                                        { name: 'square', value: 'fas fa-square' },
-                                        { name: 'square-outline', value: 'far fa-square' },
-                                        { name: 'circle', value: 'fas fa-circle' },
-                                        { name: 'circle-outline', value: 'far fa-circle' },
-                                        { name: 'arrow-right', value: 'fas fa-arrow-right' },
-                                        { name: 'arrow-left', value: 'fas fa-arrow-left' },
-                                        { name: 'arrow-circle-right', value: 'fas fa-arrow-circle-right' },
-                                        { name: 'arrow-circle-left', value: 'fas fa-arrow-circle-left' },
-                                        { name: 'arrow-alt-circle-right', value: 'far fa-arrow-alt-circle-right' },
-                                        { name: 'arrow-alt-circle-left', value: 'far fa-arrow-alt-circle-left' },
-                                        { name: 'long-arrow-alt-right', value: 'fas fa-long-arrow-alt-right' },
-                                        { name: 'long-arrow-alt-left', value: 'fas fa-long-arrow-alt-left' },
-                                        { name: 'chevron-right', value: 'fas fa-chevron-right' },
-                                        { name: 'chevron-left', value: 'fas fa-chevron-left' },
-                                        { name: 'angle-right', value: 'fas fa-angle-right' },
-                                        { name: 'angle-left', value: 'fas fa-angle-left' },
-                                        { name: 'star', value: 'fas fa-star' },
-                                        { name: 'star-outline', value: 'far fa-star' },
-                                    ]}
-                                    onChange={val => setAttributes({ bulletStyle: val })}
-                                />
-                                <RadioAdvanced label={__('Size')} value={bulletSize} onChange={val => setAttributes({ bulletSize: val })}
+                    <InspectorTabs tabs={['style', 'advance']}>
+                        <InspectorTab key={'style'}>
+                            <PanelBody title={__('Options')} initialOpen={true}>
+                                <Styles value={layout} onChange={val => setAttributes({ layout: val })}
                                     options={[
-                                        { label: 'S', value: '12px', title: __('Small') },
-                                        { label: 'M', value: '16px', title: __('Medium') },
-                                        { label: 'L', value: '20px', title: __('Large') },
-                                        { label: 'XL', value: '28px', title: __('Extra Large') },
-                                        { icon: 'fas fa-cog', value: 'custom', title: __('Custom') }
+                                        { value: 'fill', svg: icons.list_fill, label: __('Fill') },
+                                        { value: 'classic', svg: icons.list_classic, label: __('Classic') }
                                     ]}
                                 />
-                                {bulletSize == 'custom' &&
-                                    <Range label={__('Custom Size')} value={bulletSizeCustom} onChange={(value) => setAttributes({ bulletSizeCustom: value })} min={0} max={100} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
-                                }
-                            </Fragment>
-                        }
-                        {listType == 'ordered' &&
-                            <Fragment>
-                                <Range label={__('Font Size')} value={numberFontSize} onChange={(value) => setAttributes({ numberFontSize: value })} min={10} max={100} />
-                                <Toggle
-                                    value={useNumberBg}
-                                    label={__('Use Background')}
-                                    onChange={val => setAttributes({ useNumberBg: val, recreateStyles: !recreateStyles })}
-                                />
-                                {
-                                    useNumberBg == 1 &&
+                                <Alignment label={__('Alignment')} alignmentType="content" value={alignment} onChange={val => setAttributes({ alignment: val })} disableJustify disableToggle />
+                                <Separator />
+                                <Typography label={__('Typography')} value={typography} onChange={val => setAttributes({ typography: val })} device={device} onDeviceChange={value => this.setState({ device: value })} />
+                            </PanelBody>
+
+                            <PanelBody title={(listType == 'unordered') ? __('Bullet') : __('Number')} initialOpen={false}>
+                                {listType == 'unordered' &&
                                     <Fragment>
-                                        <Range label={__('Background Size')} value={numberBgSize} onChange={(value) => setAttributes({ numberBgSize: value })} min={1} max={15} />
-                                        <Range label={__('Corner')} value={numberCorner} onChange={(value) => setAttributes({ numberCorner: value })} min={0} max={100} />
+                                        <IconSelector
+                                            label="Icon"
+                                            value={bulletStyle.name}
+                                            enableSearch
+                                            icons={[
+                                                { name: 'check', value: 'fas fa-check' },
+                                                { name: 'check-square', value: 'fas fa-check-square' },
+                                                { name: 'check-square-outline', value: 'far fa-check-square' },
+                                                { name: 'check-double', value: 'fas fa-check-double' },
+                                                { name: 'check-circle', value: 'fas fa-check-circle' },
+                                                { name: 'check-circle-outline', value: 'far fa-check-circle' },
+                                                { name: 'square', value: 'fas fa-square' },
+                                                { name: 'square-outline', value: 'far fa-square' },
+                                                { name: 'circle', value: 'fas fa-circle' },
+                                                { name: 'circle-outline', value: 'far fa-circle' },
+                                                { name: 'arrow-right', value: 'fas fa-arrow-right' },
+                                                { name: 'arrow-left', value: 'fas fa-arrow-left' },
+                                                { name: 'arrow-circle-right', value: 'fas fa-arrow-circle-right' },
+                                                { name: 'arrow-circle-left', value: 'fas fa-arrow-circle-left' },
+                                                { name: 'arrow-alt-circle-right', value: 'far fa-arrow-alt-circle-right' },
+                                                { name: 'arrow-alt-circle-left', value: 'far fa-arrow-alt-circle-left' },
+                                                { name: 'long-arrow-alt-right', value: 'fas fa-long-arrow-alt-right' },
+                                                { name: 'long-arrow-alt-left', value: 'fas fa-long-arrow-alt-left' },
+                                                { name: 'chevron-right', value: 'fas fa-chevron-right' },
+                                                { name: 'chevron-left', value: 'fas fa-chevron-left' },
+                                                { name: 'angle-right', value: 'fas fa-angle-right' },
+                                                { name: 'angle-left', value: 'fas fa-angle-left' },
+                                                { name: 'star', value: 'fas fa-star' },
+                                                { name: 'star-outline', value: 'far fa-star' },
+                                            ]}
+                                            onChange={val => setAttributes({ bulletStyle: val })}
+                                        />
+                                        <RadioAdvanced label={__('Size')} value={bulletSize} onChange={val => setAttributes({ bulletSize: val })}
+                                            options={[
+                                                { label: 'S', value: '12px', title: __('Small') },
+                                                { label: 'M', value: '16px', title: __('Medium') },
+                                                { label: 'L', value: '20px', title: __('Large') },
+                                                { label: 'XL', value: '28px', title: __('Extra Large') },
+                                                { icon: 'fas fa-cog', value: 'custom', title: __('Custom') }
+                                            ]}
+                                        />
+                                        {bulletSize == 'custom' &&
+                                            <Range label={__('Custom Size')} value={bulletSizeCustom} onChange={(value) => setAttributes({ bulletSizeCustom: value })} min={0} max={100} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
+                                        }
                                     </Fragment>
                                 }
-                            </Fragment>
-                        }
-                        <Range label={__('Spacing')} value={bulletSpacing} onChange={val => setAttributes({ bulletSpacing: val })} min={0} max={60} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
-                        <Tabs>
-                            <Tab tabTitle={__('Normal')}>
-                                <Color label={__('Color')} disableAlpha value={bulletColor} onChange={val => setAttributes({ bulletColor: val })} />
-                                {(listType == 'ordered' && useNumberBg == 1) &&
-                                    <Color label={__('Background Color')} value={numberBg} onChange={val => setAttributes({ numberBg: val })} />
+                                {listType == 'ordered' &&
+                                    <Fragment>
+                                        <Range label={__('Font Size')} value={numberFontSize} onChange={(value) => setAttributes({ numberFontSize: value })} min={10} max={100} />
+                                        <Toggle
+                                            value={useNumberBg}
+                                            label={__('Use Background')}
+                                            onChange={val => setAttributes({ useNumberBg: val, recreateStyles: !recreateStyles })}
+                                        />
+                                        {
+                                            useNumberBg == 1 &&
+                                            <Fragment>
+                                                <Range label={__('Background Size')} value={numberBgSize} onChange={(value) => setAttributes({ numberBgSize: value })} min={1} max={15} />
+                                                <Range label={__('Corner')} value={numberCorner} onChange={(value) => setAttributes({ numberCorner: value })} min={0} max={100} />
+                                            </Fragment>
+                                        }
+                                    </Fragment>
                                 }
-                            </Tab>
-                            <Tab tabTitle={__('Hover')}>
-                                <Color label={__('Color')} disableAlpha value={bulletColorHover} onChange={val => setAttributes({ bulletColorHover: val })} />
-                                {listType == 'ordered' && useNumberBg == 1 &&
-                                    <Color label={__('Background Color')} value={numberBgHover} onChange={val => setAttributes({ numberBgHover: val })} />
-                                }
-                            </Tab>
-                        </Tabs>
-                    </PanelBody>
+                                <Range label={__('Spacing')} value={bulletSpacing} onChange={val => setAttributes({ bulletSpacing: val })} min={0} max={60} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
+                                <Tabs>
+                                    <Tab tabTitle={__('Normal')}>
+                                        <Color label={__('Color')} disableAlpha value={bulletColor} onChange={val => setAttributes({ bulletColor: val })} />
+                                        {(listType == 'ordered' && useNumberBg == 1) &&
+                                            <Color label={__('Background Color')} value={numberBg} onChange={val => setAttributes({ numberBg: val })} />
+                                        }
+                                    </Tab>
+                                    <Tab tabTitle={__('Hover')}>
+                                        <Color label={__('Color')} disableAlpha value={bulletColorHover} onChange={val => setAttributes({ bulletColorHover: val })} />
+                                        {listType == 'ordered' && useNumberBg == 1 &&
+                                            <Color label={__('Background Color')} value={numberBgHover} onChange={val => setAttributes({ numberBgHover: val })} />
+                                        }
+                                    </Tab>
+                                </Tabs>
+                            </PanelBody>
 
-                    <PanelBody title={__('Design')} initialOpen={false}>
-                        <Range label={__('Spacing')} value={spacing} onChange={val => setAttributes({ spacing: val })} min={0} max={60} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
-                        <Padding label={__('Padding')} value={backgroundSize} onChange={val => setAttributes({ backgroundSize: val })} min={0} max={60} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
-                        {layout == 'fill' &&
-                            <Fragment>
-                                <Separator />
-                                <BorderRadius label={__('Radius')} value={borderRadius} onChange={(value) => setAttributes({ borderRadius: value })} min={0} max={100} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
-                            </Fragment>
-                        }
-
-                        <Tabs>
-                            <Tab tabTitle={__('Normal')}>
-                                <Color label={__('Color')} value={color} onChange={val => setAttributes({ color: val })} />
+                            <PanelBody title={__('Design')} initialOpen={false}>
+                                <Range label={__('Spacing')} value={spacing} onChange={val => setAttributes({ spacing: val })} min={0} max={60} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
+                                <Padding label={__('Padding')} value={backgroundSize} onChange={val => setAttributes({ backgroundSize: val })} min={0} max={60} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
                                 {layout == 'fill' &&
-                                    <Color label={__('Background Color')} value={background} onChange={val => setAttributes({ background: val })} />
+                                    <Fragment>
+                                        <Separator />
+                                        <BorderRadius label={__('Radius')} value={borderRadius} onChange={(value) => setAttributes({ borderRadius: value })} min={0} max={100} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
+                                    </Fragment>
                                 }
-                                <Border label={__('Border')} value={border} unit={['px', 'em']} onChange={val => setAttributes({ border: val })} min={0} max={10} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
-                                {layout == 'fill' &&
-                                    <BoxShadow label={__('Box-Shadow')} value={shadow} onChange={(value) => setAttributes({ shadow: value })} />
-                                }
-                            </Tab>
-                            <Tab tabTitle={__('Hover')}>
-                                <Color label={__('Color')} value={colorHover} onChange={val => setAttributes({ colorHover: val })} />
-                                {layout == 'fill' &&
-                                    <Color label={__('Background Color')} value={backgroundHover} onChange={val => setAttributes({ backgroundHover: val })} />
-                                }
-                                {(border.openBorder != undefined && border.openBorder == 1) &&
-                                    <Color label={__('Border Color')} value={borderColorHover} onChange={(value) => setAttributes({ borderColorHover: value })} />
-                                }
-                                {layout == 'fill' &&
-                                    <BoxShadow label={__('Box-Shadow')} value={shadowHover} onChange={(value) => setAttributes({ shadowHover: value })} />
-                                }
-                            </Tab>
-                        </Tabs>
-                    </PanelBody>
 
-                    {animationSettings(uniqueId, animation, setAttributes)}
-
-                    {interactionSettings(uniqueId, interaction, setAttributes)}
-
+                                <Tabs>
+                                    <Tab tabTitle={__('Normal')}>
+                                        <Color label={__('Color')} value={color} onChange={val => setAttributes({ color: val })} />
+                                        {layout == 'fill' &&
+                                            <Color label={__('Background Color')} value={background} onChange={val => setAttributes({ background: val })} />
+                                        }
+                                        <Border label={__('Border')} value={border} unit={['px', 'em']} onChange={val => setAttributes({ border: val })} min={0} max={10} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
+                                        {layout == 'fill' &&
+                                            <BoxShadow label={__('Box-Shadow')} value={shadow} onChange={(value) => setAttributes({ shadow: value })} />
+                                        }
+                                    </Tab>
+                                    <Tab tabTitle={__('Hover')}>
+                                        <Color label={__('Color')} value={colorHover} onChange={val => setAttributes({ colorHover: val })} />
+                                        {layout == 'fill' &&
+                                            <Color label={__('Background Color')} value={backgroundHover} onChange={val => setAttributes({ backgroundHover: val })} />
+                                        }
+                                        {(border.openBorder != undefined && border.openBorder == 1) &&
+                                            <Color label={__('Border Color')} value={borderColorHover} onChange={(value) => setAttributes({ borderColorHover: value })} />
+                                        }
+                                        {layout == 'fill' &&
+                                            <BoxShadow label={__('Box-Shadow')} value={shadowHover} onChange={(value) => setAttributes({ shadowHover: value })} />
+                                        }
+                                    </Tab>
+                                </Tabs>
+                            </PanelBody>
+                        </InspectorTab>
+                        <InspectorTab key={'advance'}>
+                            {animationSettings(uniqueId, animation, setAttributes)}
+                            {interactionSettings(uniqueId, interaction, setAttributes)}
+                        </InspectorTab>
+                    </InspectorTabs>
                 </InspectorControls>
 
                 <BlockControls>

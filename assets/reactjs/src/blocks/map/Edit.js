@@ -2,7 +2,7 @@ const { __ } = wp.i18n;
 const { InspectorControls, BlockControls } = wp.blockEditor
 const { Component, Fragment } = wp.element;
 const { PanelBody, ToggleControl, TextControl, RangeControl, Toolbar } = wp.components;
-const { Media, Separator, gloalSettings: { globalSettingsPanel, animationSettings }, Inline: { InlineToolbar }, withCSSGenerator } = wp.qubelyComponents
+const { Media, Separator, gloalSettings: { globalSettingsPanel, animationSettings }, Inline: { InlineToolbar }, withCSSGenerator, InspectorTabs, InspectorTab } = wp.qubelyComponents
 import mapStyles from './mapStyles'
 
 class Edit extends Component {
@@ -197,98 +197,103 @@ class Edit extends Component {
         return (
             <Fragment>
                 <InspectorControls key="inspector">
-
-                    <PanelBody title={__('Map Settings', 'qubely')}>
-                        <TextControl
-                            label={__('API Key')}
-                            value={apiKey}
-                            placeholder={__('Enter API Key')}
-                            onChange={val => this.initMapLibrary(val)} />
-                        {!apiKey &&
-                            <Fragment>
-                                <i>{__('Generate your Google API key in')} <a href='https://developers.google.com/maps/documentation/javascript/get-api-key' target="_blank">{__('here')}</a>.</i>
-                                <Separator />
-                            </Fragment>
-                        }
-                        <RangeControl
-                            label={__('Zoom')}
-                            value={zoom}
-                            min='1'
-                            max='20'
-                            onChange={val => this.setSettings('zoom', val)} />
-                        <RangeControl
-                            label={__('Height')}
-                            value={height}
-                            min='1'
-                            max='700'
-                            onChange={(val) => this.setSettings('height', val)} />
-                    </PanelBody>
-
-                    {!apiKey &&
-                        <b><i>{__('Need Google API key extend feature.')}</i></b>
-                    }
-                    <div className={apiKey ? '' : 'not-clickable'}>
-                        <PanelBody title={__('Map Style')}>
-                            <div style={{ overflow: 'auto' }}>
-                                {mapStyles.map((option, index) => {
-                                    return (
-                                        <div className={(selectedStyle == option.value) ? 'qubely-map-style qubely-map-style-active' : 'qubely-map-style'}>
-                                            <img
-                                                key={index}
-                                                onClick={() => {
-                                                    this.setSettings('selectedStyle', option.value);
-                                                    this.setSettings('mapStyle', JSON.stringify(option.json));
-                                                }}
-                                                src={option.image}
-                                                title={__(option.label)}
-                                                alt={__('Map Style')}
-                                            />
-                                            <p>{__(option.label)}</p>
-                                        </div>
-                                    );
-                                })}
-                            </div>
-                        </PanelBody>
-
-                        <PanelBody title={__('Map Option')}>
-                            <ToggleControl
-                                label={__('Zoom Buttons')}
-                                checked={!!showZoomButtons}
-                                onChange={(val) => this.setSettings('showZoomButtons', val)} />
-                            <ToggleControl
-                                label={__('Map Type Buttons')}
-                                checked={!!showMapTypeButtons}
-                                onChange={(val) => this.setSettings('showMapTypeButtons', val)} />
-                            <ToggleControl
-                                label={__('Street View Button')}
-                                checked={!!showStreetViewButton}
-                                onChange={(val) => this.setSettings('showStreetViewButton', val)} />
-                            <ToggleControl
-                                label={__('Fullscreen Button')}
-                                checked={!!showFullscreenButton}
-                                onChange={(val) => this.setSettings('showFullscreenButton', val)} />
-                            <ToggleControl
-                                label={__('Draggable')}
-                                checked={!!optionDraggable}
-                                onChange={(val) => this.setSettings('optionDraggable', val)} />
-                            <ToggleControl
-                                label={__('Show Marker')}
-                                checked={!!showMarker}
-                                onChange={(val) => this.setSettings('showMarker', val)} />
-                            {showMarker &&
+                    <InspectorTabs tabs={['style', 'advance']}>
+                        <InspectorTab key={'style'}>
+                            <PanelBody title={__('Map Settings', 'qubely')}>
+                                <TextControl
+                                    label={__('API Key')}
+                                    value={apiKey}
+                                    placeholder={__('Enter API Key')}
+                                    onChange={val => this.initMapLibrary(val)} />
+                                {!apiKey &&
                                 <Fragment>
-                                    <Separator label={__('Add custom marker')} />
-                                    <Media
-                                        multiple={false}
-                                        type={['image']}
-                                        value={{ url: iconPointer }}
-                                        panel={true}
-                                        onChange={(val) => this.setSettings('iconPointer', val.url)} />
+                                    <i>{__('Generate your Google API key in')} <a href='https://developers.google.com/maps/documentation/javascript/get-api-key' target="_blank">{__('here')}</a>.</i>
+                                    <Separator />
                                 </Fragment>
+                                }
+                                <RangeControl
+                                    label={__('Zoom')}
+                                    value={zoom}
+                                    min='1'
+                                    max='20'
+                                    onChange={val => this.setSettings('zoom', val)} />
+                                <RangeControl
+                                    label={__('Height')}
+                                    value={height}
+                                    min='1'
+                                    max='700'
+                                    onChange={(val) => this.setSettings('height', val)} />
+                            </PanelBody>
+
+                            {!apiKey &&
+                            <b><i>{__('Need Google API key extend feature.')}</i></b>
                             }
-                        </PanelBody>
-                    </div>
-                    {animationSettings(uniqueId, animation, setAttributes)}
+                            <div className={apiKey ? '' : 'not-clickable'}>
+                                <PanelBody title={__('Map Style')}>
+                                    <div style={{ overflow: 'auto' }}>
+                                        {mapStyles.map((option, index) => {
+                                            return (
+                                                <div className={(selectedStyle == option.value) ? 'qubely-map-style qubely-map-style-active' : 'qubely-map-style'}>
+                                                    <img
+                                                        key={index}
+                                                        onClick={() => {
+                                                            this.setSettings('selectedStyle', option.value);
+                                                            this.setSettings('mapStyle', JSON.stringify(option.json));
+                                                        }}
+                                                        src={option.image}
+                                                        title={__(option.label)}
+                                                        alt={__('Map Style')}
+                                                    />
+                                                    <p>{__(option.label)}</p>
+                                                </div>
+                                            );
+                                        })}
+                                    </div>
+                                </PanelBody>
+
+                                <PanelBody title={__('Map Option')}>
+                                    <ToggleControl
+                                        label={__('Zoom Buttons')}
+                                        checked={!!showZoomButtons}
+                                        onChange={(val) => this.setSettings('showZoomButtons', val)} />
+                                    <ToggleControl
+                                        label={__('Map Type Buttons')}
+                                        checked={!!showMapTypeButtons}
+                                        onChange={(val) => this.setSettings('showMapTypeButtons', val)} />
+                                    <ToggleControl
+                                        label={__('Street View Button')}
+                                        checked={!!showStreetViewButton}
+                                        onChange={(val) => this.setSettings('showStreetViewButton', val)} />
+                                    <ToggleControl
+                                        label={__('Fullscreen Button')}
+                                        checked={!!showFullscreenButton}
+                                        onChange={(val) => this.setSettings('showFullscreenButton', val)} />
+                                    <ToggleControl
+                                        label={__('Draggable')}
+                                        checked={!!optionDraggable}
+                                        onChange={(val) => this.setSettings('optionDraggable', val)} />
+                                    <ToggleControl
+                                        label={__('Show Marker')}
+                                        checked={!!showMarker}
+                                        onChange={(val) => this.setSettings('showMarker', val)} />
+                                    {showMarker &&
+                                    <Fragment>
+                                        <Separator label={__('Add custom marker')} />
+                                        <Media
+                                            multiple={false}
+                                            type={['image']}
+                                            value={{ url: iconPointer }}
+                                            panel={true}
+                                            onChange={(val) => this.setSettings('iconPointer', val.url)} />
+                                    </Fragment>
+                                    }
+                                </PanelBody>
+                            </div>
+                        </InspectorTab>
+                        <InspectorTab key={'advance'}>
+                            {animationSettings(uniqueId, animation, setAttributes)}
+                        </InspectorTab>
+                    </InspectorTabs>
                 </InspectorControls>
 
                 <BlockControls>
