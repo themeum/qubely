@@ -49,7 +49,13 @@ export default function withCSSGenerator() {
                 if (nonResponsiveAttributes.length > 0) {
                     nonResponsiveAttributes.forEach(attr => {
                         if (nonResponsiveCSS[attr]) {
-                            if (typeof nonResponsiveCSS[attr] === 'array') {
+                            if (attr === 'hideTablet' && nonResponsiveCSS[attr].length !== 0) {
+                                console.log('handle tablet : ', nonResponsiveCSS[attr]);
+                                _CSS += '@media (max-width: 1199px) and (min-width: 992px)  {' + nonResponsiveCSS[attr][0] + '}';
+                            } else if (attr === 'hideMobile' && nonResponsiveCSS[attr].length !== 0) {
+                                console.log('handle mobile : ', nonResponsiveCSS[attr]);
+                                _CSS += '@media (max-width: 991px)  {' + nonResponsiveCSS[attr][0] + '}';
+                            } else if (typeof nonResponsiveCSS[attr] === 'array') {
                                 _CSS += nonResponsiveCSS[attr].join(' ');
                             } else {
                                 _CSS += nonResponsiveCSS[attr];
@@ -66,12 +72,7 @@ export default function withCSSGenerator() {
                                 if (currentAttribute[key].hasOwnProperty('md') && typeof currentAttribute[key].md !== 'undefined') {
                                     _CSS += currentAttribute[key].md;
                                 } else if (currentAttribute[key].hasOwnProperty('sm') && typeof currentAttribute[key].sm !== 'undefined') {
-                                    // _CSS += '@media (max-width: 1199px) {' + currentAttribute[key].sm + '}';
-                                    if (attr === 'hideTablet') {
-                                        _CSS += '@media (max-width: 1199px) and (min-width: 992px)  {' + currentAttribute[key].sm + '}';
-                                    } else if (attr === 'hideMobile') {
-                                        _CSS += '@media (max-width: 1199px) {' + currentAttribute[key].sm + '}';
-                                    }
+                                    _CSS += '@media (max-width: 1199px) {' + currentAttribute[key].sm + '}';
                                 } else if (currentAttribute[key].hasOwnProperty('xs') && typeof currentAttribute[key].xs !== 'undefined') {
                                     _CSS += '@media (max-width: 991px) {' + currentAttribute[key].xs + '}';
                                 }
