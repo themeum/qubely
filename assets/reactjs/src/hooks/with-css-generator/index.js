@@ -50,10 +50,8 @@ export default function withCSSGenerator() {
                     nonResponsiveAttributes.forEach(attr => {
                         if (nonResponsiveCSS[attr]) {
                             if (attr === 'hideTablet' && nonResponsiveCSS[attr].length !== 0) {
-                                console.log('handle tablet : ', nonResponsiveCSS[attr]);
                                 _CSS += '@media (max-width: 1199px) and (min-width: 992px)  {' + nonResponsiveCSS[attr][0] + '}';
                             } else if (attr === 'hideMobile' && nonResponsiveCSS[attr].length !== 0) {
-                                console.log('handle mobile : ', nonResponsiveCSS[attr]);
                                 _CSS += '@media (max-width: 991px)  {' + nonResponsiveCSS[attr][0] + '}';
                             } else if (typeof nonResponsiveCSS[attr] === 'array') {
                                 _CSS += nonResponsiveCSS[attr].join(' ');
