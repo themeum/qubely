@@ -239,7 +239,8 @@ You can report bugs on the [support forum here](https://wordpress.org/support/pl
 
 = 1.3.6 - 24 March, 2020 =
 Update: All blocks - Major improvement in Panel UI & UX 
-Fix: Global Settings - Hide Tablet/ Hide Mobile issue  
+Fix: Advanced Settings - Hide Tablet/ Hide Mobile issue  
+Fix: Row block - Full width option is not working in Twenty Twenty Theme  
 
 
 = 1.3.5 - 16 March, 2020 =
