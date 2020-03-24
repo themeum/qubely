@@ -1,32 +1,32 @@
 ## Qubely Developer Docs
-Developer Documentation of Qubely Blocks.
+Developer Documentation of Qubely 
 
 ## Field Types: 
 
-1. Alignment
-3. Background
-4. Border
-5. Border Radius
-6. Box Shadow
-7. Button Group
-8. Color
-9. Color Advance
-10. Dimension
-11. Drag Dimension
-12. Dropdown
-13. Gradient
-14. Headings
-15. Icon List
-16. Icon Selector
-17. Margin
-18. Media
-19. Padding
-20. Radio Advanced
-21. Range
-22. Select
-23. Separator
-24. Tabs
-25. Tab
-26. Toggle
-27. Typography
-28. URL
+1. [Alignment](./fields/alignment.md)
+2. [Background](./fields/background.md)
+3. Border
+4. Border Radius
+5. Box Shadow
+6. Button Group
+7. Color
+8. Color Advanced
+9.  Dimension
+10. Drag Dimension
+11. Dropdown
+12. Gradient
+13. Headings
+14. Icon List
+15. Icon Selector
+16. Margin
+17. Media
+18. Padding
+19. Radio Advanced
+20. Range
+21. Select
+22. Separator
+23. Tabs
+24. Tab
+25. Toggle
+26. Typography
+27. URL
