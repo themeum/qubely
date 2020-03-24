@@ -8,11 +8,11 @@ Alignment field supports both  common `non-responsive` and `responsive` values.
 ### Non-Responsive
 
 ```javascript
-const {useState} = wp.element
-const {Alignment} = wp.qubelyComponents
+const {useState} = wp.element;
+const {Alignment} = wp.qubelyComponents;
 
 const MyAlignmentComponent = () => {
-    const [alignment, setAlignment] = useState('left')
+    const [alignment, setAlignment] = useState('left');
     return (
         <Alignment 
             label='Alignment'
@@ -27,36 +27,29 @@ const MyAlignmentComponent = () => {
 ### Responsive
 
 ```javascript
-const {useState} = wp.element
-const {Alignment} = wp.qubelyComponents
+const {useState} = wp.element;
+const {Alignment} = wp.qubelyComponents;
 
 const MyAlignmentComponent = () => {
-    const [alignment, setAlignment] = useState({md: 'left'})
-    const [device, setDevice] = useState('md')
+    const [alignment, setAlignment] = useState({md: 'left',sm:'left',xs:'center'});
+    const [device, setDevice] = useState('md');
     return (
         <Alignment 
+            responsive
+            device={device}
             label='Alignment'
             value={alignment}
             onChange={alignment => setAlignment({alignment})}
-            responsive
-            device={device}
             onDeviceChange={device => setDevice({ device })} 
         />
-    )   
+    );
 }
 
 ```
 
 ### Props
 The set of props accepted by the component will be specified below.
-#### value
-The current value of the input.
 
-- Type: `String | Number`
-- Required: Yes
-  
-* One important prop to refer is `value`, if `responsive` is true, value should be an Object & Object key should be device name.
-* Another important prop `responsive` requires `device` state, device value can be `md` (Desktop) | `sm` (Tablet)  | `xs` (Mobile), ex: `this.state = {device: 'md'}`
 
 |Prop |Type|Required |
 |:---|:---|:---|
@@ -70,3 +63,21 @@ The current value of the input.
 |`alignmentType`|String|No|
 |`disableJustify`|String|No|
 |`disableCenter`|String|No|
+
+#### value
+The current value of the alignment.
+
+- Type: `String | Object`
+- Required: Yes
+  
+If `responsive` is true, value should be an `Object` .
+
+#### alignmentType
+Depends on the content type which will be controlled by the Alignment field
+
+- Type: `String`
+- Required: No
+- Allowed value : `content`
+
+
+  
