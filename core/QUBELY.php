@@ -6,7 +6,7 @@ if (!defined('ABSPATH')) {
 class QUBELY
 {
 
-	protected $api_base_url = 'http://qubely.io/wp-json/restapi/v2/';
+	protected $api_base_url = 'https://qubely.io/wp-json/restapi/v2/';
 	protected $qubely_api_request_body;
 	protected $qubely_api_request_body_default;
 

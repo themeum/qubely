@@ -17,7 +17,7 @@ registerBlockType('qubely/team', {
     example: {
         attributes: {
             contentBg: '',
-            image: { url: 'http://qubely.io/wp-content/uploads/qubely-assets/demo/team1.jpg' },
+            image: { url: 'https://qubely.io/wp-content/uploads/qubely-assets/demo/team1.jpg' },
         },
     },
     attributes: {

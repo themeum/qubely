@@ -54,7 +54,7 @@ const Sections = (props) => {
     // fetch sections
     const _fetchSections = (today) => {
         setLoadingState('qubely-is-loading');
-        fetch('http://qubely.io/wp-json/restapi/v2/sections', {
+        fetch('https://qubely.io/wp-json/restapi/v2/sections', {
             method: 'POST',
             body: block ? new URLSearchParams('block_name='+block) : ''
         })

@@ -544,7 +544,7 @@ registerBlockType('qubely/image', {
     },
     example: {
         attributes: {
-            image: { url: 'http://qubely.io/wp-content/uploads/qubely-assets/demo/image8.jpg' },
+            image: { url: 'https://qubely.io/wp-content/uploads/qubely-assets/demo/image8.jpg' },
             enableCaption: true,
             imageCaption: __('Qubely is a full-fledged Gutenberg block toolkit.', 'qubely'),
         },
