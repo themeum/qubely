@@ -108,6 +108,24 @@ Depends on the content type which will be controlled by the Alignment field
 - Type: `String`
 - Required: No
 - Allowed value : `content`
+  
+#### disableCenter
+Disables `center` alignment
+
+- Type: `Boolean`
+- Required: No
+  
+#### disableJustify
+Disables `justify` alignment
+
+- Type: `Boolean`
+- Required: No
 
 
   
+#### flex
+When the content which will be controlled by the Alignment field is flex
+
+- Type: `Boolean`
+- Required: No
+
