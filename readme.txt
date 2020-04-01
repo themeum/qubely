@@ -4,7 +4,7 @@ Donate link: https://www.themeum.com
 Tags: blocks, gutenberg, gutenberg blocks, editor, block, page builder
 Requires at least: 5.0
 Tested up to: 5.3
-Stable tag: 1.3.6
+Stable tag: 1.3.7
 Requires PHP: 5.4.0
 License: GPL-2.0+
 License URI: http://www.gnu.org/licenses/gpl-2.0.txt
@@ -236,6 +236,10 @@ You can report bugs on the [support forum here](https://wordpress.org/support/pl
 
 
 == Changelog ==
+
+= 1.3.7 - 06 April, 2020 =
+Fix: Image block - Alignment issue in Simple layout  
+
 
 = 1.3.6 - 24 March, 2020 =
 Update: All blocks - Major improvement in Panel UI & UX 

@@ -8,6 +8,8 @@
     justify-content: end;
     align-items: center;
     .qubley-group-button {
+      display: inline-block;
+      white-space: nowrap;
       padding: 4px 6px;
       color: #8d96a0;
       font-size: 12px;
