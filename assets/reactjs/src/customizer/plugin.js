@@ -129,7 +129,25 @@ class Plugin extends Component {
     }
 
     renderFields() {
-        const { body, p, h1, h2, h3, h4, h5, h6, button, colorPreset1, colorPreset2, colorPreset3, colorPreset4, colorPreset5, colorPreset6 } = this.state.globalSettings
+        const {
+            globalSettings: {
+                p,
+                h1,
+                h2,
+                h3,
+                h4,
+                h5,
+                h6,
+                body,
+                button,
+                colorPreset1,
+                colorPreset2,
+                colorPreset3,
+                colorPreset4,
+                colorPreset5,
+                colorPreset6
+            }
+        } = this.state;
 
         return (
             <Fragment>
