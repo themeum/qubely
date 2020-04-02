@@ -22,8 +22,8 @@ $border-color: #D6D9DD;
 
 .qubely-inspector-tabs{
   display: flex;
-  margin-left: -16px;
-  margin-right: -16px;
+  //margin-left: -16px;
+  //margin-right: -16px;
   position: relative;
   background: #F2F4F5;
   z-index: 9;
@@ -172,34 +172,42 @@ $border-color: #D6D9DD;
 
 }
 
-.qubely-inspector-tabs-container.qubely-is-sticky{
-  .qubely-inspector-tabs{
-    &::before,
-    &::after{
-      display: none;
-    }
-    border-bottom: 1px solid #e2e4e7;
-    button{
-      border-radius: 0;
-      &::before{
+.qubely-inspector-tabs-container{
+  position: sticky;
+  top: -3px;
+  z-index: 9;
+  border-top: calc(0.1em + 1px) solid #F2F4F5;
+  //margin-top: calc(-0.1em + 1px);
+  &.qubely-is-sticky{
+    .qubely-inspector-tabs{
+      &::before,
+      &::after{
         display: none;
       }
-      &::after{
+      border-bottom: 1px solid #e2e4e7;
+      button{
         border-radius: 0;
-        background: #2184F9;
-        height: 3px;
-        top: auto;
-        bottom: -1px;
-        opacity: 0;
-      }
-      &.qubely-active::after{
-        opacity: 1;
+        &::before{
+          display: none;
+        }
+        &::after{
+          border-radius: 0;
+          background: #2184F9;
+          height: 3px;
+          top: auto;
+          bottom: -1px;
+          opacity: 0;
+        }
+        &.qubely-active::after{
+          opacity: 1;
+        }
       }
     }
   }
 }
 
+.qubely-inspector-tab .components-panel__body:first-child,
 .edit-post-settings-sidebar__panel-block .qubely-inspector-tab .components-panel__body:first-child{
   margin-top: 0;
-  border-top: none;
+  border-top: none !important;
 }
