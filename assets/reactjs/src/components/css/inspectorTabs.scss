@@ -172,12 +172,19 @@ $border-color: #D6D9DD;
 
 }
 
+.components-panel .components-panel__body .qubely-inspector-tabs-container{
+  position: static !important;
+  margin-left: -16px;
+  margin-right: -16px;
+  border-top: 0 !important;
+  top: 0 !important;
+}
+
 .qubely-inspector-tabs-container{
   position: sticky;
   top: -3px;
   z-index: 9;
   border-top: calc(0.1em + 1px) solid #F2F4F5;
-  //margin-top: calc(-0.1em + 1px);
   &.qubely-is-sticky{
     .qubely-inspector-tabs{
       &::before,
