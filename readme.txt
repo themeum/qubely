@@ -240,6 +240,7 @@ You can report bugs on the [support forum here](https://wordpress.org/support/pl
 = 1.3.7 - 03 April, 2020 =
 Fix: Image block - Alignment issue in Simple layout
 Fix: Panel Sticky tab conflict with WordPress 5.4
+Fix: Post Grid block - Orderby issue with Random, Menu Order
 
 
 = 1.3.6 - 24 March, 2020 =
