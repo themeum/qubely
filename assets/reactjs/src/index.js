@@ -63,6 +63,7 @@ import './blocks/pieprogress'           // PieProgress
 import './blocks/table-of-contents'
 
 
+import './plugins';
 
 // Global Settings
 import './blocks/pagesettings'
