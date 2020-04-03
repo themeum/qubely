@@ -1,5 +1,6 @@
 $border-color: #D6D9DD;
 .components-panel[data-qubely-tab]{
+  &:not([data-qubely-tab='advance']) .components-panel__body.block-editor-block-inspector__advanced,
   &:not([data-qubely-tab='advance']) .components-panel__body.editor-block-inspector__advanced.block-editor-block-inspector__advanced{
     display: none;
   }
@@ -22,8 +23,8 @@ $border-color: #D6D9DD;
 
 .qubely-inspector-tabs{
   display: flex;
-  margin-left: -16px;
-  margin-right: -16px;
+  //margin-left: -16px;
+  //margin-right: -16px;
   position: relative;
   background: #F2F4F5;
   z-index: 9;
@@ -172,34 +173,49 @@ $border-color: #D6D9DD;
 
 }
 
-.qubely-inspector-tabs-container.qubely-is-sticky{
-  .qubely-inspector-tabs{
-    &::before,
-    &::after{
-      display: none;
-    }
-    border-bottom: 1px solid #e2e4e7;
-    button{
-      border-radius: 0;
-      &::before{
+.components-panel .components-panel__body .qubely-inspector-tabs-container{
+  position: static !important;
+  margin-left: -16px;
+  margin-right: -16px;
+  border-top: 0 !important;
+  top: 0 !important;
+}
+
+.qubely-inspector-tabs-container{
+  position: sticky;
+  top: -3px;
+  z-index: 9;
+  border-top: calc(0.1em + 1px) solid #F2F4F5;
+  &.qubely-is-sticky{
+    .qubely-inspector-tabs{
+      &::before,
+      &::after{
         display: none;
       }
-      &::after{
+      border-bottom: 1px solid #e2e4e7;
+      button{
         border-radius: 0;
-        background: #2184F9;
-        height: 3px;
-        top: auto;
-        bottom: -1px;
-        opacity: 0;
-      }
-      &.qubely-active::after{
-        opacity: 1;
+        &::before{
+          display: none;
+        }
+        &::after{
+          border-radius: 0;
+          background: #2184F9;
+          height: 3px;
+          top: auto;
+          bottom: -1px;
+          opacity: 0;
+        }
+        &.qubely-active::after{
+          opacity: 1;
+        }
       }
     }
   }
 }
 
+.qubely-inspector-tab .components-panel__body:first-child,
 .edit-post-settings-sidebar__panel-block .qubely-inspector-tab .components-panel__body:first-child{
   margin-top: 0;
-  border-top: none;
+  border-top: none !important;
 }
