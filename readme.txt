@@ -241,6 +241,7 @@ You can report bugs on the [support forum here](https://wordpress.org/support/pl
 Fix: Image block - Alignment issue in simple layout
 Fix: WordPress 5.4 Sidebar sticky tab issue
 
+
 = 1.3.6 - 24 March, 2020 =
 Update: All blocks - Major improvement in Panel UI & UX 
 Fix: Advanced Settings - Hide Tablet/ Hide Mobile issue  
