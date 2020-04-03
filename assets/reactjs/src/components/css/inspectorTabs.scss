@@ -1,5 +1,6 @@
 $border-color: #D6D9DD;
 .components-panel[data-qubely-tab]{
+  &:not([data-qubely-tab='advance']) .components-panel__body.block-editor-block-inspector__advanced,
   &:not([data-qubely-tab='advance']) .components-panel__body.editor-block-inspector__advanced.block-editor-block-inspector__advanced{
     display: none;
   }
