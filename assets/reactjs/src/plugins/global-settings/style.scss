@@ -1,0 +1,22 @@
+.qubely-global-settings {
+    .preset {
+        .name {
+            cursor: pointer;
+            position: relative;
+            padding: 15px;
+            outline: none;
+            width: 100%;
+            font-weight: 600;
+            text-align: left;
+            color: #191e23;
+            border: none;
+            box-shadow: none;
+            transition: background 0.1s ease-in-out;
+        }
+        &.active {
+            .name {
+                color: #2184f9;
+            }
+        }
+    }
+}
