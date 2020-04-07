@@ -57,45 +57,38 @@ class GlobalSettings extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            activePreset: 0,
-            presets: [
-                {
-                    name: 'preset1',
-                    colors: [
-                        {
-                            name: 'color1',
-                            values: ['#4A90E2', '#50E3C2', '#000', '#4A4A4A', '#9B9B9B']
+            activePreset: 'preset1',
+            presets: {
+                preset1: {
+                    name: 'Preset1',
+                    colors: {
+                        name: 'color1',
+                        values: {
+                            color1: '#4A90E2',
+                            color2: '#50E3C2',
+                            color3: '#000',
+                            color4: '#4A4A4A',
+                            color5: '#9B9B9B',
                         }
-                    ],
+
+                    }
                 },
-                {
-                    name: 'preset2',
-                    colors: [
-                        {
-                            name: 'color1',
-                            values: ['#4A90E2', '#50E3C2', '#000', '#4A4A4A', '#9B9B9B']
+                preset2: {
+                    name: 'Preset2',
+                    colors: {
+                        name: 'color1',
+                        values: {
+                            color1: '#4A90E2',
+                            color2: '#50E3C2',
+                            color3: '#000',
+                            color4: '#4A4A4A',
+                            color5: '#9B9B9B',
                         }
-                    ],
+
+                    }
                 },
-                {
-                    name: 'preset3',
-                    colors: [
-                        {
-                            name: 'color1',
-                            values: ['#4A90E2', '#50E3C2', '#000', '#4A4A4A', '#9B9B9B']
-                        }
-                    ],
-                },
-                {
-                    name: 'preset4',
-                    colors: [
-                        {
-                            name: 'color1',
-                            values: ['#4A90E2', '#50E3C2', '#000', '#4A4A4A', '#9B9B9B']
-                        }
-                    ],
-                }
-            ]
+
+            },
 
         }
     }
@@ -111,12 +104,14 @@ class GlobalSettings extends Component {
             activePreset
         } = this.state;
 
-        const changeColor = (newValue, valueIndex, colorIndex, currentPreset) => {
-            let tempColor = JSON.parse(JSON.stringify(presets));
-            tempColor[currentPreset].colors[colorIndex].values[valueIndex] = newValue;
-            this.setState({ presets: tempColor });
-        }
 
+        const changeColor = (key, newValue, presetKey) => {
+            this.setState(({ presets }, props) => {
+                let tempPresets = presets;
+                tempPresets[presetKey].colors.values[key] = newValue;
+                return { presets: tempPresets };
+            });
+        }
 
         const getInitialSettings = () => {
             return fetchFromApi().then(data => {
@@ -131,38 +126,15 @@ class GlobalSettings extends Component {
             })
         }
 
-        const colorPalettes = (currentPreset) => {
-            const { colors } = presets[currentPreset]
-            return (
-                <PanelBody title={__('Global Colors')} initialOpen={false}>
-                    <div className="qubely-d-flex qubely-align-justified">
-                        {colors.map(({ name, values }, colorIndex) => (
-                            <Fragment key={name}>
-                                {values.map((value, valueIndex) => (
-                                    <Color
-                                        value={value}
-                                        key={value + valueIndex}
-                                        onChange={newValue => changeColor(newValue, valueIndex, colorIndex, currentPreset)}
-                                    />
-                                ))}
-                            </Fragment>
-
-                        ))}
-
-                    </div>
-                </PanelBody>
-            )
-        }
-
-
         const renderPresets = () => {
             return (
                 <div className="qubely-global-settings">
+
                     {
-                        presets.map((preset, index) => {
-                            const { name } = preset;
+                        Object.keys(presets).map((presetKey, index) => {
+                            const { name, colors } = presets[presetKey];
                             let isActivePreset = false;
-                            if (activePreset === index) {
+                            if (activePreset === presetKey) {
                                 isActivePreset = true;
                             }
                             const classes = classnames(
@@ -172,19 +144,28 @@ class GlobalSettings extends Component {
                             return (
                                 <div key={name} className={classes}>
                                     <div className="name" onClick={() => { this.setState({ activePreset: index }) }}> {name}</div>
-                                    {
-                                        isActivePreset &&
-                                        <Fragment>
-                                            {colorPalettes(index)}
-                                        </Fragment>
-                                    }
+                                    <PanelBody title={__('Global Colors')} initialOpen={true}>
+                                        <div className="qubely-d-flex qubely-align-justified">
+                                            {
+                                                Object.keys(colors.values).map((key, index) => {
+                                                    return (
+                                                        <Color
+                                                            value={colors.values[key]}
+                                                            onChange={newValue => changeColor(key, newValue, presetKey)}
+                                                        />
+                                                    )
+                                                })
+                                            }
+                                        </div>
+                                    </PanelBody>
                                 </div>
-                            );
+                            )
                         })
                     }
                 </div>
             )
         }
+
 
         return (
             <Fragment>
