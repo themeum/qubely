@@ -23,6 +23,7 @@ const { withState } = wp.compose
 export default function Color({ value, onChange }) {
 
     const [showColorPicker, toggleColorPicker] = useState();
+    const [ds, dsds] = useState('#fff');
 
     const classes = classNames(
         'qubely-field',
@@ -81,23 +82,29 @@ export default function Color({ value, onChange }) {
                             aria-expanded={isOpen}
                             className="qubely-color-picker"
                             style={{ backgroundColor: value || 'transparent' }}
-                            onClick={() => onToggle()}
+                            onClick={onToggle}
                         />
                     </span>
                 )}
                 renderContent={() => (
-                    <ColorPicker
-                        color={value || ''}
-                        disableAlpha={false}
-                        onChangeComplete={newColor => {
-                            console.log('change complete');
-                            if (newColor.rgb && newColor.rgb.a != 1) {
-                                onChange('rgba(' + newColor.rgb.r + ',' + newColor.rgb.g + ',' + newColor.rgb.b + ',' + newColor.rgb.a + ')');
-                            } else {
-                            onChange(newColor.hex);
-                            }
-                        }}
-                    />
+                    <div>
+                        <ColorPicker
+                            color={ds}
+                            disableAlpha={false}
+                            onChangeComplete={newColor => {
+                                console.log('change complete');
+                                if (newColor.rgb && newColor.rgb.a != 1) {
+                                    // onChange('rgba(' + newColor.rgb.r + ',' + newColor.rgb.g + ',' + newColor.rgb.b + ',' + newColor.rgb.a + ')');
+                                    dsds('rgba(' + newColor.rgb.r + ',' + newColor.rgb.g + ',' + newColor.rgb.b + ',' + newColor.rgb.a + ')');
+                                } else {
+                                    // onChange(newColor.hex);
+                                    dsds(newColor.hex);
+                                }
+                            }}
+                        />
+                        <buton onClick={() => onChange('#000')}>test</buton>
+                    </div>
+
                 )}
             />
         </div>

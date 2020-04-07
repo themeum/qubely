@@ -61,19 +61,39 @@ class GlobalSettings extends Component {
             presets: [
                 {
                     name: 'preset1',
-                    colors: ['#4A90E2', '#50E3C2', '#000', '#4A4A4A', '#9B9B9B'],
+                    colors: [
+                        {
+                            name: 'color1',
+                            values: ['#4A90E2', '#50E3C2', '#000', '#4A4A4A', '#9B9B9B']
+                        }
+                    ],
                 },
                 {
                     name: 'preset2',
-                    colors: ['#4A90E2', '#50E3C2', '#000', '#4A4A4A', '#9B9B9B'],
+                    colors: [
+                        {
+                            name: 'color1',
+                            values: ['#4A90E2', '#50E3C2', '#000', '#4A4A4A', '#9B9B9B']
+                        }
+                    ],
                 },
                 {
                     name: 'preset3',
-                    colors: ['#4A90E2', '#50E3C2', '#000', '#4A4A4A', '#9B9B9B'],
+                    colors: [
+                        {
+                            name: 'color1',
+                            values: ['#4A90E2', '#50E3C2', '#000', '#4A4A4A', '#9B9B9B']
+                        }
+                    ],
                 },
                 {
                     name: 'preset4',
-                    colors: ['#4A90E2', '#50E3C2', '#000', '#4A4A4A', '#9B9B9B'],
+                    colors: [
+                        {
+                            name: 'color1',
+                            values: ['#4A90E2', '#50E3C2', '#000', '#4A4A4A', '#9B9B9B']
+                        }
+                    ],
                 }
             ]
 
@@ -91,10 +111,10 @@ class GlobalSettings extends Component {
             activePreset
         } = this.state;
 
-        const changeColor = (newColor, index) => {
-            let tempColor = [...colors]
-            tempColor[index] = newColor;
-            this.setState({ colors: tempColor });
+        const changeColor = (newValue, valueIndex, colorIndex, currentPreset) => {
+            let tempColor = JSON.parse(JSON.stringify(presets));
+            tempColor[currentPreset].colors[colorIndex].values[valueIndex] = newValue;
+            this.setState({ presets: tempColor });
         }
 
 
@@ -112,17 +132,23 @@ class GlobalSettings extends Component {
         }
 
         const colorPalettes = (currentPreset) => {
-
+            const { colors } = presets[currentPreset]
             return (
                 <PanelBody title={__('Global Colors')} initialOpen={false}>
                     <div className="qubely-d-flex qubely-align-justified">
-                        {presets[currentPreset].colors.map((color, index) => (
-                            <Color
-                                value={color}
-                                key={color + index}
-                                onChange={newColor => changeColor(newColor, index)}
-                            />
+                        {colors.map(({ name, values }, colorIndex) => (
+                            <Fragment key={name}>
+                                {values.map((value, valueIndex) => (
+                                    <Color
+                                        value={value}
+                                        key={value + valueIndex}
+                                        onChange={newValue => changeColor(newValue, valueIndex, colorIndex, currentPreset)}
+                                    />
+                                ))}
+                            </Fragment>
+
                         ))}
+
                     </div>
                 </PanelBody>
             )
