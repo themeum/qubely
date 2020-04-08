@@ -45,56 +45,77 @@ const PATH = {
     post: '/qubely/v1/global_settings'
 }
 
+
+const DEFAULTPRESETS = {
+    activePreset: 'preset1',
+    presets: {
+        preset1: {
+            name: 'Preset1',
+            key: 'preset1',
+            colors: ['#4A90E2', '#50E3C2', '#000', '#4A4A4A', '#9B9B9B']
+
+
+        },
+        preset2: {
+            name: 'Preset2',
+            key: 'preset2',
+            colors: ['#4A90E2', '#50E3C2', '#000', '#4A4A4A', '#9B9B9B']
+        },
+
+    },
+
+}
 async function fetchFromApi() {
     return await wp.apiFetch({ path: PATH.fetch })
 }
 
-function saveGlobalData(props) {
-    console.log('hello from saveglobaldata : ', props);
-}
+
 
 class GlobalSettings extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            activePreset: 'preset1',
-            presets: {
-                preset1: {
-                    name: 'Preset1',
-                    colors: {
-                        name: 'color1',
-                        values: {
-                            color1: '#4A90E2',
-                            color2: '#50E3C2',
-                            color3: '#000',
-                            color4: '#4A4A4A',
-                            color5: '#9B9B9B',
-                        }
-
-                    }
-                },
-                preset2: {
-                    name: 'Preset2',
-                    colors: {
-                        name: 'color1',
-                        values: {
-                            color1: '#4A90E2',
-                            color2: '#50E3C2',
-                            color3: '#000',
-                            color4: '#4A4A4A',
-                            color5: '#9B9B9B',
-                        }
-
-                    }
-                },
-
-            },
-
+            activePreset: null,
+            presets: {}
         }
     }
 
     componentDidMount() {
-        console.log('componentDidMount');
+        this.getGlobalSettings();
+        wp.data.subscribe(() => {
+            const {
+                isSavingPost,
+                isPreviewingPost,
+                isPublishingPost,
+                isAutosavingPost,
+            } = select('core/editor');
+
+            if ((isSavingPost() || isPreviewingPost() || isPublishingPost()) && !isAutosavingPost()) {
+                this.updateGlobalSettings()
+            }
+        });
+    }
+    getGlobalSettings = () => {
+        return fetchFromApi().then(data => {
+            if (data.success) {
+                console.log('data : ', data.settings);
+                this.setState({ ...data.settings })
+            } else {
+                this.setState({ ...DEFAULTPRESETS })
+            }
+
+        })
+    }
+    updateGlobalSettings = () => {
+        console.log('update global settings : ', this.state);
+        wp.apiFetch({
+            path: PATH.post,
+            method: 'POST',
+            data: { settings: JSON.stringify(this.state) }
+        }).then(data => {
+            console.log('data : ', data);
+            return data
+        })
     }
 
     render() {
@@ -108,22 +129,9 @@ class GlobalSettings extends Component {
         const changeColor = (key, newValue, presetKey) => {
             this.setState(({ presets }, props) => {
                 let tempPresets = presets;
-                tempPresets[presetKey].colors.values[key] = newValue;
+                tempPresets[presetKey].colors[key] = newValue;
                 return { presets: tempPresets };
             });
-        }
-
-        const getInitialSettings = () => {
-            return fetchFromApi().then(data => {
-                if (data.success) {
-                    // window.globalData = { ...data }
-                    console.log('data : ', data);
-                    // return data
-                } else {
-                    console.log(' no data found');
-                }
-
-            })
         }
 
         const renderPresets = () => {
@@ -132,9 +140,9 @@ class GlobalSettings extends Component {
 
                     {
                         Object.keys(presets).map((presetKey, index) => {
-                            const { name, colors } = presets[presetKey];
+                            const { name, key, colors } = presets[presetKey];
                             let isActivePreset = false;
-                            if (activePreset === presetKey) {
+                            if (activePreset === key) {
                                 isActivePreset = true;
                             }
                             const classes = classnames(
@@ -143,15 +151,15 @@ class GlobalSettings extends Component {
                             )
                             return (
                                 <div key={name} className={classes}>
-                                    <div className="name" onClick={() => { this.setState({ activePreset: index }) }}> {name}</div>
+                                    <div className="name" onClick={() => { this.setState({ activePreset: key }) }}> {name}</div>
                                     <PanelBody title={__('Global Colors')} initialOpen={true}>
                                         <div className="qubely-d-flex qubely-align-justified">
                                             {
-                                                Object.keys(colors.values).map((key, index) => {
+                                                colors.map((value, index) => {
                                                     return (
                                                         <Color
-                                                            value={colors.values[key]}
-                                                            onChange={newValue => changeColor(key, newValue, presetKey)}
+                                                            value={value}
+                                                            onChange={newValue => changeColor(index, newValue, presetKey)}
                                                         />
                                                     )
                                                 })
@@ -175,8 +183,8 @@ class GlobalSettings extends Component {
                     title={__('Global Settings')}
                 >
                     {renderPresets()}
-                    <button onClick={() => getInitialSettings()}>get</button>
-                    <button onClick={() => saveGlobalData()}>Save</button>
+                    <button onClick={() => this.getGlobalSettings()}>get</button>
+                    <button onClick={() => this.updateGlobalSettings()}>Save</button>
                 </PluginSidebar>
 
                 <PluginSidebarMoreMenuItem
@@ -191,17 +199,3 @@ class GlobalSettings extends Component {
 }
 
 export default GlobalSettings;
-
-
-wp.data.subscribe(() => {
-    const {
-        isSavingPost,
-        isPreviewingPost,
-        isPublishingPost,
-        isAutosavingPost,
-    } = select('core/editor');
-
-    if ((isSavingPost() || isPreviewingPost() || isPublishingPost()) && !isAutosavingPost()) {
-        saveGlobalData()
-    }
-});

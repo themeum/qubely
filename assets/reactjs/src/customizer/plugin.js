@@ -209,7 +209,7 @@ export default compose([
 wp.data.subscribe(() => {
     const { isSavingPost, isAutosavingPost } = select("core/editor")
     if (isSavingPost() && (!isAutosavingPost()) && window.globalSaving === false) {
-        saveGlobalData()
+        // saveGlobalData()
     }
 });
 
