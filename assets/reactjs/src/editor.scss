@@ -285,7 +285,7 @@ div[data-type="qubely/row"].is-resizing .components-resizable-box__container.qub
         background: #E5E7EA;
         color: #4d515a;
         height: 18px;
-        line-height: 18px;
+        line-height: 19px;
         width: 18px;
         border-radius: 50%;
         border: none;
@@ -309,8 +309,8 @@ div[data-type="qubely/row"].is-resizing .components-resizable-box__container.qub
         }
 
         &.active{
-            background: #2184F9;
-            color: #ffffff;
+            background: #D2E7FF;
+            color: #2184F9;
         }
     }
 }
@@ -486,8 +486,12 @@ div[data-type="qubely/row"].is-resizing .components-resizable-box__container.qub
     }
 
     &.active {
-        background: #E5E7EA;
+        background: #D2E7FF;
         color: #2184F9;
+        border-color: #A9D0FF;
+        + .qubely-button{
+            border-left-color: #A9D0FF;
+        }
     }
 
     &.qubely-button-rounded {
