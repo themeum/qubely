@@ -145,14 +145,15 @@ class Edit extends Component {
 			}
 		} = this.props;
 
-		const changeActiveTab = (index) => {
+		const changeActiveTab = async (index) => {
+
 			let currentTabBlock = $(`#block-${clientId}`);
-			this.removeActiveClass(currentTabBlock).
-				then(() => {
-					$(`#block-${block.innerBlocks[index].clientId}`, currentTabBlock).addClass("qubely-active");
-				}).catch(() => {
-					console.log('tab switching not possible');
-				});
+			let removeClassPromise = new Promise((resolve, reject) => {
+				$('.qubely-tab-content.qubely-active', currentTabBlock).removeClass('qubely-active');
+				resolve("class removed!");
+			});
+			await removeClassPromise;
+			$(`#block-${block.innerBlocks[index].clientId}`, currentTabBlock).addClass("qubely-active");
 
 			this.setState({
 				initialRender: false,
@@ -176,27 +177,33 @@ class Edit extends Component {
 					{ [`qubely-has-icon-${iconPosition}`]: typeof title.iconName !== 'undefined' }
 				)
 				return (
-					<span className={wrapperClasses}>
-						<span
+					<div className={wrapperClasses}>
+						<div
 							role="button"
 							className={titleClasses}
 							onClick={() => changeActiveTab(index)}
 						>
 							{title.iconName && (iconPosition == 'top' || iconPosition == 'left') && (<i className={`qubely-tab-icon ${title.iconName}`} />)}
-							<RichText
-								value={title.title}
-								keepPlaceholderOnFocus
-								placeholder={__('Add Tab Title')}
-								onChange={value => this.updateTitles({ title: value }, index)}
-							/>
+							{
+								isActiveTab ?
+									<RichText
+										value={title.title}
+										keepPlaceholderOnFocus
+										placeholder={__('Add Tab Title')}
+										onChange={value => this.updateTitles({ title: value }, index)}
+									/>
+									:
+									<div>{title.title}</div>
+							}
+
 							{title.iconName && (iconPosition == 'right') && (<i className={`qubely-tab-icon ${title.iconName}`} />)}
-						</span>
+						</div>
 						<Tooltip text={__('Delete this tab')}>
 							<span className="qubely-action-tab-remove" role="button" onClick={() => this.deleteTab(index)}>
 								<i className="fas fa-times" />
 							</span>
 						</Tooltip>
-					</span>
+					</div>
 				)
 			}
 			));
@@ -250,10 +257,8 @@ class Edit extends Component {
 			$('.qubely-tab-content.qubely-active', currentTabBlock).removeClass('qubely-active');
 			nextActiveTab.addClass("qubely-active");
 		} else if (tabIndex + 1 < activeTab) {
-
 			this.removeActiveClass(currentTabBlock).
 				then(() => {
-					console.log('id : ', $(`#block-${block.innerBlocks[activeTab - 2].clientId}`));
 					$(`#block-${block.innerBlocks[activeTab - 2].clientId}`, currentTabBlock).addClass("qubely-active");
 				}).catch(() => {
 					console.log('tab switching not possible');
@@ -582,4 +587,4 @@ export default compose([
 		};
 	}),
 	withCSSGenerator()
-])(Edit)
+])(Edit);
