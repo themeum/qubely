@@ -146,14 +146,13 @@ class Edit extends Component {
 		} = this.props;
 
 		const changeActiveTab = async (index) => {
-
 			let currentTabBlock = $(`#block-${clientId}`);
-			let removeClassPromise = new Promise((resolve, reject) => {
-				$('.qubely-tab-content.qubely-active', currentTabBlock).removeClass('qubely-active');
-				resolve("class removed!");
-			});
-			await removeClassPromise;
-			$(`#block-${block.innerBlocks[index].clientId}`, currentTabBlock).addClass("qubely-active");
+			await this.removeActiveClass(currentTabBlock).
+				then(() => {
+					$(`#block-${block.innerBlocks[index].clientId}`, currentTabBlock).addClass("qubely-active");
+				}).catch(() => {
+					console.log('tab switching not possible');
+				});
 
 			this.setState({
 				initialRender: false,
@@ -214,8 +213,10 @@ class Edit extends Component {
 		const {
 			block,
 			clientId,
+			getBlocks,
 			removeBlock,
 			setAttributes,
+			replaceInnerBlocks,
 			updateBlockAttributes,
 			attributes: {
 				tabs,
@@ -239,19 +240,6 @@ class Edit extends Component {
 			i++;
 		}
 
-		removeBlock(block.innerBlocks[tabIndex].clientId);
-
-		this.setState(state => {
-			let newActiveTab = state.activeTab - 1;
-			if (tabIndex + 1 === activeTab) {
-				newActiveTab = tabIndex == 0 ? 1 : tabIndex + 1 < tabs ? tabIndex + 1 : tabIndex
-			}
-			return {
-				activeTab: newActiveTab,
-				initialRender: false
-			}
-		});
-
 		if (tabIndex + 1 === activeTab) {
 			let nextActiveTab = $(`#block-${block.innerBlocks[tabIndex + 1 < tabs ? tabIndex + 1 : tabs >= 2 ? tabIndex - 1 : tabIndex].clientId}`, currentTabBlock)
 			$('.qubely-tab-content.qubely-active', currentTabBlock).removeClass('qubely-active');
@@ -264,6 +252,23 @@ class Edit extends Component {
 					console.log('tab switching not possible');
 				});
 		}
+
+		let innerBlocks = JSON.parse(JSON.stringify(block.innerBlocks));
+		innerBlocks.splice(tabIndex, 1);
+
+		replaceInnerBlocks(clientId, innerBlocks, false);
+		// removeBlock(block.innerBlocks[tabIndex].clientId);
+
+		this.setState(state => {
+			let newActiveTab = state.activeTab - 1;
+			if (tabIndex + 1 === activeTab) {
+				newActiveTab = tabIndex == 0 ? 1 : tabIndex + 1 < tabs ? tabIndex + 1 : tabIndex
+			}
+			return {
+				activeTab: newActiveTab,
+				initialRender: false
+			}
+		});
 
 	}
 
@@ -575,14 +580,18 @@ export default compose([
 	}),
 	withDispatch((dispatch) => {
 		const {
+			getBlocks,
 			insertBlock,
 			removeBlock,
+			replaceInnerBlocks,
 			updateBlockAttributes
 		} = dispatch('core/block-editor');
 
 		return {
+			getBlocks,
 			insertBlock,
 			removeBlock,
+			replaceInnerBlocks,
 			updateBlockAttributes
 		};
 	}),
