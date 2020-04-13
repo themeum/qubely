@@ -4,12 +4,12 @@
 		display: flex;
 		-ms-flex-wrap: wrap;
 		flex-wrap: wrap;
-		
+
 		.qubely-tab-item {
 			display: block;
 			text-align: center;
 			position: relative;
-			
+
 			.qubely-tab-title {
 				cursor: pointer;
 				display: block;
@@ -56,7 +56,7 @@
 			height: 18px;
 			line-height: 20px;
 			text-align: center;
-			background: rgba(0, 0, 0, .8);
+			background: rgba(0, 0, 0, 0.8);
 			color: #fff;
 			position: absolute;
 			top: -9px;
@@ -97,18 +97,19 @@
 			border-color: #0085ba;
 		}
 	}
-	.wp-block-qubely-tab.qubely-tab-content {	
+	.wp-block-qubely-tab.qubely-tab-content {
 		position: absolute;
 		visibility: hidden;
 		opacity: 0;
 		transition: opacity 400ms ease-in;
-	   &.qubely-active {	
+		&.qubely-active {
 			position: static;
 			visibility: visible;
 			opacity: 1;
-	   }
-   }
-	&.qubely-tab-style-pills,&.qubely-tab-style-tabs{
+		}
+	}
+	&.qubely-tab-style-pills,
+	&.qubely-tab-style-tabs {
 		.qubely-tab-item {
 			margin-bottom: 10px;
 		}
@@ -118,7 +119,17 @@
 	visibility: hidden;
 	opacity: 0;
 	position: absolute;
-	&.qubely-active {
+	.qubely-tabs-innerblock {
+		.block-list-appender {
+			text-align: center;
+			.block-editor-inserter {
+				display: inline-block;
+				min-width: 300px;
+			}
+		}
+	}
+	&.qubely-active,
+	&.has-child-selected {
 		position: relative;
 		opacity: 1;
 		visibility: visible;
