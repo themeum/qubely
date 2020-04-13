@@ -71,8 +71,10 @@ class Edit extends Component {
 
 	componentDidMount() {
 		const {
+			block,
 			clientId,
 			setAttributes,
+			updateBlockAttributes,
 			attributes: {
 				uniqueId
 			}
@@ -85,6 +87,13 @@ class Edit extends Component {
 		} else if (uniqueId && uniqueId != _client) {
 			setAttributes({ uniqueId: _client });
 		}
+		if (block.innerBlocks.length > 0 && block.innerBlocks[0].attributes.customClassName !== 'qubely-active') {
+			updateBlockAttributes(block.innerBlocks[0].clientId,
+				Object.assign(block.innerBlocks[0].attributes, {
+					customClassName: 'qubely-active'
+				}));
+		}
+
 	}
 
 	componentDidUpdate(prevProps, prevState) {
@@ -247,7 +256,7 @@ class Edit extends Component {
 		} else if (tabIndex + 1 < activeTab) {
 			this.removeActiveClass(currentTabBlock).
 				then(() => {
-					$(`#block-${block.innerBlocks[activeTab - 2].clientId}`, currentTabBlock).addClass("qubely-active");
+					$(`#block-${block.innerBlocks[activeTab - 1].clientId}`, currentTabBlock).addClass("qubely-active");
 				}).catch(() => {
 					console.log('tab switching not possible');
 				});
