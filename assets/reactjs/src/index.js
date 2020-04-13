@@ -61,7 +61,6 @@ import './blocks/postgrid'              // Postgrid
 import './blocks/animatedheadline'      // Animated Headline
 import './blocks/pieprogress'           // PieProgress
 import './blocks/table-of-contents'
-import './blocks/table'                 // Table
 
 
 
