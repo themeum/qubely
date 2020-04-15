@@ -335,6 +335,7 @@ class QUBELY
 			if (in_array('qubely/contactform', $available_blocks) || in_array('qubely/form', $available_blocks)) {
 				wp_enqueue_script('qubely-block-contactform', QUBELY_DIR_URL . 'assets/js/blocks/contactform.js', array('jquery'), QUBELY_VERSION);
 			}
+			
 
 			if (in_array('qubely/image-comparison', $available_blocks)) {
 				wp_enqueue_script('qubely-block-image-comparison', QUBELY_DIR_URL . 'assets/js/blocks/image-comparison.js', array(), QUBELY_VERSION);
