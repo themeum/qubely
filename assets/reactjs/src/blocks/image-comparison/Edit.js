@@ -1,11 +1,10 @@
 const { __ } = wp.i18n
 const { Fragment, Component } = wp.element;
-const { PanelBody, TextControl, Toolbar, SelectControl } = wp.components
+const { PanelBody, Toolbar } = wp.components
 const { RichText, InspectorControls, BlockControls } = wp.blockEditor
-const { Media, Range, BoxShadow, ButtonGroup, Tabs, Tab, RadioAdvanced, Typography, Toggle, Styles, Alignment, ColorAdvanced, Color, Headings, Border, BorderRadius, Padding, Separator, Select, Margin, Url, gloalSettings: { globalSettingsPanel, animationSettings, interactionSettings }, Inline: { InlineToolbar }, ContextMenu: { ContextMenu, handleContextMenu }, withCSSGenerator, InspectorTabs, InspectorTab } = wp.qubelyComponents
-import icons from '../../helpers/icons'
-class Edit extends Component {
+const { Range, ButtonGroup, Typography, Toggle, Color, Url, gloalSettings: { globalSettingsPanel, animationSettings, interactionSettings }, Inline: { InlineToolbar }, ContextMenu: { ContextMenu }, withCSSGenerator, InspectorTabs, InspectorTab } = wp.qubelyComponents
 
+class Edit extends Component {
     constructor(props) {
         super(props)
         this.state = { device: 'md', selector: true, spacer: true, openPanelSetting: '' };

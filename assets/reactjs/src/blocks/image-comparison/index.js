@@ -2,12 +2,9 @@ import './style.scss'
 import Edit from './Edit'
 import Save from './Save';
 const { __ } = wp.i18n
-const { RichText } = wp.blockEditor
 const { registerBlockType } = wp.blocks
-const { Component, Fragment } = wp.element;
 const {
     gloalSettings: { globalAttributes },
-    HelperFunction: { IsInteraction, animationAttr }
 } = wp.qubelyComponents
 
 const attributes = {
@@ -185,7 +182,7 @@ const attributes = {
 }
 
 registerBlockType('qubely/imagecomparison', {
-    title: __('imagecomparison'),
+    title: __('Image Comparison'),
     description: __('Insert images and beautify them with Qubely Image Block.'),
     category: 'qubely',
     icon: <img src={qubely_admin.plugin + 'assets/img/blocks/block-image.svg'} alt={__('Image')} />,
