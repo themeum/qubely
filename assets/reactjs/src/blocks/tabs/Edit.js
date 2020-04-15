@@ -249,19 +249,17 @@ class Edit extends Component {
 			i++;
 		}
 
+		let nextActiveTab = $(`#block-${block.innerBlocks[activeTab - 1].clientId}`, currentTabBlock);
 		if (tabIndex + 1 === activeTab) {
-			let nextActiveTab = $(`#block-${block.innerBlocks[tabIndex + 1 < tabs ? tabIndex + 1 : tabs >= 2 ? tabIndex - 1 : tabIndex].clientId}`, currentTabBlock)
-			$('.qubely-tab-content.qubely-active', currentTabBlock).removeClass('qubely-active');
-			nextActiveTab.addClass("qubely-active");
-		} else if (tabIndex + 1 < activeTab) {
-			this.removeActiveClass(currentTabBlock).
-				then(() => {
-					$(`#block-${block.innerBlocks[activeTab - 1].clientId}`, currentTabBlock).addClass("qubely-active");
-				}).catch(() => {
-					console.log('tab switching not possible');
-				});
+			nextActiveTab = $(`#block-${block.innerBlocks[tabIndex + 1 < tabs ? tabIndex + 1 : tabs >= 2 ? tabIndex - 1 : tabIndex].clientId}`, currentTabBlock);
 		}
 
+		this.removeActiveClass(currentTabBlock).
+			then(() => {
+				nextActiveTab.addClass("qubely-active");
+			}).catch(() => {
+				console.log('tab switching not possible');
+			});
 		let innerBlocks = JSON.parse(JSON.stringify(block.innerBlocks));
 		innerBlocks.splice(tabIndex, 1);
 
