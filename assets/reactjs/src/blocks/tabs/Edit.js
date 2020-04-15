@@ -87,34 +87,6 @@ class Edit extends Component {
 		} else if (uniqueId && uniqueId != _client) {
 			setAttributes({ uniqueId: _client });
 		}
-		if (block.innerBlocks.length > 0 && block.innerBlocks[0].attributes.customClassName !== 'qubely-active') {
-			updateBlockAttributes(block.innerBlocks[0].clientId,
-				Object.assign(block.innerBlocks[0].attributes, {
-					customClassName: 'qubely-active'
-				}));
-		}
-
-	}
-
-	componentDidUpdate(prevProps, prevState) {
-
-		const { initialRender } = this.state;
-
-		const {
-			block,
-			clientId,
-			attributes: {
-				tabs
-			},
-		} = this.props;
-
-
-		if (!initialRender && prevProps.block.innerBlocks.length < block.innerBlocks.length) {
-			let currentTabBlock = $(`#block-${clientId}`);
-			let activeTab = $(`#block-${block.innerBlocks[tabs - 1].clientId}`, currentTabBlock);
-			$('.qubely-tab-content.qubely-active', currentTabBlock).removeClass('qubely-active');
-			activeTab.addClass("qubely-active");
-		}
 	}
 
 	updateTitles = (value, index) => {
@@ -128,17 +100,6 @@ class Edit extends Component {
 		setAttributes({ tabTitles: modifiedTitles })
 	}
 
-	removeActiveClass = (currentBlock) => {
-		return new Promise((resolve, reject) => {
-			if ($('.qubely-tab-content.qubely-active', currentBlock)) {
-				$('.qubely-tab-content.qubely-active', currentBlock).removeClass('qubely-active');
-				resolve();
-			} else {
-				reject();
-			}
-
-		});
-	}
 	renderTabTitles = () => {
 		const {
 			activeTab,
@@ -154,15 +115,7 @@ class Edit extends Component {
 			}
 		} = this.props;
 
-		const changeActiveTab = async (index) => {
-			let currentTabBlock = $(`#block-${clientId}`);
-			await this.removeActiveClass(currentTabBlock).
-				then(() => {
-					$(`#block-${block.innerBlocks[index].clientId}`, currentTabBlock).addClass("qubely-active");
-				}).catch(() => {
-					console.log('tab switching not possible');
-				});
-
+		const changeActiveTab = (index) => {
 			this.setState({
 				initialRender: false,
 				activeTab: index + 1,
@@ -192,17 +145,13 @@ class Edit extends Component {
 							onClick={() => changeActiveTab(index)}
 						>
 							{title.iconName && (iconPosition == 'top' || iconPosition == 'left') && (<i className={`qubely-tab-icon ${title.iconName}`} />)}
-							{
-								isActiveTab ?
-									<RichText
-										value={title.title}
-										keepPlaceholderOnFocus
-										placeholder={__('Add Tab Title')}
-										onChange={value => this.updateTitles({ title: value }, index)}
-									/>
-									:
-									<div>{title.title}</div>
-							}
+
+							<RichText
+								value={title.title}
+								keepPlaceholderOnFocus
+								placeholder={__('Add Tab Title')}
+								onChange={value => this.updateTitles({ title: value }, index)}
+							/>
 
 							{title.iconName && (iconPosition == 'right') && (<i className={`qubely-tab-icon ${title.iconName}`} />)}
 						</div>
@@ -249,22 +198,10 @@ class Edit extends Component {
 			i++;
 		}
 
-		let nextActiveTab = $(`#block-${block.innerBlocks[activeTab - 1].clientId}`, currentTabBlock);
-		if (tabIndex + 1 === activeTab) {
-			nextActiveTab = $(`#block-${block.innerBlocks[tabIndex + 1 < tabs ? tabIndex + 1 : tabs >= 2 ? tabIndex - 1 : tabIndex].clientId}`, currentTabBlock);
-		}
-
-		this.removeActiveClass(currentTabBlock).
-			then(() => {
-				nextActiveTab.addClass("qubely-active");
-			}).catch(() => {
-				console.log('tab switching not possible');
-			});
 		let innerBlocks = JSON.parse(JSON.stringify(block.innerBlocks));
 		innerBlocks.splice(tabIndex, 1);
 
 		replaceInnerBlocks(clientId, innerBlocks, false);
-		// removeBlock(block.innerBlocks[tabIndex].clientId);
 
 		this.setState(state => {
 			let newActiveTab = state.activeTab - 1;
@@ -536,7 +473,7 @@ class Edit extends Component {
 				{globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
 				<div className={blockWrapperClasses}>
-					<div className={`qubely-block-tab qubely-tab-style-${tabStyle}`}>
+					<div className={`qubely-block-tab qubely-tab-style-${tabStyle} qubely-active-tab-${activeTab}`}>
 
 						<div className={`qubely-tab-nav qubely-alignment-${navAlignment}`}>
 
