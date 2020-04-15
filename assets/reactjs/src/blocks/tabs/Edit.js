@@ -107,8 +107,6 @@ class Edit extends Component {
 		} = this.state;
 
 		const {
-			block,
-			clientId,
 			attributes: {
 				tabTitles,
 				iconPosition
@@ -145,14 +143,18 @@ class Edit extends Component {
 							onClick={() => changeActiveTab(index)}
 						>
 							{title.iconName && (iconPosition == 'top' || iconPosition == 'left') && (<i className={`qubely-tab-icon ${title.iconName}`} />)}
+							{
+								isActiveTab ?
 
-							<RichText
-								value={title.title}
-								keepPlaceholderOnFocus
-								placeholder={__('Add Tab Title')}
-								onChange={value => this.updateTitles({ title: value }, index)}
-							/>
-
+									<RichText
+										value={title.title}
+										keepPlaceholderOnFocus
+										placeholder={__('Add Tab Title')}
+										onChange={value => this.updateTitles({ title: value }, index)}
+									/>
+									:
+									<div>{title.title}</div>
+							}
 							{title.iconName && (iconPosition == 'right') && (<i className={`qubely-tab-icon ${title.iconName}`} />)}
 						</div>
 						<Tooltip text={__('Delete this tab')}>
@@ -171,8 +173,6 @@ class Edit extends Component {
 		const {
 			block,
 			clientId,
-			getBlocks,
-			removeBlock,
 			setAttributes,
 			replaceInnerBlocks,
 			updateBlockAttributes,
@@ -183,7 +183,7 @@ class Edit extends Component {
 		} = this.props;
 
 		const newItems = tabTitles.filter((item, index) => index != tabIndex);
-		let i = tabIndex + 1, currentTabBlock = $(`#block-${clientId}`);
+		let i = tabIndex + 1;
 
 		setAttributes({
 			tabTitles: newItems,
@@ -218,8 +218,6 @@ class Edit extends Component {
 
 	render() {
 		const {
-			name,
-			isSelected,
 			setAttributes,
 			attributes: {
 				uniqueId,

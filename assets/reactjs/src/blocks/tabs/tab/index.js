@@ -31,7 +31,7 @@ registerBlockType('qubely/tab', {
     getEditWrapperProps(attributes) {
         return {
             'data-tab': attributes.id,
-            className: `wp-block editor-block-list__block block-editor-block-list__block qubely-tab-content ${attributes.customClassName}`
+            className: `wp-block editor-block-list__block block-editor-block-list__block qubely-tab-content`
         }
     },
     edit: Edit,
