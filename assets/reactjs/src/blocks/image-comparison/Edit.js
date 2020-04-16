@@ -1,9 +1,9 @@
 const { __ } = wp.i18n
 const { Fragment, Component } = wp.element;
-const { PanelBody, Toolbar } = wp.components
+const { PanelBody, Toolbar, Tooltip } = wp.components
 const { RichText, InspectorControls, BlockControls } = wp.blockEditor
 const { Media, Range, ButtonGroup, Typography, Toggle, Color, Url, gloalSettings: { globalSettingsPanel, animationSettings, interactionSettings }, Inline: { InlineToolbar }, ContextMenu: { ContextMenu }, withCSSGenerator, InspectorTabs, InspectorTab } = wp.qubelyComponents
-
+import icons from '../../helpers/icons';
 class Edit extends Component {
     constructor(props) {
         super(props)
@@ -18,6 +18,13 @@ class Edit extends Component {
         } else if (uniqueId && uniqueId != _client) {
             setAttributes({ uniqueId: _client });
         }
+
+        // image width 
+        const imageComparisonRoot = document.querySelector('.qubely-block-image-comparison');
+        const imageComparisonImages = document.querySelectorAll('.qubely-block-image-comparison img');
+        imageComparisonImages.forEach( (eachImg) => {
+            eachImg.style.width = imageComparisonRoot.offsetWidth + 'px';
+        });
     }
 
     handlePanelOpenings = (panelName) => {
@@ -27,17 +34,16 @@ class Edit extends Component {
     dragFunc = (event) => {
         const container = event.target.parentNode;
         const resizeElement = container.querySelector('.comparison-resize-img');
-        const dragCircle = document.querySelector('.comparison-scrollCircle');
+        const dragCircle = container.querySelector('.comparison-scrollCircle');
         this.draging(container, dragCircle, resizeElement);
     }
 
     draging = (container, dragCircle, resizeElement) => {
         let moving = () => {
-            let containerOffset = container.getBoundingClientRect().left - 40,//container.offsetLeft,
+            let containerOffset = container.getBoundingClientRect().left - 40,
                 containerWidth = container.offsetWidth,
                 rect = container.getBoundingClientRect().left - 40,
                 movingValue = ( ( event.pageX - 37 )  - containerOffset) / (containerWidth / 100);
-            console.log(containerWidth, containerOffset,event.pageX, rect); //return 0;
             if(movingValue < 10)
                 movingValue = 10;
             else if(movingValue > 90)
@@ -49,7 +55,6 @@ class Edit extends Component {
         container.addEventListener('mousemove', moving);
     
         let dragRevoveFunc = (event) => {
-            console.log("drag remove");
             container.removeEventListener('mousemove', moving);
         }
     
@@ -64,9 +69,7 @@ class Edit extends Component {
             recreateStyles,
             className,
             selector,
-            layout,
-            alignment,
-            animateOnHover,
+            titleVerticalAlign,
             originalTitle,
             titleLevel,
             originalTitleTypography,
@@ -140,6 +143,29 @@ class Edit extends Component {
                                 }
                                 <Toggle label={__('Disable Title')} value={disableTitle} onChange={val => setAttributes({ disableTitle: val })} />
 
+                                <div className="qubely-field">
+                                    <label>{__('Content Position')}</label>
+                                    <div className="qubely-field-button-list qubely-field-button-list-fluid">
+                                        <Tooltip text={__('Top')}>
+                                            <button
+                                                onClick={() => setAttributes({ titleVerticalAlign: 'flex-start' })}
+                                            >{icons.vertical_top}</button>
+                                        </Tooltip>
+
+                                        <Tooltip text={__('Middle')} >
+                                            <button
+                                                onClick={() => setAttributes({ titleVerticalAlign: 'center' })}
+                                            >{icons.vertical_middle}</button>
+                                        </Tooltip>
+
+                                        <Tooltip text={__('Bottom')} >
+                                            <button
+                                                onClick={() => setAttributes({ titleVerticalAlign: 'flex-end' })}
+                                            >{icons.vertical_bottom}</button>
+                                        </Tooltip>
+                                    </div>
+                                </div>
+                            
                             </PanelBody>
 
                         </InspectorTab>

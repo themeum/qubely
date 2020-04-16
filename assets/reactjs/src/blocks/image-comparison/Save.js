@@ -3,22 +3,12 @@ const { RichText } = wp.blockEditor
 const { HelperFunction: { IsInteraction, animationAttr } } = wp.qubelyComponents
 
 class Save extends Component {
-	drag = () => {
-		console.log("drag function");
-	}
     render() {
         const {
 			uniqueId,
 			className,
 			layout,
-			mediaType,
-			titleLevel,
 			title,
-			separatorStyle,
-			separatorPosition,
-			enableContent,
-			content,
-			iconName,
 			image,
 			image2x,
 			imgAlt,
@@ -28,20 +18,10 @@ class Save extends Component {
             image2_2x,
             imgAlt2,
             externalImageUrl2,
-			number,
-			enableButton,
 			animation,
-			buttonFillType,
-			buttonSize,
-			buttonText,
-			buttonUrl,
-			buttonIconName,
-			buttonIconPosition,
-			useMediaBg,
 			interaction
         } = this.props.attributes
-		//  console.log(this.props);
-		return <div className={`qubely-block-${uniqueId}${className ? ` ${className}` : ''}`}>
+		return  <div className={`qubely-block-${uniqueId}${className ? ` ${className}` : ''}`} {...animationAttr(animation)}>
 
 					<div class="qubely-block-image-comparison">
 						{
@@ -78,18 +58,9 @@ class Save extends Component {
 							}
 							<span class="comparison-image-text">Modified</span>
 						</div>
-						<span class="comparison-scrollCircle"
-							onClick={ (event) => this.drag }
-						>
-						</span>
+						<span class="comparison-scrollCircle"></span>
 					</div>
 				</div>
-        // return <div className="image-comparison">
-        //             <h2 onMouseDown={ (event) => console.log("object") } >Image comparison</h2>
-        //             <img className="qubely-image-image" src={image.url} srcset={image.url + ' 1x, ' + image2x.url + ' 2x'} alt={imgAlt && imgAlt} />
-        //             <h2>Image 2 comparison</h2>
-        //             <img className="qubely-image-image" src={image2.url} srcset={image2.url + ' 1x, ' + image2_2x.url + ' 2x'} alt={imgAlt2 && imgAlt2} />
-        //         </div>
     }
 }
 

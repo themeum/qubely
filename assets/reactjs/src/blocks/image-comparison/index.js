@@ -34,19 +34,6 @@ const attributes = {
             { selector: '{{QUBELY}}' }
         ]
     },
-    alignment: {
-        type: 'object',
-        default: {
-            md: 'left'
-        },
-        style: [{
-            selector: '{{QUBELY}} .qubely-block-image {text-align: {{alignment}};}'
-        }]
-    },
-    animateOnHover: {
-        type: 'boolean',
-        default: true
-    },
     // original image
     imgSize: {
         type: 'string',
@@ -151,31 +138,18 @@ const attributes = {
             }
         ],
     },
-    // end of yp
 
     disableTitle: {
         type: 'boolean',
         default: true
     },
 
-    // Content
-    contentAnimation: {
-        type: 'string',
-        default: 'zoom-out'
-    },
-
     titleVerticalAlign: {
         type: 'string',
-        default: 'center',
+        default: 'flex-end',
         style: [
             {
-                selector: '{{QUBELY}} .comparison-image-text {-webkit-box-align: start; -ms-flex-align: start; -ms-grid-row-align: flex-start; align-items: flex-start;}'
-            },
-            {
-                selector: '{{QUBELY}} .comparison-image-text {-webkit-box-align: center; -ms-flex-align: center; -ms-grid-row-align: center; align-items: center;}'
-            },
-            {
-                selector: '{{QUBELY}} .comparison-image-text {-webkit-box-align: end; -ms-flex-align: end; -ms-grid-row-align: flex-end; align-items: flex-end;}'
+                selector: '{{QUBELY}} .comparison-image-text {align-items: {{titleVerticalAlign}};}'
             }
         ]
     },
