@@ -21,6 +21,8 @@
     padding: 20px 60px 50px 60px;
     font-size: 20px;
     display: flex;
+    white-space: nowrap;
+    user-select: none;
 }
 
 .qubely-block-image-comparison > .comparison-image-text {
@@ -30,7 +32,6 @@
 }
 
 .comparison-resize-img .comparison-image-text {
-    /* right: auto; */
     left: 0;
     justify-content: flex-start;
     align-items: flex-end;
@@ -63,9 +64,6 @@
     left: 50%;
     border-radius: 50%;
     cursor: move;
-    /* background: #dc717d;
-    background-position: center center;
-    background-repeat: no-repeat; */
     background: #dc717d no-repeat center center;
     transform: translate(-50%, -50%);
 }
