@@ -20,15 +20,11 @@ class Edit extends Component {
         }
     }
 
-    componentDidUpdate() {
-    }
-
     handlePanelOpenings = (panelName) => {
         this.setState({ ...this.state, openPanelSetting: panelName })
     }
 
     dragFunc = (event) => {
-        console.log(event);
         const container = event.target.parentNode;
         const resizeElement = container.querySelector('.comparison-resize-img');
         const dragCircle = document.querySelector('.comparison-scrollCircle');
@@ -36,7 +32,6 @@ class Edit extends Component {
     }
 
     draging = (container, dragCircle, resizeElement) => {
-
         let moving = () => {
             let containerOffset = container.getBoundingClientRect().left - 40,//container.offsetLeft,
                 containerWidth = container.offsetWidth,
@@ -196,9 +191,7 @@ class Edit extends Component {
                 </BlockControls>
 
                 {globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
-
                 <div className={`qubely-block-${uniqueId}${className ? ` ${className}` : ''}`}>
-
                     <div class="qubely-block-image-comparison">
                         {
                             (imageType === 'local' && image.url != undefined) ?

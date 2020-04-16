@@ -337,7 +337,7 @@ class QUBELY
 			}
 			
 
-			if (in_array('qubely/image-comparison', $available_blocks)) {
+			if (in_array('qubely/imagecomparison', $available_blocks)) {
 				wp_enqueue_script('qubely-block-image-comparison', QUBELY_DIR_URL . 'assets/js/blocks/image-comparison.js', array(), QUBELY_VERSION);
 			}
 
@@ -380,6 +380,9 @@ class QUBELY
 			if (false !== strpos($post, '<!-- wp:' . 'qubely/contactform' . ' ') || false !== strpos($post, '<!-- wp:' . 'qubely/form' . ' ')) {
 				wp_enqueue_script('qubely-block-contactform', QUBELY_DIR_URL . 'assets/js/blocks/contactform.js', array('jquery'), QUBELY_VERSION);
 			}
+            if (false !== strpos($post, '<!-- wp:' . 'qubely/imagecomparison' . ' ')) {
+                wp_enqueue_script('qubely-block-image-comparison', QUBELY_DIR_URL . 'assets/js/blocks/image-comparison.js', array(), QUBELY_VERSION);
+            }
 
 			wp_enqueue_script('qubely-block-common', QUBELY_DIR_URL . 'assets/js/common-script.js', array('jquery'), QUBELY_VERSION, true);
 			wp_enqueue_script('qubely-interaction', QUBELY_DIR_URL . 'assets/js/interaction.js', array('jquery'), QUBELY_VERSION, true);
