@@ -40,8 +40,11 @@
             white-space: nowrap;
             user-select: none;
         }
+
         &.image-A {
-            width: 100%;
+            &.valid-images {
+                width: 100%;
+            }
             .comparison-image-text {
                 right: 0;
                 justify-content: flex-end;
