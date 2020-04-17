@@ -100,7 +100,7 @@ export const attributes = {
     },
 
     // Title
-    originalTitle: {
+    imageATitle: {
         type: 'string',
         default: 'Original',
     },
@@ -108,7 +108,7 @@ export const attributes = {
         type: 'number',
         default: 3
     },
-    originalTitleTypography: {
+    imageATitleTypography: {
         type: 'object',
         default: {
             openTypography: 1,
@@ -121,14 +121,14 @@ export const attributes = {
             selector: '{{QUBELY}} .comparison-image-text'
         }]
     },
-    originalTitleColor: {
+    imageATitleColor: {
         type: 'string',
         default: '#FFF',
         style: [{
-            selector: '{{QUBELY}} .comparison-image-text {color: {{originalTitleColor}};}'
+            selector: '{{QUBELY}} .comparison-image-text {color: {{imageATitleColor}};}'
         }]
     },
-    modifiedTitle: {
+    imageBTitle: {
         type: 'string',
         default: 'Modified'
     },
@@ -178,5 +178,13 @@ export const attributes = {
             }
         ]
     },
-
+    titleVerticalAlign: {
+        type: 'string',
+        default: 'flex-end',
+        style: [
+            {
+                selector: '{{QUBELY}} .comparison-image-text {align-items: {{titleVerticalAlign}};}'
+            }
+        ]
+    },
 };

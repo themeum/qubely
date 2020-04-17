@@ -1,3 +1,4 @@
+import icons from '../../helpers/icons';
 const { __ } = wp.i18n;
 const {
     Fragment,
@@ -6,7 +7,8 @@ const {
 
 const {
     PanelBody,
-    Toolbar
+    Toolbar,
+    Tooltip
 } = wp.components;
 
 const {
@@ -68,23 +70,29 @@ class Edit extends Component {
         } else if (uniqueId && uniqueId != _client) {
             setAttributes({ uniqueId: _client });
         }
+
+        // image width 
+        const imageComparisonRoot = document.querySelector('.qubely-block-image-comparison');
+        const imageComparisonImages = document.querySelectorAll('.qubely-block-image-comparison img');
+        imageComparisonImages.forEach((eachImg) => {
+            eachImg.style.width = imageComparisonRoot.offsetWidth + 'px';
+        });
     }
 
 
     dragFunc = (event) => {
         const container = event.target.parentNode;
-        const resizeElement = container.querySelector('.comparison-resize-img');
-        const dragCircle = document.querySelector('.comparison-scrollCircle');
+        const resizeElement = container.querySelector('.resizable-img');
+        const dragCircle = container.querySelector('.comparison-scrollCircle');
         this.draging(container, dragCircle, resizeElement);
     }
 
     draging = (container, dragCircle, resizeElement) => {
         let moving = () => {
-            let containerOffset = container.getBoundingClientRect().left - 40,//container.offsetLeft,
+            let containerOffset = container.getBoundingClientRect().left - 40,
                 containerWidth = container.offsetWidth,
                 rect = container.getBoundingClientRect().left - 40,
                 movingValue = ((event.pageX - 37) - containerOffset) / (containerWidth / 100);
-            console.log(containerWidth, containerOffset, event.pageX, rect); //return 0;
             if (movingValue < 10)
                 movingValue = 10;
             else if (movingValue > 90)
@@ -96,7 +104,6 @@ class Edit extends Component {
         container.addEventListener('mousemove', moving);
 
         let dragRevoveFunc = (event) => {
-            console.log("drag remove");
             container.removeEventListener('mousemove', moving);
         }
 
@@ -145,20 +152,20 @@ class Edit extends Component {
     render() {
         const {
             name,
-            noticeUI,
             clientId,
+            noticeUI,
             attributes,
             setAttributes,
             attributes: {
                 uniqueId,
                 className,
-                originalTitle,
-                titleLevel,
-                originalTitleTypography,
-                originalTitleColor,
-                modifiedTitle,
+                imageATitle,
+                imageATitleTypography,
+                imageATitleColor,
+                imageBTitle,
                 circleBackground,
                 disableTitle,
+                titleVerticalAlign,
                 circleWidth,
 
                 image,
@@ -166,13 +173,12 @@ class Edit extends Component {
                 imageType,
                 externalImageUrl,
                 imgAlt,
-                imageUrl,
+
                 image2,
                 image2_2x,
-                imageType2,
+
                 externalImageUrl2,
                 imgAlt2,
-                imageUrl2,
 
                 animation,
                 globalZindex,
@@ -219,6 +225,15 @@ class Edit extends Component {
                 />
             )
         }
+
+        let validImageA = false, validImageB = false;
+
+        if (image.url || image2x.url) {
+            validImageA = true;
+        }
+        if (image2.url || image2_2x.url) {
+            validImageB = true;
+        }
         return (
             <Fragment>
                 <InspectorControls key="inspector">
@@ -247,11 +262,34 @@ class Edit extends Component {
                                 }
                                 {disableTitle &&
                                     <Fragment>
-                                        <Color label={__('Title Color')} value={originalTitleColor} onChange={(value) => setAttributes({ originalTitleColor: value })} />
-                                        <Typography label={__('Typography')} value={originalTitleTypography} onChange={(value) => setAttributes({ originalTitleTypography: value })} disableLineHeight device={device} onDeviceChange={value => this.setState({ device: value })} />
+                                        <Color label={__('Title Color')} value={imageATitleColor} onChange={(value) => setAttributes({ imageATitleColor: value })} />
+                                        <Typography label={__('Typography')} value={imageATitleTypography} onChange={(value) => setAttributes({ imageATitleTypography: value })} disableLineHeight device={device} onDeviceChange={value => this.setState({ device: value })} />
                                     </Fragment>
                                 }
                                 <Toggle label={__('Disable Title')} value={disableTitle} onChange={val => setAttributes({ disableTitle: val })} />
+
+                                <div className="qubely-field">
+                                    <label>{__('Content Position')}</label>
+                                    <div className="qubely-field-button-list qubely-field-button-list-fluid">
+                                        <Tooltip text={__('Top')}>
+                                            <button
+                                                onClick={() => setAttributes({ titleVerticalAlign: 'flex-start' })}
+                                            >{icons.vertical_top}</button>
+                                        </Tooltip>
+
+                                        <Tooltip text={__('Middle')} >
+                                            <button
+                                                onClick={() => setAttributes({ titleVerticalAlign: 'center' })}
+                                            >{icons.vertical_middle}</button>
+                                        </Tooltip>
+
+                                        <Tooltip text={__('Bottom')} >
+                                            <button
+                                                onClick={() => setAttributes({ titleVerticalAlign: 'flex-end' })}
+                                            >{icons.vertical_bottom}</button>
+                                        </Tooltip>
+                                    </div>
+                                </div>
 
                             </PanelBody>
 
@@ -307,77 +345,67 @@ class Edit extends Component {
 
                 <div className={`qubely-block-${uniqueId}${className ? ` ${className}` : ''}`}>
                     <div class="qubely-block-image-comparison">
-                        <div className="temp-wrapper">  {/** this tag or classname should be replaced  */}
-                            <div className="image-container image-one">
-                                {renderPlaceholder('A')}
-                            </div>
+                        <div className="image-container image-one">
+                            {
+                                validImageA ?
+                                    <Fragment>
+                                        {image2x.url ?
+                                            <img className="qubely-image-image" src={image.url} srcset={image.url + ' 1x, ' + image2x.url + ' 2x'} alt={imgAlt && imgAlt} />
+                                            :
+                                            <img className="qubely-image-image" src={image.url} alt={imgAlt && imgAlt} />
+                                        }
+                                        <RichText
+                                            tagName="span"
+                                            value={imageATitle}
+                                            keepPlaceholderOnFocus
+                                            placeholder={__('Original')}
+                                            className="comparison-image-text"
+                                            onChange={value => setAttributes({ imageATitle: value })}
+                                        />
+                                    </Fragment>
+                                    :
+                                    renderPlaceholder('A')
 
-                            <div className="image-container image-two">
-                                {renderPlaceholder('B')}
-                            </div>
+                            }
                         </div>
 
-
-                        {
-                            (imageType === 'local' && image.url != undefined) ?
-                                <Fragment>
-                                    {image2x.url != undefined ?
-                                        <img className="qubely-image-image" src={image.url} srcset={image.url + ' 1x, ' + image2x.url + ' 2x'} alt={imgAlt && imgAlt} />
-                                        :
-                                        <img className="qubely-image-image" src={image.url} alt={imgAlt && imgAlt} />
-                                    }
-                                </Fragment>
-                                :
-                                (imageType === 'external' && externalImageUrl.url != undefined) ?
-                                    <img className="qubely-image-image" src={externalImageUrl.url} alt={imgAlt && imgAlt} />
-                                    :
-                                    <div className="qubely-image-image qubely-image-placeholder"><i className="far fa-image" /></div>
-                        }
-                        {disableTitle &&
-                            <RichText
-                                tagName="span"
-                                value={originalTitle}
-                                keepPlaceholderOnFocus
-                                placeholder={__('Original')}
-                                className="comparison-image-text"
-                                onChange={value => setAttributes({ originalTitle: value })}
-                            />
-                        }
-                        <div class="comparison-resize-img">
+                        <div className="image-container image-two resizable-img">
                             {
-                                (imageType === 'local' && image2.url != undefined) ?
+                                validImageB ?
                                     <Fragment>
-                                        {image2_2x.url != undefined ?
+                                        {image2_2x.url ?
                                             <img className="qubely-image-image" src={image2.url} srcset={image2.url + ' 1x, ' + image2_2x.url + ' 2x'} alt={imgAlt2 && imgAlt2} />
                                             :
                                             <img className="qubely-image-image" src={image2.url} alt={imgAlt2 && imgAlt2} />
                                         }
+                                        <RichText
+                                            tagName="span"
+                                            value={imageBTitle}
+                                            keepPlaceholderOnFocus
+                                            placeholder={__('Modified')}
+                                            className="comparison-image-text"
+                                            onChange={value => setAttributes({ imageBTitle: value })}
+                                        />
                                     </Fragment>
                                     :
-                                    (imageType === 'external' && externalImageUrl2.url != undefined) ?
-                                        <img className="qubely-image-image" src={externalImageUrl2.url} alt={imgAlt2 && imgAlt2} />
-                                        :
-                                        <div className="qubely-image-image qubely-image-placeholder"><i className="far fa-image" /></div>
-                            }
-                            {disableTitle &&
-                                <RichText
-                                    tagName="span"
-                                    value={modifiedTitle}
-                                    keepPlaceholderOnFocus
-                                    placeholder={__('Modified')}
-                                    className="comparison-image-text"
-                                    onChange={value => setAttributes({ modifiedTitle: value })}
-                                />
+                                    renderPlaceholder('B')
+
                             }
                         </div>
-                        <span
-                            class="comparison-scrollCircle"
-                            onMouseDown={(event) => this.dragFunc(event)}
-                        >
-                        </span>
+                        {
+                            (validImageA && validImageB) &&
+                            <span
+                                class="comparison-scrollCircle"
+                                onMouseDown={(event) => this.dragFunc(event)}
+                            />
+                        }
+                        {/* <div className="qubely-image-image qubely-image-placeholder"><i className="far fa-image" /></div> */}
                     </div>
 
-                    <div ref="qubelyContextMenu" className={`qubely-context-menu-wraper`} >
+                    <div
+                        ref="qubelyContextMenu"
+                        className={`qubely-context-menu-wraper`}
+                    >
                         <ContextMenu
                             name={name}
                             clientId={clientId}
@@ -386,7 +414,6 @@ class Edit extends Component {
                             qubelyContextMenu={this.refs.qubelyContextMenu}
                         />
                     </div>
-
                 </div>
             </Fragment>
         )
