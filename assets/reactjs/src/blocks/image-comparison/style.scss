@@ -53,7 +53,7 @@
     display: block;
     height: 100%;
     width: auto;
-    max-width : none;
+    max-width: none;
 }
 
 .comparison-scrollCircle {
@@ -66,4 +66,12 @@
     cursor: move;
     background: #dc717d no-repeat center center;
     transform: translate(-50%, -50%);
+}
+
+.temp-wrappe {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    min-height: 350px;
+    align-items: center;
 }

@@ -1,18 +1,68 @@
-const { __ } = wp.i18n
-const { Fragment, Component } = wp.element;
-const { PanelBody, Toolbar } = wp.components
-const { RichText, InspectorControls, BlockControls } = wp.blockEditor
-const { Media, Range, ButtonGroup, Typography, Toggle, Color, Url, gloalSettings: { globalSettingsPanel, animationSettings, interactionSettings }, Inline: { InlineToolbar }, ContextMenu: { ContextMenu }, withCSSGenerator, InspectorTabs, InspectorTab } = wp.qubelyComponents
+const { __ } = wp.i18n;
+const {
+    Fragment,
+    Component
+} = wp.element;
+
+const {
+    PanelBody,
+    Toolbar
+} = wp.components;
+
+const {
+    RichText,
+    BlockIcon,
+    BlockControls,
+    MediaPlaceholder,
+    InspectorControls,
+} = wp.blockEditor;
+
+const {
+    Url,
+    Color,
+    Media,
+    Range,
+    Toggle,
+    Typography,
+    ButtonGroup,
+    Inline: {
+        InlineToolbar
+    },
+    ContextMenu: {
+        ContextMenu
+    },
+    gloalSettings: {
+        animationSettings,
+        interactionSettings,
+        globalSettingsPanel,
+    },
+    InspectorTab,
+    InspectorTabs,
+    withCSSGenerator,
+} = wp.qubelyComponents;
+
+const DEFAULT_SIZE_SLUG = 'large';
+const ALLOWED_MEDIA_TYPES = ['image'];
+
 
 class Edit extends Component {
     constructor(props) {
         super(props)
-        this.state = { device: 'md', selector: true, spacer: true, openPanelSetting: '' };
+        this.state = {
+            device: 'md'
+        };
     }
 
     componentDidMount() {
-        const { setAttributes, clientId, attributes: { uniqueId } } = this.props
-        const _client = clientId.substr(0, 6)
+        const {
+            clientId,
+            setAttributes,
+            attributes: {
+                uniqueId
+            }
+        } = this.props;
+        const _client = clientId.substr(0, 6);
+
         if (!uniqueId) {
             setAttributes({ uniqueId: _client });
         } else if (uniqueId && uniqueId != _client) {
@@ -20,9 +70,6 @@ class Edit extends Component {
         }
     }
 
-    handlePanelOpenings = (panelName) => {
-        this.setState({ ...this.state, openPanelSetting: panelName })
-    }
 
     dragFunc = (event) => {
         const container = event.target.parentNode;
@@ -36,76 +83,142 @@ class Edit extends Component {
             let containerOffset = container.getBoundingClientRect().left - 40,//container.offsetLeft,
                 containerWidth = container.offsetWidth,
                 rect = container.getBoundingClientRect().left - 40,
-                movingValue = ( ( event.pageX - 37 )  - containerOffset) / (containerWidth / 100);
-            console.log(containerWidth, containerOffset,event.pageX, rect); //return 0;
-            if(movingValue < 10)
+                movingValue = ((event.pageX - 37) - containerOffset) / (containerWidth / 100);
+            console.log(containerWidth, containerOffset, event.pageX, rect); //return 0;
+            if (movingValue < 10)
                 movingValue = 10;
-            else if(movingValue > 90)
+            else if (movingValue > 90)
                 movingValue = 90;
-            dragCircle.style.left = movingValue+'%';
-            resizeElement.style.width = movingValue+'%';
+            dragCircle.style.left = movingValue + '%';
+            resizeElement.style.width = movingValue + '%';
         }
-    
+
         container.addEventListener('mousemove', moving);
-    
+
         let dragRevoveFunc = (event) => {
             console.log("drag remove");
             container.removeEventListener('mousemove', moving);
         }
-    
-        container.addEventListener('mouseup',dragRevoveFunc);
-        window.addEventListener('mouseup',dragRevoveFunc);
-    
+
+        container.addEventListener('mouseup', dragRevoveFunc);
+        window.addEventListener('mouseup', dragRevoveFunc);
+
+    }
+    onSelectImage = (media, imageId) => {
+        if (!media || !media.url) {
+            return;
+        }
+        this.props.setAttributes(imageId === 'A' ? {
+            image: media
+        } : {
+                image2: media
+            }
+        );
+    }
+    onUploadError = (message) => {
+        const { noticeOperations } = this.props;
+        noticeOperations.removeAllNotices();
+        noticeOperations.createErrorNotice(message);
+    }
+    onSelectURL = (newURL, imageId) => {
+
+        const { image, image2 } = this.props.attributes;
+        let currentImage = image;
+        if (imageId === 'B') {
+            currentImage = image2;
+        }
+        if (newURL !== currentImage.url) {
+            currentImage = {
+                ...currentImage,
+                url: newURL,
+                id: undefined,
+                sizeSlug: DEFAULT_SIZE_SLUG
+            }
+        }
+        this.props.setAttributes(imageId === 'A' ? {
+            image: currentImage
+        } : {
+                image2: currentImage
+            });
     }
 
     render() {
         const {
-            uniqueId,
-            recreateStyles,
-            className,
-            selector,
-            layout,
-            alignment,
-            animateOnHover,
-            originalTitle,
-            titleLevel,
-            originalTitleTypography,
-            originalTitleColor,
-            titleVisibleOnHover,
-            modifiedTitle,
-            circleBackground,
-            disableTitle,
-            circleWidth,
+            name,
+            noticeUI,
+            clientId,
+            attributes,
+            setAttributes,
+            attributes: {
+                uniqueId,
+                className,
+                originalTitle,
+                titleLevel,
+                originalTitleTypography,
+                originalTitleColor,
+                modifiedTitle,
+                circleBackground,
+                disableTitle,
+                circleWidth,
 
-            image,
-            image2x,
-            imageType,
-            externalImageUrl,
-            imgAlt,
-            imageUrl,
-            image2,
-            image2_2x,
-            imageType2,
-            externalImageUrl2,
-            imgAlt2,
-            imageUrl2,
+                image,
+                image2x,
+                imageType,
+                externalImageUrl,
+                imgAlt,
+                imageUrl,
+                image2,
+                image2_2x,
+                imageType2,
+                externalImageUrl2,
+                imgAlt2,
+                imageUrl2,
 
-            animation,
-            globalZindex,
-            enablePosition,
-            selectPosition,
-            positionXaxis,
-            positionYaxis,
-            hideTablet,
-            hideMobile,
-            globalCss,
-            interaction
-        } = this.props.attributes
-        const { name, clientId, attributes, setAttributes, isSelected } = this.props
-        const { openPanelSetting, device } = this.state
-        console.log(modifiedTitle, this.props);
+                animation,
+                globalZindex,
+                enablePosition,
+                selectPosition,
+                positionXaxis,
+                positionYaxis,
+                hideTablet,
+                hideMobile,
+                globalCss,
+                interaction
+            }
+        } = this.props;
 
-        const titleTagName = 'h' + titleLevel;
+        const { device } = this.state;
+
+        const renderPlaceholder = (imageId) => {
+            let selectedImage = image;
+            if (imageId === 'B') {
+                selectedImage = image2;
+            }
+            const mediaPreview = !!selectedImage.url && (
+                <img
+                    alt={__('Edit image')}
+                    title={__('Edit image')}
+                    className={'edit-image-preview'}
+                    src={selectedImage.url}
+                />
+            );
+            return (
+                <MediaPlaceholder
+                    accept="image/*"
+                    multiple={false}
+                    notices={noticeUI}
+                    icon="format-image"
+                    mediaPreview={mediaPreview}
+                    allowedTypes={ALLOWED_MEDIA_TYPES}
+                    onError={() => this.onUploadError()}
+                    labels={{ title: `Image ${imageId}` }}
+                    onSelect={media => this.onSelectImage(media, imageId)}
+                    onSelectURL={newUrl => this.onSelectURL(newUrl, imageId)}
+                    disableMediaButtons={selectedImage.url}
+                    value={{ id: selectedImage.id, src: selectedImage.src }}
+                />
+            )
+        }
         return (
             <Fragment>
                 <InspectorControls key="inspector">
@@ -132,7 +245,7 @@ class Edit extends Component {
                                         :
                                         <Url label={__('Image Source')} disableAdvanced value={externalImageUrl} onChange={newUrl => setAttributes({ externalImageUrl: newUrl })} />
                                 }
-                                { disableTitle &&
+                                {disableTitle &&
                                     <Fragment>
                                         <Color label={__('Title Color')} value={originalTitleColor} onChange={(value) => setAttributes({ originalTitleColor: value })} />
                                         <Typography label={__('Typography')} value={originalTitleTypography} onChange={(value) => setAttributes({ originalTitleTypography: value })} disableLineHeight device={device} onDeviceChange={value => this.setState({ device: value })} />
@@ -160,7 +273,7 @@ class Edit extends Component {
                                     imageType === 'local' ?
                                         <Fragment>
                                             <Media label={__('Image')} multiple={false} type={['image']} panel={true} value={image2} onChange={val => setAttributes({ image2: val })} />
-                                            <Media label={__('Retina Image (@2x)')} multiple={false} type={['image']} panel={true} value={image2_2x} onChange={val => setAttributes({ image2_2x : val })} />
+                                            <Media label={__('Retina Image (@2x)')} multiple={false} type={['image']} panel={true} value={image2_2x} onChange={val => setAttributes({ image2_2x: val })} />
                                         </Fragment>
                                         :
                                         <Url label={__('Image Source')} disableAdvanced value={externalImageUrl2} onChange={newUrl => setAttributes({ externalImageUrl2: newUrl })} />
@@ -191,8 +304,20 @@ class Edit extends Component {
                 </BlockControls>
 
                 {globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
+
                 <div className={`qubely-block-${uniqueId}${className ? ` ${className}` : ''}`}>
                     <div class="qubely-block-image-comparison">
+                        <div className="temp-wrapper">  {/** this tag or classname should be replaced  */}
+                            <div className="image-container image-one">
+                                {renderPlaceholder('A')}
+                            </div>
+
+                            <div className="image-container image-two">
+                                {renderPlaceholder('B')}
+                            </div>
+                        </div>
+
+
                         {
                             (imageType === 'local' && image.url != undefined) ?
                                 <Fragment>
@@ -208,15 +333,15 @@ class Edit extends Component {
                                     :
                                     <div className="qubely-image-image qubely-image-placeholder"><i className="far fa-image" /></div>
                         }
-                        { disableTitle &&
+                        {disableTitle &&
                             <RichText
-                                key="editable"
                                 tagName="span"
-                                className="comparison-image-text"
+                                value={originalTitle}
                                 keepPlaceholderOnFocus
                                 placeholder={__('Original')}
+                                className="comparison-image-text"
                                 onChange={value => setAttributes({ originalTitle: value })}
-                                value={originalTitle} />
+                            />
                         }
                         <div class="comparison-resize-img">
                             {
@@ -234,19 +359,20 @@ class Edit extends Component {
                                         :
                                         <div className="qubely-image-image qubely-image-placeholder"><i className="far fa-image" /></div>
                             }
-                            { disableTitle &&
+                            {disableTitle &&
                                 <RichText
-                                    key="editable"
                                     tagName="span"
-                                    className="comparison-image-text"
+                                    value={modifiedTitle}
                                     keepPlaceholderOnFocus
                                     placeholder={__('Modified')}
-                                    onChange={value => setAttributes({ modifiedTitle : value })}
-                                    value={modifiedTitle} />
+                                    className="comparison-image-text"
+                                    onChange={value => setAttributes({ modifiedTitle: value })}
+                                />
                             }
                         </div>
-                        <span class="comparison-scrollCircle"
-                            onMouseDown={ (event) => this.dragFunc(event) }
+                        <span
+                            class="comparison-scrollCircle"
+                            onMouseDown={(event) => this.dragFunc(event)}
                         >
                         </span>
                     </div>
