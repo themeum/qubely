@@ -196,7 +196,7 @@ class Edit extends Component {
 
         const { device } = this.state;
 
-        const renderPlaceholder = (imageId) => {
+        const renderPlaceholder = (imageId, title) => {
             let selectedImage = image;
             if (imageId === 'B') {
                 selectedImage = image2;
@@ -218,7 +218,7 @@ class Edit extends Component {
                     mediaPreview={mediaPreview}
                     allowedTypes={ALLOWED_MEDIA_TYPES}
                     onError={() => this.onUploadError()}
-                    labels={{ title: `Image ${imageId}` }}
+                    labels={{ title }}
                     onSelect={media => this.onSelectImage(media, imageId)}
                     onSelectURL={newUrl => this.onSelectURL(newUrl, imageId)}
                     disableMediaButtons={selectedImage.url}
@@ -238,12 +238,13 @@ class Edit extends Component {
 
         const imageAClasses = classnames(
             'image-container',
-            'image-A'
+            'image-A',
+            { ['valid-images']: validImageA && validImageB }
         );
         const imageBClasses = classnames(
             'image-container',
             'image-B',
-            { ['resizable-img']: validImageA && validImageB }
+            { ['valid-images resizable-img']: validImageA && validImageB }
         );
         return (
             <Fragment>
@@ -356,29 +357,6 @@ class Edit extends Component {
 
                 <div className={`qubely-block-${uniqueId}${className ? ` ${className}` : ''}`}>
                     <div class="qubely-block-image-comparison">
-                        <div className={imageAClasses}>
-                            {
-                                validImageA ?
-                                    <Fragment>
-                                        {image2x.url ?
-                                            <img className="qubely-image-image" src={image.url} srcset={image.url + ' 1x, ' + image2x.url + ' 2x'} alt={imgAlt && imgAlt} />
-                                            :
-                                            <img className="qubely-image-image" src={image.url} alt={imgAlt && imgAlt} />
-                                        }
-                                        <RichText
-                                            tagName="span"
-                                            value={imageATitle}
-                                            keepPlaceholderOnFocus
-                                            placeholder={__('Original')}
-                                            className="comparison-image-text"
-                                            onChange={value => setAttributes({ imageATitle: value })}
-                                        />
-                                    </Fragment>
-                                    :
-                                    renderPlaceholder('A')
-
-                            }
-                        </div>
 
                         <div className={imageBClasses}>
                             {
@@ -390,7 +368,6 @@ class Edit extends Component {
                                             <img className="qubely-image-image" src={image2.url} alt={imgAlt2 && imgAlt2} />
                                         }
                                         <RichText
-                                            tagName="span"
                                             value={imageBTitle}
                                             keepPlaceholderOnFocus
                                             placeholder={__('Modified')}
@@ -399,7 +376,29 @@ class Edit extends Component {
                                         />
                                     </Fragment>
                                     :
-                                    renderPlaceholder('B')
+                                    renderPlaceholder('B', 'Image One')
+
+                            }
+                        </div>
+                        <div className={imageAClasses}>
+                            {
+                                validImageA ?
+                                    <Fragment>
+                                        {image2x.url ?
+                                            <img className="qubely-image-image" src={image.url} srcset={image.url + ' 1x, ' + image2x.url + ' 2x'} alt={imgAlt && imgAlt} />
+                                            :
+                                            <img className="qubely-image-image" src={image.url} alt={imgAlt && imgAlt} />
+                                        }
+                                        <RichText
+                                            value={imageATitle}
+                                            keepPlaceholderOnFocus
+                                            placeholder={__('Original')}
+                                            className="comparison-image-text"
+                                            onChange={value => setAttributes({ imageATitle: value })}
+                                        />
+                                    </Fragment>
+                                    :
+                                    renderPlaceholder('A', 'Image Two')
 
                             }
                         </div>

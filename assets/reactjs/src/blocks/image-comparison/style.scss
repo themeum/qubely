@@ -9,67 +9,67 @@
     display: flex;
     min-height: 350px;
     align-items: center;
-}
-
-.qubely-block-image-comparison img {
-    display: block;
-    width: 100%;
-    user-select: none;
-}
-
-.comparison-image-text {
-    position: absolute;
-    opacity: 1;
-    color: #fff;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    padding: 50px 60px 50px 60px;
-    font-size: 20px;
-    display: flex;
-    white-space: nowrap;
-    user-select: none;
-}
-
-.qubely-block-image-comparison > .comparison-image-text {
-    right: 0;
-    justify-content: flex-end;
-    align-items: flex-end;
-}
-
-.resizable-img .comparison-image-text {
-    left: 0;
-    justify-content: flex-start;
-    align-items: flex-end;
-}
-
-.resizable-img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 50%;
-    height: 100%;
-    overflow: hidden;
-}
-
-.resizable-img img {
-    position: absolute;
-    left: 0;
-    top: 0;
-    display: block;
-    height: 100%;
-    width: auto;
-    max-width: none;
-}
-
-.comparison-scrollCircle {
-    position: absolute;
-    height: 44px;
-    width: 44px;
-    top: 50%;
-    left: 50%;
-    border-radius: 50%;
-    cursor: move;
-    background: #dc717d no-repeat center center;
-    transform: translate(-50%, -50%);
+    .image-container {
+        .comparison-image-text {
+            position: absolute;
+            opacity: 1;
+            color: #fff;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            padding: 50px 60px 50px 60px;
+            font-size: 20px;
+            display: flex;
+            white-space: nowrap;
+            user-select: none;
+        }
+        &.image-A {
+            width: 100%;
+            .comparison-image-text {
+                right: 0;
+                justify-content: flex-end;
+                align-items: flex-end;
+            }
+            img {
+                display: block;
+                width: 100%;
+                user-select: none;
+            }
+        }
+        &.image-B {
+            &.resizable-img {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 50%;
+                height: 100%;
+                overflow: hidden;
+                .comparison-image-text {
+                    left: 0;
+                    justify-content: flex-start;
+                    align-items: flex-end;
+                }
+                img {
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                    display: block;
+                    height: 100%;
+                    width: auto;
+                    max-width: none;
+                }
+            }
+        }
+    }
+    .comparison-scrollCircle {
+        position: absolute;
+        height: 44px;
+        width: 44px;
+        top: 50%;
+        left: 50%;
+        border-radius: 50%;
+        cursor: move;
+        background: #dc717d no-repeat center center;
+        transform: translate(-50%, -50%);
+    }
 }
