@@ -1,4 +1,5 @@
 import icons from '../../helpers/icons';
+import classnames from 'classnames';
 const { __ } = wp.i18n;
 const {
     Fragment,
@@ -234,6 +235,16 @@ class Edit extends Component {
         if (image2.url || image2_2x.url) {
             validImageB = true;
         }
+
+        const imageAClasses = classnames(
+            'image-container',
+            'image-A'
+        );
+        const imageBClasses = classnames(
+            'image-container',
+            'image-B',
+            { ['resizable-img']: validImageA && validImageB }
+        );
         return (
             <Fragment>
                 <InspectorControls key="inspector">
@@ -345,7 +356,7 @@ class Edit extends Component {
 
                 <div className={`qubely-block-${uniqueId}${className ? ` ${className}` : ''}`}>
                     <div class="qubely-block-image-comparison">
-                        <div className="image-container image-one">
+                        <div className={imageAClasses}>
                             {
                                 validImageA ?
                                     <Fragment>
@@ -369,7 +380,7 @@ class Edit extends Component {
                             }
                         </div>
 
-                        <div className="image-container image-two resizable-img">
+                        <div className={imageBClasses}>
                             {
                                 validImageB ?
                                     <Fragment>
