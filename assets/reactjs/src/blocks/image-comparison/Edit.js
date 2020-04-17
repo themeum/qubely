@@ -14,7 +14,6 @@ const {
 
 const {
     RichText,
-    BlockIcon,
     BlockControls,
     MediaPlaceholder,
     InspectorControls,
@@ -92,7 +91,6 @@ class Edit extends Component {
         let moving = () => {
             let containerOffset = container.getBoundingClientRect().left - 40,
                 containerWidth = container.offsetWidth,
-                rect = container.getBoundingClientRect().left - 40,
                 movingValue = ((event.pageX - 37) - containerOffset) / (containerWidth / 100);
             if (movingValue < 10)
                 movingValue = 10;
@@ -104,7 +102,7 @@ class Edit extends Component {
 
         container.addEventListener('mousemove', moving);
 
-        let dragRevoveFunc = (event) => {
+        let dragRevoveFunc = () => {
             container.removeEventListener('mousemove', moving);
         }
 
@@ -166,7 +164,6 @@ class Edit extends Component {
                 imageBTitle,
                 circleBackground,
                 disableTitle,
-                titleVerticalAlign,
                 circleWidth,
 
                 image,
@@ -224,6 +221,23 @@ class Edit extends Component {
                     disableMediaButtons={selectedImage.url}
                     value={{ id: selectedImage.id, src: selectedImage.src }}
                 />
+            )
+        }
+
+        const actionButtons = (imageId) => {
+            return (
+                <div className="qubely-media-actions">
+                    <Tooltip text={__('Edit')}>
+                        <button className="qubely-button" aria-label={__('Edit')} onClick={() => { }} role="button">
+                            <span aria-label={__('Edit')} className="fas fa-pencil-alt fa-fw" />
+                        </button>
+                    </Tooltip>
+                    <Tooltip text={__('Remove')}>
+                        <button className="qubely-button" aria-label={__('Remove')} onClick={() => setAttributes({ [imageId]: {} })} role="button">
+                            <span aria-label={__('Close')} className="far fa-trash-alt fa-fw" />
+                        </button>
+                    </Tooltip>
+                </div>
             )
         }
 
@@ -363,9 +377,9 @@ class Edit extends Component {
                                 validImageB ?
                                     <Fragment>
                                         {image2_2x.url ?
-                                            <img className="qubely-image-image" src={image2.url} srcset={image2.url + ' 1x, ' + image2_2x.url + ' 2x'} alt={imgAlt2 && imgAlt2} />
+                                            <img className="qubely-image" src={image2.url} srcset={image2.url + ' 1x, ' + image2_2x.url + ' 2x'} alt={imgAlt2 && imgAlt2} />
                                             :
-                                            <img className="qubely-image-image" src={image2.url} alt={imgAlt2 && imgAlt2} />
+                                            <img className="qubely-image" src={image2.url} alt={imgAlt2 && imgAlt2} />
                                         }
                                         <RichText
                                             value={imageBTitle}
@@ -374,6 +388,7 @@ class Edit extends Component {
                                             className="comparison-image-text"
                                             onChange={value => setAttributes({ imageBTitle: value })}
                                         />
+                                        {actionButtons('image2')}
                                     </Fragment>
                                     :
                                     renderPlaceholder('B', 'Image One')
@@ -385,9 +400,9 @@ class Edit extends Component {
                                 validImageA ?
                                     <Fragment>
                                         {image2x.url ?
-                                            <img className="qubely-image-image" src={image.url} srcset={image.url + ' 1x, ' + image2x.url + ' 2x'} alt={imgAlt && imgAlt} />
+                                            <img className="qubely-image" src={image.url} srcset={image.url + ' 1x, ' + image2x.url + ' 2x'} alt={imgAlt && imgAlt} />
                                             :
-                                            <img className="qubely-image-image" src={image.url} alt={imgAlt && imgAlt} />
+                                            <img className="qubely-image" src={image.url} alt={imgAlt && imgAlt} />
                                         }
                                         <RichText
                                             value={imageATitle}
@@ -396,6 +411,7 @@ class Edit extends Component {
                                             className="comparison-image-text"
                                             onChange={value => setAttributes({ imageATitle: value })}
                                         />
+                                        {actionButtons('image')}
                                     </Fragment>
                                     :
                                     renderPlaceholder('A', 'Image Two')
