@@ -16,7 +16,7 @@ const {
     RichText,
     BlockControls,
     MediaPlaceholder,
-    InspectorControls,
+    InspectorControls
 } = wp.blockEditor;
 
 const {
@@ -250,42 +250,13 @@ class Edit extends Component {
             validImageB = true;
         }
 
-        const imageAClasses = classnames(
-            'image-container',
-            'image-A',
-            { ['valid-images']: validImageA && validImageB }
-        );
-        const imageBClasses = classnames(
-            'image-container',
-            'image-B',
-            { ['valid-images resizable-img']: validImageA && validImageB }
-        );
+
         return (
             <Fragment>
                 <InspectorControls key="inspector">
                     <InspectorTabs tabs={['style', 'advance']}>
                         <InspectorTab key={'style'}>
-                            <PanelBody title={__('Original Image')}>
-                                <ButtonGroup
-                                    label={__('Image Type')}
-                                    options={
-                                        [
-                                            [__('Local'), 'local'],
-                                            [__('External'), 'external']
-                                        ]
-                                    }
-                                    value={imageType}
-                                    onChange={value => setAttributes({ imageType: value })}
-                                />
-                                {
-                                    imageType === 'local' ?
-                                        <Fragment>
-                                            <Media label={__('Image')} multiple={false} type={['image']} panel={true} value={image} onChange={val => setAttributes({ image: val })} />
-                                            <Media label={__('Retina Image (@2x)')} multiple={false} type={['image']} panel={true} value={image2x} onChange={val => setAttributes({ image2x: val })} />
-                                        </Fragment>
-                                        :
-                                        <Url label={__('Image Source')} disableAdvanced value={externalImageUrl} onChange={newUrl => setAttributes({ externalImageUrl: newUrl })} />
-                                }
+                            <PanelBody title={''} opened={true}>
                                 {disableTitle &&
                                     <Fragment>
                                         <Color label={__('Title Color')} value={imageATitleColor} onChange={(value) => setAttributes({ imageATitleColor: value })} />
@@ -294,7 +265,7 @@ class Edit extends Component {
                                 }
                                 <Toggle label={__('Disable Title')} value={disableTitle} onChange={val => setAttributes({ disableTitle: val })} />
 
-                                <div className="qubely-field">
+                                {/*<div className="qubely-field">
                                     <label>{__('Content Position')}</label>
                                     <div className="qubely-field-button-list qubely-field-button-list-fluid">
                                         <Tooltip text={__('Top')}>
@@ -315,39 +286,11 @@ class Edit extends Component {
                                             >{icons.vertical_bottom}</button>
                                         </Tooltip>
                                     </div>
-                                </div>
-
-                            </PanelBody>
-
-                        </InspectorTab>
-                        <InspectorTab key={'style'}>
-                            <PanelBody title={__('Modified Image')} initialOpen={false}>
-                                <ButtonGroup
-                                    label={__('Image Type')}
-                                    options={
-                                        [
-                                            [__('Local'), 'local'],
-                                            [__('External'), 'external']
-                                        ]
-                                    }
-                                    value={imageType}
-                                    onChange={value => setAttributes({ imageType: value })}
-                                />
-                                {
-                                    imageType === 'local' ?
-                                        <Fragment>
-                                            <Media label={__('Image')} multiple={false} type={['image']} panel={true} value={image2} onChange={val => setAttributes({ image2: val })} />
-                                            <Media label={__('Retina Image (@2x)')} multiple={false} type={['image']} panel={true} value={image2_2x} onChange={val => setAttributes({ image2_2x: val })} />
-                                        </Fragment>
-                                        :
-                                        <Url label={__('Image Source')} disableAdvanced value={externalImageUrl2} onChange={newUrl => setAttributes({ externalImageUrl2: newUrl })} />
-                                }
-                            </PanelBody>
-                        </InspectorTab>
-                        <InspectorTab key={'style'} initialOpen={true}>
-                            <PanelBody title={__('Circle')} initialOpen={false}>
-                                <Range label={__('Size')} value={circleWidth} onChange={(value) => setAttributes({ circleWidth: value })} min={0} max={60} />
-                                <Color label={__('Background')} value={circleBackground} onChange={(value) => setAttributes({ circleBackground: value })} />
+                                </div>*/}
+                                <PanelBody title={__('Circle')} initialOpen={false}>
+                                    <Range label={__('Size')} value={circleWidth} onChange={(value) => setAttributes({ circleWidth: value })} min={0} max={60} />
+                                    <Color label={__('Background')} value={circleBackground} onChange={(value) => setAttributes({ circleBackground: value })} />
+                                </PanelBody>
                             </PanelBody>
                         </InspectorTab>
                         <InspectorTab key={'advance'}>
@@ -370,17 +313,24 @@ class Edit extends Component {
                 {globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
                 <div className={`qubely-block-${uniqueId}${className ? ` ${className}` : ''}`}>
-                    <div class="qubely-block-image-comparison">
+                    <div class={classnames(
+                        'qubely-block-image-comparison',
+                        {
+                            'has-child-placeholder': (!validImageA || !validImageB)
+                        }
+                    )}>
 
-                        <div className={imageBClasses}>
+                        <div className={classnames(
+                            'image-container image-B',
+                            {
+                                ['valid-images resizable-img']: validImageA && validImageB,
+                                'is-placeholder' : !validImageB
+                            }
+                        )}>
                             {
                                 validImageB ?
-                                    <Fragment>
-                                        {image2_2x.url ?
-                                            <img className="qubely-image" src={image2.url} srcset={image2.url + ' 1x, ' + image2_2x.url + ' 2x'} alt={imgAlt2 && imgAlt2} />
-                                            :
-                                            <img className="qubely-image" src={image2.url} alt={imgAlt2 && imgAlt2} />
-                                        }
+                                    <div className={'image-container-inner'}>
+                                        <img className="qubely-image" src={image2.url} {...(image2_2x.url ? {srcset: image2.url + ' 1x, ' + image2_2x.url + ' 2x'} : {})} alt={imgAlt2 && imgAlt2} />
                                         <RichText
                                             value={imageBTitle}
                                             keepPlaceholderOnFocus
@@ -389,20 +339,25 @@ class Edit extends Component {
                                             onChange={value => setAttributes({ imageBTitle: value })}
                                         />
                                         {actionButtons('image2')}
-                                    </Fragment>
+                                    </div>
                                     :
                                     renderPlaceholder('B', 'Image One')
 
                             }
                         </div>
-                        <div className={imageAClasses}>
+
+                        <div className={classnames(
+                            'image-container image-A',
+                            {
+                                ['valid-images']: validImageA && validImageB,
+                                'is-placeholder' : !validImageA
+                            }
+                        )}>
                             {
                                 validImageA ?
-                                    <Fragment>
-                                        {image2x.url ?
-                                            <img className="qubely-image" src={image.url} srcset={image.url + ' 1x, ' + image2x.url + ' 2x'} alt={imgAlt && imgAlt} />
-                                            :
-                                            <img className="qubely-image" src={image.url} alt={imgAlt && imgAlt} />
+                                    <div className={'image-container-inner'}>
+                                        {
+                                            <img className="qubely-image" src={image.url} {...(image2x.url ? {srcset: image.url + ' 1x, ' + image2x.url + ' 2x'} : {})} alt={imgAlt && imgAlt} />
                                         }
                                         <RichText
                                             value={imageATitle}
@@ -412,7 +367,7 @@ class Edit extends Component {
                                             onChange={value => setAttributes({ imageATitle: value })}
                                         />
                                         {actionButtons('image')}
-                                    </Fragment>
+                                    </div>
                                     :
                                     renderPlaceholder('A', 'Image Two')
 
