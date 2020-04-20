@@ -155,13 +155,13 @@ class GlobalSettings extends Component {
         } = this.state;
 
 
-        // const changeColor = (key, newValue, presetKey) => {
-        //     this.setState(({ presets }, props) => {
-        //         let tempPresets = presets;
-        //         tempPresets[presetKey].colors[key] = newValue;
-        //         return { presets: tempPresets };
-        //     });
-        // }
+        const changeColor = (key, newValue, presetKey) => {
+            this.setState(({ presets }, props) => {
+                let tempPresets = presets;
+                tempPresets[presetKey].colors[key] = newValue;
+                return { presets: tempPresets };
+            });
+        }
         const updatePreset = (propertyName, index, newValue, presetKey, isObject = false) => {
             console.log('new update : ', propertyName, index, newValue, presetKey);
 
@@ -209,7 +209,7 @@ class GlobalSettings extends Component {
                                                     <Color
                                                         value={value}
                                                         key={value + index}
-                                                        onChange={newValue => updatePreset('colors', index, newValue, presetKey)}
+                                                        onChange={newValue => changeColor(index, newValue, presetKey)}
                                                     />
                                                 ))
                                             }
