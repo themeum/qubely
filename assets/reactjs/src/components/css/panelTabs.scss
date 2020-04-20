@@ -49,8 +49,12 @@
           border-right: none;
         }
         &.active {
-          background: #2184f9;
-          color: #fff;
+          background: #D2E7FF;
+          color: #2184f9;
+          border-color: #A9D0FF;
+          + button{
+            border-left-color: #A9D0FF;
+          }
         }
       }
     }
