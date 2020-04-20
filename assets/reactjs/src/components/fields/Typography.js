@@ -1,11 +1,12 @@
-const { __ } = wp.i18n
-import Range from './Range'
-import Toggle from './Toggle'
-import '../css/typography.scss'
-const { Component, Fragment } = wp.element
-const { Dropdown, Tooltip } = wp.components
-import FontList from "./assets/FontList"
-import icons from '../../helpers/icons'
+const { __ } = wp.i18n;
+import Range from './Range';
+import Toggle from './Toggle';
+import '../css/typography.scss';
+import classnames from 'classnames';
+import icons from '../../helpers/icons';
+import FontList from "./assets/FontList";
+const { Component, Fragment } = wp.element;
+const { Dropdown, Tooltip } = wp.components;
 
 
 class Typography extends Component {
@@ -107,13 +108,29 @@ class Typography extends Component {
         localStorage.setItem('qubelyFonts', JSON.stringify(qubelyFonts))
     }
     render() {
-        const { value, label, device, onDeviceChange } = this.props
-        const { showFontFamiles, showFontWeights, filterText } = this.state
-        let qubelyFonts = JSON.parse(localStorage.getItem('qubelyFonts'))
-        let filteredFontList = [], newFontList = FontList
+        const {
+            value,
+            label,
+            device,
+            globalSettings,
+            onDeviceChange
+        } = this.props;
+
+        const {
+            filterText,
+            showFontFamiles,
+            showFontWeights
+        } = this.state;
+
+        let qubelyFonts = JSON.parse(localStorage.getItem('qubelyFonts'));
+        let filteredFontList = [], newFontList = FontList;
         if (qubelyFonts) {
             filteredFontList = FontList.filter(font => !qubelyFonts.filter(qubelyFont => qubelyFont.n == font.n || font.n == 'Default').length > 0)
-            newFontList = [{ n: 'Default', f: 'default', v: [] }, ...qubelyFonts, ...filteredFontList]
+            newFontList = [
+                { n: 'Default', f: 'default', v: [] },
+                ...qubelyFonts,
+                ...filteredFontList
+            ]
         }
         if (filterText.length >= 2) {
             newFontList = newFontList.filter(item =>
@@ -122,23 +139,26 @@ class Typography extends Component {
         }
         return (
             <div className="qubely-field qubely-field-typography">
-                <Toggle
-                    value={value.openTypography}
-                    label={label || __('Typography')}
-                    onChange={val => this.setSettings('openTypography', val)}
-                />
-                {(value && (value.openTypography == 1)) &&
+                {
+                    !globalSettings && <Toggle
+                        value={value.openTypography}
+                        label={label || __('Typography')}
+                        onChange={val => this.setSettings('openTypography', val)}
+                    />
+                }
+
+                {((value && value.openTypography == 1) || globalSettings) &&
                     <Fragment>
                         <Range
+                            unit
+                            step={1}
+                            min={8}
+                            max={200}
+                            responsive
+                            device={device}
                             label={__('Font Size')}
                             value={value && value.size}
                             onChange={val => this.setSettings('size', val)}
-                            min={8}
-                            max={200}
-                            step={1}
-                            unit
-                            responsive
-                            device={device}
                             onDeviceChange={value => onDeviceChange(value)}
                         />
 
@@ -146,16 +166,16 @@ class Typography extends Component {
                             <div className="qubely-field qubely-field-font-family">
                                 <label>{__('Font Family')}</label>
                                 <div className="qubely-font-family-picker" ref="qubelySelectedFontFamily"
-                                    onClick={() => { 
-                                        this.setState({ showFontFamiles: !showFontFamiles }) 
-                                        }}>
+                                    onClick={() => {
+                                        this.setState({ showFontFamiles: !showFontFamiles })
+                                    }}>
                                     <span className="qubely-font-family-search-wrapper">
-                                        <input 
-                                            type="text" 
+                                        <input
+                                            type="text"
                                             className={`qubely-font-family-search${!showFontFamiles ? ' selected-font-family' : ''}`}
-                                            placeholder={__(showFontFamiles ? 'Search' : value.family || 'Select')}
+                                            placeholder={__(showFontFamiles ? 'Search' : value && value.family || 'Select')}
                                             value={filterText}
-                                            onChange={e => this.setState({ filterText: e.target.value })}/>
+                                            onChange={e => this.setState({ filterText: e.target.value })} />
                                         <span className="qubely-font-select-icon">   {showFontFamiles ? icons.arrow_up : icons.arrow_down}  </span>
                                     </span>
                                 </div>
@@ -165,8 +185,16 @@ class Typography extends Component {
                                     <div className="qubely-font-family-options" >
                                         {newFontList.length > 0 ?
                                             newFontList.map((font, index) => {
+                                                let isActiveFont = false;
+                                                if (value && (font.n == value.family)) {
+                                                    isActiveFont = true;
+                                                }
+                                                let fontClasses = classnames(
+                                                    { ['qubely-font-family-option']: !isActiveFont },
+                                                    { ['qubely-active-font-family']: isActiveFont }
+                                                )
                                                 return (
-                                                    <div className={`${font.n == value.family ? 'qubely-active-font-family' : 'qubely-font-family-option'}`}
+                                                    <div className={fontClasses}
                                                         id={`qubely-font-family-${index}`}
                                                         onClick={() => {
                                                             this.setState({ showFontFamiles: false, filterText: '' });
@@ -186,7 +214,7 @@ class Typography extends Component {
                             <div className="qubely-field qubely-field-font-weight">
                                 <label>{__('Weight')}</label>
                                 <div className="qubely-font-weight-picker-wrapper" ref="qubelySelectedFontWeight" onClick={() => this.setState({ showFontWeights: !showFontWeights })}>
-                                    <div className="qubely-font-weight-picker" >  {value.weight || 'Select'}   </div>
+                                    <div className="qubely-font-weight-picker" >  {value && value.weight || 'Select'}   </div>
                                     <span className="qubely-font-select-icon">   {showFontWeights ? icons.arrow_up : icons.arrow_down}  </span>
                                 </div>
                             </div>

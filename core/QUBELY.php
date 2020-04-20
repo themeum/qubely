@@ -69,6 +69,28 @@ class QUBELY
 
 		// dynamic blocks
 		add_action('init', array($this, 'init_dynamic_blocks'));
+
+		//qubely admin class
+		add_filter('admin_body_class', array($this, 'qubely_editor_bodyclass'));
+
+		add_filter('body_class', array($this, 'add_custom_class'));
+	}
+
+
+	public function qubely_editor_bodyclass($classes)
+	{
+
+		$current_screen = get_current_screen();
+		
+		if ('post' == $current_screen->base) {
+			$classes .= ' qubely-editor';
+		}
+		return $classes;
+	}
+
+	public function add_custom_class($classes)
+	{
+		return array_merge( $classes, array( 'qubely-frontend' ) );
 	}
 
 	/**

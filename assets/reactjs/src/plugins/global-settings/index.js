@@ -2,6 +2,7 @@ import './style.scss';
 import Color from './components';
 import classnames from 'classnames';
 import icons from '../../helpers/icons';
+import { isObject } from '../../components/HelperFunction';
 
 
 /**
@@ -19,9 +20,11 @@ const {
     PanelBody,
     ColorPicker
 } = wp.components;
+
 const {
+    select,
     withDispatch,
-    select } = wp.data;
+} = wp.data;
 
 const { PanelColorSettings } = wp.blockEditor
 
@@ -52,14 +55,41 @@ const DEFAULTPRESETS = {
         preset1: {
             name: 'Preset1',
             key: 'preset1',
-            colors: ['#4A90E2', '#50E3C2', '#000', '#4A4A4A', '#9B9B9B']
+            colors: ['#4A90E2', '#50E3C2', '#000', '#4A4A4A', '#9B9B9B'],
+            typography: [
+                {
+                    name: 'Heading 1',
+                    value: {}
+                },
+                {
+                    name: 'Heading 2',
+                    value: {}
+                },
+                {
+                    name: 'Heading 3',
+                    value: {}
+                },
+                {
+                    name: 'Heading 4',
+                    value: {}
+                },
+                {
+                    name: 'Heading 5',
+                    value: {}
+                },
+                {
+                    name: 'Heading 6',
+                    value: {}
+                }
+            ],
 
 
         },
         preset2: {
             name: 'Preset2',
             key: 'preset2',
-            colors: ['#4A90E2', '#50E3C2', '#000', '#4A4A4A', '#9B9B9B']
+            colors: ['#4A90E2', '#50E3C2', '#000', '#4A4A4A', '#9B9B9B'],
+            typography: [],
         },
 
     },
@@ -99,7 +129,7 @@ class GlobalSettings extends Component {
         return fetchFromApi().then(data => {
             if (data.success) {
                 console.log('data : ', data.settings);
-                this.setState({ ...data.settings })
+                this.setState({ ...DEFAULTPRESETS, ...data.settings })
             } else {
                 this.setState({ ...DEFAULTPRESETS })
             }
@@ -107,13 +137,12 @@ class GlobalSettings extends Component {
         })
     }
     updateGlobalSettings = () => {
-        console.log('update global settings : ', this.state);
         wp.apiFetch({
             path: PATH.post,
             method: 'POST',
             data: { settings: JSON.stringify(this.state) }
+            // data: { settings: JSON.stringify({'faisal':{}}) }
         }).then(data => {
-            console.log('data : ', data);
             return data
         })
     }
@@ -126,10 +155,25 @@ class GlobalSettings extends Component {
         } = this.state;
 
 
-        const changeColor = (key, newValue, presetKey) => {
+        // const changeColor = (key, newValue, presetKey) => {
+        //     this.setState(({ presets }, props) => {
+        //         let tempPresets = presets;
+        //         tempPresets[presetKey].colors[key] = newValue;
+        //         return { presets: tempPresets };
+        //     });
+        // }
+        const updatePreset = (propertyName, index, newValue, presetKey, isObject = false) => {
+            console.log('new update : ', propertyName, index, newValue, presetKey);
+
+            if (isObject) {
+                newValue = {
+                    ...this.state.presets[presetKey][propertyName][index].value,
+                    ...newValue
+                }
+            }
             this.setState(({ presets }, props) => {
                 let tempPresets = presets;
-                tempPresets[presetKey].colors[key] = newValue;
+                tempPresets[presetKey][propertyName][index].value = newValue;
                 return { presets: tempPresets };
             });
         }
@@ -140,7 +184,13 @@ class GlobalSettings extends Component {
 
                     {
                         Object.keys(presets).map((presetKey, index) => {
-                            const { name, key, colors } = presets[presetKey];
+                            const {
+                                name,
+                                key,
+                                colors,
+                                typography
+                            } = presets[presetKey];
+
                             let isActivePreset = false;
                             if (activePreset === key) {
                                 isActivePreset = true;
@@ -155,17 +205,35 @@ class GlobalSettings extends Component {
                                     <PanelBody title={__('Global Colors')} initialOpen={true}>
                                         <div className="qubely-d-flex qubely-align-justified">
                                             {
-                                                colors.map((value, index) => {
-                                                    return (
-                                                        <Color
-                                                            value={value}
-                                                            onChange={newValue => changeColor(index, newValue, presetKey)}
-                                                        />
-                                                    )
-                                                })
+                                                colors.map((value, index) => (
+                                                    <Color
+                                                        value={value}
+                                                        key={value + index}
+                                                        onChange={newValue => updatePreset('colors', index, newValue, presetKey)}
+                                                    />
+                                                ))
                                             }
                                         </div>
                                     </PanelBody>
+                                    {
+                                        (typeof typography !== 'undefined' && typography.length > 0) &&
+                                        <PanelBody initialOpen={false} title={__('Typography')}>
+
+                                            {
+                                                typography.map(({ name, value }, index) => (
+                                                    <div className="qubely-d-flex qubely-align-justified">
+                                                        <div>{name}</div>
+                                                        <Typography
+                                                            value={value}
+                                                            globalSettings
+                                                            key={name + index}
+                                                            onChange={newValue => updatePreset('typography', index, newValue, presetKey, true)}
+                                                        />
+                                                    </div>
+                                                ))
+                                            }
+                                        </PanelBody>
+                                    }
                                 </div>
                             )
                         })
