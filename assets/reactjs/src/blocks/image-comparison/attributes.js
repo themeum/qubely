@@ -108,24 +108,24 @@ export const attributes = {
         type: 'number',
         default: 3
     },
-    imageATitleTypography: {
+    typography: {
         type: 'object',
         default: {
-            openTypography: 1,
+            openTypography: 0,
             size: {
                 md: 30,
                 unit: 'px'
             }
         },
         style: [{
-            selector: '{{QUBELY}} .comparison-image-text'
+            selector: '{{QUBELY}} .qubely-block-image-comparison .image-container .comparison-image-text'
         }]
     },
-    imageATitleColor: {
+    titleColor: {
         type: 'string',
         default: '#FFF',
         style: [{
-            selector: '{{QUBELY}} .comparison-image-text {color: {{imageATitleColor}};}'
+            selector: '{{QUBELY}} .qubely-block-image-comparison .image-container .comparison-image-text {color: {{titleColor}};}'
         }]
     },
     imageBTitle: {
@@ -134,9 +134,16 @@ export const attributes = {
     },
 
     // circle
+    circleColor: {
+        type: 'string',
+        default: '#ffffff',
+        style: [{
+            selector: '{{QUBELY}} .comparison-scrollCircle  {color: {{circleColor}};}'
+        }]
+    },
     circleBackground: {
         type: 'string',
-        default: '#dc717d',
+        default: '#2184F9',
         style: [{
             selector: '{{QUBELY}} .comparison-scrollCircle  {background-color: {{circleBackground}};}'
         }]
@@ -146,7 +153,8 @@ export const attributes = {
         default: 40,
         style: [
             {
-                selector: '{{QUBELY}} .comparison-scrollCircle {width: {{circleWidth}}px;height: {{circleWidth}}px;}'
+                selector: '{{QUBELY}} .qubely-block-image-comparison .comparison-scrollCircle {width: {{circleWidth}}px; line-height: {{circleWidth}}px;height: {{circleWidth}}px; font-size: {{circleWidth}}px}' +
+                    '{{QUBELY}} .qubely-block-image-comparison .comparison-scrollCircle i {line-height: {{circleWidth}}px}'
             }
         ],
     },
@@ -161,30 +169,5 @@ export const attributes = {
     contentAnimation: {
         type: 'string',
         default: 'zoom-out'
-    },
-
-    titleVerticalAlign: {
-        type: 'string',
-        default: 'center',
-        style: [
-            {
-                selector: '{{QUBELY}} .comparison-image-text {-webkit-box-align: start; -ms-flex-align: start; -ms-grid-row-align: flex-start; align-items: flex-start;}'
-            },
-            {
-                selector: '{{QUBELY}} .comparison-image-text {-webkit-box-align: center; -ms-flex-align: center; -ms-grid-row-align: center; align-items: center;}'
-            },
-            {
-                selector: '{{QUBELY}} .comparison-image-text {-webkit-box-align: end; -ms-flex-align: end; -ms-grid-row-align: flex-end; align-items: flex-end;}'
-            }
-        ]
-    },
-    titleVerticalAlign: {
-        type: 'string',
-        default: 'flex-end',
-        style: [
-            {
-                selector: '{{QUBELY}} .comparison-image-text {align-items: {{titleVerticalAlign}};}'
-            }
-        ]
     },
 };

@@ -96,14 +96,19 @@
     }
     .comparison-scrollCircle {
         position: absolute;
-        height: 40px;
-        width: 40px;
         top: 50%;
         left: 50%;
         border-radius: 50%;
         cursor: move;
-        background: #dc717d no-repeat center center;
+        background: #2184F9;
         transform: translate(-50%, -50%);
         z-index: 9;
+        text-align: center;
+        color: #fff;
+        i{
+            pointer-events: none;
+            font-size: .5em;
+            display: block;
+        }
     }
 }

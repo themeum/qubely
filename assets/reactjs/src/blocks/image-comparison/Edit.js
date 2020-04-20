@@ -159,23 +159,19 @@ class Edit extends Component {
                 uniqueId,
                 className,
                 imageATitle,
-                imageATitleTypography,
-                imageATitleColor,
+                titleColor,
+                typography,
                 imageBTitle,
+                circleColor,
                 circleBackground,
                 disableTitle,
                 circleWidth,
 
                 image,
                 image2x,
-                imageType,
-                externalImageUrl,
                 imgAlt,
-
                 image2,
                 image2_2x,
-
-                externalImageUrl2,
                 imgAlt2,
 
                 animation,
@@ -257,40 +253,18 @@ class Edit extends Component {
                     <InspectorTabs tabs={['style', 'advance']}>
                         <InspectorTab key={'style'}>
                             <PanelBody title={''} opened={true}>
+                                <Toggle label={__('Enable Title')} value={disableTitle} onChange={val => setAttributes({ disableTitle: val })} />
                                 {disableTitle &&
                                     <Fragment>
-                                        <Color label={__('Title Color')} value={imageATitleColor} onChange={(value) => setAttributes({ imageATitleColor: value })} />
-                                        <Typography label={__('Typography')} value={imageATitleTypography} onChange={(value) => setAttributes({ imageATitleTypography: value })} disableLineHeight device={device} onDeviceChange={value => this.setState({ device: value })} />
+                                        <Color label={__('Title Color')} value={titleColor} onChange={(value) => setAttributes({ titleColor: value })} />
+                                        <Typography label={__('Typography')} value={typography} onChange={(value) => setAttributes({ typography: value })} disableLineHeight device={device} onDeviceChange={value => this.setState({ device: value })} />
                                     </Fragment>
                                 }
-                                <Toggle label={__('Disable Title')} value={disableTitle} onChange={val => setAttributes({ disableTitle: val })} />
-
-                                {/*<div className="qubely-field">
-                                    <label>{__('Content Position')}</label>
-                                    <div className="qubely-field-button-list qubely-field-button-list-fluid">
-                                        <Tooltip text={__('Top')}>
-                                            <button
-                                                onClick={() => setAttributes({ titleVerticalAlign: 'flex-start' })}
-                                            >{icons.vertical_top}</button>
-                                        </Tooltip>
-
-                                        <Tooltip text={__('Middle')} >
-                                            <button
-                                                onClick={() => setAttributes({ titleVerticalAlign: 'center' })}
-                                            >{icons.vertical_middle}</button>
-                                        </Tooltip>
-
-                                        <Tooltip text={__('Bottom')} >
-                                            <button
-                                                onClick={() => setAttributes({ titleVerticalAlign: 'flex-end' })}
-                                            >{icons.vertical_bottom}</button>
-                                        </Tooltip>
-                                    </div>
-                                </div>*/}
-                                <PanelBody title={__('Circle')} initialOpen={false}>
-                                    <Range label={__('Size')} value={circleWidth} onChange={(value) => setAttributes({ circleWidth: value })} min={0} max={60} />
-                                    <Color label={__('Background')} value={circleBackground} onChange={(value) => setAttributes({ circleBackground: value })} />
-                                </PanelBody>
+                            </PanelBody>
+                            <PanelBody title={__('Move Control')} initialOpen={false}>
+                                <Color label={__('Color')} value={circleColor} onChange={(value) => setAttributes({ circleColor: value })} />
+                                <Color label={__('Background')} value={circleBackground} onChange={(value) => setAttributes({ circleBackground: value })} />
+                                <Range label={__('Size')} value={circleWidth} onChange={(value) => setAttributes({ circleWidth: value })} min={30} max={100} />
                             </PanelBody>
                         </InspectorTab>
                         <InspectorTab key={'advance'}>
@@ -375,12 +349,11 @@ class Edit extends Component {
                         </div>
                         {
                             (validImageA && validImageB) &&
-                            <span
-                                class="comparison-scrollCircle"
-                                onMouseDown={(event) => this.dragFunc(event)}
-                            />
+                            <span class="comparison-scrollCircle" onMouseDown={(event) => this.dragFunc(event)}>
+                                <i className="fas fa-arrows-alt"></i>
+                            </span>
                         }
-                        {/* <div className="qubely-image-image qubely-image-placeholder"><i className="far fa-image" /></div> */}
+                        
                     </div>
 
                     <div
