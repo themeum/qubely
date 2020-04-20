@@ -15,14 +15,21 @@
         }
 
         .qubely-media-actions {
-            top: 10px;
-            right: 10px;
+            top: 13px;
+            right: 15px;
             position: absolute;
             display: inline-flex;
             vertical-align: middle;
             .qubely-button {
-                &:not(:last-child) {
-                    margin-right: 5px;
+                font-size: 15px;
+                &:not(:last-child){
+                    border-right: none;
+                    border-top-right-radius: 0;
+                    border-bottom-right-radius: 0;
+                }
+                &:not(:first-child) {
+                    border-top-left-radius: 0;
+                    border-bottom-left-radius: 0;
                 }
             }
         }
@@ -55,7 +62,7 @@
         &.image-B {
             .qubely-media-actions{
                 right: auto;
-                left: 10px;
+                left: 15px;
             }
             &.resizable-img {
                 z-index: 1;

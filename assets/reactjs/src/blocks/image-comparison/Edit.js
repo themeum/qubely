@@ -266,6 +266,22 @@ class Edit extends Component {
                                 <Color label={__('Background')} value={circleBackground} onChange={(value) => setAttributes({ circleBackground: value })} />
                                 <Range label={__('Size')} value={circleWidth} onChange={(value) => setAttributes({ circleWidth: value })} min={30} max={100} />
                             </PanelBody>
+                            <PanelBody title={__('Ratina Images')} initialOpen={false}>
+                                <Media
+                                    panel
+                                    value={image2_2x}
+                                    multiple={false}
+                                    label={__('@2x Image 1 (Left Image)')}
+                                    type={['image']}
+                                    onChange={val => setAttributes({ image2_2x: val })} />
+                                <Media
+                                    panel
+                                    value={image2x}
+                                    multiple={false}
+                                    label={__('@2x Image 2 (Right Image)')}
+                                    type={['image']}
+                                    onChange={val => setAttributes({ image2x: val })} />
+                            </PanelBody>
                         </InspectorTab>
                         <InspectorTab key={'advance'}>
                             {animationSettings(uniqueId, animation, setAttributes)}
@@ -353,7 +369,7 @@ class Edit extends Component {
                                 <i className="fas fa-arrows-alt"></i>
                             </span>
                         }
-                        
+
                     </div>
 
                     <div
