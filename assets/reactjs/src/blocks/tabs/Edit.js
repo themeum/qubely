@@ -1,9 +1,11 @@
+import classnames from 'classnames';
 import icons from '../../helpers/icons';
+
 const { __ } = wp.i18n;
 const {
+	Toolbar,
 	Tooltip,
-	PanelBody,
-	Toolbar
+	PanelBody
 } = wp.components;
 
 const { compose } = wp.compose;
@@ -14,76 +16,76 @@ const {
 } = wp.data;
 
 const {
+	Fragment,
 	Component,
-	Fragment
 } = wp.element;
 
 const {
-	InnerBlocks,
 	RichText,
-	InspectorControls,
-	BlockControls
+	InnerBlocks,
+	BlockControls,
+	InspectorControls
 } = wp.blockEditor;
 
 const {
+	Tab,
+	Tabs,
 	Color,
-	IconList,
-	Select,
-	Styles,
-	Typography,
 	Range,
+	Select,
+	Border,
+	Styles,
+	Padding,
+	IconList,
+	Separator,
+	BoxShadow,
+	Alignment,
+	Typography,
+	BorderRadius,
+	InspectorTab,
+	InspectorTabs,
 	RadioAdvanced,
+	withCSSGenerator,
+	Inline: {
+		InlineToolbar
+	},
 	gloalSettings: {
 		globalSettingsPanel,
 		animationSettings,
 		interactionSettings
-	},
-	Inline: {
-		InlineToolbar
-	},
-	BoxShadow,
-	Alignment,
-	Tabs,
-	Tab,
-	Separator,
-	Border,
-	Padding,
-	BorderRadius,
-	withCSSGenerator,
-	InspectorTabs,
-	InspectorTab } = wp.qubelyComponents
+	}
+} = wp.qubelyComponents
 
 class Edit extends Component {
 
 	constructor(props) {
 		super(props)
 		this.state = {
-			device: 'md',
-			initialRender: true,
-			activeTab: 1,
 			spacer: true,
+			device: 'md',
+			activeTab: 1,
+			initialRender: true,
 			showIconPicker: false,
 		}
 	}
 
 	componentDidMount() {
-		const { setAttributes, clientId, attributes: { uniqueId } } = this.props
-		const _client = clientId.substr(0, 6)
+		const {
+			block,
+			clientId,
+			setAttributes,
+			updateBlockAttributes,
+			attributes: {
+				uniqueId
+			}
+		} = this.props;
+
+		const _client = clientId.substr(0, 6);
+
 		if (!uniqueId) {
 			setAttributes({ uniqueId: _client });
 		} else if (uniqueId && uniqueId != _client) {
 			setAttributes({ uniqueId: _client });
-		}
-	}
-
-	componentDidUpdate(prevProps, prevState) {
-		const { attributes: { tabs }, clientId, block } = this.props
-
-		if (!this.state.initialRender && prevProps.block.innerBlocks.length < block.innerBlocks.length) {
-			let currentTabBlock = $(`#block-${clientId}`)
-			let activeTab = $(`#block-${block.innerBlocks[tabs - 1].clientId}`, currentTabBlock)
-			$('.qubely-active', currentTabBlock).removeClass('qubely-active')
-			activeTab.addClass("qubely-active")
 		}
 	}
 
@@ -99,126 +101,209 @@ class Edit extends Component {
 	}
 
 	renderTabTitles = () => {
-		const { attributes: { tabTitles, iconPosition }, block, clientId } = this.props
-		let currentTabBlock = $(`#block-${clientId}`)
-		const { showIconPicker } = this.state
-		return tabTitles.map((title, index) =>
-			<span className={`qubely-tab-item ${(this.state.activeTab == index + 1) ? 'qubely-active' : ''}`}>
-				<span className={`qubely-tab-title ${title.iconName ? 'qubely-has-icon-' + iconPosition : ''}`} onClick={() => {
-					let activeTab = $(`#block-${block.innerBlocks[index].clientId}`, currentTabBlock)
-					$('.qubely-tab-content.qubely-active', currentTabBlock).removeClass('qubely-active')
-					activeTab.addClass("qubely-active")
-					this.setState({ activeTab: index + 1, initialRender: false, showIconPicker: !showIconPicker })
-				}}
-					role="button"
-				>
-					{title.iconName && (iconPosition == 'top' || iconPosition == 'left') && (<i className={`qubely-tab-icon ${title.iconName}`} />)}
-					<RichText
-						key="editable"
-						keepPlaceholderOnFocus
-						placeholder={__('Add Tab Title')}
-						value={title.title}
-						onChange={value => this.updateTitles({ title: value }, index)}
-					/>
-					{title.iconName && (iconPosition == 'right') && (<i className={`qubely-tab-icon ${title.iconName}`} />)}
-				</span>
-				<Tooltip text={__('Delete this tab')}>
-					<span className="qubely-action-tab-remove" onClick={() => this.deleteTab(index)} role="button">
-						<i className="fas fa-times" />
-					</span>
-				</Tooltip>
-			</span>
-		)
+		const {
+			activeTab,
+			showIconPicker
+		} = this.state;
+
+		const {
+			attributes: {
+				tabTitles,
+				iconPosition
+			}
+		} = this.props;
+
+		const changeActiveTab = (index) => {
+			this.setState({
+				initialRender: false,
+				activeTab: index + 1,
+				showIconPicker: !showIconPicker
+			});
+		}
+
+		return (
+			tabTitles.map((title, index) => {
+				let isActiveTab = false;
+				if (activeTab === index + 1) {
+					isActiveTab = true;
+				}
+				const wrapperClasses = classnames(
+					'qubely-tab-item',
+					{ ['qubely-active']: isActiveTab }
+				)
+				const titleClasses = classnames(
+					'qubely-tab-title',
+					{ [`qubely-has-icon-${iconPosition}`]: typeof title.iconName !== 'undefined' }
+				)
+				return (
+					<div className={wrapperClasses}>
+						<div
+							role="button"
+							className={titleClasses}
+							onClick={() => changeActiveTab(index)}
+						>
+							{title.iconName && (iconPosition == 'top' || iconPosition == 'left') && (<i className={`qubely-tab-icon ${title.iconName}`} />)}
+							{
+								isActiveTab ?
+
+									<RichText
+										value={title.title}
+										keepPlaceholderOnFocus
+										placeholder={__('Add Tab Title')}
+										onChange={value => this.updateTitles({ title: value }, index)}
+									/>
+									:
+									<div>{title.title}</div>
+							}
+							{title.iconName && (iconPosition == 'right') && (<i className={`qubely-tab-icon ${title.iconName}`} />)}
+						</div>
+						<Tooltip text={__('Delete this tab')}>
+							<span className="qubely-action-tab-remove" role="button" onClick={() => this.deleteTab(index)}>
+								<i className="fas fa-times" />
+							</span>
+						</Tooltip>
+					</div>
+				)
+			}
+			));
 	}
 
 	deleteTab = (tabIndex) => {
-		const { activeTab } = this.state
-		const { attributes: { tabTitles, tabs }, setAttributes, block, removeBlock, updateBlockAttributes, clientId } = this.props;
-		const newItems = tabTitles.filter((item, index) => index != tabIndex)
-		setAttributes({ tabTitles: newItems, tabs: tabs - 1 })
-		let i = tabIndex + 1
+		const { activeTab } = this.state;
+		const {
+			block,
+			clientId,
+			setAttributes,
+			replaceInnerBlocks,
+			updateBlockAttributes,
+			attributes: {
+				tabs,
+				tabTitles
+			}
+		} = this.props;
+
+		const newItems = tabTitles.filter((item, index) => index != tabIndex);
+		let i = tabIndex + 1;
+
+		setAttributes({
+			tabTitles: newItems,
+			tabs: tabs - 1
+		});
+
 		while (i < tabs) {
-			updateBlockAttributes(block.innerBlocks[i].clientId, Object.assign(block.innerBlocks[i].attributes, { id: block.innerBlocks[i].attributes.id - 1 }))
-			i++
+			updateBlockAttributes(block.innerBlocks[i].clientId,
+				Object.assign(block.innerBlocks[i].attributes, {
+					id: block.innerBlocks[i].attributes.id - 1
+				}));
+			i++;
 		}
 
-		removeBlock(block.innerBlocks[tabIndex].clientId)
+		let innerBlocks = JSON.parse(JSON.stringify(block.innerBlocks));
+		innerBlocks.splice(tabIndex, 1);
 
-		if (tabIndex + 1 === activeTab) {
-			let currentTabBlock = $(`#block-${clientId}`)
-			let nextActiveTab = $(`#block-${block.innerBlocks[tabIndex + 1 < tabs ? tabIndex + 1 : tabs >= 2 ? tabIndex - 1 : tabIndex].clientId}`, currentTabBlock)
-			$('.qubely-active', currentTabBlock).removeClass('qubely-active')
-			nextActiveTab.addClass("qubely-active")
-			this.setState({ activeTab: tabIndex == 0 ? 1 : tabIndex + 1 < tabs ? tabIndex + 1 : tabIndex, initialRender: false })
-		}
-		tabIndex + 1 < activeTab && this.setState({ activeTab: activeTab - 1, initialRender: false })
+		replaceInnerBlocks(clientId, innerBlocks, false);
+
+		this.setState(state => {
+			let newActiveTab = state.activeTab - 1;
+			if (tabIndex + 1 === activeTab) {
+				newActiveTab = tabIndex == 0 ? 1 : tabIndex + 1 < tabs ? tabIndex + 1 : tabIndex
+			}
+			return {
+				activeTab: newActiveTab,
+				initialRender: false
+			}
+		});
+
 	}
 
-	newTitles = () => {
-		const { attributes: { tabs, tabTitles } } = this.props
-		let newTitles = JSON.parse(JSON.stringify(tabTitles));
-		newTitles[tabs] = {
-			title: __(`Tab ${tabs + 1}`),
-			icon: {},
-		}
-		return newTitles
-	}
 	render() {
 		const {
-			uniqueId,
-			className,
-			tabs,
-			tabTitles,
-			tabStyle,
-			navSpacing,
-			navSize,
-			navPaddingX,
-			navPaddingY,
-			navAlignment,
-			typography,
-			navColor,
-			navColorActive,
-			navBg,
-			navBgActive,
-			navBorder,
-			navBorderActive,
-			navBorderRadiusTabs,
-			navBorderRadiusPills,
-			navUnderlineBorderWidth,
-			navUnderlineBorderColor,
-			navUnderlineBorderColorActive,
-			iconSize,
-			iconGap,
-			iconPosition,
-			bodyBg,
-			bodyPadding,
-			bodyBorder,
-			bodyBorderRadius,
-			bodySeparatorHeight,
-			bodySeparatorColor,
-			bodyTopSpacing,
-			bodyShadow,
+			setAttributes,
+			attributes: {
+				uniqueId,
+				className,
 
-			//animation
-			animation,
-			//global
-			globalZindex,
-			enablePosition,
-			selectPosition,
-			positionXaxis,
-			positionYaxis,
-			hideTablet,
-			hideMobile,
-			globalCss,
-			interaction
-		} = this.props.attributes
-		const { name, setAttributes, isSelected } = this.props
-		const { activeTab, device } = this.state;
-		let iterator = [], index = 0
-		while (index < tabs) {
-			iterator.push(index)
-			index++
+				tabs,
+				navBg,
+				navSize,
+				navColor,
+				tabStyle,
+				tabTitles,
+				navSpacing,
+				typography,
+				navPaddingY,
+				navPaddingX,
+				navBgActive,
+				navAlignment,
+				navColorActive,
+
+
+				navBorder,
+				navBorderActive,
+				navBorderRadiusTabs,
+				navBorderRadiusPills,
+				navUnderlineBorderWidth,
+				navUnderlineBorderColor,
+				navUnderlineBorderColorActive,
+
+				iconGap,
+				iconSize,
+				iconPosition,
+
+				bodyBg,
+				bodyBorder,
+				bodyShadow,
+				bodyPadding,
+				bodyTopSpacing,
+				bodyBorderRadius,
+				bodySeparatorColor,
+				bodySeparatorHeight,
+
+				//animation
+				animation,
+				//global
+				globalCss,
+				hideTablet,
+				hideMobile,
+				interaction,
+				globalZindex,
+				positionXaxis,
+				positionYaxis,
+				enablePosition,
+				selectPosition
+			}
+		} = this.props;
+
+		const {
+			device,
+			activeTab
+		} = this.state;
+
+
+		const newTitles = () => {
+			let newTitles = JSON.parse(JSON.stringify(tabTitles));
+			newTitles[tabs] = {
+				title: __(`Tab ${tabs + 1}`),
+				icon: {},
+			}
+			return newTitles;
 		}
+
+		const addNewTab = () => {
+			this.setState({
+				activeTab: tabs + 1,
+				initialRender: false
+			});
+			setAttributes({
+				tabs: tabs + 1,
+				tabTitles: newTitles()
+			});
+		}
+
+		const blockWrapperClasses = classnames(
+			{ [`qubely-block-${uniqueId}`]: typeof uniqueId !== 'undefined' },
+			{ [className]: typeof className !== 'undefined' }
+		)
 
 		return (
 			<Fragment>
@@ -385,28 +470,40 @@ class Edit extends Component {
 
 				{globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
-				<div className={`qubely-block-${uniqueId}${className ? ` ${className}` : ''}`}>
-					<div className={`qubely-block-tab qubely-tab-style-${tabStyle}`}>
+				<div className={blockWrapperClasses}>
+					<div className={`qubely-block-tab qubely-tab-style-${tabStyle} qubely-active-tab-${activeTab}`}>
+
 						<div className={`qubely-tab-nav qubely-alignment-${navAlignment}`}>
+
 							{this.renderTabTitles()}
+
 							<Tooltip text={__('Add new tab')}>
-								<span className="qubely-add-new-tab" onClick={() => {
-									this.setState({ activeTab: tabs + 1, initialRender: false })
-									setAttributes({
-										tabs: tabs + 1,
-										tabTitles: this.newTitles()
-									})
-								}} role="button" areaLabel={__('Add new tab')}>
+								<span
+									role="button"
+									areaLabel={__('Add new tab')}
+									className="qubely-add-new-tab"
+									onClick={() => addNewTab()}
+								>
 									<i className="fas fa-plus-circle" />
 								</span>
 							</Tooltip>
 						</div>
+
 						<div className={`qubely-tab-body`}>
 							<InnerBlocks
 								tagName="div"
-								template={iterator.map(tabIndex => ['qubely/tab', { id: tabIndex + 1, customClassName: tabIndex == 0 ? `qubely-tab-content qubely-active` : `qubely-tab-content` }])}
-								templateLock="all"
-								allowedBlocks={['qubely/tab']} />
+								templateLock='all'
+								allowedBlocks={['qubely/tab']}
+								template={
+									Array(tabs).fill(0).map((_, tabIndex) => (
+										['qubely/tab',
+											{
+												id: tabIndex + 1,
+												...(tabIndex === 0 && { customClassName: 'qubely-active' })
+											}
+										])
+									)}
+							/>
 						</div>
 					</div>
 				</div>
@@ -417,19 +514,28 @@ class Edit extends Component {
 }
 export default compose([
 	withSelect((select, ownProps) => {
-		const { clientId } = ownProps
+		const { clientId } = ownProps;
 		const { getBlock } = select('core/block-editor');
 		return {
 			block: getBlock(clientId)
 		};
 	}),
 	withDispatch((dispatch) => {
-		const { insertBlock, removeBlock, updateBlockAttributes } = dispatch('core/block-editor');
-		return {
+		const {
+			getBlocks,
 			insertBlock,
 			removeBlock,
+			replaceInnerBlocks,
+			updateBlockAttributes
+		} = dispatch('core/block-editor');
+
+		return {
+			getBlocks,
+			insertBlock,
+			removeBlock,
+			replaceInnerBlocks,
 			updateBlockAttributes
 		};
 	}),
 	withCSSGenerator()
-])(Edit)
+])(Edit);

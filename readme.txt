@@ -3,9 +3,9 @@ Contributors: themeum, kawshar, jakirhasan, anik4e, faisalahmed29, delowardev, r
 Donate link: https://www.themeum.com
 Tags: blocks, gutenberg, gutenberg blocks, editor, block, page builder
 Requires at least: 5.0
-Tested up to: 5.3
-Stable tag: 1.3.7
-Requires PHP: 5.4.0
+Tested up to: 5.4
+Stable tag: 1.3.8
+Requires PHP: 7.0
 License: GPL-2.0+
 License URI: http://www.gnu.org/licenses/gpl-2.0.txt
 
@@ -237,8 +237,14 @@ You can report bugs on the [support forum here](https://wordpress.org/support/pl
 
 == Changelog ==
 
-= 1.3.7 - 06 April, 2020 =
-Fix: Image block - Alignment issue in Simple layout  
+= 1.3.8 - 10 April, 2020 =
+Fix: Table of Contents block - Attributes value saving issue
+
+
+= 1.3.7 - 03 April, 2020 =
+Fix: Image block - Alignment issue in Simple layout
+Fix: Panel Sticky tab conflict with WordPress 5.4
+Fix: Post Grid block - Orderby issue with Random, Menu Order
 
 
 = 1.3.6 - 24 March, 2020 =

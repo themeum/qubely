@@ -3,7 +3,7 @@
  * Plugin Name:       Qubely - Advanced Gutenberg Blocks 
  * Plugin URI:        https://www.themeum.com/
  * Description:       The one and only Gutenberg block plugin you will ever need.
- * Version: 		  1.3.7
+ * Version: 		  1.3.8
  * Author:            Themeum.com
  * Author URI:        https://themeum.com/
  * Text Domain:       qubely
@@ -24,7 +24,7 @@ function qubely_language_load()
 }
 
 // Define Version
-define('QUBELY_VERSION', '1.3.7');
+define('QUBELY_VERSION', '1.3.8');
 
 // Define License
 define('QUBELY_LICENSE', 'free');
@@ -59,6 +59,14 @@ if (!version_compare(PHP_VERSION, '5.4', '>=')) {
     require_once QUBELY_DIR_PATH . 'core/QUBELY.php';   // Loading QUBELY Blocks Main Files
 }
 
+function qubely_blocks_add_orderby( $params ) {
+
+	$params['orderby']['enum'][] = 'rand';
+	$params['orderby']['enum'][] = 'menu_order';
+
+	return $params;
+}
+
 /**
  * Create API fields for additional info
  *
@@ -67,7 +75,10 @@ if (!version_compare(PHP_VERSION, '5.4', '>=')) {
 function qubely_register_rest_fields()
 {
     $post_types = get_post_types();
-
+    
+    foreach ( $post_types as $key => $type ) {
+		add_filter( "rest_{$type}_collection_params", 'qubely_blocks_add_orderby', 10, 1 );
+	}
     //featured image
     register_rest_field(
         $post_types,
@@ -116,6 +127,7 @@ function qubely_register_rest_fields()
             ),
         )
     );
+
 }
 
 //author
@@ -171,6 +183,7 @@ function qubely_get_featured_image_url($object)
     }
 }
 add_action('rest_api_init', 'qubely_register_rest_fields');
+
 
 function qubely_blog_posts_image_sizes()
 {

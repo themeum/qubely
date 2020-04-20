@@ -68,7 +68,7 @@ const attributes = {
     },
 
     headingSize: {
-        type: 'number',
+        type: 'object',
         default: {
             md: 22,
             unit: 'px'
@@ -79,7 +79,7 @@ const attributes = {
     },
 
     bodyLineHeight: {
-        type: 'number',
+        type: 'object',
         default: {
             md: 2,
             unit: 'em'
@@ -90,7 +90,7 @@ const attributes = {
     },
 
     bodyFontSize: {
-        type: 'number',
+        type: 'object',
         default: {
             md: 18,
             unit: 'px'
@@ -100,7 +100,7 @@ const attributes = {
         }]
     },
     headerPaddingX: {
-        type: 'number',
+        type: 'object',
         default: {
             md: 20,
             unit: 'px'
@@ -110,7 +110,7 @@ const attributes = {
         }]
     },
     headerPaddingY: {
-        type: 'number',
+        type: 'object',
         default: {
             md: 15,
             unit: 'px'
@@ -121,7 +121,7 @@ const attributes = {
     },
     enableHeaderBorder: {type: 'boolean', default: true},
     headerBorderWidth: {
-        type: 'number',
+        type: 'object',
         default: {
             md: 1,
             unit: 'px'
@@ -157,7 +157,7 @@ const attributes = {
         style: [{ selector: '{{QUBELY}} .qubely-table-of-contents' }]
     },
     bodyPaddingX: {
-        type: 'number',
+        type: 'object',
         default: {
             md: 20,
             unit: 'px'
@@ -167,7 +167,7 @@ const attributes = {
         }]
     },
     bodyPaddingY: {
-        type: 'number',
+        type: 'object',
         default: {
             md: 10,
             unit: 'px'

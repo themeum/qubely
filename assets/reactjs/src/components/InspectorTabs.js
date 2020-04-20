@@ -22,43 +22,17 @@ const InspectorTabs = props => {
         sidebarPanel =  tabContainer.current.closest('.components-panel');
     });
 
-    const _isScrolling = () => {
-        const cont = document.querySelector('.qubely-inspector-tabs-container');
-        if(!cont){
-            return;
-        }
-        const elemTabs = cont.querySelector('.qubely-inspector-tabs');
-        const contRect = cont.getBoundingClientRect();
-        if(contRect.top < offset.current){
-            elemTabs.style.position = 'fixed';
-            elemTabs.style.top = offset.current + 'px';
-            elemTabs.style.width = contRect.width + 32 + 'px';
-            elemTabs.style.left = contRect.left + 'px';
-            cont.style.paddingTop = contRect.height + 'px';
-            cont.classList.add('qubely-is-sticky');
-        }else{
-            elemTabs.style.position = '';
-            elemTabs.style.top = '';
-            elemTabs.style.width = '';
-            elemTabs.style.left = '';
-            cont.style.paddingTop = '';
-            cont.classList.remove('qubely-is-sticky');
-        }
-    }
+    const observer = new IntersectionObserver(([e]) => e.target.classList.toggle('qubely-is-sticky', e.intersectionRatio < 1), {threshold: [1]});
 
     // component did mount
     useEffect(() => {
         // sticky tabs menu
-        _isScrolling();
-        const editPostSidebar = document.querySelector('.edit-post-sidebar');
-        offset.current = document.querySelector('.components-panel').getBoundingClientRect().top;
-        editPostSidebar.addEventListener('scroll', _isScrolling);
+        const container = document.querySelector('.qubely-inspector-tabs-container');
+        observer.observe(container);
 
         // component will unmount
         return () => {
             sidebarPanel && sidebarPanel.removeAttribute('data-qubely-tab');
-            // remove scroll event listener
-            editPostSidebar.removeEventListener('scroll', _isScrolling);
         }
     }, []);
 
@@ -69,7 +43,6 @@ const InspectorTabs = props => {
     const _onTabChange = tab => {
         setCurrentTab(tab);
         sidebarPanel.setAttribute('data-qubely-tab', tab);
-        _isScrolling();
     };
 
     return (
