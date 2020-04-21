@@ -139,7 +139,7 @@
             left: 100%;
             top: 50%;
             transform: translateY(-50%);
-            margin-left: 4px;
+            margin-left: 3px;
             transition: 200ms;
         }
         &::after{
@@ -148,7 +148,7 @@
             left: auto;
             right: 100%;
             margin-left: 0;
-            margin-right: 4px;
+            margin-right: 3px;
         }
         &:hover {
             &::before {
