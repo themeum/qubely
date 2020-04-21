@@ -137,26 +137,26 @@ export const attributes = {
     circleColor: {
         type: 'string',
         default: '#ffffff',
-        style: [{
+        /*style: [{
             selector: '{{QUBELY}} .comparison-scrollCircle  {color: {{circleColor}};}'
-        }]
+        }]*/
     },
     circleBackground: {
         type: 'string',
         default: '#2184F9',
-        style: [{
+        /*style: [{
             selector: '{{QUBELY}} .comparison-scrollCircle  {background-color: {{circleBackground}};}'
-        }]
+        }]*/
     },
     circleWidth: {
         type: 'number',
         default: 40,
-        style: [
+        /*style: [
             {
                 selector: '{{QUBELY}} .qubely-block-image-comparison .comparison-scrollCircle {width: {{circleWidth}}px; line-height: {{circleWidth}}px;height: {{circleWidth}}px; font-size: {{circleWidth}}px}' +
                     '{{QUBELY}} .qubely-block-image-comparison .comparison-scrollCircle i {line-height: {{circleWidth}}px}'
             }
-        ],
+        ],*/
     },
     // end of yp
 

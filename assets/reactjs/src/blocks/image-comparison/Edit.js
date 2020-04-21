@@ -365,9 +365,7 @@ class Edit extends Component {
                         </div>
                         {
                             (validImageA && validImageB) &&
-                            <span class="comparison-scrollCircle" onMouseDown={(event) => this.dragFunc(event)}>
-                                <i className="fas fa-arrows-alt"></i>
-                            </span>
+                            <span class="comparison-scrollCircle" onMouseDown={(event) => this.dragFunc(event)} />
                         }
 
                     </div>
