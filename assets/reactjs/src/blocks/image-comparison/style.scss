@@ -18,6 +18,9 @@
             position: absolute;
             display: inline-flex;
             vertical-align: middle;
+            opacity: 0;
+            visibility: hidden;
+            transition: 200ms;
             .qubely-button {
                 font-size: 15px;
                 &:not(:last-child){
@@ -32,6 +35,11 @@
             }
         }
 
+        &:hover .qubely-media-actions{
+            opacity: 1;
+            visibility: visible;
+        }
+
         .comparison-image-text {
             position: absolute;
             opacity: 1;
@@ -40,6 +48,10 @@
             left: 25px;
             font-size: 20px;
             user-select: none;
+            &.text-vertical-align-top{
+                bottom: auto;
+                top: 15px;
+            }
         }
 
         img{

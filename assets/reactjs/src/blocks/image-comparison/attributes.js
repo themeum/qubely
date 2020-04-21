@@ -85,6 +85,10 @@ export const attributes = {
         type: 'string',
         default: 'local'
     },
+    verticalAlign: {
+        type: 'string',
+        default: 'bottom'
+    },
     externalImageUrl2: {
         type: 'object',
         default: {}
@@ -133,32 +137,37 @@ export const attributes = {
         default: 'Modified'
     },
 
+    horizontalOffset: {
+        type: 'object',
+        default: { md: 25, unit: 'px' },
+        style: [{
+            selector: '{{QUBELY}} .qubely-block-image-comparison .image-container.image-A .comparison-image-text {right:  {{horizontalOffset}}}' +
+                '{{QUBELY}} .qubely-block-image-comparison .image-container.image-B .comparison-image-text {left:  {{horizontalOffset}}}'
+        }]
+    },
+
+    verticalOffset: {
+    	type: 'object',
+    	default: { md: 15, unit: 'px' },
+    	style: [{
+    		selector: '.qubely-block-image-comparison .image-container .comparison-image-text.text-vertical-align-top { top: {{verticalOffset}}; }' +
+                '.qubely-block-image-comparison .image-container .comparison-image-text.text-vertical-align-bottom { bottom: {{verticalOffset}}; }'
+    	}]
+    },
+
     // circle
-    circleColor: {
+
+    controlColor: {
         type: 'string',
         default: '#ffffff',
-        /*style: [{
-            selector: '{{QUBELY}} .comparison-scrollCircle  {color: {{circleColor}};}'
-        }]*/
+        style: [{
+            selector: '{{QUBELY}} .qubely-block-image-comparison:not(.has-child-placeholder) .image-container.image-B {border-right-color: {{controlColor}}}' +
+                '{{QUBELY}} .qubely-block-image-comparison .comparison-scrollCircle {background-color: {{controlColor}}}' +
+                '{{QUBELY}} .qubely-block-image-comparison .comparison-scrollCircle::after {border-right-color: {{controlColor}}}' +
+                '{{QUBELY}} .qubely-block-image-comparison .comparison-scrollCircle::before {border-left-color: {{controlColor}}}'
+        }]
     },
-    circleBackground: {
-        type: 'string',
-        default: '#2184F9',
-        /*style: [{
-            selector: '{{QUBELY}} .comparison-scrollCircle  {background-color: {{circleBackground}};}'
-        }]*/
-    },
-    circleWidth: {
-        type: 'number',
-        default: 40,
-        /*style: [
-            {
-                selector: '{{QUBELY}} .qubely-block-image-comparison .comparison-scrollCircle {width: {{circleWidth}}px; line-height: {{circleWidth}}px;height: {{circleWidth}}px; font-size: {{circleWidth}}px}' +
-                    '{{QUBELY}} .qubely-block-image-comparison .comparison-scrollCircle i {line-height: {{circleWidth}}px}'
-            }
-        ],*/
-    },
-    // end of yp
+
 
     disableTitle: {
         type: 'boolean',

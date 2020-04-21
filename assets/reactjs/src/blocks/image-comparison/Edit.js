@@ -20,13 +20,12 @@ const {
 } = wp.blockEditor;
 
 const {
-    Url,
+    Range,
+    RadioAdvanced,
     Color,
     Media,
-    Range,
     Toggle,
     Typography,
-    ButtonGroup,
     Inline: {
         InlineToolbar
     },
@@ -162,11 +161,11 @@ class Edit extends Component {
                 titleColor,
                 typography,
                 imageBTitle,
-                circleColor,
-                circleBackground,
+                controlColor,
                 disableTitle,
-                circleWidth,
-
+                verticalAlign,
+                horizontalOffset,
+                verticalOffset,
                 image,
                 image2x,
                 imgAlt,
@@ -253,18 +252,43 @@ class Edit extends Component {
                     <InspectorTabs tabs={['style', 'advance']}>
                         <InspectorTab key={'style'}>
                             <PanelBody title={''} opened={true}>
-                                <Toggle label={__('Enable Title')} value={disableTitle} onChange={val => setAttributes({ disableTitle: val })} />
+                                <Toggle label={__('Enable Text')} value={disableTitle} onChange={val => setAttributes({ disableTitle: val })} />
                                 {disableTitle &&
                                     <Fragment>
-                                        <Color label={__('Title Color')} value={titleColor} onChange={(value) => setAttributes({ titleColor: value })} />
+                                        <Color label={__('Text Color')} value={titleColor} onChange={(value) => setAttributes({ titleColor: value })} />
                                         <Typography label={__('Typography')} value={typography} onChange={(value) => setAttributes({ typography: value })} disableLineHeight device={device} onDeviceChange={value => this.setState({ device: value })} />
+                                        <RadioAdvanced
+                                            label={__('Vertical Align')}
+                                            options={[
+                                                { label: __('Top'), value: 'top', title: 'top' },
+                                                { label: __('Bottom'), value: 'bottom', title: 'Bottom' },
+                                            ]}
+                                            value={verticalAlign}
+                                            onChange={(verticalAlign) => setAttributes({ verticalAlign })} />
                                     </Fragment>
                                 }
-                            </PanelBody>
-                            <PanelBody title={__('Move Control')} initialOpen={false}>
-                                <Color label={__('Color')} value={circleColor} onChange={(value) => setAttributes({ circleColor: value })} />
-                                <Color label={__('Background')} value={circleBackground} onChange={(value) => setAttributes({ circleBackground: value })} />
-                                <Range label={__('Size')} value={circleWidth} onChange={(value) => setAttributes({ circleWidth: value })} min={30} max={100} />
+
+                                <Range
+                                    label={__('Horizontal Offset')}
+                                    value={verticalOffset}
+                                    min={0} max={100}
+                                    onChange={(value) => setAttributes({ verticalOffset: value })}
+                                    unit={['px', '%']}
+                                    responsive device={device}
+                                    onDeviceChange={value => this.setState({ device: value })}
+                                />
+
+                                <Range
+                                    label={__('Vertical Offset')}
+                                    value={horizontalOffset}
+                                    min={0} max={100}
+                                    onChange={(value) => setAttributes({ horizontalOffset: value })}
+                                    unit={['px', '%']}
+                                    responsive device={device}
+                                    onDeviceChange={value => this.setState({ device: value })}
+                                />
+
+                                <Color label={__('Control Color')} value={controlColor} onChange={(value) => setAttributes({ controlColor: value })} />
                             </PanelBody>
                             <PanelBody title={__('Ratina Images')} initialOpen={false}>
                                 <Media
@@ -321,13 +345,17 @@ class Edit extends Component {
                                 validImageB ?
                                     <div className={'image-container-inner'}>
                                         <img className="qubely-image" src={image2.url} {...(image2_2x.url ? {srcset: image2.url + ' 1x, ' + image2_2x.url + ' 2x'} : {})} alt={imgAlt2 && imgAlt2} />
-                                        <RichText
-                                            value={imageBTitle}
-                                            keepPlaceholderOnFocus
-                                            placeholder={__('Modified')}
-                                            className="comparison-image-text"
-                                            onChange={value => setAttributes({ imageBTitle: value })}
-                                        />
+                                        {
+                                            disableTitle && (
+                                                <RichText
+                                                    value={imageBTitle}
+                                                    keepPlaceholderOnFocus
+                                                    placeholder={__('Modified')}
+                                                    className={'comparison-image-text ' + 'text-vertical-align-' + verticalAlign}
+                                                    onChange={value => setAttributes({ imageBTitle: value })}
+                                                />
+                                            )
+                                        }
                                         {actionButtons('image2')}
                                     </div>
                                     :
@@ -349,13 +377,17 @@ class Edit extends Component {
                                         {
                                             <img className="qubely-image" src={image.url} {...(image2x.url ? {srcset: image.url + ' 1x, ' + image2x.url + ' 2x'} : {})} alt={imgAlt && imgAlt} />
                                         }
-                                        <RichText
-                                            value={imageATitle}
-                                            keepPlaceholderOnFocus
-                                            placeholder={__('Original')}
-                                            className="comparison-image-text"
-                                            onChange={value => setAttributes({ imageATitle: value })}
-                                        />
+                                        {
+                                            disableTitle && (
+                                                <RichText
+                                                    value={imageATitle}
+                                                    keepPlaceholderOnFocus
+                                                    placeholder={__('Original')}
+                                                    className={'comparison-image-text ' + 'text-vertical-align-' + verticalAlign}
+                                                    onChange={value => setAttributes({ imageATitle: value })}
+                                                />
+                                            )
+                                        }
                                         {actionButtons('image')}
                                     </div>
                                     :
