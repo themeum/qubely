@@ -134,6 +134,7 @@ class GlobalSettings extends Component {
         super(props);
         this.state = {
             activePreset: null,
+            showTypoSettings: undefined,
             presets: {}
         }
     }
@@ -196,7 +197,8 @@ class GlobalSettings extends Component {
 
         const {
             presets,
-            activePreset
+            activePreset,
+            showTypoSettings
         } = this.state;
 
         if (presets[activePreset]) {
@@ -250,7 +252,7 @@ class GlobalSettings extends Component {
                             )
                             return (
                                 <div key={name} className={classes}>
-                                    <div className="name" onClick={() => { this.setState({ activePreset: key }) }}> {name}</div>
+                                    <div className="name" onClick={() => { this.setState({ activePreset: key, showTypoSettings: undefined }) }}> {name}</div>
                                     <PanelBody title={__('Global Colors')} initialOpen={true}>
                                         <div className="qubely-d-flex qubely-align-justified">
                                             {
@@ -268,17 +270,35 @@ class GlobalSettings extends Component {
                                         (typeof typography !== 'undefined' && typography.length > 0) &&
                                         <PanelBody initialOpen={true} title={__('Typography')}>
                                             {
-                                                typography.map((item, index) => (
-                                                    <div className="qubely-global typography qubely-d-flex qubely-align-justified">
-                                                        <div className="typo-name">{item.name}</div>
-                                                        <Typography
-                                                            value={item}
-                                                            globalSettings
-                                                            key={name + index}
-                                                            onChange={newValue => updatePreset('typography', index, newValue, presetKey, true)}
-                                                        />
-                                                    </div>
-                                                ))
+                                                typography.map((item, index) => {
+                                                    let displaySettings = false;
+                                                    if (isActivePreset && showTypoSettings === index) {
+                                                        displaySettings = true;
+                                                    }
+                                                    let titleClasses = classnames(
+                                                        'typo-name',
+                                                        { ['active']: displaySettings }
+                                                    )
+                                                    return (
+                                                        <div className="qubely-global typography qubely-d-flex qubely-align-justified">
+                                                            <div
+                                                                className={titleClasses}
+                                                                onClick={() => this.setState({ showTypoSettings: displaySettings ? undefined : index })}
+                                                            >
+                                                                {item.name}
+                                                            </div>
+
+                                                            {displaySettings &&
+                                                                <Typography
+                                                                    value={item}
+                                                                    globalSettings
+                                                                    key={name + index}
+                                                                    onChange={newValue => updatePreset('typography', index, newValue, presetKey, true)}
+                                                                />
+                                                            }
+                                                        </div>
+                                                    )
+                                                })
                                             }
                                         </PanelBody>
                                     }

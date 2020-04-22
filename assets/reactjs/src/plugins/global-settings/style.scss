@@ -29,13 +29,19 @@
                 font-size: 16px;
                 font-weight: 600;
                 color: black;
-                border-top-left-radius: 5px;
-                border-top-right-radius: 5px;
+                cursor: pointer;
+                border-radius: 5px;
+                &.active {
+                    border-bottom-left-radius: 0px;
+                    border-bottom-right-radius: 0px;
+                }
                 border: 1px solid #dbdfe4;
                 background-color: #f8f8f8;
             }
             .qubely-field-typography {
-                border-radius: 0px;
+                padding: 12px;
+                border-top-left-radius: 0px;
+                border-top-right-radius: 0px;
                 border-top: none;
                 .components-dropdown.qubely-field {
                     min-width: 70%;
