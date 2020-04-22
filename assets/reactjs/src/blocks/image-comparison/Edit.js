@@ -16,7 +16,8 @@ const {
     RichText,
     BlockControls,
     MediaPlaceholder,
-    InspectorControls
+    InspectorControls,
+    MediaUpload
 } = wp.blockEditor;
 
 const {
@@ -219,16 +220,26 @@ class Edit extends Component {
             )
         }
 
-        const actionButtons = (imageId) => {
+        const actionButtons = (id, attr) => {
             return (
                 <div className="qubely-media-actions">
-                    <Tooltip text={__('Edit')}>
-                        <button className="qubely-button" aria-label={__('Edit')} onClick={() => { }} role="button">
-                            <span aria-label={__('Edit')} className="fas fa-pencil-alt fa-fw" />
-                        </button>
-                    </Tooltip>
+                    <MediaUpload
+                        value={ id }
+                        onSelect={ ( selectedImage ) => {
+                            setAttributes({[attr]: selectedImage});
+                        }}
+                        allowedTypes={ ['image'] }
+                        render={ ( { open } ) => (
+                            <Tooltip text={__('Edit')}>
+                                <button className="qubely-button" aria-label={__('Edit')} onClick={open} role="button">
+                                    <span aria-label={__('Edit')} className="fas fa-pencil-alt fa-fw" />
+                                </button>
+                            </Tooltip>
+                        ) }
+                    />
+
                     <Tooltip text={__('Remove')}>
-                        <button className="qubely-button" aria-label={__('Remove')} onClick={() => setAttributes({ [imageId]: {} })} role="button">
+                        <button className="qubely-button" aria-label={__('Remove')} onClick={() => setAttributes({ [attr]: {} })} role="button">
                             <span aria-label={__('Close')} className="far fa-trash-alt fa-fw" />
                         </button>
                     </Tooltip>
@@ -356,7 +367,7 @@ class Edit extends Component {
                                                 />
                                             )
                                         }
-                                        {actionButtons('image2')}
+                                        {actionButtons(image2.id, 'image2')}
                                     </div>
                                     :
                                     renderPlaceholder('B', 'Image One')
@@ -388,7 +399,7 @@ class Edit extends Component {
                                                 />
                                             )
                                         }
-                                        {actionButtons('image')}
+                                        {actionButtons(image.id, 'image')}
                                     </div>
                                     :
                                     renderPlaceholder('A', 'Image Two')
