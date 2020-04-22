@@ -48,6 +48,7 @@
             left: 25px;
             font-size: 20px;
             user-select: none;
+            white-space: nowrap;
             &.text-vertical-align-top{
                 bottom: auto;
                 top: 15px;
@@ -120,16 +121,16 @@
     .comparison-scrollCircle {
         position: absolute;
         top: 50%;
-        left: 50%;
+        left: calc(50%);
         cursor: move;
-        transform: translate(-50%, -50%);
+        transform: translateY(-50%);
         z-index: 9;
         text-align: center;
-        height: 50px;
+        height: 52px;
         width: 8px;
         background: white;
-        margin-left: -1.5px;
         border-radius: 1px;
+        margin-left: -5.5px;
         &::after,
         &::before{
             content: '';
@@ -138,9 +139,8 @@
             border-left: 8px solid white;
             left: 100%;
             top: 50%;
-            transform: translateY(-50%);
-            margin-left: 3px;
-            transition: 200ms;
+            transform: translateY(-50%) translateX(3px);
+            transition: 300ms;
         }
         &::after{
             border-left-color: transparent;
@@ -148,14 +148,14 @@
             left: auto;
             right: 100%;
             margin-left: 0;
-            margin-right: 3px;
+            transform: translateY(-50%) translateX(-3px);
         }
         &:hover {
             &::before {
-                margin-left: 5px;
+                transform: translateY(-50%) translateX(5px);
             }
             &::after{
-                margin-right: 5px;
+                transform: translateY(-50%) translateX(-5px);
             }
         }
     }

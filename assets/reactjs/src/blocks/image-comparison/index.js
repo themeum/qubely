@@ -9,7 +9,7 @@ registerBlockType('qubely/imagecomparison', {
     title: __('Image Comparison'),
     description: __('Compare Images with Qubely'),
     category: 'qubely',
-    icon: <img src={qubely_admin.plugin + 'assets/img/blocks/block-image.svg'} alt={__('Image')} />,
+    icon: <img src={qubely_admin.plugin + 'assets/img/blocks/block-imagecomparison.svg'} alt={__('Image Comparison')} />,
     keywords: [
         __('image'),
         __('image comparison'),
