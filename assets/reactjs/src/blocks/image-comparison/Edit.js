@@ -280,7 +280,7 @@ class Edit extends Component {
                                 }
 
                                 <Range
-                                    label={__('Horizontal Offset')}
+                                    label={__('Vertical Offset')}
                                     value={verticalOffset}
                                     min={0} max={100}
                                     onChange={(value) => setAttributes({ verticalOffset: value })}
@@ -290,7 +290,7 @@ class Edit extends Component {
                                 />
 
                                 <Range
-                                    label={__('Vertical Offset')}
+                                    label={__('Horizontal Offset')}
                                     value={horizontalOffset}
                                     min={0} max={100}
                                     onChange={(value) => setAttributes({ horizontalOffset: value })}
@@ -299,7 +299,7 @@ class Edit extends Component {
                                     onDeviceChange={value => this.setState({ device: value })}
                                 />
 
-                                <Color label={__('Control Color')} value={controlColor} onChange={(value) => setAttributes({ controlColor: value })} />
+                                <Color label={__('Slider Color')} value={controlColor} onChange={(value) => setAttributes({ controlColor: value })} />
                             </PanelBody>
                             <PanelBody title={__('Ratina Images')} initialOpen={false}>
                                 <Media
