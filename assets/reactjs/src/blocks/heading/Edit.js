@@ -141,18 +141,18 @@ class Edit extends Component {
                             <PanelBody title={__('Sub Heading')} initialOpen={false}>
                                 <Toggle label={__('Enable')} value={subHeading} onChange={val => setAttributes({ subHeading: val })} />
                                 {subHeading == 1 &&
-                                <Fragment>
-                                    <Headings selectedLevel={subHeadingLevel} onChange={(value) => setAttributes({ subHeadingLevel: value })} />
-                                    <Typography label={__('Typography')} value={subHeadingTypography} onChange={val => setAttributes({ subHeadingTypography: val })} device={device} onDeviceChange={value => this.setState({ device: value })} />
-                                    <Color label={__('Color')} value={subHeadingColor} onChange={val => setAttributes({ subHeadingColor: val })} />
-                                    <Range label={__('Spacing')} value={subHeadingSpacing} onChange={(value) => setAttributes({ subHeadingSpacing: value })} unit={['px', 'em', '%']} min={0} max={60} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
-                                    <RadioAdvanced label={__('Position')} value={subHeadingPosition} onChange={val => setAttributes({ subHeadingPosition: val })}
-                                                   options={[
-                                                       { label: __('After Title'), value: 'after_title', title: __('After Title') },
-                                                       { label: __('Before Title'), value: 'before_title', title: __('Before Title') }
-                                                   ]}
-                                    />
-                                </Fragment>
+                                    <Fragment>
+                                        <Headings selectedLevel={subHeadingLevel} onChange={(value) => setAttributes({ subHeadingLevel: value })} />
+                                        <Typography label={__('Typography')} value={subHeadingTypography} onChange={val => setAttributes({ subHeadingTypography: val, ...((val.openTypography !== subHeadingTypography.openTypography) && { recreateStyles: !recreateStyles }) })} device={device} onDeviceChange={value => this.setState({ device: value })} />
+                                        <Color label={__('Color')} value={subHeadingColor} onChange={val => setAttributes({ subHeadingColor: val })} />
+                                        <Range label={__('Spacing')} value={subHeadingSpacing} onChange={(value) => setAttributes({ subHeadingSpacing: value })} unit={['px', 'em', '%']} min={0} max={60} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
+                                        <RadioAdvanced label={__('Position')} value={subHeadingPosition} onChange={val => setAttributes({ subHeadingPosition: val })}
+                                            options={[
+                                                { label: __('After Title'), value: 'after_title', title: __('After Title') },
+                                                { label: __('Before Title'), value: 'before_title', title: __('Before Title') }
+                                            ]}
+                                        />
+                                    </Fragment>
                                 }
                             </PanelBody>
                             <PanelBody title={__('Separator')} initialOpen={false}>
@@ -173,30 +173,30 @@ class Edit extends Component {
                                     onChange={val => setAttributes({ separatorStyle: val })}
                                 />
                                 {separatorStyle &&
-                                <Fragment>
-                                    <Color
-                                        label={__('Separator Color')}
-                                        value={separatorColor}
-                                        onChange={val => setAttributes({ separatorColor: val })}
-                                    />
-                                    {(separatorStyle != 'pin' && separatorStyle != 'pin_filled') &&
-                                    <Range label={__('Stroke')} value={separatorStroke} onChange={val => setAttributes({ separatorStroke: parseInt(val) })} min={1} max={separators[separatorStyle].stroke} />
-                                    }
-                                    <Range label={__('Width')} value={separatorWidth} onChange={val => setAttributes({ separatorWidth: val })} min={20} max={separators[separatorStyle].width} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
-                                    <Range label={__('Spacing')} value={separatorSpacing} onChange={val => setAttributes({ separatorSpacing: val })} min={0} max={100} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
-                                    <SelectControl
-                                        label="Position"
-                                        value={separatorPosition}
-                                        options={[
-                                            { label: 'Top', value: 'top' },
-                                            { label: 'Bottom', value: 'bottom' },
-                                            { label: 'Left', value: 'left' },
-                                            { label: 'Right', value: 'right' },
-                                            { label: 'Left & Right', value: 'leftright' }
-                                        ]}
-                                        onChange={val => setAttributes({ separatorPosition: val })}
-                                    />
-                                </Fragment>
+                                    <Fragment>
+                                        <Color
+                                            label={__('Separator Color')}
+                                            value={separatorColor}
+                                            onChange={val => setAttributes({ separatorColor: val })}
+                                        />
+                                        {(separatorStyle != 'pin' && separatorStyle != 'pin_filled') &&
+                                            <Range label={__('Stroke')} value={separatorStroke} onChange={val => setAttributes({ separatorStroke: parseInt(val) })} min={1} max={separators[separatorStyle].stroke} />
+                                        }
+                                        <Range label={__('Width')} value={separatorWidth} onChange={val => setAttributes({ separatorWidth: val })} min={20} max={separators[separatorStyle].width} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
+                                        <Range label={__('Spacing')} value={separatorSpacing} onChange={val => setAttributes({ separatorSpacing: val })} min={0} max={100} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
+                                        <SelectControl
+                                            label="Position"
+                                            value={separatorPosition}
+                                            options={[
+                                                { label: 'Top', value: 'top' },
+                                                { label: 'Bottom', value: 'bottom' },
+                                                { label: 'Left', value: 'left' },
+                                                { label: 'Right', value: 'right' },
+                                                { label: 'Left & Right', value: 'leftright' }
+                                            ]}
+                                            onChange={val => setAttributes({ separatorPosition: val })}
+                                        />
+                                    </Fragment>
                                 }
                             </PanelBody>
                         </InspectorTab>
