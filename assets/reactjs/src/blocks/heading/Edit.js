@@ -59,6 +59,7 @@ class Edit extends Component {
             attributes: {
                 uniqueId,
                 className,
+                recreateStyles,
                 content,
                 typography,
                 alignment,
@@ -135,7 +136,7 @@ class Edit extends Component {
                             </PanelBody>
                             <PanelBody title={__('Heading')} initialOpen={false}>
                                 <Color label={__('Color')} value={textColor} onChange={val => setAttributes({ textColor: val })} />
-                                <Typography label={__('Typography')} value={typography} onChange={val => setAttributes({ typography: val })} device={device} onDeviceChange={value => this.setState({ device: value })} />
+                                <Typography label={__('Typography')} value={typography} onChange={val => setAttributes({ typography: val, ...((val.openTypography !== typography.openTypography) && { recreateStyles: !recreateStyles }) })} device={device} onDeviceChange={value => this.setState({ device: value })} />
                             </PanelBody>
                             <PanelBody title={__('Sub Heading')} initialOpen={false}>
                                 <Toggle label={__('Enable')} value={subHeading} onChange={val => setAttributes({ subHeading: val })} />
