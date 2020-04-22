@@ -228,12 +228,15 @@ const ParseCss = async (setDatabase = true) => {
                 const { presets, activePreset } = data.settings;
                 globalData = presets[activePreset];
                 console.log('presets[activePreset] : ',presets[activePreset].typography);
-                console.log('global frontend : ', CssGenerator(presets[activePreset].typography, 'global-settings', 'global', true, true, true, presets[activePreset].typography))
+                // console.log('global frontend : ', CssGenerator(presets[activePreset].typography, 'global-settings', 'global', true, true, true, presets[activePreset].typography))
                 __blocks.css += CssGenerator(presets[activePreset].typography, 'global-settings', 'global', true, true, true, presets[activePreset].typography)
             }
 
         })
     }
+    setTimeout(()=>{
+        
+    },100)
     await getGlobalSettings();
     // console.log('global data : ', globalData);
     if (typeof window.globalData != 'undefined') {

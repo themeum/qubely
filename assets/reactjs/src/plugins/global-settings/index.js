@@ -165,6 +165,13 @@ class GlobalSettings extends Component {
         })
     }
     updateGlobalSettings = () => {
+        const {
+            presets,
+            activePreset
+        } = this.state;
+
+        console.log('state before saving : ', presets[activePreset].typography[0]);
+
         wp.apiFetch({
             path: PATH.post,
             method: 'POST',
@@ -260,11 +267,10 @@ class GlobalSettings extends Component {
                                     {
                                         (typeof typography !== 'undefined' && typography.length > 0) &&
                                         <PanelBody initialOpen={true} title={__('Typography')}>
-
                                             {
                                                 typography.map((item, index) => (
-                                                    <div className="qubely-d-flex qubely-align-justified">
-                                                        <div>{item.name}</div>
+                                                    <div className="qubely-global typography qubely-d-flex qubely-align-justified">
+                                                        <div className="typo-name">{item.name}</div>
                                                         <Typography
                                                             value={item}
                                                             globalSettings

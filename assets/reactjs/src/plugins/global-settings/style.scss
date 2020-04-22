@@ -18,5 +18,40 @@
                 color: #2184f9;
             }
         }
+        .qubely-global {
+            display: flex;
+            flex-direction: column;
+            &:not(:last-child) {
+                margin-bottom: 30px;
+            }
+            .typo-name {
+                padding: 20px 10px;
+                font-size: 16px;
+                font-weight: 600;
+                color: black;
+                border-top-left-radius: 5px;
+                border-top-right-radius: 5px;
+                border: 1px solid #dbdfe4;
+                background-color: #f8f8f8;
+            }
+            .qubely-field-typography {
+                border-radius: 0px;
+                border-top: none;
+                .components-dropdown.qubely-field {
+                    min-width: 70%;
+                    width: 95%;
+                }
+                .qubely-field.qubely-field-font-family {
+                    > label {
+                        text-align: left;
+                    }
+                }
+                .qubely-field-range.qubely-field {
+                    > .qubely-align-center {
+                        align-items: flex-start;
+                    }
+                }
+            }
+        }
     }
 }
