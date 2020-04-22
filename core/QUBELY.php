@@ -41,7 +41,7 @@ class QUBELY
 		add_action('wp_enqueue_scripts', array($this, 'qubely_enqueue_scripts'));
 
 		// Load Inline Scripts
-		add_action('wp_enqueue_scripts', array($this, 'qubely_inline_header_scripts'), 0);
+		// add_action('wp_enqueue_scripts', array($this, 'qubely_inline_header_scripts'), 0);
 		add_action('admin_head', array($this, 'qubely_inline_admin_header_scripts'), 0);
 		add_action('wp_footer', array($this, 'qubely_inline_footer_scripts'));
 
