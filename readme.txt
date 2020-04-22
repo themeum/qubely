@@ -242,6 +242,7 @@ New: Image comparison Block
 Update: Tabs inner blocks new structure support
 Fix: Tabs Block contents is not displaying
 Fix: Table of Contents block - Attributes value saving issue
+Fix : Heading block - Typography disable issue in backend
 Fix : Conflict with Table of Contents Plus plugin
 
 
