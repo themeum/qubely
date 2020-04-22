@@ -37,11 +37,15 @@ const {
 /**
  * Qubely Components
  */
-const {
-    // Color,
-    Typography,
-    Separator
-} = wp.qubelyComponents;
+import Typography from '../../components/fields/Typography'
+import { CssGenerator } from '../../components/CssGenerator'
+// const {
+//     // Color,
+//     // Typography,
+//     CssGenerator: {
+//         // CssGenerator
+//     }
+// } = wp.qubelyComponents;
 
 const PATH = {
     fetch: '/qubely/v1/global_settings',
@@ -59,27 +63,51 @@ const DEFAULTPRESETS = {
             typography: [
                 {
                     name: 'Heading 1',
-                    value: {}
+                    openTypography: 1,
+                    style: [{
+                        selector: '{{QUBELY}} h1'
+                    }]
+                    // value: {}
                 },
                 {
                     name: 'Heading 2',
-                    value: {}
+                    openTypography: 1,
+                    // value: {},
+                    style: [{
+                        selector: '{{QUBELY}} h2'
+                    }]
                 },
                 {
                     name: 'Heading 3',
-                    value: {}
+                    openTypography: 1,
+                    // value: {},
+                    style: [{
+                        selector: '{{QUBELY}} h3'
+                    }]
                 },
                 {
                     name: 'Heading 4',
-                    value: {}
+                    openTypography: 1,
+                    // value: {},
+                    style: [{
+                        selector: '{{QUBELY}} h4'
+                    }]
                 },
                 {
                     name: 'Heading 5',
-                    value: {}
+                    openTypography: 1,
+                    // value: {},
+                    style: [{
+                        selector: '{{QUBELY}} h5'
+                    }]
                 },
                 {
                     name: 'Heading 6',
-                    value: {}
+                    openTypography: 1,
+                    // value: {},
+                    style: [{
+                        selector: '{{QUBELY}} h6'
+                    }]
                 }
             ],
 
@@ -141,8 +169,18 @@ class GlobalSettings extends Component {
             path: PATH.post,
             method: 'POST',
             data: { settings: JSON.stringify(this.state) }
-            // data: { settings: JSON.stringify({'faisal':{}}) }
         }).then(data => {
+            console.log('data : ', data);
+            return data
+        })
+    }
+    delGlobalSettings = () => {
+        wp.apiFetch({
+            path: PATH.post,
+            method: 'POST',
+            data: { settings: JSON.stringify({ 'delete': true }) }
+        }).then(data => {
+            console.log('data : ', data);
             return data
         })
     }
@@ -154,6 +192,10 @@ class GlobalSettings extends Component {
             activePreset
         } = this.state;
 
+        if (presets[activePreset]) {
+            CssGenerator(presets[activePreset].typography, 'global-settings', 'global', false, true, false, presets[activePreset].typography)
+        }
+
 
         const changeColor = (key, newValue, presetKey) => {
             this.setState(({ presets }, props) => {
@@ -163,17 +205,17 @@ class GlobalSettings extends Component {
             });
         }
         const updatePreset = (propertyName, index, newValue, presetKey, isObject = false) => {
-            console.log('new update : ', propertyName, index, newValue, presetKey);
+            // console.log('new update : ', propertyName, index, newValue, presetKey);
 
             if (isObject) {
                 newValue = {
-                    ...this.state.presets[presetKey][propertyName][index].value,
+                    ...this.state.presets[presetKey][propertyName][index],
                     ...newValue
                 }
             }
             this.setState(({ presets }, props) => {
                 let tempPresets = presets;
-                tempPresets[presetKey][propertyName][index].value = newValue;
+                tempPresets[presetKey][propertyName][index] = newValue;
                 return { presets: tempPresets };
             });
         }
@@ -217,14 +259,14 @@ class GlobalSettings extends Component {
                                     </PanelBody>
                                     {
                                         (typeof typography !== 'undefined' && typography.length > 0) &&
-                                        <PanelBody initialOpen={false} title={__('Typography')}>
+                                        <PanelBody initialOpen={true} title={__('Typography')}>
 
                                             {
-                                                typography.map(({ name, value }, index) => (
+                                                typography.map((item, index) => (
                                                     <div className="qubely-d-flex qubely-align-justified">
-                                                        <div>{name}</div>
+                                                        <div>{item.name}</div>
                                                         <Typography
-                                                            value={value}
+                                                            value={item}
                                                             globalSettings
                                                             key={name + index}
                                                             onChange={newValue => updatePreset('typography', index, newValue, presetKey, true)}
@@ -242,6 +284,7 @@ class GlobalSettings extends Component {
             )
         }
 
+        console.log('this state :', this.state);
 
         return (
             <Fragment>
@@ -253,6 +296,7 @@ class GlobalSettings extends Component {
                     {renderPresets()}
                     <button onClick={() => this.getGlobalSettings()}>get</button>
                     <button onClick={() => this.updateGlobalSettings()}>Save</button>
+                    <button onClick={() => this.delGlobalSettings()}>delete</button>
                 </PluginSidebar>
 
                 <PluginSidebarMoreMenuItem
