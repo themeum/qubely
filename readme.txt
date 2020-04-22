@@ -237,8 +237,13 @@ You can report bugs on the [support forum here](https://wordpress.org/support/pl
 
 == Changelog ==
 
-= 1.3.8 - 10 April, 2020 =
+= 1.3.8 - 22 April, 2020 =
+New: Image comparison Block
+Update: Tabs inner blocks new structure support
+Fix: Tabs Block contents is not displaying
 Fix: Table of Contents block - Attributes value saving issue
+Fix : Heading block - Typography disable issue in backend
+Fix : Conflict with Table of Contents Plus plugin
 
 
 = 1.3.7 - 03 April, 2020 =

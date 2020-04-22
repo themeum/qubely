@@ -1026,3 +1026,7 @@ div[data-type="qubely/row"].is-resizing .components-resizable-box__container.qub
 .block-editor-block-list__layout .block-editor-block-list__block[data-type="qubely/row"].is-selected {
     z-index: inherit;
 }
+
+span.block-editor-block-icon img{
+    max-width: 24px;
+}

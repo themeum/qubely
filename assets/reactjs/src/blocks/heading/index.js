@@ -23,6 +23,10 @@ registerBlockType('qubely/heading', {
 	attributes: {
 		uniqueId: { type: 'string', default: '' },
 		...globalAttributes,
+		recreateStyles: {
+			type: 'boolean',
+			default: true
+		},
 		spacer: { type: 'object', default: { spaceTop: { md: '10', unit: "px" }, spaceBottom: { md: '10', unit: "px" } }, style: [{ selector: '{{QUBELY}}' }] },
 		content: {
 			type: 'string',

@@ -1,4 +1,21 @@
 jQuery(document).ready(function ($) {
+
+
+    if (typeof loadScriptAsync === 'undefined') {
+        function loadScriptAsync(src) {
+            return new Promise((resolve, reject) => {
+                const tag = document.createElement('script');
+                tag.src = src;
+                tag.async = true;
+                tag.onload = () => {
+                    resolve();
+                };
+                const firstScriptTag = document.getElementsByTagName('script')[0];
+                firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+            });
+        }
+    }
+    
     //GOOGLE MAP BLOCK
     $('.qubely-google-map:not(.qubely-google-map-ready)').each(function () {
         const $mapItem = $(this);
