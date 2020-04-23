@@ -85,7 +85,6 @@ class QubelyPostGrid {
      */
      public function layout_one_markup($layout_attr, $id,$src,$image,$title,$category,$meta,$btn,$excerpt ){
          extract($layout_attr);
-         if ($layout == 1) {
              ob_start();
          ?>
             <div class="qubely-postgrid qubely-post-list-view qubely-postgrid-style-<?php echo esc_attr($style); ?>">
@@ -133,8 +132,7 @@ class QubelyPostGrid {
                     </div> <!-- qubely-post-list-content -->
                 </div> <!-- >qubely-post-list-wrap -->
             </div>  <!-- qubely-postgrid -->
-            <?php
-        } // end if (layout == 1)
+         <?php
          return ob_get_clean();
      }
 
@@ -144,7 +142,6 @@ class QubelyPostGrid {
      */
     public function layout_two_markup($layout_attr, $id,$src,$image,$title,$category,$meta,$btn,$excerpt ){
         extract($layout_attr);
-        if ($layout === 2) {
             ob_start();
         ?>
             <div class="qubely-postgrid qubely-post-grid-view qubely-postgrid-style-<?php echo esc_attr($style); ?>">
@@ -192,7 +189,6 @@ class QubelyPostGrid {
                 </div> <!-- qubely-post-list-wrap -->
             </div> <!-- qubely-post-list-wrap -->
         <?php
-        } // end if (layout == 2)
         return ob_get_clean();
     }
 
@@ -269,7 +265,7 @@ class QubelyPostGrid {
             <div class="<?php echo $class; ?>">
                 <div class="qubely-post~grid-wrapper <?php echo $interaction; ?> qubely-postgrid-layout-<?php echo esc_attr($layout); ?>">
                     <?php
-                        while ($query->have_posts()) {
+                    while ($query->have_posts()) {
                         $query->the_post();
                         $id = get_post_thumbnail_id();
                         $src = wp_get_attachment_image_src($id, $imgSize);
@@ -282,8 +278,10 @@ class QubelyPostGrid {
                         $btn = '<div class="qubely-postgrid-btn-wrapper"><a class="qubely-postgrid-btn qubely-button-' . esc_attr($readmoreStyle) . ' is-' . esc_attr($readmoreSize) . '" href="' . esc_url(get_the_permalink()) . '">' . esc_attr($buttonText) . '</a></div>';
                         $excerpt = '<div class="qubely-postgrid-intro">' . qubely_excerpt_max_charlength(esc_attr($limit)) . '</div>';
 
-                        echo $this->layout_one_markup( $this->get_layout_attributes(),$id,$src,$image,$title,$category,$meta,$btn,$excerpt );
-                        echo $this->layout_two_markup( $this->get_layout_attributes(),$id,$src,$image,$title,$category,$meta,$btn,$excerpt );
+                        if($layout == 1)
+                            echo $this->layout_one_markup( $this->get_layout_attributes(),$id,$src,$image,$title,$category,$meta,$btn,$excerpt );
+                        if($layout == 2)
+                            echo $this->layout_two_markup( $this->get_layout_attributes(),$id,$src,$image,$title,$category,$meta,$btn,$excerpt );
 
                     } # end of if($query->have_posts())
                     ?>
