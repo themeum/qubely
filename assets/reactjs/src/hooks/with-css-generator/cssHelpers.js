@@ -75,7 +75,7 @@ export const cssTypography = (v) => {
     let simple = '{' + (v.family ? "font-family:'" + v.family + "'," + v.type + ";" : '') +
         (v.weight ? 'font-weight:' + v.weight + ';' : '') +
         (v.color ? 'color:' + v.color + ';' : '') +
-        (v.style ? 'font-style:' + v.style + ';' : '') +
+        (v.style  && typeof v.style!=='object'? 'font-style:' + v.style + ';' : '') +
         (v.transform ? 'text-transform:' + v.transform + ';' : '') +
         (v.decoration ? 'text-decoration:' + v.decoration + ';' : '') + '}';
     return { md: data.md, sm: data.sm, xs: data.xs, simple, font };

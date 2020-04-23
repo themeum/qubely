@@ -83,14 +83,14 @@ class QUBELY
 		$current_screen = get_current_screen();
 		
 		if ('post' == $current_screen->base) {
-			$classes .= ' qubely-editor';
+			$classes .= 'qubely qubely-editor';
 		}
 		return $classes;
 	}
 
 	public function add_custom_class($classes)
 	{
-		return array_merge( $classes, array( 'qubely-frontend' ) );
+		return array_merge( $classes, array( 'qubely qubely-frontend' ) );
 	}
 
 	/**

@@ -234,11 +234,8 @@ const ParseCss = async (setDatabase = true) => {
 
         })
     }
-    setTimeout(()=>{
-        
-    },100)
     await getGlobalSettings();
-    // console.log('global data : ', globalData);
+
     if (typeof window.globalData != 'undefined') {
         __blocks.css += CssGenerator(window.globalData.settings, 'pagesettings', '8282882', true)
     }

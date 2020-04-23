@@ -265,32 +265,15 @@ export const CssGenerator = (settings, blockName, blockID, isInline = false, glo
 
 // Set CSS to Head
 const setStyle = (styleCss, blockID, global = false, frontend = false) => {
-    let styleSelector = window.document;
-    // console.log('setStyle frontend : ', frontend);
+    let styleSelector = window.document, id = 'qubely-block-' + blockID;
     if (global) {
-        if (styleSelector.getElementById('qubely-gobal-styles') === null) {
-            // console.log('here wer go');
-            let cssInline = document.createElement('style');
-            cssInline.type = 'text/css';
-            cssInline.id = 'qubely-gobal-styles';
-            if (cssInline.styleSheet) {
-                cssInline.styleSheet.cssText = styleCss;
-            } else {
-                cssInline.innerHTML = styleCss;
-            }
-            // console.log('styleSelector.getElementsByTagName("head") : ',styleSelector.getElementsByTagName("head"));
-            styleSelector.getElementsByTagName("head")[0].appendChild(cssInline);
-        } else {
-            styleSelector.getElementById('qubely-gobal-styles').innerHTML = styleCss;
-        }
-
+        id = 'qubely-gobal-styles';
     }
 
-
-    if (styleSelector.getElementById('qubely-block-' + blockID) === null) {
+    if (styleSelector.getElementById(id) === null) {
         let cssInline = document.createElement('style');
         cssInline.type = 'text/css';
-        cssInline.id = 'qubely-block-' + blockID;
+        cssInline.id = id;
         if (cssInline.styleSheet) {
             cssInline.styleSheet.cssText = styleCss;
         } else {
@@ -298,6 +281,6 @@ const setStyle = (styleCss, blockID, global = false, frontend = false) => {
         }
         styleSelector.getElementsByTagName("head")[0].appendChild(cssInline);
     } else {
-        styleSelector.getElementById('qubely-block-' + blockID).innerHTML = styleCss;
+        styleSelector.getElementById(id).innerHTML = styleCss;
     }
 }
