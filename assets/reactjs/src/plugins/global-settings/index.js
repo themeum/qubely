@@ -17,6 +17,7 @@ const {
 } = wp.element;
 
 const {
+    Dropdown,
     PanelBody,
     ColorPicker
 } = wp.components;
@@ -54,7 +55,7 @@ const PATH = {
 
 
 const DEFAULTPRESETS = {
-    activePreset: 'preset1',
+    activePreset: undefined,
     presets: {
         preset1: {
             name: 'Preset1',
@@ -133,9 +134,10 @@ class GlobalSettings extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            presets: {},
             activePreset: null,
             showTypoSettings: undefined,
-            presets: {}
+            showPresetSettings: undefined
         }
     }
 
@@ -198,7 +200,8 @@ class GlobalSettings extends Component {
         const {
             presets,
             activePreset,
-            showTypoSettings
+            showTypoSettings,
+            showPresetSettings
         } = this.state;
 
         if (presets[activePreset]) {
@@ -250,57 +253,102 @@ class GlobalSettings extends Component {
                                 'preset',
                                 { ['active']: isActivePreset }
                             )
+                            const changePreset = (index) => {
+                                this.setState({
+                                    showTypoSettings: undefined,
+                                    activePreset: isActivePreset ? undefined : index
+                                })
+                            }
                             return (
                                 <div key={name} className={classes}>
-                                    <div className="name" onClick={() => { this.setState({ activePreset: key, showTypoSettings: undefined }) }}> {name}</div>
-                                    <PanelBody title={__('Global Colors')} initialOpen={true}>
-                                        <div className="qubely-d-flex qubely-align-justified">
-                                            {
-                                                colors.map((value, index) => (
-                                                    <Color
-                                                        value={value}
-                                                        key={value + index}
-                                                        onChange={newValue => changeColor(index, newValue, presetKey)}
-                                                    />
-                                                ))
-                                            }
+                                    <div className="title-wrapper">
+                                        <div
+                                            className="title"
+                                            onClick={() => this.setState({ showPresetSettings: index })}
+                                        >
+                                            <span className="radio-button">{isActivePreset ? icons.circleDot : icons.circleThin}</span>
+                                            <span className="name"> {name}</span>
                                         </div>
-                                    </PanelBody>
-                                    {
-                                        (typeof typography !== 'undefined' && typography.length > 0) &&
-                                        <PanelBody initialOpen={true} title={__('Typography')}>
-                                            {
-                                                typography.map((item, index) => {
-                                                    let displaySettings = false;
-                                                    if (isActivePreset && showTypoSettings === index) {
-                                                        displaySettings = true;
-                                                    }
-                                                    let titleClasses = classnames(
-                                                        'typo-name',
-                                                        { ['active']: displaySettings }
-                                                    )
-                                                    return (
-                                                        <div className="qubely-global typography qubely-d-flex qubely-align-justified">
-                                                            <div
-                                                                className={titleClasses}
-                                                                onClick={() => this.setState({ showTypoSettings: displaySettings ? undefined : index })}
-                                                            >
-                                                                {item.name}
-                                                            </div>
 
-                                                            {displaySettings &&
-                                                                <Typography
-                                                                    value={item}
-                                                                    globalSettings
-                                                                    key={name + index}
-                                                                    onChange={newValue => updatePreset('typography', index, newValue, presetKey, true)}
-                                                                />
+                                        <Dropdown
+                                            position="bottom center"
+                                            className="options"
+                                            contentClassName="global-settings preset-options"
+                                            renderToggle={({ isOpen, onToggle }) => (
+                                                <div className="icon" onClick={onToggle}>{icons.ellipsis_v} </div>
+                                            )}
+                                            renderContent={() => {
+                                                let activeClass = classnames(
+                                                    { ['active']: isActivePreset }
+                                                )
+                                                return (
+                                                    <div className="global-preset-options">
+                                                        <div className={activeClass} {...(!isActivePreset && { onClick: () => changePreset(key) })} >Activate</div>
+                                                        <div>Rename</div>
+                                                        <div>Duplicate</div>
+                                                        <div>Delete</div>
+                                                    </div>
+                                                )
+                                            }}
+                                        />
+
+                                    </div>
+
+                                    {
+                                        (showPresetSettings === index) &&
+                                        <Fragment>
+
+                                            <PanelBody title={__('Global Colors')} initialOpen={true}>
+                                                <div className="qubely-d-flex qubely-align-justified">
+                                                    {
+                                                        colors.map((value, index) => (
+                                                            <Color
+                                                                value={value}
+                                                                key={value + index}
+                                                                onChange={newValue => changeColor(index, newValue, presetKey)}
+                                                            />
+                                                        ))
+                                                    }
+                                                </div>
+                                            </PanelBody>
+                                            {
+                                                (typeof typography !== 'undefined' && typography.length > 0) &&
+                                                <PanelBody initialOpen={true} title={__('Typography')}>
+                                                    {
+                                                        typography.map((item, index) => {
+                                                            let displaySettings = false;
+                                                            if (isActivePreset && showTypoSettings === index) {
+                                                                displaySettings = true;
                                                             }
-                                                        </div>
-                                                    )
-                                                })
+                                                            let titleClasses = classnames(
+                                                                'typo-name',
+                                                                { ['active']: displaySettings }
+                                                            )
+                                                            return (
+                                                                <div className="qubely-global typography qubely-d-flex qubely-align-justified">
+                                                                    <div
+                                                                        className={titleClasses}
+                                                                        onClick={() => this.setState({ showTypoSettings: displaySettings ? undefined : index })}
+                                                                    >
+                                                                        {item.name}
+                                                                    </div>
+
+                                                                    {displaySettings &&
+                                                                        <Typography
+                                                                            value={item}
+                                                                            globalSettings
+                                                                            key={name + index}
+                                                                            onChange={newValue => updatePreset('typography', index, newValue, presetKey, true)}
+                                                                        />
+                                                                    }
+                                                                </div>
+                                                            )
+                                                        })
+                                                    }
+                                                </PanelBody>
                                             }
-                                        </PanelBody>
+
+                                        </Fragment>
                                     }
                                 </div>
                             )
