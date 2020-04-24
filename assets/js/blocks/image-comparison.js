@@ -7,39 +7,40 @@ var imageComparison = function () {
     });
 
     dragCircles.forEach( (dragCircle) => {
+        const container = dragCircle.parentNode;
+        const resizeElement = container.querySelector('.resizable-img');
         dragCircle.addEventListener('mousedown', (event) => {
-            const container = event.target.parentNode;
-            const resizeElement = container.querySelector('.resizable-img');
-            draging(container, dragCircle, resizeElement);
+            draging(dragCircle);
         });
-    
-        const draging = (container, dragCircle, resizeElement) => {
-            let moving = () => {
-                
-                let containerOffset = container.getBoundingClientRect().left - 40,
-                    containerWidth = container.offsetWidth,
-                    rect = container.getBoundingClientRect().left - 40,
-                    movingValue = ( ( event.pageX - 37 )  - containerOffset) / (containerWidth / 100);
-                if(movingValue < 5)
-                    movingValue = 5;
-                else if(movingValue > 95)
-                    movingValue = 95;
-                dragCircle.style.left = movingValue+'%';
-                resizeElement.style.width = movingValue+'%';
-    
-            };
-    
+        let body = document.body;
+        dragCircle.addEventListener('touchstart', () => {
+            body.style.background = 'yellow';
+        });
+        dragCircle.addEventListener('touchmove', () => {
+            body.style.background = 'green';
+            moving();
+        });
+        let moving = () => {
+            let pageX = (event.pageX !== undefined) ? event.pageX : event.changedTouches[0].clientX;
+            let containerOffset = container.getBoundingClientRect().left - 40,
+                containerWidth = container.offsetWidth,
+                movingValue = ( ( pageX - 37 )  - containerOffset ) / (containerWidth / 100);
+            if(movingValue < 5)
+                movingValue = 5;
+            else if(movingValue > 95)
+                movingValue = 95;
+            dragCircle.style.left = movingValue+'%';
+            resizeElement.style.width = movingValue+'%';
+        };
+        const draging = (dragCircle) => {
             container.addEventListener('mousemove', moving);
-    
             let dragRevoveFunc = (event) => {
                 container.removeEventListener('mousemove', moving);
             };
-    
             container.addEventListener('mouseup', dragRevoveFunc);
             window.addEventListener('mouseup', dragRevoveFunc);
         };
     });
-
 };
 
 if (
