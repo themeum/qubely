@@ -301,7 +301,7 @@ class Edit extends Component {
 
                                 <Color label={__('Slider Color')} value={controlColor} onChange={(value) => setAttributes({ controlColor: value })} />
                             </PanelBody>
-                            <PanelBody title={__('Ratina Images')} initialOpen={false}>
+                            <PanelBody title={__('Retina Images')} initialOpen={false}>
                                 <Media
                                     panel
                                     value={image2_2x}
