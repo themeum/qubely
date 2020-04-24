@@ -259,12 +259,38 @@ class GlobalSettings extends Component {
                                     activePreset: isActivePreset ? undefined : index
                                 })
                             }
+                            const duplicatePreset = (selectedPreset) => {
+                                this.setState(prevState => {
+                                    let numOfPresets = Object.keys(presets).length,
+                                        tempPreset = JSON.parse(JSON.stringify(prevState.presets[selectedPreset]));
+
+                                    const newPresetName = `preset${numOfPresets + 1}`;
+                                    prevState.presets[newPresetName] = tempPreset;
+                                    prevState.presets[newPresetName].name = `Copy${tempPreset.name}`;
+                                    prevState.presets[newPresetName].key = newPresetName;
+                                    return ({
+                                        presets: prevState.presets
+                                    });
+                                })
+
+                            }
+                            const deletePreset = (selectedPreset) => {
+                                this.setState(prevState => {
+                                    delete prevState.presets[selectedPreset];
+                                    return ({
+                                        presets: prevState.presets,
+                                        // ...((selectedPreset === activePreset) && { activePreset: undefined})
+                                    })
+                                })
+                            }
                             return (
                                 <div key={name} className={classes}>
                                     <div className="title-wrapper">
                                         <div
                                             className="title"
-                                            onClick={() => this.setState({ showPresetSettings: index })}
+                                            onClick={() => this.setState(state => ({
+                                                showPresetSettings: state.showPresetSettings === index ? undefined : index
+                                            }))}
                                         >
                                             <span className="radio-button">{isActivePreset ? icons.circleDot : icons.circleThin}</span>
                                             <span className="name"> {name}</span>
@@ -285,8 +311,8 @@ class GlobalSettings extends Component {
                                                     <div className="global-preset-options">
                                                         <div className={activeClass} {...(!isActivePreset && { onClick: () => changePreset(key) })} >Activate</div>
                                                         <div>Rename</div>
-                                                        <div>Duplicate</div>
-                                                        <div>Delete</div>
+                                                        <div onClick={() => duplicatePreset(presetKey)}>Duplicate</div>
+                                                        <div onClick={() => deletePreset(presetKey)}>Delete</div>
                                                     </div>
                                                 )
                                             }}
@@ -317,20 +343,21 @@ class GlobalSettings extends Component {
                                                     {
                                                         typography.map((item, index) => {
                                                             let displaySettings = false;
-                                                            if (isActivePreset && showTypoSettings === index) {
+                                                            if (showTypoSettings === index) {
                                                                 displaySettings = true;
                                                             }
                                                             let titleClasses = classnames(
                                                                 'typo-name',
                                                                 { ['active']: displaySettings }
                                                             )
+                                                            let Tag = `h${index + 1}`
                                                             return (
                                                                 <div className="qubely-global typography qubely-d-flex qubely-align-justified">
                                                                     <div
                                                                         className={titleClasses}
                                                                         onClick={() => this.setState({ showTypoSettings: displaySettings ? undefined : index })}
                                                                     >
-                                                                        {item.name}
+                                                                        <Tag> {item.name}</Tag>
                                                                     </div>
 
                                                                     {displaySettings &&

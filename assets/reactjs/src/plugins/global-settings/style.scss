@@ -11,7 +11,6 @@
             position: relative;
             outline: none;
             width: 100%;
-            font-weight: 600;
             text-align: left;
             color: #191e23;
             border: none;
@@ -60,9 +59,7 @@
                 margin-bottom: 30px;
             }
             .typo-name {
-                padding: 20px 10px;
-                font-size: 16px;
-                font-weight: 600;
+                padding: 5px 10px;
                 color: black;
                 cursor: pointer;
                 border-radius: 5px;
@@ -70,8 +67,19 @@
                     border-bottom-left-radius: 0px;
                     border-bottom-right-radius: 0px;
                 }
-                border: 1px solid #dbdfe4;
-                background-color: #f8f8f8;
+                &:hover,
+                &.active {
+                    border: 1px solid #dbdfe4;
+                    background-color: #f8f8f8;
+                }
+                // > h1,
+                // h2,
+                // h3,
+                // h4,
+                // h5,
+                // h6 {
+                //     margin-bottom: 0px;
+                // }
             }
             .qubely-field-typography {
                 padding: 12px;
@@ -110,4 +118,8 @@
             }
         }
     }
+}
+
+.components-panel__body.is-opened {
+    padding: 16px 0px;
 }
