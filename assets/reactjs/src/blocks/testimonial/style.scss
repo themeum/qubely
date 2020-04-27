@@ -69,5 +69,37 @@
             content: "\f005\f005\f005\f005\f005";
             width: var(--qubely-testimonial-rating);
         }
+
+        /**
+         * For Backward Compatibility
+         */
+        &[data-qubelyrating="1"]:before {
+            width: 20%;
+        }
+        &[data-qubelyrating="1.5"]:before {
+            width: 29%;
+        }
+        &[data-qubelyrating="2"]:before {
+            width: 40%;
+        }
+        &[data-qubelyrating="2.5"]:before {
+            width: 49%;
+        }
+        &[data-qubelyrating="3"]:before {
+            width: 60%;
+        }
+        &[data-qubelyrating="3.5"]:before {
+            width: 69%;
+        }
+        &[data-qubelyrating="4"]:before {
+            width: 80%;
+        }
+        &[data-qubelyrating="4.5"]:before {
+            width: 89%;
+        }
+        &[data-qubelyrating="5"]:before {
+            width: 100%;
+        }
+        // end backward compatibility
     }
 }
