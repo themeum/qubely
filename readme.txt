@@ -238,7 +238,7 @@ You can report bugs on the [support forum here](https://wordpress.org/support/pl
 == Changelog ==
 
 = 1.3.9 - 27 April, 2020 =
-Fix: Testimonial rating backward compability issue
+Fix: Testimonial block - ratings backward compatibility issue
 Fix: Image comparison block responsive issue
 
 = 1.3.8 - 22 April, 2020 =
