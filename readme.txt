@@ -4,7 +4,7 @@ Donate link: https://www.themeum.com
 Tags: blocks, gutenberg, gutenberg blocks, editor, block, page builder
 Requires at least: 5.0
 Tested up to: 5.4
-Stable tag: 1.3.8
+Stable tag: 1.3.9
 Requires PHP: 7.0
 License: GPL-2.0+
 License URI: http://www.gnu.org/licenses/gpl-2.0.txt
@@ -236,6 +236,10 @@ You can report bugs on the [support forum here](https://wordpress.org/support/pl
 
 
 == Changelog ==
+
+= 1.3.9 - 27 April, 2020 =
+Fix: Testimonial rating backward compability issue
+Fix: Image comparison block responsive issue
 
 = 1.3.8 - 22 April, 2020 =
 New: Image comparison Block
