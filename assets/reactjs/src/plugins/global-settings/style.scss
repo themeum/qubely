@@ -112,6 +112,19 @@
                 }
             }
         }
+        .qubely-global.qubely-color-picker-container {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            justify-content: center;
+            background: transparent;
+        }
+    }
+    .components-panel__body.is-opened {
+        padding: 16px 0px;
     }
 }
 
@@ -128,8 +141,4 @@
             }
         }
     }
-}
-
-.components-panel__body.is-opened {
-    padding: 16px 0px;
 }

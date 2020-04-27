@@ -222,6 +222,13 @@ class GlobalSettings extends Component {
                 return { presets: tempPresets };
             });
         }
+        const addNewColor = (value, presetKey) => {
+            this.setState(({ presets }, props) => {
+                let tempPresets = presets;
+                tempPresets[presetKey].colors.push(value);
+                return { presets: tempPresets };
+            });
+        }
         const updatePreset = (propertyName, index, newValue, presetKey, isObject = false) => {
             // console.log('new update : ', propertyName, index, newValue, presetKey);
 
@@ -388,11 +395,16 @@ class GlobalSettings extends Component {
                                                             />
                                                         ))
                                                     }
+                                                    <Color
+                                                        addNewColor
+                                                        value={undefined}
+                                                        onChange={value => addNewColor(value, presetKey)}
+                                                    />
                                                 </div>
                                             </PanelBody>
                                             {
                                                 (typeof typography !== 'undefined' && typography.length > 0) &&
-                                                <PanelBody title={__('Typography')}  initialOpen={true}>
+                                                <PanelBody title={__('Typography')} initialOpen={true}>
                                                     {
                                                         typography.map((item, index) => {
                                                             let displaySettings = false;

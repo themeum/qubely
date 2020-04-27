@@ -1,7 +1,7 @@
 
 import classNames from 'classnames';
 import '../../../components/css/color.scss';
-
+import icons from '../../../helpers/icons';
 const {
     useState,
 } = wp.element;
@@ -12,7 +12,7 @@ const {
 } = wp.components;
 
 
-export default function Color({ value, onChange }) {
+export default function Color({ value, onChange, addNewColor = false }) {
 
     const [showColorPicker, toggleColorPicker] = useState();
 
@@ -23,27 +23,40 @@ export default function Color({ value, onChange }) {
         'qubely-align-center'
     );
 
+    let containerClasses = classNames(
+        'qubely-color-picker-container',
+        { ['qubely-global']: addNewColor }
+    )
     return (
         <div className={classes}>
-        
+
             <Dropdown
                 position="top center"
                 className="qubely-ml-auto"
                 renderToggle={({ isOpen, onToggle }) => (
-                    <span className="qubely-color-picker-container">
-                        <span
-                            isPrimary
-                            aria-expanded={isOpen}
-                            className="qubely-color-picker"
-                            style={{ backgroundColor: value || 'transparent' }}
-                            onClick={onToggle}
-                        />
+                    <span className={containerClasses}>
+                        {
+                            addNewColor ?
+                                icons.plus
+                                :
+                                <span
+                                    isPrimary
+                                    aria-expanded={isOpen}
+                                    className="qubely-color-picker"
+                                    style={{ backgroundColor: value || 'transparent' }}
+                                    onClick={onToggle}
+                                />
+                        }
                     </span>
                 )}
-                renderContent={() => (
-                    <div>
+                renderContent={() => {
+
+                    if (addNewColor) {
+                        return (<div>test</div>)
+                    }
+                    return (
                         <ColorPicker
-                            color={value}
+                            color={typeof undefined !== 'undefined' ? value : '#000'}
                             disableAlpha={false}
                             onChangeComplete={newColor => {
                                 console.log('change complete');
@@ -54,9 +67,8 @@ export default function Color({ value, onChange }) {
                                 }
                             }}
                         />
-                    </div>
-
-                )}
+                    )
+                }}
             />
         </div>
     );
