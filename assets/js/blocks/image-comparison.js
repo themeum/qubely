@@ -9,16 +9,13 @@ var imageComparison = function () {
     dragCircles.forEach( (dragCircle) => {
         const container = dragCircle.parentNode;
         const resizeElement = container.querySelector('.resizable-img');
-        dragCircle.addEventListener('mousedown', (event) => {
+        dragCircle.addEventListener('mousedown', function mouseDownTrigger(event) {
+            // prevent right click mouse down
+            if(event.which == 3 || event.which == 2) {
+                dragCircle.removeEventListener('mousedown', mouseDownTrigger);
+                return 0;
+            }
             draging(dragCircle);
-        });
-        let body = document.body;
-        dragCircle.addEventListener('touchstart', () => {
-            body.style.background = 'yellow';
-        });
-        dragCircle.addEventListener('touchmove', () => {
-            body.style.background = 'green';
-            moving();
         });
         let moving = () => {
             let pageX = (event.pageX !== undefined) ? event.pageX : event.changedTouches[0].clientX;
@@ -32,6 +29,10 @@ var imageComparison = function () {
             dragCircle.style.left = movingValue+'%';
             resizeElement.style.width = movingValue+'%';
         };
+        //touch event
+        dragCircle.addEventListener('touchmove', () => {
+            moving();
+        });
         const draging = (dragCircle) => {
             container.addEventListener('mousemove', moving);
             let dragRevoveFunc = (event) => {
@@ -41,6 +42,7 @@ var imageComparison = function () {
             window.addEventListener('mouseup', dragRevoveFunc);
         };
     });
+
 };
 
 if (
