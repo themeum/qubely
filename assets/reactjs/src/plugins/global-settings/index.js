@@ -19,7 +19,8 @@ const {
 const {
     Dropdown,
     PanelBody,
-    ColorPicker
+    ColorPicker,
+    TextControl
 } = wp.components;
 
 const {
@@ -27,7 +28,10 @@ const {
     withDispatch,
 } = wp.data;
 
-const { PanelColorSettings } = wp.blockEditor
+const {
+    RichText,
+    PanelColorSettings
+} = wp.blockEditor;
 
 const {
     PluginSidebar,
@@ -58,7 +62,7 @@ const DEFAULTPRESETS = {
     activePreset: undefined,
     presets: {
         preset1: {
-            name: 'Preset1',
+            name: 'Preset #1',
             key: 'preset1',
             colors: ['#4A90E2', '#50E3C2', '#000', '#4A4A4A', '#9B9B9B'],
             typography: [
@@ -115,7 +119,7 @@ const DEFAULTPRESETS = {
 
         },
         preset2: {
-            name: 'Preset2',
+            name: 'Preset #2',
             key: 'preset2',
             colors: ['#4A90E2', '#50E3C2', '#000', '#4A4A4A', '#9B9B9B'],
             typography: [],
@@ -136,6 +140,7 @@ class GlobalSettings extends Component {
         this.state = {
             presets: {},
             activePreset: null,
+            enableRenaming: false,
             showTypoSettings: undefined,
             showPresetSettings: undefined
         }
@@ -200,6 +205,7 @@ class GlobalSettings extends Component {
         const {
             presets,
             activePreset,
+            enableRenaming,
             showTypoSettings,
             showPresetSettings
         } = this.state;
@@ -245,13 +251,20 @@ class GlobalSettings extends Component {
                                 typography
                             } = presets[presetKey];
 
-                            let isActivePreset = false;
+                            let isActivePreset = false, showDetailedSettings = false;
+
                             if (activePreset === key) {
                                 isActivePreset = true;
                             }
+
+                            if (showPresetSettings === index) {
+                                showDetailedSettings = true;
+                            }
+
                             const classes = classnames(
                                 'preset',
-                                { ['active']: isActivePreset }
+                                { ['active']: isActivePreset },
+                                { ['detailed']: showDetailedSettings }
                             )
                             const changePreset = (index) => {
                                 this.setState({
@@ -281,27 +294,58 @@ class GlobalSettings extends Component {
                                         presets: prevState.presets,
                                         // ...((selectedPreset === activePreset) && { activePreset: undefined})
                                     })
+                                });
+                            }
+
+                            const renameTitle = (newTitle, presetKey) => {
+                                console.log(' renameTitle(newTitle, presetKey) : ', newTitle, presetKey);
+                                this.setState(prevState => {
+                                    prevState.presets[presetKey].name = newTitle;
+                                    return ({
+                                        presets: prevState.presets,
+                                    })
                                 })
                             }
+
+                            const saveAsNew = (presetKey) => {
+
+                            }
+
+
                             return (
                                 <div key={name} className={classes}>
                                     <div className="title-wrapper">
+
                                         <div
                                             className="title"
-                                            onClick={() => this.setState(state => ({
-                                                showPresetSettings: state.showPresetSettings === index ? undefined : index
-                                            }))}
+                                            {...(!showDetailedSettings && {
+                                                onClick: () => this.setState(state => ({
+                                                    showPresetSettings: showDetailedSettings ? undefined : index
+                                                }))
+                                            })}
+
                                         >
-                                            <span className="radio-button">{isActivePreset ? icons.circleDot : icons.circleThin}</span>
+                                            {
+                                                showDetailedSettings ?
+                                                    <span className="radio-button"
+                                                        onClick={() => this.setState(state => ({
+                                                            showPresetSettings: showDetailedSettings ? undefined : index
+                                                        }))}>
+                                                        {icons.left}</span>
+                                                    :
+                                                    <span className="radio-button">{isActivePreset ? icons.circleDot : icons.circleThin}</span>
+                                            }
                                             <span className="name"> {name}</span>
                                         </div>
-
                                         <Dropdown
                                             position="bottom center"
                                             className="options"
                                             contentClassName="global-settings preset-options"
                                             renderToggle={({ isOpen, onToggle }) => (
-                                                <div className="icon" onClick={onToggle}>{icons.ellipsis_v} </div>
+                                                showDetailedSettings ?
+                                                    <div className="icon" onClick={onToggle}>{icons.ellipsis_h} </div>
+                                                    :
+                                                    <div className="icon" onClick={onToggle}>{icons.ellipsis_v} </div>
                                             )}
                                             renderContent={() => {
                                                 let activeClass = classnames(
@@ -309,19 +353,28 @@ class GlobalSettings extends Component {
                                                 )
                                                 return (
                                                     <div className="global-preset-options">
-                                                        <div className={activeClass} {...(!isActivePreset && { onClick: () => changePreset(key) })} >Activate</div>
-                                                        <div>Rename</div>
-                                                        <div onClick={() => duplicatePreset(presetKey)}>Duplicate</div>
+                                                        {
+                                                            showDetailedSettings ?
+                                                                <div onClick={() => saveAsNew(presetKey)}>Save as New</div>
+                                                                :
+                                                                <Fragment>
+                                                                    <div className={activeClass} {...(!isActivePreset && { onClick: () => changePreset(key) })} >Activate</div>
+                                                                    <div onClick={() => this.setState(state => ({ enableRenaming: !state.enableRenaming }))}>Rename</div>
+                                                                    <div onClick={() => duplicatePreset(presetKey)}>Duplicate</div>
+                                                                </Fragment>
+                                                        }
+
                                                         <div onClick={() => deletePreset(presetKey)}>Delete</div>
                                                     </div>
                                                 )
                                             }}
                                         />
 
+
                                     </div>
 
                                     {
-                                        (showPresetSettings === index) &&
+                                        showDetailedSettings &&
                                         <Fragment>
 
                                             <PanelBody title={__('Global Colors')} initialOpen={true}>
@@ -339,7 +392,7 @@ class GlobalSettings extends Component {
                                             </PanelBody>
                                             {
                                                 (typeof typography !== 'undefined' && typography.length > 0) &&
-                                                <PanelBody initialOpen={true} title={__('Typography')}>
+                                                <PanelBody title={__('Typography')}  initialOpen={true}>
                                                     {
                                                         typography.map((item, index) => {
                                                             let displaySettings = false;

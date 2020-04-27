@@ -1,7 +1,24 @@
 .qubely-global-settings {
-    padding: 10px 15px;
     .preset {
-        margin: 20px 0px;
+        margin: 10px 0px;
+        &:not(.detailed) {
+            padding: 10px 16px;
+            .title-wrapper {
+                border-radius: 5px;
+                border: 1px solid #dbdfe4;
+            }
+        }
+        &.detailed {
+            .title-wrapper {
+                border-radius: 5px;
+                border: 1px solid #dbdfe4;
+                background-color: #f8f8f8;
+            }
+            .components-panel__body {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+        }
         .title-wrapper {
             display: flex;
             align-items: center;
@@ -16,8 +33,6 @@
             border: none;
             box-shadow: none;
             transition: background 0.1s ease-in-out;
-            border-radius: 5px;
-            border: 1px solid #dbdfe4;
             > div {
                 padding: 12px 15px;
             }
@@ -45,11 +60,6 @@
                     align-items: center;
                     justify-content: center;
                 }
-            }
-        }
-        &.active {
-            .title-wrapper {
-                color: #2184f9;
             }
         }
         .qubely-global {
