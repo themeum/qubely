@@ -20,14 +20,38 @@ if (!class_exists('QUBELY_Options')) {
          */
         public  function add_admin_menu()
         {
+//            add_menu_page(
+//                esc_html__('Qubely Options', 'qubely'),
+//                esc_html__('Qubely Options', 'qubely'),
+//                'manage_options',
+//                'qubely-settings',
+//                array($this, 'create_admin_page'),
+//                QUBELY_DIR_URL . 'assets/img/qubely-logo-white.svg'
+//            );
+
             add_menu_page(
-                esc_html__('Qubely Options', 'qubely'),
-                esc_html__('Qubely Options', 'qubely'),
+                esc_html__('Qubely', 'qubely'),
+                esc_html__('Qubely', 'qubely'),
                 'manage_options',
                 'qubely-settings',
-                array($this, 'create_admin_page'),
+                array($this, 'settings_page'),
                 QUBELY_DIR_URL . 'assets/img/qubely-logo-white.svg'
             );
+
+            add_submenu_page(
+                'qubely-settings',
+                esc_html__('Qubely Settings', 'qubely'),
+                esc_html__('Settings', 'qubely'),
+                'manage_options',
+                'qubely-settings',
+                array($this, 'settings_page'),
+                null
+            );
+        }
+
+        public function settings_page()
+        {
+            return "Hello";
         }
 
         /**
