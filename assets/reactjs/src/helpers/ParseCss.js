@@ -230,7 +230,11 @@ const ParseCss = (setDatabase = true) => {
     const available_blocks = availableBlocksMeta(all_blocks);
 
     if (setDatabase) {
-        API_fetch(getCurrentPostId(), __blocks, isRemain, available_blocks )
+        try{
+            API_fetch(getCurrentPostId(), __blocks, isRemain, available_blocks )
+        } catch (e) {
+            console.log(e)
+        }
     }
     setTimeout(() => {
         window.bindCss = false
