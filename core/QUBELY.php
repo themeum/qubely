@@ -41,7 +41,6 @@ class QUBELY
 		add_action('wp_enqueue_scripts', array($this, 'qubely_enqueue_scripts'));
 
 		// Load Inline Scripts
-		// add_action('wp_enqueue_scripts', array($this, 'qubely_inline_header_scripts'), 0);
 		add_action('admin_head', array($this, 'qubely_inline_admin_header_scripts'), 0);
 		add_action('wp_footer', array($this, 'qubely_inline_footer_scripts'));
 
@@ -430,30 +429,6 @@ class QUBELY
 					window.document.getElementsByTagName("head")[0].appendChild(cssInline);
 				}
 			})
-		</script>
-	<?php
-	}
-
-	/**
-	 * Load Inline Header Script
-	 * @since 1.3.0
-	 */
-	public function qubely_inline_header_scripts()
-	{
-	?>
-		<script>
-			function loadScriptAsync(src) {
-				return new Promise((resolve, reject) => {
-					const tag = document.createElement('script');
-					tag.src = src;
-					tag.async = true;
-					tag.onload = () => {
-						resolve();
-					};
-					const firstScriptTag = document.getElementsByTagName('script')[0];
-					firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-				});
-			}
 		</script>
 	<?php
 	}
