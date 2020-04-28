@@ -225,11 +225,25 @@ const ParseCss = async (setDatabase = true) => {
     const getGlobalSettings = () => {
         return fetchFromApi().then(data => {
             if (data.success) {
-                const { presets, activePreset } = data.settings;
-                globalData = presets[activePreset];
-                console.log('presets[activePreset] : ',presets[activePreset].typography);
-                // console.log('global frontend : ', CssGenerator(presets[activePreset].typography, 'global-settings', 'global', true, true, true, presets[activePreset].typography))
+                const {
+                    presets,
+                    activePreset
+                } = data.settings;
+
+                globalData = presets[activePreset]; 
+                let globalColors = ['#4A90E2', '#50E3C2', '#000', '#4A4A4A', '#9B9B9B'];
+
+                if (presets[activePreset].colors && presets[activePreset].colors.length > 0) {
+                    globalColors = presets[activePreset].colors;
+                }
+                
+                let globalColorStyle = ':root {'
+                globalColors.forEach((color, index) => globalColorStyle += `--qubely-color-${index + 1}:${color};`);
+                globalColorStyle += '}'
+
+                __blocks.css += globalColorStyle
                 __blocks.css += CssGenerator(presets[activePreset].typography, 'global-settings', 'global', true, true, true, presets[activePreset].typography)
+
             }
 
         })

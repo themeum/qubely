@@ -105,7 +105,7 @@ class Color extends Component {
                             {!disablePalette &&
                                 <div className="qubely-rgba-palette">
                                     {/* {globalColors.map(color => <button style={{ color: color }} onClick={() => onChange(color)} />)} */}
-                                    {globalColors.map((color, index) => <button style={{ color: `var(--color-${index + 1})` }} onClick={() => onChange(`var(--color-${index + 1})`)} />)}
+                                    {globalColors.map((color, index) => <button style={{ color: `var(--qubely-color-${index + 1})` }} onClick={() => onChange(`var(--qubely-color-${index + 1})`)} />)}
                                 </div>
                             }
                         </span>

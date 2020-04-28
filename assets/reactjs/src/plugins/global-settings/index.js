@@ -171,23 +171,21 @@ class GlobalSettings extends Component {
             presets,
             activePreset
         } = this.state;
-        console.log('preset : ', presets[activePreset]);
-        console.log('prev : ', prevState.presets[activePreset]);
-        // console.log('diif : ', diff(prevState.presets, presets));
-        console.log('is equal : ',isShallowEqual(prevState.presets, presets));
         if (presets && activePreset) {
-            // let color_1 = getComputedStyle(document.documentElement).getPropertyValue('--color-1')
             if (activePreset !== prevState.activePreset) {
-                presets[activePreset].colors.forEach((color, index) => document.documentElement.style.setProperty(`--color-${index + 1}`, color))
+                this.updateColorVariables(presets[activePreset].colors);
             }
         }
+    }
 
+    updateColorVariables = (colors) => {
+        colors.forEach((color, index) => document.documentElement.style.setProperty(`--qubely-color-${index + 1}`, color))
     }
 
     getGlobalSettings = () => {
         return fetchFromApi().then(data => {
             if (data.success) {
-                console.log('data : ',data.settings);
+                console.log('data : ', data.settings);
                 this.setState({ ...DEFAULTPRESETS, ...data.settings })
             } else {
                 this.setState({ ...DEFAULTPRESETS })
@@ -235,6 +233,7 @@ class GlobalSettings extends Component {
             this.setState(({ presets }, props) => {
                 let tempPresets = presets;
                 tempPresets[presetKey].colors[key] = newValue;
+                this.updateColorVariables(tempPresets[presetKey].colors);
                 return { presets: tempPresets };
             });
         }
