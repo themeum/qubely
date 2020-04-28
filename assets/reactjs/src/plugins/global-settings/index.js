@@ -4,7 +4,8 @@ import classnames from 'classnames';
 import icons from '../../helpers/icons';
 import { isObject } from '../../components/HelperFunction';
 
-
+const { getComputedStyle } = window;
+const diff = require("deep-object-diff").diff;
 /**
  * WordPress dependencies
  */
@@ -146,8 +147,10 @@ class GlobalSettings extends Component {
         }
     }
 
-    componentDidMount() {
-        this.getGlobalSettings();
+    async componentDidMount() {
+
+        await this.getGlobalSettings();
+
         wp.data.subscribe(() => {
             const {
                 isSavingPost,
@@ -161,16 +164,32 @@ class GlobalSettings extends Component {
             }
         });
     }
+
+    componentDidUpdate(prevProps, prevState) {
+        const {
+            presets,
+            activePreset
+        } = this.state;
+        // console.log('preset : ', presets[activePreset]);
+        // console.log('prev : ', prevState.presets[activePreset]);
+        // console.log('diif : ', diff(prevState.presets[activePreset], presets[activePreset]));
+        if (presets && activePreset) {
+            // let color_1 = getComputedStyle(document.documentElement).getPropertyValue('--color-1')
+            if (activePreset !== prevState.activePreset) {
+                presets[activePreset].colors.forEach((color, index) => document.documentElement.style.setProperty(`--color-${index + 1}`, color))
+            }
+        }
+
+    }
+
     getGlobalSettings = () => {
         return fetchFromApi().then(data => {
             if (data.success) {
-                console.log('data : ', data.settings);
                 this.setState({ ...DEFAULTPRESETS, ...data.settings })
             } else {
                 this.setState({ ...DEFAULTPRESETS })
             }
-
-        })
+        });
     }
     updateGlobalSettings = () => {
         const {
@@ -201,7 +220,10 @@ class GlobalSettings extends Component {
     }
 
     render() {
-
+        const test = () => {
+            console.log('function : ', getComputedStyle(document.documentElement).getPropertyValue('--color-1')
+            )
+        }
         const {
             presets,
             activePreset,
@@ -460,6 +482,7 @@ class GlobalSettings extends Component {
                     title={__('Global Settings')}
                 >
                     {renderPresets()}
+                    <button onClick={() => test()}>get</button>
                     <button onClick={() => this.getGlobalSettings()}>get</button>
                     <button onClick={() => this.updateGlobalSettings()}>Save</button>
                     <button onClick={() => this.delGlobalSettings()}>delete</button>
