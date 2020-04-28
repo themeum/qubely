@@ -5,6 +5,7 @@ import icons from '../../helpers/icons';
 import { isObject } from '../../components/HelperFunction';
 
 const { getComputedStyle } = window;
+const { isShallowEqual } = wp
 const diff = require("deep-object-diff").diff;
 /**
  * WordPress dependencies
@@ -170,9 +171,10 @@ class GlobalSettings extends Component {
             presets,
             activePreset
         } = this.state;
-        // console.log('preset : ', presets[activePreset]);
-        // console.log('prev : ', prevState.presets[activePreset]);
-        // console.log('diif : ', diff(prevState.presets[activePreset], presets[activePreset]));
+        console.log('preset : ', presets[activePreset]);
+        console.log('prev : ', prevState.presets[activePreset]);
+        // console.log('diif : ', diff(prevState.presets, presets));
+        console.log('is equal : ',isShallowEqual(prevState.presets, presets));
         if (presets && activePreset) {
             // let color_1 = getComputedStyle(document.documentElement).getPropertyValue('--color-1')
             if (activePreset !== prevState.activePreset) {
@@ -185,20 +187,15 @@ class GlobalSettings extends Component {
     getGlobalSettings = () => {
         return fetchFromApi().then(data => {
             if (data.success) {
+                console.log('data : ',data.settings);
                 this.setState({ ...DEFAULTPRESETS, ...data.settings })
             } else {
                 this.setState({ ...DEFAULTPRESETS })
             }
         });
     }
+
     updateGlobalSettings = () => {
-        const {
-            presets,
-            activePreset
-        } = this.state;
-
-        console.log('state before saving : ', presets[activePreset].typography[0]);
-
         wp.apiFetch({
             path: PATH.post,
             method: 'POST',
@@ -208,6 +205,7 @@ class GlobalSettings extends Component {
             return data
         })
     }
+
     delGlobalSettings = () => {
         wp.apiFetch({
             path: PATH.post,
@@ -220,10 +218,6 @@ class GlobalSettings extends Component {
     }
 
     render() {
-        const test = () => {
-            console.log('function : ', getComputedStyle(document.documentElement).getPropertyValue('--color-1')
-            )
-        }
         const {
             presets,
             activePreset,
@@ -482,7 +476,7 @@ class GlobalSettings extends Component {
                     title={__('Global Settings')}
                 >
                     {renderPresets()}
-                    <button onClick={() => test()}>get</button>
+
                     <button onClick={() => this.getGlobalSettings()}>get</button>
                     <button onClick={() => this.updateGlobalSettings()}>Save</button>
                     <button onClick={() => this.delGlobalSettings()}>delete</button>
