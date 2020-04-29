@@ -20,39 +20,39 @@ const {
 
 const {
     RichText,
-    InspectorControls,
-    BlockControls
+    BlockControls,
+    InspectorControls
 } = wp.blockEditor;
 
 const {
-    Alignment,
-    Typography,
+    Url,
+    Tab,
+    Tabs,
     Color,
-    ColorAdvanced,
-    IconList,
+    Range,
+    Border,
     Select,
     Styles,
-    Tabs,
-    Tab,
-    Range,
-    Url,
-    BoxShadow,
-    RadioAdvanced,
-    Separator,
-    Border,
-    BorderRadius,
     Padding,
-    withCSSGenerator,
-    InspectorTabs,
+    IconList,
+    Separator,
+    Alignment,
+    BoxShadow,
+    Typography,
+    BorderRadius,
     InspectorTab,
+    InspectorTabs,
+    RadioAdvanced,
+    ColorAdvanced,
+    withCSSGenerator,
     InspectorSections,
     Inline: {
         InlineToolbar
     },
     gloalSettings: {
-        globalSettingsPanel,
         animationSettings,
-        interactionSettings
+        interactionSettings,
+        globalSettingsPanel,
     },
     ContextMenu: {
         ContextMenu,
@@ -72,19 +72,23 @@ class Edit extends Component {
 
     componentDidMount() {
         const {
-            setAttributes,
             clientId,
+            setAttributes,
             attributes: {
                 uniqueId
             }
         } = this.props;
 
         const _client = clientId.substr(0, 6);
-
+        let overWriteTheme = false;
+        if (qubely_admin.overwriteTheme) {
+            overWriteTheme = true;
+        }
+        console.log(qubely_admin.overwriteTheme)
         if (!uniqueId) {
-            setAttributes({ uniqueId: _client });
+            setAttributes({ uniqueId: _client, ...(qubely_admin.overwriteTheme && { overWriteTheme }) });
         } else if (uniqueId && uniqueId != _client) {
-            setAttributes({ uniqueId: _client });
+            setAttributes({ uniqueId: _client, ...(qubely_admin.overwriteTheme && { overWriteTheme }) });
         }
     }
 
@@ -99,38 +103,38 @@ class Edit extends Component {
             updateBlockAttributes,
             buttonGroupAttributes,
             attributes: {
-                uniqueId,
-                className,
-                parentClientId,
-                buttonGroup,
-                disableFullWidth,
-                fillType,
-                buttonSize,
-                buttonWidthType,
-                buttonWidth,
-                buttonPadding,
-                typography,
-                textField,
                 url,
-                enableAlignment,
-                alignment,
-                buttonBorderRadius,
                 iconName,
+                fillType,
+                uniqueId,
+                textField,
+                alignment,
+                className,
+                buttonSize,
+                typography,
+                buttonWidth,
+                buttonGroup,
                 iconPosition,
-                iconSize,
+                buttonPadding,
+                parentClientId,
+                buttonWidthType,
+                overWriteTheme,
+                enableAlignment,
+                disableFullWidth,
+                buttonBorderRadius,
                 iconGap,
-                buttonBorder,
-                borderHoverColor,
-                buttonColor,
-                buttonColor2,
-                buttonHoverColor,
-                buttonHoverColor2,
                 bgColor,
-                bgHoverColor,
-                buttonShadow,
-                buttonHoverShadow,
+                iconSize,
                 animation,
                 interaction,
+                buttonColor,
+                bgHoverColor,
+                buttonBorder,
+                buttonShadow,
+                buttonColor2,
+                borderHoverColor,
+                buttonHoverColor,
+                buttonHoverColor2,
                 enablePosition,
                 selectPosition,
                 positionXaxis,
@@ -138,7 +142,8 @@ class Edit extends Component {
                 globalZindex,
                 hideTablet,
                 hideMobile,
-                globalCss
+                globalCss,
+                buttonHoverShadow,
             }
         } = this.props;
 
@@ -160,17 +165,18 @@ class Edit extends Component {
                 <InspectorControls key="inspector">
                     <InspectorTabs>
                         <InspectorTab key='layout'>
-                            <InspectorSections block='button'/>
+                            <InspectorSections block='button' />
                         </InspectorTab>
                         <InspectorTab key='style'>
                             <PanelBody title={__('')} opened={true}>
                                 <Styles value={fillType}
-                                        onChange={(value) => setAttributes({ fillType: value })}
-                                        options={[
-                                            { value: 'fill', svg: icons.btn_fill, label: __('Fill') },
-                                            { value: 'outline', svg: icons.btn_outline, label: __('Outline') }
-                                        ]}
+                                    onChange={(value) => setAttributes({ fillType: value })}
+                                    options={[
+                                        { value: 'fill', svg: icons.btn_fill, label: __('Fill') },
+                                        { value: 'outline', svg: icons.btn_outline, label: __('Outline') }
+                                    ]}
                                 />
+                                <button onClick={() => setAttributes({ overWriteTheme: !overWriteTheme })}>Toogle Overwrite</button>
                                 <Separator />
                                 <Url label={__('Button URL')} value={url} onChange={(value) => setAttributes({ url: value })} />
                                 {
@@ -200,16 +206,16 @@ class Edit extends Component {
                                     value={buttonSize}
                                     onChange={(value) => setAttributes({ buttonSize: value })} />
                                 {buttonSize == 'custom' &&
-                                <Padding
-                                    label={__('Padding')}
-                                    value={buttonPadding}
-                                    onChange={(value) => setAttributes({ buttonPadding: value })}
-                                    unit={['px', 'em', '%']}
-                                    max={150}
-                                    min={0}
-                                    responsive
-                                    device={device}
-                                    onDeviceChange={value => this.setState({ device: value })} />
+                                    <Padding
+                                        label={__('Padding')}
+                                        value={buttonPadding}
+                                        onChange={(value) => setAttributes({ buttonPadding: value })}
+                                        unit={['px', 'em', '%']}
+                                        max={150}
+                                        min={0}
+                                        responsive
+                                        device={device}
+                                        onDeviceChange={value => this.setState({ device: value })} />
                                 }
                                 <RadioAdvanced
                                     label={__('Button Width')}
@@ -221,16 +227,16 @@ class Edit extends Component {
                                     value={buttonWidthType}
                                     onChange={(value) => setAttributes({ buttonWidthType: value })} />
                                 {buttonWidthType == 'fixed' &&
-                                <Range
-                                    label={__('Fixed Width')}
-                                    valInspectorTabue={buttonWidth}
-                                    onChange={(value) => setAttributes({ buttonWidth: value })}
-                                    unit={['px', 'em', '%']}
-                                    min={buttonWidth.unit === '%' ? 5 : 30}
-                                    max={buttonWidth.unit === '%' ? 100 : 800}
-                                    responsive
-                                    device={device}
-                                    onDeviceChange={value => this.setState({ device: value })} />
+                                    <Range
+                                        label={__('Fixed Width')}
+                                        valInspectorTabue={buttonWidth}
+                                        onChange={(value) => setAttributes({ buttonWidth: value })}
+                                        unit={['px', 'em', '%']}
+                                        min={buttonWidth.unit === '%' ? 5 : 30}
+                                        max={buttonWidth.unit === '%' ? 100 : 800}
+                                        responsive
+                                        device={device}
+                                        onDeviceChange={value => this.setState({ device: value })} />
                                 }
                             </PanelBody>
                             <PanelBody title={__('Design')} initialOpen={false}>
@@ -238,7 +244,7 @@ class Edit extends Component {
                                     <Tab tabTitle={__('Normal')}>
                                         <Color label={__('Text Color')} value={fillType == 'fill' ? buttonColor : buttonColor2} onChange={(value) => fillType == 'fill' ? setAttributes({ buttonColor: value }) : setAttributes({ buttonColor2: value })} />
                                         {fillType == 'fill' &&
-                                        <ColorAdvanced label={__('Background')} value={bgColor} onChange={(value) => setAttributes({ bgColor: value })} />
+                                            <ColorAdvanced label={__('Background')} value={bgColor} onChange={(value) => setAttributes({ bgColor: value })} />
                                         }
                                         <Border label={__('Border')} value={buttonBorder} onChange={val => setAttributes({ buttonBorder: val })} min={0} max={10} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
                                         <BoxShadow label={__('Box-Shadow')} value={buttonShadow} onChange={(value) => setAttributes({ buttonShadow: value })} />
@@ -268,33 +274,33 @@ class Edit extends Component {
                                     value={iconName}
                                     onChange={(value) => this.props.setAttributes({ iconName: value })} />
                                 {iconName &&
-                                <Fragment>
-                                    <Select
-                                        label={__('Position')}
-                                        options={['left', 'right']}
-                                        value={iconPosition}
-                                        onChange={(value) => setAttributes({ iconPosition: value })} />
-                                    <Range
-                                        label={__('Size')}
-                                        value={iconSize}
-                                        onChange={(value) => setAttributes({ iconSize: value })}
-                                        unit={['px', 'em', '%']}
-                                        min={5}
-                                        max={48}
-                                        responsive
-                                        device={device}
-                                        onDeviceChange={value => this.setState({ device: value })} />
-                                    <Range
-                                        label={__('Gap')}
-                                        value={iconGap}
-                                        onChange={val => setAttributes({ iconGap: val })}
-                                        unit={['px', 'em', '%']}
-                                        min={0}
-                                        max={64}
-                                        responsive
-                                        device={device}
-                                        onDeviceChange={value => this.setState({ device: value })} />
-                                </Fragment>
+                                    <Fragment>
+                                        <Select
+                                            label={__('Position')}
+                                            options={['left', 'right']}
+                                            value={iconPosition}
+                                            onChange={(value) => setAttributes({ iconPosition: value })} />
+                                        <Range
+                                            label={__('Size')}
+                                            value={iconSize}
+                                            onChange={(value) => setAttributes({ iconSize: value })}
+                                            unit={['px', 'em', '%']}
+                                            min={5}
+                                            max={48}
+                                            responsive
+                                            device={device}
+                                            onDeviceChange={value => this.setState({ device: value })} />
+                                        <Range
+                                            label={__('Gap')}
+                                            value={iconGap}
+                                            onChange={val => setAttributes({ iconGap: val })}
+                                            unit={['px', 'em', '%']}
+                                            min={0}
+                                            max={64}
+                                            responsive
+                                            device={device}
+                                            onDeviceChange={value => this.setState({ device: value })} />
+                                    </Fragment>
                                 }
                             </PanelBody>
                             <PanelBody title={__('Typography')} initialOpen={false}>

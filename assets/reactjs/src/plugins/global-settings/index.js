@@ -153,6 +153,7 @@ class GlobalSettings extends Component {
         await this.getGlobalSettings();
 
         wp.data.subscribe(() => {
+            // console.log('subscribe test');
             const {
                 isSavingPost,
                 isPreviewingPost,
@@ -237,10 +238,10 @@ class GlobalSettings extends Component {
                 return { presets: tempPresets };
             });
         }
-        const addNewColor = (value, presetKey) => {
+        const addNewColor = (presetKey) => {
             this.setState(({ presets }, props) => {
                 let tempPresets = presets;
-                tempPresets[presetKey].colors.push(value);
+                tempPresets[presetKey].colors.push('');
                 return { presets: tempPresets };
             });
         }
@@ -405,7 +406,6 @@ class GlobalSettings extends Component {
                                                         colors.map((value, index) => (
                                                             <Color
                                                                 value={value}
-                                                                key={value + index}
                                                                 onChange={newValue => changeColor(index, newValue, presetKey)}
                                                             />
                                                         ))
@@ -413,7 +413,8 @@ class GlobalSettings extends Component {
                                                     <Color
                                                         addNewColor
                                                         value={undefined}
-                                                        onChange={value => addNewColor(value, presetKey)}
+                                                        addNew={() => addNewColor(presetKey)}
+                                                        onChange={newValue => changeColor(presets[presetKey].colors.length - 1, newValue, presetKey)}
                                                     />
                                                 </div>
                                             </PanelBody>
@@ -465,7 +466,7 @@ class GlobalSettings extends Component {
             )
         }
 
-        console.log('this state :', this.state);
+        // console.log('this state :', this.state);
 
         return (
             <Fragment>

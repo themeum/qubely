@@ -12,9 +12,9 @@ const {
 } = wp.components;
 
 
-export default function Color({ value, onChange, addNewColor = false }) {
+export default function Color({ value, onChange, addNew = undefined, addNewColor = false }) {
 
-    const [showColorPicker, toggleColorPicker] = useState();
+    const [newColorFlag, setNewColorFlag] = useState(addNewColor);
 
     const classes = classNames(
         'qubely-field',
@@ -35,25 +35,21 @@ export default function Color({ value, onChange, addNewColor = false }) {
                 className="qubely-ml-auto"
                 renderToggle={({ isOpen, onToggle }) => (
                     <span className={containerClasses}>
-                        {
-                            addNewColor ?
-                                <span
-                                    isPrimary
-                                    aria-expanded={isOpen}
-                                    style={{ backgroundColor: 'transparent' }}
-                                    onClick={onToggle}
-                                >
-                                    {icons.plus}
-                                </span>
-                                :
-                                <span
-                                    isPrimary
-                                    aria-expanded={isOpen}
-                                    className="qubely-color-picker"
-                                    style={{ backgroundColor: value || 'transparent' }}
-                                    onClick={onToggle}
-                                />
-                        }
+                        <span
+                            isPrimary
+                            aria-expanded={isOpen}
+                            className="qubely-color-picker"
+                            style={{ backgroundColor: (!addNewColor && value) ? value : 'transparent' }}
+                            onClick={() => {
+                                if (addNewColor) {
+                                    addNew();
+                                }
+                                onToggle()
+                            }}
+                        >
+                            {addNewColor && icons.plus}
+                        </span>
+
                     </span>
                 )}
                 renderContent={() => {

@@ -18,10 +18,13 @@
                 padding-left: 16px;
                 padding-right: 16px;
             }
-            .qubely-d-flex.qubely-align-justified{
-                display: block ;
-                >div{
-                    display: inline-block !important
+            .qubely-d-flex.qubely-align-justified {
+                display: block;
+                > div {
+                    display: inline-block !important;
+                    &:first-child {
+                        padding: 0 5px;
+                    }
                 }
             }
         }

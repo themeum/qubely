@@ -161,7 +161,7 @@ icons.ellipsis_h = <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xlink="
 icons.left = <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="13" height="15" viewBox="0 0 13 14">
     <path d="M12 7v1q0 0.414-0.254 0.707t-0.66 0.293h-5.5l2.289 2.297q0.297 0.281 0.297 0.703t-0.297 0.703l-0.586 0.594q-0.289 0.289-0.703 0.289-0.406 0-0.711-0.289l-5.086-5.094q-0.289-0.289-0.289-0.703 0-0.406 0.289-0.711l5.086-5.078q0.297-0.297 0.711-0.297 0.406 0 0.703 0.297l0.586 0.578q0.297 0.297 0.297 0.711t-0.297 0.711l-2.289 2.289h5.5q0.406 0 0.66 0.293t0.254 0.707z"></path>
 </svg>;
-icons.plus = <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="14" height="20" fill="#9b9b9b" viewBox="0 0 11 14">
+icons.plus = <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="14" height="30" fill="#9b9b9b" viewBox="0 0 11 14">
     <path d="M11 5.75v1.5q0 0.312-0.219 0.531t-0.531 0.219h-3.25v3.25q0 0.312-0.219 0.531t-0.531 0.219h-1.5q-0.312 0-0.531-0.219t-0.219-0.531v-3.25h-3.25q-0.312 0-0.531-0.219t-0.219-0.531v-1.5q0-0.312 0.219-0.531t0.531-0.219h3.25v-3.25q0-0.312 0.219-0.531t0.531-0.219h1.5q0.312 0 0.531 0.219t0.219 0.531v3.25h3.25q0.312 0 0.531 0.219t0.219 0.531z"></path>
 </svg>;
 

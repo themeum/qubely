@@ -117,7 +117,8 @@ class QUBELY
 			'shapes' => $this->getSvgShapes(),
 			'all_taxonomy' => $this->get_all_taxonomy(),
 			'image_sizes'  => $this->get_all_image_sizes(),
-			'palette' => $palette
+			'palette' => $palette,
+			'overwriteTheme' => true,
 		));
 	}
 
