@@ -51,7 +51,7 @@ if (!class_exists('QUBELY_Options')) {
 
         public function settings_page()
         {
-            return "Hello";
+            return require __DIR__ . '/admin-views/settings.php';
         }
 
         /**
