@@ -4,7 +4,9 @@ import classnames from 'classnames';
 import icons from '../../helpers/icons';
 import { isObject } from '../../components/HelperFunction';
 
-
+const { getComputedStyle } = window;
+const { isShallowEqual } = wp
+const diff = require("deep-object-diff").diff;
 /**
  * WordPress dependencies
  */
@@ -146,8 +148,10 @@ class GlobalSettings extends Component {
         }
     }
 
-    componentDidMount() {
-        this.getGlobalSettings();
+    async componentDidMount() {
+
+        await this.getGlobalSettings();
+
         wp.data.subscribe(() => {
             const {
                 isSavingPost,
@@ -161,6 +165,23 @@ class GlobalSettings extends Component {
             }
         });
     }
+
+    componentDidUpdate(prevProps, prevState) {
+        const {
+            presets,
+            activePreset
+        } = this.state;
+        if (presets && activePreset) {
+            if (activePreset !== prevState.activePreset) {
+                this.updateColorVariables(presets[activePreset].colors);
+            }
+        }
+    }
+
+    updateColorVariables = (colors) => {
+        colors.forEach((color, index) => document.documentElement.style.setProperty(`--qubely-color-${index + 1}`, color))
+    }
+
     getGlobalSettings = () => {
         return fetchFromApi().then(data => {
             if (data.success) {
@@ -169,17 +190,10 @@ class GlobalSettings extends Component {
             } else {
                 this.setState({ ...DEFAULTPRESETS })
             }
-
-        })
+        });
     }
+
     updateGlobalSettings = () => {
-        const {
-            presets,
-            activePreset
-        } = this.state;
-
-        console.log('state before saving : ', presets[activePreset].typography[0]);
-
         wp.apiFetch({
             path: PATH.post,
             method: 'POST',
@@ -189,6 +203,7 @@ class GlobalSettings extends Component {
             return data
         })
     }
+
     delGlobalSettings = () => {
         wp.apiFetch({
             path: PATH.post,
@@ -201,7 +216,6 @@ class GlobalSettings extends Component {
     }
 
     render() {
-
         const {
             presets,
             activePreset,
@@ -219,6 +233,7 @@ class GlobalSettings extends Component {
             this.setState(({ presets }, props) => {
                 let tempPresets = presets;
                 tempPresets[presetKey].colors[key] = newValue;
+                this.updateColorVariables(tempPresets[presetKey].colors);
                 return { presets: tempPresets };
             });
         }
@@ -460,6 +475,7 @@ class GlobalSettings extends Component {
                     title={__('Global Settings')}
                 >
                     {renderPresets()}
+
                     <button onClick={() => this.getGlobalSettings()}>get</button>
                     <button onClick={() => this.updateGlobalSettings()}>Save</button>
                     <button onClick={() => this.delGlobalSettings()}>delete</button>

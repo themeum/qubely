@@ -400,7 +400,7 @@ div[data-type="qubely/row"].is-resizing .components-resizable-box__container.qub
     justify-content: space-evenly;
     >div {
         padding: 0 5px;
-        display: block !important;
+        display: inline-block !important;
         margin-bottom: 0 !important;
         label {
             display: block;

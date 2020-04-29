@@ -37,7 +37,14 @@ export default function Color({ value, onChange, addNewColor = false }) {
                     <span className={containerClasses}>
                         {
                             addNewColor ?
-                                icons.plus
+                                <span
+                                    isPrimary
+                                    aria-expanded={isOpen}
+                                    style={{ backgroundColor: 'transparent' }}
+                                    onClick={onToggle}
+                                >
+                                    {icons.plus}
+                                </span>
                                 :
                                 <span
                                     isPrimary
@@ -50,16 +57,11 @@ export default function Color({ value, onChange, addNewColor = false }) {
                     </span>
                 )}
                 renderContent={() => {
-
-                    if (addNewColor) {
-                        return (<div>test</div>)
-                    }
                     return (
                         <ColorPicker
-                            color={typeof undefined !== 'undefined' ? value : '#000'}
+                            color={typeof value !== 'undefined' ? value : '#000'}
                             disableAlpha={false}
                             onChangeComplete={newColor => {
-                                console.log('change complete');
                                 if (newColor.rgb && newColor.rgb.a != 1) {
                                     onChange('rgba(' + newColor.rgb.r + ',' + newColor.rgb.g + ',' + newColor.rgb.b + ',' + newColor.rgb.a + ')');
                                 } else {

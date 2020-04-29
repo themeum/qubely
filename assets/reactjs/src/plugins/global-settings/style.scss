@@ -18,6 +18,12 @@
                 padding-left: 16px;
                 padding-right: 16px;
             }
+            .qubely-d-flex.qubely-align-justified{
+                display: block ;
+                >div{
+                    display: inline-block !important
+                }
+            }
         }
         .title-wrapper {
             display: flex;
@@ -112,7 +118,8 @@
                 }
             }
         }
-        .qubely-global.qubely-color-picker-container {
+        .qubely-global.qubely-color-picker-container,
+        .qubely-global.qubely-color-picker-container > span {
             display: -webkit-box;
             display: -ms-flexbox;
             display: flex;
