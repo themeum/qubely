@@ -148,7 +148,6 @@ export default function withCSSGenerator() {
                         || changedAttributes.indexOf('buttonFillType') !== -1
                         || changedAttributes.indexOf('tabStyle') !== -1
                         || changedAttributes.indexOf('separatorStyle') !== -1
-                        || changedAttributes.indexOf('overWriteTheme') !== -1
                     ) {
                         isLayoutChanged = true;
                         this.saveStyleAttributes();
