@@ -3,13 +3,17 @@ const { CssGenerator: { CssGenerator } } = wp.qubelyComponents
 
 const endpoint = '/qubely/v1/save_block_css'
 
-const API_fetch = (post_id, block_css, is_remain, available_blocks) => {
+const API_fetch = async (post_id, block_css, is_remain, available_blocks) => {
     const json = JSON.stringify(block_css.interaction)
-    return wp.apiFetch({
-        path: endpoint,
-        method: 'POST',
-        data: { block_css: block_css.css, interaction: json, post_id, is_remain, available_blocks }
-    }).then(data => data)
+    try{
+        await wp.apiFetch({
+            path: endpoint,
+            method: 'POST',
+            data: { block_css: block_css.css, interaction: json, post_id, is_remain, available_blocks }
+        });
+    } catch (e) {
+        console.log('Can\'t save css:', e);
+    }
 }
 
 /**
@@ -230,11 +234,7 @@ const ParseCss = (setDatabase = true) => {
     const available_blocks = availableBlocksMeta(all_blocks);
 
     if (setDatabase) {
-        try{
-            API_fetch(getCurrentPostId(), __blocks, isRemain, available_blocks )
-        } catch (e) {
-            console.log(e)
-        }
+        API_fetch(getCurrentPostId(), __blocks, isRemain, available_blocks )
     }
     setTimeout(() => {
         window.bindCss = false

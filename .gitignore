@@ -79,3 +79,4 @@ package-lock.json
 .DS_Store
 assets/reactjs/yarn.lock
 *.zip
+qubely/*
