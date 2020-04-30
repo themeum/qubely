@@ -7,10 +7,6 @@ const attributes = {
     },
     // Global
     ...globalAttributes,
-    overWriteTheme: {
-        type: 'boolean',
-        default: false
-    },
     buttonGroup: {
         type: 'boolean',
         default: false
@@ -118,8 +114,7 @@ const attributes = {
         style: [
             {
                 condition: [
-                    { key: 'fillType', relation: '==', value: 'fill' },
-                    { key: 'overWriteTheme', relation: '==', value: false },
+                    { key: 'fillType', relation: '==', value: 'fill' }
                 ],
                 selector: '{{QUBELY}} .qubely-block-btn-anchor { color:{{buttonColor}}; }'
             },
@@ -130,8 +125,7 @@ const attributes = {
         style: [
             {
                 condition: [
-                    { key: 'fillType', relation: '!=', value: 'fill' },
-                    { key: 'overWriteTheme', relation: '==', value: false },
+                    { key: 'fillType', relation: '!=', value: 'fill' }
                 ],
                 selector: '{{QUBELY}} .qubely-block-btn-anchor { color:{{buttonColor2}}; }'
             }
@@ -142,8 +136,7 @@ const attributes = {
         style: [
             {
                 condition: [
-                    { key: 'fillType', relation: '==', value: 'fill' },
-                    { key: 'overWriteTheme', relation: '==', value: false }
+                    { key: 'fillType', relation: '==', value: 'fill' }
                 ],
                 selector: '{{QUBELY}} .qubely-block-btn-anchor:hover { color:{{buttonHoverColor}}; }'
             }
@@ -153,8 +146,7 @@ const attributes = {
         type: 'string', default: '#fff',
         style: [
             {
-                condition: [{ key: 'fillType', relation: '!=', value: 'fill' },
-                { key: 'overWriteTheme', relation: '==', value: false }
+                condition: [{ key: 'fillType', relation: '!=', value: 'fill' }
                 ],
                 selector: '{{QUBELY}} .qubely-block-btn-anchor:hover { color:{{buttonHoverColor2}}; }'
             }
@@ -177,8 +169,7 @@ const attributes = {
         style: [
             {
                 condition: [
-                    { key: 'fillType', relation: '==', value: 'fill' },
-                    { key: 'overWriteTheme', relation: '==', value: false }
+                    { key: 'fillType', relation: '==', value: 'fill' }
                 ],
                 selector: '{{QUBELY}} .qubely-block-btn-anchor'
             }

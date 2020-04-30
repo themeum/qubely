@@ -1,3 +1,4 @@
+import { getGlobalSettings } from '../helpers/globalCSS';
 const { select } = wp.data
 const { CssGenerator: { CssGenerator } } = wp.qubelyComponents
 
@@ -206,53 +207,22 @@ function availableBlocksMeta(all_blocks) {
     return blocks_flag
 }
 
-const PATH = '/qubely/v1/global_settings';
-
-async function fetchFromApi() {
-    return await wp.apiFetch({ path: PATH })
-}
-
 
 const ParseCss = async (setDatabase = true) => {
-    window.bindCss = true
-    const all_blocks = select('core/block-editor').getBlocks()
-    const isRemain = isQubelyBlock(all_blocks)
-    const { getCurrentPostId } = select('core/editor')
-    let __blocks = { css: '', interaction: {} };
+    window.bindCss = true;
+    const all_blocks = select('core/block-editor').getBlocks();
+    const isRemain = isQubelyBlock(all_blocks);
+    const { getCurrentPostId } = select('core/editor');
+    let __blocks = {
+        css: '',
+        interaction: {}
+    };
 
-    let globalData;
+    __blocks.css += await getGlobalSettings();
 
-    const getGlobalSettings = () => {
-        return fetchFromApi().then(data => {
-            if (data.success) {
-                const {
-                    presets,
-                    activePreset
-                } = data.settings;
-
-                globalData = presets[activePreset]; 
-                let globalColors = ['#4A90E2', '#50E3C2', '#000', '#4A4A4A', '#9B9B9B'];
-
-                if (presets[activePreset].colors && presets[activePreset].colors.length > 0) {
-                    globalColors = presets[activePreset].colors;
-                }
-                
-                let globalColorStyle = ':root {'
-                globalColors.forEach((color, index) => globalColorStyle += `--qubely-color-${index + 1}:${color};`);
-                globalColorStyle += '}'
-
-                __blocks.css += globalColorStyle
-                __blocks.css += CssGenerator(presets[activePreset].typography, 'global-settings', 'global', true, true, true, presets[activePreset].typography)
-
-            }
-
-        })
-    }
-    await getGlobalSettings();
-
-    if (typeof window.globalData != 'undefined') {
-        __blocks.css += CssGenerator(window.globalData.settings, 'pagesettings', '8282882', true)
-    }
+    // if (typeof window.globalData != 'undefined') {
+    //     __blocks.css += CssGenerator(window.globalData.settings, 'pagesettings', '8282882', true)
+    // }
 
     // Inner Blocks
     let parseData = innerBlocks(all_blocks, true)

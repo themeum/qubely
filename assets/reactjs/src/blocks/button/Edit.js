@@ -80,15 +80,10 @@ class Edit extends Component {
         } = this.props;
 
         const _client = clientId.substr(0, 6);
-        let overWriteTheme = false;
-        if (qubely_admin.overwriteTheme) {
-            overWriteTheme = true;
-        }
-        console.log(qubely_admin.overwriteTheme)
         if (!uniqueId) {
-            setAttributes({ uniqueId: _client, ...(qubely_admin.overwriteTheme && { overWriteTheme }) });
+            setAttributes({ uniqueId: _client });
         } else if (uniqueId && uniqueId != _client) {
-            setAttributes({ uniqueId: _client, ...(qubely_admin.overwriteTheme && { overWriteTheme }) });
+            setAttributes({ uniqueId: _client });
         }
     }
 
@@ -118,7 +113,6 @@ class Edit extends Component {
                 buttonPadding,
                 parentClientId,
                 buttonWidthType,
-                overWriteTheme,
                 enableAlignment,
                 disableFullWidth,
                 buttonBorderRadius,
@@ -176,7 +170,6 @@ class Edit extends Component {
                                         { value: 'outline', svg: icons.btn_outline, label: __('Outline') }
                                     ]}
                                 />
-                                <button onClick={() => setAttributes({ overWriteTheme: !overWriteTheme })}>Toogle Overwrite</button>
                                 <Separator />
                                 <Url label={__('Button URL')} value={url} onChange={(value) => setAttributes({ url: value })} />
                                 {
