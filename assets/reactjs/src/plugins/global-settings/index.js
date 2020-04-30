@@ -2,6 +2,7 @@ import './style.scss';
 import Color from './components';
 import classnames from 'classnames';
 import icons from '../../helpers/icons';
+import { getGlobalSettings as getGlobalCSS } from '../../helpers/globalCSS';
 import { isObject } from '../../components/HelperFunction';
 
 const { getComputedStyle } = window;
@@ -70,48 +71,54 @@ const DEFAULTPRESETS = {
             typography: [
                 {
                     name: 'Heading 1',
-                    openTypography: 1,
+                    value: {
+                        openTypography: 1,
+                    },
                     style: [{
                         selector: '{{QUBELY}} h1'
                     }]
-                    // value: {}
                 },
                 {
                     name: 'Heading 2',
-                    openTypography: 1,
-                    // value: {},
+                    value: {
+                        openTypography: 1,
+                    },
                     style: [{
                         selector: '{{QUBELY}} h2'
                     }]
                 },
                 {
                     name: 'Heading 3',
-                    openTypography: 1,
-                    // value: {},
+                    value: {
+                        openTypography: 1,
+                    },
                     style: [{
                         selector: '{{QUBELY}} h3'
                     }]
                 },
                 {
                     name: 'Heading 4',
-                    openTypography: 1,
-                    // value: {},
+                    value: {
+                        openTypography: 1,
+                    },
                     style: [{
                         selector: '{{QUBELY}} h4'
                     }]
                 },
                 {
                     name: 'Heading 5',
-                    openTypography: 1,
-                    // value: {},
+                    value: {
+                        openTypography: 1,
+                    },
                     style: [{
                         selector: '{{QUBELY}} h5'
                     }]
                 },
                 {
                     name: 'Heading 6',
-                    openTypography: 1,
-                    // value: {},
+                    value: {
+                        openTypography: 1,
+                    },
                     style: [{
                         selector: '{{QUBELY}} h6'
                     }]
@@ -146,12 +153,13 @@ class GlobalSettings extends Component {
             showTypoSettings: undefined,
             showPresetSettings: undefined
         }
+        this.saveGlobalCSS = this.saveGlobalCSS.bind(this);
     }
 
     async componentDidMount() {
 
         await this.getGlobalSettings();
-
+        await this.saveGlobalCSS();
         wp.data.subscribe(() => {
             // console.log('subscribe test');
             const {
@@ -166,13 +174,32 @@ class GlobalSettings extends Component {
             }
         });
     }
+    async saveGlobalCSS() {
+        let _CSS = await getGlobalCSS();
+        let styleSelector = window.document;
+        if (styleSelector.getElementById('qubely-global-CSS') === null) {
+            let cssInline = document.createElement('style');
+            cssInline.type = 'text/css';
+            cssInline.id = 'qubely-global-CSS';
+            if (cssInline.styleSheet) {
+                cssInline.styleSheet.cssText = _CSS;
+            } else {
+                cssInline.innerHTML = _CSS;
+            }
+            styleSelector.getElementsByTagName("head")[0].appendChild(cssInline);
+        } else {
+            styleSelector.getElementById('qubely-global-CSS').innerHTML = _CSS;
+        }
 
-    componentDidUpdate(prevProps, prevState) {
+    }
+
+    async componentDidUpdate(prevProps, prevState) {
         const {
             presets,
             activePreset
         } = this.state;
         if (presets && activePreset) {
+            this.saveGlobalCSS();
             if (activePreset !== prevState.activePreset) {
                 this.updateColorVariables(presets[activePreset].colors);
             }
@@ -182,7 +209,6 @@ class GlobalSettings extends Component {
     updateColorVariables = (colors) => {
         colors.forEach((color, index) => document.documentElement.style.setProperty(`--qubely-color-${index + 1}`, color))
     }
-
     getGlobalSettings = () => {
         return fetchFromApi().then(data => {
             if (data.success) {
@@ -246,17 +272,15 @@ class GlobalSettings extends Component {
             });
         }
         const updatePreset = (propertyName, index, newValue, presetKey, isObject = false) => {
-            // console.log('new update : ', propertyName, index, newValue, presetKey);
-
             if (isObject) {
                 newValue = {
-                    ...this.state.presets[presetKey][propertyName][index],
+                    ...this.state.presets[presetKey][propertyName][index].value,
                     ...newValue
                 }
             }
             this.setState(({ presets }, props) => {
                 let tempPresets = presets;
-                tempPresets[presetKey][propertyName][index] = newValue;
+                tempPresets[presetKey][propertyName][index].value = newValue;
                 return { presets: tempPresets };
             });
         }
@@ -443,7 +467,7 @@ class GlobalSettings extends Component {
 
                                                                     {displaySettings &&
                                                                         <Typography
-                                                                            value={item}
+                                                                            value={item.value}
                                                                             globalSettings
                                                                             key={name + index}
                                                                             onChange={newValue => updatePreset('typography', index, newValue, presetKey, true)}
