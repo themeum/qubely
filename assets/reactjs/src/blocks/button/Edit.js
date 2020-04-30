@@ -80,7 +80,6 @@ class Edit extends Component {
         } = this.props;
 
         const _client = clientId.substr(0, 6);
-        console.log(qubely_admin.overwriteTheme)
         if (!uniqueId) {
             setAttributes({ uniqueId: _client });
         } else if (uniqueId && uniqueId != _client) {
