@@ -20,6 +20,12 @@ $border-color: #D6D9DD;
       z-index: -1;
     }
   }
+  .components-panel__body.edit-post-settings-sidebar__panel-block .block-editor-block-card{
+    overflow: unset;
+    &::before{
+      top: -16px;
+    }
+  }
 }
 
 .qubely-inspector-tabs{
