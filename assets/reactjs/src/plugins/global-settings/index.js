@@ -2,7 +2,14 @@ import './style.scss';
 import Color from './components';
 import classnames from 'classnames';
 import icons from '../../helpers/icons';
-import { getGlobalSettings as getGlobalCSS } from '../../helpers/globalCSS';
+import {
+    getGlobalSettings as getGlobalCSS,
+    setGlobalTypo_Variables,
+    updateColorVariables,
+    injectGlobalCSS,
+    updateGlobalVaribales
+} from '../../helpers/globalCSS';
+
 import { isObject } from '../../components/HelperFunction';
 
 const { getComputedStyle } = window;
@@ -47,13 +54,7 @@ const {
  */
 import Typography from '../../components/fields/Typography'
 import { CssGenerator } from '../../components/CssGenerator'
-// const {
-//     // Color,
-//     // Typography,
-//     CssGenerator: {
-//         // CssGenerator
-//     }
-// } = wp.qubelyComponents;
+
 
 const PATH = {
     fetch: '/qubely/v1/global_settings',
@@ -161,7 +162,6 @@ class GlobalSettings extends Component {
         await this.getGlobalSettings();
         await this.saveGlobalCSS();
         wp.data.subscribe(() => {
-            // console.log('subscribe test');
             const {
                 isSavingPost,
                 isPreviewingPost,
@@ -169,27 +169,14 @@ class GlobalSettings extends Component {
                 isAutosavingPost,
             } = select('core/editor');
 
-            if ((isSavingPost() || isPreviewingPost() || isPublishingPost()) && !isAutosavingPost()) {
+            if ((isSavingPost() || isPreviewingPost() || isPublishingPost())) {
                 this.updateGlobalSettings()
             }
         });
     }
     async saveGlobalCSS() {
         let _CSS = await getGlobalCSS();
-        let styleSelector = window.document;
-        if (styleSelector.getElementById('qubely-global-CSS') === null) {
-            let cssInline = document.createElement('style');
-            cssInline.type = 'text/css';
-            cssInline.id = 'qubely-global-CSS';
-            if (cssInline.styleSheet) {
-                cssInline.styleSheet.cssText = _CSS;
-            } else {
-                cssInline.innerHTML = _CSS;
-            }
-            styleSelector.getElementsByTagName("head")[0].appendChild(cssInline);
-        } else {
-            styleSelector.getElementById('qubely-global-CSS').innerHTML = _CSS;
-        }
+        injectGlobalCSS(_CSS);
 
     }
 
@@ -199,16 +186,13 @@ class GlobalSettings extends Component {
             activePreset
         } = this.state;
         if (presets && activePreset) {
-            this.saveGlobalCSS();
             if (activePreset !== prevState.activePreset) {
-                this.updateColorVariables(presets[activePreset].colors);
+                updateGlobalVaribales(presets[activePreset])
             }
         }
     }
 
-    updateColorVariables = (colors) => {
-        colors.forEach((color, index) => document.documentElement.style.setProperty(`--qubely-color-${index + 1}`, color))
-    }
+
     getGlobalSettings = () => {
         return fetchFromApi().then(data => {
             if (data.success) {
@@ -260,7 +244,7 @@ class GlobalSettings extends Component {
             this.setState(({ presets }, props) => {
                 let tempPresets = presets;
                 tempPresets[presetKey].colors[key] = newValue;
-                this.updateColorVariables(tempPresets[presetKey].colors);
+                updateColorVariables(tempPresets[presetKey].colors);
                 return { presets: tempPresets };
             });
         }
@@ -278,6 +262,12 @@ class GlobalSettings extends Component {
                     ...newValue
                 }
             }
+            // if (propertyName === 'typography') {
+            //     if (newValue) {
+            //         setGlobalTypo_Variables(newValue, index);
+            //     }
+            // }
+
             this.setState(({ presets }, props) => {
                 let tempPresets = presets;
                 tempPresets[presetKey][propertyName][index].value = newValue;

@@ -120,7 +120,7 @@ const checkDepends = (settings, selectData, key, indexStyle) => {
     if (selectData.hasOwnProperty('condition')) {
         selectData.condition.forEach((data) => {
             let previous = _depends
-            if ((data.relation == '==')||(data.relation == '===')) {
+            if ((data.relation == '==') || (data.relation == '===')) {
                 if ((typeof data.value == 'string') || (typeof data.value == 'number') || (typeof data.value == 'boolean')) {
                     if (settings[data.key] == data.value) { _depends = true; }
                     else { _depends = false }
@@ -131,7 +131,7 @@ const checkDepends = (settings, selectData, key, indexStyle) => {
                     })
                     if (select) { _depends = true; }
                 }
-            } else if ((data.relation == '!=')||(data.relation == '!==')) {
+            } else if ((data.relation == '!=') || (data.relation == '!==')) {
                 if ((typeof data.value == 'string') || (typeof data.value == 'number') || (typeof data.value == 'boolean')) {
                     if (settings[data.key] != data.value) { _depends = true; }
                     else { _depends = false; }
@@ -259,6 +259,7 @@ export const CssGenerator = (settings, blockName, blockID, isInline = false, glo
     }
 
     // Set CSS
+
     setStyle(__CSS, blockID, global, frontend)
 }
 
@@ -266,8 +267,8 @@ export const CssGenerator = (settings, blockName, blockID, isInline = false, glo
 // Set CSS to Head
 const setStyle = (styleCss, blockID, global = false, frontend = false) => {
     let styleSelector = window.document, id = 'qubely-block-' + blockID;
-    if (global) {
-        id = 'qubely-gobal-styles';
+    if (global && frontend) {
+        id = 'qubely-global-styles';
     }
 
     if (styleSelector.getElementById(id) === null) {
