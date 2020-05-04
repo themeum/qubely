@@ -6,11 +6,27 @@ if (!class_exists('QUBELY_Options')) {
 
     class QUBELY_Options
     {
-        // Constructor
+
+        public $options;
+        public $options_attr;
+        public $fields;
+
         public function __construct()
         {
-            add_action('admin_menu', array($this, 'add_admin_menu'));
-            add_action('admin_init', array($this, 'register_settings'));
+            $this->options = (array) maybe_unserialize(get_option('qubely_options'));
+            $this->options_attr = $this->options_attr();
+            $this->fields();
+
+            add_action('admin_menu', array($this, 'admin_menu'));
+        }
+
+        /**
+         * Initialize Field class
+         */
+        public function fields()
+        {
+            require __DIR__ . '/admin-views/Fields.php';
+            $this->fields = new Fields();
         }
 
         /**
@@ -18,65 +34,164 @@ if (!class_exists('QUBELY_Options')) {
          *
          * @since 1.0.0
          */
-        public  function add_admin_menu()
+        public function admin_menu()
         {
-//            add_menu_page(
-//                esc_html__('Qubely Options', 'qubely'),
-//                esc_html__('Qubely Options', 'qubely'),
-//                'manage_options',
-//                'qubely-settings',
-//                array($this, 'create_admin_page'),
-//                QUBELY_DIR_URL . 'assets/img/qubely-logo-white.svg'
-//            );
+
+            $parent_slug = 'qubely-settings';
+            $cap = 'manage_options';
 
             add_menu_page(
                 esc_html__('Qubely', 'qubely'),
                 esc_html__('Qubely', 'qubely'),
-                'manage_options',
-                'qubely-settings',
+                $cap,
+                $parent_slug,
                 array($this, 'settings_page'),
                 QUBELY_DIR_URL . 'assets/img/qubely-logo-white.svg'
             );
 
             add_submenu_page(
-                'qubely-settings',
+                $parent_slug,
                 esc_html__('Qubely Settings', 'qubely'),
                 esc_html__('Settings', 'qubely'),
-                'manage_options',
+                $cap,
                 'qubely-settings',
-                array($this, 'settings_page'),
-                null
+                array($this, 'settings_page')
+            );
+
+            add_submenu_page(
+                $parent_slug,
+                esc_html__('Getting Started', 'qubely'),
+                esc_html__('Getting Started', 'qubely'),
+                $cap,
+                'qubely',
+                array($this, 'getting_started')
             );
         }
 
         public function settings_page()
         {
-            return require __DIR__ . '/admin-views/settings.php';
+            return $this->options_generator();
         }
 
-        /**
-         * Register a setting and its sanitization callback.
-         *
-         * @since 1.0.0
-         */
-        public function register_settings()
-        {
-            register_setting('qubely_options', 'qubely_options', array($this, 'sanitize'));
+        public function save_options() {
+
         }
 
-        /**
-         * Sanitization callback
-         *
-         * @since 1.0.0
-         */
-        public  function sanitize($options)
-        {
-            if ($options) {
-                if (!empty($options['css_save_as'])) {
-                    $options['css_save_as'] = sanitize_text_field($options['css_save_as']);
-                }
+        public function get_option($key = null, $default = false) {
+            $options = $this->options;
+            if(empty($options) || ! is_array($options) || !$key) {
+                return $default;
             }
-            return $options;
+
+            if(array_key_exists($key, $options)) {
+                return apply_filters($key, $options['key']);
+            }
+
+            return $default;
+        }
+
+        public function options_attr() {
+            $attr = array(
+                'general' => array(
+                    'label' => 'General',
+                    'fields' => array(
+                        'qubely_gmap_api_key' => array(
+                            'type' => 'text',
+                            'label' => __('Google Map API Keys', 'qubely'),
+                            'default' => '',
+                            'desc' => __('Enter your Google map api key', 'qubely'),
+                            'placeholder' => '',
+                            'suffix' => '',
+                            'size' => 'regular',
+                        ),
+                        'qubely_recaptcha_site_key' => array(
+                            'type' => 'text',
+                            'label' => __('ReCaptcha site key', 'qubely'),
+                            'default' => '',
+                            'desc' => __('Enter your ReCaptcha site key', 'qubely'),
+                            'placeholder' => '',
+                            'class' => '',
+                            'size' => 'regular',
+                        ),
+                        'qubely_recaptcha_secret_key' => array(
+                            'type' => 'text',
+                            'label' => __('ReCaptcha secret key', 'qubely'),
+                            'default' => '',
+                            'desc' => __('Enter your ReCaptcha secret key', 'qubely'),
+                            'placeholder' => '',
+                            'suffix' => '',
+                            'size' => 'regular',
+                        )
+                    )
+                ),
+                'style' => array(),
+                'advanced' => array(
+                    'label' => 'Advanced',
+                    'fields' => array(
+                        'css_save_as' => array(
+                            'type' => 'select',
+                            'label' => __('CSS location', 'qubely'),
+                            'default' => '',
+                            'desc' => __('Select where you want to save CSS', 'qubely'),
+                            'options' => array(
+                                'wp_head'   => __('Header', 'qubely'),
+                                'filesystem' => __('File System', 'qubely'),
+                            ),
+                            'suffix' => '',
+                            'size' => 'regular',
+                        )
+                    )
+                )
+            );
+
+            return apply_filters('qubely_options', $attr);
+        }
+
+        public function options_generator()
+        {
+            ?>
+                <div class="wrap">
+                    <h1><?php esc_html_e('Qubely Settings', 'qubely'); ?></h1>
+                    <div id="qubely-settings-tabs" class="nav-tab-wrapper">
+                        <?php
+                            $index = 0;
+                            foreach ($this->options_attr as $key => $options) {
+                                $index++;
+
+                                if(!isset($options['fields']) || !is_array($options['fields'])) continue;
+                                $options['label'] = !empty($options['label']) ? $options['label'] : $key;
+                                ?>
+                                    <a class="nav-tab <?php echo $index === 0 ? 'nav-tab-active' : ''  ?>" href="#<?php echo esc_attr($key) ?>"><?php echo esc_html($options['label']) ?></a>
+                                <?php
+                            }
+                        ?>
+                    </div>
+                    <form id="qubely-settings-tabs-content">
+                        <?php
+                            $index = 0;
+                            foreach ($this->options_attr as $key => $options) {
+                                $index++;
+                                if(!isset($options['fields']) || !is_array($options['fields'])) continue;
+                                ?>
+                                    <div class="qubely-settings-inner" id="<?php echo esc_attr($key); ?>">
+                                        <table class="form-table">
+                                            <tbody>
+                                                <?php
+                                                    foreach ($options['fields'] as $field_key => $field) {
+                                                        $field['key'] = $field_key;
+                                                        $field['value'] = $this->get_option($field_key, $field['default']);
+                                                        Fields::get($field['type'], $field);
+                                                    }
+                                                ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                <?php
+                            }
+                        ?>
+                    </form>
+                </div>
+            <?php
         }
 
         /**
@@ -84,88 +199,9 @@ if (!class_exists('QUBELY_Options')) {
          *
          * @since 1.0.0
          */
-        public function create_admin_page()
-        { ?>
-            <div class="wrap">
-                <div class="qubely-options-section qubely-mt-20 qubely-mb-30" style="background-image: url(<?php echo QUBELY_DIR_URL . 'assets/img/options-logo.png' ?>)">
-                    <div class="qubely-options-section-header">
-                        <div class="qubely-header-left">
-                            <h2 class="qubely-options-section-title"><?php esc_attr_e('Welcome to Qubely! - Version ', 'qubely');
-                                                                        echo QUBELY_VERSION; ?></h2>
-                            <h3 class="qubely-options-section-subtitle"><?php esc_attr_e('Full-Fledged Gutenburg Toolkit', 'qubely') ?></h3>
-                        </div>
-                        <div class="qubely-header-right qubely-option-logo">
-                            <img src="<?php echo QUBELY_DIR_URL . 'assets/img/logo.svg' ?>" alt="Logo">
-                        </div>
-                    </div>
-
-                    <h4 class="qubely-options-section-title">
-                        <?php esc_attr_e('Qubely Core Features', 'qubely') ?>
-                        <img src="<?php echo  QUBELY_DIR_URL . 'assets/img/admin/thumbs-up@1x.png'; ?>" srcset="<?php echo  QUBELY_DIR_URL . 'assets/img/admin/thumbs-up@1x.png'; ?> 1x, <?php echo  QUBELY_DIR_URL . 'assets/img/admin/thumbs-up@2x.png'; ?> 2x" alt="<?php echo esc_attr('Features'); ?>">
-                    </h4>
-                    <div class="qubely-row qubely-columns-2">
-                        <div>
-                            <ul class="qubely-options-features">
-                                <li><i class="fas fa-check"></i> <?php esc_attr_e('Predefined sections'); ?></li>
-                                <li><i class="fas fa-check"></i> <?php esc_attr_e('Modern layout packs'); ?></li>
-                                <li><i class="fas fa-check"></i> <?php esc_attr_e('Highly customizable row columns'); ?></li>
-                                <li><i class="fas fa-check"></i> <?php esc_attr_e('Row video background & blend mode'); ?></li>
-                                <li><i class="fas fa-check"></i> <?php esc_attr_e('Drag column resizing'); ?></li>
-                                <li><i class="fas fa-check"></i> <?php esc_attr_e('Shape divider/builder'); ?></li>
-                                <li><i class="fas fa-check"></i> <?php esc_attr_e('Device specific responsive controls'); ?></li>
-                                <li><i class="fas fa-check"></i> <?php esc_attr_e('Unlimited Google fonts & system fonts'); ?></li>
-                                <li><i class="fas fa-check"></i> <?php esc_attr_e('Classic & gradient color background'); ?></li>
-                                <li><i class="fas fa-check"></i> <?php esc_attr_e('Built-in animation'); ?></li>
-                                <li><i class="fas fa-check"></i> <?php esc_attr_e('Box-shadow'); ?></li>
-                                <li><i class="fas fa-check"></i> <?php esc_attr_e('Font Awesome 5 Icons and line icons'); ?></li>
-                                <li><i class="fas fa-check"></i> <?php esc_attr_e('Custom CSS'); ?></li>
-                            </ul>
-                            <div class="qubely-mb-30">
-                                <a href="https://www.themeum.com/docs/qubely-introduction/" target="_blank" class="button button-large button-primary"><?php esc_attr_e('Documentation'); ?></a>
-                            </div>
-
-                            <hr class="qubely-mb-30" />
-                            <h3>Settings</h3>
-                            <form method="post" action="options.php">
-                                <?php
-                                settings_fields('qubely_options');
-                                $option_data    = get_option('qubely_options');
-                                ?>
-
-                                <table class="form-table wpex-custom-admin-login-table">
-                                    <tr>
-                                        <th scope="row"><?php esc_html_e('CSS Save Method', 'qubely'); ?></th>
-                                        <td>
-                                            <?php $value = $option_data['css_save_as']; ?>
-                                            <select name="qubely_options[css_save_as]">
-                                                <?php
-                                                $options = array(
-                                                    'wp_head'   => __('Header', 'qubely'),
-                                                    'filesystem' => __('File System', 'qubely'),
-                                                );
-                                                foreach ($options as $id => $label) { ?>
-                                                    <option value="<?php echo esc_attr($id); ?>" <?php selected($value, $id, true); ?>>
-                                                        <?php echo strip_tags($label); ?>
-                                                    </option>
-                                                <?php } ?>
-                                            </select>
-                                            <p class="description"> <?php _e('Select where you want to save CSS.', 'qubely'); ?></p>
-
-                                            <?php submit_button(); ?>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </form>
-                        </div>
-
-                        <div>
-                            <div class="qubely-embed-responsive">
-                                <iframe class="qubely-embed-responsive-item" src="https://www.youtube.com/embed/oLFeWSS9HhU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        <?php }
+        public function getting_started()
+        {
+            return require __DIR__ . '/admin-views/getting-started.php';
+        }
     }
 }
