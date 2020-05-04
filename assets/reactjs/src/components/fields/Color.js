@@ -38,7 +38,7 @@ class Color extends Component {
                             activePreset
                         }
                     } = data;
-                    console.log('data : ', data);
+                    // console.log('data : ', data);
                     this.setState({
                         globalColors: presets[activePreset].colors
                     })
