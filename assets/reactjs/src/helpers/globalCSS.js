@@ -102,10 +102,6 @@ export const setGlobalTypo_Variables = (globalTypoes) => {
     return CSS;
 }
 
-export const updateColorVariables = (colors) => {
-    console.log('updateColorVariables colors : ', colors);
-    colors.forEach((color, index) => document.documentElement.style.setProperty(`--qubely-color-${index + 1}`, color))
-}
 
 export const updateTypoVariables = (typography, index) => {
     // let responsive = '',
@@ -163,7 +159,7 @@ export const updateTypoVariables = (typography, index) => {
 
 }
 
-export const injectGlobalCSS = (_CSS) => {
+export const injectGlobalCSS = (_CSS, append = false) => {
     let styleSelector = window.document;
     if (styleSelector.getElementById('qubely-global-styles') === null) {
         let cssInline = document.createElement('style');

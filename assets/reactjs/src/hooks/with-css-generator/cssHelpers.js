@@ -72,7 +72,6 @@ const globalTypography = (selectedTypo) => {
         CSS += `text-transform:var(--qubely-typo${selectedTypo}-text-transform);`;
     }
     CSS += '}';
-    console.log('CSS : ', CSS);
     return CSS;
 
 }

@@ -142,7 +142,7 @@ class Edit extends Component {
         } = this.props;
 
         const { device, currentTab } = this.state;
-console.log('typography : ',typography);
+
         return (
             <Fragment>
 

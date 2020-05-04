@@ -244,7 +244,7 @@ class GlobalSettings extends Component {
             this.setState(({ presets }, props) => {
                 let tempPresets = presets;
                 tempPresets[presetKey].colors[key] = newValue;
-                updateColorVariables(tempPresets[presetKey].colors);
+                updateGlobalVaribales(tempPresets[presetKey]);
                 return { presets: tempPresets };
             });
         }
@@ -262,15 +262,11 @@ class GlobalSettings extends Component {
                     ...newValue
                 }
             }
-            // if (propertyName === 'typography') {
-            //     if (newValue) {
-            //         setGlobalTypo_Variables(newValue, index);
-            //     }
-            // }
 
             this.setState(({ presets }, props) => {
                 let tempPresets = presets;
                 tempPresets[presetKey][propertyName][index].value = newValue;
+                updateGlobalVaribales(tempPresets[presetKey]);
                 return { presets: tempPresets };
             });
         }
