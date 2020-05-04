@@ -64,7 +64,6 @@ const _push = (val, data) => {
 
 const globalTypography = (selectedTypo) => {
 
-    console.log('selectedTypo : ', selectedTypo);
     let CSS = '{';
     if (selectedTypo !== 'none') {
         CSS += `font-family:var(--qubely-typo${selectedTypo}-font-family);`;
