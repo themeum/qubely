@@ -101,7 +101,8 @@ if (!class_exists('QUBELY_Options')) {
                             'default' => '',
                             'desc' => __('Enter your Google map api key', 'qubely'),
                             'placeholder' => '',
-                            'class' => ''
+                            'suffix' => '',
+                            'size' => 'regular',
                         ),
                         'qubely_recaptcha_site_key' => array(
                             'type' => 'text',
@@ -109,7 +110,8 @@ if (!class_exists('QUBELY_Options')) {
                             'default' => '',
                             'desc' => __('Enter your ReCaptcha site key', 'qubely'),
                             'placeholder' => '',
-                            'class' => ''
+                            'class' => '',
+                            'size' => 'regular',
                         ),
                         'qubely_recaptcha_secret_key' => array(
                             'type' => 'text',
@@ -117,11 +119,12 @@ if (!class_exists('QUBELY_Options')) {
                             'default' => '',
                             'desc' => __('Enter your ReCaptcha secret key', 'qubely'),
                             'placeholder' => '',
-                            'class' => ''
+                            'suffix' => '',
+                            'size' => 'regular',
                         )
                     )
                 ),
-//                'style' => array(),
+                'style' => array(),
                 'advanced' => array(
                     'label' => 'Advanced',
                     'fields' => array(
@@ -134,7 +137,8 @@ if (!class_exists('QUBELY_Options')) {
                                 'wp_head'   => __('Header', 'qubely'),
                                 'filesystem' => __('File System', 'qubely'),
                             ),
-                            'class' => ''
+                            'suffix' => '',
+                            'size' => 'regular',
                         )
                     )
                 )
@@ -153,6 +157,9 @@ if (!class_exists('QUBELY_Options')) {
                             $index = 0;
                             foreach ($this->options_attr as $key => $options) {
                                 $index++;
+
+                                if(!isset($options['fields']) || !is_array($options['fields'])) continue;
+                                $options['label'] = !empty($options['label']) ? $options['label'] : $key;
                                 ?>
                                     <a class="nav-tab <?php echo $index === 0 ? 'nav-tab-active' : ''  ?>" href="#<?php echo esc_attr($key) ?>"><?php echo esc_html($options['label']) ?></a>
                                 <?php
@@ -164,19 +171,16 @@ if (!class_exists('QUBELY_Options')) {
                             $index = 0;
                             foreach ($this->options_attr as $key => $options) {
                                 $index++;
+                                if(!isset($options['fields']) || !is_array($options['fields'])) continue;
                                 ?>
                                     <div class="qubely-settings-inner" id="<?php echo esc_attr($key); ?>">
                                         <table class="form-table">
                                             <tbody>
                                                 <?php
                                                     foreach ($options['fields'] as $field_key => $field) {
-                                                        Fields::get($field['type'], array(
-                                                            'label' => $field['label'],
-                                                            'key' => $field_key,
-                                                            'desc' => $field['desc'],
-                                                            'options' => isset($field['options']) ? $field['options'] : array(),
-                                                            'value' => $this->get_option($field_key, $field['default'])
-                                                        ));
+                                                        $field['key'] = $field_key;
+                                                        $field['value'] = $this->get_option($field_key, $field['default']);
+                                                        Fields::get($field['type'], $field);
                                                     }
                                                 ?>
                                             </tbody>
@@ -185,7 +189,6 @@ if (!class_exists('QUBELY_Options')) {
                                 <?php
                             }
                         ?>
-
                     </form>
                 </div>
             <?php
