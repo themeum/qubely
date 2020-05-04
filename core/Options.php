@@ -13,13 +13,16 @@ if (!class_exists('QUBELY_Options')) {
 
         public function __construct()
         {
-            $this->options = (array) maybe_unserialize(get_option('qubely_options'));
-            $this->options_attr = $this->options_attr();
-            $this->fields();
-
             add_action('admin_menu', array($this, 'admin_menu'));
+            add_action('init', array($this, 'save_options'));
+            add_action('init', array($this, 'fields'));
+            add_action('init', array($this, 'option_setter'));
         }
 
+        public function option_setter() {
+            $this->options = (array) maybe_unserialize(get_option('qubely_options'));
+            $this->options_attr = $this->options_attr();
+        }
         /**
          * Initialize Field class
          */
@@ -74,7 +77,15 @@ if (!class_exists('QUBELY_Options')) {
         }
 
         public function save_options() {
+            if (
+                !isset($_POST['qubely_option_save']) ||
+                ! isset($_POST['_wpnonce']) ||
+                ! wp_verify_nonce( $_POST['_wpnonce'], 'qubely_option_save' )
+            ) return;
 
+            $option = (array) isset($_POST['qubely_options']) ? $_POST['qubely_options'] : array();
+            $option = apply_filters('qubely_options_input', $option);
+            update_option('qubely_options', $option);
         }
 
         public function get_option($key = null, $default = false) {
@@ -84,7 +95,7 @@ if (!class_exists('QUBELY_Options')) {
             }
 
             if(array_key_exists($key, $options)) {
-                return apply_filters($key, $options['key']);
+                return apply_filters($key, $options[$key]);
             }
 
             return $default;
@@ -166,7 +177,8 @@ if (!class_exists('QUBELY_Options')) {
                             }
                         ?>
                     </div>
-                    <form id="qubely-settings-tabs-content">
+                    <form id="qubely-settings-tabs-content" method="POST">
+                        <?php wp_nonce_field('qubely_option_save') ?>
                         <?php
                             $index = 0;
                             foreach ($this->options_attr as $key => $options) {
@@ -188,6 +200,7 @@ if (!class_exists('QUBELY_Options')) {
                                     </div>
                                 <?php
                             }
+                            submit_button('Save changes', 'primary', 'qubely_option_save');
                         ?>
                     </form>
                 </div>

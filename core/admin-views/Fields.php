@@ -59,6 +59,7 @@ class Fields{
     private static function select($info)
     {
         $info['options'] = isset($info['options']) ? $info['options'] : array();
+
         ?>
         <tr>
             <?php self::label($info['label']); ?>
@@ -67,7 +68,7 @@ class Fields{
                     <?php
                         foreach ($info['options'] as $key => $label) {
                             ?>
-                                <option <?php selected($info['value'], $key, true) ?> value="<?php echo esc_attr($key) ?>"><?php echo esc_html($label); ?></option>
+                                <option <?php selected($info['value'], $key, true); ?> value="<?php echo esc_attr($key) ?>"><?php echo esc_html($label); ?></option>
                             <?php
                         }
                     ?>
