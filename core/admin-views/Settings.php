@@ -51,6 +51,10 @@ class Settings {
         return $default;
     }
 
+    /**
+     * @return mixed|void
+     * Settings Fields
+     */
     public function fields() {
         $attr = array(
             'general' => array(
@@ -85,7 +89,6 @@ class Settings {
                     )
                 )
             ),
-            'style' => array(),
             'advanced' => array(
                 'label' => 'Advanced',
                 'fields' => array(
@@ -108,6 +111,9 @@ class Settings {
         return apply_filters('qubely_options', $attr);
     }
 
+    /**
+     * Setting Page Markup
+     */
     public function markup()
     {
         ?>
