@@ -8,19 +8,18 @@ class Fields{
      * @param $info
      */
     public static function get($type, $info) {
-
         if(
-                'text' === $type ||
-                'number' === $type ||
-                'date' === $type ||
-                'email' === $type ||
-                'month' === $type ||
-                'search' === $type ||
-                'url' === $type ||
-                'time' === $type ||
-                'tel' === $type ||
-                'week' === $type ||
-                'color' === $type
+            'text' === $type ||
+            'number' === $type ||
+            'date' === $type ||
+            'email' === $type ||
+            'month' === $type ||
+            'search' === $type ||
+            'url' === $type ||
+            'time' === $type ||
+            'tel' === $type ||
+            'week' === $type ||
+            'color' === $type
         ) {
             return self::text($info);
         }
