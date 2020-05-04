@@ -2,7 +2,11 @@ import './style.scss';
 import Color from './components';
 import classnames from 'classnames';
 import icons from '../../helpers/icons';
-import { getGlobalSettings as getGlobalCSS } from '../../helpers/globalCSS';
+import {
+    getGlobalSettings as getGlobalCSS,
+    setGlobalTypo_Variables
+} from '../../helpers/globalCSS';
+
 import { isObject } from '../../components/HelperFunction';
 
 const { getComputedStyle } = window;
@@ -161,7 +165,6 @@ class GlobalSettings extends Component {
         await this.getGlobalSettings();
         await this.saveGlobalCSS();
         wp.data.subscribe(() => {
-            // console.log('subscribe test');
             const {
                 isSavingPost,
                 isPreviewingPost,
@@ -199,7 +202,7 @@ class GlobalSettings extends Component {
             activePreset
         } = this.state;
         if (presets && activePreset) {
-            this.saveGlobalCSS();
+            // this.saveGlobalCSS();
             if (activePreset !== prevState.activePreset) {
                 this.updateColorVariables(presets[activePreset].colors);
             }
@@ -278,6 +281,12 @@ class GlobalSettings extends Component {
                     ...newValue
                 }
             }
+            if (propertyName === 'typography') {
+                if (newValue) {
+                    setGlobalTypo_Variables(newValue, index);
+                }
+            }
+
             this.setState(({ presets }, props) => {
                 let tempPresets = presets;
                 tempPresets[presetKey][propertyName][index].value = newValue;

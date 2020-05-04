@@ -1,13 +1,19 @@
 const { __ } = wp.i18n;
 import Range from './Range';
 import Toggle from './Toggle';
+import ButtonGroup from './ButtonGroup';
 import '../css/typography.scss';
 import classnames from 'classnames';
 import icons from '../../helpers/icons';
 import FontList from "./assets/FontList";
 const { Component, Fragment } = wp.element;
-const { Dropdown, Tooltip } = wp.components;
+const { Dropdown, Tooltip, SelectControl } = wp.components;
 
+const PATH = '/qubely/v1/global_settings'
+
+async function fetchFromApi() {
+    return await wp.apiFetch({ path: PATH })
+}
 
 class Typography extends Component {
     constructor(props) {
@@ -20,8 +26,24 @@ class Typography extends Component {
             showFontWeights: false,
         }
     }
-    componentDidMount() {
-        document.addEventListener('mousedown', this.handleClickOutside)
+    async  componentDidMount() {
+        document.addEventListener('mousedown', this.handleClickOutside);
+        await this.getGlobalSettings();
+
+    }
+    getGlobalSettings = () => {
+        return fetchFromApi().then(data => {
+            if (data.success) {
+                console.log('data.settings : ', data.settings);
+                const { presets, activePreset } = data.settings;
+                let options = presets[activePreset].typography.map(({ name }, index) => ({ label: name, value: index + 1 }));
+                this.setState({
+                    globalTypoOptions: [{ label: 'None', value: 'none' }, ...options]
+                })
+            } else {
+                console.log('error : ', data);
+            }
+        });
     }
     componentWillUnmount() {
         document.removeEventListener('mousedown', this.handleClickOutside);
@@ -119,7 +141,8 @@ class Typography extends Component {
         const {
             filterText,
             showFontFamiles,
-            showFontWeights
+            showFontWeights,
+            globalTypoOptions
         } = this.state;
 
         let qubelyFonts = JSON.parse(localStorage.getItem('qubelyFonts'));
@@ -146,171 +169,197 @@ class Typography extends Component {
                         onChange={val => this.setSettings('openTypography', val)}
                     />
                 }
-
-                {((value && value.openTypography == 1) || globalSettings) &&
-                    <Fragment>
-                        <Range
-                            unit
-                            step={1}
-                            min={8}
-                            max={200}
-                            responsive
-                            device={device}
-                            label={__('Font Size')}
-                            value={value && value.size}
-                            onChange={val => this.setSettings('size', val)}
-                            onDeviceChange={value => onDeviceChange(value)}
+                {
+                    !globalSettings &&
+                    <ButtonGroup
+                        label={__('Typography Type')}
+                        options={
+                            [
+                                [__('Custom'), 'custom'],
+                                [__('Global'), 'global']
+                            ]
+                        }
+                        value={typeof value.activeSource !== 'undefined' ? value.activeSource : 'custom'}
+                        onChange={value => this.setSettings('activeSource', value)}
+                    />
+                }
+                {
+                    (value.activeSource === 'global' && !globalSettings) ?
+                        <SelectControl
+                            label="Size"
+                            value={typeof value.globalSource !== 'undefined' ? value.globalSource : 'none'}
+                            options={globalTypoOptions}
+                            onChange={value => this.setSettings('globalSource', value)}
                         />
+                        :
+                        <Fragment>
 
-                        <div className="qubely-field-group qubely-65-35">
-                            <div className="qubely-field qubely-field-font-family">
-                                <label>{__('Font Family')}</label>
-                                <div className="qubely-font-family-picker" ref="qubelySelectedFontFamily"
-                                    onClick={() => {
-                                        this.setState({ showFontFamiles: !showFontFamiles })
-                                    }}>
-                                    <span className="qubely-font-family-search-wrapper">
-                                        <input
-                                            type="text"
-                                            className={`qubely-font-family-search${!showFontFamiles ? ' selected-font-family' : ''}`}
-                                            placeholder={__(showFontFamiles ? 'Search' : value && value.family || 'Select')}
-                                            value={filterText}
-                                            onChange={e => this.setState({ filterText: e.target.value })} />
-                                        <span className="qubely-font-select-icon">   {showFontFamiles ? icons.arrow_up : icons.arrow_down}  </span>
-                                    </span>
-                                </div>
-                            </div>
-                            {
-                                showFontFamiles && <div className="qubely-font-family-option-wrapper" ref="qubelyFontFamilyWrapper">
-                                    <div className="qubely-font-family-options" >
-                                        {newFontList.length > 0 ?
-                                            newFontList.map((font, index) => {
-                                                let isActiveFont = false;
-                                                if (value && (font.n == value.family)) {
-                                                    isActiveFont = true;
-                                                }
-                                                let fontClasses = classnames(
-                                                    { ['qubely-font-family-option']: !isActiveFont },
-                                                    { ['qubely-active-font-family']: isActiveFont }
-                                                )
-                                                return (
-                                                    <div className={fontClasses}
-                                                        id={`qubely-font-family-${index}`}
-                                                        onClick={() => {
-                                                            this.setState({ showFontFamiles: false, filterText: '' });
-                                                            font.n == 'Default' ? this.setSettings('family', 'default') : this.handleTypographyChange(font.n)
-                                                        }}
-                                                    >
-                                                        {font.n}
-                                                    </div>
-                                                )
-                                            })
-                                            :
-                                            <div className={`qubely-font-family-option no-match`} onClick={() => this.setState({ showFontFamiles: false, filterText: '' })}  >  No matched font  </div>
-                                        }
-                                    </div>
-                                </div>
-                            }
-                            <div className="qubely-field qubely-field-font-weight">
-                                <label>{__('Weight')}</label>
-                                <div className="qubely-font-weight-picker-wrapper" ref="qubelySelectedFontWeight" onClick={() => this.setState({ showFontWeights: !showFontWeights })}>
-                                    <div className="qubely-font-weight-picker" >  {value && value.weight || 'Select'}   </div>
-                                    <span className="qubely-font-select-icon">   {showFontWeights ? icons.arrow_up : icons.arrow_down}  </span>
-                                </div>
-                            </div>
-                            {
-                                showFontWeights && <div className="qubely-font-weight-wrapper" ref="qubelyFontWeightWrapper">
-                                    <div className="qubely-font-family-weights" >
-                                        {
-                                            ['Default', ...this._getWeight()].map(font => {
-                                                return (
-                                                    <div className={`${font == value.weight ? 'qubely-active-font-weight' : 'qubely-font-weight-option'}`}
-                                                        onClick={() => { this.setState({ showFontWeights: false }); this.setSettings('weight', font) }}
-                                                    >
-                                                        {font}
-                                                    </div>
-                                                )
-                                            })
-                                        }
-                                    </div>
-                                </div>
-                            }
-
-                        </div>
-
-                        <Dropdown
-                            className="qubely-field"
-                            renderToggle={({ isOpen, onToggle }) => (
-                                <div className="qubely-d-flex qubely-align-center">
-                                    <label>{__('Advanced Typography')}</label>
-                                    <div className="qubely-field-button-list qubely-ml-auto">
-                                        <button className={(isOpen == 1 ? 'active' : '') + ' qubely-button qubely-button-rounded'} onClick={onToggle} aria-expanded={isOpen}>
-                                            <i className="fas fa-cog" />
-                                        </button>
-                                    </div>
-                                </div>
-                            )}
-                            renderContent={() => (
-                                <div style={{ padding: '15px' }}>
-                                    {!this.props.disableLineHeight &&
-                                        <Range
-                                            label={__('Line Height')}
-                                            value={value && value.height}
-                                            onChange={val => this.setSettings('height', val)}
-                                            min={8}
-                                            max={200}
-                                            step={1}
-                                            unit
-                                            responsive
-                                            device={device}
-                                            onDeviceChange={value => onDeviceChange(value)}
-                                        />
-                                    }
+                            {((value && value.openTypography == 1) || globalSettings) &&
+                                <Fragment>
                                     <Range
-                                        label={__('Letter Spacing')}
-                                        value={value && value.spacing}
-                                        onChange={val => this.setSettings('spacing', val)}
-                                        min={-10}
-                                        max={30}
-                                        step={1}
                                         unit
+                                        step={1}
+                                        min={8}
+                                        max={200}
                                         responsive
                                         device={device}
+                                        label={__('Font Size')}
+                                        value={value && value.size}
+                                        onChange={val => this.setSettings('size', val)}
                                         onDeviceChange={value => onDeviceChange(value)}
                                     />
-                                    <div className="qubely-field qubely-d-flex qubely-align-center">
-                                        <div>
-                                            {__('Text Transform')}
+
+                                    <div className="qubely-field-group qubely-65-35">
+                                        <div className="qubely-field qubely-field-font-family">
+                                            <label>{__('Font Family')}</label>
+                                            <div className="qubely-font-family-picker" ref="qubelySelectedFontFamily"
+                                                onClick={() => {
+                                                    this.setState({ showFontFamiles: !showFontFamiles })
+                                                }}>
+                                                <span className="qubely-font-family-search-wrapper">
+                                                    <input
+                                                        type="text"
+                                                        className={`qubely-font-family-search${!showFontFamiles ? ' selected-font-family' : ''}`}
+                                                        placeholder={__(showFontFamiles ? 'Search' : value && value.family || 'Select')}
+                                                        value={filterText}
+                                                        onChange={e => this.setState({ filterText: e.target.value })} />
+                                                    <span className="qubely-font-select-icon">   {showFontFamiles ? icons.arrow_up : icons.arrow_down}  </span>
+                                                </span>
+                                            </div>
                                         </div>
-                                        <div className="qubely-field-button-list qubely-ml-auto">
-                                            {
-                                                ['none', 'capitalize', 'uppercase', 'lowercase'].map((data, index) => {
-                                                    return (
-                                                        <Tooltip text={data.charAt(0).toUpperCase() + data.slice(1)}>
-                                                            <button className={(value.transform == data ? 'active' : '') + ' qubely-button'} key={index} onClick={() => this.setSettings('transform', data)}>
-                                                                {data == 'none' &&
-                                                                    <i className="fas fa-ban" />
-                                                                }
-                                                                {data == 'capitalize' &&
-                                                                    <span>Aa</span>
-                                                                }
-                                                                {data == 'uppercase' &&
-                                                                    <span>AA</span>
-                                                                }
-                                                                {data == 'lowercase' &&
-                                                                    <span>aa</span>
-                                                                }
-                                                            </button>
-                                                        </Tooltip>
-                                                    )
-                                                })
-                                            }
+                                        {
+                                            showFontFamiles && <div className="qubely-font-family-option-wrapper" ref="qubelyFontFamilyWrapper">
+                                                <div className="qubely-font-family-options" >
+                                                    {newFontList.length > 0 ?
+                                                        newFontList.map((font, index) => {
+                                                            let isActiveFont = false;
+                                                            if (value && (font.n == value.family)) {
+                                                                isActiveFont = true;
+                                                            }
+                                                            let fontClasses = classnames(
+                                                                { ['qubely-font-family-option']: !isActiveFont },
+                                                                { ['qubely-active-font-family']: isActiveFont }
+                                                            )
+                                                            return (
+                                                                <div className={fontClasses}
+                                                                    id={`qubely-font-family-${index}`}
+                                                                    onClick={() => {
+                                                                        this.setState({ showFontFamiles: false, filterText: '' });
+                                                                        font.n == 'Default' ? this.setSettings('family', 'default') : this.handleTypographyChange(font.n)
+                                                                    }}
+                                                                >
+                                                                    {font.n}
+                                                                </div>
+                                                            )
+                                                        })
+                                                        :
+                                                        <div className={`qubely-font-family-option no-match`} onClick={() => this.setState({ showFontFamiles: false, filterText: '' })}  >  No matched font  </div>
+                                                    }
+                                                </div>
+                                            </div>
+                                        }
+                                        <div className="qubely-field qubely-field-font-weight">
+                                            <label>{__('Weight')}</label>
+                                            <div className="qubely-font-weight-picker-wrapper" ref="qubelySelectedFontWeight" onClick={() => this.setState({ showFontWeights: !showFontWeights })}>
+                                                <div className="qubely-font-weight-picker" >  {value && value.weight || 'Select'}   </div>
+                                                <span className="qubely-font-select-icon">   {showFontWeights ? icons.arrow_up : icons.arrow_down}  </span>
+                                            </div>
                                         </div>
+                                        {
+                                            showFontWeights && <div className="qubely-font-weight-wrapper" ref="qubelyFontWeightWrapper">
+                                                <div className="qubely-font-family-weights" >
+                                                    {
+                                                        ['Default', ...this._getWeight()].map(font => {
+                                                            return (
+                                                                <div className={`${font == value.weight ? 'qubely-active-font-weight' : 'qubely-font-weight-option'}`}
+                                                                    onClick={() => { this.setState({ showFontWeights: false }); this.setSettings('weight', font) }}
+                                                                >
+                                                                    {font}
+                                                                </div>
+                                                            )
+                                                        })
+                                                    }
+                                                </div>
+                                            </div>
+                                        }
+
                                     </div>
-                                </div>
-                            )}
-                        />
-                    </Fragment>
+
+                                    <Dropdown
+                                        className="qubely-field"
+                                        renderToggle={({ isOpen, onToggle }) => (
+                                            <div className="qubely-d-flex qubely-align-center">
+                                                <label>{__('Advanced Typography')}</label>
+                                                <div className="qubely-field-button-list qubely-ml-auto">
+                                                    <button className={(isOpen == 1 ? 'active' : '') + ' qubely-button qubely-button-rounded'} onClick={onToggle} aria-expanded={isOpen}>
+                                                        <i className="fas fa-cog" />
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        )}
+                                        renderContent={() => (
+                                            <div style={{ padding: '15px' }}>
+                                                {!this.props.disableLineHeight &&
+                                                    <Range
+                                                        label={__('Line Height')}
+                                                        value={value && value.height}
+                                                        onChange={val => this.setSettings('height', val)}
+                                                        min={8}
+                                                        max={200}
+                                                        step={1}
+                                                        unit
+                                                        responsive
+                                                        device={device}
+                                                        onDeviceChange={value => onDeviceChange(value)}
+                                                    />
+                                                }
+                                                <Range
+                                                    label={__('Letter Spacing')}
+                                                    value={value && value.spacing}
+                                                    onChange={val => this.setSettings('spacing', val)}
+                                                    min={-10}
+                                                    max={30}
+                                                    step={1}
+                                                    unit
+                                                    responsive
+                                                    device={device}
+                                                    onDeviceChange={value => onDeviceChange(value)}
+                                                />
+                                                <div className="qubely-field qubely-d-flex qubely-align-center">
+                                                    <div>
+                                                        {__('Text Transform')}
+                                                    </div>
+                                                    <div className="qubely-field-button-list qubely-ml-auto">
+                                                        {
+                                                            ['none', 'capitalize', 'uppercase', 'lowercase'].map((data, index) => {
+                                                                return (
+                                                                    <Tooltip text={data.charAt(0).toUpperCase() + data.slice(1)}>
+                                                                        <button className={(value.transform == data ? 'active' : '') + ' qubely-button'} key={index} onClick={() => this.setSettings('transform', data)}>
+                                                                            {data == 'none' &&
+                                                                                <i className="fas fa-ban" />
+                                                                            }
+                                                                            {data == 'capitalize' &&
+                                                                                <span>Aa</span>
+                                                                            }
+                                                                            {data == 'uppercase' &&
+                                                                                <span>AA</span>
+                                                                            }
+                                                                            {data == 'lowercase' &&
+                                                                                <span>aa</span>
+                                                                            }
+                                                                        </button>
+                                                                    </Tooltip>
+                                                                )
+                                                            })
+                                                        }
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        )}
+                                    />
+                                </Fragment>
+                            }
+                        </Fragment>
                 }
             </div>
         )
