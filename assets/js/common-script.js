@@ -459,6 +459,11 @@ jQuery(document).ready(function ($) {
             $('#qubely-settings-tabs a[href=' + window.location.hash + ']').addClass('nav-tab-active');
             qubelySettingsTabContent.find('.qubely-settings-inner').hide();
             qubelySettingsTabContent.find(window.location.hash).show();
+        }else {
+            qubelySettingTabs.removeClass('nav-tab-active');
+            qubelySettingTabs.first().addClass('nav-tab-active');
+            qubelySettingsTabContent.find('.qubely-settings-inner').hide();
+            qubelySettingsTabContent.find('.qubely-settings-inner').first().show();
         }
     }
 

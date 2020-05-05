@@ -6,21 +6,22 @@ class Fields{
      * Get Field Type
      * @param $type
      * @param $info
+     * @since 1.3.91
      */
-    public static function get($type, $info) {
 
+    public static function get($type, $info) {
         if(
-                'text' === $type ||
-                'number' === $type ||
-                'date' === $type ||
-                'email' === $type ||
-                'month' === $type ||
-                'search' === $type ||
-                'url' === $type ||
-                'time' === $type ||
-                'tel' === $type ||
-                'week' === $type ||
-                'color' === $type
+            'text' === $type ||
+            'number' === $type ||
+            'date' === $type ||
+            'email' === $type ||
+            'month' === $type ||
+            'search' === $type ||
+            'url' === $type ||
+            'time' === $type ||
+            'tel' === $type ||
+            'week' === $type ||
+            'color' === $type
         ) {
             return self::text($info);
         }
@@ -32,6 +33,7 @@ class Fields{
     /**
      * Get text field
      * @param $info
+     * @since 1.3.91
      */
     private static function text($info)
     {
@@ -55,6 +57,7 @@ class Fields{
     /**
      * Get Select Field
      * @param $info
+     * @since 1.3.91
      */
     private static function select($info)
     {
@@ -79,12 +82,22 @@ class Fields{
         <?php
     }
 
+    /**
+     * Label markup
+     * @param $label
+     * @since 1.3.91
+     */
     private static function label($label) {
         if(isset($label)){
             echo "<th class='row'>". esc_html($label) ."</th>";
         }
     }
 
+    /**
+     * Description Markup
+     * @param $description
+     * @since 1.3.91
+     */
     private static function description($description) {
         if(isset($description)){
             echo "<p class='description'>{$description}</p>";
