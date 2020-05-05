@@ -568,40 +568,63 @@ class QUBELY
 			)
 		);
 
-		/*// for set available blocks meta, @since 1.3.0
-        register_rest_route(
+		register_rest_route(
             'qubely/v1',
-            '/set_qubely_available_blocks_meta/',
+            '/get_qubely_options',
             array(
                 array(
-                    'methods' => 'POST',
-                    'callback' => array($this, 'set_qubely_available_blocks_meta'),
-                    'permission_callback' => function() {
+                    'methods' => 'GET',
+                    'callback' => array($this, 'get_qubely_options'),
+                    'permission_callback' => function () {
                         return current_user_can('edit_posts');
                     },
                     'args' => array()
                 )
             )
-        );*/
+        );
+
+        register_rest_route(
+            'qubely/v1',
+            '/get_qubely_options',
+            array(
+                array(
+                    'methods' => 'POST',
+                    'callback' => array($this, 'add_qubely_options'),
+                    'permission_callback' => function () {
+                        return current_user_can('edit_posts');
+                    },
+                    'args' => array()
+                )
+            )
+        );
 	}
 
-	/**
-	 * Api for set/update available blocks meta
-	 * @since 1.3.0
-	 * @param $request
-	 */
-
-	/*public function set_qubely_available_blocks_meta(WP_REST_Request $request)
+    public function add_qubely_options($request)
     {
-        try {
-            $request_body = json_decode($request->get_body(), true);
-            update_post_meta($request_body['post_id'], '__qubely_available_blocks', serialize($request_body));
-            return ['success' => true, 'message' => 'Available blocks meta added ', 'data' => $request_body];
-        } catch (Exception $e) {
-            return ['success' => false, 'message' => $e->getMessage()];
-        }
-    }*/
+        try{
+            $params = $request->get_params();
+            $options = get_option('qubely_options');
+            $key = sanitize_text_field($params['key']);
+            $value = sanitize_text_field($params['value']);
 
+            if(empty($key) || empty($value)) {
+                throw new Exception('Key or value cannot be empty!');
+            }
+
+            $options[$key] = $value;
+            update_option('qubely_options', $options);
+            wp_send_json_success($options);
+
+        } catch (Exception $e) {
+            wp_send_json_error(['success' => false, 'message' => $e->getMessage()]);
+        }
+    }
+
+	public function get_qubely_options()
+    {
+	    $options = get_option('qubely_options');
+	    wp_send_json_success($options);
+    }
 
 	public function  append_qubely_css_callback($request)
 	{

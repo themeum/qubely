@@ -14,7 +14,22 @@ class Edit extends Component {
         this.initMapLibrary = this.initMapLibrary.bind(this);
         this.setSettings = this.setSettings.bind(this);
         this.getStyles = this.getStyles.bind(this);
-        this.state = { spacer: true }
+        this.state = { spacer: true}
+    }
+
+    componentWillMount() {
+        try {
+            wp.apiFetch({
+                path: 'qubely/v1/get_qubely_options',
+                method: 'GET'
+            })
+            .then(response => {
+                this.props.setAttributes({apiKey: response.data.qubely_gmap_api_key})
+            });
+        } catch (e) {
+            console.log(e);
+        }
+
     }
 
     componentDidMount() {
