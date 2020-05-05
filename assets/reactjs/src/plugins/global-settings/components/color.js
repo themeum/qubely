@@ -12,9 +12,7 @@ const {
 } = wp.components;
 
 
-export default function Color({ value, onChange, className, deleteOption, addNew = undefined, addNewColor = false }) {
-
-    const [newColorFlag, setNewColorFlag] = useState(addNewColor);
+export default function Color({ value, onChange, className, deleteOption, onDelete, addNew = undefined, addNewColor = false }) {
 
     const classes = classNames(
         'qubely-field',
@@ -52,7 +50,7 @@ export default function Color({ value, onChange, className, deleteOption, addNew
                         </span>
                         {
                             deleteOption &&
-                            <span className="delete">{icons.plus_circle}</span>
+                            <span className="delete" onClick={() => onDelete()} >{icons.delete}</span>
                         }
                     </span>
                 )}

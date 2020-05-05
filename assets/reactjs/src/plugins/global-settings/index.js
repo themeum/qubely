@@ -370,6 +370,15 @@ class GlobalSettings extends Component {
                 return { presets: tempPresets };
             });
         }
+
+        const deleteColor = (index, presetKey) => {
+            this.setState(({ presets }, props) => {
+                let tempPresets = presets;
+                tempPresets[presetKey].colors.splice(index, 1);
+                return { presets: tempPresets };
+            });
+        }
+
         const updatePreset = (propertyName, index, newValue, presetKey, isObject = false) => {
             if (isObject) {
                 newValue = {
@@ -466,7 +475,6 @@ class GlobalSettings extends Component {
 
                             }
 
-
                             return (
                                 <div key={name} className={classes}>
                                     <div className="title-wrapper">
@@ -540,6 +548,7 @@ class GlobalSettings extends Component {
                                                                 value={value}
                                                                 className={index < 5 ? 'primary-color' : 'added-color'}
                                                                 deleteOption={index < 5 ? false : true}
+                                                                onDelete={() => deleteColor(index, presetKey)}
                                                                 onChange={newValue => changeColor(index, newValue, presetKey)}
                                                             />
                                                         ))

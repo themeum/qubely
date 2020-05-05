@@ -141,8 +141,11 @@
                 position: absolute;
                 top: 0px;
                 right: 0px;
-                // visibility: hidden;
-                // opacity: 0;
+                visibility: hidden;
+                opacity: 0;
+                svg {
+                    transform: rotate(45deg);
+                }
             }
             &:hover {
                 .delete {
