@@ -54,205 +54,13 @@ const {
  */
 import Typography from '../../components/fields/Typography'
 import { CssGenerator } from '../../components/CssGenerator'
-
+import { ADDNEWDEFAULT, DEFAULTPRESETS } from './constants';
 
 const PATH = {
     fetch: '/qubely/v1/global_settings',
     post: '/qubely/v1/global_settings'
 }
 
-const ADDNEWDEFAULT = {
-    name: undefined,
-    key: undefined,
-    colors: ['#4A90E2', '#50E3C2', '#000', '#4A4A4A', '#9B9B9B'],
-    typography: [
-        {
-            name: 'Heading 1',
-            value: {
-                openTypography: 1,
-            },
-            style: [{
-                selector: '{{QUBELY}} h1'
-            }]
-        },
-        {
-            name: 'Heading 2',
-            value: {
-                openTypography: 1,
-            },
-            style: [{
-                selector: '{{QUBELY}} h2'
-            }]
-        },
-        {
-            name: 'Heading 3',
-            value: {
-                openTypography: 1,
-            },
-            style: [{
-                selector: '{{QUBELY}} h3'
-            }]
-        },
-        {
-            name: 'Heading 4',
-            value: {
-                openTypography: 1,
-            },
-            style: [{
-                selector: '{{QUBELY}} h4'
-            }]
-        },
-        {
-            name: 'Heading 5',
-            value: {
-                openTypography: 1,
-            },
-            style: [{
-                selector: '{{QUBELY}} h5'
-            }]
-        },
-        {
-            name: 'Heading 6',
-            value: {
-                openTypography: 1,
-            },
-            style: [{
-                selector: '{{QUBELY}} h6'
-            }]
-        }
-    ],
-}
-
-
-const DEFAULTPRESETS = {
-    activePreset: undefined,
-    presets: {
-        preset1: {
-            name: 'Preset #1',
-            key: 'preset1',
-            colors: ['#4A90E2', '#50E3C2', '#000', '#4A4A4A', '#9B9B9B'],
-            typography: [
-                {
-                    name: 'Heading 1',
-                    value: {
-                        openTypography: 1,
-                    },
-                    style: [{
-                        selector: '{{QUBELY}} h1'
-                    }]
-                },
-                {
-                    name: 'Heading 2',
-                    value: {
-                        openTypography: 1,
-                    },
-                    style: [{
-                        selector: '{{QUBELY}} h2'
-                    }]
-                },
-                {
-                    name: 'Heading 3',
-                    value: {
-                        openTypography: 1,
-                    },
-                    style: [{
-                        selector: '{{QUBELY}} h3'
-                    }]
-                },
-                {
-                    name: 'Heading 4',
-                    value: {
-                        openTypography: 1,
-                    },
-                    style: [{
-                        selector: '{{QUBELY}} h4'
-                    }]
-                },
-                {
-                    name: 'Heading 5',
-                    value: {
-                        openTypography: 1,
-                    },
-                    style: [{
-                        selector: '{{QUBELY}} h5'
-                    }]
-                },
-                {
-                    name: 'Heading 6',
-                    value: {
-                        openTypography: 1,
-                    },
-                    style: [{
-                        selector: '{{QUBELY}} h6'
-                    }]
-                }
-            ],
-        },
-        preset2: {
-            name: 'Preset #2',
-            key: 'preset2',
-            colors: ['#4A90E2', '#50E3C2', '#000', '#4A4A4A', '#9B9B9B'],
-            typography: [
-                {
-                    name: 'Heading 1',
-                    value: {
-                        openTypography: 1,
-                    },
-                    style: [{
-                        selector: '{{QUBELY}} h1'
-                    }]
-                },
-                {
-                    name: 'Heading 2',
-                    value: {
-                        openTypography: 1,
-                    },
-                    style: [{
-                        selector: '{{QUBELY}} h2'
-                    }]
-                },
-                {
-                    name: 'Heading 3',
-                    value: {
-                        openTypography: 1,
-                    },
-                    style: [{
-                        selector: '{{QUBELY}} h3'
-                    }]
-                },
-                {
-                    name: 'Heading 4',
-                    value: {
-                        openTypography: 1,
-                    },
-                    style: [{
-                        selector: '{{QUBELY}} h4'
-                    }]
-                },
-                {
-                    name: 'Heading 5',
-                    value: {
-                        openTypography: 1,
-                    },
-                    style: [{
-                        selector: '{{QUBELY}} h5'
-                    }]
-                },
-                {
-                    name: 'Heading 6',
-                    value: {
-                        openTypography: 1,
-                    },
-                    style: [{
-                        selector: '{{QUBELY}} h6'
-                    }]
-                }
-            ],
-        },
-
-    },
-
-}
 async function fetchFromApi() {
     return await wp.apiFetch({ path: PATH.fetch })
 }
@@ -273,21 +81,9 @@ class GlobalSettings extends Component {
     }
 
     async componentDidMount() {
-
         await this.getGlobalSettings();
         await this.saveGlobalCSS();
-        wp.data.subscribe(() => {
-            const {
-                isSavingPost,
-                isPreviewingPost,
-                isPublishingPost,
-                isAutosavingPost,
-            } = select('core/editor');
-
-            if ((isSavingPost() || isPreviewingPost() || isPublishingPost())) {
-                this.updateGlobalSettings()
-            }
-        });
+        await this.updateGlobalSettings()
     }
     async saveGlobalCSS() {
         let _CSS = await getGlobalCSS();
@@ -320,10 +116,20 @@ class GlobalSettings extends Component {
     }
 
     updateGlobalSettings = () => {
+        const {
+            presets,
+            activePreset
+        } = this.state;
+        let tempData = {
+            activePreset,
+            presets: {
+                ...presets
+            }
+        }
         wp.apiFetch({
             path: PATH.post,
             method: 'POST',
-            data: { settings: JSON.stringify(this.state) }
+            data: { settings: JSON.stringify(tempData) }
         }).then(data => {
             console.log('data : ', data);
             return data
@@ -395,7 +201,7 @@ class GlobalSettings extends Component {
             });
         }
         const addNewPreset = (selectedPreset, operation) => {
-            this.setState(prevState => {
+            this.setState(async (prevState) => {
                 let tempPreset, numOfPresets = Object.keys(presets).length;
                 if (operation === 'add') {
                     tempPreset = selectedPreset;
@@ -405,12 +211,28 @@ class GlobalSettings extends Component {
 
                 const newPresetName = `preset${numOfPresets + 1}`;
                 prevState.presets[newPresetName] = tempPreset;
-                if (operation === 'add') {
-                    prevState.presets[newPresetName].name = `Preset #${numOfPresets + 1}`;
-                } else {
-                    prevState.presets[newPresetName].name = `Copy of ${tempPreset.name}`;
-                }
                 prevState.presets[newPresetName].key = newPresetName;
+
+                if (operation === 'duplicate') {
+                    prevState.presets[newPresetName].name = `Copy of ${tempPreset.name}`;
+                } else {
+                    prevState.presets[newPresetName].name = `Preset #${numOfPresets + 1}`;
+                }
+
+                if (operation === 'saveAs') {
+                    await fetchFromApi().then(data => {
+                        if (data.success) {
+                            if (typeof data.settings.presets[selectedPreset] !== 'undefined') {
+                                prevState.presets[selectedPreset] = data.settings.presets[selectedPreset];
+                            }
+                        }
+                    });
+                    return ({
+                        presets: prevState.presets,
+                        showPresetSettings: undefined
+                    });
+                }
+
                 return ({
                     presets: prevState.presets
                 });
@@ -461,8 +283,10 @@ class GlobalSettings extends Component {
                                 });
                             }
 
-                            const renameTitle = (newTitle, presetKey) => {
-                                console.log(' renameTitle(newTitle, presetKey) : ', newTitle, presetKey);
+                            const renameTitle = (newTitle = '', presetKey) => {
+                                console.log(' newTitle : ', newTitle);
+                                console.log(' renameTitle( presetKey) : ', presetKey);
+
                                 this.setState(prevState => {
                                     prevState.presets[presetKey].name = newTitle;
                                     return ({
@@ -471,17 +295,14 @@ class GlobalSettings extends Component {
                                 })
                             }
 
-                            const saveAsNew = (presetKey) => {
-
-                            }
 
                             return (
-                                <div key={name} className={classes}>
+                                <div key={presetKey} className={classes}>
                                     <div className="title-wrapper">
 
                                         <div
                                             className="title"
-                                            {...(!showDetailedSettings && {
+                                            {...((!showDetailedSettings && !(enableRenaming === presetKey)) && {
                                                 onClick: () => this.setState(state => ({
                                                     showPresetSettings: showDetailedSettings ? undefined : index
                                                 }))
@@ -498,7 +319,18 @@ class GlobalSettings extends Component {
                                                     :
                                                     <span className="radio-button">{isActivePreset ? icons.circleDot : icons.circleThin}</span>
                                             }
-                                            <span className="name"> {name}</span>
+                                            {
+                                                (enableRenaming === presetKey) ?
+                                                    <RichText
+                                                        value={name}
+                                                        keepPlaceholderOnFocus
+                                                        className={'rename-preset'}
+                                                        placeholder={__('Add preset name')}
+                                                        onChange={newValue => renameTitle(newValue, presetKey)}
+                                                    />
+                                                    :
+                                                    <span className="name"> {name}</span>
+                                            }
                                         </div>
                                         <Dropdown
                                             position="bottom center"
@@ -510,7 +342,7 @@ class GlobalSettings extends Component {
                                                     :
                                                     <div className="icon" onClick={onToggle}>{icons.ellipsis_v} </div>
                                             )}
-                                            renderContent={() => {
+                                            renderContent={({ onToggle }) => {
                                                 let activeClass = classnames(
                                                     { ['active']: isActivePreset }
                                                 )
@@ -518,16 +350,26 @@ class GlobalSettings extends Component {
                                                     <div className="global-preset-options">
                                                         {
                                                             showDetailedSettings ?
-                                                                <div onClick={() => saveAsNew(presetKey)}>Save as New</div>
+                                                                <div onClick={() => { addNewPreset(presetKey, 'saveAs'), onToggle() }}>Save as New</div>
                                                                 :
                                                                 <Fragment>
-                                                                    <div className={activeClass} {...(!isActivePreset && { onClick: () => changePreset(key) })} >Activate</div>
-                                                                    <div onClick={() => this.setState(state => ({ enableRenaming: !state.enableRenaming }))}>Rename</div>
-                                                                    <div onClick={() => addNewPreset(presetKey, 'duplicate')}>Duplicate</div>
+                                                                    <div className={activeClass} {...(!isActivePreset && { onClick: () => { changePreset(key); onToggle() } })} >Activate</div>
+                                                                    <div
+                                                                        onClick={() => {
+                                                                            this.setState({
+                                                                                enableRenaming: presetKey
+                                                                            });
+                                                                            onToggle();
+                                                                        }}
+                                                                    >
+                                                                        Rename
+                                                                    </div>
+                                                                    <div onClick={() => { addNewPreset(presetKey, 'duplicate'); onToggle() }}>Duplicate</div>
                                                                 </Fragment>
                                                         }
-
-                                                        <div onClick={() => deletePreset(presetKey)}>Delete</div>
+                                                        {
+                                                            index > 1 && <div onClick={() => deletePreset(presetKey)}>Delete</div>
+                                                        }
                                                     </div>
                                                 )
                                             }}
@@ -620,8 +462,17 @@ class GlobalSettings extends Component {
             )
         }
 
-        // console.log('this state :', this.state);
+        const {
+            isSavingPost,
+            isPreviewingPost,
+            isPublishingPost,
+            isAutosavingPost,
+        } = select('core/editor');
 
+        if ((isSavingPost() || isPreviewingPost() || isPublishingPost()) && !isAutosavingPost()) {
+            this.updateGlobalSettings();
+        }
+        console.log('this.state : ', this.state);
         return (
             <Fragment>
                 <PluginSidebar
@@ -630,9 +481,8 @@ class GlobalSettings extends Component {
                     title={__('Global Settings')}
                 >
                     {renderPresets()}
-                    {/* <button onClick={() => this.getGlobalSettings()}>get</button>
-                    <button onClick={() => this.updateGlobalSettings()}>Save</button>
-                    <button onClick={() => this.delGlobalSettings()}>delete</button> */}
+                    <button onClick={() => this.getGlobalSettings()}>get</button>
+                    <button onClick={() => this.delGlobalSettings()}>delete</button>
                 </PluginSidebar>
 
                 <PluginSidebarMoreMenuItem
