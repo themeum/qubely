@@ -82,6 +82,7 @@ class Settings {
          * @select
          */
         $skeleton = array(
+            // Tab General
             'general' => array(
                 'label' => 'General',
                 'fields' => array(
@@ -114,6 +115,7 @@ class Settings {
                     )
                 )
             ),
+            // Tab Advanced
             'advanced' => array(
                 'label' => 'Advanced',
                 'fields' => array(
