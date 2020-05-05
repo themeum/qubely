@@ -6,7 +6,7 @@ const endpoint = '/qubely/v1/save_block_css'
 
 const API_fetch = async (post_id, block_css, is_remain, available_blocks) => {
     const json = JSON.stringify(block_css.interaction)
-    try{
+    try {
         await wp.apiFetch({
             path: endpoint,
             method: 'POST',
@@ -222,7 +222,9 @@ const ParseCss = async (setDatabase = true) => {
         interaction: {}
     };
 
-    __blocks.css += await getGlobalSettings();
+    const globalCSS = await getGlobalSettings();
+    console.log('globalCSS : ', globalCSS);
+    __blocks.css += globalCSS;
 
     // if (typeof window.globalData != 'undefined') {
     //     __blocks.css += CssGenerator(window.globalData.settings, 'pagesettings', '8282882', true)

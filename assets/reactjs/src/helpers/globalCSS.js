@@ -83,12 +83,12 @@ const appendTypoVariable = (value, index) => {
 
     nonResponsiveProps += '}';
     let tempCSS = responsive + ' ' + nonResponsiveProps;
-    return (tempCSS);
+    return tempCSS;
 }
 
 export const setGlobalTypo_Variables = (globalTypoes) => {
     let CSS = '';
-
+    console.log('globalTypoes : ', globalTypoes);
     globalTypoes.forEach((typo, index) => {
         let value = {};
         if (typo.value) {
@@ -102,62 +102,6 @@ export const setGlobalTypo_Variables = (globalTypoes) => {
     return CSS;
 }
 
-
-export const updateTypoVariables = (typography, index) => {
-    // let responsive = '',
-    //     nonResponsiveProps = '',
-    //     data = {
-    //         md: [],
-    //         sm: [],
-    //         xs: []
-    //     };
-
-    // if (value.size) {
-    //     data = _appendVariables(generateVariables(value.size, `--qubely-typo${index + 1}-font-size:{{key}};`), data);
-    // }
-    // if (value.height) {
-    //     data = _appendVariables(generateVariables(value.height, `--qubely-typo${index + 1}-line-height:{{key}} !important;`), data)
-    // }
-    // if (value.spacing) {
-    //     data = _appendVariables(generateVariables(value.spacing, `--qubely-typo${index + 1}-letter-spacing:{{key}};`), data)
-    // }
-
-    // if (data.md.length > 0) {
-    //     responsive += ':root{' + data.md.join('') + '}'
-    // }
-    // if (data.sm.length > 0) {
-    //     responsive += '@media (max-width: 1199px) {:root{' + data.sm.join('') + '}}'
-    // }
-    // if (data.xs.length > 0) {
-    //     responsive += '@media (max-width: 991px) {:root{' + data.xs.join('') + '}}'
-    // }
-
-    // //non responsive values
-    // if (value.family) {
-    //     if (!['Arial', 'Tahoma', 'Verdana', 'Helvetica', 'Times New Roman', 'Trebuchet MS', 'Georgia'].includes(value.family)) {
-    //         nonResponsiveProps = "@import url('https://fonts.googleapis.com/css?family=" + value.family.replace(/\s/g, '+') + ':' + (value.weight || 400) + "');";
-    //     }
-    // }
-    // nonResponsiveProps += ':root{';
-
-    const {
-        type,
-        family,
-        weight,
-        transform
-    } = typography.value;
-
-    if (typeof family !== 'undefined') {
-        document.documentElement.style.setProperty(`--qubely-typo${index}-font-family`, `'${family}',${type}`)
-    }
-    if (typeof weight !== 'undefined') {
-        document.documentElement.style.setProperty(`--qubely-typo${index}-font-weight`, `${weight}`)
-    }
-    if (typeof transform !== 'undefined') {
-        document.documentElement.style.setProperty(`--qubely-typo${index}-text-transform`, `${transform}`)
-    }
-
-}
 
 export const injectGlobalCSS = (_CSS, append = false) => {
     let styleSelector = window.document;
@@ -204,7 +148,7 @@ export const getGlobalSettings = () => {
                 presets,
                 activePreset
             } = data.settings;
-
+            console.log('data.settings : ', data.settings);
             globalData = presets[activePreset];
             let globalColors = ['#4A90E2', '#50E3C2', '#000', '#4A4A4A', '#9B9B9B'];
 
@@ -221,7 +165,7 @@ export const getGlobalSettings = () => {
 
             global_CSS += setGlobalCSS_Variables(globalColors);
             global_CSS += setGlobalTypo_Variables(presets[activePreset].typography);
-
+            console.log('global_CSS : ', global_CSS);
             return global_CSS;
         }
     });

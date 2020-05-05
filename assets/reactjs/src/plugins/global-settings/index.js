@@ -115,7 +115,7 @@ class GlobalSettings extends Component {
         });
     }
 
-    updateGlobalSettings = () => {
+    updateGlobalSettings = async () => {
         const {
             presets,
             activePreset
@@ -126,7 +126,7 @@ class GlobalSettings extends Component {
                 ...presets
             }
         }
-        wp.apiFetch({
+        await wp.apiFetch({
             path: PATH.post,
             method: 'POST',
             data: { settings: JSON.stringify(tempData) }
@@ -482,6 +482,7 @@ class GlobalSettings extends Component {
                 >
                     {renderPresets()}
                     <button onClick={() => this.getGlobalSettings()}>get</button>
+                    <button onClick={() => this.updateGlobalSettings()}>Save</button>
                     <button onClick={() => this.delGlobalSettings()}>delete</button>
                 </PluginSidebar>
 
