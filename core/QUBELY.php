@@ -110,6 +110,12 @@ class QUBELY
 
 		$palette = get_theme_support('qubely-color-palette');
 		$palette = array_replace(array('#062040', '#566372', '#2084F9', '#F3F3F3', '#EEEEEE', '#FFFFFF'), ($palette ? $palette[0] : array()));
+
+		$options = get_option('qubely_options');
+		$qubely_gmap_api_key = isset($options['qubely_gmap_api_key']) ? $options['qubely_gmap_api_key'] : '';
+		$qubely_recaptcha_site_key = isset($options['qubely_recaptcha_site_key']) ? $options['qubely_recaptcha_site_key'] : '';
+		$qubely_recaptcha_secret_key = isset($options['qubely_recaptcha_secret_key']) ? $options['qubely_recaptcha_secret_key'] : '';
+
 		wp_localize_script('qubely-blocks-js', 'qubely_admin', array(
 			'plugin' => QUBELY_DIR_URL,
 			'ajax' => admin_url('admin-ajax.php'),
@@ -119,6 +125,9 @@ class QUBELY
 			'image_sizes'  => $this->get_all_image_sizes(),
 			'palette' => $palette,
 			'overwriteTheme' => true,
+            'qubely_gmap_api_key' => $qubely_gmap_api_key,
+            'qubely_recaptcha_site_key' => $qubely_recaptcha_site_key,
+            'qubely_recaptcha_secret_key' => $qubely_recaptcha_secret_key,
 		));
 	}
 
@@ -585,7 +594,7 @@ class QUBELY
 
         register_rest_route(
             'qubely/v1',
-            '/get_qubely_options',
+            '/add_qubely_options',
             array(
                 array(
                     'methods' => 'POST',

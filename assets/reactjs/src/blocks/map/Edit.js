@@ -8,7 +8,7 @@ import mapStyles from './mapStyles'
 class Edit extends Component {
 
     constructor(props) {
-        super(props)
+        super(props);
         this.initMap = this.initMap.bind(this);
         this.initSearchBox = this.initSearchBox.bind(this);
         this.initMapLibrary = this.initMapLibrary.bind(this);
@@ -17,30 +17,15 @@ class Edit extends Component {
         this.state = { spacer: true}
     }
 
-    componentWillMount() {
-        try {
-            wp.apiFetch({
-                path: 'qubely/v1/get_qubely_options',
-                method: 'GET'
-            })
-            .then(response => {
-                this.props.setAttributes({apiKey: response.data.qubely_gmap_api_key})
-            });
-        } catch (e) {
-            console.log(e);
-        }
-
-    }
-
     componentDidMount() {
-        const { setAttributes, clientId, attributes: { uniqueId, apiKey } } = this.props
-        const _client = clientId.substr(0, 6)
+        const { setAttributes, clientId, attributes: { uniqueId, apiKey } } = this.props;
+        const _client = clientId.substr(0, 6);
+
         if (!uniqueId) {
             setAttributes({ uniqueId: _client });
-        } else if (uniqueId && uniqueId != _client) {
+        } else if (uniqueId && uniqueId !== _client) {
             setAttributes({ uniqueId: _client });
         }
-        this.initMapLibrary(apiKey);
 
         const mapIframe = this.refs.qubelyGoogleMapIframe;
         if (typeof mapIframe !== 'undefined') {
@@ -48,6 +33,25 @@ class Edit extends Component {
                 e.preventDefault();
             });
         }
+
+        if(qubely_admin.qubely_gmap_api_key) {
+            this.initMapLibrary(qubely_admin.qubely_gmap_api_key);
+        } else if(apiKey) {
+            this.initMapLibrary(apiKey);
+            try {
+                wp.apiFetch({
+                    path: 'qubely/v1/add_qubely_options',
+                    method: 'POST',
+                    data: {key: 'qubely_gmap_api_key', value: apiKey}
+                })
+            } catch (e) {
+                // debug
+                console.log(e);
+            }
+        } else {
+            this.initMapLibrary('');
+        }
+
     }
 
     initMapLibrary(apiKey) {
