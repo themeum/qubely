@@ -12,6 +12,10 @@ class Settings {
         add_action('init', array($this, 'option_setter'));
     }
 
+    /**
+     * Set options to the Class
+     * @since 1.3.91
+     */
     public function option_setter() {
         $this->options = (array) maybe_unserialize(get_option('qubely_options'));
         $this->fields = $this->fields();
@@ -19,6 +23,7 @@ class Settings {
 
     /**
      * Save options to database
+     * @since 1.3.91
      */
     public function save_options() {
         if (
@@ -29,7 +34,10 @@ class Settings {
 
         $option = (array) isset($_POST['qubely_options']) ? $_POST['qubely_options'] : array();
         $option = apply_filters('qubely_options_input', $option);
+
+        do_action('qubely_options_before_save', $option);
         update_option('qubely_options', $option);
+        do_action('qubely_options_after_save', $option);
     }
 
     /**
@@ -54,9 +62,26 @@ class Settings {
     /**
      * @return mixed|void
      * Settings Fields
+     * @since 1.3.91
      */
     public function fields() {
-        $attr = array(
+        /**
+         * Available Fields
+         *
+         * @text,
+         * @number,
+         * @date,
+         * @email,
+         * @month,
+         * @search,
+         * @url,
+         * @time,
+         * @tel,
+         * @week,
+         * @color,
+         * @select
+         */
+        $skeleton = array(
             'general' => array(
                 'label' => 'General',
                 'fields' => array(
@@ -108,11 +133,12 @@ class Settings {
             )
         );
 
-        return apply_filters('qubely_options', $attr);
+        return apply_filters('qubely_options', $skeleton);
     }
 
     /**
      * Setting Page Markup
+     * @since 1.3.91
      */
     public function markup()
     {
