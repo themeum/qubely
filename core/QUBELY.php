@@ -567,41 +567,7 @@ class QUBELY
 				)
 			)
 		);
-
-		/*// for set available blocks meta, @since 1.3.0
-        register_rest_route(
-            'qubely/v1',
-            '/set_qubely_available_blocks_meta/',
-            array(
-                array(
-                    'methods' => 'POST',
-                    'callback' => array($this, 'set_qubely_available_blocks_meta'),
-                    'permission_callback' => function() {
-                        return current_user_can('edit_posts');
-                    },
-                    'args' => array()
-                )
-            )
-        );*/
 	}
-
-	/**
-	 * Api for set/update available blocks meta
-	 * @since 1.3.0
-	 * @param $request
-	 */
-
-	/*public function set_qubely_available_blocks_meta(WP_REST_Request $request)
-    {
-        try {
-            $request_body = json_decode($request->get_body(), true);
-            update_post_meta($request_body['post_id'], '__qubely_available_blocks', serialize($request_body));
-            return ['success' => true, 'message' => 'Available blocks meta added ', 'data' => $request_body];
-        } catch (Exception $e) {
-            return ['success' => false, 'message' => $e->getMessage()];
-        }
-    }*/
-
 
 	public function  append_qubely_css_callback($request)
 	{
