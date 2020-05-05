@@ -1,15 +1,15 @@
+import '../css/typography.scss';
 const { __ } = wp.i18n;
 import Range from './Range';
 import Toggle from './Toggle';
-import ButtonGroup from './ButtonGroup';
-import '../css/typography.scss';
 import classnames from 'classnames';
 import icons from '../../helpers/icons';
+import ButtonGroup from './ButtonGroup';
 import FontList from "./assets/FontList";
 const { Component, Fragment } = wp.element;
 const { Dropdown, Tooltip, SelectControl } = wp.components;
 
-const PATH = '/qubely/v1/global_settings'
+const PATH = '/qubely/v1/global_settings';
 
 async function fetchFromApi() {
     return await wp.apiFetch({ path: PATH })
@@ -36,9 +36,14 @@ class Typography extends Component {
             if (data.success) {
                 console.log('data.settings : ', data.settings);
                 const { presets, activePreset } = data.settings;
-                let options = presets[activePreset].typography.map(({ name }, index) => ({ label: name, value: index + 1 }));
+                let options = [], values = [];
+                presets[activePreset].typography.forEach(({ name, value }, index) => {
+                    options.push({ label: name, value: index + 1 })
+                    values.push(value)
+                });
                 this.setState({
-                    globalTypoOptions: [{ label: 'None', value: 'none' }, ...options]
+                    globalTypoOptions: [{ label: 'None', value: 'none' }, ...options],
+                    globalTypoValues: values,
                 })
             } else {
                 console.log('error : ', data);
@@ -134,6 +139,7 @@ class Typography extends Component {
             value,
             label,
             device,
+            globalSource,
             globalSettings,
             onDeviceChange
         } = this.props;
@@ -142,7 +148,8 @@ class Typography extends Component {
             filterText,
             showFontFamiles,
             showFontWeights,
-            globalTypoOptions
+            globalTypoOptions,
+            globalTypoValues
         } = this.state;
 
         let qubelyFonts = JSON.parse(localStorage.getItem('qubelyFonts'));
@@ -160,6 +167,7 @@ class Typography extends Component {
                 item.n.toLowerCase().search(filterText.toLowerCase()) !== -1
             )
         }
+        console.log('this.state : ', this.state);
         return (
             <div className="qubely-field qubely-field-typography">
                 {
@@ -172,15 +180,23 @@ class Typography extends Component {
                 {
                     !globalSettings &&
                     <ButtonGroup
-                        label={__('Typography Type')}
+                        label={__('Source')}
                         options={
                             [
-                                [__('Custom'), 'custom'],
-                                [__('Global'), 'global']
+                                [__('Global'), 'global'],
+                                [__('Custom'), 'custom']
                             ]
                         }
-                        value={typeof value.activeSource !== 'undefined' ? value.activeSource : 'custom'}
-                        onChange={value => this.setSettings('activeSource', value)}
+                        value={typeof value.activeSource !== 'undefined' ? value.activeSource : 'global'}
+                        onChange={newSource => {
+                            if (newSource === 'custom') {
+                                if (typeof value.globalSource !== 'undefined' && value.globalSource !== 'none') {
+                                    this.props.onChange(Object.assign({}, this.props.value, globalTypoValues[value.globalSource - 1], { 'activeSource': newSource }))
+                                }
+                            } else {
+                                this.setSettings('activeSource', newSource);
+                            }
+                        }}
                     />
                 }
                 {
@@ -189,7 +205,7 @@ class Typography extends Component {
                             label="Size"
                             value={typeof value.globalSource !== 'undefined' ? value.globalSource : 'none'}
                             options={globalTypoOptions}
-                            onChange={value => this.setSettings('globalSource', value)}
+                            onChange={value => { this.setSettings('globalSource', value); }}
                         />
                         :
                         <Fragment>
