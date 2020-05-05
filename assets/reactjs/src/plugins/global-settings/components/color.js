@@ -12,7 +12,7 @@ const {
 } = wp.components;
 
 
-export default function Color({ value, onChange, addNew = undefined, addNewColor = false }) {
+export default function Color({ value, onChange, className, deleteOption, addNew = undefined, addNewColor = false }) {
 
     const [newColorFlag, setNewColorFlag] = useState(addNewColor);
 
@@ -24,6 +24,7 @@ export default function Color({ value, onChange, addNew = undefined, addNewColor
     );
 
     let containerClasses = classNames(
+        className,
         'qubely-color-picker-container',
         { ['qubely-global']: addNewColor }
     )
@@ -49,7 +50,10 @@ export default function Color({ value, onChange, addNew = undefined, addNewColor
                         >
                             {addNewColor && icons.plus}
                         </span>
-
+                        {
+                            deleteOption &&
+                            <span className="delete">{icons.plus_circle}</span>
+                        }
                     </span>
                 )}
                 renderContent={() => {

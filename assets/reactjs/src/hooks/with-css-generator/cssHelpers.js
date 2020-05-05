@@ -86,9 +86,11 @@ export const cssTypography = (v) => {
         transform,
 
     } = v;
+
     if (typeof activeSource !== 'undefined' && activeSource === 'global') {
         return globalTypography(globalSource);
     }
+
     let font = ''
     if (v.family) {
         if (!['Arial', 'Tahoma', 'Verdana', 'Helvetica', 'Times New Roman', 'Trebuchet MS', 'Georgia'].includes(v.family)) {
@@ -118,11 +120,14 @@ export const cssTypography = (v) => {
     }
     simple += '}';
     return ({
+        md: data.md,
         sm: data.sm,
         xs: data.xs,
         simple,
         font
     });
+
+
 }
 
 

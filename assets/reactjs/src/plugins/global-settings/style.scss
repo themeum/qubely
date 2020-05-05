@@ -64,7 +64,8 @@
                 align-items: center;
                 justify-content: center;
                 .icon {
-                    width: 100%;
+                    width: 30px;
+                    min-width: 20px;
                     display: inline-flex;
                     align-items: center;
                     justify-content: center;
@@ -134,9 +135,50 @@
             justify-content: center;
             background: transparent;
         }
+        .qubely-color-picker-container.added-color {
+            position: relative;
+            .delete {
+                position: absolute;
+                top: 0px;
+                right: 0px;
+                // visibility: hidden;
+                // opacity: 0;
+            }
+            &:hover {
+                .delete {
+                    visibility: visible;
+                    opacity: 1;
+                    z-index: 100;
+                    transition: 0.15s ease all;
+                }
+            }
+        }
     }
     .components-panel__body.is-opened {
         padding: 16px 0px;
+    }
+    .add-new-wrapper {
+        display: block;
+        cursor: pointer;
+        text-align: center;
+        padding: 10px 16px;
+        margin-bottom: 50px;
+        .add-new {
+            display: inline-flex;
+            min-width: 100%;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 10px;
+            border-radius: 5px;
+            border: 1px solid #dbdfe4;
+            .icon {
+                width: 30px;
+                min-width: 20px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+        }
     }
 }
 

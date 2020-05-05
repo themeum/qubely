@@ -61,6 +61,68 @@ const PATH = {
     post: '/qubely/v1/global_settings'
 }
 
+const ADDNEWDEFAULT = {
+    name: undefined,
+    key: undefined,
+    colors: ['#4A90E2', '#50E3C2', '#000', '#4A4A4A', '#9B9B9B'],
+    typography: [
+        {
+            name: 'Heading 1',
+            value: {
+                openTypography: 1,
+            },
+            style: [{
+                selector: '{{QUBELY}} h1'
+            }]
+        },
+        {
+            name: 'Heading 2',
+            value: {
+                openTypography: 1,
+            },
+            style: [{
+                selector: '{{QUBELY}} h2'
+            }]
+        },
+        {
+            name: 'Heading 3',
+            value: {
+                openTypography: 1,
+            },
+            style: [{
+                selector: '{{QUBELY}} h3'
+            }]
+        },
+        {
+            name: 'Heading 4',
+            value: {
+                openTypography: 1,
+            },
+            style: [{
+                selector: '{{QUBELY}} h4'
+            }]
+        },
+        {
+            name: 'Heading 5',
+            value: {
+                openTypography: 1,
+            },
+            style: [{
+                selector: '{{QUBELY}} h5'
+            }]
+        },
+        {
+            name: 'Heading 6',
+            value: {
+                openTypography: 1,
+            },
+            style: [{
+                selector: '{{QUBELY}} h6'
+            }]
+        }
+    ],
+}
+
 
 const DEFAULTPRESETS = {
     activePreset: undefined,
@@ -125,14 +187,67 @@ const DEFAULTPRESETS = {
                     }]
                 }
             ],
-
-
         },
         preset2: {
             name: 'Preset #2',
             key: 'preset2',
             colors: ['#4A90E2', '#50E3C2', '#000', '#4A4A4A', '#9B9B9B'],
-            typography: [],
+            typography: [
+                {
+                    name: 'Heading 1',
+                    value: {
+                        openTypography: 1,
+                    },
+                    style: [{
+                        selector: '{{QUBELY}} h1'
+                    }]
+                },
+                {
+                    name: 'Heading 2',
+                    value: {
+                        openTypography: 1,
+                    },
+                    style: [{
+                        selector: '{{QUBELY}} h2'
+                    }]
+                },
+                {
+                    name: 'Heading 3',
+                    value: {
+                        openTypography: 1,
+                    },
+                    style: [{
+                        selector: '{{QUBELY}} h3'
+                    }]
+                },
+                {
+                    name: 'Heading 4',
+                    value: {
+                        openTypography: 1,
+                    },
+                    style: [{
+                        selector: '{{QUBELY}} h4'
+                    }]
+                },
+                {
+                    name: 'Heading 5',
+                    value: {
+                        openTypography: 1,
+                    },
+                    style: [{
+                        selector: '{{QUBELY}} h5'
+                    }]
+                },
+                {
+                    name: 'Heading 6',
+                    value: {
+                        openTypography: 1,
+                    },
+                    style: [{
+                        selector: '{{QUBELY}} h6'
+                    }]
+                }
+            ],
         },
 
     },
@@ -270,7 +385,29 @@ class GlobalSettings extends Component {
                 return { presets: tempPresets };
             });
         }
+        const addNewPreset = (selectedPreset, operation) => {
+            this.setState(prevState => {
+                let tempPreset, numOfPresets = Object.keys(presets).length;
+                if (operation === 'add') {
+                    tempPreset = selectedPreset;
+                } else {
+                    tempPreset = JSON.parse(JSON.stringify(prevState.presets[selectedPreset]));
+                }
 
+                const newPresetName = `preset${numOfPresets + 1}`;
+                prevState.presets[newPresetName] = tempPreset;
+                if (operation === 'add') {
+                    prevState.presets[newPresetName].name = `Preset #${numOfPresets + 1}`;
+                } else {
+                    prevState.presets[newPresetName].name = `Copy of ${tempPreset.name}`;
+                }
+                prevState.presets[newPresetName].key = newPresetName;
+                return ({
+                    presets: prevState.presets
+                });
+            })
+
+        }
         const renderPresets = () => {
             return (
                 <div className="qubely-global-settings">
@@ -304,21 +441,6 @@ class GlobalSettings extends Component {
                                     showTypoSettings: undefined,
                                     activePreset: isActivePreset ? undefined : index
                                 })
-                            }
-                            const duplicatePreset = (selectedPreset) => {
-                                this.setState(prevState => {
-                                    let numOfPresets = Object.keys(presets).length,
-                                        tempPreset = JSON.parse(JSON.stringify(prevState.presets[selectedPreset]));
-
-                                    const newPresetName = `preset${numOfPresets + 1}`;
-                                    prevState.presets[newPresetName] = tempPreset;
-                                    prevState.presets[newPresetName].name = `Copy${tempPreset.name}`;
-                                    prevState.presets[newPresetName].key = newPresetName;
-                                    return ({
-                                        presets: prevState.presets
-                                    });
-                                })
-
                             }
                             const deletePreset = (selectedPreset) => {
                                 this.setState(prevState => {
@@ -393,7 +515,7 @@ class GlobalSettings extends Component {
                                                                 <Fragment>
                                                                     <div className={activeClass} {...(!isActivePreset && { onClick: () => changePreset(key) })} >Activate</div>
                                                                     <div onClick={() => this.setState(state => ({ enableRenaming: !state.enableRenaming }))}>Rename</div>
-                                                                    <div onClick={() => duplicatePreset(presetKey)}>Duplicate</div>
+                                                                    <div onClick={() => addNewPreset(presetKey, 'duplicate')}>Duplicate</div>
                                                                 </Fragment>
                                                         }
 
@@ -416,6 +538,8 @@ class GlobalSettings extends Component {
                                                         colors.map((value, index) => (
                                                             <Color
                                                                 value={value}
+                                                                className={index < 5 ? 'primary-color' : 'added-color'}
+                                                                deleteOption={index < 5 ? false : true}
                                                                 onChange={newValue => changeColor(index, newValue, presetKey)}
                                                             />
                                                         ))
@@ -472,6 +596,17 @@ class GlobalSettings extends Component {
                             )
                         })
                     }
+                    <div
+                        className="add-new-wrapper"
+                        onClick={() => addNewPreset(ADDNEWDEFAULT, 'add')}
+                    >
+                        <div className="add-new">
+                            <span className="icon">
+                                {icons.plus_circle}
+                            </span>
+                            <span className="title">Add New</span>
+                        </div>
+                    </div>
                 </div>
             )
         }
@@ -486,10 +621,9 @@ class GlobalSettings extends Component {
                     title={__('Global Settings')}
                 >
                     {renderPresets()}
-
-                    <button onClick={() => this.getGlobalSettings()}>get</button>
+                    {/* <button onClick={() => this.getGlobalSettings()}>get</button>
                     <button onClick={() => this.updateGlobalSettings()}>Save</button>
-                    <button onClick={() => this.delGlobalSettings()}>delete</button>
+                    <button onClick={() => this.delGlobalSettings()}>delete</button> */}
                 </PluginSidebar>
 
                 <PluginSidebarMoreMenuItem
