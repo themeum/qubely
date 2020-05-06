@@ -1,9 +1,9 @@
 const { __ } = wp.i18n;
 
-import './components/FieldRender'
+import './components/FieldRender';
 
-import './editor.scss'
-import './blocks/scss/style.scss'
+import './editor.scss';
+import './blocks/scss/style.scss';
 
 import './blocks/row'                   // Row
 import './blocks/row/column'            // Column
@@ -85,12 +85,21 @@ window.globalData = {
 window.globalSaving = false
 
 // Save CSS in Database/File
-import ParseCss from './helpers/ParseCss'
+import ParseCss from './helpers/ParseCss';
 wp.data.subscribe(() => {
-    const { isPreviewingPost, isSavingPost, isAutosavingPost } = wp.data.select("core/editor")
-    if (isPreviewingPost() || (isSavingPost() && (!isAutosavingPost()))) {
+    const {
+        isPreviewingPost,
+        isSavingPost,
+        isAutosavingPost,
+        isPublishingPost
+    } = wp.data.select("core/editor");
+
+    if (isPreviewingPost() || isPublishingPost() || (isSavingPost() && (!isAutosavingPost()))) {
         if (window.bindCss === false) {
-            ParseCss( isPreviewingPost() ? false : true );
+            setTimeout(() => {
+                ParseCss(isPreviewingPost() ? false : true);
+            }, 1100)
+
         }
     }
 });
