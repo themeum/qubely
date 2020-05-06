@@ -35,6 +35,7 @@ class Edit extends Component {
         }
 
         if(qubely_admin.qubely_gmap_api_key) {
+            setAttributes({apiKey: qubely_admin.qubely_gmap_api_key});
             this.initMapLibrary(qubely_admin.qubely_gmap_api_key);
         } else if(apiKey) {
             this.initMapLibrary(apiKey);
