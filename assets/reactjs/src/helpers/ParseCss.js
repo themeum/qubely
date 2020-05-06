@@ -223,7 +223,6 @@ const ParseCss = async (setDatabase = true) => {
     };
 
     const globalCSS = await getGlobalSettings();
-    console.log('globalCSS : ', globalCSS);
     __blocks.css += globalCSS;
 
     // if (typeof window.globalData != 'undefined') {

@@ -10,6 +10,7 @@ import {
     updateGlobalVaribales
 } from '../../helpers/globalCSS';
 
+import { placeCaretAtEnd } from '../../helpers/utils';
 import { isObject } from '../../components/HelperFunction';
 
 const { getComputedStyle } = window;
@@ -23,7 +24,8 @@ const { __ } = wp.i18n;
 
 const {
     Component,
-    Fragment
+    Fragment,
+    createRef
 } = wp.element;
 
 const {
@@ -73,10 +75,11 @@ class GlobalSettings extends Component {
         this.state = {
             presets: {},
             activePreset: null,
-            enableRenaming: false,
+            enableRenaming: undefined,
             showTypoSettings: undefined,
             showPresetSettings: undefined
         }
+        this.ref = createRef();
         this.saveGlobalCSS = this.saveGlobalCSS.bind(this);
     }
 
@@ -94,8 +97,17 @@ class GlobalSettings extends Component {
     async componentDidUpdate(prevProps, prevState) {
         const {
             presets,
-            activePreset
+            activePreset,
+            enableRenaming
         } = this.state;
+
+        if ((enableRenaming !== prevProps.enableRenaming) && typeof enableRenaming !== 'undefined') {
+            setTimeout(() => {
+                if (typeof this.ref.current !== 'undefined') {
+                    placeCaretAtEnd(this.ref.current);
+                }
+            }, 100)
+        }
         if (presets && activePreset) {
             if (activePreset !== prevState.activePreset) {
                 updateGlobalVaribales(presets[activePreset])
@@ -265,7 +277,8 @@ class GlobalSettings extends Component {
                             const classes = classnames(
                                 'preset',
                                 { ['active']: isActivePreset },
-                                { ['detailed']: showDetailedSettings }
+                                { ['detailed']: showDetailedSettings },
+                                { ['renaming']: enableRenaming === presetKey }
                             )
                             const changePreset = (index) => {
                                 this.setState({
@@ -295,7 +308,7 @@ class GlobalSettings extends Component {
                                 })
                             }
 
-
+                            console.log('enableRenaming === presetKey : ', enableRenaming === presetKey);
                             return (
                                 <div key={presetKey} className={classes}>
                                     <div className="title-wrapper">
@@ -322,10 +335,12 @@ class GlobalSettings extends Component {
                                             {
                                                 (enableRenaming === presetKey) ?
                                                     <RichText
+                                                        ref={this.ref}
                                                         value={name}
                                                         keepPlaceholderOnFocus
                                                         className={'rename-preset'}
                                                         placeholder={__('Add preset name')}
+                                                        disabled
                                                         onChange={newValue => renameTitle(newValue, presetKey)}
                                                     />
                                                     :
