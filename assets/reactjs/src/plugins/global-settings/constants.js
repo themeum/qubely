@@ -73,56 +73,45 @@ export const DEFAULTPRESETS = {
                     name: 'Heading 1',
                     value: {
                         openTypography: 1,
-                    },
-                    style: [{
-                        selector: '{{QUBELY}} h1'
-                    }]
+                    }
                 },
                 {
                     name: 'Heading 2',
                     value: {
                         openTypography: 1,
-                    },
-                    style: [{
-                        selector: '{{QUBELY}} h2'
-                    }]
+                    }
                 },
                 {
                     name: 'Heading 3',
                     value: {
                         openTypography: 1,
-                    },
-                    style: [{
-                        selector: '{{QUBELY}} h3'
-                    }]
+                    }
                 },
                 {
                     name: 'Heading 4',
                     value: {
                         openTypography: 1,
-                    },
-                    style: [{
-                        selector: '{{QUBELY}} h4'
-                    }]
+                    }
                 },
                 {
                     name: 'Heading 5',
                     value: {
                         openTypography: 1,
-                    },
-                    style: [{
-                        selector: '{{QUBELY}} h5'
-                    }]
+                    }
                 },
                 {
                     name: 'Heading 6',
                     value: {
                         openTypography: 1,
-                    },
-                    style: [{
-                        selector: '{{QUBELY}} h6'
-                    }]
+                    }
+                },
+                {
+                    name: " I’m a paragraph. Click me to edit and apply to your own design and reuse it anytime.",
+                    value: {
+                        openTypography: 1,
+                    }
                 }
+
             ],
         },
         preset2: {
@@ -134,55 +123,37 @@ export const DEFAULTPRESETS = {
                     name: 'Heading 1',
                     value: {
                         openTypography: 1,
-                    },
-                    style: [{
-                        selector: '{{QUBELY}} h1'
-                    }]
+                    }
                 },
                 {
                     name: 'Heading 2',
                     value: {
                         openTypography: 1,
-                    },
-                    style: [{
-                        selector: '{{QUBELY}} h2'
-                    }]
+                    }
                 },
                 {
                     name: 'Heading 3',
                     value: {
                         openTypography: 1,
-                    },
-                    style: [{
-                        selector: '{{QUBELY}} h3'
-                    }]
+                    }
                 },
                 {
                     name: 'Heading 4',
                     value: {
                         openTypography: 1,
-                    },
-                    style: [{
-                        selector: '{{QUBELY}} h4'
-                    }]
+                    }
                 },
                 {
                     name: 'Heading 5',
                     value: {
                         openTypography: 1,
-                    },
-                    style: [{
-                        selector: '{{QUBELY}} h5'
-                    }]
+                    }
                 },
                 {
                     name: 'Heading 6',
                     value: {
                         openTypography: 1,
-                    },
-                    style: [{
-                        selector: '{{QUBELY}} h6'
-                    }]
+                    }
                 }
             ],
         },

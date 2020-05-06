@@ -4,18 +4,18 @@ import classnames from 'classnames';
 import icons from '../../helpers/icons';
 import {
     getGlobalSettings as getGlobalCSS,
-    setGlobalTypo_Variables,
-    updateColorVariables,
     injectGlobalCSS,
     updateGlobalVaribales
 } from '../../helpers/globalCSS';
 
-import { placeCaretAtEnd } from '../../helpers/utils';
-import { isObject } from '../../components/HelperFunction';
 
-const { getComputedStyle } = window;
-const { isShallowEqual } = wp
-const diff = require("deep-object-diff").diff;
+/**
+ * Qubely Components
+ */
+import Typography from '../../components/fields/Typography';
+import { CssGenerator } from '../../components/CssGenerator';
+import { ADDNEWDEFAULT, DEFAULTPRESETS } from './constants';
+import { placeCaretAtEnd } from '../../helpers/utils';
 /**
  * WordPress dependencies
  */
@@ -36,13 +36,11 @@ const {
 } = wp.components;
 
 const {
-    select,
-    withDispatch,
+    select
 } = wp.data;
 
 const {
-    RichText,
-    PanelColorSettings
+    RichText
 } = wp.blockEditor;
 
 const {
@@ -51,20 +49,10 @@ const {
 } = wp.editPost;
 
 
-/**
- * Qubely Components
- */
-import Typography from '../../components/fields/Typography'
-import { CssGenerator } from '../../components/CssGenerator'
-import { ADDNEWDEFAULT, DEFAULTPRESETS } from './constants';
-
-const PATH = {
-    fetch: '/qubely/v1/global_settings',
-    post: '/qubely/v1/global_settings'
-}
+const PATH = '/qubely/v1/global_settings';
 
 async function fetchFromApi() {
-    return await wp.apiFetch({ path: PATH.fetch })
+    return await wp.apiFetch({ path: PATH })
 }
 
 
@@ -106,11 +94,11 @@ class GlobalSettings extends Component {
                 if (typeof this.ref.current !== 'undefined') {
                     placeCaretAtEnd(this.ref.current);
                 }
-            }, 100)
+            }, 100);
         }
         if (presets && activePreset) {
             if (activePreset !== prevState.activePreset) {
-                updateGlobalVaribales(presets[activePreset])
+                updateGlobalVaribales(presets[activePreset]);
             }
         }
     }
@@ -139,23 +127,22 @@ class GlobalSettings extends Component {
             }
         }
         await wp.apiFetch({
-            path: PATH.post,
+            path: PATH,
             method: 'POST',
             data: { settings: JSON.stringify(tempData) }
         }).then(data => {
-            console.log('data : ', data);
-            return data
+            return data;
         })
     }
 
     delGlobalSettings = () => {
         wp.apiFetch({
-            path: PATH.post,
+            path: PATH,
             method: 'POST',
             data: { settings: JSON.stringify({ 'delete': true }) }
         }).then(data => {
             console.log('data : ', data);
-            return data
+            return data;
         })
     }
 
@@ -297,18 +284,14 @@ class GlobalSettings extends Component {
                             }
 
                             const renameTitle = (newTitle = '', presetKey) => {
-                                console.log(' newTitle : ', newTitle);
-                                console.log(' renameTitle( presetKey) : ', presetKey);
-
                                 this.setState(prevState => {
                                     prevState.presets[presetKey].name = newTitle;
                                     return ({
                                         presets: prevState.presets,
-                                    })
-                                })
+                                    });
+                                });
                             }
 
-                            console.log('enableRenaming === presetKey : ', enableRenaming === presetKey);
                             return (
                                 <div key={presetKey} className={classes}>
                                     <div className="title-wrapper">
@@ -340,7 +323,6 @@ class GlobalSettings extends Component {
                                                         keepPlaceholderOnFocus
                                                         className={'rename-preset'}
                                                         placeholder={__('Add preset name')}
-                                                        disabled
                                                         onChange={newValue => renameTitle(newValue, presetKey)}
                                                     />
                                                     :
