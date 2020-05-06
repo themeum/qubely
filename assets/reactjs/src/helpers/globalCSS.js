@@ -82,13 +82,19 @@ const appendTypoVariable = (value, index) => {
     }
 
     nonResponsiveProps += '}';
-    let tempCSS = responsive + ' ' + nonResponsiveProps;
+    let tempCSS = '';
+    if (responsive.length > 10) {
+        tempCSS += responsive;
+    }
+    if (nonResponsiveProps.length > 10) {
+        tempCSS += ' ' + nonResponsiveProps;
+    }
     return tempCSS;
 }
 
 export const setGlobalTypo_Variables = (globalTypoes) => {
     let CSS = '';
-    console.log('globalTypoes : ', globalTypoes);
+
     globalTypoes.forEach((typo, index) => {
         let value = {};
         if (typo.value) {
@@ -148,7 +154,7 @@ export const getGlobalSettings = () => {
                 presets,
                 activePreset
             } = data.settings;
-            console.log('data.settings : ', data.settings);
+
             globalData = presets[activePreset];
             let globalColors = ['#4A90E2', '#50E3C2', '#000', '#4A4A4A', '#9B9B9B'];
 
@@ -165,7 +171,6 @@ export const getGlobalSettings = () => {
 
             global_CSS += setGlobalCSS_Variables(globalColors);
             global_CSS += setGlobalTypo_Variables(presets[activePreset].typography);
-            console.log('global_CSS : ', global_CSS);
             return global_CSS;
         }
     });

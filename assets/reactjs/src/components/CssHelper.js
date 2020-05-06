@@ -61,7 +61,36 @@ const _push = (val, data) => {
     if (val.xs) { data.xs.push(val.xs) }
     return data;
 }
+
+const globalTypography = (selectedTypo) => {
+
+    let CSS = '{';
+    if (selectedTypo !== 'none') {
+        CSS += `font-family:var(--qubely-typo${selectedTypo}-font-family);`;
+        CSS += `font-size:var(--qubely-typo${selectedTypo}-font-size);`;
+        CSS += `font-weight:var(--qubely-typo${selectedTypo}-font-weight);`;
+        CSS += `text-transform:var(--qubely-typo${selectedTypo}-text-transform);`;
+    }
+    CSS += '}';
+    return CSS;
+
+}
+
 export const cssTypography = (v) => {
+
+    const {
+        globalSource,
+        activeSource,
+        family,
+        weight,
+        transform,
+
+    } = v;
+
+    if (typeof activeSource !== 'undefined' && activeSource === 'global') {
+        return globalTypography(globalSource);
+    }
+
     let font = ''
     if (v.family) {
         if (!['Arial', 'Tahoma', 'Verdana', 'Helvetica', 'Times New Roman', 'Trebuchet MS', 'Georgia'].includes(v.family)) {

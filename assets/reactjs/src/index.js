@@ -98,7 +98,7 @@ wp.data.subscribe(() => {
         if (window.bindCss === false) {
             setTimeout(() => {
                 ParseCss(isPreviewingPost() ? false : true);
-            }, 1100)
+            }, 600)
 
         }
     }

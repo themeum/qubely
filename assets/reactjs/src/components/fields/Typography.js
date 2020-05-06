@@ -167,7 +167,7 @@ class Typography extends Component {
                 item.n.toLowerCase().search(filterText.toLowerCase()) !== -1
             )
         }
-        console.log('this.state : ', this.state);
+
         return (
             <div className="qubely-field qubely-field-typography">
                 {

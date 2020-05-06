@@ -248,7 +248,7 @@ const ParseCss = async (setDatabase = true) => {
     }
     setTimeout(() => {
         window.bindCss = false
-    }, 1000)
+    }, 500)
 }
 
 export default ParseCss
