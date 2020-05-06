@@ -45,13 +45,44 @@ class Edit extends Component {
     }
 
     componentDidMount() {
-        const { setAttributes, clientId, attributes: { uniqueId } } = this.props
+        const { setAttributes, clientId, attributes: { uniqueId, reCaptchaSiteKey, reCaptchaSecretKey } } = this.props
         const _client = clientId.substr(0, 6)
         if (!uniqueId) {
             setAttributes({ uniqueId: _client });
         } else if (uniqueId && uniqueId != _client) {
             setAttributes({ uniqueId: _client });
         }
+
+        if(qubely_admin.qubely_recaptcha_site_key) {
+            setAttributes({reCaptchaSiteKey: qubely_admin.qubely_recaptcha_site_key});
+        } else if(reCaptchaSiteKey) {
+            try {
+                wp.apiFetch({
+                    path: 'qubely/v1/add_qubely_options',
+                    method: 'POST',
+                    data: {key: 'qubely_recaptcha_site_key', value: reCaptchaSiteKey}
+                })
+            } catch (e) {
+                // debug
+                console.log(e);
+            }
+        }
+
+        if(qubely_admin.qubely_recaptcha_secret_key) {
+            setAttributes({reCaptchaSecretKey: qubely_admin.qubely_recaptcha_secret_key});
+        } else if(reCaptchaSecretKey) {
+            try {
+                wp.apiFetch({
+                    path: 'qubely/v1/add_qubely_options',
+                    method: 'POST',
+                    data: {key: 'qubely_recaptcha_secret_key', value: reCaptchaSecretKey}
+                })
+            } catch (e) {
+                // debug
+                console.log(e);
+            }
+        }
+
     }
 
     setSettings(type, val, index = -1) {
