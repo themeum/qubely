@@ -43,50 +43,51 @@ class QubelyPostGrid
      * Layout attributes isset or not
      * @return number/string/array/false
      */
-    public function isset_attr($attr)
+    public function isset_attr($attr, $default)
     {
-        return isset($this->attributes[$attr]) ? $this->attributes[$attr] : false;
+        return isset($this->attributes[$attr]) ? $this->attributes[$attr] : $default;
     }
 
     /**
      * Layout Attributes
      * @return array
      */
-    public function get_layout_attributes()
+    public function get_layout_attributes($key)
     {
-        return [
-            "layout"              => $this->isset_attr('layout') ?: 3,
-            "uniqueId"            => $this->isset_attr('uniqueId') ?: '',
-            "className"           => $this->isset_attr('className') ?: '',
-            "style"               => $this->isset_attr('style') ?: 3,
-            "column"              => $this->isset_attr('column') ?: 3,
-            "number"              => $this->isset_attr('postsToShow') ?: 3,
-            "limit"               => $this->isset_attr('excerptLimit') ?: 3,
-            "showCategory"        => $this->isset_attr('showCategory') ?: 'default',
-            "categoryPosition"    => $this->isset_attr('categoryPosition') ?: 'leftTop',
-            "contentPosition"     => $this->isset_attr('contentPosition') ?: 'center',
-            "girdContentPosition" => $this->isset_attr('girdContentPosition') ?: 'center',
-            "showTitle"           => $this->isset_attr('showTitle') ?: 1,
-            "showAuthor"          => $this->isset_attr('showAuthor') ?: 1,
-            "showDates"           => $this->isset_attr('showDates') ?: 1,
-            "showComment"         => $this->isset_attr('showComment') ?: 1,
-            "showExcerpt"         => $this->isset_attr('showExcerpt') ?: 1,
-            "showReadMore"        => $this->isset_attr('showReadMore') ?: 1,
-            "titlePosition"       => $this->isset_attr('titlePosition') ?: 1,
-            "buttonText"          => $this->isset_attr('buttonText') ?: 'Read More',
-            "readmoreSize"        => $this->isset_attr('readmoreSize') ?: 'small',
-            "readmoreStyle"       => $this->isset_attr('readmoreStyle') ?: 'fill',
-            "showImages"          => $this->isset_attr('showImages') ?: 1,
-            "imgSize"             => $this->isset_attr('imgSize') ?: 'large',
-            "showBadge"           => $this->isset_attr('showBadge') ?: 1,
-            "order"               => $this->isset_attr('order') ?: 'DESC',
-            "imageAnimation"      => $this->isset_attr('imageAnimation') ?: '',
-            "orderBy"             => $this->isset_attr('orderBy') ?: 'date',
+        $arr = [
+            "layout"              => $this->isset_attr('layout', 3),
+            "uniqueId"            => $this->isset_attr('uniqueId',''),
+            "className"           => $this->isset_attr('className',''),
+            "style"               => $this->isset_attr('style','3'),
+            "column"              => $this->isset_attr('column','3'),
+            "number"              => $this->isset_attr('postsToShow','3'),
+            "limit"               => $this->isset_attr('excerptLimit','3'),
+            "showCategory"        => $this->isset_attr('showCategory','default'),
+            "categoryPosition"    => $this->isset_attr('categoryPosition','leftTop'),
+            "contentPosition"     => $this->isset_attr('contentPosition','center'),
+            "girdContentPosition" => $this->isset_attr('girdContentPosition','center'),
+            "showTitle"           => $this->isset_attr('showTitle',1),
+            "showAuthor"          => $this->isset_attr('showAuthor',1),
+            "showDates"           => $this->isset_attr('showDates',1),
+            "showComment"         => $this->isset_attr('showComment',1),
+            "showExcerpt"         => $this->isset_attr('showExcerpt',1),
+            "showReadMore"        => $this->isset_attr('showReadMore',1),
+            "titlePosition"       => $this->isset_attr('titlePosition',1),
+            "buttonText"          => $this->isset_attr('buttonText', 'Read More'),
+            "readmoreSize"        => $this->isset_attr('readmoreSize','small'),
+            "readmoreStyle"       => $this->isset_attr('readmoreStyle','fill'),
+            "showImages"          => $this->isset_attr('showImages',1),
+            "imgSize"             => $this->isset_attr('imgSize','large'),
+            "showBadge"           => $this->isset_attr('showBadge',1),
+            "order"               => $this->isset_attr('order','DESC'),
+            "imageAnimation"      => $this->isset_attr('imageAnimation',''),
+            "orderBy"             => $this->isset_attr('orderBy','date'),
             "categories"          => $this->attributes['categories'],
             "tags"                => $this->attributes['tags'],
             "taxonomy"            => $this->attributes['taxonomy'],
             "animation"           => isset($this->attributes['animation']) ? (count((array) $this->attributes['animation']) > 0 && $this->attributes['animation']['animation'] ? 'data-qubelyanimation="' . htmlspecialchars(json_encode($this->attributes['animation']), ENT_QUOTES, 'UTF-8') . '"' : '') : '',
         ];
+        return $arr[$key];
     }
 
     /**
@@ -95,24 +96,24 @@ class QubelyPostGrid
      */
     public function layout_one_markup($id, $src, $image, $title, $category, $meta, $btn, $excerpt)
     {
-        $layout              = $this->get_layout_attributes()['layout'];
-        $style               = $this->get_layout_attributes()['style'];
-        $contentPosition     = $this->get_layout_attributes()['contentPosition'];
-        $girdContentPosition = $this->get_layout_attributes()['girdContentPosition'];
-        $showImages          = $this->get_layout_attributes()['showImages'];
-        $category            = $this->get_layout_attributes()['category'];
-        $showCategory        = $this->get_layout_attributes()['showCategory'];
-        $categoryPosition    = $this->get_layout_attributes()['categoryPosition'];
-        $image               = $this->get_layout_attributes()['image'];
-        $imageAnimation      = $this->get_layout_attributes()['imageAnimation'];
-        $showTitle           = $this->get_layout_attributes()['showTitle'];
-        $titlePosition       = $this->get_layout_attributes()['titlePosition'];
-        $showAuthor          = $this->get_layout_attributes()['showAuthor'];
-        $showDates           = $this->get_layout_attributes()['showDates'];
-        $showComment         = $this->get_layout_attributes()['showComment'];
-        $showExcerpt         = $this->get_layout_attributes()['showExcerpt'];
-        $meta                = $this->get_layout_attributes()['meta'];
-        $showReadMore        = $this->get_layout_attributes()['showReadMore'];
+        $layout              = $this->get_layout_attributes('layout');
+        $style               = $this->get_layout_attributes('style');
+        $contentPosition     = $this->get_layout_attributes('contentPosition');
+        $girdContentPosition = $this->get_layout_attributes('girdContentPosition');
+        $showImages          = $this->get_layout_attributes('showImages');
+        $category            = $this->get_layout_attributes('category');
+        $showCategory        = $this->get_layout_attributes('showCategory');
+        $categoryPosition    = $this->get_layout_attributes('categoryPosition');
+        $image               = $this->get_layout_attributes('image');
+        $imageAnimation      = $this->get_layout_attributes('imageAnimation');
+        $showTitle           = $this->get_layout_attributes('showTitle');
+        $titlePosition       = $this->get_layout_attributes('titlePosition');
+        $showAuthor          = $this->get_layout_attributes('showAuthor');
+        $showDates           = $this->get_layout_attributes('showDates');
+        $showComment         = $this->get_layout_attributes('showComment');
+        $showExcerpt         = $this->get_layout_attributes('showExcerpt');
+        $meta                = $this->get_layout_attributes('meta');
+        $showReadMore        = $this->get_layout_attributes('showReadMore');
         ob_start();
         ?>
         <div class="qubely-postgrid qubely-post-list-view qubely-postgrid-style-<?php echo esc_attr($style); ?>">
@@ -170,24 +171,24 @@ class QubelyPostGrid
      */
     public function layout_two_markup($id, $src, $image, $title, $category, $meta, $btn, $excerpt)
     {
-        $layout              = $this->get_layout_attributes()['layout'];
-        $style               = $this->get_layout_attributes()['style'];
-        $contentPosition     = $this->get_layout_attributes()['contentPosition'];
-        $girdContentPosition = $this->get_layout_attributes()['girdContentPosition'];
-        $showImages          = $this->get_layout_attributes()['showImages'];
-        $category            = $this->get_layout_attributes()['category'];
-        $showCategory        = $this->get_layout_attributes()['showCategory'];
-        $categoryPosition    = $this->get_layout_attributes()['categoryPosition'];
-        $image               = $this->get_layout_attributes()['image'];
-        $animation           = $this->get_layout_attributes()['animation'];
-        $showTitle           = $this->get_layout_attributes()['showTitle'];
-        $titlePosition       = $this->get_layout_attributes()['titlePosition'];
-        $showAuthor          = $this->get_layout_attributes()['showAuthor'];
-        $showDates           = $this->get_layout_attributes()['showDates'];
-        $showComment         = $this->get_layout_attributes()['showComment'];
-        $showExcerpt         = $this->get_layout_attributes()['showExcerpt'];
-        $meta                = $this->get_layout_attributes()['meta'];
-        $showReadMore        = $this->get_layout_attributes()['showReadMore'];
+        $layout              = $this->get_layout_attributes('layout');
+        $style               = $this->get_layout_attributes('style');
+        $contentPosition     = $this->get_layout_attributes('contentPosition');
+        $girdContentPosition = $this->get_layout_attributes('girdContentPosition');
+        $showImages          = $this->get_layout_attributes('showImages');
+        $category            = $this->get_layout_attributes('category');
+        $showCategory        = $this->get_layout_attributes('showCategory');
+        $categoryPosition    = $this->get_layout_attributes('categoryPosition');
+        $image               = $this->get_layout_attributes('image');
+        $animation           = $this->get_layout_attributes('animation');
+        $showTitle           = $this->get_layout_attributes('showTitle');
+        $titlePosition       = $this->get_layout_attributes('titlePosition');
+        $showAuthor          = $this->get_layout_attributes('showAuthor');
+        $showDates           = $this->get_layout_attributes('showDates');
+        $showComment         = $this->get_layout_attributes('showComment');
+        $showExcerpt         = $this->get_layout_attributes('showExcerpt');
+        $meta                = $this->get_layout_attributes('meta');
+        $showReadMore        = $this->get_layout_attributes('showReadMore');
         ob_start();
         ?>
         <div class="qubely-postgrid qubely-post-grid-view qubely-postgrid-style-<?php echo esc_attr($this->get_layout_attributes()['style']); ?>">
@@ -244,7 +245,7 @@ class QubelyPostGrid
      */
     public function get_excerpt()
     {
-        $limit = $this->get_layout_attributes()['limit'];
+        $limit = $this->get_layout_attributes('limit');
         if(!function_exists('qubely_excerpt_max_charlength')) :
             function qubely_excerpt_max_charlength($limit) {
                 $excerpt = get_the_excerpt();
@@ -265,9 +266,9 @@ class QubelyPostGrid
      */
     public function get_meta()
     {
-        $showAuthor = $this->get_layout_attributes()['showAuthor'];
-        $showDates = $this->get_layout_attributes()['showDates'];
-        $showComment = $this->get_layout_attributes()['showComment'];
+        $showAuthor = $this->get_layout_attributes('showAuthor');
+        $showDates = $this->get_layout_attributes('showDates');
+        $showComment = $this->get_layout_attributes('showComment');
         ob_start();
         if ($showAuthor == 1) { ?>
             <span>
@@ -319,31 +320,29 @@ class QubelyPostGrid
      */
     public function postgrid_markup()
     {
-        //extract($this->get_layout_attributes());
-        $interaction = '';
-        //echo $layout . PHP_EOL, $uniqueId;
-        $layout        = $this->get_layout_attributes()['layout'];
-        $uniqueId      = $this->get_layout_attributes()['uniqueId'];
-        $order         = $this->get_layout_attributes()['order'];
-        $orderBy       = $this->get_layout_attributes()['orderBy'];
-        $limit         = $this->get_layout_attributes()['limit'];
-        $interaction   = $this->get_layout_attributes()['interaction'];
-        $showAuthor    = $this->get_layout_attributes()['showAuthor'];
-        $showDates     = $this->get_layout_attributes()['showDates'];
-        $showComment   = $this->get_layout_attributes()['showComment'];
-        $readmoreStyle = $this->get_layout_attributes()['readmoreStyle'];
-        $readmoreSize  = $this->get_layout_attributes()['readmoreSize'];
-        $buttonText    = $this->get_layout_attributes()['buttonText'];
-        $categories    = $this->get_layout_attributes()['categories'];
-        $tags          = $this->get_layout_attributes()['tags'];
-        $column        = $this->get_layout_attributes()['column'];
-        $imgSize       = $this->get_layout_attributes()['imgSize'];
+        $layout        = $this->get_layout_attributes('layout');
+        $uniqueId      = $this->get_layout_attributes('uniqueId');
+        $order         = $this->get_layout_attributes('order');
+        $orderBy       = $this->get_layout_attributes('orderBy');
+        $limit         = $this->get_layout_attributes('limit');
+        $interaction   = $this->get_layout_attributes('interaction');
+        $showAuthor    = $this->get_layout_attributes('showAuthor');
+        $showDates     = $this->get_layout_attributes('showDates');
+        $showComment   = $this->get_layout_attributes('showComment');
+        $readmoreStyle = $this->get_layout_attributes('readmoreStyle');
+        $readmoreSize  = $this->get_layout_attributes('readmoreSize');
+        $buttonText    = $this->get_layout_attributes('buttonText');
+        $categories    = $this->get_layout_attributes('categories');
+        $tags          = $this->get_layout_attributes('tags');
+        $column        = $this->get_layout_attributes('column');
+        $imgSize       = $this->get_layout_attributes('imgSize');
+        $number        = $this->get_layout_attributes('number');
 
         $animation = $this->get_animation();
 
         $args = [
             'post_type'      => 'post',
-            'posts_per_page' => esc_attr($this->get_layout_attributes()['number']),
+            'posts_per_page' => esc_attr(),
             'order'          => esc_attr($order),
             'orderby'        => esc_attr($orderBy),
             'status'         => 'publish',
