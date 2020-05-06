@@ -342,7 +342,7 @@ class QubelyPostGrid
 
         $args = [
             'post_type'      => 'post',
-            'posts_per_page' => esc_attr(),
+            'posts_per_page' => esc_attr($number),
             'order'          => esc_attr($order),
             'orderby'        => esc_attr($orderBy),
             'status'         => 'publish',
