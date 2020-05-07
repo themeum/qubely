@@ -13,6 +13,7 @@ import {
  * Qubely Components
  */
 import Typography from '../../components/fields/Typography';
+import ButtonGroup from '../../components/fields/ButtonGroup';
 import { CssGenerator } from '../../components/CssGenerator';
 import { ADDNEWDEFAULT, DEFAULTPRESETS } from './constants';
 import { placeCaretAtEnd } from '../../helpers/utils';
@@ -29,10 +30,11 @@ const {
 } = wp.element;
 
 const {
+    Tooltip,
     Dropdown,
     PanelBody,
     ColorPicker,
-    TextControl
+    TextControl,
 } = wp.components;
 
 const {
@@ -62,6 +64,8 @@ class GlobalSettings extends Component {
         super(props);
         this.state = {
             presets: {},
+            newTypoScope: 'others',
+            newTypoTitle: null,
             activePreset: null,
             enableRenaming: undefined,
             showTypoSettings: undefined,
@@ -149,6 +153,8 @@ class GlobalSettings extends Component {
     render() {
         const {
             presets,
+            newTypoScope,
+            newTypoTitle,
             activePreset,
             enableRenaming,
             showTypoSettings,
@@ -184,19 +190,25 @@ class GlobalSettings extends Component {
             });
         }
 
-        const updatePreset = (propertyName, index, newValue, presetKey, isObject = false) => {
-            if (isObject) {
-                newValue = {
-                    ...this.state.presets[presetKey][propertyName][index].value,
-                    ...newValue
-                }
-            }
+        const updateTypography = (addnew = false, presetKey, index, newValue) => {
 
-            this.setState(({ presets }, props) => {
+            this.setState(({ newTypoScope, newTypoTitle, presets }) => {
                 let tempPresets = presets;
-                tempPresets[presetKey][propertyName][index].value = newValue;
+                if (addnew) {
+                    tempPresets[presetKey].typography.push({
+                        name: newTypoTitle,
+                        removable: true,
+                        scope: newTypoScope,
+                        value: {
+                            openTypography: 1,
+                        }
+                    });
+                } else {
+                    tempPresets[presetKey].typography[index].value = newValue;
+                }
+
                 updateGlobalVaribales(tempPresets[presetKey]);
-                return { presets: tempPresets };
+                return { presets: tempPresets, newTypoTitle: null };
             });
         }
         const addNewPreset = (selectedPreset, operation) => {
@@ -239,9 +251,50 @@ class GlobalSettings extends Component {
 
         }
         const renderPresets = () => {
-            return (
-                <div className="qubely-global-settings">
 
+            const AddNewButton = (hint, classes, action = undefined) => {
+                return (
+                    <Tooltip text={__(hint)}>
+                        <div
+                            className={classes}
+                            onClick={action}
+                            {...((typeof action !== 'undefined') && {
+                                onClick: () => action()
+                            }
+                            )}
+                        >
+                            <div className="add-new">
+                                <span className="icon">
+                                    {icons.plus_circle}
+                                </span>
+                                <span className="title">Add New</span>
+                            </div>
+                        </div>
+                    </Tooltip >
+                );
+            };
+
+            const deletePreset = (selectedPreset) => {
+                this.setState(prevState => {
+                    delete prevState.presets[selectedPreset];
+                    return ({
+                        presets: prevState.presets,
+                        // ...((selectedPreset === activePreset) && { activePreset: undefined})
+                    })
+                });
+            }
+
+            const renameTitle = (newTitle = '', presetKey) => {
+                this.setState(prevState => {
+                    prevState.presets[presetKey].name = newTitle;
+                    return ({
+                        presets: prevState.presets,
+                    });
+                });
+            }
+
+            return (
+                <div className="qubely-global-settings" >
                     {
                         Object.keys(presets).map((presetKey, index) => {
                             const {
@@ -256,7 +309,12 @@ class GlobalSettings extends Component {
                             if (activePreset === key) {
                                 isActivePreset = true;
                             }
-
+                            const changePreset = (index) => {
+                                this.setState({
+                                    showTypoSettings: undefined,
+                                    activePreset: isActivePreset ? undefined : index
+                                });
+                            }
                             if (showPresetSettings === index) {
                                 showDetailedSettings = true;
                             }
@@ -267,30 +325,6 @@ class GlobalSettings extends Component {
                                 { ['detailed']: showDetailedSettings },
                                 { ['renaming']: enableRenaming === presetKey }
                             )
-                            const changePreset = (index) => {
-                                this.setState({
-                                    showTypoSettings: undefined,
-                                    activePreset: isActivePreset ? undefined : index
-                                })
-                            }
-                            const deletePreset = (selectedPreset) => {
-                                this.setState(prevState => {
-                                    delete prevState.presets[selectedPreset];
-                                    return ({
-                                        presets: prevState.presets,
-                                        // ...((selectedPreset === activePreset) && { activePreset: undefined})
-                                    })
-                                });
-                            }
-
-                            const renameTitle = (newTitle = '', presetKey) => {
-                                this.setState(prevState => {
-                                    prevState.presets[presetKey].name = newTitle;
-                                    return ({
-                                        presets: prevState.presets,
-                                    });
-                                });
-                            }
 
                             return (
                                 <div key={presetKey} className={classes}>
@@ -404,7 +438,8 @@ class GlobalSettings extends Component {
                                                 (typeof typography !== 'undefined' && typography.length > 0) &&
                                                 <PanelBody title={__('Typography')} initialOpen={true}>
                                                     {
-                                                        typography.map((item, index) => {
+                                                        typography.map(({ name, value, scope = 'h' }, index) => {
+
                                                             let displaySettings = false;
                                                             if (showTypoSettings === index) {
                                                                 displaySettings = true;
@@ -413,49 +448,82 @@ class GlobalSettings extends Component {
                                                                 'typo-name',
                                                                 { ['active']: displaySettings }
                                                             )
-                                                            let Tag = `h${index + 1}`
+                                                            let Tag = `h${index + 1}`;
+                                                            if (scope === 'p') {
+                                                                Tag = 'p'
+                                                            }
                                                             return (
                                                                 <div className="qubely-global typography qubely-d-flex qubely-align-justified">
                                                                     <div
                                                                         className={titleClasses}
                                                                         onClick={() => this.setState({ showTypoSettings: displaySettings ? undefined : index })}
                                                                     >
-                                                                        <Tag> {item.name}</Tag>
+                                                                        <Tag > {name}</Tag>
                                                                     </div>
 
                                                                     {displaySettings &&
                                                                         <Typography
-                                                                            value={item.value}
+                                                                            value={value}
                                                                             globalSettings
                                                                             key={name + index}
-                                                                            onChange={newValue => updatePreset('typography', index, newValue, presetKey, true)}
+                                                                            onChange={newValue => updateTypography(false, presetKey, index, newValue)}
                                                                         />
                                                                     }
                                                                 </div>
                                                             )
                                                         })
                                                     }
+                                                    <Dropdown
+                                                        position="bottom center"
+                                                        className="typo-options"
+                                                        contentClassName=""
+                                                        renderToggle={({ isOpen, onToggle }) => (
+                                                            // {AddNewButton('Add new typography', () => updateTypography(true, presetKey))}
+                                                            <div onClick={onToggle}>
+                                                                {AddNewButton('Add new typography', "add-new-wrapper add-new-typo")}
+                                                            </div>
+
+                                                        )}
+                                                        renderContent={({ onToggle }) => {
+                                                            return (
+                                                                <div className="new-typo-options">
+                                                                    <ButtonGroup
+                                                                        label={__('Scope')}
+                                                                        options={
+                                                                            [
+                                                                                [__('Paragraph'), 'p'],
+                                                                                [__('Button'), 'button'],
+                                                                                [__('Others'), 'others']
+                                                                            ]
+                                                                        }
+                                                                        value={newTypoScope}
+                                                                        onChange={value => this.setState({ newTypoScope: value })}
+                                                                    />
+                                                                    <TextControl
+                                                                        autoComplete="off"
+                                                                        label={__('Title')}
+                                                                        value={newTypoTitle}
+                                                                        placeholder={__('add title')}
+                                                                        onChange={value => this.setState({ newTypoTitle: value })}
+                                                                    />
+                                                                    <div>
+                                                                        <div onClick={() => onToggle()} >Cancel</div>
+                                                                        <div onClick={() => { onToggle(); updateTypography(true, presetKey); }}>Apply</div>
+                                                                    </div>
+                                                                </div>
+                                                            );
+                                                        }}
+                                                    />
                                                 </PanelBody>
                                             }
-
                                         </Fragment>
                                     }
                                 </div>
                             )
                         })
                     }
-                    <div
-                        className="add-new-wrapper"
-                        onClick={() => addNewPreset(ADDNEWDEFAULT, 'add')}
-                    >
-                        <div className="add-new">
-                            <span className="icon">
-                                {icons.plus_circle}
-                            </span>
-                            <span className="title">Add New</span>
-                        </div>
-                    </div>
-                </div>
+                    {AddNewButton('Add new preset', "add-new-wrapper", () => addNewPreset(ADDNEWDEFAULT, 'add'))}
+                </div >
             )
         }
 

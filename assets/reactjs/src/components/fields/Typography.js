@@ -32,12 +32,12 @@ class Typography extends Component {
 
     }
     getGlobalSettings = () => {
+        const { scope = 'others' } = this.props;
         return fetchFromApi().then(data => {
             if (data.success) {
-                console.log('data.settings : ', data.settings);
                 const { presets, activePreset } = data.settings;
                 let options = [], values = [];
-                presets[activePreset].typography.forEach(({ name, value }, index) => {
+                presets[activePreset].typography.filter((value) => (value.scope === scope)).forEach(({ name, value }, index) => {
                     options.push({ label: name, value: index + 1 })
                     values.push(value)
                 });

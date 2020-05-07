@@ -168,7 +168,9 @@
         cursor: pointer;
         text-align: center;
         padding: 10px 16px;
-        margin-bottom: 50px;
+        &:not(.add-new-typo) {
+            margin-bottom: 50px;
+        }
         .add-new {
             display: inline-flex;
             min-width: 100%;
@@ -185,6 +187,9 @@
                 justify-content: center;
             }
         }
+    }
+    .components-dropdown.typo-options{
+        width: 100%;
     }
 }
 

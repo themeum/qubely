@@ -141,7 +141,7 @@ class Edit extends Component {
                             </PanelBody>
 
                             <PanelBody title={__('Text')} initialOpen={false}>
-                                <Typography label={__('Typography')} value={typography} onChange={val => setAttributes({ typography: val })} device={device} onDeviceChange={value => this.setState({ device: value })} />
+                                <Typography label={__('Typography')} value={typography} scope={'p'} onChange={val => setAttributes({ typography: val })} device={device} onDeviceChange={value => this.setState({ device: value })} />
                                 <Color label={__('Text Color')} value={textColor} onChange={val => setAttributes({ textColor: val })} />
                                 <Toggle label={__('Drop Cap')} value={dropCap} onChange={val => setAttributes({ dropCap: val })} />
                                 {dropCap == 1 &&
