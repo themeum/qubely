@@ -241,7 +241,6 @@ class GlobalSettings extends Component {
         const renderPresets = () => {
             return (
                 <div className="qubely-global-settings">
-
                     {
                         Object.keys(presets).map((presetKey, index) => {
                             const {
@@ -415,7 +414,7 @@ class GlobalSettings extends Component {
                                                             )
                                                             let Tag = `h${index + 1}`
                                                             return (
-                                                                <div className="qubely-global typography qubely-d-flex qubely-align-justified">
+                                                                <div className="qubely-global typography">
                                                                     <div
                                                                         className={titleClasses}
                                                                         onClick={() => this.setState({ showTypoSettings: displaySettings ? undefined : index })}
@@ -444,16 +443,13 @@ class GlobalSettings extends Component {
                             )
                         })
                     }
-                    <div
-                        className="add-new-wrapper"
-                        onClick={() => addNewPreset(ADDNEWDEFAULT, 'add')}
-                    >
-                        <div className="add-new">
+                    <div className="add-new-wrapper">
+                        <button className="add-new" onClick={() => addNewPreset(ADDNEWDEFAULT, 'add')}>
                             <span className="icon">
                                 {icons.plus_circle}
                             </span>
                             <span className="title">Add New</span>
-                        </div>
+                        </button>
                     </div>
                 </div>
             )

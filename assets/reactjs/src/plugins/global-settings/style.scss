@@ -1,8 +1,8 @@
 .qubely-global-settings {
+    padding: 15px 18px;
     .preset {
-        margin: 10px 0px;
+        margin-bottom: 15px;
         &:not(.detailed) {
-            padding: 10px 16px;
             .title-wrapper {
                 border-radius: 5px;
                 border: 1px solid #dbdfe4;
@@ -32,24 +32,18 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-
             cursor: pointer;
             position: relative;
             outline: none;
-            width: 100%;
-            text-align: left;
             color: #191e23;
-            border: none;
             box-shadow: none;
             transition: background 0.1s ease-in-out;
-            > div {
-                padding: 12px 15px;
-            }
+            padding: 0 0 0 14px;
             .title {
-                width: 80%;
-                padding-right: 0px;
                 display: inline-flex;
                 align-items: center;
+                flex-grow: 1;
+                padding: 6px 0;
                 .radio-button {
                     padding-right: 10px;
                     display: inline-flex;
@@ -59,28 +53,28 @@
                 .rename-preset {
                     cursor: text;
                 }
+                span.name{
+                    line-height: 26px;
+                }
             }
             .options {
-                width: 20%;
-                padding-left: 0px;
                 display: inline-flex;
                 align-items: center;
                 justify-content: center;
-                .icon {
-                    width: 30px;
-                    min-width: 20px;
-                    display: inline-flex;
-                    align-items: center;
-                    justify-content: center;
+                svg{
+                    display: block;
                 }
+            }
+            .icon{
+                height: 40px;
+                padding: 0 14px;
+                display: flex;
+                align-items: center;
             }
         }
         .qubely-global {
             display: flex;
             flex-direction: column;
-            &:not(:last-child) {
-                margin-bottom: 30px;
-            }
             .typo-name {
                 width: 100%;
                 display: block !important;
@@ -88,23 +82,20 @@
                 color: black;
                 cursor: pointer;
                 border-radius: 5px;
+                border: 1px solid transparent;
                 &.active {
                     border-bottom-left-radius: 0px;
                     border-bottom-right-radius: 0px;
                 }
                 &:hover,
                 &.active {
-                    border: 1px solid #dbdfe4;
+                    border-color: #dbdfe4;
                     background-color: #f8f8f8;
                 }
-                // > h1,
-                // h2,
-                // h3,
-                // h4,
-                // h5,
-                // h6 {
-                //     margin-bottom: 0px;
-                // }
+                h1, h2, h3, h4, h5, h6 {
+                    margin: 0;
+                    line-height: 66px;
+                }
             }
             .qubely-field-typography {
                 padding: 12px;
@@ -160,15 +151,16 @@
             }
         }
     }
-    .components-panel__body.is-opened {
-        padding: 16px 0px;
+    .components-panel__body {
+        border-bottom: 1px solid #e2e4e7;
+        border-top: none;
+        &:last-child{
+            border-bottom: none;
+        }
     }
     .add-new-wrapper {
         display: block;
-        cursor: pointer;
         text-align: center;
-        padding: 10px 16px;
-        margin-bottom: 50px;
         .add-new {
             display: inline-flex;
             min-width: 100%;
@@ -176,7 +168,8 @@
             justify-content: center;
             padding: 10px 10px;
             border-radius: 5px;
-            border: 1px solid #dbdfe4;
+            border: 1px dashed #dbdfe4;
+            cursor: pointer;
             .icon {
                 width: 30px;
                 min-width: 20px;
