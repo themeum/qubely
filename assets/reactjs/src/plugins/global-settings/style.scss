@@ -15,10 +15,10 @@
                 border: 1px solid #dbdfe4;
                 background-color: #f8f8f8;
             }
-            .components-panel__body {
-                padding-left: 16px;
-                padding-right: 16px;
-            }
+            //.components-panel__body {
+            //    padding-left: 16px;
+            //    padding-right: 16px;
+            //}
             .qubely-d-flex.qubely-align-justified {
                 display: block;
                 > div {
@@ -27,6 +27,34 @@
                         padding: 0 5px;
                     }
                 }
+            }
+        }
+        .components-panel__body{
+            padding: 0;
+        }
+        .components-panel__body-title:hover{
+            background: transparent !important;
+        }
+        .components-panel__body-toggle.components-button{
+            padding-left: 0;
+            padding-right: 0;
+            .components-panel__arrow{
+                right: 0;
+            }
+        }
+        .components-panel__body>.components-panel__body-title{
+            margin: 0;
+        }
+        .qubely-global-color-pallete {
+            display: flex;
+            margin: 0 -2.5px;
+            flex-wrap: wrap;
+            margin-bottom: 10px;
+            .qubely-field{
+                margin: 0 2.5px 7px;
+            }
+            .qubely-color-picker-container .qubely-color-picker{
+                border: none;
             }
         }
         .title-wrapper {
@@ -136,9 +164,6 @@
                     line-height: 28px;
                 }
             }
-            &.typography{
-                margin: 0 -12px;
-            }
             .qubely-field-typography {
                 padding: 12px;
                 border-top-left-radius: 0px;
@@ -203,6 +228,7 @@
     .add-new-wrapper {
         display: block;
         text-align: center;
+        margin-top: 15px;
         .add-new {
             display: inline-flex;
             min-width: 100%;
