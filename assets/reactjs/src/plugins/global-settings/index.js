@@ -306,11 +306,11 @@ class GlobalSettings extends Component {
                                         >
                                             {
                                                 showDetailedSettings ?
-                                                    <span className="radio-button"
+                                                    <span
+                                                        className="radio-button fas fa-angle-left"
                                                         onClick={() => this.setState(state => ({
                                                             showPresetSettings: showDetailedSettings ? undefined : index
-                                                        }))}>
-                                                        {icons.left}</span>
+                                                        }))} />
                                                     :
                                                     <span className="radio-button">{isActivePreset ? icons.circleDot : icons.circleThin}</span>
                                             }
@@ -408,11 +408,12 @@ class GlobalSettings extends Component {
                                                             if (showTypoSettings === index) {
                                                                 displaySettings = true;
                                                             }
+                                                            let Tag = `h${index + 1}`
                                                             let titleClasses = classnames(
                                                                 'typo-name',
+                                                                `tag-${Tag}`,
                                                                 { ['active']: displaySettings }
                                                             )
-                                                            let Tag = `h${index + 1}`
                                                             return (
                                                                 <div className="qubely-global typography">
                                                                     <div
