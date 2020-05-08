@@ -71,46 +71,74 @@ export const DEFAULTPRESETS = {
             typography: [
                 {
                     name: 'Heading 1',
+                    scope: 'others',
                     value: {
                         openTypography: 1,
                     }
                 },
                 {
                     name: 'Heading 2',
+                    scope: 'others',
                     value: {
                         openTypography: 1,
                     }
                 },
                 {
                     name: 'Heading 3',
+                    scope: 'others',
                     value: {
                         openTypography: 1,
                     }
                 },
                 {
                     name: 'Heading 4',
+                    scope: 'others',
                     value: {
                         openTypography: 1,
                     }
                 },
                 {
                     name: 'Heading 5',
+                    scope: 'others',
                     value: {
                         openTypography: 1,
                     }
                 },
                 {
                     name: 'Heading 6',
+                    scope: 'others',
                     value: {
                         openTypography: 1,
                     }
                 },
                 {
-                    name: " I’m a paragraph. Click me to edit and apply to your own design and reuse it anytime.",
+                    name: "Paragraph #1",
+                    scope: 'p',
                     value: {
                         openTypography: 1,
                     }
-                }
+                },
+                {
+                    name: "Paragraph #2",
+                    scope: 'p',
+                    value: {
+                        openTypography: 1,
+                    }
+                },
+                {
+                    name: "Button #1",
+                    scope: 'button',
+                    value: {
+                        openTypography: 1,
+                    }
+                },
+                {
+                    name: "Button #2",
+                    scope: 'button',
+                    value: {
+                        openTypography: 1,
+                    }
+                },
 
             ],
         },
@@ -121,36 +149,42 @@ export const DEFAULTPRESETS = {
             typography: [
                 {
                     name: 'Heading 1',
+                    scope: 'others',
                     value: {
                         openTypography: 1,
                     }
                 },
                 {
                     name: 'Heading 2',
+                    scope: 'others',
                     value: {
                         openTypography: 1,
                     }
                 },
                 {
                     name: 'Heading 3',
+                    scope: 'others',
                     value: {
                         openTypography: 1,
                     }
                 },
                 {
                     name: 'Heading 4',
+                    scope: 'others',
                     value: {
                         openTypography: 1,
                     }
                 },
                 {
                     name: 'Heading 5',
+                    scope: 'others',
                     value: {
                         openTypography: 1,
                     }
                 },
                 {
                     name: 'Heading 6',
+                    scope: 'others',
                     value: {
                         openTypography: 1,
                     }
