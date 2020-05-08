@@ -213,7 +213,7 @@ class GlobalSettings extends Component {
                 return ({
                     presets: tempPresets,
                     newTypoTitle: null,
-                    showTypoSettings: undefined
+                    // showTypoSettings: undefined
                 });
             });
         }
