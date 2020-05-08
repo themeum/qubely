@@ -177,40 +177,42 @@ class Typography extends Component {
                         onChange={val => this.setSettings('openTypography', val)}
                     />
                 }
-                {
-                    !globalSettings &&
-                    <ButtonGroup
-                        label={__('Source')}
-                        options={
-                            [
-                                [__('Global'), 'global'],
-                                [__('Custom'), 'custom']
-                            ]
-                        }
-                        value={typeof value.activeSource !== 'undefined' ? value.activeSource : 'global'}
-                        onChange={newSource => {
-                            if (newSource === 'custom') {
-                                if (typeof value.globalSource !== 'undefined' && value.globalSource !== 'none') {
-                                    this.props.onChange(Object.assign({}, this.props.value, globalTypoValues[value.globalSource - 1], { 'activeSource': newSource }))
-                                }
-                            } else {
-                                this.setSettings('activeSource', newSource);
-                            }
-                        }}
-                    />
-                }
-                {
-                    (value.activeSource === 'global' && !globalSettings) ?
-                        <SelectControl
-                            label="Size"
-                            value={typeof value.globalSource !== 'undefined' ? value.globalSource : 'none'}
-                            options={globalTypoOptions}
-                            onChange={value => { this.setSettings('globalSource', value); }}
-                        />
-                        :
-                        <Fragment>
 
-                            {((value && value.openTypography == 1) || globalSettings) &&
+                {
+                    ((value && value.openTypography == 1) || globalSettings) &&
+                    <Fragment>
+                        {
+                            !globalSettings &&
+                            <ButtonGroup
+                                label={__('Source')}
+                                options={
+                                    [
+                                        [__('Global'), 'global'],
+                                        [__('Custom'), 'custom']
+                                    ]
+                                }
+                                value={typeof value.activeSource !== 'undefined' ? value.activeSource : 'global'}
+                                onChange={newSource => {
+                                    if (newSource === 'custom') {
+                                        if (typeof value.globalSource !== 'undefined' && value.globalSource !== 'none') {
+                                            this.props.onChange(Object.assign({}, this.props.value, globalTypoValues[value.globalSource - 1], { 'activeSource': newSource }))
+                                        }
+                                    } else {
+                                        this.setSettings('activeSource', newSource);
+                                    }
+                                }}
+                            />
+                        }
+
+                        {
+                            (value.activeSource === 'global' && !globalSettings) ?
+                                <SelectControl
+                                    label="Size"
+                                    value={typeof value.globalSource !== 'undefined' ? value.globalSource : 'none'}
+                                    options={globalTypoOptions}
+                                    onChange={value => { this.setSettings('globalSource', value); }}
+                                />
+                                :
                                 <Fragment>
                                     <Range
                                         unit
@@ -373,10 +375,13 @@ class Typography extends Component {
                                             </div>
                                         )}
                                     />
+
                                 </Fragment>
-                            }
-                        </Fragment>
+                        }
+                    </Fragment>
                 }
+
+
             </div>
         )
     }
