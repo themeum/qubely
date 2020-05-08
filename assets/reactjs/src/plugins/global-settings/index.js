@@ -258,7 +258,7 @@ class GlobalSettings extends Component {
         }
         const renderPresets = () => {
 
-            const AddNewButton = (hint, classes, action = undefined) => {
+            const AddNewButton = (message, hint, classes, action = undefined) => {
                 return (
                     <Tooltip text={__(hint)}>
                         <div
@@ -273,7 +273,7 @@ class GlobalSettings extends Component {
                                 <span className="icon">
                                     {icons.plus_circle}
                                 </span>
-                                <span className="title">Add New</span>
+                                <span className="title">{__(message)}</span>
                             </div>
                         </div>
                     </Tooltip >
@@ -501,7 +501,7 @@ class GlobalSettings extends Component {
                                                             contentClassName="typo-popover"
                                                             renderToggle={({ isOpen, onToggle }) => (
                                                                 <div onClick={onToggle}>
-                                                                    {AddNewButton('Add new typography', "add-new-wrapper add-new-typo")}
+                                                                    {AddNewButton('Add new typography', 'Add Typography', "add-new-wrapper add-new-typo")}
                                                                 </div>
 
                                                             )}
@@ -548,7 +548,7 @@ class GlobalSettings extends Component {
                             )
                         })
                     }
-                    {AddNewButton('Add new preset', "add-new-wrapper", () => addNewPreset(ADDNEWDEFAULT, 'add'))}
+                    {AddNewButton('Add new preset', 'Add Preset', "add-new-wrapper", () => addNewPreset(ADDNEWDEFAULT, 'add'))}
                 </div >
             )
         }
