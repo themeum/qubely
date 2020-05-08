@@ -108,7 +108,7 @@ class Settings {
                         'type' => 'text',
                         'label' => __('ReCaptcha secret key', 'qubely'),
                         'default' => '',
-                        'desc' => __('Enter your ReCaptcha secret key', 'qubely'),
+                        'desc' => sprintf(__('Enter your ReCaptcha secret key,  %1$s Get reCAPTCHA(v2) keys %2$s', 'qubely'), "<a href='//www.google.com/recaptcha/admin/' >", "</a>"),
                         'placeholder' => '',
                         'suffix' => '',
                         'size' => 'regular',
