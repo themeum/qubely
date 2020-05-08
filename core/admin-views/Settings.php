@@ -90,7 +90,7 @@ class Settings {
                         'type' => 'text',
                         'label' => __('Google Map API Keys', 'qubely'),
                         'default' => '',
-                        'desc' => __('Enter your Google map api key', 'qubely'),
+                        'desc' => sprintf(__('Enter your Google map api key, %1$s Generate API key %2$s', 'qubely'), '<a href="https://developers.google.com/maps/documentation/javascript/get-api-key" target="_blank">', '</a>'),
                         'placeholder' => '',
                         'suffix' => '',
                         'size' => 'regular',

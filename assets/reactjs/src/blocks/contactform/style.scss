@@ -88,3 +88,22 @@
 		}
 	}
 }
+
+.gmap-api-key-control{
+	margin-bottom: 24px;
+	.components-base-control {
+		margin-bottom: 6px;
+	}
+}
+
+.api-notice{
+	margin: 0 0 15px;
+	background: rgba(0, 255, 55, 0.15);
+	padding: 8px 12px;
+	border: 1px solid rgba(0,0,0,.1);
+	border-radius: 5px;
+	line-height: 1.6;
+	&.warning {
+		background: rgba(229, 195, 52, 0.25);
+	}
+}

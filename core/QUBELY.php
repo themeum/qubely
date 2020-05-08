@@ -128,6 +128,8 @@ class QUBELY
             'qubely_gmap_api_key' => $qubely_gmap_api_key,
             'qubely_recaptcha_site_key' => $qubely_recaptcha_site_key,
             'qubely_recaptcha_secret_key' => $qubely_recaptcha_secret_key,
+            'site_url' => site_url(),
+            'admin_url' => admin_url()
 		));
 	}
 

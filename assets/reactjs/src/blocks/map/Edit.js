@@ -1,7 +1,7 @@
 const { __ } = wp.i18n;
 const { InspectorControls, BlockControls } = wp.blockEditor
 const { Component, Fragment } = wp.element;
-const { PanelBody, ToggleControl, TextControl, RangeControl, Toolbar } = wp.components;
+const { PanelBody, ToggleControl, TextControl, RangeControl, Toolbar, Button } = wp.components;
 const { Media, Separator, gloalSettings: { globalSettingsPanel, animationSettings }, Inline: { InlineToolbar }, withCSSGenerator, InspectorTabs, InspectorTab } = wp.qubelyComponents
 import mapStyles from './mapStyles'
 
@@ -14,7 +14,8 @@ class Edit extends Component {
         this.initMapLibrary = this.initMapLibrary.bind(this);
         this.setSettings = this.setSettings.bind(this);
         this.getStyles = this.getStyles.bind(this);
-        this.state = { spacer: true}
+        this._saveGlobally = this._saveGlobally.bind(this);
+        this.state = { spacer: true, saved_globally: false}
     }
 
     componentDidMount() {
@@ -39,20 +40,26 @@ class Edit extends Component {
             this.initMapLibrary(qubely_admin.qubely_gmap_api_key);
         } else if(apiKey) {
             this.initMapLibrary(apiKey);
-            try {
-                wp.apiFetch({
-                    path: 'qubely/v1/add_qubely_options',
-                    method: 'POST',
-                    data: {key: 'qubely_gmap_api_key', value: apiKey}
-                })
-            } catch (e) {
-                // debug
-                console.log(e);
-            }
         } else {
             this.initMapLibrary('');
         }
 
+    }
+
+    async _saveGlobally(apiKey) {
+        if(!apiKey) return;
+
+        try {
+            await wp.apiFetch({
+                path: 'qubely/v1/add_qubely_options',
+                method: 'POST',
+                data: {key: 'qubely_gmap_api_key', value: apiKey}
+            });
+            this.setState({saved_globally: true});
+        } catch (e) {
+            // debug
+            console.log(e);
+        }
     }
 
     initMapLibrary(apiKey) {
@@ -214,23 +221,33 @@ class Edit extends Component {
                 globalCss }
         } = this.props;
 
+        const setting_url = qubely_admin.admin_url + 'admin.php?page=qubely-settings';
+
         return (
             <Fragment>
                 <InspectorControls key="inspector">
                     <InspectorTabs tabs={['style', 'advance']}>
                         <InspectorTab key={'style'}>
                             <PanelBody title={__('Map Settings', 'qubely')}>
-                                <TextControl
-                                    label={__('API Key')}
-                                    value={apiKey}
-                                    placeholder={__('Enter API Key')}
-                                    onChange={val => this.initMapLibrary(val)} />
-                                {!apiKey &&
-                                <Fragment>
-                                    <i>{__('Generate your Google API key in')} <a href='https://developers.google.com/maps/documentation/javascript/get-api-key' target="_blank">{__('here')}</a>.</i>
-                                    <Separator />
-                                </Fragment>
+                                {
+                                    (qubely_admin.qubely_gmap_api_key || this.state.saved_globally ) ? (
+                                        <div className='api-notice'>{__('Google map API key successfully added')}, <a target='_blank' href={setting_url}>{__('Edit API key here')}</a></div>
+                                    ) : (
+                                        apiKey ?  (
+                                            <div className="gmap-api-key-control">
+                                                <TextControl
+                                                    label={__('API Key')}
+                                                    value={apiKey}
+                                                    placeholder={__('Enter API Key')}
+                                                    onChange={val => this.initMapLibrary(val)} />
+                                                <Button onClick={() => this._saveGlobally(apiKey)} isPrimary>{__('Set globally')}</Button>
+                                            </div>
+                                        ) : (
+                                            <div className='api-notice warning'>{__('Some features requires Google map API key')}, <a target='_blank' href={setting_url}>{__('Add API key here')}</a></div>
+                                        )
+                                    )
                                 }
+
                                 <RangeControl
                                     label={__('Zoom')}
                                     value={zoom}
