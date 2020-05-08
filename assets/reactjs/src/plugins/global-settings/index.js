@@ -196,19 +196,25 @@ class GlobalSettings extends Component {
                 let tempPresets = presets;
                 if (addnew) {
                     tempPresets[presetKey].typography.push({
-                        name: newTypoTitle,
+                        name: newTypoTitle ? newTypoTitle : 'Custom Typo',
                         removable: true,
                         scope: newTypoScope,
                         value: {
                             openTypography: 1,
                         }
                     });
+                } else if (newValue === 'delete') {
+                    tempPresets[presetKey].typography.splice(index, 1);
                 } else {
                     tempPresets[presetKey].typography[index].value = newValue;
                 }
 
                 updateGlobalVaribales(tempPresets[presetKey]);
-                return { presets: tempPresets, newTypoTitle: null };
+                return ({
+                    presets: tempPresets,
+                    newTypoTitle: null,
+                    showTypoSettings: undefined
+                });
             });
         }
         const addNewPreset = (selectedPreset, operation) => {
@@ -329,7 +335,6 @@ class GlobalSettings extends Component {
                             return (
                                 <div key={presetKey} className={classes}>
                                     <div className="title-wrapper">
-
                                         <div
                                             className="title"
                                             {...((!showDetailedSettings && !(enableRenaming === presetKey)) && {
@@ -341,11 +346,11 @@ class GlobalSettings extends Component {
                                         >
                                             {
                                                 showDetailedSettings ?
-                                                    <span className="radio-button"
+                                                    <span
+                                                        className="radio-button fas fa-angle-left"
                                                         onClick={() => this.setState(state => ({
                                                             showPresetSettings: showDetailedSettings ? undefined : index
-                                                        }))}>
-                                                        {icons.left}</span>
+                                                        }))} />
                                                     :
                                                     <span className="radio-button">{isActivePreset ? icons.circleDot : icons.circleThin}</span>
                                             }
@@ -438,27 +443,42 @@ class GlobalSettings extends Component {
                                                 (typeof typography !== 'undefined' && typography.length > 0) &&
                                                 <PanelBody title={__('Typography')} initialOpen={true}>
                                                     {
-                                                        typography.map(({ name, value, scope = 'h' }, index) => {
+                                                        typography.map(({ name, value, scope = 'h', removable = false }, index) => {
 
                                                             let displaySettings = false;
                                                             if (showTypoSettings === index) {
                                                                 displaySettings = true;
                                                             }
-                                                            let titleClasses = classnames(
-                                                                'typo-name',
-                                                                { ['active']: displaySettings }
-                                                            )
                                                             let Tag = `h${index + 1}`;
                                                             if (scope === 'p') {
                                                                 Tag = 'p'
+                                                            } else if (scope === 'button') {
+                                                                Tag = 'button'
                                                             }
+                                                            let wrapperClasses = classnames(
+                                                                'qubely-global',
+                                                                'typography',
+                                                                { ['removable']: removable }
+                                                            )
+                                                            let titleClasses = classnames(
+                                                                'typo-name',
+                                                                `tag-${Tag}`,
+                                                                { ['active']: displaySettings }
+                                                            )
                                                             return (
-                                                                <div className="qubely-global typography qubely-d-flex qubely-align-justified">
+                                                                <div className={wrapperClasses}>
                                                                     <div
                                                                         className={titleClasses}
                                                                         onClick={() => this.setState({ showTypoSettings: displaySettings ? undefined : index })}
                                                                     >
                                                                         <Tag > {name}</Tag>
+
+                                                                        {
+                                                                            removable &&
+                                                                            <Tooltip text={__('Delete')}>
+                                                                                <span className="delete-typo" onClick={() => updateTypography(false, presetKey, index, 'delete')} >{icons.delete}</span>
+                                                                            </Tooltip>
+                                                                        }
                                                                     </div>
 
                                                                     {displaySettings &&
@@ -473,47 +493,53 @@ class GlobalSettings extends Component {
                                                             )
                                                         })
                                                     }
-                                                    <Dropdown
-                                                        position="bottom center"
-                                                        className="typo-options"
-                                                        contentClassName=""
-                                                        renderToggle={({ isOpen, onToggle }) => (
-                                                            // {AddNewButton('Add new typography', () => updateTypography(true, presetKey))}
-                                                            <div onClick={onToggle}>
-                                                                {AddNewButton('Add new typography', "add-new-wrapper add-new-typo")}
-                                                            </div>
-
-                                                        )}
-                                                        renderContent={({ onToggle }) => {
-                                                            return (
-                                                                <div className="new-typo-options">
-                                                                    <ButtonGroup
-                                                                        label={__('Scope')}
-                                                                        options={
-                                                                            [
-                                                                                [__('Paragraph'), 'p'],
-                                                                                [__('Button'), 'button'],
-                                                                                [__('Others'), 'others']
-                                                                            ]
-                                                                        }
-                                                                        value={newTypoScope}
-                                                                        onChange={value => this.setState({ newTypoScope: value })}
-                                                                    />
-                                                                    <TextControl
-                                                                        autoComplete="off"
-                                                                        label={__('Title')}
-                                                                        value={newTypoTitle}
-                                                                        placeholder={__('add title')}
-                                                                        onChange={value => this.setState({ newTypoTitle: value })}
-                                                                    />
-                                                                    <div>
-                                                                        <div onClick={() => onToggle()} >Cancel</div>
-                                                                        <div onClick={() => { onToggle(); updateTypography(true, presetKey); }}>Apply</div>
-                                                                    </div>
+                                                    {
+                                                        typography.length < 13 &&
+                                                        <Dropdown
+                                                            position="bottom center"
+                                                            className="typo-options"
+                                                            contentClassName="typo-popover"
+                                                            renderToggle={({ isOpen, onToggle }) => (
+                                                                <div onClick={onToggle}>
+                                                                    {AddNewButton('Add new typography', "add-new-wrapper add-new-typo")}
                                                                 </div>
-                                                            );
-                                                        }}
-                                                    />
+
+                                                            )}
+                                                            renderContent={({ onToggle }) => {
+                                                                return (
+                                                                    <div className="new-typo-options">
+                                                                        <div className="scope">Scope</div>
+                                                                        <ButtonGroup
+                                                                            label={__('')}
+                                                                            options={
+                                                                                [
+                                                                                    [__('Paragraph'), 'p'],
+                                                                                    [__('Button'), 'button'],
+                                                                                    [__('Others'), 'others']
+                                                                                ]
+                                                                            }
+                                                                            value={newTypoScope}
+                                                                            onChange={value => this.setState({ newTypoScope: value })}
+                                                                        />
+                                                                        <TextControl
+                                                                            className="new-typo-title"
+                                                                            autoComplete="off"
+                                                                            label={__('Title')}
+                                                                            value={newTypoTitle}
+                                                                            placeholder={__('add title')}
+                                                                            onChange={value => this.setState({ newTypoTitle: value })}
+                                                                        />
+                                                                        <div className="actions">
+                                                                            <div>
+                                                                                <div className="action cancel" onClick={() => onToggle()} >Cancel</div>
+                                                                                <div className={'action apply'} onClick={() => { onToggle(); updateTypography(true, presetKey); }}>Add</div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                );
+                                                            }}
+                                                        />
+                                                    }
                                                 </PanelBody>
                                             }
                                         </Fragment>

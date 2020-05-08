@@ -1,14 +1,15 @@
 .qubely-global-settings {
+    padding: 15px 18px;
     .preset {
-        margin: 10px 0px;
+        margin-bottom: 15px;
         &:not(.detailed) {
-            padding: 10px 16px;
             .title-wrapper {
                 border-radius: 5px;
                 border: 1px solid #dbdfe4;
             }
         }
         &.detailed {
+            margin-bottom: 0;
             .title-wrapper {
                 border-radius: 5px;
                 border: 1px solid #dbdfe4;
@@ -32,24 +33,18 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-
             cursor: pointer;
             position: relative;
             outline: none;
-            width: 100%;
-            text-align: left;
             color: #191e23;
-            border: none;
             box-shadow: none;
             transition: background 0.1s ease-in-out;
-            > div {
-                padding: 12px 15px;
-            }
+            padding: 0 0 0 14px;
             .title {
-                width: 80%;
-                padding-right: 0px;
                 display: inline-flex;
                 align-items: center;
+                flex-grow: 1;
+                padding: 6px 0;
                 .radio-button {
                     padding-right: 10px;
                     display: inline-flex;
@@ -59,52 +54,116 @@
                 .rename-preset {
                     cursor: text;
                 }
+                span.name {
+                    line-height: 26px;
+                }
             }
             .options {
-                width: 20%;
-                padding-left: 0px;
                 display: inline-flex;
                 align-items: center;
                 justify-content: center;
-                .icon {
-                    width: 30px;
-                    min-width: 20px;
-                    display: inline-flex;
-                    align-items: center;
-                    justify-content: center;
+                svg {
+                    display: block;
                 }
+            }
+            .icon {
+                height: 40px;
+                padding: 0 14px;
+                display: flex;
+                align-items: center;
             }
         }
         .qubely-global {
             display: flex;
             flex-direction: column;
-            &:not(:last-child) {
-                margin-bottom: 30px;
-            }
             .typo-name {
-                width: 100%;
+                position: relative;
                 display: block !important;
                 padding: 5px 10px;
                 color: black;
                 cursor: pointer;
                 border-radius: 5px;
+                border: 1px solid transparent;
+                .delete-typo {
+                    position: absolute;
+                    top: 0px;
+                    right: 0px;
+                    visibility: hidden;
+                    opacity: 0;
+                    cursor: pointer;
+                    svg {
+                        transform: rotate(45deg);
+                        fill: #000;
+                    }
+                }
+                &:hover {
+                    border-color: #dbdfe4;
+                    background-color: #f8f8f8;
+                    .delete-typo {
+                        visibility: visible;
+                        opacity: 1;
+                        z-index: 100;
+                        transition: 0.15s ease all;
+                    }
+                }
                 &.active {
+                    border-color: #dbdfe4;
+                    background-color: #f8f8f8;
                     border-bottom-left-radius: 0px;
                     border-bottom-right-radius: 0px;
                 }
-                &:hover,
-                &.active {
-                    border: 1px solid #dbdfe4;
-                    background-color: #f8f8f8;
+                h1,
+                h2,
+                h3,
+                h4,
+                h5,
+                h6 {
+                    margin: 0;
+                    line-height: 1;
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                    whte-space: nowrap;
                 }
-                // > h1,
-                // h2,
-                // h3,
-                // h4,
-                // h5,
-                // h6 {
-                //     margin-bottom: 0px;
-                // }
+                h1 {
+                    font-size: 48px;
+                    line-height: 63px;
+                }
+                h2 {
+                    font-size: 36px;
+                    line-height: 48px;
+                }
+                &.tag-h3 {
+                    margin-top: 3px;
+                }
+                h3 {
+                    font-size: 32px;
+                    line-height: 43px;
+                }
+                &.tag-h4 {
+                    margin-top: 5px;
+                }
+                h4 {
+                    font-size: 28px;
+                    line-height: 37px;
+                }
+                &.tag-h5 {
+                    margin-top: 7px;
+                }
+                h5 {
+                    font-size: 24px;
+                    line-height: 32px;
+                }
+                &.tag-h6 {
+                    margin-top: 9px;
+                }
+                h6 {
+                    font-size: 21px;
+                    line-height: 28px;
+                }
+            }
+            &.typography {
+                margin: 0 -12px;
+                
             }
             .qubely-field-typography {
                 padding: 12px;
@@ -160,12 +219,15 @@
             }
         }
     }
-    .components-panel__body.is-opened {
-        padding: 16px 0px;
+    .components-panel__body {
+        border-bottom: 1px solid #e2e4e7;
+        border-top: none;
+        &:last-child {
+            border-bottom: none;
+        }
     }
     .add-new-wrapper {
         display: block;
-        cursor: pointer;
         text-align: center;
         padding: 10px 16px;
         &:not(.add-new-typo) {
@@ -178,7 +240,8 @@
             justify-content: center;
             padding: 10px 10px;
             border-radius: 5px;
-            border: 1px solid #dbdfe4;
+            border: 1px dashed #dbdfe4;
+            cursor: pointer;
             .icon {
                 width: 30px;
                 min-width: 20px;
@@ -188,7 +251,7 @@
             }
         }
     }
-    .components-dropdown.typo-options{
+    .components-dropdown.typo-options {
         width: 100%;
     }
 }
@@ -203,6 +266,47 @@
             &.active {
                 color: gainsboro;
                 cursor: not-allowed;
+            }
+        }
+    }
+}
+
+.typo-popover {
+    .components-popover__content {
+        border-radius: 5px;
+        .new-typo-options {
+            padding: 20px;
+            .scope{
+                margin-bottom: 10px;
+            }
+            .actions {
+                display: flex;
+                align-items: center;
+                justify-content: flex-end;
+                margin-top: 20px;
+                margin-bottom: 10px;
+                > div {
+                    width: 70%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    .action {
+                        border: 1px solid #d6d9dd;
+                        padding: 5px 12px;
+                        border-radius: 5px;
+                        cursor: pointer;
+                        &.apply {
+                            color: #2184f9;
+                            background: #d2e7ff;
+                            border-color: #a9d0ff;
+                        }
+                    }
+                }
+            }
+            .new-typo-title {
+                .components-base-control__label {
+                    padding: 3px 0px;
+                }
             }
         }
     }
