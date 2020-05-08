@@ -419,7 +419,7 @@ class GlobalSettings extends Component {
                                         <Fragment>
 
                                             <PanelBody title={__('Global Colors')} initialOpen={true}>
-                                                <div className="qubely-d-flex qubely-align-justified">
+                                                <div className="qubely-global-color-pallete">
                                                     {
                                                         colors.map((value, index) => (
                                                             <Color
