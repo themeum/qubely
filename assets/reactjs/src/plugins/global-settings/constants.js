@@ -145,7 +145,7 @@ export const DEFAULTPRESETS = {
         preset2: {
             name: 'Preset #2',
             key: 'preset2',
-            colors: ['#4A90E2', '#50E3C2', '#000', '#4A4A4A', '#9B9B9B'],
+            colors: ['#e24b5a', '#50E3C2', '#fff', '#4A4A4A', '#9B9B9B'],
             typography: [
                 {
                     name: 'Heading 1',
