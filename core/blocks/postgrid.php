@@ -94,17 +94,15 @@ class QubelyPostGrid
      * Layout One Markup
      * @return string
      */
-    public function layout_one_markup($id, $src, $image, $title, $category, $meta, $btn, $excerpt)
+    public function layout_one_markup()
     {
         $layout              = $this->get_layout_attributes('layout');
         $style               = $this->get_layout_attributes('style');
         $contentPosition     = $this->get_layout_attributes('contentPosition');
         $girdContentPosition = $this->get_layout_attributes('girdContentPosition');
         $showImages          = $this->get_layout_attributes('showImages');
-        $category            = $this->get_layout_attributes('category');
         $showCategory        = $this->get_layout_attributes('showCategory');
         $categoryPosition    = $this->get_layout_attributes('categoryPosition');
-        $image               = $this->get_layout_attributes('image');
         $imageAnimation      = $this->get_layout_attributes('imageAnimation');
         $showTitle           = $this->get_layout_attributes('showTitle');
         $titlePosition       = $this->get_layout_attributes('titlePosition');
@@ -112,74 +110,97 @@ class QubelyPostGrid
         $showDates           = $this->get_layout_attributes('showDates');
         $showComment         = $this->get_layout_attributes('showComment');
         $showExcerpt         = $this->get_layout_attributes('showExcerpt');
-        $meta                = $this->get_layout_attributes('meta');
         $showReadMore        = $this->get_layout_attributes('showReadMore');
-        ob_start();
+        $imgSize             = $this->get_layout_attributes('imgSize');
+        $limit               = $this->get_layout_attributes('limit');
+        $readmoreStyle       = $this->get_layout_attributes('readmoreStyle');
+        $readmoreSize        = $this->get_layout_attributes('readmoreSize');
+        $buttonText          = $this->get_layout_attributes('buttonText');
+        $id                  = get_post_thumbnail_id();
+        $src                 = wp_get_attachment_image_src($id, $imgSize);
+
         ?>
         <div class="qubely-postgrid qubely-post-list-view qubely-postgrid-style-<?php echo esc_attr($style); ?>">
             <div class="qubely-post-list-wrapper qubely-post-list-<?php echo esc_attr(($layout == 2 && $style === 3) ? $contentPosition : $girdContentPosition); ?>">
                 <?php if (($showImages == 1) && has_post_thumbnail()) {
             		if ($showCategory == 'badge' && $style == 4) { ?>
                         <div class="qubely-postgrid-cat-position qubely-postgrid-cat-position-<?php echo esc_attr($categoryPosition); ?>">
-                            <?php echo $category; ?>
+                            <span class="qubely-postgrid-category"><?php echo get_the_category_list(' '); ?></span>
                         </div>
                     <?php } ?>
                     <div class="qubely-post-list-img qubely-post-img qubely-post-img-<?php echo esc_attr($imageAnimation); ?>">
                         <a href="<?php echo esc_url(get_the_content()); ?>">
-                            <?php echo $image; ?>
+                            <img class="qubely-post-image" src="<?php echo esc_url($src[0]); ?>" alt="<?php echo get_the_title(); ?>"/>
                         </a>
-                        <?php if ($showCategory == 'badge' && $style != 4) {?>
+                        <?php if ($showCategory == 'badge' && $style != 4) { ?>
                             <div class="qubely-postgrid-cat-position qubely-postgrid-cat-position-<?php echo esc_attr($categoryPosition); ?>">
-                                <?php echo $category; ?>
+                                <span class="qubely-postgrid-category"><?php echo get_the_category_list(' '); ?></span>
                             </div>
                         <?php }?>
                     </div>
                 <?php } ?>
                 <div class="qubely-post-list-content">
                     <?php
-					if ($showCategory == 'default') {
-						echo $category;
-					}
-					if (($showTitle == 1) && ($titlePosition == 1)) {
-						echo $title;
-					}
+					if ($showCategory == 'default') { ?>
+                        <span class="qubely-postgrid-category"><?php echo get_the_category_list(' '); ?></span>
+                        <?php
+                    }
+                    
+					if (($showTitle == 1) && ($titlePosition == 1)) { ?>
+                        <h3 class="qubely-postgrid-title">
+                            <a href="<?php esc_url(get_the_permalink()); ?>"><?php echo get_the_title(); ?></a>
+                        </h3>
+                        <?php
+                    }
+                    
 					if (($showAuthor == 1) || ($showDates == 1) || ($showComment == 1)) {?>
                         <div class="qubely-postgrid-meta">
-                            <?php echo $meta; ?>
+                            <?php echo $this->get_meta(); ?>
                         </div>
                     <?php }
-					if (($showTitle === 1) || ($titlePosition == 0)) {
-						echo $title;
-					}
-					if ($showExcerpt == 1) {
-						echo $excerpt;
-					}
-					if ($showReadMore == 1) {
-						echo $btn;
-					}
+
+					if (($showTitle === 1) || ($titlePosition == 0)) { ?>
+						<h3 class="qubely-postgrid-title">
+                            <a href="<?php esc_url(get_the_permalink()); ?>"><?php echo get_the_title(); ?></a>
+						</h3>
+                        <?php
+                    }
+                    
+					if ($showExcerpt == 1) { ?>
+                        <div class="qubely-postgrid-intro"> 
+                            <?php echo qubely_excerpt_max_charlength(esc_attr($limit)); ?>
+                        </div>
+                        <?php
+                    }
+                    
+                    if ($showReadMore == 1) { ?>
+                        <div class="qubely-postgrid-btn-wrapper">
+                            <a class="qubely-postgrid-btn qubely-button-<?php echo esc_attr($readmoreStyle); ?> is-<?php echo esc_attr($readmoreSize); ?>" href="<?php echo esc_url(get_the_permalink()); ?>">
+                                <?php echo esc_attr($buttonText); ?>
+                            </a>
+                        </div>
+						<?php
+                    }
 					?>
                 </div> <!-- qubely-post-list-content -->
             </div> <!-- >qubely-post-list-wrap -->
         </div>  <!-- qubely-postgrid -->
         <?php
-		return ob_get_clean();
     }
 
     /**
      * Layout Two Markup
      * @return string
      */
-    public function layout_two_markup($id, $src, $image, $title, $category, $meta, $btn, $excerpt)
+    public function layout_two_markup()
     {
         $layout              = $this->get_layout_attributes('layout');
         $style               = $this->get_layout_attributes('style');
         $contentPosition     = $this->get_layout_attributes('contentPosition');
         $girdContentPosition = $this->get_layout_attributes('girdContentPosition');
         $showImages          = $this->get_layout_attributes('showImages');
-        $category            = $this->get_layout_attributes('category');
         $showCategory        = $this->get_layout_attributes('showCategory');
         $categoryPosition    = $this->get_layout_attributes('categoryPosition');
-        $image               = $this->get_layout_attributes('image');
         $animation           = $this->get_layout_attributes('animation');
         $showTitle           = $this->get_layout_attributes('showTitle');
         $titlePosition       = $this->get_layout_attributes('titlePosition');
@@ -187,132 +208,73 @@ class QubelyPostGrid
         $showDates           = $this->get_layout_attributes('showDates');
         $showComment         = $this->get_layout_attributes('showComment');
         $showExcerpt         = $this->get_layout_attributes('showExcerpt');
-        $meta                = $this->get_layout_attributes('meta');
         $showReadMore        = $this->get_layout_attributes('showReadMore');
-        ob_start();
+        $imgSize             = $this->get_layout_attributes('imgSize');
+        $limit               = $this->get_layout_attributes('limit');
+        $readmoreStyle       = $this->get_layout_attributes('readmoreStyle');
+        $readmoreSize        = $this->get_layout_attributes('readmoreSize');
+        $buttonText          = $this->get_layout_attributes('buttonText');
+        $id                  = get_post_thumbnail_id();
+        $src                 = wp_get_attachment_image_src($id, $imgSize);
         ?>
-        <div class="qubely-postgrid qubely-post-grid-view qubely-postgrid-style-<?php echo esc_attr($this->get_layout_attributes()['style']); ?>">
+        <div class="qubely-postgrid qubely-post-grid-view qubely-postgrid-style-<?php echo esc_attr($style); ?>">
             <div class="qubely-post-grid-wrapper qubely-post-grid-<?php echo esc_attr(($layout == 2 && $style === 3) ? $contentPosition : $girdContentPosition); ?>">
                 <?php if (($showImages == 1) && has_post_thumbnail()) {?>
                     <div class="qubely-post-grid-img qubely-post-img qubely-post-img-<?php esc_attr($animation);?>">
                         <a href="<?php echo esc_url(get_the_permalink()); ?>">
-                            <?php echo $image; ?>
+                            <img class="qubely-post-image" src="<?php echo esc_url($src[0]); ?>" alt="<?php echo get_the_title(); ?>"/>
                         </a>
                         <?php if ($showCategory == 'badge' && $style != 4) {?>
                             <div class="qubely-postgrid-cat-position qubely-postgrid-cat-position-<?php echo esc_attr($categoryPosition); ?>">
-                                <?php echo $category; ?>
+                                <span class="qubely-postgrid-category"><?php echo get_the_category_list(' '); ?></span>
                             </div>
                         <?php }?>
                     </div>
                 <?php }?>
                 <div class="qubely-post-grid-content">
-                    <?php if ($showCategory == 'default') {
-                        echo $category;
+                    <?php if ($showCategory == 'default') { ?>
+                        <span class="qubely-postgrid-category"><?php echo get_the_category_list(' '); ?></span>
+                        <?php
                     }
                     if ($showCategory == 'badge' && $style == 4) {?>
                         <div class="qubely-postgrid-cat-position qubely-postgrid-cat-position-<?php echo esc_attr($categoryPosition); ?>">
-                            <?php echo $category; ?>
+                            <span class="qubely-postgrid-category"><?php echo get_the_category_list(' '); ?></span>
                         </div>
                     <?php }
-                    if (($showTitle == 1) && ($titlePosition == 1)) {
-                        echo $title;
+                    if (($showTitle == 1) && ($titlePosition == 1)) { ?>
+                        <h3 class="qubely-postgrid-title">
+                            <a href="<?php esc_url(get_the_permalink()); ?>"><?php echo get_the_title(); ?></a>
+						</h3>
+                        <?php
                     }
                     if (($showAuthor == 1) || ($showDates == 1) || ($showComment == 1)) {?>
                         <div class="qubely-postgrid-meta">
-                            <?php echo $meta; ?>
+                            <?php echo $this->get_meta(); ?>
                         </div>
                     <?php }
-                    if (($showTitle === 1) || ($titlePosition == 0)) {
-                        echo $title;
+                    if (($showTitle === 1) || ($titlePosition == 0)) { ?>
+                        <a href="<?php esc_url(get_the_permalink()); ?>"><?php echo get_the_title(); ?></a>
+                        <?php
                     }
-                    if ($showExcerpt == 1) {
-                        echo $excerpt;
+                    if ($showExcerpt == 1) { ?>
+                        <div class="qubely-postgrid-intro"> 
+                            <?php echo qubely_excerpt_max_charlength(esc_attr($limit)); ?>
+                        </div>
+                        <?php
                     }
-                    if ($showReadMore == 1) {
-                        echo $btn;
+                    if ($showReadMore == 1) { ?>
+                        <div class="qubely-postgrid-btn-wrapper">
+                            <a class="qubely-postgrid-btn qubely-button-<?php echo esc_attr($readmoreStyle); ?> is-<?php echo esc_attr($readmoreSize); ?>" href="<?php echo esc_url(get_the_permalink()); ?>">
+                                <?php echo esc_attr($buttonText); ?>
+                            </a>
+                        </div>
+						<?php
                     }
                     ?>
                 </div> <!-- qubely-post-grid-content -->
             </div> <!-- qubely-post-list-wrap -->
         </div> <!-- qubely-post-list-wrap -->
         <?php
-		return ob_get_clean();
-    }
-
-    /**
-     * get excerpt
-     * @return string
-     */
-    public function get_excerpt()
-    {
-        $limit = $this->get_layout_attributes('limit');
-        if(!function_exists('qubely_excerpt_max_charlength')) :
-            function qubely_excerpt_max_charlength($limit) {
-                $excerpt = get_the_excerpt();
-                if(str_word_count($excerpt, 0) > $limit) {
-                    $words = str_word_count($excerpt, 2);
-                    $pos = array_keys($words);
-                    $text = substr($excerpt, 0, $pos[$limit]);
-                    return $text;
-                }
-                return  $excerpt;
-            }
-        endif;
-    }
-
-    /**
-     * get meta
-     * @return string
-     */
-    public function get_meta()
-    {
-        $showAuthor = $this->get_layout_attributes('showAuthor');
-        $showDates = $this->get_layout_attributes('showDates');
-        $showComment = $this->get_layout_attributes('showComment');
-        ob_start();
-        if ($showAuthor == 1) { ?>
-            <span>
-                <i class="fas fa-user"></i>
-                <?php
-                    __('By ', 'qubely'); echo get_the_author_link();
-                ?>
-            </span>
-        <?php } else { ''; }
-        if($showDates == 1) { ?>
-            <span>
-                <i class="far fa-calendar-alt"></i>
-                <?php echo get_the_date(); ?>
-            </span>
-        <?php } else { ''; }
-        if($showComment == 1) { ?>
-            <span>
-                <i class="fas fa-comment"></i>
-                <?php echo get_comments_number('0', '1', '%'); ?>
-            </span>
-        <?php } else { ''; }
-        return ob_get_clean();
-    }
-
-    /**
-     * get animation
-     * @return string
-     */
-    public function get_animation()
-    {
-        if (isset($this->attributes['interaction'])) {
-            if (!empty((array) $this->attributes['interaction'])) {
-                if (isset($this->attributes['interaction']['while_scroll_into_view'])) {
-                    if ($this->attributes['interaction']['while_scroll_into_view']['enable']) {
-                        $interaction = 'qubley-block-interaction';
-                    }
-                }
-                if (isset($this->attributes['interaction']['mouse_movement'])) {
-                    if ($this->attributes['interaction']['mouse_movement']['enable']) {
-                        $interaction = 'qubley-block-interaction';
-                    }
-                }
-            }
-        }
     }
 
     /**
@@ -333,12 +295,13 @@ class QubelyPostGrid
         $readmoreSize  = $this->get_layout_attributes('readmoreSize');
         $buttonText    = $this->get_layout_attributes('buttonText');
         $categories    = $this->get_layout_attributes('categories');
+        $titlePosition = $this->get_layout_attributes('titlePosition');
         $tags          = $this->get_layout_attributes('tags');
         $column        = $this->get_layout_attributes('column');
         $imgSize       = $this->get_layout_attributes('imgSize');
         $number        = $this->get_layout_attributes('number');
-
-        $animation = $this->get_animation();
+        $interaction   = '';
+        $interaction   = $this->get_interaction();
 
         $args = [
             'post_type'      => 'post',
@@ -375,36 +338,103 @@ class QubelyPostGrid
             $class .= $this->attributes['className'];
         }
 
-        if ($query->have_posts()) {
-            ob_start()?>
+        if ($query->have_posts()) { ?>
             <div class="<?php echo $class; ?>">
-                <div class="qubely-post~grid-wrapper <?php echo $interaction; ?> qubely-postgrid-layout-<?php echo esc_attr($layout); ?>">
+                <div class="qubely-post-grid-wrapper <?php echo $interaction; ?> qubely-postgrid-layout-<?php echo esc_attr($layout); ?> <?php echo esc_attr($col); ?>">
                     <?php
                     while ($query->have_posts()) {
                         $query->the_post();
-                        $id = get_post_thumbnail_id();
-                        $src = wp_get_attachment_image_src($id, $imgSize);
-                        $image = '<img class="qubely-post-image" src="' . esc_url($src[0]) . '" alt="' . get_the_title() . '"/>';
-                        $title = '<h3 class="qubely-postgrid-title"><a href="' . esc_url(get_the_permalink()) . '">' . get_the_title() . '</a></h3>';
-                        $category = '<span class="qubely-postgrid-category">' . get_the_category_list(' ') . '</span>';
-                        $meta = $this->get_meta();
-                        $btn = '<div class="qubely-postgrid-btn-wrapper"><a class="qubely-postgrid-btn qubely-button-' . esc_attr($readmoreStyle) . ' is-' . esc_attr($readmoreSize) . '" href="' . esc_url(get_the_permalink()) . '">' . esc_attr($buttonText) . '</a></div>';
-                        $excerpt = '<div class="qubely-postgrid-intro">' . qubely_excerpt_max_charlength(esc_attr($limit)) . '</div>';
-
+                        
                         if ($layout == 1) {
-                            echo $this->layout_one_markup($id, $src, $image, $title, $category, $meta, $btn, $excerpt);
+                            $this->layout_one_markup();
                         }
 
                         if ($layout == 2) {
-                            echo $this->layout_two_markup($id, $src, $image, $title, $category, $meta, $btn, $excerpt);
+                            $this->layout_two_markup();
                         }
 
-                    } # end of if($query->have_posts())
-                    ?>
+                    } # end of while($query->have_posts())
+                    ?> 
                 </div>
             </div>
         <?php } # end of if($query->have_posts())
     } # end of postgrid_markup function
+
+    /**
+     * get excerpt
+     * @return string
+     */
+    public function get_excerpt()
+    {
+        $limit = $this->get_layout_attributes('limit');
+        if(!function_exists('qubely_excerpt_max_charlength')) :
+            function qubely_excerpt_max_charlength($limit) {
+                $excerpt = get_the_excerpt();
+                if(str_word_count($excerpt, 0) > $limit) {
+                    $words = str_word_count($excerpt, 2);
+                    $pos = array_keys($words);
+                    $text = substr($excerpt, 0, $pos[$limit]);
+                    return $text;
+                }
+                return  $excerpt;
+            }
+        endif;
+    }
+
+    /**
+     * get meta
+     * @return string
+     */
+    public function get_meta()
+    {
+        $showAuthor = $this->get_layout_attributes('showAuthor');
+        $showDates = $this->get_layout_attributes('showDates');
+        $showComment = $this->get_layout_attributes('showComment');
+        ob_start();
+        if ($showAuthor == 1) { ?>
+            <span>
+                <i class="fas fa-user"></i>
+                <?php
+                    __('By ', 'qubely'); echo get_the_author_posts_link();
+                ?>
+            </span>
+        <?php } else { ''; }
+        if($showDates == 1) { ?>
+            <span>
+                <i class="far fa-calendar-alt"></i>
+                <?php echo get_the_date(); ?>
+            </span>
+        <?php } else { ''; }
+        if($showComment == 1) { ?>
+            <span>
+                <i class="fas fa-comment"></i>
+                <?php echo get_comments_number('0', '1', '%'); ?>
+            </span>
+        <?php } else { ''; }
+        return ob_get_clean();
+    }
+
+    /**
+     * get animation
+     * @return string
+     */
+    public function get_interaction()
+    {
+        if (isset($this->attributes['interaction'])) {
+            if (!empty((array) $this->attributes['interaction'])) {
+                if (isset($this->attributes['interaction']['while_scroll_into_view'])) {
+                    if ($this->attributes['interaction']['while_scroll_into_view']['enable']) {
+                        $interaction = 'qubley-block-interaction';
+                    }
+                }
+                if (isset($this->attributes['interaction']['mouse_movement'])) {
+                    if ($this->attributes['interaction']['mouse_movement']['enable']) {
+                        $interaction = 'qubley-block-interaction';
+                    }
+                }
+            }
+        }
+    }
 
     /**
      * Set default attributes
