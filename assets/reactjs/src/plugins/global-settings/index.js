@@ -572,9 +572,6 @@ class GlobalSettings extends Component {
                     title={__('Global Settings')}
                 >
                     {renderPresets()}
-                    <button onClick={() => this.getGlobalSettings()}>get</button>
-                    <button onClick={() => this.updateGlobalSettings()}>Save</button>
-                    <button onClick={() => this.delGlobalSettings()}>delete</button>
                 </PluginSidebar>
 
                 <PluginSidebarMoreMenuItem
