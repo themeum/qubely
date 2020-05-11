@@ -4,7 +4,7 @@ Donate link: https://www.themeum.com
 Tags: blocks, gutenberg, gutenberg blocks, editor, block, page builder
 Requires at least: 5.0
 Tested up to: 5.4
-Stable tag: 1.3.91
+Stable tag: 1.4.0
 Requires PHP: 7.0
 License: GPL-2.0+
 License URI: http://www.gnu.org/licenses/gpl-2.0.txt
@@ -236,6 +236,10 @@ You can report bugs on the [support forum here](https://wordpress.org/support/pl
 
 
 == Changelog ==
+
+= 1.4.0 - 13 May, 2020 =
+Fix: Accordion block - Active Panel color 
+New: Global Settings  
 
 = 1.3.91 - 29 April, 2020 =
 Fix: Typography & Box Shadow panel css issue

@@ -54,7 +54,7 @@ export const accordionItemSettings = {
                     condition: [
                         { key: 'fillType', relation: '==', value: 'nofill' }
                     ],
-                    selector: '{{QUBELY}} .qubely-accordion-active .qubely-accordion-panel { color:{{panelColorActive}}; }'
+                    selector: '{{QUBELY}} .qubely-accordion-active .qubely-accordion-panel { color:{{panelColorActive2}}; }'
                 }
             ]
         },
