@@ -458,7 +458,7 @@ class GlobalSettings extends Component {
                                                                 displaySettings = true;
                                                             }
                                                             let Tag = `h${index + 1}`;
-                                                            if (scope === 'p' || scope === 'others') {
+                                                            if (scope === 'p' || (removable && scope === 'others')) {
                                                                 Tag = 'p'
                                                             } else if (scope === 'button') {
                                                                 Tag = 'button'

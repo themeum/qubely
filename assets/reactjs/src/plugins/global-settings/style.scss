@@ -117,8 +117,8 @@
                 border: 1px solid transparent;
                 .delete-typo {
                     position: absolute;
-                    top: 0px;
-                    right: 0px;
+                    top: -7px;
+                    right: -6px;
                     visibility: hidden;
                     opacity: 0;
                     cursor: pointer;
@@ -153,7 +153,7 @@
                     line-height: 1;
                     text-overflow: ellipsis;
                     overflow: hidden;
-                    whte-space: nowrap;
+                    white-space: nowrap;
                 }
                 h1 {
                     font-size: 48px;
@@ -163,33 +163,50 @@
                     font-size: 36px;
                     line-height: 48px;
                 }
+
                 &.tag-h3 {
                     margin-top: 3px;
-                }
-                h3 {
-                    font-size: 32px;
-                    line-height: 43px;
+                    h3 {
+                        font-size: 32px;
+                        line-height: 43px;
+                    }
                 }
                 &.tag-h4 {
                     margin-top: 5px;
-                }
-                h4 {
-                    font-size: 28px;
-                    line-height: 37px;
+                    h4 {
+                        font-size: 28px;
+                        line-height: 37px;
+                    }
                 }
                 &.tag-h5 {
                     margin-top: 7px;
-                }
-                h5 {
-                    font-size: 24px;
-                    line-height: 32px;
+                    h5 {
+                        font-size: 24px;
+                        line-height: 32px;
+                    }
                 }
                 &.tag-h6 {
                     margin-top: 9px;
+                    h6 {
+                        font-size: 21px;
+                        line-height: 28px;
+                    }
                 }
-                h6 {
-                    font-size: 21px;
-                    line-height: 28px;
+                &.tag-p{
+                    margin-top: 9px;
+                    p{
+                        margin: 0;
+                        line-height: 28px;
+                    }
+                }
+                &.tag-button {
+                    margin-top: 9px;
+                    button{
+                        padding: 0;
+                        border: none;
+                        background: none;
+                        line-height: 28px;
+                    }
                 }
             }
             &.typography {
