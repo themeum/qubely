@@ -26,7 +26,8 @@ const { __ } = wp.i18n;
 const {
     Component,
     Fragment,
-    createRef
+    createRef,
+    useCallback
 } = wp.element;
 
 const {
@@ -331,15 +332,18 @@ class GlobalSettings extends Component {
                                 { ['detailed']: showDetailedSettings },
                                 { ['renaming']: enableRenaming === presetKey }
                             )
-
+                            const onEnter = () => {
+                                console.log('heelo ');
+                            }
                             return (
                                 <div key={presetKey} className={classes}>
                                     <div className="title-wrapper">
                                         <div
                                             className="title"
-                                            {...((!showDetailedSettings && !(enableRenaming === presetKey)) && {
+                                            {...(!showDetailedSettings && {
                                                 onClick: () => this.setState(state => ({
-                                                    showPresetSettings: showDetailedSettings ? undefined : index
+                                                    showPresetSettings: showDetailedSettings ? undefined : index,
+                                                    enableRenaming: enableRenaming !== presetKey ? undefined : presetKey
                                                 }))
                                             })}
 
@@ -349,7 +353,8 @@ class GlobalSettings extends Component {
                                                     <span
                                                         className="radio-button fas fa-angle-left"
                                                         onClick={() => this.setState(state => ({
-                                                            showPresetSettings: showDetailedSettings ? undefined : index
+                                                            showPresetSettings: showDetailedSettings ? undefined : index,
+                                                            ...((enableRenaming === presetKey) && { enableRenaming: undefined })
                                                         }))} />
                                                     :
                                                     <span className="radio-button">{isActivePreset ? icons.circleDot : icons.circleThin}</span>
@@ -362,6 +367,9 @@ class GlobalSettings extends Component {
                                                         keepPlaceholderOnFocus
                                                         className={'rename-preset'}
                                                         placeholder={__('Add preset name')}
+                                                        onSplit={() =>
+                                                            console.log('onSplit')
+                                                        }
                                                         onChange={newValue => renameTitle(newValue, presetKey)}
                                                     />
                                                     :
@@ -450,7 +458,7 @@ class GlobalSettings extends Component {
                                                                 displaySettings = true;
                                                             }
                                                             let Tag = `h${index + 1}`;
-                                                            if (scope === 'p') {
+                                                            if (scope === 'p' || (removable && scope === 'others')) {
                                                                 Tag = 'p'
                                                             } else if (scope === 'button') {
                                                                 Tag = 'button'
