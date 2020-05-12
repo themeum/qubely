@@ -246,21 +246,17 @@ export const CssGenerator = (settings, blockName, blockID, isInline = false, glo
     if (sm.length > 0) { __CSS += '@media (max-width: 1199px) {' + sm.join('') + '}' }
     if (xs.length > 0) { __CSS += '@media (max-width: 991px) {' + xs.join('') + '}' }
     if (notResponsiveCss.length > 0) { __CSS += notResponsiveCss.join('') }
-    // console.log('b4 global css : ', __CSS);
 
     if (global) {
-        __CSS = __CSS.replace(new RegExp('.qubely-block-global', "g"), frontend ? '.qubely-frontend' : '.qubely-editor')
-
+        __CSS = __CSS.replace(new RegExp('.qubely-block-global', "g"), frontend ? '.qubely-frontend' : '.qubely-editor');
     }
-    // console.log('after global css : ', __CSS);
+
     if (isInline) {
-        // console.log('INLINE : ',isInline, '_CSS : ',__CSS);
-        return __CSS
+        return __CSS;
     }
 
     // Set CSS
-
-    setStyle(__CSS, blockID, global, frontend)
+    setStyle(__CSS, blockID, global, frontend);
 }
 
 

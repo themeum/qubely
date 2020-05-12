@@ -1,4 +1,5 @@
 const PATH = '/qubely/v1/global_settings';
+import { _device, _push } from '../components/CssHelper';
 
 async function fetchFromApi() {
     return await wp.apiFetch({ path: PATH })
@@ -33,6 +34,73 @@ const _appendVariables = (val, data) => {
         data.xs.push(val.xs);
     }
     return data;
+}
+
+const addTypo = (value, index) => {
+
+    let responsive = '',
+        nonResponsiveProps = '',
+        data = {
+            md: [],
+            sm: [],
+            xs: []
+        };
+
+    if (value.size) {
+        data = _appendVariables(generateVariables(value.size, `.typo-name.index-${index + 1}>*{font-size:{{key}} !important;}`), data);
+    }
+    if (value.height) {
+        data = _appendVariables(generateVariables(value.height, `.typo-name.index-${index + 1}>*{line-height:{{key}} !important;}`), data)
+    }
+    if (value.spacing) {
+        data = _appendVariables(generateVariables(value.spacing, `.typo-name.index-${index + 1}>*{letter-spacing:{{key}} !important;}`), data)
+    }
+
+    if (data.md.length > 0) {
+        responsive += data.md.join(' ')
+    }
+    if (data.sm.length > 0) {
+        responsive += `@media (max-width: 1199px) {${data.sm.join('')}}`
+    }
+    if (data.xs.length > 0) {
+        responsive += `@media (max-width: 991px) {${data.xs.join('')}}`
+    }
+
+    //non responsive values
+    if (value.family) {
+        if (!['Arial', 'Tahoma', 'Verdana', 'Helvetica', 'Times New Roman', 'Trebuchet MS', 'Georgia'].includes(value.family)) {
+            nonResponsiveProps = "@import url('https://fonts.googleapis.com/css?family=" + value.family.replace(/\s/g, '+') + ':' + (value.weight || 400) + "'); ";
+        }
+    }
+
+    if (value.family) {
+        nonResponsiveProps += `.typo-name.index-${index + 1}>*{ font-family:'${value.family}',${value.type};} `;
+    }
+    if (value.weight) {
+        nonResponsiveProps += `.typo-name.index-${index + 1}>* {font-weight:${value.weight};} `;
+    }
+    if (value.transform) {
+        nonResponsiveProps += `.typo-name.index-${index + 1}>* {text-transform:${value.transform};} `;
+    }
+
+    let tempCSS = '';
+    if (responsive.length > 10) {
+        tempCSS += responsive;
+    }
+    if (nonResponsiveProps.length > 10) {
+        tempCSS += ' ' + nonResponsiveProps;
+    }
+    return tempCSS;
+}
+
+export const setTypoTitleStyle = (typos) => {
+
+    let __CSS = '';
+    typos.forEach((typo, index) => {
+        let tempCSS= addTypo(typo.value, index)
+        __CSS += tempCSS;
+    });
+    injectGlobalCSS(__CSS, 'qubely-global-panel')
 }
 
 const appendTypoVariable = (value, index) => {
@@ -109,12 +177,12 @@ export const setGlobalTypo_Variables = (globalTypoes) => {
 }
 
 
-export const injectGlobalCSS = (_CSS, append = false) => {
+export const injectGlobalCSS = (_CSS, id = 'qubely-global-styles') => {
     let styleSelector = window.document;
-    if (styleSelector.getElementById('qubely-global-styles') === null) {
+    if (styleSelector.getElementById(id) === null) {
         let cssInline = document.createElement('style');
         cssInline.type = 'text/css';
-        cssInline.id = 'qubely-global-styles';
+        cssInline.id = id;
         if (cssInline.styleSheet) {
             cssInline.styleSheet.cssText = _CSS;
         } else {
@@ -122,7 +190,7 @@ export const injectGlobalCSS = (_CSS, append = false) => {
         }
         styleSelector.getElementsByTagName("head")[0].appendChild(cssInline);
     } else {
-        styleSelector.getElementById('qubely-global-styles').innerHTML = _CSS;
+        styleSelector.getElementById(id).innerHTML = _CSS;
     }
 }
 
