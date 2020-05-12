@@ -359,17 +359,26 @@ class GlobalSettings extends Component {
                                             }
                                             {
                                                 (enableRenaming === presetKey) ?
-                                                    <RichText
-                                                        ref={this.ref}
-                                                        value={name}
-                                                        keepPlaceholderOnFocus
-                                                        className={'rename-preset'}
-                                                        placeholder={__('Add preset name')}
-                                                        onSplit={() =>
-                                                            console.log('onSplit')
-                                                        }
-                                                        onChange={newValue => renameTitle(newValue, presetKey)}
-                                                    />
+                                                    // <RichText
+                                                    //     ref={this.ref}
+                                                    //     value={name}
+                                                    //     keepPlaceholderOnFocus
+                                                    //     className={'rename-preset'}
+                                                    //     placeholder={__('Add preset name')}
+                                                    //     onSplit={() =>
+                                                    //         console.log('onSplit')
+                                                    //     }
+                                                    //     __unstableOnSplitMiddle={() => alert('hello')}
+                                                    //     onChange={newValue => renameTitle(newValue, presetKey)}
+                                                    // />
+                                                    (
+                                                        <input
+                                                            ref={this.ref}
+                                                            value={name}
+                                                            type="text"
+                                                            onChange={event => renameTitle(event.target.value, presetKey)}
+                                                            placeholder={__('Add preset name')}/>
+                                                    )
                                                     :
                                                     <span className="name"> {name}</span>
                                             }

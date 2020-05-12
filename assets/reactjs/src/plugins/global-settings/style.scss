@@ -249,19 +249,23 @@
             position: relative;
             .delete {
                 position: absolute;
-                top: 0px;
-                right: 0px;
-                visibility: hidden;
+                top: -1px;
+                right: -2px;
+                background: #F7F7F7;
+                height: 11px;
+                width: 11px;
+                display: block;
+                color: #2184F9;
+                font-size: 8px;
+                text-align: center;
+                line-height: 11.5px;
+                border-radius: 50%;
+                box-shadow: -1px 1px 2px 0 rgba(#000, .15);
                 opacity: 0;
-                svg {
-                    transform: rotate(45deg);
-                }
             }
             &:hover {
                 .delete {
-                    visibility: visible;
                     opacity: 1;
-                    z-index: 100;
                     transition: 0.15s ease all;
                 }
             }

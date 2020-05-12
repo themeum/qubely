@@ -50,7 +50,9 @@ export default function Color({ value, onChange, className, deleteOption, onDele
                         </span>
                         {
                             deleteOption &&
-                            <span className="delete" onClick={() => onDelete()} >{icons.delete}</span>
+                            <span className="delete fas fa-times" onClick={() => onDelete()} >
+                                {/*{icons.delete}*/}
+                            </span>
                         }
                     </span>
                 )}
