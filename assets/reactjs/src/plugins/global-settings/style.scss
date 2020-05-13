@@ -150,7 +150,7 @@
                 h5,
                 h6 {
                     margin: 0;
-                    line-height: 1;
+                    line-height: 1.2;
                     text-overflow: ellipsis;
                     overflow: hidden;
                     white-space: nowrap;
@@ -158,46 +158,46 @@
                 }
                 h1 {
                     font-size: 48px;
-                    line-height: 63px;
+                    //line-height: 63px;
                 }
                 h2 {
                     font-size: 36px;
-                    line-height: 48px;
+                    //line-height: 48px;
                 }
 
                 &.tag-h3 {
                     margin-top: 3px;
                     h3 {
                         font-size: 32px;
-                        line-height: 43px;
+                        //line-height: 43px;
                     }
                 }
                 &.tag-h4 {
                     margin-top: 5px;
                     h4 {
                         font-size: 28px;
-                        line-height: 37px;
+                        //line-height: 37px;
                     }
                 }
                 &.tag-h5 {
                     margin-top: 7px;
                     h5 {
                         font-size: 24px;
-                        line-height: 32px;
+                        //line-height: 32px;
                     }
                 }
                 &.tag-h6 {
                     margin-top: 9px;
                     h6 {
                         font-size: 21px;
-                        line-height: 28px;
+                        //line-height: 28px;
                     }
                 }
                 &.tag-p{
                     margin-top: 9px;
                     p{
                         margin: 0;
-                        line-height: 28px;
+                        //line-height: 28px;
                     }
                 }
                 &.tag-button {
@@ -206,7 +206,7 @@
                         padding: 0;
                         border: none;
                         background: none;
-                        line-height: 28px;
+                        //line-height: 28px;
                     }
                 }
             }
@@ -256,18 +256,21 @@
                 height: 11px;
                 width: 11px;
                 display: block;
-                color: #2184F9;
+                color: #9B9B9B;
                 font-size: 8px;
                 text-align: center;
                 line-height: 11.5px;
                 border-radius: 50%;
                 box-shadow: -1px 1px 2px 0 rgba(#000, .15);
                 opacity: 0;
+                transition: 0.15s ease all;
+                &:hover{
+                    color: #2184F9;
+                }
             }
             &:hover {
                 .delete {
                     opacity: 1;
-                    transition: 0.15s ease all;
                 }
             }
         }
