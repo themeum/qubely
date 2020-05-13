@@ -28,24 +28,24 @@
                     }
                 }
             }
-            > div:last-child{
+            > div:last-child {
                 margin-bottom: 15px;
             }
         }
-        .components-panel__body{
+        .components-panel__body {
             padding: 0;
         }
-        .components-panel__body-title:hover{
+        .components-panel__body-title:hover {
             background: transparent !important;
         }
-        .components-panel__body-toggle.components-button{
+        .components-panel__body-toggle.components-button {
             padding-left: 0;
             padding-right: 0;
-            .components-panel__arrow{
+            .components-panel__arrow {
                 right: 0;
             }
         }
-        .components-panel__body>.components-panel__body-title{
+        .components-panel__body > .components-panel__body-title {
             margin: 0;
         }
         .qubely-global-color-pallete {
@@ -53,10 +53,10 @@
             margin: 0 -2.5px;
             flex-wrap: wrap;
             margin-bottom: 15px;
-            .qubely-field{
+            .qubely-field {
                 margin: 0 2.5px 7px;
             }
-            .qubely-color-picker-container .qubely-color-picker{
+            .qubely-color-picker-container .qubely-color-picker {
                 border: none;
             }
         }
@@ -82,8 +82,14 @@
                     align-items: center;
                     justify-content: center;
                 }
+                input:focus{
+                    outline: none;
+                    border: none;
+                    background-color: #f8f8f8;
+                }
                 .rename-preset {
                     cursor: text;
+                    border: none;
                 }
                 span.name {
                     line-height: 26px;
@@ -192,16 +198,16 @@
                         line-height: 28px;
                     }
                 }
-                &.tag-p{
+                &.tag-p {
                     margin-top: 9px;
-                    p{
+                    p {
                         margin: 0;
                         line-height: 28px;
                     }
                 }
                 &.tag-button {
                     margin-top: 9px;
-                    button{
+                    button {
                         padding: 0;
                         border: none;
                         background: none;
@@ -211,7 +217,6 @@
             }
             &.typography {
                 margin: 0;
-                
             }
             .qubely-field-typography {
                 padding: 12px;
@@ -251,16 +256,16 @@
                 position: absolute;
                 top: -1px;
                 right: -2px;
-                background: #F7F7F7;
+                background: #f7f7f7;
                 height: 11px;
                 width: 11px;
                 display: block;
-                color: #2184F9;
+                color: #2184f9;
                 font-size: 8px;
                 text-align: center;
                 line-height: 11.5px;
                 border-radius: 50%;
-                box-shadow: -1px 1px 2px 0 rgba(#000, .15);
+                box-shadow: -1px 1px 2px 0 rgba(#000, 0.15);
                 opacity: 0;
             }
             &:hover {
@@ -328,7 +333,7 @@
         border-radius: 5px;
         .new-typo-options {
             padding: 20px;
-            .scope{
+            .scope {
                 margin-bottom: 10px;
             }
             .actions {

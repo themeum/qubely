@@ -98,7 +98,7 @@ class GlobalSettings extends Component {
         if ((enableRenaming !== prevProps.enableRenaming) && typeof enableRenaming !== 'undefined') {
             setTimeout(() => {
                 if (typeof this.ref.current !== 'undefined') {
-                    placeCaretAtEnd(this.ref.current);
+                    this.ref.current.focus();
                 }
             }, 100);
         }
@@ -358,27 +358,29 @@ class GlobalSettings extends Component {
                                                     <span className="radio-button">{isActivePreset ? icons.circleDot : icons.circleThin}</span>
                                             }
                                             {
-                                                (enableRenaming === presetKey) ?
-                                                    // <RichText
-                                                    //     ref={this.ref}
-                                                    //     value={name}
-                                                    //     keepPlaceholderOnFocus
-                                                    //     className={'rename-preset'}
-                                                    //     placeholder={__('Add preset name')}
-                                                    //     onSplit={() =>
-                                                    //         console.log('onSplit')
-                                                    //     }
-                                                    //     __unstableOnSplitMiddle={() => alert('hello')}
-                                                    //     onChange={newValue => renameTitle(newValue, presetKey)}
-                                                    // />
-                                                    (
-                                                        <input
-                                                            ref={this.ref}
-                                                            value={name}
-                                                            type="text"
-                                                            onChange={event => renameTitle(event.target.value, presetKey)}
-                                                            placeholder={__('Add preset name')}/>
-                                                    )
+                                                (enableRenaming === presetKey) ? (
+                                                    <input
+                                                        ref={this.ref}
+                                                        value={name}
+                                                        type="text"
+                                                        className={'rename-preset'}
+                                                        placeholder={__('Add preset name')}
+                                                        onFocus={() => {
+                                                            this.ref.current.value = this.ref.current.value
+                                                        }}
+                                                        onKeyPress={event => {
+                                                            if (event.key == 'Enter') {
+                                                                console.log('only enter');
+                                                                this.ref.current.blur();
+                                                                this.setState({
+                                                                    enableRenaming: undefined
+                                                                })
+                                                            }
+                                                        }
+                                                        }
+                                                        onChange={event => renameTitle(event.target.value, presetKey)}
+                                                    />
+                                                )
                                                     :
                                                     <span className="name"> {name}</span>
                                             }
