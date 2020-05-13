@@ -48,14 +48,14 @@ export const cssBorder = (v) => {
 }
 
 // CSS Typography
-const _device = (val, selector) => {
+export const _device = (val, selector) => {
     let data = {}
     if (val && val.md) { data.md = selector.replace(new RegExp('{{key}}', "g"), val.md + (val.unit || '')) }
     if (val && val.sm) { data.sm = selector.replace(new RegExp('{{key}}', "g"), val.sm + (val.unit || '')) }
     if (val && val.xs) { data.xs = selector.replace(new RegExp('{{key}}', "g"), val.xs + (val.unit || '')) }
     return data;
 }
-const _push = (val, data) => {
+export const _push = (val, data) => {
     if (val.md) { data.md.push(val.md) }
     if (val.sm) { data.sm.push(val.sm) }
     if (val.xs) { data.xs.push(val.xs) }

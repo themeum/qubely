@@ -5,7 +5,8 @@ import icons from '../../helpers/icons';
 import {
     getGlobalSettings as getGlobalCSS,
     injectGlobalCSS,
-    updateGlobalVaribales
+    updateGlobalVaribales,
+    setTypoTitleStyle
 } from '../../helpers/globalCSS';
 
 
@@ -83,7 +84,7 @@ class GlobalSettings extends Component {
     }
     async saveGlobalCSS() {
         let _CSS = await getGlobalCSS();
-        injectGlobalCSS(_CSS);
+        injectGlobalCSS(_CSS, 'qubely-global-styles');
 
     }
 
@@ -112,7 +113,6 @@ class GlobalSettings extends Component {
     getGlobalSettings = () => {
         return fetchFromApi().then(data => {
             if (data.success) {
-                console.log('data : ', data.settings);
                 this.setState({ ...DEFAULTPRESETS, ...data.settings })
             } else {
                 this.setState({ ...DEFAULTPRESETS })
@@ -162,16 +162,16 @@ class GlobalSettings extends Component {
             showPresetSettings
         } = this.state;
 
-        if (presets[activePreset]) {
-            CssGenerator(presets[activePreset].typography, 'global-settings', 'global', false, true, false, presets[activePreset].typography)
-        }
+        // if (presets[activePreset]) {
+        //     // CssGenerator(presets[activePreset].typography, 'global-settings', 'global', false, true, false, presets[activePreset].typography)
+        // }
 
 
         const changeColor = (key, newValue, presetKey) => {
-            this.setState(({ presets }, props) => {
+            this.setState(({ presets, activePreset }, props) => {
                 let tempPresets = presets;
                 tempPresets[presetKey].colors[key] = newValue;
-                updateGlobalVaribales(tempPresets[presetKey]);
+                updateGlobalVaribales(tempPresets[activePreset]);
                 return { presets: tempPresets };
             });
         }
@@ -193,7 +193,7 @@ class GlobalSettings extends Component {
 
         const updateTypography = (addnew = false, presetKey, index, newValue) => {
 
-            this.setState(({ newTypoScope, newTypoTitle, presets }) => {
+            this.setState(({ newTypoScope, newTypoTitle, presets, activePreset }) => {
                 let tempPresets = presets;
                 if (addnew) {
                     tempPresets[presetKey].typography.push({
@@ -210,7 +210,7 @@ class GlobalSettings extends Component {
                     tempPresets[presetKey].typography[index].value = newValue;
                 }
 
-                updateGlobalVaribales(tempPresets[presetKey]);
+                updateGlobalVaribales(tempPresets[activePreset]);
                 return ({
                     presets: tempPresets,
                     newTypoTitle: null,
@@ -332,9 +332,7 @@ class GlobalSettings extends Component {
                                 { ['detailed']: showDetailedSettings },
                                 { ['renaming']: enableRenaming === presetKey }
                             )
-                            const onEnter = () => {
-                                console.log('heelo ');
-                            }
+
                             return (
                                 <div key={presetKey} className={classes}>
                                     <div className="title-wrapper">
@@ -378,7 +376,7 @@ class GlobalSettings extends Component {
                                                             ref={this.ref}
                                                             value={name}
                                                             type="text"
-                                                            onChange={newValue => renameTitle(newValue, presetKey)}
+                                                            onChange={event => renameTitle(event.target.value, presetKey)}
                                                             placeholder={__('Add preset name')}/>
                                                     )
                                                     :
@@ -480,6 +478,7 @@ class GlobalSettings extends Component {
                                                             let titleClasses = classnames(
                                                                 'typo-name',
                                                                 `tag-${Tag}`,
+                                                                `index-${index + 1}`,
                                                                 { ['active']: displaySettings }
                                                             )
                                                             return (
@@ -580,6 +579,11 @@ class GlobalSettings extends Component {
         if ((isSavingPost() || isPreviewingPost() || isPublishingPost()) && !isAutosavingPost()) {
             this.updateGlobalSettings();
         }
+        if (typeof showPresetSettings !== 'undefined') {
+            const detailedPreset = Object.keys(presets)[showPresetSettings];
+            setTypoTitleStyle(presets[detailedPreset].typography);
+        }
+
         return (
             <Fragment>
                 <PluginSidebar
