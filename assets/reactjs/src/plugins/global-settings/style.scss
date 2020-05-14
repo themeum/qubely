@@ -85,7 +85,8 @@
                 input:focus{
                     outline: none;
                     border: none;
-                    background-color: #f8f8f8;
+                    background-color: transparent;
+                    box-shadow: none;
                 }
                 .rename-preset {
                     cursor: text;
