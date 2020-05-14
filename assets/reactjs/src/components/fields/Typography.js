@@ -37,7 +37,8 @@ class Typography extends Component {
             if (data.success) {
                 const { presets, activePreset } = data.settings;
                 let options = [], values = [];
-                presets[activePreset].typography.filter((value) => (value.scope === scope)).forEach(({ name, value }, index) => {
+                // presets[activePreset].typography.filter((value) => (value.scope === scope)).forEach(({ name, value }, index) => {
+                presets[activePreset].typography.forEach(({ name, value }, index) => {
                     options.push({ label: name, value: index + 1 })
                     values.push(value)
                 });

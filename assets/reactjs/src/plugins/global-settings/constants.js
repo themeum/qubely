@@ -188,6 +188,34 @@ export const DEFAULTPRESETS = {
                     value: {
                         openTypography: 1,
                     }
+                },
+                {
+                    name: "Paragraph #1",
+                    scope: 'p',
+                    value: {
+                        openTypography: 1,
+                    }
+                },
+                {
+                    name: "Paragraph #2",
+                    scope: 'p',
+                    value: {
+                        openTypography: 1,
+                    }
+                },
+                {
+                    name: "Button #1",
+                    scope: 'button',
+                    value: {
+                        openTypography: 1,
+                    }
+                },
+                {
+                    name: "Button #2",
+                    scope: 'button',
+                    value: {
+                        openTypography: 1,
+                    }
                 }
             ],
         },
