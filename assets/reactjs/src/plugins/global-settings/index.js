@@ -141,16 +141,6 @@ class GlobalSettings extends Component {
         })
     }
 
-    delGlobalSettings = () => {
-        wp.apiFetch({
-            path: PATH,
-            method: 'POST',
-            data: { settings: JSON.stringify({ 'delete': true }) }
-        }).then(data => {
-            console.log('data : ', data);
-            return data;
-        })
-    }
 
     render() {
         const {
@@ -367,7 +357,6 @@ class GlobalSettings extends Component {
                                                         }}
                                                         onKeyPress={event => {
                                                             if (event.key == 'Enter') {
-                                                                console.log('only enter');
                                                                 this.ref.current.blur();
                                                                 this.setState({
                                                                     enableRenaming: undefined
