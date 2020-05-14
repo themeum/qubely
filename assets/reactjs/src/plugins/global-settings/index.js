@@ -113,7 +113,8 @@ class GlobalSettings extends Component {
     getGlobalSettings = () => {
         return fetchFromApi().then(data => {
             if (data.success) {
-                this.setState({ ...DEFAULTPRESETS, ...data.settings })
+                this.setState({ ...DEFAULTPRESETS, ...data.settings });
+                localStorage.setItem('qubely-global-settings', JSON.stringify({ ...DEFAULTPRESETS, ...data.settings }))
             } else {
                 this.setState({ ...DEFAULTPRESETS })
             }
@@ -161,10 +162,6 @@ class GlobalSettings extends Component {
             showTypoSettings,
             showPresetSettings
         } = this.state;
-
-        // if (presets[activePreset]) {
-        //     // CssGenerator(presets[activePreset].typography, 'global-settings', 'global', false, true, false, presets[activePreset].typography)
-        // }
 
 
         const changeColor = (key, newValue, presetKey) => {
@@ -585,7 +582,7 @@ class GlobalSettings extends Component {
             const detailedPreset = Object.keys(presets)[showPresetSettings];
             setTypoTitleStyle(presets[detailedPreset].typography);
         }
-
+        localStorage.setItem('qubely-global-settings', JSON.stringify(presets[activePreset]))
         return (
             <Fragment>
                 <PluginSidebar

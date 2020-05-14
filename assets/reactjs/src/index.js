@@ -68,7 +68,7 @@ import './plugins';
 
 // Global Settings
 import './blocks/pagesettings'
-import './customizer'
+
 
 window.qubelyDevice = 'md'
 window.bindCss = false

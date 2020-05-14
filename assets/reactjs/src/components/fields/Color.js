@@ -13,49 +13,22 @@ const {
     ColorPicker,
 } = wp.components;
 
-
-async function fetchFromApi() {
-    return await wp.apiFetch({ path: '/qubely/v1/global_settings' })
-}
+const { createHigherOrderComponent } = wp.compose;
 
 class Color extends Component {
     constructor(props) {
         super(props)
         this.state = {
             current: 'date',
-            globalColors: []
-
         }
     }
 
-    componentDidMount() {
-        fetchFromApi().
-            then(data => {
-                if (data.success) {
-                    const {
-                        settings: {
-                            presets,
-                            activePreset
-                        }
-                    } = data;
-                    // console.log('data : ', data);
-                    this.setState({
-                        globalColors: presets[activePreset].colors
-                    })
-                } else {
-                    this.setState({
-                        globalColors: qubely_admin.palette
-                    })
-                }
-
-            })
-    }
 
     render() {
 
         const {
             globalColors
-        } = this.state;
+        } = this.props;
 
         const {
             value,
@@ -104,7 +77,6 @@ class Color extends Component {
                             />
                             {!disablePalette &&
                                 <div className="qubely-rgba-palette">
-                                    {/* {globalColors.map(color => <button style={{ color: color }} onClick={() => onChange(color)} />)} */}
                                     {globalColors.map((color, index) => <button style={{ color: `var(--qubely-color-${index + 1})` }} onClick={() => onChange(`var(--qubely-color-${index + 1})`)} />)}
                                 </div>
                             }
@@ -122,4 +94,43 @@ class Color extends Component {
         );
     }
 }
-export default Color;
+
+function withGLobalColor(initialState = {}) {
+    return createHigherOrderComponent((OriginalComponent) => {
+        return class WrappedComponent extends Component {
+            constructor() {
+                super(...arguments);
+
+                this.setState = this.setState.bind(this);
+
+                this.state = initialState;
+            }
+            componentDidMount() {
+                this.getGlobalSettings();
+
+            }
+            getGlobalSettings = async () => {
+                let qubelyGlobalSettings = await JSON.parse(localStorage.getItem('qubely-global-settings'));
+                const { colors } = qubelyGlobalSettings;
+                if (typeof colors !== 'undefined') {
+                    this.setState({
+                        globalColors:colors
+                    });
+                }
+
+            }
+
+            render() {
+                return (
+                    <OriginalComponent
+                        {...this.props}
+                        {...this.state}
+                        setState={this.setState}
+                    />
+                );
+            }
+        };
+    }, 'withGLobalColor');
+}
+
+export default withGLobalColor()(Color);

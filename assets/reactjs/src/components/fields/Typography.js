@@ -8,12 +8,8 @@ import ButtonGroup from './ButtonGroup';
 import FontList from "./assets/FontList";
 const { Component, Fragment } = wp.element;
 const { Dropdown, Tooltip, SelectControl } = wp.components;
+const { createHigherOrderComponent } = wp.compose;
 
-const PATH = '/qubely/v1/global_settings';
-
-async function fetchFromApi() {
-    return await wp.apiFetch({ path: PATH })
-}
 
 class Typography extends Component {
     constructor(props) {
@@ -28,28 +24,6 @@ class Typography extends Component {
     }
     async  componentDidMount() {
         document.addEventListener('mousedown', this.handleClickOutside);
-        await this.getGlobalSettings();
-
-    }
-    getGlobalSettings = () => {
-        const { scope = 'others' } = this.props;
-        return fetchFromApi().then(data => {
-            if (data.success) {
-                const { presets, activePreset } = data.settings;
-                let options = [], values = [];
-                // presets[activePreset].typography.filter((value) => (value.scope === scope)).forEach(({ name, value }, index) => {
-                presets[activePreset].typography.forEach(({ name, value }, index) => {
-                    options.push({ label: name, value: index + 1 })
-                    values.push(value)
-                });
-                this.setState({
-                    globalTypoOptions: [{ label: 'None', value: 'none' }, ...options],
-                    globalTypoValues: values,
-                })
-            } else {
-                console.log('error : ', data);
-            }
-        });
     }
     componentWillUnmount() {
         document.removeEventListener('mousedown', this.handleClickOutside);
@@ -95,7 +69,10 @@ class Typography extends Component {
             if (type == 'family' && val) {
                 val = { [type]: val, type: (FontList.filter(o => { return o.n == val })[0].f) }
             } else {
-                val = { [type]: val }
+                val = {
+                    [type]: val,
+                    ...(type === 'globalSource' && { activeSource: 'global' })
+                }
             }
             this.props.onChange(Object.assign({}, prevValue, val))
         }
@@ -142,15 +119,15 @@ class Typography extends Component {
             device,
             globalSource,
             globalSettings,
-            onDeviceChange
+            onDeviceChange,
+            globalTypoOptions,
+            globalTypoValues
         } = this.props;
 
         const {
             filterText,
             showFontFamiles,
             showFontWeights,
-            globalTypoOptions,
-            globalTypoValues
         } = this.state;
 
         let qubelyFonts = JSON.parse(localStorage.getItem('qubelyFonts'));
@@ -168,7 +145,6 @@ class Typography extends Component {
                 item.n.toLowerCase().search(filterText.toLowerCase()) !== -1
             )
         }
-
         return (
             <div className="qubely-field qubely-field-typography">
                 {
@@ -206,7 +182,7 @@ class Typography extends Component {
                         }
 
                         {
-                            (value.activeSource === 'global' && !globalSettings) ?
+                            ((value.activeSource === 'global' || typeof value.activeSource === 'undefined') && !globalSettings) ?
                                 <SelectControl
                                     label="Size"
                                     value={typeof value.globalSource !== 'undefined' ? value.globalSource : 'none'}
@@ -387,4 +363,70 @@ class Typography extends Component {
         )
     }
 }
-export default Typography
+
+function withGLobalTypography(initialState = {}) {
+    return createHigherOrderComponent((OriginalComponent) => {
+        return class WrappedComponent extends Component {
+            constructor() {
+                super(...arguments);
+
+                this.setState = this.setState.bind(this);
+
+                this.state = initialState;
+            }
+            componentDidMount() {
+                this.getGlobalSettings();
+
+            }
+            getGlobalSettings = async () => {
+                let qubelyGlobalSettings = await JSON.parse(localStorage.getItem('qubely-global-settings'));
+                const { typography } = qubelyGlobalSettings;
+                let options = [], values = [];
+                if (typeof typography !== 'undefined') {
+                    typography.forEach(({ name, value }, index) => {
+                        options.push({ label: name, value: index + 1 });
+                        values.push(value);
+                    });
+                    this.setState({
+                        globalTypoOptions: [{ label: 'None', value: 'none' }, ...options],
+                        globalTypoValues: values
+                    });
+                }
+
+            }
+
+            render() {
+                return (
+                    <OriginalComponent
+                        {...this.props}
+                        {...this.state}
+                        setState={this.setState}
+                    />
+                );
+            }
+        };
+    }, 'withGLobalTypography');
+}
+
+export default withGLobalTypography()(Typography);
+
+// getGlobalSettings = () => {
+//     const { scope = 'others' } = this.props;
+//     return fetchFromApi().then(data => {
+//         if (data.success) {
+//             const { presets, activePreset } = data.settings;
+//             let options = [], values = [];
+//             // presets[activePreset].typography.filter((value) => (value.scope === scope)).forEach(({ name, value }, index) => {
+//             presets[activePreset].typography.forEach(({ name, value }, index) => {
+//                 options.push({ label: name, value: index + 1 })
+//                 values.push(value)
+//             });
+//             this.setState({
+//                 globalTypoOptions: [{ label: 'None', value: 'none' }, ...options],
+//                 globalTypoValues: values,
+//             })
+//         } else {
+//             console.log('error : ', data);
+//         }
+//     });
+// }
