@@ -117,6 +117,7 @@ class Typography extends Component {
             value,
             label,
             device,
+            typography,
             globalSource,
             globalSettings,
             onDeviceChange,
@@ -388,7 +389,8 @@ function withGLobalTypography(initialState = {}) {
                         values.push(value);
                     });
                     this.setState({
-                        globalTypoOptions: [{ label: 'None', value: 'none' }, ...options],
+                        typography:typography,
+                        globalTypoOptions: [{ label: 'Block Default', value: 'none' }, ...options],
                         globalTypoValues: values
                     });
                 }
