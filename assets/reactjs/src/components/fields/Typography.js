@@ -145,7 +145,7 @@ class Typography extends Component {
                 item.n.toLowerCase().search(filterText.toLowerCase()) !== -1
             )
         }
-        console.log('value : ', value);
+
         return (
             <div className="qubely-field qubely-field-typography">
                 {
@@ -171,10 +171,8 @@ class Typography extends Component {
                                 }
                                 value={typeof value.activeSource !== 'undefined' ? value.activeSource : 'custom'}
                                 onChange={newSource => {
-                                    console.log('current value : ', value);
                                     if (newSource === 'custom') {
                                         if (typeof value.globalSource === 'undefined' || typeof value.activeSource === 'undefined') {
-                                            console.log('one');
                                             this.props.onChange(
                                                 {
                                                     ...value,
@@ -182,23 +180,22 @@ class Typography extends Component {
                                                 }
                                             );
                                         } else if (typeof value.globalSource !== 'undefined' && value.globalSource !== 'none') {
-                                            console.log('two');
                                             this.props.onChange(
                                                 {
                                                     ...globalTypoValues[value.globalSource - 1],
                                                     activeSource: newSource,
                                                     globalSource: value.globalSource,
+                                                    blockDefaultValues: value.blockDefaultValues
                                                 }
                                             );
                                         } else if (typeof value.globalSource !== 'undefined' && value.globalSource === 'none') {
-                                            console.log('three');
-                                            console.log(value.blockDefaultValues);
                                             this.props.onChange(
                                                 {
                                                     openTypography: true,
                                                     globalSource: 'none',
                                                     activeSource: 'custom',
                                                     ...value.blockDefaultValues,
+                                                    blockDefaultValues: value.blockDefaultValues
                                                 }
                                             );
                                         }
@@ -208,6 +205,7 @@ class Typography extends Component {
                                             openTypography: true,
                                             activeSource: 'global',
                                             globalSource: typeof value.globalSource === 'undefined' ? 'none' : value.globalSource,
+                                            blockDefaultValues : value.blockDefaultValues
                                         }
 
                                         if ((typeof value.activeSource === 'undefined' || value.activeSource === 'custom') && (value.globalSource === 'none' || typeof value.globalSource === 'undefined')) {
@@ -217,7 +215,6 @@ class Typography extends Component {
                                             delete tempBlockDefaults.blockDefaultValues;
                                             newValue.blockDefaultValues = tempBlockDefaults;
                                         }
-                                        console.log('newValue : ', newValue);
                                         this.props.onChange(newValue);
                                     }
                                 }
@@ -233,7 +230,6 @@ class Typography extends Component {
                                     options={globalTypoOptions}
                                     onChange={newValue => {
                                         if (newValue === 'none' && value.globalSource !== 'none') {
-                                            console.log('hola');
                                             const temp = {
                                                 openTypography: true,
                                                 activeSource: 'global',
