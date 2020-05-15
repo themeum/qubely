@@ -127,7 +127,7 @@
                 cursor: pointer;
                 border-radius: 5px;
                 border: 1px solid transparent;
-                > .name {
+                > * {
                     padding: 5px 10px;
                 }
                 > p {
@@ -158,20 +158,13 @@
                     border-bottom-left-radius: 0px;
                     border-bottom-right-radius: 0px;
                 }
-                h1,
-                h2,
-                h3,
-                h4,
-                h5,
-                h6 {
-                    margin: 0;
-                    line-height: 1.2;
-                    color: #2a2a2a;
-                }
                 > * {
                     text-overflow: ellipsis;
                     overflow: hidden;
                     white-space: nowrap;
+                    line-height: 1.2;
+                    margin: 0;
+                    color: #2a2a2a;
                 }
                 h1 {
                     font-size: 48px;
@@ -220,10 +213,8 @@
                 &.tag-button {
                     margin-top: 9px;
                     button {
-                        padding: 0;
                         border: none;
                         background: none;
-                        //line-height: 28px;
                     }
                 }
                 .components-dropdown.options {
