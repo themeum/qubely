@@ -82,7 +82,7 @@
                     align-items: center;
                     justify-content: center;
                 }
-                input:focus{
+                input:focus {
                     outline: none;
                     border: none;
                     background-color: transparent;
@@ -117,32 +117,40 @@
             .typo-name {
                 position: relative;
                 display: block !important;
-                padding: 5px 10px;
+                &.active {
+                    display: flex !important;
+                    align-items: center;
+                    justify-content: space-between;
+                }
+
                 color: black;
                 cursor: pointer;
                 border-radius: 5px;
                 border: 1px solid transparent;
-                .delete-typo {
-                    position: absolute;
-                    top: -7px;
-                    right: -6px;
-                    visibility: hidden;
-                    opacity: 0;
-                    cursor: pointer;
-                    svg {
-                        transform: rotate(45deg);
-                        fill: #000;
+                > .name {
+                    padding: 5px 10px;
+                }
+                > p {
+                    width: 80%;
+                    max-width: 80%;
+                }
+                input {
+                    display: inline-block;
+                    &:focus {
+                        outline: none;
+                        border: none;
+                        background-color: transparent;
+                        box-shadow: none;
                     }
+                }
+                .rename-typo {
+                    cursor: text;
+                    border: none;
+                    display: inline-block;
                 }
                 &:hover {
                     border-color: #dbdfe4;
                     background-color: #f8f8f8;
-                    .delete-typo {
-                        visibility: visible;
-                        opacity: 1;
-                        z-index: 100;
-                        transition: 0.15s ease all;
-                    }
                 }
                 &.active {
                     border-color: #dbdfe4;
@@ -161,7 +169,7 @@
                     text-overflow: ellipsis;
                     overflow: hidden;
                     white-space: nowrap;
-                    color: #2A2A2A;
+                    color: #2a2a2a;
                 }
                 h1 {
                     font-size: 48px;
@@ -216,6 +224,9 @@
                         //line-height: 28px;
                     }
                 }
+                .components-dropdown.options {
+                    padding: 0px 10px;
+                }
             }
             &.typography {
                 margin: 0;
@@ -262,7 +273,7 @@
                 height: 11px;
                 width: 11px;
                 display: block;
-                color: #9B9B9B;
+                color: #9b9b9b;
                 font-size: 8px;
                 text-align: center;
                 line-height: 11.5px;
@@ -270,8 +281,8 @@
                 box-shadow: -1px 1px 2px 0 rgba(#000, 0.15);
                 opacity: 0;
                 transition: 0.15s ease all;
-                &:hover{
-                    color: #2184F9;
+                &:hover {
+                    color: #2184f9;
                 }
             }
             &:hover {
