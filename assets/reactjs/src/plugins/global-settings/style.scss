@@ -166,10 +166,12 @@
                 h6 {
                     margin: 0;
                     line-height: 1.2;
+                    color: #2a2a2a;
+                }
+                > * {
                     text-overflow: ellipsis;
                     overflow: hidden;
                     white-space: nowrap;
-                    color: #2a2a2a;
                 }
                 h1 {
                     font-size: 48px;
