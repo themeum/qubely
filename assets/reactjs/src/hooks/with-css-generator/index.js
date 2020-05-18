@@ -202,6 +202,12 @@ export default function withCSSGenerator() {
                                     }
                                 }
 
+                                if (key === 'Object'
+                                    && attributes[attribute].openTypography
+                                    && attributes[attribute].activeSource === 'global'
+                                    && attributes[attribute].globalSource === 'none') {
+                                    newState.responsiveCSS[attribute] = {}
+                                }
                             }
                             changedAttributes.forEach(changedAttribute => {
                                 updateCSS(blockAttributes, attributes, (attribute, key, value) => updateState(attribute, key, value), changedAttribute);

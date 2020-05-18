@@ -145,7 +145,6 @@ class Typography extends Component {
                 item.n.toLowerCase().search(filterText.toLowerCase()) !== -1
             )
         }
-
         return (
             <div className="qubely-field qubely-field-typography">
                 {
@@ -205,7 +204,7 @@ class Typography extends Component {
                                             openTypography: true,
                                             activeSource: 'global',
                                             globalSource: typeof value.globalSource === 'undefined' ? 'none' : value.globalSource,
-                                            blockDefaultValues : value.blockDefaultValues
+                                            blockDefaultValues: value.blockDefaultValues
                                         }
 
                                         if ((typeof value.activeSource === 'undefined' || value.activeSource === 'custom') && (value.globalSource === 'none' || typeof value.globalSource === 'undefined')) {
