@@ -62,7 +62,7 @@ const _push = (val, data) => {
     return data;
 }
 
-const globalTypography = () => {
+const globalTypography = (selectedTypo) => {
 
     let CSS = '{';
     CSS += `font-family:var(--qubely-typo${selectedTypo}-font-family);`;
@@ -86,7 +86,7 @@ export const cssTypography = (v) => {
     } = v;
 
     if (typeof activeSource !== 'undefined' && activeSource === 'global' && globalSource !== 'none') {
-        return globalTypography();
+        return globalTypography(globalSource);
     } else if (activeSource === 'global' && globalSource === 'none') {
         return {}
     }
