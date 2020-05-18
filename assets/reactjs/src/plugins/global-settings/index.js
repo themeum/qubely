@@ -595,7 +595,7 @@ class GlobalSettings extends Component {
         }
         if (typeof showPresetSettings !== 'undefined') {
             const detailedPreset = Object.keys(presets)[showPresetSettings];
-            setTypoTitleStyle(presets[detailedPreset].typography);
+            typeof presets[detailedPreset] !== 'undefined' && setTypoTitleStyle(presets[detailedPreset].typography);
         }
         localStorage.setItem('qubely-global-settings', JSON.stringify(presets[activePreset]))
         return (
