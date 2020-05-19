@@ -130,10 +130,6 @@
                 > * {
                     padding: 5px 10px;
                 }
-                > p {
-                    width: 80%;
-                    max-width: 80%;
-                }
                 input {
                     display: inline-block;
                     &:focus {
@@ -162,53 +158,56 @@
                     text-overflow: ellipsis;
                     overflow: hidden;
                     white-space: nowrap;
-                    line-height: 1.2;
+                    line-height: 22px;
                     margin: 0;
                     color: #2a2a2a;
                     display: block;
-                    width: 100%;
                     text-align: left;
+                    &:first-child {
+                        flex-grow: 1;
+                    }
                 }
                 h1 {
                     font-size: 48px;
-                    //line-height: 63px;
+                    line-height: 63px;
                 }
                 h2 {
                     font-size: 36px;
-                    //line-height: 48px;
+                    line-height: 48px;
                 }
 
                 &.tag-h3 {
                     margin-top: 3px;
                     h3 {
                         font-size: 32px;
-                        //line-height: 43px;
+                        line-height: 43px;
                     }
                 }
                 &.tag-h4 {
                     margin-top: 5px;
                     h4 {
                         font-size: 28px;
-                        //line-height: 37px;
+                        line-height: 37px;
                     }
                 }
                 &.tag-h5 {
                     margin-top: 7px;
                     h5 {
                         font-size: 24px;
-                        //line-height: 32px;
+                        line-height: 32px;
                     }
                 }
                 &.tag-h6 {
                     margin-top: 9px;
                     h6 {
                         font-size: 21px;
-                        //line-height: 28px;
+                        line-height: 28px;
                     }
                 }
                 &.tag-p {
                     margin-top: 9px;
                     p {
+                        width: 100%;
                         margin: 0;
                         //line-height: 28px;
                     }
@@ -218,10 +217,18 @@
                     button {
                         border: none;
                         background: none;
+                        width: 100%;
+                        &:focus {
+                            outline: none;
+                        }
                     }
                 }
                 .components-dropdown.options {
                     padding: 0px 10px;
+                    .icon {
+                        display: flex;
+                        align-items: center;
+                    }
                 }
             }
             &.typography {
@@ -327,6 +334,7 @@
 
 .global-settings.preset-options .components-popover__content {
     min-width: 110px;
+    padding: 0;
     .global-preset-options {
         padding: 10px 15px;
         > div {

@@ -46,12 +46,14 @@ const addTypo = (value, index) => {
             xs: []
         };
 
+    /*
     if (value.size) {
         data = _appendVariables(generateVariables(value.size, `.typo-name.index-${index + 1}>*{font-size:{{key}} !important;}`), data);
     }
     if (value.height) {
         data = _appendVariables(generateVariables(value.height, `.typo-name.index-${index + 1}>*{line-height:{{key}} !important;}`), data)
     }
+    */
     if (value.spacing) {
         data = _appendVariables(generateVariables(value.spacing, `.typo-name.index-${index + 1}>*{letter-spacing:{{key}} !important;}`), data)
     }
