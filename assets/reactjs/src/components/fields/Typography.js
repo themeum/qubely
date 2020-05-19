@@ -433,6 +433,7 @@ function withGLobalTypography(initialState = {}) {
             getGlobalSettings = async () => {
                 let qubelyGlobalSettings = await JSON.parse(localStorage.getItem('qubely-global-settings'));
                 const { typography } = qubelyGlobalSettings;
+                console.log('typography : ',typography);
                 let options = [], values = [];
                 if (typeof typography !== 'undefined') {
                     typography.forEach(({ name, value }, index) => {

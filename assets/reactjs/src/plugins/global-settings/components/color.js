@@ -2,11 +2,13 @@
 import classNames from 'classnames';
 import '../../../components/css/color.scss';
 import icons from '../../../helpers/icons';
+const { __ } = wp.i18n;
 const {
     useState,
 } = wp.element;
 
 const {
+    Tooltip,
     Dropdown,
     ColorPicker,
 } = wp.components;
@@ -24,7 +26,8 @@ export default function Color({ value, onChange, className, deleteOption, onDele
     let containerClasses = classNames(
         className,
         'qubely-color-picker-container',
-        { ['qubely-global']: addNewColor }
+        { ['qubely-global']: addNewColor },
+        { ['add-new-color']: addNewColor },
     )
     return (
         <div className={classes}>
@@ -34,25 +37,25 @@ export default function Color({ value, onChange, className, deleteOption, onDele
                 className="qubely-ml-auto"
                 renderToggle={({ isOpen, onToggle }) => (
                     <span className={containerClasses}>
-                        <span
-                            isPrimary
-                            aria-expanded={isOpen}
-                            className="qubely-color-picker"
-                            style={{ backgroundColor: (!addNewColor && value) ? value : 'transparent' }}
-                            onClick={() => {
-                                if (addNewColor) {
-                                    addNew();
-                                }
-                                onToggle()
-                            }}
-                        >
-                            {addNewColor && icons.plus}
-                        </span>
+                        <Tooltip text={__("Add new Color")}>
+                            <span
+                                isPrimary
+                                aria-expanded={isOpen}
+                                className="qubely-color-picker"
+                                style={{ backgroundColor: (!addNewColor && value) ? value : 'transparent' }}
+                                onClick={() => {
+                                    if (addNewColor) {
+                                        addNew();
+                                    }
+                                    onToggle()
+                                }}
+                            >
+                                {addNewColor && icons.addColor}
+                            </span>
+                        </Tooltip>
                         {
                             deleteOption &&
-                            <span className="delete fas fa-times" onClick={() => onDelete()} >
-                                {/*{icons.delete}*/}
-                            </span>
+                            <span className="delete fas fa-times" onClick={() => onDelete()} />
                         }
                     </span>
                 )}
