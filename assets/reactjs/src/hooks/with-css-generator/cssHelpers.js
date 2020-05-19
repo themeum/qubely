@@ -65,12 +65,10 @@ const _push = (val, data) => {
 const globalTypography = (selectedTypo) => {
 
     let CSS = '{';
-    if (selectedTypo !== 'none') {
-        CSS += `font-family:var(--qubely-typo${selectedTypo}-font-family);`;
-        CSS += `font-size:var(--qubely-typo${selectedTypo}-font-size);`;
-        CSS += `font-weight:var(--qubely-typo${selectedTypo}-font-weight);`;
-        CSS += `text-transform:var(--qubely-typo${selectedTypo}-text-transform);`;
-    }
+    CSS += `font-family:var(--qubely-typo${selectedTypo}-font-family);`;
+    CSS += `font-size:var(--qubely-typo${selectedTypo}-font-size);`;
+    CSS += `font-weight:var(--qubely-typo${selectedTypo}-font-weight);`;
+    CSS += `text-transform:var(--qubely-typo${selectedTypo}-text-transform);`;
     CSS += '}';
     return CSS;
 
@@ -87,8 +85,10 @@ export const cssTypography = (v) => {
 
     } = v;
 
-    if (typeof activeSource !== 'undefined' && activeSource === 'global') {
+    if (typeof activeSource !== 'undefined' && activeSource === 'global' && globalSource !== 'none') {
         return globalTypography(globalSource);
+    } else if (activeSource === 'global' && globalSource === 'none') {
+        return {}
     }
 
     let font = ''

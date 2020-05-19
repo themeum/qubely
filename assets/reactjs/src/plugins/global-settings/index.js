@@ -409,12 +409,12 @@ class GlobalSettings extends Component {
                                                 )
                                                 return (
                                                     <div className="global-preset-options">
+                                                        <div className={activeClass} {...(!isActivePreset && { onClick: () => { changePreset(key); onToggle() } })} >Activate</div>
                                                         {
                                                             showDetailedSettings ?
                                                                 <div onClick={() => { addNewPreset(presetKey, 'saveAs'), onToggle() }}>Save as New</div>
                                                                 :
                                                                 <Fragment>
-                                                                    <div className={activeClass} {...(!isActivePreset && { onClick: () => { changePreset(key); onToggle() } })} >Activate</div>
                                                                     <div
                                                                         onClick={() => {
                                                                             this.setState({
@@ -595,7 +595,7 @@ class GlobalSettings extends Component {
         }
         if (typeof showPresetSettings !== 'undefined') {
             const detailedPreset = Object.keys(presets)[showPresetSettings];
-            setTypoTitleStyle(presets[detailedPreset].typography);
+            typeof presets[detailedPreset] !== 'undefined' && setTypoTitleStyle(presets[detailedPreset].typography);
         }
         localStorage.setItem('qubely-global-settings', JSON.stringify(presets[activePreset]))
         return (

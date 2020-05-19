@@ -168,26 +168,78 @@ class Typography extends Component {
                                         [__('Custom'), 'custom']
                                     ]
                                 }
-                                value={typeof value.activeSource !== 'undefined' ? value.activeSource : 'global'}
+                                value={typeof value.activeSource !== 'undefined' ? value.activeSource : 'custom'}
                                 onChange={newSource => {
                                     if (newSource === 'custom') {
-                                        if (typeof value.globalSource !== 'undefined' && value.globalSource !== 'none') {
-                                            this.props.onChange(Object.assign({}, this.props.value, globalTypoValues[value.globalSource - 1], { 'activeSource': newSource }))
+                                        if (typeof value.globalSource === 'undefined' || typeof value.activeSource === 'undefined') {
+                                            this.props.onChange(
+                                                {
+                                                    ...value,
+                                                    activeSource: newSource,
+                                                }
+                                            );
+                                        } else if (typeof value.globalSource !== 'undefined' && value.globalSource !== 'none') {
+                                            this.props.onChange(
+                                                {
+                                                    ...globalTypoValues[value.globalSource - 1],
+                                                    activeSource: newSource,
+                                                    globalSource: value.globalSource,
+                                                    blockDefaultValues: value.blockDefaultValues
+                                                }
+                                            );
+                                        } else if (typeof value.globalSource !== 'undefined' && value.globalSource === 'none') {
+                                            this.props.onChange(
+                                                {
+                                                    openTypography: true,
+                                                    globalSource: 'none',
+                                                    activeSource: 'custom',
+                                                    ...value.blockDefaultValues,
+                                                    blockDefaultValues: value.blockDefaultValues
+                                                }
+                                            );
                                         }
                                     } else {
-                                        this.setSettings('activeSource', newSource);
+                                        let tempBlockDefaults;
+                                        const newValue = {
+                                            openTypography: true,
+                                            activeSource: 'global',
+                                            globalSource: typeof value.globalSource === 'undefined' ? 'none' : value.globalSource,
+                                            blockDefaultValues: value.blockDefaultValues
+                                        }
+
+                                        if ((typeof value.activeSource === 'undefined' || value.activeSource === 'custom') && (value.globalSource === 'none' || typeof value.globalSource === 'undefined')) {
+                                            tempBlockDefaults = JSON.parse(JSON.stringify(value));
+                                            delete tempBlockDefaults.activeSource;
+                                            delete tempBlockDefaults.globalSource;
+                                            delete tempBlockDefaults.blockDefaultValues;
+                                            newValue.blockDefaultValues = tempBlockDefaults;
+                                        }
+                                        this.props.onChange(newValue);
                                     }
-                                }}
+                                }
+                                }
                             />
                         }
 
                         {
-                            ((value.activeSource === 'global' || typeof value.activeSource === 'undefined') && !globalSettings) ?
+                            ((value.activeSource === 'global') && !globalSettings) ?
                                 <SelectControl
                                     label="Size"
                                     value={typeof value.globalSource !== 'undefined' ? value.globalSource : 'none'}
                                     options={globalTypoOptions}
-                                    onChange={value => { this.setSettings('globalSource', value); }}
+                                    onChange={newValue => {
+                                        if (newValue === 'none' && value.globalSource !== 'none') {
+                                            const temp = {
+                                                openTypography: true,
+                                                activeSource: 'global',
+                                                globalSource: newValue,
+                                                blockDefaultValues: value.blockDefaultValues
+                                            }
+                                            this.props.onChange(temp);
+                                        } else {
+                                            this.setSettings('globalSource', newValue);
+                                        }
+                                    }}
                                 />
                                 :
                                 <Fragment>
@@ -388,7 +440,8 @@ function withGLobalTypography(initialState = {}) {
                         values.push(value);
                     });
                     this.setState({
-                        globalTypoOptions: [{ label: 'None', value: 'none' }, ...options],
+                        typography: typography,
+                        globalTypoOptions: [{ label: 'Theme', value: 'none' }, ...options],
                         globalTypoValues: values
                     });
                 }
@@ -409,24 +462,3 @@ function withGLobalTypography(initialState = {}) {
 }
 
 export default withGLobalTypography()(Typography);
-
-// getGlobalSettings = () => {
-//     const { scope = 'others' } = this.props;
-//     return fetchFromApi().then(data => {
-//         if (data.success) {
-//             const { presets, activePreset } = data.settings;
-//             let options = [], values = [];
-//             // presets[activePreset].typography.filter((value) => (value.scope === scope)).forEach(({ name, value }, index) => {
-//             presets[activePreset].typography.forEach(({ name, value }, index) => {
-//                 options.push({ label: name, value: index + 1 })
-//                 values.push(value)
-//             });
-//             this.setState({
-//                 globalTypoOptions: [{ label: 'None', value: 'none' }, ...options],
-//                 globalTypoValues: values,
-//             })
-//         } else {
-//             console.log('error : ', data);
-//         }
-//     });
-// }
