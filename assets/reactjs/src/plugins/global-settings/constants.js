@@ -87,8 +87,8 @@ export const DEFAULTPRESETS = {
                             md: "0",
                             xs: "0"
                         },
-                        type: "sans-serif"
-
+                        type: "sans-serif",
+                        transform: "uppercase"
                     }
                 },
                 {
@@ -110,7 +110,8 @@ export const DEFAULTPRESETS = {
                             md: "0",
                             xs: "0"
                         },
-                        type: "sans-serif"
+                        type: "sans-serif",
+                        transform: "uppercase"
                     }
                 },
                 {

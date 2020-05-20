@@ -99,7 +99,7 @@ export const setTypoTitleStyle = (typos) => {
 
     let __CSS = '';
     typos.forEach((typo, index) => {
-        let tempCSS= addTypo(typo.value, index)
+        let tempCSS = addTypo(typo.value, index)
         __CSS += tempCSS;
     });
     injectGlobalCSS(__CSS, 'qubely-global-panel')
@@ -145,7 +145,13 @@ const appendTypoVariable = (value, index) => {
         nonResponsiveProps += `--qubely-typo${index + 1}-font-family:'${value.family}',${value.type};`;
     }
     if (value.weight) {
-        nonResponsiveProps += `--qubely-typo${index + 1}-font-weight:${value.weight};`;
+        if (typeof value.weight === 'string') {
+            nonResponsiveProps += `--qubely-typo${index + 1}-font-weight:${value.weight.slice(0, -1)};`;
+            nonResponsiveProps += `--qubely-typo${index + 1}-font-style:italic;`;
+        } else {
+            nonResponsiveProps += `--qubely-typo${index + 1}-font-weight:${value.weight};`;
+            nonResponsiveProps += `--qubely-typo${index + 1}-font-style:normal;`;
+        }
     }
     if (value.transform) {
         nonResponsiveProps += `--qubely-typo${index + 1}-text-transform:${value.transform};`;

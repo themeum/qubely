@@ -68,6 +68,7 @@ const globalTypography = (selectedTypo) => {
     CSS += `font-family:var(--qubely-typo${selectedTypo}-font-family);`;
     CSS += `font-size:var(--qubely-typo${selectedTypo}-font-size);`;
     CSS += `font-weight:var(--qubely-typo${selectedTypo}-font-weight) !important;`;
+    CSS += `font-style:var(--qubely-typo${selectedTypo}-font-style) !important;`;
     CSS += `line-height:var(--qubely-typo${selectedTypo}-line-height) !important;`;
     CSS += `letter-spacing:var(--qubely-typo${selectedTypo}-letter-spacing);`;
     CSS += `text-transform:var(--qubely-typo${selectedTypo}-text-transform);`;
@@ -115,7 +116,13 @@ export const cssTypography = (v) => {
         simple += `font-family:'${v.family}',${v.type};`;
     }
     if (weight) {
-        simple += `font-weight:${v.weight};`;
+        if (typeof weight === 'string') {
+            simple += `font-weight:${weight.slice(0, -1)};`;
+            simple += `font-style:italic;`;
+        } else {
+            simple += `font-weight:${weight};`;
+            simple += `font-style:normal;`;
+        }
     }
     if (transform) {
         simple += `text-transform:${v.transform};`;
