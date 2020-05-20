@@ -68,8 +68,8 @@ const globalTypography = (selectedTypo) => {
     if (selectedTypo !== 'none') {
         CSS += `font-family:var(--qubely-typo${selectedTypo}-font-family);`;
         CSS += `font-size:var(--qubely-typo${selectedTypo}-font-size);`;
-        CSS += `font-weight:var(--qubely-typo${selectedTypo}-font-weight);`;
-        CSS += `line-height:var(--qubely-typo${selectedTypo}-line-height);`;
+        CSS += `font-weight:var(--qubely-typo${selectedTypo}-font-weight) !important;`;
+        CSS += `line-height:var(--qubely-typo${selectedTypo}-line-height) !important;`;
         CSS += `letter-spacing:var(--qubely-typo${selectedTypo}-letter-spacing);`;
         CSS += `text-transform:var(--qubely-typo${selectedTypo}-text-transform);`;
     }

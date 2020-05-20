@@ -118,7 +118,7 @@ const appendTypoVariable = (value, index) => {
         data = _appendVariables(generateVariables(value.size, `--qubely-typo${index + 1}-font-size:{{key}};`), data);
     }
     if (value.height) {
-        data = _appendVariables(generateVariables(value.height, `--qubely-typo${index + 1}-line-height:{{key}} !important;`), data)
+        data = _appendVariables(generateVariables(value.height, `--qubely-typo${index + 1}-line-height:{{key}};`), data)
     }
     if (value.spacing) {
         data = _appendVariables(generateVariables(value.spacing, `--qubely-typo${index + 1}-letter-spacing:{{key}};`), data)

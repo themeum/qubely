@@ -300,7 +300,7 @@ export const DEFAULTPRESETS = {
         preset2: {
             name: 'Preset #2',
             key: 'preset2',
-            colors: ['#0081FF', '#0053A4', '#363636', '#BBC0D4', '#FFFFFF'],
+            colors: ['#696CFF', '#0053A4', '#363636', '#BBC0D4', '#FFFFFF'],
             typography: [
                 {
                     name: 'Heading 1',
@@ -321,8 +321,8 @@ export const DEFAULTPRESETS = {
                             md: "-2",
                             xs: "0"
                         },
-                        type: "sans-serif"
-
+                        type: "sans-serif",
+                        weight: 100
                     }
                 },
                 {
@@ -344,8 +344,8 @@ export const DEFAULTPRESETS = {
                             md: "-0.5",
                             xs: "0"
                         },
-                        type: "sans-serif"
-
+                        type: "sans-serif",
+                        weight: 100
                     }
                 },
                 {
