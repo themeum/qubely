@@ -37,22 +37,25 @@ export default function Color({ value, onChange, className, deleteOption, onDele
                 className="qubely-ml-auto"
                 renderToggle={({ isOpen, onToggle }) => (
                     <span className={containerClasses}>
-                        <Tooltip text={__("Add new Color")}>
-                            <span
-                                isPrimary
-                                aria-expanded={isOpen}
-                                className="qubely-color-picker"
-                                style={{ backgroundColor: (!addNewColor && value) ? value : 'transparent' }}
-                                onClick={() => {
-                                    if (addNewColor) {
-                                        addNew();
-                                    }
-                                    onToggle()
-                                }}
-                            >
-                                {addNewColor && icons.addColor}
-                            </span>
-                        </Tooltip>
+                        <span
+                            isPrimary
+                            aria-expanded={isOpen}
+                            className="qubely-color-picker"
+                            style={{ backgroundColor: (!addNewColor && value) ? value : 'transparent' }}
+                            onClick={() => {
+                                if (addNewColor) {
+                                    addNew();
+                                }
+                                onToggle()
+                            }}
+                        >
+                            {addNewColor &&
+                                <Tooltip text={__("Add new Color")}>
+                                    {icons.addColor}
+                                </Tooltip>
+                            }
+                        </span>
+
                         {
                             deleteOption &&
                             <span className="delete fas fa-times" onClick={() => onDelete()} />

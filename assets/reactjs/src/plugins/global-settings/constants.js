@@ -66,7 +66,7 @@ export const DEFAULTPRESETS = {
         preset1: {
             name: 'Preset #1',
             key: 'preset1',
-            colors: ['#0081FF', '#04C3EC', '#363636', '#BBC0D4', '#FFFFFF'],
+            colors: ['#696CFF', '#04C3EC', '#363636', '#BBC0D4', '#FFFFFF'],
             typography: [
                 {
                     name: 'Heading 1',
@@ -300,7 +300,7 @@ export const DEFAULTPRESETS = {
         preset2: {
             name: 'Preset #2',
             key: 'preset2',
-            colors: ['#696CFF', '#0053A4', '#363636', '#BBC0D4', '#FFFFFF'],
+            colors: ['#0081FF', '#0053A4', '#363636', '#BBC0D4', '#FFFFFF'],
             typography: [
                 {
                     name: 'Heading 1',
