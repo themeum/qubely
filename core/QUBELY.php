@@ -65,6 +65,7 @@ class QUBELY
 		add_action('wp_ajax_qubely_delete_saved_block', array($this, 'qubely_delete_saved_block'));
 
 		add_action('wp_ajax_qubely_send_form_data', array($this, 'qubely_send_form_data'));
+		add_action('wp_ajax_nopriv_qubely_send_form_data', array($this, 'qubely_send_form_data'));
 
 		// dynamic blocks
 		add_action('init', array($this, 'init_dynamic_blocks'));
