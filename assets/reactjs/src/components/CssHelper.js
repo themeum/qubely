@@ -69,6 +69,8 @@ const globalTypography = (selectedTypo) => {
         CSS += `font-family:var(--qubely-typo${selectedTypo}-font-family);`;
         CSS += `font-size:var(--qubely-typo${selectedTypo}-font-size);`;
         CSS += `font-weight:var(--qubely-typo${selectedTypo}-font-weight);`;
+        CSS += `line-height:var(--qubely-typo${selectedTypo}-line-height);`;
+        CSS += `letter-spacing:var(--qubely-typo${selectedTypo}-letter-spacing);`;
         CSS += `text-transform:var(--qubely-typo${selectedTypo}-text-transform);`;
     }
     CSS += '}';
