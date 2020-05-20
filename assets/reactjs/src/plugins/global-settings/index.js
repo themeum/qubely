@@ -593,6 +593,7 @@ class GlobalSettings extends Component {
         if ((isSavingPost() || isPreviewingPost() || isPublishingPost()) && !isAutosavingPost()) {
             this.updateGlobalSettings();
         }
+
         if (typeof showPresetSettings !== 'undefined') {
             const detailedPreset = Object.keys(presets)[showPresetSettings];
             typeof presets[detailedPreset] !== 'undefined' && setTypoTitleStyle(presets[detailedPreset].typography);

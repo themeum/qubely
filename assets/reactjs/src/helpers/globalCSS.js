@@ -79,7 +79,11 @@ const addTypo = (value, index) => {
         nonResponsiveProps += `.typo-name.index-${index + 1}>*{ font-family:'${value.family}',${value.type};} `;
     }
     if (value.weight) {
-        nonResponsiveProps += `.typo-name.index-${index + 1}>* {font-weight:${value.weight};} `;
+          if (typeof value.weight === 'string') {
+            nonResponsiveProps += `.typo-name.index-${index + 1}>* {font-weight:${value.weight.slice(0, -1)};font-style:italic;} `;
+        } else {
+            nonResponsiveProps += `.typo-name.index-${index + 1}>* {font-weight:${value.weight};font-style:normal;} `;
+        }
     }
     if (value.transform) {
         nonResponsiveProps += `.typo-name.index-${index + 1}>* {text-transform:${value.transform};} `;

@@ -88,7 +88,7 @@ export const DEFAULTPRESETS = {
                             xs: "0"
                         },
                         type: "sans-serif",
-                        transform: "uppercase"
+                        weight: 700
                     }
                 },
                 {
@@ -111,7 +111,7 @@ export const DEFAULTPRESETS = {
                             xs: "0"
                         },
                         type: "sans-serif",
-                        transform: "uppercase"
+                        weight: 700
                     }
                 },
                 {
@@ -157,6 +157,7 @@ export const DEFAULTPRESETS = {
                             xs: "0"
                         },
                         type: "sans-serif",
+                        weight: 700
                     }
                 },
                 {
@@ -269,6 +270,7 @@ export const DEFAULTPRESETS = {
                             xs: "0"
                         },
                         type: "sans-serif",
+                        transform: "uppercase",
                         weight: 700,
                     }
                 },
@@ -292,6 +294,7 @@ export const DEFAULTPRESETS = {
                             xs: "0"
                         },
                         type: "sans-serif",
+                        transform: "uppercase",
                         weight: 700,
                     }
                 },
@@ -323,7 +326,7 @@ export const DEFAULTPRESETS = {
                             xs: "0"
                         },
                         type: "sans-serif",
-                        weight: 100
+                        weight: 300
                     }
                 },
                 {
@@ -346,7 +349,7 @@ export const DEFAULTPRESETS = {
                             xs: "0"
                         },
                         type: "sans-serif",
-                        weight: 100
+                        weight: 300
                     }
                 },
                 {
@@ -369,7 +372,7 @@ export const DEFAULTPRESETS = {
                             xs: "0"
                         },
                         type: "sans-serif",
-                        weight: 100
+                        weight: 300
                     }
                 },
                 {
@@ -392,7 +395,7 @@ export const DEFAULTPRESETS = {
                             xs: "0"
                         },
                         type: "sans-serif",
-                        weight: 100
+                        weight: 300
                     }
                 },
                 {
@@ -415,7 +418,7 @@ export const DEFAULTPRESETS = {
                             xs: "0"
                         },
                         type: "sans-serif",
-                        weight: 100
+                        weight: 300
                     }
                 },
                 {
@@ -438,7 +441,7 @@ export const DEFAULTPRESETS = {
                             xs: "0"
                         },
                         type: "sans-serif",
-                        weight: 100
+                        weight: 300
                     }
                 },
                 {
