@@ -71,6 +71,28 @@
             box-shadow: none;
             transition: background 0.1s ease-in-out;
             padding: 0 0 0 14px;
+            .is-active-label{
+                margin-left: auto;
+                font-size: 10px;
+                line-height: 20px;
+                height: 20px;
+                padding: 0 9px 0 19px;
+                color: #53C17D;
+                background: #ECF7F0;
+                border-radius: 30px;
+                position: relative;
+                &::after {
+                    content: '';
+                    position: absolute;
+                    left: 7px;
+                    height: 6px;
+                    width: 6px;
+                    background: #53C17D;
+                    top: 50%;
+                    margin-top: -3px;
+                    border-radius: 50%;
+                }
+            }
             .title {
                 display: inline-flex;
                 align-items: center;

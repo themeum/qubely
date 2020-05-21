@@ -356,15 +356,14 @@ class GlobalSettings extends Component {
 
                                         >
                                             {
-                                                showDetailedSettings ?
-                                                    <span
-                                                        className="radio-button fas fa-angle-left"
-                                                        onClick={() => this.setState(state => ({
-                                                            showPresetSettings: showDetailedSettings ? undefined : index,
-                                                            ...((enableRenaming === presetKey) && { enableRenaming: undefined })
-                                                        }))} />
-                                                    :
-                                                    <span className="radio-button">{isActivePreset ? icons.circleDot : icons.circleThin}</span>
+                                                showDetailedSettings && (
+                                                    <span className="radio-button fas fa-angle-left"
+                                                          onClick={() => this.setState(state => ({
+                                                              showPresetSettings: showDetailedSettings ? undefined : index,
+                                                              ...((enableRenaming === presetKey) && { enableRenaming: undefined })
+                                                          }))}
+                                                    />
+                                                )
                                             }
                                             {
                                                 (enableRenaming === presetKey) ? (
@@ -388,9 +387,14 @@ class GlobalSettings extends Component {
                                                         }
                                                         onChange={event => renameTitle(event.target.value, presetKey)}
                                                     />
+                                                ) : (
+                                                    <Fragment>
+                                                        <span className="name"> {name}</span>
+                                                        {isActivePreset && <span className={'is-active-label'}>{__('Active')}</span>}
+                                                    </Fragment>
                                                 )
-                                                    :
-                                                    <span className="name"> {name}</span>
+
+
                                             }
                                         </div>
                                         <Dropdown
