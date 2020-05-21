@@ -1,6 +1,6 @@
 const PATH = '/qubely/v1/global_settings';
 import { _device, _push } from '../components/CssHelper';
-
+import {  DEFAULTPRESETS } from '../plugins/global-settings/constants';
 async function fetchFromApi() {
     return await wp.apiFetch({ path: PATH })
 }
@@ -79,7 +79,11 @@ const addTypo = (value, index) => {
         nonResponsiveProps += `.typo-name.index-${index + 1}>*{ font-family:'${value.family}',${value.type};} `;
     }
     if (value.weight) {
-        nonResponsiveProps += `.typo-name.index-${index + 1}>* {font-weight:${value.weight};} `;
+        if (typeof value.weight === 'string') {
+            nonResponsiveProps += `.typo-name.index-${index + 1}>* {font-weight:${value.weight.slice(0, -1)};font-style:italic;} `;
+        } else {
+            nonResponsiveProps += `.typo-name.index-${index + 1}>* {font-weight:${value.weight};font-style:normal;} `;
+        }
     }
     if (value.transform) {
         nonResponsiveProps += `.typo-name.index-${index + 1}>* {text-transform:${value.transform};} `;
@@ -99,7 +103,7 @@ export const setTypoTitleStyle = (typos) => {
 
     let __CSS = '';
     typos.forEach((typo, index) => {
-        let tempCSS= addTypo(typo.value, index)
+        let tempCSS = addTypo(typo.value, index)
         __CSS += tempCSS;
     });
     injectGlobalCSS(__CSS, 'qubely-global-panel')
@@ -118,7 +122,7 @@ const appendTypoVariable = (value, index) => {
         data = _appendVariables(generateVariables(value.size, `--qubely-typo${index + 1}-font-size:{{key}};`), data);
     }
     if (value.height) {
-        data = _appendVariables(generateVariables(value.height, `--qubely-typo${index + 1}-line-height:{{key}} !important;`), data)
+        data = _appendVariables(generateVariables(value.height, `--qubely-typo${index + 1}-line-height:{{key}};`), data)
     }
     if (value.spacing) {
         data = _appendVariables(generateVariables(value.spacing, `--qubely-typo${index + 1}-letter-spacing:{{key}};`), data)
@@ -145,7 +149,13 @@ const appendTypoVariable = (value, index) => {
         nonResponsiveProps += `--qubely-typo${index + 1}-font-family:'${value.family}',${value.type};`;
     }
     if (value.weight) {
-        nonResponsiveProps += `--qubely-typo${index + 1}-font-weight:${value.weight};`;
+        if (typeof value.weight === 'string') {
+            nonResponsiveProps += `--qubely-typo${index + 1}-font-weight:${value.weight.slice(0, -1)};`;
+            nonResponsiveProps += `--qubely-typo${index + 1}-font-style:italic;`;
+        } else {
+            nonResponsiveProps += `--qubely-typo${index + 1}-font-weight:${value.weight};`;
+            nonResponsiveProps += `--qubely-typo${index + 1}-font-style:normal;`;
+        }
     }
     if (value.transform) {
         nonResponsiveProps += `--qubely-typo${index + 1}-text-transform:${value.transform};`;
@@ -216,24 +226,29 @@ export const updateGlobalVaribales = async (values) => {
     injectGlobalCSS(global_CSS);
 }
 
+
+
 export const getGlobalSettings = () => {
     let global_CSS = '';
+    let {
+        presets,
+        activePreset
+    } = DEFAULTPRESETS;
     return fetchFromApi().then(data => {
         if (data.success) {
-            const {
-                presets,
-                activePreset
-            } = data.settings;
-            if (typeof presets === 'undefined' || typeof activePreset === 'undefined') {
-                return;
+        
+            if(typeof data.settings.presets !=='undefined'){
+                presets=data.settings.presets
+            }
+            if(typeof data.settings.activePreset !=='undefined'){
+                activePreset=data.settings.activePreset
             }
             globalData = presets[activePreset];
+
             let globalColors = ['#4A90E2', '#50E3C2', '#000', '#4A4A4A', '#9B9B9B'];
-
-            if (presets[activePreset].colors && presets[activePreset].colors.length > 0) {
-                globalColors = presets[activePreset].colors;
+            if (globalData.colors && globalData.colors.length > 0) {
+                globalColors = globalData.colors;
             }
-
             const setGlobalCSS_Variables = (globalColors) => {
                 let rootCSS = ':root {'
                 globalColors.forEach((color, index) => rootCSS += `--qubely-color-${index + 1}:${color};`);
@@ -241,8 +256,9 @@ export const getGlobalSettings = () => {
                 return rootCSS;
             }
 
+
             global_CSS += setGlobalCSS_Variables(globalColors);
-            global_CSS += setGlobalTypo_Variables(presets[activePreset].typography);
+            global_CSS += setGlobalTypo_Variables(globalData.typography);
             return global_CSS;
         }
     });

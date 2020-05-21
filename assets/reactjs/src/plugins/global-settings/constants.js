@@ -66,7 +66,7 @@ export const DEFAULTPRESETS = {
         preset1: {
             name: 'Preset #1',
             key: 'preset1',
-            colors: ['#0081FF', '#04C3EC', '#363636', '#BBC0D4', '#FFFFFF'],
+            colors: ['#696CFF', '#04C3EC', '#363636', '#BBC0D4', '#FFFFFF'],
             typography: [
                 {
                     name: 'Heading 1',
@@ -87,8 +87,8 @@ export const DEFAULTPRESETS = {
                             md: "0",
                             xs: "0"
                         },
-                        type: "sans-serif"
-
+                        type: "sans-serif",
+                        weight: 700
                     }
                 },
                 {
@@ -110,7 +110,8 @@ export const DEFAULTPRESETS = {
                             md: "0",
                             xs: "0"
                         },
-                        type: "sans-serif"
+                        type: "sans-serif",
+                        weight: 700
                     }
                 },
                 {
@@ -156,6 +157,7 @@ export const DEFAULTPRESETS = {
                             xs: "0"
                         },
                         type: "sans-serif",
+                        weight: 700
                     }
                 },
                 {
@@ -268,6 +270,7 @@ export const DEFAULTPRESETS = {
                             xs: "0"
                         },
                         type: "sans-serif",
+                        transform: "uppercase",
                         weight: 700,
                     }
                 },
@@ -291,6 +294,7 @@ export const DEFAULTPRESETS = {
                             xs: "0"
                         },
                         type: "sans-serif",
+                        transform: "uppercase",
                         weight: 700,
                     }
                 },
@@ -321,8 +325,8 @@ export const DEFAULTPRESETS = {
                             md: "-2",
                             xs: "0"
                         },
-                        type: "sans-serif"
-
+                        type: "sans-serif",
+                        weight: 300
                     }
                 },
                 {
@@ -344,8 +348,8 @@ export const DEFAULTPRESETS = {
                             md: "-0.5",
                             xs: "0"
                         },
-                        type: "sans-serif"
-
+                        type: "sans-serif",
+                        weight: 300
                     }
                 },
                 {
@@ -368,7 +372,7 @@ export const DEFAULTPRESETS = {
                             xs: "0"
                         },
                         type: "sans-serif",
-                        weight: 100
+                        weight: 300
                     }
                 },
                 {
@@ -391,7 +395,7 @@ export const DEFAULTPRESETS = {
                             xs: "0"
                         },
                         type: "sans-serif",
-                        weight: 100
+                        weight: 300
                     }
                 },
                 {
@@ -414,7 +418,7 @@ export const DEFAULTPRESETS = {
                             xs: "0"
                         },
                         type: "sans-serif",
-                        weight: 100
+                        weight: 300
                     }
                 },
                 {
@@ -437,7 +441,7 @@ export const DEFAULTPRESETS = {
                             xs: "0"
                         },
                         type: "sans-serif",
-                        weight: 100
+                        weight: 300
                     }
                 },
                 {

@@ -86,7 +86,7 @@ class GlobalSettings extends Component {
     }
     async saveGlobalCSS() {
         let _CSS = await getGlobalCSS();
-        injectGlobalCSS(_CSS, 'qubely-global-styles');
+        await injectGlobalCSS(_CSS, 'qubely-global-styles');
 
     }
 
@@ -593,6 +593,7 @@ class GlobalSettings extends Component {
         if ((isSavingPost() || isPreviewingPost() || isPublishingPost()) && !isAutosavingPost()) {
             this.updateGlobalSettings();
         }
+
         if (typeof showPresetSettings !== 'undefined') {
             const detailedPreset = Object.keys(presets)[showPresetSettings];
             typeof presets[detailedPreset] !== 'undefined' && setTypoTitleStyle(presets[detailedPreset].typography);

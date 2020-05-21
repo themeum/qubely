@@ -32,6 +32,10 @@ export const buttonAttributes = {
     buttonTag: { type: 'string', default: 'a' },
     buttonUrl: { type: 'object', default: { url: '#' } },
     buttonSize: { type: 'string', default: 'medium' },
+    recreateStyles: {
+        type: 'boolean',
+        default: true
+    },
     buttonAlignment: {
         type: 'object', default: { md: 'left' },
         style: [
@@ -47,7 +51,15 @@ export const buttonAttributes = {
         style: [
             {
                 condition: [{ key: 'buttonWidthType', relation: '==', value: 'block' }],
-                selector: '{{QUBELY}} .qubely-block-btn-anchor {width:100%; display: -webkit-box; display: -ms-flexbox; display: flex;}'
+                selector: '{{QUBELY}} .qubely-block-btn-anchor {width:100% !important; display: -webkit-box; display: -ms-flexbox; display: flex;}'
+            },
+            {
+                condition: [{ key: 'buttonWidthType', relation: '==', value: 'auto' }],
+                selector: '{{QUBELY}} .qubely-block-btn-anchor {width:auto !important}'
+            },
+            {
+                condition: [{ key: 'buttonWidthType', relation: '==', value: 'fixed' }],
+                selector: '{{QUBELY}} .qubely-block-btn-anchor {display:inline-flex}'
             }
         ]
     },
@@ -222,6 +234,7 @@ export function buttonSettings(attributes, device, setAttributes, updateParentSt
         controlledButtonPanel,
         showButtonPanel,
         enableButton,
+        recreateStyles,
         buttonToggleOption,
         enablePostButtonText,
         postButtonTextTypography,
@@ -292,13 +305,14 @@ export function buttonSettings(attributes, device, setAttributes, updateParentSt
                         <Padding
                             label={__('Padding')}
                             value={buttonPadding}
-                            onChange={(value) => setAttributes('buttonPadding', value)}
                             unit={['px', 'em', '%']}
                             max={150}
                             min={0}
                             responsive
                             device={device}
-                            onDeviceChange={value => updateParentState('device', value)} />
+                            onChange={(value) => setAttributes('buttonPadding', value)}
+                            onDeviceChange={value => updateParentState('device', value)}
+                        />
 
                     }
                     <RadioAdvanced
@@ -309,7 +323,8 @@ export function buttonSettings(attributes, device, setAttributes, updateParentSt
                             { label: __('Fixed'), value: 'fixed', title: __('Fixed') }
                         ]}
                         value={buttonWidthType}
-                        onChange={(value) => setAttributes('buttonWidthType', value)} />
+                        onChange={(value) => setAttributes('buttonWidthType', value)}
+                    />
                     {buttonWidthType == 'fixed' &&
                         <Range
                             label={__('Fixed Width')}

@@ -68,8 +68,9 @@ const globalTypography = (selectedTypo) => {
     if (selectedTypo !== 'none') {
         CSS += `font-family:var(--qubely-typo${selectedTypo}-font-family);`;
         CSS += `font-size:var(--qubely-typo${selectedTypo}-font-size);`;
-        CSS += `font-weight:var(--qubely-typo${selectedTypo}-font-weight);`;
-        CSS += `line-height:var(--qubely-typo${selectedTypo}-line-height);`;
+        CSS += `font-weight:var(--qubely-typo${selectedTypo}-font-weight) !important;`;
+        CSS += `font-style:var(--qubely-typo${selectedTypo}-font-style) !important;`;
+        CSS += `line-height:var(--qubely-typo${selectedTypo}-line-height) !important;`;
         CSS += `letter-spacing:var(--qubely-typo${selectedTypo}-letter-spacing);`;
         CSS += `text-transform:var(--qubely-typo${selectedTypo}-text-transform);`;
     }
@@ -104,11 +105,24 @@ export const cssTypography = (v) => {
     if (v.height) { data = _push(_device(v.height, 'line-height:{{key}} !important'), data) }
     if (v.spacing) { data = _push(_device(v.spacing, 'letter-spacing:{{key}}'), data) }
     let simple = '{' + (v.family ? "font-family:'" + v.family + "'," + v.type + ";" : '') +
-        (v.weight ? 'font-weight:' + v.weight + ';' : '') +
         (v.color ? 'color:' + v.color + ';' : '') +
-        (v.style  && typeof v.style!=='object'? 'font-style:' + v.style + ';' : '') +
-        (v.transform ? 'text-transform:' + v.transform + ';' : '') +
-        (v.decoration ? 'text-decoration:' + v.decoration + ';' : '') + '}';
+        (v.style && typeof v.style !== 'object' ? 'font-style:' + v.style + ';' : '') +
+        (v.decoration ? 'text-decoration:' + v.decoration + ';' : '');
+
+    if (weight) {
+        if (typeof weight === 'string') {
+            simple += `font-weight:${weight.slice(0, -1)};`;
+            simple += `font-style:italic;`;
+        } else {
+            simple += `font-weight:${weight};`;
+            simple += `font-style:normal;`;
+        }
+    }
+    
+    if (transform) {
+        simple += `text-transform:${transform};`;
+    }
+    simple += '}';
     return { md: data.md, sm: data.sm, xs: data.xs, simple, font };
 }
 
