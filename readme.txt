@@ -237,9 +237,11 @@ You can report bugs on the [support forum here](https://wordpress.org/support/pl
 
 == Changelog ==
 
-= 1.4.0 - 13 May, 2020 =
-Fix: Accordion block - Active Panel color 
+= 1.4.0 - 21 May, 2020 =
 New: Global Settings  
+New: Qubely Settings page - with Google Map API key, reCAPTCHA key storage 
+Fix: Accordion block - Active Panel color 
+Fix: Contact Form block - Form Submit issue   
 
 = 1.3.91 - 29 April, 2020 =
 Fix: Typography & Box Shadow panel css issue
