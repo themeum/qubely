@@ -86,7 +86,7 @@ class GlobalSettings extends Component {
     }
     async saveGlobalCSS() {
         let _CSS = await getGlobalCSS();
-        injectGlobalCSS(_CSS, 'qubely-global-styles');
+        await injectGlobalCSS(_CSS, 'qubely-global-styles');
 
     }
 
