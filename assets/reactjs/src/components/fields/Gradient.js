@@ -24,15 +24,14 @@ class Gradient extends Component {
             this.props.onChange(defaultState)
         }
     }
-    defColors() {
-        let val = [];
-        const colors = window.globalData.settings;
-        val.push(colors.colorPreset1 || qubely_admin.palette[0])
-        val.push(colors.colorPreset2 || qubely_admin.palette[1])
-        val.push(colors.colorPreset3 || qubely_admin.palette[2])
-        val.push(colors.colorPreset4 || qubely_admin.palette[3])
-        val.push(colors.colorPreset5 || qubely_admin.palette[4])
-        val.push(colors.colorPreset6 || qubely_admin.palette[5])
+    defColors = async () => {
+        let val = qubely_admin.palette;
+        let { colors } = await JSON.parse(localStorage.getItem('qubely-global-settings'));
+        console.log('colors : ', colors);
+        if (typeof colors !== 'undefined') {
+            val = colors
+        }
+        console.log('val : ', val);
         return val;
     }
 
@@ -42,6 +41,11 @@ class Gradient extends Component {
 
     renderColorPicker = (colorType, defaultColor) => {
         const { value } = this.props
+        let globalColors = qubely_admin.palette;
+        let { colors } = JSON.parse(localStorage.getItem('qubely-global-settings'));
+        if (typeof colors !== 'undefined') {
+            globalColors = colors
+        }
         return (
             <Fragment>
                 <ColorPicker color={value[colorType] || defaultColor} onChangeComplete={val => {
@@ -50,7 +54,7 @@ class Gradient extends Component {
                     }
                 }} />
                 <div className="qubely-rgba-palette" style={{ padding: '0px 0px 15px 15px' }}>
-                    {this.defColors().map(
+                    {globalColors.map(
                         color => <button style={{ color: color }} onClick={() => this.setSettings(color, colorType)} />
                     )}
                 </div>
