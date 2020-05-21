@@ -19,7 +19,8 @@
                 const isRequired = checkFormValidation($form); //check validation
                 if (!isRequired) {
                     const reCaptcha = $form.find('input[name="recaptcha"]').val();
-                    if (reCaptcha == 'true') {
+                    const qubelyRecaptcha = this.querySelector('form .qubely-google-recaptcha');
+                    if (reCaptcha == 'true' && qubelyRecaptcha) {
                         formData.push({ name: 'captcha', value: (typeof grecaptcha !== "undefined") ? grecaptcha.getResponse() : undefined });
                     }
                     jQuery.ajax({
@@ -62,22 +63,25 @@
 
         //CONTACT FORM RECAPTCHA
         const apiURL = 'https://www.google.com/recaptcha/api.js?onload=initGoogleReChaptcha&render=explicit';
-        loadScriptAsync(apiURL).then(() => {
-            window.initGoogleReChaptcha = () => {
-                $('form.qubely-form').each(function () {
-                    const $form = $(this);
-                    const reCaptcha = $form.find('input[name="recaptcha"]').val();
-                    const reCaptchaSiteKey = $form.find('input[name="recaptcha-site-key"]').val();
-                    if (reCaptcha == 'true') {
-                        const qubelyRecaptcha = this.querySelector('form .qubely-google-recaptcha');
-                        grecaptcha.render(qubelyRecaptcha, {
-                            sitekey: reCaptchaSiteKey
-                        });
-                    }
-                });
+        const qubelyRecaptcha = this.querySelector('form .qubely-google-recaptcha');
+        if(qubelyRecaptcha) {
+            loadScriptAsync(apiURL).then(() => {
+                window.initGoogleReChaptcha = () => {
+                    $('form.qubely-form').each(function () {
+                        const $form = $(this);
+                        const reCaptcha = $form.find('input[name="recaptcha"]').val();
+                        const reCaptchaSiteKey = $form.find('input[name="recaptcha-site-key"]').val();
+                        if (reCaptcha == 'true') {
+                            const qubelyRecaptcha = this.querySelector('form .qubely-google-recaptcha');
+                            grecaptcha.render(qubelyRecaptcha, {
+                                sitekey: reCaptchaSiteKey
+                            });
+                        }
+                    });
 
-            };
-        });
+                };
+            });
+        }
 
 
 
