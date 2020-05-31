@@ -184,11 +184,18 @@ h4.qubely-options-section-title {
 	font-family: 'Lato', sans-serif;
 }
 
+.qubely-gs-container {
+	display: grid;
+	grid-template-columns: 1fr 285px;
+	grid-gap: 25px;
+}
+
 .qubely-gs-card {
 	background: white;
 	border: 1px solid #EAEDF7;
 	padding: 30px;
 	border-radius: 10px;
+	margin-bottom: 25px;
 }
 
 .qubely-gs-header {
@@ -223,6 +230,11 @@ h4.qubely-options-section-title {
 	display: inline-flex;
 	color: #007AFF;
 	text-decoration: none;
+	align-items: center;
+}
+
+.qubey-gs-button span {
+	margin-left: 9px;
 }
 
 .qubey-gs-button:hover {
