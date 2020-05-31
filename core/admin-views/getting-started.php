@@ -1,3 +1,7 @@
+<?php
+// Exit if accessed directly
+if (!defined('ABSPATH')) exit;
+?>
 <div class="wrap">
     <div class="qubely-options-section qubely-mt-20 qubely-mb-30" style="background-image: url(<?php echo QUBELY_DIR_URL . 'assets/img/options-logo.png' ?>)">
         <div class="qubely-options-section-header">
