@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,400&display=swap');
+
 .qubely-options-section {
 	background-color: #FFFFFF;
 	padding: 30px;
@@ -172,4 +174,69 @@ h4.qubely-options-section-title {
 		flex: 0 0 50%;
 		max-width: 50%;
 	}
+}
+
+/**
+ * New Getting Started
+ */
+
+.qubely-getting-started {
+	font-family: 'Lato', sans-serif;
+}
+
+.qubely-gs-card {
+	background: white;
+	border: 1px solid #EAEDF7;
+	padding: 30px;
+	border-radius: 10px;
+}
+
+.qubely-gs-header {
+	padding: 80px;
+	background-repeat: no-repeat;
+	background-position: right top;
+	background-size: 260px;
+}
+
+.qubely-gs-header h2 {
+	font-size: 46px;
+	font-weight: 700;
+	margin: 0 0 20px;
+	color: #242F57;
+	line-height: 1;
+}
+
+.qubely-gs-header h3 {
+	font-size: 30px;
+	color: #242F57;
+	line-height: 1;
+	font-weight: 300;
+	margin: 0 0 40px;
+}
+
+.qubey-gs-button {
+	padding: 15px 37px;
+	font-size: 16px;
+	background: #dddddd;
+	border-radius: 30px;
+	line-height: 30px;
+	display: inline-flex;
+	color: #007AFF;
+	text-decoration: none;
+}
+
+.qubey-gs-button:hover {
+	color: #007AFF;
+}
+
+.qubey-gs-button.primary {
+	background: #007AFF;
+	color: #fff;
+}
+.qubey-gs-button.primary:hover {
+	color: #fff;
+}
+
+.qubey-gs-button.link {
+	background: none;
 }
