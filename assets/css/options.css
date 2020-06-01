@@ -198,6 +198,29 @@ h4.qubely-options-section-title {
 	margin-bottom: 25px;
 }
 
+.qubely-gs-card .qubely-gs-card-title {}
+.qubely-gs-card .qubely-gs-card-title h2 {
+	font-size: 26px;
+	margin: 0 0 28px;
+	line-height: 1;
+}
+
+.qubely-gs-card-content {
+	height: 300px;
+	overflow: hidden;
+	position: relative;
+}
+
+.qubely-gs-card-content::before {
+	content: '';
+	height: 24px;
+	width: 100%;
+	bottom: 0;
+	left: 0;
+	background: linear-gradient(0deg, white 5px, transparent);
+	position: absolute;
+}
+
 .qubely-gs-header {
 	padding: 80px;
 	background-repeat: no-repeat;
@@ -233,6 +256,15 @@ h4.qubely-options-section-title {
 	align-items: center;
 }
 
+.qubely-gs-link {
+	font-size: 16px;
+	color: #007AFF;
+	display: inline-flex;
+	text-decoration: none;
+	align-items: center;
+}
+
+.qubely-gs-link span,
 .qubey-gs-button span {
 	margin-left: 9px;
 }

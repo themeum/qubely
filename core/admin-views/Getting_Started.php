@@ -39,8 +39,25 @@ class Getting_Started {
                 </div>
                 <div class="qubely-gs-container">
                     <div class="qubely-gs-content">
+                        <div class="qubely-gs-card-row">
+                            <div class="qubely-gs-card">
+                                hello
+                            </div>
+                            <div class="qubely-gs-card">
+                                hello
+                            </div>
+                            <div class="qubely-gs-card">
+                                hello
+                            </div>
+                        </div>
                         <div class="qubely-gs-card">
-                            <?php echo $this->get_changelog(); ?>
+                            <div class="qubely-gs-card-title">
+                                <h2><?php printf(__('What\'s new in Qubely %s', 'qubely'), QUBELY_VERSION); ?></h2>
+                            </div>
+                            <div class="qubely-gs-card-content">
+                                <?php echo $this->get_changelog(); ?>
+                            </div>
+                            <a class="qubely-gs-link" href="#">Learn More <span class="fas fa-long-arrow-alt-right"></span></a>
                         </div>
                     </div>
                     <div class="qubely-gs-sidebar">
