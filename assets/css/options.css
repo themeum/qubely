@@ -182,13 +182,18 @@ h4.qubely-options-section-title {
 * {
 	box-sizing: border-box;
 }
+p {
+	margin: 0 0 10px;
+	font-size: 14px;
+}
+.qubely-getting-started {
+	font-family: "Lato", sans-serif;
+	color: rgba(36, 47, 87, 0.70);
+	font-size: 14px;
+}
 img {
 	display: block;
 	max-width: 100%;
-}
-
-.qubely-getting-started {
-	font-family: "Lato", sans-serif;
 }
 
 .qubely-gs-container {
@@ -213,9 +218,25 @@ img {
 .qubely-gs-card {
 	background: white;
 	border: 1px solid #eaedf7;
-	padding: 30px;
+	padding: 32px;
 	border-radius: 10px;
 	margin-bottom: 25px;
+}
+
+.qubely-cta-card {
+	position: relative;
+	overflow: hidden;
+	background: var(--card-bg);
+}
+
+.qubely-cta-card > img {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+}
+
+.qubely-cta-card p {
+	max-width: 350px;
 }
 
 .card-gradient {
@@ -284,11 +305,31 @@ img {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+	margin-bottom: 12px;
+}
+
+.qubely-gs-card .qubely-gs-card-title.is-large {
+	padding: 0 30px 30px;
+	margin: 0 -30px 28px;
+	border-bottom: 1px solid #EAEDF7;
 }
 .qubely-gs-card .qubely-gs-card-title h2 {
 	font-size: 26px;
-	margin: 0 0 28px;
+	margin: 0;
 	line-height: 1;
+}
+.qubely-gs-card-title h3 {
+	font-size: 22px;
+	line-height: 25px;
+	margin: 0;
+}
+.qubely-gs-card .qubely-gs-card-title a {
+	font-size: 16px;
+	color: #007AFF;
+	text-decoration: none;
+}
+.qubely-gs-card .qubely-gs-card-title a span {
+	margin-left: 6px;
 }
 .qubely-gs-card .qubely-gs-card-title button {
 	font-size: 16px;
@@ -405,4 +446,41 @@ img {
 
 .qubely-gs-button.link {
 	background: none;
+}
+
+.qubely-gs-card-footer{
+	margin-top: 24px;
+}
+
+/* Post */
+
+.qubely-gs-post-card img {
+	border-radius: 5px;
+}
+
+.qubely-gs-post-card a {
+	color: #242F57;
+	display: block;
+	text-decoration: none;
+	line-height: 20px;
+}
+
+.qubely-gs-post-card span {
+	display: block;
+	margin-bottom: 8px;
+	margin-top: 16px;
+	color: rgba(36, 47, 87, 0.6);
+}
+
+.qubely-gs-social-links {
+	margin: 0 0 0 -10px;
+	padding: 0;
+}
+
+.qubely-gs-social-links a {
+	display: inline-flex;
+	padding: 10px;
+	color: rgba(36, 47, 87, 0.7);
+	text-decoration: none;
+	font-size: 16px;
 }
