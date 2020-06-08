@@ -209,7 +209,7 @@ class Getting_Started {
                                 </div>
 							</div>
 							<div class="qubely-gs-card qubely-cta-card" style="--card-bg: #E7E6FE;">
-                                <img src="<?php echo $image2?>" alt="">
+                                <img src="<?php echo $image2; ?>" alt="">
                                 <div class="qubely-gs-card-title">
                                     <h3><?php esc_html_e('Stay in touch with us', 'qubely'); ?></h3>
                                 </div>
