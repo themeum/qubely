@@ -146,15 +146,19 @@ function register_block_qubely_postgrid()
 					'type'    => 'number',
 					'default' => 55,
 				),
-//pagination
+				//pagination
 				'enablePagination' => array(
 					'type' => 'boolean',
 					'default' => true
 				),
-//                    'paginationType' => array(
-//						'type' => 'string',
-//						'default' => 'pagition'
-//					),
+				//                    'paginationType' => array(
+				//						'type' => 'string',
+				//						'default' => 'pagition'
+				//					),
+				'page' => array(
+					'type' => 'number',
+					'default' => 1,
+				),
 				'pageAlignment' => array(
 					'type' => 'string',
 					'default' => 'center',
@@ -193,7 +197,7 @@ function register_block_qubely_postgrid()
 							(object) ['key' => 'enablePagination', 'relation' => '==', 'value' => true]
 						],
 						'selector' => '{{QUBELY}} .qubely-postgrid-pagination > a:hover, ' .
-						              '{{QUBELY}} .qubely-postgrid-pagination > button:hover{color: {{pagesHoverColor}};}'
+							'{{QUBELY}} .qubely-postgrid-pagination > button:hover{color: {{pagesHoverColor}};}'
 					]]
 				),
 				'pagesActiveColor' => array(
@@ -225,7 +229,7 @@ function register_block_qubely_postgrid()
 							(object) ['key' => 'enablePagination', 'relation' => '==', 'value' => true]
 						],
 						'selector' => '{{QUBELY}} .qubely-postgrid-pagination a:hover, ' .
-						              '{{QUBELY}} .qubely-postgrid-pagination button:hover'
+							'{{QUBELY}} .qubely-postgrid-pagination button:hover'
 					]]
 				),
 				'pagesbgActiveColor' => array(
@@ -257,7 +261,7 @@ function register_block_qubely_postgrid()
 							(object) ['key' => 'enablePagination', 'relation' => '==', 'value' => true]
 						],
 						'selector' => '{{QUBELY}} .qubely-postgrid-pagination > a:hover, ' .
-						              '{{QUBELY}} .qubely-postgrid-pagination > button:hover'
+							'{{QUBELY}} .qubely-postgrid-pagination > button:hover'
 					]]
 				),
 				'pagesActiveBorder' => array(
@@ -288,7 +292,7 @@ function register_block_qubely_postgrid()
 							(object) ['key' => 'enablePagination', 'relation' => '==', 'value' => true]
 						],
 						'selector' => '{{QUBELY}} .qubely-postgrid-pagination > a:hover, ' .
-						              '{{QUBELY}} .qubely-postgrid-pagination > button:hover'
+							'{{QUBELY}} .qubely-postgrid-pagination > button:hover'
 					]]
 				),
 				'pagesActiveShadow' => array(
@@ -315,7 +319,7 @@ function register_block_qubely_postgrid()
 					'type' => 'object',
 					'default' => (object) [
 						'openPadding' => 1,
-						'paddingType' =>'custom',
+						'paddingType' => 'custom',
 						'custom' => [
 							'md' => '0 20 0 20',
 						],
@@ -332,7 +336,7 @@ function register_block_qubely_postgrid()
 					'type' => 'object',
 					'default' => (object) [
 						'openMargin' => 1,
-						'marginType' =>'custom',
+						'marginType' => 'custom',
 						'custom' => [
 							'md' => '0 7 12 7',
 						],
@@ -1257,11 +1261,12 @@ function register_block_qubely_postgrid()
 	);
 }
 
-function pagination_bar($max_pages, $current_page) {
-	if ($max_pages > 1){
+function pagination_bar($max_pages, $current_page)
+{
+	if ($max_pages > 1) {
 		$big = 9999999;
 		return paginate_links(array(
-			'base' => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
+			'base' => str_replace($big, '%#%', esc_url(get_pagenum_link($big))),
 			'format'        => '?paged=%#%',
 			'current' => $current_page,
 			'total' => $max_pages,
@@ -1325,7 +1330,7 @@ function render_block_qubely_postgrid($att)
 
 
 	$paged = 1;
-	if(!empty(get_query_var('page')) || !empty(get_query_var('paged'))){
+	if (!empty(get_query_var('page')) || !empty(get_query_var('paged'))) {
 		$paged = is_front_page() ? get_query_var('page') : get_query_var('paged');
 	}
 
@@ -1486,7 +1491,7 @@ function render_block_qubely_postgrid($att)
 			}
 		}
 		$html .= '</div>';
-		$html .= '<div class="qubely-postgrid-pagination">'.pagination_bar($query->max_num_pages, $paged).'</div>';
+		$html .= '<div class="qubely-postgrid-pagination">' . pagination_bar($query->max_num_pages, $paged) . '</div>';
 		$html .= '</div>';
 		wp_reset_postdata();
 	}
