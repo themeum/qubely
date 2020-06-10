@@ -1,15 +1,20 @@
+import { getGlobalSettings } from '../helpers/globalCSS';
 const { select } = wp.data
 const { CssGenerator: { CssGenerator } } = wp.qubelyComponents
 
 const endpoint = '/qubely/v1/save_block_css'
 
-const API_fetch = (post_id, block_css, is_remain, available_blocks) => {
+const API_fetch = async (post_id, block_css, is_remain, available_blocks) => {
     const json = JSON.stringify(block_css.interaction)
-    return wp.apiFetch({
-        path: endpoint,
-        method: 'POST',
-        data: { block_css: block_css.css, interaction: json, post_id, is_remain, available_blocks }
-    }).then(data => data)
+    try {
+        await wp.apiFetch({
+            path: endpoint,
+            method: 'POST',
+            data: { block_css: block_css.css, interaction: json, post_id, is_remain, available_blocks }
+        });
+    } catch (e) {
+        console.log('Can\'t save css:', e);
+    }
 }
 
 /**
@@ -79,20 +84,20 @@ function innerBlocks(blocks, type = false) {
 }
 
 
-function isQubelyBlock(blocks){
+function isQubelyBlock(blocks) {
     let isQubely = false;
-    blocks.forEach( block => {
-        if(block.name.indexOf('qubely/')!= -1){
+    blocks.forEach(block => {
+        if (block.name.indexOf('qubely/') != -1) {
             isQubely = true;
         }
         if (block.innerBlocks && (block.innerBlocks).length > 0 && isQubely != true) {
-            block.innerBlocks.forEach( bl => {
-                if(bl.name.indexOf('qubely/')!= -1){
+            block.innerBlocks.forEach(bl => {
+                if (bl.name.indexOf('qubely/') != -1) {
                     isQubely = true;
                 }
                 if (bl.innerBlocks && (bl.innerBlocks).length > 0 && isQubely != true) {
-                    bl.innerBlocks.forEach( b => {
-                        if(b.name.indexOf('qubely/')!= -1){
+                    bl.innerBlocks.forEach(b => {
+                        if (b.name.indexOf('qubely/') != -1) {
                             isQubely = true;
                         }
                     })
@@ -109,15 +114,15 @@ function getData(pId) {
         path: 'qubely/v1/qubely_get_content',
         method: 'POST',
         data: { postId: pId }
-    }).then( response => {
+    }).then(response => {
         if (response.success) {
             const innerBlock = innerBlocks(wp.blocks.parse(response.data), true)
-            if(innerBlock.css){
+            if (innerBlock.css) {
                 wp.apiFetch({
                     path: 'qubely/v1/append_qubely_css',
                     method: 'POST',
                     data: { css: innerBlock.css, post_id: select('core/editor').getCurrentPostId() }
-                }).then( res => {
+                }).then(res => {
                     if (res.success) {
                         // Save Data
                     }
@@ -128,9 +133,9 @@ function getData(pId) {
 };
 
 
-function parseBlock(blocks){
-    blocks.forEach( block => {
-        if (block.name.indexOf('core/block')!= -1) {
+function parseBlock(blocks) {
+    blocks.forEach(block => {
+        if (block.name.indexOf('core/block') != -1) {
             getData(block.attributes.ref)
         }
         if (block.innerBlocks && (block.innerBlocks).length > 0) {
@@ -152,7 +157,7 @@ function parseBlock(blocks){
 }*/
 
 
-function availableBlocksMeta (all_blocks) {
+function availableBlocksMeta(all_blocks) {
     const blocks_flag = {
         available_blocks: [],
         interaction: false,
@@ -160,15 +165,15 @@ function availableBlocksMeta (all_blocks) {
         parallax: false
     }
     function recursive_block_map(blocks) {
-        if(!blocks.length){
+        if (!blocks.length) {
             return
         }
         blocks.map(block => {
-            const {attributes, innerBlocks, name} = block
+            const { attributes, innerBlocks, name } = block
             blocks_flag.available_blocks.push(name)
 
             // check if has interaction
-            if(blocks_flag.interaction === false && typeof attributes.interaction !== 'undefined'){
+            if (blocks_flag.interaction === false && typeof attributes.interaction !== 'undefined') {
                 const { while_scroll_into_view, mouse_movement } = attributes.interaction
                 if (
                     (typeof while_scroll_into_view !== 'undefined' && while_scroll_into_view.enable === true) ||
@@ -179,7 +184,7 @@ function availableBlocksMeta (all_blocks) {
             }
 
             // if has block animation
-            if(
+            if (
                 blocks_flag.animation === false &&
                 typeof attributes.animation !== 'undefined' &&
                 typeof attributes.animation.animation !== 'undefined' &&
@@ -189,12 +194,12 @@ function availableBlocksMeta (all_blocks) {
             }
 
             // if has block parallax
-            if(blocks_flag.parallax === false && name === 'qubely/row') {
-                if(
+            if (blocks_flag.parallax === false && name === 'qubely/row') {
+                if (
                     typeof attributes.rowBg !== 'undefined' &&
                     typeof attributes.rowBg.bgimgParallax !== 'undefined' &&
                     attributes.rowBg.bgimgParallax === 'animated'
-                ){
+                ) {
                     blocks_flag.parallax = true
                 }
             }
@@ -206,15 +211,23 @@ function availableBlocksMeta (all_blocks) {
     return blocks_flag
 }
 
-const ParseCss = (setDatabase = true) => {
-    window.bindCss = true
-    const all_blocks = select('core/block-editor').getBlocks()
-    const isRemain = isQubelyBlock(all_blocks)
-    const { getCurrentPostId } = select('core/editor')
-    let __blocks = { css: '', interaction: {} };
-    if (typeof window.globalData != 'undefined') {
-        __blocks.css += CssGenerator(window.globalData.settings, 'pagesettings', '8282882', true)
-    }
+
+const ParseCss = async (setDatabase = true) => {
+    window.bindCss = true;
+    const all_blocks = select('core/block-editor').getBlocks();
+    const isRemain = isQubelyBlock(all_blocks);
+    const { getCurrentPostId } = select('core/editor');
+    let __blocks = {
+        css: '',
+        interaction: {}
+    };
+
+    const globalCSS = await getGlobalSettings();
+    __blocks.css += globalCSS;
+
+    // if (typeof window.globalData != 'undefined') {
+    //     __blocks.css += CssGenerator(window.globalData.settings, 'pagesettings', '8282882', true)
+    // }
 
     // Inner Blocks
     let parseData = innerBlocks(all_blocks, true)
@@ -230,11 +243,11 @@ const ParseCss = (setDatabase = true) => {
     const available_blocks = availableBlocksMeta(all_blocks);
 
     if (setDatabase) {
-        API_fetch(getCurrentPostId(), __blocks, isRemain, available_blocks )
+        API_fetch(getCurrentPostId(), __blocks, isRemain, available_blocks)
     }
     setTimeout(() => {
         window.bindCss = false
-    }, 1000)
+    }, 500)
 }
 
 export default ParseCss

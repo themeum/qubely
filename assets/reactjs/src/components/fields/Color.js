@@ -1,52 +1,83 @@
-const { __ } = wp.i18n
-import '../css/color.scss'
-const { Component, Fragment } = wp.element
-const { Dropdown, ColorPicker, Tooltip } = wp.components;
+import '../css/color.scss';
+import classnames from 'classnames';
 
+const { __ } = wp.i18n;
 
+const {
+    Component
+} = wp.element;
+
+const {
+    Tooltip,
+    Dropdown,
+    ColorPicker,
+} = wp.components;
+
+const { createHigherOrderComponent } = wp.compose;
 
 class Color extends Component {
     constructor(props) {
         super(props)
-        this.state = { current: 'date' }
-    }
-    defColors() {
-        let val = [];
-        const colors = window.globalData.settings;
-        val.push(colors.colorPreset1 || qubely_admin.palette[0])
-        val.push(colors.colorPreset2 || qubely_admin.palette[1])
-        val.push(colors.colorPreset3 || qubely_admin.palette[2])
-        val.push(colors.colorPreset4 || qubely_admin.palette[3])
-        val.push(colors.colorPreset5 || qubely_admin.palette[4])
-        val.push(colors.colorPreset6 || qubely_admin.palette[5])
-        return val;
+        this.state = {
+            current: 'date',
+        }
     }
 
+
     render() {
-        const { label, className, value, disablePalette, disableAlpha, disableClear, onChange } = this.props
+
+        const {
+            globalColors
+        } = this.props;
+
+        const {
+            value,
+            label,
+            onChange,
+            className,
+            disableClear,
+            disableAlpha,
+            disablePalette
+        } = this.props;
+
+        const classes = classnames(
+            'qubely-field',
+            'qubely-d-flex',
+            'qubely-field-color',
+            'qubely-align-center',
+            { [className]: className }
+        )
+
         return (
-            <div className={`qubely-field qubely-field-color qubely-d-flex qubely-align-center ${className ? className : ''}`}>
-                {label && <label className="qubely-mb-0">{label}</label>}
+            <div className={classes}>
+                {label && <label className="qubely-mb-0">{__(label)}</label>}
                 <Dropdown
                     position="top center"
                     className="qubely-ml-auto"
                     renderToggle={({ isOpen, onToggle }) => (
-                        <Fragment>
-                            <span className="qubely-color-picker-container">
-                                <span className="qubely-color-picker" style={{ backgroundColor: value || '' }} isPrimary onClick={onToggle} aria-expanded={isOpen} />
-                            </span>
-                        </Fragment>
+                        <span className="qubely-color-picker-container">
+                            <span className="qubely-color-picker"
+                                isPrimary
+                                onClick={onToggle}
+                                aria-expanded={isOpen}
+                                style={{ backgroundColor: value || '' }}
+                            />
+                        </span>
                     )}
                     renderContent={() => (
                         <span>
-                            <ColorPicker color={value || ''}
+                            <ColorPicker
+                                color={value || ''}
                                 onChangeComplete={val => {
-                                    if (val.rgb) { onChange(val.rgb.a != 1 ? 'rgba(' + val.rgb.r + ',' + val.rgb.g + ',' + val.rgb.b + ',' + val.rgb.a + ')' : val.hex) }
+                                    if (val.rgb) {
+                                        onChange(val.rgb.a != 1 ? 'rgba(' + val.rgb.r + ',' + val.rgb.g + ',' + val.rgb.b + ',' + val.rgb.a + ')' : val.hex)
+                                    }
                                 }}
-                                disableAlpha={disableAlpha ? disableAlpha : false} />
+                                disableAlpha={disableAlpha ? disableAlpha : false}
+                            />
                             {!disablePalette &&
-                                <div className="qubely-rgba-palette" style={{ padding: '0px 0px 15px 15px' }}>
-                                    {this.defColors().map(color => <button style={{ color: color }} onClick={() => onChange(color)} />)}
+                                <div className="qubely-rgba-palette">
+                                    {globalColors.map((color, index) => <button style={{ color: `var(--qubely-color-${index + 1})` }} onClick={() => onChange(`var(--qubely-color-${index + 1})`)} />)}
                                 </div>
                             }
                         </span>
@@ -55,12 +86,51 @@ class Color extends Component {
                 {(value != '' && !disableClear) &&
                     <Tooltip text={__('Clear')}>
                         <div className="qubely-ml-10">
-                            <span className="qubely-border-clear" onClick={() => onChange('')} role="button"><i className="fas fa-undo"/></span>
+                            <span className="qubely-border-clear" onClick={() => onChange('')} role="button"><i className="fas fa-undo" /></span>
                         </div>
                     </Tooltip>
                 }
             </div>
-        )
+        );
     }
 }
-export default Color
+
+function withGLobalColor(initialState = {}) {
+    return createHigherOrderComponent((OriginalComponent) => {
+        return class WrappedComponent extends Component {
+            constructor() {
+                super(...arguments);
+
+                this.setState = this.setState.bind(this);
+
+                this.state = initialState;
+            }
+            componentDidMount() {
+                this.getGlobalSettings();
+
+            }
+            getGlobalSettings = async () => {
+                let qubelyGlobalSettings = await JSON.parse(localStorage.getItem('qubely-global-settings'));
+                const { colors } = qubelyGlobalSettings;
+                if (typeof colors !== 'undefined') {
+                    this.setState({
+                        globalColors:colors
+                    });
+                }
+
+            }
+
+            render() {
+                return (
+                    <OriginalComponent
+                        {...this.props}
+                        {...this.state}
+                        setState={this.setState}
+                    />
+                );
+            }
+        };
+    }, 'withGLobalColor');
+}
+
+export default withGLobalColor()(Color);

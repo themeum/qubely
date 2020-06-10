@@ -61,7 +61,39 @@ const _push = (val, data) => {
     if (val.xs) { data.xs.push(val.xs) }
     return data;
 }
+
+const globalTypography = (selectedTypo) => {
+
+    let CSS = '{';
+    CSS += `font-family:var(--qubely-typo${selectedTypo}-font-family);`;
+    CSS += `font-size:var(--qubely-typo${selectedTypo}-font-size);`;
+    CSS += `font-weight:var(--qubely-typo${selectedTypo}-font-weight) !important;`;
+    CSS += `font-style:var(--qubely-typo${selectedTypo}-font-style) !important;`;
+    CSS += `line-height:var(--qubely-typo${selectedTypo}-line-height) !important;`;
+    CSS += `letter-spacing:var(--qubely-typo${selectedTypo}-letter-spacing);`;
+    CSS += `text-transform:var(--qubely-typo${selectedTypo}-text-transform);`;
+    CSS += '}';
+    return CSS;
+
+}
+
 export const cssTypography = (v) => {
+
+    const {
+        globalSource,
+        activeSource,
+        family,
+        weight,
+        transform,
+
+    } = v;
+
+    if (typeof activeSource !== 'undefined' && activeSource === 'global' && globalSource !== 'none') {
+        return globalTypography(globalSource);
+    } else if (activeSource === 'global' && globalSource === 'none') {
+        return {}
+    }
+
     let font = ''
     if (v.family) {
         if (!['Arial', 'Tahoma', 'Verdana', 'Helvetica', 'Times New Roman', 'Trebuchet MS', 'Georgia'].includes(v.family)) {
@@ -69,16 +101,42 @@ export const cssTypography = (v) => {
         }
     }
     let data = { md: [], sm: [], xs: [] }
-    if (v.size) { data = _push(_device(v.size, 'font-size:{{key}}'), data) }
-    if (v.height) { data = _push(_device(v.height, 'line-height:{{key}} !important'), data) }
-    if (v.spacing) { data = _push(_device(v.spacing, 'letter-spacing:{{key}}'), data) }
-    let simple = '{' + (v.family ? "font-family:'" + v.family + "'," + v.type + ";" : '') +
-        (v.weight ? 'font-weight:' + v.weight + ';' : '') +
-        (v.color ? 'color:' + v.color + ';' : '') +
-        (v.style ? 'font-style:' + v.style + ';' : '') +
-        (v.transform ? 'text-transform:' + v.transform + ';' : '') +
-        (v.decoration ? 'text-decoration:' + v.decoration + ';' : '') + '}';
-    return { md: data.md, sm: data.sm, xs: data.xs, simple, font };
+    if (v.size) {
+        data = _push(_device(v.size, 'font-size:{{key}}'), data)
+    }
+    if (v.height) {
+        data = _push(_device(v.height, 'line-height:{{key}} !important'), data)
+    }
+    if (v.spacing) {
+        data = _push(_device(v.spacing, 'letter-spacing:{{key}}'), data)
+    }
+
+    let simple = '{';
+    if (family) {
+        simple += `font-family:'${v.family}',${v.type};`;
+    }
+    if (weight) {
+        if (typeof weight === 'string') {
+            simple += `font-weight:${weight.slice(0, -1)};`;
+            simple += `font-style:italic;`;
+        } else {
+            simple += `font-weight:${weight};`;
+            simple += `font-style:normal;`;
+        }
+    }
+    if (transform) {
+        simple += `text-transform:${v.transform};`;
+    }
+    simple += '}';
+    return ({
+        md: data.md,
+        sm: data.sm,
+        xs: data.xs,
+        simple,
+        font
+    });
+
+
 }
 
 

@@ -1,18 +1,70 @@
-const { __ } = wp.i18n
-const { Fragment, Component } = wp.element;
-const { PanelBody, Toolbar, Tooltip } = wp.components
-const { RichText, InspectorControls, BlockControls } = wp.blockEditor
-const { Media, Range, ButtonGroup, Typography, Toggle, Color, Url, gloalSettings: { globalSettingsPanel, animationSettings, interactionSettings }, Inline: { InlineToolbar }, ContextMenu: { ContextMenu }, withCSSGenerator, InspectorTabs, InspectorTab } = wp.qubelyComponents
 import icons from '../../helpers/icons';
+import classnames from 'classnames';
+const { __ } = wp.i18n;
+const {
+    Fragment,
+    Component
+} = wp.element;
+
+const {
+    PanelBody,
+    Toolbar,
+    Tooltip
+} = wp.components;
+
+const {
+    RichText,
+    BlockControls,
+    MediaPlaceholder,
+    InspectorControls,
+    MediaUpload
+} = wp.blockEditor;
+
+const {
+    Range,
+    RadioAdvanced,
+    Color,
+    Media,
+    Toggle,
+    Typography,
+    Inline: {
+        InlineToolbar
+    },
+    ContextMenu: {
+        ContextMenu
+    },
+    gloalSettings: {
+        animationSettings,
+        interactionSettings,
+        globalSettingsPanel,
+    },
+    InspectorTab,
+    InspectorTabs,
+    withCSSGenerator,
+} = wp.qubelyComponents;
+
+const DEFAULT_SIZE_SLUG = 'large';
+const ALLOWED_MEDIA_TYPES = ['image'];
+
+
 class Edit extends Component {
     constructor(props) {
         super(props)
-        this.state = { device: 'md', selector: true, spacer: true, openPanelSetting: '' };
+        this.state = {
+            device: 'md'
+        };
     }
 
     componentDidMount() {
-        const { setAttributes, clientId, attributes: { uniqueId } } = this.props
-        const _client = clientId.substr(0, 6)
+        const {
+            clientId,
+            setAttributes,
+            attributes: {
+                uniqueId
+            }
+        } = this.props;
+        const _client = clientId.substr(0, 6);
+
         if (!uniqueId) {
             setAttributes({ uniqueId: _client });
         } else if (uniqueId && uniqueId != _client) {
@@ -22,18 +74,15 @@ class Edit extends Component {
         // image width 
         const imageComparisonRoot = document.querySelector('.qubely-block-image-comparison');
         const imageComparisonImages = document.querySelectorAll('.qubely-block-image-comparison img');
-        imageComparisonImages.forEach( (eachImg) => {
+        imageComparisonImages.forEach((eachImg) => {
             eachImg.style.width = imageComparisonRoot.offsetWidth + 'px';
         });
     }
 
-    handlePanelOpenings = (panelName) => {
-        this.setState({ ...this.state, openPanelSetting: panelName })
-    }
 
     dragFunc = (event) => {
         const container = event.target.parentNode;
-        const resizeElement = container.querySelector('.comparison-resize-img');
+        const resizeElement = container.querySelector('.resizable-img');
         const dragCircle = container.querySelector('.comparison-scrollCircle');
         this.draging(container, dragCircle, resizeElement);
     }
@@ -42,161 +91,231 @@ class Edit extends Component {
         let moving = () => {
             let containerOffset = container.getBoundingClientRect().left - 40,
                 containerWidth = container.offsetWidth,
-                rect = container.getBoundingClientRect().left - 40,
-                movingValue = ( ( event.pageX - 37 )  - containerOffset) / (containerWidth / 100);
-            if(movingValue < 10)
+                movingValue = ((event.pageX - 37) - containerOffset) / (containerWidth / 100);
+            if (movingValue < 10)
                 movingValue = 10;
-            else if(movingValue > 90)
+            else if (movingValue > 90)
                 movingValue = 90;
-            dragCircle.style.left = movingValue+'%';
-            resizeElement.style.width = movingValue+'%';
+            dragCircle.style.left = movingValue + '%';
+            resizeElement.style.width = movingValue + '%';
         }
-    
+
         container.addEventListener('mousemove', moving);
-    
-        let dragRevoveFunc = (event) => {
+
+        let dragRevoveFunc = () => {
             container.removeEventListener('mousemove', moving);
         }
-    
-        container.addEventListener('mouseup',dragRevoveFunc);
-        window.addEventListener('mouseup',dragRevoveFunc);
-    
+
+        container.addEventListener('mouseup', dragRevoveFunc);
+        window.addEventListener('mouseup', dragRevoveFunc);
+
+    }
+    onSelectImage = (media, imageId) => {
+        if (!media || !media.url) {
+            return;
+        }
+        this.props.setAttributes(imageId === 'A' ? {
+            image: media
+        } : {
+                image2: media
+            }
+        );
+    }
+    onUploadError = (message) => {
+        const { noticeOperations } = this.props;
+        noticeOperations.removeAllNotices();
+        noticeOperations.createErrorNotice(message);
+    }
+    onSelectURL = (newURL, imageId) => {
+
+        const { image, image2 } = this.props.attributes;
+        let currentImage = image;
+        if (imageId === 'B') {
+            currentImage = image2;
+        }
+        if (newURL !== currentImage.url) {
+            currentImage = {
+                ...currentImage,
+                url: newURL,
+                id: undefined,
+                sizeSlug: DEFAULT_SIZE_SLUG
+            }
+        }
+        this.props.setAttributes(imageId === 'A' ? {
+            image: currentImage
+        } : {
+                image2: currentImage
+            });
     }
 
     render() {
         const {
-            uniqueId,
-            recreateStyles,
-            className,
-            selector,
-            titleVerticalAlign,
-            originalTitle,
-            titleLevel,
-            originalTitleTypography,
-            originalTitleColor,
-            titleVisibleOnHover,
-            modifiedTitle,
-            circleBackground,
-            disableTitle,
-            circleWidth,
+            name,
+            clientId,
+            noticeUI,
+            attributes,
+            setAttributes,
+            attributes: {
+                uniqueId,
+                className,
+                imageATitle,
+                titleColor,
+                typography,
+                imageBTitle,
+                controlColor,
+                disableTitle,
+                verticalAlign,
+                horizontalOffset,
+                verticalOffset,
+                image,
+                image2x,
+                imgAlt,
+                image2,
+                image2_2x,
+                imgAlt2,
 
-            image,
-            image2x,
-            imageType,
-            externalImageUrl,
-            imgAlt,
-            imageUrl,
-            image2,
-            image2_2x,
-            imageType2,
-            externalImageUrl2,
-            imgAlt2,
-            imageUrl2,
+                animation,
+                globalZindex,
+                enablePosition,
+                selectPosition,
+                positionXaxis,
+                positionYaxis,
+                hideTablet,
+                hideMobile,
+                globalCss,
+                interaction
+            }
+        } = this.props;
 
-            animation,
-            globalZindex,
-            enablePosition,
-            selectPosition,
-            positionXaxis,
-            positionYaxis,
-            hideTablet,
-            hideMobile,
-            globalCss,
-            interaction
-        } = this.props.attributes
-        const { name, clientId, attributes, setAttributes, isSelected } = this.props
-        const { openPanelSetting, device } = this.state
-        console.log(modifiedTitle, this.props);
+        const { device } = this.state;
 
-        const titleTagName = 'h' + titleLevel;
+        const renderPlaceholder = (imageId, title) => {
+            let selectedImage = image;
+            if (imageId === 'B') {
+                selectedImage = image2;
+            }
+            const mediaPreview = !!selectedImage.url && (
+                <img
+                    alt={__('Edit image')}
+                    title={__('Edit image')}
+                    className={'edit-image-preview'}
+                    src={selectedImage.url}
+                />
+            );
+            return (
+                <MediaPlaceholder
+                    accept="image/*"
+                    multiple={false}
+                    notices={noticeUI}
+                    icon="format-image"
+                    mediaPreview={mediaPreview}
+                    allowedTypes={ALLOWED_MEDIA_TYPES}
+                    onError={() => this.onUploadError()}
+                    labels={{ title }}
+                    onSelect={media => this.onSelectImage(media, imageId)}
+                    onSelectURL={newUrl => this.onSelectURL(newUrl, imageId)}
+                    disableMediaButtons={selectedImage.url}
+                    value={{ id: selectedImage.id, src: selectedImage.src }}
+                />
+            )
+        }
+
+        const actionButtons = (id, attr) => {
+            return (
+                <div className="qubely-media-actions">
+                    <MediaUpload
+                        value={ id }
+                        onSelect={ ( selectedImage ) => {
+                            setAttributes({[attr]: selectedImage});
+                        }}
+                        allowedTypes={ ['image'] }
+                        render={ ( { open } ) => (
+                            <Tooltip text={__('Edit')}>
+                                <button className="qubely-button" aria-label={__('Edit')} onClick={open} role="button">
+                                    <span aria-label={__('Edit')} className="fas fa-pencil-alt fa-fw" />
+                                </button>
+                            </Tooltip>
+                        ) }
+                    />
+
+                    <Tooltip text={__('Remove')}>
+                        <button className="qubely-button" aria-label={__('Remove')} onClick={() => setAttributes({ [attr]: {} })} role="button">
+                            <span aria-label={__('Close')} className="far fa-trash-alt fa-fw" />
+                        </button>
+                    </Tooltip>
+                </div>
+            )
+        }
+
+        let validImageA = false, validImageB = false;
+
+        if (image.url || image2x.url) {
+            validImageA = true;
+        }
+        if (image2.url || image2_2x.url) {
+            validImageB = true;
+        }
+
+
         return (
             <Fragment>
                 <InspectorControls key="inspector">
                     <InspectorTabs tabs={['style', 'advance']}>
                         <InspectorTab key={'style'}>
-                            <PanelBody title={__('Original Image')}>
-                                <ButtonGroup
-                                    label={__('Image Type')}
-                                    options={
-                                        [
-                                            [__('Local'), 'local'],
-                                            [__('External'), 'external']
-                                        ]
-                                    }
-                                    value={imageType}
-                                    onChange={value => setAttributes({ imageType: value })}
-                                />
-                                {
-                                    imageType === 'local' ?
-                                        <Fragment>
-                                            <Media label={__('Image')} multiple={false} type={['image']} panel={true} value={image} onChange={val => setAttributes({ image: val })} />
-                                            <Media label={__('Retina Image (@2x)')} multiple={false} type={['image']} panel={true} value={image2x} onChange={val => setAttributes({ image2x: val })} />
-                                        </Fragment>
-                                        :
-                                        <Url label={__('Image Source')} disableAdvanced value={externalImageUrl} onChange={newUrl => setAttributes({ externalImageUrl: newUrl })} />
-                                }
-                                { disableTitle &&
+                            <PanelBody title={''} opened={true}>
+                                <Toggle label={__('Enable Text')} value={disableTitle} onChange={val => setAttributes({ disableTitle: val })} />
+                                {disableTitle &&
                                     <Fragment>
-                                        <Color label={__('Title Color')} value={originalTitleColor} onChange={(value) => setAttributes({ originalTitleColor: value })} />
-                                        <Typography label={__('Typography')} value={originalTitleTypography} onChange={(value) => setAttributes({ originalTitleTypography: value })} disableLineHeight device={device} onDeviceChange={value => this.setState({ device: value })} />
+                                        <Color label={__('Text Color')} value={titleColor} onChange={(value) => setAttributes({ titleColor: value })} />
+                                        <Typography label={__('Typography')} value={typography} onChange={(value) => setAttributes({ typography: value })} disableLineHeight device={device} onDeviceChange={value => this.setState({ device: value })} />
+                                        <RadioAdvanced
+                                            label={__('Vertical Align')}
+                                            options={[
+                                                { label: __('Top'), value: 'top', title: 'top' },
+                                                { label: __('Bottom'), value: 'bottom', title: 'Bottom' },
+                                            ]}
+                                            value={verticalAlign}
+                                            onChange={(verticalAlign) => setAttributes({ verticalAlign })} />
                                     </Fragment>
                                 }
-                                <Toggle label={__('Disable Title')} value={disableTitle} onChange={val => setAttributes({ disableTitle: val })} />
 
-                                <div className="qubely-field">
-                                    <label>{__('Content Position')}</label>
-                                    <div className="qubely-field-button-list qubely-field-button-list-fluid">
-                                        <Tooltip text={__('Top')}>
-                                            <button
-                                                onClick={() => setAttributes({ titleVerticalAlign: 'flex-start' })}
-                                            >{icons.vertical_top}</button>
-                                        </Tooltip>
-
-                                        <Tooltip text={__('Middle')} >
-                                            <button
-                                                onClick={() => setAttributes({ titleVerticalAlign: 'center' })}
-                                            >{icons.vertical_middle}</button>
-                                        </Tooltip>
-
-                                        <Tooltip text={__('Bottom')} >
-                                            <button
-                                                onClick={() => setAttributes({ titleVerticalAlign: 'flex-end' })}
-                                            >{icons.vertical_bottom}</button>
-                                        </Tooltip>
-                                    </div>
-                                </div>
-                            
-                            </PanelBody>
-
-                        </InspectorTab>
-                        <InspectorTab key={'style'}>
-                            <PanelBody title={__('Modified Image')} initialOpen={false}>
-                                <ButtonGroup
-                                    label={__('Image Type')}
-                                    options={
-                                        [
-                                            [__('Local'), 'local'],
-                                            [__('External'), 'external']
-                                        ]
-                                    }
-                                    value={imageType}
-                                    onChange={value => setAttributes({ imageType: value })}
+                                <Range
+                                    label={__('Vertical Offset')}
+                                    value={verticalOffset}
+                                    min={0} max={100}
+                                    onChange={(value) => setAttributes({ verticalOffset: value })}
+                                    unit={['px', '%']}
+                                    responsive device={device}
+                                    onDeviceChange={value => this.setState({ device: value })}
                                 />
-                                {
-                                    imageType === 'local' ?
-                                        <Fragment>
-                                            <Media label={__('Image')} multiple={false} type={['image']} panel={true} value={image2} onChange={val => setAttributes({ image2: val })} />
-                                            <Media label={__('Retina Image (@2x)')} multiple={false} type={['image']} panel={true} value={image2_2x} onChange={val => setAttributes({ image2_2x : val })} />
-                                        </Fragment>
-                                        :
-                                        <Url label={__('Image Source')} disableAdvanced value={externalImageUrl2} onChange={newUrl => setAttributes({ externalImageUrl2: newUrl })} />
-                                }
+
+                                <Range
+                                    label={__('Horizontal Offset')}
+                                    value={horizontalOffset}
+                                    min={0} max={100}
+                                    onChange={(value) => setAttributes({ horizontalOffset: value })}
+                                    unit={['px', '%']}
+                                    responsive device={device}
+                                    onDeviceChange={value => this.setState({ device: value })}
+                                />
+
+                                <Color label={__('Slider Color')} value={controlColor} onChange={(value) => setAttributes({ controlColor: value })} />
                             </PanelBody>
-                        </InspectorTab>
-                        <InspectorTab key={'style'} initialOpen={true}>
-                            <PanelBody title={__('Circle')} initialOpen={false}>
-                                <Range label={__('Size')} value={circleWidth} onChange={(value) => setAttributes({ circleWidth: value })} min={0} max={60} />
-                                <Color label={__('Background')} value={circleBackground} onChange={(value) => setAttributes({ circleBackground: value })} />
+                            <PanelBody title={__('Retina Images')} initialOpen={false}>
+                                <Media
+                                    panel
+                                    value={image2_2x}
+                                    multiple={false}
+                                    label={__('@2x Image 1 (Left Image)')}
+                                    type={['image']}
+                                    onChange={val => setAttributes({ image2_2x: val })} />
+                                <Media
+                                    panel
+                                    value={image2x}
+                                    multiple={false}
+                                    label={__('@2x Image 2 (Right Image)')}
+                                    type={['image']}
+                                    onChange={val => setAttributes({ image2x: val })} />
                             </PanelBody>
                         </InspectorTab>
                         <InspectorTab key={'advance'}>
@@ -217,67 +336,87 @@ class Edit extends Component {
                 </BlockControls>
 
                 {globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
+
                 <div className={`qubely-block-${uniqueId}${className ? ` ${className}` : ''}`}>
-                    <div class="qubely-block-image-comparison">
+                    <div class={classnames(
+                        'qubely-block-image-comparison',
                         {
-                            (imageType === 'local' && image.url != undefined) ?
-                                <Fragment>
-                                    {image2x.url != undefined ?
-                                        <img className="qubely-image-image" src={image.url} srcset={image.url + ' 1x, ' + image2x.url + ' 2x'} alt={imgAlt && imgAlt} />
-                                        :
-                                        <img className="qubely-image-image" src={image.url} alt={imgAlt && imgAlt} />
-                                    }
-                                </Fragment>
-                                :
-                                (imageType === 'external' && externalImageUrl.url != undefined) ?
-                                    <img className="qubely-image-image" src={externalImageUrl.url} alt={imgAlt && imgAlt} />
-                                    :
-                                    <div className="qubely-image-image qubely-image-placeholder"><i className="far fa-image" /></div>
+                            'has-child-placeholder': (!validImageA || !validImageB)
                         }
-                        { disableTitle &&
-                            <RichText
-                                key="editable"
-                                tagName="span"
-                                className="comparison-image-text"
-                                keepPlaceholderOnFocus
-                                placeholder={__('Original')}
-                                onChange={value => setAttributes({ originalTitle: value })}
-                                value={originalTitle} />
-                        }
-                        <div class="comparison-resize-img">
+                    )}>
+
+                        <div className={classnames(
+                            'image-container image-B',
                             {
-                                (imageType === 'local' && image2.url != undefined) ?
-                                    <Fragment>
-                                        {image2_2x.url != undefined ?
-                                            <img className="qubely-image-image" src={image2.url} srcset={image2.url + ' 1x, ' + image2_2x.url + ' 2x'} alt={imgAlt2 && imgAlt2} />
-                                            :
-                                            <img className="qubely-image-image" src={image2.url} alt={imgAlt2 && imgAlt2} />
-                                        }
-                                    </Fragment>
-                                    :
-                                    (imageType === 'external' && externalImageUrl2.url != undefined) ?
-                                        <img className="qubely-image-image" src={externalImageUrl2.url} alt={imgAlt2 && imgAlt2} />
-                                        :
-                                        <div className="qubely-image-image qubely-image-placeholder"><i className="far fa-image" /></div>
+                                ['valid-images resizable-img']: validImageA && validImageB,
+                                'is-placeholder' : !validImageB
                             }
-                            { disableTitle &&
-                                <RichText
-                                    key="editable"
-                                    tagName="span"
-                                    className="comparison-image-text"
-                                    keepPlaceholderOnFocus
-                                    placeholder={__('Modified')}
-                                    onChange={value => setAttributes({ modifiedTitle : value })}
-                                    value={modifiedTitle} />
+                        )}>
+                            {
+                                validImageB ?
+                                    <div className={'image-container-inner'}>
+                                        <img className="qubely-image" src={image2.url} {...(image2_2x.url ? {srcset: image2.url + ' 1x, ' + image2_2x.url + ' 2x'} : {})} alt={imgAlt2 && imgAlt2} />
+                                        {
+                                            disableTitle && (
+                                                <RichText
+                                                    value={imageBTitle}
+                                                    keepPlaceholderOnFocus
+                                                    placeholder={__('Modified')}
+                                                    className={'comparison-image-text ' + 'text-vertical-align-' + verticalAlign}
+                                                    onChange={value => setAttributes({ imageBTitle: value })}
+                                                />
+                                            )
+                                        }
+                                        {actionButtons(image2.id, 'image2')}
+                                    </div>
+                                    :
+                                    renderPlaceholder('B', 'Image One')
+
                             }
                         </div>
-                        <span class="comparison-scrollCircle"
-                            onMouseDown={ (event) => this.dragFunc(event) }
-                        >
-                        </span>
+
+                        <div className={classnames(
+                            'image-container image-A',
+                            {
+                                ['valid-images']: validImageA && validImageB,
+                                'is-placeholder' : !validImageA
+                            }
+                        )}>
+                            {
+                                validImageA ?
+                                    <div className={'image-container-inner'}>
+                                        {
+                                            <img className="qubely-image" src={image.url} {...(image2x.url ? {srcset: image.url + ' 1x, ' + image2x.url + ' 2x'} : {})} alt={imgAlt && imgAlt} />
+                                        }
+                                        {
+                                            disableTitle && (
+                                                <RichText
+                                                    value={imageATitle}
+                                                    keepPlaceholderOnFocus
+                                                    placeholder={__('Original')}
+                                                    className={'comparison-image-text ' + 'text-vertical-align-' + verticalAlign}
+                                                    onChange={value => setAttributes({ imageATitle: value })}
+                                                />
+                                            )
+                                        }
+                                        {actionButtons(image.id, 'image')}
+                                    </div>
+                                    :
+                                    renderPlaceholder('A', 'Image Two')
+
+                            }
+                        </div>
+                        {
+                            (validImageA && validImageB) &&
+                            <span class="comparison-scrollCircle" onMouseDown={(event) => this.dragFunc(event)} />
+                        }
+
                     </div>
 
-                    <div ref="qubelyContextMenu" className={`qubely-context-menu-wraper`} >
+                    <div
+                        ref="qubelyContextMenu"
+                        className={`qubely-context-menu-wraper`}
+                    >
                         <ContextMenu
                             name={name}
                             clientId={clientId}
@@ -286,7 +425,6 @@ class Edit extends Component {
                             qubelyContextMenu={this.refs.qubelyContextMenu}
                         />
                     </div>
-
                 </div>
             </Fragment>
         )

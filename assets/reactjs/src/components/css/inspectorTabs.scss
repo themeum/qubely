@@ -8,15 +8,22 @@ $border-color: #D6D9DD;
     padding-bottom: 25px;
     position: relative;
     z-index: 1;
+    overflow: hidden;
     &::before{
       content: '';
       position: absolute;
-      top: -16px;
+      top: 0;
       left: -16px;
       right: -16px;
       bottom: 0px;
       background: #F2F4F5;
       z-index: -1;
+    }
+  }
+  .components-panel__body.edit-post-settings-sidebar__panel-block .block-editor-block-card{
+    overflow: unset;
+    &::before{
+      top: -16px;
     }
   }
 }

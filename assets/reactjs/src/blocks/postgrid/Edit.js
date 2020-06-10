@@ -338,7 +338,7 @@ class Edit extends Component {
 									/>
 								}
 								{(((layout === 1) && (style != 3)) || ((layout === 2) && (style != 3))) &&
-									<Padding label={__('Content Padding')} value={contentPadding} onChange={val => setAttributes({ contentPadding: val })} min={0} max={100} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
+									<Padding label={__('Padding')} value={contentPadding} onChange={val => setAttributes({ contentPadding: val })} min={0} max={100} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
 								}
 								<Separator />
 								{(((layout === 1) && (style === 1)) || ((layout === 2) && (style === 1))) &&

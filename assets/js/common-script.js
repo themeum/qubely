@@ -435,6 +435,37 @@ jQuery(document).ready(function ($) {
         });
     });
 
+    /**
+     * Settings tab
+     */
+
+    var qubelySettingsTabContent = $('#qubely-settings-tabs-content');
+    var qubelySettingTabs = $('#qubely-settings-tabs a');
+
+    qubelySettingTabs.on('click', function (e) {
+        e.preventDefault();
+        history.pushState({}, '', this.href);
+        var anchor = $(this).attr('href');
+        qubelySettingsTabContent.find('.qubely-settings-inner').hide();
+        qubelySettingsTabContent.find(anchor).show();
+
+        qubelySettingTabs.removeClass('nav-tab-active');
+        $(this).addClass('nav-tab-active');
+    });
+
+    if(qubelySettingsTabContent.length){
+        if(window.location.hash){
+            qubelySettingTabs.removeClass('nav-tab-active');
+            $('#qubely-settings-tabs a[href=' + window.location.hash + ']').addClass('nav-tab-active');
+            qubelySettingsTabContent.find('.qubely-settings-inner').hide();
+            qubelySettingsTabContent.find(window.location.hash).show();
+        }else {
+            qubelySettingTabs.removeClass('nav-tab-active');
+            qubelySettingTabs.first().addClass('nav-tab-active');
+            qubelySettingsTabContent.find('.qubely-settings-inner').hide();
+            qubelySettingsTabContent.find('.qubely-settings-inner').first().show();
+        }
+    }
     // postgrid-pro loadmore
 
     $('.qubely-postgrid-loadmore').on('click', function () {

@@ -4,7 +4,7 @@ Donate link: https://www.themeum.com
 Tags: blocks, gutenberg, gutenberg blocks, editor, block, page builder
 Requires at least: 5.0
 Tested up to: 5.4
-Stable tag: 1.3.7
+Stable tag: 1.4.0
 Requires PHP: 7.0
 License: GPL-2.0+
 License URI: http://www.gnu.org/licenses/gpl-2.0.txt
@@ -236,6 +236,30 @@ You can report bugs on the [support forum here](https://wordpress.org/support/pl
 
 
 == Changelog ==
+
+= 1.4.0 - 21 May, 2020 =
+New: Global Settings  
+New: Qubely Settings page - with Google Map API key, reCAPTCHA key storage 
+Fix: Accordion block - Active Panel color 
+Fix: Contact Form block - Form Submit issue   
+
+= 1.3.91 - 29 April, 2020 =
+Fix: Typography & Box Shadow panel css issue
+Fix: Image comparison block firefox touch issue
+Update: Performance improvement.
+
+= 1.3.9 - 27 April, 2020 =
+Fix: Testimonial block - ratings backward compatibility issue
+Fix: Image comparison block responsive issue
+
+= 1.3.8 - 22 April, 2020 =
+New: Image comparison Block
+Update: Tabs inner blocks new structure support
+Fix: Tabs Block contents is not displaying
+Fix: Table of Contents block - Attributes value saving issue
+Fix : Heading block - Typography disable issue in backend
+Fix : Conflict with Table of Contents Plus plugin
+
 
 = 1.3.7 - 03 April, 2020 =
 Fix: Image block - Alignment issue in Simple layout

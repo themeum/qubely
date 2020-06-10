@@ -12,7 +12,7 @@
 
 [![Gutenberg Blocks and Page Builder – Qubely ](https://ps.w.org/qubely/assets/banner-1544x500.png?rev=2111259)](http://www.youtube.com/watch?v=_aRAQkHZiUQ)
 
-## Qubely core features at a glance 
+## Qubely core features at a glance
 
 * Predefined sections
 * Modern layout packs

@@ -15,6 +15,7 @@ import {
     cssRowReverse,
     cssTransform
 } from './CssHelper'
+import GlobalSettings from '../plugins/global-settings'
 
 // Replace Value
 const replaceData = (selector, key, value) => {
@@ -119,7 +120,7 @@ const checkDepends = (settings, selectData, key, indexStyle) => {
     if (selectData.hasOwnProperty('condition')) {
         selectData.condition.forEach((data) => {
             let previous = _depends
-            if (data.relation == '==') {
+            if ((data.relation == '==') || (data.relation == '===')) {
                 if ((typeof data.value == 'string') || (typeof data.value == 'number') || (typeof data.value == 'boolean')) {
                     if (settings[data.key] == data.value) { _depends = true; }
                     else { _depends = false }
@@ -130,7 +131,7 @@ const checkDepends = (settings, selectData, key, indexStyle) => {
                     })
                     if (select) { _depends = true; }
                 }
-            } else if (data.relation == '!=') {
+            } else if ((data.relation == '!=') || (data.relation == '!==')) {
                 if ((typeof data.value == 'string') || (typeof data.value == 'number') || (typeof data.value == 'boolean')) {
                     if (settings[data.key] != data.value) { _depends = true; }
                     else { _depends = false; }
@@ -152,7 +153,7 @@ const checkDepends = (settings, selectData, key, indexStyle) => {
 }
 
 
-export const CssGenerator = (settings, blockName, blockID, isInline = false) => {
+export const CssGenerator = (settings, blockName, blockID, isInline = false, global = false, frontend = false, globalAttributes = undefined) => {
     if (!blockID) return;
     let __CSS = '',
         md = [],
@@ -161,7 +162,13 @@ export const CssGenerator = (settings, blockName, blockID, isInline = false) => 
         notResponsiveCss = [];
 
     Object.keys(settings).forEach((key) => {
-        const attributes = typeof blockName === 'string' ? wp.blocks.getBlockType('qubely/' + blockName).attributes : blockName
+        let attributes = [];
+        if (global === false) {
+            attributes = typeof blockName === 'string' ? wp.blocks.getBlockType('qubely/' + blockName).attributes : blockName
+        } else {
+            attributes = globalAttributes
+        }
+
         if (attributes[key] && attributes[key].hasOwnProperty('style')) {
 
             attributes[key].style.forEach((selectData, indexStyle) => {
@@ -240,22 +247,30 @@ export const CssGenerator = (settings, blockName, blockID, isInline = false) => 
     if (xs.length > 0) { __CSS += '@media (max-width: 991px) {' + xs.join('') + '}' }
     if (notResponsiveCss.length > 0) { __CSS += notResponsiveCss.join('') }
 
+    if (global) {
+        __CSS = __CSS.replace(new RegExp('.qubely-block-global', "g"), frontend ? '.qubely-frontend' : '.qubely-editor');
+    }
+
     if (isInline) {
-        return __CSS
+        return __CSS;
     }
 
     // Set CSS
-    setStyle(__CSS, blockID)
+    setStyle(__CSS, blockID, global, frontend);
 }
 
 
 // Set CSS to Head
-const setStyle = (styleCss, blockID) => {
-    let styleSelector = window.document;
-    if (styleSelector.getElementById('qubely-block-' + blockID) === null) {
+const setStyle = (styleCss, blockID, global = false, frontend = false) => {
+    let styleSelector = window.document, id = 'qubely-block-' + blockID;
+    if (global && frontend) {
+        id = 'qubely-global-styles';
+    }
+
+    if (styleSelector.getElementById(id) === null) {
         let cssInline = document.createElement('style');
         cssInline.type = 'text/css';
-        cssInline.id = 'qubely-block-' + blockID;
+        cssInline.id = id;
         if (cssInline.styleSheet) {
             cssInline.styleSheet.cssText = styleCss;
         } else {
@@ -263,6 +278,6 @@ const setStyle = (styleCss, blockID) => {
         }
         styleSelector.getElementsByTagName("head")[0].appendChild(cssInline);
     } else {
-        styleSelector.getElementById('qubely-block-' + blockID).innerHTML = styleCss;
+        styleSelector.getElementById(id).innerHTML = styleCss;
     }
 }

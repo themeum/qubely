@@ -1,7 +1,7 @@
 const { __ } = wp.i18n;
 const { InspectorControls, BlockControls } = wp.blockEditor
 const { Component, Fragment } = wp.element;
-const { PanelBody, TextControl, TextareaControl, Toolbar } = wp.components;
+const { PanelBody, TextControl, TextareaControl, Toolbar, Button } = wp.components;
 const {
     Styles,
     Range,
@@ -41,16 +41,46 @@ class Edit extends Component {
             device: 'md',
             spacer: true,
             selectedItem: -1,
+            saved_globally: false
         }
+        this._saveGlobally = this._saveGlobally.bind(this);
     }
 
     componentDidMount() {
-        const { setAttributes, clientId, attributes: { uniqueId } } = this.props
+        const { setAttributes, clientId, attributes: { uniqueId, reCaptchaSiteKey, reCaptchaSecretKey } } = this.props
         const _client = clientId.substr(0, 6)
         if (!uniqueId) {
             setAttributes({ uniqueId: _client });
         } else if (uniqueId && uniqueId != _client) {
             setAttributes({ uniqueId: _client });
+        }
+
+        if(qubely_admin.qubely_recaptcha_site_key) {
+            setAttributes({reCaptchaSiteKey: qubely_admin.qubely_recaptcha_site_key});
+        }
+
+        if(qubely_admin.qubely_recaptcha_secret_key) {
+            setAttributes({reCaptchaSecretKey: qubely_admin.qubely_recaptcha_secret_key});
+        }
+
+    }
+    
+    async _saveGlobally(siteKey, secretKey) {
+        if(!siteKey || !secretKey) return;
+        try {
+            await wp.apiFetch({
+                path: 'qubely/v1/add_qubely_options',
+                method: 'POST',
+                data: {key: 'qubely_recaptcha_site_key', value: siteKey}
+            });
+            await wp.apiFetch({
+                path: 'qubely/v1/add_qubely_options',
+                method: 'POST',
+                data: {key: 'qubely_recaptcha_secret_key', value: secretKey}
+            });
+            this.setState({saved_globally: true});
+        } catch (e) {
+            console.log(e);
         }
     }
 
@@ -120,7 +150,7 @@ class Edit extends Component {
             hideTablet,
             hideMobile,
             globalCss } = attributes;
-
+        const setting_url = qubely_admin.admin_url + 'admin.php?page=qubely-settings';
         return (
             <Fragment>
                 <InspectorControls key="inspector">
@@ -352,24 +382,32 @@ class Edit extends Component {
                                             help={__('Set your desired message for form submission error. Leave blank for default.')}
                                         />
                                         <Toggle label={__('Enable reCAPTCHA')} value={reCaptcha} onChange={val => setAttributes({ reCaptcha: val })} />
-                                        {reCaptcha &&
-                                            <div>
-                                                <TextControl
-                                                    label={__('Site Key ')}
-                                                    value={reCaptchaSiteKey}
-                                                    onChange={val => setAttributes({ reCaptchaSiteKey: val })}
-                                                    placeholder={__('Enter Google Site Key')}
-                                                />
-                                                <TextControl
-                                                    label={__('Secret Key ')}
-                                                    value={reCaptchaSecretKey}
-                                                    onChange={val => setAttributes({ reCaptchaSecretKey: val })}
-                                                    placeholder={__('Enter Google Secret Key')}
-                                                />
-                                                <span className="qubely-recaptcha-help">
-                                                    Get reCAPTCHA(v2) keys from <a href='//www.google.com/recaptcha/admin/' >{__('www.google.com/recaptcha/admin/')} </a>
-                                                </span>
-                                            </div>
+                                        {
+                                            reCaptcha && (
+                                                ((qubely_admin.qubely_recaptcha_site_key && qubely_admin.qubely_recaptcha_site_key) || this.state.saved_globally) ? (
+                                                    <div className='api-notice'>{__('reCaptcha keys added successfully')}, <a target='_blank' href={setting_url}>{__('Edit keys here')}</a></div>
+                                                ) : (
+                                                    reCaptchaSiteKey && reCaptchaSecretKey ? (
+                                                        <div className='recaptcha-keys'>
+                                                            <TextControl
+                                                                label={__('Site Key ')}
+                                                                value={reCaptchaSiteKey}
+                                                                onChange={val => setAttributes({ reCaptchaSiteKey: val })}
+                                                                placeholder={__('Enter Google Site Key')}
+                                                            />
+                                                            <TextControl
+                                                                label={__('Secret Key ')}
+                                                                value={reCaptchaSecretKey}
+                                                                onChange={val => setAttributes({ reCaptchaSecretKey: val })}
+                                                                placeholder={__('Enter Google Secret Key')}
+                                                            />
+                                                            <Button isPrimary onClick={() => this._saveGlobally(reCaptchaSiteKey, reCaptchaSecretKey)}>{__('Set globally')}</Button>
+                                                        </div>
+                                                    ) : (
+                                                        <div className='api-notice warning'>{__('reCaptcha requires site key & secret key')}, <a target='_blank' href={setting_url}>{__('Add keys here')}</a></div>
+                                                    )
+                                                )
+                                            )
                                         }
                                     </Tab>
                                     <Tab tabTitle={__('Email')}>
