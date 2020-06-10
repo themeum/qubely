@@ -81,7 +81,7 @@ class QUBELY
 	{
 
 		$current_screen = get_current_screen();
-		
+
 		if ('post' == $current_screen->base) {
 			$classes .= 'qubely qubely-editor';
 		}
@@ -130,7 +130,8 @@ class QUBELY
             'qubely_recaptcha_site_key' => $qubely_recaptcha_site_key,
             'qubely_recaptcha_secret_key' => $qubely_recaptcha_secret_key,
             'site_url' => site_url(),
-            'admin_url' => admin_url()
+            'admin_url' => admin_url(),
+			'publishedPosts'=>wp_count_posts()->publish,
 		));
 	}
 
