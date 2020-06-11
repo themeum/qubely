@@ -542,3 +542,41 @@
     }
   }
 }
+.qubely-postgrid-pagination {
+  font-weight: 600;
+  font-size: 16px;
+  color: #363636;
+  a,
+  > span,
+  button{
+    line-height: 48px;
+    min-width: 50px;
+    text-align: center;
+    background: white;
+    //margin-left: 4.5px;
+    //margin-right: 4.5px;
+    border: 1px solid #BBC0D4;
+    border-radius: 6px;
+    margin-bottom: 10px;
+    //padding-left: 20px;
+    //padding-right: 20px;
+    display: inline-block;
+    text-decoration: none;
+    color: inherit;
+    &:hover{
+      color: #348EF8;
+    }
+    &.current,
+    &.active{
+      color: #fff;
+      background: #348EF8;
+      border-color: #348EF8;
+    }
+    &.qubely-pagination-prev span{
+      margin-right: 4px;
+    }
+    &.qubely-pagination-next span{
+      margin-left: 4px;
+    }
+  }
+}

@@ -466,6 +466,26 @@ jQuery(document).ready(function ($) {
             qubelySettingsTabContent.find('.qubely-settings-inner').first().show();
         }
     }
+    // postgrid-pro loadmore
 
+    /*$('.qubely-postgrid-loadmore').on('click', function () {
+        var self = $(this);
+        var page = parseInt(self.data('page'));
+        var maxPage = parseInt(self.data('max-page'));
+        $.ajax({
+            url: qubely_urls.ajax,
+            data: {
+                action: 'post_grid_loadmore',
+                page: page
+            }
+        }).success(function (response) {
+            /!*$('.qubely-postgrid-wrapper').html(response);
+            self.data('page', page + 1);
+            if(page === maxPage) {
+                self.remove();
+            }*!/
+            console.log(response);
+        })
+    });*/
 
 })(jQuery);
