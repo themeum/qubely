@@ -13,6 +13,7 @@ class Getting_Started {
     public function __construct() {
         $this->posts = $this->get_posts();
         $this->hasPro = defined('QUBELY_PRO_FILE');
+        $file = file_get_contents(QUBELY_DIR_PATH . 'readme.txt');
     }
 
 	/**
@@ -27,25 +28,11 @@ class Getting_Started {
         ) );
         return $plugin_info->sections['changelog'];
         */
-
-        // @TODO: Make it dynamic after complete the changelog on themeum main site
-        ob_start();
-        ?>
-        <h3>1.4.0 - 21 May, 2020</h3>
-        <ul>
-            <li>New: Global Settings</li>
-            <li>New: Qubely Settings page - with Google Map API key, reCAPTCHA key storage</li>
-            <li>Fix: Accordion block - Active Panel color</li>
-            <li>Fix: Contact Form block - Form Submit issue</li>
-        </ul>
-        <h3>1.3.91 - 29 April, 2020</h3>
-        <ul>
-            <li>Fix: Typography & Box Shadow panel css issue</li>
-            <li>Fix: Image comparison block firefox touch issue</li>
-            <li>Update: Performance improvement.</li>
-        </ul>
-        <?php
-        return ob_get_clean();
+        if(file_exists(QUBELY_DIR_PATH . 'CHANGELOG')) {
+	        $file = file_get_contents(QUBELY_DIR_PATH . 'CHANGELOG');
+	        return $file;
+        }
+        return null;
     }
 
 	/**
