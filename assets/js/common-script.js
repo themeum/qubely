@@ -468,7 +468,7 @@ jQuery(document).ready(function ($) {
     }
     // postgrid-pro loadmore
 
-    $('.qubely-postgrid-loadmore').on('click', function () {
+    /*$('.qubely-postgrid-loadmore').on('click', function () {
         var self = $(this);
         var page = parseInt(self.data('page'));
         var maxPage = parseInt(self.data('max-page'));
@@ -479,12 +479,13 @@ jQuery(document).ready(function ($) {
                 page: page
             }
         }).success(function (response) {
-            $('.qubely-postgrid-wrapper').html(response);
+            /!*$('.qubely-postgrid-wrapper').html(response);
             self.data('page', page + 1);
             if(page === maxPage) {
                 self.remove();
-            }
+            }*!/
+            console.log(response);
         })
-    });
+    });*/
 
 })(jQuery);
