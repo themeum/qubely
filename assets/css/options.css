@@ -202,6 +202,12 @@ img {
 	grid-gap: 25px;
 }
 
+@media only screen and (max-width: 991px) {
+	.qubely-gs-container {
+		grid-template-columns: 1fr;
+	}
+}
+
 .qubely-gs-card-row {
 	display: grid;
 	grid-column-gap: 25px;
@@ -213,6 +219,14 @@ img {
 
 .qubely-column-2 {
 	grid-template-columns: 1fr 1fr;
+}
+
+@media only screen and (max-width: 700px) {
+	
+	.qubely-column-3,
+	.qubely-column-2 {
+		grid-template-columns: 1fr;
+	}
 }
 
 .qubely-gs-card {
@@ -227,12 +241,16 @@ img {
 	position: relative;
 	overflow: hidden;
 	background: var(--card-bg);
+	z-index: 1;
 }
 
 .qubely-cta-card > img {
 	position: absolute;
-	right: 0;
-	bottom: 0;
+	right: 20px;
+	bottom: 10px;
+	z-index: -1;
+	height: 90%;
+	width: auto;
 }
 
 .qubely-cta-card p {
@@ -254,13 +272,18 @@ img {
 
 .qubely-gs-card-compact {
 	display: flex;
+	text-decoration: none;
+	transition: 300ms;
 }
-
+.qubely-gs-card-compact:hover {
+	box-shadow: 0 30px 30px -10px rgba(28, 41, 90, 0.10), 0 0 0 2px #2e98ff inset;
+}
 .qubely-gs-card-compact > span {
 	height: 60px;
 	flex-basis: 60px;
 	max-width: 60px;
-	background: #d5eaff;
+	/*background: #d5eaff;*/
+	border: 1px solid #d5eaff;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -268,14 +291,19 @@ img {
 	font-size: 25px;
 	color: #2e98ff;
 }
+.qubely-gs-card-compact > span > img{
+	width: 1em;
+}
 
 .qubely-gs-card-compact:nth-child(2n) > span {
-	background: #daf7f0;
+	/*background: #daf7f0;*/
+	border: 1px solid #daf7f0;
 	color: #1fd0a3;
 }
 
 .qubely-gs-card-compact:nth-child(3n) > span {
-	background: #e7e6fe;
+	/*background: #e7e6fe;*/
+	border: 1px solid #e7e6fe;
 	color: #665cfe;
 }
 
@@ -327,6 +355,10 @@ img {
 	font-size: 16px;
 	color: #007AFF;
 	text-decoration: none;
+	transition: 300ms;
+}
+.qubely-gs-card .qubely-gs-card-title a:hover {
+	color: #0f4d91;
 }
 .qubely-gs-card .qubely-gs-card-title a span {
 	margin-left: 6px;
@@ -349,15 +381,27 @@ img {
 }
 
 .qubely-gs-card-content.qubely-gs-changelog {
-	height: 300px;
-	overflow: hidden;
+	/*height: 300px;*/
+	/*overflow: hidden;*/
 	position: relative;
+	margin-bottom: 20px;
 }
 
-.qubely-gs-card-content.qubely-gs-changelog h4:first-child {
+.qubely-gs-card-content.qubely-gs-changelog ul {
+	list-style: disc;
+	padding-left: 20px;
+	margin-bottom: 25px;
+}
+
+.qubely-gs-card-content.qubely-gs-changelog h3 {
+	font-size: 18px;
+	font-weight: 400;
+	color: #242F57;
+}
+.qubely-gs-card-content.qubely-gs-changelog h3:first-child {
 	margin-top: 0;
 }
-
+/*
 .qubely-gs-card-content.qubely-gs-changelog::before {
 	content: "";
 	height: 24px;
@@ -366,7 +410,7 @@ img {
 	left: 0;
 	background: linear-gradient(0deg, white 5px, transparent);
 	position: absolute;
-}
+}*/
 
 .qubely-gs-header {
 	padding: 80px;
@@ -401,6 +445,7 @@ img {
 	color: #007aff;
 	text-decoration: none;
 	align-items: center;
+	transition: 300ms;
 }
 
 .qubely-gs-button.button-lg {
@@ -419,6 +464,11 @@ img {
 	display: inline-flex;
 	text-decoration: none;
 	align-items: center;
+	transition: 300ms;
+}
+
+.qubely-gs-link:hover {
+	color: #0f4d91;
 }
 
 .qubely-gs-link span,
@@ -428,6 +478,11 @@ img {
 
 .qubely-gs-button:hover {
 	color: #007aff;
+	box-shadow: 0 20px 30px rgba(19, 42, 67, 0.20);
+}
+.qubely-gs-button.link:hover {
+	box-shadow: none !important;
+	color: #0f4d91;
 }
 
 .qubely-gs-button.primary {
@@ -458,11 +513,24 @@ img {
 	border-radius: 5px;
 }
 
+.qubely-gs-post-card a:first-child {
+	min-height: 150px;
+	background: #f7f7f7;
+	border-radius: 5px;
+}
+.qubely-gs-post-card a:first-child:hover {
+	box-shadow: 0 10px 20px -10px rgba(19, 42, 67, 0.20);
+}
 .qubely-gs-post-card a {
 	color: #242F57;
 	display: block;
 	text-decoration: none;
 	line-height: 20px;
+	transition: 200ms;
+}
+
+.qubely-gs-post-card a:hover {
+	color: #007AFF;
 }
 
 .qubely-gs-post-card span {
@@ -476,11 +544,15 @@ img {
 	margin: 0 0 0 -10px;
 	padding: 0;
 }
-
 .qubely-gs-social-links a {
 	display: inline-flex;
 	padding: 10px;
 	color: rgba(36, 47, 87, 0.7);
 	text-decoration: none;
 	font-size: 16px;
+	transition: 200ms;
+}
+
+.qubely-gs-social-links a:hover{
+	color: #007AFF;
 }

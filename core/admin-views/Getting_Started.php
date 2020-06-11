@@ -20,13 +20,37 @@ class Getting_Started {
      * @return mixed
      */
     public function get_changelog() {
-        require_once ABSPATH . 'wp-admin/includes/plugin-install.php';
+        /*
+         require_once ABSPATH . 'wp-admin/includes/plugin-install.php';
         $plugin_info = plugins_api( 'plugin_information', array(
             'slug' => 'qubely',
         ) );
         return $plugin_info->sections['changelog'];
+        */
+
+        // @TODO: Make it dynamic after complete the changelog on themeum main site
+        ob_start();
+        ?>
+        <h3>1.4.0 - 21 May, 2020</h3>
+        <ul>
+            <li>New: Global Settings</li>
+            <li>New: Qubely Settings page - with Google Map API key, reCAPTCHA key storage</li>
+            <li>Fix: Accordion block - Active Panel color</li>
+            <li>Fix: Contact Form block - Form Submit issue</li>
+        </ul>
+        <h3>1.3.91 - 29 April, 2020</h3>
+        <ul>
+            <li>Fix: Typography & Box Shadow panel css issue</li>
+            <li>Fix: Image comparison block firefox touch issue</li>
+            <li>Update: Performance improvement.</li>
+        </ul>
+        <?php
+        return ob_get_clean();
     }
 
+	/**
+	 * @return int|string
+	 */
     public function get_block_count() {
 	    $block = "http://qubely.io/wp-json/wp/v2/block";
 	    $block = wp_remote_get($block);
@@ -37,6 +61,9 @@ class Getting_Started {
 	    return $block;
     }
 
+	/**
+	 * @return int|string
+	 */
     public function get_section_count() {
 	    $sections = "http://qubely.io/wp-json/wp/v2/sections";
 	    $sections = wp_remote_get($sections);
@@ -47,6 +74,9 @@ class Getting_Started {
 	    return $sections;
     }
 
+	/**
+	 * @return int
+	 */
     public function get_layout_count() {
 	    $layouts = "https://qubely.io/wp-json/restapi/v2/layouts";
 	    $layouts = wp_remote_post($layouts);
@@ -63,35 +93,46 @@ class Getting_Started {
 
     public function mini_cards() {
 
-        $block = $this->get_block_count();
-        $sections = $this->get_section_count();
-        $layouts = $this->get_layout_count();
+        // @TODO: Fetech data dynamically with one request if possible
+        $block = '35+'; //$this->get_block_count();
+        $sections = '150+'; //$this->get_section_count();
+        $layouts = '25+'; //$this->get_layout_count();
+
+        $icon_blocks = QUBELY_DIR_URL . 'assets/img/admin/blocks.svg';
+        $icon_sections = QUBELY_DIR_URL . 'assets/img/admin/sections.svg';
+        $icon_starter = QUBELY_DIR_URL . 'assets/img/admin/starter-pack.svg';
 
         ?>
             <div class="qubely-gs-card-row qubely-column-3">
-                <div class="qubely-gs-card qubely-gs-card-compact">
-                    <span class="fab fa-facebook-f"></span>
+                <a target="_blank" href="https://qubely.io/starter-packs/" class="qubely-gs-card qubely-gs-card-compact">
+<!--                    <span class="fab fa-facebook-f"></span>-->
+                    <span>
+                        <img src="<?php echo $icon_starter; ?>" alt="">
+                    </span>
+
                     <div class="qubely-gs-card-content">
                         <h6><?php esc_html_e('Starter packs', 'qubely'); ?></h6>
                         <h3><?php echo $layouts; ?></h3>
                     </div>
-                </div>
+                </a>
 
-                <div class="qubely-gs-card qubely-gs-card-compact">
-                    <span class="fas fa-music"></span>
+                <a target="_blank" href="https://qubely.io/section/" class="qubely-gs-card qubely-gs-card-compact">
+<!--                    <span class="fas fa-music"></span>-->
+                    <span><img src="<?php echo $icon_sections; ?>" alt=""></span>
                     <div class="qubely-gs-card-content">
                         <h6><?php esc_html_e("Readymade Sections", 'qubely'); ?></h6>
                         <h3><?php echo $sections; ?></h3>
                     </div>
-                </div>
+                </a>
 
-                <div class="qubely-gs-card qubely-gs-card-compact">
-                    <span class="fas fa-music"></span>
+                <a target="_blank" href="https://qubely.io/blocks/" class="qubely-gs-card qubely-gs-card-compact">
+<!--                    <span class="fas fa-music"></span>-->
+                    <span><img src="<?php echo $icon_blocks; ?>" alt=""></span>
                     <div class="qubely-gs-card-content">
                         <h6><?php esc_html_e("Blocks", 'qubely');?></h6>
                         <h3><?php echo $block ?></h3>
                     </div>
-                </div>
+                </a>
             </div>
         <?php
 
@@ -103,7 +144,7 @@ class Getting_Started {
         $response_body = wp_remote_retrieve_body($response);
         $result = json_decode($response_body);
         if (is_wp_error($result) || !is_array($result)) {
-	        return null;
+	        return false;
         }
         return $result;
     }
@@ -159,13 +200,15 @@ class Getting_Started {
                         <div class="qubely-gs-card">
                             <div class="qubely-gs-card-title is-large">
                                 <h2><?php printf( __( 'What\'s new in Qubely %s', 'qubely' ), QUBELY_VERSION );?></h2>
-                                <button><span class="fas fa-angle-down"></span></button>
+<!--                                <button><span class="fas fa-angle-down"></span></button>-->
                             </div>
                             <div class="qubely-gs-card-content qubely-gs-changelog">
                                 <?php echo $this->get_changelog(); ?>
                             </div>
                             <a class="qubely-gs-link" target="_blank" href="https://wordpress.org/plugins/qubely/#developers"><?php esc_html_e('Learn More', 'qubely'); ?> <span class="fas fa-long-arrow-alt-right"></span></a>
 						</div>
+                        <?php
+                        if(is_array($this->posts) && count($this->posts)) { ?>
 						<div class="qubely-gs-card">
                             <div class="qubely-gs-card-title is-large">
                                 <h2><?php esc_html_e( 'Tips and Tutorials from our Blog', 'qubely' );?></h2>
@@ -174,29 +217,28 @@ class Getting_Started {
                             <div class="qubely-gs-card-content ">
 								<div class="qubely-gs-card-row qubely-column-3">
 									<?php
-                                        if(is_array($this->posts) && count($this->posts)) {
-                                            foreach ($this->posts as $post) {
-                                                $date = gmdate('M d, Y', strtotime($post->date));
-                                                $image = $post->qubely_featured_image_url->medium_large[0];
-                                                ?>
-                                                <div class="qubely-gs-post-card">
-                                                    <a target="_blank" href="<?php echo $post->link ?>">
-                                                        <img src="<?php echo $image ?>" alt="">
-                                                    </a>
-                                                    <span><?php echo $date ?></span>
-                                                    <a target="_blank" href="<?php echo $post->link ?>"><?php echo $post->title->rendered ?></a>
-                                                </div>
-                                                <?php
-                                            }
+                                        foreach ($this->posts as $post) {
+                                            $date = gmdate('M d, Y', strtotime($post->date));
+                                            $image = $post->qubely_featured_image_url->medium_large[0];
+                                            ?>
+                                            <div class="qubely-gs-post-card">
+                                                <a target="_blank" href="<?php echo $post->link ?>">
+                                                    <img src="<?php echo $image ?>" alt="">
+                                                </a>
+                                                <span><?php echo $date ?></span>
+                                                <a target="_blank" href="<?php echo $post->link ?>"><?php echo $post->title->rendered ?></a>
+                                            </div>
+                                            <?php
                                         }
 									?>
 								</div>
                             </div>
 						</div>
+                        <?php } ?>
 						<div class="qubely-gs-card-row qubely-column-2">
                             <?php
-                                $image1 = QUBELY_DIR_URL . 'assets/img/admin/cta-1.png';
-                                $image2 = QUBELY_DIR_URL . 'assets/img/admin/cta-2.png';
+                                $image1 = QUBELY_DIR_URL . 'assets/img/admin/join-fb.svg';
+                                $image2 = QUBELY_DIR_URL . 'assets/img/admin/keep-in-touch.svg';
                             ?>
 							<div class="qubely-gs-card qubely-cta-card" style="--card-bg: #D5EAFF;">
                                 <img src="<?php echo $image1?>" alt="">
