@@ -239,7 +239,7 @@ You can report bugs on the [support forum here](https://wordpress.org/support/pl
 
 = 1.4.1 - 11 May, 2020 =
 New: Post Grid pagination
-New: Getting Started redesign
+New: Getting Started page redesign
 Fix: Minor bug fix
 
 = 1.4.0 - 21 May, 2020 =
