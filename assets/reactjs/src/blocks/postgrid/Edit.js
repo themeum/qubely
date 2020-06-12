@@ -40,6 +40,8 @@ const {
 	Tabs,
 	Tab,
 	RadioAdvanced,
+	Alignment,
+	Margin,
 	gloalSettings: {
 		globalSettingsPanel,
 		animationSettings
@@ -166,6 +168,27 @@ class Edit extends Component {
 				orderBy,
 				postsToShow,
 
+				//pagination
+				enablePagination,
+				page,
+				paginationType,
+				pageAlignment,
+				paginationTypography,
+				pagesColor,
+				pagesHoverColor,
+				pagesActiveColor,
+				pagesbgColor,
+				pagesbgHoverColor,
+				pagesbgActiveColor,
+				pagesBorder,
+				pagesHoverBorder,
+				pagesActiveBorder,
+				pagesShadow,
+				pagesHoverShadow,
+				pagesActiveShadow,
+				pagesBorderRadius,
+				pagePadding,
+				pageMargin,
 				//image
 				showImages,
 				imgSize,
@@ -290,7 +313,8 @@ class Edit extends Component {
 
 			}
 		} = this.props
-		const { device } = this.state
+		const { device } = this.state;
+		let pages = Math.ceil(qubely_admin.publishedPosts / postsToShow);
 		return (
 			<Fragment>
 				<InspectorControls key="inspector">
@@ -453,6 +477,166 @@ class Edit extends Component {
 								/>
 							</PanelBody>
 
+
+							<PanelBody title={__('Pagination', 'qubely')} initialOpen={false}>
+								{/*<ButtonGroup
+									label={__('Type')}
+									options={
+										[
+											[__('Pagination'), 'pagition'],
+											[__('Load More'), 'loadmore'],
+											[<span className="fas fa-ban" />, 'disable']
+										]
+									}
+									value={paginationType}
+									onChange={value => setAttributes({ paginationType: value })}
+								/>*/}
+
+								<Toggle label={__('Enable Pagination')} value={enablePagination} onChange={value => setAttributes({ enablePagination: value })} />
+
+								{
+									enablePagination &&
+									<Fragment>
+										<Alignment
+											disableJustify
+											value={pageAlignment}
+											alignmentType="content"
+											label={__('Alignment')}
+											onChange={val => setAttributes({ pageAlignment: val })}
+										/>
+										<Typography
+											device={device}
+											label={__('Typography', 'qubely')}
+											value={paginationTypography}
+											onChange={value => setAttributes({ paginationTypography: value })}
+											onDeviceChange={value => this.setState({ device: value })}
+										/>
+										<Tabs>
+											<Tab tabTitle={__('Normal', 'qubely')}>
+												<Color
+													label={__('Text Color', 'qubely')}
+													value={pagesColor}
+													onChange={value => setAttributes({ pagesColor: value })}
+												/>
+												<ColorAdvanced
+													label={__('Background', 'qubely')}
+													value={pagesbgColor}
+													onChange={newColor => setAttributes({ pagesbgColor: newColor })}
+												/>
+
+												<Border
+													min={0}
+													max={10}
+													responsive
+													device={device}
+													label={__('Border', 'qubely')}
+													value={pagesBorder}
+													unit={['px', 'em', '%']}
+													onChange={val => setAttributes({ pagesBorder: val })}
+													onDeviceChange={value => this.setState({ device: value })}
+												/>
+												<BoxShadow
+													label={__('Box-Shadow')}
+													value={pagesShadow}
+													onChange={value => setAttributes({ pagesShadow: value })}
+												/>
+											</Tab>
+											<Tab tabTitle={__('Active')}>
+												<Color
+													label={__('Text Color', 'qubely')}
+													value={pagesActiveColor}
+													onChange={value => setAttributes({ pagesActiveColor: value })}
+												/>
+												<ColorAdvanced
+													label={__('Background', 'qubely')}
+													value={pagesbgActiveColor}
+													onChange={newColor => setAttributes({ pagesbgActiveColor: newColor })}
+												/>
+
+												<Border
+													min={0}
+													max={10}
+													responsive
+													device={device}
+													label={__('Border', 'qubely')}
+													value={pagesActiveBorder}
+													unit={['px', 'em', '%']}
+													onChange={val => setAttributes({ pagesActiveBorder: val })}
+													onDeviceChange={value => this.setState({ device: value })}
+												/>
+												<BoxShadow
+													label={__('Box-Shadow')}
+													value={pagesActiveShadow}
+													onChange={value => setAttributes({ pagesActiveShadow: value })}
+												/>
+											</Tab>
+											<Tab tabTitle={__('Hover')}>
+												<Color
+													label={__('Text Color', 'qubely')}
+													value={pagesHoverColor}
+													onChange={value => setAttributes({ pagesHoverColor: value })}
+												/>
+												<ColorAdvanced
+													label={__('Background', 'qubely')}
+													value={pagesbgHoverColor}
+													onChange={newColor => setAttributes({ pagesbgHoverColor: newColor })}
+												/>
+
+												<Border
+													min={0}
+													max={10}
+													responsive
+													device={device}
+													label={__('Border', 'qubely')}
+													value={pagesHoverBorder}
+													unit={['px', 'em', '%']}
+													onChange={val => setAttributes({ pagesHoverBorder: val })}
+													onDeviceChange={value => this.setState({ device: value })}
+												/>
+												<BoxShadow
+													label={__('Box-Shadow')}
+													value={pagesHoverShadow}
+													onChange={value => setAttributes({ pagesHoverShadow: value })}
+												/>
+											</Tab>
+										</Tabs>
+										<BorderRadius
+											min={0}
+											max={100}
+											responsive
+											device={device}
+											label={__('Radius')}
+											unit={['px', 'em', '%']}
+											value={pagesBorderRadius}
+											onDeviceChange={value => this.setState({ device: value })}
+											onChange={(value) => setAttributes({ pagesBorderRadius: value })}
+										/>
+										<Padding
+											min={0}
+											max={300}
+											responsive
+											device={device}
+											value={pagePadding}
+											label={__('Padding')}
+											unit={['px', 'em', '%']}
+											onChange={val => setAttributes({ pagePadding: val })}
+											onDeviceChange={value => this.setState({ device: value })}
+										/>
+										<Margin
+											max={150}
+											min={0}
+											responsive
+											device={device}
+											value={pageMargin}
+											label={__('Margin')}
+											unit={['px', 'em', '%']}
+											onChange={value => setAttributes({ pageMargin: value })}
+											onDeviceChange={value => this.setState({ device: value })}
+										/>
+									</Fragment>
+								}
+
+							</PanelBody>
 							{/* Global */}
 
 							<PanelBody title={__('Image Settings')} initialOpen={false}>
@@ -694,14 +878,17 @@ class Edit extends Component {
 								className={`qubely-postgrid-wrapper qubely-postgrid-layout-${layout} ${(layout === 2) ? 'qubely-postgrid-column qubely-postgrid-column-md' + column.md + ' ' + 'qubely-postgrid-column-sm' + column.sm + ' ' + 'qubely-postgrid-column-xs' + column.xs : ''}`}>
 								{
 									posts && posts.map(post => {
-										return (
-											<div className={`qubely-postgrid ${layout === 1 ? 'qubely-post-list-view' : 'qubely-post-grid-view'} qubely-postgrid-style-${style}`}>
-												<div className={`${layout === 1 ? `qubely-post-list-wrapper qubely-post-list-${((layout === 2) && (style === 3)) ? contentPosition : girdContentPosition}` : `qubely-post-grid-wrapper qubely-post-grid-${((layout === 2) && (style === 3)) ? contentPosition : girdContentPosition}`}`}>
-													{showImages && post.qubely_featured_image_url && this.renderFeaturedImage(post)}
-													{this.renderCardContent(post)}
+										if (post) {
+											return (
+												<div className={`qubely-postgrid ${layout === 1 ? 'qubely-post-list-view' : 'qubely-post-grid-view'} qubely-postgrid-style-${style}`}>
+													<div className={`${layout === 1 ? `qubely-post-list-wrapper qubely-post-list-${((layout === 2) && (style === 3)) ? contentPosition : girdContentPosition}` : `qubely-post-grid-wrapper qubely-post-grid-${((layout === 2) && (style === 3)) ? contentPosition : girdContentPosition}`}`}>
+														{showImages && post.qubely_featured_image_url && this.renderFeaturedImage(post)}
+														{this.renderCardContent(post)}
+													</div>
 												</div>
-											</div>
-										)
+											)
+										} else return null
+
 									})
 								}
 
@@ -714,7 +901,22 @@ class Edit extends Component {
 										qubelyContextMenu={this.refs.qubelyContextMenu}
 									/> */}
 								</div>
-
+								{
+									(pages > 1 && enablePagination) &&
+									<div className="qubely-postgrid-pagination">
+										{
+											page > 1 && <button className={'qubely-pagination-prev'} onClick={() => setAttributes({ page: page - 1 })}> <span className="fas fa-angle-left" /> {__('Prev')}</button>
+										}
+										{
+											Array(pages).fill(0).map((_, index) => (
+												<button key={index} className={`pages${page === index + 1 ? ' current' : ''}`} onClick={() => setAttributes({ page: index + 1 })}>{index + 1}</button>
+											))
+										}
+										{
+											(page !== pages) && <button className={'qubely-pagination-next'} onClick={() => setAttributes({ page: page + 1 })}>{__('Next')} <span className="fas fa-angle-right" /></button>
+										}
+									</div>
+								}
 							</div>
 							:
 							<div className="qubely-postgrid-is-loading">
@@ -730,7 +932,7 @@ class Edit extends Component {
 export default compose([
 	withSelect((select, props) => {
 		const { getEntityRecords } = select('core')
-		const { attributes: { taxonomy, order, orderBy, categories, tags, postsToShow } } = props
+		const { attributes: { page, taxonomy, order, orderBy, categories, tags, postsToShow } } = props
 
 		let allTaxonomy = qubely_admin.all_taxonomy
 
@@ -740,6 +942,7 @@ export default compose([
 		let query = {
 			order: order,
 			orderby: orderBy,
+			page: page,
 			per_page: postsToShow,
 			[seletedTaxonomy]: activeTaxes.map(({ value, label }) => value),
 		}

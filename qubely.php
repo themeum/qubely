@@ -1,9 +1,9 @@
 <?php
 /*
- * Plugin Name:       Qubely - Advanced Gutenberg Blocks 
+ * Plugin Name:       Qubely - Advanced Gutenberg Blocks
  * Plugin URI:        https://www.themeum.com/
  * Description:       The one and only Gutenberg block plugin you will ever need.
- * Version: 		  1.4.0
+ * Version: 		  1.4.1
  * Author:            Themeum.com
  * Author URI:        https://themeum.com/
  * Text Domain:       qubely
@@ -24,7 +24,7 @@ function qubely_language_load()
 }
 
 // Define Version
-define('QUBELY_VERSION', '1.4.0');
+define('QUBELY_VERSION', '1.4.1');
 
 // Define License
 define('QUBELY_LICENSE', 'free');
@@ -75,7 +75,7 @@ function qubely_blocks_add_orderby( $params ) {
 function qubely_register_rest_fields()
 {
     $post_types = get_post_types();
-    
+
     foreach ( $post_types as $key => $type ) {
 		add_filter( "rest_{$type}_collection_params", 'qubely_blocks_add_orderby', 10, 1 );
 	}
@@ -156,7 +156,7 @@ if (!function_exists('qubely_get_category_list')) {
 //feature image
 function qubely_get_featured_image_url($object)
 {
-    
+
 
     $featured_images = array();
     if (!isset($object['featured_media'])) {
@@ -168,7 +168,7 @@ function qubely_get_featured_image_url($object)
             $featured_images['landscape'] = wp_get_attachment_image_src($object['featured_media'], 'qubely_landscape', false);
             $featured_images['portraits'] = wp_get_attachment_image_src($object['featured_media'], 'qubely_portrait', false);
             $featured_images['thumbnail'] =  wp_get_attachment_image_src($object['featured_media'], 'qubely_thumbnail', false);
-            
+
             $image_sizes = QUBELY::get_all_image_sizes();
             foreach ($image_sizes as $key => $value) {
                 $size = $value['value'];
