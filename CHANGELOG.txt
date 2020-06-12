@@ -1,4 +1,4 @@
-<h3>1.4.1 - 11 Jun, 2020</h3>
+<h3>1.4.1 - 12 June, 2020</h3>
 <ul>
     <li>New: Post Grid pagination</li>
     <li>New: Getting Started page redesign</li>
