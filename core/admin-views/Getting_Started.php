@@ -172,7 +172,7 @@ class Getting_Started {
                     <h2>
                         <?php echo 'Qubely - ' . QUBELY_VERSION ?>
                     </h2>
-                    <h3><?php esc_html_e( 'Full-Fledged Gutenburg Toolkit', 'qubely' )?></h3>
+                    <h3><?php esc_html_e( 'Full-Fledged Gutenberg Toolkit', 'qubely' )?></h3>
                     <div class="qubely-gs-button-group">
                         <a class="qubely-gs-button primary button-lg" href="<?php echo admin_url('post-new.php?post_type=page') ?>"><?php esc_html_e( 'Start creating page', 'qubely' );?></a>
                         <a target="_blank" class="qubely-gs-button link button-lg" href="https://docs.themeum.com/qubely/">
@@ -270,7 +270,7 @@ class Getting_Started {
                             </div>
 							<p><?php esc_html_e("Fix any issues you may face while using Qubely with our expert support professionals.", 'qubely'); ?></p>
                             <div class="qubely-gs-card-footer">
-                                <a target="_blank" href="https://www.themeum.com/support/" class="qubely-gs-button primary button-block"><?php esc_html_e('Get Support', 'qubely'); ?></a>
+                                <a target="_blank" href="https://www.themeum.com/contact-us/" class="qubely-gs-button primary button-block"><?php esc_html_e('Get Support', 'qubely'); ?></a>
                             </div>
 						</div>
                     </div>
