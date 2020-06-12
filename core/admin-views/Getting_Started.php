@@ -258,10 +258,10 @@ class Getting_Started {
                         <?php } ?>
                         <div class="qubely-gs-card">
                             <div class="qubely-gs-card-title">
-                                <h3><?php esc_html_e('Rate your experience with Qubely', 'qubely'); ?></h3>
+                                <h3><?php esc_html_e('Rate Your Experience with Qubely', 'qubely'); ?></h3>
                             </div>
                             <div class="qubely-gs-card-footer">
-                                <a target="_blank" href="https://wordpress.org/support/plugin/qubely/reviews/?filter=5" class="qubely-gs-button primary button-block"><?php esc_html_e('Give Us a Review', 'qubely'); ?></a>
+                                <a target="_blank" href="https://wordpress.org/support/plugin/qubely/reviews/?filter=5" class="qubely-gs-button primary button-block"><?php esc_html_e('Leave a Review', 'qubely'); ?></a>
                             </div>
                         </div>
 						<div class="qubely-gs-card">
