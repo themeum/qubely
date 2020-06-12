@@ -28,8 +28,8 @@ class Getting_Started {
         ) );
         return $plugin_info->sections['changelog'];
         */
-        if(file_exists(QUBELY_DIR_PATH . 'CHANGELOG')) {
-	        $file = file_get_contents(QUBELY_DIR_PATH . 'CHANGELOG');
+        if(file_exists(QUBELY_DIR_PATH . 'CHANGELOG.txt')) {
+	        $file = file_get_contents(QUBELY_DIR_PATH . 'CHANGELOG.txt');
 	        return $file;
         }
         return null;
@@ -41,10 +41,10 @@ class Getting_Started {
     public function get_block_count() {
 	    $block = "http://qubely.io/wp-json/wp/v2/block";
 	    $block = wp_remote_get($block);
-	    $block = wp_remote_retrieve_header($block, 'X-WP-Total');
 	    if (is_wp_error($block)) {
-	        return 0;
-        }
+		    return 35;
+	    }
+	    $block = wp_remote_retrieve_header($block, 'X-WP-Total');
 	    return $block;
     }
 
@@ -54,10 +54,10 @@ class Getting_Started {
     public function get_section_count() {
 	    $sections = "http://qubely.io/wp-json/wp/v2/sections";
 	    $sections = wp_remote_get($sections);
-	    $sections = wp_remote_retrieve_header($sections, 'X-WP-Total');
 	    if(is_wp_error($sections)) {
-	        return 0;
-        }
+		    return 150;
+	    }
+	    $sections = wp_remote_retrieve_header($sections, 'X-WP-Total');
 	    return $sections;
     }
 
@@ -69,21 +69,21 @@ class Getting_Started {
 	    $layouts = wp_remote_post($layouts);
 	    $layouts = wp_remote_retrieve_body($layouts);
 	    $layouts = json_decode($layouts);
+	    if(is_wp_error($layouts) || !is_array($layouts)) {
+	        return 25;
+        }
 	    $layouts = array_filter($layouts, function ($item) {
 		    return $item->parentID === 0;
 	    });
-	    if(is_wp_error($layouts) || !is_array($layouts)) {
-	        return 0;
-        }
 	    return count($layouts);
     }
 
     public function mini_cards() {
 
         // @TODO: Fetech data dynamically with one request if possible
-        $block = '35+'; //$this->get_block_count();
-        $sections = '150+'; //$this->get_section_count();
-        $layouts = '25+'; //$this->get_layout_count();
+	    $block = $this->get_block_count();
+	    $sections = $this->get_section_count();
+	    $layouts = $this->get_layout_count();
 
         $icon_blocks = QUBELY_DIR_URL . 'assets/img/admin/blocks.svg';
         $icon_sections = QUBELY_DIR_URL . 'assets/img/admin/sections.svg';
@@ -99,7 +99,7 @@ class Getting_Started {
 
                     <div class="qubely-gs-card-content">
                         <h6><?php esc_html_e('Starter packs', 'qubely'); ?></h6>
-                        <h3><?php echo $layouts; ?></h3>
+                        <h3><?php echo $layouts . '+'; ?></h3>
                     </div>
                 </a>
 
@@ -108,7 +108,7 @@ class Getting_Started {
                     <span><img src="<?php echo $icon_sections; ?>" alt=""></span>
                     <div class="qubely-gs-card-content">
                         <h6><?php esc_html_e("Readymade Sections", 'qubely'); ?></h6>
-                        <h3><?php echo $sections; ?></h3>
+                        <h3><?php echo $sections  . '+'; ?></h3>
                     </div>
                 </a>
 
@@ -117,7 +117,7 @@ class Getting_Started {
                     <span><img src="<?php echo $icon_blocks; ?>" alt=""></span>
                     <div class="qubely-gs-card-content">
                         <h6><?php esc_html_e("Blocks", 'qubely');?></h6>
-                        <h3><?php echo $block ?></h3>
+                        <h3><?php echo $block . '+'?></h3>
                     </div>
                 </a>
             </div>
@@ -230,9 +230,9 @@ class Getting_Started {
 							<div class="qubely-gs-card qubely-cta-card" style="--card-bg: #D5EAFF;">
                                 <img src="<?php echo $image1?>" alt="">
 								<div class="qubely-gs-card-title">
-                                    <h3><?php esc_html_e('Join our facebook community', 'qubely'); ?></h3>
+                                    <h3><?php esc_html_e('Join Our Facebook Community', 'qubely'); ?></h3>
                                 </div>
-								<p><?php esc_html_e('Themeum has a rock-solid record of professionalism, regularity, responsiveness, and innovation.', 'qubely'); ?></p>
+								<p><?php esc_html_e('Do join Qubely\'s official Facebook group to share your experience, thoughts, and ideas.', 'qubely'); ?></p>
                                 <div class="qubely-gs-card-footer">
 								    <a target="_blank" href="https://web.facebook.com/groups/qubely" class="qubely-gs-button primary">Join now</a>
                                 </div>
@@ -240,7 +240,7 @@ class Getting_Started {
 							<div class="qubely-gs-card qubely-cta-card" style="--card-bg: #E7E6FE;">
                                 <img src="<?php echo $image2; ?>" alt="">
                                 <div class="qubely-gs-card-title">
-                                    <h3><?php esc_html_e('Stay in touch with us', 'qubely'); ?></h3>
+                                    <h3><?php esc_html_e('Stay in Touch with Us', 'qubely'); ?></h3>
                                 </div>
 								<p><?php esc_html_e('Stay in touch via our social media channels to receive the latest announcements and updates.', 'qubely'); ?></p>
                                 <div class="qubely-gs-card-footer">
@@ -256,11 +256,19 @@ class Getting_Started {
                                 <a target="_blank" href="https://www.themeum.com/product/qubely/" class="qubely-gs-button white button-block"><?php esc_html_e('Get Qubely Pro', 'qubely'); ?></a>
                             </div>
                         <?php } ?>
+                        <div class="qubely-gs-card">
+                            <div class="qubely-gs-card-title">
+                                <h3><?php esc_html_e('Rate your experience with Qubely', 'qubely'); ?></h3>
+                            </div>
+                            <div class="qubely-gs-card-footer">
+                                <a target="_blank" href="https://wordpress.org/support/plugin/qubely/reviews/?filter=5" class="qubely-gs-button primary button-block"><?php esc_html_e('Write a feedback', 'qubely'); ?></a>
+                            </div>
+                        </div>
 						<div class="qubely-gs-card">
                             <div class="qubely-gs-card-title">
-                                <h3><?php esc_html_e('Join our facebook community', 'qubely'); ?></h3>
+                                <h3><?php esc_html_e('Need Help? We are Here For You!', 'qubely'); ?></h3>
                             </div>
-							<p><?php esc_html_e("Themeum has a rock-solid record of professionalism, regularity, responsiveness, and innovation.", 'qubely'); ?></p>
+							<p><?php esc_html_e("Fix any issues you may face while using Qubely with our expert support professionals.", 'qubely'); ?></p>
                             <div class="qubely-gs-card-footer">
                                 <a target="_blank" href="https://www.themeum.com/support/" class="qubely-gs-button primary button-block"><?php esc_html_e('Get Support', 'qubely'); ?></a>
                             </div>

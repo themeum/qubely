@@ -282,7 +282,7 @@ img {
 	height: 60px;
 	flex-basis: 60px;
 	max-width: 60px;
-	/*background: #d5eaff;*/
+	background: rgba(213, 234, 255, 0.20);
 	border: 1px solid #d5eaff;
 	display: flex;
 	align-items: center;
@@ -296,13 +296,13 @@ img {
 }
 
 .qubely-gs-card-compact:nth-child(2n) > span {
-	/*background: #daf7f0;*/
+	background: rgba(218, 247, 240, 0.20);
 	border: 1px solid #daf7f0;
 	color: #1fd0a3;
 }
 
 .qubely-gs-card-compact:nth-child(3n) > span {
-	/*background: #e7e6fe;*/
+	background: rgba(231, 230, 254, 0.20);
 	border: 1px solid #e7e6fe;
 	color: #665cfe;
 }
@@ -348,7 +348,7 @@ img {
 }
 .qubely-gs-card-title h3 {
 	font-size: 22px;
-	line-height: 25px;
+	line-height: 27px;
 	margin: 0;
 }
 .qubely-gs-card .qubely-gs-card-title a {
