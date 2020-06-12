@@ -186,7 +186,7 @@ class Getting_Started {
                         <?php $this->mini_cards(); ?>
                         <div class="qubely-gs-card">
                             <div class="qubely-gs-card-title is-large">
-                                <h2><?php printf( __( 'What\'s new in Qubely %s', 'qubely' ), QUBELY_VERSION );?></h2>
+                                <h2><?php esc_html_e( 'What\'s New in Qubely', 'qubely' )?></h2>
 <!--                                <button><span class="fas fa-angle-down"></span></button>-->
                             </div>
                             <div class="qubely-gs-card-content qubely-gs-changelog">
@@ -261,7 +261,7 @@ class Getting_Started {
                                 <h3><?php esc_html_e('Rate your experience with Qubely', 'qubely'); ?></h3>
                             </div>
                             <div class="qubely-gs-card-footer">
-                                <a target="_blank" href="https://wordpress.org/support/plugin/qubely/reviews/?filter=5" class="qubely-gs-button primary button-block"><?php esc_html_e('Write a feedback', 'qubely'); ?></a>
+                                <a target="_blank" href="https://wordpress.org/support/plugin/qubely/reviews/?filter=5" class="qubely-gs-button primary button-block"><?php esc_html_e('Give Us a Review', 'qubely'); ?></a>
                             </div>
                         </div>
 						<div class="qubely-gs-card">
