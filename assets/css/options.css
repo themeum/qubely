@@ -191,7 +191,7 @@ p {
 	color: rgba(36, 47, 87, 0.70);
 	font-size: 14px;
 }
-img {
+.qubely-getting-started img {
 	display: block;
 	max-width: 100%;
 }
