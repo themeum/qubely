@@ -11,9 +11,7 @@ class Getting_Started {
     public $hasPro;
 
     public function __construct() {
-        $this->posts = $this->get_posts();
         $this->hasPro = defined('QUBELY_PRO_FILE');
-        $file = file_get_contents(QUBELY_DIR_PATH . 'readme.txt');
     }
 
 	/**
@@ -21,13 +19,6 @@ class Getting_Started {
      * @return mixed
      */
     public function get_changelog() {
-        /*
-         require_once ABSPATH . 'wp-admin/includes/plugin-install.php';
-        $plugin_info = plugins_api( 'plugin_information', array(
-            'slug' => 'qubely',
-        ) );
-        return $plugin_info->sections['changelog'];
-        */
         if(file_exists(QUBELY_DIR_PATH . 'CHANGELOG.txt')) {
 	        $file = file_get_contents(QUBELY_DIR_PATH . 'CHANGELOG.txt');
 	        return $file;
@@ -162,6 +153,7 @@ class Getting_Started {
      * Markup
      */
     public function markup() {
+	    $posts = $this->get_posts();
         $logo = QUBELY_DIR_URL . 'assets/img/admin/qubely-option-logo.jpg';
         wp_enqueue_style('qubely-options');
         ?>
@@ -196,7 +188,7 @@ class Getting_Started {
                             <a class="qubely-gs-link" target="_blank" href="https://wordpress.org/plugins/qubely/#developers"><?php esc_html_e('Learn More', 'qubely'); ?> <span class="fas fa-long-arrow-alt-right"></span></a>
 						</div>
                         <?php
-                        if(is_array($this->posts) && count($this->posts)) { ?>
+                        if(is_array($posts) && count($posts)) { ?>
 						<div class="qubely-gs-card">
                             <div class="qubely-gs-card-title is-large">
                                 <h2><?php esc_html_e( 'Tips and Tutorials from our Blog', 'qubely' );?></h2>
@@ -205,7 +197,7 @@ class Getting_Started {
                             <div class="qubely-gs-card-content ">
 								<div class="qubely-gs-card-row qubely-column-3">
 									<?php
-                                        foreach ($this->posts as $post) {
+                                        foreach ($posts as $post) {
                                             $date = gmdate('M d, Y', strtotime($post->date));
                                             $image = $post->qubely_featured_image_url->medium_large[0];
                                             ?>
