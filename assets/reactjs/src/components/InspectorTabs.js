@@ -28,7 +28,9 @@ const InspectorTabs = props => {
     useEffect(() => {
         // sticky tabs menu
         const container = document.querySelector('.qubely-inspector-tabs-container');
-        observer.observe(container);
+        if(container){
+            observer.observe(container);
+        }
 
         // component will unmount
         return () => {
