@@ -163,6 +163,7 @@ class Getting_Started {
      */
     public function markup() {
         $logo = QUBELY_DIR_URL . 'assets/img/admin/qubely-option-logo.jpg';
+        wp_enqueue_style('qubely-options');
         ?>
         <div class="wrap">
             <h1 style="display: none">&nbsp;</h1>
