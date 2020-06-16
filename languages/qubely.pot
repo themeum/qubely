@@ -106,7 +106,7 @@ msgid "Header"
 msgstr ""
 
 #. Author URI of the plugin
-msgid "https://themeum.com/"
+msgid "https://www.themeum.com/"
 msgstr ""
 
 #. URI of the plugin
