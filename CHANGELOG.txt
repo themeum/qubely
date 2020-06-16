@@ -1,4 +1,4 @@
-<h3>1.4.3 - 16 June, 2020</h3>
+<h3>1.5.0 - 16 June, 2020</h3>
 <ul>
     <li>Fix: Image Block whitespace issue</li>
     <li>Fix: Inspector Tabs Error</li>
