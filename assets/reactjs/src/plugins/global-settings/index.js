@@ -14,38 +14,29 @@ import {
  * Qubely Components
  */
 import Typography from '../../components/fields/Typography';
-import ButtonGroup from '../../components/fields/ButtonGroup';
-import { CssGenerator } from '../../components/CssGenerator';
 import { ADDNEWDEFAULT, DEFAULTPRESETS } from './constants';
-import { placeCaretAtEnd } from '../../helpers/utils';
+
 /**
  * WordPress dependencies
  */
 
 const { __ } = wp.i18n;
-
+const diff = require("deep-object-diff").diff;
 const {
     Component,
     Fragment,
-    createRef,
-    useCallback
+    createRef
 } = wp.element;
 
 const {
     Tooltip,
     Dropdown,
-    PanelBody,
-    ColorPicker,
-    TextControl,
+    PanelBody
 } = wp.components;
 
 const {
     select
 } = wp.data;
-
-const {
-    RichText
-} = wp.blockEditor;
 
 const {
     PluginSidebar,
@@ -58,7 +49,6 @@ const PATH = '/qubely/v1/global_settings';
 async function fetchFromApi() {
     return await wp.apiFetch({ path: PATH })
 }
-
 
 
 class GlobalSettings extends Component {
@@ -84,10 +74,10 @@ class GlobalSettings extends Component {
         await this.saveGlobalCSS();
         await this.updateGlobalSettings()
     }
+
     async saveGlobalCSS() {
         let _CSS = await getGlobalCSS();
         await injectGlobalCSS(_CSS, 'qubely-global-styles');
-
     }
 
     async componentDidUpdate(prevProps, prevState) {
@@ -97,7 +87,7 @@ class GlobalSettings extends Component {
             renameTypo,
             enableRenaming
         } = this.state;
-
+        
         if ((enableRenaming !== prevState.enableRenaming) && typeof enableRenaming !== 'undefined') {
             setTimeout(() => {
                 if (typeof this.ref.current !== 'undefined') {
@@ -112,9 +102,14 @@ class GlobalSettings extends Component {
                 }
             }, 100);
         }
+
         if (presets && activePreset) {
             if (activePreset !== prevState.activePreset) {
                 updateGlobalVaribales(presets[activePreset]);
+                /**
+                * to activate Update button
+                */
+                wp.data.dispatch('core/editor').editPost({ meta: { _non_existing_meta: true } });
             }
         }
     }
@@ -293,9 +288,10 @@ class GlobalSettings extends Component {
             const deletePreset = (selectedPreset) => {
                 this.setState(prevState => {
                     delete prevState.presets[selectedPreset];
+                    localStorage.setItem('qubely-global-settings', JSON.stringify(presets[selectedPreset === prevState.activePreset ? 'preset1' : activePreset]));
                     return ({
                         presets: prevState.presets,
-                        // ...((selectedPreset === activePreset) && { activePreset: undefined})
+                        ...((selectedPreset === prevState.activePreset) && { activePreset: 'preset1' })
                     })
                 });
             }
@@ -307,6 +303,41 @@ class GlobalSettings extends Component {
                         presets: prevState.presets,
                     });
                 });
+            }
+            const themeSupports = wp.data.select('core').getThemeSupports();
+            let ThemeSupportCheck = false;
+            let themeColorPalette = [], themefontSizes = [];
+
+            if (themeSupports['editor-color-palette']) {
+                ThemeSupportCheck = true;
+                themeColorPalette = themeSupports['editor-color-palette'].map(({ color }) => color);
+                themefontSizes = themeSupports['editor-font-sizes'];
+
+                if (typeof presets.theme === 'undefined' || Object.keys(diff({ 'colors': themeColorPalette }, { 'colors': presets.theme.colors })).length > 0) {
+                    this.setState(({ presets, activePreset }) => {
+                        let tempPresets = presets;
+                        delete presets.theme;
+                        tempPresets = {
+                            theme: {
+                                name: 'Theme',
+                                key: 'theme',
+                                colors: themeColorPalette,
+                                typography: []
+                            },
+                            ...presets,
+                        }
+                        if (activePreset === 'theme') {
+                            updateGlobalVaribales(tempPresets[activePreset]);
+                        }
+                        return ({
+                            presets: tempPresets
+                        });
+                    });
+                }
+            } else {
+                if (presets.theme) {
+                    deletePreset('theme');
+                }
             }
 
             return (
@@ -358,10 +389,10 @@ class GlobalSettings extends Component {
                                             {
                                                 showDetailedSettings && (
                                                     <span className="radio-button fas fa-angle-left"
-                                                          onClick={() => this.setState(state => ({
-                                                              showPresetSettings: showDetailedSettings ? undefined : index,
-                                                              ...((enableRenaming === presetKey) && { enableRenaming: undefined })
-                                                          }))}
+                                                        onClick={() => this.setState(state => ({
+                                                            showPresetSettings: showDetailedSettings ? undefined : index,
+                                                            ...((enableRenaming === presetKey) && { enableRenaming: undefined })
+                                                        }))}
                                                     />
                                                 )
                                             }
@@ -388,11 +419,11 @@ class GlobalSettings extends Component {
                                                         onChange={event => renameTitle(event.target.value, presetKey)}
                                                     />
                                                 ) : (
-                                                    <Fragment>
-                                                        <span className="name"> {name}</span>
-                                                        {isActivePreset && <span className={'is-active-label'}>{__('Active')}</span>}
-                                                    </Fragment>
-                                                )
+                                                        <Fragment>
+                                                            <span className="name"> {name}</span>
+                                                            {isActivePreset && <span className={'is-active-label'}>{__('Active')}</span>}
+                                                        </Fragment>
+                                                    )
 
 
                                             }
@@ -460,12 +491,15 @@ class GlobalSettings extends Component {
                                                             />
                                                         ))
                                                     }
-                                                    <Color
-                                                        addNewColor
-                                                        value={undefined}
-                                                        addNew={() => addNewColor(presetKey)}
-                                                        onChange={newValue => changeColor(presets[presetKey].colors.length - 1, newValue, presetKey)}
-                                                    />
+                                                    {
+                                                        presetKey !== 'theme' &&
+                                                        <Color
+                                                            addNewColor
+                                                            value={undefined}
+                                                            addNew={() => addNewColor(presetKey)}
+                                                            onChange={newValue => changeColor(presets[presetKey].colors.length - 1, newValue, presetKey)}
+                                                        />
+                                                    }
                                                 </div>
                                             </PanelBody>
                                             {
@@ -602,7 +636,7 @@ class GlobalSettings extends Component {
             const detailedPreset = Object.keys(presets)[showPresetSettings];
             typeof presets[detailedPreset] !== 'undefined' && setTypoTitleStyle(presets[detailedPreset].typography);
         }
-        localStorage.setItem('qubely-global-settings', JSON.stringify(presets[activePreset]))
+        localStorage.setItem('qubely-global-settings', JSON.stringify(presets[activePreset]));
         return (
             <Fragment>
                 <PluginSidebar
