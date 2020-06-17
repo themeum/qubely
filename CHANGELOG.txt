@@ -1,13 +1,13 @@
+<h3>1.5.0 - 16 June, 2020</h3>
+<ul>
+    <li>Fix: Image Block whitespace issue</li>
+    <li>Fix: Inspector Tabs Error</li>
+    <li>Fix: External ajax request issue</li>
+    <li>Fix: Minor CSS issues</li>
+</ul>
 <h3>1.4.1 - 12 June, 2020</h3>
 <ul>
     <li>New: Post Grid pagination</li>
     <li>New: Getting Started page redesign</li>
     <li>Fix: Minor bug fix</li>
-</ul>
-<h3>1.4.0 - 21 May, 2020</h3>
-<ul>
-    <li>New: Global Settings</li>
-    <li>New: Qubely Settings page - with Google Map API key, reCAPTCHA key storage</li>
-    <li>Fix: Accordion block - Active Panel color</li>
-    <li>Fix: Contact Form block - Form Submit issue</li>
 </ul>

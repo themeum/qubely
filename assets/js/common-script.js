@@ -488,4 +488,153 @@ jQuery(document).ready(function ($) {
         })
     });*/
 
+    var qubelyGsPostWrap = $('.qubely-gs-card-blog-posts');
+    if(qubelyGsPostWrap.length) {
+
+        function generatePostMarkup(post) {
+            var div = document.createElement('div');
+            div.classList.add('qubely-gs-post-card');
+
+            var anchor1 = document.createElement('a');
+            anchor1.setAttribute('href', post.link);
+
+            var img = document.createElement('img');
+            if(
+              post.qubely_featured_image_url &&
+              post.qubely_featured_image_url.medium_large
+            ) {
+                img.setAttribute('src', post.qubely_featured_image_url.medium_large[0])
+            }
+
+            anchor1.appendChild(img);
+
+            var span = document.createElement('span');
+            var date = new Date(post.date);
+            span.innerText = `${date.getUTCDate()}/${date.getUTCMonth()}/${date.getUTCFullYear()}` ;
+
+
+            var anchor2 = document.createElement('a');
+            anchor2.setAttribute('href', post.link);
+
+            $(anchor2).html(post.title.rendered);
+
+            div.appendChild(anchor1);
+            div.appendChild(span);
+            div.appendChild(anchor2);
+            return div;
+        }
+
+        function printPostMarkup(posts) {
+            $('.qubely-gs-post-items-wrap').empty();
+            posts.forEach(post => {
+                $('.qubely-gs-post-items-wrap').append(generatePostMarkup(post));
+            })
+        }
+
+        function fetchPost() {
+            var cacheTime = localStorage.getItem('__qubely_themeum_post_time');
+            var cachedPost = localStorage.getItem('__qubely_themeum_post');
+
+            if(!cachedPost || !parseInt(cacheTime) > Date.now()) {
+                var endpoint = "https://www.themeum.com/wp-json/wp/v2/posts?per_page=3&status=publish&orderby=date&categories=1486";
+                fetch(endpoint)
+                  .then(response => response.json())
+                  .then(res => {
+                      if(Array.isArray(res)) {
+                          printPostMarkup(res);
+                          localStorage.setItem('__qubely_themeum_post_time', Date.now() + 3600e3);
+                          localStorage.setItem('__qubely_themeum_post', JSON.stringify(res));
+                      } else {
+                          qubelyGsPostWrap.remove();
+                      }
+                  })
+                  .catch((e) => {
+                      qubelyGsPostWrap.remove();
+                  })
+            }
+            else {
+                var posts = JSON.parse(cachedPost);
+                printPostMarkup(posts);
+            }
+
+        }
+
+        fetchPost();
+
+
+    }
+
+    var sectionCount = $('.qubely-gs-section-count');
+    if(sectionCount.length) {
+        var endpoint = "https://qubely.io/wp-json/wp/v2/sections";
+        var cacheTime = localStorage.getItem('__qubely_section_count_time');
+        var cachedCount = localStorage.getItem('__qubely_section_count');
+        if(!cachedCount || !parseInt(cacheTime) > Date.now()) {
+            fetch(endpoint)
+              .then(response => {
+                  var count = response.headers.get('X-WP-Total');
+                  if(count) {
+                      count = count + '+';
+                      sectionCount.html(count)
+                      localStorage.setItem('__qubely_section_count_time', Date.now() + 3600e3);
+                      localStorage.setItem('__qubely_section_count', count);
+                  }
+              }).catch(e => {
+                // debug
+            });
+        } else {
+            sectionCount.html(cachedCount)
+        }
+
+    }
+
+    var blockCount = $('.qubely-gs-block-count');
+    if(blockCount.length) {
+        var endpoint = "https://qubely.io/wp-json/wp/v2/block";
+        var cacheTime = localStorage.getItem('__qubely_block_count_time');
+        var cachedCount = localStorage.getItem('__qubely_block_count');
+        if(!cachedCount || !parseInt(cacheTime) > Date.now()) {
+            fetch(endpoint)
+              .then(response => {
+                  var count = response.headers.get('X-WP-Total');
+                  if(count) {
+                      count = count + '+';
+                      blockCount.html(count)
+                      localStorage.setItem('__qubely_block_count_time', Date.now() + 3600e3);
+                      localStorage.setItem('__qubely_block_count', count);
+                  }
+              }).catch(e => {
+                // debug
+            });
+        } else {
+            blockCount.html(cachedCount)
+        }
+    }
+
+    var layoutCount = $('.qubely-gs-layout-count');
+    if(layoutCount.length) {
+        var endpoint = "https://qubely.io/wp-json/restapi/v2/layouts";
+        var cacheTime = localStorage.getItem('__qubely_layout_count_time');
+        var cachedCount = localStorage.getItem('__qubely_layout_count');
+        if(!cachedCount || !parseInt(cacheTime) > Date.now()) {
+            fetch(endpoint, {
+                method: 'post'
+            })
+              .then(response => {
+                  response.json().then(response => {
+                      var count = response.filter(item => item.parentID === 0).length + '+';
+                      layoutCount.html(count)
+                      localStorage.setItem('__qubely_layout_count_time', Date.now() + 3600e3);
+                      localStorage.setItem('__qubely_layout_count', count);
+                  })
+              }).catch(e => {
+                // debug
+            });
+        } else {
+            layoutCount.html(cachedCount)
+        }
+    }
+
+
+
 })(jQuery);

@@ -3,9 +3,9 @@
  * Plugin Name:       Qubely - Advanced Gutenberg Blocks
  * Plugin URI:        https://www.themeum.com/
  * Description:       The one and only Gutenberg block plugin you will ever need.
- * Version: 		  1.4.2
+ * Version: 		  1.5.0
  * Author:            Themeum.com
- * Author URI:        https://themeum.com/
+ * Author URI:        https://www.themeum.com/
  * Text Domain:       qubely
  * Requires at least: 5.0
  * Tested up to: 	  5.3
@@ -24,7 +24,7 @@ function qubely_language_load()
 }
 
 // Define Version
-define('QUBELY_VERSION', '1.4.2');
+define('QUBELY_VERSION', '1.5.0');
 
 // Define License
 define('QUBELY_LICENSE', 'free');

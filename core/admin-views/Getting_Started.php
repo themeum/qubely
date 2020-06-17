@@ -11,9 +11,7 @@ class Getting_Started {
     public $hasPro;
 
     public function __construct() {
-        $this->posts = $this->get_posts();
         $this->hasPro = defined('QUBELY_PRO_FILE');
-        $file = file_get_contents(QUBELY_DIR_PATH . 'readme.txt');
     }
 
 	/**
@@ -21,13 +19,6 @@ class Getting_Started {
      * @return mixed
      */
     public function get_changelog() {
-        /*
-         require_once ABSPATH . 'wp-admin/includes/plugin-install.php';
-        $plugin_info = plugins_api( 'plugin_information', array(
-            'slug' => 'qubely',
-        ) );
-        return $plugin_info->sections['changelog'];
-        */
         if(file_exists(QUBELY_DIR_PATH . 'CHANGELOG.txt')) {
 	        $file = file_get_contents(QUBELY_DIR_PATH . 'CHANGELOG.txt');
 	        return $file;
@@ -35,55 +26,13 @@ class Getting_Started {
         return null;
     }
 
-	/**
-	 * @return int|string
-	 */
-    public function get_block_count() {
-	    $block = "http://qubely.io/wp-json/wp/v2/block";
-	    $block = wp_remote_get($block);
-	    if (is_wp_error($block)) {
-		    return 35;
-	    }
-	    $block = wp_remote_retrieve_header($block, 'X-WP-Total');
-	    return $block;
-    }
-
-	/**
-	 * @return int|string
-	 */
-    public function get_section_count() {
-	    $sections = "http://qubely.io/wp-json/wp/v2/sections";
-	    $sections = wp_remote_get($sections);
-	    if(is_wp_error($sections)) {
-		    return 150;
-	    }
-	    $sections = wp_remote_retrieve_header($sections, 'X-WP-Total');
-	    return $sections;
-    }
-
-	/**
-	 * @return int
-	 */
-    public function get_layout_count() {
-	    $layouts = "https://qubely.io/wp-json/restapi/v2/layouts";
-	    $layouts = wp_remote_post($layouts);
-	    $layouts = wp_remote_retrieve_body($layouts);
-	    $layouts = json_decode($layouts);
-	    if(is_wp_error($layouts) || !is_array($layouts)) {
-	        return 25;
-        }
-	    $layouts = array_filter($layouts, function ($item) {
-		    return $item->parentID === 0;
-	    });
-	    return count($layouts);
-    }
 
     public function mini_cards() {
 
         // @TODO: Fetech data dynamically with one request if possible
-	    $block = $this->get_block_count();
-	    $sections = $this->get_section_count();
-	    $layouts = $this->get_layout_count();
+	    $block = 35;
+	    $sections = 150;
+	    $layouts = 25;
 
         $icon_blocks = QUBELY_DIR_URL . 'assets/img/admin/blocks.svg';
         $icon_sections = QUBELY_DIR_URL . 'assets/img/admin/sections.svg';
@@ -99,7 +48,7 @@ class Getting_Started {
 
                     <div class="qubely-gs-card-content">
                         <h6><?php esc_html_e('Starter packs', 'qubely'); ?></h6>
-                        <h3><?php echo $layouts . '+'; ?></h3>
+                        <h3 class="qubely-gs-layout-count"><?php echo $layouts . '+'; ?></h3>
                     </div>
                 </a>
 
@@ -108,7 +57,7 @@ class Getting_Started {
                     <span><img src="<?php echo $icon_sections; ?>" alt=""></span>
                     <div class="qubely-gs-card-content">
                         <h6><?php esc_html_e("Readymade Sections", 'qubely'); ?></h6>
-                        <h3><?php echo $sections  . '+'; ?></h3>
+                        <h3 class="qubely-gs-section-count"><?php echo $sections  . '+'; ?></h3>
                     </div>
                 </a>
 
@@ -117,23 +66,12 @@ class Getting_Started {
                     <span><img src="<?php echo $icon_blocks; ?>" alt=""></span>
                     <div class="qubely-gs-card-content">
                         <h6><?php esc_html_e("Blocks", 'qubely');?></h6>
-                        <h3><?php echo $block . '+'?></h3>
+                        <h3 class="qubely-gs-block-count"><?php echo $block . '+'?></h3>
                     </div>
                 </a>
             </div>
         <?php
 
-    }
-
-    public function get_posts() {
-        $endpoint = "http://themeum.com/wp-json/wp/v2/posts?per_page=3&status=publish&orderby=date&categories=1486";
-        $response = wp_remote_get($endpoint);
-        $response_body = wp_remote_retrieve_body($response);
-        $result = json_decode($response_body);
-        if (is_wp_error($result) || !is_array($result)) {
-	        return false;
-        }
-        return $result;
     }
 
     public function social_links() {
@@ -163,8 +101,9 @@ class Getting_Started {
      */
     public function markup() {
         $logo = QUBELY_DIR_URL . 'assets/img/admin/qubely-option-logo.jpg';
+        wp_enqueue_style('qubely-options');
         ?>
-        <div class="wrap">
+        <div id="gs-wrapper" class="wrap" style="display: none">
             <h1 style="display: none">&nbsp;</h1>
 
             <div class="qubely-getting-started">
@@ -187,7 +126,6 @@ class Getting_Started {
                         <div class="qubely-gs-card">
                             <div class="qubely-gs-card-title is-large">
                                 <h2><?php esc_html_e( 'What\'s New in Qubely', 'qubely' )?></h2>
-<!--                                <button><span class="fas fa-angle-down"></span></button>-->
                             </div>
                             <div class="qubely-gs-card-content qubely-gs-changelog">
                                 <?php echo $this->get_changelog(); ?>
@@ -195,29 +133,30 @@ class Getting_Started {
                             <a class="qubely-gs-link" target="_blank" href="https://wordpress.org/plugins/qubely/#developers"><?php esc_html_e('Learn More', 'qubely'); ?> <span class="fas fa-long-arrow-alt-right"></span></a>
 						</div>
                         <?php
-                        if(is_array($this->posts) && count($this->posts)) { ?>
-						<div class="qubely-gs-card">
+                        if(true) { ?>
+						<div class="qubely-gs-card qubely-gs-card-blog-posts">
                             <div class="qubely-gs-card-title is-large">
                                 <h2><?php esc_html_e( 'Tips and Tutorials from our Blog', 'qubely' );?></h2>
                                 <a href="https://www.themeum.com/category/qubely/" target="_blank"><?php esc_html_e('See all', 'qubely'); ?> <span class="fas fa-long-arrow-alt-right"></span></a>
                             </div>
                             <div class="qubely-gs-card-content ">
-								<div class="qubely-gs-card-row qubely-column-3">
+								<div class="qubely-gs-card-row qubely-column-3 qubely-gs-post-items-wrap">
 									<?php
-                                        foreach ($this->posts as $post) {
-                                            $date = gmdate('M d, Y', strtotime($post->date));
-                                            $image = $post->qubely_featured_image_url->medium_large[0];
+
+                                        for ($x = 1; $x <= 3; $x++) {
                                             ?>
-                                            <div class="qubely-gs-post-card">
-                                                <a target="_blank" href="<?php echo $post->link ?>">
-                                                    <img src="<?php echo $image ?>" alt="">
-                                                </a>
-                                                <span><?php echo $date ?></span>
-                                                <a target="_blank" href="<?php echo $post->link ?>"><?php echo $post->title->rendered ?></a>
-                                            </div>
+                                                <div class="qubely-gs-post-card card-placeholder">
+                                                    <a href="#">
+                                                        <img src="" alt="">
+                                                    </a>
+                                                    <span>00/00/00</span>
+                                                    <a href="#">Dummy Title</a>
+                                                </div>
                                             <?php
                                         }
+
 									?>
+
 								</div>
                             </div>
 						</div>

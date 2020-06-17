@@ -187,12 +187,13 @@ class QUBELY
 		#END_REPLACE
 
 		wp_enqueue_style('font-awesome', QUBELY_DIR_URL . 'assets/css/font-awesome.min.css', false, QUBELY_VERSION);
-		wp_enqueue_style('qubely-options', QUBELY_DIR_URL . 'assets/css/options.css', false, QUBELY_VERSION);
 		wp_enqueue_script('qubely-magnific-popup', QUBELY_DIR_URL . 'assets/js/qubely.magnific-popup.js', array('jquery'), QUBELY_VERSION, true);
 		wp_enqueue_script('jquery-animatedHeadline', QUBELY_DIR_URL . 'assets/js/jquery.animatedheadline.js', array('jquery'), QUBELY_VERSION, true);
 		wp_enqueue_script('qubely-block-map', QUBELY_DIR_URL . 'assets/js/blocks/map.js', array('jquery'), QUBELY_VERSION, true);
 		wp_enqueue_script('qubely-block-contactform', QUBELY_DIR_URL . 'assets/js/blocks/contactform.js', array('jquery'), QUBELY_VERSION, true);
 		wp_enqueue_script('qubely-block-common', QUBELY_DIR_URL . 'assets/js/common-script.js', array('jquery'), QUBELY_VERSION, true);
+
+		wp_register_style('qubely-options', QUBELY_DIR_URL . 'assets/css/options.css', false, QUBELY_VERSION);
 	}
 
 

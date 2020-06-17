@@ -179,6 +179,10 @@ h4.qubely-options-section-title {
 /**
  * New Getting Started
  */
+#gs-wrapper {
+	display: block !important;
+}
+
 * {
 	box-sizing: border-box;
 }
@@ -529,6 +533,10 @@ p {
 	transition: 200ms;
 }
 
+.qubely-gs-post-card img {
+	display: block;
+}
+
 .qubely-gs-post-card a:hover {
 	color: #007AFF;
 }
@@ -538,6 +546,16 @@ p {
 	margin-bottom: 8px;
 	margin-top: 16px;
 	color: rgba(36, 47, 87, 0.6);
+}
+
+.qubely-gs-post-card.card-placeholder span,
+.qubely-gs-post-card.card-placeholder a{
+	background: #f1f1f1;
+	color: transparent !important;
+	pointer-events: none;
+}
+.qubely-gs-post-card.card-placeholder span {
+	width: 120px;
 }
 
 .qubely-gs-social-links {
