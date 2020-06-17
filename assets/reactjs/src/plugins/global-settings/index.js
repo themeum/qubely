@@ -482,6 +482,7 @@ class GlobalSettings extends Component {
                                                     {
                                                         colors.map((value, index) => (
                                                             <Color
+                                                                preset={presetKey}
                                                                 value={value}
                                                                 className={index < 5 ? 'primary-color' : 'added-color'}
                                                                 deleteOption={index < 5 ? false : true}

@@ -14,7 +14,7 @@ const {
 } = wp.components;
 
 
-export default function Color({ value, onChange, className, deleteOption, onDelete, addNew = undefined, addNewColor = false }) {
+export default function Color({ preset, value, onChange, className, deleteOption, onDelete, addNew = undefined, addNewColor = false }) {
 
     const classes = classNames(
         'qubely-field',
@@ -46,7 +46,7 @@ export default function Color({ value, onChange, className, deleteOption, onDele
                                 if (addNewColor) {
                                     addNew();
                                 }
-                                onToggle()
+                                preset !== 'theme' && onToggle()
                             }}
                         >
                             {addNewColor &&
