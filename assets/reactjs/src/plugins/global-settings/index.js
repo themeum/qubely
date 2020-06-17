@@ -66,19 +66,19 @@ class GlobalSettings extends Component {
         }
         this.ref = createRef();
         this.typoRef = createRef();
-        this.saveGlobalCSS = this.saveGlobalCSS.bind(this);
+        // this.saveGlobalCSS = this.saveGlobalCSS.bind(this);
     }
 
     async componentDidMount() {
         await this.getGlobalSettings();
-        await this.saveGlobalCSS();
+        // await this.saveGlobalCSS();
         await this.updateGlobalSettings()
     }
 
-    async saveGlobalCSS() {
-        let _CSS = await getGlobalCSS();
-        await injectGlobalCSS(_CSS, 'qubely-global-styles');
-    }
+    // async saveGlobalCSS() {
+    //     let _CSS = await getGlobalCSS();
+    //     await injectGlobalCSS(_CSS, 'qubely-global-styles');
+    // }
 
     async componentDidUpdate(prevProps, prevState) {
         const {
@@ -87,7 +87,7 @@ class GlobalSettings extends Component {
             renameTypo,
             enableRenaming
         } = this.state;
-        
+
         if ((enableRenaming !== prevState.enableRenaming) && typeof enableRenaming !== 'undefined') {
             setTimeout(() => {
                 if (typeof this.ref.current !== 'undefined') {
@@ -145,7 +145,6 @@ class GlobalSettings extends Component {
             return data;
         })
     }
-
 
     render() {
         const {
