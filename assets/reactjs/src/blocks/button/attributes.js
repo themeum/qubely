@@ -163,7 +163,8 @@ const attributes = {
                 color2: '#2184F9',
                 direction: 0,
                 start: 0,
-                stop: 100
+                stop: 100,
+                type: 'linear'
             }
         },
         style: [

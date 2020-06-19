@@ -54,9 +54,7 @@ class Gradient extends Component {
                     }
                 }} />
                 <div className="qubely-rgba-palette" style={{ padding: '0px 0px 15px 15px' }}>
-                    {globalColors.map(
-                        color => <button style={{ color: color }} onClick={() => this.setSettings(color, colorType)} />
-                    )}
+                    {globalColors.map((color, index) => <button key={color} style={{ color: color }} onClick={() => this.setSettings(`var(--qubely-color-${index + 1})`, colorType)} />)}
                 </div>
             </Fragment>
         )

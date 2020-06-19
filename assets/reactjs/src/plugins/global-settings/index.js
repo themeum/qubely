@@ -503,7 +503,8 @@ class GlobalSettings extends Component {
                                                 </div>
                                             </PanelBody>
                                             {
-                                                (typeof typography !== 'undefined' && typography.length > 0) &&
+                                                // (typeof typography !== 'undefined' && typography.length > 0) &&
+                                                typeof typography !== 'undefined' &&
                                                 <PanelBody title={__('Typography')} initialOpen={true}>
                                                     {
                                                         typography.map(({ name, value, scope = 'h', removable = false }, index) => {
