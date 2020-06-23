@@ -307,7 +307,7 @@ class GlobalSettings extends Component {
             let ThemeSupportCheck = false;
             let themeColorPalette = [], themefontSizes = [];
 
-            if (themeSupports['editor-color-palette']) {
+            if (typeof themeSupports['editor-color-palette'] === 'object' && themeSupports['editor-color-palette'].length > 0) {
                 ThemeSupportCheck = true;
                 themeColorPalette = themeSupports['editor-color-palette'].map(({ color }) => color);
                 themefontSizes = themeSupports['editor-font-sizes'];
