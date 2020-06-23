@@ -31,7 +31,8 @@ const {
 const {
     Tooltip,
     Dropdown,
-    PanelBody
+    PanelBody,
+    RangeControl
 } = wp.components;
 
 const {
@@ -307,12 +308,29 @@ class GlobalSettings extends Component {
             let ThemeSupportCheck = false;
             let themeColorPalette = [], themefontSizes = [];
 
-            if (typeof themeSupports['editor-color-palette'] === 'object' && themeSupports['editor-color-palette'].length > 0) {
+            if ((typeof themeSupports['editor-color-palette'] === 'object' && themeSupports['editor-color-palette'].length > 0) ||
+                (typeof themeSupports['editor-font-sizes'] === 'object' && themeSupports['editor-font-sizes'].length > 0)
+            ) {
                 ThemeSupportCheck = true;
                 themeColorPalette = themeSupports['editor-color-palette'].map(({ color }) => color);
-                themefontSizes = themeSupports['editor-font-sizes'];
+                themefontSizes = themeSupports['editor-font-sizes'].map(({ name, size }) => (
+                    {
+                        name,
+                        scope: "others",
+                        value: {
+                            openTypography: true,
+                            size: {
+                                md: size,
+                                unit: 'px'
+                            }
+                        }
+                    }));
 
-                if (typeof presets.theme === 'undefined' || Object.keys(diff({ 'colors': themeColorPalette }, { 'colors': presets.theme.colors })).length > 0) {
+                themefontSizes.reverse();
+
+                if (typeof presets.theme === 'undefined' ||
+                    Object.keys(diff({ 'colors': themeColorPalette }, { 'colors': presets.theme.colors })).length > 0 ||
+                    Object.keys(diff({ 'typography': themefontSizes }, { 'typography': presets.theme.typography })).length > 0) {
                     this.setState(({ presets, activePreset }) => {
                         let tempPresets = presets;
                         delete presets.theme;
@@ -321,7 +339,7 @@ class GlobalSettings extends Component {
                                 name: 'Theme',
                                 key: 'theme',
                                 colors: themeColorPalette,
-                                typography: []
+                                typography: themefontSizes
                             },
                             ...presets,
                         }
@@ -477,7 +495,7 @@ class GlobalSettings extends Component {
                                         showDetailedSettings &&
                                         <Fragment>
 
-                                            <PanelBody title={__('Global Colors')} initialOpen={true}>
+                                            <PanelBody title={__(presetKey === 'theme' ? 'Theme Colors' : 'Global Colors')} initialOpen={true}>
                                                 <div className="qubely-global-color-pallete">
                                                     {
                                                         colors.map((value, index) => (
@@ -591,14 +609,24 @@ class GlobalSettings extends Component {
 
                                                                     </div>
 
-                                                                    {displaySettings &&
-                                                                        <Typography
-                                                                            value={value}
-                                                                            globalSettings
-                                                                            key={name + index}
-                                                                            onChange={newValue => updateTypography(false, presetKey, index, newValue)}
-                                                                        />
-                                                                    }
+                                                                    {displaySettings && (
+                                                                        presetKey === 'theme' ?
+                                                                            <div className="theme-typo-wrapper">
+                                                                                <RangeControl
+                                                                                    label={__(name)}
+                                                                                    value={value.size.md}
+                                                                                    onChange={newValue => console.log(newValue)}
+                                                                                    disabled
+                                                                                />
+                                                                            </div>
+                                                                            :
+                                                                            <Typography
+                                                                                value={value}
+                                                                                globalSettings
+                                                                                key={name + index}
+                                                                                onChange={newValue => updateTypography(false, presetKey, index, newValue)}
+                                                                            />
+                                                                    )}
                                                                 </div>
                                                             )
                                                         })
