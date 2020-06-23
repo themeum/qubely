@@ -1,3 +1,4 @@
+/* eslint-disable react/react-in-jsx-scope */
 const { __ } = wp.i18n;
 const { compose } = wp.compose;
 const { withSelect } = wp.data;
@@ -75,7 +76,7 @@ class Edit extends Component {
 		const { setAttributes, clientId, attributes: { uniqueId } } = this.props
 		this.isStillMounted = true;
 		this.fetchRequest = wp.apiFetch({
-			path: addQueryArgs(`/wp/v2/categories`, CATEGORIES_LIST_QUERY),
+			path: addQueryArgs('/wp/v2/categories', CATEGORIES_LIST_QUERY),
 		}).then(
 			(categoriesList) => {
 				if (this.isStillMounted) {
@@ -459,7 +460,7 @@ class Edit extends Component {
 								<Range label={__('Number of Items')} value={postsToShow} onChange={value => setAttributes({ postsToShow: parseInt(value) })} min={0} max={15} />
 
 								<SelectControl
-									label={__("Order By")}
+									label={__('Order By')}
 									value={orderBy}
 									options={[
 										{ label: __('Date'), value: 'date' },
@@ -644,7 +645,7 @@ class Edit extends Component {
 								<Toggle label={__('Fixed Image Height')} value={enableFixedHeight} onChange={value => setAttributes({ enableFixedHeight: value })} />
 								{enableFixedHeight && <Range label={__('')} value={fixedHeight} onChange={value => setAttributes({ fixedHeight: value })} unit={['px', 'em', '%']} min={10} max={600} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />}
 								<SelectControl
-									label={__("Image Sizes")}
+									label={__('Image Sizes')}
 									value={imgSize}
 									onChange={(value) => setAttributes({ imgSize: value })}
 									options={qubely_admin.image_sizes}
@@ -689,7 +690,7 @@ class Edit extends Component {
 									<Fragment>
 										{(layout !== 2 && showCategory == 'badge' && style != 4) &&
 											<Select
-												label={__("Badge Position")}
+												label={__('Badge Position')}
 												options={[['leftTop', __('Left Top')], ['rightTop', __('Right Top')], ['leftBottom', __('Left Bottom')], ['rightBottom', __('Right Bottom')]]}
 												value={categoryPosition}
 												onChange={value => setAttributes({ categoryPosition: value })}
@@ -709,7 +710,7 @@ class Edit extends Component {
 												{
 													badgePosition === 'default' ?
 														<Select
-															label={__("")}
+															label={__('')}
 															options={[['leftTop', __('Left Top')], ['rightTop', __('Right Top')], ['leftBottom', __('Left Bottom')], ['rightBottom', __('Right Bottom')]]}
 															value={categoryPosition}
 															onChange={value => setAttributes({ categoryPosition: value })}
@@ -872,7 +873,7 @@ class Edit extends Component {
 				<div className={`qubely-block-${uniqueId}${className ? ` ${className}` : ''}`}>
 					{
 						(posts && posts.length) ?
-
+						<Fragment>
 							<div
 								// onContextMenu={event => handleContextMenu(event, this.refs.qubelyContextMenu)}
 								className={`qubely-postgrid-wrapper qubely-postgrid-layout-${layout} ${(layout === 2) ? 'qubely-postgrid-column qubely-postgrid-column-md' + column.md + ' ' + 'qubely-postgrid-column-sm' + column.sm + ' ' + 'qubely-postgrid-column-xs' + column.xs : ''}`}>
@@ -891,8 +892,8 @@ class Edit extends Component {
 
 									})
 								}
-
-								<div ref="qubelyContextMenu" className={`qubely-context-menu-wraper`} >
+							</div>
+							<div ref="qubelyContextMenu" className={'qubely-context-menu-wraper'} >
 									{/* <ContextMenu
 										name={name}
 										clientId={clientId}
@@ -917,7 +918,7 @@ class Edit extends Component {
 										}
 									</div>
 								}
-							</div>
+							</Fragment>
 							:
 							<div className="qubely-postgrid-is-loading">
 								<Spinner />
