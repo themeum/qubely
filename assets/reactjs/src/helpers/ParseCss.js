@@ -168,47 +168,57 @@ function availableBlocksMeta(all_blocks) {
         if (!blocks.length) {
             return
         }
-        blocks.map(block => {
-            const { attributes, innerBlocks, name } = block
-            blocks_flag.available_blocks.push(name)
+        blocks.forEach(block => {
+            const {
+                name,
+                attributes,
+                innerBlocks
+            } = block;
+            const [blockType, blockName] = name.split('/');
 
-            // check if has interaction
-            if (blocks_flag.interaction === false && typeof attributes.interaction !== 'undefined') {
-                const { while_scroll_into_view, mouse_movement } = attributes.interaction
+            if (blockType === 'qubely') {
+                if (!blocks_flag.available_blocks.includes(name)) {
+                    blocks_flag.available_blocks.push(name);
+                }
+                // check if has interaction
+                if (blocks_flag.interaction === false && typeof attributes.interaction !== 'undefined') {
+                    const { while_scroll_into_view, mouse_movement } = attributes.interaction
+                    if (
+                        (typeof while_scroll_into_view !== 'undefined' && while_scroll_into_view.enable === true) ||
+                        (typeof mouse_movement !== 'undefined' && mouse_movement.enable === true)
+                    ) {
+                        blocks_flag.interaction = true;
+                    }
+                }
+
+                // if has block animation
                 if (
-                    (typeof while_scroll_into_view !== 'undefined' && while_scroll_into_view.enable === true) ||
-                    (typeof mouse_movement !== 'undefined' && mouse_movement.enable === true)
+                    blocks_flag.animation === false &&
+                    typeof attributes.animation !== 'undefined' &&
+                    typeof attributes.animation.animation !== 'undefined' &&
+                    attributes.animation.animation !== ''
                 ) {
-                    blocks_flag.interaction = true
+                    blocks_flag.animation = true;
+                }
+
+                // if has block parallax
+                if (blocks_flag.parallax === false && name === 'qubely/row') {
+                    if (
+                        typeof attributes.rowBg !== 'undefined' &&
+                        typeof attributes.rowBg.bgimgParallax !== 'undefined' &&
+                        attributes.rowBg.bgimgParallax === 'animated'
+                    ) {
+                        blocks_flag.parallax = true;
+                    }
+                }
+                if (innerBlocks.length > 0 && blockName !== 'form') {
+                    recursive_block_map(innerBlocks);
                 }
             }
-
-            // if has block animation
-            if (
-                blocks_flag.animation === false &&
-                typeof attributes.animation !== 'undefined' &&
-                typeof attributes.animation.animation !== 'undefined' &&
-                attributes.animation.animation !== ''
-            ) {
-                blocks_flag.animation = true
-            }
-
-            // if has block parallax
-            if (blocks_flag.parallax === false && name === 'qubely/row') {
-                if (
-                    typeof attributes.rowBg !== 'undefined' &&
-                    typeof attributes.rowBg.bgimgParallax !== 'undefined' &&
-                    attributes.rowBg.bgimgParallax === 'animated'
-                ) {
-                    blocks_flag.parallax = true
-                }
-            }
-
-            recursive_block_map(innerBlocks)
         })
     }
-    recursive_block_map(all_blocks)
-    return blocks_flag
+    recursive_block_map(all_blocks);
+    return blocks_flag;
 }
 
 
