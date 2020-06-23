@@ -94,7 +94,7 @@ export const attributes = {
             type: 'gradient',
             textColor: true,
             openColor: 1,
-            color: '#2184F9',
+            color: 'var(--qubely-color-1)',
             gradient: {
                 color1: '#1066CC',
                 color2: '#55cd37',

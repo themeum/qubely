@@ -121,7 +121,7 @@ const attributes = {
         ]
     },
     buttonColor2: {
-        type: 'string', default: '#2184F9',
+        type: 'string', default: 'var(--qubely-color-1)',
         style: [
             {
                 condition: [
@@ -157,10 +157,10 @@ const attributes = {
         default: {
             type: 'color',
             openColor: 1,
-            color: '#2184F9',
+            color: 'var(--qubely-color-1)',
             gradient: {
                 color1: '#1066CC',
-                color2: '#2184F9',
+                color2: 'var(--qubely-color-1)',
                 direction: 0,
                 start: 0,
                 stop: 100,
@@ -195,7 +195,7 @@ const attributes = {
         ]
     },
     buttonBorder: {
-        type: 'object', default: { openBorder: 1, widthType: "global", global: { md: "1" }, type: 'solid', color: '#2184F9' },
+        type: 'object', default: { openBorder: 1, widthType: "global", global: { md: "1" }, type: 'solid', color: 'var(--qubely-color-1)' },
         style: [
             {
                 selector: '{{QUBELY}} .qubely-block-btn-anchor'

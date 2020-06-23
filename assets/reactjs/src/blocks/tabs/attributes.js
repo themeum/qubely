@@ -155,7 +155,7 @@ const attributes = {
     },
     navColorActive: {
         type: 'string',
-        default: '#2184F9',
+        default: 'var(--qubely-color-1)',
         style: [
             { selector: '{{QUBELY}} .qubely-block-tab .qubely-tab-nav .qubely-tab-item.qubely-active .qubely-tab-title { color:{{navColorActive}}; }' }
         ]
@@ -235,7 +235,7 @@ const attributes = {
     },
     navUnderlineBorderColorActive: {
         type: 'string',
-        default: '#2184F9',
+        default: 'var(--qubely-color-1)',
         style: [
             {
                 condition: [

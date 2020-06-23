@@ -105,7 +105,7 @@ export const buttonAttributes = {
         ]
     },
     buttonColor2: {
-        type: 'string', default: '#2184F9',
+        type: 'string', default: 'var(--qubely-color-1)',
         style: [
             {
                 condition: [{ key: 'buttonFillType', relation: '!=', value: 'fill' }],
@@ -132,7 +132,7 @@ export const buttonAttributes = {
         ]
     },
     buttonBgColor: {
-        type: 'object', default: { type: 'color', openColor: 1, color: '#2184F9', gradient: { color1: '#1066CC', color2: '#2184F9', direction: 0, start: 0, stop: 100 } },
+        type: 'object', default: { type: 'color', openColor: 1, color: 'var(--qubely-color-1)', gradient: { color1: '#1066CC', color2: 'var(--qubely-color-1)', direction: 0, start: 0, stop: 100 } },
         style: [
             {
                 condition: [{ key: 'buttonFillType', relation: '==', value: 'fill' }],
@@ -141,7 +141,7 @@ export const buttonAttributes = {
         ]
     },
     buttonBgHoverColor: {
-        type: 'object', default: { type: 'color', openColor: 1, color: '#1066CC', gradient: { color1: '#2184F9', color2: '#1066CC', direction: 0, start: 0, stop: 100 } },
+        type: 'object', default: { type: 'color', openColor: 1, color: '#1066CC', gradient: { color1: 'var(--qubely-color-1)', color2: '#1066CC', direction: 0, start: 0, stop: 100 } },
         style: [
             {
                 condition: [{ key: 'buttonFillType', relation: '==', value: 'fill' }],
@@ -156,7 +156,7 @@ export const buttonAttributes = {
             openBorder: 1,
             widthType: 'global',
             global: 1,
-            color: '#2184F9',
+            color: 'var(--qubely-color-1)',
             type: "solid",
             unit: "px"
         },

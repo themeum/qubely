@@ -34,7 +34,7 @@ registerBlockType( 'qubely/progressbar', {
 		// Bar
 		barHeight: {type: 'object', default: {md: 30, unit: 'px'}, style: [{ selector: '{{QUBELY}} .qubely-progress {height: {{barHeight}}; line-height: {{barHeight}};}' }] },
 		barBackground: {type: 'string', default: '#e9ecef', style: [{ selector: '{{QUBELY}} .qubely-progress {background-color: {{barBackground}};}' }] },
-		progressBackground: { type: 'object', default: {openColor: 1, type: 'color', color: '#007bff',gradient: {}}, style: [{ selector: '{{QUBELY}} .qubely-progress-bar' }] },
+		progressBackground: { type: 'object', default: {openColor: 1, type: 'color', color: 'var(--qubely-color-1)',gradient: {}}, style: [{ selector: '{{QUBELY}} .qubely-progress-bar' }] },
 		striped: {type: 'boolean', default: false},
 		borderRadius: {
 			type: 'object',

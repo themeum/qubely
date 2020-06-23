@@ -68,7 +68,7 @@ const attributes = {
         ]
     },
     iconColor: {
-        type: 'string', default: '#338FEC',
+        type: 'string', default: 'var(--qubely-color-1)',
         style: [
             {
                 condition: [

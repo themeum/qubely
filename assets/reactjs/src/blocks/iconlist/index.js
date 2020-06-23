@@ -90,7 +90,7 @@ const attributes = {
         ]
     },
 
-    iconColor: { type: 'string', default: '#5D7FEB', style: [{ selector: '{{QUBELY}} .qubely-list .qubely-list-li .qubely-list-item-icon {color: {{iconColor}};}' }] },
+    iconColor: { type: 'string', default: 'var(--qubely-color-1)', style: [{ selector: '{{QUBELY}} .qubely-list .qubely-list-li .qubely-list-item-icon {color: {{iconColor}};}' }] },
     iconHoverColor: { type: 'string', default: '', style: [{ selector: '{{QUBELY}} .qubely-list .qubely-list-li:hover .qubely-list-item-icon {color: {{iconHoverColor}};}' }] },
 
 

@@ -208,7 +208,7 @@ registerBlockType('qubely/contactform', {
         },
 
         inputBorderColorFocus: {
-            type: 'string', default: '#2184F9',
+            type: 'string', default: 'var(--qubely-color-1)',
             style: [
                 {
                     condition: [

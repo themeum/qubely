@@ -27,14 +27,14 @@ registerBlockType('qubely/icon', {
 		url: { type: 'object', default: {} },
 		alignment: { type: 'object', default: { md: 'center' }, style: [{ selector: '{{QUBELY}} .qubely-block-icon-wrapper {text-align: {{alignment}};}' }] },
 		iconStyle: { type: 'string', default: 'nofill' },
-		iconColor: { type: 'string', default: '#338FEC', style: [{ selector: '{{QUBELY}} .qubely-block-icon i {color: {{iconColor}};}' }] },
+		iconColor: { type: 'string', default: 'var(--qubely-color-1)', style: [{ selector: '{{QUBELY}} .qubely-block-icon i {color: {{iconColor}};}' }] },
 		iconHoverColor: { type: 'string', default: '#2476CA', style: [{ selector: '{{QUBELY}} .qubely-block-icon:hover i {color: {{iconHoverColor}};}' }] },
 		bgColor: { type: 'object', default: { openColor: 1, type: 'color', color: '#D6EBFF' }, style: [{ condition: [{ key: 'iconStyle', relation: '==', value: 'fill' }], selector: '{{QUBELY}} .qubely-block-icon' }] },
 		bgHoverColor: { type: 'object', default: { openColor: 1, type: 'color', color: '#B4D9FF', gradient: {} }, style: [{ condition: [{ key: 'iconStyle', relation: '!=', value: 'nofill' }], selector: '{{QUBELY}} .qubely-block-icon:hover' }] },
 		border: {
 			type: 'object',
 			default: {
-				color: "#338FEC",
+				color: "var(--qubely-color-1)",
 			},
 			style: [{ condition: [{ key: 'iconStyle', relation: '!=', value: 'nofill' }], selector: '{{QUBELY}} .qubely-block-icon' }]
 		},

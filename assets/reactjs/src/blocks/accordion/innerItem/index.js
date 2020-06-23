@@ -86,7 +86,7 @@ export const accordionItemSettings = {
             default: {
                 type: 'color',
                 openColor: 1,
-                color: '#2476CA',
+                color: 'var(--qubely-color-1)',
                 gradient: {
                     color1: '#2476CA',
                     color2: '#1A5FA4',

@@ -457,7 +457,7 @@ registerBlockType('qubely/timeline', {
 
 		connectorColor: {
 			type: 'string',
-			default: '#2184F9',
+			default: 'var(--qubely-color-1)',
 			style: [
 				{
 					selector: '{{QUBELY}} .qubely-timeline-connector {background-color: {{connectorColor}};}'

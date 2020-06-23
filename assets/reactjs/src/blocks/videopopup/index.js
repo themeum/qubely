@@ -54,7 +54,7 @@ registerBlockType('qubely/videopopup', {
 
 		iconBgColor: {
 			type: 'string',
-			default: '#2476CA',
+			default: 'var(--qubely-color-1)',
 			style: [
 				{
 					selector: '{{QUBELY}} .qubely-block-videopopup .qubely-video-popup .qubely-btn-icon{ background-color:{{iconBgColor}}; }'
