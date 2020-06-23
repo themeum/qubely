@@ -1,3 +1,4 @@
+/* eslint-disable react/react-in-jsx-scope */
 const { __ } = wp.i18n
 import './style.scss'
 import Edit from './Edit'
@@ -46,11 +47,11 @@ registerBlockType('qubely/timeline', {
 			default: {
 				spaceTop: {
 					md: '10',
-					unit: "px"
+					unit: 'px'
 				},
 				spaceBottom: {
 					md: '10',
-					unit: "px"
+					unit: 'px'
 				}
 			},
 			style: [

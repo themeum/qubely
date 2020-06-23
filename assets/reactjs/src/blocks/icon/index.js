@@ -1,3 +1,4 @@
+/* eslint-disable react/react-in-jsx-scope */
 import './style.scss'
 const { __ } = wp.i18n
 import Edit from './Edit'
@@ -22,7 +23,7 @@ registerBlockType('qubely/icon', {
 	attributes: {
 		uniqueId: { type: 'string', default: '' },
 		...globalAttributes,
-		spacer: { type: 'object', default: { spaceTop: { md: '10', unit: "px" }, spaceBottom: { md: '10', unit: "px" } }, style: [{ selector: '{{QUBELY}}' }] },
+		spacer: { type: 'object', default: { spaceTop: { md: '10', unit: 'px' }, spaceBottom: { md: '10', unit: 'px' } }, style: [{ selector: '{{QUBELY}}' }] },
 		name: { type: 'string', default: 'fas fa-rocket' },
 		url: { type: 'object', default: {} },
 		alignment: { type: 'object', default: { md: 'center' }, style: [{ selector: '{{QUBELY}} .qubely-block-icon-wrapper {text-align: {{alignment}};}' }] },
@@ -34,7 +35,7 @@ registerBlockType('qubely/icon', {
 		border: {
 			type: 'object',
 			default: {
-				color: "var(--qubely-color-1)",
+				color: 'var(--qubely-color-1)',
 			},
 			style: [{ condition: [{ key: 'iconStyle', relation: '!=', value: 'nofill' }], selector: '{{QUBELY}} .qubely-block-icon' }]
 		},

@@ -1,3 +1,4 @@
+/* eslint-disable react/react-in-jsx-scope */
 import './style.scss'
 import Edit from './Edit'
 import Save from './Save';
@@ -30,7 +31,7 @@ registerBlockType('qubely/contactform', {
         ...buttonAttributes,
         layout: { type: 'string', default: 'classic' },
         useDefaultStyle: { type: 'boolean', default: true },
-        spacer: { type: 'object', default: { spaceTop: { md: '10', unit: "px" }, spaceBottom: { md: '10', unit: "px" } }, style: [{ selector: '{{QUBELY}}' }] },
+        spacer: { type: 'object', default: { spaceTop: { md: '10', unit: 'px' }, spaceBottom: { md: '10', unit: 'px' } }, style: [{ selector: '{{QUBELY}}' }] },
         enableButtonAlignment: { type: 'boolean', default: true },
         enableButton: { type: 'boolean', default: true },
         buttonTag: { type: 'string', default: 'button' },
@@ -74,7 +75,7 @@ registerBlockType('qubely/contactform', {
         },
 
         labelColor: {
-            type: 'string', default: "",
+            type: 'string', default: '',
             style: [
                 {
                     condition: [
@@ -92,7 +93,7 @@ registerBlockType('qubely/contactform', {
         },
 
         labelColorFocus: {
-            type: 'string', default: "",
+            type: 'string', default: '',
             style: [
                 {
                     condition: [
@@ -112,16 +113,16 @@ registerBlockType('qubely/contactform', {
             ]
         },
 
-        inputColor: { type: 'string', default: "#495057", style: [{ selector: '{{QUBELY}} .qubely-form .qubely-form-control {color: {{inputColor}};}' }] },
+        inputColor: { type: 'string', default: '#495057', style: [{ selector: '{{QUBELY}} .qubely-form .qubely-form-control {color: {{inputColor}};}' }] },
         // inputColorHover: { type: 'string', default: "#495057", style: [{ selector: '{{QUBELY}} .qubely-form .qubely-form-control:Hover {color: {{inputColorHover}};}' }] },
-        inputColorFocus: { type: 'string', default: "#495057", style: [{ selector: '{{QUBELY}} .qubely-form .qubely-form-control:focus {color: {{inputColorFocus}};}' }] },
+        inputColorFocus: { type: 'string', default: '#495057', style: [{ selector: '{{QUBELY}} .qubely-form .qubely-form-control:focus {color: {{inputColorFocus}};}' }] },
 
-        placeholderColor: { type: 'string', default: "#818181", style: [{ selector: '{{QUBELY}} .qubely-form .qubely-form-control::placeholder {color: {{placeholderColor}};}' }] },
-        placeholderColorHover: { type: 'string', default: "", style: [{ selector: '{{QUBELY}} .qubely-form .qubely-form-control::placeholder:Hover {color: {{placeholderColorHover}};}' }] },
-        placeholderColorFocus: { type: 'string', default: "", style: [{ selector: '{{QUBELY}} .qubely-form .qubely-form-control::placeholder:focus {color: {{placeholderColorFocus}};}' }] },
+        placeholderColor: { type: 'string', default: '#818181', style: [{ selector: '{{QUBELY}} .qubely-form .qubely-form-control::placeholder {color: {{placeholderColor}};}' }] },
+        placeholderColorHover: { type: 'string', default: '', style: [{ selector: '{{QUBELY}} .qubely-form .qubely-form-control::placeholder:Hover {color: {{placeholderColorHover}};}' }] },
+        placeholderColorFocus: { type: 'string', default: '', style: [{ selector: '{{QUBELY}} .qubely-form .qubely-form-control::placeholder:focus {color: {{placeholderColorFocus}};}' }] },
 
         inputBg: {
-            type: 'string', default: "#fff",
+            type: 'string', default: '#fff',
             style: [
                 {
                     condition: [
@@ -145,7 +146,7 @@ registerBlockType('qubely/contactform', {
         },
 
         inputBgFocus: {
-            type: 'string', default: "#fff",
+            type: 'string', default: '#fff',
             style: [
                 {
                     condition: [

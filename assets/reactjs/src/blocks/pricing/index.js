@@ -1,3 +1,4 @@
+/* eslint-disable react/react-in-jsx-scope */
 import './style.scss'
 const { __ } = wp.i18n
 import Save from './Save'
@@ -29,7 +30,7 @@ registerBlockType('qubely/pricing', {
 
         defaultItems: { type: 'number', default: 2 },
         alignment: { type: 'object', default: { md: 'center' }, style: [{ selector: '{{QUBELY}} .qubely-block-pricing {text-align: {{alignment}};}' }] },
-        spacer: { type: 'object', default: { spaceTop: { md: '10', unit: "px" }, spaceBottom: { md: '10', unit: "px" } }, style: [{ selector: '{{QUBELY}}' }] },
+        spacer: { type: 'object', default: { spaceTop: { md: '10', unit: 'px' }, spaceBottom: { md: '10', unit: 'px' } }, style: [{ selector: '{{QUBELY}}' }] },
 
         copyStyle: { type: 'boolean', default: false },
 

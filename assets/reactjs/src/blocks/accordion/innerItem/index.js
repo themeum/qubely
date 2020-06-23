@@ -1,3 +1,4 @@
+/* eslint-disable react/react-in-jsx-scope */
 import '../style.scss';
 import Edit from './Edit'
 import Save from './Save';

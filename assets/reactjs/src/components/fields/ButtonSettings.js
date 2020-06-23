@@ -1,17 +1,18 @@
+/* eslint-disable react/react-in-jsx-scope */
 
 const { __ } = wp.i18n
 const { Fragment } = wp.element
 const { PanelBody } = wp.components
 
-import Alignment from "./Alignment"
-import Border from "./Border"
-import BorderRadius from "./BorderRadius"
-import BoxShadow from "./BoxShadow"
-import Color from "./Color"
-import IconList from "./IconList"
-import Styles from "./Styles"
-import Typography from "./Typography"
-import Url from "./Url"
+import Alignment from './Alignment'
+import Border from './Border'
+import BorderRadius from './BorderRadius'
+import BoxShadow from './BoxShadow'
+import Color from './Color'
+import IconList from './IconList'
+import Styles from './Styles'
+import Typography from './Typography'
+import Url from './Url'
 import Tabs from './Tabs'
 import Tab from './Tab'
 import InnerPanel from './InnerPanel'
@@ -157,8 +158,8 @@ export const buttonAttributes = {
             widthType: 'global',
             global: 1,
             color: 'var(--qubely-color-1)',
-            type: "solid",
-            unit: "px"
+            type: 'solid',
+            unit: 'px'
         },
         style: [{ selector: '{{QUBELY}} .qubely-block-btn-anchor' }]
     },
@@ -498,7 +499,7 @@ export function buttonSettings(attributes, device, setAttributes, updateParentSt
                                 responsive
                                 value={postButtonTextPaddingTop}
                                 unit={['px', 'em', '%']}
-                                label={"Top"}
+                                label={'Top'}
                                 onChange={val => setAttributes('postButtonTextPaddingTop', val)}
                                 device={device}
                                 onDeviceChange={value => updateParentState('device', value)} />
@@ -508,7 +509,7 @@ export function buttonSettings(attributes, device, setAttributes, updateParentSt
                                 responsive
                                 value={postButtonTextPaddingBottom}
                                 unit={['px', 'em', '%']}
-                                label={"Bottom"}
+                                label={'Bottom'}
                                 onChange={val => setAttributes('postButtonTextPaddingBottom', val)}
                                 device={device}
                                 onDeviceChange={value => updateParentState('device', value)} />

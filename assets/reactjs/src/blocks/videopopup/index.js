@@ -1,3 +1,4 @@
+/* eslint-disable react/react-in-jsx-scope */
 import './style.scss'
 import Edit from './Edit'
 import Save from './Save';
@@ -23,7 +24,7 @@ registerBlockType('qubely/videopopup', {
 		...globalAttributes,
 		layout: { type: 'string', default: 'fill' },
 		alignment: { type: 'string', default: 'center' },
-		spacer: { type: 'object', default: { spaceTop: { md: '10', unit: "px" }, spaceBottom: { md: '10', unit: "px" } }, style: [{ selector: '{{QUBELY}}' }] },
+		spacer: { type: 'object', default: { spaceTop: { md: '10', unit: 'px' }, spaceBottom: { md: '10', unit: 'px' } }, style: [{ selector: '{{QUBELY}}' }] },
 		videoSource: { type: 'string', default: 'external' },
 		bgVideo: { type: 'object', default: {} },
 		url: { type: 'string', default: 'https://www.youtube.com/watch?v=HY3sut8LTSw' },

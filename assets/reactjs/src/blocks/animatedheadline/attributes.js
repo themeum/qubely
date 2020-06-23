@@ -33,12 +33,12 @@ export const attributes = {
         default: {
             openTypography: false,
             height: {
-                md: "1.2",
-                unit: "em"
+                md: '1.2',
+                unit: 'em'
             },
             size: {
-                md: "28",
-                unit: "px"
+                md: '28',
+                unit: 'px'
             }
         },
         style: [{ selector: '{{QUBELY}}.qubely-block-animated-heading .animated-heading-text' }]
@@ -102,7 +102,7 @@ export const attributes = {
                 start: 0,
                 stop: 100,
                 clip: false,
-                radial: "center"
+                radial: 'center'
             }
         },
         style: [
@@ -124,8 +124,8 @@ export const attributes = {
                 direction: 0,
                 start: 0,
                 stop: 100,
-                type: "linear",
-                radial: "center"
+                type: 'linear',
+                radial: 'center'
             }
         },
         style: [{ selector: '{{QUBELY}}.qubely-block-animated-heading .qubely-animated-text' }]

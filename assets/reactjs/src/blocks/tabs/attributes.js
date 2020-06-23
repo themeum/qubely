@@ -16,11 +16,11 @@ const attributes = {
         default: {
             spaceTop: {
                 md: '10',
-                unit: "px"
+                unit: 'px'
             },
             spaceBottom: {
                 md: '10',
-                unit: "px"
+                unit: 'px'
             }
         },
         style: [{ selector: '{{QUBELY}}' }]

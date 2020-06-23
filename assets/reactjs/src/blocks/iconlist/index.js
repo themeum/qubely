@@ -1,3 +1,4 @@
+/* eslint-disable react/react-in-jsx-scope */
 import './style.scss'
 import Edit from './Edit'
 import Save from './Save';
@@ -44,7 +45,7 @@ const attributes = {
         ]
     },
 
-    spacer: { type: 'object', default: { spaceTop: { md: '10', unit: "px" }, spaceBottom: { md: '10', unit: "px" } }, style: [{ selector: '{{QUBELY}}' }] },
+    spacer: { type: 'object', default: { spaceTop: { md: '10', unit: 'px' }, spaceBottom: { md: '10', unit: 'px' } }, style: [{ selector: '{{QUBELY}}' }] },
 
 
     typography: { type: 'object', default: { openTypography: 1, size: { md: 16, unit: 'px' } }, style: [{ selector: '{{QUBELY}} .qubely-list .qubely-list-li' }] },
@@ -185,7 +186,7 @@ registerBlockType('qubely/iconlist', {
                     const { attributes: { listItems, iconPosition } } = props
                     return listItems.map((item, index) => {
                         return (
-                            <li className={`qubely-list-li`}>
+                            <li className={'qubely-list-li'}>
                                 {iconPosition == 'left' && <span className={`qubely-list-item-icon ${item.icon} fa-fw`} />}
                                 <RichText.Content tagName="span" value={item.text} />
                                 {iconPosition == 'right' && <span className={`qubely-list-item-icon ${item.icon} fa-fw`} />}

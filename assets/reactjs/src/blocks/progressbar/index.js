@@ -1,3 +1,4 @@
+/* eslint-disable react/react-in-jsx-scope */
 import './style.scss'
 import Edit from './Edit'
 import Save from './Save'
@@ -20,7 +21,7 @@ registerBlockType( 'qubely/progressbar', {
 	attributes: {
 		uniqueId: { type: 'string', default: '' },
 		...globalAttributes,  // Global Settings
-		spacer: { type: 'object', default:{spaceTop: { md: '10', unit: "px"}, spaceBottom: { md: '10', unit: "px"}}, style: [{ selector: '{{QUBELY}}' }] },
+		spacer: { type: 'object', default:{spaceTop: { md: '10', unit: 'px'}, spaceBottom: { md: '10', unit: 'px'}}, style: [{ selector: '{{QUBELY}}' }] },
 		progress: {type: 'string', default: 50, style: [{ selector: '{{QUBELY}} .qubely-progress-bar {width: {{progress}}%;}' }] },
 
 		// Labels
