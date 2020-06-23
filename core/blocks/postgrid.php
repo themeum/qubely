@@ -338,7 +338,7 @@ function register_block_qubely_postgrid()
 						'openMargin' => 1,
 						'marginType' => 'custom',
 						'custom' => [
-							'md' => '0 7 12 7',
+							'md' => '20 7 12 7',
 						],
 						'unit' => 'px'
 					],
