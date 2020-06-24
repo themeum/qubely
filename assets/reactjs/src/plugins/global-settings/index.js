@@ -32,6 +32,7 @@ const {
     Tooltip,
     Dropdown,
     PanelBody,
+    Notice,
     RangeControl
 } = wp.components;
 
@@ -510,6 +511,13 @@ class GlobalSettings extends Component {
                                                         ))
                                                     }
                                                     {
+                                                        presetKey === 'theme' && (
+                                                            <Notice status="warning" isDismissible={false}>
+                                                                Disclaimer: Theme colors aren't editable.
+                                                            </Notice>
+                                                        )
+                                                    }
+                                                    {
                                                         presetKey !== 'theme' &&
                                                         <Color
                                                             addNewColor
@@ -613,11 +621,14 @@ class GlobalSettings extends Component {
                                                                         presetKey === 'theme' ?
                                                                             <div className="theme-typo-wrapper">
                                                                                 <RangeControl
-                                                                                    label={__(name)}
+                                                                                    label={__('Font Size')}
                                                                                     value={value.size.md}
                                                                                     onChange={newValue => console.log(newValue)}
                                                                                     disabled
                                                                                 />
+                                                                                <Notice status="warning" isDismissible={false}>
+                                                                                    Disclaimer: Theme fonts aren't editable.
+                                                                                </Notice>
                                                                             </div>
                                                                             :
                                                                             <Typography
@@ -632,10 +643,11 @@ class GlobalSettings extends Component {
                                                         })
                                                     }
                                                     {
-                                                        typography.length < 13 &&
-                                                        <div onClick={() => updateTypography(true, presetKey)}>
-                                                            {AddNewButton('Add new typography', 'Add Typography', "add-new-wrapper add-new-typo")}
-                                                        </div>
+                                                        (typography.length < 13 && presetKey !== 'theme') && (
+                                                            <div onClick={() => updateTypography(true, presetKey)}>
+                                                                {AddNewButton('Add new typography', 'Add Typography', "add-new-wrapper add-new-typo")}
+                                                            </div>
+                                                        )
                                                     }
                                                 </PanelBody>
                                             }
