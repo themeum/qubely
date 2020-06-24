@@ -29,7 +29,7 @@ registerBlockType('qubely/icon', {
 		alignment: { type: 'object', default: { md: 'center' }, style: [{ selector: '{{QUBELY}} .qubely-block-icon-wrapper {text-align: {{alignment}};}' }] },
 		iconStyle: { type: 'string', default: 'nofill' },
 		iconColor: { type: 'string', default: 'var(--qubely-color-1)', style: [{ selector: '{{QUBELY}} .qubely-block-icon i {color: {{iconColor}};}' }] },
-		iconHoverColor: { type: 'string', default: '#2476CA', style: [{ selector: '{{QUBELY}} .qubely-block-icon:hover i {color: {{iconHoverColor}};}' }] },
+		iconHoverColor: { type: 'string', default: 'var(--qubely-color-2)', style: [{ selector: '{{QUBELY}} .qubely-block-icon:hover i {color: {{iconHoverColor}};}' }] },
 		bgColor: { type: 'object', default: { openColor: 1, type: 'color', color: '#D6EBFF' }, style: [{ condition: [{ key: 'iconStyle', relation: '==', value: 'fill' }], selector: '{{QUBELY}} .qubely-block-icon' }] },
 		bgHoverColor: { type: 'object', default: { openColor: 1, type: 'color', color: '#B4D9FF', gradient: {} }, style: [{ condition: [{ key: 'iconStyle', relation: '!=', value: 'nofill' }], selector: '{{QUBELY}} .qubely-block-icon:hover' }] },
 		border: {
@@ -39,7 +39,7 @@ registerBlockType('qubely/icon', {
 			},
 			style: [{ condition: [{ key: 'iconStyle', relation: '!=', value: 'nofill' }], selector: '{{QUBELY}} .qubely-block-icon' }]
 		},
-		borderHoverColor: { type: 'string', default: '#2476CA', style: [{ condition: [{ key: 'iconStyle', relation: '!=', value: 'nofill' }], selector: '{{QUBELY}} .qubely-block-icon:hover {border-color: {{borderHoverColor}};}' }] },
+		borderHoverColor: { type: 'string', default: 'var(--qubely-color-2)', style: [{ condition: [{ key: 'iconStyle', relation: '!=', value: 'nofill' }], selector: '{{QUBELY}} .qubely-block-icon:hover {border-color: {{borderHoverColor}};}' }] },
 		iconSize: { type: 'string', default: '64px', style: [{ condition: [{ key: 'iconSize', relation: '!=', value: 'custom' }], selector: '{{QUBELY}} .qubely-block-icon {font-size: {{iconSize}};}' }] },
 		iconSizeCustom: { type: 'object', default: { md: 64, unit: 'px' }, style: [{ condition: [{ key: 'iconSize', relation: '==', value: 'custom' }], selector: '{{QUBELY}} .qubely-block-icon {font-size: {{iconSizeCustom}};}' }] },
 		iconBackgroundSize: { type: 'object', default: { md: '20', unit: 'px' }, style: [{ condition: [{ key: 'iconStyle', relation: '!=', value: 'nofill' }], selector: '{{QUBELY}} .qubely-block-icon { padding: {{iconBackgroundSize}};}' }] },

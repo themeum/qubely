@@ -29,18 +29,18 @@ const attributes = {
         default: {
             spaceTop: {
                 md: '10',
-                unit: "px"
+                unit: 'px'
             },
             spaceBottom: {
                 md: '10',
-                unit: "px"
+                unit: 'px'
             }
         },
         style: [{ selector: '{{QUBELY}}' }]
     },
     enableAlignment: { type: 'boolean', default: true },
     customClassName: { type: 'string', default: '' },
-    spacer: { type: 'object', default: { spaceTop: { md: '10', unit: "px" }, spaceBottom: { md: '10', unit: "px" } }, style: [{ selector: '{{QUBELY}}' }] },
+    spacer: { type: 'object', default: { spaceTop: { md: '10', unit: 'px' }, spaceBottom: { md: '10', unit: 'px' } }, style: [{ selector: '{{QUBELY}}' }] },
     textField: { type: 'string', default: '' },
     buttonWidthType: {
         type: 'string',
@@ -159,7 +159,7 @@ const attributes = {
             openColor: 1,
             color: 'var(--qubely-color-1)',
             gradient: {
-                color1: '#1066CC',
+                color1: 'var(--qubely-color-2)',
                 color2: 'var(--qubely-color-1)',
                 direction: 0,
                 start: 0,
@@ -181,7 +181,7 @@ const attributes = {
         default: {
             type: 'color',
             openColor: 1,
-            color: '#1066CC',
+            color: 'var(--qubely-color-2)',
             gradient: {
                 color1: '#16d03e',
                 color2: '#1f91f3',
@@ -195,7 +195,7 @@ const attributes = {
         ]
     },
     buttonBorder: {
-        type: 'object', default: { openBorder: 1, widthType: "global", global: { md: "1" }, type: 'solid', color: 'var(--qubely-color-1)' },
+        type: 'object', default: { openBorder: 1, widthType: 'global', global: { md: '1' }, type: 'solid', color: 'var(--qubely-color-1)' },
         style: [
             {
                 selector: '{{QUBELY}} .qubely-block-btn-anchor'
@@ -203,7 +203,7 @@ const attributes = {
         ]
     },
     borderHoverColor: {
-        type: 'string', default: '#1066CC',
+        type: 'string', default: 'var(--qubely-color-2)',
         style: [
             {
                 selector: '{{QUBELY}} .qubely-block-btn-anchor:hover {border-color: {{borderHoverColor}};}'

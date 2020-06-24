@@ -80,7 +80,7 @@ const attributes = {
         ]
     },
     iconHoverColor: {
-        type: 'string', default: '#2476CA',
+        type: 'string', default: 'var(--qubely-color-2)',
         style: [
             {
                 condition: [
