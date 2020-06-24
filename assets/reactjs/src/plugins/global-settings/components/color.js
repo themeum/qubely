@@ -14,7 +14,7 @@ const {
 } = wp.components;
 
 
-export default function Color({ preset, value, onChange, className, deleteOption, onDelete, addNew = undefined, addNewColor = false }) {
+function Color({ preset, value, onChange, className, deleteOption, onDelete, addNew = undefined, addNewColor = false }) {
 
     const classes = classNames(
         'qubely-field',
@@ -36,8 +36,8 @@ export default function Color({ preset, value, onChange, className, deleteOption
                 position="top center"
                 className="qubely-ml-auto"
                 renderToggle={({ isOpen, onToggle }) => (
-                    <span className={containerClasses}>
-                        <span
+                    <div className={containerClasses}>
+                        <button
                             isPrimary
                             aria-expanded={isOpen}
                             className="qubely-color-picker"
@@ -54,13 +54,13 @@ export default function Color({ preset, value, onChange, className, deleteOption
                                     {icons.addColor}
                                 </Tooltip>
                             }
-                        </span>
+                        </button>
 
                         {
                             deleteOption &&
                             <span className="delete fas fa-times" onClick={() => onDelete()} />
                         }
-                    </span>
+                    </div>
                 )}
                 renderContent={() => {
                     return (
@@ -81,3 +81,5 @@ export default function Color({ preset, value, onChange, className, deleteOption
         </div>
     );
 }
+
+export default Color;
