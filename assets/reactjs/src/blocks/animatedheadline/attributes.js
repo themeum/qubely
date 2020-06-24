@@ -102,6 +102,7 @@ export const attributes = {
                 start: 0,
                 stop: 100,
                 clip: false,
+                type: 'linear',
                 radial: "center"
             }
         },

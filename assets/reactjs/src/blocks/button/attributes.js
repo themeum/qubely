@@ -187,7 +187,8 @@ const attributes = {
                 color2: '#1f91f3',
                 direction: 0,
                 start: 0,
-                stop: 100
+                stop: 100,
+                type: 'linear',
             }
         },
         style: [

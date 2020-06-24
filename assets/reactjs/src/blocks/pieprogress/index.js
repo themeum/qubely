@@ -49,7 +49,8 @@ if(!qubely_admin.pro_enable) {
                         color2: '#45dbca',
                         direction: '47',
                         start: '0',
-                        stop: '100'
+                        stop: '100',
+                        type: 'linear',
                     }
                 },
                 style: []

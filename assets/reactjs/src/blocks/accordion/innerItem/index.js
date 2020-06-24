@@ -69,7 +69,8 @@ export const accordionItemSettings = {
                     color2: '#e5e5e5',
                     direction: 0,
                     start: 0,
-                    stop: 100
+                    stop: 100,
+                    type: 'linear',
                 }
             },
             style: [
@@ -92,7 +93,8 @@ export const accordionItemSettings = {
                     color2: '#1A5FA4',
                     direction: 0,
                     start: 0,
-                    stop: 100
+                    stop: 100,
+                    type: 'linear',
                 }
             },
             style: [
@@ -220,7 +222,8 @@ export const accordionItemSettings = {
                     color2: '#e5e5e5',
                     direction: 0,
                     start: 0,
-                    stop: 100
+                    stop: 100,
+                    type: 'linear',
                 }
             },
             style: [

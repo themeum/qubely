@@ -132,7 +132,7 @@ export const buttonAttributes = {
         ]
     },
     buttonBgColor: {
-        type: 'object', default: { type: 'color', openColor: 1, color: '#2184F9', gradient: { color1: '#1066CC', color2: '#2184F9', direction: 0, start: 0, stop: 100 } },
+        type: 'object', default: { type: 'color', openColor: 1, color: '#2184F9', gradient: { color1: '#1066CC', color2: '#2184F9', type: 'linear', direction: 0, start: 0, stop: 100 } },
         style: [
             {
                 condition: [{ key: 'buttonFillType', relation: '==', value: 'fill' }],
@@ -141,7 +141,7 @@ export const buttonAttributes = {
         ]
     },
     buttonBgHoverColor: {
-        type: 'object', default: { type: 'color', openColor: 1, color: '#1066CC', gradient: { color1: '#2184F9', color2: '#1066CC', direction: 0, start: 0, stop: 100 } },
+        type: 'object', default: { type: 'color', openColor: 1, color: '#1066CC', gradient: { color1: '#2184F9', color2: '#1066CC', type: 'linear', direction: 0, start: 0, stop: 100 } },
         style: [
             {
                 condition: [{ key: 'buttonFillType', relation: '==', value: 'fill' }],
