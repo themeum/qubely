@@ -1,3 +1,12 @@
+<h3>1.5.1 - 29 June, 2020</h3>
+<ul>
+    <li>New : Theme colors support in Global settings</li>
+    <li>Update: Blocks initial primary color updated with preset color</li>
+    <li>Update: Gradient field - Global setting color support</li>
+    <li>Update: Post Grid pagination default margin added</li>
+    <li>Fix: Post Grid pagination backend spacing issue</li>
+    <li>Fix: Accordion Block gradient Issue</li>
+</ul>
 <h3>1.5.0 - 16 June, 2020</h3>
 <ul>
     <li>Fix: Image Block whitespace issue</li>
@@ -5,9 +14,5 @@
     <li>Fix: External ajax request issue</li>
     <li>Fix: Minor CSS issues</li>
 </ul>
-<h3>1.4.1 - 12 June, 2020</h3>
-<ul>
-    <li>New: Post Grid pagination</li>
-    <li>New: Getting Started page redesign</li>
-    <li>Fix: Minor bug fix</li>
-</ul>
+
+

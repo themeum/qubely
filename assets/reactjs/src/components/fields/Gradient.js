@@ -77,11 +77,11 @@ class Gradient extends Component {
                                     className={`qubely-gradient-color gradient-color-position-${customClassName}`}
                                     contentClassName="qubely-gradient-color-picker"
                                     renderToggle={({ isOpen, onToggle }) => (
-                                        <span className={`qubely-color-picker-container qubely-position-${customClassName}`}>
+                                        <div className={`qubely-color-picker-container qubely-position-${customClassName}`}>
                                             <Tooltip text={label}>
-                                                <span className="qubely-color-picker" style={{ backgroundColor: value[color] || defaultColor }} isPrimary onClick={onToggle} aria-expanded={isOpen} />
+                                                <button className="qubely-color-picker" isPrimary onClick={onToggle} aria-expanded={isOpen}  style={{ backgroundColor: value[color] || defaultColor }}/>
                                             </Tooltip>
-                                        </span>
+                                        </div>
                                     )}
 
                                     renderContent={() => this.renderColorPicker(color, defaultColor)}
