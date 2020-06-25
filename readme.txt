@@ -237,10 +237,13 @@ You can report bugs on the [support forum here](https://wordpress.org/support/pl
 
 == Changelog ==
 
-= 1.5.1 - 20 June, 2020 =
+= 1.5.1 - 29 June, 2020 =
 New : Theme colors support in Global settings
+Update: Blocks initial primary color updated with preset color
 Update: Gradient field - Global setting color support
-
+Update: Post Grid pagination default margin added
+Fix: Post Grid pagination backend spacing issue
+Fix: Accordion Block gradient Issue
 
 = 1.5.0 - 16 June, 2020 =
 Fix: Image Block whitespace issue
