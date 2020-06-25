@@ -14,7 +14,11 @@ import {
  * Qubely Components
  */
 import Typography from '../../components/fields/Typography';
-import { ADDNEWDEFAULT, DEFAULTPRESETS } from './constants';
+import {
+    ADDNEWDEFAULT,
+    DEFAULTPRESETS,
+    DEFAULTBREAKINGPOINTS
+} from './constants';
 
 /**
  * WordPress dependencies
@@ -46,6 +50,7 @@ const {
 } = wp.editPost;
 
 
+
 const PATH = '/qubely/v1/global_settings';
 
 async function fetchFromApi() {
@@ -58,13 +63,20 @@ class GlobalSettings extends Component {
         super(props);
         this.state = {
             presets: {},
+            ...DEFAULTPRESETS,
             newTypoScope: 'others',
             newTypoTitle: null,
             activePreset: null,
             renameTypo: undefined,
             enableRenaming: undefined,
             showTypoSettings: undefined,
-            showPresetSettings: undefined
+            showPresetSettings: undefined,
+            breakingPoints: {
+                xs: 540,
+                sm: 720,
+                md: 960,
+                lg: 1100
+            }
         }
         this.ref = createRef();
         this.typoRef = createRef();
@@ -87,7 +99,8 @@ class GlobalSettings extends Component {
             presets,
             activePreset,
             renameTypo,
-            enableRenaming
+            enableRenaming,
+            breakingPoints
         } = this.state;
 
         if ((enableRenaming !== prevState.enableRenaming) && typeof enableRenaming !== 'undefined') {
@@ -107,23 +120,27 @@ class GlobalSettings extends Component {
 
         if (presets && activePreset) {
             if (activePreset !== prevState.activePreset) {
-                updateGlobalVaribales(presets[activePreset]);
-                /**
-                * to activate Update button
-                */
-                wp.data.dispatch('core/editor').editPost({ meta: { _non_existing_meta: true } });
+                updateGlobalVaribales(presets[activePreset], breakingPoints);
             }
         }
+
+        if (activePreset !== prevState.activePreset ||
+            // Object.keys(diff({ 'activePreset': presets[activePreset].colors }, { 'activePreset': prevState.presets[prevStateactivePreset].colors })).length > 0 ||
+            Object.keys(diff({ 'breakingPoints': breakingPoints }, { 'breakingPoints': prevState.breakingPoints })).length > 0) {
+            /**
+            * to activate Update button
+            */
+            wp.data.dispatch('core/editor').editPost({ meta: { _non_existing_meta: true } });
+        }
+
     }
 
 
     getGlobalSettings = () => {
         return fetchFromApi().then(data => {
             if (data.success) {
-                this.setState({ ...DEFAULTPRESETS, ...data.settings });
+                this.setState({ ...data.settings });
                 localStorage.setItem('qubely-global-settings', JSON.stringify({ ...DEFAULTPRESETS, ...data.settings }))
-            } else {
-                this.setState({ ...DEFAULTPRESETS })
             }
         });
     }
@@ -131,12 +148,16 @@ class GlobalSettings extends Component {
     updateGlobalSettings = async () => {
         const {
             presets,
-            activePreset
+            activePreset,
+            breakingPoints
         } = this.state;
         let tempData = {
             activePreset,
             presets: {
                 ...presets
+            },
+            breakingPoints: {
+                ...breakingPoints
             }
         }
         await wp.apiFetch({
@@ -151,6 +172,7 @@ class GlobalSettings extends Component {
     render() {
         const {
             presets,
+            breakingPoints,
             renameTypo,
             newTypoScope,
             newTypoTitle,
@@ -160,12 +182,11 @@ class GlobalSettings extends Component {
             showPresetSettings
         } = this.state;
 
-
         const changeColor = (key, newValue, presetKey) => {
-            this.setState(({ presets, activePreset }, props) => {
+            this.setState(({ presets, activePreset, breakingPoints }, props) => {
                 let tempPresets = presets;
                 tempPresets[presetKey].colors[key] = newValue;
-                updateGlobalVaribales(tempPresets[activePreset]);
+                updateGlobalVaribales(tempPresets[activePreset], breakingPoints);
                 return { presets: tempPresets };
             });
         }
@@ -187,7 +208,7 @@ class GlobalSettings extends Component {
 
         const updateTypography = (addnew = false, presetKey, index, newValue) => {
 
-            this.setState(({ newTypoScope, newTypoTitle, presets, activePreset }) => {
+            this.setState(({ newTypoScope, newTypoTitle, presets, activePreset, breakingPoints }) => {
                 let tempPresets = presets;
                 if (addnew) {
                     tempPresets[presetKey].typography.push({
@@ -204,7 +225,7 @@ class GlobalSettings extends Component {
                     tempPresets[presetKey].typography[index].value = newValue;
                 }
 
-                updateGlobalVaribales(tempPresets[activePreset]);
+                updateGlobalVaribales(tempPresets[activePreset], breakingPoints);
                 return ({
                     presets: tempPresets,
                     newTypoTitle: null,
@@ -214,10 +235,10 @@ class GlobalSettings extends Component {
         }
         const renameTypography = (presetKey, index, newValue) => {
 
-            this.setState(({ presets, activePreset }) => {
+            this.setState(({ presets, activePreset, breakingPoints }) => {
                 let tempPresets = presets;
                 tempPresets[presetKey].typography[index].name = newValue
-                updateGlobalVaribales(tempPresets[activePreset]);
+                updateGlobalVaribales(tempPresets[activePreset], breakingPoints);
                 return ({
                     presets: tempPresets
                 });
@@ -332,7 +353,7 @@ class GlobalSettings extends Component {
                 if (typeof presets.theme === 'undefined' ||
                     Object.keys(diff({ 'colors': themeColorPalette }, { 'colors': presets.theme.colors })).length > 0 ||
                     Object.keys(diff({ 'typography': themefontSizes }, { 'typography': presets.theme.typography })).length > 0) {
-                    this.setState(({ presets, activePreset }) => {
+                    this.setState(({ presets, activePreset, breakingPoints }) => {
                         let tempPresets = presets;
                         delete presets.theme;
                         tempPresets = {
@@ -345,7 +366,7 @@ class GlobalSettings extends Component {
                             ...presets,
                         }
                         if (activePreset === 'theme') {
-                            updateGlobalVaribales(tempPresets[activePreset]);
+                            updateGlobalVaribales(tempPresets[activePreset], breakingPoints);
                         }
                         return ({
                             presets: tempPresets
@@ -623,7 +644,7 @@ class GlobalSettings extends Component {
                                                                                 <RangeControl
                                                                                     label={__('Font Size')}
                                                                                     value={value.size.md}
-                                                                                    onChange={newValue => console.log(newValue)}
+                                                                                    onChange={newValue => console.log("theme default can't be changed")}
                                                                                     disabled
                                                                                 />
                                                                                 <Notice status="warning" isDismissible={false}>
@@ -661,7 +682,27 @@ class GlobalSettings extends Component {
                 </div >
             )
         }
-
+        const updateBreakingPoints = (key, newValue) => {
+            this.setState(({ presets, activePreset, breakingPoints }) => {
+                let defaultValue = 540;
+                if (key === 'sm') {
+                    defaultValue = 720;
+                } else if (key === 'md') {
+                    defaultValue = 960;
+                } else if (key === 'lg') {
+                    defaultValue = 1199;
+                }
+                let newBreakingPoints = {
+                    ...breakingPoints,
+                    [key]: typeof newValue === 'undefined' ? defaultValue : newValue
+                }
+                updateGlobalVaribales(presets[activePreset], newBreakingPoints);
+                return (
+                    {
+                        breakingPoints: newBreakingPoints
+                    });
+            });
+        }
         const {
             isSavingPost,
             isPreviewingPost,
@@ -686,6 +727,51 @@ class GlobalSettings extends Component {
                     title={__('Global Settings')}
                 >
                     {renderPresets()}
+                    <PanelBody title={__('Row Container width')} initialOpen={false}>
+                        <RangeControl
+                            min={200}
+                            max={575}
+                            allowReset
+                            label={__('Small Mobile')}
+                            value={breakingPoints.xs}
+                            renderTooltipContent={() => value => `${value}%`}
+                            onChange={newValue => updateBreakingPoints('xs', newValue)}
+                        />
+                        <RangeControl
+                            min={300}
+                            max={768}
+                            allowReset
+                            label={__('Mobile')}
+                            value={breakingPoints.sm}
+                            onChange={newValue => updateBreakingPoints('sm', newValue)}
+                        />
+                        <RangeControl
+                            min={600}
+                            max={991}
+                            allowReset
+                            label={__('Tablet')}
+                            value={breakingPoints.md}
+                            onChange={newValue => updateBreakingPoints('md', newValue)}
+                        />
+                        <RangeControl
+                            min={900}
+                            max={1199}
+                            allowReset
+                            label={__('Desktop')}
+                            value={breakingPoints.lg}
+                            onChange={newValue => updateBreakingPoints('lg', newValue)}
+                        />
+                        <div className="qubely-row-device">
+                            <Notice status="warning" isDismissible={false}>
+                                <div className="qubely-device-description title">{__('Device defination in min-width')}</div>
+                                <div className="qubely-device-description">{__('Small Mobile : 575px')}</div>
+                                <div className="qubely-device-description">  {__('Mobile : 768px')}</div>
+                                <div className="qubely-device-description">  {__('Tablet : 991px')}</div>
+                                <div className="qubely-device-description">{__('Desktop : 1199px')}</div>
+                            </Notice>
+                        </div>
+
+                    </PanelBody>
                 </PluginSidebar>
 
                 <PluginSidebarMoreMenuItem
