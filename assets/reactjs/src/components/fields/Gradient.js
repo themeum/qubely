@@ -27,11 +27,9 @@ class Gradient extends Component {
     defColors = async () => {
         let val = qubely_admin.palette;
         let { colors } = await JSON.parse(localStorage.getItem('qubely-global-settings'));
-        console.log('colors : ', colors);
         if (typeof colors !== 'undefined') {
             val = colors
         }
-        console.log('val : ', val);
         return val;
     }
 

@@ -1,6 +1,6 @@
 const PATH = '/qubely/v1/global_settings';
 import { _device, _push } from '../components/CssHelper';
-import {  DEFAULTPRESETS } from '../plugins/global-settings/constants';
+import { DEFAULTPRESETS, DEFAULTBREAKINGPOINTS } from '../plugins/global-settings/constants';
 async function fetchFromApi() {
     return await wp.apiFetch({ path: PATH })
 }
@@ -187,7 +187,29 @@ export const setGlobalTypo_Variables = (globalTypoes) => {
 
     return CSS;
 }
+const setBreakingPoints = (breakingPoints) => {
+    const {
+        xs,
+        sm,
+        md,
+        lg
+    } = breakingPoints;
 
+    let tempCSS = '';
+    if (typeof xs !== 'undefined') {
+        tempCSS += `@media (min-width: 575.98px){.qubely-section .qubely-container{max-width: ${xs}px;}}`
+    }
+    if (typeof sm !== 'undefined') {
+        tempCSS += `@media (min-width: 767.98px){.qubely-section .qubely-container{max-width: ${sm}px;}}`
+    }
+    if (typeof md !== 'undefined') {
+        tempCSS += `@media (min-width: 991.98px){.qubely-section .qubely-container{max-width: ${md}px;}}`
+    }
+    if (typeof lg !== 'undefined') {
+        tempCSS += `@media (min-width: 1199.98px){.qubely-section .qubely-container{max-width: ${lg}px;}}`
+    }
+    return tempCSS;
+}
 
 export const injectGlobalCSS = (_CSS, id = 'qubely-global-styles') => {
     let styleSelector = window.document;
@@ -206,23 +228,25 @@ export const injectGlobalCSS = (_CSS, id = 'qubely-global-styles') => {
     }
 }
 
-export const updateGlobalVaribales = async (values) => {
+export const updateGlobalVaribales = async (presetValues, breakingPoints = undefined) => {
+    let global_CSS = '';
     const {
         colors,
         typography
-    } = values;
+    } = presetValues;
 
-    let global_CSS = '';
     const setGlobalCSS_Variables = (colors) => {
         let rootCSS = ':root {'
         colors.forEach((color, index) => rootCSS += `--qubely-color-${index + 1}:${color};`);
         rootCSS += '}'
         return rootCSS;
     }
-
     global_CSS += setGlobalCSS_Variables(colors);
     global_CSS += setGlobalTypo_Variables(typography);
 
+    if (typeof breakingPoints !== 'undefined') {
+        global_CSS += setBreakingPoints(breakingPoints);
+    }
     injectGlobalCSS(global_CSS);
 }
 
@@ -232,16 +256,16 @@ export const getGlobalSettings = () => {
     let global_CSS = '';
     let {
         presets,
-        activePreset
+        activePreset,
     } = DEFAULTPRESETS;
+    let breakingPoints = { ...DEFAULTBREAKINGPOINTS }
     return fetchFromApi().then(data => {
         if (data.success) {
-        
-            if(typeof data.settings.presets !=='undefined'){
-                presets=data.settings.presets
+            if (typeof data.settings.presets !== 'undefined') {
+                presets = data.settings.presets
             }
-            if(typeof data.settings.activePreset !=='undefined'){
-                activePreset=data.settings.activePreset
+            if (typeof data.settings.activePreset !== 'undefined') {
+                activePreset = data.settings.activePreset
             }
             globalData = presets[activePreset];
 
@@ -255,10 +279,13 @@ export const getGlobalSettings = () => {
                 rootCSS += '}'
                 return rootCSS;
             }
-
+            if (typeof data.settings.breakingPoints !== 'undefined') {
+                breakingPoints = data.settings.breakingPoints
+            }
 
             global_CSS += setGlobalCSS_Variables(globalColors);
             global_CSS += setGlobalTypo_Variables(globalData.typography);
+            global_CSS += setBreakingPoints(breakingPoints);
             return global_CSS;
         }
     });

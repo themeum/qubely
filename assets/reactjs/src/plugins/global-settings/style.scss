@@ -425,8 +425,21 @@
 }
 .qubely-global-color-pallete,
 .qubely-global.typography {
-  .components-notice{
-      margin-left: 0px;
-      margin-right: 0px;
-  }
+    .components-notice {
+        margin-left: 0px;
+        margin-right: 0px;
+    }
 }
+.qubely-row-device{
+    .components-notice__content{
+        margin-right: 0px;
+        .qubely-device-description {
+            padding: 2px 0px;
+            &.title{
+                margin-bottom: 2px;
+            }
+        }
+    }
+   
+}
+
