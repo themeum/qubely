@@ -431,6 +431,9 @@
     }
 }
 .qubely-row-device{
+    .components-notice.is-warning{
+        margin-left: 0px;
+    }
     .components-notice__content{
         margin-right: 0px;
         .qubely-device-description {

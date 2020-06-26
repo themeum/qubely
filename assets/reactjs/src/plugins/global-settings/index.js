@@ -140,7 +140,15 @@ class GlobalSettings extends Component {
         return fetchFromApi().then(data => {
             if (data.success) {
                 this.setState({ ...data.settings });
-                localStorage.setItem('qubely-global-settings', JSON.stringify({ ...DEFAULTPRESETS, ...data.settings }))
+                localStorage.setItem('qubely-global-settings', JSON.stringify({
+                    ...DEFAULTPRESETS.presets[DEFAULTPRESETS.activePreset],
+                    breakingPoints: {
+                        ...this.state.breakingPoints,
+                        ...data.settings.breakingPoints,
+                    },
+                    ...data.settings.presets[data.settings.activePreset],
+
+                }))
             }
         });
     }
@@ -718,7 +726,7 @@ class GlobalSettings extends Component {
             const detailedPreset = Object.keys(presets)[showPresetSettings];
             typeof presets[detailedPreset] !== 'undefined' && setTypoTitleStyle(presets[detailedPreset].typography);
         }
-        localStorage.setItem('qubely-global-settings', JSON.stringify(presets[activePreset]));
+        localStorage.setItem('qubely-global-settings', JSON.stringify({ ...presets[activePreset], breakingPoints }));
         return (
             <Fragment>
                 <PluginSidebar
