@@ -34,7 +34,7 @@ const attributes = {
             }
         ]
     },
-    spacer: { type: 'object', default: { spaceTop: { md: '10', unit: "px" }, spaceBottom: { md: '10', unit: "px" } }, style: [{ selector: '{{QUBELY}}' }] },
+    spacer: { type: 'object', default: { spaceTop: { md: '10', unit: 'px' }, spaceBottom: { md: '10', unit: 'px' } }, style: [{ selector: '{{QUBELY}}' }] },
     mediaType: { type: 'string', default: 'icon' },
     enableButton: { type: 'boolean', default: false },
     buttonToggleOption: { type: 'boolean', default: true },
@@ -68,7 +68,7 @@ const attributes = {
         ]
     },
     iconColor: {
-        type: 'string', default: '#338FEC',
+        type: 'string', default: 'var(--qubely-color-1)',
         style: [
             {
                 condition: [
@@ -80,7 +80,7 @@ const attributes = {
         ]
     },
     iconHoverColor: {
-        type: 'string', default: '#2476CA',
+        type: 'string', default: 'var(--qubely-color-2)',
         style: [
             {
                 condition: [

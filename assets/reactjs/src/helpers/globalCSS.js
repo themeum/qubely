@@ -192,22 +192,22 @@ const setBreakingPoints = (breakingPoints) => {
         xs,
         sm,
         md,
-        lg
+        // lg
     } = breakingPoints;
 
     let tempCSS = '';
     if (typeof xs !== 'undefined') {
-        tempCSS += `@media (min-width: 575.98px){.qubely-section .qubely-container{max-width: ${xs}px;}}`
+        tempCSS += `@media (min-width: 576px){.qubely-section .qubely-container{max-width: ${xs}px;}}`
     }
     if (typeof sm !== 'undefined') {
-        tempCSS += `@media (min-width: 767.98px){.qubely-section .qubely-container{max-width: ${sm}px;}}`
+        tempCSS += `@media (min-width: 768px){.qubely-section .qubely-container{max-width: ${sm}px;}}`
     }
     if (typeof md !== 'undefined') {
-        tempCSS += `@media (min-width: 991.98px){.qubely-section .qubely-container{max-width: ${md}px;}}`
+        tempCSS += `@media (min-width: 992px){.qubely-section .qubely-container{max-width: ${md}px;}}`
     }
-    if (typeof lg !== 'undefined') {
-        tempCSS += `@media (min-width: 1199.98px){.qubely-section .qubely-container{max-width: ${lg}px;}}`
-    }
+    // if (typeof lg !== 'undefined') {
+    //     tempCSS += `@media (min-width: 1199.98px){.qubely-section .qubely-container{max-width: ${lg}px;}}`
+    // }
     return tempCSS;
 }
 

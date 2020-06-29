@@ -338,8 +338,8 @@ class GlobalSettings extends Component {
             let ThemeSupportCheck = false;
             let themeColorPalette = [], themefontSizes = [];
 
-            if ((typeof themeSupports['editor-color-palette'] === 'object' && themeSupports['editor-color-palette'].length > 0) ||
-                (typeof themeSupports['editor-font-sizes'] === 'object' && themeSupports['editor-font-sizes'].length > 0)
+            if ((typeof themeSupports['editor-color-palette'] === 'object' && Array.isArray(themeSupports['editor-color-palette'])) ||
+                (typeof themeSupports['editor-font-sizes'] === 'object' && Array.isArray(themeSupports['editor-font-sizes']))
             ) {
                 ThemeSupportCheck = true;
                 themeColorPalette = themeSupports['editor-color-palette'].map(({ color }) => color);
@@ -738,38 +738,38 @@ class GlobalSettings extends Component {
                     <PanelBody title={__('Row Container width')} initialOpen={false}>
                         <RangeControl
                             min={200}
-                            max={575}
+                            max={700}
                             allowReset
-                            label={__('Small Mobile')}
+                            label={__('Mobile')}
                             value={breakingPoints.xs}
                             renderTooltipContent={() => value => `${value}%`}
                             onChange={newValue => updateBreakingPoints('xs', newValue)}
                         />
                         <RangeControl
-                            min={300}
-                            max={768}
+                            min={400}
+                            max={1000}
                             allowReset
-                            label={__('Mobile')}
+                            label={__('Tablet')}
                             value={breakingPoints.sm}
                             onChange={newValue => updateBreakingPoints('sm', newValue)}
                         />
                         <RangeControl
-                            min={600}
-                            max={991}
+                            min={900}
+                            max={1920}
                             allowReset
-                            label={__('Tablet')}
+                            label={__('Desktop')}
                             value={breakingPoints.md}
                             onChange={newValue => updateBreakingPoints('md', newValue)}
                         />
-                        <RangeControl
+                        {/* <RangeControl
                             min={900}
                             max={1199}
                             allowReset
                             label={__('Desktop')}
                             value={breakingPoints.lg}
                             onChange={newValue => updateBreakingPoints('lg', newValue)}
-                        />
-                        <div className="qubely-row-device">
+                        /> */}
+                        {/* <div className="qubely-row-device">
                             <Notice status="warning" isDismissible={false}>
                                 <div className="qubely-device-description title">{__('Device defination in min-width')}</div>
                                 <div className="qubely-device-description">{__('Small Mobile : 575px')}</div>
@@ -777,7 +777,7 @@ class GlobalSettings extends Component {
                                 <div className="qubely-device-description">  {__('Tablet : 991px')}</div>
                                 <div className="qubely-device-description">{__('Desktop : 1199px')}</div>
                             </Notice>
-                        </div>
+                        </div> */}
 
                     </PanelBody>
                 </PluginSidebar>

@@ -1,3 +1,4 @@
+/* eslint-disable react/react-in-jsx-scope */
 import '../style.scss';
 import Edit from './Edit'
 import Save from './Save';
@@ -87,7 +88,7 @@ export const accordionItemSettings = {
             default: {
                 type: 'color',
                 openColor: 1,
-                color: '#2476CA',
+                color: 'var(--qubely-color-1)',
                 gradient: {
                     color1: '#2476CA',
                     color2: '#1A5FA4',

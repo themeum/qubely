@@ -1,3 +1,4 @@
+/* eslint-disable react/react-in-jsx-scope */
 import './style.scss'
 const { __ } = wp.i18n
 import Save from './Save'
@@ -29,7 +30,7 @@ registerBlockType('qubely/pricing', {
 
         defaultItems: { type: 'number', default: 2 },
         alignment: { type: 'object', default: { md: 'center' }, style: [{ selector: '{{QUBELY}} .qubely-block-pricing {text-align: {{alignment}};}' }] },
-        spacer: { type: 'object', default: { spaceTop: { md: '10', unit: "px" }, spaceBottom: { md: '10', unit: "px" } }, style: [{ selector: '{{QUBELY}}' }] },
+        spacer: { type: 'object', default: { spaceTop: { md: '10', unit: 'px' }, spaceBottom: { md: '10', unit: 'px' } }, style: [{ selector: '{{QUBELY}}' }] },
 
         copyStyle: { type: 'boolean', default: false },
 
@@ -40,7 +41,7 @@ registerBlockType('qubely/pricing', {
             selector: '.qubely-pricing-title',
             default: 'Basic'
         },
-        titleColor: { type: 'string', default: '#0081FF', style: [{ selector: '{{QUBELY}} .qubely-pricing-title{color: {{titleColor}};}' }] },
+        titleColor: { type: 'string', default: 'var(--qubely-color-1)', style: [{ selector: '{{QUBELY}} .qubely-pricing-title{color: {{titleColor}};}' }] },
         titleTypography: { type: 'object', default: { openTypography: 1, size: { md: 20, unit: 'px' } }, style: [{ selector: '{{QUBELY}} .qubely-pricing-title' }] },
 
         titleSpacing: {

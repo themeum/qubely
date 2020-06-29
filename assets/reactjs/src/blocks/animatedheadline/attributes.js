@@ -33,12 +33,12 @@ export const attributes = {
         default: {
             openTypography: false,
             height: {
-                md: "1.2",
-                unit: "em"
+                md: '1.2',
+                unit: 'em'
             },
             size: {
-                md: "28",
-                unit: "px"
+                md: '28',
+                unit: 'px'
             }
         },
         style: [{ selector: '{{QUBELY}}.qubely-block-animated-heading .animated-heading-text' }]
@@ -94,7 +94,7 @@ export const attributes = {
             type: 'gradient',
             textColor: true,
             openColor: 1,
-            color: '#2184F9',
+            color: 'var(--qubely-color-1)',
             gradient: {
                 color1: '#1066CC',
                 color2: '#55cd37',
@@ -103,7 +103,7 @@ export const attributes = {
                 stop: 100,
                 clip: false,
                 type: 'linear',
-                radial: "center"
+                radial: 'center'
             }
         },
         style: [
@@ -125,8 +125,8 @@ export const attributes = {
                 direction: 0,
                 start: 0,
                 stop: 100,
-                type: "linear",
-                radial: "center"
+                type: 'linear',
+                radial: 'center'
             }
         },
         style: [{ selector: '{{QUBELY}}.qubely-block-animated-heading .qubely-animated-text' }]

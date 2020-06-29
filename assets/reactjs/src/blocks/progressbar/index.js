@@ -1,3 +1,4 @@
+/* eslint-disable react/react-in-jsx-scope */
 import './style.scss'
 import Edit from './Edit'
 import Save from './Save'
@@ -20,7 +21,7 @@ registerBlockType( 'qubely/progressbar', {
 	attributes: {
 		uniqueId: { type: 'string', default: '' },
 		...globalAttributes,  // Global Settings
-		spacer: { type: 'object', default:{spaceTop: { md: '10', unit: "px"}, spaceBottom: { md: '10', unit: "px"}}, style: [{ selector: '{{QUBELY}}' }] },
+		spacer: { type: 'object', default:{spaceTop: { md: '10', unit: 'px'}, spaceBottom: { md: '10', unit: 'px'}}, style: [{ selector: '{{QUBELY}}' }] },
 		progress: {type: 'string', default: 50, style: [{ selector: '{{QUBELY}} .qubely-progress-bar {width: {{progress}}%;}' }] },
 
 		// Labels
@@ -34,7 +35,7 @@ registerBlockType( 'qubely/progressbar', {
 		// Bar
 		barHeight: {type: 'object', default: {md: 30, unit: 'px'}, style: [{ selector: '{{QUBELY}} .qubely-progress {height: {{barHeight}}; line-height: {{barHeight}};}' }] },
 		barBackground: {type: 'string', default: '#e9ecef', style: [{ selector: '{{QUBELY}} .qubely-progress {background-color: {{barBackground}};}' }] },
-		progressBackground: { type: 'object', default: {openColor: 1, type: 'color', color: '#007bff',gradient: {}}, style: [{ selector: '{{QUBELY}} .qubely-progress-bar' }] },
+		progressBackground: { type: 'object', default: {openColor: 1, type: 'color', color: 'var(--qubely-color-1)',gradient: {}}, style: [{ selector: '{{QUBELY}} .qubely-progress-bar' }] },
 		striped: {type: 'boolean', default: false},
 		borderRadius: {
 			type: 'object',

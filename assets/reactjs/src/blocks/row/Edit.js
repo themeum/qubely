@@ -134,8 +134,8 @@ class Edit extends Component {
                         </div>
                         <div className={`import-layout-btn-container`}>
                             <button type="button"
-                                    className={`components-button is-button is-default is-primary is-large`}
-                                    onClick={() => this.importLayout()}>
+                                className={`components-button is-button is-default is-primary is-large`}
+                                onClick={() => this.importLayout()}>
                                 {__('Import Layout')}
                             </button>
                         </div>
@@ -161,49 +161,50 @@ class Edit extends Component {
                                 />
 
                                 {heightOptions === 'custom' &&
-                                <Range
-                                    label={__('Min Height')}
-                                    value={rowHeight || ''}
-                                    onChange={val => setAttributes({ rowHeight: val })}
-                                    min={40}
-                                    max={1200}
-                                    unit={['px', 'em', '%']}
-                                    responsive
-                                    device={this.state.device}
-                                    onDeviceChange={value => this.setState({ device: value })}
-                                />
+                                    <Range
+                                        label={__('Min Height')}
+                                        value={rowHeight || ''}
+                                        onChange={val => setAttributes({ rowHeight: val })}
+                                        min={40}
+                                        max={1200}
+                                        unit={['px', 'em', '%']}
+                                        responsive
+                                        device={this.state.device}
+                                        onDeviceChange={value => this.setState({ device: value })}
+                                    />
                                 }
 
                                 {(align == 'full' && !hideRowSettings) &&
-                                <Fragment>
-                                    <RadioAdvanced label={__('Container')} value={rowContainerWidth} onChange={val => setAttributes({ rowContainerWidth: val })}
-                                                   options={[
-                                                       { label: __('Full Width'), value: 'fluid', title: __('Full Width') },
-                                                       { label: __('Boxed'), value: 'boxed', title: __('Boxed') }
-                                                   ]}
-                                    />
-                                    {rowContainerWidth == 'boxed' &&
-                                    <Range
-                                        label={__('Container Width')}
-                                        min={970} max={1920}
-                                        value={rowContainer}
-                                        onChange={val => setAttributes({ rowContainer: parseInt(val) })}
-                                    />
-                                    }
-                                </Fragment>
+                                    <Fragment>
+                                        <RadioAdvanced label={__('Container')} value={rowContainerWidth} onChange={val => setAttributes({ rowContainerWidth: val })}
+                                            options={[
+                                                { label: __('Full Width'), value: 'fluid', title: __('Full Width') },
+                                                { label: __('Boxed'), value: 'boxed', title: __('Boxed') }
+                                            ]}
+                                        />
+                                        {rowContainerWidth == 'boxed' &&
+                                            <Range
+                                                min={970}
+                                                max={1920}
+                                                value={rowContainer}
+                                                label={__('Container Width')}
+                                                onChange={val => setAttributes({ rowContainer: parseInt(val) })}
+                                            />
+                                        }
+                                    </Fragment>
                                 }
 
                                 {columns > 1 &&
-                                <Range
-                                    label={__('Gutter Size')}
-                                    min={0} max={100}
-                                    value={rowGutter}
-                                    onChange={val => setAttributes({ rowGutter: val })}
-                                    unit={['px', 'em', '%']}
-                                    responsive
-                                    device={this.state.device}
-                                    onDeviceChange={value => this.setState({ device: value })}
-                                />
+                                    <Range
+                                        label={__('Gutter Size')}
+                                        min={0} max={100}
+                                        value={rowGutter}
+                                        onChange={val => setAttributes({ rowGutter: val })}
+                                        unit={['px', 'em', '%']}
+                                        responsive
+                                        device={this.state.device}
+                                        onDeviceChange={value => this.setState({ device: value })}
+                                    />
                                 }
 
                                 <Separator />
@@ -273,15 +274,15 @@ class Edit extends Component {
                                 <Separator />
                                 <Toggle label={__('Enable Overlay')} value={enableRowOverlay} onChange={val => setAttributes({ enableRowOverlay: val })} />
                                 {enableRowOverlay == 1 &&
-                                <Fragment>
-                                    <Background label={__('Overlay')} sources={['image', 'gradient']} value={rowOverlay} onChange={val => setAttributes({ rowOverlay: val })} />
-                                    {rowOverlay.openBg == 1 &&
                                     <Fragment>
-                                        <RangeControl beforeIcon={"lightbulb"} label={__('Overlay Opacity')} min={.01} max={1} step={.01} value={rowOpacity} onChange={val => setAttributes({ rowOpacity: val })} />
-                                        <Select label={__('Overlay Blend Mode')} options={[['normal', __('Normal')], ['multiply', __('Multiply')], ['screen', __('Screen')], ['overlay', __('Overlay')], ['darken', __('Darken')], ['lighten', __('Lighten')], ['color-dodge', __('Color Dodge')], ['saturation', __('Saturation')], ['luminosity', __('Luminosity')], ['color', __('Color')], ['color-burn', __('Color Burn')], ['exclusion', __('Exclusion')], ['hue', __('Hue')]]} value={rowBlend} onChange={val => setAttributes({ rowBlend: val })} />
+                                        <Background label={__('Overlay')} sources={['image', 'gradient']} value={rowOverlay} onChange={val => setAttributes({ rowOverlay: val })} />
+                                        {rowOverlay.openBg == 1 &&
+                                            <Fragment>
+                                                <RangeControl beforeIcon={"lightbulb"} label={__('Overlay Opacity')} min={.01} max={1} step={.01} value={rowOpacity} onChange={val => setAttributes({ rowOpacity: val })} />
+                                                <Select label={__('Overlay Blend Mode')} options={[['normal', __('Normal')], ['multiply', __('Multiply')], ['screen', __('Screen')], ['overlay', __('Overlay')], ['darken', __('Darken')], ['lighten', __('Lighten')], ['color-dodge', __('Color Dodge')], ['saturation', __('Saturation')], ['luminosity', __('Luminosity')], ['color', __('Color')], ['color-burn', __('Color Burn')], ['exclusion', __('Exclusion')], ['hue', __('Hue')]]} value={rowBlend} onChange={val => setAttributes({ rowBlend: val })} />
+                                            </Fragment>
+                                        }
                                     </Fragment>
-                                    }
-                                </Fragment>
                                 }
                             </PanelBody>
 
@@ -351,13 +352,13 @@ class Edit extends Component {
 
                     </div>
                     {(Object.entries(shapeTop).length > 1 && shapeTop.openShape == 1 && shapeTop.style) &&
-                    <div className="qubely-shape-divider qubely-top-shape" dangerouslySetInnerHTML={{ __html: qubely_admin.shapes[shapeTop.style] }} />
+                        <div className="qubely-shape-divider qubely-top-shape" dangerouslySetInnerHTML={{ __html: qubely_admin.shapes[shapeTop.style] }} />
                     }
                     {(Object.entries(rowBg).length > 0 && rowBg.openBg == 1 && rowBg.bgType == 'video') &&
-                    videoBackground(rowBg, 'row')
+                        videoBackground(rowBg, 'row')
                     }
                     {(Object.entries(shapeBottom).length > 1 && shapeBottom.openShape == 1 && shapeBottom.style) &&
-                    <div className="qubely-shape-divider qubely-bottom-shape" dangerouslySetInnerHTML={{ __html: qubely_admin.shapes[shapeBottom.style] }} />
+                        <div className="qubely-shape-divider qubely-bottom-shape" dangerouslySetInnerHTML={{ __html: qubely_admin.shapes[shapeBottom.style] }} />
                     }
                     <div className="qubely-row-overlay"></div>
                     <div className={`${align == 'full' ? ((rowContainerWidth == 'boxed') ? 'qubely-container' : 'qubely-container-fluid') : 'qubely-container-fluid'}`}>

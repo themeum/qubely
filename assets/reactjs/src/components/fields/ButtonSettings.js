@@ -1,17 +1,18 @@
+/* eslint-disable react/react-in-jsx-scope */
 
 const { __ } = wp.i18n
 const { Fragment } = wp.element
 const { PanelBody } = wp.components
 
-import Alignment from "./Alignment"
-import Border from "./Border"
-import BorderRadius from "./BorderRadius"
-import BoxShadow from "./BoxShadow"
-import Color from "./Color"
-import IconList from "./IconList"
-import Styles from "./Styles"
-import Typography from "./Typography"
-import Url from "./Url"
+import Alignment from './Alignment'
+import Border from './Border'
+import BorderRadius from './BorderRadius'
+import BoxShadow from './BoxShadow'
+import Color from './Color'
+import IconList from './IconList'
+import Styles from './Styles'
+import Typography from './Typography'
+import Url from './Url'
 import Tabs from './Tabs'
 import Tab from './Tab'
 import InnerPanel from './InnerPanel'
@@ -27,206 +28,289 @@ import icons from '../../helpers/icons';
 //attributes 
 
 export const buttonAttributes = {
-    buttonText: { type: 'string', default: '' },
-    buttonFillType: { type: 'string', default: 'fill' },
-    buttonTag: { type: 'string', default: 'a' },
-    buttonUrl: { type: 'object', default: { url: '#' } },
-    buttonSize: { type: 'string', default: 'medium' },
-    recreateStyles: {
-        type: 'boolean',
-        default: true
-    },
-    buttonAlignment: {
-        type: 'object', default: { md: 'left' },
-        style: [
-            {
-                condition: [{ key: 'enableButtonAlignment', relation: '==', value: true }],
-                selector: '{{QUBELY}} .qubely-block-btn-wrapper {text-align: {{buttonAlignment}};}'
-            }
-        ]
-    },
-    buttonWidthType: {
-        type: 'string',
-        default: 'auto',
-        style: [
-            {
-                condition: [{ key: 'buttonWidthType', relation: '==', value: 'block' }],
-                selector: '{{QUBELY}} .qubely-block-btn-anchor {width:100% !important; display: -webkit-box; display: -ms-flexbox; display: flex;}'
-            },
-            {
-                condition: [{ key: 'buttonWidthType', relation: '==', value: 'auto' }],
-                selector: '{{QUBELY}} .qubely-block-btn-anchor {width:auto !important}'
-            },
-            {
-                condition: [{ key: 'buttonWidthType', relation: '==', value: 'fixed' }],
-                selector: '{{QUBELY}} .qubely-block-btn-anchor {display:inline-flex}'
-            }
-        ]
-    },
-    buttonWidth: {
-        type: 'object',
-        default: {
-            md: 260,
-            unit: 'px'
-        },
-        style: [
-            {
-                condition: [{ key: 'buttonWidthType', relation: '==', value: 'fixed' }],
-                selector: '{{QUBELY}} .qubely-block-btn-anchor {width: {{buttonWidth}};}'
-            }
-        ]
-    },
-    buttonPadding: {
-        type: 'object',
-        default: {
-            openPadding: 1,
-            paddingType: 'global',
-            global: { md: 18 },
-            custom: { md: '10 10 10 10' },
-            unit: 'px'
-        },
-        style: [
-            {
-                condition: [
-                    { key: 'buttonSize', relation: '==', value: 'custom' }
-                ],
-                selector: '{{QUBELY}} .qubely-block-btn-anchor'
-            }
-        ]
-    },
-    buttonTypography: { type: 'object', default: {}, style: [{ selector: '{{QUBELY}} .qubely-block-btn-anchor' }] },
-    buttonColor: {
-        type: 'string', default: '#000',
-        style: [
-            {
-                condition: [{ key: 'buttonFillType', relation: '==', value: 'fill' }],
-                selector: '{{QUBELY}} .qubely-block-btn-anchor { color:{{buttonColor}}; }'
-            }
-        ]
-    },
-    buttonColor2: {
-        type: 'string', default: '#2184F9',
-        style: [
-            {
-                condition: [{ key: 'buttonFillType', relation: '!=', value: 'fill' }],
-                selector: '{{QUBELY}} .qubely-block-btn-anchor { color:{{buttonColor2}}; }'
-            }
-        ]
-    },
-    buttonHoverColor: {
-        type: 'string', default: '#fff',
-        style: [
-            {
-                condition: [{ key: 'buttonFillType', relation: '==', value: 'fill' }],
-                selector: '{{QUBELY}} .qubely-block-btn-anchor:hover { color:{{buttonHoverColor}}; }'
-            }
-        ]
-    },
-    buttonHoverColor2: {
-        type: 'string', default: '#1066CC',
-        style: [
-            {
-                condition: [{ key: 'buttonFillType', relation: '!=', value: 'fill' }],
-                selector: '{{QUBELY}} .qubely-block-btn-anchor:hover { color:{{buttonHoverColor2}}; }'
-            }
-        ]
-    },
-    buttonBgColor: {
-        type: 'object', default: { type: 'color', openColor: 1, color: '#2184F9', gradient: { color1: '#1066CC', color2: '#2184F9', type: 'linear', direction: 0, start: 0, stop: 100 } },
-        style: [
-            {
-                condition: [{ key: 'buttonFillType', relation: '==', value: 'fill' }],
-                selector: '{{QUBELY}} .qubely-block-btn-anchor'
-            }
-        ]
-    },
-    buttonBgHoverColor: {
-        type: 'object', default: { type: 'color', openColor: 1, color: '#1066CC', gradient: { color1: '#2184F9', color2: '#1066CC', type: 'linear', direction: 0, start: 0, stop: 100 } },
-        style: [
-            {
-                condition: [{ key: 'buttonFillType', relation: '==', value: 'fill' }],
-                selector: '{{QUBELY}} .qubely-block-btn-anchor:before'
-            }
-        ]
-    },
+         buttonText: { type: 'string', default: '' },
+         buttonFillType: { type: 'string', default: 'fill' },
+         buttonTag: { type: 'string', default: 'a' },
+         buttonUrl: { type: 'object', default: { url: '#' } },
+         buttonSize: { type: 'string', default: 'medium' },
+         recreateStyles: {
+           type: 'boolean',
+           default: true,
+         },
+         buttonAlignment: {
+           type: 'object',
+           default: { md: 'left' },
+           style: [
+             {
+               condition: [
+                 { key: 'enableButtonAlignment', relation: '==', value: true },
+               ],
+               selector:
+                 '{{QUBELY}} .qubely-block-btn-wrapper {text-align: {{buttonAlignment}};}',
+             },
+           ],
+         },
+         buttonWidthType: {
+           type: 'string',
+           default: 'auto',
+           style: [
+             {
+               condition: [
+                 { key: 'buttonWidthType', relation: '==', value: 'block' },
+               ],
+               selector:
+                 '{{QUBELY}} .qubely-block-btn-anchor {width:100% !important; display: -webkit-box; display: -ms-flexbox; display: flex;}',
+             },
+             {
+               condition: [
+                 { key: 'buttonWidthType', relation: '==', value: 'auto' },
+               ],
+               selector:
+                 '{{QUBELY}} .qubely-block-btn-anchor {width:auto !important}',
+             },
+             {
+               condition: [
+                 { key: 'buttonWidthType', relation: '==', value: 'fixed' },
+               ],
+               selector:
+                 '{{QUBELY}} .qubely-block-btn-anchor {display:inline-flex}',
+             },
+           ],
+         },
+         buttonWidth: {
+           type: 'object',
+           default: {
+             md: 260,
+             unit: 'px',
+           },
+           style: [
+             {
+               condition: [
+                 { key: 'buttonWidthType', relation: '==', value: 'fixed' },
+               ],
+               selector:
+                 '{{QUBELY}} .qubely-block-btn-anchor {width: {{buttonWidth}};}',
+             },
+           ],
+         },
+         buttonPadding: {
+           type: 'object',
+           default: {
+             openPadding: 1,
+             paddingType: 'global',
+             global: { md: 18 },
+             custom: { md: '10 10 10 10' },
+             unit: 'px',
+           },
+           style: [
+             {
+               condition: [
+                 { key: 'buttonSize', relation: '==', value: 'custom' },
+               ],
+               selector: '{{QUBELY}} .qubely-block-btn-anchor',
+             },
+           ],
+         },
+         buttonTypography: {
+           type: 'object',
+           default: {},
+           style: [{ selector: '{{QUBELY}} .qubely-block-btn-anchor' }],
+         },
+         buttonColor: {
+           type: 'string',
+           default: '#000',
+           style: [
+             {
+               condition: [
+                 { key: 'buttonFillType', relation: '==', value: 'fill' },
+               ],
+               selector:
+                 '{{QUBELY}} .qubely-block-btn-anchor { color:{{buttonColor}}; }',
+             },
+           ],
+         },
+         buttonColor2: {
+           type: 'string',
+           default: 'var(--qubely-color-1)',
+           style: [
+             {
+               condition: [
+                 { key: 'buttonFillType', relation: '!=', value: 'fill' },
+               ],
+               selector:
+                 '{{QUBELY}} .qubely-block-btn-anchor { color:{{buttonColor2}}; }',
+             },
+           ],
+         },
+         buttonHoverColor: {
+           type: 'string',
+           default: '#fff',
+           style: [
+             {
+               condition: [
+                 { key: 'buttonFillType', relation: '==', value: 'fill' },
+               ],
+               selector:
+                 '{{QUBELY}} .qubely-block-btn-anchor:hover { color:{{buttonHoverColor}}; }',
+             },
+           ],
+         },
+         buttonHoverColor2: {
+           type: 'string',
+           default: 'var(--qubely-color-2)',
+           style: [
+             {
+               condition: [
+                 { key: 'buttonFillType', relation: '!=', value: 'fill' },
+               ],
+               selector:
+                 '{{QUBELY}} .qubely-block-btn-anchor:hover { color:{{buttonHoverColor2}}; }',
+             },
+           ],
+         },
+         buttonBgColor: {
+           type: 'object',
+           default: {
+             type: 'color',
+             openColor: 1,
+             color: 'var(--qubely-color-1)',
+             gradient: {
+               color1: 'var(--qubely-color-2)',
+               color2: 'var(--qubely-color-1)',
+               type: 'linear',
+               direction: 0,
+               start: 0,
+               stop: 100,
+             },
+           },
+           style: [
+             {
+               condition: [
+                 { key: 'buttonFillType', relation: '==', value: 'fill' },
+               ],
+               selector: '{{QUBELY}} .qubely-block-btn-anchor',
+             },
+           ],
+         },
+         buttonBgHoverColor: {
+           type: 'object',
+           default: {
+             type: 'color',
+             openColor: 1,
+             color: 'var(--qubely-color-2)',
+             gradient: {
+               color1: 'var(--qubely-color-1)',
+               color2: 'var(--qubely-color-2)',
+               type: 'linear',
+               direction: 0,
+               start: 0,
+               stop: 100,
+             },
+           },
+           style: [
+             {
+               condition: [
+                 { key: 'buttonFillType', relation: '==', value: 'fill' },
+               ],
+               selector: '{{QUBELY}} .qubely-block-btn-anchor:before',
+             },
+           ],
+         },
 
-    buttonBorder: {
-        type: 'object',
-        default: {
-            openBorder: 1,
-            widthType: 'global',
-            global: 1,
-            color: '#2184F9',
-            type: "solid",
-            unit: "px"
-        },
-        style: [{ selector: '{{QUBELY}} .qubely-block-btn-anchor' }]
-    },
+         buttonBorder: {
+           type: 'object',
+           default: {
+             openBorder: 1,
+             widthType: 'global',
+             global: 1,
+             color: 'var(--qubely-color-1)',
+             type: 'solid',
+             unit: 'px',
+           },
+           style: [{ selector: '{{QUBELY}} .qubely-block-btn-anchor' }],
+         },
 
-    buttonBorderHoverColor: {
-        type: 'string', default: '#1066CC',
-        style: [
-            {
-                selector: '{{QUBELY}} .qubely-block-btn-anchor:hover {border-color: {{buttonBorderHoverColor}};}'
-            }
-        ]
-    },
+         buttonBorderHoverColor: {
+           type: 'string',
+           default: 'var(--qubely-color-2)',
+           style: [
+             {
+               selector:
+                 '{{QUBELY}} .qubely-block-btn-anchor:hover {border-color: {{buttonBorderHoverColor}};}',
+             },
+           ],
+         },
 
-    buttonBorderRadius: {
-        type: 'object',
-        default: {
-            openBorderRadius: 1,
-            radiusType: 'global',
-            global: {
-                md: 4
-            },
-            unit: 'px'
-        },
-        style: [{ selector: '{{QUBELY}} .qubely-block-btn-anchor' }]
-    },
-    buttonShadow: {
-        type: 'object', default: {},
-        style: [{ selector: '{{QUBELY}} .qubely-block-btn-anchor' }]
-    },
-    buttonHoverShadow: {
-        type: 'object', default: {},
-        style: [{ selector: '{{QUBELY}} .qubely-block-btn-anchor:hover' }]
-    },
-    buttonIconName: { type: 'string', default: '' },
-    buttonIconPosition: { type: 'string', default: 'right' },
-    buttonIconSize: {
-        type: 'object', default: {},
-        style: [
-            {
-                condition: [{ key: 'buttonIconName', relation: '!=', value: '' }],
-                selector: '{{QUBELY}} .qubely-btn-icon {font-size: {{buttonIconSize}}}'
-            }
-        ]
-    },
-    buttonIconGap: {
-        type: 'object', default: { md: 8, unit: 'px' },
-        style: [
-            {
-                condition: [
-                    { key: 'buttonIconName', relation: '!=', value: '' },
-                    { key: 'buttonIconPosition', relation: '==', value: 'left' },
-                ],
-                selector: '{{QUBELY}} .qubely-btn-icon { margin-right: {{buttonIconGap}}; }'
-            },
-            {
-                condition: [
-                    { key: 'buttonIconName', relation: '!=', value: '' },
-                    { key: 'buttonIconPosition', relation: '==', value: 'right' },
-                ],
-                selector: '{{QUBELY}} .qubely-btn-icon { margin-left: {{buttonIconGap}}; }'
-            },
-        ]
-    },
-    buttonGap: {
-        type: 'object', default: { md: 8, unit: 'px' },
-        style: [{ selector: '{{QUBELY}} .qubely-block-btn-wrapper { margin-bottom: {{buttonGap}}; }' }]
-    }
-}
+         buttonBorderRadius: {
+           type: 'object',
+           default: {
+             openBorderRadius: 1,
+             radiusType: 'global',
+             global: {
+               md: 4,
+             },
+             unit: 'px',
+           },
+           style: [{ selector: '{{QUBELY}} .qubely-block-btn-anchor' }],
+         },
+         buttonShadow: {
+           type: 'object',
+           default: {},
+           style: [{ selector: '{{QUBELY}} .qubely-block-btn-anchor' }],
+         },
+         buttonHoverShadow: {
+           type: 'object',
+           default: {},
+           style: [{ selector: '{{QUBELY}} .qubely-block-btn-anchor:hover' }],
+         },
+         buttonIconName: { type: 'string', default: '' },
+         buttonIconPosition: { type: 'string', default: 'right' },
+         buttonIconSize: {
+           type: 'object',
+           default: {},
+           style: [
+             {
+               condition: [
+                 { key: 'buttonIconName', relation: '!=', value: '' },
+               ],
+               selector:
+                 '{{QUBELY}} .qubely-btn-icon {font-size: {{buttonIconSize}}}',
+             },
+           ],
+         },
+         buttonIconGap: {
+           type: 'object',
+           default: { md: 8, unit: 'px' },
+           style: [
+             {
+               condition: [
+                 { key: 'buttonIconName', relation: '!=', value: '' },
+                 { key: 'buttonIconPosition', relation: '==', value: 'left' },
+               ],
+               selector:
+                 '{{QUBELY}} .qubely-btn-icon { margin-right: {{buttonIconGap}}; }',
+             },
+             {
+               condition: [
+                 { key: 'buttonIconName', relation: '!=', value: '' },
+                 { key: 'buttonIconPosition', relation: '==', value: 'right' },
+               ],
+               selector:
+                 '{{QUBELY}} .qubely-btn-icon { margin-left: {{buttonIconGap}}; }',
+             },
+           ],
+         },
+         buttonGap: {
+           type: 'object',
+           default: { md: 8, unit: 'px' },
+           style: [
+             {
+               selector:
+                 '{{QUBELY}} .qubely-block-btn-wrapper { margin-bottom: {{buttonGap}}; }',
+             },
+           ],
+         },
+       };
 
 export function buttonSettings(attributes, device, setAttributes, updateParentState, showPostTextTypography) {
 
@@ -498,7 +582,7 @@ export function buttonSettings(attributes, device, setAttributes, updateParentSt
                                 responsive
                                 value={postButtonTextPaddingTop}
                                 unit={['px', 'em', '%']}
-                                label={"Top"}
+                                label={'Top'}
                                 onChange={val => setAttributes('postButtonTextPaddingTop', val)}
                                 device={device}
                                 onDeviceChange={value => updateParentState('device', value)} />
@@ -508,7 +592,7 @@ export function buttonSettings(attributes, device, setAttributes, updateParentSt
                                 responsive
                                 value={postButtonTextPaddingBottom}
                                 unit={['px', 'em', '%']}
-                                label={"Bottom"}
+                                label={'Bottom'}
                                 onChange={val => setAttributes('postButtonTextPaddingBottom', val)}
                                 device={device}
                                 onDeviceChange={value => updateParentState('device', value)} />
