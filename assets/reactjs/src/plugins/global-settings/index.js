@@ -75,7 +75,7 @@ class GlobalSettings extends Component {
                 xs: 540,
                 sm: 720,
                 md: 960,
-                lg: 1100
+                // lg: 1100
             }
         }
         this.ref = createRef();
@@ -125,7 +125,6 @@ class GlobalSettings extends Component {
         }
 
         if (activePreset !== prevState.activePreset ||
-            // Object.keys(diff({ 'activePreset': presets[activePreset].colors }, { 'activePreset': prevState.presets[prevStateactivePreset].colors })).length > 0 ||
             Object.keys(diff({ 'breakingPoints': breakingPoints }, { 'breakingPoints': prevState.breakingPoints })).length > 0) {
             /**
             * to activate Update button
@@ -342,25 +341,31 @@ class GlobalSettings extends Component {
                 (typeof themeSupports['editor-font-sizes'] === 'object' && Array.isArray(themeSupports['editor-font-sizes']))
             ) {
                 ThemeSupportCheck = true;
-                themeColorPalette = themeSupports['editor-color-palette'].map(({ color }) => color);
-                themefontSizes = themeSupports['editor-font-sizes'].map(({ name, size }) => (
-                    {
-                        name,
-                        scope: "others",
-                        value: {
-                            openTypography: true,
-                            size: {
-                                md: size,
-                                unit: 'px'
-                            }
-                        }
-                    }));
 
-                themefontSizes.reverse();
+                if (Array.isArray(themeSupports['editor-color-palette'])) {
+                    themeColorPalette = themeSupports['editor-color-palette'].map(({ color }) => color);
+                }
+                if (Array.isArray(themeSupports['editor-font-sizes'])) {
+                    themefontSizes = themeSupports['editor-font-sizes'].map(({ name, size }) => (
+                        {
+                            name,
+                            scope: "others",
+                            value: {
+                                openTypography: true,
+                                size: {
+                                    md: size,
+                                    unit: 'px'
+                                }
+                            }
+                        }));
+
+                    themefontSizes.reverse();
+                }
 
                 if (typeof presets.theme === 'undefined' ||
                     Object.keys(diff({ 'colors': themeColorPalette }, { 'colors': presets.theme.colors })).length > 0 ||
                     Object.keys(diff({ 'typography': themefontSizes }, { 'typography': presets.theme.typography })).length > 0) {
+
                     this.setState(({ presets, activePreset, breakingPoints }) => {
                         let tempPresets = presets;
                         delete presets.theme;
@@ -381,6 +386,7 @@ class GlobalSettings extends Component {
                         });
                     });
                 }
+
             } else {
                 if (presets.theme) {
                     deletePreset('theme');
@@ -542,7 +548,10 @@ class GlobalSettings extends Component {
                                                     {
                                                         presetKey === 'theme' && (
                                                             <Notice status="warning" isDismissible={false}>
-                                                                Disclaimer: Theme colors aren't editable.
+                                                                {
+                                                                    colors.length > 0 ? __(" Disclaimer: Theme colors aren't editable.") : __("Theme colors not available")
+
+                                                                }
                                                             </Notice>
                                                         )
                                                     }
@@ -558,128 +567,127 @@ class GlobalSettings extends Component {
                                                 </div>
                                             </PanelBody>
                                             {
-                                                // (typeof typography !== 'undefined' && typography.length > 0) &&
-                                                typeof typography !== 'undefined' &&
-                                                <PanelBody title={__('Typography')} initialOpen={true}>
-                                                    {
-                                                        typography.map(({ name, value, scope = 'h', removable = false }, index) => {
+                                                (typeof typography !== 'undefined' && typography.length > 0) && (
+                                                    <PanelBody title={__('Typography')} initialOpen={true}>
+                                                        {
+                                                            typography.map(({ name, value, scope = 'h', removable = false }, index) => {
 
-                                                            let displaySettings = false;
-                                                            if (showTypoSettings === index) {
-                                                                displaySettings = true;
-                                                            }
-                                                            let Tag = `h${index + 1}`;
-                                                            if (scope === 'p' || (removable && scope === 'others')) {
-                                                                Tag = 'p'
-                                                            } else if (scope === 'button') {
-                                                                Tag = 'button'
-                                                            }
-                                                            let wrapperClasses = classnames(
-                                                                'qubely-global',
-                                                                'typography',
-                                                                { ['removable']: removable }
-                                                            )
-                                                            let titleClasses = classnames(
-                                                                'typo-name',
-                                                                `tag-${Tag}`,
-                                                                `index-${index + 1}`,
-                                                                { ['active']: displaySettings }
-                                                            )
-                                                            return (
-                                                                <div className={wrapperClasses}>
-                                                                    <div
-                                                                        className={titleClasses}
-                                                                    >
-                                                                        {
-                                                                            renameTypo === index ?
-                                                                                <input
-                                                                                    ref={this.typoRef}
-                                                                                    value={name}
-                                                                                    type="text"
-                                                                                    className={'rename-typo name'}
-                                                                                    placeholder={__('Add typography name')}
-                                                                                    onFocus={() => {
-                                                                                        this.typoRef.current.value = this.typoRef.current.value
-                                                                                    }}
-                                                                                    onBlur={() => {
-                                                                                        this.setState({
-                                                                                            renameTypo: undefined
-                                                                                        })
-                                                                                    }}
-                                                                                    onKeyPress={event => {
-                                                                                        if (event.key == 'Enter') {
-                                                                                            this.typoRef.current.blur();
+                                                                let displaySettings = false;
+                                                                if (showTypoSettings === index) {
+                                                                    displaySettings = true;
+                                                                }
+                                                                let Tag = `h${index + 1}`;
+                                                                if (scope === 'p' || (removable && scope === 'others')) {
+                                                                    Tag = 'p'
+                                                                } else if (scope === 'button') {
+                                                                    Tag = 'button'
+                                                                }
+                                                                let wrapperClasses = classnames(
+                                                                    'qubely-global',
+                                                                    'typography',
+                                                                    { ['removable']: removable }
+                                                                )
+                                                                let titleClasses = classnames(
+                                                                    'typo-name',
+                                                                    `tag-${Tag}`,
+                                                                    `index-${index + 1}`,
+                                                                    { ['active']: displaySettings }
+                                                                )
+                                                                return (
+                                                                    <div className={wrapperClasses}>
+                                                                        <div
+                                                                            className={titleClasses}
+                                                                        >
+                                                                            {
+                                                                                renameTypo === index ?
+                                                                                    <input
+                                                                                        ref={this.typoRef}
+                                                                                        value={name}
+                                                                                        type="text"
+                                                                                        className={'rename-typo name'}
+                                                                                        placeholder={__('Add typography name')}
+                                                                                        onFocus={() => {
+                                                                                            this.typoRef.current.value = this.typoRef.current.value
+                                                                                        }}
+                                                                                        onBlur={() => {
                                                                                             this.setState({
                                                                                                 renameTypo: undefined
                                                                                             })
+                                                                                        }}
+                                                                                        onKeyPress={event => {
+                                                                                            if (event.key == 'Enter') {
+                                                                                                this.typoRef.current.blur();
+                                                                                                this.setState({
+                                                                                                    renameTypo: undefined
+                                                                                                })
+                                                                                            }
                                                                                         }
-                                                                                    }
-                                                                                    }
-                                                                                    onChange={event => renameTypography(presetKey, index, event.target.value)}
+                                                                                        }
+                                                                                        onChange={event => renameTypography(presetKey, index, event.target.value)}
+                                                                                    />
+                                                                                    :
+                                                                                    <Tag className="name" onClick={() => this.setState({ showTypoSettings: displaySettings ? undefined : index })} > {name}</Tag>
+                                                                            }
+
+                                                                            {
+                                                                                (displaySettings && removable) &&
+                                                                                <Dropdown
+                                                                                    position="bottom center"
+                                                                                    className="options"
+                                                                                    contentClassName="global-settings preset-options"
+                                                                                    renderToggle={({ isOpen, onToggle }) => (
+                                                                                        displaySettings ?
+                                                                                            <div className="icon" onClick={onToggle}>{icons.ellipsis_h} </div>
+                                                                                            :
+                                                                                            <div className="icon" onClick={onToggle}>{icons.ellipsis_v} </div>
+                                                                                    )}
+                                                                                    renderContent={({ onToggle }) => {
+                                                                                        return (
+                                                                                            <div className="global-preset-options">
+                                                                                                <div onClick={() => { onToggle(); this.setState({ renameTypo: index }) }}> Rename</div>
+                                                                                                <div onClick={() => { updateTypography(false, presetKey, index, 'delete'); onToggle() }} >delete</div>
+                                                                                            </div>
+                                                                                        )
+                                                                                    }}
                                                                                 />
+                                                                            }
+
+                                                                        </div>
+
+                                                                        {displaySettings && (
+                                                                            presetKey === 'theme' ?
+                                                                                <div className="theme-typo-wrapper">
+                                                                                    <RangeControl
+                                                                                        label={__('Font Size')}
+                                                                                        value={value.size.md}
+                                                                                        onChange={newValue => console.log("theme default can't be changed")}
+                                                                                        disabled
+                                                                                    />
+                                                                                    <Notice status="warning" isDismissible={false}>
+                                                                                        {__("Disclaimer: Theme fonts aren't editable.")}
+                                                                                    </Notice>
+                                                                                </div>
                                                                                 :
-                                                                                <Tag className="name" onClick={() => this.setState({ showTypoSettings: displaySettings ? undefined : index })} > {name}</Tag>
-                                                                        }
-
-                                                                        {
-                                                                            (displaySettings && removable) &&
-                                                                            <Dropdown
-                                                                                position="bottom center"
-                                                                                className="options"
-                                                                                contentClassName="global-settings preset-options"
-                                                                                renderToggle={({ isOpen, onToggle }) => (
-                                                                                    displaySettings ?
-                                                                                        <div className="icon" onClick={onToggle}>{icons.ellipsis_h} </div>
-                                                                                        :
-                                                                                        <div className="icon" onClick={onToggle}>{icons.ellipsis_v} </div>
-                                                                                )}
-                                                                                renderContent={({ onToggle }) => {
-                                                                                    return (
-                                                                                        <div className="global-preset-options">
-                                                                                            <div onClick={() => { onToggle(); this.setState({ renameTypo: index }) }}> Rename</div>
-                                                                                            <div onClick={() => { updateTypography(false, presetKey, index, 'delete'); onToggle() }} >delete</div>
-                                                                                        </div>
-                                                                                    )
-                                                                                }}
-                                                                            />
-                                                                        }
-
-                                                                    </div>
-
-                                                                    {displaySettings && (
-                                                                        presetKey === 'theme' ?
-                                                                            <div className="theme-typo-wrapper">
-                                                                                <RangeControl
-                                                                                    label={__('Font Size')}
-                                                                                    value={value.size.md}
-                                                                                    onChange={newValue => console.log("theme default can't be changed")}
-                                                                                    disabled
+                                                                                <Typography
+                                                                                    value={value}
+                                                                                    globalSettings
+                                                                                    key={name + index}
+                                                                                    onChange={newValue => updateTypography(false, presetKey, index, newValue)}
                                                                                 />
-                                                                                <Notice status="warning" isDismissible={false}>
-                                                                                    Disclaimer: Theme fonts aren't editable.
-                                                                                </Notice>
-                                                                            </div>
-                                                                            :
-                                                                            <Typography
-                                                                                value={value}
-                                                                                globalSettings
-                                                                                key={name + index}
-                                                                                onChange={newValue => updateTypography(false, presetKey, index, newValue)}
-                                                                            />
-                                                                    )}
+                                                                        )}
+                                                                    </div>
+                                                                )
+                                                            })
+                                                        }
+                                                        {
+                                                            (typography.length < 13 && presetKey !== 'theme') && (
+                                                                <div onClick={() => updateTypography(true, presetKey)}>
+                                                                    {AddNewButton('Add new typography', 'Add Typography', "add-new-wrapper add-new-typo")}
                                                                 </div>
                                                             )
-                                                        })
-                                                    }
-                                                    {
-                                                        (typography.length < 13 && presetKey !== 'theme') && (
-                                                            <div onClick={() => updateTypography(true, presetKey)}>
-                                                                {AddNewButton('Add new typography', 'Add Typography', "add-new-wrapper add-new-typo")}
-                                                            </div>
-                                                        )
-                                                    }
-                                                </PanelBody>
-                                            }
+                                                        }
+                                                    </PanelBody>
+                                                )}
                                         </Fragment>
                                     }
                                 </div>
