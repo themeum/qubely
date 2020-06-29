@@ -330,8 +330,8 @@ class GlobalSettings extends Component {
             let ThemeSupportCheck = false;
             let themeColorPalette = [], themefontSizes = [];
 
-            if ((typeof themeSupports['editor-color-palette'] === 'object' && themeSupports['editor-color-palette'].length > 0) ||
-                (typeof themeSupports['editor-font-sizes'] === 'object' && themeSupports['editor-font-sizes'].length > 0)
+            if ((typeof themeSupports['editor-color-palette'] === 'object' && Array.isArray(themeSupports['editor-color-palette'])) ||
+                (typeof themeSupports['editor-font-sizes'] === 'object' && Array.isArray(themeSupports['editor-font-sizes']))
             ) {
                 ThemeSupportCheck = true;
                 themeColorPalette = themeSupports['editor-color-palette'].map(({ color }) => color);
