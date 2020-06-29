@@ -55,7 +55,7 @@ const attributes = {
                     { key: 'align', relation: '==', value: 'full' },
                     { key: 'rowContainerWidth', relation: '==', value: 'boxed' },
                 ],
-                selector: '@media (min-width: 1200px) {{{QUBELY}} .qubely-container {max-width: {{rowContainer}}px;}}'
+                selector: '@media (min-width: 1200px) {{{QUBELY}} .qubely-container {max-width: {{rowContainer}}px !important;}}'
             }
         ]
     },
