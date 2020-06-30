@@ -239,6 +239,7 @@ You can report bugs on the [support forum here](https://wordpress.org/support/pl
 
 = 1.5.1 - 29 June, 2020 =
 New : Theme colors support in Global settings
+New : Row Container width settings in Global settings
 Update: Blocks initial primary color updated with preset color
 Update: Gradient field - Global setting color support
 Update: Post Grid pagination default margin added
