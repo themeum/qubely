@@ -1,6 +1,7 @@
 <h3>1.5.1 - 29 June, 2020</h3>
 <ul>
     <li>New : Theme colors support in Global settings</li>
+    <li>New : Row Container width settings in Global settings</li>
     <li>Update: Blocks initial primary color updated with preset color</li>
     <li>Update: Gradient field - Global setting color support</li>
     <li>Update: Post Grid pagination default margin added</li>
