@@ -708,12 +708,16 @@ class GlobalSettings extends Component {
         const updateBreakingPoints = (key, newValue) => {
             this.setState(({ presets, activePreset, breakingPoints }) => {
                 let defaultValue = 540;
-                if (key === 'sm') {
-                    defaultValue = 720;
-                } else if (key === 'md') {
-                    defaultValue = 960;
-                } else if (key === 'lg') {
-                    defaultValue = 1199;
+                if (typeof qubely_container_width !== undefined) {
+                    defaultValue = qubely_container_width[key]
+                } else {
+                    if (key === 'sm') {
+                        defaultValue = 720;
+                    } else if (key === 'md') {
+                        defaultValue = 960;
+                    } else if (key === 'lg') {
+                        defaultValue = 1199;
+                    }
                 }
                 let newBreakingPoints = {
                     ...breakingPoints,
