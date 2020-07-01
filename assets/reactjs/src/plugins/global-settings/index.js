@@ -66,7 +66,6 @@ class GlobalSettings extends Component {
             ...DEFAULTPRESETS,
             newTypoScope: 'others',
             newTypoTitle: null,
-            activePreset: null,
             renameTypo: undefined,
             enableRenaming: undefined,
             showTypoSettings: undefined,
@@ -80,19 +79,18 @@ class GlobalSettings extends Component {
         }
         this.ref = createRef();
         this.typoRef = createRef();
-        // this.saveGlobalCSS = this.saveGlobalCSS.bind(this);
+        this.saveGlobalCSS = this.saveGlobalCSS.bind(this);
     }
 
-    async componentDidMount() {
-        await this.getGlobalSettings();
-        // await this.saveGlobalCSS();
-        await this.updateGlobalSettings()
+    componentDidMount() {
+        this.getGlobalSettings();
+        this.saveGlobalCSS();
     }
 
-    // async saveGlobalCSS() {
-    //     let _CSS = await getGlobalCSS();
-    //     await injectGlobalCSS(_CSS, 'qubely-global-styles');
-    // }
+    async saveGlobalCSS() {
+        let _CSS = await getGlobalCSS();
+        await injectGlobalCSS(_CSS, 'qubely-global-styles');
+    }
 
     async componentDidUpdate(prevProps, prevState) {
         const {
@@ -138,6 +136,9 @@ class GlobalSettings extends Component {
     getGlobalSettings = () => {
         return fetchFromApi().then(data => {
             if (data.success) {
+                if (Object.keys(data.settings).length === 0) {
+                    this.updateGlobalSettings();
+                }
                 this.setState({ ...data.settings });
                 localStorage.setItem('qubely-global-settings', JSON.stringify({
                     ...DEFAULTPRESETS.presets[DEFAULTPRESETS.activePreset],
@@ -148,6 +149,9 @@ class GlobalSettings extends Component {
                     ...data.settings.presets[data.settings.activePreset],
 
                 }))
+            } else {
+                this.setState({ ...DEFAULTPRESETS });
+                this.updateGlobalSettings()
             }
         });
     }
@@ -158,6 +162,7 @@ class GlobalSettings extends Component {
             activePreset,
             breakingPoints
         } = this.state;
+
         let tempData = {
             activePreset,
             presets: {
