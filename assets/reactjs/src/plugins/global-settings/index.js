@@ -134,9 +134,11 @@ class GlobalSettings extends Component {
 
 
     getGlobalSettings = () => {
+        let hasExistingValues = true;
         return fetchFromApi().then(data => {
             if (data.success) {
                 if (Object.keys(data.settings).length === 0) {
+                    hasExistingValues = false
                     this.updateGlobalSettings();
                 }
                 this.setState({ ...data.settings });
@@ -144,9 +146,9 @@ class GlobalSettings extends Component {
                     ...DEFAULTPRESETS.presets[DEFAULTPRESETS.activePreset],
                     breakingPoints: {
                         ...this.state.breakingPoints,
-                        ...data.settings.breakingPoints,
+                        ...(hasExistingValues & data.settings.breakingPoints),
                     },
-                    ...data.settings.presets[data.settings.activePreset],
+                    ...(hasExistingValues & data.settings.presets[data.settings.activePreset]),
 
                 }))
             } else {
