@@ -74,6 +74,25 @@ class QUBELY
 		add_filter('admin_body_class', array($this, 'qubely_editor_bodyclass'));
 
 		add_filter('body_class', array($this, 'add_custom_class'));
+
+		// qubely global container width
+		add_action('wp_enqueue_scripts', array($this, 'qubely_global_container_width'));
+		add_action('admin_enqueue_scripts', array($this, 'qubely_global_container_width'));
+	}
+
+	/**
+	 * Qubely Container Width 
+	 */
+	public function qubely_global_container_width() {
+		$container = array(
+			'xs' => apply_filters('qubely_container_xs', 540),
+			'sm' => apply_filters('qubely_container_sm', 700),
+			'md' => apply_filters('qubely_container_md', 700),
+			'lg' => apply_filters('qubely_container_lg', 1170)
+		);
+		wp_register_script('qubely_container_width', '');
+		wp_localize_script('qubely_container_width', 'qubely_container_width', apply_filters('qubely_container_width', $container));
+		wp_enqueue_script('qubely_container_width');
 	}
 
 
@@ -126,11 +145,11 @@ class QUBELY
 			'image_sizes'  => $this->get_all_image_sizes(),
 			'palette' => $palette,
 			'overwriteTheme' => true,
-            'qubely_gmap_api_key' => $qubely_gmap_api_key,
-            'qubely_recaptcha_site_key' => $qubely_recaptcha_site_key,
-            'qubely_recaptcha_secret_key' => $qubely_recaptcha_secret_key,
-            'site_url' => site_url(),
-            'admin_url' => admin_url(),
+			'qubely_gmap_api_key' => $qubely_gmap_api_key,
+			'qubely_recaptcha_site_key' => $qubely_recaptcha_site_key,
+			'qubely_recaptcha_secret_key' => $qubely_recaptcha_secret_key,
+			'site_url' => site_url(),
+			'admin_url' => admin_url(),
 			'publishedPosts'=>wp_count_posts()->publish,
 		));
 	}
