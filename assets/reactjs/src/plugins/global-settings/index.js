@@ -146,7 +146,7 @@ class GlobalSettings extends Component {
                     ...DEFAULTPRESETS.presets[DEFAULTPRESETS.activePreset],
                     breakingPoints: {
                         ...this.state.breakingPoints,
-                        ...(hasExistingValues & data.settings.breakingPoints),
+                        ...(hasExistingValues & data.settings.breakingPoints)
                     },
                     ...(hasExistingValues & data.settings.presets[data.settings.activePreset]),
 
