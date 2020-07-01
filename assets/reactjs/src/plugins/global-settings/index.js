@@ -74,7 +74,8 @@ class GlobalSettings extends Component {
                 xs: 540,
                 sm: 720,
                 md: 960,
-                lg: 1100
+                lg: 1170,
+                ...(typeof qubely_container_width !== undefined && qubely_container_width)
             }
         }
         this.ref = createRef();
@@ -146,6 +147,7 @@ class GlobalSettings extends Component {
                     ...DEFAULTPRESETS.presets[DEFAULTPRESETS.activePreset],
                     breakingPoints: {
                         ...this.state.breakingPoints,
+                        ...(typeof qubely_container_width !== undefined && qubely_container_width),
                         ...(hasExistingValues & data.settings.breakingPoints)
                     },
                     ...(hasExistingValues & data.settings.presets[data.settings.activePreset]),

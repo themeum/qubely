@@ -258,8 +258,12 @@ export const getGlobalSettings = () => {
         presets,
         activePreset,
     } = DEFAULTPRESETS;
-    let breakingPoints = { ...DEFAULTBREAKINGPOINTS }
+    let breakingPoints = {
+        ...DEFAULTBREAKINGPOINTS,
+        ...(typeof qubely_container_width !== undefined && qubely_container_width)
+    }
     return fetchFromApi().then(data => {
+        console.log('data : ', data);
         if (data.success) {
             if (typeof data.settings.presets !== 'undefined') {
                 presets = data.settings.presets
@@ -280,7 +284,10 @@ export const getGlobalSettings = () => {
                 return rootCSS;
             }
             if (typeof data.settings.breakingPoints !== 'undefined') {
-                breakingPoints = data.settings.breakingPoints
+                breakingPoints = {
+                    ...breakingPoints,
+                    ...data.settings.breakingPoints
+                }
             }
 
             global_CSS += setGlobalCSS_Variables(globalColors);
