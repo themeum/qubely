@@ -2,7 +2,7 @@
 Developer Documentation of Qubely 
 
 
-## Settings: 
+## Hooks: 
 1. [Row-container width](./hooks/row-container-width.md)
 
 ## Field Types: 
