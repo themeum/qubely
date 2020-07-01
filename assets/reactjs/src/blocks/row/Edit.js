@@ -1,3 +1,4 @@
+/* eslint-disable react/react-in-jsx-scope */
 const { __ } = wp.i18n
 const { compose } = wp.compose;
 const { select, withDispatch } = wp.data
@@ -175,23 +176,22 @@ class Edit extends Component {
                                 }
 
                                 {(align == 'full' && !hideRowSettings) &&
-                                    <Fragment>
-                                        <RadioAdvanced label={__('Container')} value={rowContainerWidth} onChange={val => setAttributes({ rowContainerWidth: val })}
-                                            options={[
-                                                { label: __('Full Width'), value: 'fluid', title: __('Full Width') },
-                                                { label: __('Boxed'), value: 'boxed', title: __('Boxed') }
-                                            ]}
-                                        />
-                                        {rowContainerWidth == 'boxed' &&
-                                            <Range
-                                                min={970}
-                                                max={1920}
-                                                value={rowContainer}
-                                                label={__('Container Width')}
-                                                onChange={val => setAttributes({ rowContainer: parseInt(val) })}
-                                            />
-                                        }
-                                    </Fragment>
+                                <Fragment>
+                                    <RadioAdvanced label={__('Container')} value={rowContainerWidth} onChange={val => setAttributes({ rowContainerWidth: val })}
+                                                   options={[
+                                                       { label: __('Full Width'), value: 'fluid', title: __('Full Width') },
+                                                       { label: __('Boxed'), value: 'boxed', title: __('Boxed') }
+                                                   ]}
+                                    />
+                                    {rowContainerWidth == 'boxed' &&
+                                    <Range
+                                        label={__('Container Width')}
+                                        min={0} max={1920}
+                                        value={rowContainer}
+                                        onChange={val => setAttributes({ rowContainer: parseInt(val) })}
+                                    />
+                                    }
+                                </Fragment>
                                 }
 
                                 {columns > 1 &&

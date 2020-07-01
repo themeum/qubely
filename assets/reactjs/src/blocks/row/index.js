@@ -48,12 +48,13 @@ const attributes = {
 
     rowContainer: {
         type: 'number',
-        default: 1140,
+        default: 0,
         style: [
             {
                 condition: [
                     { key: 'align', relation: '==', value: 'full' },
                     { key: 'rowContainerWidth', relation: '==', value: 'boxed' },
+                    { key: 'rowContainer', relation: '!=', value: 0 },
                 ],
                 selector: '@media (min-width: 1200px) {{{QUBELY}} .qubely-container {max-width: {{rowContainer}}px !important;}}'
             }
