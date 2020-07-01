@@ -74,7 +74,7 @@ class GlobalSettings extends Component {
                 xs: 540,
                 sm: 720,
                 md: 960,
-                // lg: 1100
+                lg: 1100
             }
         }
         this.ref = createRef();
@@ -770,20 +770,20 @@ class GlobalSettings extends Component {
                         />
                         <RangeControl
                             min={900}
-                            max={1920}
+                            max={1400}
                             allowReset
-                            label={__('Desktop')}
+                            label={__('Medium')}
                             value={breakingPoints.md}
                             onChange={newValue => updateBreakingPoints('md', newValue)}
                         />
-                        {/* <RangeControl
+                        <RangeControl
                             min={900}
-                            max={1199}
+                            max={1920}
                             allowReset
                             label={__('Desktop')}
                             value={breakingPoints.lg}
                             onChange={newValue => updateBreakingPoints('lg', newValue)}
-                        /> */}
+                        />
                         {/* <div className="qubely-row-device">
                             <Notice status="warning" isDismissible={false}>
                                 <div className="qubely-device-description title">{__('Device defination in min-width')}</div>
