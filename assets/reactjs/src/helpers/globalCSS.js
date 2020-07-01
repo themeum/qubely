@@ -192,7 +192,7 @@ const setBreakingPoints = (breakingPoints) => {
         xs,
         sm,
         md,
-        // lg
+        lg
     } = breakingPoints;
 
     let tempCSS = '';
@@ -205,9 +205,9 @@ const setBreakingPoints = (breakingPoints) => {
     if (typeof md !== 'undefined') {
         tempCSS += `@media (min-width: 992px){.qubely-section .qubely-container{max-width: ${md}px;}}`
     }
-    // if (typeof lg !== 'undefined') {
-    //     tempCSS += `@media (min-width: 1199.98px){.qubely-section .qubely-container{max-width: ${lg}px;}}`
-    // }
+    if (typeof lg !== 'undefined') {
+        tempCSS += `@media (min-width: 1199.98px){.qubely-section .qubely-container{max-width: ${lg}px;}}`
+    }
     return tempCSS;
 }
 

@@ -74,7 +74,7 @@ class GlobalSettings extends Component {
                 xs: 540,
                 sm: 720,
                 md: 960,
-                // lg: 1100
+                lg: 1100
             }
         }
         this.ref = createRef();
@@ -134,9 +134,11 @@ class GlobalSettings extends Component {
 
 
     getGlobalSettings = () => {
+        let hasExistingValues = true;
         return fetchFromApi().then(data => {
             if (data.success) {
                 if (Object.keys(data.settings).length === 0) {
+                    hasExistingValues = false
                     this.updateGlobalSettings();
                 }
                 this.setState({ ...data.settings });
@@ -144,9 +146,9 @@ class GlobalSettings extends Component {
                     ...DEFAULTPRESETS.presets[DEFAULTPRESETS.activePreset],
                     breakingPoints: {
                         ...this.state.breakingPoints,
-                        ...data.settings.breakingPoints,
+                        ...(hasExistingValues & data.settings.breakingPoints)
                     },
-                    ...data.settings.presets[data.settings.activePreset],
+                    ...(hasExistingValues & data.settings.presets[data.settings.activePreset]),
 
                 }))
             } else {
@@ -706,12 +708,16 @@ class GlobalSettings extends Component {
         const updateBreakingPoints = (key, newValue) => {
             this.setState(({ presets, activePreset, breakingPoints }) => {
                 let defaultValue = 540;
-                if (key === 'sm') {
-                    defaultValue = 720;
-                } else if (key === 'md') {
-                    defaultValue = 960;
-                } else if (key === 'lg') {
-                    defaultValue = 1199;
+                if (typeof qubely_container_width !== undefined) {
+                    defaultValue = qubely_container_width[key]
+                } else {
+                    if (key === 'sm') {
+                        defaultValue = 720;
+                    } else if (key === 'md') {
+                        defaultValue = 960;
+                    } else if (key === 'lg') {
+                        defaultValue = 1199;
+                    }
                 }
                 let newBreakingPoints = {
                     ...breakingPoints,
@@ -768,20 +774,20 @@ class GlobalSettings extends Component {
                         />
                         <RangeControl
                             min={900}
-                            max={1920}
+                            max={1400}
                             allowReset
-                            label={__('Desktop')}
+                            label={__('Medium')}
                             value={breakingPoints.md}
                             onChange={newValue => updateBreakingPoints('md', newValue)}
                         />
-                        {/* <RangeControl
+                        <RangeControl
                             min={900}
-                            max={1199}
+                            max={1920}
                             allowReset
                             label={__('Desktop')}
                             value={breakingPoints.lg}
                             onChange={newValue => updateBreakingPoints('lg', newValue)}
-                        /> */}
+                        />
                         {/* <div className="qubely-row-device">
                             <Notice status="warning" isDismissible={false}>
                                 <div className="qubely-device-description title">{__('Device defination in min-width')}</div>
