@@ -28,6 +28,7 @@ function makeBuild() {
         '!./assets/css/magnific-popup.css',
         '!./assets/css/qubely.animatedheadline.css',
         '!./node_modules/**/*.*',
+        '!./docs/**/*.*',
         '!./**/*.zip',
         '!./gulpfile.js',
         '!./readme.md',
