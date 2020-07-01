@@ -4,7 +4,7 @@ Row Container width specifies the max-width of `qubely-container` class.
 
 ### default values
 |Device |Width (px)|
-|:---|:---|:---|
+|:---|:---|
 |`mobile`|540|
 |`tablet`|720|
 |`medium`|960|
