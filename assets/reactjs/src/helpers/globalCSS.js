@@ -263,7 +263,6 @@ export const getGlobalSettings = () => {
         ...(typeof qubely_container_width !== undefined && qubely_container_width)
     }
     return fetchFromApi().then(data => {
-        console.log('data : ', data);
         if (data.success) {
             if (typeof data.settings.presets !== 'undefined') {
                 presets = data.settings.presets
