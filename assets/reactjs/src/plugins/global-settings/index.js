@@ -80,18 +80,17 @@ class GlobalSettings extends Component {
         }
         this.ref = createRef();
         this.typoRef = createRef();
-        this.saveGlobalCSS = this.saveGlobalCSS.bind(this);
+        // this.saveGlobalCSS = this.saveGlobalCSS.bind(this);
     }
 
     componentDidMount() {
         this.getGlobalSettings();
-        this.saveGlobalCSS();
     }
 
-    async saveGlobalCSS() {
-        let _CSS = await getGlobalCSS();
-        await injectGlobalCSS(_CSS, 'qubely-global-styles');
-    }
+    // async saveGlobalCSS() {
+    //     let _CSS = await getGlobalCSS();
+    //     await injectGlobalCSS(_CSS, 'qubely-global-styles');
+    // }
 
     async componentDidUpdate(prevProps, prevState) {
         const {
@@ -142,16 +141,23 @@ class GlobalSettings extends Component {
                     hasExistingValues = false
                     this.updateGlobalSettings();
                 }
+                let tempPreset = {
+                    ...DEFAULTPRESETS.presets[DEFAULTPRESETS.activePreset],
+                    ...(hasExistingValues & data.settings.presets[data.settings.activePreset]),
+                }
+                let tempBreakingPoints = {
+                    ...this.state.breakingPoints,
+                    ...(typeof qubely_container_width !== undefined && qubely_container_width),
+                    ...(hasExistingValues & data.settings.breakingPoints)
+                }
+                if (data.settings.activePreset !== 'theme') {
+                    // this.saveGlobalCSS();
+                    updateGlobalVaribales(tempPreset, tempBreakingPoints);
+                }
                 this.setState({ ...data.settings });
                 localStorage.setItem('qubely-global-settings', JSON.stringify({
-                    ...DEFAULTPRESETS.presets[DEFAULTPRESETS.activePreset],
-                    breakingPoints: {
-                        ...this.state.breakingPoints,
-                        ...(typeof qubely_container_width !== undefined && qubely_container_width),
-                        ...(hasExistingValues & data.settings.breakingPoints)
-                    },
-                    ...(hasExistingValues & data.settings.presets[data.settings.activePreset]),
-
+                    ...tempPreset,
+                    breakingPoints: { ...tempBreakingPoints }
                 }))
             } else {
                 this.setState({ ...DEFAULTPRESETS });
