@@ -84,14 +84,16 @@ class QUBELY
 	 * Qubely Container Width 
 	 */
 	public function qubely_global_container_width() {
-		$container = array(
+		$default = array(
 			'xs' => apply_filters('qubely_container_xs', 540),
 			'sm' => apply_filters('qubely_container_sm', 700),
 			'md' => apply_filters('qubely_container_md', 700),
 			'lg' => apply_filters('qubely_container_lg', 1170)
 		);
+
+		$container = wp_parse_args(apply_filters('qubely_container_width', $default), $default);
 		wp_register_script('qubely_container_width', '');
-		wp_localize_script('qubely_container_width', 'qubely_container_width', apply_filters('qubely_container_width', $container));
+		wp_localize_script('qubely_container_width', 'qubely_container_width', $container);
 		wp_enqueue_script('qubely_container_width');
 	}
 
