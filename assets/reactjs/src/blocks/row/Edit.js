@@ -69,6 +69,12 @@ class Edit extends Component {
         ModalManager.open(<PageListModal rowClientId={this.props.clientId} />);
     }
 
+    getClassName = () => {
+        const { attributes: { align, childRow, rowContainerWidth } } = this.props
+        const wrapperClassName = align ? ((align === 'full' && rowContainerWidth == 'boxed') ? 'qubely-container' : 'qubely-container-fluid') : (childRow ? 'qubely-container-fluid' : 'qubely-container')
+        return wrapperClassName
+    }
+
     render() {
         const {
             attributes: {
@@ -361,7 +367,8 @@ class Edit extends Component {
                         <div className="qubely-shape-divider qubely-bottom-shape" dangerouslySetInnerHTML={{ __html: qubely_admin.shapes[shapeBottom.style] }} />
                     }
                     <div className="qubely-row-overlay"></div>
-                    <div className={`${align == 'full' ? ((rowContainerWidth == 'boxed') ? 'qubely-container' : 'qubely-container-fluid') : 'qubely-container-fluid'}`}>
+                    {/* <div className={`${align == 'full' ? ((rowContainerWidth == 'boxed') ? 'qubely-container' : 'qubely-container-fluid') : 'qubely-container-fluid'}`}> */}
+                    <div className={this.getClassName()}>
                         <div className={`qubely-row qubely-backend-row ${(heightOptions == 'window') ? 'qubely-row-height-window' : ''}`}>
                             <InnerBlocks template={this.getTemplate(columns)} templateLock="all" allowedBlocks={['qubely/column']} />
                         </div>
