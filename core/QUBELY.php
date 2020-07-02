@@ -86,8 +86,8 @@ class QUBELY
 	public function qubely_global_container_width() {
 		$default = array(
 			'xs' => apply_filters('qubely_container_xs', 540),
-			'sm' => apply_filters('qubely_container_sm', 700),
-			'md' => apply_filters('qubely_container_md', 700),
+			'sm' => apply_filters('qubely_container_sm', 720),
+			'md' => apply_filters('qubely_container_md', 960),
 			'lg' => apply_filters('qubely_container_lg', 1170)
 		);
 
