@@ -5,15 +5,15 @@
         width: 100%;
         margin-right: auto;
         margin-left: auto;
-        
+
         @media (min-width: 576px) {
             max-width: 540px;
         }
-          
+
         @media (min-width: 768px) {
             max-width: 720px;
         }
-          
+
         @media (min-width: 992px) {
             max-width: 960px;
         }
@@ -51,14 +51,13 @@
         right: 0px;
         left: 0px;
         overflow: hidden;
-        iframe{
+        iframe {
             height: 1300px;
             position: absolute;
             left: 50%;
             width: 200%;
             transform: translateX(-50%) translateY(-50%);
             top: 50%;
-    
         }
         .qubely-video-bg {
             position: absolute;
@@ -83,7 +82,7 @@
         left: 0px;
         right: 0px;
         line-height: 0;
-        > svg{
+        > svg {
             display: block;
             width: 100%;
             position: relative;
@@ -115,9 +114,8 @@
                 border-right: none;
                 padding: 0;
                 // button.components-dropdown-menu__toggle.has-text {
-                //     display: none; 
+                //     display: none;
                 // }
-            
             }
             .wp-block[data-align="full"] {
                 left: auto;
@@ -128,11 +126,21 @@
             }
         }
     }
-} 
+}
 // .editor-styles-wrapper .wp-block .qubely-backend-row .wp-block {
 //     z-index: 3;
 // }
 
-.qubely-row .block-editor-block-list__layout .editor-block-list__block{
+.qubely-row .block-editor-block-list__layout .editor-block-list__block {
     max-width: none;
+}
+.wp-block[data-align="full"][data-type="qubely/row"] {
+    .qubely-row.qubely-backend-row {
+       > .block-editor-inner-blocks .block-editor-block-list__layout{
+            .wp-block[data-type="qubely/column"]:only-child{
+                max-width: none;
+            }
+        }
+
+    }
 }

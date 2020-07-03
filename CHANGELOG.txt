@@ -1,4 +1,4 @@
-<h3>1.5.1 - 29 June, 2020</h3>
+<h3>1.5.1 - 03 July, 2020</h3>
 <ul>
     <li>New: Theme colors support in Global settings</li>
     <li>New: Row Container width settings in Global settings</li>
