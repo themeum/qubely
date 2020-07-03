@@ -189,24 +189,24 @@ export const setGlobalTypo_Variables = (globalTypoes) => {
 }
 const setBreakingPoints = (breakingPoints) => {
     const {
-        xs,
         sm,
         md,
-        lg
+        lg,
+        xl
     } = breakingPoints;
 
     let tempCSS = '';
-    if (typeof xs !== 'undefined') {
-        tempCSS += `@media (min-width: 576px){.qubely-section .qubely-container{max-width: ${xs}px;}}`
-    }
     if (typeof sm !== 'undefined') {
-        tempCSS += `@media (min-width: 768px){.qubely-section .qubely-container{max-width: ${sm}px;}}`
+        tempCSS += `@media (min-width: 576px){.qubely-section .qubely-container{max-width: ${sm}px;}}`
     }
     if (typeof md !== 'undefined') {
-        tempCSS += `@media (min-width: 992px){.qubely-section .qubely-container{max-width: ${md}px;}}`
+        tempCSS += `@media (min-width: 768px){.qubely-section .qubely-container{max-width: ${md}px;}}`
     }
     if (typeof lg !== 'undefined') {
-        tempCSS += `@media (min-width: 1199.98px){.qubely-section .qubely-container{max-width: ${lg}px;}}`
+        tempCSS += `@media (min-width: 992px){.qubely-section .qubely-container{max-width: ${lg}px;}}`
+    }
+    if (typeof xl !== 'undefined') {
+        tempCSS += `@media (min-width: 1200px){.qubely-section .qubely-container{max-width: ${xl}px;}}`
     }
     return tempCSS;
 }

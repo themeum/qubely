@@ -544,8 +544,8 @@ export const DEFAULTPRESETS = {
 }
 
 export const DEFAULTBREAKINGPOINTS = {
-    xs: 540,
-    sm: 720,
-    md: 960,
-    lg: 1140,
+    sm: 540,
+    md: 720,
+    lg: 960,
+    xl: 1140,
 }

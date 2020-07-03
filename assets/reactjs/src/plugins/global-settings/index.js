@@ -71,10 +71,10 @@ class GlobalSettings extends Component {
             showTypoSettings: undefined,
             showPresetSettings: undefined,
             breakingPoints: {
-                xs: 540,
-                sm: 720,
-                md: 960,
-                lg: 1140,
+                sm: 540,
+                md: 720,
+                lg: 960,
+                xl: 1140,
                 ...(typeof qubely_container_width !== undefined && qubely_container_width)
             }
         }
@@ -761,26 +761,26 @@ class GlobalSettings extends Component {
                     <PanelBody title={__('Row Container width')} initialOpen={false}>
                         <RangeControl
                             min={200}
-                            max={700}
+                            max={767}
                             allowReset
-                            label={__('Mobile')}
+                            label={__('Landscape Mobile')}
                             value={breakingPoints.xs}
                             renderTooltipContent={() => value => `${value}%`}
                             onChange={newValue => updateBreakingPoints('xs', newValue)}
                         />
                         <RangeControl
                             min={400}
-                            max={1000}
+                            max={991}
                             allowReset
                             label={__('Tablet')}
                             value={breakingPoints.sm}
                             onChange={newValue => updateBreakingPoints('sm', newValue)}
                         />
                         <RangeControl
-                            min={900}
-                            max={1400}
+                            min={800}
+                            max={1199}
                             allowReset
-                            label={__('Medium')}
+                            label={__('Desktop')}
                             value={breakingPoints.md}
                             onChange={newValue => updateBreakingPoints('md', newValue)}
                         />
@@ -788,7 +788,7 @@ class GlobalSettings extends Component {
                             min={900}
                             max={1920}
                             allowReset
-                            label={__('Desktop')}
+                            label={__('Large Desktop')}
                             value={breakingPoints.lg}
                             onChange={newValue => updateBreakingPoints('lg', newValue)}
                         />
