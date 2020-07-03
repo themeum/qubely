@@ -758,7 +758,7 @@ class GlobalSettings extends Component {
                     title={__('Global Settings')}
                 >
                     {renderPresets()}
-                    <PanelBody title={__('Row Container width')} initialOpen={false}>
+                    <PanelBody title={__('Row Container max-width')} initialOpen={false}>
                         <RangeControl
                             min={200}
                             max={767}
@@ -786,21 +786,21 @@ class GlobalSettings extends Component {
                         />
                         <RangeControl
                             min={900}
-                            max={1920}
+                            max={2300}
                             allowReset
                             label={__('Large Desktop')}
                             value={breakingPoints.lg}
                             onChange={newValue => updateBreakingPoints('lg', newValue)}
                         />
-                        {/* <div className="qubely-row-device">
+                        <div className="qubely-row-device">
                             <Notice status="warning" isDismissible={false}>
-                                <div className="qubely-device-description title">{__('Device defination in min-width')}</div>
-                                <div className="qubely-device-description">{__('Small Mobile : 575px')}</div>
-                                <div className="qubely-device-description">  {__('Mobile : 768px')}</div>
-                                <div className="qubely-device-description">  {__('Tablet : 991px')}</div>
-                                <div className="qubely-device-description">{__('Desktop : 1199px')}</div>
+                                <div className="qubely-device-description title">{__('Device definations in terms of ')}<strong>{__('min-width')}</strong></div>
+                                <div className="qubely-device-description">{__('Landscape Mobile : 576px')}</div>
+                                <div className="qubely-device-description">  {__('Tablet : 768px')}</div>
+                                <div className="qubely-device-description">  {__('Desktop : 992px')}</div>
+                                <div className="qubely-device-description">{__('Large Desktop : 1200px')}</div>
                             </Notice>
-                        </div> */}
+                        </div>
 
                     </PanelBody>
                 </PluginSidebar>
