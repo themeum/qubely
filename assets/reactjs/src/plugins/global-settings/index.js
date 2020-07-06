@@ -764,33 +764,33 @@ class GlobalSettings extends Component {
                             max={767}
                             allowReset
                             label={__('Landscape Mobile')}
-                            value={breakingPoints.xs}
+                            value={breakingPoints.sm}
                             renderTooltipContent={() => value => `${value}%`}
-                            onChange={newValue => updateBreakingPoints('xs', newValue)}
+                            onChange={newValue => updateBreakingPoints('sm', newValue)}
                         />
                         <RangeControl
                             min={400}
                             max={991}
                             allowReset
                             label={__('Tablet')}
-                            value={breakingPoints.sm}
-                            onChange={newValue => updateBreakingPoints('sm', newValue)}
+                            value={breakingPoints.md}
+                            onChange={newValue => updateBreakingPoints('md', newValue)}
                         />
                         <RangeControl
                             min={800}
                             max={1199}
                             allowReset
                             label={__('Desktop')}
-                            value={breakingPoints.md}
-                            onChange={newValue => updateBreakingPoints('md', newValue)}
+                            value={breakingPoints.lg}
+                            onChange={newValue => updateBreakingPoints('lg', newValue)}
                         />
                         <RangeControl
                             min={900}
                             max={2300}
                             allowReset
                             label={__('Large Desktop')}
-                            value={breakingPoints.lg}
-                            onChange={newValue => updateBreakingPoints('lg', newValue)}
+                            value={breakingPoints.xl}
+                            onChange={newValue => updateBreakingPoints('xl', newValue)}
                         />
                         <div className="qubely-row-device">
                             <Notice status="warning" isDismissible={false}>
