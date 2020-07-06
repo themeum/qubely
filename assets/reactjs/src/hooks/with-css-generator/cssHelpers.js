@@ -158,6 +158,9 @@ const split_bg = (type, image = {}, imgPosition, imgAttachment, imgRepeat, imgSi
         if (bgGradient && bgGradient.type == 'linear') {
             bgData += 'background-image: linear-gradient(' + bgGradient.direction + 'deg, ' + bgGradient.color1 + ' ' + bgGradient.start + '%,' + bgGradient.color2 + ' ' + bgGradient.stop + '%);'
         } else {
+            if (typeof bgGradient.radial === 'undefined') {
+                bgGradient.radial = 'center';
+            }
             bgData += 'background-image: radial-gradient( circle at ' + bgGradient.radial + ' , ' + bgGradient.color1 + ' ' + bgGradient.start + '%,' + bgGradient.color2 + ' ' + bgGradient.stop + '%);'
         }
     }

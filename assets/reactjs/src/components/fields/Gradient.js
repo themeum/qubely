@@ -22,6 +22,8 @@ class Gradient extends Component {
         const { value } = this.props
         if (!Object.keys(value).length > 0) {
             this.props.onChange(defaultState)
+        } else {
+            this.props.onChange({ ...defaultState, ...value })
         }
     }
     defColors = async () => {
@@ -77,7 +79,7 @@ class Gradient extends Component {
                                     renderToggle={({ isOpen, onToggle }) => (
                                         <div className={`qubely-color-picker-container qubely-position-${customClassName}`}>
                                             <Tooltip text={label}>
-                                                <button className="qubely-color-picker" isPrimary onClick={onToggle} aria-expanded={isOpen}  style={{ backgroundColor: value[color] || defaultColor }}/>
+                                                <button className="qubely-color-picker" isPrimary onClick={onToggle} aria-expanded={isOpen} style={{ backgroundColor: value[color] || defaultColor }} />
                                             </Tooltip>
                                         </div>
                                     )}
