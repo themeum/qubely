@@ -237,7 +237,7 @@ You can report bugs on the [support forum here](https://wordpress.org/support/pl
 
 == Changelog ==
 
-= 1.5.1 - 03 July, 2020 =
+= 1.5.1 - 06 July, 2020 =
 New : Theme colors support in Global settings
 New : Row Container width settings in Global settings
 New : Row Container width filter hook to modify default values from theme  
