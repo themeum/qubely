@@ -151,9 +151,9 @@ class GlobalSettings extends Component {
                     breakingPoints: {
                         ...this.state.breakingPoints,
                         ...(typeof qubely_container_width !== undefined && qubely_container_width),
-                        ...(hasExistingValues & data.settings.breakingPoints)
+                        ...((hasExistingValues && typeof data.settings.breakingPoints !== 'undefined') & data.settings.breakingPoints)
                     },
-                    ...(hasExistingValues & data.settings.presets[data.settings.activePreset]),
+                    ...((hasExistingValues && typeof data.settings.presets !== 'undefined' && typeof data.settings.activePreset !== 'undefined') & data.settings.presets[data.settings.activePreset]),
 
                 }))
             } else {
@@ -793,7 +793,7 @@ class GlobalSettings extends Component {
                             value={breakingPoints.xl}
                             onChange={newValue => updateBreakingPoints('xl', newValue)}
                         />
-                        <div className="qubely-row-device" style={{margin: '0 -15px'}}>
+                        <div className="qubely-row-device" style={{ margin: '0 -15px' }}>
                             <Notice status="default" isDismissible={false}>
                                 <div className="qubely-device-description title">{__('Device definations in terms of ')}<strong>{__('min-width')}</strong></div>
                                 <div className="qubely-device-description">{__('Landscape Mobile : 576px')}</div>
