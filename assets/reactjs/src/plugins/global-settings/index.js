@@ -796,7 +796,6 @@ class GlobalSettings extends Component {
                         <div className="qubely-row-device" style={{margin: '0 -15px'}}>
                             <Notice status="default" isDismissible={false}>
                                 <div className="qubely-device-description title">{__('Device definations in terms of ')}<strong>{__('min-width')}</strong></div>
-                                <div className="qubely-device-description">{__('Mobile : 100%')}</div>
                                 <div className="qubely-device-description">{__('Landscape Mobile : 576px')}</div>
                                 <div className="qubely-device-description">  {__('Tablet : 768px')}</div>
                                 <div className="qubely-device-description">  {__('Desktop : 992px')}</div>
