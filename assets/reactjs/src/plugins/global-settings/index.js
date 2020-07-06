@@ -1,3 +1,4 @@
+/* eslint-disable react/react-in-jsx-scope */
 import './style.scss';
 import Color from './components';
 import classnames from 'classnames';
@@ -758,7 +759,7 @@ class GlobalSettings extends Component {
                     title={__('Global Settings')}
                 >
                     {renderPresets()}
-                    <PanelBody title={__('Row Container max-width')} initialOpen={false}>
+                    <PanelBody title={__('Global Container Width')} initialOpen={false}>
                         <RangeControl
                             min={200}
                             max={767}
@@ -792,9 +793,10 @@ class GlobalSettings extends Component {
                             value={breakingPoints.xl}
                             onChange={newValue => updateBreakingPoints('xl', newValue)}
                         />
-                        <div className="qubely-row-device">
-                            <Notice status="warning" isDismissible={false}>
+                        <div className="qubely-row-device" style={{margin: '0 -15px'}}>
+                            <Notice status="default" isDismissible={false}>
                                 <div className="qubely-device-description title">{__('Device definations in terms of ')}<strong>{__('min-width')}</strong></div>
+                                <div className="qubely-device-description">{__('Mobile : 100%')}</div>
                                 <div className="qubely-device-description">{__('Landscape Mobile : 576px')}</div>
                                 <div className="qubely-device-description">  {__('Tablet : 768px')}</div>
                                 <div className="qubely-device-description">  {__('Desktop : 992px')}</div>
