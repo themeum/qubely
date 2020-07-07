@@ -631,7 +631,7 @@ class PageListModal extends Component {
                             {(this.state.itemType == 'layout' && this.state.layer == 'single') &&
                                 <span className={"qubely-template-back"} onClick={() => this.setState({ layer: 'multiple', parent_id: '' })}><span className="dashicons dashicons-arrow-left-alt" />&nbsp;</span>
                             }
-                            {this._getDataLength('heading', currentPageData.length)}&nbsp;
+                            {this._getDataLength(itemType === 'layout' && selectedLayoutCategory === '' && layer!=='single'? 'category' : 'heading', currentPageData.length)}&nbsp;
                             {itemType == 'block' ? __('Sections') : this.state.layer == 'single' ? __('Layouts') : __('Starter Packs')}
                         </h4>
                         <div className="qubely-template-filter-button-group">
