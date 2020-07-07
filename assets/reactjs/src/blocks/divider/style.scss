@@ -1,4 +1,5 @@
 .qubely-block-divider {
+  display: inline-block;
   .qubely-block-divider-style-fill {
     border-top-style: solid;
   }
@@ -13,11 +14,14 @@
     display: inline-block;
   }
 }
-.qubely-divider-picker-options{
-  max-height: 300px
+.qubely-divider-picker-options {
+  max-height: 300px;
 }
 
-.qubely-divider-picker-option:hover{
+.qubely-divider-picker-option:hover {
   background: #e8eaeb;
   border-radius: 5px;
+}
+.qubely-divider-picker.backend {
+  display: inline-block;
 }

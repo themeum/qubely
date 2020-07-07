@@ -157,7 +157,7 @@ class Edit extends Component {
 
                 <div className={`qubely-block-${uniqueId}${className ? ` ${className}` : ''}`} onContextMenu={event => handleContextMenu(event, this.refs.qubelyContextMenu)}>
                     <Dropdown
-                        className={"qubely-divider-picker"}
+                        className={"qubely-divider-picker backend"}
                         contentClassName={"qubely-divider-picker-content"}
                         position="bottom center"
                         renderToggle={({ isOpen, onToggle }) =>

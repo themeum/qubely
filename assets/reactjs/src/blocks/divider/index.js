@@ -25,7 +25,7 @@ registerBlockType ( 'qubely/divider', {
 		color: { type: 'string', default: '#252525', style: [{ selector: '{{QUBELY}} .qubely-block-divider > div { border-top-color: {{color}}; } {{QUBELY}} .qubely-block-divider path { fill: {{color}}; } {{QUBELY}} .qubely-block-divider circle { stroke: {{color}}; }  {{QUBELY}} .qubely-block-divider ellipse { stroke: {{color}}; fill: {{color}}; }' }] },
 		height: { type: 'object', default: {md: '2', unit: 'px'}, style: [{ selector: '{{QUBELY}} .qubely-block-divider > div { border-top-width: {{height}};}' }] }, 
 		width: { type: 'object', default: {md: '280', unit: 'px'}, style: [{ selector: '{{QUBELY}} .qubely-block-divider > div { width: {{width}};} {{QUBELY}} .qubely-block-divider svg { width: {{width}};}' }] },
-		alignment: { type: 'object', default: {md: 'center'}, style: [{ selector: '{{QUBELY}} .qubely-block-divider {text-align: {{alignment}};}' }]},
+		alignment: { type: 'object', default: {md: 'center'}, style: [{ selector: '{{QUBELY}} {text-align: {{alignment}};}' }]},
         sourceOfCopiedStyle: { type: 'boolean', default: false }
     },
     edit: Edit,
