@@ -134,27 +134,26 @@
 .qubely-row .block-editor-block-list__layout .editor-block-list__block {
     max-width: none;
 }
-.wp-block[data-align="full"][data-type="qubely/row"] {
+.wp-block[data-align="full"][data-type="qubely/row"],
+.block-editor-block-list__block[data-type="qubely/row"] .wp-block[data-align="full"]{
     .qubely-row.qubely-backend-row {
-       > .block-editor-inner-blocks .block-editor-block-list__layout{
-            .wp-block[data-type="qubely/column"]:only-child{
+        > .block-editor-inner-blocks .block-editor-block-list__layout {
+            .wp-block[data-type="qubely/column"]:only-child {
                 max-width: none;
             }
         }
-
     }
 }
-.wp-block[data-type="qubely/row"] {
+div[data-type="qubely/row"] {
     .qubely-row.qubely-backend-row {
-       > .block-editor-inner-blocks .block-editor-block-list__layout{
-            .wp-block[data-type="qubely/column"]:last-child{
-                .components-resizable-box__container.qubely-column-resizer{
-                   .components-resizable-box__handle.components-resizable-box__side-handle.components-resizable-box__handle-right{
-                       visibility: hidden;
-                   }
+        > .block-editor-inner-blocks {
+            .wp-block[data-type="qubely/column"]:last-child {
+                .components-resizable-box__container.qubely-column-resizer {
+                    .components-resizable-box__handle.components-resizable-box__side-handle.components-resizable-box__handle-right {
+                        visibility: hidden;
+                    }
                 }
             }
         }
-
     }
 }
