@@ -756,7 +756,7 @@ class GlobalSettings extends Component {
                 <PluginSidebar
                     icon={icons.qubely}
                     name="global-settings-sidebar"
-                    title={__('Global Settings')}
+                    title={__('Qubely Global Settings')}
                 >
                     {renderPresets()}
                     <PanelBody title={__('Global Container Width')} initialOpen={false}>
@@ -810,7 +810,7 @@ class GlobalSettings extends Component {
                     icon={icons.qubely}
                     target="global-settings-sidebar"
                 >
-                    {__('Global Settings')}
+                    {__('Qubely Global Settings')}
                 </PluginSidebarMoreMenuItem>
             </Fragment>
         );
