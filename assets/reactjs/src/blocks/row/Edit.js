@@ -70,9 +70,29 @@ class Edit extends Component {
     }
 
     getClassName = () => {
-        const { attributes: { align, childRow, rowContainerWidth } } = this.props
-        const wrapperClassName = align ? ((align === 'full' && rowContainerWidth == 'boxed') ? 'qubely-container' : 'qubely-container-fluid') : (childRow ? 'qubely-container-fluid' : 'qubely-container')
-        return wrapperClassName
+        const {
+            attributes: {
+                align,
+                childRow,
+                rowContainerWidth
+            }
+        } = this.props;
+        let wrapperClassName = '';
+
+        if (typeof align !== 'undefined') {
+            if (align === 'full' && rowContainerWidth === 'boxed') {
+                wrapperClassName = 'qubely-container';
+            } else {
+                wrapperClassName = 'qubely-container-fluid';
+            }
+        } else {
+            if (childRow) {
+                wrapperClassName = 'qubely-container-fluid';
+            } else {
+                wrapperClassName = 'qubely-container';
+            }
+        }
+        return wrapperClassName;
     }
 
     render() {
@@ -182,22 +202,22 @@ class Edit extends Component {
                                 }
 
                                 {(align == 'full' && !hideRowSettings) &&
-                                <Fragment>
-                                    <RadioAdvanced label={__('Container')} value={rowContainerWidth} onChange={val => setAttributes({ rowContainerWidth: val })}
-                                                   options={[
-                                                       { label: __('Full Width'), value: 'fluid', title: __('Full Width') },
-                                                       { label: __('Boxed'), value: 'boxed', title: __('Boxed') }
-                                                   ]}
-                                    />
-                                    {rowContainerWidth == 'boxed' &&
-                                    <Range
-                                        label={__('Container Width')}
-                                        min={0} max={1920}
-                                        value={rowContainer}
-                                        onChange={val => setAttributes({ rowContainer: parseInt(val) })}
-                                    />
-                                    }
-                                </Fragment>
+                                    <Fragment>
+                                        <RadioAdvanced label={__('Container')} value={rowContainerWidth} onChange={val => setAttributes({ rowContainerWidth: val })}
+                                            options={[
+                                                { label: __('Full Width'), value: 'fluid', title: __('Full Width') },
+                                                { label: __('Boxed'), value: 'boxed', title: __('Boxed') }
+                                            ]}
+                                        />
+                                        {rowContainerWidth == 'boxed' &&
+                                            <Range
+                                                label={__('Container Width')}
+                                                min={0} max={1920}
+                                                value={rowContainer}
+                                                onChange={val => setAttributes({ rowContainer: parseInt(val) })}
+                                            />
+                                        }
+                                    </Fragment>
                                 }
 
                                 {columns > 1 &&
