@@ -118,7 +118,7 @@ export const cssTypography = (v) => {
             simple += `font-style:normal;`;
         }
     }
-    
+
     if (transform) {
         simple += `text-transform:${transform};`;
     }
@@ -175,6 +175,13 @@ export const cssShape = (v) => {
     if (v.color) {
         shape.push(' svg path{fill:' + v.color + ';}');
         shape.push(' svg polygon{fill:' + v.color + ';}')
+    }
+    if (v.flipShapeDivider) {
+        if (v.shapeType === 'top') {
+            shape.push(' svg { transform: rotateY(180deg) translateX(50%);}');
+        } else {
+            shape.push(' svg { transform: rotate(180deg) translate(50%);}');
+        }
     }
     if (v.front) { shape.push('{z-index: 99;}') }
     if (v.width) { data = _push(_device(v.width, ' svg {width:{{key}};}'), data) }

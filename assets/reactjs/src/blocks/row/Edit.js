@@ -122,8 +122,7 @@ class Edit extends Component {
                 rowHeight,
                 border,
                 borderRadius,
-                enableRowOverlay
-                ,
+                enableRowOverlay,
                 //animation
                 animation,
                 //global
@@ -315,10 +314,10 @@ class Edit extends Component {
                             <PanelBody initialOpen={false} title={__('Shape Divider')}>
                                 <Tabs>
                                     <Tab tabTitle={__('Top Shape')}>
-                                        <Shape value={shapeTop} responsive onChange={val => setAttributes({ shapeTop: val })} />
+                                        <Shape shapeType="top" value={shapeTop} responsive onChange={val => setAttributes({ shapeTop: val })} />
                                     </Tab>
                                     <Tab tabTitle={__('Bottom Shape')}>
-                                        <Shape value={shapeBottom} onChange={val => setAttributes({ shapeBottom: val })} />
+                                        <Shape shapeType="bottom" value={shapeBottom} onChange={val => setAttributes({ shapeBottom: val })} />
                                     </Tab>
                                 </Tabs>
                             </PanelBody>
