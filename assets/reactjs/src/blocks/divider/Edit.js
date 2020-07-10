@@ -1,7 +1,7 @@
 const { __ } = wp.i18n;
 const { InspectorControls, BlockControls } = wp.blockEditor
 const { Component, Fragment } = wp.element;
-const { PanelBody, Toolbar, Dropdown } = wp.components;
+const { PanelBody, Toolbar, Tooltip, Dropdown } = wp.components;
 const {
     Alignment,
     Range,
@@ -94,7 +94,13 @@ class Edit extends Component {
                                     contentClassName={"qubely-divider-picker-content"}
                                     position="bottom center"
                                     renderToggle={({ isOpen, onToggle }) =>
-                                        <span onClick={onToggle} aria-expanded={isOpen}> {icons[style]}</span>
+                                        <div className="shape-divider-options">
+                                            <button onClick={onToggle} aria-expanded={isOpen}>
+                                                <Tooltip text={isOpen ? __('Close options') : __('Find more options')}>
+                                                    {icons[style]}
+                                                </Tooltip>
+                                            </button>
+                                        </div>
                                     }
                                     renderContent={() => this.renderDividerOptions()}
                                 />
@@ -165,13 +171,16 @@ class Edit extends Component {
                                 {((style == 'fill') || (style == 'dot') || (style == 'dash')) ?
                                     <div className={`qubely-block-divider-style-${style}`} />
                                     :
-                                    <span>{icons[style]}</span>
+                                    icons[style]
                                 }
                             </div>
                         }
                         renderContent={() => this.renderDividerOptions()}
                     />
-                    <div ref="qubelyContextMenu" className={`qubely-context-menu-wraper`} >
+                    <div
+                        ref="qubelyContextMenu"
+                        className={`qubely-context-menu-wraper`}
+                    >
                         <ContextMenu
                             name={name}
                             clientId={clientId}

@@ -1,5 +1,5 @@
-const { Component } = wp.element;
 import icons from '../divider/icon';
+const { Component } = wp.element;
 const { HelperFunction: { animationAttr, IsInteraction } } = wp.qubelyComponents
 
 class Save extends Component {

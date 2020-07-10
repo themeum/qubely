@@ -55,7 +55,7 @@ class Shape extends Component {
                             contentClassName="qubely-shape-picker-content"
                             position="bottom center"
                             renderToggle={({ isOpen, onToggle }) =>
-                                <div className="shape-divider-options">
+                            <div className="shape-divider-options">
                                     <button isPrimary onClick={onToggle} aria-expanded={isOpen} >
                                         {
                                             value.style ?
