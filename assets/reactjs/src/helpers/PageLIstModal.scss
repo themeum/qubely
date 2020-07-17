@@ -49,6 +49,7 @@
   top: 0;
   left: 0;
   width: 100%;
+  border-radius: 6px 6px 0 0;
   display: flex;
   z-index: 99999;
   .template-search-box {
@@ -73,7 +74,7 @@
       padding: 0 20px 0 75px;
       margin: 0;
       font-weight: 300;
-      border-radius: 0 !important;
+      border-radius: 6px 0 0 0 !important;
       @include placeholder-color(#507A9B);
       &:focus{
           box-shadow: none;
@@ -89,11 +90,13 @@
   display: flex;
   width: 1500px;
   height: 80%;
+  border-radius: 6px;
   background: #EBEEF4;
   max-width: 85%;
   .qubely-layout-modal-sidebar {
     min-width: 270px;
     background: #0E2244;
+    border-radius: 0 0 0 6px;
     color: #587E97;
     overflow-y: auto;
     .qubely-modal-sidebar-content{
@@ -141,6 +144,7 @@
 .qubely-template-list-header{
   text-align: center;
   background-color: #fff;
+  border-radius: 6px 6px 0 0;
   position: relative;
   flex-grow: 1;
   padding-right: 50px;
@@ -149,28 +153,38 @@
     line-height: 25px;
     padding: 30px 40px;
     border: none;
+    background: transparent;
     cursor: pointer;
     font-size: 16px;
     margin: 0 1px 0 0;
+    transition: color 300ms, background-color 300ms;
+    &:hover {
+      color: #2184F9;
+    }
     &.active{
       background-color: #EBEEF4;
       color: #2184F9;
     }
     &:focus{
-      outline: 1px dotted;
+      outline: none;
     }
   }
   .qubely-builder-close-modal{
     position: absolute;
     font-size: 20px;
     color: #9B9B9B;
+    background-color: transparent;
     border: none;
     right: 30px;
     top: 50%;
     cursor: pointer;
     transform: translateY(-50%);
+    transition: color 300ms;
+    &:hover {
+      color: #2184F9;
+    }
     &:focus{
-      outline: 1px dotted;
+      outline: none;
     }
   }
 }

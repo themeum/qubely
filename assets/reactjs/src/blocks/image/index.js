@@ -218,15 +218,19 @@ const attributes = {
                 unit: 'px'
             }
         },
-        style: [{
-            selector: '{{QUBELY}} .qubely-image-title'
-        }]
+        style: [
+            {
+                condition: [
+                    { key: 'layout', relation: '==', value: 'blurb' },
+                ],
+                selector: '{{QUBELY}} .qubely-image-container .qubely-image-content .qubely-image-content-inner .qubely-image-title'
+            }]
     },
     titleColor: {
         type: 'string',
         default: '#FFF',
         style: [{
-            selector: '{{QUBELY}} .qubely-image-title {color: {{titleColor}};}'
+            selector: '{{QUBELY}} .qubely-image-container .qubely-image-content .qubely-image-content-inner .qubely-image-title {color: {{titleColor}};}'
         }]
     },
 
@@ -258,7 +262,7 @@ const attributes = {
                 { key: 'layout', relation: '==', value: 'blurb' },
                 { key: 'enableSubTitle', relation: '==', value: 1 }
             ],
-            selector: '{{QUBELY}} .qubely-image-sub-title'
+            selector: '{{QUBELY}} .qubely-image-container .qubely-image-content .qubely-image-content-inner .qubely-image-sub-title'
         }]
     },
     subTitleColor: {
@@ -269,7 +273,7 @@ const attributes = {
                 { key: 'layout', relation: '==', value: 'blurb' },
                 { key: 'enableSubTitle', relation: '==', value: 1 }
             ],
-            selector: '{{QUBELY}} .qubely-image-sub-title {color: {{subTitleColor}};}'
+            selector: '{{QUBELY}} .qubely-image-container .qubely-image-content .qubely-image-content-inner .qubely-image-sub-title {color: {{subTitleColor}};}'
         }]
     },
     subTitleSpacing: {

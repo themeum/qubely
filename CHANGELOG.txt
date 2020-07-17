@@ -1,4 +1,11 @@
-<h3>1.5.1 - 03 July, 2020</h3>
+
+<h3>1.5.2 - 18 July, 2020</h3>
+<ul>
+    <li>New: Row block - Shape divider flip option  </li>>
+    <li>Fix: Divider block - Divider options in Panel  </li>>
+</ul>
+
+<h3>1.5.1 - 08 July, 2020</h3>
 <ul>
     <li>New: Theme colors support in Global settings</li>
     <li>New: Row Container width settings in Global settings</li>
@@ -8,13 +15,6 @@
     <li>Update: Post Grid pagination default margin added</li>
     <li>Fix: Post Grid pagination backend spacing issue</li>
     <li>Fix: Accordion Block gradient issue</li>
-</ul>
-<h3>1.5.0 - 16 June, 2020</h3>
-<ul>
-    <li>Fix: Image Block whitespace issue</li>
-    <li>Fix: Inspector Tabs Error</li>
-    <li>Fix: External ajax request issue</li>
-    <li>Fix: Minor CSS issues</li>
 </ul>
 
 

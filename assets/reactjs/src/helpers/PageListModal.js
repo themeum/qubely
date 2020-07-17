@@ -561,7 +561,13 @@ class PageListModal extends Component {
     render() {
         let { pageCategories, currentPageData } = this.getCurrentPageData();
         let types = qubely_admin.pro_enable ? 'active' : 'inactive';
-        let { itemType, blockData, layer, selectedBlockCategory, selectedLayoutCategory } = this.state
+        let {
+            itemType,
+            blockData,
+            layer,
+            selectedBlockCategory,
+            selectedLayoutCategory
+        } = this.state;
 
         return (
             <Modal className="qubely-builder-modal-pages-list" customClass="qubely-builder-modal-template-list" onRequestClose={this.props.onRequestClose} openTimeoutMS={0} closeTimeoutMS={0}>
@@ -586,10 +592,11 @@ class PageListModal extends Component {
 
                     <div className="qubely-modal-sidebar-content">
                         {
-                            !(itemType == 'layout' && layer == 'single') && !(itemType == 'saved_blocks') && <h3>Categories</h3>
+                            (!(itemType == 'layout' && layer == 'single') && !(itemType == 'saved_blocks') ||
+                                (this.state.parent_id && layer === 'single')) && <h3>Categories</h3>
                         }
                         {
-                            (!this.state.parent_id) && this.state.layer != 'block' &&
+                            ((!this.state.parent_id && layer != 'block') || (this.state.parent_id && layer === 'single')) &&
                             <ul className="qubely-template-categories">
                                 <li
                                     className={itemType == 'block' ? '' == selectedBlockCategory ? 'active' : '' : '' == selectedLayoutCategory ? 'active' : ''}
@@ -624,7 +631,7 @@ class PageListModal extends Component {
                             {(this.state.itemType == 'layout' && this.state.layer == 'single') &&
                                 <span className={"qubely-template-back"} onClick={() => this.setState({ layer: 'multiple', parent_id: '' })}><span className="dashicons dashicons-arrow-left-alt" />&nbsp;</span>
                             }
-                            {this._getDataLength('heading', currentPageData.length)}&nbsp;
+                            {this._getDataLength(itemType === 'layout' && selectedLayoutCategory === '' && layer!=='single'? 'category' : 'heading', currentPageData.length)}&nbsp;
                             {itemType == 'block' ? __('Sections') : this.state.layer == 'single' ? __('Layouts') : __('Starter Packs')}
                         </h4>
                         <div className="qubely-template-filter-button-group">

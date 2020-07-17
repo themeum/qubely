@@ -112,7 +112,8 @@ import PageListModal from './helpers/PageListModal';
 document.addEventListener("DOMContentLoaded", appendImportButton);
 
 function appendImportButton() {
-    let node = document.querySelector('.edit-post-header-toolbar');
+    // let node = document.querySelector('.edit-post-header-toolbar');
+    let node = document.querySelector('.edit-post-header__toolbar');
     let newElem = document.createElement('div');
     let html = '<div class="qubely-import-layout-btn-container">';
     html += `<button id="qubelyImportLayoutBtn" title=${__("Qubely")}><img src=${qubely_admin.plugin}assets/img/qubely-logo-white.svg alt=${__("Qubely")} /> ${__("Import Layout")}</button>`;
