@@ -553,7 +553,7 @@
   .qubely-import-settings {
     .label {
       font-size: 14px;
-      padding: 0px 10px 10px;
+      padding: 0px 10px 10px 0px;
     }
     .action-buttons {
       display: flex;
@@ -570,6 +570,11 @@
           color: #fff;
           background-color: #2184f9;
         }
+      }
+    }
+    .remember-choice-box{
+      .label{
+        display: inline-block;
       }
     }
   }

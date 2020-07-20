@@ -35,7 +35,8 @@ class PageListModal extends Component {
             spinner: false,
             lazyloadThrottleTimeout: 0,
             priceFilter: '',
-            isOpen: false
+            isOpen: false,
+            rememberChoice: false
         };
         this._lazyload = this._lazyload.bind(this);
     }
@@ -588,6 +589,7 @@ class PageListModal extends Component {
             itemType,
             blockData,
             layer,
+            rememberChoice,
             selectedBlockCategory,
             selectedLayoutCategory
         } = this.state;
@@ -783,8 +785,20 @@ class PageListModal extends Component {
                                 <div className="label">Import layouts/sections with Global settings ? </div>
                                 <div className="action-buttons">
                                     <div className="action-button no" onClick={() => { this.props.insertBlocks(JSON.parse(localStorage.getItem('changed'))); ModalManager.close(); }}>No</div>
-                                    <div className="action-button yes"  onClick={() => { this.props.insertBlocks(JSON.parse(localStorage.getItem('original'))); ModalManager.close(); }}>Yes</div>
+                                    <div className="action-button yes" onClick={() => { this.props.insertBlocks(JSON.parse(localStorage.getItem('original'))); ModalManager.close(); }}>Yes</div>
                                 </div>
+                                {
+                                    qubely_admin.import_with_global_settings === "" &&
+                                    <div className="remember-choice-box">
+                                        <input
+                                            name="isGoing"
+                                            type="checkbox"
+                                            checked={rememberChoice}
+                                            onChange={() => this.setState(state => { return { rememberChoice: !state.rememberChoice } })}
+                                        />
+                                        <div className="label">Remember my decision</div>
+                                    </div>
+                                }
                             </div>
                         </Modal>
                     )
