@@ -54,7 +54,7 @@ const Sections = (props) => {
     // fetch sections
     const _fetchSections = (today) => {
         setLoadingState('qubely-is-loading');
-        fetch('https://qubely.io/wp-json/restapi/v2/sections', {
+        fetch('https://dev-qubely-core.pantheonsite.io/wp-json/restapi/v2/sections', {
             method: 'POST',
             body: block ? new URLSearchParams('block_name='+block) : ''
         })
@@ -73,7 +73,7 @@ const Sections = (props) => {
 
     // fetch section
     const _fetchSection = (section_id, callback) => {
-        fetch('https://qubely.io/wp-json/restapi/v2/single-section', {
+        fetch('https://dev-qubely-core.pantheonsite.io/wp-json/restapi/v2/single-section', {
             method: 'POST',
             body: new URLSearchParams('section_id='+ section_id)
         })

@@ -6,7 +6,7 @@ if (!defined('ABSPATH')) {
 class QUBELY
 {
 
-	protected $api_base_url = 'https://qubely.io/wp-json/restapi/v2/';
+	protected $api_base_url = 'https://dev-qubely-core.pantheonsite.io/wp-json/restapi/v2/';
 	protected $qubely_api_request_body;
 	protected $qubely_api_request_body_default;
 
@@ -137,7 +137,7 @@ class QUBELY
 		$qubely_gmap_api_key = isset($options['qubely_gmap_api_key']) ? $options['qubely_gmap_api_key'] : '';
 		$qubely_recaptcha_site_key = isset($options['qubely_recaptcha_site_key']) ? $options['qubely_recaptcha_site_key'] : '';
 		$qubely_recaptcha_secret_key = isset($options['qubely_recaptcha_secret_key']) ? $options['qubely_recaptcha_secret_key'] : '';
-
+		$enable_global_settings=isset($options['import_with_global_settings']) ? $options['import_with_global_settings'] : false;
 		wp_localize_script('qubely-blocks-js', 'qubely_admin', array(
 			'plugin' => QUBELY_DIR_URL,
 			'ajax' => admin_url('admin-ajax.php'),
@@ -152,6 +152,7 @@ class QUBELY
 			'qubely_recaptcha_secret_key' => $qubely_recaptcha_secret_key,
 			'site_url' => site_url(),
 			'admin_url' => admin_url(),
+			'import_with_global_settings' => $enable_global_settings,
 			'publishedPosts'=>wp_count_posts()->publish,
 		));
 	}
