@@ -32,7 +32,6 @@ class Settings
      * @since 1.5.2
      */
     public function ajax_update_qubely_options() {
-        print_r($_POST);
         $new_options = isset($_POST['options']) && is_array($_POST['options']) ? $_POST['options'] : false;
         if ( !isset($_POST['_wpnonce']) || !wp_verify_nonce($_POST['_wpnonce'], 'qubely_nonce') || !$new_options) {
             wp_send_json_error('No data or nonce failed');
@@ -167,13 +166,26 @@ class Settings
                         'suffix' => '',
                         'size' => 'regular',
                     ),
+                    // 'import_with_global_settings' => array(
+                    //     'type' => 'checkbox',
+                    //     'label' => __('Use global settings with Import layouts/sections', 'qubely'),
+                    //     'default' => 'true',
+                    //     'desc' => __('Apply global settings while importing layouts/sections', 'qubely'),
+                    //     'suffix' => ''
+                    // ),
                     'import_with_global_settings' => array(
-                        'type' => 'checkbox',
-                        'label' => __('Use global settings with Import layouts/sections', 'qubely'),
-                        'default' => 'true',
+                        'type' => 'select',
+                        'label' => __('Use global settings with Import layouts/section', 'qubely'),
+                        'default' => 'manual',
                         'desc' => __('Apply global settings while importing layouts/sections', 'qubely'),
-                        'suffix' => ''
-                    )
+                        'options' => array(
+                            'manually'   => __('Manually', 'qubely'),
+                            'always' => __('Always', 'qubely'),
+                            'never' => __('Never', 'qubely'),
+                        ),
+                        'suffix' => '',
+                        'size' => 'regular',
+                    ),
                 )
             )
         );

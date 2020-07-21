@@ -265,13 +265,17 @@ class PageListModal extends Component {
                         })
                     }
 
-                    this.setState({ isOpen: true })
-                    // insertBlocks(temp);
-                    localStorage.setItem('changed', temp);
-
-                    // insertBlocks(pageData);
-                    localStorage.setItem('original', JSON.stringify(pageData));
-
+                    if (qubely_admin.import_with_global_settings === 'always') {
+                        this.props.insertBlocks(pageData)
+                        ModalManager.close();
+                    } else if (qubely_admin.import_with_global_settings === 'never') {
+                        this.props.insertBlocks(JSON.parse(temp))
+                        ModalManager.close();
+                    } else {
+                        localStorage.setItem('changed', temp);
+                        localStorage.setItem('original', JSON.stringify(pageData));
+                        this.setState({ isOpen: true })
+                    }
 
                     if (rowClientId) {
                         removeBlock(rowClientId);// remove row block
@@ -589,13 +593,39 @@ class PageListModal extends Component {
             itemType,
             blockData,
             layer,
+            isOpen,
             rememberChoice,
             selectedBlockCategory,
             selectedLayoutCategory
         } = this.state;
-        const openModal = () => this.setState({ isOpen: true });
+
         const closeModal = () => this.setState({ isOpen: false });
 
+        const importBlocks = (actionType) => {
+            let type = 'changed';
+            if (actionType === 'yes') {
+                type = 'original';
+            }
+            this.props.insertBlocks(JSON.parse(localStorage.getItem(type)));
+            ModalManager.close();
+            if (qubely_admin.import_with_global_settings === 'manually' && rememberChoice) {
+                $.post({
+                    url: qubely_urls.ajax,
+                    data: {
+                        action: 'update_qubely_options',
+                        _wpnonce: qubely_urls.nonce,
+                        options: {
+                            'import_with_global_settings': actionType === 'yes' ? 'always' : 'never',
+                        }
+                    }
+                }).success(function (response) {
+                    qubely_admin['import_with_global_settings'] = actionType === 'yes' ? 'always' : 'never'
+                }).fail(function (error) {
+                    console.log("error : ", error);
+                });
+            }
+        }
+        console.log('qubely_admin : ', qubely_admin.import_with_global_settings);
         return (
             <Fragment>
                 <QubelyModal className="qubely-builder-modal-pages-list" customClass="qubely-builder-modal-template-list" onRequestClose={this.props.onRequestClose} openTimeoutMS={0} closeTimeoutMS={0}>
@@ -775,7 +805,7 @@ class PageListModal extends Component {
                     </div>
                 </QubelyModal>
                 {
-                    this.state.isOpen && (
+                    (isOpen && qubely_admin.import_with_global_settings === "manually") && (
                         <Modal
                             title={__('Import Type Settings')}
                             className="qubely-import-global"
@@ -784,21 +814,18 @@ class PageListModal extends Component {
                             <div className="qubely-import-settings">
                                 <div className="label">Import layouts/sections with Global settings ? </div>
                                 <div className="action-buttons">
-                                    <div className="action-button no" onClick={() => { this.props.insertBlocks(JSON.parse(localStorage.getItem('changed'))); ModalManager.close(); }}>No</div>
-                                    <div className="action-button yes" onClick={() => { this.props.insertBlocks(JSON.parse(localStorage.getItem('original'))); ModalManager.close(); }}>Yes</div>
+                                    <div className="action-button no" onClick={() => { importBlocks('no') }}>No</div>
+                                    <div className="action-button yes" onClick={() => { importBlocks('yes') }}>Yes</div>
                                 </div>
-                                {
-                                    qubely_admin.import_with_global_settings === "" &&
-                                    <div className="remember-choice-box">
-                                        <input
-                                            name="isGoing"
-                                            type="checkbox"
-                                            checked={rememberChoice}
-                                            onChange={() => this.setState(state => { return { rememberChoice: !state.rememberChoice } })}
-                                        />
-                                        <div className="label">Remember my decision</div>
-                                    </div>
-                                }
+                                <div className="remember-choice-box">
+                                    <input
+                                        name="isGoing"
+                                        type="checkbox"
+                                        checked={rememberChoice}
+                                        onChange={() => this.setState(state => { return { rememberChoice: !state.rememberChoice } })}
+                                    />
+                                    <div className="label">Remember my decision</div>
+                                </div>
                             </div>
                         </Modal>
                     )
