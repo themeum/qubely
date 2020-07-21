@@ -11,9 +11,36 @@ class Settings
 
     public function __construct()
     {
+        add_action('admin_init', array($this, 'init_settings'));
+        add_action('wp_ajax_update_qubely_options', array($this, 'ajax_update_qubely_options'));
+    }
+
+
+    /**
+     * Settings Init
+     * @since 1.5.2
+     */
+    public function init_settings() {
         require __DIR__ . '/Fields.php';
-        add_action('init', array($this, 'save_options'));
-        add_action('init', array($this, 'option_setter'));
+        $this->save_options();
+        $this->option_setter();
+    }
+
+
+    /**
+     * Update option using qubely
+     * @since 1.5.2
+     */
+    public function ajax_update_qubely_options() {
+        print_r($_POST);
+        $new_options = isset($_POST['options']) && is_array($_POST['options']) ? $_POST['options'] : false;
+        if ( !isset($_POST['_wpnonce']) || !wp_verify_nonce($_POST['_wpnonce'], 'qubely_nonce') || !$new_options) {
+            wp_send_json_error('No data or nonce failed');
+        };
+        $options = get_option('qubely_options');
+        $updated_options = wp_parse_args($new_options, $options);
+        update_option('qubely_options', $updated_options);
+        wp_send_json_success($updated_options);
     }
 
     /**
@@ -145,8 +172,7 @@ class Settings
                         'label' => __('Use global settings with Import layouts/sections', 'qubely'),
                         'default' => 'true',
                         'desc' => __('Apply global settings while importing layouts/sections', 'qubely'),
-                        'suffix' => '',
-                        'size' => 'regular',
+                        'suffix' => ''
                     )
                 )
             )

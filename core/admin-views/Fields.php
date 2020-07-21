@@ -104,7 +104,7 @@ class Fields{
                         <?php echo $info['value']==='true'?'checked':'' ?>
                         name="qubely_options[<?php echo esc_attr($info['key']) ?>]"
                         value="<?php echo esc_html($info['value']) ?>"
-                        type="<?php echo esc_attr($info['type'])?>"
+                        type="checkbox"
                     >
                 <?php self::description($info['desc']); ?>
             </td>

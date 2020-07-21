@@ -153,7 +153,7 @@ class QUBELY
 			'site_url' => site_url(),
 			'admin_url' => admin_url(),
 			'import_with_global_settings' => $enable_global_settings,
-			'publishedPosts'=>wp_count_posts()->publish,
+			'publishedPosts'=>wp_count_posts()->publish
 		));
 	}
 
@@ -199,7 +199,13 @@ class QUBELY
 	 */
 	public function qubely_admin_assets()
 	{
-
+		wp_register_script('qubely_local_script', '');
+		wp_localize_script('qubely_local_script', 'qubely_urls', array(
+			'plugin' => QUBELY_DIR_URL,
+			'ajax' => admin_url('admin-ajax.php'),
+			'nonce'=>wp_create_nonce('qubely_nonce')
+		));
+		wp_enqueue_script('qubely_local_script');
 
 		#START_REPLACE
 		wp_enqueue_style('qubley-animated-headline-style', QUBELY_DIR_URL . 'assets/css/qubely.animatedheadline.css', false, QUBELY_VERSION);
@@ -365,7 +371,8 @@ class QUBELY
 		wp_register_script('qubely_local_script', '');
 		wp_localize_script('qubely_local_script', 'qubely_urls', array(
 			'plugin' => QUBELY_DIR_URL,
-			'ajax' => admin_url('admin-ajax.php')
+			'ajax' => admin_url('admin-ajax.php'),
+			'nonce'=>wp_create_nonce('qubely_nonce')
 		));
 		wp_enqueue_script('qubely_local_script');
 
