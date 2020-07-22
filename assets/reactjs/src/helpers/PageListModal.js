@@ -239,13 +239,19 @@ class PageListModal extends Component {
 
         let { itemType } = this.state;
         const { insertBlocks, removeBlock, rowClientId } = this.props;
-
+        let globalSettings;
+        console.log('itemData : ', itemData);
+        let importWithGlobal = false;
+        if (typeof itemData.global_settings !== 'undefined' && itemData.global_settings) {
+            importWithGlobal = true;
+        }
         if (!qubely_admin.pro_enable && isPro == true) {
             //
         } else {
-            this.setState({ spinner: itemData.ID })
-            let globalSettings = JSON.parse(itemData.global_settings)
-            console.log('global_settings : ', globalSettings);
+            this.setState({ spinner: itemData.ID });
+            if (importWithGlobal) {
+                globalSettings = JSON.parse(itemData.global_settings)
+            }
 
             let requestFailedMsg = [];
             const options = {
@@ -256,25 +262,44 @@ class PageListModal extends Component {
             apiFetch(options).then(response => {
                 if (response.success) {
                     //import layout
+                    console.log('response : ', response.data.rawData);
                     let pageData = parse(response.data.rawData);
+                    console.log('pageData : ', pageData);
 
-                    let temp = JSON.stringify(pageData)
-                    if (typeof globalSettings.colors !== 'undefined' && globalSettings.colors.length > 0) {
-                        globalSettings.colors.forEach((color, index) => {
-                            temp = temp.replace(new RegExp(`var.--qubely-color-${index + 1}.`, "g"), color)
-                        })
-                    }
+                    if (importWithGlobal) {
+                        let temp = JSON.stringify(pageData);
+                        // console.log('globalSettings : ', globalSettings);
 
-                    if (qubely_admin.import_with_global_settings === 'always') {
-                        this.props.insertBlocks(pageData)
-                        ModalManager.close();
-                    } else if (qubely_admin.import_with_global_settings === 'never') {
-                        this.props.insertBlocks(JSON.parse(temp))
-                        ModalManager.close();
+                        // console.log('globalTypoValues : ', globalTypoValues);
+                        console.log('before temp : ', JSON.parse(temp)[0].attributes.typography);
+                        if (typeof globalSettings.colors !== 'undefined' && globalSettings.colors.length > 0) {
+                            globalSettings.colors.forEach((color, index) => {
+                                temp = temp.replace(new RegExp(`var.--qubely-color-${index + 1}.`, "g"), color)
+                            })
+                        }
+                        if (typeof globalSettings.typography !== 'undefined' && globalSettings.typography.length > 0) {
+                            let globalTypoValues = globalSettings.typography.map(typo => typo.value);
+                            globalSettings.typography.forEach((typo, index) => {
+                                let tempValue = JSON.stringify({ ...typo.value, activeSource: "custom" })
+                                console.log('hello');
+                                temp = temp.replace(new RegExp(`\"globalSource\":\"${index + 1}\"`, "g"), tempValue.slice(1, -1))
+                            })
+                        }
+                        console.log('afger temp : ', JSON.parse(temp)[0].attributes.typography);
+                        if (qubely_admin.import_with_global_settings === 'always') {
+                            this.props.insertBlocks(pageData)
+                            ModalManager.close();
+                        } else if (qubely_admin.import_with_global_settings === 'never') {
+                            this.props.insertBlocks(JSON.parse(temp))
+                            ModalManager.close();
+                        } else {
+                            localStorage.setItem('changed', temp);
+                            localStorage.setItem('original', JSON.stringify(pageData));
+                            this.setState({ isOpen: true });
+                        }
                     } else {
-                        localStorage.setItem('changed', temp);
-                        localStorage.setItem('original', JSON.stringify(pageData));
-                        this.setState({ isOpen: true })
+                        insertBlocks(pageData);
+                        ModalManager.close();
                     }
 
                     if (rowClientId) {
