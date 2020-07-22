@@ -100,6 +100,7 @@ class Edit extends Component {
             attributes: {
                 url,
                 iconName,
+                recreateStyles,
                 fillType,
                 uniqueId,
                 textField,
@@ -218,7 +219,7 @@ class Edit extends Component {
                                         { label: __('Fixed'), value: 'fixed', title: __('Fixed') }
                                     ]}
                                     value={buttonWidthType}
-                                    onChange={(value) => setAttributes({ buttonWidthType: value })} />
+                                    onChange={(value) => setAttributes({ buttonWidthType: value, recreateStyles: !recreateStyles })} />
                                 {buttonWidthType == 'fixed' &&
                                     <Range
                                         label={__('Fixed Width')}

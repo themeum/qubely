@@ -11,6 +11,10 @@ const attributes = {
         type: 'boolean',
         default: false
     },
+    recreateStyles: {
+        type: 'boolean',
+        default: true
+    },
     disableFullWidth: {
         type: 'boolean',
         default: false,

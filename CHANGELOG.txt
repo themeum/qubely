@@ -3,6 +3,7 @@
 <ul>
     <li>New: Row block - Shape divider flip option  </li>>
     <li>Fix: Divider block - Divider options in Panel  </li>>
+    <li>Fix: Button block - Button width in Backend   </li>>
 </ul>
 
 <h3>1.5.1 - 08 July, 2020</h3>
