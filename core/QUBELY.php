@@ -914,7 +914,7 @@ class QUBELY
 		if ($css_save_as == 'filesystem') {
 			add_action('wp_enqueue_scripts', array($this, 'enqueue_block_css_file'));
 		} else {
-			add_action('wp_head', array($this, 'add_block_inline_css'), 100);
+			add_action('enqueue_block_assets', array($this, 'add_block_inline_css'), 100);
 		}
 		// }
 	}
