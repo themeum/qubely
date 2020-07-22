@@ -59,7 +59,7 @@
 
 ### Connect
 -   [Qubely Website](https://qubely.io/)
--   [Documentation](https://www.themeum.com/docs/qubely-introduction/)
+-   [Documentation](https://docs.themeum.com/qubely/)
 -   [Download on WordPress.org](https://wordpress.org/plugins/qubely/)
 -   [Join our Facebook Community](https://facebook.com/groups/coblocks)
 
