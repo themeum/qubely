@@ -638,7 +638,6 @@ class PageListModal extends Component {
                         }
                     }
                 }).success(function (response) {
-                    console.log('test');
                     qubely_admin['import_with_global_settings'] = actionType === 'yes' ? 'always' : 'never'
                 }).fail(function (error) {
                     console.log("error : ", error);
