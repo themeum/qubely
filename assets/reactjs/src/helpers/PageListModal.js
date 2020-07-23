@@ -239,9 +239,8 @@ class PageListModal extends Component {
 
         let { itemType } = this.state;
         const { insertBlocks, removeBlock, rowClientId } = this.props;
-        let globalSettings;
-        console.log('itemData : ', itemData);
-        let importWithGlobal = false;
+        let globalSettings, importWithGlobal = false;
+
         if (typeof itemData.global_settings !== 'undefined' && itemData.global_settings) {
             importWithGlobal = true;
         }
@@ -262,30 +261,21 @@ class PageListModal extends Component {
             apiFetch(options).then(response => {
                 if (response.success) {
                     //import layout
-                    console.log('response : ', response.data.rawData);
                     let pageData = parse(response.data.rawData);
-                    console.log('pageData : ', pageData);
 
                     if (importWithGlobal) {
                         let temp = JSON.stringify(pageData);
-                        // console.log('globalSettings : ', globalSettings);
-
-                        // console.log('globalTypoValues : ', globalTypoValues);
-                        console.log('before temp : ', JSON.parse(temp)[0].attributes.typography);
                         if (typeof globalSettings.colors !== 'undefined' && globalSettings.colors.length > 0) {
                             globalSettings.colors.forEach((color, index) => {
                                 temp = temp.replace(new RegExp(`var.--qubely-color-${index + 1}.`, "g"), color)
                             })
                         }
                         if (typeof globalSettings.typography !== 'undefined' && globalSettings.typography.length > 0) {
-                            let globalTypoValues = globalSettings.typography.map(typo => typo.value);
                             globalSettings.typography.forEach((typo, index) => {
                                 let tempValue = JSON.stringify({ ...typo.value, activeSource: "custom" })
-                                console.log('hello');
                                 temp = temp.replace(new RegExp(`\"globalSource\":\"${index + 1}\"`, "g"), tempValue.slice(1, -1))
                             })
                         }
-                        console.log('afger temp : ', JSON.parse(temp)[0].attributes.typography);
                         if (qubely_admin.import_with_global_settings === 'always') {
                             this.props.insertBlocks(pageData)
                             ModalManager.close();
@@ -305,7 +295,6 @@ class PageListModal extends Component {
                     if (rowClientId) {
                         removeBlock(rowClientId);// remove row block
                     }
-                    // ModalManager.close(); //close modal
                 }
             }).catch(error => {
                 requestFailedMsg.push(error.code + ' : ' + error.message);
@@ -650,7 +639,6 @@ class PageListModal extends Component {
                 });
             }
         }
-        console.log('qubely_admin : ', qubely_admin.import_with_global_settings);
         return (
             <Fragment>
                 <QubelyModal className="qubely-builder-modal-pages-list" customClass="qubely-builder-modal-template-list" onRequestClose={this.props.onRequestClose} openTimeoutMS={0} closeTimeoutMS={0}>
