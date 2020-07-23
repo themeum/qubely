@@ -3,6 +3,7 @@
 <ul>
     <li>New: Row block - Shape divider flip option  </li>>
     <li>Fix: Divider block - Divider options in Panel  </li>>
+    <li>Fix: Button block - Font size issue in Frontend  </li>>
     <li>Fix: Button block - Button width in Backend   </li>>
 </ul>
 

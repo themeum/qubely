@@ -240,6 +240,7 @@ You can report bugs on the [support forum here](https://wordpress.org/support/pl
 = 1.5.2 - 18 July, 2020 =
 New: Row block - Shape divider flip option  
 Fix: Divider block - Divider options in Panel  
+Fix: Button block - Font size issue in Frontend  
 Fix: Button block - Button width in Backend  
 
 
