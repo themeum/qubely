@@ -244,6 +244,7 @@ class PageListModal extends Component {
         if (typeof itemData.global_settings !== 'undefined' && itemData.global_settings) {
             importWithGlobal = true;
         }
+
         if (!qubely_admin.pro_enable && isPro == true) {
             //
         } else {
@@ -282,7 +283,9 @@ class PageListModal extends Component {
                         } else if (qubely_admin.import_with_global_settings === 'never') {
                             this.props.insertBlocks(JSON.parse(temp))
                             ModalManager.close();
-                        } else {
+                        } else if (qubely_admin.import_with_global_settings === 'manually' ||
+                            !qubely_admin.import_with_global_settings ||
+                            typeof qubely_admin.import_with_global_settings === 'undefined') {
                             localStorage.setItem('changed', temp);
                             localStorage.setItem('original', JSON.stringify(pageData));
                             this.setState({ isOpen: true });
@@ -622,7 +625,9 @@ class PageListModal extends Component {
             }
             this.props.insertBlocks(JSON.parse(localStorage.getItem(type)));
             ModalManager.close();
-            if (qubely_admin.import_with_global_settings === 'manually' && rememberChoice) {
+            if ((qubely_admin.import_with_global_settings === "manually" ||
+                !qubely_admin.import_with_global_settings ||
+                typeof qubely_admin.import_with_global_settings === 'undefined') && rememberChoice) {
                 $.post({
                     url: qubely_urls.ajax,
                     data: {
@@ -633,6 +638,7 @@ class PageListModal extends Component {
                         }
                     }
                 }).success(function (response) {
+                    console.log('test');
                     qubely_admin['import_with_global_settings'] = actionType === 'yes' ? 'always' : 'never'
                 }).fail(function (error) {
                     console.log("error : ", error);
@@ -818,7 +824,9 @@ class PageListModal extends Component {
                     </div>
                 </QubelyModal>
                 {
-                    (isOpen && qubely_admin.import_with_global_settings === "manually") && (
+                    (isOpen && (qubely_admin.import_with_global_settings === "manually" ||
+                        !qubely_admin.import_with_global_settings ||
+                        typeof qubely_admin.import_with_global_settings === 'undefined')) && (
                         <Modal
                             title={__('Import Type Settings')}
                             className="qubely-import-global"
