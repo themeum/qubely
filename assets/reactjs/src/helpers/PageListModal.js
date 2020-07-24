@@ -833,18 +833,21 @@ class PageListModal extends Component {
                         >
                             <div className="qubely-import-settings">
                                 <div className="label">Import layouts/sections with Global settings ? </div>
-                                <div className="action-buttons">
-                                    <div className="action-button no" onClick={() => { importBlocks('no') }}>No</div>
-                                    <div className="action-button yes" onClick={() => { importBlocks('yes') }}>Yes</div>
-                                </div>
-                                <div className="remember-choice-box">
-                                    <input
-                                        name="isGoing"
-                                        type="checkbox"
-                                        checked={rememberChoice}
-                                        onChange={() => this.setState(state => { return { rememberChoice: !state.rememberChoice } })}
-                                    />
-                                    <div className="label">Remember my decision</div>
+                                <div class="qubely-import-settings-footer">
+                                    <div className="remember-choice-box">
+                                        <input
+                                            id="isGoing"
+                                            name="isGoing"
+                                            type="checkbox"
+                                            checked={rememberChoice}
+                                            onChange={() => this.setState(state => { return { rememberChoice: !state.rememberChoice } })}
+                                        />
+                                        <label for="isGoing" className="label">Don't ask me again</label>
+                                    </div>
+                                    <div className="action-buttons">
+                                        <div className="action-button no" onClick={() => { importBlocks('no') }}>No</div>
+                                        <div className="action-button yes" onClick={() => { importBlocks('yes') }}>Yes</div>
+                                    </div>
                                 </div>
                             </div>
                         </Modal>

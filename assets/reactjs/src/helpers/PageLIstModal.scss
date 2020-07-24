@@ -548,18 +548,20 @@
 
 .qubely-import-global {
   width: 500px;
-  height: 200px;
   border-radius: 4px;
+  .qubely-import-settings-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
   .qubely-import-settings {
     .label {
       font-size: 14px;
-      padding: 0px 10px 10px 0px;
+      margin-top: -5px;
     }
     .action-buttons {
       display: flex;
-      justify-content: flex-end;
-      align-items: center;
-      padding: 10px 20px;
       .action-button {
         cursor: pointer;
         padding: 6px 30px;
