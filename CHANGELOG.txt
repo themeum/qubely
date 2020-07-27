@@ -7,6 +7,7 @@
     <li>Fix: Divider block - Divider options in Panel</li>
     <li>Fix: Button block - Font size issue in Frontend</li>
     <li>Fix: Button block - Button width in Backend</li>
+    <li>Fix: Button block - Text editing issue in Safari browser</li>
     <li>Fix: Table of Contents block - CSS issue</li>
 </ul>
 

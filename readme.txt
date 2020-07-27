@@ -244,6 +244,7 @@ Update: Added 100+ Google fonts
 Fix: Divider block - Divider options in Panel  
 Fix: Button block - Font size issue in Frontend  
 Fix: Button block - Button width in Backend  
+Fix: Button block - Text editing issue in Safari browser   
 Fix: Table of Contents block - CSS issue  
 
 

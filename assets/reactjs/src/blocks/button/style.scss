@@ -1,5 +1,7 @@
-
-.qubely-block-btn-anchor{
+.qubely-block-btn-anchor {
+    display: inline-flex;
+    display: -webkit-inline-flex;
+    display: -ms-inline-flexbox;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -8,16 +10,17 @@
     line-height: 1.3;
     color: #212529;
     text-align: center;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
+    // -webkit-user-select: none;
+    // -moz-user-select: none;
+    // -ms-user-select: none;
+    // user-select: none;
     text-decoration: none !important;
     background-color: transparent;
     position: relative;
     z-index: 1;
     overflow: hidden;
-    transition: color 200ms ease-in-out, background-color 200ms ease-in-out, border-color 200ms ease-in-out, box-shadow 200ms ease-in-out;
+    transition: color 200ms ease-in-out, background-color 200ms ease-in-out, border-color 200ms ease-in-out,
+        box-shadow 200ms ease-in-out;
     &.is-small {
         padding: 5px 10px;
         font-size: 14px;
@@ -50,7 +53,7 @@
     }
 
     &:hover:before {
-       opacity: 1;
+        opacity: 1;
     }
 }
 .qubely-action-button-remove {
@@ -60,7 +63,7 @@
     height: 18px;
     line-height: 20px;
     text-align: center;
-    background: rgba(0, 0, 0, .8);
+    background: rgba(0, 0, 0, 0.8);
     color: #fff;
     position: absolute;
     top: -9px;
@@ -69,6 +72,6 @@
     z-index: 1;
     cursor: pointer;
 }
-.qubely-button-text{
+.qubely-button-text {
     white-space: nowrap !important;
 }
