@@ -22,7 +22,7 @@ class InlineSpacer extends Component {
 				className="qubely-toolber-field"
 				position="top right"
 				renderToggle={({ isOpen, onToggle }) => (
-					<Tooltip text={__('Speacer')}>
+					<Tooltip text={__('Spacer')}>
 						<button onClick={onToggle} aria-expanded={isOpen}>
 							<i className="fas fa-arrows-alt-v" />
 						</button>
