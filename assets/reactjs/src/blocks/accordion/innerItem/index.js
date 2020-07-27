@@ -24,6 +24,7 @@ export const accordionItemSettings = {
         defaultText: { type: 'string', default: '' },
         fillType: { type: 'string', default: 'fill' },
         openFirstItem: { type: 'boolean', default: true },
+        richSnippet: { type: 'boolean', default: false },
 
         // Panel
         panelColor: {
