@@ -117,6 +117,7 @@ class AccordionItemBlockEdit extends Component {
             bodyPaddingAlt,
             iconSpacing,
             openFirstItem,
+            richSnippet,
             panelBorder,
             panelBorderColorActive,
             panelBorderRadius,
@@ -143,6 +144,7 @@ class AccordionItemBlockEdit extends Component {
                                 />
                                 <Toggle label={__('Toggle')} value={itemToggle} onChange={val => this.updateRootBlock('itemToggle', val)} />
                                 <Toggle label={__('Open First Item')} value={openFirstItem} onChange={val => this.setGlobalSettings('openFirstItem', val)} />
+                                <Toggle label={__('Rich Snippet')} value={richSnippet} onChange={val => this.setGlobalSettings('richSnippet', val)} />
                             </PanelBody>
 
                             <PanelBody title={__('Panel')} initialOpen={false}>
