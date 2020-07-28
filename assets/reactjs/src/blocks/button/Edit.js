@@ -319,7 +319,7 @@ class Edit extends Component {
 
 
                 <div className={`qubely-block-${uniqueId}${className ? ` ${className}` : ''}`}>
-                    <div className="qubely-block-btn-wrapper">
+                <div className="qubely-block-btn-wrapper" onContextMenu={event => handleContextMenu(event, this.refs.qubelyContextMenu)}>
                         <div className={`qubely-block-btn`}>
                             <div className={`qubely-block-btn-anchor is-${buttonSize}`}>
                                 {(iconName.trim() != "") && (iconPosition == 'left') && (<i className={`qubely-btn-icon ${iconName}`} />)}
