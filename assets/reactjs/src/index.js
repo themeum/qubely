@@ -115,11 +115,13 @@ function appendImportButton() {
     // let node = document.querySelector('.edit-post-header-toolbar');
     let node = document.querySelector('.edit-post-header__toolbar');
     let newElem = document.createElement('div');
+    newElem.classList.add("qubely-import-wrapper");
     let html = '<div class="qubely-import-layout-btn-container">';
     html += `<button id="qubelyImportLayoutBtn" title=${__("Qubely")}><img src=${qubely_admin.plugin}assets/img/qubely-logo-white.svg alt=${__("Qubely")} /> ${__("Import Layout")}</button>`;
     html += '</div>';
     newElem.innerHTML = html;
-    node.appendChild(newElem);
+    // node.appendChild(newElem);
+    node.insertBefore(newElem, node.childNodes[0]);
     document.getElementById("qubelyImportLayoutBtn").addEventListener("click", qubelyImportLayout);
 }
 function qubelyImportLayout() {

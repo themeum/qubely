@@ -13,6 +13,22 @@
     margin: 0 auto;
     display: inline-block;
   }
+  .divider-options-trigger {
+    display: block;
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+    color: inherit;
+    background: none;
+    box-shadow: none;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font: inherit;
+    &:focus {
+      outline: none !important;
+    }
+  }
 }
 .qubely-divider-picker-options {
   max-height: 300px;
@@ -24,4 +40,13 @@
 }
 .qubely-divider-picker.backend {
   display: inline-block;
+}
+.components-panel__body {
+  .qubely-divider-picker {
+    width: 100%;
+    button {
+      cursor: pointer;
+      color: inherit;
+    }
+  }
 }

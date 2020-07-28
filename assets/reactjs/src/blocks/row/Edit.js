@@ -70,9 +70,29 @@ class Edit extends Component {
     }
 
     getClassName = () => {
-        const { attributes: { align, childRow, rowContainerWidth } } = this.props
-        const wrapperClassName = align ? ((align === 'full' && rowContainerWidth == 'boxed') ? 'qubely-container' : 'qubely-container-fluid') : (childRow ? 'qubely-container-fluid' : 'qubely-container')
-        return wrapperClassName
+        const {
+            attributes: {
+                align,
+                childRow,
+                rowContainerWidth
+            }
+        } = this.props;
+        let wrapperClassName = '';
+
+        if (typeof align !== 'undefined') {
+            if (align === 'full' && rowContainerWidth === 'boxed') {
+                wrapperClassName = 'qubely-container';
+            } else {
+                wrapperClassName = 'qubely-container-fluid';
+            }
+        } else {
+            if (childRow) {
+                wrapperClassName = 'qubely-container-fluid';
+            } else {
+                wrapperClassName = 'qubely-container';
+            }
+        }
+        return wrapperClassName;
     }
 
     render() {
@@ -102,8 +122,7 @@ class Edit extends Component {
                 rowHeight,
                 border,
                 borderRadius,
-                enableRowOverlay
-                ,
+                enableRowOverlay,
                 //animation
                 animation,
                 //global
@@ -182,22 +201,22 @@ class Edit extends Component {
                                 }
 
                                 {(align == 'full' && !hideRowSettings) &&
-                                <Fragment>
-                                    <RadioAdvanced label={__('Container')} value={rowContainerWidth} onChange={val => setAttributes({ rowContainerWidth: val })}
-                                                   options={[
-                                                       { label: __('Full Width'), value: 'fluid', title: __('Full Width') },
-                                                       { label: __('Boxed'), value: 'boxed', title: __('Boxed') }
-                                                   ]}
-                                    />
-                                    {rowContainerWidth == 'boxed' &&
-                                    <Range
-                                        label={__('Container Width')}
-                                        min={0} max={1920}
-                                        value={rowContainer}
-                                        onChange={val => setAttributes({ rowContainer: parseInt(val) })}
-                                    />
-                                    }
-                                </Fragment>
+                                    <Fragment>
+                                        <RadioAdvanced label={__('Container')} value={rowContainerWidth} onChange={val => setAttributes({ rowContainerWidth: val })}
+                                            options={[
+                                                { label: __('Full Width'), value: 'fluid', title: __('Full Width') },
+                                                { label: __('Boxed'), value: 'boxed', title: __('Boxed') }
+                                            ]}
+                                        />
+                                        {rowContainerWidth == 'boxed' &&
+                                            <Range
+                                                label={__('Container Width')}
+                                                min={0} max={1920}
+                                                value={rowContainer}
+                                                onChange={val => setAttributes({ rowContainer: parseInt(val) })}
+                                            />
+                                        }
+                                    </Fragment>
                                 }
 
                                 {columns > 1 &&
@@ -295,10 +314,10 @@ class Edit extends Component {
                             <PanelBody initialOpen={false} title={__('Shape Divider')}>
                                 <Tabs>
                                     <Tab tabTitle={__('Top Shape')}>
-                                        <Shape value={shapeTop} responsive onChange={val => setAttributes({ shapeTop: val })} />
+                                        <Shape shapeType="top" value={shapeTop} responsive onChange={val => setAttributes({ shapeTop: val })} />
                                     </Tab>
                                     <Tab tabTitle={__('Bottom Shape')}>
-                                        <Shape value={shapeBottom} onChange={val => setAttributes({ shapeBottom: val })} />
+                                        <Shape shapeType="bottom" value={shapeBottom} onChange={val => setAttributes({ shapeBottom: val })} />
                                     </Tab>
                                 </Tabs>
                             </PanelBody>

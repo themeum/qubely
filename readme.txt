@@ -4,7 +4,7 @@ Donate link: https://www.themeum.com
 Tags: blocks, gutenberg, gutenberg blocks, editor, block, page builder
 Requires at least: 5.0
 Tested up to: 5.4
-Stable tag: 1.5.1
+Stable tag: 1.5.2
 Requires PHP: 7.0
 License: GPL-2.0+
 License URI: http://www.gnu.org/licenses/gpl-2.0.txt
@@ -17,7 +17,7 @@ Gutenberg Blocks and readymade sections with rich customization options. Enhance
 
 Extend the default WordPress Gutenberg editor with many [custom blocks](https://qubely.io/blocks/?utm_source=wporg&utm_medium=link&utm_campaign=orglanding&utm_content=customblocks) that are missing in there. Take control of your website design and apply out of the box styling options offered in Qubely. Create web pages that are stunning as well as mobile optimized.
 
-[Qubely Blocks Pro](https://www.themeum.com/product/qubely/?utm_source=wporg&utm_medium=link&utm_campaign=orglanding&utm_content=qubelyblockspro) || [Live Demo](https://qubely.io/) || [Documentation](https://www.themeum.com/docs/qubely-introduction/?utm_source=wporg&utm_medium=link&utm_campaign=orglanding&utm_content=documentation)
+[Qubely Blocks Pro](https://www.themeum.com/product/qubely/?utm_source=wporg&utm_medium=link&utm_campaign=orglanding&utm_content=qubelyblockspro) || [Live Demo](https://qubely.io/) || [Documentation](https://docs.themeum.com/qubely/)
 
 [youtube https://www.youtube.com/watch?v=_aRAQkHZiUQ]
 
@@ -173,7 +173,7 @@ Create responsive designs with Qubely Gutenberg block plugin. Control the entire
 This Gutenberg page builder gives you full control over the typography. You can choose the font, apply font weight, font transform, set font size, line height, letter spacing in px, em, and percentage on the basis of the devices.
 
 > You may find the documentation here
-> [Documentation](https://www.themeum.com/docs/qubely-introduction/)
+> [Documentation](https://docs.themeum.com/qubely/)
 
 
 <strong>Want To Contribute To The Plugin?</strong>
@@ -236,6 +236,17 @@ You can report bugs on the [support forum here](https://wordpress.org/support/pl
 
 
 == Changelog ==
+
+= 1.5.2 - 28 July, 2020 =  
+New: Accordion block - Rich Snippet added  
+New: Row block - Shape divider flip option  
+Update: Added 100+ Google fonts  
+Fix: Divider block - Divider options in Panel  
+Fix: Button block - Font size issue in Frontend  
+Fix: Button block - Button width in Backend  
+Fix: Button block - Text editing issue in Safari browser   
+Fix: Table of Contents block - CSS issue  
+
 
 = 1.5.1 - 08 July, 2020 =
 New : Theme colors support in Global settings

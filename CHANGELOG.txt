@@ -1,3 +1,16 @@
+
+<h3>1.5.2 - 28 July, 2020</h3>
+<ul>
+    <li>New: Accordion block - Rich Snippet added</li>
+    <li>New: Row block - Shape divider flip option </li>
+    <li>Update: Added 100+ Google fonts</li>
+    <li>Fix: Divider block - Divider options in Panel</li>
+    <li>Fix: Button block - Font size issue in Frontend</li>
+    <li>Fix: Button block - Button width in Backend</li>
+    <li>Fix: Button block - Text editing issue in Safari browser</li>
+    <li>Fix: Table of Contents block - CSS issue</li>
+</ul>
+
 <h3>1.5.1 - 08 July, 2020</h3>
 <ul>
     <li>New: Theme colors support in Global settings</li>
@@ -8,13 +21,6 @@
     <li>Update: Post Grid pagination default margin added</li>
     <li>Fix: Post Grid pagination backend spacing issue</li>
     <li>Fix: Accordion Block gradient issue</li>
-</ul>
-<h3>1.5.0 - 16 June, 2020</h3>
-<ul>
-    <li>Fix: Image Block whitespace issue</li>
-    <li>Fix: Inspector Tabs Error</li>
-    <li>Fix: External ajax request issue</li>
-    <li>Fix: Minor CSS issues</li>
 </ul>
 
 

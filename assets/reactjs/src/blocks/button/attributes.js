@@ -11,6 +11,10 @@ const attributes = {
         type: 'boolean',
         default: false
     },
+    recreateStyles: {
+        type: 'boolean',
+        default: true
+    },
     disableFullWidth: {
         type: 'boolean',
         default: false,
@@ -108,7 +112,10 @@ const attributes = {
             }
         ]
     },
-    typography: { type: 'object', default: {}, style: [{ selector: '{{QUBELY}} .qubely-block-btn-anchor' }] },
+    typography: {
+         type: 'object',
+          default: {}, 
+          style: [{ selector: '{{QUBELY}} .qubely-block-btn-wrapper .qubely-block-btn .qubely-block-btn-anchor ' }] },
     buttonColor: {
         type: 'string', default: '#fff',
         style: [

@@ -100,6 +100,7 @@ class Edit extends Component {
             attributes: {
                 url,
                 iconName,
+                recreateStyles,
                 fillType,
                 uniqueId,
                 textField,
@@ -218,7 +219,7 @@ class Edit extends Component {
                                         { label: __('Fixed'), value: 'fixed', title: __('Fixed') }
                                     ]}
                                     value={buttonWidthType}
-                                    onChange={(value) => setAttributes({ buttonWidthType: value })} />
+                                    onChange={(value) => setAttributes({ buttonWidthType: value, recreateStyles: !recreateStyles })} />
                                 {buttonWidthType == 'fixed' &&
                                     <Range
                                         label={__('Fixed Width')}
@@ -318,11 +319,12 @@ class Edit extends Component {
 
 
                 <div className={`qubely-block-${uniqueId}${className ? ` ${className}` : ''}`}>
-                    <div className="qubely-block-btn-wrapper" onContextMenu={event => handleContextMenu(event, this.refs.qubelyContextMenu)}>
+                <div className="qubely-block-btn-wrapper" onContextMenu={event => handleContextMenu(event, this.refs.qubelyContextMenu)}>
                         <div className={`qubely-block-btn`}>
-                            <span className={`qubely-block-btn-anchor is-${buttonSize}`}>
+                            <div className={`qubely-block-btn-anchor is-${buttonSize}`}>
                                 {(iconName.trim() != "") && (iconPosition == 'left') && (<i className={`qubely-btn-icon ${iconName}`} />)}
                                 <RichText
+                                    tagName='div'
                                     keepPlaceholderOnFocus
                                     className="qubely-button-text"
                                     placeholder={__('Add Text...')}
@@ -330,7 +332,7 @@ class Edit extends Component {
                                     value={textField}
                                 />
                                 {(iconName.trim() != "") && (iconPosition == 'right') && (<i className={`qubely-btn-icon ${iconName}`} />)}
-                            </span>
+                            </div>
                         </div>
 
                         <div ref="qubelyContextMenu" className={`qubely-context-menu-wraper`} >

@@ -128,7 +128,9 @@ const attributes = {
     shapeTop: {
         type: 'object',
         default: {
+            openShape: 0,
             color: '#006fbf',
+            shapeType: 'top',
             width: { unit: '%' },
             height: { unit: 'px' },
         },
@@ -137,7 +139,9 @@ const attributes = {
     shapeBottom: {
         type: 'object',
         default: {
+            openShape: 0,
             color: '#006fbf',
+            shapeType: 'bottom',
             width: { unit: '%' },
             height: { unit: 'px' }
         },

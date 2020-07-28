@@ -289,7 +289,7 @@ const attributes = {
 
     // Body
     bodyBg: {
-        type: 'string', default: '#FFFFFF',
+        type: 'string', default: '#F5F5F5',
         style: [
             {
                 condition: [

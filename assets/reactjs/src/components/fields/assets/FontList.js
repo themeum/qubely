@@ -1,899 +1,4997 @@
 export default [
-    { n: 'Default', f: 'default', v: [] },
-    {n:'Arial',f:'sans-serif',v:[100,200,300,400,500,600,700,800,900]},
-    {n:'Tahoma',f:'sans-serif',v:[100,200,300,400,500,600,700,800,900]},
-    {n:'Verdana',f:'sans-serif',v:[100,200,300,400,500,600,700,800,900]},
-    {n:'Helvetica',f:'sans-serif',v:[100,200,300,400,500,600,700,800,900]},
-    {n:'Times New Roman',f:'sans-serif',v:[100,200,300,400,500,600,700,800,900]},
-    {n:'Trebuchet MS',f:'sans-serif',v:[100,200,300,400,500,600,700,800,900]},
-    {n:'Georgia',f:'sans-serif',v:[100,200,300,400,500,600,700,800,900]},
-    
-    {n:'ABeeZee',f:'sans-serif',v:[400,'400i']},
-    {n:'Abel',f:'sans-serif',v:[400]},
-    {n:'Abhaya Libre',f:'serif',v:[400,500,600,700,800]},
-    {n:'Abril Fatface',f:'cursive',v:[400]},
-    {n:'Aclonica',f:'sans-serif',v:[400]},
-    {n:'Acme',f:'sans-serif',v:[400]},
-    {n:'Actor',f:'sans-serif',v:[400]},
-    {n:'Adamina',f:'serif',v:[400]},
-    {n:'Advent Pro',f:'sans-serif',v:[100,200,300,400,500,600,700]},
-    {n:'Aguafina Script',f:'cursive',v:[400]},
-    {n:'Akronim',f:'cursive',v:[400]},
-    {n:'Aladin',f:'cursive',v:[400]},
-    {n:'Aldrich',f:'sans-serif',v:[400]},
-    {n:'Alef',f:'sans-serif',v:[400,700]},
-    {n:'Alegreya',f:'serif',v:[400,'400i',500,'500i',700,'700i',800,'800i',900,'900i']},
-    {n:'Alegreya SC',f:'serif',v:[400,'400i',500,'500i',700,'700i',800,'800i',900,'900i']},
-    {n:'Alegreya Sans',f:'sans-serif',v:[100,'100i',300,'300i',400,'400i',500,'500i',700,'700i',800,'800i',900,'900i']},
-    {n:'Alegreya Sans SC',f:'sans-serif',v:[100,'100i',300,'300i',400,'400i',500,'500i',700,'700i',800,'800i',900,'900i']},
-    {n:'Alex Brush',f:'cursive',v:[400]},
-    {n:'Alfa Slab One',f:'cursive',v:[400]},
-    {n:'Alice',f:'serif',v:[400]},
-    {n:'Alike',f:'serif',v:[400]},
-    {n:'Alike Angular',f:'serif',v:[400]},
-    {n:'Allan',f:'cursive',v:[400,700]},
-    {n:'Allerta',f:'sans-serif',v:[400]},
-    {n:'Allerta Stencil',f:'sans-serif',v:[400]},
-    {n:'Allura',f:'cursive',v:[400]},
-    {n:'Almendra',f:'serif',v:[400,'400i',700,'700i']},
-    {n:'Almendra Display',f:'cursive',v:[400]},
-    {n:'Almendra SC',f:'serif',v:[400]},
-    {n:'Amarante',f:'cursive',v:[400]},
-    {n:'Amaranth',f:'sans-serif',v:[400,'400i',700,'700i']},
-    {n:'Amatic SC',f:'cursive',v:[400,700]},
-    {n:'Amethysta',f:'serif',v:[400]},
-    {n:'Amiko',f:'sans-serif',v:[400,600,700]},
-    {n:'Amiri',f:'serif',v:[400,'400i',700,'700i']},
-    {n:'Amita',f:'cursive',v:[400,700]},
-    {n:'Anaheim',f:'sans-serif',v:[400]},
-    {n:'Andada',f:'serif',v:[400]},
-    {n:'Andika',f:'sans-serif',v:[400]},
-    {n:'Angkor',f:'cursive',v:[400]},
-    {n:'Annie Use Your Telescope',f:'cursive',v:[400]},
-    {n:'Anonymous Pro',f:'monospace',v:[400,'400i',700,'700i']},
-    {n:'Antic',f:'sans-serif',v:[400]},
-    {n:'Antic Didone',f:'serif',v:[400]},
-    {n:'Antic Slab',f:'serif',v:[400]},
-    {n:'Anton',f:'sans-serif',v:[400]},
-    {n:'Arapey',f:'serif',v:[400,'400i']},
-    {n:'Arbutus',f:'cursive',v:[400]},
-    {n:'Arbutus Slab',f:'serif',v:[400]},
-    {n:'Architects Daughter',f:'cursive',v:[400]},
-    {n:'Archivo',f:'sans-serif',v:[400,'400i',500,'500i',600,'600i',700,'700i']},
-    {n:'Archivo Black',f:'sans-serif',v:[400]},
-    {n:'Archivo Narrow',f:'sans-serif',v:[400,'400i',500,'500i',600,'600i',700,'700i']},
-    {n:'Aref Ruqaa',f:'serif',v:[400,700]},
-    {n:'Arima Madurai',f:'cursive',v:[100,200,300,400,500,700,800,900]},
-    {n:'Arimo',f:'sans-serif',v:[400,'400i',700,'700i']},
-    {n:'Arizonia',f:'cursive',v:[400]},
-    {n:'Armata',f:'sans-serif',v:[400]},
-    {n:'Arsenal',f:'sans-serif',v:[400,'400i',700,'700i']},
-    {n:'Artifika',f:'serif',v:[400]},
-    {n:'Arvo',f:'serif',v:[400,'400i',700,'700i']},
-    {n:'Arya',f:'sans-serif',v:[400,700]},
-    {n:'Asap',f:'sans-serif',v:[400,'400i',500,'500i',600,'600i',700,'700i']},
-    {n:'Asap Condensed',f:'sans-serif',v:[400,'400i',500,'500i',600,'600i',700,'700i']},
-    {n:'Asar',f:'serif',v:[400]},
-    {n:'Asset',f:'cursive',v:[400]},
-    {n:'Assistant',f:'sans-serif',v:[200,300,400,600,700,800]},
-    {n:'Astloch',f:'cursive',v:[400,700]},
-    {n:'Asul',f:'sans-serif',v:[400,700]},
-    {n:'Athiti',f:'sans-serif',v:[200,300,400,500,600,700]},
-    {n:'Atma',f:'cursive',v:[300,400,500,600,700]},
-    {n:'Atomic Age',f:'cursive',v:[400]},
-    {n:'Aubrey',f:'cursive',v:[400]},
-    {n:'Audiowide',f:'cursive',v:[400]},
-    {n:'Autour One',f:'cursive',v:[400]},
-    {n:'Average',f:'serif',v:[400]},
-    {n:'Average Sans',f:'sans-serif',v:[400]},
-    {n:'Averia Gruesa Libre',f:'cursive',v:[400]},
-    {n:'Averia Libre',f:'cursive',v:[300,'300i',400,'400i',700,'700i']},
-    {n:'Averia Sans Libre',f:'cursive',v:[300,'300i',400,'400i',700,'700i']},
-    {n:'Averia Serif Libre',f:'cursive',v:[300,'300i',400,'400i',700,'700i']},
-    {n:'Bad Script',f:'cursive',v:[400]},
-    {n:'Bahiana',f:'cursive',v:[400]},
-    {n:'Baloo',f:'cursive',v:[400]},
-    {n:'Baloo Bhai',f:'cursive',v:[400]},
-    {n:'Baloo Bhaijaan',f:'cursive',v:[400]},
-    {n:'Baloo Bhaina',f:'cursive',v:[400]},
-    {n:'Baloo Chettan',f:'cursive',v:[400]},
-    {n:'Baloo Da',f:'cursive',v:[400]},
-    {n:'Baloo Paaji',f:'cursive',v:[400]},
-    {n:'Baloo Tamma',f:'cursive',v:[400]},
-    {n:'Baloo Tammudu',f:'cursive',v:[400]},
-    {n:'Baloo Thambi',f:'cursive',v:[400]},
-    {n:'Balthazar',f:'serif',v:[400]},
-    {n:'Bangers',f:'cursive',v:[400]},
-    {n:'Barlow',f:'sans-serif',v:[100,'100i',200,'200i',300,'300i',400,'400i',500,'500i',600,'600i',700,'700i',800,'800i',900,'900i']},
-    {n:'Barlow Condensed',f:'sans-serif',v:[100,'100i',200,'200i',300,'300i',400,'400i',500,'500i',600,'600i',700,'700i',800,'800i',900,'900i']},
-    {n:'Barlow Semi Condensed',f:'sans-serif',v:[100,'100i',200,'200i',300,'300i',400,'400i',500,'500i',600,'600i',700,'700i',800,'800i',900,'900i']},
-    {n:'Barrio',f:'cursive',v:[400]},
-    {n:'Basic',f:'sans-serif',v:[400]},
-    {n:'Battambang',f:'cursive',v:[400,700]},
-    {n:'Baumans',f:'cursive',v:[400]},
-    {n:'Bayon',f:'cursive',v:[400]},
-    {n:'Belgrano',f:'serif',v:[400]},
-    {n:'Bellefair',f:'serif',v:[400]},
-    {n:'Belleza',f:'sans-serif',v:[400]},
-    {n:'BenchNine',f:'sans-serif',v:[300,400,700]},
-    {n:'Bentham',f:'serif',v:[400]},
-    {n:'Berkshire Swash',f:'cursive',v:[400]},
-    {n:'Bevan',f:'cursive',v:[400]},
-    {n:'Bigelow Rules',f:'cursive',v:[400]},
-    {n:'Bigshot One',f:'cursive',v:[400]},
-    {n:'Bilbo',f:'cursive',v:[400]},
-    {n:'Bilbo Swash Caps',f:'cursive',v:[400]},
-    {n:'BioRhyme',f:'serif',v:[200,300,400,700,800]},
-    {n:'BioRhyme Expanded',f:'serif',v:[200,300,400,700,800]},
-    {n:'Biryani',f:'sans-serif',v:[200,300,400,600,700,800,900]},
-    {n:'Bitter',f:'serif',v:[400,'400i',700]},
-    {n:'Black And White Picture',f:'sans-serif',v:[400]},
-    {n:'Black Han Sans',f:'sans-serif',v:[400]},
-    {n:'Black Ops One',f:'cursive',v:[400]},
-    {n:'Bokor',f:'cursive',v:[400]},
-    {n:'Bonbon',f:'cursive',v:[400]},
-    {n:'Boogaloo',f:'cursive',v:[400]},
-    {n:'Bowlby One',f:'cursive',v:[400]},
-    {n:'Bowlby One SC',f:'cursive',v:[400]},
-    {n:'Brawler',f:'serif',v:[400]},
-    {n:'Bree Serif',f:'serif',v:[400]},
-    {n:'Bubblegum Sans',f:'cursive',v:[400]},
-    {n:'Bubbler One',f:'sans-serif',v:[400]},
-    {n:'Buda',f:'cursive',v:[300]},
-    {n:'Buenard',f:'serif',v:[400,700]},
-    {n:'Bungee',f:'cursive',v:[400]},
-    {n:'Bungee Hairline',f:'cursive',v:[400]},
-    {n:'Bungee Inline',f:'cursive',v:[400]},
-    {n:'Bungee Outline',f:'cursive',v:[400]},
-    {n:'Bungee Shade',f:'cursive',v:[400]},
-    {n:'Butcherman',f:'cursive',v:[400]},
-    {n:'Butterfly Kids',f:'cursive',v:[400]},
-    {n:'Cabin',f:'sans-serif',v:[400,'400i',500,'500i',600,'600i',700,'700i']},
-    {n:'Cabin Condensed',f:'sans-serif',v:[400,500,600,700]},
-    {n:'Cabin Sketch',f:'cursive',v:[400,700]},
-    {n:'Caesar Dressing',f:'cursive',v:[400]},
-    {n:'Cagliostro',f:'sans-serif',v:[400]},
-    {n:'Cairo',f:'sans-serif',v:[200,300,400,600,700,900]},
-    {n:'Calligraffitti',f:'cursive',v:[400]},
-    {n:'Cambay',f:'sans-serif',v:[400,'400i',700,'700i']},
-    {n:'Cambo',f:'serif',v:[400]},
-    {n:'Candal',f:'sans-serif',v:[400]},
-    {n:'Cantarell',f:'sans-serif',v:[400,'400i',700,'700i']},
-    {n:'Cantata One',f:'serif',v:[400]},
-    {n:'Cantora One',f:'sans-serif',v:[400]},
-    {n:'Capriola',f:'sans-serif',v:[400]},
-    {n:'Cardo',f:'serif',v:[400,'400i',700]},
-    {n:'Carme',f:'sans-serif',v:[400]},
-    {n:'Carrois Gothic',f:'sans-serif',v:[400]},
-    {n:'Carrois Gothic SC',f:'sans-serif',v:[400]},
-    {n:'Carter One',f:'cursive',v:[400]},
-    {n:'Catamaran',f:'sans-serif',v:[100,200,300,400,500,600,700,800,900]},
-    {n:'Caudex',f:'serif',v:[400,'400i',700,'700i']},
-    {n:'Caveat',f:'cursive',v:[400,700]},
-    {n:'Caveat Brush',f:'cursive',v:[400]},
-    {n:'Cedarville Cursive',f:'cursive',v:[400]},
-    {n:'Ceviche One',f:'cursive',v:[400]},
-    {n:'Changa',f:'sans-serif',v:[200,300,400,500,600,700,800]},
-    {n:'Changa One',f:'cursive',v:[400,'400i']},
-    {n:'Chango',f:'cursive',v:[400]},
-    {n:'Chathura',f:'sans-serif',v:[100,300,400,700,800]},
-    {n:'Chau Philomene One',f:'sans-serif',v:[400,'400i']},
-    {n:'Chela One',f:'cursive',v:[400]},
-    {n:'Chelsea Market',f:'cursive',v:[400]},
-    {n:'Chenla',f:'cursive',v:[400]},
-    {n:'Cherry Cream Soda',f:'cursive',v:[400]},
-    {n:'Cherry Swash',f:'cursive',v:[400,700]},
-    {n:'Chewy',f:'cursive',v:[400]},
-    {n:'Chicle',f:'cursive',v:[400]},
-    {n:'Chivo',f:'sans-serif',v:[300,'300i',400,'400i',700,'700i',900,'900i']},
-    {n:'Chonburi',f:'cursive',v:[400]},
-    {n:'Cinzel',f:'serif',v:[400,700,900]},
-    {n:'Cinzel Decorative',f:'cursive',v:[400,700,900]},
-    {n:'Clicker Script',f:'cursive',v:[400]},
-    {n:'Coda',f:'cursive',v:[400,800]},
-    {n:'Coda Caption',f:'sans-serif',v:[800]},
-    {n:'Codystar',f:'cursive',v:[300,400]},
-    {n:'Coiny',f:'cursive',v:[400]},
-    {n:'Combo',f:'cursive',v:[400]},
-    {n:'Comfortaa',f:'cursive',v:[300,400,700]},
-    {n:'Coming Soon',f:'cursive',v:[400]},
-    {n:'Concert One',f:'cursive',v:[400]},
-    {n:'Condiment',f:'cursive',v:[400]},
-    {n:'Content',f:'cursive',v:[400,700]},
-    {n:'Contrail One',f:'cursive',v:[400]},
-    {n:'Convergence',f:'sans-serif',v:[400]},
-    {n:'Cookie',f:'cursive',v:[400]},
-    {n:'Copse',f:'serif',v:[400]},
-    {n:'Corben',f:'cursive',v:[400,700]},
-    {n:'Cormorant',f:'serif',v:[300,'300i',400,'400i',500,'500i',600,'600i',700,'700i']},
-    {n:'Cormorant Garamond',f:'serif',v:[300,'300i',400,'400i',500,'500i',600,'600i',700,'700i']},
-    {n:'Cormorant Infant',f:'serif',v:[300,'300i',400,'400i',500,'500i',600,'600i',700,'700i']},
-    {n:'Cormorant SC',f:'serif',v:[300,400,500,600,700]},
-    {n:'Cormorant Unicase',f:'serif',v:[300,400,500,600,700]},
-    {n:'Cormorant Upright',f:'serif',v:[300,400,500,600,700]},
-    {n:'Courgette',f:'cursive',v:[400]},
-    {n:'Cousine',f:'monospace',v:[400,'400i',700,'700i']},
-    {n:'Coustard',f:'serif',v:[400,900]},
-    {n:'Covered By Your Grace',f:'cursive',v:[400]},
-    {n:'Crafty Girls',f:'cursive',v:[400]},
-    {n:'Creepster',f:'cursive',v:[400]},
-    {n:'Crete Round',f:'serif',v:[400,'400i']},
-    {n:'Crimson Text',f:'serif',v:[400,'400i',600,'600i',700,'700i']},
-    {n:'Croissant One',f:'cursive',v:[400]},
-    {n:'Crushed',f:'cursive',v:[400]},
-    {n:'Cuprum',f:'sans-serif',v:[400,'400i',700,'700i']},
-    {n:'Cute Font',f:'cursive',v:[400]},
-    {n:'Cutive',f:'serif',v:[400]},
-    {n:'Cutive Mono',f:'monospace',v:[400]},
-    {n:'Damion',f:'cursive',v:[400]},
-    {n:'Dancing Script',f:'cursive',v:[400,700]},
-    {n:'Dangrek',f:'cursive',v:[400]},
-    {n:'David Libre',f:'serif',v:[400,500,700]},
-    {n:'Dawning of a New Day',f:'cursive',v:[400]},
-    {n:'Days One',f:'sans-serif',v:[400]},
-    {n:'Dekko',f:'cursive',v:[400]},
-    {n:'Delius',f:'cursive',v:[400]},
-    {n:'Delius Swash Caps',f:'cursive',v:[400]},
-    {n:'Delius Unicase',f:'cursive',v:[400,700]},
-    {n:'Della Respira',f:'serif',v:[400]},
-    {n:'Denk One',f:'sans-serif',v:[400]},
-    {n:'Devonshire',f:'cursive',v:[400]},
-    {n:'Dhurjati',f:'sans-serif',v:[400]},
-    {n:'Didact Gothic',f:'sans-serif',v:[400]},
-    {n:'Diplomata',f:'cursive',v:[400]},
-    {n:'Diplomata SC',f:'cursive',v:[400]},
-    {n:'Do Hyeon',f:'sans-serif',v:[400]},
-    {n:'Dokdo',f:'cursive',v:[400]},
-    {n:'Domine',f:'serif',v:[400,700]},
-    {n:'Donegal One',f:'serif',v:[400]},
-    {n:'Doppio One',f:'sans-serif',v:[400]},
-    {n:'Dorsa',f:'sans-serif',v:[400]},
-    {n:'Dosis',f:'sans-serif',v:[200,300,400,500,600,700,800]},
-    {n:'Dr Sugiyama',f:'cursive',v:[400]},
-    {n:'Duru Sans',f:'sans-serif',v:[400]},
-    {n:'Dynalight',f:'cursive',v:[400]},
-    {n:'EB Garamond',f:'serif',v:[400,'400i',500,'500i',600,'600i',700,'700i',800,'800i']},
-    {n:'Eagle Lake',f:'cursive',v:[400]},
-    {n:'East Sea Dokdo',f:'cursive',v:[400]},
-    {n:'Eater',f:'cursive',v:[400]},
-    {n:'Economica',f:'sans-serif',v:[400,'400i',700,'700i']},
-    {n:'Eczar',f:'serif',v:[400,500,600,700,800]},
-    {n:'El Messiri',f:'sans-serif',v:[400,500,600,700]},
-    {n:'Electrolize',f:'sans-serif',v:[400]},
-    {n:'Elsie',f:'cursive',v:[400,900]},
-    {n:'Elsie Swash Caps',f:'cursive',v:[400,900]},
-    {n:'Emblema One',f:'cursive',v:[400]},
-    {n:'Emilys Candy',f:'cursive',v:[400]},
-    {n:'Encode Sans',f:'sans-serif',v:[100,200,300,400,500,600,700,800,900]},
-    {n:'Encode Sans Condensed',f:'sans-serif',v:[100,200,300,400,500,600,700,800,900]},
-    {n:'Encode Sans Expanded',f:'sans-serif',v:[100,200,300,400,500,600,700,800,900]},
-    {n:'Encode Sans Semi Condensed',f:'sans-serif',v:[100,200,300,400,500,600,700,800,900]},
-    {n:'Encode Sans Semi Expanded',f:'sans-serif',v:[100,200,300,400,500,600,700,800,900]},
-    {n:'Engagement',f:'cursive',v:[400]},
-    {n:'Englebert',f:'sans-serif',v:[400]},
-    {n:'Enriqueta',f:'serif',v:[400,700]},
-    {n:'Erica One',f:'cursive',v:[400]},
-    {n:'Esteban',f:'serif',v:[400]},
-    {n:'Euphoria Script',f:'cursive',v:[400]},
-    {n:'Ewert',f:'cursive',v:[400]},
-    {n:'Exo',f:'sans-serif',v:[100,'100i',200,'200i',300,'300i',400,'400i',500,'500i',600,'600i',700,'700i',800,'800i',900,'900i']},
-    {n:'Exo 2',f:'sans-serif',v:[100,'100i',200,'200i',300,'300i',400,'400i',500,'500i',600,'600i',700,'700i',800,'800i',900,'900i']},
-    {n:'Expletus Sans',f:'cursive',v:[400,'400i',500,'500i',600,'600i',700,'700i']},
-    {n:'Fanwood Text',f:'serif',v:[400,'400i']},
-    {n:'Farsan',f:'cursive',v:[400]},
-    {n:'Fascinate',f:'cursive',v:[400]},
-    {n:'Fascinate Inline',f:'cursive',v:[400]},
-    {n:'Faster One',f:'cursive',v:[400]},
-    {n:'Fasthand',f:'serif',v:[400]},
-    {n:'Fauna One',f:'serif',v:[400]},
-    {n:'Faustina',f:'serif',v:[400,'400i',500,'500i',600,'600i',700,'700i']},
-    {n:'Federant',f:'cursive',v:[400]},
-    {n:'Federo',f:'sans-serif',v:[400]},
-    {n:'Felipa',f:'cursive',v:[400]},
-    {n:'Fenix',f:'serif',v:[400]},
-    {n:'Finger Paint',f:'cursive',v:[400]},
-    {n:'Fira Mono',f:'monospace',v:[400,500,700]},
-    {n:'Fira Sans',f:'sans-serif',v:[100,'100i',200,'200i',300,'300i',400,'400i',500,'500i',600,'600i',700,'700i',800,'800i',900,'900i']},
-    {n:'Fira Sans Condensed',f:'sans-serif',v:[100,'100i',200,'200i',300,'300i',400,'400i',500,'500i',600,'600i',700,'700i',800,'800i',900,'900i']},
-    {n:'Fira Sans Extra Condensed',f:'sans-serif',v:[100,'100i',200,'200i',300,'300i',400,'400i',500,'500i',600,'600i',700,'700i',800,'800i',900,'900i']},
-    {n:'Fjalla One',f:'sans-serif',v:[400]},
-    {n:'Fjord One',f:'serif',v:[400]},
-    {n:'Flamenco',f:'cursive',v:[300,400]},
-    {n:'Flavors',f:'cursive',v:[400]},
-    {n:'Fondamento',f:'cursive',v:[400,'400i']},
-    {n:'Fontdiner Swanky',f:'cursive',v:[400]},
-    {n:'Forum',f:'cursive',v:[400]},
-    {n:'Francois One',f:'sans-serif',v:[400]},
-    {n:'Frank Ruhl Libre',f:'serif',v:[300,400,500,700,900]},
-    {n:'Freckle Face',f:'cursive',v:[400]},
-    {n:'Fredericka the Great',f:'cursive',v:[400]},
-    {n:'Fredoka One',f:'cursive',v:[400]},
-    {n:'Freehand',f:'cursive',v:[400]},
-    {n:'Fresca',f:'sans-serif',v:[400]},
-    {n:'Frijole',f:'cursive',v:[400]},
-    {n:'Fruktur',f:'cursive',v:[400]},
-    {n:'Fugaz One',f:'cursive',v:[400]},
-    {n:'GFS Didot',f:'serif',v:[400]},
-    {n:'GFS Neohellenic',f:'sans-serif',v:[400,'400i',700,'700i']},
-    {n:'Gabriela',f:'serif',v:[400]},
-    {n:'Gaegu',f:'cursive',v:[300,400,700]},
-    {n:'Gafata',f:'sans-serif',v:[400]},
-    {n:'Galada',f:'cursive',v:[400]},
-    {n:'Galdeano',f:'sans-serif',v:[400]},
-    {n:'Galindo',f:'cursive',v:[400]},
-    {n:'Gamja Flower',f:'cursive',v:[400]},
-    {n:'Gentium Basic',f:'serif',v:[400,'400i',700,'700i']},
-    {n:'Gentium Book Basic',f:'serif',v:[400,'400i',700,'700i']},
-    {n:'Geo',f:'sans-serif',v:[400,'400i']},
-    {n:'Geostar',f:'cursive',v:[400]},
-    {n:'Geostar Fill',f:'cursive',v:[400]},
-    {n:'Germania One',f:'cursive',v:[400]},
-    {n:'Gidugu',f:'sans-serif',v:[400]},
-    {n:'Gilda Display',f:'serif',v:[400]},
-    {n:'Give You Glory',f:'cursive',v:[400]},
-    {n:'Glass Antiqua',f:'cursive',v:[400]},
-    {n:'Glegoo',f:'serif',v:[400,700]},
-    {n:'Gloria Hallelujah',f:'cursive',v:[400]},
-    {n:'Goblin One',f:'cursive',v:[400]},
-    {n:'Gochi Hand',f:'cursive',v:[400]},
-    {n:'Gorditas',f:'cursive',v:[400,700]},
-    {n:'Gothic A1',f:'sans-serif',v:[100,200,300,400,500,600,700,800,900]},
-    {n:'Goudy Bookletter 1911',f:'serif',v:[400]},
-    {n:'Graduate',f:'cursive',v:[400]},
-    {n:'Grand Hotel',f:'cursive',v:[400]},
-    {n:'Gravitas One',f:'cursive',v:[400]},
-    {n:'Great Vibes',f:'cursive',v:[400]},
-    {n:'Griffy',f:'cursive',v:[400]},
-    {n:'Gruppo',f:'cursive',v:[400]},
-    {n:'Gudea',f:'sans-serif',v:[400,'400i',700]},
-    {n:'Gugi',f:'cursive',v:[400]},
-    {n:'Gurajada',f:'serif',v:[400]},
-    {n:'Habibi',f:'serif',v:[400]},
-    {n:'Halant',f:'serif',v:[300,400,500,600,700]},
-    {n:'Hammersmith One',f:'sans-serif',v:[400]},
-    {n:'Hanalei',f:'cursive',v:[400]},
-    {n:'Hanalei Fill',f:'cursive',v:[400]},
-    {n:'Handlee',f:'cursive',v:[400]},
-    {n:'Hanuman',f:'serif',v:[400,700]},
-    {n:'Happy Monkey',f:'cursive',v:[400]},
-    {n:'Harmattan',f:'sans-serif',v:[400]},
-    {n:'Headland One',f:'serif',v:[400]},
-    {n:'Heebo',f:'sans-serif',v:[100,300,400,500,700,800,900]},
-    {n:'Henny Penny',f:'cursive',v:[400]},
-    {n:'Herr Von Muellerhoff',f:'cursive',v:[400]},
-    {n:'Hi Melody',f:'cursive',v:[400]},
-    {n:'Hind',f:'sans-serif',v:[300,400,500,600,700]},
-    {n:'Hind Guntur',f:'sans-serif',v:[300,400,500,600,700]},
-    {n:'Hind Madurai',f:'sans-serif',v:[300,400,500,600,700]},
-    {n:'Hind Siliguri',f:'sans-serif',v:[300,400,500,600,700]},
-    {n:'Hind Vadodara',f:'sans-serif',v:[300,400,500,600,700]},
-    {n:'Holtwood One SC',f:'serif',v:[400]},
-    {n:'Homemade Apple',f:'cursive',v:[400]},
-    {n:'Homenaje',f:'sans-serif',v:[400]},
-    {n:'IBM Plex Mono',f:'monospace',v:[100,'100i',200,'200i',300,'300i',400,'400i',500,'500i',600,'600i',700,'700i']},
-    {n:'IBM Plex Sans',f:'sans-serif',v:[100,'100i',200,'200i',300,'300i',400,'400i',500,'500i',600,'600i',700,'700i']},
-    {n:'IBM Plex Sans Condensed',f:'sans-serif',v:[100,'100i',200,'200i',300,'300i',400,'400i',500,'500i',600,'600i',700,'700i']},
-    {n:'IBM Plex Serif',f:'serif',v:[100,'100i',200,'200i',300,'300i',400,'400i',500,'500i',600,'600i',700,'700i']},
-    {n:'IM Fell DW Pica',f:'serif',v:[400,'400i']},
-    {n:'IM Fell DW Pica SC',f:'serif',v:[400]},
-    {n:'IM Fell Double Pica',f:'serif',v:[400,'400i']},
-    {n:'IM Fell Double Pica SC',f:'serif',v:[400]},
-    {n:'IM Fell English',f:'serif',v:[400,'400i']},
-    {n:'IM Fell English SC',f:'serif',v:[400]},
-    {n:'IM Fell French Canon',f:'serif',v:[400,'400i']},
-    {n:'IM Fell French Canon SC',f:'serif',v:[400]},
-    {n:'IM Fell Great Primer',f:'serif',v:[400,'400i']},
-    {n:'IM Fell Great Primer SC',f:'serif',v:[400]},
-    {n:'Iceberg',f:'cursive',v:[400]},
-    {n:'Iceland',f:'cursive',v:[400]},
-    {n:'Imprima',f:'sans-serif',v:[400]},
-    {n:'Inconsolata',f:'monospace',v:[400,700]},
-    {n:'Inder',f:'sans-serif',v:[400]},
-    {n:'Indie Flower',f:'cursive',v:[400]},
-    {n:'Inika',f:'serif',v:[400,700]},
-    {n:'Inknut Antiqua',f:'serif',v:[300,400,500,600,700,800,900]},
-    {n:'Irish Grover',f:'cursive',v:[400]},
-    {n:'Istok Web',f:'sans-serif',v:[400,'400i',700,'700i']},
-    {n:'Italiana',f:'serif',v:[400]},
-    {n:'Italianno',f:'cursive',v:[400]},
-    {n:'Itim',f:'cursive',v:[400]},
-    {n:'Jacques Francois',f:'serif',v:[400]},
-    {n:'Jacques Francois Shadow',f:'cursive',v:[400]},
-    {n:'Jaldi',f:'sans-serif',v:[400,700]},
-    {n:'Jim Nightshade',f:'cursive',v:[400]},
-    {n:'Jockey One',f:'sans-serif',v:[400]},
-    {n:'Jolly Lodger',f:'cursive',v:[400]},
-    {n:'Jomhuria',f:'cursive',v:[400]},
-    {n:'Josefin Sans',f:'sans-serif',v:[100,'100i',300,'300i',400,'400i',600,'600i',700,'700i']},
-    {n:'Josefin Slab',f:'serif',v:[100,'100i',300,'300i',400,'400i',600,'600i',700,'700i']},
-    {n:'Joti One',f:'cursive',v:[400]},
-    {n:'Jua',f:'sans-serif',v:[400]},
-    {n:'Judson',f:'serif',v:[400,'400i',700]},
-    {n:'Julee',f:'cursive',v:[400]},
-    {n:'Julius Sans One',f:'sans-serif',v:[400]},
-    {n:'Junge',f:'serif',v:[400]},
-    {n:'Jura',f:'sans-serif',v:[300,400,500,600,700]},
-    {n:'Just Another Hand',f:'cursive',v:[400]},
-    {n:'Just Me Again Down Here',f:'cursive',v:[400]},
-    {n:'Kadwa',f:'serif',v:[400,700]},
-    {n:'Kalam',f:'cursive',v:[300,400,700]},
-    {n:'Kameron',f:'serif',v:[400,700]},
-    {n:'Kanit',f:'sans-serif',v:[100,'100i',200,'200i',300,'300i',400,'400i',500,'500i',600,'600i',700,'700i',800,'800i',900,'900i']},
-    {n:'Kantumruy',f:'sans-serif',v:[300,400,700]},
-    {n:'Karla',f:'sans-serif',v:[400,'400i',700,'700i']},
-    {n:'Karma',f:'serif',v:[300,400,500,600,700]},
-    {n:'Katibeh',f:'cursive',v:[400]},
-    {n:'Kaushan Script',f:'cursive',v:[400]},
-    {n:'Kavivanar',f:'cursive',v:[400]},
-    {n:'Kavoon',f:'cursive',v:[400]},
-    {n:'Kdam Thmor',f:'cursive',v:[400]},
-    {n:'Keania One',f:'cursive',v:[400]},
-    {n:'Kelly Slab',f:'cursive',v:[400]},
-    {n:'Kenia',f:'cursive',v:[400]},
-    {n:'Khand',f:'sans-serif',v:[300,400,500,600,700]},
-    {n:'Khmer',f:'cursive',v:[400]},
-    {n:'Khula',f:'sans-serif',v:[300,400,600,700,800]},
-    {n:'Kirang Haerang',f:'cursive',v:[400]},
-    {n:'Kite One',f:'sans-serif',v:[400]},
-    {n:'Knewave',f:'cursive',v:[400]},
-    {n:'Kosugi',f:'sans-serif',v:[400]},
-    {n:'Kosugi Maru',f:'sans-serif',v:[400]},
-    {n:'Kotta One',f:'serif',v:[400]},
-    {n:'Koulen',f:'cursive',v:[400]},
-    {n:'Kranky',f:'cursive',v:[400]},
-    {n:'Kreon',f:'serif',v:[300,400,700]},
-    {n:'Kristi',f:'cursive',v:[400]},
-    {n:'Krona One',f:'sans-serif',v:[400]},
-    {n:'Kumar One',f:'cursive',v:[400]},
-    {n:'Kumar One Outline',f:'cursive',v:[400]},
-    {n:'Kurale',f:'serif',v:[400]},
-    {n:'La Belle Aurore',f:'cursive',v:[400]},
-    {n:'Laila',f:'serif',v:[300,400,500,600,700]},
-    {n:'Lakki Reddy',f:'cursive',v:[400]},
-    {n:'Lalezar',f:'cursive',v:[400]},
-    {n:'Lancelot',f:'cursive',v:[400]},
-    {n:'Lateef',f:'cursive',v:[400]},
-    {n:'Lato',f:'sans-serif',v:[100,'100i',300,'300i',400,'400i',700,'700i',900,'900i']},
-    {n:'League Script',f:'cursive',v:[400]},
-    {n:'Leckerli One',f:'cursive',v:[400]},
-    {n:'Ledger',f:'serif',v:[400]},
-    {n:'Lekton',f:'sans-serif',v:[400,'400i',700]},
-    {n:'Lemon',f:'cursive',v:[400]},
-    {n:'Lemonada',f:'cursive',v:[300,400,600,700]},
-    {n:'Libre Barcode 128',f:'cursive',v:[400]},
-    {n:'Libre Barcode 128 Text',f:'cursive',v:[400]},
-    {n:'Libre Barcode 39',f:'cursive',v:[400]},
-    {n:'Libre Barcode 39 Extended',f:'cursive',v:[400]},
-    {n:'Libre Barcode 39 Extended Text',f:'cursive',v:[400]},
-    {n:'Libre Barcode 39 Text',f:'cursive',v:[400]},
-    {n:'Libre Baskerville',f:'serif',v:[400,'400i',700]},
-    {n:'Libre Franklin',f:'sans-serif',v:[100,'100i',200,'200i',300,'300i',400,'400i',500,'500i',600,'600i',700,'700i',800,'800i',900,'900i']},
-    {n:'Life Savers',f:'cursive',v:[400,700]},
-    {n:'Lilita One',f:'cursive',v:[400]},
-    {n:'Lily Script One',f:'cursive',v:[400]},
-    {n:'Limelight',f:'cursive',v:[400]},
-    {n:'Linden Hill',f:'serif',v:[400,'400i']},
-    {n:'Lobster',f:'cursive',v:[400]},
-    {n:'Lobster Two',f:'cursive',v:[400,'400i',700,'700i']},
-    {n:'Londrina Outline',f:'cursive',v:[400]},
-    {n:'Londrina Shadow',f:'cursive',v:[400]},
-    {n:'Londrina Sketch',f:'cursive',v:[400]},
-    {n:'Londrina Solid',f:'cursive',v:[100,300,400,900]},
-    {n:'Lora',f:'serif',v:[400,'400i',700,'700i']},
-    {n:'Love Ya Like A Sister',f:'cursive',v:[400]},
-    {n:'Loved by the King',f:'cursive',v:[400]},
-    {n:'Lovers Quarrel',f:'cursive',v:[400]},
-    {n:'Luckiest Guy',f:'cursive',v:[400]},
-    {n:'Lusitana',f:'serif',v:[400,700]},
-    {n:'Lustria',f:'serif',v:[400]},
-    {n:'M PLUS 1p',f:'sans-serif',v:[100,300,400,500,700,800,900]},
-    {n:'M PLUS Rounded 1c',f:'sans-serif',v:[100,300,400,500,700,800,900]},
-    {n:'Macondo',f:'cursive',v:[400]},
-    {n:'Macondo Swash Caps',f:'cursive',v:[400]},
-    {n:'Mada',f:'sans-serif',v:[200,300,400,500,600,700,900]},
-    {n:'Magra',f:'sans-serif',v:[400,700]},
-    {n:'Maiden Orange',f:'cursive',v:[400]},
-    {n:'Maitree',f:'serif',v:[200,300,400,500,600,700]},
-    {n:'Mako',f:'sans-serif',v:[400]},
-    {n:'Mallanna',f:'sans-serif',v:[400]},
-    {n:'Mandali',f:'sans-serif',v:[400]},
-    {n:'Manuale',f:'serif',v:[400,'400i',500,'500i',600,'600i',700,'700i']},
-    {n:'Marcellus',f:'serif',v:[400]},
-    {n:'Marcellus SC',f:'serif',v:[400]},
-    {n:'Marck Script',f:'cursive',v:[400]},
-    {n:'Margarine',f:'cursive',v:[400]},
-    {n:'Markazi Text',f:'serif',v:[400,500,600,700]},
-    {n:'Marko One',f:'serif',v:[400]},
-    {n:'Marmelad',f:'sans-serif',v:[400]},
-    {n:'Martel',f:'serif',v:[200,300,400,600,700,800,900]},
-    {n:'Martel Sans',f:'sans-serif',v:[200,300,400,600,700,800,900]},
-    {n:'Marvel',f:'sans-serif',v:[400,'400i',700,'700i']},
-    {n:'Mate',f:'serif',v:[400,'400i']},
-    {n:'Mate SC',f:'serif',v:[400]},
-    {n:'Maven Pro',f:'sans-serif',v:[400,500,700,900]},
-    {n:'McLaren',f:'cursive',v:[400]},
-    {n:'Meddon',f:'cursive',v:[400]},
-    {n:'MedievalSharp',f:'cursive',v:[400]},
-    {n:'Medula One',f:'cursive',v:[400]},
-    {n:'Meera Inimai',f:'sans-serif',v:[400]},
-    {n:'Megrim',f:'cursive',v:[400]},
-    {n:'Meie Script',f:'cursive',v:[400]},
-    {n:'Merienda',f:'cursive',v:[400,700]},
-    {n:'Merienda One',f:'cursive',v:[400]},
-    {n:'Merriweather',f:'serif',v:[300,'300i',400,'400i',700,'700i',900,'900i']},
-    {n:'Merriweather Sans',f:'sans-serif',v:[300,'300i',400,'400i',700,'700i',800,'800i']},
-    {n:'Metal',f:'cursive',v:[400]},
-    {n:'Metal Mania',f:'cursive',v:[400]},
-    {n:'Metamorphous',f:'cursive',v:[400]},
-    {n:'Metrophobic',f:'sans-serif',v:[400]},
-    {n:'Michroma',f:'sans-serif',v:[400]},
-    {n:'Milonga',f:'cursive',v:[400]},
-    {n:'Miltonian',f:'cursive',v:[400]},
-    {n:'Miltonian Tattoo',f:'cursive',v:[400]},
-    {n:'Mina',f:'sans-serif',v:[400,700]},
-    {n:'Miniver',f:'cursive',v:[400]},
-    {n:'Miriam Libre',f:'sans-serif',v:[400,700]},
-    {n:'Mirza',f:'cursive',v:[400,500,600,700]},
-    {n:'Miss Fajardose',f:'cursive',v:[400]},
-    {n:'Mitr',f:'sans-serif',v:[200,300,400,500,600,700]},
-    {n:'Modak',f:'cursive',v:[400]},
-    {n:'Modern Antiqua',f:'cursive',v:[400]},
-    {n:'Mogra',f:'cursive',v:[400]},
-    {n:'Molengo',f:'sans-serif',v:[400]},
-    {n:'Molle',f:'cursive',v:['400i']},
-    {n:'Monda',f:'sans-serif',v:[400,700]},
-    {n:'Monofett',f:'cursive',v:[400]},
-    {n:'Monoton',f:'cursive',v:[400]},
-    {n:'Monsieur La Doulaise',f:'cursive',v:[400]},
-    {n:'Montaga',f:'serif',v:[400]},
-    {n:'Montez',f:'cursive',v:[400]},
-    {n:'Montserrat',f:'sans-serif',v:[100,'100i',200,'200i',300,'300i',400,'400i',500,'500i',600,'600i',700,'700i',800,'800i',900,'900i']},
-    {n:'Montserrat Alternates',f:'sans-serif',v:[100,'100i',200,'200i',300,'300i',400,'400i',500,'500i',600,'600i',700,'700i',800,'800i',900,'900i']},
-    {n:'Montserrat Subrayada',f:'sans-serif',v:[400,700]},
-    {n:'Moul',f:'cursive',v:[400]},
-    {n:'Moulpali',f:'cursive',v:[400]},
-    {n:'Mountains of Christmas',f:'cursive',v:[400,700]},
-    {n:'Mouse Memoirs',f:'sans-serif',v:[400]},
-    {n:'Mr Bedfort',f:'cursive',v:[400]},
-    {n:'Mr Dafoe',f:'cursive',v:[400]},
-    {n:'Mr De Haviland',f:'cursive',v:[400]},
-    {n:'Mrs Saint Delafield',f:'cursive',v:[400]},
-    {n:'Mrs Sheppards',f:'cursive',v:[400]},
-    {n:'Mukta',f:'sans-serif',v:[200,300,400,500,600,700,800]},
-    {n:'Mukta Mahee',f:'sans-serif',v:[200,300,400,500,600,700,800]},
-    {n:'Mukta Malar',f:'sans-serif',v:[200,300,400,500,600,700,800]},
-    {n:'Mukta Vaani',f:'sans-serif',v:[200,300,400,500,600,700,800]},
-    {n:'Muli',f:'sans-serif',v:[200,'200i',300,'300i',400,'400i',600,'600i',700,'700i',800,'800i',900,'900i']},
-    {n:'Mystery Quest',f:'cursive',v:[400]},
-    {n:'NTR',f:'sans-serif',v:[400]},
-    {n:'Nanum Brush Script',f:'cursive',v:[400]},
-    {n:'Nanum Gothic',f:'sans-serif',v:[400,700,800]},
-    {n:'Nanum Gothic Coding',f:'monospace',v:[400,700]},
-    {n:'Nanum Myeongjo',f:'serif',v:[400,700,800]},
-    {n:'Nanum Pen Script',f:'cursive',v:[400]},
-    {n:'Neucha',f:'cursive',v:[400]},
-    {n:'Neuton',f:'serif',v:[200,300,400,'400i',700,800]},
-    {n:'New Rocker',f:'cursive',v:[400]},
-    {n:'News Cycle',f:'sans-serif',v:[400,700]},
-    {n:'Niconne',f:'cursive',v:[400]},
-    {n:'Nixie One',f:'cursive',v:[400]},
-    {n:'Nobile',f:'sans-serif',v:[400,'400i',500,'500i',700,'700i']},
-    {n:'Nokora',f:'serif',v:[400,700]},
-    {n:'Norican',f:'cursive',v:[400]},
-    {n:'Nosifer',f:'cursive',v:[400]},
-    {n:'Nothing You Could Do',f:'cursive',v:[400]},
-    {n:'Noticia Text',f:'serif',v:[400,'400i',700,'700i']},
-    {n:'Noto Sans',f:'sans-serif',v:[400,'400i',700,'700i']},
-    {n:'Noto Sans JP',f:'sans-serif',v:[100,300,400,500,700,900]},
-    {n:'Noto Sans KR',f:'sans-serif',v:[100,300,400,500,700,900]},
-    {n:'Noto Serif',f:'serif',v:[400,'400i',700,'700i']},
-    {n:'Noto Serif JP',f:'sans-serif',v:[200,300,400,500,600,700,900]},
-    {n:'Noto Serif KR',f:'sans-serif',v:[200,300,400,500,600,700,900]},
-    {n:'Nova Cut',f:'cursive',v:[400]},
-    {n:'Nova Flat',f:'cursive',v:[400]},
-    {n:'Nova Mono',f:'monospace',v:[400]},
-    {n:'Nova Oval',f:'cursive',v:[400]},
-    {n:'Nova Round',f:'cursive',v:[400]},
-    {n:'Nova Script',f:'cursive',v:[400]},
-    {n:'Nova Slim',f:'cursive',v:[400]},
-    {n:'Nova Square',f:'cursive',v:[400]},
-    {n:'Numans',f:'sans-serif',v:[400]},
-    {n:'Nunito',f:'sans-serif',v:[200,'200i',300,'300i',400,'400i',600,'600i',700,'700i',800,'800i',900,'900i']},
-    {n:'Nunito Sans',f:'sans-serif',v:[200,'200i',300,'300i',400,'400i',600,'600i',700,'700i',800,'800i',900,'900i']},
-    {n:'Odor Mean Chey',f:'cursive',v:[400]},
-    {n:'Offside',f:'cursive',v:[400]},
-    {n:'Old Standard TT',f:'serif',v:[400,'400i',700]},
-    {n:'Oldenburg',f:'cursive',v:[400]},
-    {n:'Oleo Script',f:'cursive',v:[400,700]},
-    {n:'Oleo Script Swash Caps',f:'cursive',v:[400,700]},
-    {n:'Open Sans',f:'sans-serif',v:[300,'300i',400,'400i',600,'600i',700,'700i',800,'800i']},
-    {n:'Open Sans Condensed',f:'sans-serif',v:[300,'300i',700]},
-    {n:'Oranienbaum',f:'serif',v:[400]},
-    {n:'Orbitron',f:'sans-serif',v:[400,500,700,900]},
-    {n:'Oregano',f:'cursive',v:[400,'400i']},
-    {n:'Orienta',f:'sans-serif',v:[400]},
-    {n:'Original Surfer',f:'cursive',v:[400]},
-    {n:'Oswald',f:'sans-serif',v:[200,300,400,500,600,700]},
-    {n:'Over the Rainbow',f:'cursive',v:[400]},
-    {n:'Overlock',f:'cursive',v:[400,'400i',700,'700i',900,'900i']},
-    {n:'Overlock SC',f:'cursive',v:[400]},
-    {n:'Overpass',f:'sans-serif',v:[100,'100i',200,'200i',300,'300i',400,'400i',600,'600i',700,'700i',800,'800i',900,'900i']},
-    {n:'Overpass Mono',f:'monospace',v:[300,400,600,700]},
-    {n:'Ovo',f:'serif',v:[400]},
-    {n:'Oxygen',f:'sans-serif',v:[300,400,700]},
-    {n:'Oxygen Mono',f:'monospace',v:[400]},
-    {n:'PT Mono',f:'monospace',v:[400]},
-    {n:'PT Sans',f:'sans-serif',v:[400,'400i',700,'700i']},
-    {n:'PT Sans Caption',f:'sans-serif',v:[400,700]},
-    {n:'PT Sans Narrow',f:'sans-serif',v:[400,700]},
-    {n:'PT Serif',f:'serif',v:[400,'400i',700,'700i']},
-    {n:'PT Serif Caption',f:'serif',v:[400,'400i']},
-    {n:'Pacifico',f:'cursive',v:[400]},
-    {n:'Padauk',f:'sans-serif',v:[400,700]},
-    {n:'Palanquin',f:'sans-serif',v:[100,200,300,400,500,600,700]},
-    {n:'Palanquin Dark',f:'sans-serif',v:[400,500,600,700]},
-    {n:'Pangolin',f:'cursive',v:[400]},
-    {n:'Paprika',f:'cursive',v:[400]},
-    {n:'Parisienne',f:'cursive',v:[400]},
-    {n:'Passero One',f:'cursive',v:[400]},
-    {n:'Passion One',f:'cursive',v:[400,700,900]},
-    {n:'Pathway Gothic One',f:'sans-serif',v:[400]},
-    {n:'Patrick Hand',f:'cursive',v:[400]},
-    {n:'Patrick Hand SC',f:'cursive',v:[400]},
-    {n:'Pattaya',f:'sans-serif',v:[400]},
-    {n:'Patua One',f:'cursive',v:[400]},
-    {n:'Pavanam',f:'sans-serif',v:[400]},
-    {n:'Paytone One',f:'sans-serif',v:[400]},
-    {n:'Peddana',f:'serif',v:[400]},
-    {n:'Peralta',f:'cursive',v:[400]},
-    {n:'Permanent Marker',f:'cursive',v:[400]},
-    {n:'Petit Formal Script',f:'cursive',v:[400]},
-    {n:'Petrona',f:'serif',v:[400]},
-    {n:'Philosopher',f:'sans-serif',v:[400,'400i',700,'700i']},
-    {n:'Piedra',f:'cursive',v:[400]},
-    {n:'Pinyon Script',f:'cursive',v:[400]},
-    {n:'Pirata One',f:'cursive',v:[400]},
-    {n:'Plaster',f:'cursive',v:[400]},
-    {n:'Play',f:'sans-serif',v:[400,700]},
-    {n:'Playball',f:'cursive',v:[400]},
-    {n:'Playfair Display',f:'serif',v:[400,'400i',700,'700i',900,'900i']},
-    {n:'Playfair Display SC',f:'serif',v:[400,'400i',700,'700i',900,'900i']},
-    {n:'Podkova',f:'serif',v:[400,500,600,700,800]},
-    {n:'Poiret One',f:'cursive',v:[400]},
-    {n:'Poller One',f:'cursive',v:[400]},
-    {n:'Poly',f:'serif',v:[400,'400i']},
-    {n:'Pompiere',f:'cursive',v:[400]},
-    {n:'Pontano Sans',f:'sans-serif',v:[400]},
-    {n:'Poor Story',f:'cursive',v:[400]},
-    {n:'Poppins',f:'sans-serif',v:[100,'100i',200,'200i',300,'300i',400,'400i',500,'500i',600,'600i',700,'700i',800,'800i',900,'900i']},
-    {n:'Port Lligat Sans',f:'sans-serif',v:[400]},
-    {n:'Port Lligat Slab',f:'serif',v:[400]},
-    {n:'Pragati Narrow',f:'sans-serif',v:[400,700]},
-    {n:'Prata',f:'serif',v:[400]},
-    {n:'Preahvihear',f:'cursive',v:[400]},
-    {n:'Press Start 2P',f:'cursive',v:[400]},
-    {n:'Pridi',f:'serif',v:[200,300,400,500,600,700]},
-    {n:'Princess Sofia',f:'cursive',v:[400]},
-    {n:'Prociono',f:'serif',v:[400]},
-    {n:'Prompt',f:'sans-serif',v:[100,'100i',200,'200i',300,'300i',400,'400i',500,'500i',600,'600i',700,'700i',800,'800i',900,'900i']},
-    {n:'Prosto One',f:'cursive',v:[400]},
-    {n:'Proza Libre',f:'sans-serif',v:[400,'400i',500,'500i',600,'600i',700,'700i',800,'800i']},
-    {n:'Puritan',f:'sans-serif',v:[400,'400i',700,'700i']},
-    {n:'Purple Purse',f:'cursive',v:[400]},
-    {n:'Quando',f:'serif',v:[400]},
-    {n:'Quantico',f:'sans-serif',v:[400,'400i',700,'700i']},
-    {n:'Quattrocento',f:'serif',v:[400,700]},
-    {n:'Quattrocento Sans',f:'sans-serif',v:[400,'400i',700,'700i']},
-    {n:'Questrial',f:'sans-serif',v:[400]},
-    {n:'Quicksand',f:'sans-serif',v:[300,400,500,700]},
-    {n:'Quintessential',f:'cursive',v:[400]},
-    {n:'Qwigley',f:'cursive',v:[400]},
-    {n:'Racing Sans One',f:'cursive',v:[400]},
-    {n:'Radley',f:'serif',v:[400,'400i']},
-    {n:'Rajdhani',f:'sans-serif',v:[300,400,500,600,700]},
-    {n:'Rakkas',f:'cursive',v:[400]},
-    {n:'Raleway',f:'sans-serif',v:[100,'100i',200,'200i',300,'300i',400,'400i',500,'500i',600,'600i',700,'700i',800,'800i',900,'900i']},
-    {n:'Raleway Dots',f:'cursive',v:[400]},
-    {n:'Ramabhadra',f:'sans-serif',v:[400]},
-    {n:'Ramaraja',f:'serif',v:[400]},
-    {n:'Rambla',f:'sans-serif',v:[400,'400i',700,'700i']},
-    {n:'Rammetto One',f:'cursive',v:[400]},
-    {n:'Ranchers',f:'cursive',v:[400]},
-    {n:'Rancho',f:'cursive',v:[400]},
-    {n:'Ranga',f:'cursive',v:[400,700]},
-    {n:'Rasa',f:'serif',v:[300,400,500,600,700]},
-    {n:'Rationale',f:'sans-serif',v:[400]},
-    {n:'Ravi Prakash',f:'cursive',v:[400]},
-    {n:'Redressed',f:'cursive',v:[400]},
-    {n:'Reem Kufi',f:'sans-serif',v:[400]},
-    {n:'Reenie Beanie',f:'cursive',v:[400]},
-    {n:'Revalia',f:'cursive',v:[400]},
-    {n:'Rhodium Libre',f:'serif',v:[400]},
-    {n:'Ribeye',f:'cursive',v:[400]},
-    {n:'Ribeye Marrow',f:'cursive',v:[400]},
-    {n:'Righteous',f:'cursive',v:[400]},
-    {n:'Risque',f:'cursive',v:[400]},
-    {n:'Roboto',f:'sans-serif',v:[100,'100i',300,'300i',400,'400i',500,'500i',700,'700i',900,'900i']},
-    {n:'Roboto Condensed',f:'sans-serif',v:[300,'300i',400,'400i',700,'700i']},
-    {n:'Roboto Mono',f:'monospace',v:[100,'100i',300,'300i',400,'400i',500,'500i',700,'700i']},
-    {n:'Roboto Slab',f:'serif',v:[100,300,400,700]},
-    {n:'Rochester',f:'cursive',v:[400]},
-    {n:'Rock Salt',f:'cursive',v:[400]},
-    {n:'Rokkitt',f:'serif',v:[100,200,300,400,500,600,700,800,900]},
-    {n:'Romanesco',f:'cursive',v:[400]},
-    {n:'Ropa Sans',f:'sans-serif',v:[400,'400i']},
-    {n:'Rosario',f:'sans-serif',v:[400,'400i',700,'700i']},
-    {n:'Rosarivo',f:'serif',v:[400,'400i']},
-    {n:'Rouge Script',f:'cursive',v:[400]},
-    {n:'Rozha One',f:'serif',v:[400]},
-    {n:'Rubik',f:'sans-serif',v:[300,'300i',400,'400i',500,'500i',700,'700i',900,'900i']},
-    {n:'Rubik Mono One',f:'sans-serif',v:[400]},
-    {n:'Ruda',f:'sans-serif',v:[400,700,900]},
-    {n:'Rufina',f:'serif',v:[400,700]},
-    {n:'Ruge Boogie',f:'cursive',v:[400]},
-    {n:'Ruluko',f:'sans-serif',v:[400]},
-    {n:'Rum Raisin',f:'sans-serif',v:[400]},
-    {n:'Ruslan Display',f:'cursive',v:[400]},
-    {n:'Russo One',f:'sans-serif',v:[400]},
-    {n:'Ruthie',f:'cursive',v:[400]},
-    {n:'Rye',f:'cursive',v:[400]},
-    {n:'Sacramento',f:'cursive',v:[400]},
-    {n:'Sahitya',f:'serif',v:[400,700]},
-    {n:'Sail',f:'cursive',v:[400]},
-    {n:'Saira',f:'sans-serif',v:[100,200,300,400,500,600,700,800,900]},
-    {n:'Saira Condensed',f:'sans-serif',v:[100,200,300,400,500,600,700,800,900]},
-    {n:'Saira Extra Condensed',f:'sans-serif',v:[100,200,300,400,500,600,700,800,900]},
-    {n:'Saira Semi Condensed',f:'sans-serif',v:[100,200,300,400,500,600,700,800,900]},
-    {n:'Salsa',f:'cursive',v:[400]},
-    {n:'Sanchez',f:'serif',v:[400,'400i']},
-    {n:'Sancreek',f:'cursive',v:[400]},
-    {n:'Sansita',f:'sans-serif',v:[400,'400i',700,'700i',800,'800i',900,'900i']},
-    {n:'Sarala',f:'sans-serif',v:[400,700]},
-    {n:'Sarina',f:'cursive',v:[400]},
-    {n:'Sarpanch',f:'sans-serif',v:[400,500,600,700,800,900]},
-    {n:'Satisfy',f:'cursive',v:[400]},
-    {n:'Sawarabi Gothic',f:'sans-serif',v:[400]},
-    {n:'Sawarabi Mincho',f:'sans-serif',v:[400]},
-    {n:'Scada',f:'sans-serif',v:[400,'400i',700,'700i']},
-    {n:'Scheherazade',f:'serif',v:[400,700]},
-    {n:'Schoolbell',f:'cursive',v:[400]},
-    {n:'Scope One',f:'serif',v:[400]},
-    {n:'Seaweed Script',f:'cursive',v:[400]},
-    {n:'Secular One',f:'sans-serif',v:[400]},
-    {n:'Sedgwick Ave',f:'cursive',v:[400]},
-    {n:'Sedgwick Ave Display',f:'cursive',v:[400]},
-    {n:'Sevillana',f:'cursive',v:[400]},
-    {n:'Seymour One',f:'sans-serif',v:[400]},
-    {n:'Shadows Into Light',f:'cursive',v:[400]},
-    {n:'Shadows Into Light Two',f:'cursive',v:[400]},
-    {n:'Shanti',f:'sans-serif',v:[400]},
-    {n:'Share',f:'cursive',v:[400,'400i',700,'700i']},
-    {n:'Share Tech',f:'sans-serif',v:[400]},
-    {n:'Share Tech Mono',f:'monospace',v:[400]},
-    {n:'Shojumaru',f:'cursive',v:[400]},
-    {n:'Short Stack',f:'cursive',v:[400]},
-    {n:'Shrikhand',f:'cursive',v:[400]},
-    {n:'Siemreap',f:'cursive',v:[400]},
-    {n:'Sigmar One',f:'cursive',v:[400]},
-    {n:'Signika',f:'sans-serif',v:[300,400,600,700]},
-    {n:'Signika Negative',f:'sans-serif',v:[300,400,600,700]},
-    {n:'Simonetta',f:'cursive',v:[400,'400i',900,'900i']},
-    {n:'Sintony',f:'sans-serif',v:[400,700]},
-    {n:'Sirin Stencil',f:'cursive',v:[400]},
-    {n:'Six Caps',f:'sans-serif',v:[400]},
-    {n:'Skranji',f:'cursive',v:[400,700]},
-    {n:'Slabo 13px',f:'serif',v:[400]},
-    {n:'Slabo 27px',f:'serif',v:[400]},
-    {n:'Slackey',f:'cursive',v:[400]},
-    {n:'Smokum',f:'cursive',v:[400]},
-    {n:'Smythe',f:'cursive',v:[400]},
-    {n:'Sniglet',f:'cursive',v:[400,800]},
-    {n:'Snippet',f:'sans-serif',v:[400]},
-    {n:'Snowburst One',f:'cursive',v:[400]},
-    {n:'Sofadi One',f:'cursive',v:[400]},
-    {n:'Sofia',f:'cursive',v:[400]},
-    {n:'Song Myung',f:'serif',v:[400]},
-    {n:'Sonsie One',f:'cursive',v:[400]},
-    {n:'Sorts Mill Goudy',f:'serif',v:[400,'400i']},
-    {n:'Source Code Pro',f:'monospace',v:[200,300,400,500,600,700,900]},
-    {n:'Source Sans Pro',f:'sans-serif',v:[200,'200i',300,'300i',400,'400i',600,'600i',700,'700i',900,'900i']},
-    {n:'Source Serif Pro',f:'serif',v:[400,600,700]},
-    {n:'Space Mono',f:'monospace',v:[400,'400i',700,'700i']},
-    {n:'Special Elite',f:'cursive',v:[400]},
-    {n:'Spectral',f:'serif',v:[200,'200i',300,'300i',400,'400i',500,'500i',600,'600i',700,'700i',800,'800i']},
-    {n:'Spectral SC',f:'serif',v:[200,'200i',300,'300i',400,'400i',500,'500i',600,'600i',700,'700i',800,'800i']},
-    {n:'Spicy Rice',f:'cursive',v:[400]},
-    {n:'Spinnaker',f:'sans-serif',v:[400]},
-    {n:'Spirax',f:'cursive',v:[400]},
-    {n:'Squada One',f:'cursive',v:[400]},
-    {n:'Sree Krushnadevaraya',f:'serif',v:[400]},
-    {n:'Sriracha',f:'cursive',v:[400]},
-    {n:'Stalemate',f:'cursive',v:[400]},
-    {n:'Stalinist One',f:'cursive',v:[400]},
-    {n:'Stardos Stencil',f:'cursive',v:[400,700]},
-    {n:'Stint Ultra Condensed',f:'cursive',v:[400]},
-    {n:'Stint Ultra Expanded',f:'cursive',v:[400]},
-    {n:'Stoke',f:'serif',v:[300,400]},
-    {n:'Strait',f:'sans-serif',v:[400]},
-    {n:'Stylish',f:'sans-serif',v:[400]},
-    {n:'Sue Ellen Francisco',f:'cursive',v:[400]},
-    {n:'Suez One',f:'serif',v:[400]},
-    {n:'Sumana',f:'serif',v:[400,700]},
-    {n:'Sunflower',f:'sans-serif',v:[300,500,700]},
-    {n:'Sunshiney',f:'cursive',v:[400]},
-    {n:'Supermercado One',f:'cursive',v:[400]},
-    {n:'Sura',f:'serif',v:[400,700]},
-    {n:'Suranna',f:'serif',v:[400]},
-    {n:'Suravaram',f:'serif',v:[400]},
-    {n:'Suwannaphum',f:'cursive',v:[400]},
-    {n:'Swanky and Moo Moo',f:'cursive',v:[400]},
-    {n:'Syncopate',f:'sans-serif',v:[400,700]},
-    {n:'Tajawal',f:'sans-serif',v:[200,300,400,500,700,800,900]},
-    {n:'Tangerine',f:'cursive',v:[400,700]},
-    {n:'Taprom',f:'cursive',v:[400]},
-    {n:'Tauri',f:'sans-serif',v:[400]},
-    {n:'Taviraj',f:'serif',v:[100,'100i',200,'200i',300,'300i',400,'400i',500,'500i',600,'600i',700,'700i',800,'800i',900,'900i']},
-    {n:'Teko',f:'sans-serif',v:[300,400,500,600,700]},
-    {n:'Telex',f:'sans-serif',v:[400]},
-    {n:'Tenali Ramakrishna',f:'sans-serif',v:[400]},
-    {n:'Tenor Sans',f:'sans-serif',v:[400]},
-    {n:'Text Me One',f:'sans-serif',v:[400]},
-    {n:'The Girl Next Door',f:'cursive',v:[400]},
-    {n:'Tienne',f:'serif',v:[400,700,900]},
-    {n:'Tillana',f:'cursive',v:[400,500,600,700,800]},
-    {n:'Timmana',f:'sans-serif',v:[400]},
-    {n:'Tinos',f:'serif',v:[400,'400i',700,'700i']},
-    {n:'Titan One',f:'cursive',v:[400]},
-    {n:'Titillium Web',f:'sans-serif',v:[200,'200i',300,'300i',400,'400i',600,'600i',700,'700i',900]},
-    {n:'Trade Winds',f:'cursive',v:[400]},
-    {n:'Trirong',f:'serif',v:[100,'100i',200,'200i',300,'300i',400,'400i',500,'500i',600,'600i',700,'700i',800,'800i',900,'900i']},
-    {n:'Trocchi',f:'serif',v:[400]},
-    {n:'Trochut',f:'cursive',v:[400,'400i',700]},
-    {n:'Trykker',f:'serif',v:[400]},
-    {n:'Tulpen One',f:'cursive',v:[400]},
-    {n:'Ubuntu',f:'sans-serif',v:[300,'300i',400,'400i',500,'500i',700,'700i']},
-    {n:'Ubuntu Condensed',f:'sans-serif',v:[400]},
-    {n:'Ubuntu Mono',f:'monospace',v:[400,'400i',700,'700i']},
-    {n:'Ultra',f:'serif',v:[400]},
-    {n:'Uncial Antiqua',f:'cursive',v:[400]},
-    {n:'Underdog',f:'cursive',v:[400]},
-    {n:'Unica One',f:'cursive',v:[400]},
-    {n:'UnifrakturCook',f:'cursive',v:[700]},
-    {n:'UnifrakturMaguntia',f:'cursive',v:[400]},
-    {n:'Unkempt',f:'cursive',v:[400,700]},
-    {n:'Unlock',f:'cursive',v:[400]},
-    {n:'Unna',f:'serif',v:[400,'400i',700,'700i']},
-    {n:'VT323',f:'monospace',v:[400]},
-    {n:'Vampiro One',f:'cursive',v:[400]},
-    {n:'Varela',f:'sans-serif',v:[400]},
-    {n:'Varela Round',f:'sans-serif',v:[400]},
-    {n:'Vast Shadow',f:'cursive',v:[400]},
-    {n:'Vesper Libre',f:'serif',v:[400,500,700,900]},
-    {n:'Vibur',f:'cursive',v:[400]},
-    {n:'Vidaloka',f:'serif',v:[400]},
-    {n:'Viga',f:'sans-serif',v:[400]},
-    {n:'Voces',f:'cursive',v:[400]},
-    {n:'Volkhov',f:'serif',v:[400,'400i',700,'700i']},
-    {n:'Vollkorn',f:'serif',v:[400,'400i',600,'600i',700,'700i',900,'900i']},
-    {n:'Vollkorn SC',f:'serif',v:[400,600,700,900]},
-    {n:'Voltaire',f:'sans-serif',v:[400]},
-    {n:'Waiting for the Sunrise',f:'cursive',v:[400]},
-    {n:'Wallpoet',f:'cursive',v:[400]},
-    {n:'Walter Turncoat',f:'cursive',v:[400]},
-    {n:'Warnes',f:'cursive',v:[400]},
-    {n:'Wellfleet',f:'cursive',v:[400]},
-    {n:'Wendy One',f:'sans-serif',v:[400]},
-    {n:'Wire One',f:'sans-serif',v:[400]},
-    {n:'Work Sans',f:'sans-serif',v:[100,200,300,400,500,600,700,800,900]},
-    {n:'Yanone Kaffeesatz',f:'sans-serif',v:[200,300,400,700]},
-    {n:'Yantramanav',f:'sans-serif',v:[100,300,400,500,700,900]},
-    {n:'Yatra One',f:'cursive',v:[400]},
-    {n:'Yellowtail',f:'cursive',v:[400]},
-    {n:'Yeon Sung',f:'cursive',v:[400]},
-    {n:'Yeseva One',f:'cursive',v:[400]},
-    {n:'Yesteryear',f:'cursive',v:[400]},
-    {n:'Yrsa',f:'serif',v:[300,400,500,600,700]},
-    {n:'Zeyada',f:'cursive',v:[400]},
-    {n:'Zilla Slab',f:'serif',v:[300,'300i',400,'400i',500,'500i',600,'600i',700,'700i']},
-    {n:'Zilla Slab Highlight',f:'cursive',v:[400,700]}
+  { 
+    n: "Default", 
+    v: [] ,
+    f: "default"
+  },
+  {
+    n: "ABeeZee",
+    v: [ 400, "400i" ],
+    f: "sans-serif"
+  },
+  {
+    n: "Abel",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Abhaya Libre",
+    v: [ 400, 500, 600, 700, 800 ],
+    f: "serif"
+  },
+  {
+    n: "Abril Fatface",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Aclonica",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Acme",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Actor",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Adamina",
+    v: [ 400 ],
+    f: "serif"
+  },
+  {
+    n: "Advent Pro",
+    v: [ 100, 200, 300, 400, 500, 600, 700 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Aguafina Script",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Akronim",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Aladin",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Alata",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Alatsi",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Aldrich",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Alef",
+    v: [ 400, 700 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Alegreya",
+    v: [ 400, "400i", 500, "500i", 700, "700i", 800, "800i", 900, "900i" ],
+    f: "serif"
+  },
+  {
+    n: "Alegreya SC",
+    v: [ 400, "400i", 500, "500i", 700, "700i", 800, "800i", 900, "900i" ],
+    f: "serif"
+  },
+  {
+    n: "Alegreya Sans",
+    v: [ 100, "100i", 300, "300i", 400, "400i", 500, "500i", 700, "700i", 800, "800i", 900, "900i" ],
+    f: "sans-serif"
+  },
+  {
+    n: "Alegreya Sans SC",
+    v: [ 100, "100i", 300, "300i", 400, "400i", 500, "500i", 700, "700i", 800, "800i", 900, "900i" ],
+    f: "sans-serif"
+  },
+  {
+    n: "Aleo",
+    v: [ 300, "300i", 400, "400i", 700, "700i" ],
+    f: "serif"
+  },
+  {
+    n: "Alex Brush",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Alfa Slab One",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Alice",
+    v: [ 400 ],
+    f: "serif"
+  },
+  {
+    n: "Alike",
+    v: [ 400 ],
+    f: "serif"
+  },
+  {
+    n: "Alike Angular",
+    v: [ 400 ],
+    f: "serif"
+  },
+  {
+    n: "Allan",
+    v: [ 400, 700 ],
+    f: "display"
+  },
+  {
+    n: "Allerta",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Allerta Stencil",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Allura",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Almarai",
+    v: [ 300, 400, 700, 800 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Almendra",
+    v: [ 400, "400i", 700, "700i" ],
+    f: "serif"
+  },
+  {
+    n: "Almendra Display",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Almendra SC",
+    v: [ 400 ],
+    f: "serif"
+  },
+  {
+    n: "Amarante",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Amaranth",
+    v: [ 400, "400i", 700, "700i" ],
+    f: "sans-serif"
+  },
+  {
+    n: "Amatic SC",
+    v: [ 400, 700 ],
+    f: "handwriting"
+  },
+  {
+    n: "Amethysta",
+    v: [ 400 ],
+    f: "serif"
+  },
+  {
+    n: "Amiko",
+    v: [ 400, 600, 700 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Amiri",
+    v: [ 400, "400i", 700, "700i" ],
+    f: "serif"
+  },
+  {
+    n: "Amita",
+    v: [ 400, 700 ],
+    f: "handwriting"
+  },
+  {
+    n: "Anaheim",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Andada",
+    v: [ 400 ],
+    f: "serif"
+  },
+  {
+    n: "Andika",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Angkor",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Annie Use Your Telescope",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Anonymous Pro",
+    v: [ 400, "400i", 700, "700i" ],
+    f: "monospace"
+  },
+  {
+    n: "Antic",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Antic Didone",
+    v: [ 400 ],
+    f: "serif"
+  },
+  {
+    n: "Antic Slab",
+    v: [ 400 ],
+    f: "serif"
+  },
+  {
+    n: "Anton",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Arapey",
+    v: [ 400, "400i" ],
+    f: "serif"
+  },
+  {
+    n: "Arbutus",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Arbutus Slab",
+    v: [ 400 ],
+    f: "serif"
+  },
+  {
+    n: "Architects Daughter",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Archivo",
+    v: [ 400, "400i", 500, "500i", 600, "600i", 700, "700i" ],
+    f: "sans-serif"
+  },
+  {
+    n: "Archivo Black",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Archivo Narrow",
+    v: [ 400, "400i", 500, "500i", 600, "600i", 700, "700i" ],
+    f: "sans-serif"
+  },
+  {
+    n: "Aref Ruqaa",
+    v: [ 400, 700 ],
+    f: "serif"
+  },
+  {
+    n: "Arima Madurai",
+    v: [ 100, 200, 300, 400, 500, 700, 800, 900 ],
+    f: "display"
+  },
+  {
+    n: "Arimo",
+    v: [ 400, "400i", 700, "700i" ],
+    f: "sans-serif"
+  },
+  {
+    n: "Arizonia",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Armata",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Arsenal",
+    v: [ 400, "400i", 700, "700i" ],
+    f: "sans-serif"
+  },
+  {
+    n: "Artifika",
+    v: [ 400 ],
+    f: "serif"
+  },
+  {
+    n: "Arvo",
+    v: [ 400, "400i", 700, "700i" ],
+    f: "serif"
+  },
+  {
+    n: "Arya",
+    v: [ 400, 700 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Asap",
+    v: [ 400, "400i", 500, "500i", 600, "600i", 700, "700i" ],
+    f: "sans-serif"
+  },
+  {
+    n: "Asap Condensed",
+    v: [ 400, "400i", 500, "500i", 600, "600i", 700, "700i" ],
+    f: "sans-serif"
+  },
+  {
+    n: "Asar",
+    v: [ 400 ],
+    f: "serif"
+  },
+  {
+    n: "Asset",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Assistant",
+    v: [ 200, 300, 400, 600, 700, 800 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Astloch",
+    v: [ 400, 700 ],
+    f: "display"
+  },
+  {
+    n: "Asul",
+    v: [ 400, 700 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Athiti",
+    v: [ 200, 300, 400, 500, 600, 700 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Atma",
+    v: [ 300, 400, 500, 600, 700 ],
+    f: "display"
+  },
+  {
+    n: "Atomic Age",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Aubrey",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Audiowide",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Autour One",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Average",
+    v: [ 400 ],
+    f: "serif"
+  },
+  {
+    n: "Average Sans",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Averia Gruesa Libre",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Averia Libre",
+    v: [ 300, "300i", 400, "400i", 700, "700i" ],
+    f: "display"
+  },
+  {
+    n: "Averia Sans Libre",
+    v: [ 300, "300i", 400, "400i", 700, "700i" ],
+    f: "display"
+  },
+  {
+    n: "Averia Serif Libre",
+    v: [ 300, "300i", 400, "400i", 700, "700i" ],
+    f: "display"
+  },
+  {
+    n: "B612",
+    v: [ 400, "400i", 700, "700i" ],
+    f: "sans-serif"
+  },
+  {
+    n: "B612 Mono",
+    v: [ 400, "400i", 700, "700i" ],
+    f: "monospace"
+  },
+  {
+    n: "Bad Script",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Bahiana",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Bahianita",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Bai Jamjuree",
+    v: [ 200, "200i", 300, "300i", 400, "400i", 500, "500i", 600, "600i", 700, "700i" ],
+    f: "sans-serif"
+  },
+  {
+    n: "Baloo 2",
+    v: [ 400, 500, 600, 700, 800 ],
+    f: "display"
+  },
+  {
+    n: "Baloo Bhai 2",
+    v: [ 400, 500, 600, 700, 800 ],
+    f: "display"
+  },
+  {
+    n: "Baloo Bhaina 2",
+    v: [ 400, 500, 600, 700, 800 ],
+    f: "display"
+  },
+  {
+    n: "Baloo Chettan 2",
+    v: [ 400, 500, 600, 700, 800 ],
+    f: "display"
+  },
+  {
+    n: "Baloo Da 2",
+    v: [ 400, 500, 600, 700, 800 ],
+    f: "display"
+  },
+  {
+    n: "Baloo Paaji 2",
+    v: [ 400, 500, 600, 700, 800 ],
+    f: "display"
+  },
+  {
+    n: "Baloo Tamma 2",
+    v: [ 400, 500, 600, 700, 800 ],
+    f: "display"
+  },
+  {
+    n: "Baloo Tammudu 2",
+    v: [ 400, 500, 600, 700, 800 ],
+    f: "display"
+  },
+  {
+    n: "Baloo Thambi 2",
+    v: [ 400, 500, 600, 700, 800 ],
+    f: "display"
+  },
+  {
+    n: "Balsamiq Sans",
+    v: [ 400, "400i", 700, "700i" ],
+    f: "display"
+  },
+  {
+    n: "Balthazar",
+    v: [ 400 ],
+    f: "serif"
+  },
+  {
+    n: "Bangers",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Barlow",
+    v: [ 100, "100i", 200, "200i", 300, "300i", 400, "400i", 500, "500i", 600, "600i", 700, "700i", 800, "800i", 900, "900i" ],
+    f: "sans-serif"
+  },
+  {
+    n: "Barlow Condensed",
+    v: [ 100, "100i", 200, "200i", 300, "300i", 400, "400i", 500, "500i", 600, "600i", 700, "700i", 800, "800i", 900, "900i" ],
+    f: "sans-serif"
+  },
+  {
+    n: "Barlow Semi Condensed",
+    v: [ 100, "100i", 200, "200i", 300, "300i", 400, "400i", 500, "500i", 600, "600i", 700, "700i", 800, "800i", 900, "900i" ],
+    f: "sans-serif"
+  },
+  {
+    n: "Barriecito",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Barrio",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Basic",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Baskervville",
+    v: [ 400, "400i" ],
+    f: "serif"
+  },
+  {
+    n: "Battambang",
+    v: [ 400, 700 ],
+    f: "display"
+  },
+  {
+    n: "Baumans",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Bayon",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Be Vietnam",
+    v: [ 100, "100i", 300, "300i", 400, "400i", 500, "500i", 600, "600i", 700, "700i", 800, "800i" ],
+    f: "sans-serif"
+  },
+  {
+    n: "Bebas Neue",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Belgrano",
+    v: [ 400 ],
+    f: "serif"
+  },
+  {
+    n: "Bellefair",
+    v: [ 400 ],
+    f: "serif"
+  },
+  {
+    n: "Belleza",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Bellota",
+    v: [ 300, "300i", 400, "400i", 700, "700i" ],
+    f: "display"
+  },
+  {
+    n: "Bellota Text",
+    v: [ 300, "300i", 400, "400i", 700, "700i" ],
+    f: "display"
+  },
+  {
+    n: "BenchNine",
+    v: [ 300, 400, 700 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Bentham",
+    v: [ 400 ],
+    f: "serif"
+  },
+  {
+    n: "Berkshire Swash",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Beth Ellen",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Bevan",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Big Shoulders Display",
+    v: [ 100, 300, 400, 500, 600, 700, 800, 900 ],
+    f: "display"
+  },
+  {
+    n: "Big Shoulders Text",
+    v: [ 100, 300, 400, 500, 600, 700, 800, 900 ],
+    f: "display"
+  },
+  {
+    n: "Bigelow Rules",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Bigshot One",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Bilbo",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Bilbo Swash Caps",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "BioRhyme",
+    v: [ 200, 300, 400, 700, 800 ],
+    f: "serif"
+  },
+  {
+    n: "BioRhyme Expanded",
+    v: [ 200, 300, 400, 700, 800 ],
+    f: "serif"
+  },
+  {
+    n: "Biryani",
+    v: [ 200, 300, 400, 600, 700, 800, 900 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Bitter",
+    v: [ 400, "400i", 700 ],
+    f: "serif"
+  },
+  {
+    n: "Black And White Picture",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Black Han Sans",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Black Ops One",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Blinker",
+    v: [ 100, 200, 300, 400, 600, 700, 800, 900 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Bokor",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Bonbon",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Boogaloo",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Bowlby One",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Bowlby One SC",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Brawler",
+    v: [ 400 ],
+    f: "serif"
+  },
+  {
+    n: "Bree Serif",
+    v: [ 400 ],
+    f: "serif"
+  },
+  {
+    n: "Bubblegum Sans",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Bubbler One",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Buda",
+    v: [ 300 ],
+    f: "display"
+  },
+  {
+    n: "Buenard",
+    v: [ 400, 700 ],
+    f: "serif"
+  },
+  {
+    n: "Bungee",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Bungee Hairline",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Bungee Inline",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Bungee Outline",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Bungee Shade",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Butcherman",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Butterfly Kids",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Cabin",
+    v: [ 400, "400i", 500, "500i", 600, "600i", 700, "700i" ],
+    f: "sans-serif"
+  },
+  {
+    n: "Cabin Condensed",
+    v: [ 400, 500, 600, 700 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Cabin Sketch",
+    v: [ 400, 700 ],
+    f: "display"
+  },
+  {
+    n: "Caesar Dressing",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Cagliostro",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Cairo",
+    v: [ 200, 300, 400, 600, 700, 900 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Caladea",
+    v: [ 400, "400i", 700, "700i" ],
+    f: "serif"
+  },
+  {
+    n: "Calistoga",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Calligraffitti",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Cambay",
+    v: [ 400, "400i", 700, "700i" ],
+    f: "sans-serif"
+  },
+  {
+    n: "Cambo",
+    v: [ 400 ],
+    f: "serif"
+  },
+  {
+    n: "Candal",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Cantarell",
+    v: [ 400, "400i", 700, "700i" ],
+    f: "sans-serif"
+  },
+  {
+    n: "Cantata One",
+    v: [ 400 ],
+    f: "serif"
+  },
+  {
+    n: "Cantora One",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Capriola",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Cardo",
+    v: [ 400, "400i", 700 ],
+    f: "serif"
+  },
+  {
+    n: "Carme",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Carrois Gothic",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Carrois Gothic SC",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Carter One",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Catamaran",
+    v: [ 100, 200, 300, 400, 500, 600, 700, 800, 900 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Caudex",
+    v: [ 400, "400i", 700, "700i" ],
+    f: "serif"
+  },
+  {
+    n: "Caveat",
+    v: [ 400, 700 ],
+    f: "handwriting"
+  },
+  {
+    n: "Caveat Brush",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Cedarville Cursive",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Ceviche One",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Chakra Petch",
+    v: [ 300, "300i", 400, "400i", 500, "500i", 600, "600i", 700, "700i" ],
+    f: "sans-serif"
+  },
+  {
+    n: "Changa",
+    v: [ 200, 300, 400, 500, 600, 700, 800 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Changa One",
+    v: [ 400, "400i" ],
+    f: "display"
+  },
+  {
+    n: "Chango",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Charm",
+    v: [ 400, 700 ],
+    f: "handwriting"
+  },
+  {
+    n: "Charmonman",
+    v: [ 400, 700 ],
+    f: "handwriting"
+  },
+  {
+    n: "Chathura",
+    v: [ 100, 300, 400, 700, 800 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Chau Philomene One",
+    v: [ 400, "400i" ],
+    f: "sans-serif"
+  },
+  {
+    n: "Chela One",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Chelsea Market",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Chenla",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Cherry Cream Soda",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Cherry Swash",
+    v: [ 400, 700 ],
+    f: "display"
+  },
+  {
+    n: "Chewy",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Chicle",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Chilanka",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Chivo",
+    v: [ 300, "300i", 400, "400i", 700, "700i", 900, "900i" ],
+    f: "sans-serif"
+  },
+  {
+    n: "Chonburi",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Cinzel",
+    v: [ 400, 700, 900 ],
+    f: "serif"
+  },
+  {
+    n: "Cinzel Decorative",
+    v: [ 400, 700, 900 ],
+    f: "display"
+  },
+  {
+    n: "Clicker Script",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Coda",
+    v: [ 400, 800 ],
+    f: "display"
+  },
+  {
+    n: "Coda Caption",
+    v: [ 800 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Codystar",
+    v: [ 300, 400 ],
+    f: "display"
+  },
+  {
+    n: "Coiny",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Combo",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Comfortaa",
+    v: [ 300, 400, 500, 600, 700 ],
+    f: "display"
+  },
+  {
+    n: "Comic Neue",
+    v: [ 300, "300i", 400, "400i", 700, "700i" ],
+    f: "handwriting"
+  },
+  {
+    n: "Coming Soon",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Concert One",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Condiment",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Content",
+    v: [ 400, 700 ],
+    f: "display"
+  },
+  {
+    n: "Contrail One",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Convergence",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Cookie",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Copse",
+    v: [ 400 ],
+    f: "serif"
+  },
+  {
+    n: "Corben",
+    v: [ 400, 700 ],
+    f: "display"
+  },
+  {
+    n: "Cormorant",
+    v: [ 300, "300i", 400, "400i", 500, "500i", 600, "600i", 700, "700i" ],
+    f: "serif"
+  },
+  {
+    n: "Cormorant Garamond",
+    v: [ 300, "300i", 400, "400i", 500, "500i", 600, "600i", 700, "700i" ],
+    f: "serif"
+  },
+  {
+    n: "Cormorant Infant",
+    v: [ 300, "300i", 400, "400i", 500, "500i", 600, "600i", 700, "700i" ],
+    f: "serif"
+  },
+  {
+    n: "Cormorant SC",
+    v: [ 300, 400, 500, 600, 700 ],
+    f: "serif"
+  },
+  {
+    n: "Cormorant Unicase",
+    v: [ 300, 400, 500, 600, 700 ],
+    f: "serif"
+  },
+  {
+    n: "Cormorant Upright",
+    v: [ 300, 400, 500, 600, 700 ],
+    f: "serif"
+  },
+  {
+    n: "Courgette",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Courier Prime",
+    v: [ 400, "400i", 700, "700i" ],
+    f: "monospace"
+  },
+  {
+    n: "Cousine",
+    v: [ 400, "400i", 700, "700i" ],
+    f: "monospace"
+  },
+  {
+    n: "Coustard",
+    v: [ 400, 900 ],
+    f: "serif"
+  },
+  {
+    n: "Covered By Your Grace",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Crafty Girls",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Creepster",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Crete Round",
+    v: [ 400, "400i" ],
+    f: "serif"
+  },
+  {
+    n: "Crimson Pro",
+    v: [ 200, 300, 400, 500, 600, 700, 800, 900, "200i", "300i", "400i", "500i", "600i", "700i", "800i", "900i" ],
+    f: "serif"
+  },
+  {
+    n: "Crimson Text",
+    v: [ 400, "400i", 600, "600i", 700, "700i" ],
+    f: "serif"
+  },
+  {
+    n: "Croissant One",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Crushed",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Cuprum",
+    v: [ 400, "400i", 700, "700i" ],
+    f: "sans-serif"
+  },
+  {
+    n: "Cute Font",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Cutive",
+    v: [ 400 ],
+    f: "serif"
+  },
+  {
+    n: "Cutive Mono",
+    v: [ 400 ],
+    f: "monospace"
+  },
+  {
+    n: "DM Mono",
+    v: [ 300, "300i", 400, "400i", 500, "500i" ],
+    f: "monospace"
+  },
+  {
+    n: "DM Sans",
+    v: [ 400, "400i", 500, "500i", 700, "700i" ],
+    f: "sans-serif"
+  },
+  {
+    n: "DM Serif Display",
+    v: [ 400, "400i" ],
+    f: "serif"
+  },
+  {
+    n: "DM Serif Text",
+    v: [ 400, "400i" ],
+    f: "serif"
+  },
+  {
+    n: "Damion",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Dancing Script",
+    v: [ 400, 500, 600, 700 ],
+    f: "handwriting"
+  },
+  {
+    n: "Dangrek",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Darker Grotesque",
+    v: [ 300, 400, 500, 600, 700, 800, 900 ],
+    f: "sans-serif"
+  },
+  {
+    n: "David Libre",
+    v: [ 400, 500, 700 ],
+    f: "serif"
+  },
+  {
+    n: "Dawning of a New Day",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Days One",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Dekko",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Delius",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Delius Swash Caps",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Delius Unicase",
+    v: [ 400, 700 ],
+    f: "handwriting"
+  },
+  {
+    n: "Della Respira",
+    v: [ 400 ],
+    f: "serif"
+  },
+  {
+    n: "Denk One",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Devonshire",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Dhurjati",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Didact Gothic",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Diplomata",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Diplomata SC",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Do Hyeon",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Dokdo",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Domine",
+    v: [ 400, 700 ],
+    f: "serif"
+  },
+  {
+    n: "Donegal One",
+    v: [ 400 ],
+    f: "serif"
+  },
+  {
+    n: "Doppio One",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Dorsa",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Dosis",
+    v: [ 200, 300, 400, 500, 600, 700, 800 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Dr Sugiyama",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Duru Sans",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Dynalight",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "EB Garamond",
+    v: [ 400, 500, 600, 700, 800, "400i", "500i", "600i", "700i", "800i" ],
+    f: "serif"
+  },
+  {
+    n: "Eagle Lake",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "East Sea Dokdo",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Eater",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Economica",
+    v: [ 400, "400i", 700, "700i" ],
+    f: "sans-serif"
+  },
+  {
+    n: "Eczar",
+    v: [ 400, 500, 600, 700, 800 ],
+    f: "serif"
+  },
+  {
+    n: "El Messiri",
+    v: [ 400, 500, 600, 700 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Electrolize",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Elsie",
+    v: [ 400, 900 ],
+    f: "display"
+  },
+  {
+    n: "Elsie Swash Caps",
+    v: [ 400, 900 ],
+    f: "display"
+  },
+  {
+    n: "Emblema One",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Emilys Candy",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Encode Sans",
+    v: [ 100, 200, 300, 400, 500, 600, 700, 800, 900 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Encode Sans Condensed",
+    v: [ 100, 200, 300, 400, 500, 600, 700, 800, 900 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Encode Sans Expanded",
+    v: [ 100, 200, 300, 400, 500, 600, 700, 800, 900 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Encode Sans Semi Condensed",
+    v: [ 100, 200, 300, 400, 500, 600, 700, 800, 900 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Encode Sans Semi Expanded",
+    v: [ 100, 200, 300, 400, 500, 600, 700, 800, 900 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Engagement",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Englebert",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Enriqueta",
+    v: [ 400, 500, 600, 700 ],
+    f: "serif"
+  },
+  {
+    n: "Epilogue",
+    v: [ 100, 200, 300, 400, 500, 600, 700, 800, 900, "100i", "200i", "300i", "400i", "500i", "600i", "700i", "800i", "900i" ],
+    f: "sans-serif"
+  },
+  {
+    n: "Erica One",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Esteban",
+    v: [ 400 ],
+    f: "serif"
+  },
+  {
+    n: "Euphoria Script",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Ewert",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Exo",
+    v: [ 100, 200, 300, 400, 500, 600, 700, 800, 900, "100i", "200i", "300i", "400i", "500i", "600i", "700i", "800i", "900i" ],
+    f: "sans-serif"
+  },
+  {
+    n: "Exo 2",
+    v: [ 100, 200, 300, 400, 500, 600, 700, 800, 900, "100i", "200i", "300i", "400i", "500i", "600i", "700i", "800i", "900i" ],
+    f: "sans-serif"
+  },
+  {
+    n: "Expletus Sans",
+    v: [ 400, "400i", 500, "500i", 600, "600i", 700, "700i" ],
+    f: "display"
+  },
+  {
+    n: "Fahkwang",
+    v: [ 200, "200i", 300, "300i", 400, "400i", 500, "500i", 600, "600i", 700, "700i" ],
+    f: "sans-serif"
+  },
+  {
+    n: "Fanwood Text",
+    v: [ 400, "400i" ],
+    f: "serif"
+  },
+  {
+    n: "Farro",
+    v: [ 300, 400, 500, 700 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Farsan",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Fascinate",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Fascinate Inline",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Faster One",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Fasthand",
+    v: [ 400 ],
+    f: "serif"
+  },
+  {
+    n: "Fauna One",
+    v: [ 400 ],
+    f: "serif"
+  },
+  {
+    n: "Faustina",
+    v: [ 400, 500, 600, 700, "400i", "500i", "600i", "700i" ],
+    f: "serif"
+  },
+  {
+    n: "Federant",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Federo",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Felipa",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Fenix",
+    v: [ 400 ],
+    f: "serif"
+  },
+  {
+    n: "Finger Paint",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Fira Code",
+    v: [ 300, 400, 500, 600, 700 ],
+    f: "monospace"
+  },
+  {
+    n: "Fira Mono",
+    v: [ 400, 500, 700 ],
+    f: "monospace"
+  },
+  {
+    n: "Fira Sans",
+    v: [ 100, "100i", 200, "200i", 300, "300i", 400, "400i", 500, "500i", 600, "600i", 700, "700i", 800, "800i", 900, "900i" ],
+    f: "sans-serif"
+  },
+  {
+    n: "Fira Sans Condensed",
+    v: [ 100, "100i", 200, "200i", 300, "300i", 400, "400i", 500, "500i", 600, "600i", 700, "700i", 800, "800i", 900, "900i" ],
+    f: "sans-serif"
+  },
+  {
+    n: "Fira Sans Extra Condensed",
+    v: [ 100, "100i", 200, "200i", 300, "300i", 400, "400i", 500, "500i", 600, "600i", 700, "700i", 800, "800i", 900, "900i" ],
+    f: "sans-serif"
+  },
+  {
+    n: "Fjalla One",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Fjord One",
+    v: [ 400 ],
+    f: "serif"
+  },
+  {
+    n: "Flamenco",
+    v: [ 300, 400 ],
+    f: "display"
+  },
+  {
+    n: "Flavors",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Fondamento",
+    v: [ 400, "400i" ],
+    f: "handwriting"
+  },
+  {
+    n: "Fontdiner Swanky",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Forum",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Francois One",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Frank Ruhl Libre",
+    v: [ 300, 400, 500, 700, 900 ],
+    f: "serif"
+  },
+  {
+    n: "Freckle Face",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Fredericka the Great",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Fredoka One",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Freehand",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Fresca",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Frijole",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Fruktur",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Fugaz One",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "GFS Didot",
+    v: [ 400 ],
+    f: "serif"
+  },
+  {
+    n: "GFS Neohellenic",
+    v: [ 400, "400i", 700, "700i" ],
+    f: "sans-serif"
+  },
+  {
+    n: "Gabriela",
+    v: [ 400 ],
+    f: "serif"
+  },
+  {
+    n: "Gaegu",
+    v: [ 300, 400, 700 ],
+    f: "handwriting"
+  },
+  {
+    n: "Gafata",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Galada",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Galdeano",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Galindo",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Gamja Flower",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Gayathri",
+    v: [ 100, 400, 700 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Gelasio",
+    v: [ 400, "400i", 500, "500i", 600, "600i", 700, "700i" ],
+    f: "serif"
+  },
+  {
+    n: "Gentium Basic",
+    v: [ 400, "400i", 700, "700i" ],
+    f: "serif"
+  },
+  {
+    n: "Gentium Book Basic",
+    v: [ 400, "400i", 700, "700i" ],
+    f: "serif"
+  },
+  {
+    n: "Geo",
+    v: [ 400, "400i" ],
+    f: "sans-serif"
+  },
+  {
+    n: "Geostar",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Geostar Fill",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Germania One",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Gidugu",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Gilda Display",
+    v: [ 400 ],
+    f: "serif"
+  },
+  {
+    n: "Girassol",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Give You Glory",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Glass Antiqua",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Glegoo",
+    v: [ 400, 700 ],
+    f: "serif"
+  },
+  {
+    n: "Gloria Hallelujah",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Goblin One",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Gochi Hand",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Gorditas",
+    v: [ 400, 700 ],
+    f: "display"
+  },
+  {
+    n: "Gothic A1",
+    v: [ 100, 200, 300, 400, 500, 600, 700, 800, 900 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Gotu",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Goudy Bookletter 1911",
+    v: [ 400 ],
+    f: "serif"
+  },
+  {
+    n: "Graduate",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Grand Hotel",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Gravitas One",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Great Vibes",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Grenze",
+    v: [ 100, "100i", 200, "200i", 300, "300i", 400, "400i", 500, "500i", 600, "600i", 700, "700i", 800, "800i", 900, "900i" ],
+    f: "serif"
+  },
+  {
+    n: "Grenze Gotisch",
+    v: [ 100, 200, 300, 400, 500, 600, 700, 800, 900 ],
+    f: "display"
+  },
+  {
+    n: "Griffy",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Gruppo",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Gudea",
+    v: [ 400, "400i", 700 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Gugi",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Gupter",
+    v: [ 400, 500, 700 ],
+    f: "serif"
+  },
+  {
+    n: "Gurajada",
+    v: [ 400 ],
+    f: "serif"
+  },
+  {
+    n: "Habibi",
+    v: [ 400 ],
+    f: "serif"
+  },
+  {
+    n: "Halant",
+    v: [ 300, 400, 500, 600, 700 ],
+    f: "serif"
+  },
+  {
+    n: "Hammersmith One",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Hanalei",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Hanalei Fill",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Handlee",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Hanuman",
+    v: [ 400, 700 ],
+    f: "serif"
+  },
+  {
+    n: "Happy Monkey",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Harmattan",
+    v: [ 400, 700 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Headland One",
+    v: [ 400 ],
+    f: "serif"
+  },
+  {
+    n: "Heebo",
+    v: [ 100, 200, 300, 400, 500, 600, 700, 800, 900 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Henny Penny",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Hepta Slab",
+    v: [ 100, 200, 300, 400, 500, 600, 700, 800, 900 ],
+    f: "serif"
+  },
+  {
+    n: "Herr Von Muellerhoff",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Hi Melody",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Hind",
+    v: [ 300, 400, 500, 600, 700 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Hind Guntur",
+    v: [ 300, 400, 500, 600, 700 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Hind Madurai",
+    v: [ 300, 400, 500, 600, 700 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Hind Siliguri",
+    v: [ 300, 400, 500, 600, 700 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Hind Vadodara",
+    v: [ 300, 400, 500, 600, 700 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Holtwood One SC",
+    v: [ 400 ],
+    f: "serif"
+  },
+  {
+    n: "Homemade Apple",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Homenaje",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "IBM Plex Mono",
+    v: [ 100, "100i", 200, "200i", 300, "300i", 400, "400i", 500, "500i", 600, "600i", 700, "700i" ],
+    f: "monospace"
+  },
+  {
+    n: "IBM Plex Sans",
+    v: [ 100, "100i", 200, "200i", 300, "300i", 400, "400i", 500, "500i", 600, "600i", 700, "700i" ],
+    f: "sans-serif"
+  },
+  {
+    n: "IBM Plex Sans Condensed",
+    v: [ 100, "100i", 200, "200i", 300, "300i", 400, "400i", 500, "500i", 600, "600i", 700, "700i" ],
+    f: "sans-serif"
+  },
+  {
+    n: "IBM Plex Serif",
+    v: [ 100, "100i", 200, "200i", 300, "300i", 400, "400i", 500, "500i", 600, "600i", 700, "700i" ],
+    f: "serif"
+  },
+  {
+    n: "IM Fell DW Pica",
+    v: [ 400, "400i" ],
+    f: "serif"
+  },
+  {
+    n: "IM Fell DW Pica SC",
+    v: [ 400 ],
+    f: "serif"
+  },
+  {
+    n: "IM Fell Double Pica",
+    v: [ 400, "400i" ],
+    f: "serif"
+  },
+  {
+    n: "IM Fell Double Pica SC",
+    v: [ 400 ],
+    f: "serif"
+  },
+  {
+    n: "IM Fell English",
+    v: [ 400, "400i" ],
+    f: "serif"
+  },
+  {
+    n: "IM Fell English SC",
+    v: [ 400 ],
+    f: "serif"
+  },
+  {
+    n: "IM Fell French Canon",
+    v: [ 400, "400i" ],
+    f: "serif"
+  },
+  {
+    n: "IM Fell French Canon SC",
+    v: [ 400 ],
+    f: "serif"
+  },
+  {
+    n: "IM Fell Great Primer",
+    v: [ 400, "400i" ],
+    f: "serif"
+  },
+  {
+    n: "IM Fell Great Primer SC",
+    v: [ 400 ],
+    f: "serif"
+  },
+  {
+    n: "Ibarra Real Nova",
+    v: [ 400, "400i", 600, "600i", 700, "700i" ],
+    f: "serif"
+  },
+  {
+    n: "Iceberg",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Iceland",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Imprima",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Inconsolata",
+    v: [ 200, 300, 400, 500, 600, 700, 800, 900 ],
+    f: "monospace"
+  },
+  {
+    n: "Inder",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Indie Flower",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Inika",
+    v: [ 400, 700 ],
+    f: "serif"
+  },
+  {
+    n: "Inknut Antiqua",
+    v: [ 300, 400, 500, 600, 700, 800, 900 ],
+    f: "serif"
+  },
+  {
+    n: "Inria Sans",
+    v: [ 300, "300i", 400, "400i", 700, "700i" ],
+    f: "sans-serif"
+  },
+  {
+    n: "Inria Serif",
+    v: [ 300, "300i", 400, "400i", 700, "700i" ],
+    f: "serif"
+  },
+  {
+    n: "Inter",
+    v: [ 100, 200, 300, 400, 500, 600, 700, 800, 900 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Irish Grover",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Istok Web",
+    v: [ 400, "400i", 700, "700i" ],
+    f: "sans-serif"
+  },
+  {
+    n: "Italiana",
+    v: [ 400 ],
+    f: "serif"
+  },
+  {
+    n: "Italianno",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Itim",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Jacques Francois",
+    v: [ 400 ],
+    f: "serif"
+  },
+  {
+    n: "Jacques Francois Shadow",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Jaldi",
+    v: [ 400, 700 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Jim Nightshade",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Jockey One",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Jolly Lodger",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Jomhuria",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Jomolhari",
+    v: [ 400 ],
+    f: "serif"
+  },
+  {
+    n: "Josefin Sans",
+    v: [ 100, 200, 300, 400, 500, 600, 700, "100i", "200i", "300i", "400i", "500i", "600i", "700i" ],
+    f: "sans-serif"
+  },
+  {
+    n: "Josefin Slab",
+    v: [ 100, "100i", 300, "300i", 400, "400i", 600, "600i", 700, "700i" ],
+    f: "serif"
+  },
+  {
+    n: "Jost",
+    v: [ 100, 200, 300, 400, 500, 600, 700, 800, 900, "100i", "200i", "300i", "400i", "500i", "600i", "700i", "800i", "900i" ],
+    f: "sans-serif"
+  },
+  {
+    n: "Joti One",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Jua",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Judson",
+    v: [ 400, "400i", 700 ],
+    f: "serif"
+  },
+  {
+    n: "Julee",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Julius Sans One",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Junge",
+    v: [ 400 ],
+    f: "serif"
+  },
+  {
+    n: "Jura",
+    v: [ 300, 400, 500, 600, 700 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Just Another Hand",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Just Me Again Down Here",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "K2D",
+    v: [ 100, "100i", 200, "200i", 300, "300i", 400, "400i", 500, "500i", 600, "600i", 700, "700i", 800, "800i" ],
+    f: "sans-serif"
+  },
+  {
+    n: "Kadwa",
+    v: [ 400, 700 ],
+    f: "serif"
+  },
+  {
+    n: "Kalam",
+    v: [ 300, 400, 700 ],
+    f: "handwriting"
+  },
+  {
+    n: "Kameron",
+    v: [ 400, 700 ],
+    f: "serif"
+  },
+  {
+    n: "Kanit",
+    v: [ 100, "100i", 200, "200i", 300, "300i", 400, "400i", 500, "500i", 600, "600i", 700, "700i", 800, "800i", 900, "900i" ],
+    f: "sans-serif"
+  },
+  {
+    n: "Kantumruy",
+    v: [ 300, 400, 700 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Karla",
+    v: [ 400, "400i", 700, "700i" ],
+    f: "sans-serif"
+  },
+  {
+    n: "Karma",
+    v: [ 300, 400, 500, 600, 700 ],
+    f: "serif"
+  },
+  {
+    n: "Katibeh",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Kaushan Script",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Kavivanar",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Kavoon",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Kdam Thmor",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Keania One",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Kelly Slab",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Kenia",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Khand",
+    v: [ 300, 400, 500, 600, 700 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Khmer",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Khula",
+    v: [ 300, 400, 600, 700, 800 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Kirang Haerang",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Kite One",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Knewave",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "KoHo",
+    v: [ 200, "200i", 300, "300i", 400, "400i", 500, "500i", 600, "600i", 700, "700i" ],
+    f: "sans-serif"
+  },
+  {
+    n: "Kodchasan",
+    v: [ 200, "200i", 300, "300i", 400, "400i", 500, "500i", 600, "600i", 700, "700i" ],
+    f: "sans-serif"
+  },
+  {
+    n: "Kosugi",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Kosugi Maru",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Kotta One",
+    v: [ 400 ],
+    f: "serif"
+  },
+  {
+    n: "Koulen",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Kranky",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Kreon",
+    v: [ 300, 400, 500, 600, 700 ],
+    f: "serif"
+  },
+  {
+    n: "Kristi",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Krona One",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Krub",
+    v: [ 200, "200i", 300, "300i", 400, "400i", 500, "500i", 600, "600i", 700, "700i" ],
+    f: "sans-serif"
+  },
+  {
+    n: "Kulim Park",
+    v: [ 200, "200i", 300, "300i", 400, "400i", 600, "600i", 700, "700i" ],
+    f: "sans-serif"
+  },
+  {
+    n: "Kumar One",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Kumar One Outline",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Kurale",
+    v: [ 400 ],
+    f: "serif"
+  },
+  {
+    n: "La Belle Aurore",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Lacquer",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Laila",
+    v: [ 300, 400, 500, 600, 700 ],
+    f: "serif"
+  },
+  {
+    n: "Lakki Reddy",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Lalezar",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Lancelot",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Lateef",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Lato",
+    v: [ 100, "100i", 300, "300i", 400, "400i", 700, "700i", 900, "900i" ],
+    f: "sans-serif"
+  },
+  {
+    n: "League Script",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Leckerli One",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Ledger",
+    v: [ 400 ],
+    f: "serif"
+  },
+  {
+    n: "Lekton",
+    v: [ 400, "400i", 700 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Lemon",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Lemonada",
+    v: [ 300, 400, 500, 600, 700 ],
+    f: "display"
+  },
+  {
+    n: "Lexend Deca",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Lexend Exa",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Lexend Giga",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Lexend Mega",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Lexend Peta",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Lexend Tera",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Lexend Zetta",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Libre Barcode 128",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Libre Barcode 128 Text",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Libre Barcode 39",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Libre Barcode 39 Extended",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Libre Barcode 39 Extended Text",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Libre Barcode 39 Text",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Libre Baskerville",
+    v: [ 400, "400i", 700 ],
+    f: "serif"
+  },
+  {
+    n: "Libre Caslon Display",
+    v: [ 400 ],
+    f: "serif"
+  },
+  {
+    n: "Libre Caslon Text",
+    v: [ 400, "400i", 700 ],
+    f: "serif"
+  },
+  {
+    n: "Libre Franklin",
+    v: [ 100, "100i", 200, "200i", 300, "300i", 400, "400i", 500, "500i", 600, "600i", 700, "700i", 800, "800i", 900, "900i" ],
+    f: "sans-serif"
+  },
+  {
+    n: "Life Savers",
+    v: [ 400, 700, 800 ],
+    f: "display"
+  },
+  {
+    n: "Lilita One",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Lily Script One",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Limelight",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Linden Hill",
+    v: [ 400, "400i" ],
+    f: "serif"
+  },
+  {
+    n: "Literata",
+    v: [ 400, 500, 600, 700, "400i", "500i", "600i", "700i" ],
+    f: "serif"
+  },
+  {
+    n: "Liu Jian Mao Cao",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Livvic",
+    v: [ 100, "100i", 200, "200i", 300, "300i", 400, "400i", 500, "500i", 600, "600i", 700, "700i", 900, "900i" ],
+    f: "sans-serif"
+  },
+  {
+    n: "Lobster",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Lobster Two",
+    v: [ 400, "400i", 700, "700i" ],
+    f: "display"
+  },
+  {
+    n: "Londrina Outline",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Londrina Shadow",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Londrina Sketch",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Londrina Solid",
+    v: [ 100, 300, 400, 900 ],
+    f: "display"
+  },
+  {
+    n: "Long Cang",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Lora",
+    v: [ 400, 500, 600, 700, "400i", "500i", "600i", "700i" ],
+    f: "serif"
+  },
+  {
+    n: "Love Ya Like A Sister",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Loved by the King",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Lovers Quarrel",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Luckiest Guy",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Lusitana",
+    v: [ 400, 700 ],
+    f: "serif"
+  },
+  {
+    n: "Lustria",
+    v: [ 400 ],
+    f: "serif"
+  },
+  {
+    n: "M PLUS 1p",
+    v: [ 100, 300, 400, 500, 700, 800, 900 ],
+    f: "sans-serif"
+  },
+  {
+    n: "M PLUS Rounded 1c",
+    v: [ 100, 300, 400, 500, 700, 800, 900 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Ma Shan Zheng",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Macondo",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Macondo Swash Caps",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Mada",
+    v: [ 200, 300, 400, 500, 600, 700, 900 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Magra",
+    v: [ 400, 700 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Maiden Orange",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Maitree",
+    v: [ 200, 300, 400, 500, 600, 700 ],
+    f: "serif"
+  },
+  {
+    n: "Major Mono Display",
+    v: [ 400 ],
+    f: "monospace"
+  },
+  {
+    n: "Mako",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Mali",
+    v: [ 200, "200i", 300, "300i", 400, "400i", 500, "500i", 600, "600i", 700, "700i" ],
+    f: "handwriting"
+  },
+  {
+    n: "Mallanna",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Mandali",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Manjari",
+    v: [ 100, 400, 700 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Manrope",
+    v: [ 200, 300, 400, 500, 600, 700, 800 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Mansalva",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Manuale",
+    v: [ 400, 500, 600, 700, "400i", "500i", "600i", "700i" ],
+    f: "serif"
+  },
+  {
+    n: "Marcellus",
+    v: [ 400 ],
+    f: "serif"
+  },
+  {
+    n: "Marcellus SC",
+    v: [ 400 ],
+    f: "serif"
+  },
+  {
+    n: "Marck Script",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Margarine",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Markazi Text",
+    v: [ 400, 500, 600, 700 ],
+    f: "serif"
+  },
+  {
+    n: "Marko One",
+    v: [ 400 ],
+    f: "serif"
+  },
+  {
+    n: "Marmelad",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Martel",
+    v: [ 200, 300, 400, 600, 700, 800, 900 ],
+    f: "serif"
+  },
+  {
+    n: "Martel Sans",
+    v: [ 200, 300, 400, 600, 700, 800, 900 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Marvel",
+    v: [ 400, "400i", 700, "700i" ],
+    f: "sans-serif"
+  },
+  {
+    n: "Mate",
+    v: [ 400, "400i" ],
+    f: "serif"
+  },
+  {
+    n: "Mate SC",
+    v: [ 400 ],
+    f: "serif"
+  },
+  {
+    n: "Maven Pro",
+    v: [ 400, 500, 600, 700, 800, 900 ],
+    f: "sans-serif"
+  },
+  {
+    n: "McLaren",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Meddon",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "MedievalSharp",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Medula One",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Meera Inimai",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Megrim",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Meie Script",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Merienda",
+    v: [ 400, 700 ],
+    f: "handwriting"
+  },
+  {
+    n: "Merienda One",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Merriweather",
+    v: [ 300, "300i", 400, "400i", 700, "700i", 900, "900i" ],
+    f: "serif"
+  },
+  {
+    n: "Merriweather Sans",
+    v: [ 300, "300i", 400, "400i", 700, "700i", 800, "800i" ],
+    f: "sans-serif"
+  },
+  {
+    n: "Metal",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Metal Mania",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Metamorphous",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Metrophobic",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Michroma",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Milonga",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Miltonian",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Miltonian Tattoo",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Mina",
+    v: [ 400, 700 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Miniver",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Miriam Libre",
+    v: [ 400, 700 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Mirza",
+    v: [ 400, 500, 600, 700 ],
+    f: "display"
+  },
+  {
+    n: "Miss Fajardose",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Mitr",
+    v: [ 200, 300, 400, 500, 600, 700 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Modak",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Modern Antiqua",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Mogra",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Molengo",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Molle",
+    v: [ "400i" ],
+    f: "handwriting"
+  },
+  {
+    n: "Monda",
+    v: [ 400, 700 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Monofett",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Monoton",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Monsieur La Doulaise",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Montaga",
+    v: [ 400 ],
+    f: "serif"
+  },
+  {
+    n: "Montez",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Montserrat",
+    v: [ 100, "100i", 200, "200i", 300, "300i", 400, "400i", 500, "500i", 600, "600i", 700, "700i", 800, "800i", 900, "900i" ],
+    f: "sans-serif"
+  },
+  {
+    n: "Montserrat Alternates",
+    v: [ 100, "100i", 200, "200i", 300, "300i", 400, "400i", 500, "500i", 600, "600i", 700, "700i", 800, "800i", 900, "900i" ],
+    f: "sans-serif"
+  },
+  {
+    n: "Montserrat Subrayada",
+    v: [ 400, 700 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Moul",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Moulpali",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Mountains of Christmas",
+    v: [ 400, 700 ],
+    f: "display"
+  },
+  {
+    n: "Mouse Memoirs",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Mr Bedfort",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Mr Dafoe",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Mr De Haviland",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Mrs Saint Delafield",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Mrs Sheppards",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Mukta",
+    v: [ 200, 300, 400, 500, 600, 700, 800 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Mukta Mahee",
+    v: [ 200, 300, 400, 500, 600, 700, 800 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Mukta Malar",
+    v: [ 200, 300, 400, 500, 600, 700, 800 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Mukta Vaani",
+    v: [ 200, 300, 400, 500, 600, 700, 800 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Mulish",
+    v: [ 200, 300, 400, 500, 600, 700, 800, 900, "200i", "300i", "400i", "500i", "600i", "700i", "800i", "900i" ],
+    f: "sans-serif"
+  },
+  {
+    n: "MuseoModerno",
+    v: [ 100, 200, 300, 400, 500, 600, 700, 800, 900 ],
+    f: "display"
+  },
+  {
+    n: "Mystery Quest",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "NTR",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Nanum Brush Script",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Nanum Gothic",
+    v: [ 400, 700, 800 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Nanum Gothic Coding",
+    v: [ 400, 700 ],
+    f: "monospace"
+  },
+  {
+    n: "Nanum Myeongjo",
+    v: [ 400, 700, 800 ],
+    f: "serif"
+  },
+  {
+    n: "Nanum Pen Script",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Neucha",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Neuton",
+    v: [ 200, 300, 400, "400i", 700, 800 ],
+    f: "serif"
+  },
+  {
+    n: "New Rocker",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "News Cycle",
+    v: [ 400, 700 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Niconne",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Niramit",
+    v: [ 200, "200i", 300, "300i", 400, "400i", 500, "500i", 600, "600i", 700, "700i" ],
+    f: "sans-serif"
+  },
+  {
+    n: "Nixie One",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Nobile",
+    v: [ 400, "400i", 500, "500i", 700, "700i" ],
+    f: "sans-serif"
+  },
+  {
+    n: "Nokora",
+    v: [ 400, 700 ],
+    f: "serif"
+  },
+  {
+    n: "Norican",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Nosifer",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Notable",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Nothing You Could Do",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Noticia Text",
+    v: [ 400, "400i", 700, "700i" ],
+    f: "serif"
+  },
+  {
+    n: "Noto Sans",
+    v: [ 400, "400i", 700, "700i" ],
+    f: "sans-serif"
+  },
+  {
+    n: "Noto Sans HK",
+    v: [ 100, 300, 400, 500, 700, 900 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Noto Sans JP",
+    v: [ 100, 300, 400, 500, 700, 900 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Noto Sans KR",
+    v: [ 100, 300, 400, 500, 700, 900 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Noto Sans SC",
+    v: [ 100, 300, 400, 500, 700, 900 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Noto Sans TC",
+    v: [ 100, 300, 400, 500, 700, 900 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Noto Serif",
+    v: [ 400, "400i", 700, "700i" ],
+    f: "serif"
+  },
+  {
+    n: "Noto Serif JP",
+    v: [ 200, 300, 400, 500, 600, 700, 900 ],
+    f: "serif"
+  },
+  {
+    n: "Noto Serif KR",
+    v: [ 200, 300, 400, 500, 600, 700, 900 ],
+    f: "serif"
+  },
+  {
+    n: "Noto Serif SC",
+    v: [ 200, 300, 400, 500, 600, 700, 900 ],
+    f: "serif"
+  },
+  {
+    n: "Noto Serif TC",
+    v: [ 200, 300, 400, 500, 600, 700, 900 ],
+    f: "serif"
+  },
+  {
+    n: "Nova Cut",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Nova Flat",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Nova Mono",
+    v: [ 400 ],
+    f: "monospace"
+  },
+  {
+    n: "Nova Oval",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Nova Round",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Nova Script",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Nova Slim",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Nova Square",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Numans",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Nunito",
+    v: [ 200, "200i", 300, "300i", 400, "400i", 600, "600i", 700, "700i", 800, "800i", 900, "900i" ],
+    f: "sans-serif"
+  },
+  {
+    n: "Nunito Sans",
+    v: [ 200, "200i", 300, "300i", 400, "400i", 600, "600i", 700, "700i", 800, "800i", 900, "900i" ],
+    f: "sans-serif"
+  },
+  {
+    n: "Odibee Sans",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Odor Mean Chey",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Offside",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Old Standard TT",
+    v: [ 400, "400i", 700 ],
+    f: "serif"
+  },
+  {
+    n: "Oldenburg",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Oleo Script",
+    v: [ 400, 700 ],
+    f: "display"
+  },
+  {
+    n: "Oleo Script Swash Caps",
+    v: [ 400, 700 ],
+    f: "display"
+  },
+  {
+    n: "Open Sans",
+    v: [ 300, "300i", 400, "400i", 600, "600i", 700, "700i", 800, "800i" ],
+    f: "sans-serif"
+  },
+  {
+    n: "Open Sans Condensed",
+    v: [ 300, "300i", 700 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Oranienbaum",
+    v: [ 400 ],
+    f: "serif"
+  },
+  {
+    n: "Orbitron",
+    v: [ 400, 500, 600, 700, 800, 900 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Oregano",
+    v: [ 400, "400i" ],
+    f: "display"
+  },
+  {
+    n: "Orienta",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Original Surfer",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Oswald",
+    v: [ 200, 300, 400, 500, 600, 700 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Over the Rainbow",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Overlock",
+    v: [ 400, "400i", 700, "700i", 900, "900i" ],
+    f: "display"
+  },
+  {
+    n: "Overlock SC",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Overpass",
+    v: [ 100, "100i", 200, "200i", 300, "300i", 400, "400i", 600, "600i", 700, "700i", 800, "800i", 900, "900i" ],
+    f: "sans-serif"
+  },
+  {
+    n: "Overpass Mono",
+    v: [ 300, 400, 600, 700 ],
+    f: "monospace"
+  },
+  {
+    n: "Ovo",
+    v: [ 400 ],
+    f: "serif"
+  },
+  {
+    n: "Oxanium",
+    v: [ 200, 300, 400, 500, 600, 700, 800 ],
+    f: "display"
+  },
+  {
+    n: "Oxygen",
+    v: [ 300, 400, 700 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Oxygen Mono",
+    v: [ 400 ],
+    f: "monospace"
+  },
+  {
+    n: "PT Mono",
+    v: [ 400 ],
+    f: "monospace"
+  },
+  {
+    n: "PT Sans",
+    v: [ 400, "400i", 700, "700i" ],
+    f: "sans-serif"
+  },
+  {
+    n: "PT Sans Caption",
+    v: [ 400, 700 ],
+    f: "sans-serif"
+  },
+  {
+    n: "PT Sans Narrow",
+    v: [ 400, 700 ],
+    f: "sans-serif"
+  },
+  {
+    n: "PT Serif",
+    v: [ 400, "400i", 700, "700i" ],
+    f: "serif"
+  },
+  {
+    n: "PT Serif Caption",
+    v: [ 400, "400i" ],
+    f: "serif"
+  },
+  {
+    n: "Pacifico",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Padauk",
+    v: [ 400, 700 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Palanquin",
+    v: [ 100, 200, 300, 400, 500, 600, 700 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Palanquin Dark",
+    v: [ 400, 500, 600, 700 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Pangolin",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Paprika",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Parisienne",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Passero One",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Passion One",
+    v: [ 400, 700, 900 ],
+    f: "display"
+  },
+  {
+    n: "Pathway Gothic One",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Patrick Hand",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Patrick Hand SC",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Pattaya",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Patua One",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Pavanam",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Paytone One",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Peddana",
+    v: [ 400 ],
+    f: "serif"
+  },
+  {
+    n: "Peralta",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Permanent Marker",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Petit Formal Script",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Petrona",
+    v: [ 400 ],
+    f: "serif"
+  },
+  {
+    n: "Philosopher",
+    v: [ 400, "400i", 700, "700i" ],
+    f: "sans-serif"
+  },
+  {
+    n: "Piedra",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Pinyon Script",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Pirata One",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Plaster",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Play",
+    v: [ 400, 700 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Playball",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Playfair Display",
+    v: [ 400, 500, 600, 700, 800, 900, "400i", "500i", "600i", "700i", "800i", "900i" ],
+    f: "serif"
+  },
+  {
+    n: "Playfair Display SC",
+    v: [ 400, "400i", 700, "700i", 900, "900i" ],
+    f: "serif"
+  },
+  {
+    n: "Podkova",
+    v: [ 400, 500, 600, 700, 800 ],
+    f: "serif"
+  },
+  {
+    n: "Poiret One",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Poller One",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Poly",
+    v: [ 400, "400i" ],
+    f: "serif"
+  },
+  {
+    n: "Pompiere",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Pontano Sans",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Poor Story",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Poppins",
+    v: [ 100, "100i", 200, "200i", 300, "300i", 400, "400i", 500, "500i", 600, "600i", 700, "700i", 800, "800i", 900, "900i" ],
+    f: "sans-serif"
+  },
+  {
+    n: "Port Lligat Sans",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Port Lligat Slab",
+    v: [ 400 ],
+    f: "serif"
+  },
+  {
+    n: "Pragati Narrow",
+    v: [ 400, 700 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Prata",
+    v: [ 400 ],
+    f: "serif"
+  },
+  {
+    n: "Preahvihear",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Press Start 2P",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Pridi",
+    v: [ 200, 300, 400, 500, 600, 700 ],
+    f: "serif"
+  },
+  {
+    n: "Princess Sofia",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Prociono",
+    v: [ 400 ],
+    f: "serif"
+  },
+  {
+    n: "Prompt",
+    v: [ 100, "100i", 200, "200i", 300, "300i", 400, "400i", 500, "500i", 600, "600i", 700, "700i", 800, "800i", 900, "900i" ],
+    f: "sans-serif"
+  },
+  {
+    n: "Prosto One",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Proza Libre",
+    v: [ 400, "400i", 500, "500i", 600, "600i", 700, "700i", 800, "800i" ],
+    f: "sans-serif"
+  },
+  {
+    n: "Public Sans",
+    v: [ 100, 200, 300, 400, 500, 600, 700, 800, 900, "100i", "200i", "300i", "400i", "500i", "600i", "700i", "800i", "900i" ],
+    f: "sans-serif"
+  },
+  {
+    n: "Puritan",
+    v: [ 400, "400i", 700, "700i" ],
+    f: "sans-serif"
+  },
+  {
+    n: "Purple Purse",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Quando",
+    v: [ 400 ],
+    f: "serif"
+  },
+  {
+    n: "Quantico",
+    v: [ 400, "400i", 700, "700i" ],
+    f: "sans-serif"
+  },
+  {
+    n: "Quattrocento",
+    v: [ 400, 700 ],
+    f: "serif"
+  },
+  {
+    n: "Quattrocento Sans",
+    v: [ 400, "400i", 700, "700i" ],
+    f: "sans-serif"
+  },
+  {
+    n: "Questrial",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Quicksand",
+    v: [ 300, 400, 500, 600, 700 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Quintessential",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Qwigley",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Racing Sans One",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Radley",
+    v: [ 400, "400i" ],
+    f: "serif"
+  },
+  {
+    n: "Rajdhani",
+    v: [ 300, 400, 500, 600, 700 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Rakkas",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Raleway",
+    v: [ 100, 200, 300, 400, 500, 600, 700, 800, 900, "100i", "200i", "300i", "400i", "500i", "600i", "700i", "800i", "900i" ],
+    f: "sans-serif"
+  },
+  {
+    n: "Raleway Dots",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Ramabhadra",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Ramaraja",
+    v: [ 400 ],
+    f: "serif"
+  },
+  {
+    n: "Rambla",
+    v: [ 400, "400i", 700, "700i" ],
+    f: "sans-serif"
+  },
+  {
+    n: "Rammetto One",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Ranchers",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Rancho",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Ranga",
+    v: [ 400, 700 ],
+    f: "display"
+  },
+  {
+    n: "Rasa",
+    v: [ 300, 400, 500, 600, 700 ],
+    f: "serif"
+  },
+  {
+    n: "Rationale",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Ravi Prakash",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Red Hat Display",
+    v: [ 400, "400i", 500, "500i", 700, "700i", 900, "900i" ],
+    f: "sans-serif"
+  },
+  {
+    n: "Red Hat Text",
+    v: [ 400, "400i", 500, "500i", 700, "700i" ],
+    f: "sans-serif"
+  },
+  {
+    n: "Red Rose",
+    v: [ 300, 400, 700 ],
+    f: "display"
+  },
+  {
+    n: "Redressed",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Reem Kufi",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Reenie Beanie",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Revalia",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Rhodium Libre",
+    v: [ 400 ],
+    f: "serif"
+  },
+  {
+    n: "Ribeye",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Ribeye Marrow",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Righteous",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Risque",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Roboto",
+    v: [ 100, "100i", 300, "300i", 400, "400i", 500, "500i", 700, "700i", 900, "900i" ],
+    f: "sans-serif"
+  },
+  {
+    n: "Roboto Condensed",
+    v: [ 300, "300i", 400, "400i", 700, "700i" ],
+    f: "sans-serif"
+  },
+  {
+    n: "Roboto Mono",
+    v: [ 100, 200, 300, 400, 500, 600, 700, "100i", "200i", "300i", "400i", "500i", "600i", "700i" ],
+    f: "monospace"
+  },
+  {
+    n: "Roboto Slab",
+    v: [ 100, 200, 300, 400, 500, 600, 700, 800, 900 ],
+    f: "serif"
+  },
+  {
+    n: "Rochester",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Rock Salt",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Rokkitt",
+    v: [ 100, 200, 300, 400, 500, 600, 700, 800, 900 ],
+    f: "serif"
+  },
+  {
+    n: "Romanesco",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Ropa Sans",
+    v: [ 400, "400i" ],
+    f: "sans-serif"
+  },
+  {
+    n: "Rosario",
+    v: [ 300, 400, 500, 600, 700, "300i", "400i", "500i", "600i", "700i" ],
+    f: "sans-serif"
+  },
+  {
+    n: "Rosarivo",
+    v: [ 400, "400i" ],
+    f: "serif"
+  },
+  {
+    n: "Rouge Script",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Rowdies",
+    v: [ 300, 400, 700 ],
+    f: "display"
+  },
+  {
+    n: "Rozha One",
+    v: [ 400 ],
+    f: "serif"
+  },
+  {
+    n: "Rubik",
+    v: [ 300, "300i", 400, "400i", 500, "500i", 700, "700i", 900, "900i" ],
+    f: "sans-serif"
+  },
+  {
+    n: "Rubik Mono One",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Ruda",
+    v: [ 400, 500, 600, 700, 800, 900 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Rufina",
+    v: [ 400, 700 ],
+    f: "serif"
+  },
+  {
+    n: "Ruge Boogie",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Ruluko",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Rum Raisin",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Ruslan Display",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Russo One",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Ruthie",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Rye",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Sacramento",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Sahitya",
+    v: [ 400, 700 ],
+    f: "serif"
+  },
+  {
+    n: "Sail",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Saira",
+    v: [ 100, 200, 300, 400, 500, 600, 700, 800, 900 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Saira Condensed",
+    v: [ 100, 200, 300, 400, 500, 600, 700, 800, 900 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Saira Extra Condensed",
+    v: [ 100, 200, 300, 400, 500, 600, 700, 800, 900 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Saira Semi Condensed",
+    v: [ 100, 200, 300, 400, 500, 600, 700, 800, 900 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Saira Stencil One",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Salsa",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Sanchez",
+    v: [ 400, "400i" ],
+    f: "serif"
+  },
+  {
+    n: "Sancreek",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Sansita",
+    v: [ 400, "400i", 700, "700i", 800, "800i", 900, "900i" ],
+    f: "sans-serif"
+  },
+  {
+    n: "Sarabun",
+    v: [ 100, "100i", 200, "200i", 300, "300i", 400, "400i", 500, "500i", 600, "600i", 700, "700i", 800, "800i" ],
+    f: "sans-serif"
+  },
+  {
+    n: "Sarala",
+    v: [ 400, 700 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Sarina",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Sarpanch",
+    v: [ 400, 500, 600, 700, 800, 900 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Satisfy",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Sawarabi Gothic",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Sawarabi Mincho",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Scada",
+    v: [ 400, "400i", 700, "700i" ],
+    f: "sans-serif"
+  },
+  {
+    n: "Scheherazade",
+    v: [ 400, 700 ],
+    f: "serif"
+  },
+  {
+    n: "Schoolbell",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Scope One",
+    v: [ 400 ],
+    f: "serif"
+  },
+  {
+    n: "Seaweed Script",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Secular One",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Sedgwick Ave",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Sedgwick Ave Display",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Sen",
+    v: [ 400, 700, 800 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Sevillana",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Seymour One",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Shadows Into Light",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Shadows Into Light Two",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Shanti",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Share",
+    v: [ 400, "400i", 700, "700i" ],
+    f: "display"
+  },
+  {
+    n: "Share Tech",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Share Tech Mono",
+    v: [ 400 ],
+    f: "monospace"
+  },
+  {
+    n: "Shojumaru",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Short Stack",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Shrikhand",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Siemreap",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Sigmar One",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Signika",
+    v: [ 300, 400, 500, 600, 700 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Signika Negative",
+    v: [ 300, 400, 600, 700 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Simonetta",
+    v: [ 400, "400i", 900, "900i" ],
+    f: "display"
+  },
+  {
+    n: "Single Day",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Sintony",
+    v: [ 400, 700 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Sirin Stencil",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Six Caps",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Skranji",
+    v: [ 400, 700 ],
+    f: "display"
+  },
+  {
+    n: "Slabo 13px",
+    v: [ 400 ],
+    f: "serif"
+  },
+  {
+    n: "Slabo 27px",
+    v: [ 400 ],
+    f: "serif"
+  },
+  {
+    n: "Slackey",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Smokum",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Smythe",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Sniglet",
+    v: [ 400, 800 ],
+    f: "display"
+  },
+  {
+    n: "Snippet",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Snowburst One",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Sofadi One",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Sofia",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Solway",
+    v: [ 300, 400, 500, 700, 800 ],
+    f: "serif"
+  },
+  {
+    n: "Song Myung",
+    v: [ 400 ],
+    f: "serif"
+  },
+  {
+    n: "Sonsie One",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Sora",
+    v: [ 100, 200, 300, 400, 500, 600, 700, 800 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Sorts Mill Goudy",
+    v: [ 400, "400i" ],
+    f: "serif"
+  },
+  {
+    n: "Source Code Pro",
+    v: [ 200, "200i", 300, "300i", 400, "400i", 500, "500i", 600, "600i", 700, "700i", 900, "900i" ],
+    f: "monospace"
+  },
+  {
+    n: "Source Sans Pro",
+    v: [ 200, "200i", 300, "300i", 400, "400i", 600, "600i", 700, "700i", 900, "900i" ],
+    f: "sans-serif"
+  },
+  {
+    n: "Source Serif Pro",
+    v: [ 200, "200i", 300, "300i", 400, "400i", 600, "600i", 700, "700i", 900, "900i" ],
+    f: "serif"
+  },
+  {
+    n: "Space Mono",
+    v: [ 400, "400i", 700, "700i" ],
+    f: "monospace"
+  },
+  {
+    n: "Spartan",
+    v: [ 100, 200, 300, 400, 500, 600, 700, 800, 900 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Special Elite",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Spectral",
+    v: [ 200, "200i", 300, "300i", 400, "400i", 500, "500i", 600, "600i", 700, "700i", 800, "800i" ],
+    f: "serif"
+  },
+  {
+    n: "Spectral SC",
+    v: [ 200, "200i", 300, "300i", 400, "400i", 500, "500i", 600, "600i", 700, "700i", 800, "800i" ],
+    f: "serif"
+  },
+  {
+    n: "Spicy Rice",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Spinnaker",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Spirax",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Squada One",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Sree Krushnadevaraya",
+    v: [ 400 ],
+    f: "serif"
+  },
+  {
+    n: "Sriracha",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Srisakdi",
+    v: [ 400, 700 ],
+    f: "display"
+  },
+  {
+    n: "Staatliches",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Stalemate",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Stalinist One",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Stardos Stencil",
+    v: [ 400, 700 ],
+    f: "display"
+  },
+  {
+    n: "Stint Ultra Condensed",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Stint Ultra Expanded",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Stoke",
+    v: [ 300, 400 ],
+    f: "serif"
+  },
+  {
+    n: "Strait",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Stylish",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Sue Ellen Francisco",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Suez One",
+    v: [ 400 ],
+    f: "serif"
+  },
+  {
+    n: "Sulphur Point",
+    v: [ 300, 400, 700 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Sumana",
+    v: [ 400, 700 ],
+    f: "serif"
+  },
+  {
+    n: "Sunflower",
+    v: [ 300, 500, 700 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Sunshiney",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Supermercado One",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Sura",
+    v: [ 400, 700 ],
+    f: "serif"
+  },
+  {
+    n: "Suranna",
+    v: [ 400 ],
+    f: "serif"
+  },
+  {
+    n: "Suravaram",
+    v: [ 400 ],
+    f: "serif"
+  },
+  {
+    n: "Suwannaphum",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Swanky and Moo Moo",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Syncopate",
+    v: [ 400, 700 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Tajawal",
+    v: [ 200, 300, 400, 500, 700, 800, 900 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Tangerine",
+    v: [ 400, 700 ],
+    f: "handwriting"
+  },
+  {
+    n: "Taprom",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Tauri",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Taviraj",
+    v: [ 100, "100i", 200, "200i", 300, "300i", 400, "400i", 500, "500i", 600, "600i", 700, "700i", 800, "800i", 900, "900i" ],
+    f: "serif"
+  },
+  {
+    n: "Teko",
+    v: [ 300, 400, 500, 600, 700 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Telex",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Tenali Ramakrishna",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Tenor Sans",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Text Me One",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Thasadith",
+    v: [ 400, "400i", 700, "700i" ],
+    f: "sans-serif"
+  },
+  {
+    n: "The Girl Next Door",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Tienne",
+    v: [ 400, 700, 900 ],
+    f: "serif"
+  },
+  {
+    n: "Tillana",
+    v: [ 400, 500, 600, 700, 800 ],
+    f: "handwriting"
+  },
+  {
+    n: "Timmana",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Tinos",
+    v: [ 400, "400i", 700, "700i" ],
+    f: "serif"
+  },
+  {
+    n: "Titan One",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Titillium Web",
+    v: [ 200, "200i", 300, "300i", 400, "400i", 600, "600i", 700, "700i", 900 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Tomorrow",
+    v: [ 100, "100i", 200, "200i", 300, "300i", 400, "400i", 500, "500i", 600, "600i", 700, "700i", 800, "800i", 900, "900i" ],
+    f: "sans-serif"
+  },
+  {
+    n: "Trade Winds",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Trirong",
+    v: [ 100, "100i", 200, "200i", 300, "300i", 400, "400i", 500, "500i", 600, "600i", 700, "700i", 800, "800i", 900, "900i" ],
+    f: "serif"
+  },
+  {
+    n: "Trocchi",
+    v: [ 400 ],
+    f: "serif"
+  },
+  {
+    n: "Trochut",
+    v: [ 400, "400i", 700 ],
+    f: "display"
+  },
+  {
+    n: "Trykker",
+    v: [ 400 ],
+    f: "serif"
+  },
+  {
+    n: "Tulpen One",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Turret Road",
+    v: [ 200, 300, 400, 500, 700, 800 ],
+    f: "display"
+  },
+  {
+    n: "Ubuntu",
+    v: [ 300, "300i", 400, "400i", 500, "500i", 700, "700i" ],
+    f: "sans-serif"
+  },
+  {
+    n: "Ubuntu Condensed",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Ubuntu Mono",
+    v: [ 400, "400i", 700, "700i" ],
+    f: "monospace"
+  },
+  {
+    n: "Ultra",
+    v: [ 400 ],
+    f: "serif"
+  },
+  {
+    n: "Uncial Antiqua",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Underdog",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Unica One",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "UnifrakturCook",
+    v: [ 700 ],
+    f: "display"
+  },
+  {
+    n: "UnifrakturMaguntia",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Unkempt",
+    v: [ 400, 700 ],
+    f: "display"
+  },
+  {
+    n: "Unlock",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Unna",
+    v: [ 400, "400i", 700, "700i" ],
+    f: "serif"
+  },
+  {
+    n: "VT323",
+    v: [ 400 ],
+    f: "monospace"
+  },
+  {
+    n: "Vampiro One",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Varela",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Varela Round",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Varta",
+    v: [ 300, 400, 500, 600, 700 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Vast Shadow",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Vesper Libre",
+    v: [ 400, 500, 700, 900 ],
+    f: "serif"
+  },
+  {
+    n: "Viaoda Libre",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Vibes",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Vibur",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Vidaloka",
+    v: [ 400 ],
+    f: "serif"
+  },
+  {
+    n: "Viga",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Voces",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Volkhov",
+    v: [ 400, "400i", 700, "700i" ],
+    f: "serif"
+  },
+  {
+    n: "Vollkorn",
+    v: [ 400, 500, 600, 700, 800, 900, "400i", "500i", "600i", "700i", "800i", "900i" ],
+    f: "serif"
+  },
+  {
+    n: "Vollkorn SC",
+    v: [ 400, 600, 700, 900 ],
+    f: "serif"
+  },
+  {
+    n: "Voltaire",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Waiting for the Sunrise",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Wallpoet",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Walter Turncoat",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Warnes",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Wellfleet",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Wendy One",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Wire One",
+    v: [ 400 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Work Sans",
+    v: [ 100, 200, 300, 400, 500, 600, 700, 800, 900, "100i", "200i", "300i", "400i", "500i", "600i", "700i", "800i", "900i" ],
+    f: "sans-serif"
+  },
+  {
+    n: "Yanone Kaffeesatz",
+    v: [ 200, 300, 400, 500, 600, 700 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Yantramanav",
+    v: [ 100, 300, 400, 500, 700, 900 ],
+    f: "sans-serif"
+  },
+  {
+    n: "Yatra One",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Yellowtail",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Yeon Sung",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Yeseva One",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "Yesteryear",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Yrsa",
+    v: [ 300, 400, 500, 600, 700 ],
+    f: "serif"
+  },
+  {
+    n: "ZCOOL KuaiLe",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "ZCOOL QingKe HuangYou",
+    v: [ 400 ],
+    f: "display"
+  },
+  {
+    n: "ZCOOL XiaoWei",
+    v: [ 400 ],
+    f: "serif"
+  },
+  {
+    n: "Zeyada",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Zhi Mang Xing",
+    v: [ 400 ],
+    f: "handwriting"
+  },
+  {
+    n: "Zilla Slab",
+    v: [ 300, "300i", 400, "400i", 500, "500i", 600, "600i", 700, "700i" ],
+    f: "serif"
+  },
+  {
+    n: "Zilla Slab Highlight",
+    v: [ 400, 700 ],
+    f: "display"
+  }
 ];

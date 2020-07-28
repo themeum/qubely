@@ -7,9 +7,30 @@ const { HelperFunction: { animationAttr, videoBackground } } = wp.qubelyComponen
 class Save extends Component {
 
 	getClassName = () => {
-		const { attributes: { align, childRow, rowContainerWidth } } = this.props
-		const wrapperClassName = align ? ((align === 'full' && rowContainerWidth == 'boxed') ? 'qubely-container' : 'qubely-container-fluid') : (childRow ? 'qubely-container-fluid' : 'qubely-container')
-		return wrapperClassName
+		const {
+			attributes: {
+				align,
+				childRow,
+				rowContainerWidth
+			}
+		} = this.props;
+		let wrapperClassName = '';
+
+		if (typeof align !== 'undefined') {
+			if (align === 'full' && rowContainerWidth === 'boxed') {
+				wrapperClassName = 'qubely-container';
+			} else {
+				wrapperClassName = 'qubely-container-fluid';
+			}
+		} else {
+			if (childRow) {
+				wrapperClassName = 'qubely-container-fluid';
+			} else {
+				wrapperClassName = 'qubely-container';
+			}
+		}
+
+		return wrapperClassName;
 	}
 
 	render() {
