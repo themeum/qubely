@@ -1,5 +1,5 @@
 
-<h3>1.5.2 - 28 July, 2020</h3>
+<h3>1.5.2 - 29 July, 2020</h3>
 <ul>
     <li>New: Accordion block - Rich Snippet added</li>
     <li>New: Row block - Shape divider flip option </li>
