@@ -237,7 +237,7 @@ You can report bugs on the [support forum here](https://wordpress.org/support/pl
 
 == Changelog ==
 
-= 1.5.2 - 27 July, 2020 =  
+= 1.5.2 - 29 July, 2020 =  
 New: Accordion block - Rich Snippet added  
 New: Row block - Shape divider flip option  
 Update: Added 100+ Google fonts  
