@@ -1,8 +1,10 @@
 import icons from '../../helpers/icons';
+import classnames from 'classnames';
 const { __ } = wp.i18n;
 const {
     Fragment,
-    Component
+    Component,
+    createRef
 } = wp.element;
 
 const { compose } = wp.compose;
@@ -68,6 +70,7 @@ class Edit extends Component {
             device: 'md',
             spacer: true
         };
+        this.qubelyContextMenu = createRef();
     }
 
     componentDidMount() {
@@ -143,6 +146,11 @@ class Edit extends Component {
         } = this.props;
 
         const { device, currentTab } = this.state;
+
+        const classNames = classnames(
+            { [`qubely-block-${uniqueId}`]: uniqueId },
+            className
+        );
 
         return (
             <Fragment>
@@ -318,8 +326,8 @@ class Edit extends Component {
                 {globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
 
-                <div className={`qubely-block-${uniqueId}${className ? ` ${className}` : ''}`}>
-                <div className="qubely-block-btn-wrapper" onContextMenu={event => handleContextMenu(event, this.refs.qubelyContextMenu)}>
+                <div className={classNames}>
+                    <div className="qubely-block-btn-wrapper" onContextMenu={event => handleContextMenu(event, this.qubelyContextMenu.current)}>
                         <div className={`qubely-block-btn`}>
                             <div className={`qubely-block-btn-anchor is-${buttonSize}`}>
                                 {(iconName.trim() != "") && (iconPosition == 'left') && (<i className={`qubely-btn-icon ${iconName}`} />)}
@@ -328,20 +336,23 @@ class Edit extends Component {
                                     keepPlaceholderOnFocus
                                     className="qubely-button-text"
                                     placeholder={__('Add Text...')}
-                                    onChange={value => setAttributes({ textField: value })}
                                     value={textField}
+                                    onChange={value => setAttributes({ textField: value })}
                                 />
                                 {(iconName.trim() != "") && (iconPosition == 'right') && (<i className={`qubely-btn-icon ${iconName}`} />)}
                             </div>
                         </div>
 
-                        <div ref="qubelyContextMenu" className={`qubely-context-menu-wraper`} >
+                        <div
+                            ref={this.qubelyContextMenu}
+                            className={`qubely-context-menu-wraper`}
+                        >
                             <ContextMenu
                                 name={name}
                                 clientId={clientId}
                                 attributes={attributes}
                                 setAttributes={setAttributes}
-                                qubelyContextMenu={this.refs.qubelyContextMenu}
+                                qubelyContextMenu={this.qubelyContextMenu.current}
                             />
                         </div>
 
