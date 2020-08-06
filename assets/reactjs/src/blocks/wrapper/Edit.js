@@ -1,5 +1,5 @@
 const { __ } = wp.i18n;
-const { Component, Fragment } = wp.element;
+const { Component, Fragment, createRef } = wp.element;
 const { PanelBody, Toolbar } = wp.components
 const { InspectorControls, BlockControls, InnerBlocks } = wp.blockEditor
 const {
@@ -21,13 +21,21 @@ const {
 	},
 	withCSSGenerator,
 	InspectorTabs,
-	InspectorTab
+	InspectorTab,
+	ContextMenu: {
+        ContextMenu,
+        handleContextMenu
+    },
 } = wp.qubelyComponents
 
 class Edit extends Component {
 	constructor() {
 		super(...arguments);
-		this.state = { device: 'md', spacer: true };
+		this.state = {
+			device: 'md',
+			spacer: true
+		};
+		this.qubelyContextMenu = createRef();
 	}
 
 	componentDidMount() {
@@ -43,6 +51,8 @@ class Edit extends Component {
 	render() {
 		const {
 			name,
+			clientId,
+			attributes,
 			setAttributes,
 			isSelected,
 			attributes: {
@@ -133,8 +143,23 @@ class Edit extends Component {
 				{globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
 				<div className={`qubely-block-${uniqueId}${className ? ` ${className}` : ''}`}>
-					<div className="qubely-block-wrapper-block">
+					<div
+						className="qubely-block-wrapper-block"
+						onContextMenu={event => handleContextMenu(event, this.qubelyContextMenu.current)}
+					>
 						<InnerBlocks templateLock={false} />
+						<div
+							ref={this.qubelyContextMenu}
+							className={`qubely-context-menu-wraper`}
+						>
+							<ContextMenu
+								name={name}
+								clientId={clientId}
+								attributes={attributes}
+								setAttributes={setAttributes}
+								qubelyContextMenu={this.qubelyContextMenu.current}
+							/>
+						</div>
 					</div>
 				</div>
 			</Fragment>
