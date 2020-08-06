@@ -7,7 +7,8 @@ const {
 
 const {
     Component,
-    Fragment
+    Fragment,
+    createRef
 } = wp.element;
 
 const {
@@ -52,13 +53,14 @@ const {
 class Edit extends Component {
 
     constructor(props) {
-        super(props)
+        super(props);
         this.state = {
             device: 'md',
             spacer: true,
             removeItemViaBackSpace: 999,
             focusedItem: this.props.attributes.listItems.length - 1
-        }
+        };
+        this.qubelyContextMenu = createRef();
     }
 
     componentDidMount() {
@@ -444,16 +446,21 @@ class Edit extends Component {
                 {globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
                 <div className={`qubely-block-${uniqueId}${className ? ` ${className}` : ''}`}>
-                    <div className={`qubely-block-advanced-list qubely-alignment-${alignment}`} onContextMenu={event => handleContextMenu(event, this.refs.qubelyContextMenu)}>
+                    <div
+                        className={`qubely-block-advanced-list qubely-alignment-${alignment}`}
+                        onContextMenu={event => handleContextMenu(event, this.qubelyContextMenu.current)}
+                    >
                         {this.renderListItems()}
-
-                        <div ref="qubelyContextMenu" className={`qubely-context-menu-wraper`} >
+                        <div
+                            ref={this.qubelyContextMenu}
+                            className={`qubely-context-menu-wraper`}
+                        >
                             <ContextMenu
                                 name={name}
                                 clientId={clientId}
                                 attributes={attributes}
                                 setAttributes={setAttributes}
-                                qubelyContextMenu={this.refs.qubelyContextMenu}
+                                qubelyContextMenu={this.qubelyContextMenu.current}
                             />
                         </div>
                     </div>

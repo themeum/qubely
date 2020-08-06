@@ -3,7 +3,7 @@ const { __ } = wp.i18n
 const { compose } = wp.compose;
 const { select, withDispatch } = wp.data
 const { PanelBody, TextControl, SelectControl, Tooltip, Button, RangeControl } = wp.components
-const { Component, Fragment } = wp.element
+const { Component, Fragment, createRef } = wp.element
 const { InspectorControls, InnerBlocks, InspectorAdvancedControls } = wp.blockEditor
 const { Background, Select, Range, Toggle, Shape, BoxShadow, Tab, Tabs, Separator, Border, BorderRadius, RadioAdvanced, Dimension, gloalSettings: { globalSettingsPanel, animationSettings }, HelperFunction: { videoBackground }, CssGenerator: { CssGenerator }, withCSSGenerator, InspectorTabs, InspectorTab } = wp.qubelyComponents
 import { ModalManager } from '../../helpers/ModalManager';
@@ -29,11 +29,12 @@ let defaultLayout = { md: [100], sm: [100], xs: [100] }
 
 class Edit extends Component {
     constructor(props) {
-        super(props)
+        super(props);
         this.state = {
             device: 'md',
             hideRowSettings: false
-        }
+        };
+        this.qubelyContextMenu = createRef();
     }
     componentDidMount() {
         const { setAttributes, clientId, attributes: { uniqueId } } = this.props

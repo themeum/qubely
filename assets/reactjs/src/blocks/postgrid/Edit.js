@@ -3,7 +3,7 @@ const { __ } = wp.i18n;
 const { compose } = wp.compose;
 const { withSelect } = wp.data;
 const { addQueryArgs } = wp.url;
-const { Fragment, Component } = wp.element;
+const { Fragment, Component, createRef } = wp.element;
 const {
 	dateI18n,
 	__experimentalGetSettings
@@ -70,6 +70,7 @@ class Edit extends Component {
 			spacer: true,
 			categoriesList: [],
 		};
+		this.qubelyContextMenu = createRef();
 	}
 
 	componentDidMount() {
@@ -873,34 +874,37 @@ class Edit extends Component {
 				<div className={`qubely-block-${uniqueId}${className ? ` ${className}` : ''}`}>
 					{
 						(posts && posts.length) ?
-						<Fragment>
-							<div
-								// onContextMenu={event => handleContextMenu(event, this.refs.qubelyContextMenu)}
-								className={`qubely-postgrid-wrapper qubely-postgrid-layout-${layout} ${(layout === 2) ? 'qubely-postgrid-column qubely-postgrid-column-md' + column.md + ' ' + 'qubely-postgrid-column-sm' + column.sm + ' ' + 'qubely-postgrid-column-xs' + column.xs : ''}`}>
-								{
-									posts && posts.map(post => {
-										if (post) {
-											return (
-												<div className={`qubely-postgrid ${layout === 1 ? 'qubely-post-list-view' : 'qubely-post-grid-view'} qubely-postgrid-style-${style}`}>
-													<div className={`${layout === 1 ? `qubely-post-list-wrapper qubely-post-list-${((layout === 2) && (style === 3)) ? contentPosition : girdContentPosition}` : `qubely-post-grid-wrapper qubely-post-grid-${((layout === 2) && (style === 3)) ? contentPosition : girdContentPosition}`}`}>
-														{showImages && post.qubely_featured_image_url && this.renderFeaturedImage(post)}
-														{this.renderCardContent(post)}
+							<Fragment>
+								<div
+									// onContextMenu={event => handleContextMenu(event, this.qubelyContextMenu.current)}
+									className={`qubely-postgrid-wrapper qubely-postgrid-layout-${layout} ${(layout === 2) ? 'qubely-postgrid-column qubely-postgrid-column-md' + column.md + ' ' + 'qubely-postgrid-column-sm' + column.sm + ' ' + 'qubely-postgrid-column-xs' + column.xs : ''}`}>
+									{
+										posts && posts.map(post => {
+											if (post) {
+												return (
+													<div className={`qubely-postgrid ${layout === 1 ? 'qubely-post-list-view' : 'qubely-post-grid-view'} qubely-postgrid-style-${style}`}>
+														<div className={`${layout === 1 ? `qubely-post-list-wrapper qubely-post-list-${((layout === 2) && (style === 3)) ? contentPosition : girdContentPosition}` : `qubely-post-grid-wrapper qubely-post-grid-${((layout === 2) && (style === 3)) ? contentPosition : girdContentPosition}`}`}>
+															{showImages && post.qubely_featured_image_url && this.renderFeaturedImage(post)}
+															{this.renderCardContent(post)}
+														</div>
 													</div>
-												</div>
-											)
-										} else return null
+												)
+											} else return null
 
-									})
-								}
-							</div>
-							<div ref="qubelyContextMenu" className={'qubely-context-menu-wraper'} >
-									{/* <ContextMenu
+										})
+									}
+								</div>
+								<div
+									ref={this.qubelyContextMenu}
+									className={`qubely-context-menu-wraper`}
+								>
+									<ContextMenu
 										name={name}
 										clientId={clientId}
 										attributes={attributes}
 										setAttributes={setAttributes}
-										qubelyContextMenu={this.refs.qubelyContextMenu}
-									/> */}
+										qubelyContextMenu={this.qubelyContextMenu.current}
+									/>
 								</div>
 								{
 									(pages > 1 && enablePagination) &&

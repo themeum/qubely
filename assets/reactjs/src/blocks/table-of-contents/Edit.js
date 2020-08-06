@@ -5,7 +5,8 @@ import Separator from "../../components/fields/Separator";
 const { __ } = wp.i18n;
 const {
     Fragment,
-    Component
+    Component,
+    createRef
 } = wp.element;
 const {
     PanelBody,
@@ -52,10 +53,11 @@ const {
 class Edit extends Component {
 
     constructor(props) {
-        super(props)
+        super(props);
         this.state = {
             device: 'md'
         };
+        this.qubelyContextMenu = createRef();
     }
 
     componentDidMount() {
@@ -533,13 +535,16 @@ class Edit extends Component {
                         </InspectorTab>
                     </InspectorTabs>
                 </InspectorControls>
-                
+
                 {globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
                 <div className={classes}>
-                    <div className={classnames([
-                        'qubely-table-of-contents',
-                        ...(isCollapsed ? ['qubely-toc-collapsed'] : [])
-                    ])}>
+                    <div
+                        className={classnames([
+                            'qubely-table-of-contents',
+                            ...(isCollapsed ? ['qubely-toc-collapsed'] : [])
+                        ])}
+                        onContextMenu={event => handleContextMenu(event, this.qubelyContextMenu.current)}
+                    >
                         <div className={classnames([
                             'qubely-table-of-contents-header',
                             collapsibleAlignment
@@ -588,16 +593,17 @@ class Edit extends Component {
                         }
 
                     </div>
-
-                    <div ref="qubelyContextMenu" className="qubely-context-menu-wraper" >
+                    <div
+                        ref={this.qubelyContextMenu}
+                        className={`qubely-context-menu-wraper`}
+                    >
                         <ContextMenu
-                            name={this.props.name}
+                            name={name}
                             clientId={clientId}
                             attributes={attributes}
                             setAttributes={setAttributes}
-                            qubelyContextMenu={this.refs.qubelyContextMenu}
+                            qubelyContextMenu={this.qubelyContextMenu.current}
                         />
-
                     </div>
                 </div>
             </Fragment>

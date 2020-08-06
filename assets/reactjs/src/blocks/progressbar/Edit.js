@@ -1,5 +1,5 @@
 const { __ } = wp.i18n
-const { Fragment, Component } = wp.element;
+const { Fragment, Component, createRef } = wp.element;
 const { PanelBody, TextControl, Toolbar } = wp.components
 const { InspectorControls, BlockControls } = wp.blockEditor
 const {
@@ -28,11 +28,12 @@ const {
 class Edit extends Component {
 
     constructor(props) {
-        super(props)
+        super(props);
         this.state = {
             device: 'md',
             spacer: true
-        }
+        };
+        this.qubelyContextMenu = createRef();
     }
 
     componentDidMount() {
@@ -104,21 +105,21 @@ class Edit extends Component {
                             <PanelBody title={__('Text')} initialOpen={false}>
                                 <TextControl label={__('Title')} value={title} onChange={val => setAttributes({ title: val })} />
                                 {title != '' &&
-                                <Fragment>
-                                    <Toggle label={__('Show Percentage')} value={showProgress} onChange={val => setAttributes({ showProgress: val })} />
-                                    <RadioAdvanced
-                                        label={__('Position')}
-                                        options={[
-                                            { label: __('Inside'), value: 'inside' },
-                                            { label: __('Outside'), value: 'outside' }
-                                        ]}
-                                        value={labelPosition}
-                                        onChange={val => setAttributes({ labelPosition: val })}
-                                    />
-                                    <Range label={__('Spacing')} value={labelSpacing} onChange={(value) => setAttributes({ labelSpacing: value })} unit={['px', 'em', '%']} min={0} max={40} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
-                                    <Typography label={__('Typography')} value={labelTypography} onChange={val => setAttributes({ labelTypography: val })} device={device} onDeviceChange={value => this.setState({ device: value })} />
-                                    <Color label={__('Color')} value={labelColor} onChange={val => setAttributes({ labelColor: val })} />
-                                </Fragment>
+                                    <Fragment>
+                                        <Toggle label={__('Show Percentage')} value={showProgress} onChange={val => setAttributes({ showProgress: val })} />
+                                        <RadioAdvanced
+                                            label={__('Position')}
+                                            options={[
+                                                { label: __('Inside'), value: 'inside' },
+                                                { label: __('Outside'), value: 'outside' }
+                                            ]}
+                                            value={labelPosition}
+                                            onChange={val => setAttributes({ labelPosition: val })}
+                                        />
+                                        <Range label={__('Spacing')} value={labelSpacing} onChange={(value) => setAttributes({ labelSpacing: value })} unit={['px', 'em', '%']} min={0} max={40} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
+                                        <Typography label={__('Typography')} value={labelTypography} onChange={val => setAttributes({ labelTypography: val })} device={device} onDeviceChange={value => this.setState({ device: value })} />
+                                        <Color label={__('Color')} value={labelColor} onChange={val => setAttributes({ labelColor: val })} />
+                                    </Fragment>
                                 }
                             </PanelBody>
 
@@ -156,7 +157,10 @@ class Edit extends Component {
                 {globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
                 <div className={`qubely-block-${uniqueId}${className ? ` ${className}` : ''}`}>
-                    <div className="qubely-block-progress-bar" onContextMenu={event => handleContextMenu(event, this.refs.qubelyContextMenu)}>
+                    <div
+                        className="qubely-block-progress-bar"
+                        onContextMenu={event => handleContextMenu(event, this.qubelyContextMenu.current)}
+                    >
                         {labelPosition == 'outside' && labelsContent}
                         <div className="qubely-progress">
                             <div className="qubely-progress-bar" role="progressbar">
@@ -164,14 +168,16 @@ class Edit extends Component {
                                 {labelPosition == 'inside' && labelsContent}
                             </div>
                         </div>
-
-                        <div ref="qubelyContextMenu" className={`qubely-context-menu-wraper`} >
+                        <div
+                            ref={this.qubelyContextMenu}
+                            className={`qubely-context-menu-wraper`}
+                        >
                             <ContextMenu
                                 name={name}
                                 clientId={clientId}
                                 attributes={attributes}
                                 setAttributes={setAttributes}
-                                qubelyContextMenu={this.refs.qubelyContextMenu}
+                                qubelyContextMenu={this.qubelyContextMenu.current}
                             />
                         </div>
                     </div>

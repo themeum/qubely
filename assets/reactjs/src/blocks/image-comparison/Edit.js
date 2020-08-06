@@ -3,7 +3,8 @@ import classnames from 'classnames';
 const { __ } = wp.i18n;
 const {
     Fragment,
-    Component
+    Component,
+    createRef
 } = wp.element;
 
 const {
@@ -31,7 +32,8 @@ const {
         InlineToolbar
     },
     ContextMenu: {
-        ContextMenu
+        ContextMenu,
+        handleContextMenu
     },
     gloalSettings: {
         animationSettings,
@@ -53,6 +55,7 @@ class Edit extends Component {
         this.state = {
             device: 'md'
         };
+        this.qubelyContextMenu = createRef();
     }
 
     componentDidMount() {
@@ -224,18 +227,18 @@ class Edit extends Component {
             return (
                 <div className="qubely-media-actions">
                     <MediaUpload
-                        value={ id }
-                        onSelect={ ( selectedImage ) => {
-                            setAttributes({[attr]: selectedImage});
+                        value={id}
+                        onSelect={(selectedImage) => {
+                            setAttributes({ [attr]: selectedImage });
                         }}
-                        allowedTypes={ ['image'] }
-                        render={ ( { open } ) => (
+                        allowedTypes={['image']}
+                        render={({ open }) => (
                             <Tooltip text={__('Edit')}>
                                 <button className="qubely-button" aria-label={__('Edit')} onClick={open} role="button">
                                     <span aria-label={__('Edit')} className="fas fa-pencil-alt fa-fw" />
                                 </button>
                             </Tooltip>
-                        ) }
+                        )}
                     />
 
                     <Tooltip text={__('Remove')}>
@@ -338,24 +341,27 @@ class Edit extends Component {
                 {globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
                 <div className={`qubely-block-${uniqueId}${className ? ` ${className}` : ''}`}>
-                    <div class={classnames(
-                        'qubely-block-image-comparison',
-                        {
-                            'has-child-placeholder': (!validImageA || !validImageB)
-                        }
-                    )}>
+                    <div
+                        className={classnames(
+                            'qubely-block-image-comparison',
+                            {
+                                'has-child-placeholder': (!validImageA || !validImageB)
+                            }
+                        )}
+                        onContextMenu={event => handleContextMenu(event, this.qubelyContextMenu.current)}
+                    >
 
                         <div className={classnames(
                             'image-container image-B',
                             {
                                 ['valid-images resizable-img']: validImageA && validImageB,
-                                'is-placeholder' : !validImageB
+                                'is-placeholder': !validImageB
                             }
                         )}>
                             {
                                 validImageB ?
                                     <div className={'image-container-inner'}>
-                                        <img className="qubely-image" src={image2.url} {...(image2_2x.url ? {srcset: image2.url + ' 1x, ' + image2_2x.url + ' 2x'} : {})} alt={imgAlt2 && imgAlt2} />
+                                        <img className="qubely-image" src={image2.url} {...(image2_2x.url ? { srcset: image2.url + ' 1x, ' + image2_2x.url + ' 2x' } : {})} alt={imgAlt2 && imgAlt2} />
                                         {
                                             disableTitle && (
                                                 <RichText
@@ -379,14 +385,14 @@ class Edit extends Component {
                             'image-container image-A',
                             {
                                 ['valid-images']: validImageA && validImageB,
-                                'is-placeholder' : !validImageA
+                                'is-placeholder': !validImageA
                             }
                         )}>
                             {
                                 validImageA ?
                                     <div className={'image-container-inner'}>
                                         {
-                                            <img className="qubely-image" src={image.url} {...(image2x.url ? {srcset: image.url + ' 1x, ' + image2x.url + ' 2x'} : {})} alt={imgAlt && imgAlt} />
+                                            <img className="qubely-image" src={image.url} {...(image2x.url ? { srcset: image.url + ' 1x, ' + image2x.url + ' 2x' } : {})} alt={imgAlt && imgAlt} />
                                         }
                                         {
                                             disableTitle && (
@@ -414,7 +420,7 @@ class Edit extends Component {
                     </div>
 
                     <div
-                        ref="qubelyContextMenu"
+                        ref={this.qubelyContextMenu}
                         className={`qubely-context-menu-wraper`}
                     >
                         <ContextMenu
@@ -422,7 +428,7 @@ class Edit extends Component {
                             clientId={clientId}
                             attributes={attributes}
                             setAttributes={setAttributes}
-                            qubelyContextMenu={this.refs.qubelyContextMenu}
+                            qubelyContextMenu={this.qubelyContextMenu.current}
                         />
                     </div>
                 </div>

@@ -4,7 +4,7 @@ const {
     BlockControls,
     InspectorControls,
 } = wp.blockEditor;
-const { Component, Fragment, RawHTML } = wp.element;
+const { Component, Fragment, RawHTML, createRef } = wp.element;
 const { PanelBody, SelectControl, FormTokenField, TextControl } = wp.components;
 const {
     BorderRadius,
@@ -33,12 +33,13 @@ class Edit extends Component {
 
     constructor(props) {
         super(props);
-        this._getAnimationClass = this._getAnimationClass.bind(this)
-        this._handleTypeChange = this._handleTypeChange.bind(this)
+        this._getAnimationClass = this._getAnimationClass.bind(this);
+        this._handleTypeChange = this._handleTypeChange.bind(this);
         this.state = {
             device: 'md',
             animationClass: this._getAnimationClass(this.props.attributes.animationType)
-        }
+        };
+        this.qubelyContextMenu = createRef();
     }
     componentDidMount() {
         const { setAttributes, name, clientId, attributes, attributes: { uniqueId } } = this.props
@@ -272,7 +273,10 @@ class Edit extends Component {
 
                 {globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
-                <div className={`qubely-block-${uniqueId} qubely-block-animated-heading qubely-block-animated-heading-backend ${className}`} onContextMenu={event => handleContextMenu(event, this.refs.qubelyContextMenu)} >
+                <div
+                    className={`qubely-block-${uniqueId} qubely-block-animated-heading qubely-block-animated-heading-backend ${className}`}
+                    onContextMenu={event => handleContextMenu(event, this.qubelyContextMenu.current)}
+                >
                     <CustomHeadingTag className={`animated-heading-text ${animationClass} ${align ? ` has-text-align-${align}` : ''}`} ref={el => this.animatedHeading = el}>
                         {titleBefore}
                         <span className="qubely-animated-text">
@@ -288,13 +292,16 @@ class Edit extends Component {
                         </span>
                         {titleAfter}
                     </CustomHeadingTag>
-                    <div ref="qubelyContextMenu" className={`qubely-context-menu-wraper`} >
+                    <div
+                        ref={this.qubelyContextMenu}
+                        className={`qubely-context-menu-wraper`}
+                    >
                         <ContextMenu
                             name={name}
                             clientId={clientId}
                             attributes={attributes}
                             setAttributes={setAttributes}
-                            qubelyContextMenu={this.refs.qubelyContextMenu}
+                            qubelyContextMenu={this.qubelyContextMenu.current}
                         />
                     </div>
                 </div>

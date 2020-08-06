@@ -1,5 +1,5 @@
 const { __ } = wp.i18n
-const { Fragment, Component } = wp.element;
+const { Fragment, Component, createRef } = wp.element;
 const { PanelBody, Tooltip, Toolbar } = wp.components
 const { InspectorControls, RichText, BlockControls, MediaUpload } = wp.blockEditor
 const {
@@ -26,16 +26,21 @@ const {
 	},
 	withCSSGenerator,
 	InspectorTabs,
-	InspectorTab
+	InspectorTab,
+	ContextMenu: {
+		ContextMenu,
+		handleContextMenu
+	},
 } = wp.qubelyComponents;
 
 class Edit extends Component {
 	constructor(props) {
-		super(props)
+		super(props);
 		this.state = {
 			device: 'md',
 			spacer: true,
-		}
+		};
+		this.qubelyContextMenu = createRef();
 	}
 
 	componentDidMount() {
@@ -173,6 +178,8 @@ class Edit extends Component {
 	render() {
 		const {
 			name,
+			clientId,
+			attributes,
 			isSelected,
 			setAttributes,
 			attributes: {
@@ -338,9 +345,24 @@ class Edit extends Component {
 				{globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
 				<div className={`qubely-block-${uniqueId}${className ? ` ${className}` : ''}`}>
-					<div className={`qubely-block-timeline qubely-timeline-layout-vertical qubely-timeline-orientation-${orientation}`}>
+					<div
+						className={`qubely-block-timeline qubely-timeline-layout-vertical qubely-timeline-orientation-${orientation}`}
+						onContextMenu={event => handleContextMenu(event, this.qubelyContextMenu.current)}
+					>
 						<div className={`qubely-timeline-items`}>
 							{this.renderTimeline()}
+						</div>
+						<div
+							ref={this.qubelyContextMenu}
+							className={`qubely-context-menu-wraper`}
+						>
+							<ContextMenu
+								name={name}
+								clientId={clientId}
+								attributes={attributes}
+								setAttributes={setAttributes}
+								qubelyContextMenu={this.qubelyContextMenu.current}
+							/>
 						</div>
 					</div>
 				</div>

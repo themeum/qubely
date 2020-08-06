@@ -1,7 +1,7 @@
 import icons from '../../helpers/icons';
 import classnames from 'classnames';
 const { __ } = wp.i18n
-const { Fragment, Component } = wp.element;
+const { Fragment, Component, createRef } = wp.element;
 const { PanelBody, TextControl, Toolbar } = wp.components;
 const { RichText, InspectorControls, BlockControls } = wp.blockEditor;
 const {
@@ -43,13 +43,14 @@ const {
 class Edit extends Component {
 
     constructor(props) {
-        super(props)
+        super(props);
         this.state = {
             device: 'md',
             selector: true,
             spacer: true,
             openPanelSetting: ''
         };
+        this.qubelyContextMenu = createRef();
     }
 
     componentDidMount() {
@@ -513,7 +514,10 @@ class Edit extends Component {
                 {globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
                 <div className={wrapperClasses}>
-                    <div className={`qubely-block-team qubely-team-layout-${layout}`} onContextMenu={event => handleContextMenu(event, this.refs.qubelyContextMenu)}>
+                    <div
+                        className={`qubely-block-team qubely-team-layout-${layout}`}
+                        onContextMenu={event => handleContextMenu(event, this.qubelyContextMenu.current)}
+                    >
                         <div className="qubely-team-image-wrapper" onClick={() => this.handlePanelOpenings('Image')}>
                             {imageType === 'local' && image.url != undefined ?
                                 <img className="qubely-team-image" src={image.url} srcset={image2x.url != undefined ? image.url + ' 1x, ' + image2x.url + ' 2x' : ''} alt={name} />
@@ -624,13 +628,16 @@ class Edit extends Component {
                                 }
                             </div>
                         </div>
-                        <div ref="qubelyContextMenu" className={`qubely-context-menu-wraper`} >
+                        <div
+                            ref={this.qubelyContextMenu}
+                            className={`qubely-context-menu-wraper`}
+                        >
                             <ContextMenu
-                                name={this.props.name}
+                                name={name}
                                 clientId={clientId}
                                 attributes={attributes}
                                 setAttributes={setAttributes}
-                                qubelyContextMenu={this.refs.qubelyContextMenu}
+                                qubelyContextMenu={this.qubelyContextMenu.current}
                             />
                         </div>
                     </div>

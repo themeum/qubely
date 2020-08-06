@@ -1,7 +1,7 @@
 
 import Progress from './Progress'
 import icons from '../../helpers/icons';
-const { Fragment, Component } = wp.element;
+const { Fragment, Component, createRef } = wp.element;
 const { PanelBody, Toolbar, TextControl } = wp.components
 const { InspectorControls, BlockControls, RichText } = wp.blockEditor
 const { __ } = wp.i18n
@@ -36,13 +36,14 @@ const {
 class Edit extends Component {
 
     constructor(props) {
-        super(props)
+        super(props);
         this.state = {
             device: 'md',
             selector: true,
             spacer: true,
             openPanelSetting: ''
-        }
+        };
+        this.qubelyContextMenu = createRef();
     }
 
     componentDidMount() {
@@ -197,71 +198,71 @@ class Edit extends Component {
                             <PanelBody title={__('Percentage / Icon')} initialOpen={false}>
                                 <Toggle label={__('Enable')} value={enableIcon} onChange={enableIcon => setAttributes({ enableIcon })} />
                                 {enableIcon &&
-                                <Fragment>
-                                    <RadioAdvanced
-                                        label={__('Type')}
-                                        options={[
-                                            { label: '%', value: 'percent', title: 'Percent' },
-                                            { label: 'Icon', value: 'icon', title: 'Icon' },
-                                            { label: 'Image', value: 'image', title: 'Image' },
-                                            { label: 'Text', value: 'text', title: 'Text' }
-                                        ]}
-                                        value={iconStyle}
-                                        onChange={iconStyle => setAttributes({ iconStyle })} />
-                                    {
-                                        iconStyle === 'icon' && (
-                                            <Fragment>
-                                                <IconList
-                                                    value={iconName}
-                                                    onChange={iconName => setAttributes({ iconName })} />
-                                                <Range label={__('Icon Size')} value={iconSize} onChange={iconSize => setAttributes({ iconSize })} min={10} max={200} />
-                                            </Fragment>
-                                        )
-                                    }
-                                    {
-                                        iconStyle === 'image' && (
-
-                                            <Fragment>
-                                                <Media
-                                                    label={__('Image')}
-                                                    multiple={false}
-                                                    type={['image']}
-                                                    panel
-                                                    value={image} onChange={image => setAttributes({ image })} />
-                                                <Media
-                                                    panel
-                                                    value={image2x}
-                                                    multiple={false}
-                                                    type={['image']}
-                                                    label={__('Retina Image')}
-                                                    onChange={image2x => setAttributes({ image2x })} />
-
-                                                {image.url &&
+                                    <Fragment>
+                                        <RadioAdvanced
+                                            label={__('Type')}
+                                            options={[
+                                                { label: '%', value: 'percent', title: 'Percent' },
+                                                { label: 'Icon', value: 'icon', title: 'Icon' },
+                                                { label: 'Image', value: 'image', title: 'Image' },
+                                                { label: 'Text', value: 'text', title: 'Text' }
+                                            ]}
+                                            value={iconStyle}
+                                            onChange={iconStyle => setAttributes({ iconStyle })} />
+                                        {
+                                            iconStyle === 'icon' && (
                                                 <Fragment>
-                                                    <TextControl label={__('Alt Text')} value={imageAlt} onChange={imageAlt => setAttributes({ imageAlt })} />
-                                                    <Range label={__('Image Width')} value={imageSize} onChange={imageSize => setAttributes({ imageSize })} min={imageSize.unit !== 'px' ? 0 : 10} max={imageSize.unit === '%' ? 100 : 500} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
+                                                    <IconList
+                                                        value={iconName}
+                                                        onChange={iconName => setAttributes({ iconName })} />
+                                                    <Range label={__('Icon Size')} value={iconSize} onChange={iconSize => setAttributes({ iconSize })} min={10} max={200} />
                                                 </Fragment>
-                                                }
+                                            )
+                                        }
+                                        {
+                                            iconStyle === 'image' && (
 
-                                            </Fragment>
-                                        )
-                                    }
+                                                <Fragment>
+                                                    <Media
+                                                        label={__('Image')}
+                                                        multiple={false}
+                                                        type={['image']}
+                                                        panel
+                                                        value={image} onChange={image => setAttributes({ image })} />
+                                                    <Media
+                                                        panel
+                                                        value={image2x}
+                                                        multiple={false}
+                                                        type={['image']}
+                                                        label={__('Retina Image')}
+                                                        onChange={image2x => setAttributes({ image2x })} />
 
-                                    {iconStyle === 'text' && (
-                                        <TextControl
-                                            label="Text"
-                                            value={iconText}
-                                            onChange={(iconText) => setAttributes({ iconText })}
-                                        />
-                                    )}
-                                    {iconStyle !== 'image' && (
-                                        <Color label={__('Color')} value={iconTextColor} onChange={iconTextColor => setAttributes({ iconTextColor })} />
-                                    )}
-                                    {(iconStyle === 'text' || iconStyle === 'percent') && (
-                                        <Typography value={iconTypography} onChange={iconTypography => setAttributes({ iconTypography })} />
-                                    )}
+                                                    {image.url &&
+                                                        <Fragment>
+                                                            <TextControl label={__('Alt Text')} value={imageAlt} onChange={imageAlt => setAttributes({ imageAlt })} />
+                                                            <Range label={__('Image Width')} value={imageSize} onChange={imageSize => setAttributes({ imageSize })} min={imageSize.unit !== 'px' ? 0 : 10} max={imageSize.unit === '%' ? 100 : 500} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
+                                                        </Fragment>
+                                                    }
 
-                                </Fragment>
+                                                </Fragment>
+                                            )
+                                        }
+
+                                        {iconStyle === 'text' && (
+                                            <TextControl
+                                                label="Text"
+                                                value={iconText}
+                                                onChange={(iconText) => setAttributes({ iconText })}
+                                            />
+                                        )}
+                                        {iconStyle !== 'image' && (
+                                            <Color label={__('Color')} value={iconTextColor} onChange={iconTextColor => setAttributes({ iconTextColor })} />
+                                        )}
+                                        {(iconStyle === 'text' || iconStyle === 'percent') && (
+                                            <Typography value={iconTypography} onChange={iconTypography => setAttributes({ iconTypography })} />
+                                        )}
+
+                                    </Fragment>
                                 }
                             </PanelBody>
                             <PanelBody title={__('Heading')} initialOpen={false}>
@@ -310,7 +311,10 @@ class Edit extends Component {
                 </BlockControls>
 
                 {globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
-                <div className={`qubely-block-${uniqueId} qubely-block-pie-progress${className ? ` ${className}` : ''}`} onContextMenu={event => handleContextMenu(event, this.refs.qubelyContextMenu)}>
+                <div
+                    className={`qubely-block-${uniqueId} qubely-block-pie-progress${className ? ` ${className}` : ''}`}
+                    onContextMenu={event => handleContextMenu(event, this.qubelyContextMenu.current)}
+                >
                     <div className="qubely-progress-parent">
                         <Progress {...progressAttr} />
                         {(enableIcon || enableHeading) && (
@@ -370,13 +374,16 @@ class Edit extends Component {
                             onChange={heading => setAttributes({ heading })}
                         />
                     )}
-                    <div ref="qubelyContextMenu" className="qubely-context-menu-wraper">
+                    <div
+                        ref={this.qubelyContextMenu}
+                        className={`qubely-context-menu-wraper`}
+                    >
                         <ContextMenu
                             name={name}
                             clientId={clientId}
                             attributes={attributes}
                             setAttributes={setAttributes}
-                            qubelyContextMenu={this.refs.qubelyContextMenu}
+                            qubelyContextMenu={this.qubelyContextMenu.current}
                         />
                     </div>
                 </div>

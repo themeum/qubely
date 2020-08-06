@@ -1,6 +1,6 @@
 const { __ } = wp.i18n;
 const { InspectorControls, BlockControls } = wp.blockEditor
-const { Component, Fragment } = wp.element;
+const { Component, Fragment, createRef } = wp.element;
 const { PanelBody, TextControl, Toolbar, Button, Popover } = wp.components;
 const {
     Styles,
@@ -37,14 +37,15 @@ import IconSocialData from '../../components/fields/assets/IconSocialData'
 class Edit extends Component {
 
     constructor(props) {
-        super(props)
+        super(props);
         this.state = {
             spacer: true,
             device: 'md',
             selectedLabel: -1,
             selectedItem: -1,
             showIconPicker: false
-        }
+        };
+        this.qubelyContextMenu = createRef();
     }
 
     componentDidMount() {
@@ -270,7 +271,7 @@ class Edit extends Component {
 
                 <div className={`qubely-block-${uniqueId}${className ? ` ${className}` : ''}`}>
                     <div
-                        onContextMenu={event => handleContextMenu(event, this.refs.qubelyContextMenu)}
+                        onContextMenu={event => handleContextMenu(event, this.qubelyContextMenu.current)}
                         className={`qubely-block-social-icons qubely-layout-${layout} qubely-style-${useDefaultStyle ? 'default' : 'custom'}`} >
 
                         <ul className="qubely-ul" >
@@ -350,13 +351,16 @@ class Edit extends Component {
                             </span>
                         </ul>
 
-                        <div ref="qubelyContextMenu" className={`qubely-context-menu-wraper`} >
+                        <div
+                            ref={this.qubelyContextMenu}
+                            className={`qubely-context-menu-wraper`}
+                        >
                             <ContextMenu
                                 name={name}
                                 clientId={clientId}
                                 attributes={attributes}
                                 setAttributes={setAttributes}
-                                qubelyContextMenu={this.refs.qubelyContextMenu}
+                                qubelyContextMenu={this.qubelyContextMenu.current}
                             />
                         </div>
                     </div>

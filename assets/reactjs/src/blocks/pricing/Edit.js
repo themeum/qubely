@@ -2,7 +2,7 @@ const { __ } = wp.i18n
 const { PanelBody, Toolbar, SelectControl, TextControl } = wp.components
 const { compose } = wp.compose
 const { select, withSelect, withDispatch } = wp.data
-const { Component, Fragment } = wp.element
+const { Component, Fragment, createRef } = wp.element
 const { getBlock } = select('core/block-editor')
 const { RichText, InspectorControls, BlockControls } = wp.blockEditor
 const {
@@ -51,7 +51,7 @@ import icons from '../../helpers/icons';
 class Edit extends Component {
 
 	constructor(props) {
-		super(props)
+		super(props);
 		this.state = {
 			device: 'md',
 			spacer: true,
@@ -66,7 +66,8 @@ class Edit extends Component {
 			openContextMenu: false,
 			disablePasteStyle: false,
 			showPostTextTypography: false
-		}
+		};
+		this.qubelyContextMenu = createRef();
 	}
 
 	componentDidMount() {
@@ -765,7 +766,10 @@ class Edit extends Component {
 				{globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
 				<div className={`qubely-block-${uniqueId}${className ? ` ${className}` : ''}`} >
-					<div className={`qubely-block-pricing`} onContextMenu={event => handleContextMenu(event, this.refs.qubelyContextMenu)}>
+					<div
+						className={`qubely-block-pricing`}
+						onContextMenu={event => handleContextMenu(event, this.qubelyContextMenu.current)}
+					>
 						{enableBadge && <span className={`qubely-pricing-badge qubely-badge-style-${badgeStyle} qubely-badge-size-${badgeSize}`} contenteditable="true" onBlur={(e) => setAttributes({ 'badge': e.target.innerText })} onClick={() => this.handlePanelOpenings('Badge')}><span>{badge}</span></span>}
 						<div className="qubely-block-pricing-content">
 							<div className="qubely-block-pricing-header">
@@ -810,16 +814,18 @@ class Edit extends Component {
 								this.renderPricingButton()
 							}
 						</div>
-						<div ref="qubelyContextMenu" className={`qubely-context-menu-wraper`} >
+						<div
+							ref={this.qubelyContextMenu}
+							className={`qubely-context-menu-wraper`}
+						>
 							<ContextMenu
 								name={name}
 								clientId={clientId}
 								attributes={attributes}
 								setAttributes={setAttributes}
-								qubelyContextMenu={this.refs.qubelyContextMenu}
+								qubelyContextMenu={this.qubelyContextMenu.current}
 							/>
 						</div>
-
 					</div>
 				</div>
 			</Fragment>

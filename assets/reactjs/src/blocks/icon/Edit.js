@@ -1,7 +1,7 @@
 import InspectorTab from "../../components/InspectorTab";
 
 const { __ } = wp.i18n;
-const { Component, Fragment } = wp.element;
+const { Component, Fragment, createRef } = wp.element;
 const { PanelBody, Toolbar } = wp.components
 const { InspectorControls, BlockControls } = wp.blockEditor
 const {
@@ -31,7 +31,11 @@ import icons from '../../helpers/icons'
 class Edit extends Component {
 	constructor() {
 		super(...arguments);
-		this.state = { device: 'md', spacer: true };
+		this.state = {
+			device: 'md',
+			spacer: true
+		};
+		this.qubelyContextMenu = createRef();
 	}
 
 	componentDidMount() {
@@ -88,16 +92,16 @@ class Edit extends Component {
 				iconHoverShadow,
 				iconStyle,
 
-                animation,
-                enablePosition, 
-                selectPosition, 
-                positionXaxis, 
-                positionYaxis,
+				animation,
+				enablePosition,
+				selectPosition,
+				positionXaxis,
+				positionYaxis,
 				globalZindex,
 				hideTablet,
 				hideMobile,
 				globalCss,
-				interaction 
+				interaction
 			}
 		} = this.props;
 
@@ -138,16 +142,16 @@ class Edit extends Component {
 									value={iconSize}
 									onChange={(value) => setAttributes({ iconSize: value })} />
 								{iconSize == 'custom' &&
-								<Range
-									label={__('Custom Size')}
-									value={iconSizeCustom}
-									onChange={val => setAttributes({ iconSizeCustom: val })}
-									min={12}
-									max={300}
-									unit={['px', 'em', '%']}
-									responsive
-									device={this.state.device}
-									onDeviceChange={value => this.setState({ device: value })} />
+									<Range
+										label={__('Custom Size')}
+										value={iconSizeCustom}
+										onChange={val => setAttributes({ iconSizeCustom: val })}
+										min={12}
+										max={300}
+										unit={['px', 'em', '%']}
+										responsive
+										device={this.state.device}
+										onDeviceChange={value => this.setState({ device: value })} />
 								}
 								<Url
 									label={__('Url')}
@@ -170,83 +174,83 @@ class Edit extends Component {
 							</PanelBody>
 
 							{iconStyle != 'nofill' &&
-							<PanelBody title={__('Background')} initialOpen={false}>
-								<Tabs>
-									<Tab tabTitle={__('Normal')}>
-										{iconStyle == 'fill' &&
-										<ColorAdvanced
-											label={__('Background Color')}
-											value={bgColor}
-											onChange={val => setAttributes({ bgColor: val })} />
-										}
-										<Border
-											label={__('Border')}
-											value={border}
-											unit={['px', 'em']}
-											responsive
-											min={0} max={10}
-											onChange={val => setAttributes({ border: val })}
-											device={this.state.device}
-											onDeviceChange={value => this.setState({ device: value })} />
-									</Tab>
-									<Tab tabTitle={__('Hover')}>
-										<ColorAdvanced
-											label={__('Background Color')}
-											value={bgHoverColor}
-											onChange={val => setAttributes({ bgHoverColor: val })} />
-										{
-											border.type &&
-											<Color
-												label={__('Border Color')}
-												value={borderHoverColor}
-												onChange={val => setAttributes({ borderHoverColor: val })} />
-										}
+								<PanelBody title={__('Background')} initialOpen={false}>
+									<Tabs>
+										<Tab tabTitle={__('Normal')}>
+											{iconStyle == 'fill' &&
+												<ColorAdvanced
+													label={__('Background Color')}
+													value={bgColor}
+													onChange={val => setAttributes({ bgColor: val })} />
+											}
+											<Border
+												label={__('Border')}
+												value={border}
+												unit={['px', 'em']}
+												responsive
+												min={0} max={10}
+												onChange={val => setAttributes({ border: val })}
+												device={this.state.device}
+												onDeviceChange={value => this.setState({ device: value })} />
+										</Tab>
+										<Tab tabTitle={__('Hover')}>
+											<ColorAdvanced
+												label={__('Background Color')}
+												value={bgHoverColor}
+												onChange={val => setAttributes({ bgHoverColor: val })} />
+											{
+												border.type &&
+												<Color
+													label={__('Border Color')}
+													value={borderHoverColor}
+													onChange={val => setAttributes({ borderHoverColor: val })} />
+											}
 
-									</Tab>
-								</Tabs>
+										</Tab>
+									</Tabs>
 
-								<Range
-									label={__('Background Size')}
-									value={iconBackgroundSize}
-									min={0}
-									max={200}
-									unit={['px', 'em', '%']}
-									responsive
-									device={this.state.device}
-									onDeviceChange={value => this.setState({ device: value })}
-									onChange={val => setAttributes({ iconBackgroundSize: val })}
-								/>
-								<BorderRadius
-									label={__('Border Radius')}
-									value={iconBorderRadius}
-									min={0}
-									max={100}
-									unit={['px', 'em', '%']}
-									responsive
-									device={this.state.device}
-									onChange={val => setAttributes({ iconBorderRadius: val })}
-									onDeviceChange={value => this.setState({ device: value })}
-								/>
-							</PanelBody>
+									<Range
+										label={__('Background Size')}
+										value={iconBackgroundSize}
+										min={0}
+										max={200}
+										unit={['px', 'em', '%']}
+										responsive
+										device={this.state.device}
+										onDeviceChange={value => this.setState({ device: value })}
+										onChange={val => setAttributes({ iconBackgroundSize: val })}
+									/>
+									<BorderRadius
+										label={__('Border Radius')}
+										value={iconBorderRadius}
+										min={0}
+										max={100}
+										unit={['px', 'em', '%']}
+										responsive
+										device={this.state.device}
+										onChange={val => setAttributes({ iconBorderRadius: val })}
+										onDeviceChange={value => this.setState({ device: value })}
+									/>
+								</PanelBody>
 							}
 
 							{iconStyle != 'nofill' &&
-							<PanelBody title={__('Shadow')} initialOpen={false}>
-								<Tabs>
-									<Tab tabTitle={__('Normal')}>
-										<BoxShadow
-											label={__('Box-shadow')}
-											value={iconShadow}
-											onChange={val => setAttributes({ iconShadow: val })} />
-									</Tab>
-									<Tab tabTitle={__('Hover')}>
-										<BoxShadow
-											label={__('Box-shadow')}
-											value={iconHoverShadow}
-											onChange={val => setAttributes({ iconHoverShadow: val })} />
-									</Tab>
-								</Tabs>
-							</PanelBody>
+								<PanelBody title={__('Shadow')} initialOpen={false}>
+									<Tabs>
+										<Tab tabTitle={__('Normal')}>
+											<BoxShadow
+												label={__('Box-shadow')}
+												value={iconShadow}
+												onChange={val => setAttributes({ iconShadow: val })} />
+										</Tab>
+										<Tab tabTitle={__('Hover')}>
+											<BoxShadow
+												label={__('Box-shadow')}
+												value={iconHoverShadow}
+												onChange={val => setAttributes({ iconHoverShadow: val })} />
+										</Tab>
+									</Tabs>
+								</PanelBody>
 							}
 						</InspectorTab>
 						<InspectorTab key={'advance'}>
@@ -270,17 +274,23 @@ class Edit extends Component {
 				{globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
 				<div className={`qubely-block-${uniqueId}${className ? ` ${className}` : ''}`}>
-					<div className="qubely-block-icon-wrapper" onContextMenu={event => handleContextMenu(event, this.refs.qubelyContextMenu)}>
+					<div
+						className="qubely-block-icon-wrapper"
+						onContextMenu={event => handleContextMenu(event, this.qubelyContextMenu.current)}
+					>
 						<div className="qubely-block-icon">
 							<i className={name} />
 						</div>
-						<div ref="qubelyContextMenu" className={`qubely-context-menu-wraper`} >
+						<div
+							ref={this.qubelyContextMenu}
+							className={`qubely-context-menu-wraper`}
+						>
 							<ContextMenu
-								name={this.props.name}
+								name={name}
 								clientId={clientId}
 								attributes={attributes}
 								setAttributes={setAttributes}
-								qubelyContextMenu={this.refs.qubelyContextMenu}
+								qubelyContextMenu={this.qubelyContextMenu.current}
 							/>
 						</div>
 					</div>
@@ -290,4 +300,4 @@ class Edit extends Component {
 	}
 }
 
-export default withCSSGenerator() (Edit);
+export default withCSSGenerator()(Edit);

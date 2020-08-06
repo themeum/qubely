@@ -1,5 +1,5 @@
 const { __ } = wp.i18n
-const { Fragment, Component } = wp.element;
+const { Fragment, Component, createRef } = wp.element;
 const { PanelBody, TextControl, Toolbar } = wp.components
 const { RichText, BlockControls, InspectorControls, AlignmentToolbar } = wp.blockEditor
 const { Media, RadioAdvanced, Range, Color, Typography, Toggle, Separator, ColorAdvanced, Border, BorderRadius, BoxShadow, Styles, Alignment, Padding, Tabs, Tab, gloalSettings: { globalSettingsPanel, animationSettings, interactionSettings }, Inline: { InlineToolbar }, ContextMenu: { ContextMenu, handleContextMenu }, withCSSGenerator, InspectorTabs, InspectorTab, InspectorSections } = wp.qubelyComponents
@@ -7,12 +7,13 @@ import icons from '../../helpers/icons'
 
 class Edit extends Component {
     constructor(props) {
-        super(props)
+        super(props);
         this.state = {
             device: 'md',
             spacer: true,
             openPanelSetting: ''
-        }
+        };
+        this.qubelyContextMenu = createRef();
     }
     componentDidMount() {
         const { setAttributes, clientId, attributes: { uniqueId } } = this.props
@@ -158,10 +159,10 @@ class Edit extends Component {
                         <InspectorTab key={'style'}>
                             <PanelBody title="" initialOpen={true}>
                                 <Styles value={layout} onChange={val => setAttributes({ layout: val })}
-                                        options={[
-                                            { value: 1, svg: icons.testimonial_1, label: __('Layout 1') },
-                                            { value: 2, svg: icons.testimonial_2, label: __('Layout 2') }
-                                        ]}
+                                    options={[
+                                        { value: 1, svg: icons.testimonial_1, label: __('Layout 1') },
+                                        { value: 2, svg: icons.testimonial_2, label: __('Layout 2') }
+                                    ]}
                                 />
                                 <Alignment label={__('Alignment')} value={alignment} alignmentType="content" onChange={val => setAttributes({ alignment: val })} alignmentType="content" disableJustify responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
                             </PanelBody>
@@ -233,17 +234,17 @@ class Edit extends Component {
                                             label={__('Upload Avatar @2x')} multiple={false} type={['image']}
                                             value={avatar2x} panel={true} onChange={value => setAttributes({ avatar2x: value })} />
                                         {avatar.url &&
-                                        <TextControl
-                                            label={__('Alt Text (Alternative Text)')}
-                                            value={avatarAlt} onChange={value => setAttributes({ avatarAlt: value })} />
+                                            <TextControl
+                                                label={__('Alt Text (Alternative Text)')}
+                                                value={avatarAlt} onChange={value => setAttributes({ avatarAlt: value })} />
                                         }
                                         <Styles label={__('Avatar Layout')} value={avatarLayout} onChange={val => setAttributes({ avatarLayout: val })}
-                                                options={[
-                                                    { value: 'left', svg: icons.avatar_left, label: __('Left') },
-                                                    { value: 'right', svg: icons.avatar_right, label: __('Right') },
-                                                    { value: 'top', svg: icons.avatar_top, label: __('Top') },
-                                                    { value: 'bottom', svg: icons.avatar_bottom, label: __('Bottom') },
-                                                ]}
+                                            options={[
+                                                { value: 'left', svg: icons.avatar_left, label: __('Left') },
+                                                { value: 'right', svg: icons.avatar_right, label: __('Right') },
+                                                { value: 'top', svg: icons.avatar_top, label: __('Top') },
+                                                { value: 'bottom', svg: icons.avatar_bottom, label: __('Bottom') },
+                                            ]}
                                         />
                                         <Separator />
                                         <RadioAdvanced
@@ -258,30 +259,30 @@ class Edit extends Component {
                                             onChange={(value) => setAttributes({ avatarSize: value })}
                                         />
                                         {avatarSize == 'custom' &&
-                                        <Fragment>
-                                            <Range
-                                                label={<span className="dashicons dashicons-leftright" title="Width" />}
-                                                value={avatarWidth}
-                                                onChange={(value) => setAttributes({ avatarWidth: value })}
-                                                unit={['px', 'em', '%']}
-                                                max={300}
-                                                min={0}
-                                                responsive
-                                                device={device}
-                                                onDeviceChange={value => this.setState({ device: value })}
-                                            />
-                                            <Range
-                                                label={<span className="dashicons dashicons-sort" title="Height" />}
-                                                value={avatarHeight}
-                                                onChange={(value) => setAttributes({ avatarHeight: value })}
-                                                unit={['px', 'em', '%']}
-                                                max={300}
-                                                min={0}
-                                                responsive
-                                                device={device}
-                                                onDeviceChange={value => this.setState({ device: value })}
-                                            />
-                                        </Fragment>
+                                            <Fragment>
+                                                <Range
+                                                    label={<span className="dashicons dashicons-leftright" title="Width" />}
+                                                    value={avatarWidth}
+                                                    onChange={(value) => setAttributes({ avatarWidth: value })}
+                                                    unit={['px', 'em', '%']}
+                                                    max={300}
+                                                    min={0}
+                                                    responsive
+                                                    device={device}
+                                                    onDeviceChange={value => this.setState({ device: value })}
+                                                />
+                                                <Range
+                                                    label={<span className="dashicons dashicons-sort" title="Height" />}
+                                                    value={avatarHeight}
+                                                    onChange={(value) => setAttributes({ avatarHeight: value })}
+                                                    unit={['px', 'em', '%']}
+                                                    max={300}
+                                                    min={0}
+                                                    responsive
+                                                    device={device}
+                                                    onDeviceChange={value => this.setState({ device: value })}
+                                                />
+                                            </Fragment>
                                         }
                                         <Fragment>
                                             <BorderRadius
@@ -327,30 +328,30 @@ class Edit extends Component {
                                     value={quoteIcon}
                                     onChange={val => setAttributes({ quoteIcon: val })} />
                                 {quoteIcon &&
-                                <Fragment>
-                                    <Color
-                                        label={__('Color')}
-                                        value={quoteIconColor} onChange={(value) => setAttributes({ quoteIconColor: value })} />
-                                    <Range
-                                        label={__('Size')}
-                                        value={quoteIconSize} onChange={(value) => setAttributes({ quoteIconSize: value })}
-                                        min={10}
-                                        max={150}
-                                        unit={['px', 'em', '%']}
-                                        responsive
-                                        device={device}
-                                        onDeviceChange={value => this.setState({ device: value })}
-                                    />
-                                    <Range
-                                        label={__('Spacing')}
-                                        value={quoteIconSpacing} onChange={(value) => setAttributes({ quoteIconSpacing: value })}
-                                        min={0}
-                                        max={100}
-                                        unit={['px', 'em', '%']}
-                                        responsive
-                                        device={device}
-                                        onDeviceChange={value => this.setState({ device: value })} />
-                                </Fragment>
+                                    <Fragment>
+                                        <Color
+                                            label={__('Color')}
+                                            value={quoteIconColor} onChange={(value) => setAttributes({ quoteIconColor: value })} />
+                                        <Range
+                                            label={__('Size')}
+                                            value={quoteIconSize} onChange={(value) => setAttributes({ quoteIconSize: value })}
+                                            min={10}
+                                            max={150}
+                                            unit={['px', 'em', '%']}
+                                            responsive
+                                            device={device}
+                                            onDeviceChange={value => this.setState({ device: value })}
+                                        />
+                                        <Range
+                                            label={__('Spacing')}
+                                            value={quoteIconSpacing} onChange={(value) => setAttributes({ quoteIconSpacing: value })}
+                                            min={0}
+                                            max={100}
+                                            unit={['px', 'em', '%']}
+                                            responsive
+                                            device={device}
+                                            onDeviceChange={value => this.setState({ device: value })} />
+                                    </Fragment>
                                 }
                             </PanelBody>
 
@@ -366,30 +367,30 @@ class Edit extends Component {
                                             min={0}
                                             max={5} step={.1} />
                                         {(ratings != 0) &&
-                                        <Fragment>
-                                            <Color
-                                                label={__('Color')}
-                                                value={ratingsColor}
-                                                onChange={(value) => setAttributes({ ratingsColor: value })} />
-                                            <Range
-                                                label={__('Stars Size')}
-                                                value={starsSize} onChange={(value) => setAttributes({ starsSize: value })}
-                                                unit={['px', 'em', '%']}
-                                                min={10}
-                                                max={48}
-                                                responsive
-                                                device={device}
-                                                onDeviceChange={value => this.setState({ device: value })} />
-                                            <Range
-                                                label={__('Spacing')}
-                                                value={ratingsSpacing} onChange={(value) => setAttributes({ ratingsSpacing: value })}
-                                                unit={['px', 'em', '%']}
-                                                min={0}
-                                                max={200}
-                                                responsive
-                                                device={device}
-                                                onDeviceChange={value => this.setState({ device: value })} />
-                                        </Fragment>
+                                            <Fragment>
+                                                <Color
+                                                    label={__('Color')}
+                                                    value={ratingsColor}
+                                                    onChange={(value) => setAttributes({ ratingsColor: value })} />
+                                                <Range
+                                                    label={__('Stars Size')}
+                                                    value={starsSize} onChange={(value) => setAttributes({ starsSize: value })}
+                                                    unit={['px', 'em', '%']}
+                                                    min={10}
+                                                    max={48}
+                                                    responsive
+                                                    device={device}
+                                                    onDeviceChange={value => this.setState({ device: value })} />
+                                                <Range
+                                                    label={__('Spacing')}
+                                                    value={ratingsSpacing} onChange={(value) => setAttributes({ ratingsSpacing: value })}
+                                                    unit={['px', 'em', '%']}
+                                                    min={0}
+                                                    max={200}
+                                                    responsive
+                                                    device={device}
+                                                    onDeviceChange={value => this.setState({ device: value })} />
+                                            </Fragment>
                                         }
                                     </Fragment>
                                 }
@@ -473,12 +474,15 @@ class Edit extends Component {
                 {globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
                 <div className={`qubely-block-${uniqueId}${className ? ` ${className}` : ''}`}>
-                    <div className={`qubely-block-testimonial`} onContextMenu={event => handleContextMenu(event, this.refs.qubelyContextMenu)}>
+                    <div
+                        className={`qubely-block-testimonial`}
+                        onContextMenu={event => handleContextMenu(event, this.qubelyContextMenu.current)}
+                    >
 
                         {layout == 2 && authorInfo}
 
                         {(showRatings && ratings > 0 && layout == 2) &&
-                            <div className="qubely-testimonial-ratings" style={{'--qubely-testimonial-rating': `${ratings * 20}%`}} onClick={() => this.handlePanelOpenings('Ratings')}></div>
+                            <div className="qubely-testimonial-ratings" style={{ '--qubely-testimonial-rating': `${ratings * 20}%` }} onClick={() => this.handlePanelOpenings('Ratings')}></div>
                         }
 
                         {(quoteIcon && (layout == 1)) &&
@@ -490,7 +494,7 @@ class Edit extends Component {
                         </div>
 
                         {(showRatings && ratings > 0 && layout == 1) &&
-                            <div className="qubely-testimonial-ratings" style={{'--qubely-testimonial-rating': `${ratings * 20}%`}} onClick={() => this.handlePanelOpenings('Ratings')}></div>
+                            <div className="qubely-testimonial-ratings" style={{ '--qubely-testimonial-rating': `${ratings * 20}%` }} onClick={() => this.handlePanelOpenings('Ratings')}></div>
                         }
 
                         {layout == 1 && authorInfo}
@@ -498,14 +502,16 @@ class Edit extends Component {
                         {(quoteIcon && (layout == 2)) &&
                             <div className="qubely-testimonial-quote qubely-position-bottom" onClick={() => this.handlePanelOpenings('Quote Icon')}><span className={`qubely-quote-icon ${quoteIcon}`} /></div>
                         }
-
-                        <div ref="qubelyContextMenu" className={`qubely-context-menu-wraper`} >
+                        <div
+                            ref={this.qubelyContextMenu}
+                            className={`qubely-context-menu-wraper`}
+                        >
                             <ContextMenu
-                                name={this.props.name}
+                                name={name}
                                 clientId={clientId}
                                 attributes={attributes}
                                 setAttributes={setAttributes}
-                                qubelyContextMenu={this.refs.qubelyContextMenu}
+                                qubelyContextMenu={this.qubelyContextMenu.current}
                             />
                         </div>
 
@@ -516,4 +522,4 @@ class Edit extends Component {
     }
 }
 
-export default withCSSGenerator() (Edit);
+export default withCSSGenerator()(Edit);
