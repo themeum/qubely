@@ -78,10 +78,23 @@ class QUBELY
 		// qubely global container width
 		add_action('wp_enqueue_scripts', array($this, 'qubely_global_container_width'));
 		add_action('admin_enqueue_scripts', array($this, 'qubely_global_container_width'));
+
+		do_action('qubely_active_theme_preset', array($this, 'active_theme_preset'));
+
 	}
 
 	/**
-	 * Qubely Container Width 
+	 * Theme preset activation hook
+	 */
+	public function active_theme_preset() {
+		$settings = json_decode(get_option($this->option_keyword));
+		$settings->activePreset = "theme";
+		$settings = json_encode($settings);
+		update_option($this->option_keyword, $settings);
+	}
+
+	/**
+	 * Qubely Container Width
 	 */
 	public function qubely_global_container_width() {
 		$default = array(
