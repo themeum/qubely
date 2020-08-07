@@ -79,7 +79,7 @@ class QUBELY
 		add_action('wp_enqueue_scripts', array($this, 'qubely_global_container_width'));
 		add_action('admin_enqueue_scripts', array($this, 'qubely_global_container_width'));
 
-		do_action('qubely_active_theme_preset', array($this, 'active_theme_preset'));
+		add_action('qubely_active_theme_preset', array($this, 'active_theme_preset'));
 
 	}
 
