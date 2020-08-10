@@ -37,7 +37,7 @@ class Save extends Component {
                     <div
                         {...(typeof richSnippet !== 'undefined' && itemPropAnswer)}
                         className="qubely-accordion-body"
-                        style={openFirstItem && itemNumber == 0 && 'display: block;'}
+                        style={(openFirstItem && itemNumber == 0) ? { 'display': 'block' } : {}}
                     >
                         {
                             typeof richSnippet !== 'undefined' ?
