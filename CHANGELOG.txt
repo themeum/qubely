@@ -1,4 +1,12 @@
 
+<h3>1.5.3 - 13 August, 2020</h3>
+<ul>
+    <li>New: Import Sections/Layouts with Global settings </li>
+    <li>Update: All blocks - Context Menu refs</li>
+    <li>Fix: Parse Qubely block issue for CSS generator</li>
+</ul>
+
+
 <h3>1.5.2 - 29 July, 2020</h3>
 <ul>
     <li>New: Accordion block - Rich Snippet added</li>
@@ -9,18 +17,6 @@
     <li>Fix: Button block - Button width in Backend</li>
     <li>Fix: Button block - Text editing issue in Safari browser</li>
     <li>Fix: Table of Contents block - CSS issue</li>
-</ul>
-
-<h3>1.5.1 - 08 July, 2020</h3>
-<ul>
-    <li>New: Theme colors support in Global settings</li>
-    <li>New: Row Container width settings in Global settings</li>
-    <li>New : Row Container width filter hook to modify default values from theme</li>
-    <li>Update: Blocks initial primary color updated with preset color</li>
-    <li>Update: Gradient field - Global setting color support</li>
-    <li>Update: Post Grid pagination default margin added</li>
-    <li>Fix: Post Grid pagination backend spacing issue</li>
-    <li>Fix: Accordion Block gradient issue</li>
 </ul>
 
 
