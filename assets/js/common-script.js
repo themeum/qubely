@@ -635,21 +635,4 @@ jQuery(document).ready(function ($) {
         }
     }
 
-
-    // $.post({
-    //     url: qubely_urls.ajax,
-    //     data: {
-    //         action: 'update_qubely_options',
-    //         _wpnonce: qubely_urls.nonce,
-    //         options: {
-    //             'qubely_gmap_api_key': 'value_from_ajax',
-    //             'qubely_recaptcha_secret_key': 'value_from_ajax',
-    //         }
-    //     }
-    // }).success(function(response) {
-    //     console.log(response);
-    // });
-
-
-
 })(jQuery);
