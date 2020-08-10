@@ -441,7 +441,7 @@ function withGLobalTypography(initialState = {}) {
                     });
                     this.setState({
                         typography: typography,
-                        globalTypoOptions: [{ label: 'Theme', value: 'none' }, ...options],
+                        globalTypoOptions: [{ label: 'Default', value: 'none' }, ...options],
                         globalTypoValues: values
                     });
                 }

@@ -31,6 +31,9 @@ class Fields{
         if('select' === $type) {
             return self::select($info);
         }
+        if('checkbox' === $type) {
+            return self::checkbox($info);
+        }
     }
 
     /**
@@ -79,6 +82,30 @@ class Fields{
                         }
                     ?>
                 </select>
+                <?php self::description($info['desc']); ?>
+            </td>
+        </tr>
+        <?php
+    }
+    /**
+     * Get Checkbox Field
+     * @param $info
+     * @since 1.5.2
+     */
+    private static function checkbox($info)
+    {
+        $info['options'] = isset($info['options']) ? $info['options'] : array();
+
+        ?>
+        <tr>
+            <?php self::label($info['label']); ?>
+            <td>
+                 <input
+                        <?php echo $info['value']==='true'?'checked':'' ?>
+                        name="qubely_options[<?php echo esc_attr($info['key']) ?>]"
+                        value="<?php echo esc_html($info['value']) ?>"
+                        type="checkbox"
+                    >
                 <?php self::description($info['desc']); ?>
             </td>
         </tr>

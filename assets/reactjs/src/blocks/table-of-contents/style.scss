@@ -96,6 +96,7 @@
     list-style: none !important;
     > li {
       counter-increment: item;
+      list-style-type: none;
     }
     li{
       position: relative;

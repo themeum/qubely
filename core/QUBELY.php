@@ -150,7 +150,7 @@ class QUBELY
 		$qubely_gmap_api_key = isset($options['qubely_gmap_api_key']) ? $options['qubely_gmap_api_key'] : '';
 		$qubely_recaptcha_site_key = isset($options['qubely_recaptcha_site_key']) ? $options['qubely_recaptcha_site_key'] : '';
 		$qubely_recaptcha_secret_key = isset($options['qubely_recaptcha_secret_key']) ? $options['qubely_recaptcha_secret_key'] : '';
-
+		$enable_global_settings=isset($options['import_with_global_settings']) ? $options['import_with_global_settings'] : false;
 		wp_localize_script('qubely-blocks-js', 'qubely_admin', array(
 			'plugin' => QUBELY_DIR_URL,
 			'ajax' => admin_url('admin-ajax.php'),
@@ -165,7 +165,8 @@ class QUBELY
 			'qubely_recaptcha_secret_key' => $qubely_recaptcha_secret_key,
 			'site_url' => site_url(),
 			'admin_url' => admin_url(),
-			'publishedPosts'=>wp_count_posts()->publish,
+			'import_with_global_settings' => $enable_global_settings,
+			'publishedPosts'=>wp_count_posts()->publish
 		));
 	}
 
@@ -211,7 +212,13 @@ class QUBELY
 	 */
 	public function qubely_admin_assets()
 	{
-
+		wp_register_script('qubely_local_script', '');
+		wp_localize_script('qubely_local_script', 'qubely_urls', array(
+			'plugin' => QUBELY_DIR_URL,
+			'ajax' => admin_url('admin-ajax.php'),
+			'nonce'=>wp_create_nonce('qubely_nonce')
+		));
+		wp_enqueue_script('qubely_local_script');
 
 		#START_REPLACE
 		wp_enqueue_style('qubley-animated-headline-style', QUBELY_DIR_URL . 'assets/css/qubely.animatedheadline.css', false, QUBELY_VERSION);
@@ -377,7 +384,8 @@ class QUBELY
 		wp_register_script('qubely_local_script', '');
 		wp_localize_script('qubely_local_script', 'qubely_urls', array(
 			'plugin' => QUBELY_DIR_URL,
-			'ajax' => admin_url('admin-ajax.php')
+			'ajax' => admin_url('admin-ajax.php'),
+			'nonce'=>wp_create_nonce('qubely_nonce')
 		));
 		wp_enqueue_script('qubely_local_script');
 
@@ -920,7 +928,6 @@ class QUBELY
 			add_action('wp_enqueue_scripts', array($this, 'enqueue_block_css_file'));
 		} else {
 			add_action('wp_head', array($this, 'add_block_inline_css'), 100);
-			// add_action('enqueue_block_assets', array($this, 'add_block_inline_css'), 100);
 		}
 		// }
 	}

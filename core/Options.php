@@ -8,15 +8,16 @@ if (!class_exists('QUBELY_Options')) {
     {
 
         public $settings;
-        public $getting_started;
 
         public function __construct()
         {
-            require __DIR__ . '/admin-views/Settings.php';
-            require __DIR__ . '/admin-views/Getting_Started.php';
-            $this->settings = new Settings();
-            $this->getting_started = new Getting_Started();
+            add_action('init', array($this, 'init'));
             add_action('admin_menu', array($this, 'admin_menu'));
+        }
+
+        public function init() {
+            require __DIR__ . '/admin-views/Settings.php';
+            $this->settings = new Settings();
         }
 
         /**
@@ -26,6 +27,8 @@ if (!class_exists('QUBELY_Options')) {
          */
         public function admin_menu()
         {
+            require __DIR__ . '/admin-views/Getting_Started.php';
+            $getting_started = new Getting_Started();
 
             $parent_slug = 'qubely-settings';
             $cap = 'manage_options';
@@ -54,7 +57,7 @@ if (!class_exists('QUBELY_Options')) {
                 esc_html__('Getting Started', 'qubely'),
                 $cap,
                 'qubely',
-                array($this->getting_started, 'markup')
+                array($getting_started, 'markup')
             );
         }
     }
