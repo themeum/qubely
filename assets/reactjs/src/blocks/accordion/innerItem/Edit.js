@@ -333,12 +333,11 @@ class AccordionItemBlockEdit extends Component {
                                 }
                                 <RichText
                                     tagName='div'
-                                    placeholder={__('Add Accordion Item..')}
+                                    placeholder={__('Accordion label')}
                                     className="qubely-accordion-panel-handler-label"
                                     value={heading}
                                     onChange={(value) => setAttributes({ heading: value })}
                                     allowedFormats={['bold', 'italic', 'strikethrough']}
-                                    // isSelected={isSelected}
                                     keepPlaceholderOnFocus
                                     onClick={() => this.updateLabel()}
                                 />
@@ -353,17 +352,16 @@ class AccordionItemBlockEdit extends Component {
                                     onClick={() => {
                                         const parentAccordion = this.findParentAccordion(this.props.rootBlock);
                                         if (parentAccordion && parentAccordion.clientId) {
-
                                             this.updateItemNumber(itemNumber);
                                             this.props.removeBlock(this.props.clientId);
-
                                             if (parentAccordion.innerBlocks.length <= 1) {
                                                 this.props.removeBlock(parentAccordion.clientId);
                                             }
                                         }
                                     }}
                                     className="qubely-accordion-item-remove-button"
-                                ><i className="fa fa-times" />
+                                >
+                                    <i className="fa fa-times" />
                                 </Button>
                             }
                         </div>

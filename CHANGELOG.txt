@@ -4,6 +4,8 @@
     <li>New: Import Sections/Layouts with Global settings </li>
     <li>Update: All blocks - Context Menu refs</li>
     <li>Fix: Parse Qubely block issue for CSS generator</li>
+    <li>Fix: Accordion block - inline style issue </li>
+    <li>Fix: Accordion block - Accordion title editing issue on Safari  </li>
 </ul>
 
 

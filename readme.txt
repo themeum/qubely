@@ -242,6 +242,7 @@ New: Import Sections/Layouts with Global settings
 Update: All blocks - Context Menu refs
 Fix: Parse Qubely block issue for CSS generator
 Fix: Accordion block - inline style issue 
+Fix: Accordion block - Accordion title editing issue on Safari  
 
 
 = 1.5.2 - 29 July, 2020 =  
