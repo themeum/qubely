@@ -567,7 +567,11 @@ class QUBELY
 			array(
 				array(
 					'methods'  => 'GET',
-					'callback' => array($this, 'get_global_option')
+					'callback' => array($this, 'get_global_option'),
+					'permission_callback' => function () {
+                        return true;
+                    },
+                    'args' => array()
 				),
 				array(
 					'methods'  => 'POST',

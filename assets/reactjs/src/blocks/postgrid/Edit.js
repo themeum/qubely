@@ -158,6 +158,9 @@ class Edit extends Component {
 		const {
 			setAttributes,
 			posts,
+			name,
+			clientId,
+			attributes,
 			taxonomyList,
 			attributes: {
 				uniqueId,
@@ -894,7 +897,7 @@ class Edit extends Component {
 										})
 									}
 								</div>
-								<div
+								{/* <div
 									ref={this.qubelyContextMenu}
 									className={`qubely-context-menu-wraper`}
 								>
@@ -905,7 +908,7 @@ class Edit extends Component {
 										setAttributes={setAttributes}
 										qubelyContextMenu={this.qubelyContextMenu.current}
 									/>
-								</div>
+								</div> */}
 								{
 									(pages > 1 && enablePagination) &&
 									<div className="qubely-postgrid-pagination">

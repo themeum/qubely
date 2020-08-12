@@ -136,11 +136,11 @@ class AccordionItemBlockEdit extends Component {
                         <InspectorTab key={'style'}>
                             <PanelBody title={__('')}>
                                 <Styles value={fillType}
-                                        onChange={(val) => this.setGlobalSettings('fillType', val)}
-                                        options={[
-                                            { value: 'fill', svg: icons.accordion_fill, label: __('Fill') },
-                                            { value: 'nofill', svg: icons.accordion_classic, label: __('Classic') },
-                                        ]}
+                                    onChange={(val) => this.setGlobalSettings('fillType', val)}
+                                    options={[
+                                        { value: 'fill', svg: icons.accordion_fill, label: __('Fill') },
+                                        { value: 'nofill', svg: icons.accordion_classic, label: __('Classic') },
+                                    ]}
                                 />
                                 <Toggle label={__('Toggle')} value={itemToggle} onChange={val => this.updateRootBlock('itemToggle', val)} />
                                 <Toggle label={__('Open First Item')} value={openFirstItem} onChange={val => this.setGlobalSettings('openFirstItem', val)} />
@@ -152,20 +152,20 @@ class AccordionItemBlockEdit extends Component {
                                     <Tab tabTitle={__('Normal')}>
                                         <Color label={__('Color')} value={panelColor} onChange={val => this.setGlobalSettings('panelColor', val)} />
                                         {fillType == 'fill' &&
-                                        <Fragment>
-                                            <ColorAdvanced label={__('Background')} value={panelBg} onChange={(val) => this.setGlobalSettings('panelBg', val)} />
-                                            <Border label={__('Border')} value={panelBorder} onChange={(val) => this.setGlobalSettings('panelBorder', val)} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
-                                            <BoxShadow label={__('Box-Shadow')} value={panelBoxShadow} onChange={(value) => this.setGlobalSettings('panelBoxShadow', value)} disableInset />
-                                            <BorderRadius
-                                                label={__('Radius')}
-                                                value={panelBorderRadius} onChange={(value) => this.setGlobalSettings('panelBorderRadius', value)}
-                                                unit={['px', 'em', '%']} max={100}
-                                                min={0}
-                                                responsive
-                                                device={device}
-                                                onDeviceChange={value => this.setState({ device: value })}
-                                            />
-                                        </Fragment>
+                                            <Fragment>
+                                                <ColorAdvanced label={__('Background')} value={panelBg} onChange={(val) => this.setGlobalSettings('panelBg', val)} />
+                                                <Border label={__('Border')} value={panelBorder} onChange={(val) => this.setGlobalSettings('panelBorder', val)} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
+                                                <BoxShadow label={__('Box-Shadow')} value={panelBoxShadow} onChange={(value) => this.setGlobalSettings('panelBoxShadow', value)} disableInset />
+                                                <BorderRadius
+                                                    label={__('Radius')}
+                                                    value={panelBorderRadius} onChange={(value) => this.setGlobalSettings('panelBorderRadius', value)}
+                                                    unit={['px', 'em', '%']} max={100}
+                                                    min={0}
+                                                    responsive
+                                                    device={device}
+                                                    onDeviceChange={value => this.setState({ device: value })}
+                                                />
+                                            </Fragment>
                                         }
                                     </Tab>
                                     <Tab tabTitle={__('Active')}>
@@ -175,34 +175,34 @@ class AccordionItemBlockEdit extends Component {
                                             onChange={val => fillType == 'fill' ? this.setGlobalSettings('panelColorActive', val) : this.setGlobalSettings('panelColorActive2', val)}
                                         />
                                         {fillType == 'fill' &&
-                                        <Fragment>
-                                            <ColorAdvanced label={__('Background')} value={panelBgActive} onChange={(val) => this.setGlobalSettings('panelBgActive', val)} />
-                                            <Color label={__('Border Color')} value={panelBorderColorActive} onChange={(val) => this.setGlobalSettings('panelBorderColorActive', val)} />
-                                            <BoxShadow label={__('Box-Shadow')} value={panelBoxShadowActive} onChange={(value) => this.setGlobalSettings('panelBoxShadowActive', value)} disableInset />
-                                            <BorderRadius
-                                                label={__('Radius')}
-                                                value={panelBorderRadiusActive} onChange={(value) => this.setGlobalSettings('panelBorderRadiusActive', value)}
-                                                unit={['px', 'em', '%']} max={100}
-                                                min={0}
-                                                responsive
-                                                device={device}
-                                                onDeviceChange={value => this.setState({ device: value })}
-                                            />
-                                        </Fragment>
+                                            <Fragment>
+                                                <ColorAdvanced label={__('Background')} value={panelBgActive} onChange={(val) => this.setGlobalSettings('panelBgActive', val)} />
+                                                <Color label={__('Border Color')} value={panelBorderColorActive} onChange={(val) => this.setGlobalSettings('panelBorderColorActive', val)} />
+                                                <BoxShadow label={__('Box-Shadow')} value={panelBoxShadowActive} onChange={(value) => this.setGlobalSettings('panelBoxShadowActive', value)} disableInset />
+                                                <BorderRadius
+                                                    label={__('Radius')}
+                                                    value={panelBorderRadiusActive} onChange={(value) => this.setGlobalSettings('panelBorderRadiusActive', value)}
+                                                    unit={['px', 'em', '%']} max={100}
+                                                    min={0}
+                                                    responsive
+                                                    device={device}
+                                                    onDeviceChange={value => this.setState({ device: value })}
+                                                />
+                                            </Fragment>
                                         }
                                     </Tab>
                                 </Tabs>
 
                                 {fillType == 'fill' &&
-                                <Padding
-                                    label={__('Padding')}
-                                    value={panelPadding} onChange={(value) => this.setGlobalSettings('panelPadding', value)}
-                                    unit={['px', 'em', '%']} max={100}
-                                    min={0}
-                                    responsive
-                                    device={device}
-                                    onDeviceChange={value => this.setState({ device: value })}
-                                />
+                                    <Padding
+                                        label={__('Padding')}
+                                        value={panelPadding} onChange={(value) => this.setGlobalSettings('panelPadding', value)}
+                                        unit={['px', 'em', '%']} max={100}
+                                        min={0}
+                                        responsive
+                                        device={device}
+                                        onDeviceChange={value => this.setState({ device: value })}
+                                    />
                                 }
                                 <Typography label={__('Typography')} value={typography} onChange={(val) => this.setGlobalSettings('typography', val)} device={device} onDeviceChange={value => this.setState({ device: value })} />
                             </PanelBody>
@@ -226,59 +226,59 @@ class AccordionItemBlockEdit extends Component {
                                     onChange={(val) => this.setGlobalSettings('panelIcon', val)}
                                 />
                                 {panelIcon &&
-                                <Fragment>
-                                    <RadioAdvanced
-                                        label={__('Size')}
-                                        options={[
-                                            { label: 'S', value: '14px', title: __('Small') },
-                                            { label: 'M', value: '22px', title: __('Medium') },
-                                            { label: 'L', value: '30px', title: __('Large') },
-                                            { icon: 'fas fa-cog', value: 'custom', title: __('Custom') }
-                                        ]}
-                                        value={iconSize}
-                                        onChange={(val) => this.setGlobalSettings('iconSize', val)}
-                                    />
-                                    {iconSize == 'custom' &&
-                                    <Range
-                                        value={customIconSize}
-                                        onChange={(val) => this.setGlobalSettings('customIconSize', val)}
-                                        min={0}
-                                        max={100}
-                                        unit={['px', 'em', '%']}
-                                        responsive
-                                        device={device}
-                                        onDeviceChange={value => this.setState({ device: value })} />
-                                    }
-                                    <RadioAdvanced
-                                        label={__('Position')}
-                                        options={[
-                                            { label: 'Left', value: 'left' },
-                                            { label: 'Right', value: 'right' }
-                                        ]}
-                                        value={iconPosition}
-                                        onChange={(val) => this.setGlobalSettings('iconPosition', val)}
-                                    />
+                                    <Fragment>
+                                        <RadioAdvanced
+                                            label={__('Size')}
+                                            options={[
+                                                { label: 'S', value: '14px', title: __('Small') },
+                                                { label: 'M', value: '22px', title: __('Medium') },
+                                                { label: 'L', value: '30px', title: __('Large') },
+                                                { icon: 'fas fa-cog', value: 'custom', title: __('Custom') }
+                                            ]}
+                                            value={iconSize}
+                                            onChange={(val) => this.setGlobalSettings('iconSize', val)}
+                                        />
+                                        {iconSize == 'custom' &&
+                                            <Range
+                                                value={customIconSize}
+                                                onChange={(val) => this.setGlobalSettings('customIconSize', val)}
+                                                min={0}
+                                                max={100}
+                                                unit={['px', 'em', '%']}
+                                                responsive
+                                                device={device}
+                                                onDeviceChange={value => this.setState({ device: value })} />
+                                        }
+                                        <RadioAdvanced
+                                            label={__('Position')}
+                                            options={[
+                                                { label: 'Left', value: 'left' },
+                                                { label: 'Right', value: 'right' }
+                                            ]}
+                                            value={iconPosition}
+                                            onChange={(val) => this.setGlobalSettings('iconPosition', val)}
+                                        />
 
-                                    <Range
-                                        label={__('Spacing')}
-                                        value={iconSpacing}
-                                        onChange={(val) => this.setGlobalSettings('iconSpacing', val)}
-                                        min={0}
-                                        max={30}
-                                        unit={['px', 'em', '%']}
-                                        responsive
-                                        device={device}
-                                        onDeviceChange={value => this.setState({ device: value })} />
+                                        <Range
+                                            label={__('Spacing')}
+                                            value={iconSpacing}
+                                            onChange={(val) => this.setGlobalSettings('iconSpacing', val)}
+                                            min={0}
+                                            max={30}
+                                            unit={['px', 'em', '%']}
+                                            responsive
+                                            device={device}
+                                            onDeviceChange={value => this.setState({ device: value })} />
 
-                                    <Tabs>
-                                        <Tab tabTitle={__('Normal')}>
-                                            <Color label={__('Icon Color')} value={iconColor} onChange={val => this.setGlobalSettings('iconColor', val)} />
-                                        </Tab>
-                                        <Tab tabTitle={__('Active')}>
-                                            <Color label={__('Icon Color')} value={iconColorActive} onChange={val => this.setGlobalSettings('iconColorActive', val)} />
-                                        </Tab>
-                                    </Tabs>
-                                </Fragment>
+                                        <Tabs>
+                                            <Tab tabTitle={__('Normal')}>
+                                                <Color label={__('Icon Color')} value={iconColor} onChange={val => this.setGlobalSettings('iconColor', val)} />
+                                            </Tab>
+                                            <Tab tabTitle={__('Active')}>
+                                                <Color label={__('Icon Color')} value={iconColorActive} onChange={val => this.setGlobalSettings('iconColorActive', val)} />
+                                            </Tab>
+                                        </Tabs>
+                                    </Fragment>
                                 }
                             </PanelBody>
 
@@ -293,20 +293,20 @@ class AccordionItemBlockEdit extends Component {
                                     onDeviceChange={value => this.setState({ device: value })}
                                 />
                                 {fillType == 'fill' &&
-                                <Fragment>
-                                    <ColorAdvanced label={__('Background')} value={bodyBg} onChange={(val) => this.setGlobalSettings('bodyBg', val)} />
-                                    <Border label={__('Border')} value={bodyBorder} onChange={(val) => this.setGlobalSettings('bodyBorder', val)} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
-                                    <BoxShadow label={__('Box-Shadow')} value={bodyBoxShadow} onChange={(value) => this.setGlobalSettings('bodyBoxShadow', value)} disableInset />
-                                    <BorderRadius
-                                        label={__('Radius')}
-                                        value={borderRadius} onChange={(value) => this.setGlobalSettings('borderRadius', value)}
-                                        unit={['px', 'em', '%']} max={100}
-                                        min={0}
-                                        responsive
-                                        device={device}
-                                        onDeviceChange={value => this.setState({ device: value })}
-                                    />
-                                </Fragment>
+                                    <Fragment>
+                                        <ColorAdvanced label={__('Background')} value={bodyBg} onChange={(val) => this.setGlobalSettings('bodyBg', val)} />
+                                        <Border label={__('Border')} value={bodyBorder} onChange={(val) => this.setGlobalSettings('bodyBorder', val)} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
+                                        <BoxShadow label={__('Box-Shadow')} value={bodyBoxShadow} onChange={(value) => this.setGlobalSettings('bodyBoxShadow', value)} disableInset />
+                                        <BorderRadius
+                                            label={__('Radius')}
+                                            value={borderRadius} onChange={(value) => this.setGlobalSettings('borderRadius', value)}
+                                            unit={['px', 'em', '%']} max={100}
+                                            min={0}
+                                            responsive
+                                            device={device}
+                                            onDeviceChange={value => this.setState({ device: value })}
+                                        />
+                                    </Fragment>
                                 }
                             </PanelBody>
 
@@ -323,21 +323,30 @@ class AccordionItemBlockEdit extends Component {
                 <div className={`qubely-block-${uniqueId}${className ? ` ${className}` : ''}`}>
                     <div className={`qubely-accordion-item qubely-type-${fillType} ${(active) ? `qubely-accordion-active` : ''}`}>
                         <div className={`qubely-accordion-panel ${panelIcon && 'qubely-icon-position-' + iconPosition}`}>
-                            <span className="qubely-accordion-panel-handler" onClick={() => this._onClickLabel()} role="button">
-                                {(panelIcon && iconPosition == 'left') && <span className={`qubely-accordion-icon ${panelIcon}`} />}
+                            <div
+                                className="qubely-accordion-panel-handler"
+                                onClick={() => this._onClickLabel()}
+                            >
+                                {
+                                    (panelIcon && iconPosition == 'left') &&
+                                    <span className={`qubely-accordion-icon ${panelIcon}`} />
+                                }
                                 <RichText
-                                    tagName="span"
+                                    tagName='div'
                                     placeholder={__('Add Accordion Item..')}
                                     className="qubely-accordion-panel-handler-label"
                                     value={heading}
                                     onChange={(value) => setAttributes({ heading: value })}
                                     allowedFormats={['bold', 'italic', 'strikethrough']}
-                                    isSelected={isSelected}
+                                    // isSelected={isSelected}
                                     keepPlaceholderOnFocus
                                     onClick={() => this.updateLabel()}
                                 />
-                                {(panelIcon && iconPosition == 'right') && <span className={`qubely-accordion-icon ${panelIcon}`} />}
-                            </span>
+                                {
+                                    (panelIcon && iconPosition == 'right') &&
+                                    <span className={`qubely-accordion-icon ${panelIcon}`} />
+                                }
+                            </div>
 
                             {(isSelectedBlockInRoot) &&
                                 <Button

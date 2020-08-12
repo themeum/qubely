@@ -241,6 +241,7 @@ You can report bugs on the [support forum here](https://wordpress.org/support/pl
 New: Import Sections/Layouts with Global settings 
 Update: All blocks - Context Menu refs
 Fix: Parse Qubely block issue for CSS generator
+Fix: Accordion block - inline style issue 
 
 
 = 1.5.2 - 29 July, 2020 =  
