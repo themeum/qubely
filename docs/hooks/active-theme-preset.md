@@ -1,6 +1,7 @@
 # Active Theme Preset
 
-Using following hook active theme preset of Qubely Global Settings after activating theme 
+Use following hook to active `Theme preset` of Qubely Global Settings from themes. 
+
 
 ## Code
 

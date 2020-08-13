@@ -239,6 +239,7 @@ You can report bugs on the [support forum here](https://wordpress.org/support/pl
 
 = 1.5.3 - 13 August, 2020 =  
 New: Import Sections/Layouts with Global settings 
+New: Theme Preset activation hook  
 Update: All blocks - Context Menu refs
 Fix: Parse Qubely block issue for CSS generator
 Fix: Accordion block - inline style issue 
