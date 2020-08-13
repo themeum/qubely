@@ -4,6 +4,7 @@ Developer Documentation of Qubely
 
 ## Hooks: 
 1. [Row-container width](./hooks/row-container-width.md)
+2. [Active Theme preset](./hooks/active-theme-preset.md)
 
 ## Field Types: 
 
