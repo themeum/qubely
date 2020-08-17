@@ -142,17 +142,24 @@ function registerFormat() {
                                         }))
                                     }} />
                                 <div className="qubely-rgba-palette" style={{ padding: '0px 0px 15px 15px' }}>
-                                    {defColors().map(color => <button style={{ color: color }} onClick={() => {
-                                        onChange(applyFormat(value, {
-                                            type: 'qubely/inlinecolor',
-                                            attributes: {
-                                                style: `color: ${color};`,
-                                                data: color
-                                            },
-                                            startIndex: value.start,
-                                            endIndex: value.end
-                                        }))
-                                    }} />)}
+                                    {
+                                        defColors().map((color, index) => (
+                                            <button
+                                                key={color}
+                                                style={{ color: `var(--qubely-color-${index + 1})` }}
+                                                onClick={() => {
+                                                    onChange(applyFormat(value, {
+                                                        type: 'qubely/inlinecolor',
+                                                        attributes: {
+                                                            style: `color: var(--qubely-color-${index + 1});`,
+                                                            data: `var(--qubely-color-${index + 1})`
+                                                        },
+                                                        startIndex: value.start,
+                                                        endIndex: value.end
+                                                    }))
+                                                }}
+                                            />))
+                                    }
                                 </div>
                             </Popover>
                         }
@@ -253,17 +260,25 @@ function registerFormat() {
                                     }} />
 
                                 <div className="qubely-rgba-palette" style={{ padding: '0px 0px 15px 15px' }}>
-                                    {defColors().map(color => <button style={{ color: color }} onClick={() => {
-                                        onChange(applyFormat(value, {
-                                            type: 'qubely/backgroundcolor',
-                                            attributes: {
-                                                style: `background-color: ${color};`,
-                                                data: color
-                                            },
-                                            startIndex: value.start,
-                                            endIndex: value.end
-                                        }))
-                                    }} />)}
+                                    {
+                                        defColors().map((color, index) => (
+                                            <button
+                                                key={color}
+                                                style={{ color: `var(--qubely-color-${index + 1})` }}
+                                                onClick={() => {
+                                                    onChange(applyFormat(value, {
+                                                        type: 'qubely/backgroundcolor',
+                                                        attributes: {
+                                                            style: `background-color: var(--qubely-color-${index + 1});`,
+                                                            data: `var(--qubely-color-${index + 1})`
+                                                        },
+                                                        startIndex: value.start,
+                                                        endIndex: value.end
+                                                    }))
+                                                }}
+                                            />
+                                        ))
+                                    }
                                 </div>
 
                             </Popover>

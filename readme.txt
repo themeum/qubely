@@ -239,11 +239,13 @@ You can report bugs on the [support forum here](https://wordpress.org/support/pl
 
 = 1.5.3 - 13 August, 2020 =  
 New: Import Sections/Layouts with Global settings 
+New: Inline Color and Background Color compatibility with Global settings 
 New: Theme Preset activation hook  
 Update: All blocks - Context Menu refs
 Fix: Parse Qubely block issue for CSS generator
 Fix: Accordion block - inline style issue 
 Fix: Accordion block - Accordion title editing issue on Safari  
+Fix: Dropdown Component -  initial options issue with API call  
 
 
 = 1.5.2 - 29 July, 2020 =  

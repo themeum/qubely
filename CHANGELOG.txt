@@ -2,11 +2,13 @@
 <h3>1.5.3 - 13 August, 2020</h3>
 <ul>
     <li>New: Import Sections/Layouts with Global settings</li>
+    <li>New: Inline Color and Background Color compatibility with Global settings</li>
     <li>New: Theme Preset activation hook</li>
     <li>Update: All blocks - Context Menu refs</li>
     <li>Fix: Parse Qubely block issue for CSS generator</li>
-    <li>Fix: Accordion block - inline style issue </li>
-    <li>Fix: Accordion block - Accordion title editing issue on Safari  </li>
+    <li>Fix: Accordion block - inline style issue</li>
+    <li>Fix: Accordion block - Accordion title editing issue on Safari</li>
+    <li>Fix: Dropdown Component -  initial options issue with API call</li>
 </ul>
 
 

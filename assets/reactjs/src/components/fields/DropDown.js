@@ -21,7 +21,11 @@ export default function ({ label, enableSearch, defaultOptionsLabel, value, opti
         return flag
     }
 
-    const [avaiableOptions, setOptions] = useState(options.filter(option => filterOut(option.value)))
+    // const [avaiableOptions, setOptions] = useState(options.filter(option => filterOut(option.value)))
+
+    const getAvaiableOptions = () => {
+        return options.filter(option => filterOut(option.value))
+    }
 
     const handleClickOutside = (event) => {
         if (showOptions) {
@@ -35,9 +39,9 @@ export default function ({ label, enableSearch, defaultOptionsLabel, value, opti
         return () => document.removeEventListener('mousedown', handleClickOutside);
     });
 
-    useEffect(() => {
-        setOptions(options.filter(option => filterOut(option.value)))
-    }, [options]);
+    // useEffect(() => {
+    //     setOptions(options.filter(option => filterOut(option.value)))
+    // }, [options]);
 
     const findArrayIndex = (value) => {
         let index = 0
@@ -92,7 +96,7 @@ export default function ({ label, enableSearch, defaultOptionsLabel, value, opti
                                 if (event.key === 'Enter') {
                                     toggleOptions(false)
                                     setFilteredText('')
-                                    onChange([...value, options[findArrayIndex(avaiableOptions.filter(option => !event.target.value ? true : option.label.toLowerCase().search(event.target.value.toLowerCase()) !== -1)[0].value)]])
+                                    onChange([...value, options[findArrayIndex(getAvaiableOptions().filter(option => !event.target.value ? true : option.label.toLowerCase().search(event.target.value.toLowerCase()) !== -1)[0].value)]])
                                 }
                             }}
                             onChange={event => setFilteredText(event.target.value)}
@@ -106,7 +110,7 @@ export default function ({ label, enableSearch, defaultOptionsLabel, value, opti
                 showOptions && <div className="qubely-dropdown-options-wrapper" ref={qubelyOptionsWraper}>
                     <div className="qubely-dropdown-options" >
                         {options.length > 0 ?
-                            avaiableOptions.filter(option => !filteredText ? true : option.label.toLowerCase().search(filteredText.toLowerCase()) !== -1).map((option, index) => {
+                            getAvaiableOptions().filter(option => !filteredText ? true : option.label.toLowerCase().search(filteredText.toLowerCase()) !== -1).map((option, index) => {
                                 return (
                                     <div className={`qubely-dropdown-option`}
                                         id={`qubely-dropdown-option-${index + 1}`}
