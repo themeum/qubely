@@ -88,6 +88,12 @@ class Edit extends Component {
     }
 
     listMarkup() {
+
+        // fetch lists from mailchimp:
+        // https://{SERVER}.api.mailchimp.com/3.0/lists/?apikey={APIKEY}-{SERVER}
+        // Add member to a list: https://mailchimp.com/developer/api/marketing/list-members/
+
+        const mailchimpListID = this.props.attributes
         const api = '1963145e993bc97ff9aa531cf47077ee-us12' // api must come from db
         const server = api.split('-')[1];
         const url = `https://${server}.api.mailchimp.com/3.0/lists/?apikey=${api}`;
@@ -518,14 +524,6 @@ class Edit extends Component {
                                 // must add another condition to check if there is a mailchimp api key available
                                 submitAction.includes('mailchimp') && (
                                     <PanelBody title={__('MailChimp')} initialOpen={false}>
-                                        {/*
-                                            fetch lists from mailchimp:
-                                            https://{SERVER}.api.mailchimp.com/3.0/lists/?apikey={APIKEY}-{SERVER}
-
-                                            Add member to a list: https://mailchimp.com/developer/api/marketing/list-members/
-                                        */}
-                                        {mailchimpListID}
-
                                         {this.listMarkup()}
                                     </PanelBody>
                                 )
