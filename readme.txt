@@ -1,9 +1,9 @@
 === Gutenberg Blocks and Page Builder – Qubely ===
-Contributors: themeum, kawshar, jakirhasan, anik4e, faisalahmed29, delowardev, rejuancse, badsha_eee, sksaaju, mhshohel
+Contributors: themeum
 Donate link: https://www.themeum.com
 Tags: blocks, gutenberg, gutenberg blocks, editor, block, page builder
 Requires at least: 5.0
-Tested up to: 5.4
+Tested up to: 5.5
 Stable tag: 1.5.3
 Requires PHP: 7.0
 License: GPL-2.0+
@@ -237,15 +237,16 @@ You can report bugs on the [support forum here](https://wordpress.org/support/pl
 
 == Changelog ==
 
-= 1.5.3 - 13 August, 2020 =  
+= 1.5.3 - 21 August, 2020 =  
 New: Import Sections/Layouts with Global settings 
 New: Inline Color and Background Color compatibility with Global settings 
 New: Theme Preset activation hook  
+New : Row block - Even Column Height option  
 Update: All blocks - Context Menu refs
 Fix: Parse Qubely block issue for CSS generator
 Fix: Accordion block - inline style issue 
 Fix: Accordion block - Accordion title editing issue on Safari  
-Fix: Dropdown Component -  initial options issue with API call  
+Fix: Dropdown Component - initial options issue with API call  
 
 
 = 1.5.2 - 29 July, 2020 =  
