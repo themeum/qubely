@@ -120,9 +120,9 @@ class Edit extends Component {
                 <Fragment>
                     <SelectControl
                         label={ __( 'Audience Lists' ) }
-                        value={ '' }
-                        onChange={ (value) => {
-                            console.log(value)
+                        value={ mailchimpListID }
+                        onChange={ (mailchimpListID) => {
+                            setAttributes({mailchimpListID})
                         } }
                         options={ this.state.lists }
                     />
