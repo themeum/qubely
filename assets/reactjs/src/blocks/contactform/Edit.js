@@ -2,7 +2,7 @@
 const { __ } = wp.i18n;
 const { InspectorControls, BlockControls } = wp.blockEditor
 const { Component, Fragment, createRef } = wp.element;
-const { PanelBody, TextControl, TextareaControl, Toolbar, Button, SelectControl } = wp.components;
+const { PanelBody, TextControl, TextareaControl, Toolbar, Button } = wp.components;
 const {
     Styles,
     Range,
@@ -42,8 +42,7 @@ class Edit extends Component {
             device: 'md',
             spacer: true,
             selectedItem: -1,
-            saved_globally: false,
-            lists: null
+            saved_globally: false
         }
         this._saveGlobally = this._saveGlobally.bind(this);
         this.qubelyContextMenu = createRef();
@@ -85,60 +84,6 @@ class Edit extends Component {
         } catch (e) {
             console.log(e);
         }
-    }
-
-    listMarkup() {
-
-        // fetch lists from mailchimp:
-        // https://{SERVER}.api.mailchimp.com/3.0/lists/?apikey={APIKEY}-{SERVER}
-        // Add member to a list: https://mailchimp.com/developer/api/marketing/list-members/
-
-        const mailchimpListID = this.props.attributes
-        const api = '1963145e993bc97ff9aa531cf47077ee-us12' // api must come from db
-        const server = api.split('-')[1];
-        const url = `https://${server}.api.mailchimp.com/3.0/lists/?apikey=${api}`;
-        let message = '';
-
-        if (!this.state.lists) {
-            message = 'Fetching lists';
-            fetch(url)
-            .then(response => response.json())
-            .then(response => {
-                if (Array.isArray(response.lists)) {
-                    const lists = [];
-                    response.lists.forEach(list => {
-                        lists.push({
-                            label: list.name,
-                            value: list.value
-                        })
-                    })
-                    this.setState({ lists })
-                }
-                message = '';
-            })
-            .catch(() => {
-                message = 'Something is wrong!';
-            })
-        }
-
-        if (Array.isArray(this.state.lists) && this.state.lists.length) {
-            return (
-                <Fragment>
-                    <SelectControl
-                        label={ __( 'Audience Lists' ) }
-                        value={ mailchimpListID }
-                        onChange={ (mailchimpListID) => {
-                            setAttributes({mailchimpListID})
-                        } }
-                        options={ this.state.lists }
-                    />
-                </Fragment>
-            )
-        } else if (message) {
-            return <p>{message}</p>
-        }
-
-        return null;
     }
 
     setSettings(type, val, index = -1) {
@@ -206,10 +151,7 @@ class Edit extends Component {
             globalZindex,
             hideTablet,
             hideMobile,
-            submitAction,
-            mailchimpListID,
-            globalCss
-        } = attributes;
+            globalCss } = attributes;
         const setting_url = qubely_admin.admin_url + 'admin.php?page=qubely-settings';
         return (
             <Fragment>
@@ -504,30 +446,6 @@ class Edit extends Component {
                                     </Tab>
                                 </Tabs>
                             </PanelBody>
-                            <PanelBody title={__('After Submit Action')} initialOpen={false}>
-                            <SelectControl
-                                multiple
-                                label={ __( 'Add action' ) }
-                                value={ submitAction }
-                                onChange={ (submitAction) => {
-                                    setAttributes({submitAction: submitAction})
-                                } }
-                                options={ [
-                                    { value: null, label: 'Choose action', disabled: true },
-                                    { value: 'mailchimp', label: 'MailChimp' },
-                                    { value: 'mailer', label: 'Mailer' },
-                                    { value: 'getresponse', label: 'GetResponse' },
-                                ] }
-                            />
-                            </PanelBody>
-                            {
-                                // must add another condition to check if there is a mailchimp api key available
-                                submitAction.includes('mailchimp') && (
-                                    <PanelBody title={__('MailChimp')} initialOpen={false}>
-                                        {this.listMarkup()}
-                                    </PanelBody>
-                                )
-                            }
                             {buttonSettings(this.props.attributes, device, (key, value) => { setAttributes({ [key]: value }) }, (key, value) => { this.setState({ [key]: value }) })}
                         </InspectorTab>
                         <InspectorTab key={'advance'}>

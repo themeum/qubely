@@ -308,14 +308,6 @@ registerBlockType('qubely/contactform', {
         emailSubject: { type: 'string', default: '{{subject}} | {{email}} | {{site-name}}' },
         emailBody: { type: 'string', default: '<p><strong>From:</strong> {{full-name }}</p><strong>Email:</strong> {{email}}</p>\n<p><strong>Subject:</strong> {{subject}}</p>\n<p><strong>Message:</strong> {{message}}</p>' },
         sourceOfCopiedStyle: { type: 'boolean', default: false },
-        submitAction: {
-            type: 'array',
-            default: []
-        },
-        mailchimpListID: {
-            type: 'string',
-            default: ''
-        }
     },
     edit: Edit,
     save: Save,
