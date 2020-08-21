@@ -103,6 +103,7 @@ class Edit extends Component {
                 className,
                 rowId,
                 columns,
+                evenColumnHeight,
                 align,
                 rowGutter,
                 rowBlend,
@@ -219,7 +220,7 @@ class Edit extends Component {
                                         }
                                     </Fragment>
                                 }
-
+                                <Toggle label={__('Even Column Height')} value={evenColumnHeight} onChange={val => setAttributes({ evenColumnHeight: val })} />
                                 {columns > 1 &&
                                     <Range
                                         label={__('Gutter Size')}

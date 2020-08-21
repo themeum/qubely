@@ -10,6 +10,13 @@ const attributes = {
     ...globalAttributes,  // Global Settings
     columns: { type: 'number', default: '' },
     childRow: { type: 'boolean', default: false },
+    evenColumnHeight: {
+        type: 'boolean',
+        default: false,
+        style: [
+            { selector: '{{QUBELY}}.qubely-section .qubely-row .qubely-column>.qubely-column-inner {height: 100%;}' },
+        ]
+    },
     // Dimension
     padding: {
         type: 'object',
