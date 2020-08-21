@@ -61,7 +61,7 @@
 -   [Qubely Website](https://qubely.io/)
 -   [Documentation](https://docs.themeum.com/qubely/)
 -   [Download on WordPress.org](https://wordpress.org/plugins/qubely/)
--   [Join our Facebook Community](https://facebook.com/groups/coblocks)
+-   [Join our Facebook Community](https://www.facebook.com/groups/qubely)
 
 
 
