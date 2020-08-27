@@ -163,9 +163,9 @@ class Settings
                         'fields' => array(
                             'mailchimp_api_key' => array(
                                 'type' => 'text',
-                                'label' => __('MailChimp API key', 'qubely'),
+                                'label' => __('Default Form Action', 'qubely'),
                                 'default' => '',
-                                'desc' => sprintf(__('Enter your MailChimp api key, %1$s Generate API key %2$s', 'qubely'), '<a href="https://kb.mailchimp.com/integrations/api-integrations/about-api-keys" target="_blank">', '</a>'),
+                                'desc' => sprintf(__('Enter your MailChimp Form Action, %1$s or Create a Signup form here %2$s', 'qubely'), '<a href="https://mailchimp.com/help/add-a-signup-form-to-your-website/" target="_blank">', '</a>'),
                                 'placeholder' => '',
                                 'suffix' => '',
                                 'size' => 'regular',
