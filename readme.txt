@@ -237,6 +237,12 @@ You can report bugs on the [support forum here](https://wordpress.org/support/pl
 
 == Changelog ==
 
+= 1.5.4 - 21 September, 2020 =  
+New: Richtext Tooltip format
+Update: Disable 'Edit as html' option in parent blocks  
+Update: Richtext formats usability  
+
+
 = 1.5.3 - 21 August, 2020 =  
 New: Import Sections/Layouts with Global settings 
 New: Inline Color and Background Color compatibility with Global settings 
