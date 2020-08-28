@@ -103,6 +103,7 @@ class Edit extends Component {
                 className,
                 rowId,
                 columns,
+                evenColumnHeight,
                 align,
                 rowGutter,
                 rowBlend,
@@ -219,8 +220,9 @@ class Edit extends Component {
                                         }
                                     </Fragment>
                                 }
-
-                                {columns > 1 &&
+                                <Toggle label={__('Even Column Height')} value={evenColumnHeight} onChange={val => setAttributes({ evenColumnHeight: val })} />
+                                {
+                                    columns > 1 &&
                                     <Range
                                         label={__('Gutter Size')}
                                         min={0} max={100}
@@ -232,7 +234,6 @@ class Edit extends Component {
                                         onDeviceChange={value => this.setState({ device: value })}
                                     />
                                 }
-
                                 <Separator />
 
                                 <div className="qubely-field">

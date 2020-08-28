@@ -1,3 +1,4 @@
+/* eslint-disable react/react-in-jsx-scope */
 const { __ } = wp.i18n;
 const { InspectorControls, BlockControls } = wp.blockEditor
 const { Component, Fragment, createRef } = wp.element;
@@ -30,7 +31,7 @@ const {
     InspectorTab
 } = wp.qubelyComponents
 
-import icons from '../../helpers/icons'
+import icons from '../../helpers/icons';
 
 
 class Edit extends Component {
@@ -440,7 +441,7 @@ class Edit extends Component {
                                             label={__('Email Body')}
                                             value={emailBody}
                                             onChange={val => setAttributes({ emailBody: val })}
-                                            help={__("Set your form email body here. In editor don't add any CSS style or others option just add your form field name between double curly braces {{field-name}} as you set in 'Field Name'.")}
+                                            help={__('Set your form email body here. In editor don\'t add any CSS style or others option just add your form field name between double curly braces {{field-name}} as you set in \'Field Name\'.')}
                                         />
                                     </Tab>
                                 </Tabs>
@@ -516,7 +517,7 @@ class Edit extends Component {
 
                         <div
                             ref={this.qubelyContextMenu}
-                            className={`qubely-context-menu-wraper`}
+                            className={'qubely-context-menu-wraper'}
                         >
                             <ContextMenu
                                 name={name}

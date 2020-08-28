@@ -61,3 +61,121 @@
 .wp-block-qubely-text .qubely-block-text .qubely-block-text-title-container{
     color: inherit;
 }
+
+/**
+ * tooltip richtext format using CSS
+ */
+
+ *[data-tooltip] {
+    position: relative;
+}
+[data-tooltip]:before {
+    /* needed - do not change */
+    content: attr(data-tooltip);
+    position: absolute;
+    pointer-events: none;
+    opacity: 0;
+    display: inline-block;
+    /* customizable */
+    transition: all 0.15s ease;
+    padding: 5px 10px;
+    color: white;
+    border-radius: 2px;
+    border-width: 0;
+    white-space: nowrap;
+    text-align: center;
+    line-height: 1.6;
+    font-size: 16px;
+    box-shadow: none;
+}
+
+[data-tooltip]:hover:before {
+    /* needed - do not change */
+    opacity: 1;
+    z-index: 1000;
+    /* customizable */
+    background: #1a1a1a;
+    margin-top: -38px;
+    margin-left: 20%;
+}
+
+.qubely-tooltip {
+    background-color: gainsboro;
+}
+
+/**
+ * Popover Style
+ */
+
+.qubely-custom-popover .components-popover__content {
+    border: 1px solid #e1e1e1;
+    border-radius: 4px;
+}
+
+.qubely-popover-contents {
+    min-width: 360px;
+    display: block;
+    padding: 30px 20px;
+    display: flex;
+    position: relative;
+    input {
+        flex: 1 1 0px;
+        display: inline-block;
+        padding: 11px 36px 11px 16px !important;
+        height: 38px !important;
+        border: 1px solid #e1e1e1 !important;
+        border-radius: 4px !important;
+        font-size: 16px;
+    }
+}
+
+.qubely-custom-submit {
+    right: 22px;
+    top: 31px;
+    display: inline-flex;
+    text-decoration: none;
+    font-size: 13px;
+    margin: 0;
+    border: 0;
+    cursor: pointer;
+    -webkit-appearance: none;
+    background: none;
+    transition: box-shadow 0.1s linear;
+    height: 36px;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 0 9px;
+    overflow: hidden;
+    border-radius: 3px;
+    color: #555d66;
+    &:hover {
+        background-color: #fff;
+        color: #191e23;
+        box-shadow: inset 0 0 0 1px #555d66, inset 0 0 0 2px #fff;
+    }
+}
+
+.tooltip-message {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .qubely-tooltip-text {
+        margin-bottom: 5px;
+        max-width: 210px;
+        font-size: 14px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+    .qubely-action-buttons {
+        display: inline-flex;
+        .qubely-edit {
+            margin-right: 10px;
+        }
+        .qubely-remove {
+            background-color: #e65054;
+            color: #fff;
+        }
+    }
+}

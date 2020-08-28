@@ -1,7 +1,7 @@
 /* eslint-disable react/react-in-jsx-scope */
-import './style.scss'
-import Edit from './Edit'
+import Edit from './Edit';
 import Save from './Save';
+import './style.scss';
 const { __ } = wp.i18n
 const { registerBlockType } = wp.blocks
 const { gloalSettings: { globalAttributes }, QubelyButton: { buttonAttributes }, } = wp.qubelyComponents
@@ -307,7 +307,7 @@ registerBlockType('qubely/contactform', {
         emailFrom: { type: 'string', default: 'Your Name: admin@example.com' },
         emailSubject: { type: 'string', default: '{{subject}} | {{email}} | {{site-name}}' },
         emailBody: { type: 'string', default: '<p><strong>From:</strong> {{full-name }}</p><strong>Email:</strong> {{email}}</p>\n<p><strong>Subject:</strong> {{subject}}</p>\n<p><strong>Message:</strong> {{message}}</p>' },
-        sourceOfCopiedStyle: { type: 'boolean', default: false }
+        sourceOfCopiedStyle: { type: 'boolean', default: false },
     },
     edit: Edit,
     save: Save,

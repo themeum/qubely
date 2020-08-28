@@ -28,9 +28,8 @@ const {
     InspectorTabs,
     InspectorTab,
     InspectorSections
-} = wp.qubelyComponents
+} = wp.qubelyComponents;
 
-import '../../components/fields/inline/editorInline'
 import svg from '../heading/separators'
 
 class Edit extends Component {
