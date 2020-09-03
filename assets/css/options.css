@@ -250,8 +250,8 @@ p {
 
 .qubely-cta-card > img {
 	position: absolute;
-	right: 20px;
-	bottom: 10px;
+    right: -10px;
+    bottom: -60px;
 	z-index: -1;
 	height: 90%;
 	width: auto;

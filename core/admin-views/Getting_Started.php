@@ -76,10 +76,10 @@ class Getting_Started {
 
     public function social_links() {
         $links = [
-            'fab fa-facebook-f' => 'https://fb.com/themeum',
+            'fab fa-facebook-f' => 'https://www.facebook.com/groups/qubely',
             'fab fa-twitter' => 'https://twitter.com/themeum',
             'fab fa-youtube' => 'https://www.youtube.com/channel/UCeKEfO6qZOtKyAnTt3pj5TA',
-            'fab fa-wordpress' => 'https://profiles.wordpress.org/themeum/#content-plugins',
+            'fab fa-wordpress' => 'https://wordpress.org/plugins/qubely/',
         ];
         ?>
             <div class="qubely-gs-social-links">
