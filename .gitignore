@@ -80,3 +80,4 @@ package-lock.json
 assets/reactjs/yarn.lock
 *.zip
 qubely/*
+.prettierignore
