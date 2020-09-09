@@ -84,8 +84,7 @@ wp.blocks.updateCategory('qubely', { icon: <img style={{ height: '20px', 'margin
 //APPEND IMPORT LAYOUTS BUTTON TO POST HEADER TOOLBAR
 import { ModalManager } from './helpers/ModalManager';
 import PageListModal from './helpers/PageListModal';
-// document.addEventListener("DOMContentLoaded", appendImportButton);
-window.addEventListener("load", appendImportButton);
+document.addEventListener("DOMContentLoaded", appendImportButton);
 
 function appendImportButton() {
     // let node = document.querySelector('.edit-post-header-toolbar');
