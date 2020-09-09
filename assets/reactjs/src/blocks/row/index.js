@@ -8,6 +8,7 @@ const {
     HelperFunction: {
         animationAttr,
         videoBackground
+
     },
 } = wp.qubelyComponents;
 
