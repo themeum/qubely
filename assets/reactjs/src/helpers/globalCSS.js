@@ -273,7 +273,7 @@ export const getGlobalSettings = () => {
             globalData = presets[activePreset];
 
             let globalColors = ['#4A90E2', '#50E3C2', '#000', '#4A4A4A', '#9B9B9B'];
-            if (globalData.colors && globalData.colors.length > 0) {
+            if (typeof globalData !== 'undefined' && globalData.colors && globalData.colors.length > 0) {
                 globalColors = globalData.colors;
             }
             const setGlobalCSS_Variables = (globalColors) => {

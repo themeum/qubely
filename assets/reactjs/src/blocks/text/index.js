@@ -79,7 +79,7 @@ registerBlockType('qubely/text', {
         },
 
 
-        typography: { type: 'object', default: {}, style: [{ selector: '{{QUBELY}} .qubely-block-text, {{QUBELY}} .qubely-block-text .editor-rich-text p' }] },
+        typography: { type: 'object', default: {}, style: [{ selector: '{{QUBELY}} .qubely-block-text, {{QUBELY}} .qubely-block-text p.rich-text' }] },
         textColor: { type: 'string', default: '', style: [{ selector: '{{QUBELY}} .qubely-block-text > * { color:{{textColor}}; }' }] },
 
 

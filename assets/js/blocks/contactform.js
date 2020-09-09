@@ -64,7 +64,7 @@
         //CONTACT FORM RECAPTCHA
         const apiURL = 'https://www.google.com/recaptcha/api.js?onload=initGoogleReChaptcha&render=explicit';
         const qubelyRecaptcha = this.querySelector('form .qubely-google-recaptcha');
-        if(qubelyRecaptcha) {
+        if (qubelyRecaptcha) {
             loadScriptAsync(apiURL).then(() => {
                 window.initGoogleReChaptcha = () => {
                     $('form.qubely-form').each(function () {

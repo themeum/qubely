@@ -120,33 +120,57 @@ class Settings
             // Tab General
             'general' => array(
                 'label' => 'General',
-                'fields' => array(
-                    'qubely_gmap_api_key' => array(
-                        'type' => 'text',
-                        'label' => __('Google Map API Keys', 'qubely'),
-                        'default' => '',
-                        'desc' => sprintf(__('Enter your Google map api key, %1$s Generate API key %2$s', 'qubely'), '<a href="https://developers.google.com/maps/documentation/javascript/get-api-key" target="_blank">', '</a>'),
-                        'placeholder' => '',
-                        'suffix' => '',
-                        'size' => 'regular',
+                'field_groups' => array(
+                    "gmap" => array(
+                        'label' => 'Google MAP',
+                        'fields' => array(
+                            'qubely_gmap_api_key' => array(
+                                'type' => 'text',
+                                'label' => __('Google Map API Keys', 'qubely'),
+                                'default' => '',
+                                'desc' => sprintf(__('Enter your Google map api key, %1$s Generate API key %2$s', 'qubely'), '<a href="https://developers.google.com/maps/documentation/javascript/get-api-key" target="_blank">', '</a>'),
+                                'placeholder' => '',
+                                'suffix' => '',
+                                'size' => 'regular',
+                            )
+                        )
                     ),
-                    'qubely_recaptcha_site_key' => array(
-                        'type' => 'text',
-                        'label' => __('ReCaptcha site key', 'qubely'),
-                        'default' => '',
-                        'desc' => __('Enter your ReCaptcha site key', 'qubely'),
-                        'placeholder' => '',
-                        'class' => '',
-                        'size' => 'regular',
+                    "recaptcha" => array(
+                        'label' => 'Google ReCaptcha',
+                        'fields' => array(
+                            'qubely_recaptcha_site_key' => array(
+                                'type' => 'text',
+                                'label' => __('ReCaptcha site key', 'qubely'),
+                                'default' => '',
+                                'desc' => __('Enter your ReCaptcha site key', 'qubely'),
+                                'placeholder' => '',
+                                'class' => '',
+                                'size' => 'regular',
+                            ),
+                            'qubely_recaptcha_secret_key' => array(
+                                'type' => 'text',
+                                'label' => __('ReCaptcha secret key', 'qubely'),
+                                'default' => '',
+                                'desc' => sprintf(__('Enter your ReCaptcha secret key,  %1$s Get reCAPTCHA(v2) keys %2$s', 'qubely'), "<a href='//www.google.com/recaptcha/admin/' >", "</a>"),
+                                'placeholder' => '',
+                                'suffix' => '',
+                                'size' => 'regular',
+                            )
+                        )
                     ),
-                    'qubely_recaptcha_secret_key' => array(
-                        'type' => 'text',
-                        'label' => __('ReCaptcha secret key', 'qubely'),
-                        'default' => '',
-                        'desc' => sprintf(__('Enter your ReCaptcha secret key,  %1$s Get reCAPTCHA(v2) keys %2$s', 'qubely'), "<a href='//www.google.com/recaptcha/admin/' >", "</a>"),
-                        'placeholder' => '',
-                        'suffix' => '',
-                        'size' => 'regular',
+                    "mailchimp" => array(
+                        'label' => 'MailChimp',
+                        'fields' => array(
+                            'mailchimp_api_key' => array(
+                                'type' => 'text',
+                                'label' => __('Default Form Action', 'qubely'),
+                                'default' => '',
+                                'desc' => sprintf(__('Enter your MailChimp Form Action, %1$s or Create a Signup form here %2$s', 'qubely'), '<a href="https://mailchimp.com/help/add-a-signup-form-to-your-website/" target="_blank">', '</a>'),
+                                'placeholder' => '',
+                                'suffix' => '',
+                                'size' => 'regular',
+                            ),
+                        ),
                     )
                 )
             ),
@@ -166,13 +190,6 @@ class Settings
                         'suffix' => '',
                         'size' => 'regular',
                     ),
-                    // 'import_with_global_settings' => array(
-                    //     'type' => 'checkbox',
-                    //     'label' => __('Use global settings with Import layouts/sections', 'qubely'),
-                    //     'default' => 'true',
-                    //     'desc' => __('Apply global settings while importing layouts/sections', 'qubely'),
-                    //     'suffix' => ''
-                    // ),
                     'import_with_global_settings' => array(
                         'type' => 'select',
                         'label' => __('Use global settings with Import layouts/section', 'qubely'),
@@ -208,7 +225,7 @@ class Settings
                 foreach ($this->fields() as $key => $options) {
                     $index++;
 
-                    if (!isset($options['fields']) || !is_array($options['fields'])) continue;
+                    // if (!isset($options['fields']) || !is_array($options['fields'])) continue;
                     $options['label'] = !empty($options['label']) ? $options['label'] : $key;
                 ?>
                     <a class="nav-tab <?php echo $index === 0 ? 'nav-tab-active' : ''  ?>" href="#<?php echo esc_attr($key) ?>"><?php echo esc_html($options['label']) ?></a>
@@ -222,20 +239,42 @@ class Settings
                 $index = 0;
                 foreach ($this->fields() as $key => $options) {
                     $index++;
-                    if (!isset($options['fields']) || !is_array($options['fields'])) continue;
                 ?>
                     <div class="qubely-settings-inner" id="<?php echo esc_attr($key); ?>">
-                        <table class="form-table">
-                            <tbody>
-                                <?php
-                                foreach ($options['fields'] as $field_key => $field) {
-                                    $field['key'] = $field_key;
-                                    $field['value'] = $this->get_option($field_key, $field['default']);
-                                    Fields::get($field['type'], $field);
+                        <?php if(isset($options['fields']) && is_array($options['fields']) && count($options['fields'])) { ?>
+                            <table class="form-table">
+                                <tbody>
+                                    <?php
+                                    foreach ($options['fields'] as $field_key => $field) {
+                                        $field['key'] = $field_key;
+                                        $field['value'] = $this->get_option($field_key, $field['default']);
+                                        Fields::get($field['type'], $field);
+                                    }
+                                    ?>
+                                </tbody>
+                            </table>
+                        <?php } ?>
+                        <?php
+                            if(
+                                isset($options['field_groups']) &&
+                                is_array($options['field_groups']) &&
+                                count($options['field_groups'])
+                            ) {
+                                foreach ($options['field_groups'] as $group_key => $group) {
+                                    $label = isset($group['label']) ? $group['label'] : null;
+                                    $description = isset($group['description']) ? $group['description'] : null;
+                                    echo $label ? "<h2>$label</h2>" : "";
+                                    echo $description ? $description : "";
+                                    echo "<table class='form-table'><tbody>";
+                                    foreach ($group['fields'] as $field_key => $field) {
+                                        $field['key'] = $field_key;
+                                        $field['value'] = $this->get_option($field_key, $field['default']);
+                                        Fields::get($field['type'], $field);
+                                    }
+                                    echo "</tbody></table>";
                                 }
-                                ?>
-                            </tbody>
-                        </table>
+                            }
+                        ?>
                     </div>
                 <?php
                 }
