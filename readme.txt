@@ -243,6 +243,7 @@ Update: Disable 'Edit as html' option in parent blocks
 Update: Richtext formats usability  
 Update: Restored missing fonts  
 Fix: Advanced Text block - Text font size in editor  
+Fix: Contact Form block - Email sending issue    
 
 
 = 1.5.3 - 21 August, 2020 =  
