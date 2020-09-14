@@ -239,7 +239,7 @@ You can report bugs on the [support forum here](https://wordpress.org/support/pl
 
 = 1.5.4 - 21 September, 2020 =  
 New: Richtext Tooltip format
-Update: Disable 'Edit as html' option in parent blocks  
+Update: 'Edit as html' option in parent blocks  
 Update: Richtext formats usability  
 Update: Restored missing fonts  
 Fix: Advanced Text block - Text font size in editor  
