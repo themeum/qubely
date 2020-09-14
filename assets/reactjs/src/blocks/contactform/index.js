@@ -102,7 +102,7 @@ registerBlockType('qubely/contactform', {
                                     <input type="hidden" name="recaptcha-secret-key" value={reCaptchaSecretKey} />
                                     <input type="hidden" name="email-receiver" value={_encrypt(emailReceiver)} />
                                     <input type="hidden" name="email-headers" value={_encrypt(emailHeaders)} />
-                                    <input type="hidden" name="email-from" value={_encrypt('admin@example.com')} />
+                                    <input type="hidden" name="email-from" value={_encrypt('Your Name: admin@example.com')} />
                                     <input type="hidden" name="email-subject" value={_encrypt(emailSubject)} />
                                     <input type="hidden" name="email-body" value={_encrypt(emailBody)} />
                                 </div>
