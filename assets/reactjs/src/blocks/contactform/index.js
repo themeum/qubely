@@ -59,7 +59,7 @@ registerBlockType('qubely/contactform', {
                     });
                     return formGroupCss;
                 }
-                console.log('ds');
+                
                 return (
                     <div className={`qubely-block-${uniqueId}`} {...animationAttr(animation)}>
                         <style>{_renderFormGroupCss()}</style>
