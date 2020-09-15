@@ -244,7 +244,7 @@ Update: 'Edit as html' option in parent blocks
 Fix: Contact Form block - Email sending issue    
 Fix: Advanced Text block - Text font size in editor  
 Fix: Global Settings - Old installations undefined preset issue  
-Fix: Import layout button conflict with new Gutenberg Plugin
+Fix: Import layout button conflict with new Gutenberg Plugin  
 
 
 = 1.5.3 - 21 August, 2020 =  
