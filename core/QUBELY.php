@@ -1468,7 +1468,7 @@ class QUBELY {
 		$emailSubject = str_replace( '{{site-name}}', $siteName, $emailSubject );
 
 		$headers[] = 'Content-Type: text/html; charset=UTF-8';
-		// $headers[] = 'From: ' . $fromName . ' <' . $fromEmail . '>';
+		$headers[] = 'From: ' . $fromName . ' <' . $fromEmail . '>';
 		$headers[] = 'Reply-To: ' . $replyToName . ' <' . $replyToMail . '>';
 		$headers[] = 'Cc: <' . $cc . '>';
 		$headers[] = 'Bcc: <' . $bcc . '>';
