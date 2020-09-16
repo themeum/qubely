@@ -241,7 +241,8 @@ You can report bugs on the [support forum here](https://wordpress.org/support/pl
 New: Richtext Tooltip format
 Update: Restored missing fonts  
 Update: 'Edit as html' option in parent blocks  
-Fix: Contact Form block - Email sending issue    
+Fix: Contact Form block - Email sending issue  
+Fix: Contact Form block - Deprecated support    
 Fix: Advanced Text block - Text font size in editor  
 Fix: Global Settings - Old installations undefined preset issue  
 Fix: Import layout button conflict with new Gutenberg Plugin  

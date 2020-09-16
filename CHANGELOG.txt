@@ -1,4 +1,16 @@
 
+<h3>1.5.4 - 16 September, 2020</h3>
+<ul>
+    <li>New: Richtext Tooltip format</li>
+    <li>Update: Restored missing fonts</li>
+    <li>Update: 'Edit as html' option in parent blocks</li>
+    <li>Fix: Contact Form block - Email sending issue</li>
+    <li>Fix: Contact Form block - Deprecated support</li>
+    <li>Fix: Advanced Text block - Text font size in editor</li>
+    <li>Fix: Global Settings - Old installations undefined preset issue</li>
+    <li>Fix: Import layout button conflict with new Gutenberg Plugin </li>
+</ul>
+
 <h3>1.5.3 - 13 August, 2020</h3>
 <ul>
     <li>New: Import Sections/Layouts with Global settings</li>
@@ -11,18 +23,4 @@
     <li>Fix: Accordion block - Accordion title editing issue on Safari</li>
     <li>Fix: Dropdown Component -  initial options issue with API call</li>
 </ul>
-
-
-<h3>1.5.2 - 29 July, 2020</h3>
-<ul>
-    <li>New: Accordion block - Rich Snippet added</li>
-    <li>New: Row block - Shape divider flip option </li>
-    <li>Update: Added 100+ Google fonts</li>
-    <li>Fix: Divider block - Divider options in Panel</li>
-    <li>Fix: Button block - Font size issue in Frontend</li>
-    <li>Fix: Button block - Button width in Backend</li>
-    <li>Fix: Button block - Text editing issue in Safari browser</li>
-    <li>Fix: Table of Contents block - CSS issue</li>
-</ul>
-
 
