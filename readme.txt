@@ -237,7 +237,7 @@ You can report bugs on the [support forum here](https://wordpress.org/support/pl
 
 == Changelog ==
 
-= 1.5.4 - 15 September, 2020 =  
+= 1.5.4 - 16 September, 2020 =  
 New: Richtext Tooltip format
 Update: Restored missing fonts  
 Update: 'Edit as html' option in parent blocks  
