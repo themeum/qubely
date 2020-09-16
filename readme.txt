@@ -238,7 +238,7 @@ You can report bugs on the [support forum here](https://wordpress.org/support/pl
 == Changelog ==
 
 = 1.5.5 - 16 September, 2020 =  
-Fix: Fixed Plugin build issue
+Fix: Fixed Plugin build issue for version 1.5.4 
 
 = 1.5.4 - 16 September, 2020 =  
 New: Richtext Tooltip format

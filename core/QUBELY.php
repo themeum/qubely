@@ -228,7 +228,7 @@ class QUBELY {
 		wp_enqueue_script( 'qubely_local_script' );
 
 		#START_REPLACE
-		wp_enqueue_style( 'qubley-animated-headline-style', QUBELY_DIR_URL . 'assets/css/qubely.animatedheadline.css', false, QUBELY_VERSION );
+		wp_enqueue_style( 'qubley-animated-headline-style', QUBELY_DIR_URL . 'assets/css/qubely.u.css', false, QUBELY_VERSION );
 		wp_enqueue_style( 'qubely-animation', QUBELY_DIR_URL . 'assets/css/animation.css', false, QUBELY_VERSION );
 		wp_enqueue_style( 'qubely-magnific-popup-style', QUBELY_DIR_URL . 'assets/css/magnific-popup.css', false, QUBELY_VERSION );
 		wp_enqueue_style( 'qubely-style-min', QUBELY_DIR_URL . 'assets/css/style.min.css', false, QUBELY_VERSION );
@@ -368,7 +368,7 @@ class QUBELY {
 			 * @warning: Don't Remove `START_REPLACE` and `START_REPLACE` comments. These comments are required for gulp build
 			 */
 
-			/#START_REPLACE
+			#START_REPLACE
 			wp_enqueue_style( 'qubley-animated-headline-style', QUBELY_DIR_URL . 'assets/css/qubely.animatedheadline.css', false, QUBELY_VERSION );
 			wp_enqueue_style( 'qubely-animation', QUBELY_DIR_URL . 'assets/css/animation.css', false, QUBELY_VERSION );
 			wp_enqueue_style( 'qubely-magnific-popup-style', QUBELY_DIR_URL . 'assets/css/magnific-popup.css', false, QUBELY_VERSION );
