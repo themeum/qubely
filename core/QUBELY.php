@@ -227,12 +227,12 @@ class QUBELY {
 		);
 		wp_enqueue_script( 'qubely_local_script' );
 
-		// START_REPLACE
+		#START_REPLACE
 		wp_enqueue_style( 'qubley-animated-headline-style', QUBELY_DIR_URL . 'assets/css/qubely.animatedheadline.css', false, QUBELY_VERSION );
 		wp_enqueue_style( 'qubely-animation', QUBELY_DIR_URL . 'assets/css/animation.css', false, QUBELY_VERSION );
 		wp_enqueue_style( 'qubely-magnific-popup-style', QUBELY_DIR_URL . 'assets/css/magnific-popup.css', false, QUBELY_VERSION );
 		wp_enqueue_style( 'qubely-style-min', QUBELY_DIR_URL . 'assets/css/style.min.css', false, QUBELY_VERSION );
-		// END_REPLACE
+		#END_REPLACE
 
 		wp_enqueue_style( 'font-awesome', QUBELY_DIR_URL . 'assets/css/font-awesome.min.css', false, QUBELY_VERSION );
 		wp_enqueue_script( 'qubely-magnific-popup', QUBELY_DIR_URL . 'assets/js/qubely.magnific-popup.js', array( 'jquery' ), QUBELY_VERSION, true );
@@ -368,12 +368,12 @@ class QUBELY {
 			 * @warning: Don't Remove `START_REPLACE` and `START_REPLACE` comments. These comments are required for gulp build
 			 */
 
-			// START_REPLACE
+			#START_REPLACE
 			wp_enqueue_style( 'qubley-animated-headline-style', QUBELY_DIR_URL . 'assets/css/qubely.animatedheadline.css', false, QUBELY_VERSION );
 			wp_enqueue_style( 'qubely-animation', QUBELY_DIR_URL . 'assets/css/animation.css', false, QUBELY_VERSION );
 			wp_enqueue_style( 'qubely-magnific-popup-style', QUBELY_DIR_URL . 'assets/css/magnific-popup.css', false, QUBELY_VERSION );
 			wp_enqueue_style( 'qubely-style-min', QUBELY_DIR_URL . 'assets/css/style.min.css', false, QUBELY_VERSION );
-			// END_REPLACE
+			#END_REPLACE
 
 			wp_enqueue_style( 'qubely-font-awesome', QUBELY_DIR_URL . 'assets/css/font-awesome.min.css', false, QUBELY_VERSION );
 		}
@@ -1468,7 +1468,7 @@ class QUBELY {
 		$emailSubject = str_replace( '{{site-name}}', $siteName, $emailSubject );
 
 		$headers[] = 'Content-Type: text/html; charset=UTF-8';
-		// $headers[] = 'From: ' . $fromName . ' <' . $fromEmail . '>';
+		$headers[] = 'From: ' . $fromName . ' <' . $fromEmail . '>';
 		$headers[] = 'Reply-To: ' . $replyToName . ' <' . $replyToMail . '>';
 		$headers[] = 'Cc: <' . $cc . '>';
 		$headers[] = 'Bcc: <' . $bcc . '>';
