@@ -1,6 +1,6 @@
 {
   "name": "qubely",
-  "version": "1.4.3",
+  "version": "1.5.4",
   "description": "Contributors: **themeum**",
   "main": "gulpfile.js",
   "devDependencies": {

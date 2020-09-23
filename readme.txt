@@ -4,7 +4,7 @@ Donate link: https://www.themeum.com
 Tags: blocks, gutenberg, gutenberg blocks, editor, block, page builder
 Requires at least: 5.0
 Tested up to: 5.5
-Stable tag: 1.5.4
+Stable tag: 1.5.5
 Requires PHP: 7.0
 License: GPL-2.0+
 License URI: http://www.gnu.org/licenses/gpl-2.0.txt
@@ -237,14 +237,18 @@ You can report bugs on the [support forum here](https://wordpress.org/support/pl
 
 == Changelog ==
 
-= 1.5.4 - 15 September, 2020 =  
+= 1.5.5 - 16 September, 2020 =  
+Fix: Fixed Plugin build issue for version 1.5.4 
+
+= 1.5.4 - 16 September, 2020 =  
 New: Richtext Tooltip format
 Update: Restored missing fonts  
 Update: 'Edit as html' option in parent blocks  
-Fix: Contact Form block - Email sending issue    
+Fix: Contact Form block - Email sending issue  
+Fix: Contact Form block - Deprecated support    
 Fix: Advanced Text block - Text font size in editor  
 Fix: Global Settings - Old installations undefined preset issue  
-Fix: Import layout button conflict with new Gutenberg Plugin
+Fix: Import layout button conflict with new Gutenberg Plugin  
 
 
 = 1.5.3 - 21 August, 2020 =  
