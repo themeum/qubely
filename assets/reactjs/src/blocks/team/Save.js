@@ -1,5 +1,6 @@
 import classnames from 'classnames';
 const { Component } = wp.element;
+const { __ } = wp.i18n;
 const { RichText } = wp.blockEditor
 const { HelperFunction: { animationAttr, IsInteraction } } = wp.qubelyComponents;
 
