@@ -312,7 +312,7 @@ export const buttonAttributes = {
          },
        };
 
-export function buttonSettings(attributes, device, setAttributes, updateParentState, showPostTextTypography) {
+export function buttonSettings(attributes, device, setAttributes, updateParentState, showPostTextTypography,initialOpen=false) {
 
     const {
         controlledButtonPanel,
@@ -532,7 +532,7 @@ export function buttonSettings(attributes, device, setAttributes, updateParentSt
                         {enableButton && renderButtonControls()}
                     </PanelBody>
                     :
-                    <PanelBody title={__('Button')} initialOpen={false}>
+                    <PanelBody title={__('Button')} initialOpen={initialOpen}>
                         {buttonToggleOption && <Toggle label={__('Enable Button')} value={enableButton} onChange={val => setAttributes('enableButton', val)} />}
                         {enableButton && renderButtonControls()}
                     </PanelBody>
