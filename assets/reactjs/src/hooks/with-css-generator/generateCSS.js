@@ -3,6 +3,7 @@ import {
     cssBorderRadius,
     cssGradient,
     cssBorder,
+    tableBorder,
     cssBoxShadow,
     cssTypography,
     cssDimension,
@@ -82,6 +83,8 @@ const objectField = (data) => {
         return { data: cssBackground(data), action: 'append' }; //Background
     } else if (data.openBorder) {
         return { data: cssBorder(data), action: 'append' }; //Border
+    } else if (data.tableBorder) {
+        return { data: tableBorder(data), action: 'append' }; //Table Border
     } else if (data.openShadow && data.color) {
         return { data: cssBoxShadow(data), action: 'append' }; //Shadow
     } else if (data.direction) {
@@ -117,7 +120,7 @@ const checkDepends = (settings, selectData, key) => {
     if (selectData.hasOwnProperty('condition')) {
         selectData.condition.forEach((data) => {
             let previous = _depends
-            if ((data.relation == '==')||(data.relation == '===')) {
+            if ((data.relation == '==') || (data.relation == '===')) {
                 if ((typeof data.value == 'string') || (typeof data.value == 'number') || (typeof data.value == 'boolean')) {
                     if (settings[data.key] == data.value) { _depends = true; }
                     else { _depends = false }
@@ -128,7 +131,7 @@ const checkDepends = (settings, selectData, key) => {
                     })
                     if (select) { _depends = true; }
                 }
-            } else if ((data.relation == '!=')||(data.relation == '!==')) {
+            } else if ((data.relation == '!=') || (data.relation == '!==')) {
                 if ((typeof data.value == 'string') || (typeof data.value == 'number') || (typeof data.value == 'boolean')) {
                     if (settings[data.key] != data.value) { _depends = true; }
                     else { _depends = false; }
