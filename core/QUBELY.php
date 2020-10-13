@@ -478,19 +478,16 @@ class QUBELY {
 	public function qubely_inline_footer_scripts() {        ?>
 		<script>
 			// Set Preview CSS
-			// if ( window.location.href.includes('preview=true')) {
-			// 		var qubelyInteraction=JSON.parse( localStorage.getItem('qubelyInteraction'));
-			// }
-			document.addEventListener("DOMContentLoaded", function() {
-				const cussrent_url = window.location.href;
-				if (cussrent_url.includes('preview=true')) {
-					let cssInline = document.createElement('style');
-					cssInline.type = 'text/css';
-					cssInline.id = 'qubely-block-js-preview';
-					cssInline.innerHTML =JSON.parse( localStorage.getItem('qubelyCSS'));
-					window.document.getElementsByTagName("head")[0].appendChild(cssInline);
-				}
-			})
+			// document.addEventListener("DOMContentLoaded", function() {
+			// 	const cussrent_url = window.location.href;
+			// 	if (cussrent_url.includes('preview=true')) {
+			// 		let cssInline = document.createElement('style');
+			// 		cssInline.type = 'text/css';
+			// 		cssInline.id = 'qubely-block-js-preview';
+			// 		cssInline.innerHTML =JSON.parse( localStorage.getItem('qubelyCSS'));
+			// 		window.document.getElementsByTagName("head")[0].appendChild(cssInline);
+			// 	}
+			// })
 		</script>
 		<?php
 	}
@@ -825,67 +822,72 @@ class QUBELY {
 	 * @since 1.0.0-BETA
 	 * Save block css for each post in a css file and enqueue the file to the post page
 	 */
-	public function save_block_css( $request ) {
+	public function save_block_css($request){
 		try {
 			global $wp_filesystem;
-			if ( ! $wp_filesystem ) {
+			if (!$wp_filesystem) {
 				require_once ABSPATH . 'wp-admin/includes/file.php';
 			}
 
 			$params  = $request->get_params();
-			$post_id = (int) sanitize_text_field( $params['post_id'] );
+			$post_id = (int) sanitize_text_field($params['post_id']);
 
-			if ( $params['is_remain'] ) {
+			if ($params['is_remain']) {
 				$qubely_block_css = $params['block_css'];
 				$filename         = "qubely-css-{$post_id}.css";
 
 				$qubely_block_json = $params['interaction'];
 				$is_previewing = $params['isPreviewing'];
 				$jsonfilename      = "qubely-json-{$post_id}.json";
-				if($is_previewing){
-					$filename         = "qubely-preview.css";
-					$jsonfilename      = "qubely-preview.json";
-				}
+
 				$upload_dir = wp_upload_dir();
-				$dir        = trailingslashit( $upload_dir['basedir'] ) . 'qubely/';
+				$dir        = trailingslashit($upload_dir['basedir']) . 'qubely/';
 
 				// Add Import in first
-				$import_first = $this->set_import_url_to_top_css( $qubely_block_css );
+				$import_first = $this->set_import_url_to_top_css($qubely_block_css);
 
-				// development
-				update_post_meta( $post_id, '_qubely_css', $import_first );
-				if ( $qubely_block_json ) {
-					update_post_meta( $post_id, '_qubely_interaction_json', $qubely_block_json );
+				if ($is_previewing) {
+					$filename         = "qubely-preview.css";
+					$jsonfilename      = "qubely-preview.json";
+				} else {
+					update_post_meta($post_id, '_qubely_css', $import_first);
+					if ($qubely_block_json) {
+						update_post_meta($post_id, '_qubely_interaction_json', $qubely_block_json);
+					}
 				}
 
-				WP_Filesystem( false, $upload_dir['basedir'], true );
+				WP_Filesystem(false, $upload_dir['basedir'], true);
 
-				if ( ! $wp_filesystem->is_dir( $dir ) ) {
-					$wp_filesystem->mkdir( $dir );
+				if (!$wp_filesystem->is_dir($dir)) {
+					$wp_filesystem->mkdir($dir);
 				}
 				// If fail to save css in directory, then it will show a message to user
-				if ( ! $wp_filesystem->put_contents( $dir . $filename, $import_first ) ) {
-					throw new Exception( __( 'CSS can not be saved due to permission!!!', 'qubely' ) );
+				if (!$wp_filesystem->put_contents($dir . $filename, $import_first)) {
+					throw new Exception(__('CSS can not be saved due to permission!!!', 'qubely'));
 				}
 
 				// If fail to save css in directory, then it will show a message to user
-				if ( ! $wp_filesystem->put_contents( $dir . $jsonfilename, $qubely_block_json ) ) {
-					throw new Exception( __( 'JSON can not be saved due to permission!!!', 'qubely' ) );
+				if (!$wp_filesystem->put_contents($dir . $jsonfilename, $qubely_block_json)) {
+					throw new Exception(__('JSON can not be saved due to permission!!!', 'qubely'));
 				}
 			} else {
-				delete_post_meta( $post_id, '_qubely_css' );
-				delete_post_meta( $post_id, '_qubely_interaction_json' );
-				$this->delete_post_resource( $post_id );
+				delete_post_meta($post_id, '_qubely_css');
+				delete_post_meta($post_id, '_qubely_interaction_json');
+				$this->delete_post_resource($post_id);
 			}
 
+			$success_message = 'Qubely preview css file has been updated.';
 			// set block meta
-			update_post_meta( $post_id, '__qubely_available_blocks', serialize( $params['available_blocks'] ) );
+			if (!$is_previewing) {
+				update_post_meta($post_id, '__qubely_available_blocks', serialize($params['available_blocks']));
+				$success_message = 'Qubely block css file has been updated.';
+			}
 			return array(
 				'success' => true,
-				'message' => __( 'Qubely block css file has been updated.', 'qubely' ),
+				'message' => __($success_message, 'qubely'),
 				'data'    => $params,
 			);
-		} catch ( Exception $e ) {
+		} catch (Exception $e) {
 			return array(
 				'success' => false,
 				'message' => $e->getMessage(),
@@ -1022,43 +1024,47 @@ class QUBELY {
 		$json_path      = $upload_css_dir . "qubely/qubely-json-{$post_id}.json";
 
 		if( isset($_GET['preview']) && $_GET['preview'] == true){
-			print_r('file system - preview mode');
 			$css_path       = $upload_css_dir . "qubely/qubely-preview.css";
 			$json_path      = $upload_css_dir . "qubely/qubely-preview.json";
-			print_r($css_path);
-			print_r($json_path);
-			// die();
+
+			/**
+			 * equeue static CSS 
+			 * and Scripts
+			 */
+			$this->add_static_css();
+
+			if ( file_exists( $css_path ) ) {
+				$css_dir_url = trailingslashit( $upload_dir['baseurl'] );
+				$css_url     = $css_dir_url . "qubely/qubely-preview.css";
+				if ( ! $this->is_editor_screen() ) {
+					wp_enqueue_style( "qubely-post-preview", $css_url, false, QUBELY_VERSION );
+				}
+
+				$blockJson = file_get_contents( $json_path );
+				if ( $blockJson != '{}' ) {
+					echo '<script type="text/javascript"> var qubelyInteraction = ' . $blockJson . '</script>';
+				}
+			}
 		}else{
-			// print_r('file system -saved');
-			// die();
-		}
-
-		if ( file_exists( $css_path ) ) {
-			$css_dir_url = trailingslashit( $upload_dir['baseurl'] );
-			$css_url     = $css_dir_url . "qubely/qubely-css-{$post_id}.css";
-			if( isset($_GET['preview']) && $_GET['preview'] == true){
-				print_r('file exists');
-				$css_url       = $css_dir_url . "qubely/qubely-preview.css";
-			}else{
-				print_r('messed up exists');
+			if ( file_exists( $css_path ) ) {
+				$css_dir_url = trailingslashit( $upload_dir['baseurl'] );
+				$css_url     = $css_dir_url . "qubely/qubely-css-{$post_id}.css";
+				if ( ! $this->is_editor_screen() ) {
+					wp_enqueue_style( "qubely-post-{$post_id}", $css_url, false, QUBELY_VERSION );
+				}
+				$this->add_reusable_css();
+			} else {
+				wp_register_style( 'qubely-post-data', false );
+				wp_enqueue_style( 'qubely-post-data' );
+				wp_add_inline_style( 'qubely-post-data', get_post_meta( get_the_ID(), '_qubely_css', true ) );
 			}
-			if ( ! $this->is_editor_screen() ) {
-				wp_enqueue_style( "qubely-post-{$post_id}", $css_url, false, QUBELY_VERSION );
-			}
-			$this->add_reusable_css();
-		} else {
-			print_r(' - no file exists');
-			wp_register_style( 'qubely-post-data', false );
-			wp_enqueue_style( 'qubely-post-data' );
-			wp_add_inline_style( 'qubely-post-data', get_post_meta( get_the_ID(), '_qubely_css', true ) );
-		}
-
-		if ( ! file_exists( $json_path ) ) {
-			$this->print_interaction_json_to_header();
-		} else {
-			$blockJson = file_get_contents( $json_path );
-			if ( $blockJson != '{}' ) {
-				echo '<script type="text/javascript"> var qubelyInteraction = ' . $blockJson . '</script>';
+			if ( ! file_exists( $json_path ) ) {
+				$this->print_interaction_json_to_header();
+			} else {
+				$blockJson = file_get_contents( $json_path );
+				if ( $blockJson != '{}' ) {
+					echo '<script type="text/javascript"> var qubelyInteraction = ' . $blockJson . '</script>';
+				}
 			}
 		}
 	}
@@ -1089,42 +1095,77 @@ class QUBELY {
 	}
 
 	/**
+	 * on Preview
+	 * enqueue static CSS 
+	 * and Scripts 
+	 */
+	public function add_static_css(){
+		//CSS
+		wp_enqueue_style('qubley-animated-headline-style', QUBELY_DIR_URL . 'assets/css/qubely.animatedheadline.css', false, QUBELY_VERSION);
+		wp_enqueue_style('qubely-animation', QUBELY_DIR_URL . 'assets/css/animation.css', false, QUBELY_VERSION);
+		wp_enqueue_style('qubely-magnific-popup-style', QUBELY_DIR_URL . 'assets/css/magnific-popup.css', false, QUBELY_VERSION);
+		wp_enqueue_style('qubely-style-min', QUBELY_DIR_URL . 'assets/css/style.min.css', false, QUBELY_VERSION);
+		wp_enqueue_style('qubely-font-awesome', QUBELY_DIR_URL . 'assets/css/font-awesome.min.css', false, QUBELY_VERSION);
+
+		//Scripts
+		wp_enqueue_script('qubley-animated-headline-script', QUBELY_DIR_URL . 'assets/js/jquery.animatedheadline.js', array('jquery'), QUBELY_VERSION, true);
+		wp_enqueue_script('qubely-block-map', QUBELY_DIR_URL . 'assets/js/blocks/map.js', array('jquery'), QUBELY_VERSION, true);
+		wp_enqueue_script('qubely-magnific-popup-script', QUBELY_DIR_URL . 'assets/js/qubely.magnific-popup.js', array('jquery'), QUBELY_VERSION);
+		wp_enqueue_script('qubely-block-contactform', QUBELY_DIR_URL . 'assets/js/blocks/contactform.js', array('jquery'), QUBELY_VERSION);
+		wp_enqueue_script('qubely-block-image-comparison', QUBELY_DIR_URL . 'assets/js/blocks/image-comparison.js', array(), QUBELY_VERSION);
+		wp_enqueue_script('qubely-block-common', QUBELY_DIR_URL . 'assets/js/common-script.js', array('jquery'), QUBELY_VERSION, true);
+		wp_enqueue_script('qubely-interaction', QUBELY_DIR_URL . 'assets/js/interaction.js', array('jquery'), QUBELY_VERSION, true);
+	}
+
+	/**
 	 * Check current post page open and css path exists
 	 * Then read the css file content from css path
 	 * Then add inline css to the header
 	 */
 	public function add_block_inline_css() {
-		$post_id = $this->is_qubely_single();
-		if($_GET['preview'] == true){
-			print_r('preview mode');
-			die();
-}else{
-print_r('saved');
-			die();
-}
-		if ( $post_id ) {
-			$upload_dir     = wp_get_upload_dir();
-			$upload_css_dir = trailingslashit( $upload_dir['basedir'] );
-			$css_path       = $upload_css_dir . "qubely/qubely-css-{$post_id}.css";
-			$json_path      = $upload_css_dir . "qubely/qubely-json-{$post_id}.json";
+		if (isset($_GET['preview']) && $_GET['preview'] == true) {
+			$css_path       = $upload_css_dir . "qubely/qubely-preview.css";
+			$json_path      = $upload_css_dir . "qubely/qubely-preview.json";
 
-			if ( file_exists( $css_path ) ) {
-				$blockCss = file_get_contents( $css_path );
+			$this->add_static_css();
+
+			if (file_exists($css_path)) {
+				$blockCss = file_get_contents($css_path);
 				echo '<style type="text/css">' . $blockCss . '</style>';
-			} else {
-				echo '<style type="text/css">' . get_post_meta( get_the_ID(), '_qubely_css', true ) . '</style>';
 			}
-
-			if ( ! file_exists( $json_path ) ) {
-				$this->print_interaction_json_to_header();
-			} else {
-				$blockJson = file_get_contents( $json_path );
-				if ( $blockJson != '{}' ) {
+			if (file_exists($json_path)) {
+				$blockJson = file_get_contents($json_path);
+				if ($blockJson != '{}') {
 					echo '<script type="text/javascript"> var qubelyInteraction = ' . $blockJson . '</script>';
 				}
+			} 
+		}else{
+			$post_id = $this->is_qubely_single();
+			if ( $post_id ) {
+				$upload_dir     = wp_get_upload_dir();
+				$upload_css_dir = trailingslashit( $upload_dir['basedir'] );
+				$css_path       = $upload_css_dir . "qubely/qubely-css-{$post_id}.css";
+				$json_path      = $upload_css_dir . "qubely/qubely-json-{$post_id}.json";
+	
+				if ( file_exists( $css_path ) ) {
+					$blockCss = file_get_contents( $css_path );
+					echo '<style type="text/css">' . $blockCss . '</style>';
+				} else {
+					echo '<style type="text/css">' . get_post_meta( get_the_ID(), '_qubely_css', true ) . '</style>';
+				}
+	
+				if ( ! file_exists( $json_path ) ) {
+					$this->print_interaction_json_to_header();
+				} else {
+					$blockJson = file_get_contents( $json_path );
+					if ( $blockJson != '{}' ) {
+						echo '<script type="text/javascript"> var qubelyInteraction = ' . $blockJson . '</script>';
+					}
+				}
 			}
+			$this->add_reusable_css();
 		}
-		$this->add_reusable_css();
+		
 	}
 
 	/**

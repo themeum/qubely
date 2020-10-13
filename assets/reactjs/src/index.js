@@ -69,18 +69,15 @@ wp.data.subscribe(() => {
         isPublishingPost
     } = wp.data.select("core/editor");
 
-    if (isPreviewingPost() || isPublishingPost() || (isSavingPost() && (!isAutosavingPost()))) {
+    if (isPreviewingPost()
+        || isPublishingPost()
+        || (isSavingPost() && (!isAutosavingPost()))) {
         if (window.bindCss === false) {
-            setTimeout(() => {
-                if (isPreviewingPost() && !isSavingPost() && !isAutosavingPost() ) {
-                    console.log('is previ');
-                    ParseCss(false, true);
-                } else {
-                    console.log('is sav');
-                    ParseCss(true);
-                }
-            }, 600)
-
+            if (isPreviewingPost()) {
+                ParseCss(false);
+            } else {
+                ParseCss(true);
+            }
         }
     }
 });

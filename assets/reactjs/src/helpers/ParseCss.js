@@ -2,7 +2,7 @@ import { getGlobalSettings } from '../helpers/globalCSS';
 const { select } = wp.data
 const { CssGenerator: { CssGenerator } } = wp.qubelyComponents
 
-const endpoint = '/qubely/v1/save_block_css'
+const endpoint = '/qubely/v1/save_block_css';
 
 const API_fetch = async (post_id, block_css, is_remain, available_blocks, isPreviewing = false) => {
     const json = JSON.stringify(block_css.interaction)
@@ -222,7 +222,7 @@ function availableBlocksMeta(all_blocks) {
 }
 
 
-const ParseCss = async (setDatabase = true, isPreviewing = false) => {
+const ParseCss = async (setDatabase = true) => {
     window.bindCss = true;
     const all_blocks = select('core/block-editor').getBlocks();
     const isRemain = isQubelyBlock(all_blocks);
@@ -246,24 +246,22 @@ const ParseCss = async (setDatabase = true, isPreviewing = false) => {
 
     // reusable Block
     parseBlock(all_blocks);
-    // console.log('__blocks : ', JSON.stringify(__blocks));
-    localStorage.setItem('qubelyCSS', JSON.stringify(__blocks.css));
-    localStorage.setItem('qubelyInteraction', JSON.stringify(__blocks.interaction));
+ 
+    // localStorage.setItem('qubelyCSS', JSON.stringify(__blocks.css));
+    // localStorage.setItem('qubelyInteraction', JSON.stringify(__blocks.interaction));
 
     // available blocks meta
     const available_blocks = availableBlocksMeta(all_blocks);
 
     if (setDatabase) {
-        console.log('saving');
-        API_fetch(getCurrentPostId(), __blocks, isRemain, available_blocks)
-    }
-    if (isPreviewing) {
-        console.log('previewing');
+        API_fetch(getCurrentPostId(), __blocks, isRemain, available_blocks, false)
+    } else {
         API_fetch(getCurrentPostId(), __blocks, isRemain, available_blocks, true)
     }
-    setTimeout(() => {
-        window.bindCss = false
-    }, 500)
+
+    // setTimeout(() => {
+    window.bindCss = false;
+    // }, 500)
 }
 
 export default ParseCss;
