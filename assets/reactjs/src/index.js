@@ -72,7 +72,13 @@ wp.data.subscribe(() => {
     if (isPreviewingPost() || isPublishingPost() || (isSavingPost() && (!isAutosavingPost()))) {
         if (window.bindCss === false) {
             setTimeout(() => {
-                ParseCss(isPreviewingPost() ? false : true);
+                if (isPreviewingPost() && !isSavingPost() && !isAutosavingPost() ) {
+                    console.log('is previ');
+                    ParseCss(false, true);
+                } else {
+                    console.log('is sav');
+                    ParseCss(true);
+                }
             }, 600)
 
         }

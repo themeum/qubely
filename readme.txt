@@ -237,7 +237,8 @@ You can report bugs on the [support forum here](https://wordpress.org/support/pl
 
 == Changelog ==
 
-= 1.5.5 - 16 October, 2020 =  
+= 1.5.5 - 16 October, 2020 = 
+Fix: Team block - Internationalization issue on Frontend   
 Update: Border filed - Custom Border disable option  
 
 = 1.5.5 - 16 September, 2020 =  

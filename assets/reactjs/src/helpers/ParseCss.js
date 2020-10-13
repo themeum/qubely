@@ -4,13 +4,20 @@ const { CssGenerator: { CssGenerator } } = wp.qubelyComponents
 
 const endpoint = '/qubely/v1/save_block_css'
 
-const API_fetch = async (post_id, block_css, is_remain, available_blocks) => {
+const API_fetch = async (post_id, block_css, is_remain, available_blocks, isPreviewing = false) => {
     const json = JSON.stringify(block_css.interaction)
     try {
         await wp.apiFetch({
             path: endpoint,
             method: 'POST',
-            data: { block_css: block_css.css, interaction: json, post_id, is_remain, available_blocks }
+            data: {
+                block_css: block_css.css,
+                interaction: json,
+                post_id,
+                is_remain,
+                available_blocks,
+                isPreviewing
+            }
         });
     } catch (e) {
         console.log('Can\'t save css:', e);
@@ -215,7 +222,7 @@ function availableBlocksMeta(all_blocks) {
 }
 
 
-const ParseCss = async (setDatabase = true) => {
+const ParseCss = async (setDatabase = true, isPreviewing = false) => {
     window.bindCss = true;
     const all_blocks = select('core/block-editor').getBlocks();
     const isRemain = isQubelyBlock(all_blocks);
@@ -239,18 +246,24 @@ const ParseCss = async (setDatabase = true) => {
 
     // reusable Block
     parseBlock(all_blocks);
-
-    localStorage.setItem('qubelyCSS', __blocks)
+    // console.log('__blocks : ', JSON.stringify(__blocks));
+    localStorage.setItem('qubelyCSS', JSON.stringify(__blocks.css));
+    localStorage.setItem('qubelyInteraction', JSON.stringify(__blocks.interaction));
 
     // available blocks meta
     const available_blocks = availableBlocksMeta(all_blocks);
 
     if (setDatabase) {
+        console.log('saving');
         API_fetch(getCurrentPostId(), __blocks, isRemain, available_blocks)
+    }
+    if (isPreviewing) {
+        console.log('previewing');
+        API_fetch(getCurrentPostId(), __blocks, isRemain, available_blocks, true)
     }
     setTimeout(() => {
         window.bindCss = false
     }, 500)
 }
 
-export default ParseCss
+export default ParseCss;
