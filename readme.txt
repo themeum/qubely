@@ -4,7 +4,7 @@ Donate link: https://www.themeum.com
 Tags: blocks, gutenberg, gutenberg blocks, editor, block, page builder
 Requires at least: 5.0
 Tested up to: 5.5
-Stable tag: 1.5.5
+Stable tag: 1.6.0
 Requires PHP: 7.0
 License: GPL-2.0+
 License URI: http://www.gnu.org/licenses/gpl-2.0.txt
@@ -237,9 +237,14 @@ You can report bugs on the [support forum here](https://wordpress.org/support/pl
 
 == Changelog ==
 
-= 1.5.5 - 16 October, 2020 = 
+= 1.6.0 - 16 October, 2020 = 
+New: Richtext Custom font-size format
+New: Range field - disable option 
+Fix: CSS issue on Preview posts 
 Fix: Team block - Internationalization issue on Frontend   
+Fix: Table of content block - List styling issue 
 Update: Border filed - Custom Border disable option  
+
 
 = 1.5.5 - 16 September, 2020 =  
 Fix: Fixed Plugin build issue for version 1.5.4 
