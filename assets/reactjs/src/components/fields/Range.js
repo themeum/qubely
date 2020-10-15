@@ -71,7 +71,7 @@ class Range extends Component {
     }
 
     render() {
-        const { unit, label, responsive, device, onDeviceChange } = this.props
+        const { unit, label, responsive, device, onDeviceChange, disabled = false } = this.props
         let responsiveDevice = responsive ? device ? device : this.state.device : window.qubelyDevice
         return (
             <div className={'qubely-field-range qubely-field ' + (responsive ? 'qubely-responsive' : '')}>
@@ -113,9 +113,17 @@ class Range extends Component {
                             max={this._minMax('max')}
                             value={this._filterValue()}
                             step={this._steps()}
+                            disabled={disabled}
                             onChange={e => this.setSettings(this._filterValue() == e.target.value ? '' : e.target.value, 'range')}
                         />
-                        <input type="number" step={this._steps()} onChange={v => this.setSettings(v.target.value, 'range')} value={this._filterValue() + (this.props.suffix ? this.props.suffix : '')} {...(this.props.suffix && { disabled: true })} />
+                        <input
+                            type="number"
+                            step={this._steps()}
+                            onChange={v => this.setSettings(v.target.value, 'range')}
+                            value={this._filterValue() + (this.props.suffix ? this.props.suffix : '')}
+                            disabled={disabled}
+                            {...(this.props.suffix && { disabled: true })}
+                        />
                     </div>
                 </div>
             </div>
