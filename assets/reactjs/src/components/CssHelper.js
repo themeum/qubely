@@ -58,7 +58,6 @@ export const tableBorder = (v) => {
     }
     let data = { md: [], sm: [], xs: [] }
     if (border.widthType === 'global') {
-        console.log('handle global');
         if(border.global.md){
             data.md.push(`box-shadow: 0 0 0 ${border.global.md}${border.unit} ${color};`)
         }
