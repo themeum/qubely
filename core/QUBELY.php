@@ -68,6 +68,10 @@ class QUBELY {
 		 // dynamic blocks
 		 add_action( 'init', array( $this, 'init_dynamic_blocks' ) );
 
+		 // Preview CSS
+		//  add_action( 'upgrader_process_complete', 'create_preview_css');
+		//  register_activation_hook(__FILE__, array($this, 'create_preview_css'));
+
 		 // qubely admin class
 		 add_filter( 'admin_body_class', array( $this, 'qubely_editor_bodyclass' ) );
 
@@ -123,13 +127,49 @@ class QUBELY {
 		return array_merge( $classes, array( 'qubely qubely-frontend' ) );
 	}
 
+
+	
+	/**
+	 * Create preview CSS
+	 */
+	public function create_preview_css() {
+		
+		global $wp_filesystem;
+		if ( ! $wp_filesystem ) {
+			require_once ABSPATH . 'wp-admin/includes/file.php';
+		}
+		$upload_dir = wp_upload_dir();
+		WP_Filesystem(false, $upload_dir['basedir'], true);
+		$dir        = trailingslashit($upload_dir['basedir']) . 'qubely/';
+
+		$filename         = "qubely-preview.css";
+		$jsonfilename      = "qubely-preview.json";
+
+		if (!$wp_filesystem->is_dir($dir)) {
+			$wp_filesystem->mkdir($dir);
+		}
+
+		if (!file_exists($dir . $filename)) {
+			if (!$wp_filesystem->put_contents($dir . $filename, '')) {
+				throw new Exception(__('Prevriew CSS can not be saved due to permission!!!', 'qubely'));
+			}
+		}
+		if (!file_exists($dir . $jsonfilename)) {
+			if (!$wp_filesystem->put_contents($dir . $jsonfilename, '{}')) {
+				throw new Exception(__('Preview JSON can not be saved due to permission!!!', 'qubely'));
+			}
+		}
+
+
+	}
+	
 	/**
 	 * Init dynamic blocks frontend
 	 */
 	public function init_dynamic_blocks() {
-		 require_once QUBELY_DIR_PATH . 'core/blocks/postgrid.php';
-	}
-
+		require_once QUBELY_DIR_PATH . 'core/blocks/postgrid.php';
+		$this->create_preview_css();
+   }
 	/**
 	 * Load Editor Styles and Scripts
 	 *

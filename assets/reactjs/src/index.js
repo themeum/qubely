@@ -76,8 +76,11 @@ wp.data.subscribe(() => {
             if (isPreviewingPost()) {
                 ParseCss(false);
             } else {
-                ParseCss(true);
+                setTimeout(() => {
+                    ParseCss(true);
+                }, 600);
             }
+
         }
     }
 });

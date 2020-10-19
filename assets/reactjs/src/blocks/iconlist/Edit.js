@@ -92,26 +92,41 @@ class Edit extends Component {
         setAttributes({ listItems: newList })
     }
     placeCaretAtEnd = (el) => {
-        el.focus()
-        if (typeof window.getSelection != "undefined"
-            && typeof document.createRange != "undefined") {
-            var range = document.createRange();
-            range.selectNodeContents(el);
-            range.collapse(false);
-            var sel = window.getSelection();
-            sel.removeAllRanges();
-            sel.addRange(range);
-        } else if (typeof document.body.createTextRange != "undefined") {
-            var textRange = document.body.createTextRange();
-            textRange.moveToElementText(el);
-            textRange.collapse(false);
-            textRange.select();
+        if (el) {
+            el.focus()
+            if (typeof window.getSelection != "undefined"
+                && typeof document.createRange != "undefined") {
+                var range = document.createRange();
+                range.selectNodeContents(el);
+                range.collapse(false);
+                var sel = window.getSelection();
+                sel.removeAllRanges();
+                sel.addRange(range);
+            } else if (typeof document.body.createTextRange != "undefined") {
+                var textRange = document.body.createTextRange();
+                textRange.moveToElementText(el);
+                textRange.collapse(false);
+                textRange.select();
+            }
         }
+
     }
     renderListItems = () => {
-        const { isSelected, attributes: { iconPosition, listItems } } = this.props
-        const { focusedItem, removeItemViaBackSpace, currentListItemIndex, openIconPopUp } = this.state
-        return listItems.map((item, index) => {
+        const {
+            isSelected,
+            attributes: {
+                iconPosition,
+                listItems,
+            },
+        } = this.props;
+        const { focusedItem, removeItemViaBackSpace, currentListItemIndex, openIconPopUp } = this.state;
+        let tempItems = listItems;
+        if (Array.isArray(listItems)) {
+            tempItems = listItems;
+        } else {
+            tempItems = listItems.default;
+        }
+        return tempItems.map((item, index) => {
             return (
                 <li className="qubely-list-li qubely-list-li-editor" >
                     <div ref="avoidOnClick" className={`qubely-list-item qubely-list-item-${index}`} onClick={() => this.setState({ currentListItemIndex: index })}>

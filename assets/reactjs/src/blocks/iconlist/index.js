@@ -167,7 +167,29 @@ registerBlockType('qubely/iconlist', {
         align: ['center', 'wide', 'full'],
     },
     example: {
-        attributes: {},
+        attributes:{
+            listItems: {
+                type: 'array',
+                default: [
+                    {
+                        icon: 'far fa-star',
+                        text: 'Add beautiful icons and text'
+                    },
+                    {
+                        icon: 'far fa-heart',
+                        text: 'Set icon color for normal and hover state'
+                    },
+                    {
+                        icon: 'fas fa-check',
+                        text: 'Manage space between icon and the text'
+                    },
+                    {
+                        icon: 'fas fa-burn',
+                        text: 'Choose a desired layout from the list'
+                    },
+                ]
+            },
+        }
     },
 
     attributes,
