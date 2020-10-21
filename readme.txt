@@ -237,12 +237,13 @@ You can report bugs on the [support forum here](https://wordpress.org/support/pl
 
 == Changelog ==
 
-= 1.6.0 - 16 October, 2020 = 
+= 1.6.0 - 22 October, 2020 = 
 New: Richtext Custom font-size format
 New: Range field - disable option 
 Fix: CSS issue on Preview posts 
 Fix: Team block - Internationalization issue on Frontend   
 Fix: Table of content block - List styling issue 
+Fix: Advanced Text block - Typography issue  
 Update: Border filed - Custom Border disable option  
 
 

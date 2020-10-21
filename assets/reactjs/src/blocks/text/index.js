@@ -92,7 +92,18 @@ registerBlockType('qubely/text', {
             default: 'Advanced Text Block'
         },
         titleLevel: { type: 'number', default: 2 },
-        titleTypography: { type: 'object', default: { openTypography: 1, size: { md: 24, unit: 'px' } }, style: [{ selector: '{{QUBELY}} .qubely-block-text-title' }] },
+        titleTypography: {
+            type: 'object',
+            default: {
+                openTypography: 1,
+                size: {
+                    md: 24,
+                    unit: 'px'
+                },
+            },
+            style: [
+                { selector: '{{QUBELY}} .qubely-block-text-title-container .qubely-block-text-title-inner .qubely-block-text-title' }]
+        },
         titleColor: { type: 'string', default: '', style: [{ selector: '{{QUBELY}} .qubely-block-text-title {color: {{titleColor}};}' }] },
         titleSpacing: { type: 'object', default: { md: 10, unit: 'px' }, style: [{ selector: '{{QUBELY}} .qubely-block-text-title-inner {margin-bottom: {{titleSpacing}};}' }] },
 
@@ -104,7 +115,17 @@ registerBlockType('qubely/text', {
             selector: '.qubely-block-text-sub-title',
             default: 'Sub Title'
         },
-        subTitleTypography: { type: 'object', default: { openTypography: 1, size: { md: 16, unit: 'px' } }, style: [{ selector: '{{QUBELY}} .qubely-block-text .qubely-block-text-sub-title' }] },
+        subTitleTypography: {
+            type: 'object',
+            default: {
+                openTypography: 1,
+                size: {
+                    md: 16,
+                    unit: 'px'
+                }
+            },
+            style: [{ selector: '{{QUBELY}} .qubely-block-text .qubely-block-text-title-container .qubely-block-text-sub-title-container .qubely-block-text-sub-title' }]
+        },
         subTitleColor: {
             type: 'string', default: '#333',
             style: [

@@ -60,6 +60,7 @@ export const fontsize = {
                             });
                         }}
                         isActive={isActive}
+                        isDisabled={isActive ? false : value.start === value.end}
                     />
 
                     {
