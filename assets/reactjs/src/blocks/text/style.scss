@@ -186,41 +186,44 @@
     }
 }
 .qubely-custom-popover.custom-fontsize {
-    .qubely-popover-contents {
-        padding: 15px;
-        .qubely-font-size-message {
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-direction: column;
-            .qubely-field-range.qubely-field {
+    .components-popover__content {
+        transition: 300ms;
+        .qubely-popover-contents {
+            padding: 15px;
+            .qubely-font-size-message {
                 width: 100%;
-                .qubely-mb-10 {
-                    margin-bottom: 0px;
-                }
-                .qubely-field-child {
-                    .qubely-input-range {
-                        width: 100%;
-                        input {
-                            -webkit-appearance: auto;
-                        }
-                        input[type="range"] {
-                            min-width: 80%;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                flex-direction: column;
+                .qubely-field-range.qubely-field {
+                    width: 100%;
+                    .qubely-mb-10 {
+                        margin-bottom: 0px;
+                    }
+                    .qubely-field-child {
+                        .qubely-input-range {
+                            width: 100%;
+                            input {
+                                -webkit-appearance: auto;
+                            }
+                            input[type="range"] {
+                                min-width: 80%;
+                            }
                         }
                     }
                 }
-            }
 
-            .qubely-action-buttons {
-                display: flex;
-                width: 100%;
-                .qubely-edit {
-                    margin-right: 10px;
-                }
-                .qubely-remove {
-                    background-color: #e65054;
-                    color: #fff;
+                .qubely-action-buttons {
+                    display: flex;
+                    width: 100%;
+                    .qubely-edit {
+                        margin-right: 10px;
+                    }
+                    .qubely-remove {
+                        background-color: #e65054;
+                        color: #fff;
+                    }
                 }
             }
         }
