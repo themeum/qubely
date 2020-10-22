@@ -1,12 +1,13 @@
 
 
-<h3>1.6.0 - 16 October, 2020</h3>
+<h3>1.6.0 - 22 October, 2020</h3>
 <ul>
     <li>New: Richtext Custom font-size format</li>
     <li>New: Range field - disable option </li>
     <li>Fix: CSS issue on Preview posts </li>
     <li>Fix: Team block - Internationalization issue on Frontend</li>
     <li>Fix: Table of content block - List styling issue</li>
+    <li>Fix: Advanced Text block - Typography issue  </li>
     <li>Update: Border filed - Custom Border disable option</li>
 </ul>
 
