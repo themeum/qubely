@@ -28,7 +28,7 @@ class QubelyButtonEdit extends Component {
 class QubelyButtonSave extends Component {
 
     render() {
-        const { buttonIconName, buttonIconPosition, buttonSize, buttonText, buttonUrl, buttonTag, buttonId, buttonFillType } = this.props
+        const { buttonIconName, buttonIconPosition, buttonSize, buttonText, buttonUrl, buttonTag, buttonId, buttonFillType = undefined, tableBuilder } = this.props
 
         const buttonHtml = <Fragment>
             {buttonIconName && (buttonIconPosition == 'left') && (<i className={`qubely-btn-icon ${buttonIconName}`} />)}
@@ -37,7 +37,7 @@ class QubelyButtonSave extends Component {
         </Fragment>
 
         return (
-            <div className={`qubely-block-btn-wrapper${typeof buttonFillType !== 'undefined' ? ` button-type-${buttonFillType}` : ''}`}>
+            <div className={`qubely-block-btn-wrapper${(typeof tableBuilder !== 'undefined' && typeof buttonFillType !== 'undefined') ? ` button-type-${buttonFillType}` : ''}`}>
                 <div className={`qubely-block-btn`}>
                     {buttonTag == 'a' ?
                         <a className={`qubely-block-btn-anchor is-${[buttonSize]}`} {...buttonId ? 'id="' + buttonId + '"' : ''} href={(buttonUrl && buttonUrl.url) ? buttonUrl.url : '#'} {...((buttonUrl && buttonUrl.target) && { target: '_blank' })} {...((buttonUrl && buttonUrl.nofollow) ? { rel: 'nofollow noopener noreferrer' } : { ...(buttonUrl && buttonUrl.target) && { rel: 'noopener noreferrer' } })} >
