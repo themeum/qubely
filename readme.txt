@@ -76,7 +76,7 @@ More advanced Gutenberg blocks, pre-designed sections and starter packs are comi
 
 ## Pro Features
 
-11 blocks that help you build more sophisticated designs-
+12 blocks that help you build more sophisticated designs-
 
 * [Form Builder](https://qubely.io/block/form-builder/)
 * [Image Gallery](https://qubely.io/block/image-gallery/)
@@ -89,6 +89,7 @@ More advanced Gutenberg blocks, pre-designed sections and starter packs are comi
 * [Media Card](https://qubely.io/block/media-card/)
 * [Pie Progress](https://qubely.io/block/pie-progress/)
 * [Countdown](https://qubely.io/block/countdown/)
+* [Table Builder](https://qubely.io/block/table-builder/)
 
 ⭐️ [Ready Sections](https://qubely.io/section/) ⭐️ [Starter Packs](https://qubely.io/starter-packs/)
 
@@ -237,7 +238,7 @@ You can report bugs on the [support forum here](https://wordpress.org/support/pl
 
 == Changelog ==
 
-= 1.6.0 - 22 October, 2020 = 
+= 1.6.0 - 23 October, 2020 = 
 New: Richtext Custom font-size format
 New: Range field - disable option 
 Fix: CSS issue on Preview posts 
