@@ -51,7 +51,7 @@ registerBlockType('qubely/text', {
                     condition: [
                         { key: 'dropCap', relation: '==', value: true }
                     ],
-                    selector: '{{QUBELY}} .qubely-block-text p::first-letter, {{QUBELY}} .qubely-block-text .editor-rich-text p::first-letter {font-size: {{dropCapSize}};}'
+                    selector: '{{QUBELY}} .qubely-block-text p::first-letter, {{QUBELY}} .qubely-block-text p::first-letter {font-size: {{dropCapSize}};}'
                 }
             ]
         },
@@ -62,7 +62,7 @@ registerBlockType('qubely/text', {
                     condition: [
                         { key: 'dropCap', relation: '==', value: true }
                     ],
-                    selector: '{{QUBELY}} .qubely-block-text p::first-letter, {{QUBELY}} .qubely-block-text .editor-rich-text p::first-letter {color: {{dropCapColor}};}'
+                    selector: '{{QUBELY}} .qubely-block-text p::first-letter, {{QUBELY}} .qubely-block-text p::first-letter {color: {{dropCapColor}};}'
                 }
             ]
         },
@@ -73,7 +73,7 @@ registerBlockType('qubely/text', {
                     condition: [
                         { key: 'dropCap', relation: '==', value: true }
                     ],
-                    selector: '{{QUBELY}} .qubely-block-text p::first-letter, {{QUBELY}} .qubely-block-text .editor-rich-text p::first-letter {margin-right: {{dropCapSpacing}};}'
+                    selector: '{{QUBELY}} .qubely-block-text p::first-letter, {{QUBELY}} .qubely-block-text.qubely-has-drop-cap p.rich-text.block-editor-rich-text__editable::first-letter {margin-right: {{dropCapSpacing}};}'
                 }
             ]
         },
