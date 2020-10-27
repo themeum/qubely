@@ -22,7 +22,7 @@ function register_block_qubely_postgrid()
 				//general
 				'postType' => array(
 					'type' => 'string',
-					'default' => 'Posts',
+					'default' => 'post',
 				),
 				'taxonomy' => array(
 					'type' => 'string',
@@ -1306,6 +1306,7 @@ function render_block_qubely_postgrid($att)
 	$imageAnimation 		= isset($att['imageAnimation']) ? $att['imageAnimation'] : '';
 	$orderBy 		        = isset($att['orderBy']) ? $att['orderBy'] : 'date';
 	$categories             = $att['categories'];
+	$postTypes              = isset($att['postType']) ? $att['postType'] : 'post';
 	$tags                   = $att['tags'];
 	$taxonomy               = $att['taxonomy'];
 
@@ -1335,7 +1336,7 @@ function render_block_qubely_postgrid($att)
 	}
 
 	$args = array(
-		'post_type' 		=> 'post',
+		'post_type' 		=> $postTypes,
 		'posts_per_page' 	=> esc_attr($numbers),
 		'order' 			=> esc_attr($order),
 		'orderby' 			=> esc_attr($orderBy),

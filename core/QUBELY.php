@@ -196,6 +196,7 @@ class QUBELY {
 				'ajax'                        => admin_url( 'admin-ajax.php' ),
 				'pro_enable'                  => defined( 'QUBELY_PRO_VERSION' ) ? true : false,
 				'shapes'                      => $this->getSvgShapes(),
+				'post_type'                   => json_encode( self::get_post_types() ),
 				'all_taxonomy'                => $this->get_all_taxonomy(),
 				'image_sizes'                 => $this->get_all_image_sizes(),
 				'palette'                     => $palette,
