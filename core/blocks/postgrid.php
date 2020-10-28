@@ -28,6 +28,13 @@ function register_block_qubely_postgrid()
 					'type' => 'string',
 					'default' => 'categories',
 				),
+				'taxonomyType' => array(
+					'type' => 'string',
+					'default' => 'category',
+				),
+				'cats' => array(
+					'type' => 'string',
+				),
 				'categories' => array(
 					'type' => 'array',
 					'default' => [],
@@ -1306,9 +1313,11 @@ function render_block_qubely_postgrid($att)
 	$imageAnimation 		= isset($att['imageAnimation']) ? $att['imageAnimation'] : '';
 	$orderBy 		        = isset($att['orderBy']) ? $att['orderBy'] : 'date';
 	$categories             = $att['categories'];
-	$postTypes              = isset($att['postType']) ? $att['postType'] : 'post';
+	$postType               = isset($att['postType']) ? $att['postType'] : 'post';
 	$tags                   = $att['tags'];
 	$taxonomy               = $att['taxonomy'];
+	$taxonomyType           = isset($att['taxonomyType']) ? $att['taxonomyType'] : 'category';
+	$cats                   = $att['cats'];
 
 	$animation 		        = isset($att['animation']) ? (count((array) $att['animation']) > 0 &&  $att['animation']['animation'] ? 'data-qubelyanimation="' . htmlspecialchars(json_encode($att['animation']), ENT_QUOTES, 'UTF-8') . '"' : '') : '';
 
@@ -1336,7 +1345,7 @@ function render_block_qubely_postgrid($att)
 	}
 
 	$args = array(
-		'post_type' 		=> $postTypes,
+		'post_type' 		=> $postType,
 		'posts_per_page' 	=> esc_attr($numbers),
 		'order' 			=> esc_attr($order),
 		'orderby' 			=> esc_attr($orderBy),
@@ -1393,7 +1402,7 @@ function render_block_qubely_postgrid($att)
 			$src = wp_get_attachment_image_src($id, $imgSize);
 			$image = '<img class="qubely-post-image" src="' . esc_url($src[0]) . '" alt="' . get_the_title() . '"/>';
 			$title = '<h3 class="qubely-postgrid-title"><a href="' . esc_url(get_the_permalink()) . '">' . get_the_title() . '</a></h3>';
-			$category = '<span class="qubely-postgrid-category">' . get_the_category_list(' ') . '</span>';
+			$category = '<span class="qubely-postgrid-category">' . ('post' === $postType ? get_the_category_list(' ') : get_the_term_list(get_the_ID(), $taxonomyType, ' ')) . '</span>';
 			$meta = ($showAuthor == 1) ? '<span><i class="fas fa-user"></i> ' . __('By ', 'qubely') . get_the_author_posts_link() . '</span>' : '';
 			$meta .= ($showDates == 1) ? '<span><i class="far fa-calendar-alt"></i> ' . get_the_date() . '</span>' : '';
 			$meta .= ($showComment == 1) ? '<span><i class="fas fa-comment"></i> ' . get_comments_number('0', '1', '%') . '</span>' : '';

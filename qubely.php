@@ -82,9 +82,9 @@ function qubely_register_rest_fields() {
             $value['value'],
             'qubely_featured_image_url',
             array(
-                'get_callback' => 'qubely_get_featured_image_url',
+                'get_callback'    => 'qubely_get_featured_image_url',
                 'update_callback' => null,
-                'schema' => array(
+                'schema'          => array(
                     'description' => __('Different sized featured images'),
                     'type' => 'array',
                 ),
@@ -117,57 +117,74 @@ function qubely_register_rest_fields() {
             $value['value'],
             'qubely_category',
             array(
-                'get_callback' => 'qubely_get_category_list',
+                'get_callback'    => 'qubely_get_category_list',
                 'update_callback' => null,
-                'schema' => array(
+                'schema'          => array(
                     'description' => __('Category list links'),
-                    'type' => 'string',
+                    'type'        => 'string',
                 ),
+            )
+        );
+
+        // Excerpt.
+        register_rest_field(
+            $value['value'],
+            'qubely_excerpt',
+            array(
+                'get_callback'    => 'qubely_get_excerpt',
+                'update_callback' => null,
+                'schema'          => null,
             )
         );
     }
 }
 
 //author
-function qubely_get_author_info( $object, $field_name, $request ) {
+function qubely_get_author_info( $object ) {
     $author = ( isset( $object['author'] ) ) ? $object['author'] : '';
 
-    $author_data['display_name'] = get_the_author_meta( 'display_name', $author) ;
+    $author_data['display_name'] = get_the_author_meta( 'display_name', $author ) ;
     $author_data['author_link']  = get_author_posts_url( $author );
     
     return $author_data;
 }
 
 //comment
-function qubely_get_comment_info($object) {
-    $comments_count = wp_count_comments($object['id']);
+function qubely_get_comment_info( $object ) {
+    $comments_count = wp_count_comments( $object['id'] );
     return $comments_count->total_comments;
 }
 
 //category list
-if (!function_exists('qubely_get_category_list')) {
-    function qubely_get_category_list( $object )
-    {
-        return get_the_category_list(esc_html__(' '), '', $object['id']);
+if ( !function_exists( 'qubely_get_category_list' ) ) {
+    function qubely_get_category_list( $object ) {
+        $taxonomies = get_post_taxonomies( $object['id'] );
+        if ( 'post' === get_post_type() ) {
+            return get_the_category_list( esc_html__(' '), '', $object['id'] );
+        } else {
+            if ( ! empty( $taxonomies ) ) {
+                return get_the_term_list( $object['id'], $taxonomies[0], ' ' );
+            }
+        }
     }
 }
 
 //feature image
-function qubely_get_featured_image_url($object) {
+function qubely_get_featured_image_url( $object ) {
 
     $featured_images = array();
-    if (!isset($object['featured_media'])) {
+    if ( ! isset( $object['featured_media'] ) ) {
         return $featured_images;
     } else {
-        $image = wp_get_attachment_image_src($object['featured_media'], 'full', false);
-        if (is_array($image)) {
-            $featured_images['full'] = $image;
-            $featured_images['landscape'] = wp_get_attachment_image_src($object['featured_media'], 'qubely_landscape', false);
-            $featured_images['portraits'] = wp_get_attachment_image_src($object['featured_media'], 'qubely_portrait', false);
-            $featured_images['thumbnail'] =  wp_get_attachment_image_src($object['featured_media'], 'qubely_thumbnail', false);
+        $image = wp_get_attachment_image_src( $object['featured_media'], 'full', false );
+        if ( is_array( $image ) ) {
+            $featured_images['full']      = $image;
+            $featured_images['landscape'] = wp_get_attachment_image_src( $object['featured_media'], 'qubely_landscape', false );
+            $featured_images['portraits'] = wp_get_attachment_image_src( $object['featured_media'], 'qubely_portrait', false );
+            $featured_images['thumbnail'] =  wp_get_attachment_image_src( $object['featured_media'], 'qubely_thumbnail', false );
 
             $image_sizes = QUBELY::get_all_image_sizes();
-            foreach ($image_sizes as $key => $value) {
+            foreach ( $image_sizes as $key => $value ) {
                 $size = $value['value'];
                 $featured_images[$size] = wp_get_attachment_image_src(
                     $object['featured_media'],
@@ -179,7 +196,16 @@ function qubely_get_featured_image_url($object) {
         }
     }
 }
-add_action('rest_api_init', 'qubely_register_rest_fields');
+
+// Excerpt.
+function qubely_get_excerpt( $object ) {
+    $excerpt = wp_trim_words( get_the_excerpt( $object['id'] ) );
+    if ( ! $excerpt ) {
+        $excerpt = null;
+    }
+    return $excerpt;
+}
+add_action( 'rest_api_init', 'qubely_register_rest_fields' );
 
 /**
  * Order by 

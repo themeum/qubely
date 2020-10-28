@@ -61,7 +61,7 @@ import icons from '../../helpers/icons'
 
 
 const CATEGORIES_LIST_QUERY = { per_page: -1 };
-
+let postTypes = qubely_admin.post_type;
 class Edit extends Component {
 	constructor() {
 		super(...arguments);
@@ -148,7 +148,7 @@ class Edit extends Component {
 					</div>
 				}
 				{showTitle && (titlePosition == false) && title}
-				{showExcerpt && <div className="qubely-postgrid-intro" dangerouslySetInnerHTML={{ __html: this.truncate(post.excerpt.rendered, excerptLimit) }} />}
+				{showExcerpt && <div className="qubely-postgrid-intro" dangerouslySetInnerHTML={{ __html: this.truncate(post.qubely_excerpt, excerptLimit) }} />}
 				{showReadMore && <div className="qubely-postgrid-btn-wrapper"><a className={`qubely-postgrid-btn qubely-button-${readmoreStyle} is-${readmoreSize}`}>{buttonText}</a></div>}
 			</div>
 		)
@@ -161,12 +161,16 @@ class Edit extends Component {
 			name,
 			clientId,
 			attributes,
+			categoryList,
 			taxonomyList,
 			attributes: {
 				uniqueId,
 				className,
 				//general
+				postType,
 				taxonomy,
+				taxonomyType,
+				cats,
 				categories,
 				tags,
 				order,
@@ -320,6 +324,25 @@ class Edit extends Component {
 		} = this.props
 		const { device } = this.state;
 		let pages = Math.ceil(qubely_admin.publishedPosts / postsToShow);
+		let taxonomyListOptions = [
+			{ value: '', label: __('Select Taxonomy') }
+		];
+
+		let categoryListOptions = [
+			{ value: '', label: __('All') }
+		];
+
+		if ('' !== taxonomyList) {
+			Object.keys(taxonomyList).map((item, index) => {
+				return taxonomyListOptions.push({ value: taxonomyList[item]['name'], label: taxonomyList[item]['label'] })
+			});
+		}
+
+		if ('' !== categoryList) {
+			Object.keys(categoryList).map((item, index) => {
+				return categoryListOptions.push({ value: categoryList[item]['id'], label: categoryList[item]['label'] })
+			});
+		}
 		return (
 			<Fragment>
 				<InspectorControls key="inspector">
@@ -447,20 +470,46 @@ class Edit extends Component {
 
 
 							<PanelBody title={__('Query')} initialOpen={false}>
-								<ButtonGroup
-									label={__('Taxonomy')}
-									options={[[__('Categories'), 'categories'], [__('Tags'), 'tags']]}
-									value={taxonomy}
-									onChange={value => setAttributes({ taxonomy: value })}
+								<SelectControl
+									label={__('Post Type')}
+									options={postTypes}
+									value={postType}
+									onChange={value => setAttributes({ postType: value })}
 								/>
-								<Dropdown
-									label={taxonomy === 'categories' ? __('Categories') : __('Tags')}
-									enableSearch
-									defaultOptionsLabel="All"
-									options={[{ value: 'all', label: __('All') }, ...taxonomyList]}
-									value={taxonomy === 'categories' ? categories : tags}
-									onChange={value => setAttributes(taxonomy === 'categories' ? { categories: value.length && value[value.length - 1].label === 'All' ? [] : value } : { tags: value.length && value[value.length - 1].label === 'All' ? [] : value })}
-								/>
+								{taxonomyList && 'post' !== postType &&
+									<SelectControl
+										label={__('Taxonomy')}
+										options={taxonomyListOptions}
+										value={taxonomyType}
+										onChange={value => setAttributes({ taxonomyType: value })}
+									/>
+								}
+								{categoryList && 'post' !== postType &&
+									<SelectControl
+										label={taxonomyList[taxonomyType] ? taxonomyList[taxonomyType]['label'] : __('Taxonomy Terms')}
+										options={categoryListOptions}
+										value={cats}
+										onChange={value => setAttributes({ cats: value })}
+									/>
+								}
+								{'post' === postType &&
+									<Fragment>
+										<ButtonGroup
+											label={__('Taxonomy')}
+											options={[[__('Categories'), 'categories'], [__('Tags'), 'tags']]}
+											value={taxonomy}
+											onChange={value => setAttributes({ taxonomy: value })}
+										/>
+										<Dropdown
+											label={taxonomy === 'categories' ? __('Categories') : __('Tags')}
+											enableSearch
+											defaultOptionsLabel="All"
+											options={[{ value: 'all', label: __('All') }, ...taxonomyList]}
+											value={taxonomy === 'categories' ? categories : tags}
+											onChange={value => setAttributes(taxonomy === 'categories' ? { categories: value.length && value[value.length - 1].label === 'All' ? [] : value } : { tags: value.length && value[value.length - 1].label === 'All' ? [] : value })}
+										/>
+									</Fragment>
+								}
 								<Range label={__('Number of Items')} value={postsToShow} onChange={value => setAttributes({ postsToShow: parseInt(value) })} min={0} max={15} />
 
 								<SelectControl
@@ -940,12 +989,29 @@ class Edit extends Component {
 export default compose([
 	withSelect((select, props) => {
 		const { getEntityRecords } = select('core')
-		const { attributes: { page, taxonomy, order, orderBy, categories, tags, postsToShow } } = props
+		const { attributes: { page, cats, taxonomyType, taxonomy, order, orderBy, categories, tags, postsToShow, postType } } = props
 
-		let allTaxonomy = qubely_admin.all_taxonomy
+		let allTaxonomy = qubely_admin.all_taxonomy;
+		let currentTax = allTaxonomy[postType];
+		let categoryList = [];
+		let rest_base = '';
 
-		let seletedTaxonomy = taxonomy === 'categories' ? 'categories' : 'tags'
-		let activeTaxes = taxonomy === 'categories' ? categories : tags
+		if ('undefined' !== typeof currentTax) {
+			if ('undefined' !== typeof currentTax['taxonomy'][taxonomyType]) {
+				rest_base = (currentTax['taxonomy'][taxonomyType]['rest_base'] == false || currentTax['taxonomy'][taxonomyType]['rest_base'] == null) ? currentTax['taxonomy'][taxonomyType]['id'] : currentTax['taxonomy'][taxonomyType]['rest_base'];
+			}
+
+			if ('' !== taxonomyType) {
+				if ('undefined' !== typeof currentTax['terms'] && 'undefined' !== typeof currentTax['terms'][taxonomyType]) {
+					categoryList = currentTax['terms'][taxonomyType];
+				}
+			}
+		}
+
+		let seletedTaxonomy = taxonomy === 'categories' ? 'categories' : 'tags';
+		let activeTaxes = taxonomy === 'categories' ? categories : tags;
+		let postTaxonomies = allTaxonomy.post.terms ? allTaxonomy.post.terms[taxonomy === 'categories' ? 'category' : 'post_tag'] ? allTaxonomy.post.terms[taxonomy === 'categories' ? 'category' : 'post_tag'] : [] : [];
+		let otherTaxonomies = ('undefined' !== typeof currentTax) ? currentTax['taxonomy'] : [];
 
 		let query = {
 			order: order,
@@ -954,9 +1020,14 @@ export default compose([
 			per_page: postsToShow,
 			[seletedTaxonomy]: activeTaxes.map(({ value, label }) => value),
 		}
+
+		if ('post' !== postType) {
+			query[rest_base] = cats;
+		}
 		return {
-			posts: getEntityRecords('postType', 'post', query),
-			taxonomyList: allTaxonomy.post.terms ? allTaxonomy.post.terms[taxonomy === 'categories' ? 'category' : 'post_tag'] ? allTaxonomy.post.terms[taxonomy === 'categories' ? 'category' : 'post_tag'] : [] : [],
+			posts: getEntityRecords('postType', postType, query),
+			categoryList: categoryList,
+			taxonomyList: ('post' === postType) ? postTaxonomies : otherTaxonomies,
 		};
 	}),
 	withCSSGenerator()
