@@ -77,7 +77,7 @@ function qubely_register_rest_fields() {
 
    foreach ( $post_type as $key => $value ) {
 
-        //featured image
+        // Featured image.
         register_rest_field(
             $value['value'],
             'qubely_featured_image_url',
@@ -90,7 +90,7 @@ function qubely_register_rest_fields() {
                 ),
             )
         );
-        // author info
+        // Author info.
         register_rest_field(
             $value['value'],
             'qubely_author',
@@ -139,7 +139,7 @@ function qubely_register_rest_fields() {
     }
 }
 
-//author
+// Author.
 function qubely_get_author_info( $object ) {
     $author = ( isset( $object['author'] ) ) ? $object['author'] : '';
 
@@ -149,13 +149,13 @@ function qubely_get_author_info( $object ) {
     return $author_data;
 }
 
-//comment
+// Comment.
 function qubely_get_comment_info( $object ) {
     $comments_count = wp_count_comments( $object['id'] );
     return $comments_count->total_comments;
 }
 
-//category list
+// Category list.
 if ( !function_exists( 'qubely_get_category_list' ) ) {
     function qubely_get_category_list( $object ) {
         $taxonomies = get_post_taxonomies( $object['id'] );
@@ -169,7 +169,7 @@ if ( !function_exists( 'qubely_get_category_list' ) ) {
     }
 }
 
-//feature image
+// Feature image.
 function qubely_get_featured_image_url( $object ) {
 
     $featured_images = array();
@@ -221,8 +221,8 @@ add_action( 'init', 'qubely_resigter_rest_order_by_fields' );
 
 function qubely_blog_posts_image_sizes()
 {
-    add_image_size('qubely_landscape', 1200, 750, true);
-    add_image_size('qubely_portrait', 540, 320, true);
-    add_image_size('qubely_thumbnail', 140, 100, true);
+    add_image_size( 'qubely_landscape', 1200, 750, true );
+    add_image_size( 'qubely_portrait', 540, 320, true );
+    add_image_size( 'qubely_thumbnail', 140, 100, true );
 }
-add_action('after_setup_theme', 'qubely_blog_posts_image_sizes');
+add_action( 'after_setup_theme', 'qubely_blog_posts_image_sizes' );

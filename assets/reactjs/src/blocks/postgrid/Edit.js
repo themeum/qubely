@@ -170,8 +170,8 @@ class Edit extends Component {
 				postType,
 				taxonomy,
 				taxonomyType,
-				cats,
 				categories,
+				customTaxonomies,
 				tags,
 				order,
 				orderBy,
@@ -333,14 +333,14 @@ class Edit extends Component {
 		];
 
 		if ('' !== taxonomyList) {
-			Object.keys(taxonomyList).map((item, index) => {
+			Object.keys(taxonomyList).map((item) => {
 				return taxonomyListOptions.push({ value: taxonomyList[item]['name'], label: taxonomyList[item]['label'] })
 			});
 		}
 
 		if ('' !== categoryList) {
-			Object.keys(categoryList).map((item, index) => {
-				return categoryListOptions.push({ value: categoryList[item]['id'], label: categoryList[item]['label'] })
+			Object.keys(categoryList).map((item) => {
+				return categoryListOptions.push({ value: categoryList[item]['value'], label: categoryList[item]['label'] })
 			});
 		}
 		return (
@@ -485,11 +485,13 @@ class Edit extends Component {
 									/>
 								}
 								{categoryList && 'post' !== postType &&
-									<SelectControl
-										label={taxonomyList[taxonomyType] ? taxonomyList[taxonomyType]['label'] : __('Taxonomy Terms')}
+									<Dropdown
+										label={taxonomyList && taxonomyList[taxonomyType] ? taxonomyList[taxonomyType]['label'] : __('Taxonomy Terms')}
+										enableSearch
+										defaultOptionsLabel="All"
 										options={categoryListOptions}
-										value={cats}
-										onChange={value => setAttributes({ cats: value })}
+										value={customTaxonomies}
+										onChange={value => setAttributes({ customTaxonomies: value.length && value[value.length - 1].label === 'All' ? [] : value })}
 									/>
 								}
 								{'post' === postType &&
@@ -989,7 +991,7 @@ class Edit extends Component {
 export default compose([
 	withSelect((select, props) => {
 		const { getEntityRecords } = select('core')
-		const { attributes: { page, cats, taxonomyType, taxonomy, order, orderBy, categories, tags, postsToShow, postType } } = props
+		const { attributes: { page, cats, taxonomyType, taxonomy, customTaxonomies, order, orderBy, categories, tags, postsToShow, postType } } = props
 
 		let allTaxonomy = qubely_admin.all_taxonomy;
 		let currentTax = allTaxonomy[postType];
@@ -998,7 +1000,7 @@ export default compose([
 
 		if ('undefined' !== typeof currentTax) {
 			if ('undefined' !== typeof currentTax['taxonomy'][taxonomyType]) {
-				rest_base = (currentTax['taxonomy'][taxonomyType]['rest_base'] == false || currentTax['taxonomy'][taxonomyType]['rest_base'] == null) ? currentTax['taxonomy'][taxonomyType]['id'] : currentTax['taxonomy'][taxonomyType]['rest_base'];
+				rest_base = (currentTax['taxonomy'][taxonomyType]['rest_base'] == false || currentTax['taxonomy'][taxonomyType]['rest_base'] == null) ? currentTax['taxonomy'][taxonomyType]['name'] : currentTax['taxonomy'][taxonomyType]['rest_base'];
 			}
 
 			if ('' !== taxonomyType) {
@@ -1018,11 +1020,12 @@ export default compose([
 			orderby: orderBy,
 			page: page,
 			per_page: postsToShow,
-			[seletedTaxonomy]: activeTaxes.map(({ value, label }) => value),
 		}
 
 		if ('post' !== postType) {
-			query[rest_base] = cats;
+			query[rest_base] = '' !== customTaxonomies ? customTaxonomies.map(({ value, label }) => value) : [];
+		} else {
+			query[seletedTaxonomy] = activeTaxes.map(({ value, label }) => value);
 		}
 		return {
 			posts: getEntityRecords('postType', postType, query),
