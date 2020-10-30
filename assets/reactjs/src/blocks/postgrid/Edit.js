@@ -991,7 +991,7 @@ class Edit extends Component {
 export default compose([
 	withSelect((select, props) => {
 		const { getEntityRecords } = select('core')
-		const { attributes: { page, cats, taxonomyType, taxonomy, customTaxonomies, order, orderBy, categories, tags, postsToShow, postType } } = props
+		const { attributes: { page, taxonomyType, taxonomy, customTaxonomies, order, orderBy, categories, tags, postsToShow, postType } } = props
 
 		let allTaxonomy = qubely_admin.all_taxonomy;
 		let currentTax = allTaxonomy[postType];
@@ -1027,6 +1027,7 @@ export default compose([
 		} else {
 			query[seletedTaxonomy] = activeTaxes.map(({ value, label }) => value);
 		}
+
 		return {
 			posts: getEntityRecords('postType', postType, query),
 			categoryList: categoryList,
