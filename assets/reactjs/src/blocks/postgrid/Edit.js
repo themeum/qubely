@@ -512,7 +512,7 @@ class Edit extends Component {
 										/>
 									</Fragment>
 								}
-								<Range label={__('Number of Items')} value={postsToShow} onChange={value => setAttributes({ postsToShow: parseInt(value) })} min={0} max={15} />
+								<Range label={__('Number of Items')} value={postsToShow} onChange={value => setAttributes({ postsToShow: parseInt(value) })} min={1} max={15} />
 
 								<SelectControl
 									label={__('Order By')}
