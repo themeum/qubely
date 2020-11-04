@@ -57,6 +57,63 @@ const attributes = {
         type: 'boolean',
         default: false,
     },
+    progressBarBg: {
+        type: 'object',
+        default: {
+            type: 'color',
+            openColor: 1,
+            color: '#EEEEEE',
+            gradient: {
+                color1: '#EEEEEE',
+                color2: '#e5e5e5',
+                direction: 0,
+                start: 0,
+                stop: 100,
+                type: 'linear',
+            }
+        },
+        style: [
+            {
+                selector: '{{QUBELY}} .qubely-block-tab .qubely-tab-item.qubely-active .progress'
+            }
+        ]
+    },
+    progressBarHeight: {
+        type: 'object',
+        default: {
+            md: "10",
+            unit: "px",
+        },
+        style: [
+            {
+                selector: '{{QUBELY}} .qubely-block-tab .qubely-tab-item.qubely-active .progress {height:{{progressBarHeight}};}'
+            }
+        ]
+    },
+    progressBarSpacing: {
+        type: 'object',
+        default: {
+            md: "2",
+            unit: "px",
+        },
+        style: [
+            {
+                selector: '{{QUBELY}} .qubely-block-tab .qubely-tab-item.qubely-active .progress {margin-top:{{progressBarSpacing}};}'
+            }
+        ]
+    },
+    progressBarRadius: {
+        type: 'object',
+        default: {
+            md: "2",
+            unit: "px",
+        },
+        style: [
+            {
+                selector: '{{QUBELY}} .qubely-block-tab .qubely-tab-item.qubely-active .progress {border-radius:{{progressBarRadius}};}'
+            }
+        ]
+    },
     navAlignment: {
         type: 'string',
         default: 'left'

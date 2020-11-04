@@ -50,6 +50,7 @@ const {
 	InspectorTabs,
 	RadioAdvanced,
 	withCSSGenerator,
+	ColorAdvanced,
 	Inline: {
 		InlineToolbar
 	},
@@ -113,7 +114,10 @@ class Edit extends Component {
 		const {
 			attributes: {
 				tabTitles,
-				iconPosition
+				iconPosition,
+				autoSwithcing,
+				showProgressBar,
+				defaultDelay,
 			}
 		} = this.props;
 
@@ -162,6 +166,10 @@ class Edit extends Component {
 							}
 							{title.iconName && (iconPosition == 'right') && (<i className={`qubely-tab-icon ${title.iconName}`} />)}
 						</div>
+						{
+							(autoSwithcing && showProgressBar) &&
+							<div className="progress" style={{ width: '100%', transition: typeof title.delay === 'undefined' ? defaultDelay : title.delay + 's' }} />
+						}
 						<Tooltip text={__('Delete this tab')}>
 							<span className="qubely-action-tab-remove" role="button" onClick={() => this.deleteTab(index)}>
 								<i className="fas fa-times" />
@@ -231,6 +239,10 @@ class Edit extends Component {
 				delayType,
 				defaultDelay,
 				showProgressBar,
+				progressBarBg,
+				progressBarHeight,
+				progressBarSpacing,
+				progressBarRadius,
 				reverseContent,
 				recreateStyles,
 
@@ -343,6 +355,9 @@ class Edit extends Component {
 								/>
 								<Separator />
 								<Toggle label={__('Reverse Content')} value={reverseContent} onChange={val => setAttributes({ reverseContent: val, recreateStyles: !recreateStyles })} />
+								<Alignment label={__('Alignment')} value={navAlignment} alignmentType="content" onChange={val => setAttributes({ navAlignment: val })} disableJustify />
+							</PanelBody>
+							<PanelBody title={__('Auto Switching')} initialOpen={true}>
 								<Toggle label={__('Auto Switch Tabs')} value={autoSwithcing} onChange={val => setAttributes({ autoSwithcing: val })} />
 								{
 									autoSwithcing &&
@@ -389,9 +404,46 @@ class Edit extends Component {
 
 								}
 								<Toggle label={__('Show Progress Bar')} value={showProgressBar} onChange={val => setAttributes({ showProgressBar: val })} />
-								<Alignment label={__('Alignment')} value={navAlignment} alignmentType="content" onChange={val => setAttributes({ navAlignment: val })} disableJustify />
+								{
+									showProgressBar &&
+									<Fragment>
+										<ColorAdvanced label={__('Progressbar Background')} value={progressBarBg} onChange={(val) => setAttributes({ progressBarBg: val })} />
+										<Range
+											label={__('Height')}
+											value={progressBarHeight}
+											unit={['px', 'em', '%']}
+											max={50}
+											min={1}
+											responsive
+											device={device}
+											onChange={(value) => setAttributes({ progressBarHeight: value })}
+											onDeviceChange={value => this.setState({ device: value })}
+										/>
+										<Range
+											label={__('Spacing')}
+											value={progressBarSpacing}
+											unit={['px', 'em', '%']}
+											max={50}
+											min={0}
+											responsive
+											device={device}
+											onChange={(value) => setAttributes({ progressBarSpacing: value })}
+											onDeviceChange={value => this.setState({ device: value })}
+										/>
+										<Range
+											label={__('Radius')}
+											value={progressBarRadius}
+											unit={['px', 'em', '%']}
+											max={100}
+											min={0}
+											responsive
+											device={device}
+											onChange={(value) => setAttributes({ progressBarRadius: value })}
+											onDeviceChange={value => this.setState({ device: value })}
+										/>
+									</Fragment>
+								}
 							</PanelBody>
-
 							<PanelBody title={__('Nav')} initialOpen={false}>
 								<RadioAdvanced label={__('Nav Size')}
 									options={[
