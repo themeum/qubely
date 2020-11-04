@@ -25,6 +25,38 @@ const attributes = {
         },
         style: [{ selector: '{{QUBELY}}' }]
     },
+    reverseContent: {
+        type: 'boolean',
+        default: false,
+        style: [
+            {
+                condition: [
+                    { key: 'reverseContent', relation: '==', value: true }
+                ],
+                selector: '{{QUBELY}} .qubely-block-tab{display: flex; flex-direction:column-reverse;}'
+            }
+        ]
+    },
+    autoSwithcing: {
+        type: 'boolean',
+        default: false,
+    },
+    delayType: {
+        type: 'string',
+        default: 'common',
+    },
+    recreateStyles: {
+        type: 'boolean',
+        default: true
+    },
+    defaultDelay: {
+        type: 'number',
+        default: 3,
+    },
+    showProgressBar: {
+        type: 'boolean',
+        default: false,
+    },
     navAlignment: {
         type: 'string',
         default: 'left'

@@ -2,10 +2,12 @@ import classnames from 'classnames';
 import icons from '../../helpers/icons';
 
 const { __ } = wp.i18n;
+const { createBlock } = wp.blocks;
 const {
 	Toolbar,
 	Tooltip,
-	PanelBody
+	PanelBody,
+	RangeControl,
 } = wp.components;
 
 const { compose } = wp.compose;
@@ -32,12 +34,14 @@ const {
 	Tabs,
 	Color,
 	Range,
+	Toggle,
 	Select,
 	Border,
 	Styles,
 	Padding,
 	IconList,
 	Separator,
+	ButtonGroup,
 	BoxShadow,
 	Alignment,
 	Typography,
@@ -129,6 +133,7 @@ class Edit extends Component {
 				}
 				const wrapperClasses = classnames(
 					'qubely-tab-item',
+					'qubely-backend',
 					{ ['qubely-active']: isActiveTab }
 				)
 				const titleClasses = classnames(
@@ -222,6 +227,12 @@ class Edit extends Component {
 			attributes: {
 				uniqueId,
 				className,
+				autoSwithcing,
+				delayType,
+				defaultDelay,
+				showProgressBar,
+				reverseContent,
+				recreateStyles,
 
 				tabs,
 				navBg,
@@ -290,6 +301,11 @@ class Edit extends Component {
 		}
 
 		const addNewTab = () => {
+			const {
+				clientId,
+				block,
+				replaceInnerBlocks,
+			} = this.props;
 			this.setState({
 				activeTab: tabs + 1,
 				initialRender: false
@@ -298,6 +314,13 @@ class Edit extends Component {
 				tabs: tabs + 1,
 				tabTitles: newTitles()
 			});
+			let innerBlocks = JSON.parse(JSON.stringify(block.innerBlocks));
+			innerBlocks.push(createBlock('qubely/tab', {
+				id: innerBlocks.length + 1,
+				customClassName: 'qubely-active',
+			}));
+
+			replaceInnerBlocks(clientId, innerBlocks, false);
 		}
 
 		const blockWrapperClasses = classnames(
@@ -319,6 +342,53 @@ class Edit extends Component {
 									]}
 								/>
 								<Separator />
+								<Toggle label={__('Reverse Content')} value={reverseContent} onChange={val => setAttributes({ reverseContent: val, recreateStyles: !recreateStyles })} />
+								<Toggle label={__('Auto Switch Tabs')} value={autoSwithcing} onChange={val => setAttributes({ autoSwithcing: val })} />
+								{
+									autoSwithcing &&
+									<Fragment>
+										<ButtonGroup
+											label={__('Delay Type')}
+											options={
+												[
+													[__('Common'), 'common'],
+													[__('Custom'), 'custom']
+												]
+											}
+											value={delayType}
+											onChange={value => setAttributes({ delayType: value })}
+										/>
+										{
+											delayType === 'common' ?
+												<RangeControl
+													min={2}
+													max={200}
+													label={__('Delay')}
+													value={defaultDelay}
+													onChange={(defaultDelay) => setAttributes({ defaultDelay })}
+												/>
+												:
+												<Fragment>
+													<Separator label={__('Custom Delays')} />
+													{
+														tabTitles.map(({ title, delay }, index) => (
+															<RangeControl
+																min={2}
+																max={200}
+																label={__(title)}
+																value={typeof delay === 'undefined' ? defaultDelay : delay}
+																onChange={(value) => this.updateTitles({ delay: value }, index)}
+															/>
+														))
+													}
+												</Fragment>
+
+										}
+
+									</Fragment>
+
+								}
+								<Toggle label={__('Show Progress Bar')} value={showProgressBar} onChange={val => setAttributes({ showProgressBar: val })} />
 								<Alignment label={__('Alignment')} value={navAlignment} alignmentType="content" onChange={val => setAttributes({ navAlignment: val })} disableJustify />
 							</PanelBody>
 
@@ -468,7 +538,7 @@ class Edit extends Component {
 					</Toolbar>
 				</BlockControls>
 
-				{globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
+				{ globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
 				<div className={blockWrapperClasses}>
 					<div className={`qubely-block-tab qubely-tab-style-${tabStyle} qubely-active-tab-${activeTab}`}>
@@ -508,7 +578,7 @@ class Edit extends Component {
 					</div>
 				</div>
 
-			</Fragment>
+			</Fragment >
 		)
 	}
 }
