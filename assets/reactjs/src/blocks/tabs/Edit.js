@@ -257,6 +257,7 @@ class Edit extends Component {
 				navPaddingY,
 				navPaddingX,
 				navBgActive,
+				navShadow,
 				navAlignment,
 				navColorActive,
 
@@ -508,6 +509,10 @@ class Edit extends Component {
 										}
 									</Tab>
 								</Tabs>
+								{
+									tabStyle !== 'underline' &&
+									<BoxShadow label={__('Box-Shadow')} value={navShadow} onChange={(value) => setAttributes({ navShadow: value })} />
+								}
 								<Typography label={__('Typography')} value={typography} onChange={(value) => setAttributes({ typography: value })} disableLineHeight device={device} onDeviceChange={value => this.setState({ device: value })} />
 							</PanelBody>
 							<PanelBody title={__('Icon')} initialOpen={false}>

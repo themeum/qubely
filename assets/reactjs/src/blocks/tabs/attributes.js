@@ -118,6 +118,23 @@ const attributes = {
         type: 'string',
         default: 'left'
     },
+    navShadow: {
+        type: 'object',
+        default: {
+            horizontal: 2,
+            vertical: 2,
+            blur: 3,
+            spread: '0'
+        },
+        style: [
+            {
+                condition: [
+                    { key: 'tabStyle', relation: '!=', value: 'underline' }
+                ],
+                selector: '{{QUBELY}} .qubely-block-tab .qubely-tab-nav .qubely-tab-item .qubely-tab-title'
+            }
+        ]
+    },
     tabs: {
         type: 'number',
         default: 3
