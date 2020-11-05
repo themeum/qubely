@@ -96,6 +96,6 @@ registerBlockType('qubely/tabs', {
                     </div>
                 );
             }
-        }
+        },
     ]
 })
