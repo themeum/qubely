@@ -243,6 +243,7 @@ class Edit extends Component {
 				progressBarHeight,
 				progressBarSpacing,
 				progressBarRadius,
+				progressBarPosition,
 				reverseContent,
 				recreateStyles,
 
@@ -408,7 +409,13 @@ class Edit extends Component {
 								{
 									showProgressBar &&
 									<Fragment>
-										<ColorAdvanced label={__('Progressbar Background')} value={progressBarBg} onChange={(val) => setAttributes({ progressBarBg: val })} />
+										<RadioAdvanced label={__('Position')} value={progressBarPosition} onChange={val => setAttributes({ progressBarPosition: val })}
+											options={[
+												{ label: __('After Title'), value: 'after_title', nav: __('After Title') },
+												{ label: __('Before Title'), value: 'before_title', nav: __('Before Title') }
+											]}
+										/>
+										<ColorAdvanced label={__('Background')} value={progressBarBg} onChange={(val) => setAttributes({ progressBarBg: val })} />
 										<Range
 											label={__('Height')}
 											value={progressBarHeight}

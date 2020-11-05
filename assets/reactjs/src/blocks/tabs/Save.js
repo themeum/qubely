@@ -19,6 +19,7 @@ class Save extends Component {
                 autoSwithcing,
                 showProgressBar,
                 defaultDelay,
+                progressBarPosition,
                 tabStyle,
                 tabTitles,
                 iconPosition,
@@ -30,18 +31,26 @@ class Save extends Component {
 
         const interactionClass = IsInteraction(interaction) ? 'qubley-block-interaction' : '';
 
+        const renderProgressBarPosition = (title) => {
+            const { autoSwithcing, showProgressBar, defaultDelay } = this.props.attributes
+        
+            if (autoSwithcing && showProgressBar) {
+                return (
+                    <div className="progress" style={{ width: '0%', transition: typeof title.delay === 'undefined' ? defaultDelay : title.delay + 's' }} />
+                )
+            }
+        }
+
         const renderTabTitles = () => {
             return tabTitles.map((title, index) =>
                 <div className={`qubely-tab-item ${(index == 0) ? 'qubely-active' : ''}`}{...(autoSwithcing && { 'data-customdelay': typeof title.delay !== 'undefined' ? title.delay : defaultDelay })}>
+                    {progressBarPosition == 'before_title' && renderProgressBarPosition(title)}
                     <span class={`qubely-tab-title ${title.iconName ? 'qubely-has-icon-' + iconPosition : ''}`} role="button">
                         {title.iconName && (iconPosition == 'top' || iconPosition == 'left') && (<i className={`qubely-tab-icon ${title.iconName}`} />)}
                         {title.title}
                         {title.iconName && (iconPosition == 'right') && (<i className={`qubely-tab-icon ${title.iconName}`} />)}
                     </span>
-                    {
-                        (autoSwithcing && showProgressBar) &&
-                        <div className="progress" style={{ width: '0%', transition: typeof title.delay === 'undefined' ? defaultDelay : title.delay + 's' }} />
-                    }
+                    {progressBarPosition == 'after_title' && renderProgressBarPosition(title)}
                 </div>
             );
         }

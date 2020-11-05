@@ -114,6 +114,10 @@ const attributes = {
             }
         ]
     },
+    progressBarPosition: {
+        type: 'string',
+        default: 'after_title',
+    },
     navAlignment: {
         type: 'string',
         default: 'left'
