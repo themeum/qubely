@@ -32,7 +32,7 @@ class Save extends Component {
 
         const renderTabTitles = () => {
             return tabTitles.map((title, index) =>
-                <div className={`qubely-tab-item ${(index == 0) ? 'qubely-active' : ''}`}{...(autoSwithcing && { 'data-customdelay': typeof title.delay !== 'undefined' ? title.delay : defaultDelay })}>
+                <span className={`qubely-tab-item ${(index == 0) ? 'qubely-active' : ''}`}{...(autoSwithcing && { 'data-customdelay': typeof title.delay !== 'undefined' ? title.delay : defaultDelay })}>
                     <span class={`qubely-tab-title ${title.iconName ? 'qubely-has-icon-' + iconPosition : ''}`} role="button">
                         {title.iconName && (iconPosition == 'top' || iconPosition == 'left') && (<i className={`qubely-tab-icon ${title.iconName}`} />)}
                         {title.title}
@@ -42,7 +42,7 @@ class Save extends Component {
                         (autoSwithcing && showProgressBar) &&
                         <div className="progress" style={{ width: '0%', transition: typeof title.delay === 'undefined' ? defaultDelay : title.delay + 's' }} />
                     }
-                </div>
+                </span>
             );
         }
 

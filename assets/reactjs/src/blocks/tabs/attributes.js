@@ -62,7 +62,7 @@ const attributes = {
         default: {
             type: 'color',
             openColor: 1,
-            color: '#EEEEEE',
+            color: '#2184F9',
             gradient: {
                 color1: '#EEEEEE',
                 color2: '#e5e5e5',
