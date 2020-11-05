@@ -104,9 +104,11 @@
         content: counters(item, ".") ". ";
         position: absolute;
         right: calc(100% + 12px);
+        word-break: initial;
       }
       ol > li::before{
         content: counters(item, ".") " ";
+        word-break: initial;
       }
     }
   }

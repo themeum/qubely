@@ -17,7 +17,23 @@ registerBlockType('qubely/accordion', {
         align: ['center', 'wide', 'full'],
     },
     example: {
-        attributes: {},
+        attributes: {
+           
+        },
+        innerBlocks: [
+            {
+                name: 'qubely/accordion-item',
+                innerBlocks: [
+                    {
+                        name: 'qubely/heading',
+                        attributes: {
+                            content: 'Qubely - A Full-fledged Gutenberg Builder',
+                            alignment: { md: "center" }
+                        },
+                    },
+                ],
+            }
+        ],
     },
     attributes: {
         uniqueId: { type: 'string', default: '' },

@@ -69,11 +69,17 @@ wp.data.subscribe(() => {
         isPublishingPost
     } = wp.data.select("core/editor");
 
-    if (isPreviewingPost() || isPublishingPost() || (isSavingPost() && (!isAutosavingPost()))) {
+    if (isPreviewingPost()
+        || isPublishingPost()
+        || (isSavingPost() && (!isAutosavingPost()))) {
         if (window.bindCss === false) {
-            setTimeout(() => {
-                ParseCss(isPreviewingPost() ? false : true);
-            }, 600)
+            if (isPreviewingPost()) {
+                ParseCss(false);
+            } else {
+                setTimeout(() => {
+                    ParseCss(true);
+                }, 600);
+            }
 
         }
     }
@@ -84,7 +90,8 @@ wp.blocks.updateCategory('qubely', { icon: <img style={{ height: '20px', 'margin
 //APPEND IMPORT LAYOUTS BUTTON TO POST HEADER TOOLBAR
 import { ModalManager } from './helpers/ModalManager';
 import PageListModal from './helpers/PageListModal';
-document.addEventListener("DOMContentLoaded", appendImportButton);
+// document.addEventListener("DOMContentLoaded", appendImportButton);
+window.addEventListener("load", appendImportButton);
 
 function appendImportButton() {
     // let node = document.querySelector('.edit-post-header-toolbar');

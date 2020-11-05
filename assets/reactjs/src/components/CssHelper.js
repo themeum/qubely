@@ -46,6 +46,34 @@ export const cssBorder = (v) => {
         return '{' + data + '}';
     }
 }
+// Table Border
+export const tableBorder = (v) => {
+    const {
+        border
+    } = v;
+    let nonResponsiveCss = 'border-style:hidden;';
+    let color = '#E5E7EA';
+    if (border.color) {
+        color = v.border.color;
+    }
+    let data = { md: [], sm: [], xs: [] }
+    if (border.widthType === 'global') {
+        if(border.global.md){
+            data.md.push(`box-shadow: 0 0 0 ${border.global.md}${border.unit} ${color};`)
+        }
+        if(border.global.sm){
+            data.sm.push(`box-shadow: 0 0 0 ${border.global.sm}${border.unit} ${color};`)
+        }
+        if(border.global.xs){
+            data.xs.push(`box-shadow: 0 0 0 ${border.global.xs}${border.unit} ${color};`)
+        }
+    } 
+
+    data.md.push(nonResponsiveCss)
+    data.sm.push(nonResponsiveCss)
+    data.xs.push(nonResponsiveCss)
+    return { md: data.md, sm: data.sm, xs: data.xs }
+}
 
 // CSS Typography
 export const _device = (val, selector) => {

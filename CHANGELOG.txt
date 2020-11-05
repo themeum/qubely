@@ -1,28 +1,19 @@
 
-<h3>1.5.3 - 13 August, 2020</h3>
+
+<h3>1.6.0 - 22 October, 2020</h3>
 <ul>
-    <li>New: Import Sections/Layouts with Global settings</li>
-    <li>New: Inline Color and Background Color compatibility with Global settings</li>
-    <li>New: Theme Preset activation hook</li>
-    <li>New : Row block - Even Column Height option</li>
-    <li>Update: All blocks - Context Menu refs</li>
-    <li>Fix: Parse Qubely block issue for CSS generator</li>
-    <li>Fix: Accordion block - inline style issue</li>
-    <li>Fix: Accordion block - Accordion title editing issue on Safari</li>
-    <li>Fix: Dropdown Component -  initial options issue with API call</li>
+    <li>New: Richtext Custom font-size format</li>
+    <li>New: Range field - disable option </li>
+    <li>Fix: CSS issue on Preview posts </li>
+    <li>Fix: Team block - Internationalization issue on Frontend</li>
+    <li>Fix: Table of content block - List styling issue</li>
+    <li>Fix: Advanced Text block - Typography issue  </li>
+    <li>Update: Border filed - Custom Border disable option</li>
 </ul>
 
 
-<h3>1.5.2 - 29 July, 2020</h3>
+<h3>1.5.5 - 16 September, 2020</h3>
 <ul>
-    <li>New: Accordion block - Rich Snippet added</li>
-    <li>New: Row block - Shape divider flip option </li>
-    <li>Update: Added 100+ Google fonts</li>
-    <li>Fix: Divider block - Divider options in Panel</li>
-    <li>Fix: Button block - Font size issue in Frontend</li>
-    <li>Fix: Button block - Button width in Backend</li>
-    <li>Fix: Button block - Text editing issue in Safari browser</li>
-    <li>Fix: Table of Contents block - CSS issue</li>
+    <li>Fix: Fixed Plugin build issue for version 1.5.4 </li>
 </ul>
-
 

@@ -1,5 +1,10 @@
 .editor-styles-wrapper .qubely-block-text {
-    h1, h2, h3, h4, h5, h6 {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
         padding: 0;
         margin: 0;
         line-height: 1;
@@ -21,9 +26,9 @@
         }
         p::first-letter {
             float: left;
-            line-height: .68;
+            line-height: 0.68;
             font-weight: 700;
-            margin: .05em .1em 0 0;
+            margin: 0.05em 0.1em 0 0;
             text-transform: uppercase;
             font-style: normal;
         }
@@ -31,7 +36,8 @@
     p {
         padding: 0;
         margin: 0;
-        transition: color 300ms ease-in-out, background-color 300ms ease-in-out, border-color 300ms ease-in-out, box-shadow 300ms ease-in-out;
+        transition: color 300ms ease-in-out, background-color 300ms ease-in-out, border-color 300ms ease-in-out,
+            box-shadow 300ms ease-in-out;
     }
     .qubely-block-text-title {
         margin: 0;
@@ -58,7 +64,7 @@
         }
     }
 }
-.wp-block-qubely-text .qubely-block-text .qubely-block-text-title-container{
+.wp-block-qubely-text .qubely-block-text .qubely-block-text-title-container {
     color: inherit;
 }
 
@@ -66,7 +72,7 @@
  * tooltip richtext format using CSS
  */
 
- *[data-tooltip] {
+*[data-tooltip] {
     position: relative;
 }
 [data-tooltip]:before {
@@ -176,6 +182,50 @@
         .qubely-remove {
             background-color: #e65054;
             color: #fff;
+        }
+    }
+}
+.qubely-custom-popover.custom-fontsize {
+    .components-popover__content {
+        transition: 300ms;
+        .qubely-popover-contents {
+            padding: 15px;
+            .qubely-font-size-message {
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                flex-direction: column;
+                .qubely-field-range.qubely-field {
+                    width: 100%;
+                    .qubely-mb-10 {
+                        margin-bottom: 0px;
+                    }
+                    .qubely-field-child {
+                        .qubely-input-range {
+                            width: 100%;
+                            input {
+                                -webkit-appearance: auto;
+                            }
+                            input[type="range"] {
+                                min-width: 80%;
+                            }
+                        }
+                    }
+                }
+
+                .qubely-action-buttons {
+                    display: flex;
+                    width: 100%;
+                    .qubely-edit {
+                        margin-right: 10px;
+                    }
+                    .qubely-remove {
+                        background-color: #e65054;
+                        color: #fff;
+                    }
+                }
+            }
         }
     }
 }

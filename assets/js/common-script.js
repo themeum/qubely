@@ -98,8 +98,34 @@ jQuery(document).ready(function ($) {
     });
 
     //TAB BLOCK
+    function progress(parentElement, elem, delay) {
+        if(typeof elem ==='undefined'){
+            return;
+        }
+        $('.qubely-tab-item', parentElement).each(function () {
+            $(this).find('.progress').css({
+                'width': '0%',
+                'transition': '0s',
+            });
+        });
+        elem.style.width = '100%';
+        elem.style.transition = delay + 's';
+    };
+
+    var timeouts = [];
+    function clearTimeouts() {
+        for (let i = 0; i < timeouts.length; i++) {
+            clearTimeout(timeouts[i]);
+        }
+    }
     $('.qubely-tab-title').on('click', function (event) {
+        clearTimeouts();
         var $qubelyTab = $(this).parent();
+        var qubelyTabNav = $($qubelyTab).parent();
+        $('.qubely-tab-item.qubely-active .progress', qubelyTabNav).css({
+            'width': '0%',
+            'transition': '0s',
+        });
         var qubelyIndex = $qubelyTab.index();
         if ($qubelyTab.hasClass('qubely-active')) {
             return;
@@ -110,7 +136,47 @@ jQuery(document).ready(function ($) {
         $qubelyTab.closest('.qubely-block-tab').find('.qubely-tab-content').eq(qubelyIndex).addClass('qubely-active')
     });
 
-    //TAB BLOCK
+
+    $('.qubely-block-tab.with-auto-swithing').each(function () {
+        const currentElement = $(this)[0];
+        let defaultdelay = parseInt(currentElement.dataset.defaultdelay);
+        let tabs = parseInt(currentElement.dataset.tabs);
+        let effectiveDelays = Array(tabs).fill(defaultdelay);
+        let tabIndex = 0;
+
+        $('.qubely-tab-item', currentElement).each(function (index) {
+            if (typeof $(this)[0].dataset.customdelay !== 'undefined') {
+                effectiveDelays[index] = parseInt($(this)[0].dataset.customdelay);
+            }
+        });
+
+        let changeTab = function () {
+            let activeTab = $('.qubely-tab-item.qubely-active', currentElement);
+            let current = $(".qubely-tab-item", currentElement).index(activeTab);
+            tabIndex++;
+            let idx = current;
+            let max = $('.qubely-tab-item', currentElement).length - 1;
+            idx = (current < max) ? (idx + 1) : 0;
+            // $('.qubely-tab-item:not(.qubely-backend):eq(' + idx + ') .qubely-tab-title', currentElement).click();
+            var $qubelyTab = $('.qubely-tab-item:not(.qubely-backend):eq(' + idx + ') .qubely-tab-title', currentElement).parent();
+            var qubelyIndex = $qubelyTab.index();
+            if ($qubelyTab.hasClass('qubely-active')) {
+                return;
+            }
+
+            $qubelyTab.closest('.qubely-tab-nav').find('.qubely-active').removeClass('qubely-active');
+            $qubelyTab.addClass('qubely-active');
+            $qubelyTab.closest('.qubely-block-tab').find('.qubely-tab-content.qubely-active').removeClass('qubely-active');
+            $qubelyTab.closest('.qubely-block-tab').find('.qubely-tab-content').eq(qubelyIndex).addClass('qubely-active');
+            progress(currentElement, $qubelyTab.find('.progress')[0], parseInt($qubelyTab[0].dataset.customdelay));
+            timeouts.push(setTimeout(changeTab, effectiveDelays[tabIndex % tabs] * 1000));
+        }
+        timeouts.push(setTimeout(changeTab, effectiveDelays[0] * 1000));
+        progress(currentElement, $('.qubely-tab-item.qubely-active', currentElement).find('.progress')[0], effectiveDelays[0])
+
+    });
+
+    //Vertical TAB BLOCK
     $('.qubely-vertical-tab-item-button').on('click', function (event) {
         var $that = $(this);
         var $currentNav = $that.parent();
@@ -453,13 +519,13 @@ jQuery(document).ready(function ($) {
         $(this).addClass('nav-tab-active');
     });
 
-    if(qubelySettingsTabContent.length){
-        if(window.location.hash){
+    if (qubelySettingsTabContent.length) {
+        if (window.location.hash) {
             qubelySettingTabs.removeClass('nav-tab-active');
             $('#qubely-settings-tabs a[href=' + window.location.hash + ']').addClass('nav-tab-active');
             qubelySettingsTabContent.find('.qubely-settings-inner').hide();
             qubelySettingsTabContent.find(window.location.hash).show();
-        }else {
+        } else {
             qubelySettingTabs.removeClass('nav-tab-active');
             qubelySettingTabs.first().addClass('nav-tab-active');
             qubelySettingsTabContent.find('.qubely-settings-inner').hide();
@@ -489,7 +555,7 @@ jQuery(document).ready(function ($) {
     });*/
 
     var qubelyGsPostWrap = $('.qubely-gs-card-blog-posts');
-    if(qubelyGsPostWrap.length) {
+    if (qubelyGsPostWrap.length) {
 
         function generatePostMarkup(post) {
             var div = document.createElement('div');
@@ -499,9 +565,9 @@ jQuery(document).ready(function ($) {
             anchor1.setAttribute('href', post.link);
 
             var img = document.createElement('img');
-            if(
-              post.qubely_featured_image_url &&
-              post.qubely_featured_image_url.medium_large
+            if (
+                post.qubely_featured_image_url &&
+                post.qubely_featured_image_url.medium_large
             ) {
                 img.setAttribute('src', post.qubely_featured_image_url.medium_large[0])
             }
@@ -510,7 +576,7 @@ jQuery(document).ready(function ($) {
 
             var span = document.createElement('span');
             var date = new Date(post.date);
-            span.innerText = `${date.getUTCDate()}/${date.getUTCMonth()}/${date.getUTCFullYear()}` ;
+            span.innerText = `${date.getUTCDate()}/${date.getUTCMonth()}/${date.getUTCFullYear()}`;
 
 
             var anchor2 = document.createElement('a');
@@ -535,22 +601,22 @@ jQuery(document).ready(function ($) {
             var cacheTime = localStorage.getItem('__qubely_themeum_post_time');
             var cachedPost = localStorage.getItem('__qubely_themeum_post');
 
-            if(!cachedPost || !parseInt(cacheTime) > Date.now()) {
+            if (!cachedPost || !parseInt(cacheTime) > Date.now()) {
                 var endpoint = "https://www.themeum.com/wp-json/wp/v2/posts?per_page=3&status=publish&orderby=date&categories=1486";
                 fetch(endpoint)
-                  .then(response => response.json())
-                  .then(res => {
-                      if(Array.isArray(res)) {
-                          printPostMarkup(res);
-                          localStorage.setItem('__qubely_themeum_post_time', Date.now() + 3600e3);
-                          localStorage.setItem('__qubely_themeum_post', JSON.stringify(res));
-                      } else {
-                          qubelyGsPostWrap.remove();
-                      }
-                  })
-                  .catch((e) => {
-                      qubelyGsPostWrap.remove();
-                  })
+                    .then(response => response.json())
+                    .then(res => {
+                        if (Array.isArray(res)) {
+                            printPostMarkup(res);
+                            localStorage.setItem('__qubely_themeum_post_time', Date.now() + 3600e3);
+                            localStorage.setItem('__qubely_themeum_post', JSON.stringify(res));
+                        } else {
+                            qubelyGsPostWrap.remove();
+                        }
+                    })
+                    .catch((e) => {
+                        qubelyGsPostWrap.remove();
+                    })
             }
             else {
                 var posts = JSON.parse(cachedPost);
@@ -565,23 +631,23 @@ jQuery(document).ready(function ($) {
     }
 
     var sectionCount = $('.qubely-gs-section-count');
-    if(sectionCount.length) {
+    if (sectionCount.length) {
         var endpoint = "https://qubely.io/wp-json/wp/v2/sections";
         var cacheTime = localStorage.getItem('__qubely_section_count_time');
         var cachedCount = localStorage.getItem('__qubely_section_count');
-        if(!cachedCount || !parseInt(cacheTime) > Date.now()) {
+        if (!cachedCount || !parseInt(cacheTime) > Date.now()) {
             fetch(endpoint)
-              .then(response => {
-                  var count = response.headers.get('X-WP-Total');
-                  if(count) {
-                      count = count + '+';
-                      sectionCount.html(count)
-                      localStorage.setItem('__qubely_section_count_time', Date.now() + 3600e3);
-                      localStorage.setItem('__qubely_section_count', count);
-                  }
-              }).catch(e => {
-                // debug
-            });
+                .then(response => {
+                    var count = response.headers.get('X-WP-Total');
+                    if (count) {
+                        count = count + '+';
+                        sectionCount.html(count)
+                        localStorage.setItem('__qubely_section_count_time', Date.now() + 3600e3);
+                        localStorage.setItem('__qubely_section_count', count);
+                    }
+                }).catch(e => {
+                    // debug
+                });
         } else {
             sectionCount.html(cachedCount)
         }
@@ -589,47 +655,47 @@ jQuery(document).ready(function ($) {
     }
 
     var blockCount = $('.qubely-gs-block-count');
-    if(blockCount.length) {
+    if (blockCount.length) {
         var endpoint = "https://qubely.io/wp-json/wp/v2/block";
         var cacheTime = localStorage.getItem('__qubely_block_count_time');
         var cachedCount = localStorage.getItem('__qubely_block_count');
-        if(!cachedCount || !parseInt(cacheTime) > Date.now()) {
+        if (!cachedCount || !parseInt(cacheTime) > Date.now()) {
             fetch(endpoint)
-              .then(response => {
-                  var count = response.headers.get('X-WP-Total');
-                  if(count) {
-                      count = count + '+';
-                      blockCount.html(count)
-                      localStorage.setItem('__qubely_block_count_time', Date.now() + 3600e3);
-                      localStorage.setItem('__qubely_block_count', count);
-                  }
-              }).catch(e => {
-                // debug
-            });
+                .then(response => {
+                    var count = response.headers.get('X-WP-Total');
+                    if (count) {
+                        count = count + '+';
+                        blockCount.html(count)
+                        localStorage.setItem('__qubely_block_count_time', Date.now() + 3600e3);
+                        localStorage.setItem('__qubely_block_count', count);
+                    }
+                }).catch(e => {
+                    // debug
+                });
         } else {
             blockCount.html(cachedCount)
         }
     }
 
     var layoutCount = $('.qubely-gs-layout-count');
-    if(layoutCount.length) {
+    if (layoutCount.length) {
         var endpoint = "https://qubely.io/wp-json/restapi/v2/layouts";
         var cacheTime = localStorage.getItem('__qubely_layout_count_time');
         var cachedCount = localStorage.getItem('__qubely_layout_count');
-        if(!cachedCount || !parseInt(cacheTime) > Date.now()) {
+        if (!cachedCount || !parseInt(cacheTime) > Date.now()) {
             fetch(endpoint, {
                 method: 'post'
             })
-              .then(response => {
-                  response.json().then(response => {
-                      var count = response.filter(item => item.parentID === 0).length + '+';
-                      layoutCount.html(count)
-                      localStorage.setItem('__qubely_layout_count_time', Date.now() + 3600e3);
-                      localStorage.setItem('__qubely_layout_count', count);
-                  })
-              }).catch(e => {
-                // debug
-            });
+                .then(response => {
+                    response.json().then(response => {
+                        var count = response.filter(item => item.parentID === 0).length + '+';
+                        layoutCount.html(count)
+                        localStorage.setItem('__qubely_layout_count_time', Date.now() + 3600e3);
+                        localStorage.setItem('__qubely_layout_count', count);
+                    })
+                }).catch(e => {
+                    // debug
+                });
         } else {
             layoutCount.html(cachedCount)
         }

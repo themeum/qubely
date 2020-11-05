@@ -3,6 +3,7 @@ import {
     cssBorderRadius,
     cssGradient,
     cssBorder,
+    tableBorder,
     cssBoxShadow,
     cssTypography,
     cssDimension,
@@ -85,6 +86,8 @@ const objectField = (data) => {
         return { data: cssBackground(data), action: 'append' }; //Background
     } else if (data.openBorder) {
         return { data: cssBorder(data), action: 'append' }; //Border
+    } else if (data.tableBorder) {
+        return { data: tableBorder(data), action: 'append' }; //tableBorder
     } else if (data.openShadow && data.color) {
         return { data: cssBoxShadow(data), action: 'append' }; //Shadow
     } else if (data.direction) {

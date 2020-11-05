@@ -2,10 +2,12 @@ import classnames from 'classnames';
 import icons from '../../helpers/icons';
 
 const { __ } = wp.i18n;
+const { createBlock } = wp.blocks;
 const {
 	Toolbar,
 	Tooltip,
-	PanelBody
+	PanelBody,
+	RangeControl,
 } = wp.components;
 
 const { compose } = wp.compose;
@@ -32,12 +34,14 @@ const {
 	Tabs,
 	Color,
 	Range,
+	Toggle,
 	Select,
 	Border,
 	Styles,
 	Padding,
 	IconList,
 	Separator,
+	ButtonGroup,
 	BoxShadow,
 	Alignment,
 	Typography,
@@ -46,6 +50,7 @@ const {
 	InspectorTabs,
 	RadioAdvanced,
 	withCSSGenerator,
+	ColorAdvanced,
 	Inline: {
 		InlineToolbar
 	},
@@ -109,7 +114,10 @@ class Edit extends Component {
 		const {
 			attributes: {
 				tabTitles,
-				iconPosition
+				iconPosition,
+				autoSwithcing,
+				showProgressBar,
+				defaultDelay,
 			}
 		} = this.props;
 
@@ -129,6 +137,7 @@ class Edit extends Component {
 				}
 				const wrapperClasses = classnames(
 					'qubely-tab-item',
+					'qubely-backend',
 					{ ['qubely-active']: isActiveTab }
 				)
 				const titleClasses = classnames(
@@ -157,6 +166,10 @@ class Edit extends Component {
 							}
 							{title.iconName && (iconPosition == 'right') && (<i className={`qubely-tab-icon ${title.iconName}`} />)}
 						</div>
+						{
+							(autoSwithcing && showProgressBar) &&
+							<div className="progress" style={{ width: '100%', transition: typeof title.delay === 'undefined' ? defaultDelay : title.delay + 's' }} />
+						}
 						<Tooltip text={__('Delete this tab')}>
 							<span className="qubely-action-tab-remove" role="button" onClick={() => this.deleteTab(index)}>
 								<i className="fas fa-times" />
@@ -222,6 +235,16 @@ class Edit extends Component {
 			attributes: {
 				uniqueId,
 				className,
+				autoSwithcing,
+				delayType,
+				defaultDelay,
+				showProgressBar,
+				progressBarBg,
+				progressBarHeight,
+				progressBarSpacing,
+				progressBarRadius,
+				reverseContent,
+				recreateStyles,
 
 				tabs,
 				navBg,
@@ -234,6 +257,7 @@ class Edit extends Component {
 				navPaddingY,
 				navPaddingX,
 				navBgActive,
+				navShadow,
 				navAlignment,
 				navColorActive,
 
@@ -290,6 +314,11 @@ class Edit extends Component {
 		}
 
 		const addNewTab = () => {
+			const {
+				clientId,
+				block,
+				replaceInnerBlocks,
+			} = this.props;
 			this.setState({
 				activeTab: tabs + 1,
 				initialRender: false
@@ -298,6 +327,13 @@ class Edit extends Component {
 				tabs: tabs + 1,
 				tabTitles: newTitles()
 			});
+			let innerBlocks = JSON.parse(JSON.stringify(block.innerBlocks));
+			innerBlocks.push(createBlock('qubely/tab', {
+				id: innerBlocks.length + 1,
+				customClassName: 'qubely-active',
+			}));
+
+			replaceInnerBlocks(clientId, innerBlocks, false);
 		}
 
 		const blockWrapperClasses = classnames(
@@ -319,9 +355,96 @@ class Edit extends Component {
 									]}
 								/>
 								<Separator />
+								<Toggle label={__('Reverse Content')} value={reverseContent} onChange={val => setAttributes({ reverseContent: val, recreateStyles: !recreateStyles })} />
 								<Alignment label={__('Alignment')} value={navAlignment} alignmentType="content" onChange={val => setAttributes({ navAlignment: val })} disableJustify />
 							</PanelBody>
+							<PanelBody title={__('Auto Switching')} initialOpen={true}>
+								<Toggle label={__('Auto Switch Tabs')} value={autoSwithcing} onChange={val => setAttributes({ autoSwithcing: val })} />
+								{
+									autoSwithcing &&
+									<Fragment>
+										<ButtonGroup
+											label={__('Delay Type')}
+											options={
+												[
+													[__('Common'), 'common'],
+													[__('Custom'), 'custom']
+												]
+											}
+											value={delayType}
+											onChange={value => setAttributes({ delayType: value })}
+										/>
+										{
+											delayType === 'common' ?
+												<RangeControl
+													min={2}
+													max={200}
+													label={__('Delay')}
+													value={defaultDelay}
+													onChange={(defaultDelay) => setAttributes({ defaultDelay })}
+												/>
+												:
+												<Fragment>
+													<Separator label={__('Custom Delays')} />
+													{
+														tabTitles.map(({ title, delay }, index) => (
+															<RangeControl
+																min={2}
+																max={200}
+																label={__(title)}
+																value={typeof delay === 'undefined' ? defaultDelay : delay}
+																onChange={(value) => this.updateTitles({ delay: value }, index)}
+															/>
+														))
+													}
+												</Fragment>
 
+										}
+
+									</Fragment>
+
+								}
+								<Toggle label={__('Show Progress Bar')} value={showProgressBar} onChange={val => setAttributes({ showProgressBar: val })} />
+								{
+									showProgressBar &&
+									<Fragment>
+										<ColorAdvanced label={__('Progressbar Background')} value={progressBarBg} onChange={(val) => setAttributes({ progressBarBg: val })} />
+										<Range
+											label={__('Height')}
+											value={progressBarHeight}
+											unit={['px', 'em', '%']}
+											max={50}
+											min={1}
+											responsive
+											device={device}
+											onChange={(value) => setAttributes({ progressBarHeight: value })}
+											onDeviceChange={value => this.setState({ device: value })}
+										/>
+										<Range
+											label={__('Spacing')}
+											value={progressBarSpacing}
+											unit={['px', 'em', '%']}
+											max={50}
+											min={0}
+											responsive
+											device={device}
+											onChange={(value) => setAttributes({ progressBarSpacing: value })}
+											onDeviceChange={value => this.setState({ device: value })}
+										/>
+										<Range
+											label={__('Radius')}
+											value={progressBarRadius}
+											unit={['px', 'em', '%']}
+											max={100}
+											min={0}
+											responsive
+											device={device}
+											onChange={(value) => setAttributes({ progressBarRadius: value })}
+											onDeviceChange={value => this.setState({ device: value })}
+										/>
+									</Fragment>
+								}
+							</PanelBody>
 							<PanelBody title={__('Nav')} initialOpen={false}>
 								<RadioAdvanced label={__('Nav Size')}
 									options={[
@@ -386,6 +509,10 @@ class Edit extends Component {
 										}
 									</Tab>
 								</Tabs>
+								{
+									tabStyle !== 'underline' &&
+									<BoxShadow label={__('Box-Shadow')} value={navShadow} onChange={(value) => setAttributes({ navShadow: value })} />
+								}
 								<Typography label={__('Typography')} value={typography} onChange={(value) => setAttributes({ typography: value })} disableLineHeight device={device} onDeviceChange={value => this.setState({ device: value })} />
 							</PanelBody>
 							<PanelBody title={__('Icon')} initialOpen={false}>
@@ -468,7 +595,7 @@ class Edit extends Component {
 					</Toolbar>
 				</BlockControls>
 
-				{globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
+				{ globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
 				<div className={blockWrapperClasses}>
 					<div className={`qubely-block-tab qubely-tab-style-${tabStyle} qubely-active-tab-${activeTab}`}>
@@ -508,7 +635,7 @@ class Edit extends Component {
 					</div>
 				</div>
 
-			</Fragment>
+			</Fragment >
 		)
 	}
 }

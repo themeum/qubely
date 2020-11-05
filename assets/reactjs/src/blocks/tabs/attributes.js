@@ -25,9 +25,115 @@ const attributes = {
         },
         style: [{ selector: '{{QUBELY}}' }]
     },
+    reverseContent: {
+        type: 'boolean',
+        default: false,
+        style: [
+            {
+                condition: [
+                    { key: 'reverseContent', relation: '==', value: true }
+                ],
+                selector: '{{QUBELY}} .qubely-block-tab{display: flex; flex-direction:column-reverse;}'
+            }
+        ]
+    },
+    autoSwithcing: {
+        type: 'boolean',
+        default: false,
+    },
+    delayType: {
+        type: 'string',
+        default: 'common',
+    },
+    recreateStyles: {
+        type: 'boolean',
+        default: true
+    },
+    defaultDelay: {
+        type: 'number',
+        default: 3,
+    },
+    showProgressBar: {
+        type: 'boolean',
+        default: false,
+    },
+    progressBarBg: {
+        type: 'object',
+        default: {
+            type: 'color',
+            openColor: 1,
+            color: '#EEEEEE',
+            gradient: {
+                color1: '#EEEEEE',
+                color2: '#e5e5e5',
+                direction: 0,
+                start: 0,
+                stop: 100,
+                type: 'linear',
+            }
+        },
+        style: [
+            {
+                selector: '{{QUBELY}} .qubely-block-tab .qubely-tab-item.qubely-active .progress'
+            }
+        ]
+    },
+    progressBarHeight: {
+        type: 'object',
+        default: {
+            md: "10",
+            unit: "px",
+        },
+        style: [
+            {
+                selector: '{{QUBELY}} .qubely-block-tab .qubely-tab-item.qubely-active .progress {height:{{progressBarHeight}};}'
+            }
+        ]
+    },
+    progressBarSpacing: {
+        type: 'object',
+        default: {
+            md: "2",
+            unit: "px",
+        },
+        style: [
+            {
+                selector: '{{QUBELY}} .qubely-block-tab .qubely-tab-item.qubely-active .progress {margin-top:{{progressBarSpacing}};}'
+            }
+        ]
+    },
+    progressBarRadius: {
+        type: 'object',
+        default: {
+            md: "2",
+            unit: "px",
+        },
+        style: [
+            {
+                selector: '{{QUBELY}} .qubely-block-tab .qubely-tab-item.qubely-active .progress {border-radius:{{progressBarRadius}};}'
+            }
+        ]
+    },
     navAlignment: {
         type: 'string',
         default: 'left'
+    },
+    navShadow: {
+        type: 'object',
+        default: {
+            horizontal: 2,
+            vertical: 2,
+            blur: 3,
+            spread: '0'
+        },
+        style: [
+            {
+                condition: [
+                    { key: 'tabStyle', relation: '!=', value: 'underline' }
+                ],
+                selector: '{{QUBELY}} .qubely-block-tab .qubely-tab-nav .qubely-tab-item .qubely-tab-title'
+            }
+        ]
     },
     tabs: {
         type: 'number',

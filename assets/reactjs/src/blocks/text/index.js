@@ -51,7 +51,7 @@ registerBlockType('qubely/text', {
                     condition: [
                         { key: 'dropCap', relation: '==', value: true }
                     ],
-                    selector: '{{QUBELY}} .qubely-block-text p::first-letter, {{QUBELY}} .qubely-block-text .editor-rich-text p::first-letter {font-size: {{dropCapSize}};}'
+                    selector: '{{QUBELY}} .qubely-block-text p::first-letter, {{QUBELY}} .qubely-block-text p::first-letter {font-size: {{dropCapSize}};}'
                 }
             ]
         },
@@ -62,7 +62,7 @@ registerBlockType('qubely/text', {
                     condition: [
                         { key: 'dropCap', relation: '==', value: true }
                     ],
-                    selector: '{{QUBELY}} .qubely-block-text p::first-letter, {{QUBELY}} .qubely-block-text .editor-rich-text p::first-letter {color: {{dropCapColor}};}'
+                    selector: '{{QUBELY}} .qubely-block-text p::first-letter, {{QUBELY}} .qubely-block-text p::first-letter {color: {{dropCapColor}};}'
                 }
             ]
         },
@@ -73,13 +73,13 @@ registerBlockType('qubely/text', {
                     condition: [
                         { key: 'dropCap', relation: '==', value: true }
                     ],
-                    selector: '{{QUBELY}} .qubely-block-text p::first-letter, {{QUBELY}} .qubely-block-text .editor-rich-text p::first-letter {margin-right: {{dropCapSpacing}};}'
+                    selector: '{{QUBELY}} .qubely-block-text p::first-letter, {{QUBELY}} .qubely-block-text.qubely-has-drop-cap p.rich-text.block-editor-rich-text__editable::first-letter {margin-right: {{dropCapSpacing}};}'
                 }
             ]
         },
 
 
-        typography: { type: 'object', default: {}, style: [{ selector: '{{QUBELY}} .qubely-block-text, {{QUBELY}} .qubely-block-text .editor-rich-text p' }] },
+        typography: { type: 'object', default: {}, style: [{ selector: '{{QUBELY}} .qubely-block-text, {{QUBELY}} .qubely-block-text p.rich-text' }] },
         textColor: { type: 'string', default: '', style: [{ selector: '{{QUBELY}} .qubely-block-text > * { color:{{textColor}}; }' }] },
 
 
@@ -92,7 +92,18 @@ registerBlockType('qubely/text', {
             default: 'Advanced Text Block'
         },
         titleLevel: { type: 'number', default: 2 },
-        titleTypography: { type: 'object', default: { openTypography: 1, size: { md: 24, unit: 'px' } }, style: [{ selector: '{{QUBELY}} .qubely-block-text-title' }] },
+        titleTypography: {
+            type: 'object',
+            default: {
+                openTypography: 1,
+                size: {
+                    md: 24,
+                    unit: 'px'
+                },
+            },
+            style: [
+                { selector: '{{QUBELY}} .qubely-block-text-title-container .qubely-block-text-title-inner .qubely-block-text-title' }]
+        },
         titleColor: { type: 'string', default: '', style: [{ selector: '{{QUBELY}} .qubely-block-text-title {color: {{titleColor}};}' }] },
         titleSpacing: { type: 'object', default: { md: 10, unit: 'px' }, style: [{ selector: '{{QUBELY}} .qubely-block-text-title-inner {margin-bottom: {{titleSpacing}};}' }] },
 
@@ -104,7 +115,17 @@ registerBlockType('qubely/text', {
             selector: '.qubely-block-text-sub-title',
             default: 'Sub Title'
         },
-        subTitleTypography: { type: 'object', default: { openTypography: 1, size: { md: 16, unit: 'px' } }, style: [{ selector: '{{QUBELY}} .qubely-block-text .qubely-block-text-sub-title' }] },
+        subTitleTypography: {
+            type: 'object',
+            default: {
+                openTypography: 1,
+                size: {
+                    md: 16,
+                    unit: 'px'
+                }
+            },
+            style: [{ selector: '{{QUBELY}} .qubely-block-text .qubely-block-text-title-container .qubely-block-text-sub-title-container .qubely-block-text-sub-title' }]
+        },
         subTitleColor: {
             type: 'string', default: '#333',
             style: [

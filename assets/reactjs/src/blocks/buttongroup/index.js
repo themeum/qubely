@@ -38,7 +38,20 @@ registerBlockType('qubely/buttongroup', {
                 unit: "px"
             }
         },
-
+        innerBlocks: [
+            {
+                name: 'qubely/button',
+                attributes: {
+                    textField: 'Button one',
+                },
+            },
+            {
+                name: 'qubely/button',
+                attributes: {
+                    textField: 'Button two',
+                },
+            }
+        ],
     },
     attributes,
     edit: Edit,

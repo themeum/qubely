@@ -47,6 +47,35 @@ export const cssBorder = (v) => {
     }
 }
 
+// Table Border
+export const tableBorder = (v) => {
+    const {
+        border
+    } = v;
+    let nonResponsiveCss = 'border-style:hidden;';
+    let color = '#E5E7EA';
+    if (border.color) {
+        color = v.border.color;
+    }
+    let data = { md: [], sm: [], xs: [] }
+    if (border.widthType === 'global') {
+        if(border.global.md){
+            data.md.push(`box-shadow: 0 0 0 ${border.global.md}${border.unit} ${color};`)
+        }
+        if(border.global.sm){
+            data.sm.push(`box-shadow: 0 0 0 ${border.global.sm}${border.unit} ${color};`)
+        }
+        if(border.global.xs){
+            data.xs.push(`box-shadow: 0 0 0 ${border.global.xs}${border.unit} ${color};`)
+        }
+    } 
+
+    data.md.push(nonResponsiveCss)
+    data.sm.push(nonResponsiveCss)
+    data.xs.push(nonResponsiveCss)
+    return { md: data.md, sm: data.sm, xs: data.xs }
+}
+
 // CSS Typography
 const _device = (val, selector) => {
     let data = {}
@@ -191,9 +220,9 @@ export const cssShape = (v) => {
         shape.push(' svg polygon{fill:' + v.color + ';}')
     }
     if (v.flipShapeDivider) {
-        if(v.shapeType==='top'){
+        if (v.shapeType === 'top') {
             shape.push(' svg { transform: rotateY(180deg) translateX(50%);}');
-        }else{
+        } else {
             shape.push(' svg { transform: rotate(180deg) translate(50%);}');
         }
     }

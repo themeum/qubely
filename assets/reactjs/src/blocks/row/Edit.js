@@ -223,6 +223,7 @@ class Edit extends Component {
                                 <Toggle label={__('Even Column Height')} value={evenColumnHeight} onChange={val => setAttributes({ evenColumnHeight: val })} />
                                 {
                                     columns > 1 &&
+
                                     <Range
                                         label={__('Gutter Size')}
                                         min={0} max={100}
