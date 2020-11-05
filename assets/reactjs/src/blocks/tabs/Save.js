@@ -1,5 +1,5 @@
 import classnames from 'classnames';
-const { Component } = wp.element;
+const { Fragment, Component } = wp.element;
 const { InnerBlocks } = wp.blockEditor;
 const {
     HelperFunction: {
@@ -16,6 +16,7 @@ class Save extends Component {
                 uniqueId,
                 className,
                 tabs,
+                navType,
                 autoSwithcing,
                 showProgressBar,
                 defaultDelay,
@@ -33,11 +34,25 @@ class Save extends Component {
         const renderTabTitles = () => {
             return tabTitles.map((title, index) =>
                 <span className={`qubely-tab-item ${(index == 0) ? 'qubely-active' : ''}`}{...(autoSwithcing && { 'data-customdelay': typeof title.delay !== 'undefined' ? title.delay : defaultDelay })}>
-                    <span class={`qubely-tab-title ${title.iconName ? 'qubely-has-icon-' + iconPosition : ''}`} role="button">
-                        {title.iconName && (iconPosition == 'top' || iconPosition == 'left') && (<i className={`qubely-tab-icon ${title.iconName}`} />)}
-                        {title.title}
-                        {title.iconName && (iconPosition == 'right') && (<i className={`qubely-tab-icon ${title.iconName}`} />)}
-                    </span>
+                    {
+                        navType === 'text' ?
+                            <Fragment>
+                                <span class={`qubely-tab-title ${title.iconName ? 'qubely-has-icon-' + iconPosition : ''}`} role="button">
+                                    {title.iconName && (iconPosition == 'top' || iconPosition == 'left') && (<i className={`qubely-tab-icon ${title.iconName}`} />)}
+                                    {title.title}
+                                    {title.iconName && (iconPosition == 'right') && (<i className={`qubely-tab-icon ${title.iconName}`} />)}
+                                </span>
+                            </Fragment>
+                            :
+                            <Fragment>
+                                {typeof title.avatar !== 'undefined' && title.avatar.url ?
+                                    <img className="qubely-tab-title qubely-tab-image" src={title.avatar.url} alt={title.avatar.alt ? title.avatar.alt : 'tab-image'} />
+                                    :
+                                    <div className="qubely-tab-title qubely-image-placeholder qubely-tab-title-avatar"><i className="far fa-user" /></div>
+                                }
+                            </Fragment>
+                    }
+
                     {
                         (autoSwithcing && showProgressBar) &&
                         <div className="progress" style={{ width: '0%', transition: typeof title.delay === 'undefined' ? defaultDelay : title.delay + 's' }} />

@@ -81,7 +81,7 @@ const attributes = {
     progressBarHeight: {
         type: 'object',
         default: {
-            md: "10",
+            md: "3",
             unit: "px",
         },
         style: [
@@ -114,6 +114,68 @@ const attributes = {
             }
         ]
     },
+    navType: {
+        type: 'string',
+        default: 'text'
+    },
+    navImageSize: {
+        type: 'string',
+        default: '96px',
+        style: [
+            {
+                condition: [
+                    { key: 'navImageSize', relation: '!=', value: 'custom' }
+                ],
+                selector: '{{QUBELY}} .qubely-block-tab .qubely-tab-item .qubely-tab-image , {{QUBELY}} .qubely-image-placeholder.qubely-tab-title-avatar{ display: inline-flex; width: {{navImageSize}}; height: {{navImageSize}}; }'
+            }
+        ]
+    },
+    navImageWidth: {
+        type: 'object',
+        default: { md: 120, unit: 'px' },
+        style: [{
+            condition: [{ key: 'navImageSize', relation: '==', value: 'custom' }],
+            selector: '{{QUBELY}} .qubely-block-tab .qubely-tab-item .qubely-tab-image {width: {{avatarWidth}}; font-size: {{navImageWidth}};}'
+        }]
+    },
+    navImageHeight: {
+        type: 'object',
+        default: { md: 120, unit: 'px' },
+        style: [{
+            condition: [{ key: 'navImageSize', relation: '==', value: 'custom' }],
+            selector: '{{QUBELY}} .qubely-block-tab .qubely-tab-item .qubely-tab-image {height: {{navImageHeight}};}'
+        }]
+    },
+    navImageBorderRadius: {
+        type: 'object',
+        default: {
+            openBorderRadius: 1,
+            radiusType: 'global',
+            global: {
+                md: 5
+            },
+            unit: '%'
+        },
+        style: [
+            { selector: '{{QUBELY}} .qubely-block-tab .qubely-tab-item .qubely-tab-image ' }
+        ]
+    },
+    navImageBorder: {
+        type: 'object',
+        default: {
+            color: "#7d8485",
+            global: {
+                md: "1"
+            },
+            type: "solid",
+            unit: "px",
+            widthType: "global",
+        },
+        style: [{
+            selector: '{{QUBELY}} .qubely-block-tab .qubely-tab-item .qubely-tab-image '
+        }]
+    },
+
     navAlignment: {
         type: 'string',
         default: 'left'
@@ -253,7 +315,8 @@ const attributes = {
         style: [
             {
                 condition: [
-                    { key: 'tabStyle', relation: '!=', value: 'underline' }
+                    { key: 'tabStyle', relation: '!=', value: 'underline' },
+                    { key: 'navType', relation: '==', value: 'text' },
                 ],
                 selector: '{{QUBELY}} .qubely-block-tab .qubely-tab-nav .qubely-tab-item .qubely-tab-title {background-color: {{navBg}};}'
             }

@@ -26,7 +26,8 @@ const {
 	RichText,
 	InnerBlocks,
 	BlockControls,
-	InspectorControls
+	InspectorControls,
+	MediaUpload,
 } = wp.blockEditor;
 
 const {
@@ -113,6 +114,7 @@ class Edit extends Component {
 
 		const {
 			attributes: {
+				navType,
 				tabTitles,
 				iconPosition,
 				autoSwithcing,
@@ -151,20 +153,47 @@ class Edit extends Component {
 							className={titleClasses}
 							onClick={() => changeActiveTab(index)}
 						>
-							{title.iconName && (iconPosition == 'top' || iconPosition == 'left') && (<i className={`qubely-tab-icon ${title.iconName}`} />)}
 							{
-								isActiveTab ?
-
-									<RichText
-										value={title.title}
-										keepPlaceholderOnFocus
-										placeholder={__('Add Tab Title')}
-										onChange={value => this.updateTitles({ title: value }, index)}
-									/>
+								navType === 'text' ?
+									<Fragment>
+										{title.iconName && (iconPosition == 'top' || iconPosition == 'left') && (<i className={`qubely-tab-icon ${title.iconName}`} />)}
+										{
+											isActiveTab ?
+												<RichText
+													value={title.title}
+													keepPlaceholderOnFocus
+													placeholder={__('Add Tab Title')}
+													onChange={value => this.updateTitles({ title: value }, index)}
+												/>
+												:
+												<div>{title.title}</div>
+										}
+										{title.iconName && (iconPosition == 'right') && (<i className={`qubely-tab-icon ${title.iconName}`} />)}
+									</Fragment>
 									:
-									<div>{title.title}</div>
+									<Fragment>
+										<MediaUpload
+											onSelect={val => this.updateTitles({ avatar: val }, index)}
+											allowedTypes={['image']}
+											multiple={false}
+											value={title.avatar}
+											render={({ open }) => (
+												<div className="image-type-item">
+													{(title.avatar && title.avatar.url) ?
+														<img onClick={open} className="qubely-tab-image" src={title.avatar.url} alt={title.avatar.alt ? title.avatar.alt : 'tab-image'} />
+														:
+														<div className="qubely-image-placeholder qubely-tab-title-avatar">
+															<a className="qubely-insert-image" href="#" onClick={open}>
+																<svg aria-hidden="true" role="img" focusable="false" class="dashicon dashicons-insert" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><path d="M10 1c-5 0-9 4-9 9s4 9 9 9 9-4 9-9-4-9-9-9zm0 16c-3.9 0-7-3.1-7-7s3.1-7 7-7 7 3.1 7 7-3.1 7-7 7zm1-11H9v3H6v2h3v3h2v-3h3V9h-3V6z"></path></svg>
+															</a>
+														</div>
+													}
+												</div>
+											)}
+										/>
+									</Fragment>
 							}
-							{title.iconName && (iconPosition == 'right') && (<i className={`qubely-tab-icon ${title.iconName}`} />)}
+
 						</div>
 						{
 							(autoSwithcing && showProgressBar) &&
@@ -247,6 +276,13 @@ class Edit extends Component {
 				recreateStyles,
 
 				tabs,
+				navType,
+				navImageSize,
+				navImageWidth,
+				navImageHeight,
+				navImageBorder,
+				navImageBorderRadius,
+				navImageCustomWidth,
 				navBg,
 				navSize,
 				navColor,
@@ -358,7 +394,7 @@ class Edit extends Component {
 								<Toggle label={__('Reverse Content')} value={reverseContent} onChange={val => setAttributes({ reverseContent: val, recreateStyles: !recreateStyles })} />
 								<Alignment label={__('Alignment')} value={navAlignment} alignmentType="content" onChange={val => setAttributes({ navAlignment: val })} disableJustify />
 							</PanelBody>
-							<PanelBody title={__('Auto Switching')} initialOpen={true}>
+							<PanelBody title={__('Auto Switching')} initialOpen={false}>
 								<Toggle label={__('Auto Switch Tabs')} value={autoSwithcing} onChange={val => setAttributes({ autoSwithcing: val })} />
 								{
 									autoSwithcing &&
@@ -446,74 +482,152 @@ class Edit extends Component {
 								}
 							</PanelBody>
 							<PanelBody title={__('Nav')} initialOpen={false}>
-								<RadioAdvanced label={__('Nav Size')}
-									options={[
-										{ label: 'S', value: '4px 12px', title: 'Small' },
-										{ label: 'M', value: '6px 15px', title: 'Medium' },
-										{ label: 'L', value: '10px 20px', title: 'Large' },
-										{ icon: 'fas fa-cog', value: 'custom', title: 'Custom' }
-									]}
-									value={navSize} onChange={(value) => setAttributes({ navSize: value })} />
-
-								{navSize == 'custom' &&
-									<Fragment>
-										<Range label={<span className="dashicons dashicons-sort" title="X Spacing" />} value={navPaddingY} onChange={(value) => setAttributes({ navPaddingY: value })} unit={['px', 'em', '%']} max={100} min={0} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
-										<Range label={<span className="dashicons dashicons-leftright" title="Y Spacing" />} value={navPaddingX} onChange={(value) => setAttributes({ navPaddingX: value })} unit={['px', 'em', '%']} max={100} min={0} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
-									</Fragment>
-								}
-
-								<Range label={__('Gap')} value={navSpacing} onChange={(value) => setAttributes({ navSpacing: value })} max={50} min={0} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
-
-								{tabStyle == 'tabs' &&
-									<Fragment>
-										<BorderRadius label={__('Radius')} value={navBorderRadiusTabs} onChange={(value) => setAttributes({ navBorderRadiusTabs: value })} min={0} max={100} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
-									</Fragment>
-								}
-								{tabStyle == 'pills' &&
-									<Fragment>
-										<BorderRadius label={__('Radius')} value={navBorderRadiusPills} onChange={(value) => setAttributes({ navBorderRadiusPills: value })} min={0} max={100} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
-									</Fragment>
-								}
-								{tabStyle == 'underline' &&
-									<Range label={__('Underline Height')} value={navUnderlineBorderWidth} onChange={(value) => setAttributes({ navUnderlineBorderWidth: value })} min={1} max={10} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
-								}
-
-								<Tabs>
-									<Tab tabTitle={__('Normal')}>
-										<Color label={__('Color')} value={navColor} onChange={(value) => setAttributes({ navColor: value })} />
-										{tabStyle != 'underline' &&
-											<Fragment>
-												<Color label={__('Background')} value={navBg} onChange={(value) => setAttributes({ navBg: value })} />
-												<Border label={__('Border')} value={navBorder} onChange={(value) => setAttributes({ navBorder: value })} min={0} max={100} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
-											</Fragment>
-										}
-										{tabStyle == 'underline' &&
-											<Fragment>
-												<Color label={__('Line Color')} value={navUnderlineBorderColor} onChange={(value) => setAttributes({ navUnderlineBorderColor: value })} />
-											</Fragment>
-										}
-									</Tab>
-									<Tab tabTitle={__('Active')}>
-										<Color label={__('Color')} value={navColorActive} onChange={(value) => setAttributes({ navColorActive: value })} />
-										{tabStyle != 'underline' &&
-											<Fragment>
-												<Color label={__('Background')} value={navBgActive} onChange={(value) => setAttributes({ navBgActive: value })} />
-												<Border label={__('Border')} value={navBorderActive} onChange={(value) => setAttributes({ navBorderActive: value })} min={0} max={100} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
-											</Fragment>
-										}
-
-										{tabStyle == 'underline' &&
-											<Fragment>
-												<Color label={__('Line Color')} value={navUnderlineBorderColorActive} onChange={(value) => setAttributes({ navUnderlineBorderColorActive: value })} />
-											</Fragment>
-										}
-									</Tab>
-								</Tabs>
+								<ButtonGroup
+									label={__('Nav Type')}
+									options={
+										[
+											[__('Text'), 'text'],
+											[__('Image'), 'image']
+										]
+									}
+									value={navType}
+									onChange={value => setAttributes({ navType: value, recreateStyles:!recreateStyles })}
+								/>
 								{
-									tabStyle !== 'underline' &&
-									<BoxShadow label={__('Box-Shadow')} value={navShadow} onChange={(value) => setAttributes({ navShadow: value })} />
+									navType === 'text' ?
+										<Fragment>
+											<RadioAdvanced label={__('Nav Size')}
+												options={[
+													{ label: 'S', value: '4px 12px', title: 'Small' },
+													{ label: 'M', value: '6px 15px', title: 'Medium' },
+													{ label: 'L', value: '10px 20px', title: 'Large' },
+													{ icon: 'fas fa-cog', value: 'custom', title: 'Custom' }
+												]}
+												value={navSize} onChange={(value) => setAttributes({ navSize: value })} />
+
+											{navSize == 'custom' &&
+												<Fragment>
+													<Range label={<span className="dashicons dashicons-sort" title="X Spacing" />} value={navPaddingY} onChange={(value) => setAttributes({ navPaddingY: value })} unit={['px', 'em', '%']} max={100} min={0} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
+													<Range label={<span className="dashicons dashicons-leftright" title="Y Spacing" />} value={navPaddingX} onChange={(value) => setAttributes({ navPaddingX: value })} unit={['px', 'em', '%']} max={100} min={0} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
+												</Fragment>
+											}
+
+											<Range label={__('Gap')} value={navSpacing} onChange={(value) => setAttributes({ navSpacing: value })} max={50} min={0} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
+
+											{tabStyle == 'tabs' &&
+												<Fragment>
+													<BorderRadius label={__('Radius')} value={navBorderRadiusTabs} onChange={(value) => setAttributes({ navBorderRadiusTabs: value })} min={0} max={100} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
+												</Fragment>
+											}
+											{tabStyle == 'pills' &&
+												<Fragment>
+													<BorderRadius label={__('Radius')} value={navBorderRadiusPills} onChange={(value) => setAttributes({ navBorderRadiusPills: value })} min={0} max={100} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
+												</Fragment>
+											}
+											{tabStyle == 'underline' &&
+												<Range label={__('Underline Height')} value={navUnderlineBorderWidth} onChange={(value) => setAttributes({ navUnderlineBorderWidth: value })} min={1} max={10} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
+											}
+
+											<Tabs>
+												<Tab tabTitle={__('Normal')}>
+													<Color label={__('Color')} value={navColor} onChange={(value) => setAttributes({ navColor: value })} />
+													{tabStyle != 'underline' &&
+														<Fragment>
+															<Color label={__('Background')} value={navBg} onChange={(value) => setAttributes({ navBg: value })} />
+															<Border label={__('Border')} value={navBorder} onChange={(value) => setAttributes({ navBorder: value })} min={0} max={100} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
+														</Fragment>
+													}
+													{tabStyle == 'underline' &&
+														<Fragment>
+															<Color label={__('Line Color')} value={navUnderlineBorderColor} onChange={(value) => setAttributes({ navUnderlineBorderColor: value })} />
+														</Fragment>
+													}
+												</Tab>
+												<Tab tabTitle={__('Active')}>
+													<Color label={__('Color')} value={navColorActive} onChange={(value) => setAttributes({ navColorActive: value })} />
+													{tabStyle != 'underline' &&
+														<Fragment>
+															<Color label={__('Background')} value={navBgActive} onChange={(value) => setAttributes({ navBgActive: value })} />
+															<Border label={__('Border')} value={navBorderActive} onChange={(value) => setAttributes({ navBorderActive: value })} min={0} max={100} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
+														</Fragment>
+													}
+
+													{tabStyle == 'underline' &&
+														<Fragment>
+															<Color label={__('Line Color')} value={navUnderlineBorderColorActive} onChange={(value) => setAttributes({ navUnderlineBorderColorActive: value })} />
+														</Fragment>
+													}
+												</Tab>
+											</Tabs>
+											{
+												tabStyle !== 'underline' &&
+												<BoxShadow label={__('Box-Shadow')} value={navShadow} onChange={(value) => setAttributes({ navShadow: value })} />
+											}
+											<Typography label={__('Typography')} value={typography} onChange={(value) => setAttributes({ typography: value })} disableLineHeight device={device} onDeviceChange={value => this.setState({ device: value })} />
+
+										</Fragment>
+										:
+										<Fragment>
+											<RadioAdvanced
+												label={__('Image Size')}
+												options={[
+													{ label: 'S', value: '64px', title: 'Small' },
+													{ label: 'M', value: '96px', title: 'Medium' },
+													{ label: 'L', value: '120px', title: 'Large' },
+													{ icon: 'fas fa-cog', value: 'custom', title: 'Custom' }
+												]}
+												value={navImageSize}
+												onChange={(value) => setAttributes({ navImageSize: value })}
+											/>
+											{navImageSize == 'custom' &&
+												<Fragment>
+													<Range
+														label={<span className="dashicons dashicons-leftright" title="Width" />}
+														value={navImageWidth}
+														onChange={(value) => setAttributes({ navImageWidth: value })}
+														unit={['px', 'em', '%']}
+														max={300}
+														min={0}
+														responsive
+														device={device}
+														onDeviceChange={value => this.setState({ device: value })}
+													/>
+													<Range
+														label={<span className="dashicons dashicons-sort" title="Height" />}
+														value={navImageHeight}
+														onChange={(value) => setAttributes({ navImageHeight: value })}
+														unit={['px', 'em', '%']}
+														max={300}
+														min={0}
+														responsive
+														device={device}
+														onDeviceChange={value => this.setState({ device: value })}
+													/>
+												</Fragment>
+											}
+											<Fragment>
+												<BorderRadius
+													label={__('Radius')}
+													value={navImageBorderRadius}
+													onChange={(value) => setAttributes({ navImageBorderRadius: value })}
+													min={0}
+													max={100}
+													unit={['px', 'em', '%']}
+													responsive
+													device={device}
+													onDeviceChange={value => this.setState({ device: value })} />
+												<Border
+													label={__('Border')}
+													value={navImageBorder}
+													onChange={(value) => setAttributes({ navImageBorder: value })}
+													unit={['px', 'em', '%']}
+													responsive
+													device={device}
+													onDeviceChange={value => this.setState({ device: value })}
+												/>
+											</Fragment>
+										</Fragment>
 								}
-								<Typography label={__('Typography')} value={typography} onChange={(value) => setAttributes({ typography: value })} disableLineHeight device={device} onDeviceChange={value => this.setState({ device: value })} />
 							</PanelBody>
 							<PanelBody title={__('Icon')} initialOpen={false}>
 
@@ -595,7 +709,7 @@ class Edit extends Component {
 					</Toolbar>
 				</BlockControls>
 
-				{ globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
+				{globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
 
 				<div className={blockWrapperClasses}>
 					<div className={`qubely-block-tab qubely-tab-style-${tabStyle} qubely-active-tab-${activeTab}`}>
