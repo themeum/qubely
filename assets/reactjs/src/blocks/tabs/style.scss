@@ -28,6 +28,12 @@
 					display: block;
 				}
 			}
+			.description-type-tab {
+				display: inline-flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+			}
 		}
 
 		&.qubely-alignment-left {

@@ -1,6 +1,6 @@
 import classnames from 'classnames';
 const { Fragment, Component } = wp.element;
-const { InnerBlocks } = wp.blockEditor;
+const { InnerBlocks, RichText } = wp.blockEditor;
 const {
     HelperFunction: {
         animationAttr,
@@ -25,7 +25,8 @@ class Save extends Component {
                 iconPosition,
                 navAlignment,
                 animation,
-                interaction
+                interaction,
+                enableNavImageCaption,
             }
         } = this.props;
 
@@ -44,13 +45,25 @@ class Save extends Component {
                                 </span>
                             </Fragment>
                             :
-                            <Fragment>
-                                {typeof title.avatar !== 'undefined' && title.avatar.url ?
-                                    <img className="qubely-tab-title qubely-tab-image" src={title.avatar.url} alt={title.avatar.alt ? title.avatar.alt : 'tab-image'} />
-                                    :
-                                    <div className="qubely-tab-title qubely-image-placeholder qubely-tab-title-avatar"><i className="far fa-user" /></div>
-                                }
-                            </Fragment>
+                            <div className="qubely-tab-title">
+                                <div className="description-type-tab">
+                                    {typeof title.avatar !== 'undefined' && title.avatar.url ?
+                                        <img className="qubely-tab-image" src={title.avatar.url} alt={title.avatar.alt ? title.avatar.alt : 'tab-image'} />
+                                        :
+                                        <div className="qubely-tab-title qubely-image-placeholder qubely-tab-title-avatar"><i className="far fa-user" /></div>
+                                    }
+                                    {
+                                        enableNavImageCaption &&
+                                        <RichText.Content
+                                            tagName="div"
+                                            className="image-cation"
+                                            value={title.imageCaption}
+                                        />
+                                    }
+                                </div>
+
+                            </div>
+
                     }
 
                     {

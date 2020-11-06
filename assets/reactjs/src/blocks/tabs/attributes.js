@@ -130,12 +130,140 @@ const attributes = {
             }
         ]
     },
+    imageTypeNavSize: {
+        type: 'object',
+        default: {
+            openPadding: 1,
+            paddingType: 'global',
+            global: {
+                md: 20
+            },
+            unit: 'px',
+        },
+        style: [
+            {
+                condition: [
+                    { key: 'navType', relation: '==', value: 'image' }
+                ],
+                selector: '{{QUBELY}} .qubely-block-tab .qubely-tab-nav .qubely-tab-item .qubely-tab-title'
+            }
+        ]
+    },
+    enableNavImageCaption: {
+        type: 'boolean',
+        default: true,
+    },
+    captionAlignment: {
+        type: 'object',
+        default: {
+            md: 'center',
+        },
+        style: [
+            {
+                condition: [
+                    { key: 'navType', relation: '==', value: 'image' },
+                    { key: 'enableNavImageCaption', relation: '==', value: true }
+                ],
+                selector: '{{QUBELY}} .qubely-block-tab .qubely-tab-item .description-type-tab .image-cation {text-align: {{captionAlignment}}; }'
+            }
+        ]
+    },
+    navImageCaptionColor: {
+        type: 'string',
+        default: '',
+        style: [
+            {
+                condition: [
+                    { key: 'navType', relation: '==', value: 'image' },
+                    { key: 'enableNavImageCaption', relation: '==', value: true }
+                ],
+                selector: '{{QUBELY}} .qubely-block-tab .qubely-tab-item .description-type-tab .image-cation {color:{{navImageCaptionColor}};}'
+            }
+        ]
+    },
+    imageTypeNavBG: {
+        type: 'object',
+        default: {
+            color: '#e5e5e5',
+            gradient: {
+                color1: '#EEEEEE',
+                color2: '#e5e5e5',
+                direction: 0,
+                start: 0,
+                stop: 100,
+                type: 'linear',
+            }
+        },
+        style: [
+            {
+                condition: [
+                    { key: 'navType', relation: '!=', value: 'text' },
+                ],
+                selector: '{{QUBELY}} .qubely-block-tab .qubely-tab-nav .qubely-tab-item:not(.qubely-active) .qubely-tab-title'
+            }
+        ]
+    },
+    imageTypeActiveNavBG: {
+        type: 'object',
+        default: {
+            color: '#e5e5e5',
+            gradient: {
+                color1: '#EEEEEE',
+                color2: '#e5e5e5',
+                direction: 0,
+                start: 0,
+                stop: 100,
+                type: 'linear',
+            }
+        },
+        style: [
+            {
+                condition: [
+                    { key: 'navType', relation: '!=', value: 'text' },
+                ],
+                selector: '{{QUBELY}} .qubely-block-tab .qubely-tab-nav .qubely-tab-item.qubely-active .qubely-tab-title'
+            }
+        ]
+    },
+
+    navImageCaptionMargin: {
+        type: 'object',
+        default: {
+            custom: { md: "10   " },
+            marginType: "custom",
+            openMargin: 1,
+            unit: "px",
+        },
+        style: [
+            {
+                condition: [
+                    { key: 'navType', relation: '!=', value: 'text' },
+                    { key: 'enableNavImageCaption', relation: '==', value: true }
+                ],
+                selector: '{{QUBELY}} .qubely-block-tab .qubely-tab-item .description-type-tab .image-cation'
+            }
+        ]
+    },
+    navImageCaptionTypo: {
+        type: 'object',
+        default: {},
+        style: [
+            {
+                condition: [
+                    { key: 'navType', relation: '!=', value: 'text' },
+                    { key: 'enableNavImageCaption', relation: '==', value: true }
+                ],
+                selector: '{{QUBELY}} .qubely-block-tab .qubely-tab-item .description-type-tab .image-cation'
+            }
+        ]
+    },
     navImageWidth: {
         type: 'object',
         default: { md: 120, unit: 'px' },
         style: [{
-            condition: [{ key: 'navImageSize', relation: '==', value: 'custom' }],
-            selector: '{{QUBELY}} .qubely-block-tab .qubely-tab-item .qubely-tab-image {width: {{avatarWidth}}; font-size: {{navImageWidth}};}'
+            condition: [
+                { key: 'navImageSize', relation: '==', value: 'custom' }],
+            selector: '{{QUBELY}} .qubely-block-tab .qubely-tab-item .qubely-tab-image {width: {{navImageWidth}}; font-size: {{navImageWidth}};}'
         }]
     },
     navImageHeight: {
@@ -252,7 +380,8 @@ const attributes = {
         style: [
             {
                 condition: [
-                    { key: 'navSize', relation: '!=', value: 'custom' }
+                    { key: 'navSize', relation: '!=', value: 'custom' },
+                    { key: 'navType', relation: '==', value: 'text' },
                 ],
                 selector: '{{QUBELY}} .qubely-block-tab .qubely-tab-nav .qubely-tab-item .qubely-tab-title {padding: {{navSize}};}'
             }
@@ -267,7 +396,8 @@ const attributes = {
         style: [
             {
                 condition: [
-                    { key: 'navSize', relation: '==', value: 'custom' }
+                    { key: 'navSize', relation: '==', value: 'custom' },
+                    { key: 'navType', relation: '==', value: 'text' },
                 ],
                 selector: '{{QUBELY}} .qubely-block-tab .qubely-tab-nav .qubely-tab-item .qubely-tab-title {padding-top: {{navPaddingY}}; padding-bottom: {{navPaddingY}};}'
             }
@@ -282,7 +412,8 @@ const attributes = {
         style: [
             {
                 condition: [
-                    { key: 'navSize', relation: '==', value: 'custom' }
+                    { key: 'navSize', relation: '==', value: 'custom' },
+                    { key: 'navType', relation: '==', value: 'text' },
                 ],
                 selector: '{{QUBELY}} .qubely-block-tab .qubely-tab-nav .qubely-tab-item .qubely-tab-title {padding-left: {{navPaddingX}}; padding-right: {{navPaddingX}};}'
             }
@@ -396,7 +527,8 @@ const attributes = {
         style: [
             {
                 condition: [
-                    { key: 'tabStyle', relation: '==', value: 'underline' }
+                    { key: 'tabStyle', relation: '==', value: 'underline' },
+                    { key: 'navType', relation: '==', value: 'text' }
                 ],
                 selector: '{{QUBELY}} .qubely-block-tab .qubely-tab-nav .qubely-tab-item .qubely-tab-title { border-bottom-color:{{navUnderlineBorderColor}}; }'
             }
@@ -408,7 +540,8 @@ const attributes = {
         style: [
             {
                 condition: [
-                    { key: 'tabStyle', relation: '==', value: 'underline' }
+                    { key: 'tabStyle', relation: '==', value: 'underline' },
+                    { key: 'navType', relation: '==', value: 'text' }
                 ],
                 selector: '{{QUBELY}} .qubely-block-tab .qubely-tab-nav .qubely-tab-item.qubely-active .qubely-tab-title { border-bottom-color:{{navUnderlineBorderColorActive}}; }'
             }
