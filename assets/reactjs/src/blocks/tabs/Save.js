@@ -26,7 +26,9 @@ class Save extends Component {
                 navAlignment,
                 animation,
                 interaction,
-                enableNavImageCaption,
+                navLayout,
+                enableImageNavTitle,
+                enableImageNavDesciption,
             }
         } = this.props;
 
@@ -46,19 +48,38 @@ class Save extends Component {
                             </Fragment>
                             :
                             <div className="qubely-tab-title">
-                                <div className="description-type-tab">
-                                    {typeof title.avatar !== 'undefined' && title.avatar.url ?
-                                        <img className="qubely-tab-image" src={title.avatar.url} alt={title.avatar.alt ? title.avatar.alt : 'tab-image'} />
-                                        :
-                                        <div className="qubely-tab-title qubely-image-placeholder qubely-tab-title-avatar"><i className="far fa-user" /></div>
-                                    }
+                                <div className={`description-type-tab nav-layout-${navLayout}`}>
                                     {
-                                        enableNavImageCaption &&
-                                        <RichText.Content
-                                            tagName="div"
-                                            className="image-cation"
-                                            value={title.imageCaption}
-                                        />
+                          				navLayout !== 'three' &&
+                                        <Fragment>
+                                            {typeof title.avatar !== 'undefined' && title.avatar.url ?
+                                                <img className="qubely-tab-image" src={title.avatar.url} alt={title.avatar.alt ? title.avatar.alt : 'tab-image'} />
+                                                :
+                                                <div className="qubely-tab-title qubely-image-placeholder qubely-tab-title-avatar"><i className="far fa-user" /></div>
+                                            }
+                                        </Fragment>
+                                    }
+
+                                    {
+                                        (enableImageNavTitle || enableImageNavDesciption) &&
+                                        <div className="qubely-tab-description">
+                                            {
+                                                enableImageNavTitle &&
+                                                <RichText.Content
+                                                    tagName="div"
+                                                    className="image-type-nav-title"
+                                                    value={title.title}
+                                                />
+                                            }
+                                            {
+                                                enableImageNavDesciption &&
+                                                <RichText.Content
+                                                    tagName="div"
+                                                    className="image-type-nav-description"
+                                                    value={title.description}
+                                                />
+                                            }
+                                        </div>
                                     }
                                 </div>
 

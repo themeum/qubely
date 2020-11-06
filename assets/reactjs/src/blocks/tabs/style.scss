@@ -30,9 +30,18 @@
 			}
 			.description-type-tab {
 				display: inline-flex;
-				flex-direction: column;
 				justify-content: center;
 				align-items: center;
+				&.nav-layout-one{
+					flex-direction: column;
+				}
+				.qubely-tab-description {
+					width: 100%;
+				}
+			}
+			.progress {
+				position: absolute;
+				bottom: 0;
 			}
 		}
 

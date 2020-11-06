@@ -116,12 +116,14 @@ class Edit extends Component {
 		const {
 			attributes: {
 				navType,
+				navLayout,
 				tabTitles,
 				iconPosition,
 				autoSwithcing,
 				showProgressBar,
 				defaultDelay,
-				enableNavImageCaption,
+				enableImageNavTitle,
+				enableImageNavDesciption,
 			}
 		} = this.props;
 
@@ -173,38 +175,56 @@ class Edit extends Component {
 										{title.iconName && (iconPosition == 'right') && (<i className={`qubely-tab-icon ${title.iconName}`} />)}
 									</Fragment>
 									:
-									<Fragment>
-										<MediaUpload
-											onSelect={val => this.updateTitles({ avatar: val }, index)}
-											allowedTypes={['image']}
-											multiple={false}
-											value={title.avatar}
-											render={({ open }) => (
-												<div className="description-type-tab">
-													{(title.avatar && title.avatar.url) ?
-														<img onClick={open} className="qubely-tab-image" src={title.avatar.url} alt={title.avatar.alt ? title.avatar.alt : 'tab-image'} />
-														:
-														<div className="qubely-image-placeholder qubely-tab-title-avatar">
-															<a className="qubely-insert-image" href="#" onClick={open}>
-																<svg aria-hidden="true" role="img" focusable="false" class="dashicon dashicons-insert" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><path d="M10 1c-5 0-9 4-9 9s4 9 9 9 9-4 9-9-4-9-9-9zm0 16c-3.9 0-7-3.1-7-7s3.1-7 7-7 7 3.1 7 7-3.1 7-7 7zm1-11H9v3H6v2h3v3h2v-3h3V9h-3V6z"></path></svg>
-															</a>
-														</div>
-													}
-													{
-														enableNavImageCaption &&
-														<RichText
-															className="image-cation"
-															value={title.imageCaption}
-															keepPlaceholderOnFocus
-															placeholder={__('Add Caption')}
-															onChange={value => this.updateTitles({ imageCaption: value }, index)}
-														/>
-													}
-												</div>
-											)}
-										/>
+									<div className={`description-type-tab nav-layout-${navLayout}`}>
+										{
+											navLayout !== 'three' &&
+											<MediaUpload
+												onSelect={val => this.updateTitles({ avatar: val }, index)}
+												allowedTypes={['image']}
+												multiple={false}
+												value={title.avatar}
+												render={({ open }) => (
+													<Fragment>
+														{(title.avatar && title.avatar.url) ?
+															<img onClick={open} className="qubely-tab-image" src={title.avatar.url} alt={title.avatar.alt ? title.avatar.alt : 'tab-image'} />
+															:
+															<div className="qubely-image-placeholder qubely-tab-title-avatar">
+																<a className="qubely-insert-image" href="#" onClick={open}>
+																	<svg aria-hidden="true" role="img" focusable="false" class="dashicon dashicons-insert" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><path d="M10 1c-5 0-9 4-9 9s4 9 9 9 9-4 9-9-4-9-9-9zm0 16c-3.9 0-7-3.1-7-7s3.1-7 7-7 7 3.1 7 7-3.1 7-7 7zm1-11H9v3H6v2h3v3h2v-3h3V9h-3V6z"></path></svg>
+																</a>
+															</div>
+														}
 
-									</Fragment>
+													</Fragment>
+												)}
+											/>
+										}
+										{
+											(enableImageNavTitle || enableImageNavDesciption) &&
+											<div className="qubely-tab-description">
+												{
+													enableImageNavTitle &&
+													<RichText
+														className="image-type-nav-title"
+														value={title.title}
+														keepPlaceholderOnFocus
+														placeholder={__('Add Caption')}
+														onChange={value => this.updateTitles({ title: value }, index)}
+													/>
+												}
+												{
+													enableImageNavDesciption &&
+													<RichText
+														className="image-type-nav-description"
+														value={title.description}
+														keepPlaceholderOnFocus
+														placeholder={__('Add description')}
+														onChange={value => this.updateTitles({ description: value }, index)}
+													/>
+												}
+											</div>
+										}
+									</div>
 							}
 
 						</div>
@@ -290,21 +310,27 @@ class Edit extends Component {
 
 				tabs,
 				navType,
+				enableImage,
 				navImageSize,
 				navImageWidth,
 				navImageHeight,
 				navImageBorder,
 				navImageBorderRadius,
+				navLayout,
 				imageTypeNavSize,
+				navImageTypeBorderRadius,
 				imageTypeNavBG,
 				imageTypeActiveNavBG,
 				navBg,
 				navSize,
-				enableNavImageCaption,
-				captionAlignment,
-				navImageCaptionColor,
-				navImageCaptionMargin,
+				enableImageNavTitle,
+				enableImageNavDesciption,
+				imageNavTitleAlignment,
+				imageNavTitleColor,
+				navImageGap,
 				navImageCaptionTypo,
+				navImageDescriptionTypo,
+
 				navColor,
 				tabStyle,
 				tabTitles,
@@ -448,8 +474,6 @@ class Edit extends Component {
 												</Fragment>
 											}
 
-											<Range label={__('Gap')} value={navSpacing} onChange={(value) => setAttributes({ navSpacing: value })} max={50} min={0} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
-
 											{tabStyle == 'tabs' &&
 												<Fragment>
 													<BorderRadius label={__('Radius')} value={navBorderRadiusTabs} onChange={(value) => setAttributes({ navBorderRadiusTabs: value })} min={0} max={100} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
@@ -498,43 +522,17 @@ class Edit extends Component {
 										</Fragment>
 										:
 										<Fragment>
-											<RadioAdvanced
-												label={__('Image Size')}
+											<Styles
+												columns={3}
+												value={navLayout}
+												onChange={val => setAttributes({ navLayout: val, recreateStyles: !recreateStyles })}
 												options={[
-													{ label: 'S', value: '64px', title: 'Small' },
-													{ label: 'M', value: '96px', title: 'Medium' },
-													{ label: 'L', value: '120px', title: 'Large' },
-													{ icon: 'fas fa-cog', value: 'custom', title: 'Custom' }
+													{ value: 'one', svg: icons.infobox_1 },
+													{ value: 'two', svg: icons.infobox_2, },
+													{ value: 'three', svg: icons.infobox_4 },
 												]}
-												value={navImageSize}
-												onChange={(value) => setAttributes({ navImageSize: value })}
 											/>
-											{navImageSize == 'custom' &&
-												<Fragment>
-													<Range
-														label={<span className="dashicons dashicons-leftright" title="Width" />}
-														value={navImageWidth}
-														onChange={(value) => setAttributes({ navImageWidth: value })}
-														unit={['px', 'em', '%']}
-														max={300}
-														min={0}
-														responsive
-														device={device}
-														onDeviceChange={value => this.setState({ device: value })}
-													/>
-													<Range
-														label={<span className="dashicons dashicons-sort" title="Height" />}
-														value={navImageHeight}
-														onChange={(value) => setAttributes({ navImageHeight: value })}
-														unit={['px', 'em', '%']}
-														max={300}
-														min={0}
-														responsive
-														device={device}
-														onDeviceChange={value => this.setState({ device: value })}
-													/>
-												</Fragment>
-											}
+											<Range label={__('Gap')} value={navSpacing} onChange={(value) => setAttributes({ navSpacing: value })} max={50} min={0} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
 											<Padding
 												label={__('Nav Size')}
 												value={imageTypeNavSize}
@@ -546,63 +544,129 @@ class Edit extends Component {
 												device={device}
 												onDeviceChange={value => this.setState({ device: value })}
 											/>
-											<BorderRadius
-												label={__('Image Radius')}
-												value={navImageBorderRadius}
-												onChange={(value) => setAttributes({ navImageBorderRadius: value })}
-												min={0}
-												max={100}
-												unit={['px', 'em', '%']}
-												responsive
-												device={device}
-												onDeviceChange={value => this.setState({ device: value })} />
-											<Border
-												label={__('Image Border')}
-												value={navImageBorder}
-												onChange={(value) => setAttributes({ navImageBorder: value })}
-												unit={['px', 'em', '%']}
-												responsive
-												device={device}
-												onDeviceChange={value => this.setState({ device: value })}
+											<BorderRadius label={__('Radius')} value={navImageTypeBorderRadius} onChange={(value) => setAttributes({ navImageTypeBorderRadius: value })} min={0} max={100} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
+
+											{
+												navLayout !== 'three' &&
+												<Fragment>
+													<Separator label={__('Image')} />
+													<RadioAdvanced
+														label={__('Image Size')}
+														options={[
+															{ label: 'S', value: '64px', title: 'Small' },
+															{ label: 'M', value: '96px', title: 'Medium' },
+															{ label: 'L', value: '120px', title: 'Large' },
+															{ icon: 'fas fa-cog', value: 'custom', title: 'Custom' }
+														]}
+														value={navImageSize}
+														onChange={(value) => setAttributes({ navImageSize: value })}
+													/>
+													{navImageSize == 'custom' &&
+														<Fragment>
+															<Range
+																label={<span className="dashicons dashicons-leftright" title="Width" />}
+																value={navImageWidth}
+																onChange={(value) => setAttributes({ navImageWidth: value })}
+																unit={['px', 'em', '%']}
+																max={300}
+																min={0}
+																responsive
+																device={device}
+																onDeviceChange={value => this.setState({ device: value })}
+															/>
+															<Range
+																label={<span className="dashicons dashicons-sort" title="Height" />}
+																value={navImageHeight}
+																onChange={(value) => setAttributes({ navImageHeight: value })}
+																unit={['px', 'em', '%']}
+																max={300}
+																min={0}
+																responsive
+																device={device}
+																onDeviceChange={value => this.setState({ device: value })}
+															/>
+														</Fragment>
+													}
+													<BorderRadius
+														label={__('Image Radius')}
+														value={navImageBorderRadius}
+														onChange={(value) => setAttributes({ navImageBorderRadius: value })}
+														min={0}
+														max={100}
+														unit={['px', 'em', '%']}
+														responsive
+														device={device}
+														onDeviceChange={value => this.setState({ device: value })} />
+													<Border
+														label={__('Border')}
+														value={navImageBorder}
+														onChange={(value) => setAttributes({ navImageBorder: value })}
+														unit={['px', 'em', '%']}
+														responsive
+														device={device}
+														onDeviceChange={value => this.setState({ device: value })}
+													/>
+												</Fragment>
+											}
+
+											<Toggle
+												label={__('Nav Title')}
+												value={enableImageNavTitle}
+												onChange={val => setAttributes({ enableImageNavTitle: val })}
 											/>
 											<Toggle
-												label={__('Image Caption')}
-												value={enableNavImageCaption}
-												onChange={val => setAttributes({ enableNavImageCaption: val })}
+												label={__('Nav Description')}
+												value={enableImageNavDesciption}
+												onChange={val => setAttributes({ enableImageNavDesciption: val })}
 											/>
 											{
-												enableNavImageCaption &&
+												(enableImageNavTitle || enableImageNavDesciption) &&
 												<Fragment>
 													<Alignment
 														disableJustify
-														label={__('Caption Alignment')}
-														value={captionAlignment}
-														onChange={val => setAttributes({ captionAlignment: val })}
+														label={__('Alignment')}
+														value={imageNavTitleAlignment}
+														onChange={val => setAttributes({ imageNavTitleAlignment: val })}
 														responsive device={device}
 														onDeviceChange={value => this.setState({ device: value })}
 													/>
 													<Color
-														label={__('Caption Color')}
-														value={navImageCaptionColor}
-														onChange={(value) => setAttributes({ navImageCaptionColor: value })}
+														label={__('Color')}
+														value={imageNavTitleColor}
+														onChange={(value) => setAttributes({ imageNavTitleColor: value })}
 													/>
-													<Margin
-														label={__('Caption Margin')}
-														value={navImageCaptionMargin}
-														onChange={(value) => setAttributes({ navImageCaptionMargin: value })}
+
+													<Range
+														label={__('Gap after Image')}
+														value={navImageGap}
+														onChange={(value) => setAttributes({ navImageGap: value })}
 														unit={['px', 'em', '%']}
-														max={100}
+														max={300}
 														min={0}
 														responsive
 														device={device}
-														onDeviceChange={value => this.setState({ device: value })} />
-													<Typography
-														label={__('Caption Typography')}
-														value={navImageCaptionTypo}
-														device={device}
-														onChange={(value) => setAttributes({ navImageCaptionTypo: value })}
 														onDeviceChange={value => this.setState({ device: value })}
 													/>
+													{
+														enableImageNavTitle &&
+														<Typography
+															label={__('Title Typography')}
+															value={navImageCaptionTypo}
+															device={device}
+															onChange={(value) => setAttributes({ navImageCaptionTypo: value })}
+															onDeviceChange={value => this.setState({ device: value })}
+														/>
+													}
+													{
+														enableImageNavDesciption &&
+														<Typography
+															label={__('Description Typography')}
+															value={navImageDescriptionTypo}
+															device={device}
+															onChange={(value) => setAttributes({ navImageDescriptionTypo: value })}
+															onDeviceChange={value => this.setState({ device: value })}
+														/>
+													}
 												</Fragment>
 											}
 											<Tabs>
