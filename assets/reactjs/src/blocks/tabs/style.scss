@@ -28,6 +28,21 @@
 					display: block;
 				}
 			}
+			.description-type-tab {
+				display: inline-flex;
+				justify-content: center;
+				align-items: center;
+				&.nav-layout-one{
+					flex-direction: column;
+				}
+				.qubely-tab-description {
+					width: 100%;
+				}
+			}
+			.progress {
+				position: absolute;
+				bottom: 0;
+			}
 		}
 
 		&.qubely-alignment-left {

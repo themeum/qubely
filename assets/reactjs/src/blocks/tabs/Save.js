@@ -1,6 +1,6 @@
 import classnames from 'classnames';
-const { Component } = wp.element;
-const { InnerBlocks } = wp.blockEditor;
+const { Fragment, Component } = wp.element;
+const { InnerBlocks, RichText } = wp.blockEditor;
 const {
     HelperFunction: {
         animationAttr,
@@ -16,6 +16,7 @@ class Save extends Component {
                 uniqueId,
                 className,
                 tabs,
+                navType,
                 autoSwithcing,
                 showProgressBar,
                 defaultDelay,
@@ -25,7 +26,10 @@ class Save extends Component {
                 iconPosition,
                 navAlignment,
                 animation,
-                interaction
+                interaction,
+                navLayout,
+                enableImageNavTitle,
+                enableImageNavDesciption,
             }
         } = this.props;
 
@@ -43,15 +47,62 @@ class Save extends Component {
 
         const renderTabTitles = () => {
             return tabTitles.map((title, index) =>
-                <div className={`qubely-tab-item ${(index == 0) ? 'qubely-active' : ''}`}{...(autoSwithcing && { 'data-customdelay': typeof title.delay !== 'undefined' ? title.delay : defaultDelay })}>
-                    {progressBarPosition == 'before_title' && renderProgressBarPosition(title)}
-                    <span class={`qubely-tab-title ${title.iconName ? 'qubely-has-icon-' + iconPosition : ''}`} role="button">
-                        {title.iconName && (iconPosition == 'top' || iconPosition == 'left') && (<i className={`qubely-tab-icon ${title.iconName}`} />)}
-                        {title.title}
-                        {title.iconName && (iconPosition == 'right') && (<i className={`qubely-tab-icon ${title.iconName}`} />)}
-                    </span>
-                    {progressBarPosition == 'after_title' && renderProgressBarPosition(title)}
-                </div>
+                <span className={`qubely-tab-item ${(index == 0) ? 'qubely-active' : ''}`}{...(autoSwithcing && { 'data-customdelay': typeof title.delay !== 'undefined' ? title.delay : defaultDelay })}>
+                    {
+                        navType === 'text' ?
+                            <Fragment>
+                                <span class={`qubely-tab-title ${title.iconName ? 'qubely-has-icon-' + iconPosition : ''}`} role="button">
+                                    {title.iconName && (iconPosition == 'top' || iconPosition == 'left') && (<i className={`qubely-tab-icon ${title.iconName}`} />)}
+                                    {title.title}
+                                    {title.iconName && (iconPosition == 'right') && (<i className={`qubely-tab-icon ${title.iconName}`} />)}
+                                </span>
+                            </Fragment>
+                            :
+                            <div className="qubely-tab-title">
+                                <div className={`description-type-tab nav-layout-${navLayout}`}>
+                                    {
+                          				navLayout !== 'three' &&
+                                        <Fragment>
+                                            {typeof title.avatar !== 'undefined' && title.avatar.url ?
+                                                <img className="qubely-tab-image" src={title.avatar.url} alt={title.avatar.alt ? title.avatar.alt : 'tab-image'} />
+                                                :
+                                                <div className="qubely-tab-title qubely-image-placeholder qubely-tab-title-avatar"><i className="far fa-user" /></div>
+                                            }
+                                        </Fragment>
+                                    }
+
+                                    {
+                                        (enableImageNavTitle || enableImageNavDesciption) &&
+                                        <div className="qubely-tab-description">
+                                            {
+                                                enableImageNavTitle &&
+                                                <RichText.Content
+                                                    tagName="div"
+                                                    className="image-type-nav-title"
+                                                    value={title.title}
+                                                />
+                                            }
+                                            {
+                                                enableImageNavDesciption &&
+                                                <RichText.Content
+                                                    tagName="div"
+                                                    className="image-type-nav-description"
+                                                    value={title.description}
+                                                />
+                                            }
+                                        </div>
+                                    }
+                                </div>
+
+                            </div>
+
+                    }
+
+                    {
+                        (autoSwithcing && showProgressBar) &&
+                        <div className="progress" style={{ width: '0%', transition: 'width' + typeof title.delay === 'undefined' ? defaultDelay : title.delay + 's' }} />
+                    }
+                </span>
             );
         }
 
