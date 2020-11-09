@@ -105,11 +105,11 @@ jQuery(document).ready(function ($) {
         $('.qubely-tab-item', parentElement).each(function () {
             $(this).find('.progress').css({
                 'width': '0%',
-                'transition': '0s',
+                'transition': 'width 0s',
             });
         });
         elem.style.width = '100%';
-        elem.style.transition = delay + 's';
+        elem.style.transition = 'width '+delay + 's';
     };
 
     var timeouts = [];
@@ -124,7 +124,7 @@ jQuery(document).ready(function ($) {
         var qubelyTabNav = $($qubelyTab).parent();
         $('.qubely-tab-item.qubely-active .progress', qubelyTabNav).css({
             'width': '0%',
-            'transition': '0s',
+            'transition': 'width 0s',
         });
         var qubelyIndex = $qubelyTab.index();
         if ($qubelyTab.hasClass('qubely-active')) {
