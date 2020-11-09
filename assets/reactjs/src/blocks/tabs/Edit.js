@@ -53,6 +53,7 @@ const {
 	RadioAdvanced,
 	withCSSGenerator,
 	ColorAdvanced,
+	Url,
 	Inline: {
 		InlineToolbar
 	},
@@ -121,6 +122,8 @@ class Edit extends Component {
 				iconPosition,
 				autoSwithcing,
 				showProgressBar,
+				enableButton,
+				buttonUrl,
 				defaultDelay,
 				enableImageNavTitle,
 				enableImageNavDesciption,
@@ -224,6 +227,9 @@ class Edit extends Component {
 												}
 											</div>
 										}
+										{
+											enableButton && <div className="qubely-tab-inner-button"><a className="qubely-block-btn-anchor" href="#"><i className="fas fa-long-arrow-alt-right" /></a></div>
+										}
 									</div>
 							}
 
@@ -306,7 +312,6 @@ class Edit extends Component {
 				progressBarHeight,
 				progressBarSpacing,
 				progressBarRadius,
-				progressBarPosition,
 				reverseContent,
 				recreateStyles,
 
@@ -327,6 +332,8 @@ class Edit extends Component {
 				navSize,
 				enableImageNavTitle,
 				enableImageNavDesciption,
+				enableButton,
+				buttonUrl,
 				imageNavTitleAlignment,
 				imageNavTitleColor,
 				navImageGap,
@@ -610,7 +617,15 @@ class Edit extends Component {
 													/>
 												</Fragment>
 											}
-
+											<Toggle
+												label={__('Show Button')}
+												value={enableButton}
+												onChange={val => setAttributes({ enableButton: val })}
+											/>
+											{
+												enableButton &&
+                                				<Url label={__('Button URL')} value={buttonUrl} onChange={(value) => setAttributes({ buttonUrl: value })} />
+											}
 											<Toggle
 												label={__('Nav Title')}
 												value={enableImageNavTitle}

@@ -21,6 +21,8 @@ class Save extends Component {
                 showProgressBar,
                 defaultDelay,
                 progressBarPosition,
+                enableButton,
+                buttonUrl,
                 tabStyle,
                 tabTitles,
                 iconPosition,
@@ -90,6 +92,12 @@ class Save extends Component {
                                                     value={title.description}
                                                 />
                                             }
+                                        </div>
+                                    }
+                                    {
+                                        enableButton && 
+                                        <div className="qubely-tab-inner-button">
+                                            <a className={`qubely-block-btn-anchor`} href={buttonUrl.url ? buttonUrl.url : '#'} {...(buttonUrl.target && { target: '_blank' })} {...(buttonUrl.nofollow ? { rel: 'nofollow noopener noreferrer' } : {...buttonUrl.target && { rel: 'noopener noreferrer' }}  )} ><i className="fas fa-long-arrow-alt-right" /></a>
                                         </div>
                                     }
                                 </div>

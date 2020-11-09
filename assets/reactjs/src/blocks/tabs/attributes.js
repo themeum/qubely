@@ -174,6 +174,14 @@ const attributes = {
         type: 'boolean',
         default: false,
     },
+    enableButton: {
+        type: 'boolean',
+        default: false,
+    },
+    buttonUrl: { 
+        type: 'object', 
+        default: { url: '#' } 
+    },
     imageNavTitleAlignment: {
         type: 'object',
         default: {

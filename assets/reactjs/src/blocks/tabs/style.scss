@@ -38,6 +38,22 @@
 				.qubely-tab-description {
 					width: 100%;
 				}
+				.qubely-tab-inner-button{
+					width: 30px;
+					height: 30px;
+					border-radius: 50%;
+					background: #becce8;
+					position: absolute;
+					right: 10px;
+					bottom: 10px;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					.qubely-block-btn-anchor{
+						width: 100%;
+						height: 100%;
+					}
+				}
 			}
 			.progress {
 				position: absolute;
