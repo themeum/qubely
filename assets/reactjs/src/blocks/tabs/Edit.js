@@ -230,7 +230,7 @@ class Edit extends Component {
 						</div>
 						{
 							(autoSwithcing && showProgressBar) &&
-							<div className="progress" style={{ width: '100%', transition: typeof title.delay === 'undefined' ? defaultDelay : title.delay + 's' }} />
+							<div className="progress" style={{ width: '100%' }} />
 						}
 						<Tooltip text={__('Delete this tab')}>
 							<span className="qubely-action-tab-remove" role="button" onClick={() => this.deleteTab(index)}>
@@ -302,6 +302,7 @@ class Edit extends Component {
 				defaultDelay,
 				showProgressBar,
 				progressBarBg,
+				progressBarPosition,
 				progressBarHeight,
 				progressBarSpacing,
 				progressBarRadius,
@@ -806,6 +807,13 @@ class Edit extends Component {
 								{
 									showProgressBar &&
 									<Fragment>
+										<Range
+											label={__('Position')}
+											value={progressBarPosition}
+											max={100}
+											min={-50}
+											onChange={(value) => setAttributes({ progressBarPosition: value })}
+										/>
 										<ColorAdvanced label={__('Progressbar Background')} value={progressBarBg} onChange={(val) => setAttributes({ progressBarBg: val })} />
 										<Range
 											label={__('Height')}

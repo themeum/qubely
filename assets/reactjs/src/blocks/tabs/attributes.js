@@ -78,6 +78,15 @@ const attributes = {
             }
         ]
     },
+    progressBarPosition: {
+        type: 'string',
+        default: "0",
+        style: [
+            {
+                selector: '{{QUBELY}} .qubely-block-tab .qubely-tab-item.qubely-active .progress {position:absolute;bottom:{{progressBarPosition}}px !important;}'
+            }
+        ]
+    },
     progressBarHeight: {
         type: 'object',
         default: {

@@ -89,7 +89,7 @@ class Save extends Component {
 
                     {
                         (autoSwithcing && showProgressBar) &&
-                        <div className="progress" style={{ width: '0%', transition: typeof title.delay === 'undefined' ? defaultDelay : title.delay + 's' }} />
+                        <div className="progress" style={{ width: '0%', transition: 'width' + typeof title.delay === 'undefined' ? defaultDelay : title.delay + 's' }} />
                     }
                 </span>
             );
