@@ -78,12 +78,25 @@ const attributes = {
             }
         ]
     },
-    progressBarPosition: {
+    progressbarPosition: {
+        type: 'string',
+        default: "bottom",
+    },
+    progressbarBottom: {
         type: 'string',
         default: "0",
         style: [
             {
-                selector: '{{QUBELY}} .qubely-block-tab .qubely-tab-item.qubely-active .progress {position:absolute;bottom:{{progressBarPosition}}px !important;}'
+                condition: [
+                    { key: 'progressbarPosition', relation: '==', value: 'bottom' }
+                ],
+                selector: '{{QUBELY}} .qubely-block-tab .qubely-tab-item.qubely-active .progress {position:absolute;bottom:{{progressbarBottom}}px !important;}'
+            },
+            {
+                condition: [
+                    { key: 'progressbarPosition', relation: '==', value: 'top' }
+                ],
+                selector: '{{QUBELY}} .qubely-block-tab .qubely-tab-item.qubely-active .progress {position:absolute;top:{{progressbarBottom}}px !important;}'
             }
         ]
     },

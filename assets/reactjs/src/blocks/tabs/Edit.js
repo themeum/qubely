@@ -123,6 +123,7 @@ class Edit extends Component {
 				showProgressBar,
 				defaultDelay,
 				enableImageNavTitle,
+				progressbarPosition,
 				enableImageNavDesciption,
 			}
 		} = this.props;
@@ -230,7 +231,7 @@ class Edit extends Component {
 						</div>
 						{
 							(autoSwithcing && showProgressBar) &&
-							<div className="progress" style={{ width: '100%' }} />
+							<div className={`progress ${progressbarPosition}`} style={{ width: '100%' }} />
 						}
 						<Tooltip text={__('Delete this tab')}>
 							<span className="qubely-action-tab-remove" role="button" onClick={() => this.deleteTab(index)}>
@@ -302,7 +303,8 @@ class Edit extends Component {
 				defaultDelay,
 				showProgressBar,
 				progressBarBg,
-				progressBarPosition,
+				progressbarPosition,
+				progressbarBottom,
 				progressBarHeight,
 				progressBarSpacing,
 				progressBarRadius,
@@ -799,20 +801,30 @@ class Edit extends Component {
 												</Fragment>
 
 										}
-
+										<Toggle label={__('Show Progress Bar')} value={showProgressBar} onChange={val => setAttributes({ showProgressBar: val })} />
 									</Fragment>
 
 								}
-								<Toggle label={__('Show Progress Bar')} value={showProgressBar} onChange={val => setAttributes({ showProgressBar: val })} />
 								{
 									showProgressBar &&
 									<Fragment>
+										<ButtonGroup
+											label={__('Progressbar Position')}
+											options={
+												[
+													[__('Bottom'), 'bottom'],
+													[__('Top'), 'top']
+												]
+											}
+											value={progressbarPosition}
+											onChange={value => setAttributes({ progressbarPosition: value, recreateStyles: !recreateStyles })}
+										/>
 										<Range
 											label={__('Position')}
-											value={progressBarPosition}
+											value={progressbarBottom}
 											max={100}
 											min={-50}
-											onChange={(value) => setAttributes({ progressBarPosition: value })}
+											onChange={(value) => setAttributes({ progressbarBottom: value })}
 										/>
 										<ColorAdvanced label={__('Progressbar Background')} value={progressBarBg} onChange={(val) => setAttributes({ progressBarBg: val })} />
 										<Range
