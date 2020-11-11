@@ -31,6 +31,7 @@ class Save extends Component {
                 interaction,
                 navLayout,
                 enableImageNavTitle,
+                progressbarPosition,
                 enableImageNavDesciption,
             }
         } = this.props;
@@ -63,7 +64,7 @@ class Save extends Component {
                             <div className="qubely-tab-title">
                                 <div className={`description-type-tab nav-layout-${navLayout}`}>
                                     {
-                          				navLayout !== 'three' &&
+                                        navLayout !== 'three' &&
                                         <Fragment>
                                             {typeof title.avatar !== 'undefined' && title.avatar.url ?
                                                 <img className="qubely-tab-image" src={title.avatar.url} alt={title.avatar.alt ? title.avatar.alt : 'tab-image'} />
@@ -108,7 +109,7 @@ class Save extends Component {
 
                     {
                         (autoSwithcing && showProgressBar) &&
-                        <div className="progress" style={{ width: '0%', transition: 'width' + typeof title.delay === 'undefined' ? defaultDelay : title.delay + 's' }} />
+                        <div className={`progress ${progressbarPosition}`} style={{ width: '0%', transition: 'width' + typeof title.delay === 'undefined' ? defaultDelay : title.delay + 's' }} />
                     }
                 </span>
             );

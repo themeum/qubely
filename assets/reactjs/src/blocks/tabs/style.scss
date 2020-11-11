@@ -32,7 +32,7 @@
 				display: inline-flex;
 				justify-content: center;
 				align-items: center;
-				&.nav-layout-one{
+				&.nav-layout-one {
 					flex-direction: column;
 				}
 				.qubely-tab-description {
@@ -57,7 +57,12 @@
 			}
 			.progress {
 				position: absolute;
-				bottom: 0;
+				&.bottom {
+					bottom: 0;
+				}
+				&.top {
+					top: 0;
+				}
 			}
 		}
 
