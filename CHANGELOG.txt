@@ -1,6 +1,15 @@
 
 
-<h3>1.6.0 - 22 October, 2020</h3>
+<h3>1.6.1 - 16 November, 2020</h3>
+<ul>
+    <li>New: Tab block - Auto switch option</li>
+    <liNew: Post Grid block - Custom Post-type support</li>
+    <li>New: Tab block - New layouts for tab titles</li>
+    <li>Update: CSS preview issue on Frontend</li>
+    <li>Fix: Tab block - Add new tab issue in WordPress new versions</li>
+</ul>
+    
+<h3>1.6.0 - 23 October, 2020</h3>
 <ul>
     <li>New: Richtext Custom font-size format</li>
     <li>New: Range field - disable option </li>
@@ -10,10 +19,3 @@
     <li>Fix: Advanced Text block - Typography issue  </li>
     <li>Update: Border filed - Custom Border disable option</li>
 </ul>
-
-
-<h3>1.5.5 - 16 September, 2020</h3>
-<ul>
-    <li>Fix: Fixed Plugin build issue for version 1.5.4 </li>
-</ul>
-

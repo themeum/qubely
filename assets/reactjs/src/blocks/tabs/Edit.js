@@ -124,6 +124,7 @@ class Edit extends Component {
 				defaultDelay,
 				enableImageNavTitle,
 				progressbarPosition,
+				imageNavTitleAlignment,
 				enableImageNavDesciption,
 			}
 		} = this.props;
@@ -176,7 +177,7 @@ class Edit extends Component {
 										{title.iconName && (iconPosition == 'right') && (<i className={`qubely-tab-icon ${title.iconName}`} />)}
 									</Fragment>
 									:
-									<div className={`description-type-tab nav-layout-${navLayout}`}>
+									<div className={`description-type-tab nav-layout-${navLayout} align-${imageNavTitleAlignment}`}>
 										{
 											navLayout !== 'three' &&
 											<MediaUpload
@@ -562,7 +563,7 @@ class Edit extends Component {
 															{ icon: 'fas fa-cog', value: 'custom', title: 'Custom' }
 														]}
 														value={navImageSize}
-														onChange={(value) => setAttributes({ navImageSize: value })}
+														onChange={(value) => setAttributes({ navImageSize: value, recreateStyles: !recreateStyles })}
 													/>
 													{navImageSize == 'custom' &&
 														<Fragment>
@@ -630,8 +631,6 @@ class Edit extends Component {
 														label={__('Alignment')}
 														value={imageNavTitleAlignment}
 														onChange={val => setAttributes({ imageNavTitleAlignment: val })}
-														responsive device={device}
-														onDeviceChange={value => this.setState({ device: value })}
 													/>
 													<Color
 														label={__('Color')}
