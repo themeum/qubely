@@ -102,7 +102,7 @@ class Edit extends Component {
 		this.isStillMounted = false;
 	}
 	truncate(value, limit) {
-		if (value.split(' ').length > limit) {
+		if (value && value.split(' ').length > limit) {
 			return value.split(' ').splice(0, limit).join(' ');
 		}
 		return value;
