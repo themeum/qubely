@@ -2,7 +2,7 @@
 
 <h3>1.6.1 - 16 November, 2020</h3>
 <ul>
-    <li>New: Tab block - Auto switch option</li>
+    <li>New: Tab block - Auto switch & Progressbar option</li>
     <liNew: Post Grid block - Custom Post-type support</li>
     <li>New: Tab block - New layouts for tab titles</li>
     <li>Update: CSS preview issue on Frontend</li>
