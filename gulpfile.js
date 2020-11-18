@@ -47,6 +47,7 @@ function productionMode() {
         .pipe(replace(/map\.js/g, 'map.min.js'))
         .pipe(replace(/qubely\.magnific-popup\.js/g, 'qubely.magnific-popup.min.js'))
         .pipe(replace(/contactform\.js/g, 'contactform.min.js'))
+        .pipe(replace(/image-comparison\.js/g, 'image-comparison.min.js'))
         .pipe(replace(/interaction\.js/g, 'interaction.min.js'))
         .pipe(replace(/common-script\.js/g, 'common-script.min.js'))
         .pipe(dest('./build/qubely/core/'));
