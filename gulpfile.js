@@ -102,6 +102,9 @@ function removeJsFiles() {
         './build/qubely/assets/js/interaction.js',
         './build/qubely/assets/js/jquery.animatedheadline.js',
         './build/qubely/assets/js/qubely.magnific-popup.js',
+        './build/qubely/assets/js/blocks/contactform.js',
+        './build/qubely/assets/js/blocks/map.js',
+        './build/qubely/assets/js/blocks/image-comparison.js',
     ],
         { read: false, allowEmpty: true })
         .pipe(clean());

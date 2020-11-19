@@ -238,7 +238,7 @@ You can report bugs on the [support forum here](https://wordpress.org/support/pl
 
 == Changelog ==
 
-= 1.6.1 - 16 November, 2020 = 
+= 1.6.1 - 19 November, 2020 = 
 New: Tab block - Auto switch & Progressbar option  
 New: Post Grid block - Custom Post-type support  
 New: Tab block - New layouts for tab titles  
