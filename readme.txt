@@ -239,13 +239,12 @@ You can report bugs on the [support forum here](https://wordpress.org/support/pl
 == Changelog ==
 
 = 1.6.1 - 19 November, 2020 = 
-New: Tab block - Auto switch & Progressbar option  
-New: Post Grid block - Custom Post-type support  
-New: Tab block - New layouts for tab titles  
-Update: CSS preview issue on Frontend  
-Update: Replaced deprecated jQuery functions 
-Fix: Tab block - Add new tab issue in WordPress new versions  
-
+New: Tab block - Auto switch & Progress-bar option 
+New: Post Grid block - Custom Post-type support 
+New: Tabs block - New layouts for tab titles 
+Update: CSS preview issue on Frontend
+Update: Replaced deprecated jQuery functions
+Fix: Tab block - Missing add new block option in new tab for latest WordPress version
 
 = 1.6.0 - 23 October, 2020 = 
 New: Richtext Custom font-size format
