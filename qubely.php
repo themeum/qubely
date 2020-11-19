@@ -72,105 +72,119 @@ function qubely_blocks_add_orderby( $params ) {
  *
  * @since 1.0.9
  */
-function qubely_register_rest_fields()
-{
-    $post_types = get_post_types();
+function qubely_register_rest_fields() {
+   $post_type = QUBELY::get_post_types();
 
-    foreach ( $post_types as $key => $type ) {
-		add_filter( "rest_{$type}_collection_params", 'qubely_blocks_add_orderby', 10, 1 );
-	}
-    //featured image
-    register_rest_field(
-        $post_types,
-        'qubely_featured_image_url',
-        array(
-            'get_callback' => 'qubely_get_featured_image_url',
-            'update_callback' => null,
-            'schema' => array(
-                'description' => __('Different sized featured images'),
-                'type' => 'array',
-            ),
-        )
-    );
-    // author info
-    register_rest_field(
-        'post',
-        'qubely_author',
-        array(
-            'get_callback'    => 'qubely_get_author_info',
-            'update_callback' => null,
-            'schema'          => null,
-        )
-    );
+   foreach ( $post_type as $key => $value ) {
 
-    // Add comment info.
-    register_rest_field(
-        'post',
-        'qubely_comment',
-        array(
-            'get_callback'    => 'qubely_get_comment_info',
-            'update_callback' => null,
-            'schema'          => null,
-        )
-    );
+        // Featured image.
+        register_rest_field(
+            $value['value'],
+            'qubely_featured_image_url',
+            array(
+                'get_callback'    => 'qubely_get_featured_image_url',
+                'update_callback' => null,
+                'schema'          => array(
+                    'description' => __('Different sized featured images'),
+                    'type' => 'array',
+                ),
+            )
+        );
+        // Author info.
+        register_rest_field(
+            $value['value'],
+            'qubely_author',
+            array(
+                'get_callback'    => 'qubely_get_author_info',
+                'update_callback' => null,
+                'schema'          => null,
+            )
+        );
 
-    // Category links.
-    register_rest_field(
-        'post',
-        'qubely_category',
-        array(
-            'get_callback' => 'qubely_get_category_list',
-            'update_callback' => null,
-            'schema' => array(
-                'description' => __('Category list links'),
-                'type' => 'string',
-            ),
-        )
-    );
+        // Add comment info.
+        register_rest_field(
+            $value['value'],
+            'qubely_comment',
+            array(
+                'get_callback'    => 'qubely_get_comment_info',
+                'update_callback' => null,
+                'schema'          => null,
+            )
+        );
 
-}
+        // Category links.
+        register_rest_field(
+            $value['value'],
+            'qubely_category',
+            array(
+                'get_callback'    => 'qubely_get_category_list',
+                'update_callback' => null,
+                'schema'          => array(
+                    'description' => __('Category list links'),
+                    'type'        => 'string',
+                ),
+            )
+        );
 
-//author
-function qubely_get_author_info($object)
-{
-    $author['display_name'] = get_the_author_meta('display_name', $object['author']);
-    $author['author_link'] = get_author_posts_url($object['author']);
-    return $author;
-}
-
-//comment
-function qubely_get_comment_info($object)
-{
-    $comments_count = wp_count_comments($object['id']);
-    return $comments_count->total_comments;
-}
-
-//category list
-if (!function_exists('qubely_get_category_list')) {
-    function qubely_get_category_list($object)
-    {
-        return get_the_category_list(esc_html__(' '), '', $object['id']);
+        // Excerpt.
+        register_rest_field(
+            $value['value'],
+            'qubely_excerpt',
+            array(
+                'get_callback'    => 'qubely_get_excerpt',
+                'update_callback' => null,
+                'schema'          => null,
+            )
+        );
     }
 }
 
-//feature image
-function qubely_get_featured_image_url($object)
-{
+// Author.
+function qubely_get_author_info( $object ) {
+    $author = ( isset( $object['author'] ) ) ? $object['author'] : '';
 
+    $author_data['display_name'] = get_the_author_meta( 'display_name', $author ) ;
+    $author_data['author_link']  = get_author_posts_url( $author );
+    
+    return $author_data;
+}
+
+// Comment.
+function qubely_get_comment_info( $object ) {
+    $comments_count = wp_count_comments( $object['id'] );
+    return $comments_count->total_comments;
+}
+
+// Category list.
+if ( !function_exists( 'qubely_get_category_list' ) ) {
+    function qubely_get_category_list( $object ) {
+        $taxonomies = get_post_taxonomies( $object['id'] );
+        if ( 'post' === get_post_type() ) {
+            return get_the_category_list( esc_html__(' '), '', $object['id'] );
+        } else {
+            if ( ! empty( $taxonomies ) ) {
+                return get_the_term_list( $object['id'], $taxonomies[0], ' ' );
+            }
+        }
+    }
+}
+
+// Feature image.
+function qubely_get_featured_image_url( $object ) {
 
     $featured_images = array();
-    if (!isset($object['featured_media'])) {
+    if ( ! isset( $object['featured_media'] ) ) {
         return $featured_images;
     } else {
-        $image = wp_get_attachment_image_src($object['featured_media'], 'full', false);
-        if (is_array($image)) {
-            $featured_images['full'] = $image;
-            $featured_images['landscape'] = wp_get_attachment_image_src($object['featured_media'], 'qubely_landscape', false);
-            $featured_images['portraits'] = wp_get_attachment_image_src($object['featured_media'], 'qubely_portrait', false);
-            $featured_images['thumbnail'] =  wp_get_attachment_image_src($object['featured_media'], 'qubely_thumbnail', false);
+        $image = wp_get_attachment_image_src( $object['featured_media'], 'full', false );
+        if ( is_array( $image ) ) {
+            $featured_images['full']      = $image;
+            $featured_images['landscape'] = wp_get_attachment_image_src( $object['featured_media'], 'qubely_landscape', false );
+            $featured_images['portraits'] = wp_get_attachment_image_src( $object['featured_media'], 'qubely_portrait', false );
+            $featured_images['thumbnail'] =  wp_get_attachment_image_src( $object['featured_media'], 'qubely_thumbnail', false );
 
             $image_sizes = QUBELY::get_all_image_sizes();
-            foreach ($image_sizes as $key => $value) {
+            foreach ( $image_sizes as $key => $value ) {
                 $size = $value['value'];
                 $featured_images[$size] = wp_get_attachment_image_src(
                     $object['featured_media'],
@@ -182,13 +196,33 @@ function qubely_get_featured_image_url($object)
         }
     }
 }
-add_action('rest_api_init', 'qubely_register_rest_fields');
 
+// Excerpt.
+function qubely_get_excerpt( $object ) {
+    $excerpt = wp_trim_words( get_the_excerpt( $object['id'] ) );
+    if ( ! $excerpt ) {
+        $excerpt = null;
+    }
+    return $excerpt;
+}
+add_action( 'rest_api_init', 'qubely_register_rest_fields' );
+
+/**
+ * Order by 
+ */
+function qubely_resigter_rest_order_by_fields() {
+    $post_types = QUBELY::get_post_types();
+
+    foreach ( $post_types as $key => $type ) {
+		add_filter( "rest_{$type['value']}_collection_params", 'qubely_blocks_add_orderby', 10, 1 );
+	}
+}
+add_action( 'init', 'qubely_resigter_rest_order_by_fields' );
 
 function qubely_blog_posts_image_sizes()
 {
-    add_image_size('qubely_landscape', 1200, 750, true);
-    add_image_size('qubely_portrait', 540, 320, true);
-    add_image_size('qubely_thumbnail', 140, 100, true);
+    add_image_size( 'qubely_landscape', 1200, 750, true );
+    add_image_size( 'qubely_portrait', 540, 320, true );
+    add_image_size( 'qubely_thumbnail', 140, 100, true );
 }
-add_action('after_setup_theme', 'qubely_blog_posts_image_sizes');
+add_action( 'after_setup_theme', 'qubely_blog_posts_image_sizes' );

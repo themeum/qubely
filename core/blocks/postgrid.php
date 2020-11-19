@@ -22,13 +22,24 @@ function register_block_qubely_postgrid()
 				//general
 				'postType' => array(
 					'type' => 'string',
-					'default' => 'Posts',
+					'default' => 'post',
 				),
 				'taxonomy' => array(
 					'type' => 'string',
 					'default' => 'categories',
 				),
+				'taxonomyType' => array(
+					'type' => 'string',
+					'default' => 'category',
+				),
 				'categories' => array(
+					'type' => 'array',
+					'default' => [],
+					'items'   => [
+						'type' => 'object'
+					],
+				),
+				'customTaxonomies' => array(
 					'type' => 'array',
 					'default' => [],
 					'items'   => [
@@ -1306,9 +1317,12 @@ function render_block_qubely_postgrid($att)
 	$imageAnimation 		= isset($att['imageAnimation']) ? $att['imageAnimation'] : '';
 	$orderBy 		        = isset($att['orderBy']) ? $att['orderBy'] : 'date';
 	$categories             = $att['categories'];
+	$postType               = isset($att['postType']) ? $att['postType'] : 'post';
 	$tags                   = $att['tags'];
 	$taxonomy               = $att['taxonomy'];
-
+	$taxonomyType           = isset($att['taxonomyType']) ? $att['taxonomyType'] : 'category';
+	$customTaxonomies       = $att['customTaxonomies'];
+	
 	$animation 		        = isset($att['animation']) ? (count((array) $att['animation']) > 0 &&  $att['animation']['animation'] ? 'data-qubelyanimation="' . htmlspecialchars(json_encode($att['animation']), ENT_QUOTES, 'UTF-8') . '"' : '') : '';
 
 
@@ -1335,7 +1349,7 @@ function render_block_qubely_postgrid($att)
 	}
 
 	$args = array(
-		'post_type' 		=> 'post',
+		'post_type' 		=> $postType,
 		'posts_per_page' 	=> esc_attr($numbers),
 		'order' 			=> esc_attr($order),
 		'orderby' 			=> esc_attr($orderBy),
@@ -1344,10 +1358,21 @@ function render_block_qubely_postgrid($att)
 	);
 
 	$active_taxonomy_array = $att['taxonomy'] == 'categories' ? $categories : $tags;
-	$active_taxonomy_name = $att['taxonomy'] == 'categories' ? 'category__in' : 'tag__in';
+	$active_taxonomy_name  = $att['taxonomy'] == 'categories' ? 'category__in' : 'tag__in';
 
-	if (is_array($active_taxonomy_array) && count($active_taxonomy_array) > 0) {
-		$args[$active_taxonomy_name] = array_column($active_taxonomy_array, 'value');
+	$custom_tax_query = array(
+		'taxonomy' => $taxonomyType,
+		'terms'    => array_column( $customTaxonomies, 'value' ),
+	);
+	
+	if ( 'post' === $postType ) {
+		if ( is_array( $active_taxonomy_array ) && count( $active_taxonomy_array ) > 0 ) {
+			$args[ $active_taxonomy_name ] = array_column( $active_taxonomy_array, 'value' );
+		}
+	} else {
+		if ( is_array( $customTaxonomies ) && count( $customTaxonomies ) > 0 ) {
+			$args['tax_query'] = array( $custom_tax_query );
+		}
 	}
 
 	$query = new WP_Query($args);
@@ -1392,7 +1417,7 @@ function render_block_qubely_postgrid($att)
 			$src = wp_get_attachment_image_src($id, $imgSize);
 			$image = '<img class="qubely-post-image" src="' . esc_url($src[0]) . '" alt="' . get_the_title() . '"/>';
 			$title = '<h3 class="qubely-postgrid-title"><a href="' . esc_url(get_the_permalink()) . '">' . get_the_title() . '</a></h3>';
-			$category = '<span class="qubely-postgrid-category">' . get_the_category_list(' ') . '</span>';
+			$category = '<span class="qubely-postgrid-category">' . ('post' === $postType ? get_the_category_list(' ') : get_the_term_list(get_the_ID(), $taxonomyType, ' ')) . '</span>';
 			$meta = ($showAuthor == 1) ? '<span><i class="fas fa-user"></i> ' . __('By ', 'qubely') . get_the_author_posts_link() . '</span>' : '';
 			$meta .= ($showDates == 1) ? '<span><i class="far fa-calendar-alt"></i> ' . get_the_date() . '</span>' : '';
 			$meta .= ($showComment == 1) ? '<span><i class="fas fa-comment"></i> ' . get_comments_number('0', '1', '%') . '</span>' : '';
