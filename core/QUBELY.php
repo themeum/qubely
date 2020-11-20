@@ -209,6 +209,7 @@ class QUBELY {
 				'actual_url'                  => str_replace( $protocols, '', site_url() ),
 				'import_with_global_settings' => $enable_global_settings,
 				'publishedPosts'              => wp_count_posts()->publish,
+				'publishedPosts_count'         => self::get_post_count(),
 				'mc_key'                      => $mc_key,
 			)
 		);
@@ -321,7 +322,25 @@ class QUBELY {
 			);
 		}
 
+
 		return $options;
+	}
+	/**
+	 * Get Post Types.
+	 *
+	 * @since 1.0.9
+	 */
+	public static function get_post_count() {
+		$post_types = self::get_post_types();
+		$post_count_array = array();
+
+		foreach ( $post_types as  $value ) {
+			$post_type = $value['value'];
+			$post_count_array[$post_type ]=	wp_count_posts( $post_type  )->publish;
+
+		}
+
+		return $post_count_array;
 	}
 
 	/**

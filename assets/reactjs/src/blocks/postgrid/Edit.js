@@ -163,6 +163,7 @@ class Edit extends Component {
 			attributes,
 			categoryList,
 			taxonomyList,
+			numberofPosts,
 			attributes: {
 				uniqueId,
 				className,
@@ -323,7 +324,10 @@ class Edit extends Component {
 			}
 		} = this.props
 		const { device } = this.state;
-		let pages = Math.ceil(qubely_admin.publishedPosts / postsToShow);
+		let pages = 0;
+		if (numberofPosts && numberofPosts.length) {
+			pages = Math.ceil(numberofPosts.length / postsToShow);
+		}
 		let taxonomyListOptions = [
 			{ value: '', label: __('Select Taxonomy') }
 		];
@@ -343,6 +347,7 @@ class Edit extends Component {
 				return categoryListOptions.push({ value: categoryList[item]['value'], label: categoryList[item]['label'] })
 			});
 		}
+
 		return (
 			<Fragment>
 				<InspectorControls key="inspector">
@@ -474,7 +479,7 @@ class Edit extends Component {
 									label={__('Post Type')}
 									options={postTypes}
 									value={postType}
-									onChange={value => setAttributes({ postType: value })}
+									onChange={value => setAttributes({ postType: value, page: 1 })}
 								/>
 								{taxonomyList && 'post' !== postType &&
 									<SelectControl
@@ -1018,8 +1023,7 @@ export default compose([
 		let query = {
 			order: order,
 			orderby: orderBy,
-			page: page,
-			per_page: postsToShow,
+			per_page: -1,
 		}
 
 		if ('post' !== postType) {
@@ -1029,7 +1033,8 @@ export default compose([
 		}
 
 		return {
-			posts: getEntityRecords('postType', postType, query),
+			posts: getEntityRecords('postType', postType, { ...query, page, per_page: postsToShow, }),
+			numberofPosts: getEntityRecords('postType', postType, query),
 			categoryList: categoryList,
 			taxonomyList: ('post' === postType) ? postTaxonomies : otherTaxonomies,
 		};
