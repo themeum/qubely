@@ -141,7 +141,7 @@ const attributes = {
             condition: [
                 { key: 'imageHeight', relation: '==', value: 'auto' },
             ],
-            selector: '{{QUBELY}} .qubely-info-box-media .qubely-info-box-image {height: auto;}'
+            selector: '{{QUBELY}} .qubely-info-box-media .qubely-info-box-image:not(.qubely-image-placeholder) {height: auto;}'
         }]
     },
 
@@ -155,7 +155,7 @@ const attributes = {
             condition: [
                 { key: 'imageHeight', relation: '==', value: 'custom' },
             ],
-            selector: '{{QUBELY}} .qubely-info-box-media .qubely-info-box-image {height: {{imageCustomHeight}} !important;}'
+            selector: '{{QUBELY}} .qubely-info-box-media .qubely-info-box-image:not(.qubely-image-placeholder) {height: {{imageCustomHeight}} !important;}'
         }]
     },
 

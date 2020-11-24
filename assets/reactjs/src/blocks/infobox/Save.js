@@ -21,6 +21,7 @@ class Save extends Component {
 			image2x,
 			imgAlt,
 			imageType,
+			imageSize,
 			externalImageUrl,
 			number,
 			enableButton,
@@ -83,7 +84,7 @@ class Save extends Component {
 											(imageType === 'external' && externalImageUrl.url != undefined) ?
 												<img className="qubely-info-box-image" src={externalImageUrl.url} alt={imgAlt && imgAlt} />
 												:
-												<div className="qubely-info-box-image qubely-image-placeholder"><i className="far fa-image" /></div>
+												<div className={`qubely-info-box-image qubely-image-placeholder${typeof imageSize !== 'undefined'? ` size-${imageSize}` : ''}`}><i className="far fa-image" /></div>
 									}
 								</Fragment>
 							}

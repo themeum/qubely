@@ -1,6 +1,11 @@
 .qubely-block-info-box {
     transition: border-color 400ms, background-color 400ms, box-shadow 400ms;
-    h1, h2, h3, h4, h5, h6 {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
         padding: 0;
         margin: 0;
         line-height: 1;
@@ -35,7 +40,7 @@
             max-width: 100%;
             height: auto;
         }
-    
+
         &.qubely-media-has-bg {
             i,
             .qubely-info-box-number {
@@ -60,7 +65,7 @@
     .qubely-info-box-text {
         transition: color 400ms, border-color 400ms, background-color 400ms, box-shadow 400ms;
     }
-    
+
     &.qubely-info-box-layout-2,
     &.qubely-info-box-layout-3 {
         display: -ms-flexbox;
@@ -103,7 +108,12 @@
         }
     }
 }
-.qubely-info-box-image.qubely-image-placeholder{
-    width: 100%;
+.qubely-info-box-image.qubely-image-placeholder {
     display: flex;
+    &:not(.size-custom) {
+        width: 100%;
+    }
+    &.size-auto {
+        width: 210px;
+    }
 }
