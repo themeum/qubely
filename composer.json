@@ -1,0 +1,21 @@
+{
+    "name": "qubely/qubely",
+    "description": "",
+    "license": "ISC",
+    "version": "1.6.1",
+    "authors": [
+        {
+            "name": "Themeum",
+            "email": "hello@themeum.com",
+            "homepage": "https://themeum.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Qubely\\": "./core"
+        },
+        "files": [
+            "./core/Helpers.php"
+        ]
+    }
+}
