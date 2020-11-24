@@ -26,8 +26,9 @@
         img {
             font-style: normal;
             position: relative;
-            display: block;
+            display: inline-block;
             transition: 400ms;
+            object-fit: cover;
         }
 
         img {
@@ -101,4 +102,8 @@
             }
         }
     }
+}
+.qubely-info-box-image.qubely-image-placeholder{
+    width: 100%;
+    display: flex;
 }

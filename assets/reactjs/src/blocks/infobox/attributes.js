@@ -104,18 +104,59 @@ const attributes = {
         type: 'object',
         default: {}
     },
+
+    imageSize: {
+        type: 'string',
+        default: 'custom',
+        style: [{
+            condition: [
+                { key: 'imageSize', relation: '!=', value: 'auto' },
+                { key: 'imageSize', relation: '!=', value: 'custom' },
+            ],
+            selector: '{{QUBELY}} .qubely-info-box-media {width: {{imageSize}};} {{QUBELY}} .qubely-info-box-media img {width: 100%;}'
+        }]
+    },
     imageWidth: {
         type: 'object',
-        default: {},
+        default: {
+            md: "600",
+            unit: "px"
+        },
         style: [
             {
                 condition: [
                     { key: 'layout', relation: '!=', value: 4 },
-                    { key: 'mediaType', relation: '==', value: 'image' }
+                    { key: 'imageSize', relation: '==', value: 'custom' },
+                    { key: 'mediaType', relation: '==', value: 'image' },
                 ],
-                selector: '{{QUBELY}} .qubely-info-box-media {width: {{imageWidth}};} {{QUBELY}} .qubely-info-box-media img {width: 100%;} {{QUBELY}} .qubely-info-box-media .qubely-image-placeholder {height: {{imageWidth}}; width: {{imageWidth}};}'
+                selector: '{{QUBELY}} .qubely-info-box-media {width: {{imageWidth}};} {{QUBELY}} .qubely-info-box-media img {width: 100%;}'
             }
         ]
+    },
+
+    imageHeight: {
+        type: 'string',
+        default: 'auto',
+        style: [{
+            condition: [
+                { key: 'imageHeight', relation: '==', value: 'auto' },
+            ],
+            selector: '{{QUBELY}} .qubely-info-box-media .qubely-info-box-image {height: auto;}'
+        }]
+    },
+
+    imageCustomHeight: {
+        type: 'object',
+        default: {
+            md: 300,
+            unit: 'px'
+        },
+        style: [{
+            condition: [
+                { key: 'imageHeight', relation: '==', value: 'custom' },
+            ],
+            selector: '{{QUBELY}} .qubely-info-box-media .qubely-info-box-image {height: {{imageCustomHeight}} !important;}'
+        }]
     },
 
     // Number

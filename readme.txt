@@ -239,6 +239,12 @@ You can report bugs on the [support forum here](https://wordpress.org/support/pl
 == Changelog ==
 
 = 1.6.1 - 20 November, 2020 = 
+Update: Row block - Removed unnecessary padding,margin for better UX  
+Update: Image block - Custom height option for image  
+Update: Infobox block - Custom height option for image  
+Fix: Image block - Border-radius issue for smaller images  
+
+= 1.6.1 - 20 November, 2020 = 
 New: Tab block - Auto switch & Progress-bar option 
 New: Post Grid block - Custom Post-type support 
 New: Tabs block - New layouts for tab titles 

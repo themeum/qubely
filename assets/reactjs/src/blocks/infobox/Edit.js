@@ -92,7 +92,10 @@ class Edit extends Component {
             image2x,
             imgAlt,
             imageType,
+            imageSize,
             imageWidth,
+            imageHeight,
+            imageCustomHeight,
             externalImageUrl,
 
             number,
@@ -232,7 +235,32 @@ class Edit extends Component {
                                                             <Url label={__('Image Source')} disableAdvanced value={externalImageUrl} onChange={newUrl => setAttributes({ externalImageUrl: newUrl })} />
                                                     }
                                                     <TextControl label={__('Alt Text')} value={imgAlt} onChange={val => setAttributes({ imgAlt: val })} />
-                                                    <Range label={__('Image Width')} value={imageWidth} onChange={val => setAttributes({ imageWidth: val })} min={0} max={2000} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
+
+                                                    <RadioAdvanced label={__('Size')} value={imageSize} onChange={(value) => setAttributes({ imageSize: value, recreateStyles: !recreateStyles })}
+                                                        options={[
+                                                            { label: __('Auto'), value: 'auto', title: __('Auto') },
+                                                            { label: __('S'), value: '100px', title: __('Small') },
+                                                            { label: __('M'), value: '300px', title: __('Medium') },
+                                                            { label: __('L'), value: '500px', title: __('Large') },
+                                                            { icon: 'fas fa-cog', value: 'custom', title: __('Custom') },
+                                                        ]}
+                                                    />
+                                                    {imageSize == 'custom' &&
+                                                        <Fragment>
+                                                            <Range label={__('Image Width')} value={imageWidth} onChange={val => setAttributes({ imageWidth: val })} min={0} max={2000} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
+                                                        </Fragment>
+                                                    }
+                                                    <RadioAdvanced label={__('Image Height')} value={imageHeight} onChange={(value) => setAttributes({ imageHeight: value, recreateStyles: !recreateStyles })}
+                                                        options={[
+                                                            { label: __('Auto'), value: 'auto', title: __('Auto') },
+                                                            { label: __('Custom'), value: 'custom', title: __('Custom') },
+                                                        ]}
+                                                    />
+                                                    {imageHeight == 'custom' &&
+                                                        <Fragment>
+                                                            <Range label={__('Custom Height')} value={imageCustomHeight} onChange={val => setAttributes({ imageCustomHeight: val })} min={10} max={1920} responsive unit={['px', 'em', '%']} device={device} onDeviceChange={value => this.setState({ device: value })} />
+                                                        </Fragment>
+                                                    }
                                                 </Fragment>
                                             }
 
