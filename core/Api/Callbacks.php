@@ -350,7 +350,7 @@ class Callbacks {
 
 			$success_message = 'Qubely preview css file has been updated.';
 			// set block meta
-			if ( $is_previewing==false ) {
+			if ( $is_previewing === false ) {
 				update_post_meta( $post_id, '__qubely_available_blocks', serialize( $params['available_blocks'] ) );
 				$success_message = 'Qubely block css file has been updated.';
 			}
@@ -373,7 +373,7 @@ class Callbacks {
 	 * @delete post css file
 	 */
 	private function delete_post_resource( $post_id = '' ) {
-		$post_id = $post_id ? $post_id : $this->is_qubely_single();
+		$post_id = $post_id ? $post_id : is_qubely_single();
 		if ( $post_id ) {
 			$upload_dir     = wp_get_upload_dir();
 			$upload_css_dir = trailingslashit( $upload_dir['basedir'] );

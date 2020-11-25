@@ -1,75 +1,93 @@
 <?php
+/**
+ * Handles settings for the dashboard
+ * 
+ * @package Qubely
+ */
 
-// Exit if accessed directly
-if (!defined('ABSPATH')) exit;
+namespace Qubely\Admin\Views;
 
-class Settings
-{
+use Qubely\Admin\Views\Fields;
 
+defined( 'ABSPATH' ) || exit;
+
+/**
+ * Settings class
+ */
+class Settings {
+
+    /**
+     * Public $options
+     *
+     * @var [type]
+     */
     public $options;
+
+    /**
+     * Public fields 
+     *
+     * @var [type]
+     */
     public $fields;
 
-    public function __construct()
-    {
-        add_action('admin_init', array($this, 'init_settings'));
-        add_action('wp_ajax_update_qubely_options', array($this, 'ajax_update_qubely_options'));
+    /**
+     * Constructor
+     */
+    public function __construct() {
+        add_action( 'admin_init', array( $this, 'init_settings' ) );
+        add_action( 'wp_ajax_update_qubely_options', array( $this, 'ajax_update_qubely_options' ) );
     }
-
 
     /**
      * Settings Init
      * @since 1.5.2
      */
     public function init_settings() {
-        require __DIR__ . '/Fields.php';
         $this->save_options();
         $this->option_setter();
     }
-
 
     /**
      * Update option using qubely
      * @since 1.5.2
      */
     public function ajax_update_qubely_options() {
-        $new_options = isset($_POST['options']) && is_array($_POST['options']) ? $_POST['options'] : false;
-        if ( !isset($_POST['_wpnonce']) || !wp_verify_nonce($_POST['_wpnonce'], 'qubely_nonce') || !$new_options) {
-            wp_send_json_error('No data or nonce failed');
+        $new_options = isset( $_POST['options'] ) && is_array( $_POST['options'] ) ? $_POST['options'] : false;
+        if ( ! isset( $_POST['_wpnonce'] ) || ! wp_verify_nonce( $_POST['_wpnonce'], 'qubely_nonce' ) || ! $new_options ) {
+            wp_send_json_error( 'No data or nonce failed' );
         };
-        $options = get_option('qubely_options');
-        $updated_options = wp_parse_args($new_options, $options);
-        update_option('qubely_options', $updated_options);
-        wp_send_json_success($updated_options);
+        $options         = get_option( 'qubely_options' );
+        $updated_options = wp_parse_args( $new_options, $options );
+        update_option( 'qubely_options', $updated_options );
+        wp_send_json_success( $updated_options );
     }
 
     /**
      * Set options to the Class
      * @since 1.3.91
      */
-    public function option_setter()
-    {
-        $this->options = (array) maybe_unserialize(get_option('qubely_options'));
-        $this->fields = $this->fields();
+    public function option_setter() {
+        $this->options = ( array ) maybe_unserialize( get_option( 'qubely_options' ) );
+        $this->fields  = $this->fields();
     }
 
     /**
      * Save options to database
      * @since 1.3.91
      */
-    public function save_options()
-    {
+    public function save_options() {
         if (
-            !isset($_POST['qubely_option_save']) ||
-            !isset($_POST['_wpnonce']) ||
-            !wp_verify_nonce($_POST['_wpnonce'], 'qubely_option_save')
+            ! isset( $_POST['qubely_option_save'] ) ||
+            ! isset( $_POST['_wpnonce'] ) ||
+            ! wp_verify_nonce( $_POST['_wpnonce'], 'qubely_option_save' )
         ) return;
 
-        $option = (array) isset($_POST['qubely_options']) ? $_POST['qubely_options'] : array();
-        $option = apply_filters('qubely_options_input', $option);
+        $option = ( array ) isset( $_POST['qubely_options'] ) ? $_POST['qubely_options'] : array();
+        $option = apply_filters( 'qubely_options_input', $option );
 
-        do_action('qubely_options_before_save', $option);
-        update_option('qubely_options', $option);
-        do_action('qubely_options_after_save', $option);
+        do_action( 'qubely_options_before_save', $option );
+        update_option( 'qubely_options', $option );
+        do_action( 'qubely_options_after_save', $option );
     }
 
     /**
@@ -78,27 +96,27 @@ class Settings
      * @return bool|mixed|void
      * Get option by key
      */
-    public function get_option($key = null, $default = false)
-    {
+    public function get_option( $key = null, $default = false ) {
         $options = $this->options;
-        if (empty($options) || !is_array($options) || !$key) {
+        if ( empty( $options ) || ! is_array( $options ) || ! $key ) {
             return $default;
         }
 
-        if (array_key_exists($key, $options)) {
-            return apply_filters($key, $options[$key]);
+        if ( array_key_exists( $key, $options ) ) {
+            return apply_filters( $key, $options[$key] );
         }
 
         return $default;
     }
 
     /**
-     * @return mixed|void
      * Settings Fields
+     * 
+     * @return mixed|void
+     * 
      * @since 1.3.91
      */
-    public function fields()
-    {
+    public function fields() {
         /**
          * Available Fields
          *
@@ -214,8 +232,7 @@ class Settings
      * Setting Page Markup
      * @since 1.3.91
      */
-    public function markup()
-    {
+    public function markup() {
 ?>
         <div class="wrap">
             <h1><?php esc_html_e('Qubely Settings', 'qubely'); ?></h1>

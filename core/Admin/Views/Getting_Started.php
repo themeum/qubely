@@ -42,7 +42,7 @@ class Getting_Started {
      */
     public function get_changelog() {
 
-        if( file_exists( QUBELY_DIR_PATH . 'CHANGELOG.txt' ) ) {
+        if ( file_exists( QUBELY_DIR_PATH . 'CHANGELOG.txt' ) ) {
 	        $file = file_get_contents( QUBELY_DIR_PATH . 'CHANGELOG.txt' );
 	        return $file;
         }
@@ -93,7 +93,7 @@ class Getting_Started {
                     <span><img src="<?php echo $icon_blocks; ?>" alt=""></span>
                     <div class="qubely-gs-card-content">
                         <h6><?php esc_html_e("Blocks", 'qubely');?></h6>
-                        <h3 class="qubely-gs-block-count"><?php echo $block . '+'?></h3>
+                        <h3 class="qubely-gs-block-count"><?php echo $block . '+'; ?></h3>
                     </div>
                 </a>
             </div>
@@ -118,8 +118,8 @@ class Getting_Started {
                 <?php
                     foreach ( $links as $key => $value ) {
                         ?>
-                            <a href="<?php echo $value ?>" target="_blank">
-                                <i class="<?php echo $key ?>"></i>
+                            <a href="<?php echo $value; ?>" target="_blank">
+                                <i class="<?php echo $key; ?>"></i>
                             </a>
                         <?php
                     }
@@ -133,13 +133,13 @@ class Getting_Started {
      */
     public function markup() {
         $logo = QUBELY_DIR_URL . 'assets/img/admin/qubely-option-logo.jpg';
-        wp_enqueue_style('qubely-options');
+        wp_enqueue_style( 'qubely-options' );
         ?>
         <div id="gs-wrapper" class="wrap" style="display: none">
             <h1 style="display: none">&nbsp;</h1>
 
             <div class="qubely-getting-started">
-                <div class="qubely-gs-card qubely-gs-header" style="background-image: url(<?php echo $logo ?>)">
+                <div class="qubely-gs-card qubely-gs-header" style="background-image: url(<?php echo $logo; ?>)">
                     <h2>
                         <?php echo 'Qubely - ' . QUBELY_VERSION ?>
                     </h2>
@@ -221,7 +221,7 @@ class Getting_Started {
 						</div>
                     </div>
                     <div class="qubely-gs-sidebar">
-                        <?php if( !$this->hasPro ) {?>
+                        <?php if ( ! $this->hasPro ) { ?>
                             <div class="qubely-gs-card card-gradient">
                                 <h2><?php esc_html_e( 'Enjoy the full power and flexibility of Qubely', 'qubely' ); ?></h2>
                                 <a target="_blank" href="https://www.themeum.com/product/qubely/" class="qubely-gs-button white button-block"><?php esc_html_e( 'Get Qubely Pro', 'qubely' ); ?></a>

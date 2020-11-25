@@ -185,6 +185,3 @@ class Setup {
 		return array_merge( $classes, array( 'qubely qubely-frontend' ) );
 	}
 }
-        
-    
-

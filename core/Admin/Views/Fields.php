@@ -1,8 +1,17 @@
 <?php
+/**
+ * Handles registering various fields
+ * 
+ * @package Qubely
+ */
 
-// Exit if accessed directly
-if (!defined('ABSPATH')) exit;
+namespace Qubely\Admin\Views;
 
+defined( 'ABSPATH' ) || exit;
+
+/**
+ * Fields class
+ */
 class Fields{
 
     /**
@@ -11,8 +20,7 @@ class Fields{
      * @param $info
      * @since 1.3.91
      */
-
-    public static function get($type, $info) {
+    public static function get( $type, $info ) {
         if(
             'text' === $type ||
             'number' === $type ||
@@ -26,13 +34,13 @@ class Fields{
             'week' === $type ||
             'color' === $type
         ) {
-            return self::text($info);
+            return self::text( $info );
         }
-        if('select' === $type) {
-            return self::select($info);
+        if( 'select' === $type ) {
+            return self::select( $info );
         }
-        if('checkbox' === $type) {
-            return self::checkbox($info);
+        if( 'checkbox' === $type ) {
+            return self::checkbox( $info );
         }
     }
 
@@ -41,20 +49,19 @@ class Fields{
      * @param $info
      * @since 1.3.91
      */
-    private static function text($info)
-    {
+    private static function text( $info ) {
         ?>
             <tr>
-                <?php self::label($info['label']); ?>
+                <?php self::label( $info['label'] ); ?>
                 <td>
                     <input
-                        name="qubely_options[<?php echo esc_attr($info['key']) ?>]"
-                        value="<?php echo esc_html($info['value']) ?>"
-                        type="<?php echo esc_attr($info['type'])?>"
-                        class="<?php echo esc_attr($info['size'] === 'regular' ? 'regular-text' : '' ) ?>"
+                        name="qubely_options[<?php echo esc_attr( $info['key'] ); ?>]"
+                        value="<?php echo esc_html( $info['value'] ); ?>"
+                        type="<?php echo esc_attr( $info['type'] ); ?>"
+                        class="<?php echo esc_attr( $info['size'] === 'regular' ? 'regular-text' : '' ); ?>"
                     >
-                    <?php echo isset($info['suffix']) ? esc_html($info['suffix']) : '' ?>
-                    <?php self::description($info['desc']); ?>
+                    <?php echo isset( $info['suffix'] ) ? esc_html( $info['suffix'] ) : ''; ?>
+                    <?php self::description( $info['desc'] ); ?>
                 </td>
             </tr>
         <?php
@@ -65,48 +72,47 @@ class Fields{
      * @param $info
      * @since 1.3.91
      */
-    private static function select($info)
-    {
-        $info['options'] = isset($info['options']) ? $info['options'] : array();
+    private static function select( $info ) {
+        $info['options'] = isset( $info['options'] ) ? $info['options'] : array();
 
         ?>
         <tr>
-            <?php self::label($info['label']); ?>
+            <?php self::label( $info['label'] ); ?>
             <td>
-                <select name="qubely_options[<?php echo esc_attr($info['key']) ?>]" id="<?php echo esc_attr($info['key']) ?>">
+                <select name="qubely_options[<?php echo esc_attr( $info['key'] ); ?>]" id="<?php echo esc_attr( $info['key'] ); ?>">
                     <?php
-                        foreach ($info['options'] as $key => $label) {
+                        foreach ( $info['options'] as $key => $label ) {
                             ?>
-                                <option <?php selected($info['value'], $key, true); ?> value="<?php echo esc_attr($key) ?>"><?php echo esc_html($label); ?></option>
+                                <option <?php selected( $info['value'], $key, true ); ?> value="<?php echo esc_attr( $key ); ?>"><?php echo esc_html( $label ); ?></option>
                             <?php
                         }
                     ?>
                 </select>
-                <?php self::description($info['desc']); ?>
+                <?php self::description( $info['desc'] ); ?>
             </td>
         </tr>
         <?php
     }
+
     /**
      * Get Checkbox Field
      * @param $info
      * @since 1.5.2
      */
-    private static function checkbox($info)
-    {
-        $info['options'] = isset($info['options']) ? $info['options'] : array();
+    private static function checkbox( $info ) {
+        $info['options'] = isset( $info['options'] ) ? $info['options'] : array();
 
         ?>
         <tr>
-            <?php self::label($info['label']); ?>
+            <?php self::label( $info['label'] ); ?>
             <td>
                  <input
-                        <?php echo $info['value']==='true'?'checked':'' ?>
-                        name="qubely_options[<?php echo esc_attr($info['key']) ?>]"
-                        value="<?php echo esc_html($info['value']) ?>"
+                        <?php echo $info['value'] === 'true' ? 'checked' : ''; ?>
+                        name="qubely_options[<?php echo esc_attr( $info['key'] ); ?>]"
+                        value="<?php echo esc_html( $info['value'] ); ?>"
                         type="checkbox"
                     >
-                <?php self::description($info['desc']); ?>
+                <?php self::description( $info['desc'] ); ?>
             </td>
         </tr>
         <?php
@@ -117,9 +123,9 @@ class Fields{
      * @param $label
      * @since 1.3.91
      */
-    private static function label($label) {
-        if(isset($label)){
-            echo "<th class='row'>". esc_html($label) ."</th>";
+    private static function label( $label ) {
+        if ( isset( $label ) ) {
+            echo "<th class='row'>". esc_html( $label ) ."</th>";
         }
     }
 
@@ -128,10 +134,9 @@ class Fields{
      * @param $description
      * @since 1.3.91
      */
-    private static function description($description) {
-        if(isset($description)){
+    private static function description( $description ) {
+        if ( isset( $description ) ) {
             echo "<p class='description'>{$description}</p>";
         }
     }
-
 }

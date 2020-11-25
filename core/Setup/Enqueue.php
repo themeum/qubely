@@ -302,7 +302,7 @@ class Enqueue {
 	public function enqueue_block_css() {
 		$option_data = get_option( 'qubely_options' );
 		$css_save_as = isset( $option_data['css_save_as'] ) ? $option_data['css_save_as'] : 'wp_head';
-		if ( $css_save_as == 'filesystem' ) {
+		if ( $css_save_as === 'filesystem' ) {
 			add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_block_css_file' ) );
 		} else {
 			add_action( 'wp_head', array( $this, 'add_block_inline_css' ), 100 );
@@ -476,8 +476,9 @@ class Enqueue {
 	}
 
 	/**
-	 * @since 1.2.0
 	 * Interaction Add
+	 * 
+	 * @since 1.2.0
 	 */
 	public function print_interaction_json_to_header() {
 		$post_id         = get_the_ID();

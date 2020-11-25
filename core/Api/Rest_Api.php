@@ -17,13 +17,27 @@ defined( 'ABSPATH' ) || exit;
  */
 class Rest_Api {
 
+	/**
+	 * Public callbacks
+	 *
+	 * @var [type]
+	 */
+	public $callbacks;
+
     /**
      * Register
      */
     public function register() {
+		add_action( 'init', array( $this, 'init_callbacks' ) );
         add_action( 'rest_api_init', array( $this, 'register_api_hook' ) );
-        $callbacks = new Callbacks();
-    }
+	}
+	
+	/**
+	 * Init callbacks
+	 */
+	public function init_callbacks() {
+		$this->callbacks = new Callbacks();
+	}
 
     /**
 	 * @since 1.0.0-BETA
@@ -40,7 +54,7 @@ class Rest_Api {
                  $value['value'],
                  'qubely_featured_image_url',
                  array(
-                     'get_callback'    => array( $callbacks, 'get_featured_image_url' ),
+                     'get_callback'    => array( $this->callbacks, 'get_featured_image_url' ),
                      'update_callback' => null,
                      'schema'          => array(
                          'description' => __('Different sized featured images'),
@@ -53,7 +67,7 @@ class Rest_Api {
                  $value['value'],
                  'qubely_author',
                  array(
-                     'get_callback'    => array( $callbacks, 'get_author_info' ),
+                     'get_callback'    => array( $this->callbacks, 'get_author_info' ),
                      'update_callback' => null,
                      'schema'          => null,
                  )
@@ -64,7 +78,7 @@ class Rest_Api {
                  $value['value'],
                  'qubely_comment',
                  array(
-                     'get_callback'    => array( $callbacks, 'get_comment_info' ),
+                     'get_callback'    => array( $this->callbacks, 'get_comment_info' ),
                      'update_callback' => null,
                      'schema'          => null,
                  )
@@ -75,7 +89,7 @@ class Rest_Api {
                  $value['value'],
                  'qubely_category',
                  array(
-                     'get_callback'    => array( $callbacks, 'get_category_list' ),
+                     'get_callback'    => array( $this->callbacks, 'get_category_list' ),
                      'update_callback' => null,
                      'schema'          => array(
                          'description' => __('Category list links'),
@@ -89,7 +103,7 @@ class Rest_Api {
                  $value['value'],
                  'qubely_excerpt',
                  array(
-                     'get_callback'    => array( $callbacks, 'get_excerpt' ),
+                     'get_callback'    => array( $this->callbacks, 'get_excerpt' ),
                      'update_callback' => null,
                      'schema'          => null,
                  )
@@ -103,7 +117,7 @@ class Rest_Api {
 			array(
 				array(
 					'methods'             => 'GET',
-					'callback'            => array( $callbacks, 'get_global_option' ),
+					'callback'            => array( $this->callbacks, 'get_global_option' ),
 					'permission_callback' => function () {
 						return true;
 					},
@@ -111,7 +125,7 @@ class Rest_Api {
 				),
 				array(
 					'methods'             => 'POST',
-					'callback'            => array( $callbacks, 'update_global_option' ),
+					'callback'            => array( $this->callbacks, 'update_global_option' ),
 					'permission_callback' => function () {
 						return current_user_can( 'edit_posts' );
 					},
@@ -126,7 +140,7 @@ class Rest_Api {
 			array(
 				array(
 					'methods'             => 'POST',
-					'callback'            => array( $callbacks, 'save_block_css' ),
+					'callback'            => array( $this->callbacks, 'save_block_css' ),
 					'permission_callback' => function () {
 						return current_user_can( 'edit_posts' );
 					},
@@ -141,7 +155,7 @@ class Rest_Api {
 			array(
 				array(
 					'methods'             => 'POST',
-					'callback'            => array( $callbacks, 'qubely_get_content' ),
+					'callback'            => array( $this->callbacks, 'qubely_get_content' ),
 					'permission_callback' => function () {
 						return current_user_can( 'edit_posts' );
 					},
@@ -156,7 +170,7 @@ class Rest_Api {
 			array(
 				array(
 					'methods'             => 'POST',
-					'callback'            => array( $callbacks, 'append_qubely_css_callback' ),
+					'callback'            => array( $this->callbacks, 'append_qubely_css_callback' ),
 					'permission_callback' => function () {
 						return current_user_can( 'edit_posts' );
 					},
@@ -171,7 +185,7 @@ class Rest_Api {
 			array(
 				array(
 					'methods'             => 'GET',
-					'callback'            => array( $callbacks, 'get_qubely_options' ),
+					'callback'            => array( $this->callbacks, 'get_qubely_options' ),
 					'permission_callback' => function () {
 						return current_user_can( 'edit_posts' );
 					},
@@ -186,7 +200,7 @@ class Rest_Api {
 			array(
 				array(
 					'methods'             => 'POST',
-					'callback'            => array( $callbacks, 'add_qubely_options' ),
+					'callback'            => array( $this->callbacks, 'add_qubely_options' ),
 					'permission_callback' => function () {
 						return current_user_can( 'edit_posts' );
 					},

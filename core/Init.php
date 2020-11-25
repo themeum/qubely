@@ -25,7 +25,8 @@ final class Init {
 			Api\Rest_Api::class,
 			Setup\Setup::class,
 			Setup\Enqueue::class,
-            Admin\Dashboard::class,
+			Admin\Dashboard::class,
+			Templates\Template::class,
 		);
 	}
 

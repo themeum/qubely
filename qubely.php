@@ -17,11 +17,16 @@
 
 defined('ABSPATH') || exit;
 
-// Language Load
+// Language Load.
 add_action( 'init', 'qubely_language_load' );
 
 function qubely_language_load() {
     load_plugin_textdomain( 'qubely', false,  basename( dirname( __FILE__ ) ) . '/languages/' );
+}
+
+// Load autoloader.
+if ( file_exists( dirname( __FILE__ ) . '/vendor/autoload.php' ) ) {
+    require_once dirname( __FILE__ ) . '/vendor/autoload.php';
 }
 
 // Plugin constants.
@@ -50,9 +55,9 @@ function qubely_option_data() {
 
 // Version Check & Include Core
 if ( ! version_compare( PHP_VERSION, '5.4', '>=' ) ) {
-    add_action('admin_notices', 'qubely_php_error_notice' ); // PHP Version Check
+    add_action( 'admin_notices', 'qubely_php_error_notice' ); // PHP Version Check
 } elseif ( ! version_compare( get_bloginfo( 'version' ), '4.5', '>=' ) ) {
-    add_action('admin_notices', 'qubely_wordpress_error_notice' ); // WordPress Version Check
+    add_action( 'admin_notices', 'qubely_wordpress_error_notice' ); // WordPress Version Check
 } else {
     if ( class_exists( 'Qubely\\Init' ) ) {
         Qubely\Init::register_services();
