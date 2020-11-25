@@ -15,7 +15,7 @@
  * @package Qubely
  */
 
-defined('ABSPATH') || exit;
+defined( 'ABSPATH' ) || exit;
 
 // Language Load.
 add_action( 'init', 'qubely_language_load' );

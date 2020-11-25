@@ -40,7 +40,7 @@ function makeBuild() {
 
 function productionMode() {
     const replacement_string = '\n\t\t\twp_enqueue_style(\'qubely-bundle\', QUBELY_DIR_URL . \'assets/css/qubely.bundle.min.css\', false, QUBELY_VERSION);\n\t\t\t';
-    return src(['./build/qubely/core/QUBELY.php'])
+    return src(['./build/qubely/core/Setup/Enqueue.php'])
         .pipe(replace(/(?<=#START_REPLACE)([^]*?)(?=#END_REPLACE)/g, replacement_string))
         .pipe(replace(/qubely\.dev\.js/g, 'qubely.min.js'))
         .pipe(replace(/jquery\.animatedheadline\.js/g, 'jquery.animatedheadline.min.js'))
