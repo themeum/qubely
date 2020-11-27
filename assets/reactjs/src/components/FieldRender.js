@@ -81,6 +81,9 @@ import { listAttributes, listSettings } from './fields/ListSettings'
 import { ContextMenu, handleContextMenu } from './fields/ContextMenu'
 
 
+import { Pagination } from './others';
+
+
 wp.qubelyComponents = {
     Alignment,
     Animation,
@@ -162,6 +165,7 @@ wp.qubelyComponents = {
     Typography,
     Wrapper,
     Url,
+    Pagination,
     QubelyButtonEdit,
     QubelyButtonSave,
     QubelyIconListEdit,

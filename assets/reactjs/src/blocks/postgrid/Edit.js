@@ -54,10 +54,11 @@ const {
 	},
 	withCSSGenerator,
 	InspectorTabs,
-	InspectorTab
+	InspectorTab,
+	Pagination,
 } = wp.qubelyComponents;
 
-import icons from '../../helpers/icons'
+import icons from '../../helpers/icons';
 
 
 const CATEGORIES_LIST_QUERY = { per_page: -1 };
@@ -517,7 +518,7 @@ class Edit extends Component {
 										/>
 									</Fragment>
 								}
-								<Range label={__('Number of Items')} value={postsToShow} onChange={value => setAttributes({ postsToShow: parseInt(value) })} min={1} max={15} />
+								<Range label={__('Number of Items')} value={postsToShow} onChange={value => setAttributes({ postsToShow: parseInt(value), page: 1 })} min={1} max={15} />
 
 								<SelectControl
 									label={__('Order By')}
@@ -953,6 +954,16 @@ class Edit extends Component {
 										})
 									}
 								</div>
+								{
+									enablePagination &&
+									<Pagination
+										total={pages}
+										current={page}
+										prevText="Prev"
+										nextText="Next"
+										onClickPage={(page) => setAttributes({ page })}
+									/>
+								}
 								{/* <div
 									ref={this.qubelyContextMenu}
 									className={`qubely-context-menu-wraper`}
@@ -965,22 +976,6 @@ class Edit extends Component {
 										qubelyContextMenu={this.qubelyContextMenu.current}
 									/>
 								</div> */}
-								{
-									(pages > 1 && enablePagination) &&
-									<div className="qubely-postgrid-pagination">
-										{
-											page > 1 && <button className={'qubely-pagination-prev'} onClick={() => setAttributes({ page: page - 1 })}> <span className="fas fa-angle-left" /> {__('Prev')}</button>
-										}
-										{
-											Array(pages).fill(0).map((_, index) => (
-												<button key={index} className={`pages${page === index + 1 ? ' current' : ''}`} onClick={() => setAttributes({ page: index + 1 })}>{index + 1}</button>
-											))
-										}
-										{
-											(page !== pages) && <button className={'qubely-pagination-next'} onClick={() => setAttributes({ page: page + 1 })}>{__('Next')} <span className="fas fa-angle-right" /></button>
-										}
-									</div>
-								}
 							</Fragment>
 							:
 							<div className="qubely-postgrid-is-loading">
