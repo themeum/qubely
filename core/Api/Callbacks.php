@@ -314,7 +314,7 @@ class Callbacks {
 				$dir        = trailingslashit( $upload_dir['basedir'] ) . 'qubely/';
 
 				// Add Import in first
-				$import_first = $this->set_import_url_to_top_css( $qubely_block_css );
+				$import_first = set_import_url_to_top_css( $qubely_block_css );
 
 				if ( $is_previewing === true ) {
 					$filename     = 'qubely-preview.css';

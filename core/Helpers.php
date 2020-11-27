@@ -51,7 +51,7 @@ function reference_id( $parse_blocks ) {
                 $extra_id[] = $block['attrs']['ref'];
             }
             if ( count( $block['innerBlocks'] ) > 0 ) {
-                $extra_id = array_merge( $this->reference_id( $block['innerBlocks'] ), $extra_id );
+                $extra_id = array_merge( reference_id( $block['innerBlocks'] ), $extra_id );
             }
         }
     }
