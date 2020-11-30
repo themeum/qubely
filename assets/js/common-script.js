@@ -1,4 +1,4 @@
-jQuery(document).ready(function ($) {
+jQuery(function ($) {
     'use strict';
     // Magnific Popup
     if (typeof $(document).magnificPopup !== 'undefined') {

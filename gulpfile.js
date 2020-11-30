@@ -8,12 +8,12 @@ const concatCss = require('gulp-concat-css');
 const merge = require('merge-stream');
 
 function cleanBuild() {
-    return src('./build', {read: false, allowEmpty: true})
+    return src('./build', { read: false, allowEmpty: true })
         .pipe(clean());
 }
 
 function cleanZip() {
-    return src('./qubely.zip', {read: false, allowEmpty: true})
+    return src('./qubely.zip', { read: false, allowEmpty: true })
         .pipe(clean());
 }
 
@@ -47,6 +47,7 @@ function productionMode() {
         .pipe(replace(/map\.js/g, 'map.min.js'))
         .pipe(replace(/qubely\.magnific-popup\.js/g, 'qubely.magnific-popup.min.js'))
         .pipe(replace(/contactform\.js/g, 'contactform.min.js'))
+        .pipe(replace(/image-comparison\.js/g, 'image-comparison.min.js'))
         .pipe(replace(/interaction\.js/g, 'interaction.min.js'))
         .pipe(replace(/common-script\.js/g, 'common-script.min.js'))
         .pipe(dest('./build/qubely/core/'));
@@ -70,11 +71,11 @@ function minify_css() {
 }
 
 function minify_js() {
-    const commonjs =  src(['./build/qubely/assets/js/*.js'])
+    const commonjs = src(['./build/qubely/assets/js/*.js'])
         .pipe(minifyJS({
-            ext:{
-                src:'.js',
-                min:'.min.js'
+            ext: {
+                src: '.js',
+                min: '.min.js'
             },
             exclude: ['tasks'],
             ignoreFiles: ['qubely.min.js', '*-min.js', '*.min.js']
@@ -83,9 +84,9 @@ function minify_js() {
 
     const blocksjs = src(['./build/qubely/assets/js/blocks/*.js'])
         .pipe(minifyJS({
-            ext:{
-                src:'.js',
-                min:'.min.js'
+            ext: {
+                src: '.js',
+                min: '.min.js'
             },
             exclude: ['tasks'],
             ignoreFiles: ['qubely.min.js', '*-min.js', '*.min.js']
@@ -96,7 +97,16 @@ function minify_js() {
 }
 
 function removeJsFiles() {
-    return src(['./build/qubely/assets/js/common-script.js'], {read: false, allowEmpty: true})
+    return src([
+        './build/qubely/assets/js/common-script.js',
+        './build/qubely/assets/js/interaction.js',
+        './build/qubely/assets/js/jquery.animatedheadline.js',
+        './build/qubely/assets/js/qubely.magnific-popup.js',
+        './build/qubely/assets/js/blocks/contactform.js',
+        './build/qubely/assets/js/blocks/map.js',
+        './build/qubely/assets/js/blocks/image-comparison.js',
+    ],
+        { read: false, allowEmpty: true })
         .pipe(clean());
 }
 
@@ -115,4 +125,4 @@ exports.cleanBuild = cleanBuild;
 exports.cleanZip = cleanZip;
 exports.removeJsFiles = removeJsFiles;
 exports.makeZip = makeZip;
-exports.default = series(cleanBuild, cleanZip, makeBuild, productionMode,gulpConcatCss, minify_css, minify_js, removeJsFiles, makeZip, cleanBuild);
+exports.default = series(cleanBuild, cleanZip, makeBuild, productionMode, gulpConcatCss, minify_css, minify_js, removeJsFiles, makeZip, cleanBuild);

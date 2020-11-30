@@ -34,6 +34,15 @@
 				align-items: center;
 				&.nav-layout-one {
 					flex-direction: column;
+					&.align-left{
+						align-items: flex-start;
+					}
+					&.align-center{
+						align-items: center;
+					}
+					&.align-right{
+						align-items: flex-end;
+					}
 				}
 				.qubely-tab-description {
 					width: 100%;

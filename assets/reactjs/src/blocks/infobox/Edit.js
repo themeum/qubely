@@ -92,7 +92,10 @@ class Edit extends Component {
             image2x,
             imgAlt,
             imageType,
+            imageSize,
             imageWidth,
+            imageHeight,
+            imageCustomHeight,
             externalImageUrl,
 
             number,
@@ -232,7 +235,32 @@ class Edit extends Component {
                                                             <Url label={__('Image Source')} disableAdvanced value={externalImageUrl} onChange={newUrl => setAttributes({ externalImageUrl: newUrl })} />
                                                     }
                                                     <TextControl label={__('Alt Text')} value={imgAlt} onChange={val => setAttributes({ imgAlt: val })} />
-                                                    <Range label={__('Image Width')} value={imageWidth} onChange={val => setAttributes({ imageWidth: val })} min={0} max={2000} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
+
+                                                    <RadioAdvanced label={__('Size')} value={imageSize} onChange={(value) => setAttributes({ imageSize: value, recreateStyles: !recreateStyles })}
+                                                        options={[
+                                                            { label: __('Auto'), value: 'auto', title: __('Auto') },
+                                                            { label: __('S'), value: '100px', title: __('Small') },
+                                                            { label: __('M'), value: '300px', title: __('Medium') },
+                                                            { label: __('L'), value: '500px', title: __('Large') },
+                                                            { icon: 'fas fa-cog', value: 'custom', title: __('Custom') },
+                                                        ]}
+                                                    />
+                                                    {imageSize == 'custom' &&
+                                                        <Fragment>
+                                                            <Range label={__('Image Width')} value={imageWidth} onChange={val => setAttributes({ imageWidth: val })} min={0} max={2000} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
+                                                        </Fragment>
+                                                    }
+                                                    <RadioAdvanced label={__('Image Height')} value={imageHeight} onChange={(value) => setAttributes({ imageHeight: value, recreateStyles: !recreateStyles })}
+                                                        options={[
+                                                            { label: __('Auto'), value: 'auto', title: __('Auto') },
+                                                            { label: __('Custom'), value: 'custom', title: __('Custom') },
+                                                        ]}
+                                                    />
+                                                    {imageHeight == 'custom' &&
+                                                        <Fragment>
+                                                            <Range label={__('Custom Height')} value={imageCustomHeight} onChange={val => setAttributes({ imageCustomHeight: val })} min={10} max={1920} responsive unit={['px', 'em', '%']} device={device} onDeviceChange={value => this.setState({ device: value })} />
+                                                        </Fragment>
+                                                    }
                                                 </Fragment>
                                             }
 
@@ -450,89 +478,89 @@ class Edit extends Component {
                                                 (imageType === 'external' && externalImageUrl.url != undefined) ?
                                                     <img className="qubely-info-box-image" src={externalImageUrl.url} alt={imgAlt && imgAlt} />
                                                     :
-                                                    <div className="qubely-info-box-image qubely-image-placeholder"><i className="far fa-image" /></div>
-                                        }
+                                                    <div className={`qubely-info-box-image qubely-image-placeholder${typeof imageSize !== 'undefined'? ` size-${imageSize}` : ''}`}><i className="far fa-image" /></div>
+                                }
                                     </Fragment>
-                                }
-                                {(mediaType == 'number' && number) &&
-                                    <span className="qubely-info-box-number">{number}</span>
-                                }
-                            </div>
+                        }
+                        {(mediaType == 'number' && number) &&
+                            <span className="qubely-info-box-number">{number}</span>
+                        }
+                    </div>
                         }
 
                         <div className="qubely-info-box-body">
-                            <div className={`qubely-info-box-title-container ${separatorStyle ? 'qubely-has-separator' : ''} ${separatorPosition ? 'qubely-separator-position-' + separatorPosition : ''}`} >
-                                <div className="qubely-info-box-title-inner">
-                                    {separatorStyle && (separatorPosition == 'left' || separatorPosition == 'top' || separatorPosition == 'leftright') ? <div className="qubely-separator qubely-separator-before">{renderSeparators}</div> : ''}
-                                    <div onClick={() => this.handlePanelOpenings('Title')}>
-                                        <RichText
-                                            key="editable"
-                                            tagName={titleTagName}
-                                            className="qubely-info-box-title"
-                                            keepPlaceholderOnFocus
-                                            placeholder={__('Add Text...')}
-                                            onChange={value => setAttributes({ title: value })}
-                                            value={title} />
-                                    </div>
-                                    {separatorStyle != '' && (separatorPosition == 'right' || separatorPosition == 'bottom' || separatorPosition == 'leftright') ? <div className="qubely-separator qubely-separator-after">{renderSeparators}</div> : ''}
-                                </div>
-
-                                {subTitle == 1 &&
-                                    <div className="qubely-info-box-sub-title-container" onClick={() => this.handlePanelOpenings('Sub Title')}>
-                                        <RichText
-                                            key="editable"
-                                            tagName={subTitleTagName}
-                                            className="qubely-info-box-sub-title"
-                                            keepPlaceholderOnFocus
-                                            placeholder={__('Add Text...')}
-                                            onChange={value => setAttributes({ subTitleContent: value })}
-                                            value={subTitleContent} />
-                                    </div>
-                                }
-                            </div>
-
-                            {
-                                enableContent &&
-                                <div className="qubely-info-box-content" onClick={() => this.handlePanelOpenings('Content')}>
+                        <div className={`qubely-info-box-title-container ${separatorStyle ? 'qubely-has-separator' : ''} ${separatorPosition ? 'qubely-separator-position-' + separatorPosition : ''}`} >
+                            <div className="qubely-info-box-title-inner">
+                                {separatorStyle && (separatorPosition == 'left' || separatorPosition == 'top' || separatorPosition == 'leftright') ? <div className="qubely-separator qubely-separator-before">{renderSeparators}</div> : ''}
+                                <div onClick={() => this.handlePanelOpenings('Title')}>
                                     <RichText
                                         key="editable"
-                                        tagName='div'
-                                        className="qubely-info-box-text"
+                                        tagName={titleTagName}
+                                        className="qubely-info-box-title"
                                         keepPlaceholderOnFocus
                                         placeholder={__('Add Text...')}
-                                        onChange={value => setAttributes({ content: value })}
-                                        value={content}
-                                    />
+                                        onChange={value => setAttributes({ title: value })}
+                                        value={title} />
+                                </div>
+                                {separatorStyle != '' && (separatorPosition == 'right' || separatorPosition == 'bottom' || separatorPosition == 'leftright') ? <div className="qubely-separator qubely-separator-after">{renderSeparators}</div> : ''}
+                            </div>
+
+                            {subTitle == 1 &&
+                                <div className="qubely-info-box-sub-title-container" onClick={() => this.handlePanelOpenings('Sub Title')}>
+                                    <RichText
+                                        key="editable"
+                                        tagName={subTitleTagName}
+                                        className="qubely-info-box-sub-title"
+                                        keepPlaceholderOnFocus
+                                        placeholder={__('Add Text...')}
+                                        onChange={value => setAttributes({ subTitleContent: value })}
+                                        value={subTitleContent} />
                                 </div>
                             }
-                            {enableButton &&
-                                <QubelyButtonEdit
-                                    enableButton={enableButton}
-                                    buttonFillType={buttonFillType}
-                                    buttonSize={buttonSize}
-                                    buttonText={buttonText}
-                                    buttonIconName={buttonIconName}
-                                    buttonIconPosition={buttonIconPosition}
-                                    buttonUrl={buttonUrl}
-                                    onTextChange={value => setAttributes({ buttonText: value })}
+                        </div>
+
+                        {
+                            enableContent &&
+                            <div className="qubely-info-box-content" onClick={() => this.handlePanelOpenings('Content')}>
+                                <RichText
+                                    key="editable"
+                                    tagName='div'
+                                    className="qubely-info-box-text"
+                                    keepPlaceholderOnFocus
+                                    placeholder={__('Add Text...')}
+                                    onChange={value => setAttributes({ content: value })}
+                                    value={content}
                                 />
-                            }
-                        </div>
-                        <div
-                            ref={this.qubelyContextMenu}
-                            className={`qubely-context-menu-wraper`}
-                        >
-                            <ContextMenu
-                                name={name}
-                                clientId={clientId}
-                                attributes={attributes}
-                                setAttributes={setAttributes}
-                                qubelyContextMenu={this.qubelyContextMenu.current}
+                            </div>
+                        }
+                        {enableButton &&
+                            <QubelyButtonEdit
+                                enableButton={enableButton}
+                                buttonFillType={buttonFillType}
+                                buttonSize={buttonSize}
+                                buttonText={buttonText}
+                                buttonIconName={buttonIconName}
+                                buttonIconPosition={buttonIconPosition}
+                                buttonUrl={buttonUrl}
+                                onTextChange={value => setAttributes({ buttonText: value })}
                             />
-                        </div>
+                        }
+                    </div>
+                    <div
+                        ref={this.qubelyContextMenu}
+                        className={`qubely-context-menu-wraper`}
+                    >
+                        <ContextMenu
+                            name={name}
+                            clientId={clientId}
+                            attributes={attributes}
+                            setAttributes={setAttributes}
+                            qubelyContextMenu={this.qubelyContextMenu.current}
+                        />
                     </div>
                 </div>
-            </Fragment>
+                </div>
+            </Fragment >
         )
     }
 }

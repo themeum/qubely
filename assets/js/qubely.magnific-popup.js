@@ -1860,7 +1860,7 @@ $.magnificPopup.registerModule(RETINA_NS, {
  _checkInstance(); }));
 
 
- jQuery(document).ready(function ($) {
+ jQuery(function ($) {
 	'use strict';
 	if (typeof $(document).magnificPopup !== 'undefined') {
         $('.qubely-video-popup').magnificPopup({

@@ -105,6 +105,30 @@ const attributes = {
             selector: '{{QUBELY}} .qubely-image-image {width: {{imageSizeCustom}};}'
         }]
     },
+    imageHeight: {
+        type: 'string',
+        default: 'auto',
+        style: [{
+            condition: [
+                { key: 'imageHeight', relation: '==', value: 'auto' },
+            ],
+            selector: '{{QUBELY}} .qubely-image-image {height: auto;}'
+        }]
+    },
+
+    imageCustomHeight: {
+        type: 'object',
+        default: {
+            md: 300,
+            unit: 'px'
+        },
+        style: [{
+            condition: [
+                { key: 'imageHeight', relation: '==', value: 'custom' },
+            ],
+            selector: '{{QUBELY}} .qubely-image-image {height: {{imageCustomHeight}};}'
+        }]
+    },
 
     imgAlt: {
         type: 'string',
@@ -129,7 +153,7 @@ const attributes = {
 
         },
         style: [{
-            selector: '{{QUBELY}} .qubely-image-container'
+            selector: '{{QUBELY}} .qubely-block-image .qubely-image-container, {{QUBELY}} .qubely-block-image .qubely-image-container img'
         }]
     },
 

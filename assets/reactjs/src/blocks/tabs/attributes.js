@@ -196,10 +196,8 @@ const attributes = {
         default: { url: '#' } 
     },
     imageNavTitleAlignment: {
-        type: 'object',
-        default: {
-            md: 'center',
-        },
+        type: 'string',
+        default: 'center',
         style: [
             {
                 condition: [
@@ -321,16 +319,24 @@ const attributes = {
     },
     navImageWidth: {
         type: 'object',
-        default: { md: 120, unit: 'px' },
-        style: [{
-            condition: [
-                { key: 'navImageSize', relation: '==', value: 'custom' }],
-            selector: '{{QUBELY}} .qubely-block-tab .qubely-tab-item .qubely-tab-image {width: {{navImageWidth}}; font-size: {{navImageWidth}};}'
-        }]
+        default: {
+            md: 120,
+            unit: 'px'
+        },
+        style: [
+            {
+                condition: [
+                    { key: 'navImageSize', relation: '==', value: 'custom' }
+                ],
+                selector: '{{QUBELY}} .qubely-block-tab .qubely-tab-item .qubely-tab-image {width: {{navImageWidth}}; font-size: {{navImageWidth}};}'
+            }]
     },
     navImageHeight: {
         type: 'object',
-        default: { md: 120, unit: 'px' },
+        default: {
+            md: 120,
+            unit: 'px'
+        },
         style: [{
             condition: [{ key: 'navImageSize', relation: '==', value: 'custom' }],
             selector: '{{QUBELY}} .qubely-block-tab .qubely-tab-item .qubely-tab-image {height: {{navImageHeight}};}'

@@ -246,9 +246,9 @@ const ParseCss = async (setDatabase = true) => {
 
     // reusable Block
     parseBlock(all_blocks);
- 
-    // localStorage.setItem('qubelyCSS', JSON.stringify(__blocks.css));
-    // localStorage.setItem('qubelyInteraction', JSON.stringify(__blocks.interaction));
+
+    localStorage.setItem('qubelyCSS', JSON.stringify(__blocks.css));
+    localStorage.setItem('qubelyInteraction', JSON.stringify(__blocks.interaction));
 
     // available blocks meta
     const available_blocks = availableBlocksMeta(all_blocks);

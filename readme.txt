@@ -4,7 +4,7 @@ Donate link: https://www.themeum.com
 Tags: blocks, gutenberg, gutenberg blocks, editor, block, page builder
 Requires at least: 5.0
 Tested up to: 5.5
-Stable tag: 1.6.0
+Stable tag: 1.6.2
 Requires PHP: 7.0
 License: GPL-2.0+
 License URI: http://www.gnu.org/licenses/gpl-2.0.txt
@@ -237,6 +237,21 @@ You can report bugs on the [support forum here](https://wordpress.org/support/pl
 
 
 == Changelog ==
+
+= 1.6.2 - 03 December, 2020 = 
+Update: Row block - Removed unnecessary padding,margin for better UX  
+Update: Image block - Custom height option for image  
+Update: Infobox block - Custom height option for image  
+Fix: Image block - Border-radius issue for smaller images  
+Fix: Post Grid block - Pagination issue on Backend  
+
+= 1.6.1 - 20 November, 2020 = 
+New: Tab block - Auto switch & Progress-bar option 
+New: Post Grid block - Custom Post-type support 
+New: Tabs block - New layouts for tab titles 
+Update: CSS preview issue on Frontend
+Update: Replaced deprecated jQuery functions
+Fix: Tab block - Missing add new block option in new tab for latest WordPress version
 
 = 1.6.0 - 23 October, 2020 = 
 New: Richtext Custom font-size format

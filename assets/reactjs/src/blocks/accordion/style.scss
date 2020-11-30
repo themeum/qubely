@@ -1,12 +1,12 @@
 .qubely-block-accordion {
-    >.wp-block-qubely-accordion-item {
+    > .wp-block-qubely-accordion-item {
         &:last-child {
             padding-bottom: 0;
             border-bottom: 0;
             margin-bottom: 0;
         }
     }
-    
+
     .qubely-accordion-item {
         display: block;
         .components-button:focus:enabled {
@@ -129,11 +129,13 @@
     background: #ed0b0b;
     border-radius: 50%;
     right: -10px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
     i {
         font-size: 11px !important;
     }
 }
 .qubely-accordion-item-remove-button i {
     font-style: normal;
-    margin-left: -1px;
 }

@@ -27,7 +27,9 @@
 			transition: box-shadow 0.35s;
 			img{
 				display: inline-block;
-				//display: block;
+				-webkit-transition: ease-in 300ms;
+				transition: ease-in 300ms;
+				object-fit: cover;
 			}
 			.qubely-image-content {
 				display: flex;
@@ -302,4 +304,8 @@
             }
         }
     }
+}
+.qubely-image-image.qubely-image-placeholder{
+	min-height: 200px;
+	min-width: 200px;
 }

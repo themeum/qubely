@@ -32,6 +32,7 @@ class Save extends Component {
                 navLayout,
                 enableImageNavTitle,
                 progressbarPosition,
+                imageNavTitleAlignment,
                 enableImageNavDesciption,
             }
         } = this.props;
@@ -62,7 +63,7 @@ class Save extends Component {
                             </Fragment>
                             :
                             <div className="qubely-tab-title">
-                                <div className={`description-type-tab nav-layout-${navLayout}`}>
+                                <div className={`description-type-tab nav-layout-${navLayout} align-${imageNavTitleAlignment}`}>
                                     {
                                         navLayout !== 'three' &&
                                         <Fragment>

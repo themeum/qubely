@@ -66,7 +66,9 @@ class Edit extends Component {
             imgAlt,
             imageUrl,
             imageSize,
+            imageHeight,
             imageSizeCustom,
+            imageCustomHeight,
             imageBorderRadius,
             imageOpacity,
             imageBoxShadow,
@@ -147,7 +149,7 @@ class Edit extends Component {
                                 <Url label={__('URL')} value={imageUrl} onChange={(value) => setAttributes({ imageUrl: value })} />
 
                                 <TextControl label={__('Alt Text')} value={imgAlt} onChange={val => setAttributes({ imgAlt: val })} />
-                                <RadioAdvanced label={__('Size')} value={imageSize} onChange={(value) => setAttributes({ imageSize: value })}
+                                <RadioAdvanced label={__('Size')} value={imageSize} onChange={(value) => setAttributes({ imageSize: value, recreateStyles: !recreateStyles })}
                                     options={[
                                         { label: __('Auto'), value: 'auto', title: __('Auto') },
                                         { label: __('S'), value: '300px', title: __('Small') },
@@ -159,6 +161,18 @@ class Edit extends Component {
                                 {imageSize == 'custom' &&
                                     <Fragment>
                                         <Range label={__('Custom Width')} value={imageSizeCustom} onChange={val => setAttributes({ imageSizeCustom: val })} min={10} max={1920} responsive unit={['px', 'em', '%']} device={device} onDeviceChange={value => this.setState({ device: value })} />
+                                        <Separator />
+                                    </Fragment>
+                                }
+                                <RadioAdvanced label={__('Image Height')} value={imageHeight} onChange={(value) => setAttributes({ imageHeight: value, recreateStyles: !recreateStyles })}
+                                    options={[
+                                        { label: __('Auto'), value: 'auto', title: __('Auto') },
+                                        { label: __('Custom'), value: 'custom', title: __('Custom') },
+                                    ]}
+                                />
+                                {imageHeight == 'custom' &&
+                                    <Fragment>
+                                        <Range label={__('Custom Height')} value={imageCustomHeight} onChange={val => setAttributes({ imageCustomHeight: val })} min={10} max={1920} responsive unit={['px', 'em', '%']} device={device} onDeviceChange={value => this.setState({ device: value })} />
                                         <Separator />
                                     </Fragment>
                                 }
