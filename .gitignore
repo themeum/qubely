@@ -36,6 +36,7 @@ build/Release
 # Dependency directories
 node_modules/
 jspm_packages/
+vendor/
 
 # TypeScript v1 declaration files
 typings/
@@ -74,6 +75,7 @@ assets/js/blocks.build.js.map
 assets/reactjs/node_modules/
 
 package-lock.json
+composer.lock
 .idea/
 .vscode/
 .DS_Store
