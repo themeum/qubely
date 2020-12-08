@@ -238,7 +238,7 @@ You can report bugs on the [support forum here](https://wordpress.org/support/pl
 
 == Changelog ==
 
-= 1.6.2 - 03 December, 2020 = 
+= 1.6.2 - 08 December, 2020 = 
 New: Post Grid block - Restructured Pagination  in Backend 
 Update: Row block - Removed unnecessary padding,margin for better UX  
 Update: Image block - Custom height option for image  
