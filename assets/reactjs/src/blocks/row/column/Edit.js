@@ -346,8 +346,7 @@ class Edit extends Component {
         if (resizing) {
             resigingClass += ' is-resizing'
         }
-        const { getBlockOrder } = select('core/block-editor')
-        let hasChildBlocks = getBlockOrder(clientId).length > 0
+        const { getBlockOrder } = select('core/block-editor');
 
         return (
             <Fragment>
@@ -448,7 +447,7 @@ class Edit extends Component {
                                 <InnerBlocks
                                     templateLock={false}
                                     renderAppender={(
-                                        hasChildBlocks ?
+                                        getBlockOrder(clientId).length > 0 ?
                                             undefined :
                                             () => <InnerBlocks.ButtonBlockAppender />
                                     )}

@@ -1,5 +1,15 @@
 
 
+<h3>1.6.2 - 08 December, 2020</h3>
+<ul>
+    <li>New: Post Grid block - Restructured Pagination  in Backend</li>
+    <li>Update: Row block - Removed unnecessary padding,margin for better UX</li>
+    <li>Update: Image block - Custom height option for image</li>
+    <li>Update: Infobox block - Custom height option for image</li>
+    <li>Fix: Image block - Border-radius issue for smaller images</li>
+    <li>Fix: Table of Contents block - Back to top button error on Frontend</li>
+</ul>
+
 <h3>1.6.1 - 20 November, 2020</h3>
 <ul>
     <li>New: Tab block - Auto switch & Progressbar option</li>
@@ -7,15 +17,4 @@
     <li>New: Tab block - New layouts for tab titles</li>
     <li>Update: CSS preview issue on Frontend</li>
     <li>Fix: Tab block - Add new tab issue in WordPress new versions</li>
-</ul>
-    
-<h3>1.6.0 - 23 October, 2020</h3>
-<ul>
-    <li>New: Richtext Custom font-size format</li>
-    <li>New: Range field - disable option </li>
-    <li>Fix: CSS issue on Preview posts </li>
-    <li>Fix: Team block - Internationalization issue on Frontend</li>
-    <li>Fix: Table of content block - List styling issue</li>
-    <li>Fix: Advanced Text block - Typography issue  </li>
-    <li>Update: Border filed - Custom Border disable option</li>
 </ul>

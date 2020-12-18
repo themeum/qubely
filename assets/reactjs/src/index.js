@@ -1,4 +1,5 @@
 const { __ } = wp.i18n;
+const { render } = wp.element;
 
 import './components/FieldRender';
 import './components/format-library';
@@ -84,28 +85,28 @@ wp.data.subscribe(() => {
         }
     }
 });
+
 //UPDATE BLOCK CATEGORY ICON
 wp.blocks.updateCategory('qubely', { icon: <img style={{ height: '20px', 'margin-top': '-2px' }} src={qubely_admin.plugin + 'assets/img/blocks/block-qubely.svg'} alt={__('Qubely')} /> });
 
-//APPEND IMPORT LAYOUTS BUTTON TO POST HEADER TOOLBAR
-import { ModalManager } from './helpers/ModalManager';
-import PageListModal from './helpers/PageListModal';
-// document.addEventListener("DOMContentLoaded", appendImportButton);
-window.addEventListener("load", appendImportButton);
 
-function appendImportButton() {
-    // let node = document.querySelector('.edit-post-header-toolbar');
-    let node = document.querySelector('.edit-post-header__toolbar');
-    let newElem = document.createElement('div');
-    newElem.classList.add("qubely-import-wrapper");
-    let html = '<div class="qubely-import-layout-btn-container">';
-    html += `<button id="qubelyImportLayoutBtn" title=${__("Qubely")}><img src=${qubely_admin.plugin}assets/img/qubely-logo-white.svg alt=${__("Qubely")} /> ${__("Import Layout")}</button>`;
-    html += '</div>';
-    newElem.innerHTML = html;
-    // node.appendChild(newElem);
-    node.insertBefore(newElem, node.childNodes[0]);
-    document.getElementById("qubelyImportLayoutBtn").addEventListener("click", qubelyImportLayout);
-}
-function qubelyImportLayout() {
-    ModalManager.open(<PageListModal rowClientId={false} />);
-}
+import { ImportButton } from './components/others';
+
+wp.domReady(function () {
+    setTimeout(function () {
+        
+        const toolbar = document.querySelector('.edit-post-header__toolbar');
+        const toolbarChild = document.querySelector('.edit-post-header-toolbar');
+
+        if (!toolbar) {
+            return
+        }
+        const qubelyImportWrapper = document.createElement('div');
+        qubelyImportWrapper.classList.add("qubely-import-button-wrapper");
+
+        if (!toolbar.querySelector('.qubely-import-button-wrapper')) {
+            render(<ImportButton />, qubelyImportWrapper);
+            toolbar.insertBefore(qubelyImportWrapper, toolbarChild);
+        }
+    }, 100);
+})
