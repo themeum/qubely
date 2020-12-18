@@ -39,7 +39,6 @@ jQuery(function ($) {
 
         if (!$('.block-editor-block-list__layout').length) {
 
-            const backToTop = $('.qubely-back-to-top-button');
             $('.qubely-back-to-top-button').on("click", function (e) {
                 e.preventDefault();
                 $("html, body").animate({
@@ -47,11 +46,15 @@ jQuery(function ($) {
                 }, 800);
             });
 
-            window.onscroll = () => {
-                if ($(window).scrollTop() > 300) {
-                    backToTop[0].classList.add("qubely-show-scroll")
-                } else {
-                    backToTop[0].classList.remove("qubely-show-scroll")
+            const backToTop = $('.qubely-back-to-top-button');
+        
+            if (typeof backToTop[0] !== 'undefined') {
+                window.onscroll = () => {
+                    if ($(window).scrollTop() > 300) {
+                        backToTop[0].classList.add("qubely-show-scroll");
+                    } else {
+                        backToTop[0].classList.remove("qubely-show-scroll");
+                    }
                 }
             }
         }
@@ -99,7 +102,7 @@ jQuery(function ($) {
 
     //TAB BLOCK
     function progress(parentElement, elem, delay) {
-        if(typeof elem ==='undefined'){
+        if (typeof elem === 'undefined') {
             return;
         }
         $('.qubely-tab-item', parentElement).each(function () {
@@ -109,7 +112,7 @@ jQuery(function ($) {
             });
         });
         elem.style.width = '100%';
-        elem.style.transition = 'width '+delay + 's';
+        elem.style.transition = 'width ' + delay + 's';
     };
 
     var timeouts = [];

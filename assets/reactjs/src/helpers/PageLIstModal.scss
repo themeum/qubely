@@ -546,13 +546,30 @@
 
 //global settings
 
-.qubely-import-global {
+.qubely-import-global,
+.qubely-restore-global_preset {
   width: 500px;
   border-radius: 4px;
   .qubely-import-settings-footer {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    margin-top: 20px;
+  }
+  .qubely-restore-settings-footer {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    margin-top: 20px;
+    flex-direction: column;
+    .action-buttons {
+      width: 100%;
+      justify-content: flex-end;
+    }
+  }
+  .help {
+    font-size: 12px;
+    margin-bottom: -5px;
     margin-top: 20px;
   }
   .qubely-import-settings {
@@ -574,8 +591,8 @@
         }
       }
     }
-    .remember-choice-box{
-      .label{
+    .remember-choice-box {
+      .label {
         display: inline-block;
       }
     }

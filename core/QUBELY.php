@@ -206,10 +206,11 @@ class QUBELY {
 				'qubely_recaptcha_secret_key' => $qubely_recaptcha_secret_key,
 				'site_url'                    => site_url(),
 				'admin_url'                   => admin_url(),
-				'actual_url'                  => str_replace( $protocols, '', site_url() ),
+				'actual_url'                  => str_replace($protocols, '', site_url()),
 				'import_with_global_settings' => $enable_global_settings,
 				'publishedPosts'              => wp_count_posts()->publish,
 				'mc_key'                      => $mc_key,
+				'is_core_active'              => is_plugin_active('qubely-core/qubely-core.php'),
 			)
 		);
 	}
@@ -640,6 +641,20 @@ class QUBELY {
 				),
 			)
 		);
+		register_rest_route(
+			'qubely/v1',
+			'/get_saved_preset/',
+			array(
+				array(
+					'methods'             => 'POST',
+					'callback'            => array( $this, 'get_saved_preset' ),
+					'permission_callback' => function () {
+						return current_user_can( 'edit_posts' );
+					},
+					'args'                => array(),
+				),
+			)
+		);
 		// For css file save
 		register_rest_route(
 			'qubely/v1',
@@ -785,6 +800,23 @@ class QUBELY {
 		}
 	}
 
+	public function get_saved_preset( $request ) {
+		$params = $request->get_params();
+		try {
+			if ( isset( $params['postId'] ) ) {
+				return array(
+					'success' => true,
+					'saved_preset'    => get_post_meta($params['postId'], '__qubely_global_settings', true),
+					'message' => 'Saved preset Successfully retrieved!!',
+				);
+			}
+		} catch ( Exception $e ) {
+			return array(
+				'success' => false,
+				'message' => $e->getMessage(),
+			);
+		}
+	}
 	public function qubely_get_content( $request ) {
 		$params = $request->get_params();
 		try {
