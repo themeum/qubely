@@ -1,4 +1,8 @@
-
+<h3>1.6.3 - 18 December, 2020</h3>
+<ul>
+    <li>Update: Backend API changes from layout/sections in Backend</li>
+    <li>Fix: Import layout button missing in WordPress 5.6</li>
+</ul>
 
 <h3>1.6.2 - 08 December, 2020</h3>
 <ul>
@@ -10,11 +14,3 @@
     <li>Fix: Table of Contents block - Back to top button error on Frontend</li>
 </ul>
 
-<h3>1.6.1 - 20 November, 2020</h3>
-<ul>
-    <li>New: Tab block - Auto switch & Progressbar option</li>
-    <liNew: Post Grid block - Custom Post-type support</li>
-    <li>New: Tab block - New layouts for tab titles</li>
-    <li>Update: CSS preview issue on Frontend</li>
-    <li>Fix: Tab block - Add new tab issue in WordPress new versions</li>
-</ul>
