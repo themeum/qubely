@@ -628,7 +628,7 @@ jQuery(function ($) {
 
         }
 
-        fetchPost();
+        // fetchPost();
 
 
     }
