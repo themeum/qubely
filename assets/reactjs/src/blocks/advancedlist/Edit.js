@@ -359,13 +359,13 @@ class Edit extends Component {
                                 <Range label={__('Spacing')} value={bulletSpacing} onChange={val => setAttributes({ bulletSpacing: val })} min={0} max={60} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
                                 <Tabs>
                                     <Tab tabTitle={__('Normal')}>
-                                        <Color label={__('Color')} disableAlpha value={bulletColor} onChange={val => setAttributes({ bulletColor: val })} />
+                                        <Color label={__('Color')} value={bulletColor} onChange={val => setAttributes({ bulletColor: val })} />
                                         {(listType == 'ordered' && useNumberBg == 1) &&
                                             <Color label={__('Background Color')} value={numberBg} onChange={val => setAttributes({ numberBg: val })} />
                                         }
                                     </Tab>
                                     <Tab tabTitle={__('Hover')}>
-                                        <Color label={__('Color')} disableAlpha value={bulletColorHover} onChange={val => setAttributes({ bulletColorHover: val })} />
+                                        <Color label={__('Color')} value={bulletColorHover} onChange={val => setAttributes({ bulletColorHover: val })} />
                                         {listType == 'ordered' && useNumberBg == 1 &&
                                             <Color label={__('Background Color')} value={numberBgHover} onChange={val => setAttributes({ numberBgHover: val })} />
                                         }
