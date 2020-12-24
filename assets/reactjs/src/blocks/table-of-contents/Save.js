@@ -1,6 +1,7 @@
 import classnames from 'classnames';
 import { TableOfContents } from './components';
 import {Fragment} from 'react';
+const { __ } = wp.i18n;
 const { Component } = wp.element;
 const { RichText } = wp.blockEditor
 const {
@@ -80,7 +81,7 @@ class Save extends Component {
                                     <RichText.Content
                                         tagName='div'
                                         className='title'
-                                        value={title}
+                                        value={__(title, 'qubely')}
                                     />
                                 </div>
                             )
