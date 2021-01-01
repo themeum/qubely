@@ -238,6 +238,9 @@ You can report bugs on the [support forum here](https://wordpress.org/support/pl
 
 == Changelog ==
 
+= 1.6.4 - 08 January, 2021 = 
+Fix: Table of Contents block - Indent value not saving issue
+
 = 1.6.3 - 18 December, 2020 = 
 Update: Backend API changes from layout/sections in Backend  
 Fix: Import layout button missing in WordPress 5.6

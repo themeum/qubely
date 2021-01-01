@@ -327,7 +327,7 @@ const attributes = {
         }]
     },
     indent: {
-        type: 'number',
+        type: 'object',
         default: {
             md: 35,
             unit: 'px'

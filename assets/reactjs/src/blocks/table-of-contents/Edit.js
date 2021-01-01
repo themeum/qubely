@@ -449,7 +449,7 @@ class Edit extends Component {
                                 />
                             </PanelBody>
 
-                            <PanelBody title={__('Smooth Scroll')}>
+                            <PanelBody title={__('Smooth Scroll')} initialOpen={false}>
                                 <Toggle
                                     label={__('Enable Smooth Scroll')}
                                     value={smoothScroll}
