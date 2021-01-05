@@ -1,6 +1,6 @@
-.qubely-media{
+.qubely-media {
 	margin-bottom: 15px;
-	label{
+	label {
 		margin-bottom: 10px;
 		display: block;
 	}
@@ -10,12 +10,12 @@
 		right: 10px;
 	}
 	.qubely-single-img {
-		.qubely-media-image-parent{
+		.qubely-media-image-parent {
 			position: relative;
 			display: inline-block;
 			min-height: 140px;
 			min-width: 140px;
-			img{
+			img {
 				margin: 0;
 			}
 		}
@@ -27,9 +27,8 @@
 		background: #ffffff;
 		cursor: copy;
 		border-radius: 5px;
-		span{
-			display: block;
-			margin-top: 8px;
+		div {
+			margin: 8px 0px;
 			text-align: center;
 		}
 	}

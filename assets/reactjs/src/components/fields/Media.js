@@ -83,7 +83,7 @@ class Media extends Component {
 												)
 											})
 										}
-										<div onClick={open} className={"qubely-placeholder-image"}><Dashicon icon="insert" /><span>{__('Insert')}</span></div>
+										<div onClick={open} className={"qubely-placeholder-image"}><div className="dashicon dashicons dashicons-insert" /><div>{__('Insert')}</div></div>
 									</div>
 									:
 									((value && value.url) ?
@@ -111,7 +111,7 @@ class Media extends Component {
 											}
 										</span>
 										:
-										<div onClick={open} className={"qubely-placeholder-image"}><Dashicon icon="insert" /><span>{__('Insert')}</span></div>
+										<div onClick={open} className={"qubely-placeholder-image"}><div className="dashicon dashicons dashicons-insert" /><div>{__('Insert')}</div></div>
 									)
 								}
 							</div>

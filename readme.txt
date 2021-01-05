@@ -240,6 +240,7 @@ You can report bugs on the [support forum here](https://wordpress.org/support/pl
 
 = 1.6.4 - 08 January, 2021 = 
 Fix: Table of Contents block - Indent value not saving issue
+Fix: Media field - Image picker conflict with WordPress 5.6 
 
 = 1.6.3 - 18 December, 2020 = 
 Update: Backend API changes from layout/sections in Backend  
