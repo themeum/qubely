@@ -65,6 +65,8 @@ class QUBELY {
 		 add_action( 'wp_ajax_qubely_send_form_data', array( $this, 'qubely_send_form_data' ) );
 		 add_action( 'wp_ajax_nopriv_qubely_send_form_data', array( $this, 'qubely_send_form_data' ) );
 
+		 add_action( 'wp_ajax_qubely_add_to_cart', array( $this, 'qubely_add_to_cart' ) );
+		 add_action( 'wp_ajax_nopriv_qubely_add_to_cart', array( $this, 'qubely_add_to_cart' ) );
 		 // dynamic blocks
 		 add_action( 'init', array( $this, 'init_dynamic_blocks' ) );
 
@@ -432,13 +434,15 @@ class QUBELY {
 
 	public function qubely_enqueue_scripts() {
 		wp_register_script( 'qubely_local_script', '' );
+		$protocols                   = array( 'http://', 'https://', 'http://www', 'https://www', 'www' );
 		wp_localize_script(
 			'qubely_local_script',
 			'qubely_urls',
 			array(
 				'plugin' => QUBELY_DIR_URL,
-				'ajax'   => admin_url( 'admin-ajax.php' ),
-				'nonce'  => wp_create_nonce( 'qubely_nonce' ),
+				'ajax'   => admin_url('admin-ajax.php'),
+				'nonce'  => wp_create_nonce('qubely_nonce'),
+				'actual_url' => str_replace($protocols, '', site_url()),
 			)
 		);
 		wp_enqueue_script( 'qubely_local_script' );
@@ -1649,6 +1653,23 @@ class QUBELY {
 			$responseData['status'] = 0;
 			$responseData['msg']    = $e->getMessage();
 			wp_send_json_error( $responseData );
+		}
+	}
+	/**
+	 * Ajax add to cart button 
+	 *
+	 * @return boolean,void     Return false if failure, echo json on success
+	 */
+	public function qubely_add_to_cart()
+	{
+		try {
+			$responseData['status'] = 1;
+			WC()->cart->add_to_cart($_POST['id'], 1);
+			wp_send_json_success($responseData);
+		} catch (\Exception $e) {
+			$responseData['status'] = 0;
+			$responseData['msg']    = $e->getMessage();
+			wp_send_json_error($responseData);
 		}
 	}
 }

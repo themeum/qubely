@@ -4,7 +4,7 @@ Donate link: https://www.themeum.com
 Tags: blocks, gutenberg, gutenberg blocks, editor, block, page builder
 Requires at least: 5.0
 Tested up to: 5.6
-Stable tag: 1.6.3
+Stable tag: 1.6.4
 Requires PHP: 7.0
 License: GPL-2.0+
 License URI: http://www.gnu.org/licenses/gpl-2.0.txt
@@ -238,8 +238,8 @@ You can report bugs on the [support forum here](https://wordpress.org/support/pl
 
 == Changelog ==
 
-= 1.6.4 - 08 January, 2021 = 
-Fix: Table of Contents block - Indent value not saving issue
+= 1.6.4 - 22 January, 2021 = 
+Fix: Table of Contents block - Indent value not saving 
 Fix: Media field - Image picker conflict with WordPress 5.6 
 
 = 1.6.3 - 18 December, 2020 = 
