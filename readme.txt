@@ -239,6 +239,7 @@ You can report bugs on the [support forum here](https://wordpress.org/support/pl
 == Changelog ==
 
 = 1.6.4 - 22 January, 2021 = 
+Update: Optimised Font Awesome CSS loading on Front-end
 Fix: Table of Contents block - Indent value not saving 
 Fix: Media field - Image picker conflict with WordPress 5.6 
 
