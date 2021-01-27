@@ -76,7 +76,7 @@ More advanced Gutenberg blocks, pre-designed sections and starter packs are comi
 
 ## Pro Features
 
-12 blocks that help you build more sophisticated designs-
+13 blocks that help you build more sophisticated designs-
 
 * [Form Builder](https://qubely.io/block/form-builder/)
 * [Image Gallery](https://qubely.io/block/image-gallery/)
@@ -90,6 +90,7 @@ More advanced Gutenberg blocks, pre-designed sections and starter packs are comi
 * [Pie Progress](https://qubely.io/block/pie-progress/)
 * [Countdown](https://qubely.io/block/countdown/)
 * [Table Builder](https://qubely.io/block/table-builder/)
+* [Woo Products](https://qubely.io/block/woo-products/)
 
 ⭐️ [Ready Sections](https://qubely.io/section/) ⭐️ [Starter Packs](https://qubely.io/starter-packs/)
 
@@ -240,7 +241,7 @@ You can report bugs on the [support forum here](https://wordpress.org/support/pl
 
 = 1.6.4 - 26 January, 2021 = 
 Update: Optimised Font Awesome CSS loading on Front-end
-Update: Contact Form block - Linebreak in message  
+Update: Contact Form block - Linebreak support in message  
 Fix: Table of Contents block - Indent value not saving 
 Fix: Media field - Image picker conflict with WordPress 5.6 
 
