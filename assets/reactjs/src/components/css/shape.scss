@@ -9,6 +9,7 @@
 }
 
 .qubely-shape-picker-options {
+    width: 230px;
     .qubely-shape-picker-option {
         padding: 10px 10px 10px 10px;
     }
@@ -58,7 +59,7 @@
         box-shadow: none;
         border: none;
         outline: none;
-        &:focus{
+        &:focus {
             outline: none !important;
         }
     }
