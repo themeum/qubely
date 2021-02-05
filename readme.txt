@@ -76,7 +76,7 @@ More advanced Gutenberg blocks, pre-designed sections and starter packs are comi
 
 ## Pro Features
 
-13 blocks that help you build more sophisticated designs-
+14 blocks that help you build more sophisticated designs-
 
 * [Form Builder](https://qubely.io/block/form-builder/)
 * [Image Gallery](https://qubely.io/block/image-gallery/)
@@ -91,6 +91,7 @@ More advanced Gutenberg blocks, pre-designed sections and starter packs are comi
 * [Countdown](https://qubely.io/block/countdown/)
 * [Table Builder](https://qubely.io/block/table-builder/)
 * [Woo Products](https://qubely.io/block/woo-products/)
+* [Woo Carousel](https://qubely.io/block/woo-carousel/)
 
 ⭐️ [Ready Sections](https://qubely.io/section/) ⭐️ [Starter Packs](https://qubely.io/starter-packs/)
 

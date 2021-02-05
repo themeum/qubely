@@ -1,16 +1,15 @@
+
+<h3>1.6.4 - 08 February, 2021</h3>
+<ul>
+    <li>Update: Optimised Font Awesome CSS loading on Front-end</li>
+    <li>Update: Contact Form block - Linebreak support in message</li>
+    <li>Fix: Table of Contents block - Indent value not saving</li> 
+    <li>Fix: Row block - Shape divider picker not showing</li>  
+    <li>Fix: Media field - Image picker conflict with WordPress 5.6</li> 
+</ul>
+
 <h3>1.6.3 - 18 December, 2020</h3>
 <ul>
     <li>Update: Backend API changes from layout/sections in Backend</li>
     <li>Fix: Import layout button missing in WordPress 5.6</li>
 </ul>
-
-<h3>1.6.2 - 08 December, 2020</h3>
-<ul>
-    <li>New: Post Grid block - Restructured Pagination  in Backend</li>
-    <li>Update: Row block - Removed unnecessary padding,margin for better UX</li>
-    <li>Update: Image block - Custom height option for image</li>
-    <li>Update: Infobox block - Custom height option for image</li>
-    <li>Fix: Image block - Border-radius issue for smaller images</li>
-    <li>Fix: Table of Contents block - Back to top button error on Frontend</li>
-</ul>
-
