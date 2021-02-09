@@ -240,7 +240,7 @@ You can report bugs on the [support forum here](https://wordpress.org/support/pl
 
 == Changelog ==
 
-= 1.6.4 - 08 February, 2021 = 
+= 1.6.4 - 09 February, 2021 = 
 Update: Optimised Font Awesome CSS loading on Front-end
 Update: Contact Form block - Linebreak support in message  
 Fix: Table of Contents block - Indent value not saving 

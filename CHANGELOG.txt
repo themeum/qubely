@@ -1,5 +1,5 @@
 
-<h3>1.6.4 - 08 February, 2021</h3>
+<h3>1.6.4 - 09 February, 2021</h3>
 <ul>
     <li>Update: Optimised Font Awesome CSS loading on Front-end</li>
     <li>Update: Contact Form block - Linebreak support in message</li>
