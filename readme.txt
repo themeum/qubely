@@ -4,7 +4,7 @@ Donate link: https://www.themeum.com
 Tags: blocks, gutenberg, gutenberg blocks, editor, block, page builder
 Requires at least: 5.0
 Tested up to: 5.6
-Stable tag: 1.6.4
+Stable tag: 1.6.5
 Requires PHP: 7.0
 License: GPL-2.0+
 License URI: http://www.gnu.org/licenses/gpl-2.0.txt
@@ -239,6 +239,9 @@ You can report bugs on the [support forum here](https://wordpress.org/support/pl
 
 
 == Changelog ==
+
+= 1.6.5 - 23 February, 2021 = 
+New: Font Awesome CSS loading settings under Qubely settings  
 
 = 1.6.4 - 09 February, 2021 = 
 Update: Optimised Font Awesome CSS loading on Front-end

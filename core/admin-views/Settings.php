@@ -203,6 +203,30 @@ class Settings
                         'suffix' => '',
                         'size' => 'regular',
                     ),
+                    'load_font_awesome_CSS' => array(
+                        'type' => 'select',
+                        'label' => __('Load Font Awesome CSS', 'qubely'),
+                        'default' => 'yes',
+                        'desc' => __('Select Yes if you want to load Font Awesome from Qubely', 'qubely'),
+                        'options' => array(
+                            'yes'   => __('Yes', 'qubely'),
+                            'no' => __('No', 'qubely'),
+                        ),
+                        'suffix' => '',
+                        'size' => 'regular',
+                    ),
+                    // 'load_google_fonts' => array(
+                    //     'type' => 'select',
+                    //     'label' => __('Load Google Fonts', 'qubely'),
+                    //     'default' => 'yes',
+                    //     'desc' => __('Select Yes if you want to load Google Fonts from Qubely', 'qubely'),
+                    //     'options' => array(
+                    //         'yes'   => __('Yes', 'qubely'),
+                    //         'no' => __('No', 'qubely'),
+                    //     ),
+                    //     'suffix' => '',
+                    //     'size' => 'regular',
+                    // ),
                 )
             )
         );

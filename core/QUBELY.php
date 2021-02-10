@@ -252,6 +252,18 @@ class QUBELY {
 		return $dividerArray;
 	}
 
+	/**
+	 * Load font-awesome CSS
+	 * 
+	 * 	 * @since 1.6.5
+	 */
+	public function qubely_load_fontawesome(){
+		$option_data = get_option( 'qubely_options');
+		$load_font_awesome = isset($option_data['load_font_awesome_CSS']) ? $option_data['load_font_awesome_CSS'] : 'yes';
+		if ($load_font_awesome == 'yes') {
+			wp_enqueue_style('qubely-font-awesome', QUBELY_DIR_URL . 'assets/css/font-awesome.min.css', false, QUBELY_VERSION);
+		} 
+	}
 
 	/**
 	 * Admin Style & Script
@@ -259,7 +271,7 @@ class QUBELY {
 	 * @since 1.0.0
 	 */
 	public function qubely_admin_assets() {
-		 wp_register_script( 'qubely_local_script', '' );
+		wp_register_script( 'qubely_local_script', '' );
 		wp_localize_script(
 			'qubely_local_script',
 			'qubely_urls',
@@ -276,8 +288,9 @@ class QUBELY {
 		wp_enqueue_style( 'qubely-animation', QUBELY_DIR_URL . 'assets/css/animation.css', false, QUBELY_VERSION );
 		wp_enqueue_style( 'qubely-magnific-popup-style', QUBELY_DIR_URL . 'assets/css/magnific-popup.css', false, QUBELY_VERSION );
 		wp_enqueue_style( 'qubely-style-min', QUBELY_DIR_URL . 'assets/css/style.min.css', false, QUBELY_VERSION );
-		wp_enqueue_style( 'font-awesome', QUBELY_DIR_URL . 'assets/css/font-awesome.min.css', false, QUBELY_VERSION );
 		#END_REPLACE
+
+		$this->qubely_load_fontawesome();
 
 		wp_enqueue_script( 'qubely-magnific-popup', QUBELY_DIR_URL . 'assets/js/qubely.magnific-popup.js', array( 'jquery' ), QUBELY_VERSION, true );
 		wp_enqueue_script( 'jquery-animatedHeadline', QUBELY_DIR_URL . 'assets/js/jquery.animatedheadline.js', array( 'jquery' ), QUBELY_VERSION, true );
@@ -426,8 +439,10 @@ class QUBELY {
 			wp_enqueue_style( 'qubely-animation', QUBELY_DIR_URL . 'assets/css/animation.css', false, QUBELY_VERSION );
 			wp_enqueue_style( 'qubely-magnific-popup-style', QUBELY_DIR_URL . 'assets/css/magnific-popup.css', false, QUBELY_VERSION );
 			wp_enqueue_style( 'qubely-style-min', QUBELY_DIR_URL . 'assets/css/style.min.css', false, QUBELY_VERSION );
-			wp_enqueue_style( 'qubely-font-awesome', QUBELY_DIR_URL . 'assets/css/font-awesome.min.css', false, QUBELY_VERSION );
 			#END_REPLACE
+
+
+			$this->qubely_load_fontawesome(); 
 		}
 	}
 
@@ -1181,6 +1196,7 @@ class QUBELY {
 		}
 	}
 
+
 	/**
 	 * on Preview
 	 * enqueue static CSS 
@@ -1194,9 +1210,11 @@ class QUBELY {
 		wp_enqueue_style( 'qubely-animation', QUBELY_DIR_URL . 'assets/css/animation.css', false, QUBELY_VERSION );
 		wp_enqueue_style( 'qubely-magnific-popup-style', QUBELY_DIR_URL . 'assets/css/magnific-popup.css', false, QUBELY_VERSION );
 		wp_enqueue_style( 'qubely-style-min', QUBELY_DIR_URL . 'assets/css/style.min.css', false, QUBELY_VERSION );
-		wp_enqueue_style( 'font-awesome', QUBELY_DIR_URL . 'assets/css/font-awesome.min.css', false, QUBELY_VERSION );
 		#END_REPLACE
-		
+
+		$this->qubely_load_fontawesome();
+
+
 		//Scripts
 		wp_enqueue_script( 'qubely-magnific-popup', QUBELY_DIR_URL . 'assets/js/qubely.magnific-popup.js', array( 'jquery' ), QUBELY_VERSION, true );
 		wp_enqueue_script( 'jquery-animatedHeadline', QUBELY_DIR_URL . 'assets/js/jquery.animatedheadline.js', array( 'jquery' ), QUBELY_VERSION, true );
