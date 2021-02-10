@@ -102,7 +102,7 @@ class GlobalSettings extends Component {
         }
         // this.getGlobalSettings();
         let hasExistingValues = true;
-        return fetchFromApi().then(data => {
+        fetchFromApi().then(data => {
             if (data.success) {
                 if (qubely_admin.is_core_active && savedMeta && (
                     savedMeta.key !== data.settings.activePreset ||
@@ -184,8 +184,7 @@ class GlobalSettings extends Component {
                             ...(typeof qubely_container_width !== undefined && qubely_container_width),
                             ...((hasExistingValues && typeof data.settings.breakingPoints !== 'undefined') & data.settings.breakingPoints)
                         },
-                        ...((hasExistingValues && typeof data.settings.presets !== 'undefined' && typeof data.settings.activePreset !== 'undefined') & data.settings.presets[data.settings.activePreset]),
-
+                        ...((hasExistingValues && typeof data.settings.presets !== 'undefined' && typeof data.settings.activePreset !== 'undefined') && data.settings.presets[data.settings.activePreset]),
                     }));
                 }
 
