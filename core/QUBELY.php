@@ -394,6 +394,7 @@ class QUBELY {
 		$blocks;
 		$contains_qubely_blocks = false;
 		$block_fonts = [];
+		$option_data = get_option('qubely_options');
 		$load_google_fonts = isset($option_data['load_google_fonts']) ? $option_data['load_google_fonts'] : 'yes';
 
 		if ($load_google_fonts == 'yes') {
@@ -402,7 +403,6 @@ class QUBELY {
 
 			if ($contains_qubely_blocks) {
 				$block_fonts = $this->gather_block_fonts($blocks, $block_fonts);
-				$option_data = get_option('qubely_options');
 				$global_settings = get_option($this->option_keyword);
 				$global_settings = $global_settings == false ? json_decode('{}') : json_decode($global_settings);
 				$global_settings = json_decode(json_encode($global_settings), true);
@@ -730,21 +730,26 @@ class QUBELY {
 	 *
 	 * @since 1.3.0
 	 */
-	public function qubely_inline_footer_scripts() {        ?>
-		<script>
-			// Set Preview CSS
-			document.addEventListener("DOMContentLoaded", function() {
-				const cussrent_url = window.location.href;
-				if (cussrent_url.includes('preview=true')) {
-					let cssInline = document.createElement('style');
-					cssInline.type = 'text/css';
-					cssInline.id = 'qubely-block-js-preview';
-					cssInline.innerHTML =JSON.parse( localStorage.getItem('qubelyCSS'));
-					window.document.getElementsByTagName("head")[0].appendChild(cssInline);
-				}
-			})
-		</script>
-		<?php
+	public function qubely_inline_footer_scripts() {       
+		global $wp_query;	 
+		$is_previewing= $wp_query->is_preview();
+		if($is_previewing){
+			?>
+			<script>
+				// Set Preview CSS
+				document.addEventListener("DOMContentLoaded", function() {
+					const cussrent_url = window.location.href;
+					if (cussrent_url.includes('preview=true')) {
+						let cssInline = document.createElement('style');
+						cssInline.type = 'text/css';
+						cssInline.id = 'qubely-block-js-preview';
+						cssInline.innerHTML =JSON.parse( localStorage.getItem('qubelyCSS'));
+						window.document.getElementsByTagName("head")[0].appendChild(cssInline);
+					}
+				})
+			</script>
+			<?php
+		}
 	}
 
 	/**

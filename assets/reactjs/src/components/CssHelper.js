@@ -123,11 +123,11 @@ export const cssTypography = (v) => {
     }
 
     let font = ''
-    if (v.family) {
-        if (!['Arial', 'Tahoma', 'Verdana', 'Helvetica', 'Times New Roman', 'Trebuchet MS', 'Georgia'].includes(v.family)) {
-            font = "@import url('https://fonts.googleapis.com/css?family=" + v.family.replace(/\s/g, '+') + ':' + (v.weight || 400) + "');"
-        }
-    }
+    // if (v.family) {
+    //     if (!['Arial', 'Tahoma', 'Verdana', 'Helvetica', 'Times New Roman', 'Trebuchet MS', 'Georgia'].includes(v.family)) {
+    //         font = "@import url('https://fonts.googleapis.com/css?family=" + v.family.replace(/\s/g, '+') + ':' + (v.weight || 400) + "');"
+    //     }
+    // }
     let data = { md: [], sm: [], xs: [] }
     if (v.size) { data = _push(_device(v.size, 'font-size:{{key}}'), data) }
     if (v.height) { data = _push(_device(v.height, 'line-height:{{key}} !important'), data) }
