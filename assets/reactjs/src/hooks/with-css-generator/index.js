@@ -83,6 +83,12 @@ export default function withCSSGenerator() {
 
                 _CSS = _CSS.replace(new RegExp('{{QUBELY}}', "g"), '.qubely-block-' + uniqueId)
 
+                let googleFonts = _CSS.match(new RegExp('@import([^;]*);', "g"));
+                if (googleFonts) {
+                    _CSS = _CSS.replace(new RegExp('@import([^;]*);', "g"), "");
+                    _CSS = googleFonts + " " + _CSS;
+                }
+
                 let styleSelector = window.document;
                 if (styleSelector.getElementById('qubely-block-' + uniqueId) === null) {
                     let cssInline = document.createElement('style');
