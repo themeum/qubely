@@ -311,7 +311,7 @@ class QUBELY {
 		foreach ($blocks as $key => $block) {
 			if (strpos($block['blockName'], 'qubely') !== false) {
 				foreach ($block['attrs'] as $key =>  $att) {
-					if (gettype($att) == 'array' && isset($att['openTypography'])) {
+					if (gettype($att) == 'array' && isset($att['openTypography']) && isset($att['family'])) {
 						if (isset($block['attrs'][$key]['activeSource'])) {
 							if ($block['attrs'][$key]['activeSource'] == 'custom') {
 								array_push($google_fonts,$block['attrs'][$key]['family']);
@@ -373,6 +373,7 @@ class QUBELY {
 			'qubely/postcarousel', 
 			'qubely/imagecarousel',
 			'qubely/verticaltabs',
+			'qubely/form',
 		);
 		foreach ($blocks as $key => $block) {
 			if (in_array($block['blockName'], $target_blocks, true)) {

@@ -232,7 +232,7 @@ const ParseCss = async (setDatabase = true) => {
         interaction: {}
     };
 
-    const globalCSS = await getGlobalSettings();
+    const globalCSS = await getGlobalSettings('frontend');
     __blocks.css += globalCSS;
 
     // if (typeof window.globalData != 'undefined') {

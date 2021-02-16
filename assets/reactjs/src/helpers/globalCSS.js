@@ -109,7 +109,7 @@ export const setTypoTitleStyle = (typos) => {
     injectGlobalCSS(__CSS, 'qubely-global-panel')
 }
 
-const appendTypoVariable = (value, index) => {
+const appendTypoVariable = (value, index, type) => {
     let responsive = '',
         nonResponsiveProps = '',
         data = {
@@ -139,7 +139,7 @@ const appendTypoVariable = (value, index) => {
     }
 
     //non responsive values
-    if (value.family) {
+    if (type !== 'frontend' && value.family) {
         if (!['Arial', 'Tahoma', 'Verdana', 'Helvetica', 'Times New Roman', 'Trebuchet MS', 'Georgia'].includes(value.family)) {
             nonResponsiveProps = "@import url('https://fonts.googleapis.com/css?family=" + value.family.replace(/\s/g, '+') + ':' + (value.weight || 400) + "');";
         }
@@ -172,7 +172,7 @@ const appendTypoVariable = (value, index) => {
     return tempCSS;
 }
 
-export const setGlobalTypo_Variables = (globalTypoes) => {
+export const setGlobalTypo_Variables = (globalTypoes, type) => {
     let CSS = '';
 
     globalTypoes.forEach((typo, index) => {
@@ -181,7 +181,7 @@ export const setGlobalTypo_Variables = (globalTypoes) => {
             value = typo.value
         }
         if (Object.keys(value).length >= 1) {
-            CSS += appendTypoVariable(value, index)
+            CSS += appendTypoVariable(value, index, type)
         }
     });
 
@@ -252,7 +252,7 @@ export const updateGlobalVaribales = async (presetValues, breakingPoints = undef
 
 
 
-export const getGlobalSettings = () => {
+export const getGlobalSettings = (type) => {
     let global_CSS = '';
     let {
         presets,
@@ -290,7 +290,7 @@ export const getGlobalSettings = () => {
             }
 
             global_CSS += setGlobalCSS_Variables(globalColors);
-            global_CSS += setGlobalTypo_Variables(globalData.typography);
+            global_CSS += setGlobalTypo_Variables(globalData.typography, type);
             global_CSS += setBreakingPoints(breakingPoints);
             return global_CSS;
         }
