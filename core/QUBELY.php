@@ -374,6 +374,16 @@ class QUBELY {
 			'qubely/imagecarousel',
 			'qubely/verticaltabs',
 			'qubely/form',
+			'qubely/button',
+			'qubely/buttongroup',
+			'qubely/table-of-contents',
+			'qubely/videopopup',
+			'qubely/table',
+			'qubely/pieprogress',
+			'qubely/wooproducts',
+			'qubely/postgrid',
+			'qubely/contactform',
+
 		);
 		foreach ($blocks as $key => $block) {
 			if (in_array($block['blockName'], $target_blocks, true)) {
