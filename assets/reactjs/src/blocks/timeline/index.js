@@ -329,7 +329,7 @@ registerBlockType('qubely/timeline', {
 			default: {},
 			style: [
 				{
-					selector: '{{QUBELY}} .qubely-timeline-description'
+					selector: '{{QUBELY}} .qubely-block-timeline .qubely-timeline-items .qubely-timeline-item .qubely-timeline-content .qubely-timeline-description'
 				}
 			]
 		},

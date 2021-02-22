@@ -240,8 +240,9 @@ You can report bugs on the [support forum here](https://wordpress.org/support/pl
 
 == Changelog ==
 
-= 1.6.5 - 23 February, 2021 = 
-New: Font Awesome CSS loading settings under Qubely settings  
+= 1.6.5 - 22 February, 2021 = 
+New: Settings to enable/disable loading Font Awesome CSS on frontend  
+New: Settings to enable/disable loading Google Fonts on the frontend  
 
 = 1.6.4 - 09 February, 2021 = 
 Update: Optimised Font Awesome CSS loading on Front-end
