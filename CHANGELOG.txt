@@ -1,3 +1,9 @@
+<h3>1.6.6 - 04 March, 2021</h3>
+<ul>
+    <li>Fix: Google fonts retrieve issue from Global settings</li>
+</ul>
+
+
 <h3>1.6.5 - 22 February, 2020</h3>
 <ul>
     <li>Update: Backend API changes from layout/sections in Backend</li>
@@ -5,11 +11,4 @@
 </ul>
 
 
-<h3>1.6.4 - 09 February, 2021</h3>
-<ul>
-    <li>Update: Optimised Font Awesome CSS loading on Front-end</li>
-    <li>Update: Contact Form block - Linebreak support in message</li>
-    <li>Fix: Table of Contents block - Indent value not saving</li> 
-    <li>Fix: Row block - Shape divider picker not showing</li>  
-    <li>Fix: Media field - Image picker conflict with WordPress 5.6</li> 
-</ul>
+

@@ -417,7 +417,10 @@ class QUBELY {
 				$global_settings = get_option($this->option_keyword);
 				$global_settings = $global_settings == false ? json_decode('{}') : json_decode($global_settings);
 				$global_settings = json_decode(json_encode($global_settings), true);
-				$all_global_fonts = $this->colsFromArray(array_column($global_settings['presets'][$global_settings['activePreset']]['typography'], 'value'), ['family', 'weight']);
+				$all_global_fonts = array();
+				if(isset($global_settings['presets'][$global_settings['activePreset']]['typography'])) {
+					$all_global_fonts = $this->colsFromArray(array_column($global_settings['presets'][$global_settings['activePreset']]['typography'], 'value'), ['family', 'weight']);
+				}
 				$global_fonts = array_column($all_global_fonts, 'family');
 
 				$all_fonts = array_unique(array_merge($global_fonts, $block_fonts));
