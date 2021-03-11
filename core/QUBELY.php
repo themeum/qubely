@@ -417,32 +417,33 @@ class QUBELY {
 				$global_settings = get_option($this->option_keyword);
 				$global_settings = $global_settings == false ? json_decode('{}') : json_decode($global_settings);
 				$global_settings = json_decode(json_encode($global_settings), true);
+				$gfonts = '';
 				$all_global_fonts = array();
-				if(isset($global_settings['presets'][$global_settings['activePreset']]['typography'])) {
+				if (isset($global_settings['presets']) && isset($global_settings['presets'][$global_settings['activePreset']]) && isset($global_settings['presets'][$global_settings['activePreset']]['typography'])) {
 					$all_global_fonts = $this->colsFromArray(array_column($global_settings['presets'][$global_settings['activePreset']]['typography'], 'value'), ['family', 'weight']);
 				}
-				$global_fonts = array_column($all_global_fonts, 'family');
+				if (count($all_global_fonts) > 0) {
+					$global_fonts = array_column($all_global_fonts, 'family');
 
-				$all_fonts = array_unique(array_merge($global_fonts, $block_fonts));
+					$all_fonts = array_unique(array_merge($global_fonts, $block_fonts));
 
-				if (!empty($all_fonts)) {
-					$system = array(
-						'Arial',
-						'Tahoma',
-						'Verdana',
-						'Helvetica',
-						'Times New Roman',
-						'Trebuchet MS',
-						'Georgia',
-					);
+					if (!empty($all_fonts)) {
+						$system = array(
+							'Arial',
+							'Tahoma',
+							'Verdana',
+							'Helvetica',
+							'Times New Roman',
+							'Trebuchet MS',
+							'Georgia',
+						);
 
-					$gfonts = '';
+						$gfonts_attr = ':100,100italic,200,200italic,300,300italic,400,400italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic';
 
-					$gfonts_attr = ':100,100italic,200,200italic,300,300italic,400,400italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic';
-
-					foreach ($all_fonts as $font) {
-						if (!in_array($font, $system, true) && !empty($font)) {
-							$gfonts .= str_replace(' ', '+', trim($font)) . $gfonts_attr . '|';
+						foreach ($all_fonts as $font) {
+							if (!in_array($font, $system, true) && !empty($font)) {
+								$gfonts .= str_replace(' ', '+', trim($font)) . $gfonts_attr . '|';
+							}
 						}
 					}
 
