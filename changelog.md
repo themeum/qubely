@@ -2,7 +2,7 @@
 
 
 ### 1.6.7 - 11 March, 2021 
-Fix: Google fonts retrieve issue from Global settings  
+Fix: Theme demo importing conflict with global settings
 ### 1.6.6 - 04 March, 2021 
 Fix: Google fonts retrieve issue from Global settings  
  
