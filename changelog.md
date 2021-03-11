@@ -168,25 +168,25 @@ Fix: Heading block - Separator color in the backend
 Fix: Range field - CSS updating issue on unit change
 Fix: Typography field - CSS updating issue on unit change
 
-= 1.3.3 - 18 February, 2020 =
+### 1.3.3 - 18 February, 2020 
 Fix: Post Grid block - Translation issue of the dates
 Fix: Post Grid block - Post title position settings in frontend
 Fix: CSS issue on template selection
 Update: Performance improvement
 
-= 1.3.2 - 12 February, 2020 =
+### 1.3.2 - 12 February, 2020 
 New : Background field - external image option
 Update : Performance improvement in CSS generator
 Fix: Context menu z-index issue
 
-= 1.3.1 - 31 January, 2020 =
+### 1.3.1 - 31 January, 2020 
 New: Table of Contents block
 Update : Map block - Default place id
 Fix: PageModal conflict with Learndash
 Fix: Customizer - Loading Async script issue
 
 
-= 1.3.0 - 21 January, 2020 =
+### 1.3.0 - 21 January, 2020 
 New: Animated Headline block
 Update: Block specific script loading on the frontend
 Update: Conditional script loading for interactions, animations, and parallax
@@ -197,12 +197,12 @@ Fix: Row block - Background overlay issue
 Fix: Gradient field - Default preview issue
 
 
-= 1.2.9 - 13 January, 2020 =
+### 1.2.9 - 13 January, 2020 
 New: Image block - External Image option
 Fix: Contact form block - focus border issue
 
 
-= 1.2.8 - 06 January, 2020 =
+### 1.2.8 - 06 January, 2020 
 Fix: Contact form block -  reCAPTCHA issue
 Fix: Additional CSS class issue in Back-end
 Fix: Button Group block - Button width issue
@@ -210,7 +210,7 @@ Fix: Carousel blocks - Active item dot indicator in Back-end
 Update: Block specific script loading in Front-end
 
 
-= 1.2.7 - 23 December, 2019 =
+### 1.2.7 - 23 December, 2019 
 New: Pie Progress block
 New: Predesigned block template feature
 New: Transform function in CSS generator
@@ -220,12 +220,12 @@ Fix: Reusable block issue in rows
 Fix: Post Grid block - Excerpt issue
 
 
-= 1.2.6 - 05 December, 2019 =
+### 1.2.6 - 05 December, 2019 
 New: Full Width, Wide Width alignment option in all blocks
 Update: Improvement in Interaction
 Fix: Team block - Social icons hover issue
 
-= 1.2.5 - 28 November, 2019 =
+### 1.2.5 - 28 November, 2019 
 New: Team block - Image border
 New: Team block - Image box shadow
 New: Media field - Local video preview option in Panel
@@ -239,7 +239,7 @@ Update: Tabs block - Block preview
 Update: Tabs block, Video popup block - Preview image path
 
 
-= 1.2.4 - 20 November, 2019 =
+### 1.2.4 - 20 November, 2019 
 New: Block preview option added
 New: Post Grid block - context menu
 Fix: CSS issue fixed in Reusable blocks
@@ -285,7 +285,7 @@ Fix: Contact Form block - CSS issue in input fields
 Fix: Image block - CSS issue
 Fix: Video Popup block - fixed layout naming issue
 
-= 1.1.5 - 01 October, 2019 =
+### 1.1.5 - 01 October, 2019 
 Fix: CSS issue in import layout modal
 Fix: Image block - Removed empty space
 Update: Carousel field - Bug fixed & finalized
@@ -332,7 +332,7 @@ New: Testimonial block - Retina image uploading option
 Fix: Image block - Top and bottom spacer issue
 Fix: CSS duplication issue on frontend
 
-= 1.0.7 - 06 August, 2019 =
+### 1.0.7 - 06 August, 2019 
 
 New: Image Block
 Update: Testimonial Block - Ratings settings UI improved
@@ -345,7 +345,7 @@ Update: Infobox Block - Settings UI improved
 Update: Media field improvement
 Fix: Row Block - Column reverse setting
 
-= 1.0.5 - 24 July, 2019 =
+### 1.0.5 - 24 July, 2019 
 
 Update: Advanced Text Block - HTML support for RichText
 Update: Testimonial Block - HTML support for RichText
@@ -354,13 +354,13 @@ Update: Pricing Block - HTML support for RichText
 Fix: CSS issue while exporting/importing pages
 Fix: Button Block - Outline layout hover fill color
 
-= 1.0.4 - 15 July, 2019 =
+### 1.0.4 - 15 July, 2019 
 
 Update: InfoBox Block - Button enable/disable toggle position
 Update: Button Component - Panel settings improvement
 Fix: Row - Margin field issue fixed
 
-= 1.0.3 - 11 July, 2019 =
+### 1.0.3 - 11 July, 2019 
 
 New: Block style copy/paste option on the context menu
 New: Typography field - gets Font family & font-weight reset option
@@ -368,14 +368,14 @@ Fix: Button block/Button component - has default text-color & background-color f
 Fix: Accordion block - not saving separator value issue
 Fix: Import layout modal conflict with Yoast SEO plugin
 
-= 1.0.2 - 08 July, 2019 =
+### 1.0.2 - 08 July, 2019 
 
 New: Button Group block - Responsive setting in Alignment field
 Update: Info Box block - Button default tag
 Update: Import layout modal modification
 Fix: Tabs block - inactive tab content display issue in Backend
 
-= 1.0.1 - 01 July, 2019 =
+### 1.0.1 - 01 July, 2019 
 
 New: Column block - Add column option in BlockControls
 Update: Social Icons block - Used Gutenberg’s Popover component
@@ -386,7 +386,7 @@ Fix: Icon List block - Issue with item removal using Backspace
 Fix: Pricing block - Issue with removing any newly added feature
 Fix: Social Icons block - Icon label inline changing issue
 
-= 1.0.0 - 20 June, 2019 =
+### 1.0.0 - 20 June, 2019 
 
 New: Premade sections & layouts
 New: Info Box block - Content disable option
@@ -412,7 +412,7 @@ Fix: Testimonial block -  Layout change issue
 Fix: Tabs block - Nav responsive margin issue
 Fix: Video Popup block - Icon ripple effect issue
 
-= 1.0.0-RC-2 - 31 May, 2019 =
+### 1.0.0-RC-2 - 31 May, 2019 
 
 New: Font family search option in typography
 Update: Pricing Badge UI
@@ -420,7 +420,7 @@ Update: Tab icon setting
 Update: Gradient angle & position UI
 Update: Shape divider settings in Row
 
-= 1.0.0-RC-1 - 24 May, 2019 =
+### 1.0.0-RC-1 - 24 May, 2019 
 
 Update: Block Wraper's description & keyword
 Update: Code optimization
@@ -428,7 +428,7 @@ Fix: List item auto focus issue in Advanced list & Icon list block
 Fix: Border Hover color option in Icon block
 Fix: Import layout Reloading Issue
 
-= 1.0.0-beta-3 - 22 May, 2019 =
+### 1.0.0-beta-3 - 22 May, 2019 
 
 New: Global color palate setting
 New: Recent font-family setting in typography
@@ -438,7 +438,7 @@ Fix: Text color issue in Advanced block
 Fix: Border Hover color option in Icon block
 Fix: Animation delay issue in global option
 
-= 1.0.0-beta-2 - 16 May, 2019 =
+### 1.0.0-beta-2 - 16 May, 2019 
 Update: Gradient field color picker position
 Update: Redesigned Testimonial Block's layout
 Update: Responsive device setting
@@ -447,7 +447,7 @@ Fix: Button Size issue in Pricing Block
 Fix: Transition issue in Video Popup block,  Button Block
 
 
-= 1.0.0-beta - 10 May, 2019 =
+### 1.0.0-beta - 10 May, 2019 
 New: Pricing Block
 New: Wrapper Block
 New: Team Block
@@ -461,7 +461,7 @@ Fix: Icon size in the icon list
 Fix: Autofocus in the icon list
 Fix: Video Popup SVG
 
-= 1.0.0-alpha-4 - 28 March, 2019 =
+### 1.0.0-alpha-4 - 28 March, 2019 
 
 New: Contact Form Block
 New: Icon List Block
@@ -474,12 +474,12 @@ Fix: Link open in new tab issue
 Fix: Button Alignment issue
 Fix: Video Popup youtube short link issue
 
-= 1.0.0-alpha-3 - 11 March, 2019 =
+### 1.0.0-alpha-3 - 11 March, 2019 
 
 Update: Tab Improvement
 Fix: Social icon blocks dropdown issue
 
-= 1.0.0-alpha-2 - 08 March, 2019 =
+###  1.0.0-alpha-2 - 08 March, 2019 
 
 New: Tabs block
 New: Social Icons block
@@ -489,11 +489,7 @@ Fix: Select field issue
 Fix: Responsive device issue
 Fix: Map block address issue
 
-= 1.0.0-alpha - 01 March, 2019 =
+### 1.0.0-alpha - 01 March, 2019 
 
 * Initial Alpha Release :)
 
-
-== Upgrade Notice ==
-
-Nothing here
