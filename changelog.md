@@ -12,18 +12,18 @@ New: Settings to enable/disable loading Font Awesome CSS on frontend
 New: Settings to enable/disable loading Google Fonts on the frontend  
 
 ### 1.6.4 - 09 February, 2021  
-Update: Optimised Font Awesome CSS loading on Front-end
-Update: Contact Form block - Linebreak support in message  
-Fix: Table of Contents block - Indent value not saving 
+Update: Optimised Font Awesome CSS loading on Front-end    
+Update: Contact Form block - Linebreak support in message    
+Fix: Table of Contents block - Indent value not saving  
 Fix: Row block - Shape divider picker not showing  
-Fix: Media field - Image picker conflict with WordPress 5.6 
+Fix: Media field - Image picker conflict with WordPress 5.6  
 
 ### 1.6.3 - 18 December, 2020 
 Update: Backend API changes from layout/sections in Backend  
 Fix: Import layout button missing in WordPress 5.6
 
 ### 1.6.2 - 08 December, 2020 
-New: Post Grid block - Restructured Pagination  in Backend 
+New: Post Grid block - Restructured Pagination  in Backend  
 Update: Row block - Removed unnecessary padding,margin for better UX  
 Update: Image block - Custom height option for image  
 Update: Infobox block - Custom height option for image  
@@ -31,19 +31,19 @@ Fix: Image block - Border-radius issue for smaller images
 Fix: Table of Contents block - Back to top button error on Frontend    
 
 ### 1.6.1 - 20 November, 2020 
-New: Tab block - Auto switch & Progress-bar option 
-New: Post Grid block - Custom Post-type support 
-New: Tabs block - New layouts for tab titles 
-Update: CSS preview issue on Frontend
-Update: Replaced deprecated jQuery functions
-Fix: Tab block - Missing add new block option in new tab for latest WordPress version
+New: Tab block - Auto switch & Progress-bar option   
+New: Post Grid block - Custom Post-type support  
+New: Tabs block - New layouts for tab titles  
+Update: CSS preview issue on Frontend   
+Update: Replaced deprecated jQuery functions   
+Fix: Tab block - Missing add new block option in new tab for latest WordPress version    
 
 ### 1.6.0 - 23 October, 2020 
-New: Richtext Custom font-size format
-New: Range field - disable option 
-Fix: CSS issue on Preview posts 
+New: Richtext Custom font-size format   
+New: Range field - disable option  
+Fix: CSS issue on Preview posts  
 Fix: Team block - Internationalization issue on Frontend   
-Fix: Table of content block - List styling issue 
+Fix: Table of content block - List styling issue   
 Fix: Advanced Text block - Typography issue  
 Update: Border filed - Custom Border disable option  
 
