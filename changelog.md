@@ -423,27 +423,27 @@ Update: Shape divider settings in Row
 ### 1.0.0-RC-1 - 24 May, 2019 
 
 Update: Block Wraper's description & keyword  
-Update: Code optimization
-Fix: List item auto focus issue in Advanced list & Icon list block
-Fix: Border Hover color option in Icon block
-Fix: Import layout Reloading Issue
+Update: Code optimization  
+Fix: List item auto focus issue in Advanced list & Icon list block  
+Fix: Border Hover color option in Icon block  
+Fix: Import layout Reloading Issue  
 
 ### 1.0.0-beta-3 - 22 May, 2019 
 
-New: Global color palate setting
-New: Recent font-family setting in typography
-Update: Inline text-color and background-color option
-Update: Removed hover option from Pricing block’s background
-Fix: Text color issue in Advanced block
-Fix: Border Hover color option in Icon block
-Fix: Animation delay issue in global option
+New: Global color palate setting  
+New: Recent font-family setting in typography  
+Update: Inline text-color and background-color option  
+Update: Removed hover option from Pricing block’s background  
+Fix: Text color issue in Advanced block  
+Fix: Border Hover color option in Icon block  
+Fix: Animation delay issue in global option  
 
 ### 1.0.0-beta-2 - 16 May, 2019 
-Update: Gradient field color picker position
-Update: Redesigned Testimonial Block's layout
-Update: Responsive device setting
-Update: Changed icon updating option in Pricing Block's features  
-Fix: Button Size issue in Pricing Block  
+Update: Gradient field color picker position  
+Update: Redesigned Testimonial Block's layout  
+Update: Responsive device setting  
+Update: Changed icon updating option in Pricing Block's features    
+Fix: Button Size issue in Pricing Block    
 Fix: Transition issue in Video Popup block,  Button Block  
 
 
