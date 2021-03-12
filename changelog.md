@@ -63,15 +63,15 @@ Fix: Import layout button conflict with new Gutenberg Plugin
 
 
 ### 1.5.3 - 21 August, 2020 
-New: Import Sections/Layouts with Global settings 
-New: Inline Color and Background Color compatibility with Global settings 
+New: Import Sections/Layouts with Global settings  
+New: Inline Color and Background Color compatibility with Global settings   
 New: Theme Preset activation hook  
 New : Row block - Even Column Height option  
-Update: All blocks - Context Menu refs
-Fix: Parse Qubely block issue for CSS generator
+Update: All blocks - Context Menu refs  
+Fix: Parse Qubely block issue for CSS generator   
 Fix: Accordion block - inline style issue 
-Fix: Accordion block - Accordion title editing issue on Safari  
-Fix: Dropdown Component - initial options issue with API call  
+Fix: Accordion block - Accordion title editing issue on Safari   
+Fix: Dropdown Component - initial options issue with API call   
 
 
 ### 1.5.2 - 29 July, 2020  
@@ -86,14 +86,14 @@ Fix: Table of Contents block - CSS issue
 
 
 ### 1.5.1 - 08 July, 2020  
-New : Theme colors support in Global settings
-New : Row Container width settings in Global settings
-New : Row Container width filter hook to modify default values from theme  
-Update: Blocks initial primary color updated with preset color
-Update: Gradient field - Global setting color support
-Update: Post Grid pagination default margin added
-Fix: Post Grid pagination backend spacing issue
-Fix: Accordion Block gradient Issue
+New : Theme colors support in Global settings  
+New : Row Container width settings in Global settings  
+New : Row Container width filter hook to modify default values from theme    
+Update: Blocks initial primary color updated with preset color  
+Update: Gradient field - Global setting color support  
+Update: Post Grid pagination default margin added  
+Fix: Post Grid pagination backend spacing issue  
+Fix: Accordion Block gradient Issue  
 
 ### 1.5.0 - 16 June, 2020 
 Fix: Image Block whitespace issue
@@ -110,9 +110,9 @@ New: Getting Started page redesign
 Fix: Minor bug fix
 
 ### 1.4.0 - 21 May, 2020 
-New: Global Settings
-New: Qubely Settings page - with Google Map API key, reCAPTCHA key storage
-Fix: Accordion block - Active Panel color
+New: Global Settings  
+New: Qubely Settings page - with Google Map API key, reCAPTCHA key storage  
+Fix: Accordion block - Active Panel color  
 Fix: Contact Form block - Form Submit issue  
 
 ###  1.3.91 - 29 April, 2020 
@@ -211,132 +211,132 @@ Update: Block specific script loading in Front-end
 
 
 ### 1.2.7 - 23 December, 2019 
-New: Pie Progress block  
-New: Predesigned block template feature
-New: Transform function in CSS generator
-Update: Column block default UI
-Fix: Block control CSS issue for blocks inside columns
-Fix: Reusable block issue in rows
-Fix: Post Grid block - Excerpt issue
+New: Pie Progress block    
+New: Predesigned block template feature  
+New: Transform function in CSS generator  
+Update: Column block default UI  
+Fix: Block control CSS issue for blocks inside columns  
+Fix: Reusable block issue in rows  
+Fix: Post Grid block - Excerpt issue  
 
 
 ### 1.2.6 - 05 December, 2019 
-New: Full Width, Wide Width alignment option in all blocks
-Update: Improvement in Interaction
-Fix: Team block - Social icons hover issue
+New: Full Width, Wide Width alignment option in all blocks  
+Update: Improvement in Interaction  
+Fix: Team block - Social icons hover issue  
 
 ### 1.2.5 - 28 November, 2019 
-New: Team block - Image border
-New: Team block - Image box shadow
-New: Media field - Local video preview option in Panel
-Fix: Dropdown field - Search
-Fix: Post Grid block - Stack background in style 3
-Fix: InfoBox block - Placeholder image width adjustment issue
-Fix: Contact Form block - Input field background Material layout
-Fix: Broken CSS issue after editing original Reusable blocks
-Update: Tabs block - Frontend script
-Update: Tabs block - Block preview
-Update: Tabs block, Video popup block - Preview image path
+New: Team block - Image border  
+New: Team block - Image box shadow  
+New: Media field - Local video preview option in Panel  
+Fix: Dropdown field - Search  
+Fix: Post Grid block - Stack background in style 3  
+Fix: InfoBox block - Placeholder image width adjustment issue  
+Fix: Contact Form block - Input field background Material layout  
+Fix: Broken CSS issue after editing original Reusable blocks  
+Update: Tabs block - Frontend script  
+Update: Tabs block - Block preview  
+Update: Tabs block, Video popup block - Preview image path  
 
 
 ### 1.2.4 - 20 November, 2019 
-New: Block preview option added
-New: Post Grid block - context menu
-Fix: CSS issue fixed in Reusable blocks
-Fix: Interaction issue fixed
-Fix: Typography field - Search option
-Fix: Divider block - Divider color issue
-Fix: Icon list block - Padding issue
-Fix: Team block - Alignment issue
-Fix: Icon list block - Animation issue
-Fix: Button Group block - Animation issue
-Fix: Timeline block - Responsive issue
-Fix: Infobox block - Image width issue
-Fix: Image block - Animation issue
-Update: Team block - Image width
-Update: Import layout design
+New: Block preview option added  
+New: Post Grid block - context menu  
+Fix: CSS issue fixed in Reusable blocks  
+Fix: Interaction issue fixed  
+Fix: Typography field - Search option  
+Fix: Divider block - Divider color issue  
+Fix: Icon list block - Padding issue  
+Fix: Team block - Alignment issue  
+Fix: Icon list block - Animation issue  
+Fix: Button Group block - Animation issue  
+Fix: Timeline block - Responsive issue  
+Fix: Infobox block - Image width issue  
+Fix: Image block - Animation issue  
+Update: Team block - Image width  
+Update: Import layout design  
 
 ### 1.2.3 - 12 November, 2019 
-Update: WordPress 5.3 compatibility added
-Update: Heading block - Replaced deprecated components: RichText, InspectorControls, BlockControls
+Update: WordPress 5.3 compatibility added  
+Update: Heading block - Replaced deprecated components: RichText, InspectorControls, BlockControls  
 
 
 ### 1.2.2 - 11 November, 2019 
-New: add_theme_support added to qubely-color-palette
-Fix: CSS loading from file issue
-Fix: Qubely CSS loading in non-Qubely pages
-Fix: Global settings issue
-Fix: Post Grid block - Date issue fixed
-Update: Few label texts
+New: add_theme_support added to qubely-color-palette  
+Fix: CSS loading from file issue  
+Fix: Qubely CSS loading in non-Qubely pages  
+Fix: Global settings issue  
+Fix: Post Grid block - Date issue fixed  
+Update: Few label texts  
 
 ### 1.2.1 - 01 November, 2019 
-Fix: Import Layout - Sections & Starter Packs count & search issue fixed
-Update: Import Layout - Recategorized Sections & Starter Packs
+Fix: Import Layout - Sections & Starter Packs count & search issue fixed  
+Update: Import Layout - Recategorized Sections & Starter Packs  
 
 
 ### 1.2.0 - 30 October, 2019 
-New: Mouse Movement effect
-Update: Contact Form block - Script
-Update: Post Grid block - Style
+New: Mouse Movement effect  
+Update: Contact Form block - Script  
+Update: Post Grid block - Style  
 
 
 ### 1.1.6 - 09 October, 2019 
-Fix: Contact Form block - CSS issue in input fields
-Fix: Image block - CSS issue
-Fix: Video Popup block - fixed layout naming issue
-
+Fix: Contact Form block - CSS issue in input fields  
+Fix: Image block - CSS issue  
+Fix: Video Popup block - fixed layout naming issue  
+  
 ### 1.1.5 - 01 October, 2019 
-Fix: CSS issue in import layout modal
-Fix: Image block - Removed empty space
-Update: Carousel field - Bug fixed & finalized
+Fix: CSS issue in import layout modal  
+Fix: Image block - Removed empty space  
+Update: Carousel field - Bug fixed & finalized  
 
 
 ### 1.1.4 - 24 September, 2019 
-New: Image block - Image URL option
-Update: Timeline block - Item removing option
-Fix: Row block - Column reverse issue for child rows
-Fix: Row block - Column issue in responsive devices
+New: Image block - Image URL option  
+Update: Timeline block - Item removing option  
+Fix: Row block - Column reverse issue for child rows  
+Fix: Row block - Column issue in responsive devices  
 
 ### 1.1.3 - 19 September, 2019 
 
-New: 2 page templates - Qubely Full Width, Qubely Canvas
-Update: Performance improvement
-Update: Refactored components & fields
-Fix: Post Grid block - Category clickable issue in Edit view
+New: 2 page templates - Qubely Full Width, Qubely Canvas  
+Update: Performance improvement  
+Update: Refactored components & fields  
+Fix: Post Grid block - Category clickable issue in Edit view  
 
 ###   1.1.2 - 06 September, 2019 
 
-Fix: Font weight issue in frontend
-Fix: Conflict with Gutenberg plugin
+Fix: Font weight issue in frontend  
+Fix: Conflict with Gutenberg plugin  
 
 ### 1.1.1 - 03 September, 2019 
 
-Fix: Post Grid block - Front end issue
+Fix: Post Grid block - Front end issue  
 
 ###   1.1.0 - 02 September, 2019 
 
-New: Post Grid block
-New: Custom dropdown field with search option
+New: Post Grid block  
+New: Custom dropdown field with search option  
 
 ###   1.0.9 - 23 August, 2019 
 
-Update: Timeline block - Item limit increased to 100 from 20
-Fix: Inline CSS issue on frontend
+Update: Timeline block - Item limit increased to 100 from 20  
+Fix: Inline CSS issue on frontend  
 
 ### 1.0.8 - 09 August, 2019 
 
 New: Timeline block
-New: Info Box block - Retina image uploading option
-New: Team block - Retina image uploading option
-New: Testimonial block - Retina image uploading option
-Fix: Image block - Top and bottom spacer issue
-Fix: CSS duplication issue on frontend
+New: Info Box block - Retina image uploading option  
+New: Team block - Retina image uploading option  
+New: Testimonial block - Retina image uploading option  
+Fix: Image block - Top and bottom spacer issue  
+Fix: CSS duplication issue on frontend  
 
 ### 1.0.7 - 06 August, 2019 
 
 New: Image Block
-Update: Testimonial Block - Ratings settings UI improved  
-Fix: Qubely Options page issue  
+Update: Testimonial Block - Ratings settings UI improved    
+Fix: Qubely Options page issue    
 
 ### 1.0.6 - 01 August, 2019 
 
