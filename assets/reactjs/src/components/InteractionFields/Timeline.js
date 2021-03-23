@@ -1,9 +1,10 @@
-const { __ } = wp.i18n
-const { isShallowEqual } = wp
-const { Component } = wp.element
+
 import { IntParser } from './InteractionParser'
 import RenderFields from './RenderFields';
 import { interactionActions } from './InteractionData';
+import isShallowEqual from '@wordpress/is-shallow-equal';
+const { __ } = wp.i18n
+const { Component } = wp.element
 
 class Timeline extends Component {
     
