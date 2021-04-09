@@ -104,7 +104,7 @@ registerBlockType('qubely/text', {
             style: [
                 { selector: '{{QUBELY}} .qubely-block-text-title-container .qubely-block-text-title-inner .qubely-block-text-title' }]
         },
-        titleColor: { type: 'string', default: '', style: [{ selector: '{{QUBELY}} .qubely-block-text-title {color: {{titleColor}};}' }] },
+        titleColor: { type: 'string', default: '', style: [{ selector: '{{QUBELY}} .qubely-block-text .qubely-block-text-title-container .qubely-block-text-title-inner .qubely-block-text-title,{{QUBELY}} .qubely-block-text .qubely-block-text-title-container .qubely-block-text-title-inner .qubely-block-text-title >* {color: {{titleColor}};}' }] },
         titleSpacing: { type: 'object', default: { md: 10, unit: 'px' }, style: [{ selector: '{{QUBELY}} .qubely-block-text-title-inner {margin-bottom: {{titleSpacing}};}' }] },
 
         subTitle: { type: 'boolean', default: 0 },

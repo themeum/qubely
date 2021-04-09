@@ -117,8 +117,8 @@ class TableOfContents extends Component {
         };
 
         const parseList = list =>
-            list.map(item => (
-                <li>
+            list.map((item) => (
+                <li key={item.anchor}>
                     <a
                         href={`#${item.anchor}`}
                         dangerouslySetInnerHTML={{

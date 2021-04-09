@@ -242,7 +242,8 @@ You can report bugs on the [support forum here](https://wordpress.org/support/pl
 
 = 1.6.9 - 23 April, 2021 = 
 Fix: Divider block - divider options not showing  
-Fix: Table of Contents block -  
+Fix: Table of Contents block -  Invalid JSON while parsing headings  
+Fix: Advanced Text block - Title color not working if inline link added  
 
 = 1.6.8 - 23 March, 2021 = 
 Fix: Interaction conflict with WordPress 5.7  
