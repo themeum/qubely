@@ -240,6 +240,10 @@ You can report bugs on the [support forum here](https://wordpress.org/support/pl
 
 == Changelog ==
 
+= 1.6.9 - 23 April, 2021 = 
+Fix: Divider block - divider options not showing  
+Fix: Table of Contents block -  
+
 = 1.6.8 - 23 March, 2021 = 
 Fix: Interaction conflict with WordPress 5.7  
 

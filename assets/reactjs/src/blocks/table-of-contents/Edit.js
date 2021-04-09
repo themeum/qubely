@@ -354,18 +354,18 @@ class Edit extends Component {
                                                         value={collapsibleIcon}
                                                         onChange={collapsibleIcon => setAttributes({ collapsibleIcon })} />
                                                 ) : (
-                                                        <Fragment>
-                                                            <TextControl
-                                                                label="Open Text"
-                                                                value={collapsibleOpen}
-                                                                onChange={(collapsibleOpen) => setAttributes({ collapsibleOpen })} />
-                                                            <TextControl
-                                                                label="Close Text"
-                                                                value={collapsibleClose}
-                                                                onChange={(collapsibleClose) => setAttributes({ collapsibleClose })} />
-                                                        </Fragment>
+                                                    <Fragment>
+                                                        <TextControl
+                                                            label="Open Text"
+                                                            value={collapsibleOpen}
+                                                            onChange={(collapsibleOpen) => setAttributes({ collapsibleOpen })} />
+                                                        <TextControl
+                                                            label="Close Text"
+                                                            value={collapsibleClose}
+                                                            onChange={(collapsibleClose) => setAttributes({ collapsibleClose })} />
+                                                    </Fragment>
 
-                                                    )
+                                                )
                                             }
                                         </Fragment>
                                     )
@@ -551,7 +551,7 @@ class Edit extends Component {
                         ])}>
                             {
                                 showTitle && (
-                                    <div class="qubely-table-of-contents-heading">
+                                    <div className="qubely-table-of-contents-heading">
                                         <RichText
                                             tagName="div"
                                             value={__(title, 'qubely')}
@@ -573,8 +573,8 @@ class Edit extends Component {
                                             isCollapsed === true ? (
                                                 collapsibleType !== 'icon' ? <a href='javascript:;'>{collapsibleOpen}</a> : <a href="javascript:;" className={currentIconClass.close}></a>
                                             ) : (
-                                                    collapsibleType !== 'icon' ? <a href='javascript:;'>{collapsibleClose}</a> : <a href="javascript:;" className={currentIconClass.open}></a>
-                                                )
+                                                collapsibleType !== 'icon' ? <a href='javascript:;'>{collapsibleClose}</a> : <a href="javascript:;" className={currentIconClass.open}></a>
+                                            )
                                         }
                                     </div>
                                 )
@@ -582,7 +582,8 @@ class Edit extends Component {
                         </div>
                         <div className='qubely-table-of-contents-body'>
                             <TableOfContents
-                                headers={headerLinks && JSON.parse(headerLinks)}
+                                // headers={headerLinks && JSON.parse(headerLinks)}
+                                headers={headerLinks && JSON.parse(headerLinks.replace(/u0022/g, "\""))}
                                 blockProp={this.props}
                             />
                         </div>

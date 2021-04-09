@@ -1,6 +1,6 @@
 import classnames from 'classnames';
 import { TableOfContents } from './components';
-import {Fragment} from 'react';
+import { Fragment } from 'react';
 const { __ } = wp.i18n;
 const { Component } = wp.element;
 const { RichText } = wp.blockEditor
@@ -49,7 +49,7 @@ class Save extends Component {
 
 
         const currentIconClass = {};
-        switch(collapsibleIcon) {
+        switch (collapsibleIcon) {
             case 'chevron-cirlce':
                 currentIconClass.open = 'fas fa-chevron-circle-up';
                 currentIconClass.close = 'fas fa-chevron-circle-down';
@@ -88,7 +88,7 @@ class Save extends Component {
                         }
                         {
                             minimizeBox && (
-                                <div className={`qubely-table-of-contents-toggle ${isCollapsed ? 'qubely-toc-collapsed': ''}`}>
+                                <div className={`qubely-table-of-contents-toggle ${isCollapsed ? 'qubely-toc-collapsed' : ''}`}>
                                     {
                                         collapsibleType !== 'icon' ? (
                                             <Fragment>
@@ -115,7 +115,7 @@ class Save extends Component {
 
                     <div className="qubely-table-of-contents-body">
                         <TableOfContents
-                            headers={headerLinks && JSON.parse(headerLinks)}
+                            headers={headerLinks && JSON.parse( headerLinks.replace(/u0022/g, "\""))}
                             blockProp={this.props}
                             frontend
                         />
