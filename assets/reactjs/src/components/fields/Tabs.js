@@ -58,6 +58,6 @@ export default class Tabs extends Component {
     }
 }
 
-Tabs.PropTypes = {
-    tabs: PropTypes.element.isRequired
-};
+// Tabs.propTypes = {
+//     tabs: PropTypes.element.isRequired
+// };

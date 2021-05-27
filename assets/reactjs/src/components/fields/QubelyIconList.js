@@ -20,7 +20,7 @@ class QubelyIconListEdit extends Component {
             focusedListItem.focus();
         } else if (this.props.listItems.length < prevProps.listItems.length) {
             let focusedListItem = document.querySelector(`.${this.props.parentBlock} .qubely-list-item-text-${focusedItem}`)
-          
+
             if (this.props.isSelected && focusedListItem) {
                 this.placeCaretAtEnd(focusedListItem);
             }
@@ -67,7 +67,7 @@ class QubelyIconListEdit extends Component {
         const { focusedItem, removeItemViaBackSpace } = this.state
         return listItems.map((item, index) => {
             return (
-                <li className={`qubely-list-li qubely-list-li-editor qubely-icon-position-${iconPosition}`}>
+                <li className={`qubely-list-li qubely-list-li-editor qubely-icon-position-${iconPosition}`} key={index}>
                     <div ref="avoidOnClick" className={`qubely-list-item qubely-list-item-${index}`} onClick={() => this.setState({ currentListItemIndex: index })}>
                         {iconPosition == 'right' && item.text.length > 0 && this.renderDeleteIcon(index)}
                         {enableListIcons && iconPosition == 'left' && <span className={`qubely-list-item-icon ${item.icon} fa-fw`} style={item.customColor ? { color: item.customColor } : {}} />}
@@ -157,7 +157,7 @@ class QubelyIconListSave extends Component {
                         listItems.map((item, index) => {
                             if (item.text.length > 0) {
                                 return (
-                                    <li className={`qubely-list-li qubely-icon-position-${iconPosition}`}>
+                                    <li className={`qubely-list-li qubely-icon-position-${iconPosition}`} key={index}>
                                         <div className={`qubely-list-item qubely-list-item-${index}`} >
                                             {enableListIcons && iconPosition == 'left' && <span className={`qubely-list-item-icon ${item.icon} fa-fw`} style={item.customColor ? { color: item.customColor } : {}} />}
                                             <div
