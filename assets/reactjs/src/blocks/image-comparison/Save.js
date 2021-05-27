@@ -84,7 +84,7 @@ class Save extends Component {
 					</div>
 					{
 						(validImageA && validImageB) &&
-						<span class="comparison-scrollCircle" />
+						<span className="comparison-scrollCircle" />
 					}
 				</div>
 

@@ -833,7 +833,7 @@ class PageListModal extends Component {
                         >
                             <div className="qubely-import-settings">
                                 <div className="label">{__("Apply global styling while importing this?")} </div>
-                                <div class="qubely-import-settings-footer">
+                                <div className="qubely-import-settings-footer">
                                     <div className="remember-choice-box">
                                         <input
                                             id="isGoing"

@@ -908,7 +908,7 @@ class GlobalSettings extends Component {
         //             onRequestClose={() => this.setState({ showModal: false })}>
         //             <div className="qubely-import-settings">
         //                 <div className="label">{__("Restore previously saved preset ?")} </div>
-        //                 <div class="qubely-restore-settings-footer">
+        //                 <div className="qubely-restore-settings-footer">
         //                     <div className="action-buttons">
         //                         <div className="action-button no" onClick={() => { restoreSavedpreset('no') }}>{__('No')}</div>
         //                         <div className="action-button yes" onClick={() => { restoreSavedpreset('yes') }}>{__('Yes')}</div>
