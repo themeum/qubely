@@ -748,19 +748,20 @@ class QUBELY {
 	public function qubely_inline_footer_scripts() {       
 		global $wp_query;	 
 		$is_previewing= $wp_query->is_preview();
-		if($is_previewing){
+		$can_edit= current_user_can( 'edit_posts' );
+		if($is_previewing || $can_edit){
 			?>
 			<script>
 				// Set Preview CSS
 				document.addEventListener("DOMContentLoaded", function() {
 					const cussrent_url = window.location.href;
-					if (cussrent_url.includes('preview=true')) {
+					// if (cussrent_url.includes('preview=true')) {
 						let cssInline = document.createElement('style');
 						cssInline.type = 'text/css';
 						cssInline.id = 'qubely-block-js-preview';
 						cssInline.innerHTML =JSON.parse( localStorage.getItem('qubelyCSS'));
 						window.document.getElementsByTagName("head")[0].appendChild(cssInline);
-					}
+					// }
 				})
 			</script>
 			<?php
@@ -924,6 +925,20 @@ class QUBELY {
 				),
 			)
 		);
+		register_rest_route(
+			'qubely/v1',
+			'/append_reusable_css/',
+			array(
+				array(
+					'methods'             => 'POST',
+					'callback'            => array( $this, 'append_reusable_css_callback' ),
+					'permission_callback' => function () {
+						return current_user_can( 'edit_posts' );
+					},
+					'args'                => array(),
+				),
+			)
+		);
 
 		register_rest_route(
 			'qubely/v1',
@@ -1014,6 +1029,39 @@ class QUBELY {
 					)
 				);
 			}
+		} catch ( Exception $e ) {
+			wp_send_json_error(
+				array(
+					'success' => false,
+					'message' => $e->getMessage(),
+				)
+			);
+		}
+	}
+	public function append_reusable_css_callback( $request ) {
+		try {
+			global $wp_filesystem;
+			if ( ! $wp_filesystem ) {
+				require_once ABSPATH . 'wp-admin/includes/file.php';
+			}
+			$params  = $request->get_params();
+			$css     = $params['css'];
+
+				$filename   = "qubely-preview.css";
+				$upload_dir = wp_upload_dir();
+				$dir        = trailingslashit( $upload_dir['basedir'] ) . 'qubely/';
+				if ( file_exists( $dir . $filename ) ) {
+					$file = fopen( $dir . $filename, 'a' );
+					fwrite( $file, $css );
+					fclose( $file );
+				}
+				wp_send_json_success(
+					array(
+						'success' => true,
+						'message' => 'appended reusable css in preview file',
+					)
+				);
+			
 		} catch ( Exception $e ) {
 			wp_send_json_error(
 				array(

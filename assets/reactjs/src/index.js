@@ -46,8 +46,8 @@ import './plugins';
 import './blocks/pagesettings'
 
 
-window.qubelyDevice = 'md'
-window.bindCss = false
+window.qubelyDevice = 'md';
+window.bindCss = false;
 window.globalData = {
     settings: {
         colorPreset1: qubely_admin.palette[0],
@@ -62,29 +62,45 @@ window.globalSaving = false
 
 // Save CSS in Database/File
 import ParseCss from './helpers/ParseCss';
-wp.data.subscribe(() => {
-    const {
-        isPreviewingPost,
-        isSavingPost,
-        isAutosavingPost,
-        isPublishingPost
-    } = wp.data.select("core/editor");
 
-    if (isPreviewingPost()
-        || isPublishingPost()
-        || (isSavingPost() && (!isAutosavingPost()))) {
+wp.data.subscribe(() => {
+    const hasNonPostEntityChanges = wp.data.select('core/editor').hasNonPostEntityChanges();
+    if (hasNonPostEntityChanges) {
+        $('.components-button.editor-post-publish-button.editor-post-publish-button__button.is-primary').click(() => {
+            setTimeout(() => {
+                // console.log($('.components-button.editor-entities-saved-states__save-button.is-primary'));
+                $(".components-button.editor-entities-saved-states__save-button.is-primary").bind("click", function () {
+                    ParseCss(true);
+                });
+            });
+        });
+    }
+
+    try {
+
         if (window.bindCss === false) {
-            if (isPreviewingPost()) {
-                ParseCss(false);
-            } else {
+            const isSaving = wp.data.select("core/editor").isSavingPost();
+            const isAutosaving = wp.data.select("core/editor").isAutosavingPost();
+            const isPublishing = wp.data.select("core/editor").isPublishingPost();
+
+            if (isPublishing || (isSaving && !isAutosaving)) {
                 setTimeout(() => {
                     ParseCss(true);
-                }, 600);
+                })
+            } else {
+                const isPreviewing = wp.data.select("core/editor").isPreviewingPost();
+                if (isPreviewing) {
+                    ParseCss(false);
+                }
             }
-
         }
+
+    } catch (error) {
+        console.error(error);
     }
 });
+
+
 
 //UPDATE BLOCK CATEGORY ICON
 wp.blocks.updateCategory('qubely', { icon: <img style={{ height: '20px', 'margin-top': '-2px' }} src={qubely_admin.plugin + 'assets/img/blocks/block-qubely.svg'} alt={__('Qubely')} /> });
@@ -94,7 +110,7 @@ import { ImportButton } from './components/others';
 
 wp.domReady(function () {
     setTimeout(function () {
-        
+
         const toolbar = document.querySelector('.edit-post-header__toolbar');
         const toolbarChild = document.querySelector('.edit-post-header-toolbar');
 

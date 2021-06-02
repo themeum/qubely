@@ -116,7 +116,7 @@ function getData(pId) {
         data: { postId: pId }
     }).then(response => {
         if (response.success) {
-            const innerBlock = innerBlocks(wp.blocks.parse(response.data), true)
+            const innerBlock = innerBlocks(wp.blocks.parse(response.data), true);
             if (innerBlock.css) {
                 wp.apiFetch({
                     path: 'qubely/v1/append_qubely_css',
@@ -125,6 +125,7 @@ function getData(pId) {
                 }).then(res => {
                     if (res.success) {
                         // Save Data
+                        // console.log('res  : ', res);
                     }
                 })
             }
@@ -132,17 +133,25 @@ function getData(pId) {
     })
 };
 
+function getReusableBlockCSS(pId) {
+    return wp.apiFetch({
+        path: 'qubely/v1/qubely_get_content',
+        method: 'POST',
+        data: { postId: pId }
+    }).then(response => response);
+};
 
 function parseBlock(blocks) {
     blocks.forEach(block => {
         if (block.name.indexOf('core/block') != -1) {
-            getData(block.attributes.ref)
+            getData(block.attributes.ref);
         }
         if (block.innerBlocks && (block.innerBlocks).length > 0) {
             parseBlock(block.innerBlocks)
         }
-    })
+    });
 }
+
 
 
 /*function setAvailableBlocksMeta(data) {
@@ -245,10 +254,47 @@ const ParseCss = async (setDatabase = true) => {
     __blocks.css += parseData.css
 
     // reusable Block
-    parseBlock(all_blocks);
+    if (setDatabase) {
+        parseBlock(all_blocks);
+    } else {
+        const parseReusableCSS = (blocks) => {
+            let temp = ''
+            blocks.forEach((block) => {
+                if (block.name.indexOf('core/block') != -1) {
+                    getReusableBlockCSS(block.attributes.ref).then(async (response) => {
+                        if (response.success) {
+                            const reuseableBlock = innerBlocks(wp.blocks.parse(response.data), true);
+                            if (reuseableBlock.css) {
+                                temp += await reuseableBlock.css;
+                                wp.apiFetch({
+                                    path: 'qubely/v1/append_reusable_css',
+                                    method: 'POST',
+                                    data: { css: reuseableBlock.css }
+                                }).then(res => {
+                                    if (res.success) {
+                                        // Save Data
+                                        let localCSS = JSON.parse(localStorage.getItem('qubelyCSS'));
+                                        localCSS += reuseableBlock.css;
+                                        localStorage.setItem('qubelyCSS', JSON.stringify(localCSS));
+                                    }
+                                })
+                            }
+                        }
+                    });
+                }
+                if (block.innerBlocks && (block.innerBlocks).length > 0) {
+                    return parseReusableCSS(block.innerBlocks)
+                }
+            });
+            localStorage.setItem('qubelyReusabelCSS', JSON.stringify(temp));
+        }
+        parseReusableCSS(all_blocks);
+    }
+
 
     localStorage.setItem('qubelyCSS', JSON.stringify(__blocks.css));
     localStorage.setItem('qubelyInteraction', JSON.stringify(__blocks.interaction));
+
 
     // available blocks meta
     const available_blocks = availableBlocksMeta(all_blocks);
