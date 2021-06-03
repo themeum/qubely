@@ -83,6 +83,22 @@ To install Qubely manually, you need to download the plugin and upload it to you
 
 The WordPress codex contains [instructions on how to do this here](https://codex.wordpress.org/Managing_Plugins#Manual_Plugin_Installation).
 
+
+##  Development
+- Navigate to reactjs folder `cd  assets/reactjs`
+- `npm install`
+- `npm start`
+
+##  To Build
+### Javascript
+- Navigate to reactjs folder `cd  assets/reactjs`
+- run `npm run build &&  gulp sass`
+
+### To Bundle
+- Under root folder, install dependencies `npm install`
+- run `gulp`, new file `qubely.zip` should appear
+
+
 ## Support
 
 You can get support by posting on the support section of this plugin on the WordPress plugin directory, or on the Themeum support forums: https://www.themeum.com/support/ 🙂
