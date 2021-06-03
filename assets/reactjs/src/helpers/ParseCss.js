@@ -273,9 +273,12 @@ const ParseCss = async (setDatabase = true) => {
                                 }).then(res => {
                                     if (res.success) {
                                         // Save Data
-                                        let localCSS = JSON.parse(localStorage.getItem('qubelyCSS'));
-                                        localCSS += reuseableBlock.css;
-                                        localStorage.setItem('qubelyCSS', JSON.stringify(localCSS));
+                                        const localQubelyCSS = localStorage.getItem('qubelyCSS');
+                                        if (localQubelyCSS) {
+                                            let localCSS = JSON.parse(localQubelyCSS);
+                                            localCSS += reuseableBlock.css;
+                                            localStorage.setItem('qubelyCSS', JSON.stringify(localCSS));
+                                        }
                                     }
                                 })
                             }

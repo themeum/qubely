@@ -63,34 +63,36 @@ window.globalSaving = false
 // Save CSS in Database/File
 import ParseCss from './helpers/ParseCss';
 
-wp.data.subscribe(() => {
-    const hasNonPostEntityChanges = wp.data.select('core/editor').hasNonPostEntityChanges();
-    if (hasNonPostEntityChanges) {
-        $('.components-button.editor-post-publish-button.editor-post-publish-button__button.is-primary').click(() => {
-            setTimeout(() => {
-                // console.log($('.components-button.editor-entities-saved-states__save-button.is-primary'));
-                $(".components-button.editor-entities-saved-states__save-button.is-primary").bind("click", function () {
-                    ParseCss(true);
-                });
-            });
-        });
-    }
-
+let unSubscribe = wp.data.subscribe(() => {
     try {
-
         if (window.bindCss === false) {
+            const hasNonPostEntityChanges = wp.data.select('core/editor').hasNonPostEntityChanges();
             const isSaving = wp.data.select("core/editor").isSavingPost();
             const isAutosaving = wp.data.select("core/editor").isAutosavingPost();
             const isPublishing = wp.data.select("core/editor").isPublishingPost();
 
             if (isPublishing || (isSaving && !isAutosaving)) {
-                setTimeout(() => {
-                    ParseCss(true);
-                })
+                ParseCss(true);
+                window.bindCss = true;
             } else {
                 const isPreviewing = wp.data.select("core/editor").isPreviewingPost();
                 if (isPreviewing) {
                     ParseCss(false);
+                } else {
+                    if (hasNonPostEntityChanges) {
+                        $('.components-button.editor-post-publish-button.editor-post-publish-button__button.is-primary').click(() => {
+                            setTimeout(() => {
+                                console.log('post has hasNonPostEntityChanges');
+                                if (window.bindCss === false) {
+                                    $(".components-button.editor-entities-saved-states__save-button.is-primary").bind("click", function () {
+                                        console.log('saving hasNonPostEntityChanges');
+                                        ParseCss(true);
+                                    });
+                                    window.bindCss = true;
+                                }
+                            });
+                        });
+                    }
                 }
             }
         }
