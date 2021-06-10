@@ -383,7 +383,7 @@ class QUBELY {
 			'qubely/wooproducts',
 			'qubely/postgrid',
 			'qubely/contactform',
-
+			'core/block',
 		);
 		foreach ($blocks as $key => $block) {
 			if (in_array($block['blockName'], $target_blocks, true)) {

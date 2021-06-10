@@ -240,7 +240,7 @@ You can report bugs on the [support forum here](https://wordpress.org/support/pl
 
 == Changelog ==
 
-= 1.6.9 - 03 June, 2021 = 
+= 1.6.9 - 10 June, 2021 = 
 Fix: Reusable Block and it's CSS saving issues in Wordpress 5.7
 Fix: Divider block - divider options not showing  
 Fix: Table of Contents block -  Invalid JSON while parsing headings  

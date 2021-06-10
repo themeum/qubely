@@ -82,7 +82,6 @@ let unSubscribe = wp.data.subscribe(() => {
                     if (hasNonPostEntityChanges) {
                         $('.components-button.editor-post-publish-button.editor-post-publish-button__button.is-primary').click(() => {
                             setTimeout(() => {
-                                console.log('post has hasNonPostEntityChanges');
                                 if (window.bindCss === false) {
                                     $(".components-button.editor-entities-saved-states__save-button.is-primary").bind("click", function () {
                                         console.log('saving hasNonPostEntityChanges');
