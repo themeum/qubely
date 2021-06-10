@@ -1,8 +1,18 @@
 # Qubely Changelog
 
 
+### 1.6.9 - 10 June, 2021 
+Fix: Reusable Block and it's CSS saving issues in Wordpress 5.7
+Fix: Divider block - divider options not showing  
+Fix: Table of Contents block -  Invalid JSON while parsing headings  
+Fix: Advanced Text block - Title color not working if inline link added  
+
+### 1.6.8 - 11 March, 2021 
+Fix: Interaction conflict with WordPress 5.7  
+
 ### 1.6.7 - 11 March, 2021 
 Fix: Theme demo importing conflict with global settings
+
 ### 1.6.6 - 04 March, 2021 
 Fix: Google fonts retrieve issue from Global settings  
  
