@@ -170,6 +170,11 @@ class QUBELY {
 	 */
 	public function init_dynamic_blocks() {
 		require_once QUBELY_DIR_PATH . 'core/blocks/postgrid.php';
+
+		if ( class_exists( '\TUTOR\Utils' ) ) {
+			require_once QUBELY_DIR_PATH . 'core/blocks/tutor-course-list.php';
+		}
+
 		$this->create_preview_css();
    }
 	/**
@@ -213,6 +218,7 @@ class QUBELY {
 				'publishedPosts'              => wp_count_posts()->publish,
 				'mc_key'                      => $mc_key,
 				'is_core_active'              => is_plugin_active('qubely-core/qubely-core.php'),
+				'is_tutor_active'             => class_exists( '\TUTOR\Utils' ),
 			)
 		);
 	}
