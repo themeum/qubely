@@ -38,7 +38,7 @@ import './blocks/animatedheadline'      // Animated Headline
 import './blocks/pieprogress'           // PieProgress
 import './blocks/table-of-contents'
 import './blocks/image-comparison'      // image-comparison
-
+import './blocks/tutor-course-list'     // tutor-course-list
 
 import './plugins';
 
