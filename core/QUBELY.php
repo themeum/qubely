@@ -645,6 +645,7 @@ class QUBELY {
 			wp_enqueue_style( 'qubely-animation', QUBELY_DIR_URL . 'assets/css/animation.css', false, QUBELY_VERSION );
 			wp_enqueue_style( 'qubely-magnific-popup-style', QUBELY_DIR_URL . 'assets/css/magnific-popup.css', false, QUBELY_VERSION );
 			wp_enqueue_style( 'qubely-style-min', QUBELY_DIR_URL . 'assets/css/style.min.css', false, QUBELY_VERSION );
+			wp_enqueue_style( 'qubely-tutor-course-style', QUBELY_DIR_URL . 'assets/css/qubely-tutor-course.css', false, QUBELY_VERSION );
 			#END_REPLACE
 
 

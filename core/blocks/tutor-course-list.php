@@ -262,59 +262,8 @@ function register_block_qubely_tutor_course_list() {
 						'selector' => '{{QUBELY}} .qubely-tutor-course-list-pagination > *'
 					]]
 				),
-				//Seperator
-				'showSeparator' => array(
-					'type' => 'boolean',
-					'default' => true
-				),
 
-				'separatorColor' => array(
-					'type'    => 'string',
-					'default' => '#e5e5e5',
-					'style' => [(object) [
-						'condition' => [
-							(object) ['key' => 'style', 'relation' => '==', 'value' => 1],
-							(object) ['key' => 'showSeparator', 'relation' => '==', 'value' => true]
-						],
-						'selector' => '{{QUBELY}} .qubely-post-list-view.qubely-postgrid-style-1:not(:last-child) {border-bottom-color: {{separatorColor}};}'
-					]]
-				),
-
-				'separatorHeight' => array(
-					'type' => 'object',
-					'default' => (object) array(
-						'md' => 1,
-						'unit' => 'px'
-					),
-					'style' => [
-						(object) [
-							'condition' => [
-								(object) ['key' => 'style', 'relation' => '==', 'value' => 1],
-								(object) ['key' => 'showSeparator', 'relation' => '==', 'value' => true]
-							],
-							'selector' => '{{QUBELY}} .qubely-post-list-view.qubely-postgrid-style-1:not(:last-child){border-bottom-style: solid;border-bottom-width: {{separatorHeight}};}'
-						],
-					],
-				),
-
-				'separatorSpace' => array(
-					'type' => 'object',
-					'default' => (object) array(
-						'md' => 20,
-						'unit' => 'px'
-					),
-					'style' => [
-						(object) [
-							'condition' => [
-								(object) ['key' => 'style', 'relation' => '==', 'value' => 1],
-								(object) ['key' => 'showSeparator', 'relation' => '==', 'value' => true]
-							],
-							'selector' => '{{QUBELY}} .qubely-post-list-view.qubely-postgrid-style-1:not(:last-child){padding-bottom: {{separatorSpace}};margin-bottom: {{separatorSpace}};}'
-						],
-					],
-				),
-
-				//card
+				//Card
 				'cardBackground' => array(
 					'type' => 'object',
 					'default' => (object) [],
@@ -405,140 +354,7 @@ function register_block_qubely_tutor_course_list() {
 					]
 				),
 
-				//scart
-				'stackBg' => array(
-					'type' => 'object',
-					'default' => (object) [],
-					'style' => [
-						(object) [
-							'condition' => [
-								(object) ['key' => 'layout', 'relation' => '==', 'value' => 1],
-								(object) ['key' => 'style', 'relation' => '==', 'value' => 3]
-							],
-							'selector' => '{{QUBELY}} .qubely-post-list-view.qubely-postgrid-style-3 .qubely-post-list-wrapper .qubely-post-list-content'
-						],
-						(object) [
-							'condition' => [
-								(object) ['key' => 'layout', 'relation' => '==', 'value' => 2],
-								(object) ['key' => 'style', 'relation' => '==', 'value' => 3]
-							],
-							'selector' => '{{QUBELY}} .qubely-post-grid-view.qubely-postgrid-style-3 .qubely-post-grid-content'
-						]
-					]
-				),
-				'stackBorderRadius' => array(
-					'type' => 'object',
-					'default' => (object) array(
-						'unit' => 'px',
-						'openBorderRadius' => true,
-						'radiusType' => 'global',
-						'global' => (object) array(
-							'md' => 10,
-						),
-					),
-					'style' => [
-						(object) [
-							'condition' => [
-								(object) ['key' => 'layout', 'relation' => '==', 'value' => 1],
-								(object) ['key' => 'style', 'relation' => '==', 'value' => 3]
-							],
-							'selector' => '{{QUBELY}} .qubely-post-list-view.qubely-postgrid-style-3 .qubely-post-list-wrapper .qubely-post-list-content'
-						],
-						(object) [
-							'condition' => [
-								(object) ['key' => 'layout', 'relation' => '==', 'value' => 2],
-								(object) ['key' => 'style', 'relation' => '==', 'value' => 3]
-							],
-							'selector' => '{{QUBELY}} .qubely-post-grid-view.qubely-postgrid-style-3 .qubely-post-grid-content'
-						]
-					]
-				),
-				'stackWidth' => array(
-					'type' => 'object',
-					'default' => (object) array(),
-
-					'style' => [
-						(object) [
-							'condition' => [
-								(object) ['key' => 'layout', 'relation' => '==', 'value' => 2],
-								(object) ['key' => 'style', 'relation' => '==', 'value' => 3]
-							],
-							'selector' => '{{QUBELY}} .qubely-post-grid-view.qubely-postgrid-style-3 .qubely-post-grid-img + .qubely-post-grid-content {width: {{stackWidth}};}'
-						]
-					]
-				),
-				'stackSpace' => array(
-					'type' => 'object',
-					'default' => (object) array(
-						'md' => 40,
-						'unit' => 'px'
-					),
-					'style' => [
-						(object) [
-							'condition' => [
-								(object) ['key' => 'layout', 'relation' => '==', 'value' => 1],
-								(object) ['key' => 'style', 'relation' => '==', 'value' => 3]
-							],
-							'selector' => '{{QUBELY}} .qubely-post-list-view.qubely-postgrid-style-3:not(:last-child) {margin-bottom: {{stackSpace}};}'
-						]
-					]
-
-				),
-				'stackPadding' => array(
-					'type' => 'object',
-					'default' => (object) [
-						'openPadding' => 1,
-						'paddingType' => 'global',
-						'unit' => 'px',
-						'global' => (object) ['md' => 30],
-					],
-					'style' => [
-						(object) [
-							'condition' => [
-								(object) ['key' => 'layout', 'relation' => '==', 'value' => 1],
-								(object) ['key' => 'style', 'relation' => '==', 'value' => 3]
-							],
-							'selector' => '{{QUBELY}} .qubely-post-list-view.qubely-postgrid-style-3 .qubely-post-list-wrapper .qubely-post-list-content'
-						],
-						(object) [
-							'condition' => [
-								(object) ['key' => 'layout', 'relation' => '==', 'value' => 2],
-								(object) ['key' => 'style', 'relation' => '==', 'value' => 3]
-							],
-							'selector' => '{{QUBELY}} .qubely-post-grid-view.qubely-postgrid-style-3 .qubely-post-grid-wrapper .qubely-post-grid-content'
-						]
-					]
-				),
-				'stackBoxShadow' => array(
-					'type' => 'object',
-					'default' => (object) array(
-						'blur' => 28,
-						'color' => "rgba(0,0,0,0.15)",
-						'horizontal' => 0,
-						'inset' => 0,
-						'openShadow' => true,
-						'spread' => -20,
-						'vertical' => 34
-					),
-					'style' => [
-						(object) [
-							'condition' => [
-								(object) ['key' => 'layout', 'relation' => '==', 'value' => 1],
-								(object) ['key' => 'style', 'relation' => '==', 'value' => 3]
-							],
-							'selector' => '{{QUBELY}} .qubely-post-list-view.qubely-postgrid-style-3 .qubely-post-list-wrapper .qubely-post-list-content'
-						],
-						(object) [
-							'condition' => [
-								(object) ['key' => 'layout', 'relation' => '==', 'value' => 2],
-								(object) ['key' => 'style', 'relation' => '==', 'value' => 3]
-							],
-							'selector' => '{{QUBELY}} .qubely-post-grid-view.qubely-postgrid-style-3 .qubely-post-grid-content'
-						]
-					]
-				),
-
-				//typography
+				// Typography
 				'titleTypography' => array(
 					'type' => 'object',
 					'default' => (object) [
@@ -581,7 +397,7 @@ function register_block_qubely_tutor_course_list() {
 					]]
 				),
 
-				//image
+				//Image
 				'showImages' => array(
 					'type' => 'boolean',
 					'default' => true
@@ -616,175 +432,13 @@ function register_block_qubely_tutor_course_list() {
 					'default' => 'zoom-out'
 				),
 
-				//readmore link
+				//Add to cart
 				'buttonText' => array(
 					'type' => 'string',
 					'default' => 'Read More'
 				),
-				'readmoreStyle' => array(
-					'type' => 'string',
-					'default' => 'fill'
-				),
-				'readmoreSize' => array(
-					'type' => 'string',
-					'default' => 'small'
-				),
-				'readmoreCustomSize' => array(
-					'type' => 'object',
-					'default' => (object) [
-						'openPadding' => 1,
-						'paddingType' => 'custom',
-						'unit' => 'px',
-						'custom' => (object) ['md' => '5 10 5 10'],
-					],
-					'style' => [(object) [
-						'condition' => [
-							(object) ['key' => 'readmoreStyle', 'relation' => '==', 'value' => 'fill'],
-							(object) ['key' => 'readmoreSize', 'relation' => '==', 'value' => 'custom']
-						],
-						'selector' => '{{QUBELY}} .qubely-postgrid-wrapper .qubely-postgrid .qubely-postgrid-btn-wrapper .qubely-postgrid-btn.qubely-button-fill.is-custom'
-					]]
-				),
-
-				'readmoreTypography' => array(
-					'type' => 'object',
-					'default' => (object) [
-						'openTypography' => 1,
-						'family' => "Roboto",
-						'type' => "sans-serif",
-						'size' => (object) ['md' => 14, 'unit' => 'px'],
-					],
-					'style' => [(object) [
-						'condition' => [(object) ['key' => 'showTitle', 'relation' => '==', 'value' => true]],
-						'selector' => '{{QUBELY}} .qubely-postgrid-wrapper .qubely-postgrid .qubely-postgrid-btn'
-					]]
-				),
-				'readmoreColor' => array(
-					'type'    => 'string',
-					'default' => '#fff',
-					'style' => [(object) [
-						'condition' => [
-							(object) ['key' => 'showReadMore', 'relation' => '==', 'value' => true],
-							(object) ['key' => 'readmoreStyle', 'relation' => '==', 'value' => 'fill']
-						],
-						'selector' => '{{QUBELY}} .qubely-postgrid-wrapper .qubely-postgrid a.qubely-postgrid-btn {color: {{readmoreColor}};}'
-					]]
-
-				),
-				'readmoreColor2' => array(
-					'type'    => 'string',
-					'default' => '#2184F9',
-					'style' => [(object) [
-						'condition' => [
-							(object) ['key' => 'showReadMore', 'relation' => '==', 'value' => true],
-							(object) ['key' => 'readmoreStyle', 'relation' => '==', 'value' => 'outline']
-						],
-						'selector' => '{{QUBELY}} .qubely-postgrid-wrapper .qubely-postgrid a.qubely-postgrid-btn {color: {{readmoreColor2}};}'
-					]]
-
-				),
-				'readmoreHoverColor' => array(
-					'type'    => 'string',
-					'default' => '',
-					'style' => [(object) [
-						'condition' => [(object) ['key' => 'showReadMore', 'relation' => '==', 'value' => true]],
-						'selector' => '{{QUBELY}} .qubely-postgrid-wrapper .qubely-postgrid a.qubely-postgrid-btn:hover {color: {{readmoreHoverColor}};}'
-					]]
-
-				),
-				'readmoreBg' => array(
-					'type' => 'object',
-					'default' => (object) array(
-						'openColor' => 1,
-						'type' => 'color',
-						'color' => '#2184F9',
-						'gradient' => (object) [
-							'color1' => '#16d03e',
-							'color2' => '#1f91f3',
-							'direction' => 45,
-							'start' => 0,
-							'stop' => 100,
-							'type' => 'linear'
-						],
-					),
-					'style' => [(object) [
-						'condition' => [(object) ['key' => 'readmoreStyle', 'relation' => '==', 'value' => 'fill']],
-						'selector' => '{{QUBELY}} .qubely-postgrid-wrapper .qubely-postgrid .qubely-postgrid-btn'
-					]]
-				),
-				'readmoreHoverBg' => array(
-					'type' => 'object',
-					'default' => (object) array(),
-					'style' => [(object) [
-						'condition' => [(object) ['key' => 'readmoreStyle', 'relation' => '==', 'value' => 'fill']],
-						'selector' => '{{QUBELY}} .qubely-postgrid-wrapper .qubely-postgrid .qubely-postgrid-btn:hover'
-					]]
-				),
-				'readmoreBorder' => array(
-					'type' => 'object',
-					'default' => (object) array(),
-					'style' => [(object) [
-						'condition' => [(object) ['key' => 'readmoreStyle', 'relation' => '==', 'value' => 'fill']],
-						'selector' => '{{QUBELY}} .qubely-postgrid-wrapper .qubely-postgrid .qubely-postgrid-btn'
-					]]
-				),
-				'readmoreBorderRadius' => array(
-					'type' => 'object',
-					'default' => (object) array(
-						'unit' => 'px',
-						'openBorderRadius' => true,
-						'radiusType' => 'global',
-						'global' => (object) array(
-							'md' => 2,
-						),
-					),
-					'style' => [(object) [
-						'condition' => [(object) ['key' => 'readmoreStyle', 'relation' => '==', 'value' => 'fill']],
-						'selector' => '{{QUBELY}} .qubely-postgrid-wrapper .qubely-postgrid .qubely-postgrid-btn'
-					]]
-				),
-				'readmoreBoxShadow' => array(
-					'type' => 'object',
-					'default' => (object) array(),
-					'style' => [(object) [
-						'condition' => [(object) ['key' => 'readmoreStyle', 'relation' => '==', 'value' => 'fill']],
-						'selector' => '{{QUBELY}} .qubely-postgrid-wrapper .qubely-postgrid .qubely-postgrid-btn'
-					]]
-				),
-
-				//color
-				'categoryPadding' => array(
-					'type' => 'object',
-					'default' => (object) array(
-						'unit' => 'px',
-						'openPadding' => true,
-						'paddingType' => 'custom',
-						'custom' => (object) array(
-							'md' => '4 8 4 8',
-						),
-					),
-					'style' => [(object) [
-						'condition' => [(object) ['key' => 'showCategory', 'relation' => '==', 'value' => 'badge']],
-						'selector' => '{{QUBELY}} .qubely-postgrid-category a'
-					]]
-				),
-				'contentPadding' => array(
-					'type' => 'object',
-					'default' => (object) array(),
-					'style' => [(object) ['selector' => '{{QUBELY}} .qubely-postgrid-wrapper .qubely-postgrid .qubely-post-grid-content,{{QUBELY}} .qubely-postgrid-wrapper .qubely-postgrid .qubely-post-list-content']]
-				),
-				'categoryRadius' => array(
-					'type' => 'object',
-					'default' => (object) array(
-						'unit' => 'px',
-						'openBorderRadius' => true,
-						'radiusType' => 'global',
-						'global' => (object) array(
-							'md' => 2,
-						),
-					),
-					'style' => [(object) ['selector' => '{{QUBELY}} .qubely-postgrid-category a']]
-				),
+				
+				// Color
 				'titleColor' => array(
 					'type'    => 'string',
 					'default' => '#1b1b1b',
@@ -823,14 +477,6 @@ function register_block_qubely_tutor_course_list() {
 						'selector' => '{{QUBELY}} .qubely-postgrid-category a {color: {{categoryColor}};}'
 					]]
 				),
-				'categoryColor2' => array(
-					'type'    => 'string',
-					'default' => '#fff',
-					'style' => [(object) [
-						'condition' => [(object) ['key' => 'showCategory', 'relation' => '==', 'value' => 'badge']],
-						'selector' => '{{QUBELY}} .qubely-postgrid-category a {color: {{categoryColor2}};}'
-					]]
-				),
 				'categoryHoverColor' => array(
 					'type'    => 'string',
 					'default' => '#FF0096',
@@ -855,15 +501,6 @@ function register_block_qubely_tutor_course_list() {
 						'selector' => '{{QUBELY}} .qubely-postgrid-category a:hover {background: {{categoryHoverBackground}};}'
 					]]
 				),
-
-				'categoryHoverColor2' => array(
-					'type'    => 'string',
-					'default' => '#fff',
-					'style' => [(object) [
-						'condition' => [(object) ['key' => 'showCategory', 'relation' => '==', 'value' => 'badge']],
-						'selector' => '{{QUBELY}} .qubely-postgrid-category a:hover {color: {{categoryHoverColor2}};}'
-					]]
-				),
 				'metaColor' => array(
 					'type'    => 'string',
 					'default' => '#9B9B9B',
@@ -885,7 +522,7 @@ function register_block_qubely_tutor_course_list() {
 					]]
 				),
 
-				//design
+				// Design
 				'spacer' => 	array(
 					'type' => 'object',
 					'default' => (object) array(
@@ -943,102 +580,7 @@ function register_block_qubely_tutor_course_list() {
 					]]
 				),
 
-				//overlay
-				'overlayBg' => array(
-					'type' => 'object',
-					'default' => (object) [
-						'openColor' => 1,
-						'type' => 'color',
-						'color' => '#101a3b',
-						'gradient' => (object) [
-							'color1' => '#071b0b',
-							'color2' => '#101a3b',
-							'direction' => 45,
-							'start' => 0,
-							'stop' => 100,
-							'type' => 'linear'
-						],
-					],
-					'style' => [(object) [
-						'condition' => [(object) ['key' => 'style', 'relation' => '==', 'value' => 4]],
-						'selector' => '{{QUBELY}} .qubely-postgrid-style-4:before'
-					]]
-				),
-				'overlayHoverBg' => array(
-					'type' => 'object',
-					'default' => (object) [
-						'openColor' => 1,
-						'type' => 'color',
-						'color' => '#4c4e54',
-						'gradient' => (object) [
-							'color1' => '#4c4e54',
-							'color2' => '#071b0b',
-							'direction' => 45,
-							'start' => 0,
-							'stop' => 100,
-							'type' => 'linear'
-						],
-					],
-					'style' => [(object) [
-						'condition' => [(object) ['key' => 'style', 'relation' => '==', 'value' => 4]],
-						'selector' => '{{QUBELY}} .qubely-postgrid-style-4:hover:before'
-					]]
-				),
-				'overlayBorderRadius' => array(
-					'type' => 'object',
-					'default' => (object) array(
-						'unit' => 'px',
-						'openBorderRadius' => true,
-						'radiusType' => 'global',
-						'global' => (object) array(
-							'md' => 20,
-						),
-					),
-					'style' => [
-						(object) [
-							'condition' => [(object) ['key' => 'style', 'relation' => '==', 'value' => 4]],
-							'selector' => '{{QUBELY}} .qubely-postgrid-style-4'
-						]
-					]
-				),
-				'overlaySpace' => array(
-					'type' => 'object',
-					'default' => (object) array(
-						'md' => 30,
-						'unit' => 'px'
-					),
-					'style' => [
-						(object) [
-							'condition' => [(object) ['key' => 'style', 'relation' => '==', 'value' => 4]],
-							'selector' => '{{QUBELY}} .qubely-post-list-view.qubely-postgrid-style-4:not(:last-child) {margin-bottom: {{overlaySpace}};}'
-						]
-					]
-				),
-				'overlayHeight' => array(
-					'type' => 'object',
-					'default' => (object) array(
-						'md' => 300,
-						'unit' => 'px'
-					),
-					'style' => [
-						(object) [
-							'condition' => [
-								(object) ['key' => 'style', 'relation' => '==', 'value' => 4]
-							],
-							'selector' => '{{QUBELY}} .qubely-postgrid-style-4 {height: {{overlayHeight}};}'
-						]
-					]
-				),
-				'overlayBlend' => array(
-					'type'    => 'string',
-					'default' => '',
-					'style' => [(object) [
-						'condition' => [(object) ['key' => 'style', 'relation' => '==', 'value' => 4]],
-						'selector' => '{{QUBELY}} .qubely-postgrid.qubely-post-list-view.qubely-postgrid-style-4:before {mix-blend-mode: {{overlayBlend}};}'
-					]]
-				),
-
-				//Spacing
+				// Spacing
 				'columnGap' => array(
 					'type' => 'object',
 					'default' => (object) array(
@@ -1076,14 +618,6 @@ function register_block_qubely_tutor_course_list() {
 						'unit' => 'px'
 					),
 					'style' => [(object) ['selector' => '{{QUBELY}} .qubely-postgrid-meta {padding-bottom: {{metaSpace}};}']]
-				),
-				'postSpace' => array(
-					'type' => 'object',
-					'default' => (object) array(
-						'md' => 10,
-						'unit' => 'px'
-					),
-					// 'style' => [(object) ['selector' => '{{QUBELY}} .qubely-postgrid-wrapper .qubely-postgrid']]
 				),
 				'globalZindex' => array(
 					'type' => 'string',
@@ -1162,13 +696,115 @@ function render_block_qubely_tutor_course_list( $att ) {
         )
     );
 
-    $html = '<div><h2>Tutor Course List Block</h2></div>';
+	$query = new WP_Query( $args );
+?>
+<?php if ( $query->have_posts() ) : ?>
+	<?php do_action('tutor_qubely/before/course_list'); ?>
+	<!-- .qubely-tutor-course-grid -->
+	<section class="qubely-tutor-course-grid">
+		<?php while ( $query->have_posts() ) :
+			$query->the_post(); ?>
+		<!-- .qubely-tutor-course-card -->
+		<div class="qubely-tutor-course-card">
+			<div class="qubely-tutor-course-card-header">
+				<a href="<?php the_permalink(); ?>">
+				<?php if ( has_post_thumbnail( get_the_ID() ) ) : ?>
+					<img src="<?php the_post_thumbnail_url( 'full' ); ?>" alt="<?php the_title(); ?>" loading="lazy" />
+				<?php endif; ?>
+				</a>
+				<div class="course-card-header-meta">
+					<?php 
+						$course_id     = get_the_ID();
+                        $is_wishlisted = tutor_utils()->is_wishlisted( $course_id );
+                        $has_wish_list = '';
+                        if ( $is_wishlisted ) {
+                            $has_wish_list = 'has-wish-listed';
+                        }
 
-    return $html;
-
-   // $query = new WP_Query( $args );
+                        $action_class = '';
+                        if ( is_user_logged_in() ) {
+                        	$action_class = apply_filters( 'tutor_wishlist_btn_class', 'tutor-course-wishlist-btn' );
+                        } else {
+                            $action_class = apply_filters( 'tutor_popup_login_class', 'cart-required-login' );
+                        }
+						?>
+					<span class="level"><?php echo get_tutor_course_level(); ?></span>
+					<span class="wishlist"><a href="javascript:;" class="tutor-icon-fav-line <?php echo $action_class; ?> <?php echo $has_wish_list; ?>" data-course-id="<?php echo $course_id; ?>"></a></span>
+				</div>
+			</div>
+			<!-- end /.qubely-tutor-course-card-header -->
+			<div class="qubely-tutor-course-card-body">
+				<div class="course-card-rating">
+					<?php
+						$course_rating = tutor_utils()->get_course_rating();
+						tutor_utils()->star_rating_generator( $course_rating->rating_avg );
+					?>
+					<span class="count">
+					<?php
+						if ( $course_rating->rating_avg > 0 ) {
+							echo apply_filters( 'tutor_course_rating_average', $course_rating->rating_avg );
+							echo ' (' . apply_filters( 'tutor_course_rating_count', $course_rating->rating_count ) . ')';
+						}
+					?>
+					</span>
+				</div>
+				<div class="course-card-title">
+					<h4>
+						<a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+					</h4>
+				</div>
+				<div class="course-card-meta">
+					<?php
+						$course_duration = get_tutor_course_duration_context();
+						$course_students = tutor_utils()->count_enrolled_users_by_course();
+					?>
+					<div class="enrolled"><i class="tutor-icon-user"></i><span><?php echo $course_students; ?></span></div>
+					<div class="duration"><i class="tutor-icon-clock"></i> <span><?php echo $course_duration; ?></span></div>
+				</div>
+				<div class="course-card-aut-cat">
+					<?php 
+						$profile_url   = tutor_utils()->profile_url( get_the_author_meta( 'ID' ) );
+						$author_avatar = tutor_utils()->get_tutor_avatar( get_the_author_meta( 'ID' ) );
+					?>
+					<div class="avatar">
+						<a href="<?php echo $profile_url; ?>">
+							<?php echo $author_avatar; ?>
+						</a>
+					</div>
+					<div class="author">
+						<span><?php esc_html_e( 'by', 'qubely' ); ?></span>
+						<a href="<?php echo $profile_url; ?>"><?php echo get_the_author(); ?></a>
+					</div>
+					<div class="category">
+						<?php 
+							$course_categories = get_tutor_course_categories();
+							if ( ! empty( $course_categories ) && is_array( $course_categories ) && count( $course_categories ) ) : ?>
+								<span><?php esc_html_e( 'In', 'qubely' ) ?></span>
+							<?php
+								foreach ( $course_categories as $course_category ) {
+									$category_name = $course_category->name;
+									$category_link = get_term_link( $course_category->term_id );
+									echo "<a href='$category_link'>$category_name </a>";
+								}
+							endif;
+						?>
+					</div>
+				</div>
+			</div>
+			<!-- end /.qubely-tutor-course-card-body -->
+			<div class="qubely-tutor-course-card-footer">
+				<?php tutor_course_loop_price(); ?>
+			</div>
+			<!-- end /.qubely-tutor-course-card-footer -->
+		</div>
+		<!-- end /.qubely-tutor-course-card -->
+	<?php endwhile; ?>
+</section>
+<!-- end /.qubely-tutor-course-grid -->
+<?php endif;
+wp_reset_postdata();
 }
 
-if ( ! defined( 'QUBELY_PRO_VERSION' ) ) {
+if ( ! defined( 'QUBELY_PRO_VERSION' ) && class_exists( '\TUTOR\Utils' ) ) {
 	add_action( 'init', 'register_block_qubely_tutor_course_list', 100 );
 }

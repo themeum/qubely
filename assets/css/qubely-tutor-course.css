@@ -1,0 +1,206 @@
+.qubely-tutor-course-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 30px;
+}
+@media (max-width: 991px) {
+    .qubely-tutor-course-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+@media (max-width: 650px) {
+    .qubely-tutor-course-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.qubely-tutor-course-card {
+    overflow: hidden;
+    position: relative;
+    background: #fff;
+    color: var(--tutor-text-color);
+    border-radius: 4px;
+    transition: 250ms linear;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    height: 100%;
+    transform: translateY(0px);
+}
+.qubely-tutor-course-card:hover {
+    box-shadow: 0 4px 23px rgba(0, 0, 0, 0.1);
+    transform: translateY(-1px);
+}
+.qubely-tutor-course-card a {
+    text-decoration: none;
+    color: inherit;
+}
+.qubely-tutor-course-card a:hover {
+    color: var(--tutor-primary-color);
+}
+
+.qubely-tutor-course-card-header {
+    position: relative;
+}
+.qubely-tutor-course-card-header .course-card-header-meta {
+    position: absolute;
+    left: 0;
+    top: 13px;
+    width: 100%;
+    padding-left: 13px;
+    padding-right: 13px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.qubely-tutor-course-card-header .course-card-header-meta span.level {
+    background: #9013fe;
+    color: #fff;
+    font-size: 0.8rem;
+    line-height: 1;
+    padding: 3px 6px 5px 6px;
+    border-radius: 3px;
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0.1);
+}
+.qubely-tutor-course-card-header .course-card-header-meta span.wishlist {
+    display: inline-flex;
+    background: #fff;
+    font-size: 19px;
+    padding: 5px 5px;
+    border-radius: 3px;
+    transition: 300ms;
+}
+.qubely-tutor-course-card-header .course-card-header-meta span.wishlist a {
+    color: var(--tutor-primary-color);
+    transition: 300ms;
+}
+.qubely-tutor-course-card-header .course-card-header-meta span.wishlist:hover {
+    background: var(--tutor-primary-color);
+}
+.qubely-tutor-course-card-header
+    .course-card-header-meta
+    span.wishlist
+    a.has-wish-listed {
+    background: var(--tutor-primary-color);
+    color: #ffffff;
+}
+.qubely-tutor-course-card-header .course-card-header-meta span.has-wish-listed {
+    background: var(--tutor-primary-color);
+    color: #ffffff;
+}
+.qubely-tutor-course-card-header
+    .course-card-header-meta
+    span.wishlist:hover
+    a {
+    color: #fff;
+}
+
+.qubely-tutor-course-card-body {
+    padding: 23px 20px;
+}
+.qubely-tutor-course-card-body .course-card-rating .icon {
+    color: #f4c150;
+    display: inline-block;
+    text-align: left;
+}
+.qubely-tutor-course-card-body .course-card-rating .icon i:not(:last-child) {
+    margin-right: 3px;
+}
+.qubely-tutor-course-card-body .course-card-title {
+    margin-top: 15px;
+}
+.qubely-tutor-course-card-body .course-card-title h4 {
+    font-size: 20px;
+    line-height: 28px;
+    font-weight: 600;
+}
+.qubely-tutor-course-card-body .course-card-title h4 a {
+    color: var(--tutor-text-color);
+    text-decoration: none;
+}
+.qubely-tutor-course-card-body .course-card-title h4 a:hover {
+    color: var(--tutor-primary-color);
+}
+.qubely-tutor-course-card-body .course-card-meta {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    color: var(--tutor-text-color);
+    font-size: var(--tutor-text-size);
+}
+.qubely-tutor-course-card-body .course-card-meta > div:not(:last-child) {
+    margin-right: 10px;
+}
+.qubely-tutor-course-card-body .course-card-meta i {
+    margin-right: 5px;
+}
+.qubely-tutor-course-card-body .course-card-aut-cat {
+    display: inline-flex;
+    margin-top: 20px;
+}
+.qubely-tutor-course-card-body .course-card-aut-cat > div:not(:last-child) {
+    margin-right: 5px;
+}
+.qubely-tutor-course-card-body .course-card-aut-cat .avatar {
+    display: inline-flex;
+}
+.qubely-tutor-course-card-body .course-card-aut-cat .avatar a span {
+    width: 25px;
+    height: 25px;
+    padding: 5px 10px;
+    border-radius: 100%;
+    text-align: center;
+    vertical-align: middle;
+}
+.qubely-tutor-course-card-body .course-card-aut-cat .avatar img {
+    width: 25px;
+    height: 25px;
+    display: block;
+    border-radius: 50%;
+    margin-right: 6px;
+}
+.qubely-tutor-course-card-body .course-card-aut-cat .author > span,
+.qubely-tutor-course-card-body .course-card-aut-cat .category > span {
+    display: inline-block;
+    margin: 0 2px 0 2px;
+    color: var(--tutor-light-color);
+    line-height: 25px;
+    font-weight: 400;
+}
+
+.qubely-tutor-course-card-footer {
+    padding: 15px;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    color: #838791;
+    font-size: 12px;
+    line-height: 25px;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    font-weight: 400;
+}
+.qubely-tutor-course-card-footer .course-card-price {
+    color: var(--tutor-text-color);
+    font-size: 16px;
+    display: flex;
+    justify-content: space-between;
+}
+.qubely-tutor-course-card-footer .course-card-price .price {
+    font-weight: 600;
+}
+.qubely-tutor-course-card-footer .course-card-price .cart-btn {
+    font-weight: 400;
+}
+.qubely-tutor-course-card-footer .course-card-price .cart-btn a:before {
+    content: "";
+    font-family: "tutor" !important;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 20px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    margin-right: 5px;
+    vertical-align: top;
+    color: var(--tutor-primary-color);
+}
