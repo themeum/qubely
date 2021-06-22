@@ -1,6 +1,7 @@
 <h3>1.7.0 - 22 June, 2021</h3>
 <ul>
     <li>Fix: Team block - Image width settings issue on layout 3</li>
+    <li>Fix: Icon List block - List icon picker not displaying properly</li>
 </ul>
 
 

@@ -242,6 +242,7 @@ You can report bugs on the [support forum here](https://wordpress.org/support/pl
 
 = 1.7.0 - 22 June, 2021 = 
 Fix: Team block - Image width settings issue on layout 3  
+Fix: Icon List block - List icon picker not displaying properly    
  
 
 = 1.6.9 - 10 June, 2021 = 
