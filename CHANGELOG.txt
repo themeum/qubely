@@ -1,3 +1,10 @@
+<h3>1.7.0 - 22 June, 2021</h3>
+<ul>
+    <li>Fix: Team block - Image width settings issue on layout 3</li>
+</ul>
+
+
+
 <h3>1.6.9 - 10 June, 2021</h3>
 <ul>
     <li>Fix: Reusable Block and it's CSS saving issues in Wordpress 5.7</li>
@@ -5,10 +12,4 @@
     <li>Fix: Table of Contents block -  Invalid JSON while parsing headings</li>
     <li>Fix: Advanced Text block - Title color not working if inline link added  </li>
 </ul>
-
-<h3>1.6.8 - 23 March, 2021</h3>
-<ul>
-    <li>Fix: Interaction conflict with WordPress 5.7</li>
-</ul>
-
 

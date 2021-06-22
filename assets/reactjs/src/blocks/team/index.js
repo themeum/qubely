@@ -82,7 +82,7 @@ registerBlockType('qubely/team', {
                     condition: [
                         { key: 'layout', relation: '==', value: 3 },
                     ],
-                    selector: '{{QUBELY}} .qubely-block-team.qubely-team-layout-3 > div {flex: 0 0 {{imageWidth}}; max-width: {{imageWidth}}} {{QUBELY}} .qubely-team-image-wrapper img {width: 100%;}'
+                    selector: '{{QUBELY}} .qubely-block-team.qubely-team-layout-3 .qubely-team-image-wrapper {flex: 0 0 {{imageWidth}}; max-width: {{imageWidth}}} {{QUBELY}} .qubely-team-image-wrapper img {width: 100%;}'
                 }
             ]
         },

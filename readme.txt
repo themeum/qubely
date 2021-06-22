@@ -4,7 +4,7 @@ Donate link: https://www.themeum.com
 Tags: blocks, gutenberg, gutenberg blocks, editor, block, page builder
 Requires at least: 5.0
 Tested up to: 5.7.2
-Stable tag: 1.6.9
+Stable tag: 1.7.0
 Requires PHP: 7.0
 License: GPL-2.0+
 License URI: http://www.gnu.org/licenses/gpl-2.0.txt
@@ -239,6 +239,10 @@ You can report bugs on the [support forum here](https://wordpress.org/support/pl
 
 
 == Changelog ==
+
+= 1.7.0 - 22 June, 2021 = 
+Fix: Team block - Image width settings issue on layout 3  
+ 
 
 = 1.6.9 - 10 June, 2021 = 
 Fix: Reusable Block and it's CSS saving issues in Wordpress 5.7
