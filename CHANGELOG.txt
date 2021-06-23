@@ -1,7 +1,8 @@
-<h3>1.7.0 - 22 June, 2021</h3>
+<h3>1.7.0 - 23 June, 2021</h3>
 <ul>
     <li>Fix: Team block - Image width settings issue on layout 3</li>
     <li>Fix: Icon List block - List icon picker not displaying properly</li>
+    <li>Fix: Post Grid block - Post image thumbnail issue</li>
 </ul>
 
 
