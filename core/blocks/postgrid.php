@@ -1415,7 +1415,8 @@ function render_block_qubely_postgrid($att)
 			$query->the_post();
 			$id = get_post_thumbnail_id();
 			$src = wp_get_attachment_image_src($id, $imgSize);
-			$image = '<img class="qubely-post-image" src="' . esc_url($src[0]) . '" alt="' . get_the_title() . '"/>';
+			$src = has_post_thumbnail( get_the_ID() ) ? get_the_post_thumbnail_url( get_the_ID(), $imgSize ) : '';
+			$image = '<img class="qubely-post-image" src="' . esc_url( $src ) . '" alt="' . get_the_title() . '"/>';
 			$title = '<h3 class="qubely-postgrid-title"><a href="' . esc_url(get_the_permalink()) . '">' . get_the_title() . '</a></h3>';
 			$category = '<span class="qubely-postgrid-category">' . ('post' === $postType ? get_the_category_list(' ') : get_the_term_list(get_the_ID(), $taxonomyType, ' ')) . '</span>';
 			$meta = ($showAuthor == 1) ? '<span><i class="fas fa-user"></i> ' . __('By ', 'qubely') . get_the_author_posts_link() . '</span>' : '';
