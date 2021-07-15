@@ -91,14 +91,6 @@ jQuery(function ($) {
     });
 
 
-    //ANIMATED HEADLINE BLOCK
-    $('.qubely-block-animated-heading .animated-heading-text').each(function () {
-        let animatedHeadline = $(this)
-        if (window.animatedHeading) {
-            new window.animatedHeading({ heading: $(animatedHeadline) })
-        }
-
-    });
 
     //TAB BLOCK
     function progress(parentElement, elem, delay) {

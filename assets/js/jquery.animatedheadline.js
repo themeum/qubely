@@ -1,6 +1,5 @@
 //Addon Animated Heading
 (function ($) {
-
     var animatedHeading = function (options) {
         this.$heading = options.heading;
         this.type = typeof options.type === 'undefined' ? 'word' : options.type;
@@ -73,7 +72,7 @@
             } else if (headline.hasClass('text-clip')) {
                 var spanWrapper = headline.find('.qubely-animated-text .animated-text-words-wrapper'),
                     newWidth = spanWrapper.width() + 5
-                if(!$('.block-editor-block-list__layout').length){
+                if (!$('.block-editor-block-list__layout').length) {
                     spanWrapper.css('width', newWidth);
                 }
 
@@ -231,7 +230,7 @@
     //ANIMATED HEADLINE BLOCK
     $(':not(.block-editor-block-list__layout) .qubely-block-animated-heading .animated-heading-text').each(function () {
         let animatedHeadline = $(this)
-        if (window.animatedHeading) {
+        if (window.animatedHeading ) {
             new window.animatedHeading({ heading: $(animatedHeadline) })
         }
     });
