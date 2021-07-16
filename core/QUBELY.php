@@ -31,7 +31,7 @@ class QUBELY {
 		 add_action( 'admin_enqueue_scripts', array( $this, 'qubely_admin_assets' ) );
 
 		 // Block Categories
-		 add_filter( 'block_categories', array( $this, 'qubely_block_categories' ), 1, 2 );
+		 add_filter( 'block_categories_all', array( $this, 'qubely_block_categories' ), 1, 2 );
 
 		 // Add Styles and Scripts
 		 add_action( 'wp_enqueue_scripts', array( $this, 'qubely_enqueue_style' ) );
@@ -178,7 +178,11 @@ class QUBELY {
 	 * @since 1.0.0
 	 */
 	public function qubely_editor_assets() {
-		wp_enqueue_script( 'qubely-blocks-js', QUBELY_DIR_URL . 'assets/js/qubely.dev.js', array( 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor' ), QUBELY_VERSION, true );
+		global $pagenow;
+
+		if ( 'widgets.php' !== $pagenow ) {
+			wp_enqueue_script( 'qubely-blocks-js', QUBELY_DIR_URL . 'assets/js/qubely.dev.js', array( 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor' ), QUBELY_VERSION, true );
+		}
 
 		$palette = get_theme_support( 'qubely-color-palette' );
 		$palette = array_replace( array( '#062040', '#566372', '#2084F9', '#F3F3F3', '#EEEEEE', '#FFFFFF' ), ( $palette ? $palette[0] : array() ) );
