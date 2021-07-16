@@ -3,8 +3,8 @@ Contributors: themeum
 Donate link: https://www.themeum.com
 Tags: blocks, gutenberg, gutenberg blocks, editor, block, page builder
 Requires at least: 5.0
-Tested up to: 5.7.2
-Stable tag: 1.7.0
+Tested up to: 5.8
+Stable tag: 1.7.1
 Requires PHP: 7.0
 License: GPL-2.0+
 License URI: http://www.gnu.org/licenses/gpl-2.0.txt
@@ -240,7 +240,8 @@ You can report bugs on the [support forum here](https://wordpress.org/support/pl
 
 == Changelog ==
 
-= 1.7.1 - Next Release = 
+= 1.7.1 - 16 July = 
+Update: Added WordPress 5.8 Compatibility  
 Fix: Animated Headline block - Animated text repetition issue  
 
 

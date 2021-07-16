@@ -1,3 +1,10 @@
+<h3>1.7.1 - 16 July, 2021</h3>
+<ul> 
+    <li>Update: Added WordPress 5.8 Compatibility </li>
+    <li>Fix: Animated Headline block - Animated text repetition issue  </li>
+</ul>
+
+
 <h3>1.7.0 - 23 June, 2021</h3>
 <ul>
     <li>Fix: Team block - Image width settings issue on layout 3</li>
@@ -5,13 +12,4 @@
     <li>Fix: Post Grid block - Post image thumbnail issue</li>
 </ul>
 
-
-
-<h3>1.6.9 - 10 June, 2021</h3>
-<ul>
-    <li>Fix: Reusable Block and it's CSS saving issues in Wordpress 5.7</li>
-    <li>Fix: Divider block - divider options not showing</li>
-    <li>Fix: Table of Contents block -  Invalid JSON while parsing headings</li>
-    <li>Fix: Advanced Text block - Title color not working if inline link added  </li>
-</ul>
 
