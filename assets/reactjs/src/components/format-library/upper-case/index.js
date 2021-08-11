@@ -34,7 +34,7 @@ export const uppercase = {
             value,
             onChange,
         } = props;
-
+        console.log('value : ', value);
         const onToggle = () => onChange(toggleFormat(value, {
             type: name,
             attributes: {
