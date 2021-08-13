@@ -31,7 +31,11 @@ class QUBELY {
 		 add_action( 'admin_enqueue_scripts', array( $this, 'qubely_admin_assets' ) );
 
 		 // Block Categories
-		 add_filter( 'block_categories_all', array( $this, 'qubely_block_categories' ), 1, 2 );
+		 if ( version_compare( get_bloginfo( 'version' ), '5.8', '>=' ) ) {
+			 add_filter( 'block_categories_all', array( $this, 'qubely_block_categories' ), 1, 2 );
+		 } else {
+			add_filter( 'block_categories', array( $this, 'qubely_block_categories' ), 1, 2 );
+		 }
 
 		 // Add Styles and Scripts
 		 add_action( 'wp_enqueue_scripts', array( $this, 'qubely_enqueue_style' ) );
@@ -1910,8 +1914,11 @@ class QUBELY {
 		$headers[] = 'Content-Type: text/html; charset=UTF-8';
 		$headers[] = 'From: ' . $fromName . ' <' . $fromEmail . '>';
 		$headers[] = 'Reply-To: ' . $replyToName . ' <' . $replyToMail . '>';
-		$headers[] = 'Cc: <' . $cc . '>';
-		$headers[] = 'Bcc: <' . $bcc . '>';
+		$headers[] = 'Cc: ' . $cc;
+		$headers[] = 'Bcc: ' . $bcc;
+
+		// var_dump( $headers );
+		// die();
 
 		// Send E-Mail Now or through error msg.
 		try {
