@@ -223,6 +223,8 @@ function availableBlocksMeta(all_blocks) {
                 if (innerBlocks.length > 0 && blockName !== 'form') {
                     recursive_block_map(innerBlocks);
                 }
+            } else if (innerBlocks.length > 0 && blockName !== 'form') {
+                recursive_block_map(innerBlocks);
             }
         })
     }

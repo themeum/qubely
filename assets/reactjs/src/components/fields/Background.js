@@ -4,6 +4,7 @@ import Color from "./Color";
 import Select from './Select';
 import Gradient from './Gradient';
 import ButtonGroup from "./ButtonGroup";
+import classnames from 'classnames';
 const { __ } = wp.i18n;
 const { Component, Fragment } = wp.element;
 const { Tooltip, TextControl, Dropdown } = wp.components;
@@ -161,14 +162,14 @@ class Background extends Component {
                                         <div className="qubely-d-flex qubely-align-center">
                                             <label>{__('Advanced')} {fieldLabel}</label>
                                             <div className="qubely-field-button-list qubely-ml-auto">
-                                                <button className={(isOpen == 1 ? 'active' : '') + ' qubely-button qubely-button-rounded'} onClick={onToggle} aria-expanded={isOpen}>
+                                                <button className={classnames('qubely-button', 'qubely-button-rounded', 'advanced-background-trigger', { 'active': isOpen })} onClick={onToggle} aria-expanded={isOpen}>
                                                     <i className="fas fa-cog" />
                                                 </button>
                                             </div>
                                         </div>
                                     )}
                                     renderContent={() => (
-                                        <div style={{ padding: '15px' }}>
+                                        <div className="advanced-background-settings">
                                             <Fragment>
                                                 {!this.props.position &&
                                                     <Select label={fieldLabel + ' ' + __('Position')} value={value.bgimgPosition} options={control.position} onChange={(val) => this.setSettings(val, 'bgimgPosition')} />
