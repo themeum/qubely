@@ -679,8 +679,7 @@ class PageListModal extends Component {
                                         onClick={() => this._OnChangeCategory('')}>
                                         {__('All ')}{itemType == 'block' ? 'Sections' : 'Starter Packs'}
                                         <span>
-                                            {/* {this._getDataLength('category', currentPageData.length)} */}
-                                            {currentPageData.length}
+                                            {this._getDataLength('category', currentPageData.length)}
                                         </span>
                                     </li>
                                     {
@@ -708,10 +707,8 @@ class PageListModal extends Component {
                                 {(this.state.itemType == 'layout' && this.state.layer == 'single') &&
                                     <span className={"qubely-template-back"} onClick={() => this.setState({ layer: 'multiple', parent_id: '' })}><span className="dashicons dashicons-arrow-left-alt" />&nbsp;</span>
                                 }
-                                {/* {this._getDataLength(itemType === 'layout' && selectedLayoutCategory === '' && layer !== 'single' ? 'category' : 'heading', currentPageData.length)}&nbsp; */}
-                                {currentPageData.length} &nbsp;
-                                
-                                {itemType == 'block' ? __('Sections') : this.state.layer == 'single' ? __('Layouts') : __('Starter Packs')}
+                                {this._getDataLength(itemType === 'layout' && selectedLayoutCategory === '' && layer !== 'single' ? 'category' : 'heading', currentPageData.length)}&nbsp;
+                            {itemType == 'block' ? __('Sections') : this.state.layer == 'single' ? __('Layouts') : __('Starter Packs')}
                             </h4>
                             <div className="qubely-template-filter-button-group">
                                 <button onClick={() => this._changePriceFilter()} className={'' == this.state.priceFilter ? 'active' : ''}>{__('All')}</button>

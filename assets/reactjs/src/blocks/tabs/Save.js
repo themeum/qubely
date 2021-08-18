@@ -20,9 +20,6 @@ class Save extends Component {
                 autoSwithcing,
                 showProgressBar,
                 defaultDelay,
-                progressBarPosition,
-                enableButton,
-                buttonUrl,
                 tabStyle,
                 tabTitles,
                 iconPosition,
@@ -38,16 +35,6 @@ class Save extends Component {
         } = this.props;
 
         const interactionClass = IsInteraction(interaction) ? 'qubley-block-interaction' : '';
-
-        const renderProgressBarPosition = (title) => {
-            const { autoSwithcing, showProgressBar, defaultDelay } = this.props.attributes
-        
-            if (autoSwithcing && showProgressBar) {
-                return (
-                    <div className="progress" style={{ width: '0%', transition: typeof title.delay === 'undefined' ? defaultDelay : title.delay + 's' }} />
-                )
-            }
-        }
 
         const renderTabTitles = () => {
             return tabTitles.map((title, index) =>
@@ -94,12 +81,6 @@ class Save extends Component {
                                                     value={title.description}
                                                 />
                                             }
-                                        </div>
-                                    }
-                                    {
-                                        enableButton && 
-                                        <div className="qubely-tab-inner-button">
-                                            <a className={`qubely-block-btn-anchor`} href={buttonUrl.url ? buttonUrl.url : '#'} {...(buttonUrl.target && { target: '_blank' })} {...(buttonUrl.nofollow ? { rel: 'nofollow noopener noreferrer' } : {...buttonUrl.target && { rel: 'noopener noreferrer' }}  )} ><i className="fas fa-long-arrow-alt-right" /></a>
                                         </div>
                                     }
                                 </div>
