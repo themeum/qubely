@@ -82,4 +82,3 @@ composer.lock
 assets/reactjs/yarn.lock
 *.zip
 qubely/*
-.prettierignore
