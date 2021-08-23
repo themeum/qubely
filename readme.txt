@@ -241,8 +241,6 @@ You can report bugs on the [support forum here](https://wordpress.org/support/pl
 == Changelog ==
 
 = 1.7.2 - 23 August, 2021 =
-Fix: Post Grid Typography issue
-Fix: Animated Headline Showing Twice issue
 Fix: Tab Block not Working issue
 Fix: Multiple Pie Progress not Working issue
 Fix: Contact Form Block not Working issue
