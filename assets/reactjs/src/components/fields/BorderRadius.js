@@ -88,9 +88,9 @@ class BorderRadius extends Component {
                                     <Tooltip text={data[1]}>
                                         <button className={((value.radiusType ? value.radiusType == data[0] : defaultRadiusType == data[0]) ? 'active' : '') + ' qubely-button'} key={index} onClick={() => this.updateRadiusType(data[0])}>
                                             {data[0] == 'global' ?
-                                                <svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M14.12 0h-12.24c-1.038 0-1.88.842-1.88 1.88v12.24c0 1.038.842 1.88 1.88 1.88h12.24c1.038 0 1.88-.842 1.88-1.88v-12.24c0-1.038-.842-1.88-1.88-1.88zm0 13.18c0 .519-.421.94-.94.94h-10.36c-.519 0-.94-.421-.94-.94v-10.36c0-.519.421-.94.94-.94h10.36c.519 0 .94.421.94.94v10.36z" className="qubely-svg-fill" fill-rule="nonzero" /></svg>
+                                                <svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M14.12 0h-12.24c-1.038 0-1.88.842-1.88 1.88v12.24c0 1.038.842 1.88 1.88 1.88h12.24c1.038 0 1.88-.842 1.88-1.88v-12.24c0-1.038-.842-1.88-1.88-1.88zm0 13.18c0 .519-.421.94-.94.94h-10.36c-.519 0-.94-.421-.94-.94v-10.36c0-.519.421-.94.94-.94h10.36c.519 0 .94.421.94.94v10.36z" className="qubely-svg-fill" fillRule="nonzero" /></svg>
                                                 :
-                                                <svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M1.88 0c-1.038 0-1.88.842-1.88 1.88v4.71h1.88v-3.77c0-.519.421-.94.94-.94h3.77v-1.88h-4.71zm0 9.41h-1.88v4.71c0 1.038.842 1.88 1.88 1.88h4.71v-1.88h-3.77c-.519 0-.94-.421-.94-.94v-3.77zm12.24-9.41h-4.71v1.88h3.77c.519 0 .94.421.94.94v3.77h1.88v-4.71c0-1.038-.842-1.88-1.88-1.88zm-.94 14.12h-3.77v1.88h4.71c1.038 0 1.88-.842 1.88-1.88v-4.71h-1.88v3.77c0 .519-.421.94-.94.94z" className="qubely-svg-fill" fill-rule="nonzero" /></svg>
+                                                <svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M1.88 0c-1.038 0-1.88.842-1.88 1.88v4.71h1.88v-3.77c0-.519.421-.94.94-.94h3.77v-1.88h-4.71zm0 9.41h-1.88v4.71c0 1.038.842 1.88 1.88 1.88h4.71v-1.88h-3.77c-.519 0-.94-.421-.94-.94v-3.77zm12.24-9.41h-4.71v1.88h3.77c.519 0 .94.421.94.94v3.77h1.88v-4.71c0-1.038-.842-1.88-1.88-1.88zm-.94 14.12h-3.77v1.88h4.71c1.038 0 1.88-.842 1.88-1.88v-4.71h-1.88v3.77c0 .519-.421.94-.94.94z" className="qubely-svg-fill" fillRule="nonzero" /></svg>
                                             }
                                         </button>
                                     </Tooltip>
@@ -120,7 +120,7 @@ class BorderRadius extends Component {
                         {
                             iterator.map((item, index) => {
                                 return (
-                                    <div className="qubely-d-flex qubely-align-center qubely-field">
+                                    <div key={index} className="qubely-d-flex qubely-align-center qubely-field">
                                         <div className="qubely-mr-15">
                                             {icons.borderRadius[item]}
                                         </div>

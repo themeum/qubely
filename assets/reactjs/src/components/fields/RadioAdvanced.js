@@ -18,7 +18,7 @@ class RadioAdvanced extends Component {
                     {
                         options.map((data, index) => {
                             return (
-                                <Tooltip text={ data.title || data.value }>
+                                <Tooltip key={index} text={ data.title || data.value }>
                                     <button className={(value == data.value ? 'active' : '') + ' qubely-button'} key={index} onClick={ () => this.setSettings(data.value) }>
                                         {data.icon ? (<i className={ data.icon } />)
                                         : data.svg ? (<span className='qubely-option-svg'>{data.svg}</span>)

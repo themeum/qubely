@@ -59,17 +59,17 @@ class Alignment extends Component {
                                 <Fragment>
                                     {(data == 'left' || data == 'flex-start') &&
                                         <Tooltip text={__('Left')}>
-                                            <svg width="21" height="18" viewBox="0 0 21 18" xmlns="http://www.w3.org/2000/svg"><g transform="translate(-29 -4) translate(29 4)" fill="none"><path d="M1 .708v15.851" className="qubely-svg-stroke" stroke-linecap="square" /><rect className="qubely-svg-fill" x="5" y="5" width="16" height="7" rx="1" /></g></svg>
+                                            <svg width="21" height="18" viewBox="0 0 21 18" xmlns="http://www.w3.org/2000/svg"><g transform="translate(-29 -4) translate(29 4)" fill="none"><path d="M1 .708v15.851" className="qubely-svg-stroke" strokeLinecap="square" /><rect className="qubely-svg-fill" x="5" y="5" width="16" height="7" rx="1" /></g></svg>
                                         </Tooltip>
                                     }
                                     {data == 'center' &&
                                         <Tooltip text={__('Middle')}>
-                                            <svg width="16" height="18" viewBox="0 0 16 18" xmlns="http://www.w3.org/2000/svg"><g transform="translate(-115 -4) translate(115 4)" fill="none"><path d="M8 .708v15.851" className="qubely-svg-stroke" stroke-linecap="square" /><rect className="qubely-svg-fill" y="5" width="16" height="7" rx="1" /></g></svg>
+                                            <svg width="16" height="18" viewBox="0 0 16 18" xmlns="http://www.w3.org/2000/svg"><g transform="translate(-115 -4) translate(115 4)" fill="none"><path d="M8 .708v15.851" className="qubely-svg-stroke" strokeLinecap="square" /><rect className="qubely-svg-fill" y="5" width="16" height="7" rx="1" /></g></svg>
                                         </Tooltip>
                                     }
                                     {(data == 'right' || data == 'flex-end') &&
                                         <Tooltip text={__('Right')}>
-                                            <svg width="21" height="18" viewBox="0 0 21 18" xmlns="http://www.w3.org/2000/svg"><g transform="translate(0 1) rotate(-180 10.5 8.5)" fill="none"><path d="M1 .708v15.851" className="qubely-svg-stroke" stroke-linecap="square" /><rect className="qubely-svg-fill" fill-rule="nonzero" x="5" y="5" width="16" height="7" rx="1" /></g></svg>
+                                            <svg width="21" height="18" viewBox="0 0 21 18" xmlns="http://www.w3.org/2000/svg"><g transform="translate(0 1) rotate(-180 10.5 8.5)" fill="none"><path d="M1 .708v15.851" className="qubely-svg-stroke" strokeLinecap="square" /><rect className="qubely-svg-fill" fillRule="nonzero" x="5" y="5" width="16" height="7" rx="1" /></g></svg>
                                         </Tooltip>
                                     }
                                 </Fragment>

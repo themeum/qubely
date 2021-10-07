@@ -6,9 +6,9 @@ class InlineToolbar extends Component {
 
     render() {
         let html = [];
-        (this.props.data).forEach(val => {
+        (this.props.data).forEach((val, i) => {
             if (val.name == 'InlineSpacer' && this.props.prevState[val.key]) {
-                html.push(<InlineSpacer value={this.props.attributes[val.key]} responsive={val.responsive ? true : false} unit={val.unit || ''} onChange={value => this.props.setAttributes({ [val.key]: value })} />)
+                html.push(<InlineSpacer key={i} value={this.props.attributes[val.key]} responsive={val.responsive ? true : false} unit={val.unit || ''} onChange={value => this.props.setAttributes({ [val.key]: value })} />)
             }
         })
         return html

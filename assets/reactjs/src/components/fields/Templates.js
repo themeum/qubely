@@ -40,7 +40,7 @@ class Templates extends Component {
                                         }
                                     }
                                     return (
-                                        <div className={'qubely-design-template ' + (this.state.activeTemplate === _index ? 'active' : '')} role='button' onClick={() => {
+                                        <div key={_index} className={'qubely-design-template ' + (this.state.activeTemplate === _index ? 'active' : '')} role='button' onClick={() => {
                                             this.setState({activeTemplate: _index})
                                             return this.handleTemplateSelection(templates[key]);
                                         }}>
