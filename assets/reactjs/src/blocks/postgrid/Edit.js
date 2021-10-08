@@ -920,7 +920,7 @@ class Edit extends Component {
 				</InspectorControls>
 
 				<BlockControls>
-					<Toolbar>
+					<Toolbar label={__('Post Grid Options', 'qubely')}>
 						<InlineToolbar
 							data={[{ name: 'InlineSpacer', key: 'spacer', responsive: true, unit: ['px', 'em', '%'] }]}
 							{...this.props}
@@ -939,10 +939,10 @@ class Edit extends Component {
 									// onContextMenu={event => handleContextMenu(event, this.qubelyContextMenu.current)}
 									className={`qubely-postgrid-wrapper qubely-postgrid-layout-${layout} ${(layout === 2) ? 'qubely-postgrid-column qubely-postgrid-column-md' + column.md + ' ' + 'qubely-postgrid-column-sm' + column.sm + ' ' + 'qubely-postgrid-column-xs' + column.xs : ''}`}>
 									{
-										posts && posts.map(post => {
+										posts && posts.map((post, i) => {
 											if (post) {
 												return (
-													<div className={`qubely-postgrid ${layout === 1 ? 'qubely-post-list-view' : 'qubely-post-grid-view'} qubely-postgrid-style-${style}`}>
+													<div key={i} className={`qubely-postgrid ${layout === 1 ? 'qubely-post-list-view' : 'qubely-post-grid-view'} qubely-postgrid-style-${style}`}>
 														<div className={`${layout === 1 ? `qubely-post-list-wrapper qubely-post-list-${((layout === 2) && (style === 3)) ? contentPosition : girdContentPosition}` : `qubely-post-grid-wrapper qubely-post-grid-${((layout === 2) && (style === 3)) ? contentPosition : girdContentPosition}`}`}>
 															{showImages && post.qubely_featured_image_url && this.renderFeaturedImage(post)}
 															{this.renderCardContent(post)}

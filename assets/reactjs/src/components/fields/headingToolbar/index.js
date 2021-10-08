@@ -31,6 +31,7 @@ class HeadingToolbar extends Component {
 
         return (
             <Toolbar
+                label={__('Heading Toolbar', 'qubely')}
                 isCollapsed={isCollapsed}
                 icon={<HeadingLevelIcon level={selectedLevel} />}
                 controls={this.headingLevels(minLevel, maxLevel).map(

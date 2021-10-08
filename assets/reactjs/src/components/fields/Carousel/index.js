@@ -100,7 +100,7 @@ export default class Carousel extends Component {
         let dots = Math.floor(children.length / items[device]);
         return Array(dots).fill(0).map((item, index) => {
             return (
-                <li className={`qubely-carousel-dot-${index}${index === 0 ? ' active' : ''}`}>
+                <li key={index} className={`qubely-carousel-dot-${index}${index === 0 ? ' active' : ''}`}>
                     <span className="dot-indicator"/>
                 </li>
             )

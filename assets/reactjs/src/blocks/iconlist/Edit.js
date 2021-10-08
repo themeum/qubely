@@ -128,7 +128,7 @@ class Edit extends Component {
         }
         return tempItems.map((item, index) => {
             return (
-                <li className="qubely-list-li qubely-list-li-editor" >
+                <li key={index} className="qubely-list-li qubely-list-li-editor" >
                     <div ref="avoidOnClick" className={`qubely-list-item qubely-list-item-${index}`} onClick={() => this.setState({ currentListItemIndex: index })}>
                         {iconPosition == 'left' && <span className={`qubely-list-item-icon ${item.icon} fa-fw`} onClick={() => this.setState({ openIconPopUp: openIconPopUp ? (currentListItemIndex == index) ? false : true : true })} />}
                         <div

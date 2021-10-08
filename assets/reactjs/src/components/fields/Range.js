@@ -89,8 +89,8 @@ class Range extends Component {
 
                         {unit &&
                             <div className="qubely-unit-btn-group qubely-ml-auto">
-                                {(typeof unit == 'object' ? unit : ['px', 'em', '%']).map((value) => (
-                                    <button className={(this.props.value && value == this.props.value.unit) ? 'active' : ''}
+                                {(typeof unit == 'object' ? unit : ['px', 'em', '%']).map((value, i) => (
+                                    <button key={i} className={(this.props.value && value == this.props.value.unit) ? 'active' : ''}
                                         onClick={() => {
                                             this.setSettings(value, 'unit');
                                             // console.log(this._filterValue())

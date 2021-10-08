@@ -63,7 +63,7 @@ class Media extends Component {
 										{(value.length > 0) &&
 											value.map((v, index) => {
 												return (
-													<span className="qubely-media-image-parent">
+													<span key={index} className="qubely-media-image-parent">
 														<img src={this.isUrl(v.url)} alt={__('image')} />
 														{panel &&
 															<div className="qubely-media-actions qubely-field-button-list">

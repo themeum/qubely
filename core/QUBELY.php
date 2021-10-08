@@ -386,7 +386,6 @@ class QUBELY {
 			'qubely/buttongroup',
 			'qubely/table-of-contents',
 			'qubely/videopopup',
-			'qubely/table',
 			'qubely/pieprogress',
 			'qubely/wooproducts',
 			'qubely/postgrid',

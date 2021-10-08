@@ -38,7 +38,7 @@ class Save extends Component {
 
         const renderTabTitles = () => {
             return tabTitles.map((title, index) =>
-                <span className={`qubely-tab-item ${(index == 0) ? 'qubely-active' : ''}`}{...(autoSwithcing && { 'data-customdelay': typeof title.delay !== 'undefined' ? title.delay : defaultDelay })}>
+                <span key={index} className={`qubely-tab-item ${(index == 0) ? 'qubely-active' : ''}`}{...(autoSwithcing && { 'data-customdelay': typeof title.delay !== 'undefined' ? title.delay : defaultDelay })}>
                     {
                         navType === 'text' ?
                             <Fragment>

@@ -124,7 +124,7 @@ class Edit extends Component {
                     {showAvatar && (avatarLayout == 'left' || avatarLayout == 'top') &&
                         <Fragment>
                             {avatar.url != undefined ?
-                                <img className="qubely-testimonial-avatar" src={avatar.url} srcset={avatar2x.url != undefined ? avatar.url + ' 1x, ' + avatar2x.url + ' 2x' : ''} alt={avatarAlt} onClick={() => this.handlePanelOpenings('Avatar')} />
+                                <img className="qubely-testimonial-avatar" src={avatar.url} srcSet={avatar2x.url != undefined ? avatar.url + ' 1x, ' + avatar2x.url + ' 2x' : ''} alt={avatarAlt} onClick={() => this.handlePanelOpenings('Avatar')} />
                                 :
                                 <div className="qubely-image-placeholder qubely-testimonial-avatar" onClick={() => this.handlePanelOpenings('Avatar')}><i className="far fa-user" /></div>
                             }
@@ -139,7 +139,7 @@ class Edit extends Component {
                     {showAvatar && (avatarLayout == 'right' || avatarLayout == 'bottom') &&
                         <Fragment>
                             {avatar.url != undefined ?
-                                <img className="qubely-testimonial-avatar" src={avatar.url} srcset={avatar2x.url != undefined ? avatar.url + ' 1x, ' + avatar2x.url + ' 2x' : ''} alt={avatarAlt} onClick={() => this.handlePanelOpenings('Avatar')} />
+                                <img className="qubely-testimonial-avatar" src={avatar.url} srcSet={avatar2x.url != undefined ? avatar.url + ' 1x, ' + avatar2x.url + ' 2x' : ''} alt={avatarAlt} onClick={() => this.handlePanelOpenings('Avatar')} />
                                 :
                                 <div className="qubely-image-placeholder qubely-testimonial-avatar" onClick={() => this.handlePanelOpenings('Avatar')}><i className="far fa-user" /></div>
                             }
@@ -457,7 +457,7 @@ class Edit extends Component {
                 </InspectorControls>
 
                 <BlockControls>
-                    <Toolbar>
+                    <Toolbar label={__('Testimonial Options', 'qubely')}>
                         <InlineToolbar
                             data={[{ name: 'InlineSpacer', key: 'spacer', responsive: true }]}
                             {...this.props}

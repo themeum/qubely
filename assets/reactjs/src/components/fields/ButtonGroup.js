@@ -29,9 +29,9 @@ export default function ({ label, options, value, onChange, additionalClass, res
             {!responsive && label && <label> {label} </label>}
 
             <ButtonGroup className="qubely-field-child qubely-d-flex">
-                {options.map(([title, option]) => {
+                {options.map(([title, option], i) => {
                     const activeBtn = option === getValue() ? 'qubley-active-group-btn' : ''
-                    return (<Button className={`qubley-group-button ${activeBtn}${additionalClass ? ` ${additionalClass}` : ''}`} onClick={() => onButtonClick(option)}>{title}</Button>)
+                    return (<Button key={i} className={`qubley-group-button ${activeBtn}${additionalClass ? ` ${additionalClass}` : ''}`} onClick={() => onButtonClick(option)}>{title}</Button>)
                 })}
             </ButtonGroup>
         </div>

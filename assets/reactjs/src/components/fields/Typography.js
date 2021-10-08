@@ -288,7 +288,7 @@ class Typography extends Component {
                                                                 { ['qubely-active-font-family']: isActiveFont }
                                                             )
                                                             return (
-                                                                <div className={fontClasses}
+                                                                <div key={index} className={fontClasses}
                                                                     id={`qubely-font-family-${index}`}
                                                                     onClick={() => {
                                                                         this.setState({ showFontFamiles: false, filterText: '' });
@@ -316,9 +316,9 @@ class Typography extends Component {
                                             showFontWeights && <div className="qubely-font-weight-wrapper" ref="qubelyFontWeightWrapper">
                                                 <div className="qubely-font-family-weights" >
                                                     {
-                                                        ['Default', ...this._getWeight()].map(font => {
+                                                        ['Default', ...this._getWeight()].map((font, i) => {
                                                             return (
-                                                                <div className={`${font == value.weight ? 'qubely-active-font-weight' : 'qubely-font-weight-option'}`}
+                                                                <div key={i} className={`${font == value.weight ? 'qubely-active-font-weight' : 'qubely-font-weight-option'}`}
                                                                     onClick={() => { this.setState({ showFontWeights: false }); this.setSettings('weight', font) }}
                                                                 >
                                                                     {font}
@@ -380,7 +380,7 @@ class Typography extends Component {
                                                         {
                                                             ['none', 'capitalize', 'uppercase', 'lowercase'].map((data, index) => {
                                                                 return (
-                                                                    <Tooltip text={data.charAt(0).toUpperCase() + data.slice(1)}>
+                                                                    <Tooltip key={index} text={data.charAt(0).toUpperCase() + data.slice(1)}>
                                                                         <button className={(value.transform == data ? 'active' : '') + ' qubely-button'} key={index} onClick={() => this.setSettings('transform', data)}>
                                                                             {data == 'none' &&
                                                                                 <i className="fas fa-ban" />

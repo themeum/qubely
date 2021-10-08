@@ -39,7 +39,7 @@ class Shape extends Component {
 
         return (
             <ul className="qubely-shape-picker-options">
-                {shapes.map(item => <li className={`qubely-shape-picker-option`} onClick={() => this.setSettings('style', item)} dangerouslySetInnerHTML={{ __html: qubely_admin.shapes[item] }} style={value.style == item ? { fill: value.color } : {}} />)}
+                {shapes.map((item, i) => <li key={i} className={`qubely-shape-picker-option`} onClick={() => this.setSettings('style', item)} dangerouslySetInnerHTML={{ __html: qubely_admin.shapes[item] }} style={value.style == item ? { fill: value.color } : {}} />)}
             </ul>
         )
     }

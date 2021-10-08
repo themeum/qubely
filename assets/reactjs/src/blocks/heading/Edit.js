@@ -213,7 +213,7 @@ class Edit extends Component {
 
                 <BlockControls>
                     <HeadingToolbar minLevel={1} maxLevel={6} selectedLevel={level} onChange={newLevel => setAttributes({ level: newLevel, selector: `h${newLevel}` })} />
-                    <Toolbar>
+                    <Toolbar label={__('Heading Options', 'qubely')}>
                         <InlineToolbar
                             data={[{ name: 'InlineSpacer', key: 'spacer', responsive: true, unit: ['px', 'em', '%'] }]}
                             {...this.props}

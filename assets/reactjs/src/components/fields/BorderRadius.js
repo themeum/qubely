@@ -68,8 +68,8 @@ class BorderRadius extends Component {
 
                 {unit &&
                     <div className="qubely-unit-btn-group qubely-d-block qubely-text-right">
-                        {(typeof unit == 'object' ? unit : ['px', 'em', '%']).map(unitName => (
-                            <button className={(value.unit ? unitName == value.unit : unitName == defaultUnit) ? 'active' : ''}
+                        {(typeof unit == 'object' ? unit : ['px', 'em', '%']).map((unitName, i) => (
+                            <button key={i} className={(value.unit ? unitName == value.unit : unitName == defaultUnit) ? 'active' : ''}
                                 onClick={() => this.updateUnit(unitName)}>
                                 {unitName}</button>
                         ))}
@@ -85,7 +85,7 @@ class BorderRadius extends Component {
                         {
                             [['global', __('Global')], ['custom', __('Custom')]].map((data, index) => {
                                 return (
-                                    <Tooltip text={data[1]}>
+                                    <Tooltip key={index} text={data[1]}>
                                         <button className={((value.radiusType ? value.radiusType == data[0] : defaultRadiusType == data[0]) ? 'active' : '') + ' qubely-button'} key={index} onClick={() => this.updateRadiusType(data[0])}>
                                             {data[0] == 'global' ?
                                                 <svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M14.12 0h-12.24c-1.038 0-1.88.842-1.88 1.88v12.24c0 1.038.842 1.88 1.88 1.88h12.24c1.038 0 1.88-.842 1.88-1.88v-12.24c0-1.038-.842-1.88-1.88-1.88zm0 13.18c0 .519-.421.94-.94.94h-10.36c-.519 0-.94-.421-.94-.94v-10.36c0-.519.421-.94.94-.94h10.36c.519 0 .94.421.94.94v10.36z" className="qubely-svg-fill" fillRule="nonzero" /></svg>

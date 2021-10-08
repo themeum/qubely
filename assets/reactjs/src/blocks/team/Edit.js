@@ -502,7 +502,7 @@ class Edit extends Component {
                     </InspectorTabs>
                 </InspectorControls>
                 <BlockControls>
-                    <Toolbar>
+                    <Toolbar label={__('team Options', 'qubely')}>
                         <InlineToolbar
                             data={[{ name: 'InlineSpacer', key: 'spacer', responsive: true, unit: ['px', 'em', '%'] }]}
                             {...this.props}
@@ -520,7 +520,7 @@ class Edit extends Component {
                     >
                         <div className="qubely-team-image-wrapper" onClick={() => this.handlePanelOpenings('Image')}>
                             {imageType === 'local' && image.url != undefined ?
-                                <img className="qubely-team-image" src={image.url} srcset={image2x.url != undefined ? image.url + ' 1x, ' + image2x.url + ' 2x' : ''} alt={name} />
+                                <img className="qubely-team-image" src={image.url} srcSet={image2x.url != undefined ? image.url + ' 1x, ' + image2x.url + ' 2x' : ''} alt={name} />
                                 :
                                 (imageType === 'external' && externalImageUrl.url != undefined) ?
                                     <img className="qubely-team-image" src={externalImageUrl.url} alt={name} />

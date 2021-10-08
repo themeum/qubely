@@ -285,7 +285,7 @@ class Edit extends Component {
                                     [...animatedText.length > 0 ? animatedText : defaultTexts].map((item, index) => {
                                         let isVisible = index === 0 ? 'is-visible' : 'is-hidden'
                                         let className = `animated-text ${isVisible}`
-                                        return <span className={className}>{item}</span>
+                                        return <span key={index} className={className}>{item}</span>
                                     })
                                 }
                             </span>

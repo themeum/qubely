@@ -69,10 +69,11 @@ class Gradient extends Component {
 
                 <div className="qubely-field-gradient-preview qubely-mb-20" style={{ background: '-webkit-linear-gradient(' + (value.direction > 90 ? (90 - value.direction + 360) : 90 - value.direction) + 'deg,' + value.color1 + ' ' + value.start + '%, ' + value.color2 + ' ' + value.stop + '%' + ')', background: 'linear-gradient(' + value.direction + 'deg,' + value.color1 + ' ' + value.start + '%, ' + value.color2 + ' ' + value.stop + '%' + ')' }}>
                     {
-                        gradientColors.map(gradientColor => {
+                        gradientColors.map((gradientColor, i) => {
                             let [color, label, defaultColor, customClassName] = gradientColor
                             return (
                                 <Dropdown
+                                    key={i}
                                     position="bottom left"
                                     className={`qubely-gradient-color gradient-color-position-${customClassName}`}
                                     contentClassName="qubely-gradient-color-picker"

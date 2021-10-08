@@ -79,7 +79,7 @@ class Save extends Component {
 								<Fragment>
 									{
 										(imageType === 'local' && image.url != undefined) ?
-											<img className="qubely-info-box-image" src={image.url} srcset={image2x.url != undefined ? image.url + ' 1x, ' + image2x.url + ' 2x' : ''} alt={imgAlt && imgAlt} />
+											<img className="qubely-info-box-image" src={image.url} srcSet={image2x.url != undefined ? image.url + ' 1x, ' + image2x.url + ' 2x' : ''} alt={imgAlt && imgAlt} />
 											:
 											(imageType === 'external' && externalImageUrl.url != undefined) ?
 												<img className="qubely-info-box-image" src={externalImageUrl.url} alt={imgAlt && imgAlt} />

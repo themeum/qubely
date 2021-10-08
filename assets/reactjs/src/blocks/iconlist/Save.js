@@ -8,7 +8,7 @@ class Save extends Component {
         const { attributes: { listItems, iconPosition } } = this.props
         return listItems.map((item, index) => {
             return (
-                <li className={`qubely-list-li`}>
+                <li key={index} className={`qubely-list-li`}>
                     {iconPosition == 'left' && <span className={`qubely-list-item-icon ${item.icon} fa-fw`} />}
                     <RichText.Content tagName="span" value={item.text} />
                     {iconPosition == 'right' && <span className={`qubely-list-item-icon ${item.icon} fa-fw`} />}

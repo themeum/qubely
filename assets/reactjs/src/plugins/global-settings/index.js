@@ -695,6 +695,7 @@ class GlobalSettings extends Component {
                                                     {
                                                         colors.map((value, index) => (
                                                             <Color
+                                                                key={index}
                                                                 preset={presetKey}
                                                                 value={value}
                                                                 className={index < 5 ? 'primary-color' : 'added-color'}
@@ -753,7 +754,7 @@ class GlobalSettings extends Component {
                                                                     { ['active']: displaySettings }
                                                                 )
                                                                 return (
-                                                                    <div className={wrapperClasses}>
+                                                                    <div key={index} className={wrapperClasses}>
                                                                         <div
                                                                             className={titleClasses}
                                                                         >

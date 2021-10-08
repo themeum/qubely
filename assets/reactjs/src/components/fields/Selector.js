@@ -24,10 +24,10 @@ class Selector extends Component {
                     :
                     <div className="qubely-field-child">
                         <div className="qubely-selector-button-group">
-                            {defaultVal.map(data => {
+                            {defaultVal.map((data, i) => {
                                 const [tag, description] = data
                                 return (
-                                    <button className={"qubely-button" + (tag == value ? ' active' : '')} onClick={val => this.setSettings(val)} data-value={tag}>
+                                    <button key={i} className={"qubely-button" + (tag == value ? ' active' : '')} onClick={val => this.setSettings(val)} data-value={tag}>
                                         {icons[tag] && icons[tag]}
                                         {description}
                                     </button>

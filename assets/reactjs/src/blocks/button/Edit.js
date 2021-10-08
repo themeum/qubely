@@ -156,7 +156,7 @@ class Edit extends Component {
             <Fragment>
 
                 <BlockControls>
-                    <Toolbar>
+                    <Toolbar label={__('Button Toolbar', 'qubely')}>
                         <InlineToolbar
                             data={[{ name: 'InlineSpacer', key: 'spacer', responsive: true, unit: ['px', 'em', '%'] }]}
                             {...this.props}

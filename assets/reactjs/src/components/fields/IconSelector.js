@@ -28,9 +28,9 @@ class IconSelector extends Component {
                     {enableSearch && <input type="text" value={filterText} placeholder="Search..." onChange={e => this.setState({ filterText: e.target.value })} autoComplete="off" />}
 
                     <div className="qubely-icon-list-icons">
-                        {finalData.map(item => {
+                        {finalData.map((item, i) => {
                             return (
-                                <span className={value == item ? 'qubely-active' : ''} onClick={() => onChange(item)}>
+                                <span key={i} className={value == item ? 'qubely-active' : ''} onClick={() => onChange(item)}>
                                     <span className={item.value} />
                                 </span>
                             )

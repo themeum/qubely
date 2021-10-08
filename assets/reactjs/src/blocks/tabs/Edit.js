@@ -153,7 +153,7 @@ class Edit extends Component {
 					{ [`qubely-has-icon-${iconPosition}`]: typeof title.iconName !== 'undefined' }
 				)
 				return (
-					<div className={wrapperClasses}>
+					<div key={index} className={wrapperClasses}>
 						<div
 							role="button"
 							className={titleClasses}
@@ -872,7 +872,7 @@ class Edit extends Component {
 				</InspectorControls>
 
 				<BlockControls>
-					<Toolbar>
+					<Toolbar label={__('Tabs Options', 'qubely')}>
 						<InlineToolbar
 							data={[{ name: 'InlineSpacer', key: 'spacer', responsive: true, unit: ['px', 'em', '%'] }]}
 							{...this.props}

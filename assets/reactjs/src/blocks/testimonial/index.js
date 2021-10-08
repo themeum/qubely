@@ -73,7 +73,7 @@ registerBlockType('qubely/testimonial', {
                             {showAvatar && (avatarLayout == 'left' || avatarLayout == 'top') &&
                                 <Fragment>
                                     {avatar.url != undefined ?
-                                        <img className="qubely-testimonial-avatar" src={avatar.url} srcset={avatar2x.url != undefined ? avatar.url + ' 1x, ' + avatar2x.url + ' 2x' : ''} alt={avatarAlt} />
+                                        <img className="qubely-testimonial-avatar" src={avatar.url} srcSet={avatar2x.url != undefined ? avatar.url + ' 1x, ' + avatar2x.url + ' 2x' : ''} alt={avatarAlt} />
                                         :
                                         <div className="qubely-image-placeholder qubely-testimonial-avatar"><i className="far fa-user" /></div>
                                     }
@@ -88,7 +88,7 @@ registerBlockType('qubely/testimonial', {
                             {showAvatar && (avatarLayout == 'right' || avatarLayout == 'bottom') &&
                                 <Fragment>
                                     {avatar.url != undefined ?
-                                        <img className="qubely-testimonial-avatar" src={avatar.url} srcset={avatar2x.url != undefined ? avatar.url + ' 1x, ' + avatar2x.url + ' 2x' : ''} alt={avatarAlt} />
+                                        <img className="qubely-testimonial-avatar" src={avatar.url} srcSet={avatar2x.url != undefined ? avatar.url + ' 1x, ' + avatar2x.url + ' 2x' : ''} alt={avatarAlt} />
                                         :
                                         <div className="qubely-image-placeholder qubely-testimonial-avatar"><i className="far fa-user" /></div>
                                     }
