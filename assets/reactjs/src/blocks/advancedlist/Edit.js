@@ -417,13 +417,14 @@ class Edit extends Component {
                 </InspectorControls>
 
                 <BlockControls>
-                    <Toolbar>
+                    <Toolbar label={__('Advanced List Options', 'qubely')}>
                         <InlineToolbar
                             data={[{ name: 'InlineSpacer', key: 'spacer', responsive: true, unit: ['px', 'em', '%'] }]}
                             {...this.props}
                             prevState={this.state} />
                     </Toolbar>
                     <Toolbar
+                        label={__('Unordered List Options', 'qubely')}
                         controls={
                             [
                                 {
