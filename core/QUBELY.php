@@ -1825,6 +1825,11 @@ class QUBELY {
 	 * @return boolean,void     Return false if failure, echo json on success
 	 */
 	public function qubely_send_form_data() {
+
+		// Verify the authenticity of the request.
+		check_ajax_referer( 'qubely_nonce', 'security' );
+
+		// All good, let's proceed.
 		if ( isset( $_POST['captcha'] ) && $_POST['recaptcha'] == 'true' ) {
 			$captcha   = $_POST['captcha'];
 			$secretKey = $_POST['recaptcha-secret-key'];
