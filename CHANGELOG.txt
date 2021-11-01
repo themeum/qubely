@@ -1,3 +1,9 @@
+<h3>1.7.3 - 1 November, 2021</h3>
+<ul> 
+    <li>Fix: Security Update </li>
+    <li>Fix: Tab Block Image Jumping Issue </li>
+</ul>
+
 <h3>1.7.2 - 23 August, 2021</h3>
 <ul> 
     <li>Fix: Tab Block - Not Working issue </li>
