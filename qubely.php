@@ -3,7 +3,7 @@
  * Plugin Name:       Qubely - Advanced Gutenberg Blocks
  * Plugin URI:        https://www.themeum.com/
  * Description:       The one and only Gutenberg block plugin you will ever need.
- * Version: 		  1.7.3
+ * Version: 		  1.7.4
  * Author:            Themeum.com
  * Author URI:        https://www.themeum.com/
  * Text Domain:       qubely
@@ -24,7 +24,7 @@ function qubely_language_load()
 }
 
 // Define Version
-define('QUBELY_VERSION', '1.7.3');
+define('QUBELY_VERSION', '1.7.4');
 
 // Define License
 define('QUBELY_LICENSE', 'free');
@@ -73,7 +73,7 @@ function qubely_blocks_add_orderby( $params ) {
  * @since 1.0.9
  */
 function qubely_register_rest_fields() {
-   $post_type = QUBELY::get_post_types();
+   $post_type = QUBELY_MAIN::get_post_types();
 
    foreach ( $post_type as $key => $value ) {
 
@@ -183,7 +183,7 @@ function qubely_get_featured_image_url( $object ) {
             $featured_images['portraits'] = wp_get_attachment_image_src( $object['featured_media'], 'qubely_portrait', false );
             $featured_images['thumbnail'] =  wp_get_attachment_image_src( $object['featured_media'], 'qubely_thumbnail', false );
 
-            $image_sizes = QUBELY::get_all_image_sizes();
+            $image_sizes = QUBELY_MAIN::get_all_image_sizes();
             foreach ( $image_sizes as $key => $value ) {
                 $size = $value['value'];
                 $featured_images[$size] = wp_get_attachment_image_src(
@@ -211,7 +211,7 @@ add_action( 'rest_api_init', 'qubely_register_rest_fields' );
  * Order by 
  */
 function qubely_resigter_rest_order_by_fields() {
-    $post_types = QUBELY::get_post_types();
+    $post_types = QUBELY_MAIN::get_post_types();
 
     foreach ( $post_types as $key => $type ) {
 		add_filter( "rest_{$type['value']}_collection_params", 'qubely_blocks_add_orderby', 10, 1 );

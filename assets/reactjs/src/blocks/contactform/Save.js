@@ -71,17 +71,17 @@ class Save extends Component {
 								buttonIconPosition={buttonIconPosition}
                                 buttonTag={buttonTag}
 							/>
-                            <input type="hidden" name="field-error-message" value={ _encrypt( fieldErrorMessage ) } />
-                            <input type="hidden" name="form-success-message" value={ _encrypt( formSuccessMessage ) } />
-                            <input type="hidden" name="form-error-message" value={ _encrypt( formErrorMessage ) } />
+                            <input type="hidden" name="field-error-message" value={fieldErrorMessage} />
+                            <input type="hidden" name="form-success-message" value={formSuccessMessage} />
+                            <input type="hidden" name="form-error-message" value={formErrorMessage} />
                             <input type="hidden" name="recaptcha" value={ (reCaptcha && reCaptchaSiteKey && reCaptchaSecretKey) ? 'true' : 'false' } />
                             <input type="hidden" name="recaptcha-site-key" value={ reCaptchaSiteKey } />
                             <input type="hidden" name="recaptcha-secret-key" value={ reCaptchaSecretKey } />
-                            <input type="hidden" name="email-receiver" value={ _encrypt( emailReceiver ) } />
-                            <input type="hidden" name="email-headers" value={ _encrypt( emailHeaders ) } />
-                            <input type="hidden" name="email-from" value={ _encrypt( emailFrom ) } />
-                            <input type="hidden" name="email-subject" value={ _encrypt( emailSubject ) } />
-                            <input type="hidden" name="email-body" value={ _encrypt( emailBody ) } />
+                            <input type="hidden" name="email-receiver" value={emailReceiver} />
+                            <input type="hidden" name="email-headers" value={emailHeaders} />
+                            <input type="hidden" name="email-from" value={emailFrom} />
+                            <input type="hidden" name="email-subject" value={emailSubject} />
+                            <input type="hidden" name="email-body" value={emailBody} />
                         </div>
                         <div className="qubely-form-group">
                             <div className="qubely-form-group-inner">

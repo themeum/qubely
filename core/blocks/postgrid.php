@@ -1,5 +1,6 @@
 <?php
 
+defined( 'ABSPATH' ) || exit;
 /**
  * Registers the `qubely/postgrid` block on server.
  *

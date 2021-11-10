@@ -17,7 +17,7 @@ if (!class_exists('QUBELY_Options')) {
 
         public function init() {
             require __DIR__ . '/admin-views/Settings.php';
-            $this->settings = new Settings();
+            $this->settings = new QUBELY_Settings();
         }
 
         /**
@@ -28,7 +28,7 @@ if (!class_exists('QUBELY_Options')) {
         public function admin_menu()
         {
             require __DIR__ . '/admin-views/Getting_Started.php';
-            $getting_started = new Getting_Started();
+            $getting_started = new QUBELY_Getting_Started();
 
             $parent_slug = 'qubely-settings';
             $cap = 'manage_options';

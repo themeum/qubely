@@ -3,7 +3,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-class QUBELY {
+class QUBELY_MAIN {
 
 
 	protected $api_base_url = 'https://qubely.io/wp-json/restapi/v2/';
@@ -1851,13 +1851,14 @@ class QUBELY {
 		$formErrorMessage   = ( $_POST['form-error-message'] ) ? sanitize_text_field( $_POST['form-error-message'] ) : '';
 		$emailReceiver      = ( $_POST['email-receiver'] ) ? sanitize_email( $_POST['email-receiver'] ) : '';
 		$emailHeaders       = ( $_POST['email-headers'] ) ? sanitize_text_field( $_POST['email-headers'] ) : '';
-		$emailFrom          = ( $_POST['email-from'] ) ? sanitize_email( $_POST['email-from'] ) : '';
+		$emailFrom          = ( $_POST['email-from'] ) ? sanitize_text_field( $_POST['email-from'] ) : '';
 		$emailSubject       = ( $_POST['email-subject'] ) ? sanitize_text_field( $_POST['email-subject'] ) : '';
-		$emailBody          = ( $_POST['email-body'] ) ? sanitize_text_field( $_POST['email-body'] ) : '';
+		$emailBody          = ( $_POST['email-body'] ) ? sanitize_textarea_field( $_POST['email-body'] ) : '';
 
 		$fieldNames     = array();
 		$validation     = false;
 		$formInputArray = $_POST['qubely-form-input'];
+
 		foreach ( $formInputArray as $key => $value ) {
 			if ( preg_match( '/[*]$/', $key ) ) {
 				if ( empty( $value ) ) {
@@ -1877,7 +1878,7 @@ class QUBELY {
 			$emailFrom = explode( ':', $emailFrom );
 			if ( count( $emailFrom ) > 0 ) {
 				$fromName  = isset( $emailFrom[0] ) ? trim( $emailFrom[0] ) : '';
-				$fromEmail = isset( $emailFrom[1] ) ? trim( $emailFrom[1] ) : '';
+				$fromEmail = isset( $emailFrom[1] ) ? sanitize_email( trim( $emailFrom[1] ) ) : '';
 			}
 		}
 
@@ -1902,13 +1903,13 @@ class QUBELY {
 
 		foreach ( $fieldNames as $name => $value ) {
 			$value        = is_array( $fieldNames[ $name ] ) ? implode( ', ', $fieldNames[ $name ] ) : $value;
-			$emailBody    = str_replace( '{{' . $name . '}}', $value, $emailBody );
-			$emailSubject = str_replace( '{{' . $name . '}}', $value, $emailSubject );
-			$replyToName  = str_replace( '{{' . $name . '}}', $value, $replyToName );
-			$replyToMail  = str_replace( '{{' . $name . '}}', $value, $replyToMail );
-			$fromName     = str_replace( '{{' . $name . '}}', $value, $fromName );
-			$cc           = str_replace( '{{' . $name . '}}', $value, $cc );
-			$bcc          = str_replace( '{{' . $name . '}}', $value, $bcc );
+			$emailBody    = str_replace( '{{' . $name . '}}', sanitize_textarea_field( $value ), $emailBody );
+			$emailSubject = str_replace( '{{' . $name . '}}', sanitize_text_field( $value ), $emailSubject );
+			$replyToName  = str_replace( '{{' . $name . '}}', sanitize_text_field( $value ), $replyToName );
+			$replyToMail  = str_replace( '{{' . $name . '}}', sanitize_text_field( $value ), $replyToMail );
+			$fromName     = str_replace( '{{' . $name . '}}', sanitize_text_field( $value ), $fromName );
+			$cc           = str_replace( '{{' . $name . '}}', sanitize_text_field( $value ), $cc );
+			$bcc          = str_replace( '{{' . $name . '}}', sanitize_text_field( $value ), $bcc );
 		}
 
 		// Subject Structure
@@ -1920,9 +1921,6 @@ class QUBELY {
 		$headers[] = 'Reply-To: ' . $replyToName . ' <' . $replyToMail . '>';
 		$headers[] = 'Cc: ' . $cc;
 		$headers[] = 'Bcc: ' . $bcc;
-
-		// var_dump( $headers );
-		// die();
 
 		// Send E-Mail Now or through error msg.
 		try {
@@ -1970,4 +1968,4 @@ class QUBELY {
 		return wp_kses( $element, $allowed_tags );
 	}
 }
-new QUBELY();
+new QUBELY_MAIN();

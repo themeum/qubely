@@ -3,7 +3,7 @@
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-class Fields {
+class QUBELY_Fields {
 
     /**
      * Get Field Type

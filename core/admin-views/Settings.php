@@ -3,7 +3,7 @@
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-class Settings
+class QUBELY_Settings
 {
 
     public $options;

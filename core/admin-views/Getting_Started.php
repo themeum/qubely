@@ -5,7 +5,7 @@ if ( !defined( 'ABSPATH' ) ) {
     exit;
 }
 
-class Getting_Started {
+class QUBELY_Getting_Started {
 
     public $posts;
     public $hasPro;
