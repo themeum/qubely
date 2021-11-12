@@ -26,13 +26,37 @@ class QUBELY_Settings
         $this->option_setter();
     }
 
+    /**
+	 * @param array $input
+	 *
+	 * @return array
+	 *
+	 * Sanitize input array
+	 */
+	public function sanitize_settings_array( $input = array() ) {
+		$array = array();
+
+		if ( is_array( $input ) && count( $input ) ) {
+			foreach ( $input as $key => $value ) {
+				if ( is_array( $value ) ) {
+					$array[ $key ] = $this->sanitize_array( $value );
+				} else {
+					$key           = sanitize_text_field( $key );
+					$value         = sanitize_text_field( $value );
+					$array[ $key ] = $value;
+				}
+			}
+		}
+
+		return $array;
+	}
 
     /**
      * Update option using qubely
      * @since 1.5.2
      */
     public function ajax_update_qubely_options() {
-        $new_options = isset( $_POST['options'] ) && is_array( $_POST['options'] ) ? $_POST['options'] : false;
+        $new_options = isset( $_POST['options'] ) && is_array( $_POST['options'] ) ? $this->sanitize_settings_array( $_POST['options'] ) : array();
         if ( ! isset( $_POST['_wpnonce'] ) || ! wp_verify_nonce( $_POST['_wpnonce'], 'qubely_nonce' ) || ! $new_options ) {
             wp_send_json_error( 'No data or nonce failed' );
         };
@@ -64,7 +88,7 @@ class QUBELY_Settings
             ! wp_verify_nonce( $_POST['_wpnonce'], 'qubely_option_save' )
         ) return;
 
-        $option = (array) isset( $_POST['qubely_options'] ) ? $_POST['qubely_options'] : array();
+        $option = (array) isset( $_POST['qubely_options'] ) ? $this->sanitize_settings_array( $_POST['qubely_options'] ) : array();
         $option = apply_filters( 'qubely_options_input', $option );
 
         do_action( 'qubely_options_before_save', $option );
@@ -171,6 +195,29 @@ class QUBELY_Settings
                                 'size' => 'regular',
                             ),
                         ),
+                    ),
+                    "qubely_email" => array(
+                        'label' => 'Contact Form Settings',
+                        'fields' => array(
+                            'form_from_name' => array(
+                                'type' => 'text',
+                                'label' => __( 'From Name', 'qubely' ),
+                                'default' => sanitize_text_field( get_option( 'blogname' ) ),
+                                'desc' => __( 'Set the default "From Name" for contact forms' ),
+                                'placeholder' => 'Qubely',
+                                'suffix' => '',
+                                'size' => 'regular',
+                            ),
+                            'form_from_email' => array(
+                                'type' => 'text',
+                                'label' => __( 'From Email', 'qubely' ),
+                                'default' => sanitize_email( get_option( 'admin_email' ) ),
+                                'desc' => __( 'Set the default "From Email" for contact forms' ),
+                                'placeholder' => 'admin@example.com',
+                                'suffix' => '',
+                                'size' => 'regular',
+                            ),
+                        ),
                     )
                 )
             ),
@@ -272,7 +319,7 @@ class QUBELY_Settings
                                     foreach ( $options['fields'] as $field_key => $field ) {
                                         $field['key'] = $field_key;
                                         $field['value'] = $this->get_option( $field_key, $field['default'] );
-                                        Fields::get( $field['type'], $field );
+                                        QUBELY_Fields::get( $field['type'], $field );
                                     }
                                     ?>
                                 </tbody>
@@ -293,7 +340,7 @@ class QUBELY_Settings
                                     foreach ( $group['fields'] as $field_key => $field ) {
                                         $field['key'] = $field_key;
                                         $field['value'] = $this->get_option( $field_key, $field['default'] );
-                                        Fields::get( $field['type'], $field );
+                                        QUBELY_Fields::get( $field['type'], $field );
                                     }
                                     echo "</tbody></table>";
                                 }

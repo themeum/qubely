@@ -146,7 +146,6 @@ class Edit extends Component {
             reCaptchaSecretKey,
             emailReceiver,
             emailHeaders,
-            emailFrom,
             emailSubject,
             emailBody,
             layout,
@@ -432,17 +431,6 @@ class Edit extends Component {
                                             value={emailHeaders}
                                             onChange={val => setAttributes({ emailHeaders: val })}
                                         />
-                                        <TextControl
-                                            label={__('From Email')}
-                                            value={emailFrom}
-                                            onChange={val => setAttributes({ emailFrom: val })}
-                                            placeholder={__('Your Name: admin@example.com')}
-                                        />
-                                        <Notice status="warning" isDismissible={false}>
-                                            {__("Please use your site's email, to avoid any error.")}
-                                            <br />
-                                            {__("if your site is example.com, the email should be anything@example.com")}
-                                        </Notice>
                                         <TextControl
                                             label={__('Subject')}
                                             value={emailSubject}

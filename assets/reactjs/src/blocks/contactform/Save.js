@@ -36,7 +36,7 @@ class Save extends Component {
 
     render() {
         const { _encrypt, _renderField } = this;
-        const { uniqueId, formItems, inputSize, fieldErrorMessage, formSuccessMessage, formErrorMessage, reCaptcha, reCaptchaSiteKey, reCaptchaSecretKey, emailReceiver, emailHeaders, emailFrom, emailSubject, emailBody, layout, buttonFillType, buttonSize, buttonText, buttonIconName, buttonIconPosition, buttonTag, animation } = this.props.attributes
+        const { uniqueId, formItems, inputSize, fieldErrorMessage, formSuccessMessage, formErrorMessage, reCaptcha, reCaptchaSiteKey, reCaptchaSecretKey, emailReceiver, emailHeaders, emailSubject, emailBody, layout, buttonFillType, buttonSize, buttonText, buttonIconName, buttonIconPosition, buttonTag, animation } = this.props.attributes
         return (
             <div className={`qubely-block-${uniqueId}`} {...animationAttr(animation)}>
                 <style>{ this._renderFormGroupCss() }</style>
@@ -79,7 +79,6 @@ class Save extends Component {
                             <input type="hidden" name="recaptcha-secret-key" value={ reCaptchaSecretKey } />
                             <input type="hidden" name="email-receiver" value={emailReceiver} />
                             <input type="hidden" name="email-headers" value={emailHeaders} />
-                            <input type="hidden" name="email-from" value={emailFrom} />
                             <input type="hidden" name="email-subject" value={emailSubject} />
                             <input type="hidden" name="email-body" value={emailBody} />
                         </div>

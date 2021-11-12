@@ -74,10 +74,6 @@ class QUBELY_MAIN {
 		 // dynamic blocks
 		 add_action( 'init', array( $this, 'init_dynamic_blocks' ) );
 
-		 // Preview CSS
-		//  add_action( 'upgrader_process_complete', 'create_preview_css');
-		//  register_activation_hook(__FILE__, array($this, 'create_preview_css'));
-
 		 // qubely admin class
 		 add_filter( 'admin_body_class', array( $this, 'qubely_editor_bodyclass' ) );
 
@@ -132,8 +128,6 @@ class QUBELY_MAIN {
 	public function add_custom_class( $classes ) {
 		return array_merge( $classes, array( 'qubely qubely-frontend' ) );
 	}
-
-
 	
 	/**
 	 * Create preview CSS
@@ -165,8 +159,6 @@ class QUBELY_MAIN {
 				throw new Exception(__('Preview JSON can not be saved due to permission!!!', 'qubely'));
 			}
 		}
-
-
 	}
 	
 	/**
@@ -176,6 +168,7 @@ class QUBELY_MAIN {
 		require_once QUBELY_DIR_PATH . 'core/blocks/postgrid.php';
 		$this->create_preview_css();
    }
+
 	/**
 	 * Load Editor Styles and Scripts
 	 *
@@ -242,7 +235,6 @@ class QUBELY_MAIN {
 		return $shapeArray;
 	}
 
-
 	/**
 	 * Load SvgShapes
 	 *
@@ -282,6 +274,7 @@ class QUBELY_MAIN {
 		}
 		return $blocks;
 	}
+
 	/**
 	 * Load font-awesome CSS
 	 * 
@@ -339,6 +332,7 @@ class QUBELY_MAIN {
 		}
 		return array_unique($google_fonts);
 	}
+
 	/**
 	 * Check whether post contains
 	 * any qubely blocks
@@ -402,6 +396,7 @@ class QUBELY_MAIN {
 		}
 		return $has_fontawesome_block;
 	}
+
 	/**
 	 * Load Google fonts
 	 * 
@@ -508,7 +503,6 @@ class QUBELY_MAIN {
 		wp_register_style( 'qubely-options', QUBELY_DIR_URL . 'assets/css/options.css', false, QUBELY_VERSION );
 	}
 
-
 	/**
 	 * Get Post Types.
 	 *
@@ -591,6 +585,7 @@ class QUBELY_MAIN {
 
 		return $taxonomy_array;
 	}
+
 	/**
 	 * Get all image sizes.
 	 *
@@ -627,7 +622,6 @@ class QUBELY_MAIN {
 		}
 		return $image_sizes;
 	}
-
 
 	/**
 	 * Frontend Style & Script
@@ -816,7 +810,6 @@ class QUBELY_MAIN {
 		);
 	}
 
-
 	/**
 	 * @since 1.0.0-BETA
 	 * Add post meta
@@ -843,7 +836,6 @@ class QUBELY_MAIN {
 			)
 		);
 	}
-
 
 	/**
 	 * @since 1.0.0-BETA
@@ -1045,6 +1037,7 @@ class QUBELY_MAIN {
 			);
 		}
 	}
+
 	public function append_reusable_css_callback( $request ) {
 		try {
 			global $wp_filesystem;
@@ -1096,6 +1089,7 @@ class QUBELY_MAIN {
 			);
 		}
 	}
+
 	public function qubely_get_content( $request ) {
 		$params = $request->get_params();
 		try {
@@ -1258,7 +1252,6 @@ class QUBELY_MAIN {
 		}
 	}
 
-
 	/**
 	 * @since 1.0.2
 	 * Set font import to the top of the CSS file
@@ -1300,7 +1293,6 @@ class QUBELY_MAIN {
 		return $get_css;
 	}
 
-
 	/**
 	 * @return bool|false|int
 	 *
@@ -1330,7 +1322,6 @@ class QUBELY_MAIN {
 		}
 		return false;
 	}
-
 
 	/**
 	 * Enqueue post style
@@ -1370,7 +1361,6 @@ class QUBELY_MAIN {
 		}
 		return $extra_id;
 	}
-
 
 	/**
 	 * Enqueue block css file
@@ -1426,7 +1416,7 @@ class QUBELY_MAIN {
 			} else {
 				$blockJson = file_get_contents( $json_path );
 				if ( $blockJson != '{}' ) {
-					echo $this->custom_sanitization( '<script type="text/javascript"> var qubelyInteraction = ' . $blockJson . '</script>' );
+					echo $this->custom_sanitization( '<script type="text/javascript"> var qubelyInteraction = ' . wp_kses_post( $blockJson ) . '</script>' );
 				}
 			}
 		}
@@ -1456,7 +1446,6 @@ class QUBELY_MAIN {
 			}
 		}
 	}
-
 
 	/**
 	 * on Preview
@@ -1501,12 +1490,12 @@ class QUBELY_MAIN {
 
 			if ( file_exists( $css_path ) ) {
 				$blockCss = file_get_contents( $css_path );
-				echo $this->custom_sanitization( '<style type="text/css">' . $blockCss . '</style>' );
+				echo $this->custom_sanitization( '<style type="text/css">' . wp_kses_post( $blockCss ) . '</style>' );
 			}
 			if (file_exists($json_path)) {
 				$blockJson = file_get_contents($json_path);
 				if ($blockJson != '{}') {
-					echo $this->custom_sanitization( '<script type="text/javascript"> var qubelyInteraction = ' . $blockJson . '</script>' );
+					echo $this->custom_sanitization( '<script type="text/javascript"> var qubelyInteraction = ' . wp_kses_post( $blockJson ) . '</script>' );
 				}
 			} 
 		}else{
@@ -1517,9 +1506,9 @@ class QUBELY_MAIN {
 	
 				if ( file_exists( $css_path ) ) {
 					$blockCss = file_get_contents( $css_path );
-					echo $this->custom_sanitization( '<style type="text/css">' . $blockCss . '</style>' );
+					echo $this->custom_sanitization( '<style type="text/css">' . wp_kses_post( $blockCss ) . '</style>' );
 				} else {
-					echo $this->custom_sanitization( '<style type="text/css">' . get_post_meta( get_the_ID(), '_qubely_css', true ) . '</style>' );
+					echo $this->custom_sanitization( '<style type="text/css">' . wp_kses_post( get_post_meta( get_the_ID(), '_qubely_css', true ) ) . '</style>' );
 				}
 	
 				if ( ! file_exists( $json_path ) ) {
@@ -1527,7 +1516,7 @@ class QUBELY_MAIN {
 				} else {
 					$blockJson = file_get_contents( $json_path );
 					if ( $blockJson != '{}' ) {
-						echo $this->custom_sanitization( '<script type="text/javascript"> var qubelyInteraction = ' . $blockJson . '</script>' );
+						echo $this->custom_sanitization( '<script type="text/javascript"> var qubelyInteraction = ' . wp_kses_post( $blockJson ) . '</script>' );
 					}
 				}
 			}
@@ -1544,7 +1533,7 @@ class QUBELY_MAIN {
 		$post_id         = get_the_ID();
 		$interactionJson = get_post_meta( $post_id, '_qubely_interaction_json', true );
 		if ( $interactionJson != '{}' && $interactionJson != '' ) {
-			echo $this->custom_sanitization( '<script type="text/javascript"> var qubelyInteraction = ' . $interactionJson . '</script>' );
+			echo $this->custom_sanitization( '<script type="text/javascript"> var qubelyInteraction = ' . wp_kses_post( $interactionJson ) . '</script>' );
 		}
 	}
 
@@ -1554,6 +1543,7 @@ class QUBELY_MAIN {
 	public function before_delete_post() {
 		// $this->delete_post_resource();
 	}
+
 	/**
 	 * Delete post releated data
 	 *
@@ -1580,25 +1570,9 @@ class QUBELY_MAIN {
 	 * Get Blocks
 	 */
 	public function qubely_get_sections() {
-		 // $cachedBlockFile = "qubely-blocks.json";
-		// $cache_time = ( 60*60*24*7 ); //cached for 7 days
 
 		$sectionData = array();
-
-		// $upload_dir = wp_upload_dir();
-		// $dir = trailingslashit( $upload_dir[ 'basedir' ] ) . 'qubely/cache/';
-		// $file_path_name = $dir . $cachedBlockFile;
-
-		/*
-		 if ( file_exists( $file_path_name ) && ( filemtime( $file_path_name ) + $cache_time ) > time() ) {
-			$getBlocksFromCached = file_get_contents( $file_path_name );
-			$sectionData = json_decode( $getBlocksFromCached, true );
-			$cached_at = 'Last cached: '.human_time_diff( filemtime($file_path_name), current_time( 'timestamp') ). ' ago';
-
-			wp_send_json( array( 'success' => true, 'cached_at' => $cached_at,  'data' => $sectionData ) );
-		} else { */
 		$sectionData = $this->load_blocks_from_server();
-		// }
 
 		wp_send_json_success( $sectionData );
 	}
@@ -1618,16 +1592,7 @@ class QUBELY_MAIN {
 			wp_send_json_error( array( 'messages' => $blockRequest->get_error_messages() ) );
 		}
 		$blockData = json_decode( $blockRequest['body'], true );
-		/*
-		 $cachedBlockFile = "qubely-blocks.json";
-		$upload_dir = wp_upload_dir();
-		$dir = trailingslashit( $upload_dir[ 'basedir' ] ) . 'qubely/cache/';
-		$file_path_name = $dir . $cachedBlockFile;
-		if ( ! file_exists( $dir ) ) {
-			mkdir( $dir, 0777, true );
-		}
-		file_put_contents( $file_path_name,  json_encode( $blockData ) ); // Put template content to cached directory
-		 */
+
 		return $blockData;
 	}
 
@@ -1636,25 +1601,9 @@ class QUBELY_MAIN {
 	 * Get Blocks
 	 */
 	public function qubely_get_layouts() {
-		// $cachedLayoutFile = "qubely-layouts.json";
-		// $cache_time = ( 60*60*24*7 ); //cached for 7 days
 
 		$layoutData = array();
-
-		// $upload_dir = wp_upload_dir();
-		// $dir = trailingslashit( $upload_dir[ 'basedir' ] ) . 'qubely/cache/';
-		// $file_path_name = $dir . $cachedLayoutFile;
-
-		/*
-		 if ( file_exists( $file_path_name ) && ( filemtime( $file_path_name ) + $cache_time ) > time() ) {
-			$getLayoutFromCached = file_get_contents($file_path_name);
-			$layoutData = json_decode($getLayoutFromCached, true);
-			$cached_at = 'Last cached: '.human_time_diff( filemtime( $file_path_name ), current_time( 'timestamp' ) ). ' ago';
-
-			wp_send_json( array( 'success' => true, 'cached_at' => $cached_at,  'data' => $layoutData ) );
-		} else { */
 		$layoutData = $this->load_layouts_from_server();
-		// }
 
 		wp_send_json_success( $layoutData );
 	}
@@ -1674,19 +1623,9 @@ class QUBELY_MAIN {
 			wp_send_json_error( array( 'messages' => $layoutRequest->get_error_messages() ) );
 		}
 		$layoutData = json_decode( $layoutRequest['body'], true );
-		/*
-		 $cachedLayoutFile = "qubely-layouts.json";
-		$upload_dir = wp_upload_dir();
-		$dir = trailingslashit( $upload_dir[ 'basedir' ] ) . 'qubely/cache/';
-		$file_path_name = $dir . $cachedLayoutFile;
-		if ( ! file_exists( $dir ) ) {
-			mkdir( $dir, 0777, true );
-		}
-		file_put_contents( $file_path_name,  json_encode( $layoutData ) ); // Put template content to cached directory
-		 */
+
 		return $layoutData;
 	}
-
 
 	/**
 	 * @since 1.0.0
@@ -1694,20 +1633,7 @@ class QUBELY_MAIN {
 	 */
 	public function qubely_get_single_layout() {
 		$layout_id = (int) sanitize_text_field( $_REQUEST['layout_id'] );
-
-		// $cache_time = ( 60*60*24*7 ); //cached for 7 days
-		// $cachedSingleLayoutFile = "qubely-single-layout-{$layout_id}.json";
-		// $upload_dir = wp_upload_dir();
-		// $dir = trailingslashit( $upload_dir['basedir'] ) . 'qubely/cache/layouts/';
-		// $file_path_name = $dir . $cachedSingleLayoutFile;
-		// Checking if exists file and cache validity true
-		/*
-		 if ( file_exists( $file_path_name ) && ( filemtime( $file_path_name ) + $cache_time ) > time() ) {
-			$getSingleLayoutFromCached = file_get_contents( $file_path_name );
-			$layoutData = json_decode( $getSingleLayoutFromCached, true );
-		} else { */
 		$layoutData = $this->load_and_cache_single_layout_from_server( $layout_id );
-		// }
 		wp_send_json_success( $layoutData );
 	}
 
@@ -1752,7 +1678,6 @@ class QUBELY_MAIN {
 		return $sectionData;
 	}
 
-
 	/**
 	 * @since 1.0.0-BETA
 	 * Load single layout and cache it
@@ -1780,15 +1705,6 @@ class QUBELY_MAIN {
 		}
 
 		$layoutData = json_decode( $layoutRequest['body'], true );
-		/*
-		 $cachedLayoutFile = "qubely-single-layout-{$layout_id}.json";
-		$upload_dir = wp_upload_dir();
-		$dir = trailingslashit( $upload_dir[ 'basedir' ] ) . 'qubely/cache/layouts/';
-		$file_path_name = $dir . $cachedLayoutFile;
-		if ( ! file_exists( $dir ) ) {
-			mkdir( $dir, 0777, true );
-		}
-		file_put_contents( $file_path_name,  json_encode( $layoutData ) );  */
 
 		return $layoutData;
 	}
@@ -1818,6 +1734,55 @@ class QUBELY_MAIN {
 		wp_send_json_success( $deleted_block );
 	}
 
+	/**
+	 * @param array $input
+	 *
+	 * @return array
+	 *
+	 * Sanitize input array
+	 */
+	public function sanitize_array( $input = array() ) {
+		$array = array();
+
+		if ( is_array( $input ) && count( $input ) ) {
+			foreach ( $input as $key => $value ) {
+				if ( is_array( $value ) ) {
+					$array[ $key ] = $this->sanitize_array( $value );
+				} else {
+					$key           = sanitize_text_field( $key );
+					$value         = sanitize_text_field( $value );
+					$array[ $key ] = $value;
+				}
+			}
+		}
+
+		return $array;
+	}
+
+	/**
+	 * @param array $input
+	 *
+	 * @return array
+	 *
+	 * Sanitize input array
+	 */
+	public function sanitize_form_array( $input = array() ) {
+		$array = array();
+
+		if ( is_array( $input ) && count( $input ) ) {
+			foreach ( $input as $key => $value ) {
+				if ( is_array( $value ) ) {
+					$array[ $key ] = $this->sanitize_form_array( $value );
+				} else {
+					$key           = 'email' === $key ? sanitize_email( $key ) : sanitize_text_field( $key );
+					$value         = 'email' === $key ? sanitize_email( $value ) : sanitize_text_field( $value );
+					$array[ $key ] = $value;
+				}
+			}
+		}
+
+		return $array;
+	}
 
 	/**
 	 * Ajax for sending form data
@@ -1851,13 +1816,17 @@ class QUBELY_MAIN {
 		$formErrorMessage   = ( $_POST['form-error-message'] ) ? sanitize_text_field( $_POST['form-error-message'] ) : '';
 		$emailReceiver      = ( $_POST['email-receiver'] ) ? sanitize_email( $_POST['email-receiver'] ) : '';
 		$emailHeaders       = ( $_POST['email-headers'] ) ? sanitize_text_field( $_POST['email-headers'] ) : '';
-		$emailFrom          = ( $_POST['email-from'] ) ? sanitize_text_field( $_POST['email-from'] ) : '';
 		$emailSubject       = ( $_POST['email-subject'] ) ? sanitize_text_field( $_POST['email-subject'] ) : '';
 		$emailBody          = ( $_POST['email-body'] ) ? sanitize_textarea_field( $_POST['email-body'] ) : '';
+		
+		// setting from options.
+		$qubely_options     = maybe_unserialize ( get_option( 'qubely_options' ) );
+		$emailFrom          = sanitize_email( $qubely_options['form_from_email'] );
+		$fromName           = sanitize_text_field( $qubely_options['form_from_name'] );
 
 		$fieldNames     = array();
 		$validation     = false;
-		$formInputArray = $_POST['qubely-form-input'];
+		$formInputArray = $this->sanitize_form_array( $_POST['qubely-form-input'] );
 
 		foreach ( $formInputArray as $key => $value ) {
 			if ( preg_match( '/[*]$/', $key ) ) {
@@ -1873,14 +1842,7 @@ class QUBELY_MAIN {
 			wp_send_json( __( $formErrorMessage, 'qubely' ), 400 );
 		}
 
-		$replyToMail = $replyToName = $cc = $bcc = $fromName = $fromEmail = '';
-		if ( $emailFrom != '' ) {
-			$emailFrom = explode( ':', $emailFrom );
-			if ( count( $emailFrom ) > 0 ) {
-				$fromName  = isset( $emailFrom[0] ) ? trim( $emailFrom[0] ) : '';
-				$fromEmail = isset( $emailFrom[1] ) ? sanitize_email( trim( $emailFrom[1] ) ) : '';
-			}
-		}
+		$replyToMail = $replyToName = $cc = $bcc = '';
 
 		$emailHeaders = explode( "\n", $emailHeaders );
 		foreach ( $emailHeaders as $_header ) {
@@ -1907,7 +1869,6 @@ class QUBELY_MAIN {
 			$emailSubject = str_replace( '{{' . $name . '}}', sanitize_text_field( $value ), $emailSubject );
 			$replyToName  = str_replace( '{{' . $name . '}}', sanitize_text_field( $value ), $replyToName );
 			$replyToMail  = str_replace( '{{' . $name . '}}', sanitize_text_field( $value ), $replyToMail );
-			$fromName     = str_replace( '{{' . $name . '}}', sanitize_text_field( $value ), $fromName );
 			$cc           = str_replace( '{{' . $name . '}}', sanitize_text_field( $value ), $cc );
 			$bcc          = str_replace( '{{' . $name . '}}', sanitize_text_field( $value ), $bcc );
 		}
@@ -1917,7 +1878,7 @@ class QUBELY_MAIN {
 		$emailSubject = str_replace( '{{site-name}}', $siteName, $emailSubject );
 
 		$headers[] = 'Content-Type: text/html; charset=UTF-8';
-		$headers[] = 'From: ' . $fromName . ' <' . $fromEmail . '>';
+		$headers[] = 'From: ' . $fromName . ' <' . $emailFrom . '>';
 		$headers[] = 'Reply-To: ' . $replyToName . ' <' . $replyToMail . '>';
 		$headers[] = 'Cc: ' . $cc;
 		$headers[] = 'Bcc: ' . $bcc;
@@ -1939,6 +1900,7 @@ class QUBELY_MAIN {
 			wp_send_json_error( $responseData );
 		}
 	}
+	
 	/**
 	 * Ajax add to cart button 
 	 *
