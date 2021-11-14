@@ -693,10 +693,10 @@ class QUBELY {
 			if (has_block('qubely/map')) {
 				wp_enqueue_script('qubely-block-map');
 			}
-			if (has_block('qubely/videopopup')) {
+			if (has_block('qubely/videopopup'||has_block('qubely/gallery'))) {
 				wp_enqueue_script('qubely-magnific-popup-script');
 			}
-			if (has_block('qubely/contactform')) {
+			if (has_block('qubely/contactform')||has_block('qubely/form')) {
 				wp_enqueue_script('qubely-block-contactform');
 			}
 			if (has_block('qubely/imagecomparison')) {
