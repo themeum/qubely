@@ -1495,10 +1495,10 @@ class QUBELY_MAIN {
 			if (file_exists($json_path)) {
 				$blockJson = file_get_contents($json_path);
 				if ($blockJson != '{}') {
-					echo $this->custom_sanitization( '<script type="text/javascript"> var qubelyInteraction = ' . wp_kses_post( $blockJson ) . '</script>' );
+					echo '<script type="text/javascript"> var qubelyInteraction = ' . wp_kses_post( $blockJson ) . '</script>';
 				}
 			} 
-		}else{
+		} else {
 			$post_id = $this->is_qubely_single();
 			if ( $post_id ) {
 				$css_path       = $upload_css_dir . "qubely/qubely-css-{$post_id}.css";
@@ -1506,9 +1506,9 @@ class QUBELY_MAIN {
 	
 				if ( file_exists( $css_path ) ) {
 					$blockCss = file_get_contents( $css_path );
-					echo $this->custom_sanitization( '<style type="text/css">' . wp_kses_post( $blockCss ) . '</style>' );
+					echo '<style type="text/css">' . wp_kses_post( $blockCss ) . '</style>';
 				} else {
-					echo $this->custom_sanitization( '<style type="text/css">' . wp_kses_post( get_post_meta( get_the_ID(), '_qubely_css', true ) ) . '</style>' );
+					echo '<style type="text/css">' . wp_kses_post( get_post_meta( get_the_ID(), '_qubely_css', true ) ) . '</style>';
 				}
 	
 				if ( ! file_exists( $json_path ) ) {
@@ -1516,7 +1516,7 @@ class QUBELY_MAIN {
 				} else {
 					$blockJson = file_get_contents( $json_path );
 					if ( $blockJson != '{}' ) {
-						echo $this->custom_sanitization( '<script type="text/javascript"> var qubelyInteraction = ' . wp_kses_post( $blockJson ) . '</script>' );
+						echo '<script type="text/javascript"> var qubelyInteraction = ' . wp_kses_post( $blockJson ) . '</script>';
 					}
 				}
 			}
@@ -1533,7 +1533,7 @@ class QUBELY_MAIN {
 		$post_id         = get_the_ID();
 		$interactionJson = get_post_meta( $post_id, '_qubely_interaction_json', true );
 		if ( $interactionJson != '{}' && $interactionJson != '' ) {
-			echo $this->custom_sanitization( '<script type="text/javascript"> var qubelyInteraction = ' . wp_kses_post( $interactionJson ) . '</script>' );
+			echo '<script type="text/javascript"> var qubelyInteraction = ' . wp_kses_post( $interactionJson ) . '</script>';
 		}
 	}
 
@@ -1810,20 +1810,22 @@ class QUBELY_MAIN {
 			}
 		}
 
+		// setting from options.
+		$qubely_options   = maybe_unserialize( get_option( 'qubely_options' ) );
+		$emailFrom        = sanitize_email( $qubely_options['form_from_email'] );
+		$fromName         = sanitize_text_field( $qubely_options['form_from_name'] );
+
+		$default_receiver = sanitize_email( get_option( 'admin_email' ) );
+
 		// Settings data
 		$fieldErrorMessage  = ( $_POST['field-error-message'] ) ? sanitize_text_field( $_POST['field-error-message'] ) : '';
 		$formSuccessMessage = ( $_POST['form-success-message'] ) ? sanitize_text_field( $_POST['form-success-message'] ) : '';
 		$formErrorMessage   = ( $_POST['form-error-message'] ) ? sanitize_text_field( $_POST['form-error-message'] ) : '';
-		$emailReceiver      = ( $_POST['email-receiver'] ) ? sanitize_email( $_POST['email-receiver'] ) : '';
+		$emailReceiver      = ( $_POST['email-receiver'] ) ? sanitize_email( $_POST['email-receiver'] ) : $default_receiver;
 		$emailHeaders       = ( $_POST['email-headers'] ) ? sanitize_text_field( $_POST['email-headers'] ) : '';
 		$emailSubject       = ( $_POST['email-subject'] ) ? sanitize_text_field( $_POST['email-subject'] ) : '';
 		$emailBody          = ( $_POST['email-body'] ) ? sanitize_textarea_field( $_POST['email-body'] ) : '';
 		
-		// setting from options.
-		$qubely_options     = maybe_unserialize ( get_option( 'qubely_options' ) );
-		$emailFrom          = sanitize_email( $qubely_options['form_from_email'] );
-		$fromName           = sanitize_text_field( $qubely_options['form_from_name'] );
-
 		$fieldNames     = array();
 		$validation     = false;
 		$formInputArray = $this->sanitize_form_array( $_POST['qubely-form-input'] );

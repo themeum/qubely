@@ -1,3 +1,9 @@
+<h3>1.7.6</h3>
+<ul> 
+    <li>Fix: Layout breaking issue</li>
+    <li>Fix: Contact form not sending issue</li>
+</ul>
+
 <h3>1.7.5</h3>
 <ul> 
     <li>Update: Security Update </li>
