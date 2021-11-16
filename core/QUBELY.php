@@ -1498,11 +1498,11 @@ class QUBELY_MAIN {
 
 			if ( file_exists( $css_path ) ) {
 				$blockCss = file_get_contents( $css_path );
-				echo $this->custom_sanitization( '<style type="text/css">' . wp_kses_post( $blockCss ) . '</style>' );
+				echo '<style type="text/css">' . wp_kses_post( $blockCss ) . '</style>';
 			}
-			if (file_exists($json_path)) {
-				$blockJson = file_get_contents($json_path);
-				if ($blockJson != '{}') {
+			if ( file_exists( $json_path ) ) {
+				$blockJson = file_get_contents( $json_path );
+				if ( $blockJson != '{}' ) {
 					echo '<script type="text/javascript"> var qubelyInteraction = ' . wp_kses_post( $blockJson ) . '</script>';
 				}
 			} 
@@ -1819,9 +1819,9 @@ class QUBELY_MAIN {
 		}
 
 		// setting from options.
-		$qubely_options   = maybe_unserialize( get_option( 'qubely_options' ) );
-		$emailFrom        = sanitize_email( $qubely_options['form_from_email'] );
-		$fromName         = sanitize_text_field( $qubely_options['form_from_name'] );
+		$qubely_options = maybe_unserialize( get_option( 'qubely_options' ) );
+		$emailFrom      = isset( $qubely_options['form_from_email'] ) ? sanitize_email( $qubely_options['form_from_email'] ) : sanitize_email( get_option( 'admin_email' ) );
+		$fromName       = isset( $qubely_options['form_from_name'] ) ? sanitize_text_field( $qubely_options['form_from_name'] ) : sanitize_text_field( get_option( 'blogname' ) );
 
 		$default_receiver = sanitize_email( get_option( 'admin_email' ) );
 
