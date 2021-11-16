@@ -669,78 +669,86 @@ class QUBELY {
 		$blocks_meta_data = get_post_meta( get_the_ID(), '__qubely_available_blocks', true );
 		$blocks_meta_data = unserialize( $blocks_meta_data );
 
-		if ( is_array( $blocks_meta_data ) && count( $blocks_meta_data ) ) {
+		/**
+		 * register scripts
+		 */
+		wp_register_script('qubley-animated-headline-script', QUBELY_DIR_URL . 'assets/js/jquery.animatedheadline.js', array('jquery'), QUBELY_VERSION, true);
+		wp_register_script('qubely-block-map', QUBELY_DIR_URL . 'assets/js/blocks/map.js', array('jquery'), QUBELY_VERSION, true);
+		wp_register_script('qubely-magnific-popup-script', QUBELY_DIR_URL . 'assets/js/qubely.magnific-popup.js', array('jquery'), QUBELY_VERSION, true);
+		wp_register_script('qubely-block-contactform', QUBELY_DIR_URL . 'assets/js/blocks/contactform.js', array('jquery'), QUBELY_VERSION, true);
+		wp_register_script('qubely-block-image-comparison', QUBELY_DIR_URL . 'assets/js/blocks/image-comparison.js', array(), QUBELY_VERSION, true);
+		wp_register_script('qubely-block-common', QUBELY_DIR_URL . 'assets/js/common-script.js', array('jquery'), QUBELY_VERSION, true);
+		wp_register_script('qubely-interaction', QUBELY_DIR_URL . 'assets/js/interaction.js', array('jquery'), QUBELY_VERSION, true);
+
+
+		if (is_array($blocks_meta_data) && count($blocks_meta_data)) {
 			$available_blocks = $blocks_meta_data['available_blocks'];
 			$has_interaction  = $blocks_meta_data['interaction'];
 			$has_animation    = $blocks_meta_data['animation'];
 			$has_parallax     = $blocks_meta_data['parallax'];
 
-			if ( in_array( 'qubely/animatedheadline', $available_blocks ) ) {
-				wp_enqueue_script( 'qubley-animated-headline-script', QUBELY_DIR_URL . 'assets/js/jquery.animatedheadline.js', array( 'jquery' ), QUBELY_VERSION, true );
+			if (has_block('qubely/animatedheadline')) {
+				wp_enqueue_script('qubley-animated-headline-script');
+			}
+			if (has_block('qubely/map')) {
+				wp_enqueue_script('qubely-block-map');
+			}
+			if (has_block('qubely/videopopup'||has_block('qubely/gallery'))) {
+				wp_enqueue_script('qubely-magnific-popup-script');
+			}
+			if (has_block('qubely/contactform')||has_block('qubely/form')) {
+				wp_enqueue_script('qubely-block-contactform');
+			}
+			if (has_block('qubely/imagecomparison')) {
+				wp_enqueue_script('qubely-block-image-comparison');
 			}
 
-			if ( in_array( 'qubely/map', $available_blocks ) ) {
-				wp_enqueue_script( 'qubely-block-map', QUBELY_DIR_URL . 'assets/js/blocks/map.js', array( 'jquery' ), QUBELY_VERSION, true );
+			if ($has_interaction) {
+				wp_enqueue_script('qubely-interaction');
 			}
 
-			if ( in_array( 'qubely/videopopup', $available_blocks ) || in_array( 'qubely/gallery', $available_blocks ) ) {
-				wp_enqueue_script( 'qubely-magnific-popup-script', QUBELY_DIR_URL . 'assets/js/qubely.magnific-popup.js', array( 'jquery' ), QUBELY_VERSION );
-			}
-
-			if ( in_array( 'qubely/contactform', $available_blocks ) || in_array( 'qubely/form', $available_blocks ) ) {
-				wp_enqueue_script( 'qubely-block-contactform', QUBELY_DIR_URL . 'assets/js/blocks/contactform.js', array( 'jquery' ), QUBELY_VERSION );
-			}
-
-			if ( in_array( 'qubely/imagecomparison', $available_blocks ) ) {
-				wp_enqueue_script( 'qubely-block-image-comparison', QUBELY_DIR_URL . 'assets/js/blocks/image-comparison.js', array(), QUBELY_VERSION );
-			}
-
-			if ( $has_interaction ) {
-				wp_enqueue_script( 'qubely-interaction', QUBELY_DIR_URL . 'assets/js/interaction.js', array( 'jquery' ), QUBELY_VERSION, true );
-			}
-			
 			if (
 				$has_interaction ||
 				$has_parallax ||
 				$has_animation ||
-				in_array( 'qubely/accordion', $available_blocks ) ||
-				in_array( 'qubely/pieprogress', $available_blocks ) ||
-				in_array( 'qubely/counter', $available_blocks ) ||
-				in_array( 'qubely/tabs', $available_blocks ) ||
-				in_array( 'qubely/table-of-contents', $available_blocks ) ||
-				in_array( 'qubely/verticaltabs', $available_blocks ) ||
-				in_array( 'qubely/postgrid', $available_blocks )
+				in_array('qubely/accordion', $available_blocks) ||
+				in_array('qubely/pieprogress', $available_blocks) ||
+				in_array('qubely/counter', $available_blocks) ||
+				in_array('qubely/tabs', $available_blocks) ||
+				in_array('qubely/table-of-contents', $available_blocks) ||
+				in_array('qubely/verticaltabs', $available_blocks) ||
+				in_array('qubely/postgrid', $available_blocks)
 			) {
-				wp_enqueue_script( 'qubely-block-common', QUBELY_DIR_URL . 'assets/js/common-script.js', array( 'jquery' ), QUBELY_VERSION, true );
+				wp_enqueue_script('qubely-block-common');
 			}
 		} else {
 			$post    = null;
-			$wp_post = get_post( $post );
-			if ( $wp_post instanceof WP_Post ) {
+			$wp_post = get_post($post);
+			if ($wp_post instanceof WP_Post) {
 				$post = $wp_post->post_content;
 			}
 
-			if ( false !== strpos( $post, '<!-- wp:' . 'qubely/animatedheadline' . ' ' ) ) {
-				wp_enqueue_script( 'qubley-animated-headline-script', QUBELY_DIR_URL . 'assets/js/jquery.animatedheadline.js', array( 'jquery' ), QUBELY_VERSION, true );
+			if (false !== strpos($post, '<!-- wp:' . 'qubely/animatedheadline' . ' ')) {
+				wp_enqueue_script('qubley-animated-headline-script');
 			}
 
-			if ( false !== strpos( $post, '<!-- wp:' . 'qubely/map' . ' ' ) ) {
-				wp_enqueue_script( 'qubely-block-map', QUBELY_DIR_URL . 'assets/js/blocks/map.js', array( 'jquery' ), QUBELY_VERSION, true );
+			if (false !== strpos($post, '<!-- wp:' . 'qubely/map' . ' ')) {
+				wp_enqueue_script('qubely-block-map');
 			}
 
-			if ( false !== strpos( $post, '<!-- wp:' . 'qubely/videopopup' . ' ' ) || false !== strpos( $post, '<!-- wp:' . 'qubely/gallery' . ' ' ) ) {
-				wp_enqueue_script( 'qubely-magnific-popup-script', QUBELY_DIR_URL . 'assets/js/qubely.magnific-popup.js', array( 'jquery' ), QUBELY_VERSION );
+			if (false !== strpos($post, '<!-- wp:' . 'qubely/videopopup' . ' ') || false !== strpos($post, '<!-- wp:' . 'qubely/gallery' . ' ')) {
+				wp_enqueue_script('qubely-magnific-popup-script');
 			}
 
-			if ( false !== strpos( $post, '<!-- wp:' . 'qubely/contactform' . ' ' ) || false !== strpos( $post, '<!-- wp:' . 'qubely/form' . ' ' ) ) {
-				wp_enqueue_script( 'qubely-block-contactform', QUBELY_DIR_URL . 'assets/js/blocks/contactform.js', array( 'jquery' ), QUBELY_VERSION );
+			if (false !== strpos($post, '<!-- wp:' . 'qubely/contactform' . ' ') || false !== strpos($post, '<!-- wp:' . 'qubely/form' . ' ')) {
+				wp_enqueue_script('qubely-block-contactform');
 			}
-			if ( false !== strpos( $post, '<!-- wp:' . 'qubely/imagecomparison' . ' ' ) ) {
-				wp_enqueue_script( 'qubely-block-image-comparison', QUBELY_DIR_URL . 'assets/js/blocks/image-comparison.js', array(), QUBELY_VERSION );
+			if (false !== strpos($post, '<!-- wp:' . 'qubely/imagecomparison' . ' ')) {
+				wp_enqueue_script('qubely-block-image-comparison');
 			}
 
-			wp_enqueue_script( 'qubely-block-common', QUBELY_DIR_URL . 'assets/js/common-script.js', array( 'jquery' ), QUBELY_VERSION, true );
-			wp_enqueue_script( 'qubely-interaction', QUBELY_DIR_URL . 'assets/js/interaction.js', array( 'jquery' ), QUBELY_VERSION, true );
+			wp_enqueue_script('qubely-block-common');
+			wp_enqueue_script('qubely-interaction');
 		}
 	}
 
