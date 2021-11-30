@@ -1737,6 +1737,13 @@ class QUBELY_MAIN {
 	 * Delete saved blocks
 	 */
 	public function qubely_delete_saved_block() {
+
+		$user = wp_get_current_user();
+		$allowed_roles = array( 'editor', 'administrator', 'author' );
+		if ( ! array_intersect( $allowed_roles, $user->roles ) ) {
+			wp_die( 'You don\'t have permission to perform this action' );
+		}
+
 		$block_id      = (int) sanitize_text_field( $_REQUEST['block_id'] );
 		$deleted_block = wp_delete_post( $block_id );
 		wp_send_json_success( $deleted_block );
