@@ -1853,6 +1853,8 @@ class QUBELY_MAIN {
 				$key = str_replace( '*', '', $key );
 			}
 			$fieldNames[ $key ] = $value;
+
+			$emailReceiver = apply_filters( 'qubely_custom_email_receiver', $value, $emailReceiver );
 		}
 
 		if ( $validation || ( isset( $_POST['qubely-form-has-policy'] ) && empty( $_POST['qubely-form-has-policy'] ) ) ) {
