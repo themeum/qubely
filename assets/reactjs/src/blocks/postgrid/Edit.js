@@ -126,7 +126,7 @@ class Edit extends Component {
 
 	renderCardContent = (post) => {
 		const { attributes: { layout, style, readmoreStyle, showCategory, categoryPosition, showTitle, titlePosition, showAuthor, showDates, showComment, showExcerpt, excerptLimit, showReadMore, buttonText, readmoreSize } } = this.props
-		let title = <h3 className="qubely-postgrid-title"><a>{post.title.rendered}</a></h3>
+		let title = <h3 className="qubely-postgrid-title"><a dangerouslySetInnerHTML={{ __html: post.title.rendered }}/></h3>
 
 		return (
 			<div className={`${layout === 1 ? 'qubely-post-list-content' : 'qubely-post-grid-content'}`}>
