@@ -23,7 +23,6 @@
 
     .qubely-info-box-media {
         display: inline-block;
-        line-height: 1;
         text-align: center;
         overflow: hidden;
         i,
@@ -63,7 +62,8 @@
     .qubely-info-box-media,
     .qubely-info-box-title,
     .qubely-info-box-text {
-        transition: color 400ms, border-color 400ms, background-color 400ms, box-shadow 400ms;
+        transition: color 400ms, border-color 400ms, background-color 400ms,
+            box-shadow 400ms;
     }
 
     &.qubely-info-box-layout-2,
