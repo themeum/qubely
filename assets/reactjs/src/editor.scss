@@ -282,6 +282,16 @@ div[data-type="qubely/row"].is-resizing
     }
 }
 
+.qubely-field.qubely-field-boxshadow {
+    border: none;
+    border-radius: 0;
+    background-color: transparent;
+    padding: 2px;
+    input {
+        min-width: 40px;
+    }
+}
+
 .qubely-field {
     position: relative;
     margin-bottom: 20px;
