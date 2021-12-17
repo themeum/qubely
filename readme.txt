@@ -4,7 +4,7 @@ Donate link: https://www.themeum.com
 Tags: blocks, gutenberg, gutenberg blocks, editor, block, page builder
 Requires at least: 5.0
 Tested up to: 5.8
-Stable tag: 1.7.6
+Stable tag: 1.7.7
 Requires PHP: 7.0
 License: GPL-2.0+
 License URI: http://www.gnu.org/licenses/gpl-2.0.txt
@@ -239,6 +239,23 @@ You can report bugs on the [support forum here](https://wordpress.org/support/pl
 
 
 == Changelog ==
+
+= 1.7.7 =
+Fix: Layout Breaking Issue for Already Designed Pages/Posts
+Fix: License Page Logo Image Broken issue
+Fix: License Expiration Date wrongly shown
+Fix: Infobox Block - Icons style is not circular issue
+Fix: Form Builder Block - Date placeholder not working issue
+Fix: Divider Block - Width percent not working
+Fix: Postgrid Block - Preview characters not converted to UTF8
+Fix: Info box and Advanced Text Block - Typography issue
+Fix: Countdown Block - Errors while selecting custom dates
+Fix: Post Carousel Block - Number of columns not working
+Fix: Image Carousel Block - Arrow size is not working
+Fix: Accordion Block - Toggle option not working
+Fix: Inline Toolbar Padding Block width issue
+Fix: Button Block - Box shadow width not working
+Fix: Image Block - Radius option not working
 
 = 1.7.6 = 
 Fix: Layout breaking issue

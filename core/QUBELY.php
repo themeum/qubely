@@ -295,7 +295,7 @@ class QUBELY_MAIN {
 	 */
 	public function qubely_load_fontawesome() {
 		$option_data = get_option( 'qubely_options' );
-		$load_font_awesome = isset( $option_data['load_font_awesome_CSS'] ) ? $option_data['load_font_awesome_CSS'] : 'yes';
+		$load_font_awesome = isset( $option_data['load_font_awesome_CSS'] ) ? sanitize_text_field( $option_data['load_font_awesome_CSS'] ) : 'yes';
 		if ( $load_font_awesome == 'yes' ) {
 			$blocks = $this->parse_all_blocks();
 			$contains_qubely_blocks = $this->has_blocks_with_fontawesome( $blocks );
