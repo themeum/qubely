@@ -241,17 +241,13 @@ You can report bugs on the [support forum here](https://wordpress.org/support/pl
 == Changelog ==
 
 = 1.7.7 =
+Update: Security Update
 Fix: Layout Breaking Issue for Already Designed Pages/Posts
-Fix: License Page Logo Image Broken issue
-Fix: License Expiration Date wrongly shown
 Fix: Infobox Block - Icons style is not circular issue
-Fix: Form Builder Block - Date placeholder not working issue
 Fix: Divider Block - Width percent not working
 Fix: Postgrid Block - Preview characters not converted to UTF8
 Fix: Info box and Advanced Text Block - Typography issue
-Fix: Countdown Block - Errors while selecting custom dates
 Fix: Post Carousel Block - Number of columns not working
-Fix: Image Carousel Block - Arrow size is not working
 Fix: Accordion Block - Toggle option not working
 Fix: Inline Toolbar Padding Block width issue
 Fix: Button Block - Box shadow width not working

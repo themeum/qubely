@@ -1,3 +1,18 @@
+<h3>1.7.7</h3>
+<ul> 
+    <li>Update: Security Update</li>
+    <li>Fix: Layout Breaking Issue for Already Designed Pages/Posts</li>
+    <li>Fix: Infobox Block - Icons style is not circular issue</li>
+    <li>Fix: Divider Block - Width percent not working</li>
+    <li>Fix: Postgrid Block - Preview characters not converted to UTF8</li>
+    <li>Fix: Info box and Advanced Text Block - Typography issue</li>
+    <li>Fix: Post Carousel Block - Number of columns not working</li>
+    <li>Fix: Accordion Block - Toggle option not working</li>
+    <li>Fix: Inline Toolbar Padding Block width issue</li>
+    <li>Fix: Button Block - Box shadow width not working</li>
+    <li>Fix: Image Block - Radius option not working</li>
+</ul>
+
 <h3>1.7.6</h3>
 <ul> 
     <li>Fix: Layout breaking issue</li>
