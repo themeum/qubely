@@ -45,10 +45,12 @@ class PageListModal extends Component {
 
         this.setState({ loading: true });
         let requestFailedMsg = [];
+        let security = qubely_urls.nonce;
+        let currentUserId = qubely_admin.current_user_id;
 
         const options = {
             method: 'POST',
-            url: qubely_admin.ajax + '?action=qubely_get_sections',
+            url: qubely_admin.ajax + '?action=qubely_get_sections' + '&security=' + security + '&user_id=' + currentUserId,
             headers: { 'Content-Type': 'application/json' }
         }
         apiFetch(options).then(response => {
@@ -217,9 +219,11 @@ class PageListModal extends Component {
     deleteSavedBlock(index, blockID) {
         let { savedBlocks } = this.state;
         let requestFailedMsg = [];
+        let security = qubely_urls.nonce;
+        let currentUserId = qubely_admin.current_user_id;
         const options = {
             method: 'POST',
-            url: qubely_admin.ajax + '?action=qubely_delete_saved_block&block_id=' + blockID,
+            url: qubely_admin.ajax + '?action=qubely_delete_saved_block&block_id=' + blockID + '&security=' + security + '&user_id=' + currentUserId,
             headers: { 'Content-Type': 'application/json' }
         }
         apiFetch(options).then(response => {
@@ -254,9 +258,11 @@ class PageListModal extends Component {
             }
 
             let requestFailedMsg = [];
+            let security = qubely_urls.nonce;
+            let currentUserId = qubely_admin.current_user_id;
             const options = {
                 method: 'POST',
-                url: qubely_admin.ajax + '?action=qubely_get_single_' + itemType + '&' + itemType + '_id=' + itemData.ID,
+                url: qubely_admin.ajax + '?action=qubely_get_single_' + itemType + '&' + itemType + '_id=' + itemData.ID + '&security=' + security + '&user_id=' + currentUserId,
                 headers: { 'Content-Type': 'application/json' }
             }
             apiFetch(options).then(response => {
@@ -335,10 +341,12 @@ class PageListModal extends Component {
         if (!layoutData) {
             this.setState({ loading: true });
             let requestFailedMsg = [];
+            let security = qubely_urls.nonce;
+            let currentUserId = qubely_admin.current_user_id;
 
             const options = {
                 method: 'POST',
-                url: qubely_admin.ajax + '?action=qubely_get_layouts',
+                url: qubely_admin.ajax + '?action=qubely_get_layouts' + '&security=' + security + '&user_id=' + currentUserId,
                 headers: { 'Content-Type': 'application/json' }
             }
             apiFetch(options).then(response => {
@@ -420,11 +428,14 @@ class PageListModal extends Component {
     _onlickSavedBlocksTab() {
         let requestFailedMsg = [];
         let { savedBlocks } = this.state;
+        let security = qubely_urls.nonce;
+        let currentUserId = qubely_admin.current_user_id;
+
         if (!savedBlocks) {
             this.setState({ loading: true });
             const options = {
                 method: 'POST',
-                url: qubely_admin.ajax + '?action=qubely_get_saved_block',
+                url: qubely_admin.ajax + '?action=qubely_get_saved_block' + '&security=' + security + '&user_id=' + currentUserId,
                 headers: { 'Content-Type': 'application/json' }
             }
             apiFetch(options).then(response => {

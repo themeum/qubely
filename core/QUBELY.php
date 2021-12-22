@@ -217,6 +217,7 @@ class QUBELY_MAIN {
 				'image_sizes'                 => $this->get_all_image_sizes(),
 				'palette'                     => $palette,
 				'overwriteTheme'              => true,
+				'current_user_id'             => get_current_user_id(),
 				'qubely_gmap_api_key'         => $qubely_gmap_api_key,
 				'qubely_recaptcha_site_key'   => $qubely_recaptcha_site_key,
 				'qubely_recaptcha_secret_key' => $qubely_recaptcha_secret_key,
@@ -776,8 +777,8 @@ class QUBELY_MAIN {
 	 */
 	public function qubely_inline_footer_scripts() {       
 		global $wp_query;	 
-		$is_previewing= $wp_query->is_preview();
-		$can_edit= current_user_can( 'edit_posts' );
+		$is_previewing = $wp_query->is_preview();
+		$can_edit = current_user_can( 'edit_posts' );
 		if ( $is_previewing || $can_edit ) {
 			?>
 			<script>
@@ -1124,7 +1125,7 @@ class QUBELY_MAIN {
 			if ( isset( $params['postId'] ) ) {
 				return array(
 					'success' => true,
-					'data'    => get_post( $params['postId'] )->post_content,
+					'data'    => ! empty( $params['postId'] ) ? get_post( $params['postId'] )->post_content : '',
 					'message' => 'Get Data Success!!',
 				);
 			}
@@ -1601,6 +1602,22 @@ class QUBELY_MAIN {
 	 */
 	public function qubely_get_sections() {
 
+		// Verify the request.
+		check_ajax_referer( 'qubely_nonce', 'security' );
+
+		// It's good let's do some capability check.
+		$user = wp_get_current_user();
+		$allowed_roles = array( 'editor', 'administrator', 'author' );
+		
+		if ( ! array_intersect( $allowed_roles, $user->roles ) ) {
+			wp_die( 'You don\'t have permission to perform this action' );
+		}
+		
+		// Cool, we're almost there, let's check the user authenticity a little bit, shall we!
+		if ( ! is_user_logged_in() && $user->ID !== sanitize_text_field( $_REQUEST['user_id'] ) ) {
+			wp_die( 'You don\'t have proper authorization to perform this action' );
+		}
+
 		$sectionData = array();
 		$sectionData = $this->load_blocks_from_server();
 
@@ -1632,6 +1649,22 @@ class QUBELY_MAIN {
 	 */
 	public function qubely_get_layouts() {
 
+		// Verify the request.
+		check_ajax_referer( 'qubely_nonce', 'security' );
+
+		// It's good let's do some capability check.
+		$user = wp_get_current_user();
+		$allowed_roles = array( 'editor', 'administrator', 'author' );
+		
+		if ( ! array_intersect( $allowed_roles, $user->roles ) ) {
+			wp_die( 'You don\'t have permission to perform this action' );
+		}
+		
+		// Cool, we're almost there, let's check the user authenticity a little bit, shall we!
+		if ( ! is_user_logged_in() && $user->ID !== sanitize_text_field( $_REQUEST['user_id'] ) ) {
+			wp_die( 'You don\'t have proper authorization to perform this action' );
+		}
+
 		$layoutData = array();
 		$layoutData = $this->load_layouts_from_server();
 
@@ -1662,9 +1695,30 @@ class QUBELY_MAIN {
 	 * Get single layout
 	 */
 	public function qubely_get_single_layout() {
-		$layout_id = (int) sanitize_text_field( $_REQUEST['layout_id'] );
-		$layoutData = $this->load_and_cache_single_layout_from_server( $layout_id );
-		wp_send_json_success( $layoutData );
+
+		// Verify the request.
+		check_ajax_referer( 'qubely_nonce', 'security' );
+
+		// It's good let's do some capability check.
+		$user = wp_get_current_user();
+		$allowed_roles = array( 'editor', 'administrator', 'author' );
+		
+		if ( ! array_intersect( $allowed_roles, $user->roles ) ) {
+			wp_die( 'You don\'t have permission to perform this action' );
+		}
+		
+		// Cool, we're almost there, let's check the user authenticity a little bit, shall we!
+		if ( ! is_user_logged_in() && $user->ID !== sanitize_text_field( $_REQUEST['user_id'] ) ) {
+			wp_die( 'You don\'t have proper authorization to perform this action' );
+		}
+
+		$layout_id = isset( $_REQUEST['layout_id'] ) ? (int) sanitize_text_field( $_REQUEST['layout_id'] ) : null;
+		if ( $layout_id ) {
+			$layoutData = $this->load_and_cache_single_layout_from_server( $layout_id );
+			wp_send_json_success( $layoutData );
+		} else {
+			wp_send_json_error( __( 'No layout id was provided', 'qubely' ) );
+		}
 	}
 
 	/**
@@ -1672,9 +1726,30 @@ class QUBELY_MAIN {
 	 * Get single layout
 	 */
 	public function qubely_get_single_section() {
-		$section_id  = (int) sanitize_text_field( $_REQUEST['block_id'] );
-		$sectionData = $this->load_and_cache_single_section_from_server( $section_id );
-		wp_send_json_success( $sectionData );
+
+		// Verify the request.
+		check_ajax_referer( 'qubely_nonce', 'security' );
+
+		// It's good let's do some capability check.
+		$user = wp_get_current_user();
+		$allowed_roles = array( 'editor', 'administrator', 'author' );
+		
+		if ( ! array_intersect( $allowed_roles, $user->roles ) ) {
+			wp_die( 'You don\'t have permission to perform this action' );
+		}
+		
+		// Cool, we're almost there, let's check the user authenticity a little bit, shall we!
+		if ( ! is_user_logged_in() && $user->ID !== sanitize_text_field( $_REQUEST['user_id'] ) ) {
+			wp_die( 'You don\'t have proper authorization to perform this action' );
+		}
+
+		$section_id = isset( $_REQUEST['block_id'] ) ? (int) sanitize_text_field( $_REQUEST['block_id'] ) : null;
+		if ( $section_id ) {
+			$sectionData = $this->load_and_cache_single_section_from_server( $section_id );
+			wp_send_json_success( $sectionData );
+		} else {
+			wp_send_json_error( __( 'No section id was provided', 'qubely' ) );
+		}
 	}
 
 	/**
@@ -1744,6 +1819,23 @@ class QUBELY_MAIN {
 	 * Get saved blocks
 	 */
 	public function qubely_get_saved_block() {
+
+		// Verify the request.
+		check_ajax_referer( 'qubely_nonce', 'security' );
+
+		// It's good let's do some capability check.
+		$user = wp_get_current_user();
+		$allowed_roles = array( 'editor', 'administrator', 'author' );
+		
+		if ( ! array_intersect( $allowed_roles, $user->roles ) ) {
+			wp_die( 'You don\'t have permission to perform this action' );
+		}
+		
+		// Cool, we're almost there, let's check the user authenticity a little bit, shall we!
+		if ( ! is_user_logged_in() && $user->ID !== sanitize_text_field( $_REQUEST['user_id'] ) ) {
+			wp_die( 'You don\'t have proper authorization to perform this action' );
+		}
+
 		$args      = array(
 			'post_type'   => 'wp_block',
 			'post_status' => 'publish',
@@ -1760,15 +1852,30 @@ class QUBELY_MAIN {
 	 */
 	public function qubely_delete_saved_block() {
 
+		// Verify the request.
+		check_ajax_referer( 'qubely_nonce', 'security' );
+
+		// It's good let's do some capability check.
 		$user = wp_get_current_user();
 		$allowed_roles = array( 'editor', 'administrator', 'author' );
+		
 		if ( ! array_intersect( $allowed_roles, $user->roles ) ) {
 			wp_die( 'You don\'t have permission to perform this action' );
 		}
+		
+		// Cool, we're almost there, let's check the user authenticity a little bit, shall we!
+		if ( ! is_user_logged_in() && $user->ID !== sanitize_text_field( $_REQUEST['user_id'] ) ) {
+			wp_die( 'You don\'t have proper authorization to perform this action' );
+		}
 
-		$block_id      = (int) sanitize_text_field( $_REQUEST['block_id'] );
-		$deleted_block = wp_delete_post( $block_id );
-		wp_send_json_success( $deleted_block );
+		// All good, let's proceed.
+		$block_id = isset( $_REQUEST['block_id'] ) ? (int) sanitize_text_field( $_REQUEST['block_id'] ) : null;
+		if ( $block_id ) {
+			$deleted_block = wp_delete_post( $block_id );
+			wp_send_json_success( $deleted_block );
+		} else {
+			wp_send_json_error( __( 'No post id was provided', 'qubely' ) );
+		}
 	}
 
 	/**
@@ -1947,11 +2054,11 @@ class QUBELY_MAIN {
 	 *
 	 * @return boolean,void     Return false if failure, echo json on success
 	 */
-	public function qubely_add_to_cart()
-	{
+	public function qubely_add_to_cart() {
+		$product_id = isset( $_POST['id'] ) ? sanitize_text_field( $_POST['id'] ) : 0;
 		try {
 			$responseData['status'] = 1;
-			WC()->cart->add_to_cart( $_POST['id'], 1 );
+			WC()->cart->add_to_cart( $product_id, 1 );
 			wp_send_json_success( $responseData );
 		} catch ( \Exception $e ) {
 			$responseData['status'] = 0;
