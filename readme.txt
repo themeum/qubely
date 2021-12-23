@@ -240,6 +240,9 @@ You can report bugs on the [support forum here](https://wordpress.org/support/pl
 
 == Changelog ==
 
+= 1.7.8 =
+Update: Security Update
+
 = 1.7.7 =
 Update: Security Update
 Fix: Layout Breaking Issue for Already Designed Pages/Posts

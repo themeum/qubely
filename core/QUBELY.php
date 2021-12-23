@@ -1610,12 +1610,12 @@ class QUBELY_MAIN {
 		$allowed_roles = array( 'editor', 'administrator', 'author' );
 		
 		if ( ! array_intersect( $allowed_roles, $user->roles ) ) {
-			wp_die( 'You don\'t have permission to perform this action' );
+			wp_die( __( 'You don\'t have permission to perform this action', 'qubely' ) );
 		}
 		
 		// Cool, we're almost there, let's check the user authenticity a little bit, shall we!
 		if ( ! is_user_logged_in() && $user->ID !== sanitize_text_field( $_REQUEST['user_id'] ) ) {
-			wp_die( 'You don\'t have proper authorization to perform this action' );
+			wp_die( __( 'You don\'t have proper authorization to perform this action', 'qubely' ) );
 		}
 
 		$sectionData = array();
@@ -1657,12 +1657,12 @@ class QUBELY_MAIN {
 		$allowed_roles = array( 'editor', 'administrator', 'author' );
 		
 		if ( ! array_intersect( $allowed_roles, $user->roles ) ) {
-			wp_die( 'You don\'t have permission to perform this action' );
+			wp_die( __( 'You don\'t have permission to perform this action', 'qubely' ) );
 		}
 		
 		// Cool, we're almost there, let's check the user authenticity a little bit, shall we!
 		if ( ! is_user_logged_in() && $user->ID !== sanitize_text_field( $_REQUEST['user_id'] ) ) {
-			wp_die( 'You don\'t have proper authorization to perform this action' );
+			wp_die( __( 'You don\'t have proper authorization to perform this action', 'qubely' ) );
 		}
 
 		$layoutData = array();
@@ -1704,12 +1704,12 @@ class QUBELY_MAIN {
 		$allowed_roles = array( 'editor', 'administrator', 'author' );
 		
 		if ( ! array_intersect( $allowed_roles, $user->roles ) ) {
-			wp_die( 'You don\'t have permission to perform this action' );
+			wp_die( __( 'You don\'t have permission to perform this action', 'qubely' ) );
 		}
 		
 		// Cool, we're almost there, let's check the user authenticity a little bit, shall we!
 		if ( ! is_user_logged_in() && $user->ID !== sanitize_text_field( $_REQUEST['user_id'] ) ) {
-			wp_die( 'You don\'t have proper authorization to perform this action' );
+			wp_die( __( 'You don\'t have proper authorization to perform this action', 'qubely' ) );
 		}
 
 		$layout_id = isset( $_REQUEST['layout_id'] ) ? (int) sanitize_text_field( $_REQUEST['layout_id'] ) : null;
@@ -1735,12 +1735,12 @@ class QUBELY_MAIN {
 		$allowed_roles = array( 'editor', 'administrator', 'author' );
 		
 		if ( ! array_intersect( $allowed_roles, $user->roles ) ) {
-			wp_die( 'You don\'t have permission to perform this action' );
+			wp_die( __( 'You don\'t have permission to perform this action', 'qubely' ) );
 		}
 		
 		// Cool, we're almost there, let's check the user authenticity a little bit, shall we!
 		if ( ! is_user_logged_in() && $user->ID !== sanitize_text_field( $_REQUEST['user_id'] ) ) {
-			wp_die( 'You don\'t have proper authorization to perform this action' );
+			wp_die( __( 'You don\'t have proper authorization to perform this action', 'qubely' ) );
 		}
 
 		$section_id = isset( $_REQUEST['block_id'] ) ? (int) sanitize_text_field( $_REQUEST['block_id'] ) : null;
@@ -1828,12 +1828,12 @@ class QUBELY_MAIN {
 		$allowed_roles = array( 'editor', 'administrator', 'author' );
 		
 		if ( ! array_intersect( $allowed_roles, $user->roles ) ) {
-			wp_die( 'You don\'t have permission to perform this action' );
+			wp_die( __( 'You don\'t have permission to perform this action', 'qubely' ) );
 		}
 		
 		// Cool, we're almost there, let's check the user authenticity a little bit, shall we!
 		if ( ! is_user_logged_in() && $user->ID !== sanitize_text_field( $_REQUEST['user_id'] ) ) {
-			wp_die( 'You don\'t have proper authorization to perform this action' );
+			wp_die( __( 'You don\'t have proper authorization to perform this action', 'qubely' ) );
 		}
 
 		$args      = array(
@@ -1860,17 +1860,18 @@ class QUBELY_MAIN {
 		$allowed_roles = array( 'editor', 'administrator', 'author' );
 		
 		if ( ! array_intersect( $allowed_roles, $user->roles ) ) {
-			wp_die( 'You don\'t have permission to perform this action' );
+			wp_die( __( 'You don\'t have permission to perform this action', 'qubely' ) );
 		}
 		
 		// Cool, we're almost there, let's check the user authenticity a little bit, shall we!
 		if ( ! is_user_logged_in() && $user->ID !== sanitize_text_field( $_REQUEST['user_id'] ) ) {
-			wp_die( 'You don\'t have proper authorization to perform this action' );
+			wp_die( __( 'You don\'t have proper authorization to perform this action', 'qubely' ) );
 		}
 
 		// All good, let's proceed.
 		$block_id = isset( $_REQUEST['block_id'] ) ? (int) sanitize_text_field( $_REQUEST['block_id'] ) : null;
-		if ( $block_id ) {
+		$has_post = get_post( $block_id );
+		if ( null !== $has_post ) {
 			$deleted_block = wp_delete_post( $block_id );
 			wp_send_json_success( $deleted_block );
 		} else {
