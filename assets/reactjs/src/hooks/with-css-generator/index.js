@@ -127,7 +127,7 @@ export default function withCSSGenerator() {
           new RegExp("{{QUBELY}}", "g"),
           ".qubely-block-" + uniqueId
         );
-        _CSS = _CSS.replace(new RegExp(";;", "g"), "");
+        _CSS = _CSS.replace(new RegExp(";;", "g"), ";");
 
         let googleFonts = _CSS.match(new RegExp("@import([^;]*);", "g"));
         if (googleFonts) {
