@@ -44,113 +44,18 @@ export default function withCSSGenerator() {
         }
       };
       saveCSS = (responsiveCSS, nonResponsiveCSS) => {
-        let _CSS = "";
         const {
+          attributes,
           attributes: { uniqueId },
+          name,
         } = this.props;
-        console.log({ responsiveCSS, nonResponsiveCSS });
-        const nonResponsiveAttributes = Object.keys(nonResponsiveCSS);
-        const responsiveAttributes = Object.keys(responsiveCSS);
 
-        if (nonResponsiveAttributes.length > 0) {
-          nonResponsiveAttributes.forEach((attr) => {
-            if (nonResponsiveCSS[attr]) {
-              if (
-                attr === "hideTablet" &&
-                nonResponsiveCSS[attr].length !== 0
-              ) {
-                _CSS +=
-                  "@media (max-width: 1199px) and (min-width: 992px)  {" +
-                  nonResponsiveCSS[attr][0] +
-                  "}";
-              } else if (
-                attr === "hideMobile" &&
-                nonResponsiveCSS[attr].length !== 0
-              ) {
-                _CSS +=
-                  "@media (max-width: 991px)  {" +
-                  nonResponsiveCSS[attr][0] +
-                  "}";
-              } else if (typeof nonResponsiveCSS[attr] === "array") {
-                _CSS += nonResponsiveCSS[attr].join(" ");
-              } else {
-                _CSS += nonResponsiveCSS[attr];
-              }
-            }
-          });
-        }
-        if (responsiveAttributes.length > 0) {
-          responsiveAttributes.forEach((attr) => {
-            const currentAttribute = responsiveCSS[attr];
-            let attrKeys = Object.keys(currentAttribute);
-            attrKeys.forEach((key) => {
-              if (
-                key !== "nonResponsiveCSS" &&
-                typeof currentAttribute[key] === "object" &&
-                Object.keys(currentAttribute[key]).length > 0
-              ) {
-                if (
-                  currentAttribute[key].hasOwnProperty("md") &&
-                  typeof currentAttribute[key].md !== "undefined"
-                ) {
-                  _CSS += currentAttribute[key].md;
-                } else if (
-                  currentAttribute[key].hasOwnProperty("sm") &&
-                  typeof currentAttribute[key].sm !== "undefined"
-                ) {
-                  _CSS +=
-                    "@media (max-width: 1199px) {" +
-                    currentAttribute[key].sm +
-                    "}";
-                } else if (
-                  currentAttribute[key].hasOwnProperty("xs") &&
-                  typeof currentAttribute[key].xs !== "undefined"
-                ) {
-                  _CSS +=
-                    "@media (max-width: 991px) {" +
-                    currentAttribute[key].xs +
-                    "}";
-                }
-              } else if (
-                key === "nonResponsiveCSS" &&
-                currentAttribute.nonResponsiveCSS.length > 0
-              ) {
-                _CSS += currentAttribute.nonResponsiveCSS
-                  .filter((v) => !v.includes("{}"))
-                  .join(" ");
-              }
-            });
-          });
-        }
+        const {
+          CssGenerator: { CssGenerator },
+        } = wp.qubelyComponents;
 
-        _CSS = _CSS.replace(
-          new RegExp("{{QUBELY}}", "g"),
-          ".qubely-block-" + uniqueId
-        );
-        _CSS = _CSS.replace(new RegExp(";;", "g"), ";");
-
-        let googleFonts = _CSS.match(new RegExp("@import([^;]*);", "g"));
-        if (googleFonts) {
-          _CSS = _CSS.replace(new RegExp("@import([^;]*);", "g"), "");
-          _CSS = googleFonts + " " + _CSS;
-        }
-
-        let styleSelector = window.document;
-        if (styleSelector.getElementById("qubely-block-" + uniqueId) === null) {
-          let cssInline = document.createElement("style");
-          cssInline.type = "text/css";
-          cssInline.id = "qubely-block-" + uniqueId;
-          cssInline.classList.add("qubely-block-styles");
-          if (cssInline.styleSheet) {
-            cssInline.styleSheet.cssText = _CSS;
-          } else {
-            cssInline.innerHTML = _CSS;
-          }
-          styleSelector.getElementsByTagName("head")[0].appendChild(cssInline);
-        } else {
-          styleSelector.getElementById("qubely-block-" + uniqueId).innerHTML =
-            _CSS;
-        }
+        const blockName = name.split("/");
+        CssGenerator(attributes, blockName[1], uniqueId, false);
       };
 
       componentDidUpdate(prevProps, prevState) {

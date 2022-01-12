@@ -15,8 +15,7 @@ const API_fetch = async (
 ) => {
   const json = JSON.stringify(block_css.interaction);
   let d = {
-    // block_css: block_css.css,
-    block_css: getAllCssStringFromHead(),
+    block_css: trimCssString(block_css.css),
     interaction: json,
     post_id,
     is_remain,
@@ -35,17 +34,10 @@ const API_fetch = async (
   }
 };
 
-export const getAllCssStringFromHead = () => {
-  const globalCssBlock = document.querySelector("#qubely-global-styles");
-  let cssString = globalCssBlock.innerHTML;
-
-  const elementsCss = document.querySelectorAll(".qubely-block-styles");
-  elementsCss.forEach((singleBlock) => {
-    cssString += singleBlock.innerHTML;
-  });
-
-  console.log(cssString);
-  return cssString;
+export const trimCssString = (str) => {
+  str = str.replace(new RegExp(";;", "g"), ";");
+  console.log(str);
+  return str;
 };
 
 /**

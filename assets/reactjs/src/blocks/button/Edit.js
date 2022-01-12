@@ -3,14 +3,14 @@ import classnames from "classnames";
 const { __ } = wp.i18n;
 const { Fragment, Component, createRef } = wp.element;
 
-const { compose } = wp.compose;
+// const { compose } = wp.compose;
 
 // const {
 // withSelect,
 // withDispatch
 // } = wp.data;
 
-const { PanelBody, Toolbar, Tooltip } = wp.components;
+const { PanelBody, Toolbar } = wp.components;
 
 const { RichText, BlockControls, InspectorControls } = wp.blockEditor;
 
@@ -91,10 +91,10 @@ class Edit extends Component {
         buttonSize,
         typography,
         buttonWidth,
-        buttonGroup,
+        // buttonGroup,
         iconPosition,
         buttonPadding,
-        parentClientId,
+        // parentClientId,
         buttonWidthType,
         enableAlignment,
         disableFullWidth,
@@ -124,7 +124,7 @@ class Edit extends Component {
       },
     } = this.props;
 
-    const { device, currentTab } = this.state;
+    const { device } = this.state;
 
     const classNames = classnames(
       { [`qubely-block-${uniqueId}`]: uniqueId },
@@ -460,18 +460,19 @@ class Edit extends Component {
     );
   }
 }
-export default compose([
-  // withSelect((select, ownProps) => {
-  //     const { parentClientId } = ownProps.attributes
-  //     const { getBlockAttributes } = select('core/block-editor');
-  //     return { buttonGroupAttributes: getBlockAttributes(parentClientId) }
-  // }),
-  // withDispatch((dispatch) => {
-  //     const { removeBlock, updateBlockAttributes } = dispatch('core/block-editor');
-  //     return {
-  //         removeBlock,
-  //         updateBlockAttributes
-  //     }
-  // }),
-  withCSSGenerator(),
-])(Edit);
+// export default compose([
+//   // withSelect((select, ownProps) => {
+//   //     const { parentClientId } = ownProps.attributes
+//   //     const { getBlockAttributes } = select('core/block-editor');
+//   //     return { buttonGroupAttributes: getBlockAttributes(parentClientId) }
+//   // }),
+//   // withDispatch((dispatch) => {
+//   //     const { removeBlock, updateBlockAttributes } = dispatch('core/block-editor');
+//   //     return {
+//   //         removeBlock,
+//   //         updateBlockAttributes
+//   //     }
+//   // }),
+//   withCSSGenerator(),
+// ])(Edit);
+export default withCSSGenerator()(Edit);
