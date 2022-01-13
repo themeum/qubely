@@ -59,7 +59,12 @@ class QUBELY_Settings
         $new_options = isset( $_POST['options'] ) && is_array( $_POST['options'] ) ? $this->sanitize_settings_array( $_POST['options'] ) : array();
         if ( ! isset( $_POST['_wpnonce'] ) || ! wp_verify_nonce( $_POST['_wpnonce'], 'qubely_nonce' ) || ! $new_options ) {
             wp_send_json_error( 'No data or nonce failed' );
+            die();
         };
+        if (!current_user_can('edit_posts')) {
+            wp_send_json_error( "Sorry you are not allowed to access this route" );
+            die();
+        }
         $options = get_option( 'qubely_options' );
         $updated_options = wp_parse_args( $new_options, $options );
         update_option( 'qubely_options', $updated_options );
