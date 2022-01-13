@@ -56,16 +56,31 @@ export default function withCSSGenerator() {
       };
 
       componentDidUpdate(prevProps, prevState) {
-        console.log(prevProps.attributes, this.props.attributes);
-        console.log(
-          prevProps.attributes.alignment,
-          this.props.attributes.alignment
-        );
-        console.log(
-          this.props.name + " ==>> " + this.props.attributes.uniqueId
-        );
+        // console.log(prevProps.attributes, this.props.attributes);
+        // console.log(
+        //   prevProps.attributes.alignment,
+        //   this.props.attributes.alignment
+        // );
+        // console.log(
+        //   this.props.name + " ==>> " + this.props.attributes.uniqueId
+        // );
 
         this.saveCSS();
+      }
+
+      shouldComponentUpdate(nextProps, nextState) {
+        // console.log(nextProps.attributes, this.props.attributes);
+        // console.log(
+        //   nextProps.attributes.alignment,
+        //   this.props.attributes.alignment
+        // );
+        if (
+          JSON.stringify(nextProps.attributes) ===
+          JSON.stringify(this.props.attributes.alignment)
+        ) {
+          return false;
+        }
+        return true;
       }
 
       copyAttributes = () => {
