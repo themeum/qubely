@@ -55,10 +55,16 @@ export default function withCSSGenerator() {
         CssGenerator(attributes, blockName[1], uniqueId, false);
       };
 
-      componentDidUpdate() {
+      componentDidUpdate(prevProps, prevState) {
+        console.log(prevProps.attributes, this.props.attributes);
+        console.log(
+          prevProps.attributes.alignment,
+          this.props.attributes.alignment
+        );
         console.log(
           this.props.name + " ==>> " + this.props.attributes.uniqueId
         );
+
         this.saveCSS();
       }
 
