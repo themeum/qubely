@@ -58,7 +58,7 @@ class Edit extends Component {
         if (!uniqueId) {
             setAttributes({ uniqueId: _client });
         } else if (uniqueId && uniqueId != _client) {
-            setAttributes({ uniqueId: _client });
+            // setAttributes({ uniqueId: _client });
         }
         this.placeCaretAtEnd(document.querySelector(`.qubely-block-${uniqueId} .qubely-list-item-text-${this.state.focusedItem}`))
     }

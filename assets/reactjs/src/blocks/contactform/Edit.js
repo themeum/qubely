@@ -61,7 +61,7 @@ class Edit extends Component {
         if (!uniqueId) {
             setAttributes({ uniqueId: _client });
         } else if (uniqueId && uniqueId != _client) {
-            setAttributes({ uniqueId: _client });
+            // setAttributes({ uniqueId: _client });
         }
 
         if (qubely_admin.qubely_recaptcha_site_key) {
