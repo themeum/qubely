@@ -36,7 +36,6 @@ const API_fetch = async (
 
 export const trimCssString = (str) => {
   str = str.replace(new RegExp(";;", "g"), ";");
-  console.log(str);
   return str;
 };
 
