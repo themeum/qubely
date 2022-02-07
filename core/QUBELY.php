@@ -789,7 +789,7 @@ class QUBELY_MAIN {
 						let cssInline = document.createElement('style');
 						cssInline.type = 'text/css';
 						cssInline.id = 'qubely-block-js-preview';
-						cssInline.innerHTML =JSON.parse( localStorage.getItem('qubelyCSS'));
+						cssInline.innerHTML = JSON.parse( localStorage.getItem('qubelyCSS'));
 						window.document.getElementsByTagName("head")[0].appendChild(cssInline);
 					// }
 				})
@@ -1230,9 +1230,9 @@ class QUBELY_MAIN {
 				// Add Import in first
 				$import_first = $this->set_import_url_to_top_css( $qubely_block_css );
 
-				if ( $is_previewing==true ) {
-					$filename         = "qubely-preview.css";
-					$jsonfilename      = "qubely-preview.json";
+				if ( $is_previewing == true ) {
+					$filename     = "qubely-preview.css";
+					$jsonfilename = "qubely-preview.json";
 				} else {
 					update_post_meta( $post_id, '_qubely_css', $import_first );
 					if ( $qubely_block_json ) {
@@ -2034,7 +2034,7 @@ class QUBELY_MAIN {
 
 		// Send E-Mail Now or through error msg.
 		try {
-			$isMail = wp_mail( $emailReceiver, $emailSubject, $emailBody, $headers );
+			$isMail = wp_mail( $emailFrom, $emailSubject, $emailBody, $headers );
 			if ( $isMail ) {
 				$responseData['status'] = 1;
 				$responseData['msg']    = __( $formSuccessMessage, 'qubely' );

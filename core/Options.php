@@ -1,8 +1,8 @@
 <?php
 // Exit if accessed directly
-if (!defined('ABSPATH')) exit;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
-if (!class_exists('QUBELY_Options')) {
+if ( ! class_exists( 'QUBELY_Options' ) ) {
 
     class QUBELY_Options
     {
@@ -11,8 +11,8 @@ if (!class_exists('QUBELY_Options')) {
 
         public function __construct()
         {
-            add_action('init', array($this, 'init'));
-            add_action('admin_menu', array($this, 'admin_menu'));
+            add_action( 'init', array( $this, 'init' ) );
+            add_action( 'admin_menu', array( $this, 'admin_menu' ) );
         }
 
         public function init() {

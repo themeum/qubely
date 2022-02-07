@@ -39,7 +39,7 @@ class QUBELY_Settings
 		if ( is_array( $input ) && count( $input ) ) {
 			foreach ( $input as $key => $value ) {
 				if ( is_array( $value ) ) {
-					$array[ $key ] = $this->sanitize_array( $value );
+					$array[ $key ] = $this->sanitize_settings_array( $value );
 				} else {
 					$key           = sanitize_text_field( $key );
 					$value         = sanitize_text_field( $value );
