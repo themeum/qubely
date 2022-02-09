@@ -193,6 +193,9 @@ export default function withCSSGenerator() {
       }
 
       shouldComponentUpdate(nextProps, nextState) {
+        if(nextProps.posts && JSON.stringify(nextProps.posts) !== JSON.stringify(this.props.posts) ) {
+          return true;
+        }
         if (
           JSON.stringify(nextProps.attributes) ===
           JSON.stringify(this.props.attributes)
