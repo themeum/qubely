@@ -76,7 +76,7 @@ class QUBELY_Getting_Started {
         $links = [
             'fab fa-facebook-f' => 'https://www.facebook.com/groups/qubely',
             'fab fa-twitter' => 'https://twitter.com/themeum',
-            'fab fa-youtube' => 'https://www.youtube.com/channel/UCeKEfO6qZOtKyAnTt3pj5TA',
+            'fab fa-youtube' => 'https://www.youtube.com/themeum',
             'fab fa-wordpress' => 'https://wordpress.org/plugins/qubely/',
         ];
         ?>
@@ -130,35 +130,7 @@ class QUBELY_Getting_Started {
                             </div>
                             <a class="qubely-gs-link" target="_blank" href="https://wordpress.org/plugins/qubely/#developers"><?php esc_html_e( 'Learn More', 'qubely' ); ?> <span class="fas fa-long-arrow-alt-right"></span></a>
 						</div>
-                        <?php
-                        if ( true ) { ?>
-						<div class="qubely-gs-card qubely-gs-card-blog-posts">
-                            <div class="qubely-gs-card-title is-large">
-                                <h2><?php esc_html_e( 'Tips and Tutorials from our Blog', 'qubely' ); ?></h2>
-                                <a href="https://www.themeum.com/category/qubely/" target="_blank"><?php esc_html_e( 'See all', 'qubely' ); ?> <span class="fas fa-long-arrow-alt-right"></span></a>
-                            </div>
-                            <div class="qubely-gs-card-content ">
-								<div class="qubely-gs-card-row qubely-column-3 qubely-gs-post-items-wrap">
-									<?php
-
-                                        for ( $x = 1; $x <= 3; $x++ ) {
-                                            ?>
-                                                <div class="qubely-gs-post-card card-placeholder">
-                                                    <a href="#">
-                                                        <img src="" alt="">
-                                                    </a>
-                                                    <span>00/00/00</span>
-                                                    <a href="#">Dummy Title</a>
-                                                </div>
-                                            <?php
-                                        }
-
-									?>
-
-								</div>
-                            </div>
-						</div>
-                        <?php } ?>
+                        
 						<div class="qubely-gs-card-row qubely-column-2">
                             <?php
                                 $image1 = QUBELY_DIR_URL . 'assets/img/admin/join-fb.svg';
