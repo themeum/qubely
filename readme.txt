@@ -241,10 +241,13 @@ You can report bugs on the [support forum here](https://wordpress.org/support/pl
 == Changelog ==
 
 = 1.7.9 =
-Update: Added WordPress 5.9 Compatibility
-Update: Added Security Update
-Fix: Post Grid Block Pagination Issue
-Fix: Multiple Contact Form Not Working in the Same Page Issue
+New: Introducing WordPress 5.9 compatibility for Qubely
+Update: Improved authorization check for the Qubely settings page
+Update: Same style IDs will not re-render anymore
+Update: Use Reusable Blocks without any issue or dependency
+Update: Pre-made layouts are now a separate tab for better implementation
+Fix: Pagination issue for the Post Grid block
+Fix: Multiple Contact Form was not working on the same page
 
 = 1.7.8 =
 Update: Security Update

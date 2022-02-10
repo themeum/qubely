@@ -1,9 +1,9 @@
 <h3>1.7.9</h3>
 <ul> 
-    <li>Update: Added WordPress 5.9 Compatibility</li>
-    <li>Update: Added Security Update</li>
-    <li>Post Grid Block Pagination Issue</li>
-    <li>Multiple Contact Form Not Working in the Same Page Issue</li>
+    <li>New: Introducing WordPress 5.9 compatibility for Qubely</li>
+    <li>Update: Improved authorization check for the Qubely settings page</li>
+    <li>Fix: Pagination issue for the Post Grid block</li>
+    <li>Fix: Multiple contact form was not working on the same page</li>
 </ul>
 
 <h3>1.7.8</h3>

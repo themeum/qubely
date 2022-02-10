@@ -50,7 +50,7 @@ class Edit extends Component {
         if (!uniqueId) {
             setAttributes({ uniqueId: _client, childRow: parentClientId ? true : false });
         } else if (uniqueId && uniqueId != _client) {
-            setAttributes({ uniqueId: _client, childRow: parentClientId ? true : false });
+            //setAttributes({ uniqueId: _client, childRow: parentClientId ? true : false });
         }
     }
 
