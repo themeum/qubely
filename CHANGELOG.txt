@@ -1,3 +1,11 @@
+<h3>1.7.9</h3>
+<ul> 
+    <li>Update: Added WordPress 5.9 Compatibility</li>
+    <li>Update: Added Security Update</li>
+    <li>Post Grid Block Pagination Issue</li>
+    <li>Multiple Contact Form Not Working in the Same Page Issue</li>
+</ul>
+
 <h3>1.7.8</h3>
 <ul> 
     <li>Update: Security update</li>
