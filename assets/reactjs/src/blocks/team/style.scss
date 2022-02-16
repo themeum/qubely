@@ -1,221 +1,226 @@
 .qubely-block-team {
-    position: relative;
-    transition: border-color 400ms, background-color 400ms, box-shadow 400ms;
-    h1, h2, h3, h4, h5, h6 {
-        padding: 0;
-        margin: 0;
-        line-height: 1;
-        position: relative;
+	position: relative;
+	transition: border-color 400ms, background-color 400ms, box-shadow 400ms;
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		padding: 0;
+		margin: 0;
+		line-height: 1;
+		position: relative;
 
-        &::before,
-        &::after {
-            display: none !important;
-        }
+		&::before,
+		&::after {
+			display: none !important;
+		}
 
-        .qubely-text-has-bgcolor {
-            padding-left: 10px;
-            padding-right: 10px;
-        }
-    }
+		.qubely-text-has-bgcolor {
+			padding-left: 10px;
+			padding-right: 10px;
+		}
+	}
 
-    .qubely-team-image-wrapper {
-        // overflow: hidden;
-        font-size: 0;
-    }
-    &.qubely-team-layout-1 {
-        .qubely-team-image-wrapper {
-            display: inline-block;
-        }
-    }
+	.qubely-team-image-wrapper {
+		// overflow: hidden;
+		font-size: 0;
+	}
+	&.qubely-team-layout-1 {
+		.qubely-team-image-wrapper {
+			display: inline-block;
+		}
+	}
 
-    &.qubely-team-layout-2 {
-        .qubely-team-image-wrapper {
-            img {
-                width: 100%;
-            }
-        }
-        .qubely-team-content {
-            display: flex;
-            position: absolute;
-            left: 0;
-            right: 0;
-            opacity: 0;
-            transition: opacity 300ms;
-            .qubely-team-content-inner {
-                width: 100%;
-            }
-        }
-        &:hover {
-            .qubely-team-content {
-                opacity: 1;
-            }
-        }
-    }
+	&.qubely-team-layout-2 {
+		.qubely-team-image-wrapper {
+			img {
+				width: 100%;
+			}
+		}
+		.qubely-team-content {
+			display: flex;
+			position: absolute;
+			left: 0;
+			right: 0;
+			opacity: 0;
+			transition: opacity 300ms;
+			.qubely-team-content-inner {
+				width: 100%;
+			}
+		}
+		&:hover {
+			.qubely-team-content {
+				opacity: 1;
+			}
+		}
+	}
 
-    &.qubely-team-layout-3 {
-        display: flex;
-        .qubely-team-content {
-            display: flex;
-            flex-grow: 1;
-            .qubely-team-content-inner {
-                width: 100%;
-            }
-        }
-    }
+	&.qubely-team-layout-3 {
+		display: flex;
+		.qubely-team-content {
+			display: flex;
+			flex-grow: 1;
+			.qubely-team-content-inner {
+				width: 100%;
+			}
+		}
+	}
 
-    .qubely-team-social-links {
-        font-size: 0;
-        a {
-            display: inline-block;
-            text-decoration: none !important;
-            transition: 400ms;
-        }
+	.qubely-team-social-links {
+		font-size: 0;
+		a {
+			display: inline-block;
+			text-decoration: none !important;
+			transition: 400ms;
+		}
 
-        &.qubely-team-icon-layout-fill {
-            a {
-                padding: 10px;
-                i {
-                    font-style: normal;
-                    width: 1em;
-                    height: 1em;
-                    display: block;
-                    text-align: center;
-                }
-            }
-        }
+		&.qubely-team-icon-layout-fill {
+			a {
+				padding: 10px;
+				i {
+					font-style: normal;
+					width: 1em;
+					height: 1em;
+					display: block;
+					text-align: center;
+				}
+			}
+		}
 
-        &.qubely-team-icon-style-default {
-            &.qubely-team-icon-layout-normal {
-                .qubely-team-social-facebook {
-                    color: #3b5998;
-                    &:hover {
-                        color: #2f477c;
-                    }
-                }
-                .qubely-team-social-twitter {
-                    color: #1da1f2;
-                    &:hover {
-                        color: #1a93df;
-                    }
-                }
-                .qubely-team-social-instagram {
-                    color: #e1306c;
-                    &:hover {
-                        color: #c0275a;
-                    }
-                }
-                .qubely-team-social-linkedin {
-                    color: #0077b5;
-                    &:hover {
-                        color: #005f92;
-                    }
-                }
-                .qubely-team-social-youtube {
-                    color: #ff0000;
-                    &:hover {
-                        color: #e40000;
-                    }
-                }
-                .qubely-team-social-github {
-                    color: #333;
-                    &:hover {
-                        color: rgb(24, 24, 24);
-                    }
-                }
-                .qubely-team-social-flickr {
-                    color: #ff0084;
-                    &:hover {
-                        color: #e60077;
-                    }
-                }
-                .qubely-team-social-pinterest {
-                    color: #bd081c;
-                    &:hover {
-                        color: #9c0718;
-                    }
-                }
-                .qubely-team-social-dribbble {
-                    color: #ea4c89;
-                    &:hover {
-                        color: #d3437a;
-                    }
-                }
-                .qubely-team-social-behance {
-                    color: #1769ff;
-                    &:hover {
-                        color: #135add;
-                    }
-                }
-            }
+		&.qubely-team-icon-style-default {
+			&.qubely-team-icon-layout-normal {
+				.qubely-team-social-facebook {
+					color: #3b5998;
+					&:hover {
+						color: #2f477c;
+					}
+				}
+				.qubely-team-social-twitter {
+					color: #1da1f2;
+					&:hover {
+						color: #1a93df;
+					}
+				}
+				.qubely-team-social-instagram {
+					color: #e1306c;
+					&:hover {
+						color: #c0275a;
+					}
+				}
+				.qubely-team-social-linkedin {
+					color: #0077b5;
+					&:hover {
+						color: #005f92;
+					}
+				}
+				.qubely-team-social-youtube {
+					color: #ff0000;
+					&:hover {
+						color: #e40000;
+					}
+				}
+				.qubely-team-social-github {
+					color: #333;
+					&:hover {
+						color: rgb(24, 24, 24);
+					}
+				}
+				.qubely-team-social-flickr {
+					color: #ff0084;
+					&:hover {
+						color: #e60077;
+					}
+				}
+				.qubely-team-social-pinterest {
+					color: #bd081c;
+					&:hover {
+						color: #9c0718;
+					}
+				}
+				.qubely-team-social-dribbble {
+					color: #ea4c89;
+					&:hover {
+						color: #d3437a;
+					}
+				}
+				.qubely-team-social-behance {
+					color: #1769ff;
+					&:hover {
+						color: #135add;
+					}
+				}
+			}
 
-            &.qubely-team-icon-layout-fill {
-                a {
-                    color: #fff;
-                    &:hover {
-                        color: #fff;
-                    }
-                }
-                .qubely-team-social-facebook {
-                    background-color: #3b5998;
-                    &:hover {
-                        background-color: #2f477c;
-                    }
-                }
-                .qubely-team-social-twitter {
-                    background-color: #1da1f2;
-                    &:hover {
-                        background-color: #1a93df;
-                    }
-                }
-                .qubely-team-social-instagram {
-                    background-color: #e1306c;
-                    &:hover {
-                        background-color: #c0275a;
-                    }
-                }
-                .qubely-team-social-linkedin {
-                    background-color: #0077b5;
-                    &:hover {
-                        background-color: #005f92;
-                    }
-                }
-                .qubely-team-social-youtube {
-                    background-color: #ff0000;
-                    &:hover {
-                        background-color: #e40000;
-                    }
-                }
-                .qubely-team-social-github {
-                    background-color: #333;
-                    &:hover {
-                        background-color: rgb(24, 24, 24);
-                    }
-                }
-                .qubely-team-social-flickr {
-                    background-color: #ff0084;
-                    &:hover {
-                        background-color: #e60077;
-                    }
-                }
-                .qubely-team-social-pinterest {
-                    background-color: #bd081c;
-                    &:hover {
-                        background-color: #9c0718;
-                    }
-                }
-                .qubely-team-social-dribbble {
-                    background-color: #ea4c89;
-                    &:hover {
-                        background-color: #d3437a;
-                    }
-                }
-                .qubely-team-social-behance {
-                    background-color: #1769ff;
-                    &:hover {
-                        background-color: #135add;
-                    }
-                }
-            }
-        }
-    }
+			&.qubely-team-icon-layout-fill {
+				a {
+					color: #fff;
+					&:hover {
+						color: #fff;
+					}
+				}
+				.qubely-team-social-facebook {
+					background-color: #3b5998;
+					&:hover {
+						background-color: #2f477c;
+					}
+				}
+				.qubely-team-social-twitter {
+					background-color: #1da1f2;
+					&:hover {
+						background-color: #1a93df;
+					}
+				}
+				.qubely-team-social-instagram {
+					background-color: #e1306c;
+					&:hover {
+						background-color: #c0275a;
+					}
+				}
+				.qubely-team-social-linkedin {
+					background-color: #0077b5;
+					&:hover {
+						background-color: #005f92;
+					}
+				}
+				.qubely-team-social-youtube {
+					background-color: #ff0000;
+					&:hover {
+						background-color: #e40000;
+					}
+				}
+				.qubely-team-social-github {
+					background-color: #333;
+					&:hover {
+						background-color: rgb(24, 24, 24);
+					}
+				}
+				.qubely-team-social-flickr {
+					background-color: #ff0084;
+					&:hover {
+						background-color: #e60077;
+					}
+				}
+				.qubely-team-social-pinterest {
+					background-color: #bd081c;
+					&:hover {
+						background-color: #9c0718;
+					}
+				}
+				.qubely-team-social-dribbble {
+					background-color: #ea4c89;
+					&:hover {
+						background-color: #d3437a;
+					}
+				}
+				.qubely-team-social-behance {
+					background-color: #1769ff;
+					&:hover {
+						background-color: #135add;
+					}
+				}
+			}
+		}
+	}
 }

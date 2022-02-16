@@ -1,7 +1,7 @@
 $border-color: #d6d9dd;
 .components-panel[data-qubely-tab] {
-	&:not([data-qubely-tab='advance']) .components-panel__body.block-editor-block-inspector__advanced,
-	&:not([data-qubely-tab='advance'])
+	&:not([data-qubely-tab="advance"]) .components-panel__body.block-editor-block-inspector__advanced,
+	&:not([data-qubely-tab="advance"])
 		.components-panel__body.editor-block-inspector__advanced.block-editor-block-inspector__advanced {
 		display: none;
 	}
@@ -11,7 +11,7 @@ $border-color: #d6d9dd;
 		z-index: 1;
 		overflow: hidden;
 		&::before {
-			content: '';
+			content: "";
 			position: absolute;
 			top: 0;
 			left: -16px;
@@ -31,13 +31,11 @@ $border-color: #d6d9dd;
 
 .qubely-inspector-tabs {
 	display: flex;
-	//margin-left: -16px;
-	//margin-right: -16px;
 	position: relative;
 	background: #f2f4f5;
 	z-index: 9;
 	&::after {
-		content: '';
+		content: "";
 		position: absolute;
 		left: 0;
 		bottom: 0;
@@ -63,7 +61,7 @@ $border-color: #d6d9dd;
 		&::after,
 		&::before {
 			z-index: 1;
-			content: '';
+			content: "";
 			position: absolute;
 			top: 0;
 			left: -0.5px;

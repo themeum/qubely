@@ -1,105 +1,104 @@
 .qubely-field-icon-list {
-    .qubely-icon-list-warp{
-        width: 100%;
-        display: block;
-    }
-    .qubely-icon-list-wrapper {
-        input{
-            background: #fff;
-            width: 100%;
-            height: 36px;
-            padding: 0 10px !important;
-            border-radius: 3px 3px 0 0;
-            border: 1px solid #E5E7EA;
-            position: relative;
-            z-index: 2;
-            &:focus {
-                border: 1px solid #2184F9;
-                outline: 0;
-                box-shadow: none;
-            }
-        }
+	.qubely-icon-list-warp {
+		width: 100%;
+		display: block;
+	}
+	.qubely-icon-list-wrapper {
+		input {
+			background: #fff;
+			width: 100%;
+			height: 36px;
+			padding: 0 10px !important;
+			border-radius: 3px 3px 0 0;
+			border: 1px solid #e5e7ea;
+			position: relative;
+			z-index: 2;
+			&:focus {
+				border: 1px solid #2184f9;
+				outline: 0;
+				box-shadow: none;
+			}
+		}
 
-        .qubely-font-list{
-            span{
-                border-bottom: .5px solid #E5E7EA;
-                &.active{
-                    //border-bottom: 1px solid #555d66;
-                    color: #555d66;
-                }
-            }
-        }
-    }
+		.qubely-font-list {
+			span {
+				border-bottom: 0.5px solid #e5e7ea;
+				&.active {
+					//border-bottom: 1px solid #555d66;
+					color: #555d66;
+				}
+			}
+		}
+	}
 
-    &.qubely-toggle-enabled {
-        label {
-            font-size: 16px;
-            line-height: 1;
-            margin: 0;
-            width: auto;
-            display: inline-block;
-        }
-    }
-    
-    .qubely-icon-list-icons {
-        max-height: 177px;
-        margin: 0;
-        border: 1px solid #E5E7EA;
-        border-top: 0;
-        margin-top: -1px;
-        overflow: auto;
-        position: relative;
-        z-index: 1;
-        >span{
-            text-align: center;
-            font-size: 15px;
-            float: left;
-            width: 16.666666666666667%;
-            margin: 0;
-            span{
-                display: block;
-                height: 37px;
-                line-height: 37px;
-                border: 1px solid #E5E7EA;
-                margin-left: -1px;
-                margin-bottom: -1px;
-                background: #fff;
-                color: #565D66;
-                transition: 300ms;
-            }
-            &:hover{
-                cursor: pointer;
-                span {
-                    color: #fff;
-                    background: #2184F9;
-                    border-color: #2184F9;
-                }
-            }
-            &.qubely-active {
-                span {
-                    color: #fff;
-                    background: #2184F9;
-                    border-color: #2184F9;
-                }
-            }
-        }
+	&.qubely-toggle-enabled {
+		label {
+			font-size: 16px;
+			line-height: 1;
+			margin: 0;
+			width: auto;
+			display: inline-block;
+		}
+	}
 
-    }
-    .qubely-icon-list-inner{
-        width: 100%;
-        padding: 4px 9px;
-        display: block;
-        &:hover{
-            cursor: pointer;
-        }
-        > i {
-            font-style: normal;
-            float: right;
-            padding: 3px;
-            font-size: 11px;
-            &.fa-times:hover{
-                color: red;
-            }
-        }
-    }
+	.qubely-icon-list-icons {
+		max-height: 177px;
+		margin: 0;
+		border: 1px solid #e5e7ea;
+		border-top: 0;
+		margin-top: -1px;
+		overflow: auto;
+		position: relative;
+		z-index: 1;
+		> span {
+			text-align: center;
+			font-size: 15px;
+			float: left;
+			width: 16.666666666666667%;
+			margin: 0;
+			span {
+				display: block;
+				height: 37px;
+				line-height: 37px;
+				border: 1px solid #e5e7ea;
+				margin-left: -1px;
+				margin-bottom: -1px;
+				background: #fff;
+				color: #565d66;
+				transition: 300ms;
+			}
+			&:hover {
+				cursor: pointer;
+				span {
+					color: #fff;
+					background: #2184f9;
+					border-color: #2184f9;
+				}
+			}
+			&.qubely-active {
+				span {
+					color: #fff;
+					background: #2184f9;
+					border-color: #2184f9;
+				}
+			}
+		}
+	}
+	.qubely-icon-list-inner {
+		width: 100%;
+		padding: 4px 9px;
+		display: block;
+		&:hover {
+			cursor: pointer;
+		}
+		> i {
+			font-style: normal;
+			float: right;
+			padding: 3px;
+			font-size: 11px;
+			&.fa-times:hover {
+				color: red;
+			}
+		}
+	}
 }

@@ -1,41 +1,47 @@
 .qubely-block-heading {
-    transition: color 200ms ease-in-out, background-color 200ms ease-in-out, border-color 200ms ease-in-out, box-shadow 200ms ease-in-out;
-    position: relative;
-    h1, h2, h3, h4, h5, h6 {
-        padding: 0;
-        margin: 0;
-        line-height: 1;
-        position: relative;
-        &::before,
-        &::after {
-            display: none !important;
-        }
-    }
+	transition: color 200ms ease-in-out, background-color 200ms ease-in-out, border-color 200ms ease-in-out,
+		box-shadow 200ms ease-in-out;
+	position: relative;
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		padding: 0;
+		margin: 0;
+		line-height: 1;
+		position: relative;
+		&::before,
+		&::after {
+			display: none !important;
+		}
+	}
 
-    .qubely-text-has-bgcolor {
-        padding-left: 10px;
-        padding-right: 10px;
-    }
+	.qubely-text-has-bgcolor {
+		padding-left: 10px;
+		padding-right: 10px;
+	}
 
-    .qubely-separator {
-        font-size: 0;
-        .qubely-separator-type-css,
-        .qubely-separator-type-svg {
-            display: inline-block;
-        }
-    }
+	.qubely-separator {
+		font-size: 0;
+		.qubely-separator-type-css,
+		.qubely-separator-type-svg {
+			display: inline-block;
+		}
+	}
 
-    &.qubely-separator-position-left,
-    &.qubely-separator-position-right,
-    &.qubely-separator-position-leftright {
-        .qubely-heading-container {
-            display: inline-flex;
-            align-items: center;
+	&.qubely-separator-position-left,
+	&.qubely-separator-position-right,
+	&.qubely-separator-position-leftright {
+		.qubely-heading-container {
+			display: inline-flex;
+			align-items: center;
 
-            .qubely-heading-selector,
-            .qubely-separator {
-                display: inline-flex;
-            }
-        }
-    }
+			.qubely-heading-selector,
+			.qubely-separator {
+				display: inline-flex;
+			}
+		}
+	}
 }

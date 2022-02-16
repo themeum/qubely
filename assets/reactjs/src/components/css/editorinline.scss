@@ -1,30 +1,30 @@
 .components-toolbar.components-toolbar {
-  div {
-    button {
-      width: auto;
-      .qubely-color-picker-icon-wraper {
-        border-radius: 3px;
-        border: none;
-        outline: none;
-        padding: 0px 5px 0px 5px;
-      }
-    }
-  }
+	div {
+		button {
+			width: auto;
+			.qubely-color-picker-icon-wraper {
+				border-radius: 3px;
+				border: none;
+				outline: none;
+				padding: 0px 5px 0px 5px;
+			}
+		}
+	}
 }
 .components-toolbar {
-  button {
-    img {
-      &.qubely-block-icon {
-        &.small {
-          width: 50%;
-        }
-      }
-    }
-  }
+	button {
+		img {
+			&.qubely-block-icon {
+				&.small {
+					width: 50%;
+				}
+			}
+		}
+	}
 }
 
 .qubely-toolber-popup {
-  .qubely-field-alignment {
-    margin-bottom: 15px;
-  }
+	.qubely-field-alignment {
+		margin-bottom: 15px;
+	}
 }
