@@ -19,14 +19,7 @@ class Edit extends Component {
     }
 
     componentDidMount() {
-        const { setAttributes, clientId, attributes: { uniqueId, apiKey } } = this.props;
-        const _client = clientId.substr(0, 6);
-
-        if (!uniqueId) {
-            setAttributes({ uniqueId: _client });
-        } else if (uniqueId && uniqueId !== _client) {
-            // setAttributes({ uniqueId: _client });
-        }
+        const { setAttributes, attributes: { apiKey } } = this.props;
 
         const mapIframe = this.refs.qubelyGoogleMapIframe;
         if (typeof mapIframe !== 'undefined') {
@@ -43,7 +36,6 @@ class Edit extends Component {
         } else {
             this.initMapLibrary('');
         }
-
     }
 
     async _saveGlobally(apiKey) {

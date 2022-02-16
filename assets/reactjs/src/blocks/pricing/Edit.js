@@ -70,19 +70,11 @@ class Edit extends Component {
 		this.qubelyContextMenu = createRef();
 	}
 
-	componentDidMount() {
-		const { setAttributes, clientId, attributes: { uniqueId, sourceOfCopiedStyle } } = this.props
-		const _client = clientId.substr(0, 6)
-		if (!uniqueId) {
-			setAttributes({ uniqueId: _client })
-		} else if (uniqueId && uniqueId != _client) {
-			setAttributes({ uniqueId: _client })
-		}
-	}
 	renderCurrencyContent = () => {
 		const { attributes: { currency, currencyCustom } } = this.props
 		return (<span className="qubely-pricing-currency">{currency == 'custom' ? currencyCustom : currency}</span>)
 	}
+	
 	renderDuration = () => {
 		const { attributes: { duration }, setAttributes } = this.props
 		return (

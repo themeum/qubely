@@ -76,26 +76,6 @@ class Edit extends Component {
 		}
 	}
 
-	componentDidMount() {
-		const {
-			block,
-			clientId,
-			setAttributes,
-			updateBlockAttributes,
-			attributes: {
-				uniqueId
-			}
-		} = this.props;
-
-		const _client = clientId.substr(0, 6);
-
-		if (!uniqueId) {
-			setAttributes({ uniqueId: _client });
-		} else if (uniqueId && uniqueId != _client) {
-			// setAttributes({ uniqueId: _client });
-		}
-	}
-
 	updateTitles = (value, index) => {
 		const { attributes: { tabTitles }, setAttributes } = this.props;
 		const modifiedTitles = tabTitles.map((title, thisIndex) => {

@@ -46,11 +46,12 @@ class Edit extends Component {
             this.setState({ hideRowSettings: true })
         }
 
-        const _client = clientId.substr(0, 6)
+        const _client = clientId.substr(0, 6);
+        
         if (!uniqueId) {
-            setAttributes({ uniqueId: _client, childRow: parentClientId ? true : false });
+            setAttributes({childRow: parentClientId ? true : false });
         } else if (uniqueId && uniqueId != _client) {
-            //setAttributes({ uniqueId: _client, childRow: parentClientId ? true : false });
+            setAttributes({ childRow: parentClientId ? true : false });
         }
     }
 

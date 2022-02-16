@@ -14,19 +14,6 @@ class QUBELY_Getting_Started {
         $this->hasPro = defined('QUBELY_PRO_FILE');
     }
 
-	/**
-     * Fetch changelog
-     * @return mixed
-     */
-    public function get_changelog() {
-        if(file_exists(QUBELY_DIR_PATH . 'CHANGELOG.txt')) {
-	        $file = file_get_contents(QUBELY_DIR_PATH . 'CHANGELOG.txt');
-	        return $file;
-        }
-        return null;
-    }
-
-
     public function mini_cards() {
 
         // @TODO: Fetech data dynamically with one request if possible
@@ -120,17 +107,7 @@ class QUBELY_Getting_Started {
                 <div class="qubely-gs-container">
                     <div class="qubely-gs-content">
                         <?php $this->mini_cards(); ?>
-                        <div class="qubely-gs-card">
-                            <div class="qubely-gs-card-title is-large">
-                                <h2><?php esc_html_e( 'What\'s New in Qubely', 'qubely' ); ?></h2>
-                            </div>
-                            <div class="qubely-gs-card-content qubely-gs-changelog">
-                                <?php echo $this->get_changelog(); ?>
-                            </div>
-                            <a class="qubely-gs-link" target="_blank" href="https://wordpress.org/plugins/qubely/#developers"><?php esc_html_e( 'Learn More', 'qubely' ); ?> <span class="fas fa-long-arrow-alt-right"></span></a>
-						</div>
-                        
-						<div class="qubely-gs-card-row qubely-column-2">
+                       <div class="qubely-gs-card-row qubely-column-2">
                             <?php
                                 $image1 = QUBELY_DIR_URL . 'assets/img/admin/join-fb.svg';
                                 $image2 = QUBELY_DIR_URL . 'assets/img/admin/keep-in-touch.svg';

@@ -59,21 +59,6 @@ class Edit extends Component {
     }
 
     componentDidMount() {
-        const {
-            clientId,
-            setAttributes,
-            attributes: {
-                uniqueId
-            }
-        } = this.props;
-        const _client = clientId.substr(0, 6);
-
-        if (!uniqueId) {
-            setAttributes({ uniqueId: _client });
-        } else if (uniqueId && uniqueId != _client) {
-            // setAttributes({ uniqueId: _client });
-        }
-
         // image width 
         const imageComparisonRoot = document.querySelector('.qubely-block-image-comparison');
         const imageComparisonImages = document.querySelectorAll('.qubely-block-image-comparison img');
