@@ -920,7 +920,7 @@ class Edit extends Component {
 				</InspectorControls>
 
 				<BlockControls>
-					<Toolbar label={__('Post Grid Options', 'qubely')}>
+					<Toolbar className="components-dropdown components-dropdown-menu components-toolbar-group" label={__('Post Grid Options', 'qubely')}>
 						<InlineToolbar
 							data={[{ name: 'InlineSpacer', key: 'spacer', responsive: true, unit: ['px', 'em', '%'] }]}
 							{...this.props}

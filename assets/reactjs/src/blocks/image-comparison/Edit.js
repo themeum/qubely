@@ -329,7 +329,7 @@ class Edit extends Component {
                 </InspectorControls>
 
                 <BlockControls>
-                    <Toolbar label={__('Image Comparison Options', 'qubely')}>
+                    <Toolbar className="components-dropdown components-dropdown-menu components-toolbar-group" label={__('Image Comparison Options', 'qubely')}>
                         <InlineToolbar
                             data={[{ name: 'InlineSpacer', key: 'spacer', responsive: true, unit: ['px', 'em', '%'] }]}
                             {...this.props}

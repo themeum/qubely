@@ -133,7 +133,7 @@ class Interaction extends Component {
                             {!qubely_admin.pro_enable ?
                                 <div className='qubely-field-pro-upgrade'>
                                     <div className='qubely-logo'>
-                                        <img src={qubely_admin.plugin + 'assets/img/Qubely-Q.svg'} alt={__('Qubely-Q')} />
+                                        <img src={qubely_admin.plugin + 'assets/img/qubely-logo.svg'} alt={__('Qubely')} />
                                     </div>
                                     <div className='qubely-upgrade-message'>
                                         <span className='qubely-upgrade-message-title'>{__('Upgrade to Pro')}</span>

@@ -26,7 +26,7 @@ class PageListModal extends Component {
             blockData: '',
             layoutData: '',
             savedBlocks: '',
-            itemType: 'block',
+            itemType: 'layout',
             layer: 'single',
             searchContext: '',
             isSearchEnable: false,
@@ -43,70 +43,9 @@ class PageListModal extends Component {
 
     componentDidMount() {
 
-        this.setState({ loading: true });
-        let requestFailedMsg = [];
-        let security = qubely_urls.nonce;
-        let currentUserId = qubely_admin.current_user_id;
+        this._onlickLayoutsTab();return;
 
-        const options = {
-            method: 'POST',
-            url: qubely_admin.ajax + '?action=qubely_get_sections' + '&security=' + security + '&user_id=' + currentUserId,
-            headers: { 'Content-Type': 'application/json' }
-        }
-        apiFetch(options).then(response => {
-
-            if (response.success) {
-
-                let blockCategories = [],
-                    blockData = {};
-
-                response.data.map(item => {
-                    if (item.category) {
-                        item.category.map(cat => {
-                            if (cat.slug in blockData) {
-                                blockData[cat.slug].push(item)
-                            } else {
-                                blockData[cat.slug] = [];
-                                blockData[cat.slug].push(item)
-                            }
-                            let index = -1;
-                            blockCategories.forEach((change, i) => {
-                                if (cat.slug == change.slug) {
-                                    index = i
-                                    blockCategories[i].count = blockCategories[i].count + 1
-                                }
-                            });
-                            if (index === -1) {
-                                blockCategories.push({ name: cat.name, slug: cat.slug, count: 1 })
-                            }
-                        })
-                    }
-                });
-
-                this.setState({
-                    loading: false,
-                    blockCategories,
-                    blockData
-                });
-
-                let node = document.querySelector('#modalContainer');
-                node.addEventListener("scroll", this._lazyload, true);
-                this._lazyload();
-
-            } else {
-                this.setState({
-                    loading: false,
-                    requestFailedMsg: response.data.message
-                });
-            }
-
-        }).catch(error => {
-            requestFailedMsg.push(error.code + ' : ' + error.message);
-            this.setState({
-                loading: false,
-                requestFailedMsg
-            });
-        });
+        
     }
 
     componentDidUpdate() {
@@ -314,6 +253,73 @@ class PageListModal extends Component {
         }
     }
 
+    getSectionsList(){
+        this.setState({ loading: true });
+        let requestFailedMsg = [];
+        let security = qubely_urls.nonce;
+        let currentUserId = qubely_admin.current_user_id;
+
+        const options = {
+            method: 'POST',
+            url: qubely_admin.ajax + '?action=qubely_get_sections' + '&security=' + security + '&user_id=' + currentUserId,
+            headers: { 'Content-Type': 'application/json' }
+        }
+        apiFetch(options).then(response => {
+
+            if (response.success) {
+
+                let blockCategories = [],
+                    blockData = {};
+
+                response.data.map(item => {
+                    if (item.category) {
+                        item.category.map(cat => {
+                            if (cat.slug in blockData) {
+                                blockData[cat.slug].push(item)
+                            } else {
+                                blockData[cat.slug] = [];
+                                blockData[cat.slug].push(item)
+                            }
+                            let index = -1;
+                            blockCategories.forEach((change, i) => {
+                                if (cat.slug == change.slug) {
+                                    index = i
+                                    blockCategories[i].count = blockCategories[i].count + 1
+                                }
+                            });
+                            if (index === -1) {
+                                blockCategories.push({ name: cat.name, slug: cat.slug, count: 1 })
+                            }
+                        })
+                    }
+                });
+
+                this.setState({
+                    loading: false,
+                    blockCategories,
+                    blockData
+                });
+
+                let node = document.querySelector('#modalContainer');
+                node.addEventListener("scroll", this._lazyload, true);
+                this._lazyload();
+
+            } else {
+                this.setState({
+                    loading: false,
+                    requestFailedMsg: response.data.message
+                });
+            }
+
+        }).catch(error => {
+            requestFailedMsg.push(error.code + ' : ' + error.message);
+            this.setState({
+                loading: false,
+                requestFailedMsg
+            });
+        });
+    }
+
     importSavedBlock(block) {
         const { insertBlocks, removeBlock, rowClientId } = this.props;
         const blocks = parse(block.post_content);
@@ -325,6 +331,10 @@ class PageListModal extends Component {
     }
 
     _onlickBlocksTab() {
+        let { blockData } = this.state;
+        if(!blockData){
+            this.getSectionsList();
+        }
         this.setState({
             itemType: 'block',
             layer: 'single',
@@ -549,7 +559,6 @@ class PageListModal extends Component {
         return out;
     }
 
-
     _OnSearchTemplate(event) {
         let { isSearchEnable } = this.state;
         isSearchEnable = event.target.value === '' ? false : true
@@ -666,8 +675,8 @@ class PageListModal extends Component {
                         </div>
 
                         <div className="qubely-template-list-header">
-                            <button className={this.state.itemType == 'block' ? 'active' : ''} onClick={e => this._onlickBlocksTab()}> {__('Sections')} </button>
                             <button className={this.state.itemType == 'layout' ? 'active' : ''} onClick={e => this._onlickLayoutsTab()}> {__('Starter Packs')} </button>
+                            <button className={this.state.itemType == 'block' ? 'active' : ''} onClick={e => this._onlickBlocksTab()}> {__('Sections')} </button>
                             <button className={this.state.itemType == 'saved_blocks' ? 'active' : ''} onClick={e => this._onlickSavedBlocksTab()}> {__('Saved')} </button>
                             <button className="qubely-builder-close-modal" onClick={e => { ModalManager.close() }} >
                                 <i className={"fas fa-times"} />

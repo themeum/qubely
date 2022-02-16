@@ -40,8 +40,7 @@ class QUBELY_Getting_Started {
 
         ?>
             <div class="qubely-gs-card-row qubely-column-3">
-                <a target="_blank" href="https://qubely.io/starter-packs/" class="qubely-gs-card qubely-gs-card-compact">
-<!--                    <span class="fab fa-facebook-f"></span>-->
+                <a target="_blank" href="https://www.themeum.com/qubely/starter-packs/" class="qubely-gs-card qubely-gs-card-compact">
                     <span>
                         <img src="<?php echo esc_url( $icon_starter ); ?>" alt="">
                     </span>
@@ -52,7 +51,7 @@ class QUBELY_Getting_Started {
                     </div>
                 </a>
 
-                <a target="_blank" href="https://qubely.io/section/" class="qubely-gs-card qubely-gs-card-compact">
+                <a target="_blank" href="https://www.themeum.com/qubely/sections/" class="qubely-gs-card qubely-gs-card-compact">
                     <span><img src="<?php echo esc_url( $icon_sections ); ?>" alt=""></span>
                     <div class="qubely-gs-card-content">
                         <h6><?php esc_html_e("Readymade Sections", 'qubely'); ?></h6>
@@ -60,7 +59,7 @@ class QUBELY_Getting_Started {
                     </div>
                 </a>
 
-                <a target="_blank" href="https://qubely.io/blocks/" class="qubely-gs-card qubely-gs-card-compact">
+                <a target="_blank" href="https://www.themeum.com/qubely/blocks/" class="qubely-gs-card qubely-gs-card-compact">
                     <span><img src="<?php echo esc_url( $icon_blocks ); ?>" alt=""></span>
                     <div class="qubely-gs-card-content">
                         <h6><?php esc_html_e( 'Blocks', 'qubely' ); ?></h6>

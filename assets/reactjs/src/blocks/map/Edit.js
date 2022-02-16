@@ -334,7 +334,7 @@ class Edit extends Component {
                 </InspectorControls>
 
                 <BlockControls>
-                    <Toolbar label={__('Map Options', 'qubely')}>
+                    <Toolbar className="components-dropdown components-dropdown-menu components-toolbar-group" label={__('Map Options', 'qubely')}>
                         <InlineToolbar
                             data={[{ name: 'InlineSpacer', key: 'spacer', responsive: true, unit: ['px', 'em', '%'] }]}
                             {...this.props}

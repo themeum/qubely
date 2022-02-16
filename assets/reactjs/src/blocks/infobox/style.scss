@@ -31,7 +31,7 @@
             font-style: normal;
             position: relative;
             display: inline-block;
-            transition: 400ms;
+            transition: color 400ms, background-color 400ms, border-color 400ms, border-width 400ms;
             object-fit: cover;
         }
 
@@ -41,6 +41,7 @@
         }
 
         &.qubely-media-has-bg {
+            display: inline-flex;
             i,
             .qubely-info-box-number {
                 min-width: 1em;

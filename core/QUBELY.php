@@ -12,8 +12,6 @@ class QUBELY_MAIN {
 
 	protected $option_keyword = 'qubely_global_options';
 
-
-
 	/**
 	 * QUBELY constructor
 	 */
@@ -301,8 +299,8 @@ class QUBELY_MAIN {
 			$blocks = $this->parse_all_blocks();
 			$contains_qubely_blocks = $this->has_blocks_with_fontawesome( $blocks );
 			if ( $contains_qubely_blocks ) {
-				wp_enqueue_style( 'qubely-font-awesome', QUBELY_DIR_URL . 'assets/css/font-awesome.min.css', false, QUBELY_VERSION );
 			}
+			wp_enqueue_style( 'qubely-font-awesome', QUBELY_DIR_URL . 'assets/css/font-awesome.min.css', false, QUBELY_VERSION );
 		}
 	}
 

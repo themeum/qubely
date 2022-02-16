@@ -55,21 +55,6 @@ class Edit extends Component {
     this.qubelyContextMenu = createRef();
   }
 
-  componentDidMount() {
-    const {
-      clientId,
-      setAttributes,
-      attributes: { uniqueId },
-    } = this.props;
-
-    const _client = clientId.substr(0, 6);
-    if (!uniqueId) {
-      setAttributes({ uniqueId: _client });
-    } else if (uniqueId && uniqueId != _client) {
-      // setAttributes({ uniqueId: _client });
-    }
-  }
-
   render() {
     const {
       name,
@@ -134,7 +119,7 @@ class Edit extends Component {
     return (
       <Fragment>
         <BlockControls>
-          <Toolbar label={__("Button Toolbar", "qubely")}>
+          <Toolbar className="components-dropdown components-dropdown-menu components-toolbar-group" label={__("Button Toolbar", "qubely")}>
             <InlineToolbar
               data={[
                 {

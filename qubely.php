@@ -53,7 +53,7 @@ if (class_exists('QUBELY_Options')){
 // Version Check & Include Core
 if (!version_compare(PHP_VERSION, '5.4', '>=')) {
     add_action('admin_notices', array('QUBELY_Initial_Setup', 'php_error_notice')); // PHP Version Check
-} elseif (!version_compare(get_bloginfo('version'), '4.5', '>=')) {
+} elseif (!version_compare(get_bloginfo('version'), '4.7', '>=')) {
     add_action('admin_notices', array('QUBELY_Initial_Setup', 'wordpress_error_notice')); // WordPress Version Check
 } else {
     require_once QUBELY_DIR_PATH . 'core/QUBELY.php';   // Loading QUBELY Blocks Main Files
@@ -73,9 +73,9 @@ function qubely_blocks_add_orderby( $params ) {
  * @since 1.0.9
  */
 function qubely_register_rest_fields() {
-   $post_type = QUBELY_MAIN::get_post_types();
+   $post_types = QUBELY_MAIN::get_post_types();
 
-   foreach ( $post_type as $key => $value ) {
+   foreach ( $post_types as $key => $value ) {
 
         // Featured image.
         register_rest_field(

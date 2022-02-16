@@ -192,18 +192,18 @@ export default function withCSSGenerator() {
         }
       }
 
-      shouldComponentUpdate(nextProps, nextState) {
-        if(nextProps.posts && JSON.stringify(nextProps.posts) !== JSON.stringify(this.props.posts) ) {
-          return true;
-        }
-        if (
-          JSON.stringify(nextProps.attributes) ===
-          JSON.stringify(this.props.attributes)
-        ) {
-          return false;
-        }
-        return true;
-      }
+      // shouldComponentUpdate(nextProps, nextState) {
+      //   if(nextProps.posts && JSON.stringify(nextProps.posts) !== JSON.stringify(this.props.posts) ) {
+      //     return true;
+      //   }
+      //   if (
+      //     JSON.stringify(nextProps.attributes) ===
+      //     JSON.stringify(this.props.attributes)
+      //   ) {
+      //     return false;
+      //   }
+      //   return true;
+      // }
 
       copyAttributes = () => {
         const {
@@ -220,8 +220,11 @@ export default function withCSSGenerator() {
       };
       render() {
         const {
+          clientId,
           attributes: { showCopyAttr },
         } = this.props;
+        let obj = this.props;
+        obj.attributes.uniqueId = clientId.substr(0, 6);
         return (
           <Fragment>
             {showCopyAttr && (
@@ -234,7 +237,7 @@ export default function withCSSGenerator() {
               </BlockControls>
             )}
             <OriginalComponent
-              {...this.props}
+              {...obj}
               {...this.state}
               setState={this.setState}
             />

@@ -56,13 +56,7 @@ class Edit extends Component {
     }
 
     componentDidMount() {
-        const { setAttributes, clientId, attributes: { uniqueId, reCaptchaSiteKey, reCaptchaSecretKey } } = this.props
-        const _client = clientId.substr(0, 6)
-        if (!uniqueId) {
-            setAttributes({ uniqueId: _client });
-        } else if (uniqueId && uniqueId != _client) {
-            // setAttributes({ uniqueId: _client });
-        }
+        const { setAttributes, attributes: {} } = this.props
 
         if (qubely_admin.qubely_recaptcha_site_key) {
             setAttributes({ reCaptchaSiteKey: qubely_admin.qubely_recaptcha_site_key });
@@ -71,7 +65,6 @@ class Edit extends Component {
         if (qubely_admin.qubely_recaptcha_secret_key) {
             setAttributes({ reCaptchaSecretKey: qubely_admin.qubely_recaptcha_secret_key });
         }
-
     }
 
     async _saveGlobally(siteKey, secretKey) {
@@ -455,7 +448,7 @@ class Edit extends Component {
                 </InspectorControls>
 
                 <BlockControls>
-                    <Toolbar label={__('Form Controls', 'qubely')}>
+                    <Toolbar className="components-dropdown components-dropdown-menu components-toolbar-group" label={__('Form Controls', 'qubely')}>
                         <InlineToolbar
                             data={[{ name: 'InlineSpacer', key: 'spacer', responsive: true, unit: ['px', 'em', '%'] }]}
                             {...this.props}

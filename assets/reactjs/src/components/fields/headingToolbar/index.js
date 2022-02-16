@@ -36,7 +36,8 @@ class HeadingToolbar extends Component {
                 icon={<HeadingLevelIcon level={selectedLevel} />}
                 controls={this.headingLevels(minLevel, maxLevel).map(
                     (index) => this.createLevelControl(index, selectedLevel, onChange)
-                )} />
+                )}
+                />
         );
     }
 }

@@ -502,7 +502,7 @@ class Edit extends Component {
                     </InspectorTabs>
                 </InspectorControls>
                 <BlockControls>
-                    <Toolbar label={__('team Options', 'qubely')}>
+                    <Toolbar className="components-dropdown components-dropdown-menu components-toolbar-group" label={__('team Options', 'qubely')}>
                         <InlineToolbar
                             data={[{ name: 'InlineSpacer', key: 'spacer', responsive: true, unit: ['px', 'em', '%'] }]}
                             {...this.props}

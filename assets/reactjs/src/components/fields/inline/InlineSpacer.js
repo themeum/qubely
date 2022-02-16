@@ -24,7 +24,7 @@ class InlineSpacer extends Component {
 				renderToggle={({ isOpen, onToggle }) => (
 					<Tooltip text={__('Spacer')}>
 						<button onClick={onToggle} aria-expanded={isOpen}>
-							<i className="fas fa-arrows-alt-v" />
+							<i className="fas fa-arrows-alt-v" area-hidden="true" />
 						</button>
 					</Tooltip>
 				)}

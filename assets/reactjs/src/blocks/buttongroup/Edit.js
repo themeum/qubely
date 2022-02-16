@@ -29,23 +29,6 @@ class Edit extends Component {
             device: 'md'
         }
     }
-    componentDidMount() {
-        const {
-            clientId,
-            setAttributes,
-            attributes: {
-                uniqueId
-            }
-        } = this.props;
-
-        const _client = clientId.substr(0, 6);
-
-        if (!uniqueId) {
-            setAttributes({ uniqueId: _client });
-        } else if (uniqueId && uniqueId != _client) {
-            // setAttributes({ uniqueId: _client });
-        }
-    }
 
     render() {
         const {
