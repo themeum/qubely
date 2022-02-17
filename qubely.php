@@ -4,7 +4,7 @@
  * Plugin URI:        https://www.themeum.com/
  * Description:       The one and only Gutenberg block plugin you will ever need.
  * Version: 		  1.7.9
- * Author:            Themeum.com
+ * Author:            Themeum
  * Author URI:        https://www.themeum.com/
  * Text Domain:       qubely
  * Requires at least: 5.0
