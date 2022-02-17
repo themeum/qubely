@@ -17,9 +17,9 @@ class QUBELY_Getting_Started {
     public function mini_cards() {
 
         // @TODO: Fetech data dynamically with one request if possible
-	    $block = 35;
-	    $sections = 150;
-	    $layouts = 25;
+	    $block = 39;
+	    $sections = 160;
+	    $layouts = 44;
 
         $icon_blocks = QUBELY_DIR_URL . 'assets/img/admin/blocks.svg';
         $icon_sections = QUBELY_DIR_URL . 'assets/img/admin/sections.svg';
@@ -93,9 +93,9 @@ class QUBELY_Getting_Started {
             <div class="qubely-getting-started">
                 <div class="qubely-gs-card qubely-gs-header" style="background-image: url(<?php echo $logo ?>)">
                     <h2>
-                        <?php echo esc_html( 'Qubely - ' . QUBELY_VERSION ); ?>
+                        <?php echo esc_html( 'Qubely' ); ?>
                     </h2>
-                    <h3><?php esc_html_e( 'Full-Fledged Gutenberg Toolkit', 'qubely' ); ?></h3>
+                    <h3><?php esc_html_e( 'Advanced Gutenberg Blocks', 'qubely' ); ?></h3>
                     <div class="qubely-gs-button-group">
                         <a class="qubely-gs-button primary button-lg" href="<?php echo esc_url( admin_url( 'post-new.php?post_type=page' ) ) ?>"><?php esc_html_e( 'Start creating page', 'qubely' ); ?></a>
                         <a target="_blank" class="qubely-gs-button link button-lg" href="https://docs.themeum.com/qubely/">

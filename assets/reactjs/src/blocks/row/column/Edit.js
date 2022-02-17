@@ -2,7 +2,7 @@ import InspectorTabs from "../../../components/InspectorTabs";
 
 const { __ } = wp.i18n;
 const { PanelBody, Toolbar, ResizableBox, IconButton } = wp.components;
-const { Component, Fragment } = wp.element;
+const { Component, Fragment, createRef } = wp.element;
 const { InnerBlocks, InspectorControls, BlockControls } = wp.blockEditor;
 const { createBlock } = wp.blocks;
 const { select, dispatch } = wp.data;
@@ -22,6 +22,7 @@ const {
 } = wp.qubelyComponents;
 
 $ = jQuery;
+
 class Edit extends Component {
 	constructor() {
 		super(...arguments);
@@ -39,6 +40,7 @@ class Edit extends Component {
 			responsiveDevice: "md",
 			colWidthMax: 85,
 		};
+		this.finalResizeValue = createRef();
 	}
 
 	componentDidMount() {
@@ -111,15 +113,20 @@ class Edit extends Component {
 			maxResizeWidth = resizePrevColWidth + resizeCurrenColWidth;
 		}
 		// Every time select resize hanlder set the width
-		setAttributes({ colWidth });
-		const clmRect = document.getElementById(`block-${clientId}`).getBoundingClientRect();
+		// setAttributes({ colWidth });
+		let ele = document.getElementById(`block-${clientId}`);
+		let clmRect = {};
+		if (ele) {
+			clmRect = ele.getBoundingClientRect();
+		}
+
 		this.setState({
 			colWidth: colWidth,
 			prevColWidth,
 			nextColWidth,
 			maxResizeWidth,
 			resizing: true,
-			absWidth: clmRect.width,
+			absWidth: clmRect.width || 0,
 		});
 	}
 
@@ -166,16 +173,18 @@ class Edit extends Component {
 			}
 		}
 		currentcolumnId.find(".components-resizable-box__container").css({ width: "auto" });
+
 		if (nextBlockWidth > 10 && calWidth > 10) {
 			currentcolumnId.css({ width: calWidth.toFixed(2) + "%" });
-			setAttributes({ colWidth: { ...colWidth, md: calWidth.toFixed(2) } });
+			this.finalResizeValue.current = { colWidth: { ...colWidth, md: calWidth.toFixed(2) } };
 		}
 	}
 
 	onResizeStop(event, direction, elt, delta) {
-		const { toggleSelection } = this.props;
+		const { toggleSelection, setAttributes } = this.props;
 		toggleSelection(true);
 		this.setState({ resizing: false });
+		setAttributes(this.finalResizeValue.current);
 	}
 
 	/**
@@ -294,7 +303,10 @@ class Edit extends Component {
 	}
 
 	componentWillReceiveProps(nextProps) {
-		document.getElementById("block-" + this.props.clientId).style.alignSelf = nextProps.attributes.position;
+		let ele = document.getElementById("block-" + this.props.clientId);
+		if (ele) {
+			ele.style.alignSelf = nextProps.attributes.position;
+		}
 	}
 
 	render() {

@@ -72,6 +72,7 @@ class Edit extends Component {
 		};
 		this.qubelyContextMenu = createRef();
 	}
+
 	componentDidMount() {
 		const {
 			setAttributes,
