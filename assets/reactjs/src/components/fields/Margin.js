@@ -71,8 +71,9 @@ class Margin extends Component {
             <div className={"qubely-field-margin qubely-field" + (responsive ? ' qubely-responsive' : '')}>
                 {unit &&
                     <div className="qubely-unit-btn-group qubely-d-block qubely-text-right">
-                        {(typeof unit == 'object' ? unit : ['px', 'em', '%']).map(unitName => (
+                        {(typeof unit == 'object' ? unit : ['px', 'em', '%']).map((unitName, i) => (
                             <button
+                                key={i}
                                 className={(value.unit ? unitName == value.unit : unitName == defaultUnit) ? 'active' : ''}
                                 onClick={() => this.updateUnit(unitName)}>
                                 {unitName}
@@ -89,7 +90,7 @@ class Margin extends Component {
                         {
                             [['global', __('Global')], ['custom', __('Custom')]].map((data, index) => {
                                 return (
-                                    <Tooltip text={data[1]}>
+                                    <Tooltip key={index} text={data[1]}>
                                         <button className={((value.marginType ? value.marginType == data[0] : defaultMarginType == data[0]) ? 'active' : '') + ' qubely-button'} key={index} onClick={() => this.updateMarginType(data[0])}>
                                             {data[0] == 'global' ?
                                                 <svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M15.971 15.059v.941h-16v-16h16v15.058zm-1.882-.941v-12.235h-12.235v12.235h12.235z" className="qubely-svg-fill" /></svg>
@@ -122,7 +123,7 @@ class Margin extends Component {
                             {
                                 iterator.map((item, index) => {
                                     return (
-                                        <div className="qubely-d-flex qubely-align-center qubely-mb-20">
+                                        <div key={index} className="qubely-d-flex qubely-align-center qubely-mb-20">
                                             <div className="qubely-mr-15">
                                                 {icons.spacing[item]}
                                             </div>

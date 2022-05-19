@@ -236,7 +236,7 @@ class Edit extends Component {
 
                 <BlockControls>
                     <InlineSelector options={[['p', 'Paragraph'], ['span', 'span'], ['div', 'div']]} selector={selector} setAttributes={setAttributes} />
-                    <Toolbar>
+                    <Toolbar label={__('Text Options', 'qubely')}>
                         <InlineToolbar
                             data={[{ name: 'InlineSpacer', key: 'spacer', responsive: true, unit: ['px', 'em', '%'] }]}
                             {...this.props}

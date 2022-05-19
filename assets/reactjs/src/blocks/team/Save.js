@@ -17,7 +17,7 @@ class Save extends Component {
 				<div className={`qubely-block-team ${interactionClass} qubely-team-layout-${layout}`}>
 					<div className="qubely-team-image-wrapper">
 						{(imageType === 'local' && image.url != undefined) ?
-							<img className="qubely-team-image" src={image.url} srcset={image2x.url != undefined ? image.url + ' 1x, ' + image2x.url + ' 2x' : ''} alt={name} />
+							<img className="qubely-team-image" src={image.url} srcSet={image2x.url != undefined ? image.url + ' 1x, ' + image2x.url + ' 2x' : ''} alt={name} />
 							:
 							(imageType === 'external' && externalImageUrl.url != undefined) ?
 								<img className="qubely-team-image" src={externalImageUrl.url} alt={name} />

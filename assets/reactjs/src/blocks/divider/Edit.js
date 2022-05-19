@@ -48,6 +48,7 @@ class Edit extends Component {
                 <ul>
                     {dividerOptions.map((item, index) => (
                         <li
+                            key={index}
                             className={`qubely-divider-picker-option ${index}`}
                             onClick={() => { setAttributes({ style: item }) }}>
                             {icons[item]}
@@ -155,7 +156,7 @@ class Edit extends Component {
                 </InspectorControls >
 
                 <BlockControls>
-                    <Toolbar>
+                    <Toolbar label={__('Divider Options', 'qubely')}>
                         <InlineToolbar
                             data={[{ name: 'InlineSpacer', key: 'spacer', responsive: true, unit: ['px', 'em', '%'] }]}
                             {...this.props}

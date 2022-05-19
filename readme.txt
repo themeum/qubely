@@ -1,15 +1,15 @@
-=== Gutenberg Blocks and Page Builder – Qubely ===
+=== Qubely - Advanced Gutenberg Blocks ===
 Contributors: themeum
 Donate link: https://www.themeum.com
 Tags: blocks, gutenberg, gutenberg blocks, editor, block, page builder
 Requires at least: 5.0
 Tested up to: 5.8
-Stable tag: 1.7.1
+Stable tag: 1.7.3
 Requires PHP: 7.0
 License: GPL-2.0+
 License URI: http://www.gnu.org/licenses/gpl-2.0.txt
 
-Gutenberg Blocks and readymade sections with rich customization options. Enhance Gutenberg editor with easy UI and functional blocks.
+Readymade gutenberg blocks and sections with rich customization options. Enhance Gutenberg editor with easy UI and functional blocks.
 
 == Description ==
 
@@ -239,6 +239,16 @@ You can report bugs on the [support forum here](https://wordpress.org/support/pl
 
 
 == Changelog ==
+
+= 1.7.3 - 3 November, 2021 =
+Fix: Security Update
+Fix: Tab Block Image Jumping Issue
+
+= 1.7.2 - 23 August, 2021 =
+Fix: Tab Block not Working issue
+Fix: Multiple Pie Progress not Working issue
+Fix: Contact Form Block not Working issue
+Fix: In Row Column, Advanced Background Settings Width CSS issue
 
 = 1.7.1 - 16 July = 
 Update: Added WordPress 5.8 Compatibility  

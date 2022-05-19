@@ -31,7 +31,7 @@ class ColorAdvanced extends Component {
                         {
                             ['color', 'gradient'].map((data, index) => {
                                 return (
-                                    <button className={((value && (value.type == data && value.openColor)) ? 'active' : '') + ' qubely-button'} onClick={() => this.setSettings(data, 'type')}>
+                                    <button key={index} className={((value && (value.type == data && value.openColor)) ? 'active' : '') + ' qubely-button'} onClick={() => this.setSettings(data, 'type')}>
                                         {data == 'color' &&
                                             <Tooltip text={__('Color')}>
                                                 <svg width="17" height="18" viewBox="0 0 17 18" xmlns="http://www.w3.org/2000/svg"><path d="M.964 15.047c0 1.091.835 1.983 1.856 1.983 1.021 0 1.856-.892 1.856-1.983 0-1.091-1.856-3.966-1.856-3.966s-1.856 2.875-1.856 3.966zm14.909-7.84l-4.362-4.371c-.291-.292-.639-.489-1.009-.593l.683-.683c.234-.235.233-.611.001-.843-.234-.234-.609-.231-.842.002l-2.831 2.836-.03.033-3.613 3.619c-.906.908-.905 2.378 0 3.284l4.362 4.371c.906.908 2.373.907 3.278 0l4.362-4.371c.906-.908.905-2.378 0-3.284zm-11.494 1.664c0-.289.111-.579.332-.801l4.362-4.37c.442-.443 1.156-.443 1.599 0l4.362 4.37c.221.222.332.511.332.801h-10.986z" className="qubely-svg-fill" fill-rule="nonzero" /></svg>

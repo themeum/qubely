@@ -46,7 +46,7 @@ class IconList extends Component {
                     <div className="qubely-icon-list-wrapper">
                         <input type="text" value={this.state.filterText} placeholder="Search..." onChange={e => this.setState({ filterText: e.target.value })} autoComplete="off" />
                         <div className="qubely-icon-list-icons">
-                            {finalData.map(name => { return (<span className={value == name ? 'qubely-active' : ''} onClick={e => { this.props.onChange(name) }}><span className={name} /></span>) })}
+                            {finalData.map((name, i) => { return (<span key={i} className={value == name ? 'qubely-active' : ''} onClick={e => { this.props.onChange(name) }}><span className={name} /></span>) })}
                         </div>
                     </div>
                 }

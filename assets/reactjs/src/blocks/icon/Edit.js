@@ -262,7 +262,7 @@ class Edit extends Component {
 				</InspectorControls>
 
 				<BlockControls>
-					<Toolbar>
+					<Toolbar label={__('Icon Options', 'qubely')}>
 						<InlineToolbar
 							data={[{ name: 'InlineSpacer', key: 'spacer', responsive: true, unit: ['px', 'em', '%'] }]}
 							{...this.props}

@@ -10,10 +10,11 @@ class Styles extends Component {
             <div className="qubely-field qubely-field-styles">
                 {label && <label>{label}</label>}
                 <div className={`qubely-field-style-list qubely-field-style-columns-${columns}`}>
-                    {options.map(data =>
+                    {options.map((data, i) =>
                         (
                             <div
-                                role="button" tabindex="0" aria-label={data.label ? data.label : ''}
+                                key={i}
+                                role="button" tabIndex="0" aria-label={data.label ? data.label : ''}
                                 {...(!data.pro && { onClick: () => onChange(data.value) })}
                                 className={`${value == data.value ? 'qubely-active' : ''}${data.pro ? ' qubely-pro-layout' : ''}`}
                             >

@@ -4,6 +4,7 @@ import Color from "./Color";
 import Select from './Select';
 import Gradient from './Gradient';
 import ButtonGroup from "./ButtonGroup";
+import classnames from 'classnames';
 const { __ } = wp.i18n;
 const { Component, Fragment } = wp.element;
 const { Tooltip, TextControl, Dropdown } = wp.components;
@@ -71,7 +72,7 @@ class Background extends Component {
                         {
                             this.props.sources.map((data, index) => {
                                 return (
-                                    <button className={((value.bgType == data && value.openBg) ? 'active' : '') + ' qubely-button'} onClick={() => this.setSettings(data, 'bgType')}>
+                                    <button key={index} className={((value.bgType == data && value.openBg) ? 'active' : '') + ' qubely-button'} onClick={() => this.setSettings(data, 'bgType')}>
                                         {data == 'image' &&
                                             <Tooltip text={__('Image')}>
                                                 <svg width="18" height="15" viewBox="0 0 18 15" xmlns="http://www.w3.org/2000/svg"><path d="M16.083.263h-14.446c-.798 0-1.445.648-1.445 1.447v11.579c0 .8.646 1.447 1.445 1.447h14.446c.798 0 1.445-.648 1.445-1.447v-11.579c0-.8-.646-1.447-1.445-1.447zm-4.334 2.171c2.389 0 2.386 3.618 0 3.618-2.385 0-2.39-3.618 0-3.618zm-9.39 10.855l4.334-5.789 2.965 3.961 2.091-2.514 3.611 4.342h-13.001z" className="qubely-svg-fill" fill-rule="nonzero" /></svg>
@@ -161,14 +162,14 @@ class Background extends Component {
                                         <div className="qubely-d-flex qubely-align-center">
                                             <label>{__('Advanced')} {fieldLabel}</label>
                                             <div className="qubely-field-button-list qubely-ml-auto">
-                                                <button className={(isOpen == 1 ? 'active' : '') + ' qubely-button qubely-button-rounded'} onClick={onToggle} aria-expanded={isOpen}>
+                                                <button className={classnames('qubely-button', 'qubely-button-rounded', 'advanced-background-trigger', { 'active': isOpen })} onClick={onToggle} aria-expanded={isOpen}>
                                                     <i className="fas fa-cog" />
                                                 </button>
                                             </div>
                                         </div>
                                     )}
                                     renderContent={() => (
-                                        <div style={{ padding: '15px' }}>
+                                        <div className="advanced-background-settings">
                                             <Fragment>
                                                 {!this.props.position &&
                                                     <Select label={fieldLabel + ' ' + __('Position')} value={value.bgimgPosition} options={control.position} onChange={(val) => this.setSettings(val, 'bgimgPosition')} />

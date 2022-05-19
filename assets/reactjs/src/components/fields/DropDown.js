@@ -57,7 +57,7 @@ export default function ({ label, enableSearch, defaultOptionsLabel, value, opti
     const renderSelectedOptions = () => {
         return (value.map(({ label }, index) => {
             return (
-                <span className="qubely-dropdown-selected-value">
+                <span key={index} className="qubely-dropdown-selected-value">
                     <span className="qubely-selected-value-label" role="option" aria-selected="true">   {label}  </span>
                     <span className="qubely-selected-value-icon" aria-hidden="true"
                         onClick={() => {
@@ -112,7 +112,7 @@ export default function ({ label, enableSearch, defaultOptionsLabel, value, opti
                         {options.length > 0 ?
                             getAvaiableOptions().filter(option => !filteredText ? true : option.label.toLowerCase().search(filteredText.toLowerCase()) !== -1).map((option, index) => {
                                 return (
-                                    <div className={`qubely-dropdown-option`}
+                                    <div key={index} className={`qubely-dropdown-option`}
                                         id={`qubely-dropdown-option-${index + 1}`}
                                         onClick={() => {
                                             toggleOptions(false)

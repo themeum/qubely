@@ -14,7 +14,7 @@ class Headings extends Component {
 					{
 						[1, 2, 3, 4, 5, 6].map((data, index) => {
 							return (
-								<button className={(selectedLevel == data ? 'active' : '') + ' qubely-button'} onClick={() => onChange(data)}>
+								<button key={index} className={(selectedLevel == data ? 'active' : '') + ' qubely-button'} onClick={() => onChange(data)}>
 									{icons['h' + data]}
 								</button>
 							)

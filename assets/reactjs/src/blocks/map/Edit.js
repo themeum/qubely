@@ -270,7 +270,7 @@ class Edit extends Component {
                                     <div style={{ overflow: 'auto' }}>
                                         {mapStyles.map((option, index) => {
                                             return (
-                                                <div className={(selectedStyle == option.value) ? 'qubely-map-style qubely-map-style-active' : 'qubely-map-style'}>
+                                                <div key={index} className={(selectedStyle == option.value) ? 'qubely-map-style qubely-map-style-active' : 'qubely-map-style'}>
                                                     <img
                                                         key={index}
                                                         onClick={() => {
@@ -334,7 +334,7 @@ class Edit extends Component {
                 </InspectorControls>
 
                 <BlockControls>
-                    <Toolbar>
+                    <Toolbar label={__('Map Options', 'qubely')}>
                         <InlineToolbar
                             data={[{ name: 'InlineSpacer', key: 'spacer', responsive: true, unit: ['px', 'em', '%'] }]}
                             {...this.props}

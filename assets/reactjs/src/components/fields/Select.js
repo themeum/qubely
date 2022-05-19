@@ -45,8 +45,8 @@ class Select extends Component {
                             {(this.props.noValue || this.props.clear) &&
                                 <option value="">{this.props.noValue || this.props.initial ? this.props.initial : __('Select')}</option>
                             }
-                            {this.props.options.map(item =>
-                                <option value={Array.isArray(item) ? item[0] : item} onClick={() => this.setSettings(Array.isArray(item) ? item[0] : item)}>{Array.isArray(item) ? item[1] : item}</option>
+                            {this.props.options.map((item, i) =>
+                                <option key={i} value={Array.isArray(item) ? item[0] : item} onClick={() => this.setSettings(Array.isArray(item) ? item[0] : item)}>{Array.isArray(item) ? item[1] : item}</option>
                             )}
                         </select>
                     </div>

@@ -148,8 +148,8 @@ const Sections = (props) => {
                     </button>
                 </Tooltip>
                 {
-                    sections.map(section => (
-                        <div className='qubely-block-section'>
+                    sections.map((section, i) => (
+                        <div key={i} className='qubely-block-section'>
                             <img width='330' height='230' loading='lazy' src={section.image} alt={section.name} />
                             <div className="qubely-block-section-btns">
                                 <button onClick={() => _insertSection(section.ID)}>{__('Import')}</button>

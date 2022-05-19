@@ -16,7 +16,9 @@ jQuery(function ($) {
         $form.submit((e) => {
             e.preventDefault();
             let formData = $form.serializeArray();
-             formData = formData.map(({ name, value }) => {
+            // Add security nonce.
+            formData.push( { name: 'security', value: qubely_urls.nonce} );
+            formData = formData.map(({ name, value }) => {
                 if (name === "qubely-form-input[message*]") {
                     let temp = value.replace(/(?:\r\n|\r|\n)/g, '<br>');
                     return ({ name, value: temp })

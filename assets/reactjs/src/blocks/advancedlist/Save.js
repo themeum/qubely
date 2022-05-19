@@ -5,7 +5,7 @@ class Save extends Component {
     renderListItems = () => {
         const { attributes: { listItems } } = this.props
 
-        return listItems.map(item => <li>{item}</li>)
+        return listItems.map((item, i) => <li key={i}>{item}</li>)
 
     }
     render() {

@@ -193,16 +193,16 @@ class Edit extends Component {
 						</Button>
 						<div className="qubely-row-preset-title">{__('Select Column Layout')}</div>
 						<div className="qubely-row-preset-group">
-							{colOption.map((data) => (
-								<Tooltip text={data.label}>
+							{colOption.map((data, i) => (
+								<Tooltip key={i} text={data.label}>
 									<button
 										onClick={() => {
 											setAttributes({ columns: data.columns });
 											defaultLayout = data.layout;
 										}}
 									>
-										{data.layout.md.map((d) => (
-											<i style={{ width: d + '%' }} />
+										{data.layout.md.map((d, index) => (
+											<i key={index} style={{ width: d + '%' }} />
 										))}
 									</button>
 								</Tooltip>

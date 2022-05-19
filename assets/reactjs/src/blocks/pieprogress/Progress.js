@@ -90,14 +90,14 @@ const Progress = (props) => {
                     progressShadow.openShadow === true && (
                         progressShadow.inset !== 'inset' ? (
                             <filter id={`progress-shadow-${uniqueId}`} width="500%" height="500%" x="-250%" y="-250%">
-                                <feDropShadow dx={progressShadow.vertical * -1} dy={progressShadow.horizontal} stdDeviation={progressShadow.blur} flood-color={progressShadow.color} flood-opacity="1" />
+                                <feDropShadow dx={progressShadow.vertical * -1} dy={progressShadow.horizontal} stdDeviation={progressShadow.blur} floodColor={progressShadow.color} floodOpacity="1" />
                             </filter>
                         ) : (
                             <filter id={`progress-shadow-${uniqueId}`} width="500%" height="500%" x="-250%" y="-250%">
                                 <feOffset dx={progressShadow.vertical * -1} dy={progressShadow.horizontal} />
                                 <feGaussianBlur stdDeviation={progressShadow.blur} />
                                 <feComposite operator="out" in="SourceGraphic" result="inverse"/>
-                                <feFlood flood-color={progressShadow.color} flood-opacity="1" result="color"/>
+                                <feFlood floodColor={progressShadow.color} floodOpacity="1" result="color"/>
                                 <feComposite operator="in" in="color" in2="inverse" result="shadow"/>
                                 <feComposite operator="over" in="shadow" in2="SourceGraphic"/>
                             </filter>
@@ -112,14 +112,14 @@ const Progress = (props) => {
                     circleShadow.openShadow === true && (
                         circleShadow.inset !== 'inset' ? (
                             <filter id={`circle-shadow-${uniqueId}`} width="500%" height="500%" x="-250%" y="-250%">
-                                <feDropShadow dx={circleShadow.vertical * -1} dy={circleShadow.horizontal} stdDeviation={circleShadow.blur} flood-color={circleShadow.color} flood-opacity="1" />
+                                <feDropShadow dx={circleShadow.vertical * -1} dy={circleShadow.horizontal} stdDeviation={circleShadow.blur} floodColor={circleShadow.color} floodOpacity="1" />
                             </filter>
                         ) : (
                             <filter id={`circle-shadow-${uniqueId}`} width="500%" height="500%" x="-250%" y="-250%">
                                 <feOffset dx={circleShadow.vertical * -1} dy={circleShadow.horizontal} />
                                 <feGaussianBlur stdDeviation={circleShadow.blur} />
                                 <feComposite operator="out" in="SourceGraphic" result="inverse"/>
-                                <feFlood flood-color={circleShadow.color} flood-opacity="1" result="color"/>
+                                <feFlood floodColor={circleShadow.color} floodOpacity="1" result="color"/>
                                 <feComposite operator="in" in="color" in2="inverse" result="shadow"/>
                                 <feComposite operator="over" in="shadow" in2="SourceGraphic"/>
                             </filter>
@@ -130,13 +130,13 @@ const Progress = (props) => {
                     fill.type !== 'color' && (
                         fill.gradient.type == 'radial' ? (
                             <radialGradient id={`qgrd-${uniqueId}`} fx="50%" fy="50%" cx="50%" cy="50%" r={`${radialPercent}%`} spreadMethod="reflect">
-                                <stop offset={`${fill.gradient.start || 0}%`} stop-color={fill.gradient.color1} />
-                                <stop offset={`${fill.gradient.stop || 100}%`} stop-color={fill.gradient.color2} />
+                                <stop offset={`${fill.gradient.start || 0}%`} stopColor={fill.gradient.color1} />
+                                <stop offset={`${fill.gradient.stop || 100}%`} stopColor={fill.gradient.color2} />
                             </radialGradient>
                         ) : (
                             <linearGradient id={`qgrd-${uniqueId}`} x1="0%" y1="0%" x2="0%" y2="100%" gradientTransform={`rotate(${fill.gradient.direction - 90 || 0}, .5, .5)`}>
-                                <stop offset={`${fill.gradient.start || 0}%`} stop-color={fill.gradient.color1} />
-                                <stop offset={`${fill.gradient.stop || 100}%`} stop-color={fill.gradient.color2} />
+                                <stop offset={`${fill.gradient.start || 0}%`} stopColor={fill.gradient.color1} />
+                                <stop offset={`${fill.gradient.stop || 100}%`} stopColor={fill.gradient.color2} />
                             </linearGradient>
                         )
                     )
@@ -149,7 +149,7 @@ const Progress = (props) => {
                     cy={size}
                     r={circleRadiusBg - circleShrink}
                     stroke={emptyFill}
-                    stroke-width={thicknessBg}
+                    strokeWidth={thicknessBg}
                     fill={layout !== 'outline' ? emptyFill : 'none'}
                 />
 
@@ -160,11 +160,11 @@ const Progress = (props) => {
                     cx={size}
                     cy={size}
                     r={circleRadiusFg}
-                    stroke-dasharray={circumference}
-                    stroke-dashoffset={isSaveMode === true ? circumference : circumference - offset}
+                    strokeDasharray={circumference}
+                    strokeDashoffset={isSaveMode === true ? circumference : circumference - offset}
                     data-dashoffset={circumference - offset}
-                    stroke-width={thickness}
-                    stroke-linecap={corner}
+                    strokeWidth={thickness}
+                    strokeLinecap={corner}
                     fill="none"
                     data-transition={`stroke-dashoffset ${isSaveMode === true ? duration : 0}ms linear`}
                     data-transition-duration={isSaveMode === true ? duration : 0}

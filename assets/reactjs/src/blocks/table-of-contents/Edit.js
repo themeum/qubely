@@ -183,7 +183,7 @@ class Edit extends Component {
                         controls={['left', 'center', 'right']}
                         onChange={value => setAttributes({ align: value })}
                     />*/}
-                    <Toolbar controls={
+                    <Toolbar label={__('Table of Content Options', 'qubely')} controls={
                         [{
                             icon: 'editor-ul',
                             title: 'Convert to unordered list',

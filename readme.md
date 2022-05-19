@@ -1,4 +1,4 @@
-# Gutenberg Blocks and Page Builder – Qubely
+# Qubely - Advanced Gutenberg Blocks
 
 [![WordPress plugin](https://img.shields.io/wordpress/plugin/v/qubely.svg)](https://wordpress.org/plugins/qubely/)
 [![WordPress](https://img.shields.io/wordpress/v/qubely.svg)](https://wordpress.org/plugins/qubely/)
@@ -8,7 +8,7 @@
 
 [Qubely](https://wordpress.org/plugins/qubely/) is a full-fledged Gutenberg toolkit with plenty of predefined sections and modern layout packs to create beautiful pages and posts on the Gutenberg editor. It offers a whole new experience that minimizes all limitations of the Gutenberg editor and opens unlimited possibilities to create any simple to complex content on a WordPress website. This user-friendly tool has been developed with all necessary customization features to achieve any possible layout.
 
-[![Gutenberg Blocks and Page Builder – Qubely ](https://ps.w.org/qubely/assets/banner-1544x500.png?rev=2111259)](http://www.youtube.com/watch?v=_aRAQkHZiUQ)
+[![Qubely - Advanced Gutenberg Blocks](https://ps.w.org/qubely/assets/banner-1544x500.png?rev=2111259)](http://www.youtube.com/watch?v=_aRAQkHZiUQ)
 
 ## Qubely core features at a glance
 
@@ -99,33 +99,9 @@ The WordPress codex contains [instructions on how to do this here](https://codex
 - Under root folder, install dependencies `npm install`
 - run `gulp`, new file `qubely.zip` should appear
 
-## Support
-
-You can get support by posting on the support section of this plugin on the WordPress plugin directory, or on the Themeum support forums: https://www.themeum.com/support/ 🙂
-
-## [Qubely Pro Blocks](https://www.themeum.com/product/qubely)
-
-<table>
-
-<tr>
-
-<td align="center">
-<img src="https://www.themeum.com/wp-content/uploads/2019/10/block-form.svg" alt="form" height="40px" >
-<h4>Form Builder</h4>
-Create functional Form using Qubely Form block
-</td>
-
-<td align="center">
-<img src="https://www.themeum.com/wp-content/uploads/2019/10/block-gallery.svg" alt="gallery" height="40px" >
-<h4>Gallery</h4>
-Display blog posts beautifully in grid or list views
-</td>
-
-<td align="center">
 <img src="https://www.themeum.com/wp-content/uploads/2019/09/post-grid-block.svg" alt="post-grid" height="40px" >
 <h4>Post Grid</h4>
 Showcase detailed with Qubely Gallery
-</td>
 </tr>
 
 <tr>
@@ -191,7 +167,5 @@ Showcase detailed Price List
 <h4>Vertical Tabs</h4>
 Showcase features in Beautiful pre-designed tabs 
 </td>
-
 </tr>
-
 </table>

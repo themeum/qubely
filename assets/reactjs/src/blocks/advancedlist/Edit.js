@@ -154,7 +154,7 @@ class Edit extends Component {
                 <ListTag className={`qubely-list qubely-list-type-${listType} qubely-list-bullet-${bulletStyle.name}`}>
                     {listItems.map((item, index) => {
                         return (
-                            <li className={`qubely-list-item`}  >
+                            <li key={index} className={`qubely-list-item`}  >
                                 {item.length > 0 && alignment == 'right' && this.renderDeleteOption(index, alignment)}
                                 <div
                                     className={`qubely-list-item-text-${index}`}
@@ -417,13 +417,14 @@ class Edit extends Component {
                 </InspectorControls>
 
                 <BlockControls>
-                    <Toolbar>
+                    <Toolbar label={__('Advanced List Options', 'qubely')}>
                         <InlineToolbar
                             data={[{ name: 'InlineSpacer', key: 'spacer', responsive: true, unit: ['px', 'em', '%'] }]}
                             {...this.props}
                             prevState={this.state} />
                     </Toolbar>
                     <Toolbar
+                        label={__('Unordered List Options', 'qubely')}
                         controls={
                             [
                                 {

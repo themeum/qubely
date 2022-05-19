@@ -93,7 +93,7 @@ class Border extends Component {
                         {
                             [['solid', __('Solid')], ['dotted', __('Dotted')], ['dashed', __('Dashed')], ['double', __('Double')]].map((data, index) => {
                                 return (
-                                    <Tooltip text={data[1]}>
+                                    <Tooltip text={data[1]} key={index}>
                                         <button className={(value.type == data[0] ? 'active' : '') + ' qubely-button'} key={index} onClick={() => this.setSettings('type', data[0])}>
                                             <span className={`qubely-field-border-type qubely-field-border-type-${data[0]}`} />
                                         </button>

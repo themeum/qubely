@@ -399,7 +399,7 @@ class Edit extends Component {
                 </InspectorControls>
 
                 <BlockControls>
-                    <Toolbar>
+                    <Toolbar label={__('Column Options', 'qubely')}>
                         {columns < 6 &&
                             <IconButton
                                 className="components-icon-button components-toolbar__control"

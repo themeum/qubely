@@ -302,7 +302,7 @@ class Edit extends Component {
                 </InspectorControls>
 
                 <BlockControls>
-                    <Toolbar>
+                    <Toolbar label={__('Image Options', 'qubely')}>
                         <InlineToolbar
                             data={[{ name: 'InlineSpacer', key: 'spacer', responsive: true, unit: ['px', 'em', '%'] }]}
                             {...this.props}
@@ -326,7 +326,7 @@ class Edit extends Component {
                                         (imageType === 'local' && image.url != undefined) ?
                                             <Fragment>
                                                 {image2x.url != undefined ?
-                                                    <img className="qubely-image-image" src={image.url} srcset={image.url + ' 1x, ' + image2x.url + ' 2x'} alt={imgAlt && imgAlt} />
+                                                    <img className="qubely-image-image" src={image.url} srcSet={image.url + ' 1x, ' + image2x.url + ' 2x'} alt={imgAlt && imgAlt} />
                                                     :
                                                     <img className="qubely-image-image" src={image.url} alt={imgAlt && imgAlt} />
                                                 }
