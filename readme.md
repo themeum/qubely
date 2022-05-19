@@ -1,77 +1,74 @@
-#  Gutenberg Blocks and Page Builder – Qubely  
+# Gutenberg Blocks and Page Builder – Qubely
 
 [![WordPress plugin](https://img.shields.io/wordpress/plugin/v/qubely.svg)](https://wordpress.org/plugins/qubely/)
 [![WordPress](https://img.shields.io/wordpress/v/qubely.svg)](https://wordpress.org/plugins/qubely/)
 [![WordPress rating](https://img.shields.io/wordpress/plugin/r/qubely.svg)](https://wordpress.org/support/plugin/qubely/reviews/)
 [![WordPress](https://img.shields.io/wordpress/plugin/dt/qubely.svg)](https://wordpress.org/plugins/qubely/advanced/)
-[![Wordpress Plugin Active Installs](https://img.shields.io/wordpress/plugin/installs/qubely.svg)](https://wordpress.org/plugins/qubely/) 
+[![Wordpress Plugin Active Installs](https://img.shields.io/wordpress/plugin/installs/qubely.svg)](https://wordpress.org/plugins/qubely/)
 
 [Qubely](https://wordpress.org/plugins/qubely/) is a full-fledged Gutenberg toolkit with plenty of predefined sections and modern layout packs to create beautiful pages and posts on the Gutenberg editor. It offers a whole new experience that minimizes all limitations of the Gutenberg editor and opens unlimited possibilities to create any simple to complex content on a WordPress website. This user-friendly tool has been developed with all necessary customization features to achieve any possible layout.
-
-
 
 [![Gutenberg Blocks and Page Builder – Qubely ](https://ps.w.org/qubely/assets/banner-1544x500.png?rev=2111259)](http://www.youtube.com/watch?v=_aRAQkHZiUQ)
 
 ## Qubely core features at a glance
 
-* Predefined sections
-* Modern layout packs
-* Highly customizable row columns
-* Row video background & blend mode
-* Drag column resizing
-* Shape divider/builder
-* Device specific responsive controls
-* Unlimited Google web fonts & system fonts
-* Classic & gradient color and background
-* Built-in animation
-* Box-shadow
-* Font Awesome 5 Icons and line icons
-* Custom CSS
+- Predefined sections
+- Modern layout packs
+- Highly customizable row columns
+- Row video background & blend mode
+- Drag column resizing
+- Shape divider/builder
+- Device specific responsive controls
+- Unlimited Google web fonts & system fonts
+- Classic & gradient color and background
+- Built-in animation
+- Box-shadow
+- Font Awesome 5 Icons and line icons
+- Custom CSS
 
-## Advanced Gutenberg blocks inside Qubely 
+## Advanced Gutenberg blocks inside Qubely
 
-* Row
-* Button
-* Testimonial
-* Heading
-* Counter
-* Tabs
-* Accordion/Toggle
-* Advanced Text
-* Video Popup
-* Google Map
-* Progress Bar
-* Icon
-* Divider
-* Social Icons
-* Button Group
-* Info Box
-* Advanced List
-* Contact Form
-* Icon List
-* Pricing
-* Block Wrapper
-* Team
-* Image
-* Timeline
-* Post Grid
-* More advanced Gutenberg blocks coming
+- Row
+- Button
+- Testimonial
+- Heading
+- Counter
+- Tabs
+- Accordion/Toggle
+- Advanced Text
+- Video Popup
+- Google Map
+- Progress Bar
+- Icon
+- Divider
+- Social Icons
+- Button Group
+- Info Box
+- Advanced List
+- Contact Form
+- Icon List
+- Pricing
+- Block Wrapper
+- Team
+- Image
+- Timeline
+- Post Grid
+- More advanced Gutenberg blocks coming
 
 ### Connect
--   [Qubely Website](https://qubely.io/)
--   [Documentation](https://docs.themeum.com/qubely/)
--   [Download on WordPress.org](https://wordpress.org/plugins/qubely/)
--   [Join our Facebook Community](https://www.facebook.com/groups/qubely)
 
+- [Qubely Website](https://qubely.io/)
+- [Documentation](https://docs.themeum.com/qubely/)
+- [Download on WordPress.org](https://wordpress.org/plugins/qubely/)
+- [Join our Facebook Community](https://www.facebook.com/groups/qubely)
 
-
-## Installation 
+## Installation
 
 **Minimum Requirements**
 
-* PHP version 5.6.0 or greater (PHP 7.1 or greater is recommended)
-* MySQL version 5.0 or greater (MySQL 5.6 or greater is recommended)
-* Running WordPress 5.0+ else installing the [Gutenberg](https://wordpress.org/plugins/gutenberg/) plugin 
+- PHP version 5.6.0 or greater (PHP 7.1 or greater is recommended)
+- MySQL version 5.0 or greater (MySQL 5.6 or greater is recommended)
+- Running WordPress 5.0+ else installing the [Gutenberg](https://wordpress.org/plugins/gutenberg/) plugin
 
 **Automatic installation**
 
@@ -83,29 +80,30 @@ To install Qubely manually, you need to download the plugin and upload it to you
 
 The WordPress codex contains [instructions on how to do this here](https://codex.wordpress.org/Managing_Plugins#Manual_Plugin_Installation).
 
+## Development
 
-##  Development
-- Navigate to reactjs folder `cd  assets/reactjs`
+- Navigate to reactjs folder `cd assets/reactjs`
 - `npm install`
 - `npm start`
 - `gulp watch` (for CSS hotloading)
 
-##  To Build
+## To Build
+
 ### Javascript
-- Navigate to reactjs folder `cd  assets/reactjs`
-- run `npm run build &&  gulp sass`
+
+- Navigate to reactjs folder `cd assets/reactjs`
+- run `npm run build && gulp sass`
 
 ### To Bundle
+
 - Under root folder, install dependencies `npm install`
 - run `gulp`, new file `qubely.zip` should appear
-
 
 ## Support
 
 You can get support by posting on the support section of this plugin on the WordPress plugin directory, or on the Themeum support forums: https://www.themeum.com/support/ 🙂
 
 ## [Qubely Pro Blocks](https://www.themeum.com/product/qubely)
-
 
 <table>
 
@@ -133,13 +131,13 @@ Showcase detailed with Qubely Gallery
 <tr>
 
 <td align="center">
-<img src="https://qubely.io/wp-content/uploads/2020/02/countdown-icon.jpg" alt="countdown" height="40px" >
+<img src="https://qubely.io/wp-content/uploads/2020/11/block-countdown.svg" alt="countdown" height="40px" >
 <h4>Countdown</h4>
 Create under construction banners, announce release and more
 </td>
 
 <td align="center">
-<img src="https://www.themeum.com/wp-content/uploads/2019/12/media-card-block.png" alt="mediacard" height="40px" >
+<img src="https://qubely.io/wp-content/uploads/2020/11/media-card.svg" alt="mediacard" height="40px" >
 <h4>Media Card</h4>
 Add an image or video with an offset
 </td>
@@ -195,7 +193,5 @@ Showcase features in Beautiful pre-designed tabs
 </td>
 
 </tr>
-
-
 
 </table>
