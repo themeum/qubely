@@ -202,17 +202,6 @@ class Edit extends Component {
                     <InspectorTabs tabs={['style', 'advance']}>
                         <InspectorTab key={'style'}>
                             <PanelBody title={__('')} initialOpen={true}>
-                                {/* <FormTokenField
-                            maxLength={6}
-                            label={__('Anchors by Tags')}
-                            placeholder={__('Add anchor')}
-                            suggestions={['H1', 'H2', 'H3', 'H4', 'H5', 'H6']}
-                            onChange={value => {
-                                value.forEach(item => defaultTags[item] = true)
-                                setAttributes({ allowedAnchors: defaultTags })
-                            }}
-                            value={Object.keys(allowedAnchors).filter(item => allowedAnchors[item])}
-                        /> */}
                                 <div className="qubely-field ">
                                     <label>{__('Select headings')}</label>
                                     <div className="qubely-toc-allowed-headings">
