@@ -37,9 +37,7 @@ class Edit extends Component {
 		const _client = clientId.substr(0, 6)
 		if (!uniqueId) {
 			setAttributes({ uniqueId: _client });
-		} else if (uniqueId && uniqueId != _client) {
-			setAttributes({ uniqueId: _client });
-		}
+		} 
 	}
 	render() {
 		const {

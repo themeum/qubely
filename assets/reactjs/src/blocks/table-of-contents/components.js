@@ -132,7 +132,6 @@ class TableOfContents extends Component {
 					return allowedAnchors[`h${level}`];
 				})
 				.forEach((header) => createHierarchy(formattedHeaders2, header));
-			console.log({ formattedHeaders2 });
 			return formattedHeaders2;
 		};
 

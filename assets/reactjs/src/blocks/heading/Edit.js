@@ -180,7 +180,9 @@ class Edit extends Component {
 							<PanelBody title={__('Heading')} initialOpen={false}>
 								<Headings
 									selectedLevel={level}
-									onChange={(value) => setAttributes({ level: value })}
+									onChange={(value) =>
+										setAttributes({ level: value, selector: `h${value}` })
+									}
 								/>
 								<Color
 									label={__('Color')}
