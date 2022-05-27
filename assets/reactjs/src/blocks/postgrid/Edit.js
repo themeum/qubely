@@ -56,6 +56,7 @@ const {
 	InspectorTabs,
 	InspectorTab,
 	Pagination,
+	Headings
 } = wp.qubelyComponents;
 
 import icons from '../../helpers/icons';
@@ -124,9 +125,9 @@ class Edit extends Component {
 		)
 	}
 
-	renderCardContent = (post) => {
+	renderCardContent = (post, TitleTag = 'h3') => {
 		const { attributes: { layout, style, readmoreStyle, showCategory, categoryPosition, showTitle, titlePosition, showAuthor, showDates, showComment, showExcerpt, excerptLimit, showReadMore, buttonText, readmoreSize } } = this.props
-		let title = <h3 className="qubely-postgrid-title"><a>{post.title.rendered}</a></h3>
+		let title = <TitleTag className="qubely-postgrid-title"><a>{post.title.rendered}</a></TitleTag>
 
 		return (
 			<div className={`${layout === 1 ? 'qubely-post-list-content' : 'qubely-post-grid-content'}`}>
@@ -166,6 +167,7 @@ class Edit extends Component {
 			taxonomyList,
 			numberofPosts,
 			attributes: {
+				level,
 				uniqueId,
 				className,
 				//general
@@ -325,6 +327,7 @@ class Edit extends Component {
 			}
 		} = this.props
 		const { device } = this.state;
+		const tag = `h${level}`;
 		let pages = 0;
 		if (numberofPosts && numberofPosts.length) {
 			pages = Math.ceil(numberofPosts.length / postsToShow);
@@ -727,6 +730,13 @@ class Edit extends Component {
 
 							<PanelBody title='Content' initialOpen={false}>
 								<Toggle label={__('Show Title')} value={showTitle} onChange={value => setAttributes({ showTitle: value })} />
+								{showTitle &&
+									<Headings
+										selectedLevel={level}
+										onChange={(value) =>
+											setAttributes({ level: value, selector: `h${value}` })
+										}
+								/>}
 								<Toggle label={__('Show Excerpt')} value={showExcerpt} onChange={value => setAttributes({ showExcerpt: value })} />
 								<RangeControl label={__('Excerpt Limit')} min={1} max={100} step={1} value={excerptLimit} onChange={val => setAttributes({ excerptLimit: val })} />
 								<Separator />
@@ -945,7 +955,7 @@ class Edit extends Component {
 													<div key={i} className={`qubely-postgrid ${layout === 1 ? 'qubely-post-list-view' : 'qubely-post-grid-view'} qubely-postgrid-style-${style}`}>
 														<div className={`${layout === 1 ? `qubely-post-list-wrapper qubely-post-list-${((layout === 2) && (style === 3)) ? contentPosition : girdContentPosition}` : `qubely-post-grid-wrapper qubely-post-grid-${((layout === 2) && (style === 3)) ? contentPosition : girdContentPosition}`}`}>
 															{showImages && post.qubely_featured_image_url && this.renderFeaturedImage(post)}
-															{this.renderCardContent(post)}
+															{this.renderCardContent(post, tag)}
 														</div>
 													</div>
 												)

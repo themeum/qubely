@@ -22,7 +22,7 @@ class InlineSelector extends Component {
             <Toolbar
                 isCollapsed={true}
                 icon={icons[selector]}
-                label={__('Change Heading')}
+                // label={__('Change Heading')}
                 controls={(options || defaultOptions).map(newSelector => this.headingController(newSelector))}
             />
         )

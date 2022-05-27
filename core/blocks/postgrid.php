@@ -76,6 +76,10 @@ function register_block_qubely_postgrid()
 				),
 
 				//content
+				'level' => array(
+					'type' => 'number',
+					'default' => 2
+				),
 				'showTitle' => array(
 					'type' => 'boolean',
 					'default' => true

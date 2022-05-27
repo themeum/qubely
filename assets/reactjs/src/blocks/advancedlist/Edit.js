@@ -424,7 +424,7 @@ class Edit extends Component {
                             prevState={this.state} />
                     </Toolbar>
                     <Toolbar
-                        label={__('Unordered List Options', 'qubely')}
+                        // label={__('Unordered List Options', 'qubely')}
                         controls={
                             [
                                 {
