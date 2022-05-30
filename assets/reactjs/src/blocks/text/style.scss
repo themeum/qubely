@@ -1,71 +1,71 @@
 .editor-styles-wrapper .qubely-block-text {
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-        padding: 0;
-        margin: 0;
-        line-height: 1;
-        position: relative;
-        &::before,
-        &::after {
-            display: none !important;
-        }
-        .qubely-text-has-bgcolor {
-            padding-left: 10px;
-            padding-right: 10px;
-        }
-    }
-    &.qubely-has-drop-cap {
-        &:after {
-            content: " ";
-            display: table;
-            clear: both;
-        }
-        p::first-letter {
-            float: left;
-            line-height: 0.68;
-            font-weight: 700;
-            margin: 0.05em 0.1em 0 0;
-            text-transform: uppercase;
-            font-style: normal;
-        }
-    }
-    p {
-        padding: 0;
-        margin: 0;
-        transition: color 300ms ease-in-out, background-color 300ms ease-in-out, border-color 300ms ease-in-out,
-            box-shadow 300ms ease-in-out;
-    }
-    .qubely-block-text-title {
-        margin: 0;
-        transition: color 400ms, border-color 400ms, background-color 400ms, box-shadow 400ms;
-    }
-    .qubely-separator {
-        font-size: 0;
-        .qubely-separator-type-css,
-        .qubely-separator-type-svg {
-            display: inline-block;
-        }
-    }
-    .qubely-separator-position-left,
-    .qubely-separator-position-right,
-    .qubely-separator-position-leftright {
-        .qubely-block-text-title-inner {
-            display: inline-flex;
-            align-items: center;
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		padding: 0;
+		margin: 0;
+		line-height: 1;
+		position: relative;
+		&::before,
+		&::after {
+			display: none !important;
+		}
+		.qubely-text-has-bgcolor {
+			padding-left: 10px;
+			padding-right: 10px;
+		}
+	}
+	&.qubely-has-drop-cap {
+		&:after {
+			content: " ";
+			display: table;
+			clear: both;
+		}
+		p::first-letter {
+			float: left;
+			line-height: 0.68;
+			font-weight: 700;
+			margin: 0.05em 0.1em 0 0;
+			text-transform: uppercase;
+			font-style: normal;
+		}
+	}
+	p {
+		padding: 0;
+		margin: 0;
+		transition: color 300ms ease-in-out, background-color 300ms ease-in-out, border-color 300ms ease-in-out,
+			box-shadow 300ms ease-in-out;
+	}
+	.qubely-block-text-title {
+		margin: 0;
+		transition: color 400ms, border-color 400ms, background-color 400ms, box-shadow 400ms;
+	}
+	.qubely-separator {
+		font-size: 0;
+		.qubely-separator-type-css,
+		.qubely-separator-type-svg {
+			display: inline-block;
+		}
+	}
+	.qubely-separator-position-left,
+	.qubely-separator-position-right,
+	.qubely-separator-position-leftright {
+		.qubely-block-text-title-inner {
+			display: inline-flex;
+			align-items: center;
 
-            .qubely-block-text-title,
-            .qubely-separator {
-                display: inline-flex;
-            }
-        }
-    }
+			.qubely-block-text-title,
+			.qubely-separator {
+				display: inline-flex;
+			}
+		}
+	}
 }
 .wp-block-qubely-text .qubely-block-text .qubely-block-text-title-container {
-    color: inherit;
+	color: inherit;
 }
 
 /**
@@ -73,40 +73,36 @@
  */
 
 *[data-tooltip] {
-    position: relative;
+	position: relative;
 }
 [data-tooltip]:before {
-    /* needed - do not change */
-    content: attr(data-tooltip);
-    position: absolute;
-    pointer-events: none;
-    opacity: 0;
-    display: inline-block;
-    /* customizable */
-    transition: all 0.15s ease;
-    padding: 5px 10px;
-    color: white;
-    border-radius: 2px;
-    border-width: 0;
-    white-space: nowrap;
-    text-align: center;
-    line-height: 1.6;
-    font-size: 16px;
-    box-shadow: none;
+	/* needed - do not change */
+	content: attr(data-tooltip);
+	position: absolute;
+	pointer-events: none;
+	opacity: 0;
+	display: inline-block;
+	/* customizable */
+	transition: all 0.15s ease;
+	padding: 5px 10px;
+	color: white;
+	border-radius: 2px;
+	border-width: 0;
+	white-space: nowrap;
+	text-align: center;
+	line-height: 1.6;
+	font-size: 16px;
+	box-shadow: none;
 }
 
 [data-tooltip]:hover:before {
-    /* needed - do not change */
-    opacity: 1;
-    z-index: 1000;
-    /* customizable */
-    background: #1a1a1a;
-    margin-top: -38px;
-    margin-left: 20%;
-}
-
-.qubely-tooltip {
-    background-color: gainsboro;
+	/* needed - do not change */
+	opacity: 1;
+	z-index: 1000;
+	/* customizable */
+	background: #1a1a1a;
+	margin-top: -38px;
+	margin-left: 20%;
 }
 
 /**
@@ -114,118 +110,118 @@
  */
 
 .qubely-custom-popover .components-popover__content {
-    border: 1px solid #e1e1e1;
-    border-radius: 4px;
+	border: 1px solid #e1e1e1;
+	border-radius: 4px;
 }
 
 .qubely-popover-contents {
-    min-width: 360px;
-    display: block;
-    padding: 30px 20px;
-    display: flex;
-    position: relative;
-    input {
-        flex: 1 1 0px;
-        display: inline-block;
-        padding: 11px 36px 11px 16px !important;
-        height: 38px !important;
-        border: 1px solid #e1e1e1 !important;
-        border-radius: 4px !important;
-        font-size: 16px;
-    }
+	min-width: 360px;
+	display: block;
+	padding: 30px 20px;
+	display: flex;
+	position: relative;
+	input {
+		flex: 1 1 0px;
+		display: inline-block;
+		padding: 11px 36px 11px 16px !important;
+		height: 38px !important;
+		border: 1px solid #e1e1e1 !important;
+		border-radius: 4px !important;
+		font-size: 16px;
+	}
 }
 
 .qubely-custom-submit {
-    right: 22px;
-    top: 31px;
-    display: inline-flex;
-    text-decoration: none;
-    font-size: 13px;
-    margin: 0;
-    border: 0;
-    cursor: pointer;
-    -webkit-appearance: none;
-    background: none;
-    transition: box-shadow 0.1s linear;
-    height: 36px;
-    align-items: center;
-    box-sizing: border-box;
-    padding: 0 9px;
-    overflow: hidden;
-    border-radius: 3px;
-    color: #555d66;
-    &:hover {
-        background-color: #fff;
-        color: #191e23;
-        box-shadow: inset 0 0 0 1px #555d66, inset 0 0 0 2px #fff;
-    }
+	right: 22px;
+	top: 31px;
+	display: inline-flex;
+	text-decoration: none;
+	font-size: 13px;
+	margin: 0;
+	border: 0;
+	cursor: pointer;
+	-webkit-appearance: none;
+	background: none;
+	transition: box-shadow 0.1s linear;
+	height: 36px;
+	align-items: center;
+	box-sizing: border-box;
+	padding: 0 9px;
+	overflow: hidden;
+	border-radius: 3px;
+	color: #555d66;
+	&:hover {
+		background-color: #fff;
+		color: #191e23;
+		box-shadow: inset 0 0 0 1px #555d66, inset 0 0 0 2px #fff;
+	}
 }
 
 .tooltip-message {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    .qubely-tooltip-text {
-        margin-bottom: 5px;
-        max-width: 210px;
-        font-size: 14px;
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-    }
-    .qubely-action-buttons {
-        display: inline-flex;
-        .qubely-edit {
-            margin-right: 10px;
-        }
-        .qubely-remove {
-            background-color: #e65054;
-            color: #fff;
-        }
-    }
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	.qubely-tooltip-text {
+		margin-bottom: 5px;
+		max-width: 210px;
+		font-size: 14px;
+		overflow: hidden;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+	}
+	.qubely-action-buttons {
+		display: inline-flex;
+		.qubely-edit {
+			margin-right: 10px;
+		}
+		.qubely-remove {
+			background-color: #e65054;
+			color: #fff;
+		}
+	}
 }
 .qubely-custom-popover.custom-fontsize {
-    .components-popover__content {
-        transition: 300ms;
-        .qubely-popover-contents {
-            padding: 15px;
-            .qubely-font-size-message {
-                width: 100%;
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                flex-direction: column;
-                .qubely-field-range.qubely-field {
-                    width: 100%;
-                    .qubely-mb-10 {
-                        margin-bottom: 0px;
-                    }
-                    .qubely-field-child {
-                        .qubely-input-range {
-                            width: 100%;
-                            input {
-                                -webkit-appearance: auto;
-                            }
-                            input[type="range"] {
-                                min-width: 80%;
-                            }
-                        }
-                    }
-                }
+	.components-popover__content {
+		transition: 300ms;
+		.qubely-popover-contents {
+			padding: 15px;
+			.qubely-font-size-message {
+				width: 100%;
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				flex-direction: column;
+				.qubely-field-range.qubely-field {
+					width: 100%;
+					.qubely-mb-10 {
+						margin-bottom: 0px;
+					}
+					.qubely-field-child {
+						.qubely-input-range {
+							width: 100%;
+							input {
+								-webkit-appearance: auto;
+							}
+							input[type="range"] {
+								min-width: 80%;
+							}
+						}
+					}
+				}
 
-                .qubely-action-buttons {
-                    display: flex;
-                    width: 100%;
-                    .qubely-edit {
-                        margin-right: 10px;
-                    }
-                    .qubely-remove {
-                        background-color: #e65054;
-                        color: #fff;
-                    }
-                }
-            }
-        }
-    }
+				.qubely-action-buttons {
+					display: flex;
+					width: 100%;
+					.qubely-edit {
+						margin-right: 10px;
+					}
+					.qubely-remove {
+						background-color: #e65054;
+						color: #fff;
+					}
+				}
+			}
+		}
+	}
 }

@@ -1,62 +1,61 @@
 .qubely-field-wrapper {
-    margin: 25px -15px 15px -15px;
-    padding: 25px 15px 15px;
-    border-top: 1px solid #EBECEE;
-    border-bottom: 1px solid #EBECEE;
-    background: #FAFAFA;
-    position: relative;
-    z-index: 1;
-    &.qubely-field-wrapper-inline {
-        position: absolute;
-        top: 100%;
-        left: 0;
-        width: 300px;
-        z-index: 99;
-        margin: 0;
-        padding: 20px;
-        background: #fff;
-        border: 1px solid #e5e5e5;
-        box-shadow: 0 1px 2px rgba(0, 0, 0, .1);
-        .qubely-field-wrapper-content {
-            position: relative;
-        }
-        &.quebly-position-bottom {
+	margin: 25px -15px 15px -15px;
+	padding: 25px 15px 15px;
+	border-top: 1px solid #ebecee;
+	border-bottom: 1px solid #ebecee;
+	background: #fafafa;
+	position: relative;
+	z-index: 1;
+	&.qubely-field-wrapper-inline {
+		position: absolute;
+		top: 100%;
+		left: 0;
+		width: 300px;
+		z-index: 99;
+		margin: 0;
+		padding: 20px;
+		background: #fff;
+		border: 1px solid #e5e5e5;
+		box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+		.qubely-field-wrapper-content {
+			position: relative;
+		}
+		&.quebly-position-bottom {
+		}
+		&.quebly-position-top {
+			top: auto;
+			bottom: 100%;
+		}
+		&.quebly-position-middle {
+			left: 100%;
+		}
+	}
+	&.qubely-padding-0 {
+		padding: 0;
+		.qubely-icon-list-wrapper {
+			border: 0;
+			border-radius: 0;
+		}
+	}
+	.qubely-field-wrapper-label {
+		margin: 0;
+		position: absolute;
+		top: 0;
+		left: 15px;
+		display: inline-block;
+		width: auto;
+		background: #fff;
+		border: 1px solid #e2e4e7;
+		padding: 5px 10px;
+		line-height: 1;
+		transform: translateY(-50%);
+		overflow: hidden;
+	}
 
-        }
-        &.quebly-position-top {
-            top: auto;
-            bottom: 100%;
-        }
-        &.quebly-position-middle {
-            left: 100%;
-        }
-    }
-    &.qubely-padding-0 {
-        padding: 0;
-        .qubely-icon-list-wrapper {
-            border: 0;
-            border-radius: 0;
-        }
-    }
-    .qubely-field-wrapper-label {
-        margin: 0;
-        position: absolute;
-        top: 0;
-        left: 15px;
-        display: inline-block;
-        width: auto;
-        background: #fff;
-        border: 1px solid #E2E4E7;
-        padding: 5px 10px;
-        line-height: 1;
-        transform: translateY(-50%);
-        overflow: hidden;
-    }
-
-    .qubely-field-separator {
-        margin-bottom: 15px;
-        label {
-            background: #FAFAFA;
-        }
-    }
+	.qubely-field-separator {
+		margin-bottom: 15px;
+		label {
+			background: #fafafa;
+		}
+	}
 }

@@ -32,6 +32,7 @@ function makeBuild() {
         '!./**/*.zip',
         '!./gulpfile.js',
         '!./readme.md',
+        '!./changelog.md',
         '!./LICENSE.txt',
         '!./package.json',
         '!./package-lock.json',

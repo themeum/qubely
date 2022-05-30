@@ -3,8 +3,8 @@ Contributors: themeum
 Donate link: https://www.themeum.com
 Tags: blocks, gutenberg, gutenberg blocks, editor, block, page builder
 Requires at least: 5.0
-Tested up to: 5.8
-Stable tag: 1.7.3
+Tested up to: 5.9
+Stable tag: 1.7.9
 Requires PHP: 7.0
 License: GPL-2.0+
 License URI: http://www.gnu.org/licenses/gpl-2.0.txt
@@ -15,9 +15,9 @@ Readymade gutenberg blocks and sections with rich customization options. Enhance
 
 [Qubely](https://www.themeum.com/product/qubely?utm_source=wporg&utm_medium=link&utm_campaign=orglanding&utm_term=description&utm_content=qubely) is a full-fledged Gutenberg block toolkit with plenty of custom blocks, predefined sections and starter packs to create beautiful web pages. It minimizes the limitations of the Gutenberg editor and opens unlimited possibilities for any simple to complex design on Gutenberg. Qubely is a user-friendly Gutenberg plugin with necessary customization features and advanced functionalities.
 
-Extend the default WordPress Gutenberg editor with many [custom blocks](https://qubely.io/blocks/?utm_source=wporg&utm_medium=link&utm_campaign=orglanding&utm_content=customblocks) that are missing in there. Take control of your website design and apply out of the box styling options offered in Qubely. Create web pages that are stunning as well as mobile optimized.
+Extend the default WordPress Gutenberg editor with many [custom blocks](https://www.themeum.com/qubely/blocks/?utm_source=wporg&utm_medium=link&utm_campaign=orglanding&utm_content=customblocks) that are missing in there. Take control of your website design and apply out of the box styling options offered in Qubely. Create web pages that are stunning as well as mobile optimized.
 
-[Qubely Blocks Pro](https://www.themeum.com/product/qubely/?utm_source=wporg&utm_medium=link&utm_campaign=orglanding&utm_content=qubelyblockspro) || [Live Demo](https://qubely.io/) || [Documentation](https://docs.themeum.com/qubely/)
+[Qubely Blocks Pro](https://www.themeum.com/product/qubely/?utm_source=wporg&utm_medium=link&utm_campaign=orglanding&utm_content=qubelyblockspro) || [Live Preview](https://www.themeum.com/qubely/starter-packs/) || [Documentation](https://docs.themeum.com/qubely/)
 
 [youtube https://www.youtube.com/watch?v=_aRAQkHZiUQ]
 
@@ -44,33 +44,32 @@ Want to know all the latest news and be part of the Qubely community? [Join our 
 
 Qubely adds numerous custom Gutenberg blocks to the Gutenberg block editor and takes Gutenberg editor to the next level. The available custom advanced Gutenberg blocks inside Qubely are:
 
-* [Row](https://qubely.io/block/row-advanced-text/)
-* [Button](https://qubely.io/block/button/)
-* [Testimonial](https://qubely.io/block/testimonial/)
-* [Heading](https://qubely.io/block/heading/)
-* [Counter](https://qubely.io/block/counters/)
-* [Tabs](https://qubely.io/block/tabs/)
-* [Accordion/Toggle](https://qubely.io/block/accordion/)
-* [Advanced Text](https://qubely.io/block/row-advanced-text/)
-* [Video Popup](https://qubely.io/block/video-popup/)
-* [Google Map](https://qubely.io/block/google-map/)
-* [Progress Bar](https://qubely.io/block/progress-bar/)
-* [Social Icons](https://qubely.io/block/social-icons/)
-* [Button Group](https://qubely.io/block/button-group/)
-* [Button](https://qubely.io/block/button/)
-* [Info Box](https://qubely.io/block/info-box/)
-* [Advanced List](https://qubely.io/block/advanced-list/)
-* [Contact Form](https://qubely.io/block/contact/)
-* [Icon List](https://qubely.io/block/icon-list/)
-* [Pricing](https://qubely.io/block/pricing/)
-* [Team](https://qubely.io/block/team/)
-* [Image](https://qubely.io/block/image/)
-* [Timeline](https://qubely.io/block/timeline/)
-* [Post Grid](https://qubely.io/block/post-grid/)
+* [Row](https://www.themeum.com/qubely/blocks/#block-row)
+* [Button](https://www.themeum.com/qubely/blocks/#block-button)
+* [Testimonial](https://www.themeum.com/qubely/blocks/#block-testimonial)
+* [Heading](https://www.themeum.com/qubely/blocks/#block-heading)
+* [Counter](https://www.themeum.com/qubely/blocks/#block-counters)
+* [Tabs](https://www.themeum.com/qubely/blocks/#block-tabs)
+* [Accordion/Toggle](https://www.themeum.com/qubely/blocks/#block-accordion)
+* Advanced Text
+* [Video Popup](https://www.themeum.com/qubely/blocks/#block-video-popup)
+* [Google Map](https://www.themeum.com/qubely/blocks/#block-google-map)
+* [Progress Bar](https://www.themeum.com/qubely/blocks/#block-progress-bar)
+* [Social Icons](https://www.themeum.com/qubely/blocks/#block-social-icons)
+* [Button Group](https://www.themeum.com/qubely/blocks/#block-button-group)
+* [Info Box](https://www.themeum.com/qubely/blocks/#block-info-box)
+* [Advanced List](https://www.themeum.com/qubely/blocks/#block-advanced-list)
+* [Contact Form](https://www.themeum.com/qubely/blocks/#block-contact)
+* [Icon List](https://www.themeum.com/qubely/blocks/#block-icon-list)
+* [Pricing](https://www.themeum.com/qubely/blocks/#block-pricing)
+* [Team](https://www.themeum.com/qubely/blocks/#block-team)
+* [Image](https://www.themeum.com/qubely/blocks/#block-image)
+* [Timeline](https://www.themeum.com/qubely/blocks/#block-timeline)
+* [Post Grid](https://www.themeum.com/qubely/blocks/#block-post-grid)
 * Icon
 * Divider
 * Block Wrapper
-* [Pie Progress](https://qubely.io/block/pie-progress/)
+* [Pie Progress](https://www.themeum.com/qubely/blocks/#block-pie-progress)
 
 More advanced Gutenberg blocks, pre-designed sections and starter packs are coming every month! [Signup on our site]() to receive updates via email.
 
@@ -78,22 +77,22 @@ More advanced Gutenberg blocks, pre-designed sections and starter packs are comi
 
 14 blocks that help you build more sophisticated designs-
 
-* [Form Builder](https://qubely.io/block/form-builder/)
-* [Image Gallery](https://qubely.io/block/image-gallery/)
-* [Image Carousel](https://qubely.io/block/image-carousel/)
-* [Post Carousel](https://qubely.io/block/post-carousel/)
-* [Advanced Post Grid](https://qubely.io/block/advanced-post-grid/)
-* [Pricing List](https://qubely.io/block/pricing-list/)
-* [Team Carousel](https://qubely.io/block/team-carousel/)
-* [Testimonial Carousel](https://qubely.io/block/testimonial-carousel/)
-* [Media Card](https://qubely.io/block/media-card/)
-* [Pie Progress](https://qubely.io/block/pie-progress/)
-* [Countdown](https://qubely.io/block/countdown/)
-* [Table Builder](https://qubely.io/block/table-builder/)
-* [Woo Products](https://qubely.io/block/woo-products/)
-* [Woo Carousel](https://qubely.io/block/woo-carousel/)
+* [Form Builder](https://www.themeum.com/qubely/blocks/#block-form-builder)
+* [Image Gallery](https://www.themeum.com/qubely/blocks/#block-image-gallery)
+* [Image Carousel](https://www.themeum.com/qubely/blocks/#block-image-carousel)
+* [Post Carousel](https://www.themeum.com/qubely/blocks/#block-post-carousel)
+* [Advanced Post Grid](https://www.themeum.com/qubely/blocks/#block-advanced-post-grid)
+* [Pricing List](https://www.themeum.com/qubely/blocks/#block-pricing-list)
+* [Team Carousel](https://www.themeum.com/qubely/blocks/#block-team-carousel)
+* [Testimonial Carousel](https://www.themeum.com/qubely/blocks/#block-testimonial-carousel)
+* [Media Card](https://www.themeum.com/qubely/blocks/#block-media-card)
+* [Pie Progress](https://www.themeum.com/qubely/blocks/#block-pie-progress)
+* [Countdown](https://www.themeum.com/qubely/blocks/#block-countdown)
+* [Table Builder](https://www.themeum.com/qubely/blocks/#block-table-builder)
+* [Woo Products](https://www.themeum.com/qubely/blocks/#block-woo-products)
+* [Woo Carousel](https://www.themeum.com/qubely/blocks/#block-woo-carousel)
 
-⭐️ [Ready Sections](https://qubely.io/section/) ⭐️ [Starter Packs](https://qubely.io/starter-packs/)
+⭐️ [Ready Sections](https://www.themeum.com/qubely/sections/) ⭐️ [Starter Packs](https://www.themeum.com/qubely/starter-packs/)
 
 
  ## QUBELY GUTENBERG BLOCKS FEATURES AND FUNCTIONALITIES IN DETAILS
@@ -239,6 +238,41 @@ You can report bugs on the [support forum here](https://wordpress.org/support/pl
 
 
 == Changelog ==
+
+= 1.7.9 =
+New: Introducing WordPress 5.9 compatibility for Qubely
+Update: Improved authorization check for the Qubely settings page
+Update: Same style IDs will not re-render anymore
+Update: Use Reusable Blocks without any issue or dependency
+Update: Pre-made layouts are now a separate tab for better implementation
+Fix: Pagination issue for the Post Grid block
+Fix: Multiple Contact Form was not working on the same page
+
+= 1.7.8 =
+Update: Security Update
+
+= 1.7.7 =
+Update: Security Update
+Fix: Layout Breaking Issue for Already Designed Pages/Posts
+Fix: Infobox Block - Icons style is not circular issue
+Fix: Divider Block - Width percent not working
+Fix: Postgrid Block - Preview characters not converted to UTF8
+Fix: Info box and Advanced Text Block - Typography issue
+Fix: Post Carousel Block - Number of columns not working
+Fix: Accordion Block - Toggle option not working
+Fix: Inline Toolbar Padding Block width issue
+Fix: Button Block - Box shadow width not working
+Fix: Image Block - Radius option not working
+
+= 1.7.6 = 
+Fix: Layout breaking issue
+Fix: Contact Form not sending issue
+
+= 1.7.5 = 
+Update: Security Update
+
+= 1.7.4 =
+Update: Security Update
 
 = 1.7.3 - 3 November, 2021 =
 Fix: Security Update

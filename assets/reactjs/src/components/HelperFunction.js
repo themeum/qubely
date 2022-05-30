@@ -84,14 +84,13 @@ export const videoBackground = (settings) => {
 };
 
 export const IsInteraction = (interaction) => {
-	if (typeof interaction === 'undefined') {
+	if (typeof interaction === "undefined") {
 		return false;
 	} else {
 		return (
-			(typeof interaction.while_scroll_into_view !== 'undefined' &&
+			(typeof interaction.while_scroll_into_view !== "undefined" &&
 				interaction.while_scroll_into_view.enable === true) ||
-			(typeof interaction.mouse_movement !== 'undefined' &&
-				interaction.mouse_movement.enable === true)
+			(typeof interaction.mouse_movement !== "undefined" && interaction.mouse_movement.enable === true)
 		);
 	}
 };
@@ -101,27 +100,25 @@ export const _equal = (value, other) => {
 		const type = Object.prototype.toString.call(value);
 		if (type !== Object.prototype.toString.call(other)) return false;
 
-		if (['[object Array]', '[object Object]'].indexOf(type) < 0) return false;
+		if (["[object Array]", "[object Object]"].indexOf(type) < 0) return false;
 
-		const valueLen =
-			type === '[object Array]' ? value.length : Object.keys(value).length;
-		const otherLen =
-			type === '[object Array]' ? other.length : Object.keys(other).length;
+		const valueLen = type === "[object Array]" ? value.length : Object.keys(value).length;
+		const otherLen = type === "[object Array]" ? other.length : Object.keys(other).length;
 		if (valueLen !== otherLen) return false;
 		const compare = (item1, item2) => {
 			var itemType = Object.prototype.toString.call(item1);
-			if (['[object Array]', '[object Object]'].indexOf(itemType) >= 0) {
+			if (["[object Array]", "[object Object]"].indexOf(itemType) >= 0) {
 				if (!isEqual(item1, item2)) return false;
 			} else {
 				if (itemType !== Object.prototype.toString.call(item2)) return false;
-				if (itemType === '[object Function]') {
+				if (itemType === "[object Function]") {
 					if (item1.toString() !== item2.toString()) return false;
 				} else {
 					if (item1 !== item2) return false;
 				}
 			}
 		};
-		if (type === '[object Array]') {
+		if (type === "[object Array]") {
 			for (var i = 0; i < valueLen; i++) {
 				if (compare(value[i], other[i]) === false) return false;
 			}
@@ -139,7 +136,7 @@ export const _equal = (value, other) => {
 
 export const parseResponsiveViewPort = () => {
 	let responsive = [{ viewport: 1170 }, { viewport: 980 }, { viewport: 580 }];
-	if (typeof responsive === 'undefined') return;
+	if (typeof responsive === "undefined") return;
 	let activeView = null;
 
 	for (let i = 0; i < responsive.length; i++) {

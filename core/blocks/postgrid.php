@@ -1,5 +1,6 @@
 <?php
 
+defined( 'ABSPATH' ) || exit;
 /**
  * Registers the `qubely/postgrid` block on server.
  *
@@ -1328,6 +1329,7 @@ function render_block_qubely_postgrid($att)
 	$taxonomy               = $att['taxonomy'];
 	$taxonomyType           = isset($att['taxonomyType']) ? $att['taxonomyType'] : 'category';
 	$customTaxonomies       = $att['customTaxonomies'];
+	$enablePagination       = isset($att['enablePagination']) ? $att['enablePagination'] : true;
 	
 	$animation 		        = isset($att['animation']) ? (count((array) $att['animation']) > 0 &&  $att['animation']['animation'] ? 'data-qubelyanimation="' . htmlspecialchars(json_encode($att['animation']), ENT_QUOTES, 'UTF-8') . '"' : '') : '';
 	$title_tag            = "h{$level}";
@@ -1524,7 +1526,7 @@ function render_block_qubely_postgrid($att)
 			}
 		}
 		$html .= '</div>';
-		if($enablePagination === true) {
+		if ( true === $enablePagination ) {
 			$html .= '<div class="qubely-postgrid-pagination">' . pagination_bar($query->max_num_pages, $paged) . '</div>';
 		}
 		$html .= '</div>';

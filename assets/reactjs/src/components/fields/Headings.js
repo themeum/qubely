@@ -23,5 +23,4 @@ function Headings(props) {
 		</div>
 	);
 }
-
 export default Headings;

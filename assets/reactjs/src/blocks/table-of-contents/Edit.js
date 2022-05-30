@@ -127,8 +127,8 @@ class Edit extends Component {
 
 		const classes = classnames(
 			`qubely-block-${uniqueId}`,
-			'qubely-block-table-of-contents',
-			`qubely-align-${align}`,
+			"qubely-block-table-of-contents",
+			`qubely-align-${align}`
 		);
 
 		let defaultTags = {
@@ -142,21 +142,21 @@ class Edit extends Component {
 
 		const currentIconClass = {};
 		switch (collapsibleIcon) {
-			case 'chevron-cirlce':
-				currentIconClass.open = 'fas fa-chevron-circle-up';
-				currentIconClass.close = 'fas fa-chevron-circle-down';
+			case "chevron-cirlce":
+				currentIconClass.open = "fas fa-chevron-circle-up";
+				currentIconClass.close = "fas fa-chevron-circle-down";
 				break;
-			case 'plus':
-				currentIconClass.open = 'fas fa-plus';
-				currentIconClass.close = 'fas fa-minus';
+			case "plus":
+				currentIconClass.open = "fas fa-plus";
+				currentIconClass.close = "fas fa-minus";
 				break;
-			case 'plus-square':
-				currentIconClass.open = 'fas fa-plus-square';
-				currentIconClass.close = 'fas fa-minus-square';
+			case "plus-square":
+				currentIconClass.open = "fas fa-plus-square";
+				currentIconClass.close = "fas fa-minus-square";
 				break;
 			default:
-				currentIconClass.open = 'fas fa-angle-up';
-				currentIconClass.close = 'fas fa-angle-down';
+				currentIconClass.open = "fas fa-angle-up";
+				currentIconClass.close = "fas fa-angle-down";
 		}
 
 		return (

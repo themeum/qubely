@@ -1,5 +1,4 @@
 .qubely-block-social-icons {
-
 	ul.qubely-ul {
 		list-style: none;
 		padding: 0;
@@ -54,7 +53,7 @@
 							color: #fff;
 						}
 					}
-	
+
 					&.qubely-social-facebook {
 						a {
 							background: #3b5998;
@@ -353,7 +352,7 @@
 					}
 					&.qubely-social-imdb {
 						a {
-							background: #EAB700;
+							background: #eab700;
 							color: #333;
 							&:hover {
 								background: rgb(194, 152, 1);
@@ -409,7 +408,7 @@
 							color: #333;
 						}
 					}
-	
+
 					&.qubely-social-facebook {
 						a {
 							color: #3b5998;
@@ -708,7 +707,7 @@
 					}
 					&.qubely-social-imdb {
 						a {
-							color: #EAB700;
+							color: #eab700;
 							&:hover {
 								color: rgb(202, 159, 3);
 							}
@@ -716,7 +715,7 @@
 					}
 					&.qubely-social-snapchat {
 						a {
-							color: #FEFC00;
+							color: #fefc00;
 							&:hover {
 								color: rgb(211, 211, 1);
 							}
@@ -752,12 +751,12 @@
 	}
 }
 .qubely-socialicon-picker-popover {
-	.components-popover__content:not(.is-mobile){
+	.components-popover__content:not(.is-mobile) {
 		padding: 20px;
 		min-width: 300px !important;
 		min-height: fit-content;
 		border: 1px solid #e5e5e5;
-		box-shadow: 0 1px 2px rgba(0, 0, 0, .1);
+		box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 		.qubely-action-social-icon-apply,
 		.qubely-action-social-icon-remove {
 			width: 100%;

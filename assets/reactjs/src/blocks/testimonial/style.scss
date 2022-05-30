@@ -1,105 +1,106 @@
 .qubely-block-testimonial {
-    transition: all 400ms;
-    // Editor line height hack
-    .editor-rich-text {
-        .editor-rich-text__tinymce {
-            line-height: inherit;
-        }
-    }
+	transition: all 400ms;
+	// Editor line height hack
+	.editor-rich-text {
+		.editor-rich-text__tinymce {
+			line-height: inherit;
+		}
+	}
 
-    .qubely-testimonial-quote {
-        .qubely-quote-icon {
-            line-height: 1;
-            width: auto;
-            height: auto;
-        }
+	.qubely-testimonial-quote {
+		.qubely-quote-icon {
+			line-height: 1;
+			width: auto;
+			height: auto;
+		}
 
-        &.qubely-position-bottom {
-            .qubely-quote-icon {
-                transform: scaleY(-1);
-            }
-        }
-    }
+		&.qubely-position-bottom {
+			.qubely-quote-icon {
+				transform: scaleY(-1);
+			}
+		}
+	}
 
-    .qubely-testimonial-avatar {
-        &.qubely-image-placeholder i {
-            font-style: normal;
-            font-size: .5em;
-        }
-    }
+	.qubely-testimonial-avatar {
+		&.qubely-image-placeholder i {
+			font-style: normal;
+			font-size: 0.5em;
+		}
+	}
 
-    .qubely-testimonial-avatar-layout-left,
-    .qubely-testimonial-avatar-layout-right {
-        display: inline-flex;
-        align-items: center;
-        .qubely-testimonial-author-info {
-            text-align: left;
-        }
-    }
+	.qubely-testimonial-avatar-layout-left,
+	.qubely-testimonial-avatar-layout-right {
+		display: inline-flex;
+		align-items: center;
+		.qubely-testimonial-author-info {
+			text-align: left;
+		}
+	}
 
-    .qubely-testimonial-avatar-layout-right {
-        .qubely-testimonial-author-info {
-            text-align: right;
-        }
-    }
+	.qubely-testimonial-avatar-layout-right {
+		.qubely-testimonial-author-info {
+			text-align: right;
+		}
+	}
 
-    //rating
-    .qubely-testimonial-ratings {
-        unicode-bidi: bidi-override;
-        display: inline-block;
-        position: relative;
-        letter-spacing: 5px;
-        --qubely-testimonial-rating: 0%;
-        &:before, &:after{
-            content: "\f005\f005\f005\f005\f005";
-            font-family: 'Font Awesome\ 5 Free';
-            font-weight: 400;
-            display: block;
-            white-space: nowrap;
-            z-index: 0;
-        }
+	//rating
+	.qubely-testimonial-ratings {
+		unicode-bidi: bidi-override;
+		display: inline-block;
+		position: relative;
+		letter-spacing: 5px;
+		--qubely-testimonial-rating: 0%;
+		&:before,
+		&:after {
+			content: "\f005\f005\f005\f005\f005";
+			font-family: "Font Awesome\ 5 Free";
+			font-weight: 400;
+			display: block;
+			white-space: nowrap;
+			z-index: 0;
+		}
 
-        &:before{
-            position: absolute;
-            z-index: 1;
-            left: 0px;
-            overflow: hidden;
-            font-family: 'Font Awesome\ 5 Free';
-            font-weight: 900;
-            content: "\f005\f005\f005\f005\f005";
-            width: var(--qubely-testimonial-rating);
-        }
+		&:before {
+			position: absolute;
+			z-index: 1;
+			left: 0px;
+			overflow: hidden;
+			font-family: "Font Awesome\ 5 Free";
+			font-weight: 900;
+			content: "\f005\f005\f005\f005\f005";
+			width: var(--qubely-testimonial-rating);
+		}
 
-        /**
+		/**
          * For Backward Compatibility
          */
-        &[data-qubelyrating="1"]:before {
-            width: 20%;
-        }
-        &[data-qubelyrating="1.5"]:before {
-            width: 29%;
-        }
-        &[data-qubelyrating="2"]:before {
-            width: 40%;
-        }
-        &[data-qubelyrating="2.5"]:before {
-            width: 49%;
-        }
-        &[data-qubelyrating="3"]:before {
-            width: 60%;
-        }
-        &[data-qubelyrating="3.5"]:before {
-            width: 69%;
-        }
-        &[data-qubelyrating="4"]:before {
-            width: 80%;
-        }
-        &[data-qubelyrating="4.5"]:before {
-            width: 89%;
-        }
-        &[data-qubelyrating="5"]:before {
-            width: 100%;
-        }
-        // end backward compatibility
-    }
+		&[data-qubelyrating="1"]:before {
+			width: 20%;
+		}
+		&[data-qubelyrating="1.5"]:before {
+			width: 29%;
+		}
+		&[data-qubelyrating="2"]:before {
+			width: 40%;
+		}
+		&[data-qubelyrating="2.5"]:before {
+			width: 49%;
+		}
+		&[data-qubelyrating="3"]:before {
+			width: 60%;
+		}
+		&[data-qubelyrating="3.5"]:before {
+			width: 69%;
+		}
+		&[data-qubelyrating="4"]:before {
+			width: 80%;
+		}
+		&[data-qubelyrating="4.5"]:before {
+			width: 89%;
+		}
+		&[data-qubelyrating="5"]:before {
+			width: 100%;
+		}
+		// end backward compatibility
+	}
 }

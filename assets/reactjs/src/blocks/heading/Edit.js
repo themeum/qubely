@@ -10,11 +10,7 @@ const {
 	Toggle,
 	Headings,
 	RadioAdvanced,
-	gloalSettings: {
-		globalSettingsPanel,
-		animationSettings,
-		interactionSettings,
-	},
+	gloalSettings: { globalSettingsPanel, animationSettings, interactionSettings },
 	HeadingToolbar,
 	Inline: { InlineToolbar, InlineSelector },
 	ContextMenu: { ContextMenu, handleContextMenu },
@@ -24,31 +20,17 @@ const {
 	InspectorSections,
 } = wp.qubelyComponents;
 
-import svg from '../heading/separators';
+import svg from "../heading/separators";
 
 class Edit extends Component {
 	constructor() {
 		super(...arguments);
 		this.state = {
-			device: 'md',
+			device: "md",
 			selector: true,
 			spacer: true,
 		};
 		this.qubelyContextMenu = createRef();
-	}
-
-	componentDidMount() {
-		const {
-			setAttributes,
-			clientId,
-			attributes: { uniqueId },
-		} = this.props;
-		const _client = clientId.substr(0, 6);
-		if (!uniqueId) {
-			setAttributes({ uniqueId: _client });
-		} else if (uniqueId && uniqueId != _client) {
-			setAttributes({ uniqueId: _client });
-		}
 	}
 
 	render() {
@@ -100,57 +82,34 @@ class Edit extends Component {
 		const { device } = this.state;
 
 		const separators = {
-			solid: { type: 'css', separator: 'solid', width: 300, stroke: 10 },
-			double: { type: 'css', separator: 'double', width: 300, stroke: 10 },
-			dotted: { type: 'css', separator: 'dotted', width: 300, stroke: 10 },
-			dashed: { type: 'css', separator: 'dashed', width: 300, stroke: 10 },
-			pin: {
-				type: 'svg',
-				separator: 'pin',
-				svg: svg['pin'],
-				width: 100,
-				stroke: 0,
-			},
-			pin_filled: {
-				type: 'svg',
-				separator: 'pin_filled',
-				svg: svg['pin_filled'],
-				width: 100,
-				stroke: 0,
-			},
-			zigzag: {
-				type: 'svg',
-				separator: 'zigzag',
-				svg: svg['zigzag'],
-				style: 'fill',
-				width: 88,
-				stroke: 5,
-			},
+			solid: { type: "css", separator: "solid", width: 300, stroke: 10 },
+			double: { type: "css", separator: "double", width: 300, stroke: 10 },
+			dotted: { type: "css", separator: "dotted", width: 300, stroke: 10 },
+			dashed: { type: "css", separator: "dashed", width: 300, stroke: 10 },
+			pin: { type: "svg", separator: "pin", svg: svg["pin"], width: 100, stroke: 0 },
+			pin_filled: { type: "svg", separator: "pin_filled", svg: svg["pin_filled"], width: 100, stroke: 0 },
+			zigzag: { type: "svg", separator: "zigzag", svg: svg["zigzag"], style: "fill", width: 88, stroke: 5 },
 			zigzag_large: {
-				type: 'svg',
-				separator: 'zigzag_large',
-				svg: svg['zigzag_large'],
-				style: 'fill',
+				type: "svg",
+				separator: "zigzag_large",
+				svg: svg["zigzag_large"],
+				style: "fill",
 				width: 161,
 				stroke: 5,
 			},
 		};
 
-		const subHeadingTagName = 'h' + subHeadingLevel;
+		const subHeadingTagName = "h" + subHeadingLevel;
 
 		const renderSeparators = (
 			<Fragment>
 				{separatorStyle && (
 					<Fragment>
-						{separators[separatorStyle].type == 'css' && (
-							<span
-								className={`qubely-separator-type-css qubely-separator-${separatorStyle}`}
-							/>
+						{separators[separatorStyle].type == "css" && (
+							<span className={`qubely-separator-type-css qubely-separator-${separatorStyle}`} />
 						)}
-						{separators[separatorStyle].type == 'svg' && (
-							<span
-								className={`qubely-separator-type-svg qubely-separator-${separatorStyle}`}
-							>
+						{separators[separatorStyle].type == "svg" && (
+							<span className={`qubely-separator-type-svg qubely-separator-${separatorStyle}`}>
 								{separators[separatorStyle].svg}
 							</span>
 						)}
@@ -163,13 +122,13 @@ class Edit extends Component {
 			<Fragment>
 				<InspectorControls key="inspector">
 					<InspectorTabs>
-						<InspectorTab key={'layout'}>
-							<InspectorSections block={'heading'} />
+						<InspectorTab key={"layout"}>
+							<InspectorSections block={"heading"} />
 						</InspectorTab>
-						<InspectorTab key={'style'}>
+						<InspectorTab key={"style"}>
 							<PanelBody title="" initialOpen={true}>
 								<Alignment
-									label={__('Alignment')}
+									label={__("Alignment")}
 									value={alignment}
 									onChange={(val) => setAttributes({ alignment: val })}
 									responsive
@@ -177,20 +136,14 @@ class Edit extends Component {
 									onDeviceChange={(value) => this.setState({ device: value })}
 								/>
 							</PanelBody>
-							<PanelBody title={__('Heading')} initialOpen={false}>
-								<Headings
-									selectedLevel={level}
-									onChange={(value) =>
-										setAttributes({ level: value, selector: `h${value}` })
-									}
-								/>
+							<PanelBody title={__("Heading")} initialOpen={false}>
 								<Color
-									label={__('Color')}
+									label={__("Color")}
 									value={textColor}
 									onChange={(val) => setAttributes({ textColor: val })}
 								/>
 								<Typography
-									label={__('Typography')}
+									label={__("Typography")}
 									value={typography}
 									onChange={(val) =>
 										setAttributes({
@@ -204,9 +157,9 @@ class Edit extends Component {
 									onDeviceChange={(value) => this.setState({ device: value })}
 								/>
 							</PanelBody>
-							<PanelBody title={__('Sub Heading')} initialOpen={false}>
+							<PanelBody title={__("Sub Heading")} initialOpen={false}>
 								<Toggle
-									label={__('Enable')}
+									label={__("Enable")}
 									value={subHeading}
 									onChange={(val) => setAttributes({ subHeading: val })}
 								/>
@@ -214,156 +167,128 @@ class Edit extends Component {
 									<Fragment>
 										<Headings
 											selectedLevel={subHeadingLevel}
-											onChange={(value) =>
-												setAttributes({ subHeadingLevel: value })
-											}
+											onChange={(value) => setAttributes({ subHeadingLevel: value })}
 										/>
 										<Typography
-											label={__('Typography')}
+											label={__("Typography")}
 											value={subHeadingTypography}
 											onChange={(val) =>
 												setAttributes({
 													subHeadingTypography: val,
-													...(val.openTypography !==
-														subHeadingTypography.openTypography && {
+													...(val.openTypography !== subHeadingTypography.openTypography && {
 														recreateStyles: !recreateStyles,
 													}),
 												})
 											}
 											device={device}
-											onDeviceChange={(value) =>
-												this.setState({ device: value })
-											}
+											onDeviceChange={(value) => this.setState({ device: value })}
 										/>
 										<Color
-											label={__('Color')}
+											label={__("Color")}
 											value={subHeadingColor}
-											onChange={(val) =>
-												setAttributes({ subHeadingColor: val })
-											}
+											onChange={(val) => setAttributes({ subHeadingColor: val })}
 										/>
 										<Range
-											label={__('Spacing')}
+											label={__("Spacing")}
 											value={subHeadingSpacing}
-											onChange={(value) =>
-												setAttributes({ subHeadingSpacing: value })
-											}
-											unit={['px', 'em', '%']}
+											onChange={(value) => setAttributes({ subHeadingSpacing: value })}
+											unit={["px", "em", "%"]}
 											min={0}
 											max={60}
 											responsive
 											device={device}
-											onDeviceChange={(value) =>
-												this.setState({ device: value })
-											}
+											onDeviceChange={(value) => this.setState({ device: value })}
 										/>
 										<RadioAdvanced
-											label={__('Position')}
+											label={__("Position")}
 											value={subHeadingPosition}
-											onChange={(val) =>
-												setAttributes({ subHeadingPosition: val })
-											}
+											onChange={(val) => setAttributes({ subHeadingPosition: val })}
 											options={[
 												{
-													label: __('After Title'),
-													value: 'after_title',
-													title: __('After Title'),
+													label: __("After Title"),
+													value: "after_title",
+													title: __("After Title"),
 												},
 												{
-													label: __('Before Title'),
-													value: 'before_title',
-													title: __('Before Title'),
+													label: __("Before Title"),
+													value: "before_title",
+													title: __("Before Title"),
 												},
 											]}
 										/>
 									</Fragment>
 								)}
 							</PanelBody>
-							<PanelBody title={__('Separator')} initialOpen={false}>
+							<PanelBody title={__("Separator")} initialOpen={false}>
 								<SelectControl
 									label="Style"
 									value={separatorStyle}
 									options={[
-										{ label: '--Select--', value: '' },
-										{ label: 'Line', value: 'solid' },
-										{ label: 'Line Doubled', value: 'double' },
-										{ label: 'Dashed', value: 'dashed' },
-										{ label: 'Dotted', value: 'dotted' },
-										{ label: 'Pin', value: 'pin' },
-										{ label: 'Pin Filled', value: 'pin_filled' },
-										{ label: 'Zigzag', value: 'zigzag' },
-										{ label: 'Zigzag Large', value: 'zigzag_large' },
+										{ label: "--Select--", value: "" },
+										{ label: "Line", value: "solid" },
+										{ label: "Line Doubled", value: "double" },
+										{ label: "Dashed", value: "dashed" },
+										{ label: "Dotted", value: "dotted" },
+										{ label: "Pin", value: "pin" },
+										{ label: "Pin Filled", value: "pin_filled" },
+										{ label: "Zigzag", value: "zigzag" },
+										{ label: "Zigzag Large", value: "zigzag_large" },
 									]}
 									onChange={(val) => setAttributes({ separatorStyle: val })}
 								/>
 								{separatorStyle && (
 									<Fragment>
 										<Color
-											label={__('Separator Color')}
+											label={__("Separator Color")}
 											value={separatorColor}
-											onChange={(val) =>
-												setAttributes({ separatorColor: val })
-											}
+											onChange={(val) => setAttributes({ separatorColor: val })}
 										/>
-										{separatorStyle != 'pin' &&
-											separatorStyle != 'pin_filled' && (
-												<Range
-													label={__('Stroke')}
-													value={separatorStroke}
-													onChange={(val) =>
-														setAttributes({ separatorStroke: parseInt(val) })
-													}
-													min={1}
-													max={separators[separatorStyle].stroke}
-												/>
-											)}
+										{separatorStyle != "pin" && separatorStyle != "pin_filled" && (
+											<Range
+												label={__("Stroke")}
+												value={separatorStroke}
+												onChange={(val) => setAttributes({ separatorStroke: parseInt(val) })}
+												min={1}
+												max={separators[separatorStyle].stroke}
+											/>
+										)}
 										<Range
-											label={__('Width')}
+											label={__("Width")}
 											value={separatorWidth}
-											onChange={(val) =>
-												setAttributes({ separatorWidth: val })
-											}
+											onChange={(val) => setAttributes({ separatorWidth: val })}
 											min={20}
 											max={separators[separatorStyle].width}
 											responsive
 											device={device}
-											onDeviceChange={(value) =>
-												this.setState({ device: value })
-											}
+											onDeviceChange={(value) => this.setState({ device: value })}
 										/>
 										<Range
-											label={__('Spacing')}
+											label={__("Spacing")}
 											value={separatorSpacing}
-											onChange={(val) =>
-												setAttributes({ separatorSpacing: val })
-											}
+											onChange={(val) => setAttributes({ separatorSpacing: val })}
 											min={0}
 											max={100}
 											responsive
 											device={device}
-											onDeviceChange={(value) =>
-												this.setState({ device: value })
-											}
+											onDeviceChange={(value) => this.setState({ device: value })}
 										/>
 										<SelectControl
 											label="Position"
 											value={separatorPosition}
 											options={[
-												{ label: 'Top', value: 'top' },
-												{ label: 'Bottom', value: 'bottom' },
-												{ label: 'Left', value: 'left' },
-												{ label: 'Right', value: 'right' },
-												{ label: 'Left & Right', value: 'leftright' },
+												{ label: "Top", value: "top" },
+												{ label: "Bottom", value: "bottom" },
+												{ label: "Left", value: "left" },
+												{ label: "Right", value: "right" },
+												{ label: "Left & Right", value: "leftright" },
 											]}
-											onChange={(val) =>
-												setAttributes({ separatorPosition: val })
-											}
+											onChange={(val) => setAttributes({ separatorPosition: val })}
 										/>
 									</Fragment>
 								)}
 							</PanelBody>
 						</InspectorTab>
-						<InspectorTab key={'advance'}>
+						<InspectorTab key={"advance"}>
 							{animationSettings(uniqueId, animation, setAttributes)}
 							{interactionSettings(uniqueId, interaction, setAttributes)}
 						</InspectorTab>
@@ -375,20 +300,14 @@ class Edit extends Component {
 						minLevel={1}
 						maxLevel={6}
 						selectedLevel={level}
-						onChange={(newLevel) =>
-							setAttributes({ level: newLevel, selector: `h${newLevel}` })
-						}
+						onChange={(newLevel) => setAttributes({ level: newLevel, selector: `h${newLevel}` })}
 					/>
-					<Toolbar label={__('Heading Options', 'qubely')}>
+					<Toolbar
+						className="components-dropdown components-dropdown-menu components-toolbar-group"
+						label={__("Heading Options", "qubely")}
+					>
 						<InlineToolbar
-							data={[
-								{
-									name: 'InlineSpacer',
-									key: 'spacer',
-									responsive: true,
-									unit: ['px', 'em', '%'],
-								},
-							]}
+							data={[{ name: "InlineSpacer", key: "spacer", responsive: true, unit: ["px", "em", "%"] }]}
 							{...this.props}
 							prevState={this.state}
 						/>
@@ -404,86 +323,66 @@ class Edit extends Component {
 					hideTablet,
 					hideMobile,
 					globalCss,
-					setAttributes,
+					setAttributes
 				)}
 
-				<div
-					className={`qubely-block-${uniqueId}${
-						className ? ` ${className}` : ''
-					}`}
-				>
+				<div className={`qubely-block-${uniqueId}${className ? ` ${className}` : ""}`}>
 					<div
-						onContextMenu={(event) =>
-							handleContextMenu(event, this.qubelyContextMenu.current)
-						}
+						onContextMenu={(event) => handleContextMenu(event, this.qubelyContextMenu.current)}
 						className={`qubely-block-heading ${
-							separatorStyle
-								? 'qubely-has-separator qubely-separator-position-' +
-								  separatorPosition
-								: ''
+							separatorStyle ? "qubely-has-separator qubely-separator-position-" + separatorPosition : ""
 						}`}
 					>
-						{subHeading == 1 && subHeadingPosition == 'before_title' && (
+						{subHeading == 1 && subHeadingPosition == "before_title" && (
 							<RichText
 								key="editable"
 								tagName={subHeadingTagName}
 								className="qubely-sub-heading-selector"
 								keepPlaceholderOnFocus
-								placeholder={__('Add Text...')}
-								onChange={(value) =>
-									setAttributes({ subHeadingContent: value })
-								}
+								placeholder={__("Add Text...")}
+								onChange={(value) => setAttributes({ subHeadingContent: value })}
 								value={subHeadingContent}
 							/>
 						)}
 						<div className="qubely-heading-container">
-							{separatorStyle !== '' &&
-							(separatorPosition == 'left' ||
-								separatorPosition == 'top' ||
-								separatorPosition == 'leftright') ? (
-								<div className="qubely-separator qubely-separator-before">
-									{renderSeparators}
-								</div>
+							{separatorStyle !== "" &&
+							(separatorPosition == "left" ||
+								separatorPosition == "top" ||
+								separatorPosition == "leftright") ? (
+								<div className="qubely-separator qubely-separator-before">{renderSeparators}</div>
 							) : (
-								''
+								""
 							)}
 							<RichText
 								key="editable"
 								tagName={selector}
 								className="qubely-heading-selector"
 								keepPlaceholderOnFocus
-								placeholder={__('Add Text...')}
+								placeholder={__("Add Text...")}
 								onChange={(value) => setAttributes({ content: value })}
 								value={content}
 							/>
-							{separatorStyle != '' &&
-							(separatorPosition == 'right' ||
-								separatorPosition == 'bottom' ||
-								separatorPosition == 'leftright') ? (
-								<div className="qubely-separator qubely-separator-after">
-									{renderSeparators}
-								</div>
+							{separatorStyle != "" &&
+							(separatorPosition == "right" ||
+								separatorPosition == "bottom" ||
+								separatorPosition == "leftright") ? (
+								<div className="qubely-separator qubely-separator-after">{renderSeparators}</div>
 							) : (
-								''
+								""
 							)}
 						</div>
-						{subHeading == 1 && subHeadingPosition == 'after_title' && (
+						{subHeading == 1 && subHeadingPosition == "after_title" && (
 							<RichText
 								key="editable"
 								tagName={subHeadingTagName}
 								className="qubely-sub-heading-selector"
 								keepPlaceholderOnFocus
-								placeholder={__('Add Text...')}
-								onChange={(value) =>
-									setAttributes({ subHeadingContent: value })
-								}
+								placeholder={__("Add Text...")}
+								onChange={(value) => setAttributes({ subHeadingContent: value })}
 								value={subHeadingContent}
 							/>
 						)}
-						<div
-							ref={this.qubelyContextMenu}
-							className={`qubely-context-menu-wraper`}
-						>
+						<div ref={this.qubelyContextMenu} className={`qubely-context-menu-wraper`}>
 							<ContextMenu
 								name={name}
 								clientId={clientId}
