@@ -10,6 +10,7 @@ const { Fragment } = wp.element;
 const { TextareaControl, PanelBody, SelectControl } = wp.components;
 
 //attributes
+//attributes
 export const globalAttributes = {
 	animation: {
 		type: "object",
@@ -49,6 +50,11 @@ export const globalAttributes = {
 		default: "0",
 		style: [{ selector: "{{QUBELY}} {z-index:{{globalZindex}};}" }],
 	},
+	hideDesktop: {
+		type: "boolean",
+		default: false,
+		style: [{ selector: "@media (min-width: 1200px){{{QUBELY}}{display:none;}}" }],
+	},
 	hideTablet: {
 		type: "boolean",
 		default: false,
@@ -72,6 +78,7 @@ export function globalSettingsPanel(
 	positionXaxis,
 	positionYaxis,
 	globalZindex,
+	hideDesktop,
 	hideTablet,
 	hideMobile,
 	globalCss,
@@ -130,11 +137,19 @@ export function globalSettingsPanel(
 				value={globalZindex}
 				onChange={(value) => setAttributes({ globalZindex: value })}
 			/>
+
+			<Toggle
+				label={__("Hide on Desktop")}
+				value={hideDesktop}
+				onChange={() => setAttributes({ hideDesktop: !hideDesktop })}
+			/>
+
 			<Toggle
 				label={__("Hide on Tablet")}
 				value={hideTablet}
 				onChange={() => setAttributes({ hideTablet: !hideTablet })}
 			/>
+
 			<Toggle
 				label={__("Hide on Phone")}
 				value={hideMobile}

@@ -72,7 +72,6 @@ class Edit extends Component {
 		};
 		this.qubelyContextMenu = createRef();
 	}
-
 	componentDidMount() {
 		const {
 			setAttributes,
@@ -88,11 +87,10 @@ class Edit extends Component {
 		}
 
 		const _client = clientId.substr(0, 6);
-
 		if (!uniqueId) {
-			setAttributes({ childRow: parentClientId ? true : false });
+			setAttributes({ uniqueId: _client, childRow: parentClientId ? true : false });
 		} else if (uniqueId && uniqueId != _client) {
-			setAttributes({ childRow: parentClientId ? true : false });
+			setAttributes({ uniqueId: _client, childRow: parentClientId ? true : false });
 		}
 	}
 
@@ -177,6 +175,7 @@ class Edit extends Component {
 				positionXaxis,
 				positionYaxis,
 				globalZindex,
+				hideDesktop,
 				hideTablet,
 				hideMobile,
 				globalCss,
@@ -194,16 +193,16 @@ class Edit extends Component {
 						</Button>
 						<div className="qubely-row-preset-title">{__("Select Column Layout")}</div>
 						<div className="qubely-row-preset-group">
-							{colOption.map((data, i) => (
-								<Tooltip key={i} text={data.label}>
+							{colOption.map((data) => (
+								<Tooltip text={data.label}>
 									<button
 										onClick={() => {
 											setAttributes({ columns: data.columns });
 											defaultLayout = data.layout;
 										}}
 									>
-										{data.layout.md.map((d, index) => (
-											<i key={index} style={{ width: d + "%" }} />
+										{data.layout.md.map((d) => (
+											<i style={{ width: d + "%" }} />
 										))}
 									</button>
 								</Tooltip>
@@ -498,6 +497,7 @@ class Edit extends Component {
 						positionXaxis,
 						positionYaxis,
 						globalZindex,
+						hideDesktop,
 						hideTablet,
 						hideMobile,
 						globalCss,
