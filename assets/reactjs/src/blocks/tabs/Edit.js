@@ -328,6 +328,7 @@ class Edit extends Component {
 				animation,
 				//global
 				globalCss,
+				hideDesktop,
 				hideTablet,
 				hideMobile,
 				interaction,
@@ -1094,6 +1095,7 @@ class Edit extends Component {
 					positionXaxis,
 					positionYaxis,
 					globalZindex,
+					hideDesktop,
 					hideTablet,
 					hideMobile,
 					globalCss,

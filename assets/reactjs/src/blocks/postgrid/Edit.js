@@ -333,14 +333,17 @@ class Edit extends Component {
 				selectPosition,
 				positionXaxis,
 				positionYaxis,
+				hideDesktop,
 				hideTablet,
 				hideMobile,
 				globalCss,
 			},
 		} = this.props;
+
 		const { device } = this.state;
 		const tag = `h${level}`;
 		let pages = 0;
+		
 		if (numberofPosts && numberofPosts.length) {
 			pages = Math.ceil(numberofPosts.length / postsToShow);
 		}
@@ -1545,6 +1548,7 @@ class Edit extends Component {
 					positionXaxis,
 					positionYaxis,
 					globalZindex,
+					hideDesktop,
 					hideTablet,
 					hideMobile,
 					globalCss,
