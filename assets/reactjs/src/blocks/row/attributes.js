@@ -192,6 +192,11 @@ const attributes = {
 	},
 
 	// Responsive
+	hideDesktop: {
+		type: "boolean",
+		default: false,
+		style: [{ selector: "{{QUBELY}}.qubely-section{ display:none; }" }],
+	},
 	hideTablet: {
 		type: "boolean",
 		default: false,

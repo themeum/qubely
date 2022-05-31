@@ -272,7 +272,10 @@ const handleObjects = (settings, key, cssSelector, updateStyle, isInline, sendBa
 
 const handleNonObjects = (settings, key, cssSelector, updateStyle, isInline, sendBack) => {
 	let temp = [];
-	if (key == "hideTablet" && isInline) {
+	if (key == "hideDesktop" && isInline) {
+		temp.push({ md: singleField(cssSelector, key, settings[key]) });
+		!sendBack && updateStyle(key, "Object", temp);
+	} else if (key == "hideTablet" && isInline) {
 		temp.push({ sm: singleField(cssSelector, key, settings[key]) });
 		!sendBack && updateStyle(key, "Object", temp);
 	} else if (key == "hideMobile" && isInline) {
