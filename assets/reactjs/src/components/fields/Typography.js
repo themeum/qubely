@@ -6,7 +6,7 @@ import classnames from "classnames";
 import icons from "../../helpers/icons";
 import ButtonGroup from "./ButtonGroup";
 import FontList from "./assets/FontList";
-const { Component, Fragment } = wp.element;
+const { Component, Fragment, createRef } = wp.element;
 const { Dropdown, Tooltip, SelectControl } = wp.components;
 const { createHigherOrderComponent } = wp.compose;
 
@@ -19,7 +19,9 @@ class Typography extends Component {
 			changeType: "",
 			showFontFamiles: false,
 			showFontWeights: false,
-		};
+        };
+        this.qubelyFontFamilyWrapper = createRef();
+        this.qubelySelectedFontFamily = createRef();
 	}
 	async componentDidMount() {
 		document.addEventListener("mousedown", this.handleClickOutside);
@@ -30,16 +32,16 @@ class Typography extends Component {
 	handleClickOutside = (event) => {
 		const { showFontFamiles, showFontWeights } = this.state;
 		if (showFontFamiles) {
-			const qubelyFontFamilyWrapper = this.refs.qubelyFontFamilyWrapper;
-			const qubelySelectedFontFamily = this.refs.qubelySelectedFontFamily;
+			const qubelyFontFamilyWrapper = this.qubelyFontFamilyWrapper.current;
+			const qubelySelectedFontFamily = this.qubelySelectedFontFamily.current;
 			if (qubelyFontFamilyWrapper && !qubelyFontFamilyWrapper.contains(event.target)) {
 				qubelySelectedFontFamily &&
 					!qubelySelectedFontFamily.contains(event.target) &&
 					this.setState({ showFontFamiles: false });
 			}
 		} else if (showFontWeights) {
-			const qubelyFontWeightWrapper = this.refs.qubelyFontWeightWrapper;
-			const qubelySelectedFontWeight = this.refs.qubelySelectedFontWeight;
+			const qubelyFontWeightWrapper = this.qubelyFontWeightWrapper.current;
+			const qubelySelectedFontWeight = this.qubelySelectedFontWeight.current;
 			if (qubelyFontWeightWrapper && !qubelyFontWeightWrapper.contains(event.target)) {
 				qubelySelectedFontWeight &&
 					!qubelySelectedFontWeight.contains(event.target) &&

@@ -99,7 +99,8 @@ class QubelyIconListEdit extends Component {
 						<div
 							className={`qubely-list-item-text-${index} qubely-text `}
 							id={`qubely-list-item-text-${index}`}
-							contenteditable="true"
+							contenteditable={true}
+							suppressContentEditableWarning={true}
 							placeholder={newListItemPlaceHolder}
 							onBlur={(event) => this.modifySpecificItem({ text: event.target.innerText }, index)}
 							onKeyPress={(event) => {

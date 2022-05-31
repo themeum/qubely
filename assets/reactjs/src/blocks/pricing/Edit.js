@@ -177,7 +177,8 @@ class Edit extends Component {
 				{currencyPosition == "before" && this.renderCurrencyContent()}
 				<span
 					className="qubely-pricing-price"
-					contenteditable="true"
+					contenteditable={true}
+					suppressContentEditableWarning={true}
 					onBlur={(e) => setAttributes({ price: e.target.innerText })}
 				>
 					{discount && <strike>{discountPrice}</strike>}
@@ -919,7 +920,8 @@ class Edit extends Component {
 						{enableBadge && (
 							<span
 								className={`qubely-pricing-badge qubely-badge-style-${badgeStyle} qubely-badge-size-${badgeSize}`}
-								contenteditable="true"
+								contenteditable={true}
+								suppressContentEditableWarning={true}
 								onBlur={(e) => setAttributes({ badge: e.target.innerText })}
 								onClick={() => this.handlePanelOpenings("Badge")}
 							>
