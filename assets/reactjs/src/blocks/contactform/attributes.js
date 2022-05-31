@@ -353,14 +353,14 @@ const attributes = {
 	emailReceiver: { type: "string", default: "" },
 	emailHeaders: {
 		type: "string",
-		default: "Reply-To: {{email}}\nReply-name: {{full-name }} \nCc: {{email}}\nBcc: admin@yourcompany.com",
+		default: "Reply-To: {{email}}\nReply-name: {{full-name}} \nCc: {{email}}\nBcc: admin@yourcompany.com",
 	},
 	emailFrom: { type: "string", default: `Your Company Name: admin@${qubely_admin.actual_url}` },
 	emailSubject: { type: "string", default: "{{subject}} | {{email}} | {{site-name}}" },
 	emailBody: {
 		type: "string",
 		default:
-			"<p><strong>From:</strong> {{full-name }}</p><strong>Email:</strong> {{email}}</p>\n<p><strong>Subject:</strong> {{subject}}</p>\n<p><strong>Message:</strong> {{message}}</p>",
+			"<p><strong>From:</strong> {{full-name}}</p><p><strong>Email:</strong> {{email}}</p>\n<p><strong>Subject:</strong> {{subject}}</p>\n<p><strong>Message:</strong> {{message}}</p>",
 	},
 	sourceOfCopiedStyle: { type: "boolean", default: false },
 };
