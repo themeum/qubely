@@ -355,7 +355,8 @@ class Edit extends Component {
 										{iconLabel && item.label && (
 											<div
 												className="qubely-social-label"
-												contenteditable="true"
+												contentEditable={true}
+												suppressContentEditableWarning={true}
 												onBlur={(e) =>
 													this.setSettings(selectedLabel, "label", e.target.innerHTML)
 												}

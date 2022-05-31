@@ -593,7 +593,8 @@ class Edit extends Component {
 										{!item.hideLabel && layout == "classic" && (
 											<label className="qubely-form-label">
 												<span
-													contenteditable="true"
+													contentEditable={true}
+													suppressContentEditableWarning={true}
 													onBlur={(e) => this.setSettings("label", e.target.innerText, index)}
 												>
 													{__(item.label)}{" "}
@@ -626,7 +627,8 @@ class Edit extends Component {
 										{layout == "material" && (
 											<label className="qubely-form-label">
 												<span
-													contenteditable="true"
+													contentEditable={true}
+													suppressContentEditableWarning={true}
 													onBlur={(e) => this.setSettings("label", e.target.innerText, index)}
 												>
 													{__(item.label)}{" "}
