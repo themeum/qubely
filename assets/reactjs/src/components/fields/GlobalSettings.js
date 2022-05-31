@@ -10,7 +10,6 @@ const { Fragment } = wp.element;
 const { TextareaControl, PanelBody, SelectControl } = wp.components;
 
 //attributes
-//attributes
 export const globalAttributes = {
 	animation: {
 		type: "object",
@@ -138,11 +137,11 @@ export function globalSettingsPanel(
 				onChange={(value) => setAttributes({ globalZindex: value })}
 			/>
 
-			<Toggle
+			{/* <Toggle
 				label={__("Hide on Desktop")}
 				value={hideDesktop}
 				onChange={() => setAttributes({ hideDesktop: !hideDesktop })}
-			/>
+			/> */}
 
 			<Toggle
 				label={__("Hide on Tablet")}
