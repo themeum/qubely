@@ -287,7 +287,11 @@ export const CssGenerator = (
 							}
 						}
 					} else {
-						if (key == "hideTablet") {
+						if (key == "hideDesktop") {
+							if (isInline) {
+								md = md.concat(singleField(cssSelecor, blockID, key, settings[key]));
+							}
+						} else if (key == "hideTablet") {
 							if (isInline) {
 								sm = sm.concat(singleField(cssSelecor, blockID, key, settings[key]));
 							}
@@ -310,7 +314,7 @@ export const CssGenerator = (
 
 	// Join CSS
 	if (md.length > 0) {
-		__CSS += md.join("");
+		__CSS += "@media (min-width: 1200px) {" + md.join("") + "}";
 	}
 	if (sm.length > 0) {
 		__CSS += "@media (max-width: 1199px) {" + sm.join("") + "}";
