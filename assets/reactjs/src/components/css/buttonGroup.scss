@@ -1,48 +1,48 @@
 .qubely-field-group-btn {
-  align-items: center;
-  label {
-    margin-bottom: 0;
-  }
-  .qubely-field-child {
-    display: flex;
-    justify-content: end;
-    align-items: center;
-    .qubley-group-button {
-      display: inline-block;
-      white-space: nowrap;
-      padding: 0px 9px;
-      color: #8d96a0;
-      font-size: 12px;
-      border-top: 1px solid #d6d9dd;
-      border-bottom: 1px solid #d6d9dd;
-      border-left: 1px solid #d6d9dd;
-      text-transform: capitalize;
-      cursor: pointer;
-      box-shadow: none;
-      line-height: 26px;
-      height: 26px;
-      &.extra-padding {
-        padding: 0px 10px;
-        font-weight: bold;
-        font-size: 15px;
-      }
-      &:last-child {
-        border-bottom-right-radius: 3px;
-        border-top-right-radius: 3px;
-        border-right: 1px solid #d6d9dd;
-      }
-      &:first-child {
-        border-top-left-radius: 3px;
-        border-bottom-left-radius: 3px;
-      }
-      &.qubley-active-group-btn {
-        color: #2184f9;
-        background: #d2e7ff;
-        border-color: #a9d0ff;
-        & + .qubley-group-button{
-          border-left-color: #a9d0ff;
-        }
-      }
-    }
-  }
+	align-items: center;
+	label {
+		margin-bottom: 0;
+	}
+	.qubely-field-child {
+		display: flex;
+		justify-content: end;
+		align-items: center;
+		.qubley-group-button {
+			display: inline-block;
+			white-space: nowrap;
+			padding: 0px 9px;
+			color: #8d96a0;
+			font-size: 12px;
+			border-top: 1px solid #d6d9dd;
+			border-bottom: 1px solid #d6d9dd;
+			border-left: 1px solid #d6d9dd;
+			text-transform: capitalize;
+			cursor: pointer;
+			box-shadow: none;
+			line-height: 26px;
+			height: 26px;
+			&.extra-padding {
+				padding: 0px 10px;
+				font-weight: bold;
+				font-size: 15px;
+			}
+			&:last-child {
+				border-bottom-right-radius: 3px;
+				border-top-right-radius: 3px;
+				border-right: 1px solid #d6d9dd;
+			}
+			&:first-child {
+				border-top-left-radius: 3px;
+				border-bottom-left-radius: 3px;
+			}
+			&.qubley-active-group-btn {
+				color: #2184f9;
+				background: #d2e7ff;
+				border-color: #a9d0ff;
+				& + .qubley-group-button {
+					border-left-color: #a9d0ff;
+				}
+			}
+		}
+	}
 }

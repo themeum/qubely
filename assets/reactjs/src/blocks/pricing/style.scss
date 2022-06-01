@@ -1,29 +1,29 @@
-.qubely-block-pricing { 
+.qubely-block-pricing {
 	transition: 400ms;
 	position: relative;
-    .qubely-list {
-        list-style: none;
-        padding: 0;
+	.qubely-list {
+		list-style: none;
+		padding: 0;
 		margin: 0;
-		[contenteditable=true]:empty:before {
+		[contenteditable="true"]:empty:before {
 			content: attr(placeholder);
 			color: gray;
 			padding: 0px 5px 0px 5px;
 			display: block;
 		}
-        .qubely-list-li {
-            position: relative;
-            margin: 0;
-            display: block;
-            transition: color 400ms, background-color 400ms, border-color 400ms, box-shadow 400ms;
+		.qubely-list-li {
+			position: relative;
+			margin: 0;
+			display: block;
+			transition: color 400ms, background-color 400ms, border-color 400ms, box-shadow 400ms;
 			.qubely-list-item-icon {
 				transition: color 400ms;
 			}
 			.qubely-list-item {
 				display: inline-block;
 				position: relative;
-				>span,
-				>div {
+				> span,
+				> div {
 					display: inline-block;
 				}
 
@@ -34,7 +34,7 @@
 					height: 18px;
 					line-height: 20px;
 					text-align: center;
-					background: rgba(0, 0, 0, .8);
+					background: rgba(0, 0, 0, 0.8);
 					color: #fff;
 					border-radius: 10px;
 					position: absolute;
@@ -46,7 +46,6 @@
 			}
 
 			&.qubely-list-li-editor {
-			
 			}
 
 			&:hover {
@@ -113,8 +112,8 @@
 			display: block;
 			position: relative;
 
-			>span:before,
-			>span:after,
+			> span:before,
+			> span:after,
 			&:before,
 			&:after {
 				content: " ";
@@ -127,8 +126,8 @@
 				line-height: 27px;
 				margin-left: -10px;
 				margin-right: -10px;
-				>span:before,
-				>span:after,
+				> span:before,
+				> span:after,
 				&:before,
 				&:after {
 					bottom: -10px;
@@ -141,8 +140,8 @@
 				line-height: 37px;
 				margin-left: -15px;
 				margin-right: -15px;
-				>span:before,
-				>span:after,
+				> span:before,
+				> span:after,
 				&:before,
 				&:after {
 					bottom: -15px;
@@ -155,8 +154,8 @@
 				line-height: 46px;
 				margin-left: -20px;
 				margin-right: -20px;
-				>span:before,
-				>span:after,
+				> span:before,
+				> span:after,
 				&:before,
 				&:after {
 					bottom: -20px;
@@ -164,29 +163,28 @@
 				}
 			}
 
-			>span:before,
+			> span:before,
 			&:before {
 				left: 0;
 			}
 
-			>span:after,
+			> span:after,
 			&:after {
 				right: 0;
 			}
 
-			>span:before,
-			>span:after {
+			> span:before,
+			> span:after {
 				z-index: 1;
 			}
 
-			>span:before {
-				border-color: rgba(0, 0, 0, .15) rgba(0, 0, 0, .15) transparent transparent;
-			}
-			
-			>span:after {
-				border-color: rgba(0, 0, 0, .15) transparent transparent rgba(0, 0, 0, .15);
+			> span:before {
+				border-color: rgba(0, 0, 0, 0.15) rgba(0, 0, 0, 0.15) transparent transparent;
 			}
 
+			> span:after {
+				border-color: rgba(0, 0, 0, 0.15) transparent transparent rgba(0, 0, 0, 0.15);
+			}
 		}
 
 		&.qubely-badge-style-4 {
@@ -194,7 +192,7 @@
 			display: block;
 			height: 40px;
 			line-height: 40px;
-			
+
 			&.qubely-badge-size-small {
 				height: 27px;
 				line-height: 27px;
@@ -239,7 +237,7 @@
 			display: block;
 			line-height: 1;
 
-			>span {
+			> span {
 				display: inline-block;
 				transform: rotate(90deg);
 			}

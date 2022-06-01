@@ -1,166 +1,163 @@
 .qubely-block-table-of-contents {
-  .qubely-table-of-contents{
-    overflow: hidden;
-    &.qubely-toc-collapsed{
-      .qubely-table-of-contents-header{
-        border-bottom-width: 0;
-      }
-      .qubely-table-of-contents-body{
-        display: none;
-      }
-    }
-  }
-  // toc header
+	.qubely-table-of-contents {
+		overflow: hidden;
+		&.qubely-toc-collapsed {
+			.qubely-table-of-contents-header {
+				border-bottom-width: 0;
+			}
+			.qubely-table-of-contents-body {
+				display: none;
+			}
+		}
+	}
+	// toc header
 
-  .qubely-table-of-contents-header{
-    display: flex;
-    align-items: center;
-    position: relative;
-    &.qubely-justify-start{
-      justify-content: flex-start;
-    }
-    &.qubely-justify-between{
-      justify-content: space-between;
-    }
-    &.qubely-justify-center{
-      justify-content: center;
-    }
-    &.qubely-justify-end{
-      justify-content: flex-end;
-    }
-    .qubely-table-of-contents-toggle{
-      box-sizing: border-box;
-      margin-left: 5px;
-      .qubely-toc-close-icon,
-      .qubely-toc-close-text{
-        display: none;
-      }
-      &.qubely-toc-collapsed {
-        .qubely-toc-open-icon,
-        .qubely-toc-open-text{
-          display: none;
-        }
-        .qubely-toc-close-icon,
-        .qubely-toc-close-text{
-          display: block;
-        }
-      }
-      a{
-        text-decoration: none;
-        display: block;
-      }
-    }
-    &.qubely-toc-header-frontend .qubely-table-of-contents-toggle a::after{
-      content: '';
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      z-index: 2;
-      left: 0;
-      top: 0;
-    }
-  }
+	.qubely-table-of-contents-header {
+		display: flex;
+		align-items: center;
+		position: relative;
+		&.qubely-justify-start {
+			justify-content: flex-start;
+		}
+		&.qubely-justify-between {
+			justify-content: space-between;
+		}
+		&.qubely-justify-center {
+			justify-content: center;
+		}
+		&.qubely-justify-end {
+			justify-content: flex-end;
+		}
+		.qubely-table-of-contents-toggle {
+			box-sizing: border-box;
+			margin-left: 5px;
+			.qubely-toc-close-icon,
+			.qubely-toc-close-text {
+				display: none;
+			}
+			&.qubely-toc-collapsed {
+				.qubely-toc-open-icon,
+				.qubely-toc-open-text {
+					display: none;
+				}
+				.qubely-toc-close-icon,
+				.qubely-toc-close-text {
+					display: block;
+				}
+			}
+			a {
+				text-decoration: none;
+				display: block;
+			}
+		}
+		&.qubely-toc-header-frontend .qubely-table-of-contents-toggle a::after {
+			content: "";
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			z-index: 2;
+			left: 0;
+			top: 0;
+		}
+	}
 
+	&.qubely-align-left {
+		text-align: left;
+	}
+	&.qubely-align-center {
+		text-align: center;
+	}
+	&.qubely-align-right {
+		text-align: right;
+	}
 
-  &.qubely-align-left {
-    text-align: left;
-  }
-  &.qubely-align-center {
-    text-align: center;
-  }
-  &.qubely-align-right {
-    text-align: right;
-  }
+	.ordered-list,
+	.unordered-list {
+		text-align: left;
+		margin: 0;
+		padding: 0 0 0 1.5em;
+		ul,
+		ol {
+			padding-left: 20px;
+			margin: 0;
+			li {
+				position: relative;
+			}
+		}
+	}
 
-  .ordered-list,
-  .unordered-list {
-    text-align: left;
-    margin: 0;
-    padding: 0 0 0 1.5em;
-    ul,
-    ol{
-      padding-left: 20px;
-      margin: 0;
-      li{
-        position: relative;
-      }
-    }
-  }
+	ul.child-list {
+		list-style-type: circle;
+	}
 
-  ul.child-list {
-    list-style-type: circle;
-  }
-
-  ol {
-    counter-reset: item;
-    list-style: none !important;
-    > li {
-      counter-increment: item;
-      list-style-type: none;
-    }
-    li{
-      position: relative;
-      &::before{
-        content: counters(item, ".") ". ";
-        position: absolute;
-        right: calc(100% + 12px);
-        word-break: initial;
-      }
-      ol > li::before{
-        content: counters(item, ".") " ";
-        word-break: initial;
-      }
-    }
-  }
-
+	ol {
+		counter-reset: item;
+		list-style: none !important;
+		> li {
+			counter-increment: item;
+			list-style-type: none;
+		}
+		li {
+			position: relative;
+			&::before {
+				content: counters(item, ".") ". ";
+				position: absolute;
+				right: calc(100% + 12px);
+				word-break: initial;
+			}
+			ol > li::before {
+				content: counters(item, ".") " ";
+				word-break: initial;
+			}
+		}
+	}
 }
 
-.qubely-back-to-top-button{
-  position: fixed;
-  bottom: 50px;
-  right: 310px;
-  z-index: 99999999;
-  background: red;
-  width: 40px;
-  height: 40px;
-  text-align: center;
-  text-decoration: none !important;
-  opacity: 0;
-  visibility: hidden;
-  transition: 300ms;
-  &.qubely-show-scroll{
-    opacity: 1;
-    visibility: visible;
-  }
-  &:focus,
-  &:active,
-  &:hover{
-    color: inherit;
-    text-decoration: none !important;
-  }
+.qubely-back-to-top-button {
+	position: fixed;
+	bottom: 50px;
+	right: 310px;
+	z-index: 99999999;
+	background: red;
+	width: 40px;
+	height: 40px;
+	text-align: center;
+	text-decoration: none !important;
+	opacity: 0;
+	visibility: hidden;
+	transition: 300ms;
+	&.qubely-show-scroll {
+		opacity: 1;
+		visibility: visible;
+	}
+	&:focus,
+	&:active,
+	&:hover {
+		color: inherit;
+		text-decoration: none !important;
+	}
 }
 
-
-.block-editor-page .qubely-back-to-top-button{
-  margin-right: 280px;
-  margin-left: 160px;
-  opacity: 1;
-  visibility: visible;
+.block-editor-page .qubely-back-to-top-button {
+	margin-right: 280px;
+	margin-left: 160px;
+	opacity: 1;
+	visibility: visible;
 }
 
-.qubely-toc-allowed-headings{
-  display: flex;
-  flex-wrap: wrap;
-  margin-right: -12px;
-  .components-base-control{
-    margin: 9px 15px 4px 0 !important;
-    font-weight: 400;
-    font-size: 14px;
-    border: 1px solid #c7c7c7;
-    padding: 5px 10px;
-    border-radius: 3px;
-    .components-base-control__field{
-      margin: 0;
-    }
-  }
+.qubely-toc-allowed-headings {
+	display: flex;
+	flex-wrap: wrap;
+	margin-right: -12px;
+	.components-base-control {
+		margin: 9px 15px 4px 0 !important;
+		font-weight: 400;
+		font-size: 14px;
+		border: 1px solid #c7c7c7;
+		padding: 5px 10px;
+		border-radius: 3px;
+		.components-base-control__field {
+			margin: 0;
+		}
+	}
 }

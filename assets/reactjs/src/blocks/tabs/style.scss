@@ -34,13 +34,13 @@
 				align-items: center;
 				&.nav-layout-one {
 					flex-direction: column;
-					&.align-left{
+					&.align-left {
 						align-items: flex-start;
 					}
-					&.align-center{
+					&.align-center {
 						align-items: center;
 					}
-					&.align-right{
+					&.align-right {
 						align-items: flex-end;
 					}
 				}
@@ -94,6 +94,9 @@
 			z-index: 1;
 			cursor: pointer;
 		}
+	}
+	.qubely-tab-body {
+		display: flex;
 	}
 
 	&.qubely-tab-style-tabs {

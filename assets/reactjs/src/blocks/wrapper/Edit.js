@@ -1,7 +1,7 @@
 const { __ } = wp.i18n;
 const { Component, Fragment, createRef } = wp.element;
-const { PanelBody, Toolbar } = wp.components
-const { InspectorControls, BlockControls, InnerBlocks } = wp.blockEditor
+const { PanelBody, Toolbar } = wp.components;
+const { InspectorControls, BlockControls, InnerBlocks } = wp.blockEditor;
 const {
 	Tabs,
 	Tab,
@@ -11,41 +11,22 @@ const {
 	BoxShadow,
 	Background,
 	BorderRadius,
-	gloalSettings: {
-		globalSettingsPanel,
-		animationSettings,
-		interactionSettings
-	},
-	Inline: {
-		InlineToolbar
-	},
+	gloalSettings: { globalSettingsPanel, animationSettings, interactionSettings },
+	Inline: { InlineToolbar },
 	withCSSGenerator,
 	InspectorTabs,
 	InspectorTab,
-	ContextMenu: {
-        ContextMenu,
-        handleContextMenu
-    },
-} = wp.qubelyComponents
+	ContextMenu: { ContextMenu, handleContextMenu },
+} = wp.qubelyComponents;
 
 class Edit extends Component {
 	constructor() {
 		super(...arguments);
 		this.state = {
-			device: 'md',
-			spacer: true
+			device: "md",
+			spacer: true,
 		};
 		this.qubelyContextMenu = createRef();
-	}
-
-	componentDidMount() {
-		const { setAttributes, clientId, attributes: { uniqueId } } = this.props
-		const _client = clientId.substr(0, 6)
-		if (!uniqueId) {
-			setAttributes({ uniqueId: _client });
-		} else if (uniqueId && uniqueId != _client) {
-			setAttributes({ uniqueId: _client });
-		}
 	}
 
 	render() {
@@ -77,81 +58,124 @@ class Edit extends Component {
 				hideTablet,
 				hideMobile,
 				globalCss,
-				interaction
-			}
-		} = this.props
-		const { device } = this.state
+				interaction,
+			},
+		} = this.props;
+		const { device } = this.state;
 
 		return (
 			<Fragment>
 				<InspectorControls key="inspector">
-					<InspectorTabs tabs={['style', 'advance']}>
-						<InspectorTab key={'style'}>
-							<PanelBody title={__('Background')} initialOpen={true}>
+					<InspectorTabs tabs={["style", "advance"]}>
+						<InspectorTab key={"style"}>
+							<PanelBody title={__("Background")} initialOpen={true}>
 								<Tabs>
-									<Tab tabTitle={__('Normal')}>
+									<Tab tabTitle={__("Normal")}>
 										<Background
 											externalImage
 											value={bgColor}
-											label={__('Background')}
-											sources={['image', 'gradient']}
-											onChange={val => setAttributes({ bgColor: val })}
+											label={__("Background")}
+											sources={["image", "gradient"]}
+											onChange={(val) => setAttributes({ bgColor: val })}
 										/>
 										<Padding
-											label={__('Padding')}
+											label={__("Padding")}
 											value={padding}
 											min={0}
 											max={300}
 											responsive
 											device={device}
-											unit={['px', 'em', '%']}
-											onChange={val => setAttributes({ padding: val })}
-											onDeviceChange={value => this.setState({ device: value })}
+											unit={["px", "em", "%"]}
+											onChange={(val) => setAttributes({ padding: val })}
+											onDeviceChange={(value) => this.setState({ device: value })}
 										/>
-										<Border label={__('Border')} value={border} onChange={val => setAttributes({ border: val })} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
-										<BoxShadow label={__('Box-Shadow')} value={bgShadow} onChange={(value) => setAttributes({ bgShadow: value })} />
-										<BorderRadius label={__('Radius')} value={borderRadius} onChange={(value) => setAttributes({ borderRadius: value })} min={0} max={100} unit={['px', 'em', '%']} responsive device={device} onDeviceChange={value => this.setState({ device: value })} />
+										<Border
+											label={__("Border")}
+											value={border}
+											onChange={(val) => setAttributes({ border: val })}
+											responsive
+											device={device}
+											onDeviceChange={(value) => this.setState({ device: value })}
+										/>
+										<BoxShadow
+											label={__("Box-Shadow")}
+											value={bgShadow}
+											onChange={(value) => setAttributes({ bgShadow: value })}
+										/>
+										<BorderRadius
+											label={__("Radius")}
+											value={borderRadius}
+											onChange={(value) => setAttributes({ borderRadius: value })}
+											min={0}
+											max={100}
+											unit={["px", "em", "%"]}
+											responsive
+											device={device}
+											onDeviceChange={(value) => this.setState({ device: value })}
+										/>
 									</Tab>
-									<Tab tabTitle={__('Hover')}>
-										<Background label={__('Background')} sources={['image', 'gradient']} value={bgColorHover} onChange={val => setAttributes({ bgColorHover: val })} />
-										{(border.openBorder != undefined && border.openBorder == 1) &&
-											<Color label={__('Border Color')} value={bgBorderColorHover} onChange={(value) => setAttributes({ bgBorderColorHover: value })} />
-										}
-										<BoxShadow label={__('Box-Shadow')} value={bgShadowHover} onChange={(value) => setAttributes({ bgShadowHover: value })} />
+									<Tab tabTitle={__("Hover")}>
+										<Background
+											label={__("Background")}
+											sources={["image", "gradient"]}
+											value={bgColorHover}
+											onChange={(val) => setAttributes({ bgColorHover: val })}
+										/>
+										{border.openBorder != undefined && border.openBorder == 1 && (
+											<Color
+												label={__("Border Color")}
+												value={bgBorderColorHover}
+												onChange={(value) => setAttributes({ bgBorderColorHover: value })}
+											/>
+										)}
+										<BoxShadow
+											label={__("Box-Shadow")}
+											value={bgShadowHover}
+											onChange={(value) => setAttributes({ bgShadowHover: value })}
+										/>
 									</Tab>
 								</Tabs>
 							</PanelBody>
 						</InspectorTab>
-						<InspectorTab key={'advance'}>
+						<InspectorTab key={"advance"}>
 							{animationSettings(uniqueId, animation, setAttributes)}
 							{interactionSettings(uniqueId, interaction, setAttributes)}
 						</InspectorTab>
 					</InspectorTabs>
-
 				</InspectorControls>
 
 				<BlockControls>
-					<Toolbar>
+					<Toolbar
+						className="components-dropdown components-dropdown-menu components-toolbar-group"
+						label={__("Wrapper Options", "qubely")}
+					>
 						<InlineToolbar
-							data={[{ name: 'InlineSpacer', key: 'spacer', responsive: true, unit: ['px', 'em', '%'] }]}
+							data={[{ name: "InlineSpacer", key: "spacer", responsive: true, unit: ["px", "em", "%"] }]}
 							{...this.props}
 							prevState={this.state}
 						/>
 					</Toolbar>
 				</BlockControls>
 
-				{globalSettingsPanel(enablePosition, selectPosition, positionXaxis, positionYaxis, globalZindex, hideTablet, hideMobile, globalCss, setAttributes)}
+				{globalSettingsPanel(
+					enablePosition,
+					selectPosition,
+					positionXaxis,
+					positionYaxis,
+					globalZindex,
+					hideTablet,
+					hideMobile,
+					globalCss,
+					setAttributes
+				)}
 
-				<div className={`qubely-block-${uniqueId}${className ? ` ${className}` : ''}`}>
+				<div className={`qubely-block-${uniqueId}${className ? ` ${className}` : ""}`}>
 					<div
 						className="qubely-block-wrapper-block"
-						onContextMenu={event => handleContextMenu(event, this.qubelyContextMenu.current)}
+						onContextMenu={(event) => handleContextMenu(event, this.qubelyContextMenu.current)}
 					>
 						<InnerBlocks templateLock={false} />
-						<div
-							ref={this.qubelyContextMenu}
-							className={`qubely-context-menu-wraper`}
-						>
+						<div ref={this.qubelyContextMenu} className={`qubely-context-menu-wraper`}>
 							<ContextMenu
 								name={name}
 								clientId={clientId}

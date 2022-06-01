@@ -35,7 +35,7 @@ if (! class_exists('QUBELY_Initial_Setup')) {
 
         // Wordpress Error Notice
         public static function wordpress_error_notice(){
-            $message = sprintf( esc_html__( 'QUBELY Blocks requires WordPress version %s or more.', 'qubely'), '4.7' );
+            $message = sprintf( esc_html__( 'QUBELY Blocks requires WordPress version %s or more.', 'qubely'), '4.8' );
             $html_message = sprintf( '<div class="notice notice-error is-dismissible">%s</div>', wpautop( $message ) );
             echo wp_kses_post( $html_message );
         }

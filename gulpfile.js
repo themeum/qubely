@@ -32,9 +32,11 @@ function makeBuild() {
         '!./**/*.zip',
         '!./gulpfile.js',
         '!./readme.md',
+        '!./changelog.md',
         '!./LICENSE.txt',
         '!./package.json',
         '!./package-lock.json',
+        '!./yarn.lock',
     ]).pipe(dest('build/qubely/'));
 }
 

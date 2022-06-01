@@ -3,7 +3,7 @@
  */
 
 
-jQuery(function ($) {
+ jQuery(function ($) {
     $('.qubely-block-contact-form form.qubely-form:not(.qubely-form-ready)').each(function () {
         const $form = $(this);
         $form.addClass('qubely-form-ready');
@@ -16,7 +16,9 @@ jQuery(function ($) {
         $form.submit((e) => {
             e.preventDefault();
             let formData = $form.serializeArray();
-             formData = formData.map(({ name, value }) => {
+            // Add security nonce.
+            formData.push( { name: 'security', value: qubely_urls.nonce} );
+            formData = formData.map(({ name, value }) => {
                 if (name === "qubely-form-input[message*]") {
                     let temp = value.replace(/(?:\r\n|\r|\n)/g, '<br>');
                     return ({ name, value: temp })
@@ -96,7 +98,7 @@ jQuery(function ($) {
 
     //FORM VALIDATION
     function checkFormValidation($form) {
-        const fieldErrorMessage = atob($form.find('input[name="field-error-message"]').val());
+        const fieldErrorMessage = $form.find('input[name="field-error-message"]').val();
         let onChange = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
         let isRequired = false;
         $form.find(' input[type=text], input[type=email], input[type=radio], input[type=checkbox], textarea, select').each(function () {
