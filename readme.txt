@@ -3,7 +3,7 @@ Contributors: themeum
 Donate link: https://www.themeum.com
 Tags: blocks, gutenberg, gutenberg blocks, editor, block, page builder
 Requires at least: 5.0
-Tested up to: 5.9
+Tested up to: 6.0
 Stable tag: 1.8.0
 Requires PHP: 7.0
 License: GPL-2.0+
