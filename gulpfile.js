@@ -36,6 +36,7 @@ function makeBuild() {
         '!./LICENSE.txt',
         '!./package.json',
         '!./package-lock.json',
+        '!./yarn.lock',
     ]).pipe(dest('build/qubely/'));
 }
 
