@@ -55,6 +55,7 @@ typings/
 
 # Yarn Integrity file
 .yarn-integrity
+yarn.lock
 
 # dotenv environment variables file
 .env
@@ -77,8 +78,8 @@ assets/reactjs/node_modules/
 package-lock.json
 composer.lock
 .idea/
-.vscode/
 .DS_Store
 assets/reactjs/yarn.lock
 *.zip
 qubely/*
+yarn.lock

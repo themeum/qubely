@@ -1,141 +1,141 @@
 .qubely-block-accordion {
-    > .wp-block-qubely-accordion-item {
-        &:last-child {
-            padding-bottom: 0;
-            border-bottom: 0;
-            margin-bottom: 0;
-        }
-    }
+	> .wp-block-qubely-accordion-item {
+		&:last-child {
+			padding-bottom: 0;
+			border-bottom: 0;
+			margin-bottom: 0;
+		}
+	}
 
-    .qubely-accordion-item {
-        display: block;
-        .components-button:focus:enabled {
-            background-color: #ed0b0b;
-        }
-    }
+	.qubely-accordion-item {
+		display: block;
+		.components-button:focus:enabled {
+			background-color: #ed0b0b;
+		}
+	}
 
-    .qubely-accordion-panel {
-        .qubely-accordion-panel-handler {
-            display: flex;
-            align-items: center;
-            padding: 0;
-            margin: 0;
-            box-shadow: none;
-            font-size: inherit;
-            line-height: 1.6;
-            cursor: pointer;
-            &:focus,
-            &:active,
-            &:hover {
-                color: inherit;
-                text-decoration: none;
-                text-transform: none;
-                font-style: normal;
-                outline: none;
-                box-shadow: none;
-            }
-        }
+	.qubely-accordion-panel {
+		.qubely-accordion-panel-handler {
+			display: flex;
+			align-items: center;
+			padding: 0;
+			margin: 0;
+			box-shadow: none;
+			font-size: inherit;
+			line-height: 1.6;
+			cursor: pointer;
+			&:focus,
+			&:active,
+			&:hover {
+				color: inherit;
+				text-decoration: none;
+				text-transform: none;
+				font-style: normal;
+				outline: none;
+				box-shadow: none;
+			}
+		}
 
-        &.qubely-icon-position-right {
-            .qubely-accordion-panel-handler {
-                justify-content: space-between;
-            }
-        }
-    }
+		&.qubely-icon-position-right {
+			.qubely-accordion-panel-handler {
+				justify-content: space-between;
+			}
+		}
+	}
 
-    .qubely-accordion-body {
-        display: none;
-        p {
-            &:first-child {
-                margin-top: 0;
-            }
-            &:last-child {
-                margin-bottom: 0;
-            }
-        }
-    }
+	.qubely-accordion-body {
+		display: none;
+		p {
+			&:first-child {
+				margin-top: 0;
+			}
+			&:last-child {
+				margin-bottom: 0;
+			}
+		}
+	}
 
-    .qubely-accordion-active {
-        .qubely-accordion-body {
-            display: block;
-        }
-        .qubely-accordion-icon {
-            &.fa-plus:before {
-                content: "\f068";
-            }
-            &.fa-plus-circle:before {
-                content: "\f056";
-            }
-            &.fa-plus-square-o:before {
-                content: "\f147";
-            }
-            &.fa-plus-square:before {
-                content: "\f146";
-            }
-            &.fa-arrow-circle-o-right:before {
-                content: "\f01a";
-            }
-            &.fa-arrow-circle-right:before {
-                content: "\f0ab";
-            }
-            &.fa-angle-right:before {
-                content: "\f107";
-            }
-            &.fa-angle-double-right:before {
-                content: "\f103";
-            }
-            &.fa-chevron-right:before {
-                content: "\f078";
-            }
-            &.fa-chevron-circle-right:before {
-                content: "\f13a";
-            }
-            &.fa-caret-right:before {
-                content: "\f0d7";
-            }
-        }
-    }
+	.qubely-accordion-active {
+		.qubely-accordion-body {
+			display: block;
+		}
+		.qubely-accordion-icon {
+			&.fa-plus:before {
+				content: "\f068";
+			}
+			&.fa-plus-circle:before {
+				content: "\f056";
+			}
+			&.fa-plus-square-o:before {
+				content: "\f147";
+			}
+			&.fa-plus-square:before {
+				content: "\f146";
+			}
+			&.fa-arrow-circle-o-right:before {
+				content: "\f01a";
+			}
+			&.fa-arrow-circle-right:before {
+				content: "\f0ab";
+			}
+			&.fa-angle-right:before {
+				content: "\f107";
+			}
+			&.fa-angle-double-right:before {
+				content: "\f103";
+			}
+			&.fa-chevron-right:before {
+				content: "\f078";
+			}
+			&.fa-chevron-circle-right:before {
+				content: "\f13a";
+			}
+			&.fa-caret-right:before {
+				content: "\f0d7";
+			}
+		}
+	}
 }
 
 // hide drag handler from accordion items
 [data-type="qubely/accordion-item"] > .editor-block-mover > .editor-block-mover__control-drag-handle {
-    display: none;
+	display: none;
 }
 .qubely-accordion-add-item {
-    padding-bottom: 10px;
-    .components-button {
-        margin: 0 auto;
-        background: #f8f8f8;
-        padding: 10px 15px;
-        border: 1px solid #efefef;
-        transition: 400ms;
-        &:hover {
-            box-shadow: none !important;
-            background: #e5e5e5 !important;
-            border: 1px solid #e2e2e2 !important;
-        }
-        svg {
-            margin-right: 10px;
-        }
-    }
+	padding-bottom: 10px;
+	.components-button {
+		margin: 0 auto;
+		background: #f8f8f8;
+		padding: 10px 15px;
+		border: 1px solid #efefef;
+		transition: 400ms;
+		&:hover {
+			box-shadow: none !important;
+			background: #e5e5e5 !important;
+			border: 1px solid #e2e2e2 !important;
+		}
+		svg {
+			margin-right: 10px;
+		}
+	}
 }
 .qubely-accordion-item-remove-button {
-    height: 20px;
-    width: 20px;
-    position: absolute;
-    top: -10px;
-    font-size: 11px;
-    color: #fff !important;
-    background: #ed0b0b;
-    border-radius: 50%;
-    right: -10px;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    i {
-        font-size: 11px !important;
-    }
+	height: 20px;
+	width: 20px;
+	position: absolute;
+	top: -10px;
+	font-size: 11px;
+	color: #fff !important;
+	background: #ed0b0b;
+	border-radius: 50%;
+	right: -10px;
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+	i {
+		font-size: 11px !important;
+	}
 }
 .qubely-accordion-item-remove-button i {
-    font-style: normal;
+	font-style: normal;
 }

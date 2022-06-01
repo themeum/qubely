@@ -1,119 +1,119 @@
 .qubely-block-info-box {
-    transition: border-color 400ms, background-color 400ms, box-shadow 400ms;
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-        padding: 0;
-        margin: 0;
-        line-height: 1;
-        position: relative;
-        &::before,
-        &::after {
-            display: none !important;
-        }
+	transition: border-color 400ms, background-color 400ms, box-shadow 400ms;
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		padding: 0;
+		margin: 0;
+		line-height: 1;
+		position: relative;
+		&::before,
+		&::after {
+			display: none !important;
+		}
 
-        .qubely-text-has-bgcolor {
-            padding-left: 10px;
-            padding-right: 10px;
-        }
-    }
+		.qubely-text-has-bgcolor {
+			padding-left: 10px;
+			padding-right: 10px;
+		}
+	}
 
-    .qubely-info-box-media {
-        display: inline-block;
-        line-height: 1;
-        text-align: center;
-        overflow: hidden;
-        i,
-        span,
-        img {
-            font-style: normal;
-            position: relative;
-            display: inline-block;
-            transition: 400ms;
-            object-fit: cover;
-        }
+	.qubely-info-box-media {
+		display: inline-block;
+		text-align: center;
+		overflow: hidden;
+		i,
+		span,
+		img {
+			font-style: normal;
+			position: relative;
+			display: inline-block;
+			transition: color 400ms, background-color 400ms, border-color 400ms, border-width 400ms;
+			object-fit: cover;
+		}
 
-        img {
-            max-width: 100%;
-            height: auto;
-        }
+		img {
+			max-width: 100%;
+			height: auto;
+		}
 
-        &.qubely-media-has-bg {
-            i,
-            .qubely-info-box-number {
-                min-width: 1em;
-                height: 1em;
-                white-space: nowrap;
-                &:before {
-                    position: absolute;
-                    left: 50%;
-                    transform: translateX(-50%);
-                }
-            }
-        }
-    }
+		&.qubely-media-has-bg {
+			display: inline-flex;
+			i,
+			.qubely-info-box-number {
+				min-width: 1em;
+				height: 1em;
+				white-space: nowrap;
+				&:before {
+					position: absolute;
+					left: 50%;
+					transform: translateX(-50%);
+				}
+			}
+		}
+	}
 
-    .qubely-info-box-title {
-        margin: 0 !important;
-    }
+	.qubely-info-box-title {
+		margin: 0 !important;
+	}
 
-    .qubely-info-box-media,
-    .qubely-info-box-title,
-    .qubely-info-box-text {
-        transition: color 400ms, border-color 400ms, background-color 400ms, box-shadow 400ms;
-    }
+	.qubely-info-box-media,
+	.qubely-info-box-title,
+	.qubely-info-box-text {
+		transition: color 400ms, border-color 400ms, background-color 400ms, box-shadow 400ms;
+	}
 
-    &.qubely-info-box-layout-2,
-    &.qubely-info-box-layout-3 {
-        display: -ms-flexbox;
-        display: flex;
-        -ms-flex-align: start;
-        align-items: flex-start;
+	&.qubely-info-box-layout-2,
+	&.qubely-info-box-layout-3 {
+		display: -ms-flexbox;
+		display: flex;
+		-ms-flex-align: start;
+		align-items: flex-start;
 
-        .qubely-info-box-body {
-            -ms-flex: 1;
-            flex: 1;
-        }
-    }
+		.qubely-info-box-body {
+			-ms-flex: 1;
+			flex: 1;
+		}
+	}
 
-    &.qubely-info-box-layout-3 {
-        flex-direction: row-reverse;
-        .qubely-info-box-body {
-            text-align: right;
-        }
-    }
+	&.qubely-info-box-layout-3 {
+		flex-direction: row-reverse;
+		.qubely-info-box-body {
+			text-align: right;
+		}
+	}
 
-    .qubely-separator {
-        font-size: 0;
-        .qubely-separator-type-css,
-        .qubely-separator-type-svg {
-            display: inline-block;
-        }
-    }
+	.qubely-separator {
+		font-size: 0;
+		.qubely-separator-type-css,
+		.qubely-separator-type-svg {
+			display: inline-block;
+		}
+	}
 
-    .qubely-separator-position-left,
-    .qubely-separator-position-right,
-    .qubely-separator-position-leftright {
-        .qubely-info-box-title-inner {
-            display: inline-flex;
-            align-items: center;
+	.qubely-separator-position-left,
+	.qubely-separator-position-right,
+	.qubely-separator-position-leftright {
+		.qubely-info-box-title-inner {
+			display: inline-flex;
+			align-items: center;
 
-            .qubely-info-box-title,
-            .qubely-separator {
-                display: inline-flex;
-            }
-        }
-    }
+			.qubely-info-box-title,
+			.qubely-separator {
+				display: inline-flex;
+			}
+		}
+	}
 }
 .qubely-info-box-image.qubely-image-placeholder {
-    display: flex;
-    &:not(.size-custom) {
-        width: 100%;
-    }
-    &.size-auto {
-        width: 210px;
-    }
+	display: flex;
+	&:not(.size-custom) {
+		width: 100%;
+	}
+	&.size-auto {
+		width: 210px;
+	}
 }

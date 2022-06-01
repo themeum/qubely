@@ -2,24 +2,24 @@
 	z-index: 6;
 }
 .qubely-divider-block {
-  display: inline-block;
-  position: relative;
-  width: 100%;
-    &:before {
-	    content: "";
+	display: inline-block;
+	position: relative;
+	width: 100%;
+	&:before {
+		content: "";
 		position: absolute;
 		left: 0;
 		width: 100%;
 		height: 2px;
 		background: #e5e5e5;
 		top: 50%;
-  	}
-    .qubely-divider-withicon {
+	}
+	.qubely-divider-withicon {
 		position: relative;
 		.qubely-divider-icon {
 			position: absolute;
 			i {
-                font-style: normal;
+				font-style: normal;
 				color: #fff;
 				width: 27px;
 				height: 27px;
@@ -30,8 +30,8 @@
 				font-size: 14px;
 			}
 		}
-  	}
-  	.qubely-divider-withimg {
+	}
+	.qubely-divider-withimg {
 		position: relative;
 		.qubely-divider-img {
 			vertical-align: middle;
@@ -40,23 +40,23 @@
 			width: 30px;
 			height: 30px;
 		}
-  	}
-    .qubely-divider-withtext {
-    	position: relative;
-		.qubely-divider-text{
+	}
+	.qubely-divider-withtext {
+		position: relative;
+		.qubely-divider-text {
 			text-transform: uppercase;
 			background: #fff;
 			padding: 0 10px;
 			position: absolute;
 		}
-  	}
-  	.qubely-divider-center {
+	}
+	.qubely-divider-center {
 		.qubely-divider-text,
 		.qubely-divider-img,
 		.qubely-divider-icon {
 			left: 50%;
 			top: 50%;
-			transform: translate(-50%,-50%);
+			transform: translate(-50%, -50%);
 		}
 	}
 	.qubely-divider-left {

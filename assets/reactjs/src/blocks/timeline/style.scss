@@ -1,9 +1,9 @@
 .qubely-block-timeline {
 	position: relative;
-	
+
 	// Bar
 	&:after {
-		content: '';
+		content: "";
 		position: absolute;
 		top: 0;
 		bottom: 0;
@@ -23,12 +23,12 @@
 	}
 	.qubely-timeline-date-container {
 		position: relative;
-    }
-    &.qubely-timeline-orientation-center {
-        .qubely-timeline-date-container {
-            position: absolute;
-        }
-    }
+	}
+	&.qubely-timeline-orientation-center {
+		.qubely-timeline-date-container {
+			position: absolute;
+		}
+	}
 
 	// Image
 	.qubely-timeline-image-container {
@@ -59,7 +59,7 @@
 		.qubely-insert-image {
 			text-align: center;
 			display: inline-block;
-			color: #2184F9;
+			color: #2184f9;
 			text-decoration: none;
 			line-height: 1;
 			span {
@@ -86,7 +86,7 @@
 	// Content
 	.qubely-timeline-content {
 		position: relative;
-		
+
 		.qubely-action-timeline-remove {
 			display: none;
 			font-size: 12px;
@@ -94,7 +94,7 @@
 			height: 18px;
 			line-height: 20px;
 			text-align: center;
-			background: rgba(0, 0, 0, .8);
+			background: rgba(0, 0, 0, 0.8);
 			color: #fff;
 			position: absolute;
 			top: -9px;
@@ -128,7 +128,7 @@
 				z-index: 0;
 			}
 		}
-		
+
 		&:hover {
 			.qubely-action-timeline-remove {
 				display: block;
@@ -140,7 +140,6 @@
 	@media (min-width: 768px) {
 		// Center
 		&.qubely-timeline-orientation-center {
-			
 			// Bar
 			&::after {
 				left: 50%;
@@ -172,7 +171,7 @@
 					text-align: left;
 				}
 			}
-		
+
 			.qubely-timeline-right {
 				left: 50%;
 				.qubely-timeline-content {
@@ -215,12 +214,9 @@
 		}
 	}
 
-
-
 	// Phone
 	@media (max-width: 767px) {
 		&.qubely-timeline-orientation-center {
-
 			.qubely-timeline-content {
 				&:before {
 					left: -30px;
@@ -229,21 +225,21 @@
 
 			.qubely-timeline-date-container {
 				margin-top: 10px;
-            }
-            .qubely-timeline-date-container {
-                position: relative;
-            }
-        }
+			}
+			.qubely-timeline-date-container {
+				position: relative;
+			}
+		}
 
 		&.qubely-timeline-orientation-center,
 		&.qubely-timeline-orientation-left {
 			margin-left: 20px;
-        }
-        &.qubely-timeline-orientation-left {
-            .qubely-timeline-date-container {
+		}
+		&.qubely-timeline-orientation-left {
+			.qubely-timeline-date-container {
 				position: absolute;
-			}  
-        }
+			}
+		}
 		&.qubely-timeline-orientation-right {
 			margin-right: 20px;
 		}

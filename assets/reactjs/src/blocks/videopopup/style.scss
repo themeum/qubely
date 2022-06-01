@@ -1,91 +1,91 @@
-.qubely-block-videopopup-wrapper{
-    position: relative;
-    z-index: 1;
-    display: flex;
-    align-items: center;
-    transition: 400ms;
-    &.qubely-alignment-left {
-        justify-content: flex-start;
-    }
-    &.qubely-alignment-center {
-        justify-content: center;
-    }
-    &.qubely-alignment-right {
-        justify-content: flex-end;
-    }
-    .qubely-block-videopopup{
-        a{
-            display: block;
-            text-decoration: none !important;
-        }
-        .qubely-video-popup-prefix,
-        .qubely-video-popup-postfix {
-            transition: 400ms;
-        }
-        .qubely-btn-icon-wrapper {
-            display: inline-block;
-        }
-        .qubely-btn-icon{
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            transition: 400ms;
-            span.qubely-ripple {
-                position: absolute;
-                height: 100%;
-                width: 100%;
-                left: 0;
-                top: 0;
-                z-index: -1;
-                box-shadow: 0 0 0 15px rgba(white, .8), 0 0 0 30px rgba(white, .6), 0 0 0 45px rgba(white, .4);
-                animation: qubelyRipple 2s infinite;
-            }
-        }
-        &.qubely-size-small .qubely-btn-icon{
-            width: 80px;
-            height: 80px;
-            font-size: 24px;
-        }
-        &.qubely-size-medium .qubely-btn-icon{
-            width: 100px;
-            height: 100px;
-            font-size: 30px;
-        }
-        &.qubely-size-large .qubely-btn-icon{
-            width: 140px;
-            height: 140px;
-            font-size: 40px;
-        }
-    }
+.qubely-block-videopopup-wrapper {
+	position: relative;
+	z-index: 1;
+	display: flex;
+	align-items: center;
+	transition: 400ms;
+	&.qubely-alignment-left {
+		justify-content: flex-start;
+	}
+	&.qubely-alignment-center {
+		justify-content: center;
+	}
+	&.qubely-alignment-right {
+		justify-content: flex-end;
+	}
+	.qubely-block-videopopup {
+		a {
+			display: block;
+			text-decoration: none !important;
+		}
+		.qubely-video-popup-prefix,
+		.qubely-video-popup-postfix {
+			transition: 400ms;
+		}
+		.qubely-btn-icon-wrapper {
+			display: inline-block;
+		}
+		.qubely-btn-icon {
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			position: relative;
+			transition: 400ms;
+			span.qubely-ripple {
+				position: absolute;
+				height: 100%;
+				width: 100%;
+				left: 0;
+				top: 0;
+				z-index: -1;
+				box-shadow: 0 0 0 15px rgba(white, 0.8), 0 0 0 30px rgba(white, 0.6), 0 0 0 45px rgba(white, 0.4);
+				animation: qubelyRipple 2s infinite;
+			}
+		}
+		&.qubely-size-small .qubely-btn-icon {
+			width: 80px;
+			height: 80px;
+			font-size: 24px;
+		}
+		&.qubely-size-medium .qubely-btn-icon {
+			width: 100px;
+			height: 100px;
+			font-size: 30px;
+		}
+		&.qubely-size-large .qubely-btn-icon {
+			width: 140px;
+			height: 140px;
+			font-size: 40px;
+		}
+	}
 
-    .qubely-block-videopopup-overlay {
-        position: absolute;
-        z-index: -1;
-        height: 100%;
-        width: 100%;
-        left: 0;
-        top: 0;
-        transition: 400ms;
-    }
+	.qubely-block-videopopup-overlay {
+		position: absolute;
+		z-index: -1;
+		height: 100%;
+		width: 100%;
+		left: 0;
+		top: 0;
+		transition: 400ms;
+	}
 }
 
 @keyframes qubelyRipple {
-    0% {
-        opacity: 0;
-        transform: scale(.5);
-    }
-    10%{
-        opacity: 1;
-    }
-    90%{
-        opacity: 0;
-    }
-    100% {
-        opacity: 0;
-        transform: scale(1);
-    }
+	0% {
+		opacity: 0;
+		transform: scale(0.5);
+	}
+	10% {
+		opacity: 1;
+	}
+	90% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 0;
+		transform: scale(1);
+	}
 }
 .edit-post-visual-editor i {
-    font-style: initial !important;
+	font-style: initial !important;
 }

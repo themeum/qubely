@@ -1,8 +1,8 @@
 <?php
 // Exit if accessed directly
-if (!defined('ABSPATH')) exit;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
-if (!class_exists('QUBELY_Options')) {
+if ( ! class_exists( 'QUBELY_Options' ) ) {
 
     class QUBELY_Options
     {
@@ -11,13 +11,13 @@ if (!class_exists('QUBELY_Options')) {
 
         public function __construct()
         {
-            add_action('init', array($this, 'init'));
-            add_action('admin_menu', array($this, 'admin_menu'));
+            add_action( 'init', array( $this, 'init' ) );
+            add_action( 'admin_menu', array( $this, 'admin_menu' ) );
         }
 
         public function init() {
             require __DIR__ . '/admin-views/Settings.php';
-            $this->settings = new Settings();
+            $this->settings = new QUBELY_Settings();
         }
 
         /**
@@ -28,7 +28,7 @@ if (!class_exists('QUBELY_Options')) {
         public function admin_menu()
         {
             require __DIR__ . '/admin-views/Getting_Started.php';
-            $getting_started = new Getting_Started();
+            $getting_started = new QUBELY_Getting_Started();
 
             $parent_slug = 'qubely-settings';
             $cap = 'manage_options';

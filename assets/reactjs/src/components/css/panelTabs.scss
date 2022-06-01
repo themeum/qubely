@@ -1,74 +1,74 @@
 .qubely-field-tabs {
-  margin-left: -16px;
-  margin-right: -16px;
-  background: #f7f8fc;
-  &:last-child {
-    margin-bottom: -16px !important;
-  }
-  &.qubely-has-label {
-    border-top: 1px solid #e9e9e9;
-    .qubely-field-tab-header {
-      padding-top: 10px;
-      label {
-        margin: 0 15px;
-      }
-    }
-    .qubely-field-tab-menus {
-      margin-top: 10px;
-    }
-  }
-  &.panel-group {
-    margin-top: 20px;
-    .qubely-field-tab-menus {
-      cursor: pointer;
-      display: flex;
-      justify-content: space-evenly;
-      .tab-menu-wrapper {
-        display: flex;
-        align-items: center;
-        flex-direction: column;
-        .qubely-tab-menu {
-          flex-grow: 1;
-        }
-      }
-    }
-  }
-  &:not(.panel-group) {
-    .qubely-field-tab-menus {
-      display: flex;
-      button {
-        flex-grow: 1;
-        justify-content: center;
-        padding: 7px 15px;
-        box-shadow: none;
-        border: none;
-        transition: 400ms;
-        border: 1px solid #e9e9e9;
-        cursor: pointer;
-        &:not(:last-child) {
-          border-right: none;
-        }
-        &.active {
-          background: #D2E7FF;
-          color: #2184f9;
-          border-color: #A9D0FF;
-          + button{
-            border-left-color: #A9D0FF;
-          }
-        }
-      }
-    }
+	margin-left: -16px;
+	margin-right: -16px;
+	background: #f7f8fc;
+	&:last-child {
+		margin-bottom: -16px !important;
+	}
+	&.qubely-has-label {
+		border-top: 1px solid #e9e9e9;
+		.qubely-field-tab-header {
+			padding-top: 10px;
+			label {
+				margin: 0 15px;
+			}
+		}
+		.qubely-field-tab-menus {
+			margin-top: 10px;
+		}
+	}
+	&.panel-group {
+		margin-top: 20px;
+		.qubely-field-tab-menus {
+			cursor: pointer;
+			display: flex;
+			justify-content: space-evenly;
+			.tab-menu-wrapper {
+				display: flex;
+				align-items: center;
+				flex-direction: column;
+				.qubely-tab-menu {
+					flex-grow: 1;
+				}
+			}
+		}
+	}
+	&:not(.panel-group) {
+		.qubely-field-tab-menus {
+			display: flex;
+			button {
+				flex-grow: 1;
+				justify-content: center;
+				padding: 7px 15px;
+				box-shadow: none;
+				border: none;
+				transition: 400ms;
+				border: 1px solid #e9e9e9;
+				cursor: pointer;
+				&:not(:last-child) {
+					border-right: none;
+				}
+				&.active {
+					background: #d2e7ff;
+					color: #2184f9;
+					border-color: #a9d0ff;
+					+ button {
+						border-left-color: #a9d0ff;
+					}
+				}
+			}
+		}
 
-    .qubely-field-tab-items {
-      padding: 15px;
-    }
-  }
+		.qubely-field-tab-items {
+			padding: 15px;
+		}
+	}
 }
 
 .qubely-field .qubely-field-boxshadow,
 .qubely-field.qubely-field-typography {
-  border: 1px solid #e9e9e9;
-  padding: 12px;
-  border-radius: 5px;
-  background-color: #ffffff;
+	border: 1px solid #e9e9e9;
+	padding: 12px;
+	border-radius: 5px;
+	background-color: #ffffff;
 }

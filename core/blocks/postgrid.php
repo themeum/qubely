@@ -1,5 +1,6 @@
 <?php
 
+defined( 'ABSPATH' ) || exit;
 /**
  * Registers the `qubely/postgrid` block on server.
  *
@@ -76,6 +77,10 @@ function register_block_qubely_postgrid()
 				),
 
 				//content
+				'level' => array(
+					'type' => 'number',
+					'default' => 2
+				),
 				'showTitle' => array(
 					'type' => 'boolean',
 					'default' => true
@@ -1289,6 +1294,8 @@ function pagination_bar($max_pages, $current_page)
 
 function render_block_qubely_postgrid($att)
 {
+	$enablePagination 	= isset($att['enablePagination']) ? (bool) $att['enablePagination'] : false;
+	$level 							= isset($att['level']) ? $att['level'] : 3;
 	$layout 		        = isset($att['layout']) ? $att['layout'] : 3;
 	$uniqueId 		        = isset($att['uniqueId']) ? $att['uniqueId'] : '';
 	$className 		        = isset($att['className']) ? $att['className'] : '';
@@ -1322,8 +1329,10 @@ function render_block_qubely_postgrid($att)
 	$taxonomy               = $att['taxonomy'];
 	$taxonomyType           = isset($att['taxonomyType']) ? $att['taxonomyType'] : 'category';
 	$customTaxonomies       = $att['customTaxonomies'];
+	$enablePagination       = isset($att['enablePagination']) ? $att['enablePagination'] : true;
 	
 	$animation 		        = isset($att['animation']) ? (count((array) $att['animation']) > 0 &&  $att['animation']['animation'] ? 'data-qubelyanimation="' . htmlspecialchars(json_encode($att['animation']), ENT_QUOTES, 'UTF-8') . '"' : '') : '';
+	$title_tag            = "h{$level}";
 
 
 	$interaction = '';
@@ -1417,7 +1426,7 @@ function render_block_qubely_postgrid($att)
 			$src = wp_get_attachment_image_src($id, $imgSize);
 			$src = has_post_thumbnail( get_the_ID() ) ? get_the_post_thumbnail_url( get_the_ID(), $imgSize ) : '';
 			$image = '<img class="qubely-post-image" src="' . esc_url( $src ) . '" alt="' . get_the_title() . '"/>';
-			$title = '<h3 class="qubely-postgrid-title"><a href="' . esc_url(get_the_permalink()) . '">' . get_the_title() . '</a></h3>';
+			$title = '<'. $title_tag. ' class="qubely-postgrid-title"><a href="' . esc_url(get_the_permalink()) . '">' . get_the_title() . '</a></'. $title_tag. '>';
 			$category = '<span class="qubely-postgrid-category">' . ('post' === $postType ? get_the_category_list(' ') : get_the_term_list(get_the_ID(), $taxonomyType, ' ')) . '</span>';
 			$meta = ($showAuthor == 1) ? '<span><i class="fas fa-user"></i> ' . __('By ', 'qubely') . get_the_author_posts_link() . '</span>' : '';
 			$meta .= ($showDates == 1) ? '<span><i class="far fa-calendar-alt"></i> ' . get_the_date() . '</span>' : '';
@@ -1517,7 +1526,9 @@ function render_block_qubely_postgrid($att)
 			}
 		}
 		$html .= '</div>';
-		$html .= '<div class="qubely-postgrid-pagination">' . pagination_bar($query->max_num_pages, $paged) . '</div>';
+		if ( true === $enablePagination ) {
+			$html .= '<div class="qubely-postgrid-pagination">' . pagination_bar($query->max_num_pages, $paged) . '</div>';
+		}
 		$html .= '</div>';
 		wp_reset_postdata();
 	}

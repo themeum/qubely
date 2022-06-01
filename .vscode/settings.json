@@ -1,0 +1,20 @@
+{
+	"emmet.includeLanguages": {
+		"javascript": "javascriptreact"
+	},
+	"editor.defaultFormatter": "esbenp.prettier-vscode",
+	"editor.formatOnType": true,
+	"editor.formatOnSave": true,
+	"editor.tabSize": 4,
+	"prettier.singleQuote": true,
+	"prettier.printWidth": 120,
+	"emmet.triggerExpansionOnTab": true,
+	"prettier.useTabs": true,
+	"prettier.trailingComma": "all",
+	"editor.codeActionsOnSave": {
+		"source.fixAll.eslint": true
+	},
+	"[php]": {
+		"editor.defaultFormatter": "bmewburn.vscode-intelephense-client"
+	}
+}

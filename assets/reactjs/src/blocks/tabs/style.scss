@@ -1,278 +1,276 @@
 .qubely-block-tab {
-    .qubely-tab-nav {
-        display: -ms-flexbox;
-        display: flex;
-        -ms-flex-wrap: wrap;
-        flex-wrap: wrap;
+	.qubely-tab-nav {
+		display: -ms-flexbox;
+		display: flex;
+		-ms-flex-wrap: wrap;
+		flex-wrap: wrap;
 
-        .qubely-tab-item {
-            display: block;
-            text-align: center;
-            position: relative;
+		.qubely-tab-item {
+			display: block;
+			text-align: center;
+			position: relative;
 
-            .qubely-tab-title {
-                cursor: pointer;
-                display: block;
-                display: flex;
-                align-items: center;
-                transition: color 400ms, background-color 400ms,
-                    border-color 400ms;
-                position: relative;
-                justify-content: center;
-                &.qubely-has-icon-top {
-                    flex-direction: column;
-                }
-            }
+			.qubely-tab-title {
+				cursor: pointer;
+				display: block;
+				display: flex;
+				align-items: center;
+				transition: color 400ms, background-color 400ms, border-color 400ms;
+				position: relative;
+				justify-content: center;
+				&.qubely-has-icon-top {
+					flex-direction: column;
+				}
+			}
 
-            &:hover {
-                .qubely-action-tab-remove {
-                    display: block;
-                }
-            }
-            .description-type-tab {
-                display: inline-flex;
-                justify-content: center;
-                align-items: center;
-                &.nav-layout-one {
-                    flex-direction: column;
-                    &.align-left {
-                        align-items: flex-start;
-                    }
-                    &.align-center {
-                        align-items: center;
-                    }
-                    &.align-right {
-                        align-items: flex-end;
-                    }
-                }
-                .qubely-tab-description {
-                    width: 100%;
-                }
-            }
-            .progress {
-                position: absolute;
-                &.bottom {
-                    bottom: 0;
-                }
-                &.top {
-                    top: 0;
-                }
-            }
-        }
+			&:hover {
+				.qubely-action-tab-remove {
+					display: block;
+				}
+			}
+			.description-type-tab {
+				display: inline-flex;
+				justify-content: center;
+				align-items: center;
+				&.nav-layout-one {
+					flex-direction: column;
+					&.align-left {
+						align-items: flex-start;
+					}
+					&.align-center {
+						align-items: center;
+					}
+					&.align-right {
+						align-items: flex-end;
+					}
+				}
+				.qubely-tab-description {
+					width: 100%;
+				}
+			}
+			.progress {
+				position: absolute;
+				&.bottom {
+					bottom: 0;
+				}
+				&.top {
+					top: 0;
+				}
+			}
+		}
 
-        &.qubely-alignment-left {
-            justify-content: flex-start;
-        }
+		&.qubely-alignment-left {
+			justify-content: flex-start;
+		}
 
-        &.qubely-alignment-center {
-            justify-content: center;
-        }
+		&.qubely-alignment-center {
+			justify-content: center;
+		}
 
-        &.qubely-alignment-right {
-            justify-content: flex-end;
-        }
+		&.qubely-alignment-right {
+			justify-content: flex-end;
+		}
 
-        &.qubely-alignment-justify {
-            .qubely-tab-item {
-                -ms-flex: 1 1 auto;
-                flex: 1 1 auto;
-            }
-        }
+		&.qubely-alignment-justify {
+			.qubely-tab-item {
+				-ms-flex: 1 1 auto;
+				flex: 1 1 auto;
+			}
+		}
 
-        .qubely-action-tab-remove {
-            display: none;
-            font-size: 12px;
-            width: 18px;
-            height: 18px;
-            line-height: 20px;
-            text-align: center;
-            background: rgba(0, 0, 0, 0.8);
-            color: #fff;
-            position: absolute;
-            top: -9px;
-            right: -9px;
-            border-radius: 10px;
-            z-index: 1;
-            cursor: pointer;
-        }
-    }
-    .qubely-tab-body {
-        display: flex;
-    }
+		.qubely-action-tab-remove {
+			display: none;
+			font-size: 12px;
+			width: 18px;
+			height: 18px;
+			line-height: 20px;
+			text-align: center;
+			background: rgba(0, 0, 0, 0.8);
+			color: #fff;
+			position: absolute;
+			top: -9px;
+			right: -9px;
+			border-radius: 10px;
+			z-index: 1;
+			cursor: pointer;
+		}
+	}
+	.qubely-tab-body {
+		display: flex;
+	}
 
-    &.qubely-tab-style-tabs {
-        .qubely-tab-nav {
-            .qubely-tab-item.qubely-active {
-                .qubely-tab-title {
-                    &:after {
-                        content: " ";
-                        position: absolute;
-                        left: 0;
-                        width: 100%;
-                        transition: color 400ms, background-color 400ms,
-                            border-color 400ms;
-                    }
-                }
-            }
-        }
-    }
+	&.qubely-tab-style-tabs {
+		.qubely-tab-nav {
+			.qubely-tab-item.qubely-active {
+				.qubely-tab-title {
+					&:after {
+						content: " ";
+						position: absolute;
+						left: 0;
+						width: 100%;
+						transition: color 400ms, background-color 400ms, border-color 400ms;
+					}
+				}
+			}
+		}
+	}
 
-    .qubely-add-new-tab {
-        cursor: pointer;
-        display: inline-flex;
-        align-items: center;
-        margin-left: 10px;
-        padding: 0px 15px;
-        border-radius: 3px;
-        color: #666;
-        transition: color 300ms;
-        &:hover {
-            color: #0085ba;
-            border-color: #0085ba;
-        }
-    }
-    .wp-block-qubely-tab.qubely-tab-content {
-        position: absolute;
-        visibility: hidden;
-        opacity: 0;
-        transition: opacity 400ms ease-in;
-        &.qubely-active {
-            position: static;
-            visibility: visible;
-            opacity: 1;
-        }
-    }
-    &.qubely-tab-style-pills,
-    &.qubely-tab-style-tabs {
-        .qubely-tab-item {
-            margin-bottom: 10px;
-        }
-    }
+	.qubely-add-new-tab {
+		cursor: pointer;
+		display: inline-flex;
+		align-items: center;
+		margin-left: 10px;
+		padding: 0px 15px;
+		border-radius: 3px;
+		color: #666;
+		transition: color 300ms;
+		&:hover {
+			color: #0085ba;
+			border-color: #0085ba;
+		}
+	}
+	.wp-block-qubely-tab.qubely-tab-content {
+		position: absolute;
+		visibility: hidden;
+		opacity: 0;
+		transition: opacity 400ms ease-in;
+		&.qubely-active {
+			position: static;
+			visibility: visible;
+			opacity: 1;
+		}
+	}
+	&.qubely-tab-style-pills,
+	&.qubely-tab-style-tabs {
+		.qubely-tab-item {
+			margin-bottom: 10px;
+		}
+	}
 
-    .wp-block.qubely-tab-content {
-        opacity: 0;
-        position: absolute;
-        visibility: hidden;
-        transition: opacity 400ms;
-        .qubely-tabs-innerblock {
-            .block-list-appender {
-                text-align: center;
-                .block-editor-inserter {
-                    display: inline-block;
-                    min-width: 300px;
-                }
-            }
-        }
-        &.qubely-active {
-            position: relative;
-            opacity: 1;
-            visibility: visible;
-            transition: opacity 400ms;
-        }
-    }
-    &.qubely-active-tab-1 {
-        .wp-block.qubely-tab-content[data-tab="1"] {
-            opacity: 1;
-            position: relative;
-            visibility: visible;
-        }
-    }
-    &.qubely-active-tab-2 {
-        .wp-block.qubely-tab-content[data-tab="2"] {
-            opacity: 1;
-            position: relative;
-            visibility: visible;
-        }
-    }
-    &.qubely-active-tab-3 {
-        .wp-block.qubely-tab-content[data-tab="3"] {
-            opacity: 1;
-            position: relative;
-            visibility: visible;
-        }
-    }
-    &.qubely-active-tab-4 {
-        .wp-block.qubely-tab-content[data-tab="4"] {
-            opacity: 1;
-            position: relative;
-            visibility: visible;
-        }
-    }
-    &.qubely-active-tab-5 {
-        .wp-block.qubely-tab-content[data-tab="5"] {
-            opacity: 1;
-            position: relative;
-            visibility: visible;
-        }
-    }
-    &.qubely-active-tab-6 {
-        .wp-block.qubely-tab-content[data-tab="6"] {
-            opacity: 1;
-            position: relative;
-            visibility: visible;
-        }
-    }
-    &.qubely-active-tab-7 {
-        .wp-block.qubely-tab-content[data-tab="7"] {
-            opacity: 1;
-            position: relative;
-            visibility: visible;
-        }
-    }
-    &.qubely-active-tab-8 {
-        .wp-block.qubely-tab-content[data-tab="8"] {
-            opacity: 1;
-            position: relative;
-            visibility: visible;
-        }
-    }
-    &.qubely-active-tab-9 {
-        .wp-block.qubely-tab-content[data-tab="9"] {
-            opacity: 1;
-            position: relative;
-            visibility: visible;
-        }
-    }
-    &.qubely-active-tab-10 {
-        .wp-block.qubely-tab-content[data-tab="10"] {
-            opacity: 1;
-            position: relative;
-            visibility: visible;
-        }
-    }
-    &.qubely-active-tab-11 {
-        .wp-block.qubely-tab-content[data-tab="11"] {
-            opacity: 1;
-            position: relative;
-            visibility: visible;
-        }
-    }
-    &.qubely-active-tab-12 {
-        .wp-block.qubely-tab-content[data-tab="12"] {
-            opacity: 1;
-            position: relative;
-            visibility: visible;
-        }
-    }
-    &.qubely-active-tab-13 {
-        .wp-block.qubely-tab-content[data-tab="13"] {
-            opacity: 1;
-            position: relative;
-            visibility: visible;
-        }
-    }
-    &.qubely-active-tab-14 {
-        .wp-block.qubely-tab-content[data-tab="14"] {
-            opacity: 1;
-            position: relative;
-            visibility: visible;
-        }
-    }
-    &.qubely-active-tab-15 {
-        .wp-block.qubely-tab-content[data-tab="15"] {
-            opacity: 1;
-            position: relative;
-            visibility: visible;
-        }
-    }
+	.wp-block.qubely-tab-content {
+		opacity: 0;
+		position: absolute;
+		visibility: hidden;
+		transition: opacity 400ms;
+		.qubely-tabs-innerblock {
+			.block-list-appender {
+				text-align: center;
+				.block-editor-inserter {
+					display: inline-block;
+					min-width: 300px;
+				}
+			}
+		}
+		&.qubely-active {
+			position: relative;
+			opacity: 1;
+			visibility: visible;
+			transition: opacity 400ms;
+		}
+	}
+	&.qubely-active-tab-1 {
+		.wp-block.qubely-tab-content[data-tab="1"] {
+			opacity: 1;
+			position: relative;
+			visibility: visible;
+		}
+	}
+	&.qubely-active-tab-2 {
+		.wp-block.qubely-tab-content[data-tab="2"] {
+			opacity: 1;
+			position: relative;
+			visibility: visible;
+		}
+	}
+	&.qubely-active-tab-3 {
+		.wp-block.qubely-tab-content[data-tab="3"] {
+			opacity: 1;
+			position: relative;
+			visibility: visible;
+		}
+	}
+	&.qubely-active-tab-4 {
+		.wp-block.qubely-tab-content[data-tab="4"] {
+			opacity: 1;
+			position: relative;
+			visibility: visible;
+		}
+	}
+	&.qubely-active-tab-5 {
+		.wp-block.qubely-tab-content[data-tab="5"] {
+			opacity: 1;
+			position: relative;
+			visibility: visible;
+		}
+	}
+	&.qubely-active-tab-6 {
+		.wp-block.qubely-tab-content[data-tab="6"] {
+			opacity: 1;
+			position: relative;
+			visibility: visible;
+		}
+	}
+	&.qubely-active-tab-7 {
+		.wp-block.qubely-tab-content[data-tab="7"] {
+			opacity: 1;
+			position: relative;
+			visibility: visible;
+		}
+	}
+	&.qubely-active-tab-8 {
+		.wp-block.qubely-tab-content[data-tab="8"] {
+			opacity: 1;
+			position: relative;
+			visibility: visible;
+		}
+	}
+	&.qubely-active-tab-9 {
+		.wp-block.qubely-tab-content[data-tab="9"] {
+			opacity: 1;
+			position: relative;
+			visibility: visible;
+		}
+	}
+	&.qubely-active-tab-10 {
+		.wp-block.qubely-tab-content[data-tab="10"] {
+			opacity: 1;
+			position: relative;
+			visibility: visible;
+		}
+	}
+	&.qubely-active-tab-11 {
+		.wp-block.qubely-tab-content[data-tab="11"] {
+			opacity: 1;
+			position: relative;
+			visibility: visible;
+		}
+	}
+	&.qubely-active-tab-12 {
+		.wp-block.qubely-tab-content[data-tab="12"] {
+			opacity: 1;
+			position: relative;
+			visibility: visible;
+		}
+	}
+	&.qubely-active-tab-13 {
+		.wp-block.qubely-tab-content[data-tab="13"] {
+			opacity: 1;
+			position: relative;
+			visibility: visible;
+		}
+	}
+	&.qubely-active-tab-14 {
+		.wp-block.qubely-tab-content[data-tab="14"] {
+			opacity: 1;
+			position: relative;
+			visibility: visible;
+		}
+	}
+	&.qubely-active-tab-15 {
+		.wp-block.qubely-tab-content[data-tab="15"] {
+			opacity: 1;
+			position: relative;
+			visibility: visible;
+		}
+	}
 }
