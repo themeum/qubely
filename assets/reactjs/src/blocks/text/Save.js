@@ -59,9 +59,7 @@ class Save extends Component {
 			animation,
 			interaction,
 			anchor,
-			children,
 		} = this.props.attributes;
-		const subTitleAnchor = children && children[0] ? children[0].anchor : null;
 		const titleTagName = 'h' + titleLevel;
 		const subTitleTagName = 'h' + subTitleLevel;
 		const interactionClass = IsInteraction(interaction)
@@ -91,6 +89,7 @@ class Save extends Component {
 		return (
 			<div
 				className={`qubely-block-${uniqueId}`}
+				id={anchor}
 				{...animationAttr(animation)}
 			>
 				<div
@@ -107,7 +106,6 @@ class Save extends Component {
 									? 'qubely-separator-position-' + separatorPosition
 									: ''
 							}`}
-							id={anchor}
 						>
 							<div className="qubely-block-text-title-inner">
 								{separatorStyle &&
@@ -139,7 +137,6 @@ class Save extends Component {
 
 							{subTitle == 1 && (
 								<div
-									id={subTitleAnchor}
 									className="qubely-block-text-sub-title-container"
 									onClick={() => this.handlePanelOpenings('Sub Title')}
 								>

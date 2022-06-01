@@ -1,74 +1,74 @@
 .qubely-gradient.qubely-field.popup {
-  label {
-    flex-grow: 1;
-  }
-  > .qubely-field-child {
-    text-align: right;
-    flex-grow: 0;
-    .qubely-panel {
-      height: 28px;
-      width: 28px;
-      border-radius: 50%;
-      display: inline-block;
-      vertical-align: middle;
-      box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.2);
-      transition: 300ms;
-      cursor: pointer;
-      &:hover {
-        transform: scale(1.1);
-      }
-      .qubely-gradient {
-        padding: 15px;
-      }
-    }
-  }
+	label {
+		flex-grow: 1;
+	}
+	> .qubely-field-child {
+		text-align: right;
+		flex-grow: 0;
+		.qubely-panel {
+			height: 28px;
+			width: 28px;
+			border-radius: 50%;
+			display: inline-block;
+			vertical-align: middle;
+			box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.2);
+			transition: 300ms;
+			cursor: pointer;
+			&:hover {
+				transform: scale(1.1);
+			}
+			.qubely-gradient {
+				padding: 15px;
+			}
+		}
+	}
 }
 
 .qubely-gradient.qubely-field.inline > label {
-  width: 100%;
-  margin-bottom: 10px;
+	width: 100%;
+	margin-bottom: 10px;
 }
 
 .qubely-gradient-popup {
-  padding: 0;
-  > div:not(:last-child) {
-    margin-bottom: 15px;
-  }
+	padding: 0;
+	> div:not(:last-child) {
+		margin-bottom: 15px;
+	}
 }
 
 .qubely-field-gradient-preview {
-  height: 10px;
-  border-radius: 6px;
-  position: relative;
-  .qubely-color-picker-container {
-    position: absolute;
-    width: 18px;
-    height: 18px;
-    border: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3);
-    &.qubely-position-left {
-      left: 0;
-    }
-    &.qubely-position-right {
-      right: 0;
-    }
-    .qubely-color-picker {
-      width: 18px;
-      height: 18px;
-      border: 4px solid #ffffff;
-      box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 0px 1px inset;
-      border: 1px solid transparent;
-    }
-  }
+	height: 10px;
+	border-radius: 6px;
+	position: relative;
+	.qubely-color-picker-container {
+		position: absolute;
+		width: 18px;
+		height: 18px;
+		border: 0;
+		top: 50%;
+		transform: translateY(-50%);
+		box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3);
+		&.qubely-position-left {
+			left: 0;
+		}
+		&.qubely-position-right {
+			right: 0;
+		}
+		.qubely-color-picker {
+			width: 18px;
+			height: 18px;
+			border: 4px solid #ffffff;
+			box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 0px 1px inset;
+			border: 1px solid transparent;
+		}
+	}
 }
 .qubely-gradient-color.gradient-color-position-left {
-  margin-left: -230px;
+	margin-left: -230px;
 }
 .qubely-gradient-color.gradient-color-position-right {
-  margin-right: -230px;
+	margin-right: -230px;
 }
 .qubely-gradient-color-picker.is-bottom {
-  margin-top: 20px !important;
+	margin-top: 20px !important;
 }

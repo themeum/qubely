@@ -1,27 +1,26 @@
 .qubely-block-animated-heading {
-  .animated-heading-text {
-    &.has-text-align-left{
-      justify-content: flex-start;
-    }
-    &.has-text-align-right{
-      justify-content: flex-end
-    }
-    &.has-text-align-center{
-      justify-content: center;
-    }
-    &::before {
-      display: none;
-    }
-    .qubely-animated-text{
-      padding-left: 5px;
-      padding-right: 5px;
-      line-height: inherit;
-    }
-  }
-  &.qubely-block-animated-heading-backend .animated-heading-text{
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-  }
+	.animated-heading-text {
+		&.has-text-align-left {
+			justify-content: flex-start;
+		}
+		&.has-text-align-right {
+			justify-content: flex-end;
+		}
+		&.has-text-align-center {
+			justify-content: center;
+		}
+		&::before {
+			display: none;
+		}
+		.qubely-animated-text {
+			padding-left: 5px;
+			padding-right: 5px;
+			line-height: inherit;
+		}
+	}
+	&.qubely-block-animated-heading-backend .animated-heading-text {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+	}
 }
-

@@ -4,7 +4,7 @@
 		flex-wrap: wrap;
 		.qubely-form-group {
 			position: relative;
-			.qubely-form-group-inner{
+			.qubely-form-group-inner {
 				text-align: left;
 			}
 			.qubely-form-label {
@@ -15,14 +15,14 @@
 				display: block;
 				width: 100%;
 				background-clip: padding-box;
-				transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+				transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out,
+					box-shadow 0.15s ease-in-out;
 
 				&.is-small {
 					padding: 6px 8px;
 				}
 				&.is-medium {
 					padding: 8.5px 12px;
-					
 				}
 				&.is-large {
 					padding: 14.5px 16px;
@@ -39,7 +39,7 @@
 				color: red;
 				margin: 0;
 			}
-			.qubely-block-btn-anchor:hover{
+			.qubely-block-btn-anchor:hover {
 				background-color: transparent;
 			}
 		}
@@ -52,8 +52,8 @@
 					position: relative;
 				}
 				.qubely-form-label {
-					position:absolute;
-					pointer-events:none;
+					position: absolute;
+					pointer-events: none;
 					top: 0px;
 					transition: 0.2s ease all;
 				}
@@ -61,11 +61,11 @@
 					border-radius: 0;
 					box-shadow: none;
 					padding-left: 0;
-                    padding-right: 0;
-                    background: none;
+					padding-right: 0;
+					background: none;
 					&:focus,
 					&:valid {
-						outline:none;
+						outline: none;
 						color: #333;
 					}
 
@@ -89,11 +89,11 @@
 	}
 }
 
-.api-notice{
+.api-notice {
 	margin: 0 0 15px;
 	background: rgba(0, 255, 55, 0.15);
 	padding: 8px 12px;
-	border: 1px solid rgba(0,0,0,.1);
+	border: 1px solid rgba(0, 0, 0, 0.1);
 	border-radius: 5px;
 	line-height: 1.6;
 	&.warning {

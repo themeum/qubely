@@ -1,58 +1,58 @@
 .qubely-field-border-type {
-    width: 16px;
-    display: block;
-    height: 0;
-    &.qubely-field-border-type-solid {
-        border-top: 3px solid #8D96A0;
-    }
-    &.qubely-field-border-type-dotted {
-        border-top: 3px dotted #8D96A0;
-    }
-    &.qubely-field-border-type-dashed {
-        border-top: 3px dashed #8D96A0;
-    }
-    &.qubely-field-border-type-double {
-        border-top: 6px double #8D96A0;
-    }  
+	width: 16px;
+	display: block;
+	height: 0;
+	&.qubely-field-border-type-solid {
+		border-top: 3px solid #8d96a0;
+	}
+	&.qubely-field-border-type-dotted {
+		border-top: 3px dotted #8d96a0;
+	}
+	&.qubely-field-border-type-dashed {
+		border-top: 3px dashed #8d96a0;
+	}
+	&.qubely-field-border-type-double {
+		border-top: 6px double #8d96a0;
+	}
 }
 
 .active {
-    .qubely-field-border-type {
-        &.qubely-field-border-type-solid {
-            border-top-color: #2184F9;
-        }
-        &.qubely-field-border-type-dotted {
-            border-top-color: #2184F9;
-        }
-        &.qubely-field-border-type-dashed {
-            border-top-color: #2184F9;
-        }
-        &.qubely-field-border-type-double {
-            border-top-color: #2184F9;
-        }
-    }
+	.qubely-field-border-type {
+		&.qubely-field-border-type-solid {
+			border-top-color: #2184f9;
+		}
+		&.qubely-field-border-type-dotted {
+			border-top-color: #2184f9;
+		}
+		&.qubely-field-border-type-dashed {
+			border-top-color: #2184f9;
+		}
+		&.qubely-field-border-type-double {
+			border-top-color: #2184f9;
+		}
+	}
 }
 
 .qubely-svg-fill {
-    fill: #8D96A0;
+	fill: #8d96a0;
 }
 
 .qubely-svg-stroke {
-    stroke: #8D96A0;
+	stroke: #8d96a0;
 }
 .active {
-    .qubely-svg-fill {
-        fill: #2184F9;
-    }
-    .qubely-svg-stroke {
-        stroke: #2184F9;
-    }
+	.qubely-svg-fill {
+		fill: #2184f9;
+	}
+	.qubely-svg-stroke {
+		stroke: #2184f9;
+	}
 }
 
 .qubely-border-clear {
-    font-size: 12px;
-    color: #8D96A0;
-    &:hover {
-        color: #2184F9;
-    }
+	font-size: 12px;
+	color: #8d96a0;
+	&:hover {
+		color: #2184f9;
+	}
 }

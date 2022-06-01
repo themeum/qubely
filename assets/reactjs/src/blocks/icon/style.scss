@@ -1,28 +1,28 @@
 .qubely-block-icon-wrapper {
-  .qubely-block-icon {
-    display: inline-block;
-    line-height: 1;
-    font-size: 36px;
-    text-align: center;
-    transition: color 400ms, border-color 400ms, background-color 400ms, box-shadow 400ms;
-    i {
-      font-style: normal;
-      width: 1em;
-      height: 1em;
-      position: relative;
-      display: block;
-      transition: 400ms;
-      &:before {
-        position: absolute;
-      	left: 50%;
-      	transform: translateX(-50%);
-      }
-    }
-    .qubely-icon-block-anchor {
-      text-decoration: none !important;
-      a {
-        text-decoration: none !important;
-      }
-    }
-  }
+	.qubely-block-icon {
+		display: inline-block;
+		line-height: 1;
+		font-size: 36px;
+		text-align: center;
+		transition: color 400ms, border-color 400ms, background-color 400ms, box-shadow 400ms;
+		i {
+			font-style: normal;
+			width: 1em;
+			height: 1em;
+			position: relative;
+			display: block;
+			transition: 400ms;
+			&:before {
+				position: absolute;
+				left: 50%;
+				transform: translateX(-50%);
+			}
+		}
+		.qubely-icon-block-anchor {
+			text-decoration: none !important;
+			a {
+				text-decoration: none !important;
+			}
+		}
+	}
 }

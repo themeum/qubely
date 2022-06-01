@@ -1,2 +1,1 @@
-export { default } from './color';
-
+export { default } from "./color";

@@ -1,56 +1,56 @@
 .qubely-block-divider {
-  display: inline-block;
-  .qubely-block-divider-style-fill {
-    border-top-style: solid;
-  }
-  .qubely-block-divider-style-dot {
-    border-top-style: dotted;
-  }
-  .qubely-block-divider-style-dash {
-    border-top-style: dashed;
-  }
-  > div {
-    margin: 0 auto;
-    display: inline-block;
-  }
-  .divider-options-trigger {
-    display: block;
-    width: 100%;
-    margin: 0px;
-    padding: 0px;
-    color: inherit;
-    background: none;
-    box-shadow: none;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    font: inherit;
-    &:focus {
-      outline: none !important;
-    }
-  }
+	display: inline-block;
+	.qubely-block-divider-style-fill {
+		border-top-style: solid;
+	}
+	.qubely-block-divider-style-dot {
+		border-top-style: dotted;
+	}
+	.qubely-block-divider-style-dash {
+		border-top-style: dashed;
+	}
+	> div {
+		margin: 0 auto;
+		display: inline-block;
+	}
+	.divider-options-trigger {
+		display: block;
+		width: 100%;
+		margin: 0px;
+		padding: 0px;
+		color: inherit;
+		background: none;
+		box-shadow: none;
+		border: none;
+		outline: none;
+		cursor: pointer;
+		font: inherit;
+		&:focus {
+			outline: none !important;
+		}
+	}
 }
 .qubely-divider-picker-options {
-  max-height: 300px;
+	max-height: 300px;
 }
 
 .qubely-divider-picker-option:hover {
-  background: #e8eaeb;
-  border-radius: 5px;
+	background: #e8eaeb;
+	border-radius: 5px;
 }
 .qubely-divider-picker.backend {
-  display: inline-block;
+	display: inline-block;
 }
 .components-panel__body {
-  .qubely-divider-picker {
-    width: 100%;
-    button {
-      cursor: pointer;
-      color: inherit;
-    }
-  }
+	.qubely-divider-picker {
+		width: 100%;
+		button {
+			cursor: pointer;
+			color: inherit;
+		}
+	}
 }
 
 .qubely-divider-picker-content .components-popover__content > div {
-  width: 250px;
+	width: 250px;
 }

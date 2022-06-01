@@ -13,10 +13,16 @@ class TableOfContents extends Component {
 		};
 	}
 
-	getHeadings = (headings = [], type = 'default') => {
-		if (type === 'default')
-			return headings.filter((heading) => heading.level !== undefined);
-		return headings.filter((heading) => heading.level === undefined);
+	isAdvancedHeading(header) {
+		return header.level === undefined;
+	}
+
+	getHeaderLevel = (header) => {
+		return this.isAdvancedHeading(header) ? header.titleLevel : header.level;
+	};
+
+	getHeaderContent = (header) => {
+		return this.isAdvancedHeading(header) ? header.title : header.content;
 	};
 
 	componentDidMount() {
@@ -55,24 +61,14 @@ class TableOfContents extends Component {
 			});
 			return targetBlocks;
 		};
-
 		const setHeaders = () => {
-			const headings = getsHeadingBlocks().map((header) => header.attributes);
-			const advancedHeadings = this.getHeadings(headings, 'advanced');
-			const simpleHeadings = this.getHeadings(headings);
-
-			simpleHeadings.forEach((heading, key) => {
+			let headings = getsHeadingBlocks().map((header) => header.attributes);
+			headings.forEach((heading, key) => {
 				if (!heading.anchor) {
-					heading.anchor = generateAnchor(heading.content, `${key + 1}`);
+					const anchorText = this.getHeaderContent(heading);
+					heading.anchor = generateAnchor(anchorText, `${key + 1}`);
 				}
 			});
-
-			advancedHeadings.forEach((heading, key) => {
-				if (!heading.anchor) {
-					heading.anchor = generateAnchor(heading.title, `${key + 1}`);
-				}
-			});
-
 			if (JSON.stringify(headings) !== JSON.stringify(this.state.headers)) {
 				this.setState({ headers: headings });
 			}
@@ -111,13 +107,17 @@ class TableOfContents extends Component {
 			let lastIndex = formattedHeaders.length - 1;
 			if (
 				formattedHeaders.length === 0 ||
-				formattedHeaders[0].level === currentHeader.level
+				this.getHeaderLevel(formattedHeaders[0]) ===
+					this.getHeaderLevel(currentHeader)
 			) {
-				formattedHeaders.push(Object.assign({}, currentHeader));
-			} else if (formattedHeaders[lastIndex].level < currentHeader.level) {
+				formattedHeaders.push({ ...currentHeader });
+			} else if (
+				this.getHeaderLevel(formattedHeaders[lastIndex]) <
+				this.getHeaderLevel(currentHeader)
+			) {
 				if (!formattedHeaders[lastIndex].children) {
 					formattedHeaders[lastIndex].children = [
-						Object.assign({}, currentHeader),
+						Object.assign({ ...currentHeader }),
 					];
 				} else
 					createHierarchy(formattedHeaders[lastIndex].children, currentHeader);
@@ -127,68 +127,30 @@ class TableOfContents extends Component {
 		const formatHeaders = (allHeaders) => {
 			let formattedHeaders2 = [];
 			allHeaders
-				.filter((header) => allowedAnchors[`h${header.level}`])
+				.filter((header) => {
+					const level = this.getHeaderLevel(header);
+					return allowedAnchors[`h${level}`];
+				})
 				.forEach((header) => createHierarchy(formattedHeaders2, header));
-
 			return formattedHeaders2;
 		};
 
-		const formatHeadersAdvanced = (allHeaders) => {
-			let formattedAdvancedHeaders = [];
-			allHeaders.forEach((header) => {
-				if (header.subTitle) {
-					header.children = [
-						{
-							anchor: generateAnchor(header.subTitleContent),
-							title: header.subTitleContent,
-						},
-					];
-				}
-				formattedAdvancedHeaders.push(header);
-			});
-
-			return formattedAdvancedHeaders;
-		};
-
-		const parseList = (list, listType = 'default') => {
-			if (listType === 'advanced') {
-				return list.map((item) => (
-					<li key={item.anchor}>
-						<a href={`#${item.anchor}`}>
-							{item.title.replace(/(<.+?>)/g, '')}
-						</a>
-						{item.children && (
-							<ListTag className="child-list">
-								{parseList(item.children, listType)}
-							</ListTag>
-						)}
-					</li>
-				));
-			} else {
-				return list.map((item) => (
-					<li key={item.anchor}>
-						<a href={`#${item.anchor}`}>
-							{item.content.replace(/(<.+?>)/g, '')}
-						</a>
-						{item.children && (
-							<ListTag className="child-list">
-								{parseList(item.children, listType)}
-							</ListTag>
-						)}
-					</li>
-				));
-			}
-		};
-
+		const parseList = (list) =>
+			list.map((item) => (
+				<li key={item.anchor}>
+					<a href={`#${item.anchor}`}>
+						{this.getHeaderContent(item).replace(/(<.+?>)/g, '')}
+					</a>
+					{item.children && (
+						<ListTag className="child-list">
+							{parseList(item.children)}
+						</ListTag>
+					)}
+				</li>
+			));
 		return (
 			<ListTag className={`${tableType}-list`}>
-				{[
-					...parseList(formatHeaders(this.getHeadings(headers))),
-					...parseList(
-						formatHeadersAdvanced(this.getHeadings(headers, 'advanced')),
-						'advanced',
-					),
-				]}
+				{parseList(formatHeaders(headers))}
 			</ListTag>
 		);
 	}

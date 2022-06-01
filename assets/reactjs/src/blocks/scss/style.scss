@@ -1,145 +1,145 @@
 .qubely-alert {
-  position: relative;
-  padding: 8px 15px;
-  margin-bottom: 16px;
-  border-radius: 4px;
+	position: relative;
+	padding: 8px 15px;
+	margin-bottom: 16px;
+	border-radius: 4px;
 
-  .qubely-alert-heading {
-    color: inherit;
-  }
+	.qubely-alert-heading {
+		color: inherit;
+	}
 
-  .qubely-alert-dismissible {
-    padding-right: 64px;
-  }
+	.qubely-alert-dismissible {
+		padding-right: 64px;
+	}
 
-  .qubely-alert-dismissible .qubely-close {
-    position: absolute;
-    top: 0;
-    right: 0;
-    padding: 8px 15px;
-    color: inherit;
-  }
+	.qubely-alert-dismissible .qubely-close {
+		position: absolute;
+		top: 0;
+		right: 0;
+		padding: 8px 15px;
+		color: inherit;
+	}
 
-  &.qubely-alert-link {
-    font-weight: 700;
-  }
+	&.qubely-alert-link {
+		font-weight: 700;
+	}
 
-  &.qubely-alert-success {
-    color: #416b42;
-    background-color: #d2f7d5;
-  }
+	&.qubely-alert-success {
+		color: #416b42;
+		background-color: #d2f7d5;
+	}
 
-  &.qubely-alert-success hr {
-    border-top-color: rgb(162, 201, 171);
-  }
+	&.qubely-alert-success hr {
+		border-top-color: rgb(162, 201, 171);
+	}
 
-  &.qubely-alert-success &.qubely-alert-link {
-    color: #0b2e13;
-  }
+	&.qubely-alert-success &.qubely-alert-link {
+		color: #0b2e13;
+	}
 
-  &.qubely-alert-info {
-    color: #0c8b98;
-    background-color: #baeaf6;
-  }
+	&.qubely-alert-info {
+		color: #0c8b98;
+		background-color: #baeaf6;
+	}
 
-  &.qubely-alert-info hr {
-    border-top-color: #abdde5;
-  }
+	&.qubely-alert-info hr {
+		border-top-color: #abdde5;
+	}
 
-  &.qubely-alert-info .qubely-alert-link {
-    color: #062c33;
-  }
+	&.qubely-alert-info .qubely-alert-link {
+		color: #062c33;
+	}
 
-  &.qubely-alert-warning {
-    color: #98810c;
-    background-color: #f6eaba;
-  }
+	&.qubely-alert-warning {
+		color: #98810c;
+		background-color: #f6eaba;
+	}
 
-  &.qubely-alert-warning hr {
-    border-top-color: #ffe8a1;
-  }
+	&.qubely-alert-warning hr {
+		border-top-color: #ffe8a1;
+	}
 
-  &.qubely-alert-warning .qubely-alert-link {
-    color: #533f03;
-  }
+	&.qubely-alert-warning .qubely-alert-link {
+		color: #533f03;
+	}
 
-  &.qubely-alert-danger {
-    color: #981a0c;
-    background-color: #f6baba;
-  }
+	&.qubely-alert-danger {
+		color: #981a0c;
+		background-color: #f6baba;
+	}
 
-  &.qubely-alert-danger hr {
-    border-top-color: #f1b0b7;
-  }
+	&.qubely-alert-danger hr {
+		border-top-color: #f1b0b7;
+	}
 
-  &.qubely-alert-danger .qubely-alert-link {
-    color: #491217;
-  }
+	&.qubely-alert-danger .qubely-alert-link {
+		color: #491217;
+	}
 }
 
 .qubely-image-placeholder {
-  width: 210px;
-  height: 210px;
-  background: #f5f5f5;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+	width: 210px;
+	height: 210px;
+	background: #f5f5f5;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
 
-  i {
-    font-style: normal;
-    font-size: 64px;
-    color: #d8d8d8;
-  }
+	i {
+		font-style: normal;
+		font-size: 64px;
+		color: #d8d8d8;
+	}
 }
 [data-qubelyanimation] {
-  opacity: 0;
+	opacity: 0;
 }
 .components-modal__frame.edit-post-manage-blocks-modal {
-  .block-editor-block-icon img {
-    min-width: 20px;
-    min-height: 20px;
-    max-width: 24px;
-    max-height: 24px;
-  }
+	.block-editor-block-icon img {
+		min-width: 20px;
+		min-height: 20px;
+		max-width: 24px;
+		max-height: 24px;
+	}
 }
 
 .qubely-context-menu-wraper {
-  display: none;
-  position: fixed;
-  background: white;
-  z-index: 100;
+	display: none;
+	position: fixed;
+	background: white;
+	z-index: 100;
 
-  &--option {
-    padding: 6px 50px 5px 10px;
-    min-width: 160px;
-    cursor: default;
-    font-size: 12px;
-    &:hover {
-      background: linear-gradient(to top, #555, #333);
-      color: white;
-    }
+	&--option {
+		padding: 6px 50px 5px 10px;
+		min-width: 160px;
+		cursor: default;
+		font-size: 12px;
+		&:hover {
+			background: linear-gradient(to top, #555, #333);
+			color: white;
+		}
 
-    &:active {
-      color: #e9e9e9;
-      background: linear-gradient(to top, #555, #444);
-    }
+		&:active {
+			color: #e9e9e9;
+			background: linear-gradient(to top, #555, #444);
+		}
 
-    &__disabled {
-      color: #999999;
-      pointer-events: none;
-    }
-  }
+		&__disabled {
+			color: #999999;
+			pointer-events: none;
+		}
+	}
 }
 
 .qubely-scroll-top {
-  position: fixed;
-  bottom: 50px;
-  right: 50px;
-  padding: 10px;
-  background: #ccd0d4;
-  cursor: pointer;
-  display: none;
-  &.qubely-show-scroll {
-    display: block;
-  }
+	position: fixed;
+	bottom: 50px;
+	right: 50px;
+	padding: 10px;
+	background: #ccd0d4;
+	cursor: pointer;
+	display: none;
+	&.qubely-show-scroll {
+		display: block;
+	}
 }

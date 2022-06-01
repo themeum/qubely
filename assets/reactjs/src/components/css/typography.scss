@@ -1,127 +1,132 @@
-.qubely-field-font-family{
-    min-width: calc(65% - 15px);
+.qubely-field-font-family {
+	min-width: calc(65% - 15px);
 }
-.qubely-field-font-weight{
-    min-width: 35%;
+.qubely-field-font-weight {
+	min-width: 35%;
 }
-.qubely-font-family-picker, .qubely-font-weight-picker-wrapper{
-    -webkit-box-align: center;
-    align-items: center;
-    background-color: rgb(255, 255, 255);
-    cursor: default;
-    display: flex;
-    flex-wrap: wrap;
-    -webkit-box-pack: justify;
-    justify-content: space-between;
-    position: relative;
-    box-sizing: border-box;
-    border-color: rgb(204, 204, 204);
-    border-radius: 4px;
-    border-style: solid;
-    border-width: 1px;
-    transition: all 100ms ease 0s;
-    outline: 0px !important;
-    line-height: 28px;
-    height: 30px;
-    vertical-align: middle;
-    padding-left: 5px;
-    .editor-rich-text{
-        width: 100%;
-    }
-    .selected-font-family{
-        color: black;
-    }
+.qubely-font-family-picker,
+.qubely-font-weight-picker-wrapper {
+	-webkit-box-align: center;
+	align-items: center;
+	background-color: rgb(255, 255, 255);
+	cursor: default;
+	display: flex;
+	flex-wrap: wrap;
+	-webkit-box-pack: justify;
+	justify-content: space-between;
+	position: relative;
+	box-sizing: border-box;
+	border-color: rgb(204, 204, 204);
+	border-radius: 4px;
+	border-style: solid;
+	border-width: 1px;
+	transition: all 100ms ease 0s;
+	outline: 0px !important;
+	line-height: 28px;
+	height: 30px;
+	vertical-align: middle;
+	padding-left: 5px;
+	.editor-rich-text {
+		width: 100%;
+	}
+	.selected-font-family {
+		color: black;
+	}
 }
 .qubely-font-family-option-wrapper {
-    top: 100%;
-    background-color: rgb(255, 255, 255);
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 0px 1px, rgba(0, 0, 0, 0.1) 0px 4px 11px;
-    margin-bottom: 8px;
-    margin-top: 8px;
-    position: absolute;
-    width: 70%;
-    box-sizing: border-box;
-    border-radius: 4px;
-    z-index: 100;
+	top: 100%;
+	background-color: rgb(255, 255, 255);
+	box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 0px 1px, rgba(0, 0, 0, 0.1) 0px 4px 11px;
+	margin-bottom: 8px;
+	margin-top: 8px;
+	position: absolute;
+	width: 70%;
+	box-sizing: border-box;
+	border-radius: 4px;
+	z-index: 100;
 }
-//font weight 
+//font weight
 .qubely-font-weight-wrapper {
-    top: 100%;
-    left:62%;
-    background-color: rgb(255, 255, 255);
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 0px 1px, rgba(0, 0, 0, 0.1) 0px 4px 11px;
-    margin-bottom: 8px;
-    margin-top: 8px;
-    position: absolute;
-    width: 40%;
-    box-sizing: border-box;
-    border-radius: 4px;
-    z-index: 100;
+	top: 100%;
+	left: 62%;
+	background-color: rgb(255, 255, 255);
+	box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 0px 1px, rgba(0, 0, 0, 0.1) 0px 4px 11px;
+	margin-bottom: 8px;
+	margin-top: 8px;
+	position: absolute;
+	width: 40%;
+	box-sizing: border-box;
+	border-radius: 4px;
+	z-index: 100;
 }
 
-.qubely-font-family-options, .qubely-font-family-weights {
-    max-height: 270px;
-    overflow-y: auto;
-    padding-bottom: 4px;
-    padding-top: 4px;
-    position: relative;
-    box-sizing: border-box;     
+.qubely-font-family-options,
+.qubely-font-family-weights {
+	max-height: 270px;
+	overflow-y: auto;
+	padding-bottom: 4px;
+	padding-top: 4px;
+	position: relative;
+	box-sizing: border-box;
 }
-.qubely-active-font-family, .qubely-active-font-weight{
-    background-color: rgb(38, 132, 255);
-    color: rgb(255, 255, 255);
-    cursor: default;
-    display: block;
-    font-size: inherit;
-    width: 100%;
-    user-select: none;
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-    box-sizing: border-box;
-    padding: 8px 12px;
-}   
-.qubely-font-family-option, .qubely-font-weight-option {
-    background-color: transparent;
-    color: inherit;
-    cursor: default;
-    display: block;
-    font-size: inherit;
-    width: 100%;
-    user-select: none;
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-    box-sizing: border-box;
-    padding: 8px 12px;
+.qubely-active-font-family,
+.qubely-active-font-weight {
+	background-color: rgb(38, 132, 255);
+	color: rgb(255, 255, 255);
+	cursor: default;
+	display: block;
+	font-size: inherit;
+	width: 100%;
+	user-select: none;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+	box-sizing: border-box;
+	padding: 8px 12px;
 }
-.qubely-font-family-option:hover, .qubely-font-weight-option:hover{
-    background-color: #e8eaeb;
+.qubely-font-family-option,
+.qubely-font-weight-option {
+	background-color: transparent;
+	color: inherit;
+	cursor: default;
+	display: block;
+	font-size: inherit;
+	width: 100%;
+	user-select: none;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+	box-sizing: border-box;
+	padding: 8px 12px;
 }
-.qubely-font-family-search-wrapper{
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    input {
-        &.qubely-font-family-search {
-            border: none !important;
-            background-color: transparent !important;
-            &:focus,
-            &:active,
-            &:hover{
-                outline: 0;
-                box-shadow: none;
-            }
-        }
-    }
+.qubely-font-family-option:hover,
+.qubely-font-weight-option:hover {
+	background-color: #e8eaeb;
 }
-.qubely-font-weight-picker-wrapper{
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
+.qubely-font-family-search-wrapper {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	input {
+		&.qubely-font-family-search {
+			border: none !important;
+			background-color: transparent !important;
+			&:focus,
+			&:active,
+			&:hover {
+				outline: 0;
+				box-shadow: none;
+			}
+		}
+	}
 }
-.qubely-font-select-icon{
-    display: flex;
-    align-items: center;
-    padding-right: 3px;
+.qubely-font-weight-picker-wrapper {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+}
+.qubely-font-select-icon {
+	display: flex;
+	align-items: center;
+	padding-right: 3px;
 }
 
-.qubely-field.qubely-field-typography .components-dropdown.qubely-field{
-    width: 100%;
+.qubely-field.qubely-field-typography .components-dropdown.qubely-field {
+	width: 100%;
 }
