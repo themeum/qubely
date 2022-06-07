@@ -331,6 +331,7 @@ class Edit extends Component {
 				positionXaxis,
 				positionYaxis,
 				globalZindex,
+				hideDesktop,
 				hideTablet,
 				hideMobile,
 				globalCss,
@@ -472,17 +473,18 @@ class Edit extends Component {
 					</Toolbar>
 				</BlockControls>
 
-				{globalSettingsPanel(
+				{globalSettingsPanel({
 					enablePosition,
 					selectPosition,
 					positionXaxis,
 					positionYaxis,
 					globalZindex,
+					hideDesktop,
 					hideTablet,
 					hideMobile,
 					globalCss,
 					setAttributes
-				)}
+				})}
 
 				{rowWidth !== 0 && (
 					<ResizableBox

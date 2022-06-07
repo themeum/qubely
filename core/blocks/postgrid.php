@@ -1252,6 +1252,11 @@ function register_block_qubely_postgrid()
 					'default' => '0',
 					'style' => [(object) ['selector' => '{{QUBELY}} {z-index:{{globalZindex}};}']]
 				),
+				'hideDesktop' => array(
+					'type' => 'boolean',
+					'default' => false,
+					'style' => [(object) ['selector' => '{{QUBELY}}{display:none;}']]
+				),
 				'hideTablet' => array(
 					'type' => 'boolean',
 					'default' => false,

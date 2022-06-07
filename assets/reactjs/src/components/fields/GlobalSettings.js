@@ -71,18 +71,19 @@ export const globalAttributes = {
 	},
 };
 
-export function globalSettingsPanel(
+export function globalSettingsPanel({
 	enablePosition,
 	selectPosition,
 	positionXaxis,
 	positionYaxis,
 	globalZindex,
+	hideDesktop,
 	hideTablet,
 	hideMobile,
 	globalCss,
 	setAttributes,
 	isReturn = false
-) {
+}) {
 	const Output = (
 		<Fragment>
 			<Toggle
@@ -136,11 +137,11 @@ export function globalSettingsPanel(
 				onChange={(value) => setAttributes({ globalZindex: value })}
 			/>
 
-			{/* <Toggle
+			<Toggle
 				label={__("Hide on Desktop")}
 				value={hideDesktop}
 				onChange={() => setAttributes({ hideDesktop: !hideDesktop })}
-			/> */}
+			/>
 
 			<Toggle
 				label={__("Hide on Tablet")}

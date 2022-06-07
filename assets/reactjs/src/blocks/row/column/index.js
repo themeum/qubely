@@ -63,6 +63,7 @@ registerBlockType("qubely/column", {
 		borderRadius: { type: "object", default: {}, style: [{ selector: "{{QUBELY}} > .qubely-column-inner" }] },
 
 		// Responsive
+		hideDesktop: { type: "boolean", default: false, style: [{ selector: "{{QUBELY}}{display:none;}" }] },
 		hideTablet: { type: "boolean", default: false, style: [{ selector: "{{QUBELY}}{display:none;}" }] },
 		hideMobile: { type: "boolean", default: false, style: [{ selector: "{{QUBELY}}{display:none;}" }] },
 

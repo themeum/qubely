@@ -48,6 +48,7 @@ class Edit extends Component {
 				selectPosition,
 				positionXaxis,
 				positionYaxis,
+				hideDesktop,
 				hideTablet,
 				hideMobile,
 				globalCss,
@@ -105,17 +106,18 @@ class Edit extends Component {
 					</InspectorTabs>
 				</InspectorControls>
 
-				{globalSettingsPanel(
+				{globalSettingsPanel({
 					enablePosition,
 					selectPosition,
 					positionXaxis,
 					positionYaxis,
 					globalZindex,
+					hideDesktop,
 					hideTablet,
 					hideMobile,
 					globalCss,
 					setAttributes
-				)}
+				})}
 
 				<div className={classes}>
 					<div className={`qubely-block-button-group qubely-backend`}>
@@ -145,7 +147,6 @@ class Edit extends Component {
 									},
 								])}
 							templateLock={false}
-							renderAppender={false}
 							__experimentalUIParts={UI_PARTS}
 							__experimentalMoverDirection="horizontal"
 							allowedBlocks={["qubely/button"]}
