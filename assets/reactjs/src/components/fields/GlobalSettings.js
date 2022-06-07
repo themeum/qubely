@@ -77,7 +77,6 @@ export function globalSettingsPanel(
 	positionXaxis,
 	positionYaxis,
 	globalZindex,
-	hideDesktop,
 	hideTablet,
 	hideMobile,
 	globalCss,
