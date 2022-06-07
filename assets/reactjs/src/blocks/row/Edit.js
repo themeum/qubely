@@ -497,7 +497,6 @@ class Edit extends Component {
 						positionXaxis,
 						positionYaxis,
 						globalZindex,
-						hideDesktop,
 						hideTablet,
 						hideMobile,
 						globalCss,
