@@ -61,7 +61,7 @@ class QUBELY_Settings
             wp_send_json_error( 'No data or nonce failed' );
             die();
         };
-        if (!current_user_can('edit_posts')) {
+        if (!current_user_can('administrator')) {
             wp_send_json_error( "Sorry you are not allowed to access this route" );
             die();
         }
@@ -87,6 +87,9 @@ class QUBELY_Settings
      */
     public function save_options()
     {
+        if(!current_user_can('administrator')) {
+           return new WP_Error('qubely_error', __('Sorry you are not allowed to access this route', 'qubely')); 
+        }
         if (
             ! isset( $_POST['qubely_option_save'] ) ||
             ! isset( $_POST['_wpnonce'] ) ||
