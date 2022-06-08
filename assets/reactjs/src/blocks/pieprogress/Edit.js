@@ -84,6 +84,7 @@ class Edit extends Component {
 					positionXaxis,
 					positionYaxis,
 					globalZindex,
+					hideDesktop,
 					hideTablet,
 					hideMobile,
 					globalCss,
@@ -433,17 +434,18 @@ class Edit extends Component {
 					</Toolbar>
 				</BlockControls>
 
-				{globalSettingsPanel(
+				{globalSettingsPanel({
 					enablePosition,
 					selectPosition,
 					positionXaxis,
 					positionYaxis,
 					globalZindex,
+					hideDesktop,
 					hideTablet,
 					hideMobile,
 					globalCss,
 					setAttributes
-				)}
+				})}
 				<div
 					className={`qubely-block-${uniqueId} qubely-block-pie-progress${className ? ` ${className}` : ""}`}
 					onContextMenu={(event) => handleContextMenu(event, this.qubelyContextMenu.current)}

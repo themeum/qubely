@@ -130,6 +130,7 @@ class Edit extends Component {
 				positionXaxis,
 				positionYaxis,
 				globalZindex,
+				hideDesktop,
 				hideTablet,
 				hideMobile,
 				globalCss,
@@ -290,17 +291,18 @@ class Edit extends Component {
 					<AlignmentToolbar value={align} onChange={(nextAlign) => setAttributes({ align: nextAlign })} />
 				</BlockControls>
 
-				{globalSettingsPanel(
+				{globalSettingsPanel({
 					enablePosition,
 					selectPosition,
 					positionXaxis,
 					positionYaxis,
 					globalZindex,
+					hideDesktop,
 					hideTablet,
 					hideMobile,
 					globalCss,
 					setAttributes
-				)}
+				})}
 
 				<div
 					className={`qubely-block-${uniqueId} qubely-block-animated-heading qubely-block-animated-heading-backend ${className}`}

@@ -328,6 +328,7 @@ class Edit extends Component {
 				animation,
 				//global
 				globalCss,
+				hideDesktop,
 				hideTablet,
 				hideMobile,
 				interaction,
@@ -1088,17 +1089,18 @@ class Edit extends Component {
 					</Toolbar>
 				</BlockControls>
 
-				{globalSettingsPanel(
+				{globalSettingsPanel({
 					enablePosition,
 					selectPosition,
 					positionXaxis,
 					positionYaxis,
 					globalZindex,
+					hideDesktop,
 					hideTablet,
 					hideMobile,
 					globalCss,
 					setAttributes
-				)}
+				})}
 
 				<div className={blockWrapperClasses}>
 					<div className={`qubely-block-tab qubely-tab-style-${tabStyle} qubely-active-tab-${activeTab}`}>

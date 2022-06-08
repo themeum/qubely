@@ -56,6 +56,7 @@ class AccordionBlock extends Component {
 				positionXaxis,
 				positionYaxis,
 				globalZindex,
+				hideDesktop,
 				hideTablet,
 				hideMobile,
 				globalCss,
@@ -70,17 +71,18 @@ class AccordionBlock extends Component {
 					{interactionSettings(uniqueId, interaction, setAttributes)}
 				</InspectorControls>
 
-				{globalSettingsPanel(
+				{globalSettingsPanel({
 					enablePosition,
 					selectPosition,
 					positionXaxis,
 					positionYaxis,
 					globalZindex,
+					hideDesktop,
 					hideTablet,
 					hideMobile,
 					globalCss,
 					setAttributes
-				)}
+				})}
 
 				<div className={`qubely-block-accordion qubely-block-${uniqueId}${className ? ` ${className}` : ""}`}>
 					<InnerBlocks
