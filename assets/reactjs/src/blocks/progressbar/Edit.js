@@ -208,7 +208,7 @@ class Edit extends Component {
 					</Toolbar>
 				</BlockControls>
 
-				{globalSettingsPanel(
+				{globalSettingsPanel({
 					enablePosition,
 					selectPosition,
 					positionXaxis,
@@ -219,7 +219,7 @@ class Edit extends Component {
 					hideMobile,
 					globalCss,
 					setAttributes
-				)}
+				})}
 
 				<div className={`qubely-block-${uniqueId}${className ? ` ${className}` : ""}`}>
 					<div

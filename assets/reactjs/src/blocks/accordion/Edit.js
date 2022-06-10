@@ -71,7 +71,7 @@ class AccordionBlock extends Component {
 					{interactionSettings(uniqueId, interaction, setAttributes)}
 				</InspectorControls>
 
-				{globalSettingsPanel(
+				{globalSettingsPanel({
 					enablePosition,
 					selectPosition,
 					positionXaxis,
@@ -82,7 +82,7 @@ class AccordionBlock extends Component {
 					hideMobile,
 					globalCss,
 					setAttributes
-				)}
+				})}
 
 				<div className={`qubely-block-accordion qubely-block-${uniqueId}${className ? ` ${className}` : ""}`}>
 					<InnerBlocks

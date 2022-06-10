@@ -491,19 +491,18 @@ class Edit extends Component {
 						onChange={(val) => setAttributes({ rowReverse: { values: val, openRowReverse: true } })}
 					/>
 					<TextControl label={__("CSS ID")} value={rowId} onChange={(val) => setAttributes({ rowId: val })} />
-					{globalSettingsPanel(
+					{globalSettingsPanel({
 						enablePosition,
 						selectPosition,
 						positionXaxis,
 						positionYaxis,
 						globalZindex,
-						hideDesktop,
 						hideTablet,
 						hideMobile,
 						globalCss,
 						setAttributes,
-						true
-					)}
+						isReturn: true
+					})}
 				</InspectorAdvancedControls>
 
 				<div

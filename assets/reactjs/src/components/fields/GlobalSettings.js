@@ -10,7 +10,6 @@ const { Fragment } = wp.element;
 const { TextareaControl, PanelBody, SelectControl } = wp.components;
 
 //attributes
-//attributes
 export const globalAttributes = {
 	animation: {
 		type: "object",
@@ -72,7 +71,7 @@ export const globalAttributes = {
 	},
 };
 
-export function globalSettingsPanel(
+export function globalSettingsPanel({
 	enablePosition,
 	selectPosition,
 	positionXaxis,
@@ -84,7 +83,7 @@ export function globalSettingsPanel(
 	globalCss,
 	setAttributes,
 	isReturn = false
-) {
+}) {
 	const Output = (
 		<Fragment>
 			<Toggle
