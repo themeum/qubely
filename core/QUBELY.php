@@ -12,12 +12,6 @@ class QUBELY_MAIN {
 
 	protected $option_keyword = 'qubely_global_options';
 
-	const FULL_NAME_PLACEHOLDER = '{{full-name}}';
-	const EMAIL_PLACEHOLDER = '{{email}}';
-	const SITE_NAME_PLACEHOLDER = '{{site-name}}';
-	const SUBJECT_PLACEHOLDER = '{{subject}}';
-	const MESSAGE_PLACEHOLDER = '{{message}}';
-
 	/**
 	 * QUBELY constructor
 	 */
@@ -1938,6 +1932,7 @@ class QUBELY_MAIN {
 	 *
 	 * @return boolean,void     Return false if failure, echo json on success
 	 */
+
 	public function qubely_send_form_data() {
 
 		// Verify the authenticity of the request.
@@ -1973,7 +1968,7 @@ class QUBELY_MAIN {
 		$emailReceiver      = ( $_POST['email-receiver'] ) ? sanitize_email( $_POST['email-receiver'] ) : $default_receiver;
 		$emailHeaders       = ( $_POST['email-headers'] ) ? $_POST['email-headers'] : '';
 		$emailSubject       = ( $_POST['email-subject'] ) ? sanitize_text_field( $_POST['email-subject'] ) : '';
-		$emailBody          = ( $_POST['email-body'] ) ? wp_kses_post($_POST['email-body']) : '';
+		$emailBody          = ( $_POST['email-body'] ) ? wp_kses_post( $_POST['email-body'] ) : '';
 		
 		$fieldNames     = array();
 		$validation     = false;
@@ -1984,7 +1979,7 @@ class QUBELY_MAIN {
 				if ( empty( $value ) ) {
 					$validation = true;
 				}
-				$key = trim(str_replace( '*', '', $key ));
+				$key = str_replace( '*', '', $key );
 			}
 			$fieldNames[ $key ] = $value;
 
@@ -2016,23 +2011,19 @@ class QUBELY_MAIN {
 			}
 		}
 
-		
+		foreach ( $fieldNames as $name => $value ) {
+			$value        = is_array( $fieldNames[ $name ] ) ? implode( ', ', $fieldNames[ $name ] ) : $value;
+			$emailBody    = str_replace( '{{' . $name . '}}', sanitize_textarea_field( $value ), $emailBody );
+			$emailSubject = str_replace( '{{' . $name . '}}', sanitize_text_field( $value ), $emailSubject );
+			$replyToName  = str_replace( '{{' . $name . '}}', sanitize_text_field( $value ), $replyToName );
+			$replyToMail  = str_replace( '{{' . $name . '}}', sanitize_text_field( $value ), $replyToMail );
+			$cc           = str_replace( '{{' . $name . '}}', sanitize_text_field( $value ), $cc );
+			$bcc          = str_replace( '{{' . $name . '}}', sanitize_text_field( $value ), $bcc );
+		}
 
-		$replaceable[self::FULL_NAME_PLACEHOLDER]		= isset($fieldNames['full-name']) ? $fieldNames['full-name'] : '';
-		$replaceable[self::EMAIL_PLACEHOLDER] 			= isset($fieldNames['email']) ? $fieldNames['email'] : '';
-		$replaceable[self::SUBJECT_PLACEHOLDER] 		= isset($fieldNames['subject']) ? $fieldNames['subject'] : '';
-		$replaceable[self::MESSAGE_PLACEHOLDER] 		= isset($fieldNames['message']) ? $fieldNames['message'] : '';
-		$replaceable[self::SITE_NAME_PLACEHOLDER] 	= isset($fieldNames['site-name']) ? $fieldNames['site-name'] : get_bloginfo( 'name' );
-
-		$replace_keys		= array_keys( $replaceable );
-		$replace_values = array_values( $replaceable );
-
-		$emailBody		= str_replace($replace_keys, $replace_values, $emailBody);
-		$emailSubject	= str_replace($replace_keys, $replace_values, $emailSubject);
-		$replyToName	= str_replace($replace_keys, $replace_values, $replyToName);
-		$replyToMail	= str_replace($replace_keys, $replace_values, $replyToMail);
-		$cc						= str_replace($replace_keys, $replace_values, $cc);
-		$bcc					= str_replace($replace_keys, $replace_values, $bcc);
+		// Subject Structure
+		$siteName     = isset( $_SERVER['SERVER_NAME'] ) ? $_SERVER['SERVER_NAME'] : '';
+		$emailSubject = str_replace( '{{site-name}}', $siteName, $emailSubject );
 
 		$headers[] = 'Content-Type: text/html; charset=UTF-8';
 		$headers[] = 'From: ' . $fromName . ' <' . $emailFrom . '>';
