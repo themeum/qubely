@@ -144,7 +144,7 @@ class Edit extends Component {
 						<div
 							className={`qubely-list-item-text-${index}`}
 							id={`qubely-list-item-text-${index}`}
-							contenteditable={true}
+							contenteditable="true"
 							suppressContentEditableWarning={true}
 							placeholder="Enter new list item"
 							onBlur={(event) => this.modifySpecificItem({ text: event.target.innerText }, index)}

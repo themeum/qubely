@@ -5,9 +5,10 @@ const {
 } = wp.qubelyComponents;
 class Save extends Component {
 	render() {
-		const { animation, uniqueId, itemToggle, interaction } = this.props.attributes;
+		const { clientId, attributes } = this.props;
+		const { animation, uniqueId, itemToggle, interaction } = attributes;
 		const interactionClass = IsInteraction(interaction) ? "qubley-block-interaction" : "";
-		const className = `qubely-block-accordion ${interactionClass} qubely-block-${uniqueId}`;
+		const className = `qubely-block-accordion ${interactionClass} qubely-block-${clientId}`;
 		return (
 			<div className={className} {...animationAttr(animation)} data-item-toggle={itemToggle}>
 				<InnerBlocks.Content />

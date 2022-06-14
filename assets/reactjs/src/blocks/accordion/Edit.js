@@ -47,6 +47,7 @@ class AccordionBlock extends Component {
 			attributes,
 			isSelectedBlockInRoot,
 			setAttributes,
+			clientId,
 			attributes: {
 				uniqueId,
 				className,
@@ -84,7 +85,7 @@ class AccordionBlock extends Component {
 					setAttributes
 				})}
 
-				<div className={`qubely-block-accordion qubely-block-${uniqueId}${className ? ` ${className}` : ""}`}>
+				<div className={`qubely-block-accordion qubely-block-${clientId}${className ? ` ${className}` : ""}`}>
 					<InnerBlocks
 						template={this.getAccordionTemplate(attributes)}
 						allowedBlocks={["qubely/accordion-item"]}
