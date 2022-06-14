@@ -65,6 +65,8 @@ class AccordionBlock extends Component {
 			},
 		} = this.props;
 
+		if(!uniqueId) setAttributes({uniqueId: clientId.substr(0, 6)})
+
 		return (
 			<Fragment>
 				<InspectorControls>
@@ -85,7 +87,7 @@ class AccordionBlock extends Component {
 					setAttributes
 				})}
 
-				<div className={`qubely-block-accordion qubely-block-${clientId}${className ? ` ${className}` : ""}`}>
+				<div className={`qubely-block-accordion qubely-block-${uniqueId}${className ? ` ${className}` : ""}`}>
 					<InnerBlocks
 						template={this.getAccordionTemplate(attributes)}
 						allowedBlocks={["qubely/accordion-item"]}
