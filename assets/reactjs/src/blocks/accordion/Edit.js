@@ -47,6 +47,7 @@ class AccordionBlock extends Component {
 			attributes,
 			isSelectedBlockInRoot,
 			setAttributes,
+			clientId,
 			attributes: {
 				uniqueId,
 				className,
@@ -63,6 +64,8 @@ class AccordionBlock extends Component {
 				interaction,
 			},
 		} = this.props;
+
+		if(!uniqueId) setAttributes({uniqueId: clientId.substr(0, 6)})
 
 		return (
 			<Fragment>

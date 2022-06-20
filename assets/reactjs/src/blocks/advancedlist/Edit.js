@@ -146,7 +146,7 @@ class Edit extends Component {
 							<div
 								className={`qubely-list-item-text-${index}`}
 								id={`qubely-list-item-text-${index}`}
-								contentEditable={true}
+								contenteditable="true"
                                 suppressContentEditableWarning={true}
 								placeholder="Enter new item"
 								onClick={() => this.setState({ focusedItem: index })}
