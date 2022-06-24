@@ -52,7 +52,7 @@ class Save extends Component {
 								{title.iconName && (iconPosition == "top" || iconPosition == "left") && (
 									<i className={`qubely-tab-icon ${title.iconName}`} />
 								)}
-								{title.title}
+								<span className="qubely-tab-title-text">{title.title}</span>
 								{title.iconName && iconPosition == "right" && (
 									<i className={`qubely-tab-icon ${title.iconName}`} />
 								)}
