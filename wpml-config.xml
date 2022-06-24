@@ -3,6 +3,10 @@
 		<gutenberg-block type="qubely/accordion-item" translate="1">
 			<xpath>//span[@class="qubely-accordion-panel-handler-label"]</xpath>
 		</gutenberg-block>
+		<gutenberg-block type="qubely/tabs" translate="1">
+			<xpath>//span[@class="qubely-tab-title-text"]</xpath>
+			<xpath>//div[@class="image-type-nav-title"]</xpath>
+		</gutenberg-block>
   </gutenberg-blocks>
   <custom-fields>
     <custom-field action="copy">_qubely_css</custom-field>
