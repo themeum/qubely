@@ -15,7 +15,5 @@
   </custom-fields>
   <admin-texts>
     <key name="qubely_global_options"/>
-    <key name="qubely_pro_version"/>
-    <key name="themeum_update_error_qubely-pro/qubely-pro.php"/>
   </admin-texts>
 </wpml-config>
