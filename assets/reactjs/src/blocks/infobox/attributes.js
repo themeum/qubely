@@ -25,6 +25,14 @@ const attributes = {
 				condition: [{ key: "layout", relation: "==", value: 4 }],
 				selector: "{{QUBELY}} .qubely-block-info-box {text-align: {{alignment}};}",
 			},
+			{
+				condition: [{ key: "layout", relation: "==", value: 2 }],
+				selector: "{{QUBELY}}.qubely-block-info-box-2 {display: flex; justify-content: {{alignment}};}",
+			},
+			{
+				condition: [{ key: "layout", relation: "==", value: 3 }],
+				selector: "{{QUBELY}}.qubely-block-info-box-3 {display: flex; justify-content: {{alignment}};}",
+			}
 		],
 	},
 	spacer: {
