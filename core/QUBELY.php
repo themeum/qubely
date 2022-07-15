@@ -1997,16 +1997,16 @@ class QUBELY_MAIN {
 			$_header = explode( ':', $_header );
 			if ( count( $_header ) > 0 ) {
 				if ( strtolower( $_header[0] ) == 'reply-to' ) {
-					$replyToMail = isset( $_header[1] ) ? trim( $_header[1] ) : '';
+					$replyToMail = isset( $_header[1] ) ? sanitize_text_field( $_header[1] ) : '';
 				}
 				if ( strtolower( $_header[0] ) == 'reply-name' ) {
-					$replyToName = isset( $_header[1] ) ? trim( $_header[1] ) : '';
+					$replyToName = isset( $_header[1] ) ? sanitize_text_field( $_header[1] ) : '';
 				}
 				if ( strtolower( $_header[0] ) == 'cc' ) {
-					$cc = isset( $_header[1] ) ? trim( $_header[1] ) : '';
+					$cc = isset( $_header[1] ) ? sanitize_text_field( $_header[1] ) : '';
 				}
 				if ( strtolower( $_header[0] ) == 'bcc' ) {
-					$bcc = isset( $_header[1] ) ? trim( $_header[1] ) : '';
+					$bcc = isset( $_header[1] ) ? sanitize_text_field( $_header[1] ) : '';
 				}
 			}
 		}
@@ -2022,7 +2022,7 @@ class QUBELY_MAIN {
 		}
 
 		// Subject Structure
-		$siteName     = isset( $_SERVER['SERVER_NAME'] ) ? $_SERVER['SERVER_NAME'] : '';
+		$siteName     = isset( $_SERVER['SERVER_NAME'] ) ? sanitize_text_field( $_SERVER['SERVER_NAME'] ) : '';
 		$emailSubject = str_replace( '{{site-name}}', $siteName, $emailSubject );
 
 		$headers[] = 'Content-Type: text/html; charset=UTF-8';
