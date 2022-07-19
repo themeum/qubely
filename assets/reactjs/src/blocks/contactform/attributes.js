@@ -6,7 +6,7 @@ const formItems = [
 	{
 		type: "text",
 		label: "Full Name",
-		name: "full-name ",
+		name: "full-name",
 		placeholder: "Full Name",
 		width: { md: 50 },
 		required: true,
