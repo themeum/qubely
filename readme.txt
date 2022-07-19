@@ -4,7 +4,7 @@ Donate link: https://www.themeum.com
 Tags: blocks, gutenberg, gutenberg blocks, editor, block, page builder
 Requires at least: 5.0
 Tested up to: 6.0
-Stable tag: 1.8.2
+Stable tag: 1.8.3
 Requires PHP: 7.0
 License: GPL-2.0+
 License URI: http://www.gnu.org/licenses/gpl-2.0.txt
@@ -238,6 +238,13 @@ You can report bugs on the [support forum here](https://wordpress.org/support/pl
 
 
 == Changelog ==
+
+= 1.8.3 =
+Update: Email Sending Mechanism is improved in terms of Security and Performance
+Update: PHP version compatibility is improved
+Fix: Counter was not working properly
+Fix: Row Padding was not being implemented the same way as it is shown in the Preview page
+Fix: Pre-made templates were appearing differently when editing than how they appear on the frontend
 
 = 1.8.2 =
 Update: Compatibility with the latest WPML plugin is introduced
