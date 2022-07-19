@@ -1966,7 +1966,7 @@ class QUBELY_MAIN {
 		$formSuccessMessage = ( $_POST['form-success-message'] ) ? sanitize_text_field( $_POST['form-success-message'] ) : '';
 		$formErrorMessage   = ( $_POST['form-error-message'] ) ? sanitize_text_field( $_POST['form-error-message'] ) : '';
 		$emailReceiver      = ( $_POST['email-receiver'] ) ? sanitize_email( $_POST['email-receiver'] ) : $default_receiver;
-		$emailHeaders       = ( $_POST['email-headers'] ) ? $_POST['email-headers'] : '';
+		$emailHeaders       = ( $_POST['email-headers'] ) ? sanitize_textarea_field( $_POST['email-headers'] ) : '';
 		$emailSubject       = ( $_POST['email-subject'] ) ? sanitize_text_field( $_POST['email-subject'] ) : '';
 		$emailBody          = ( $_POST['email-body'] ) ? wp_kses_post( $_POST['email-body'] ) : '';
 		
