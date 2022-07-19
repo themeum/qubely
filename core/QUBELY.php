@@ -709,7 +709,7 @@ class QUBELY_MAIN {
 		wp_enqueue_script( 'qubely_local_script' );
 
 		$blocks_meta_data = get_post_meta( get_the_ID(), '__qubely_available_blocks', true );
-		$blocks_meta_data = unserialize( $blocks_meta_data );
+		$blocks_meta_data = maybe_unserialize( $blocks_meta_data );
 
 		/**
 		 * register scripts
