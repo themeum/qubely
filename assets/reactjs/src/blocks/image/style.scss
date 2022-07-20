@@ -11,6 +11,7 @@
 		position: relative;
 
 		.qubely-image-image {
+			max-width: 100%;
 			margin: 0;
 			padding: 0;
 			display: block;
@@ -40,6 +41,7 @@
 				right: 0;
 				z-index: 10;
 				line-height: normal;
+				box-sizing: border-box;
 			}
 		}
 		div.qubely-image-container {
