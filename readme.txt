@@ -2,8 +2,8 @@
 Contributors: themeum
 Donate link: https://www.themeum.com
 Tags: blocks, gutenberg, gutenberg blocks, editor, block, page builder
-Requires at least: 5.0
-Tested up to: 6.0
+Requires at least: 5.3
+Tested up to: 6.0.1
 Stable tag: 1.8.3
 Requires PHP: 7.0
 License: GPL-2.0+
