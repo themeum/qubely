@@ -2,7 +2,7 @@
 	position: relative;
 	.qubely-container {
 		position: relative;
-		width: 100%;
+		// width: 100%;
 		margin-right: auto;
 		margin-left: auto;
 
@@ -154,6 +154,11 @@ div[data-type="qubely/row"] {
 					}
 				}
 			}
+		}
+
+		.wp-block {
+			margin-top: 0;
+			margin-bottom: 0;
 		}
 	}
 }

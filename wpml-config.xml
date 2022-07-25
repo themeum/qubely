@@ -1,0 +1,19 @@
+<wpml-config>
+  <gutenberg-blocks>
+		<gutenberg-block type="qubely/accordion-item" translate="1">
+			<xpath>//span[@class="qubely-accordion-panel-handler-label"]</xpath>
+		</gutenberg-block>
+		<gutenberg-block type="qubely/tabs" translate="1">
+			<xpath>//span[@class="qubely-tab-title-text"]</xpath>
+			<xpath>//div[@class="image-type-nav-title"]</xpath>
+		</gutenberg-block>
+  </gutenberg-blocks>
+  <custom-fields>
+    <custom-field action="copy">_qubely_css</custom-field>
+    <custom-field action="copy">_qubely_interaction_json</custom-field>
+    <custom-field action="copy">__qubely_available_blocks</custom-field>
+  </custom-fields>
+  <admin-texts>
+    <key name="qubely_global_options"/>
+  </admin-texts>
+</wpml-config>

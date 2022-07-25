@@ -314,7 +314,7 @@ export const CssGenerator = (
 
 	// Join CSS
 	if (md.length > 0) {
-		__CSS += "@media (min-width: 1200px) {" + md.join("") + "}";
+		__CSS += md.join("");
 	}
 	if (sm.length > 0) {
 		__CSS += "@media (max-width: 1199px) {" + sm.join("") + "}";
