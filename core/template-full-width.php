@@ -24,7 +24,7 @@ if ( version_compare( $wp_version, '5.9', '>=' ) && function_exists( 'wp_is_bloc
 			<?php
 				$theme      = wp_get_theme();
 				$theme_slug = $theme->get( 'TextDomain' );
-				echo do_blocks( '<!-- wp:template-part {"slug":"header","theme":"' . $theme_slug . '","tagName":"header","className":"site-header"} /-->' );
+				echo do_blocks( '<!-- wp:template-part {"slug":"header","theme":"' . esc_attr( $theme_slug ) . '","tagName":"header","className":"site-header"} /-->' );
 } else {
 	get_header();
 }
@@ -36,7 +36,7 @@ endwhile; // End of the loop.
 if ( version_compare( $wp_version, '5.9', '>=' ) && function_exists( 'wp_is_block_theme' ) && true === wp_is_block_theme() ) {
 	$theme      = wp_get_theme();
 	$theme_slug = $theme->get( 'TextDomain' );
-	echo do_blocks('<!-- wp:template-part {"slug":"footer","theme":"' . $theme_slug . '","tagName":"footer","className":"site-footer"} /-->');
+	echo do_blocks('<!-- wp:template-part {"slug":"footer","theme":"' . esc_attr( $theme_slug ) . '","tagName":"footer","className":"site-footer"} /-->');
 	echo '</div>';
 	wp_footer();
 	echo '</body>';
