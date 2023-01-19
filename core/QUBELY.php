@@ -1959,7 +1959,7 @@ class QUBELY_MAIN {
 
 		return $array;
 	}
-
+	
 	/**
 	 * Ajax for sending form data
 	 *
@@ -2016,7 +2016,9 @@ class QUBELY_MAIN {
 			}
 			$fieldNames[ $key ] = $value;
 
-			$emailReceiver = apply_filters( 'qubely_custom_email_receiver', $value, $emailReceiver );
+			// if ($key == 'email') {
+			// $emailReceiver = apply_filters( 'qubely_custom_email_receiver', $value, $emailReceiver );
+			// }
 		}
 
 		if ( $validation || ( isset( $_POST['qubely-form-has-policy'] ) && empty( $_POST['qubely-form-has-policy'] ) ) ) {
@@ -2066,7 +2068,7 @@ class QUBELY_MAIN {
 
 		// Send E-Mail Now or through error msg.
 		try {
-			$isMail = wp_mail( $emailFrom, $emailSubject, $emailBody, $headers );
+			$isMail = wp_mail( $emailReceiver, $emailSubject, $emailBody, $headers );
 			if ( $isMail ) {
 				$responseData['status'] = 1;
 				$responseData['msg']    = __( $formSuccessMessage, 'qubely' );
