@@ -95,7 +95,7 @@ const attributes = {
 		],
 	},
 	fillType: { type: "string", default: "fill" },
-	url: { type: "object", default: { url: "#" } },
+	qubelyButtonUrl: { type: "object", default: { url: "#" } },
 	buttonSize: { type: "string", default: "large" },
 	buttonPadding: {
 		type: "object",

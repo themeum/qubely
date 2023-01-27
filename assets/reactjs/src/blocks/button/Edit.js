@@ -61,7 +61,7 @@ class Edit extends Component {
 			// updateBlockAttributes,
 			// buttonGroupAttributes,
 			attributes: {
-				url,
+				qubelyButtonUrl,
 				iconName,
 				recreateStyles,
 				fillType,
@@ -154,8 +154,8 @@ class Edit extends Component {
 								<Separator />
 								<Url
 									label={__("Button URL")}
-									value={url}
-									onChange={(value) => setAttributes({ url: value })}
+									value={qubelyButtonUrl}
+									onChange={(value) => setAttributes({ qubelyButtonUrl: value })}
 								/>
 								{enableAlignment && (
 									<Alignment

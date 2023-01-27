@@ -68,7 +68,7 @@ class Edit extends Component {
 				uniqueId,
 				className,
 				name,
-				url,
+				qubelyIconUrl,
 				alignment,
 
 				iconSize,
@@ -154,7 +154,7 @@ class Edit extends Component {
 										onDeviceChange={(value) => this.setState({ device: value })}
 									/>
 								)}
-								<Url label={__("Url")} value={url} onChange={(val) => setAttributes({ url: val })} />
+								<Url label={__("Url")} value={qubelyIconUrl} onChange={(val) => setAttributes({ qubelyIconUrl: val })} />
 								<Tabs>
 									<Tab tabTitle={__("Normal")}>
 										<Color
