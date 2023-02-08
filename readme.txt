@@ -239,6 +239,12 @@ You can report bugs on the [support forum here](https://wordpress.org/support/pl
 
 == Changelog ==
 
+= 1.8.5 =
+New: Jetpack compatibility is introduced
+Update: All Stylesheet and Script libraries are updated to the latest version
+Update: More security improvements is introduced
+Fix: Form Builder had an issue with the Recipient Email input field
+
 = 1.8.4 =
 Update: Implemented more security update for improved security
 New: Introduced "Deprecation" in case of the "Block Recovery Issue" for Update
