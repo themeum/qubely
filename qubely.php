@@ -210,14 +210,14 @@ add_action( 'rest_api_init', 'qubely_register_rest_fields' );
 /**
  * Order by 
  */
-function qubely_resigter_rest_order_by_fields() {
+function qubely_register_rest_order_by_fields() {
     $post_types = QUBELY_MAIN::get_post_types();
 
     foreach ( $post_types as $key => $type ) {
 		add_filter( "rest_{$type['value']}_collection_params", 'qubely_blocks_add_orderby', 10, 1 );
 	}
 }
-add_action( 'init', 'qubely_resigter_rest_order_by_fields' );
+add_action( 'init', 'qubely_register_rest_order_by_fields' );
 
 function qubely_blog_posts_image_sizes()
 {

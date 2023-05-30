@@ -16,7 +16,7 @@ class QUBELY_Getting_Started {
 
     public function mini_cards() {
 
-        // @TODO: Fetech data dynamically with one request if possible
+        // @TODO: Fetch data dynamically with one request if possible
 	    $block = 39;
 	    $sections = 160;
 	    $layouts = 44;
