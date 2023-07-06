@@ -63,9 +63,11 @@ class QUBELY_MAIN {
 
 		 add_action( 'wp_ajax_qubely_get_saved_block', array( $this, 'qubely_get_saved_block' ) );
 		 add_action( 'wp_ajax_qubely_delete_saved_block', array( $this, 'qubely_delete_saved_block' ) );
-
-		 add_action( 'wp_ajax_qubely_send_form_data', array( $this, 'qubely_send_form_data' ) );
-		 add_action( 'wp_ajax_nopriv_qubely_send_form_data', array( $this, 'qubely_send_form_data' ) );
+		
+			add_action( 'wp_ajax_qubely_send_form_data', array( $this, 'qubely_send_form_data' ) );
+			add_action( 'wp_ajax_nopriv_qubely_send_form_data', array( $this, 'qubely_send_form_data' ) );
+		
+		 
 
 		 add_action( 'wp_ajax_qubely_add_to_cart', array( $this, 'qubely_add_to_cart' ) );
 		 add_action( 'wp_ajax_nopriv_qubely_add_to_cart', array( $this, 'qubely_add_to_cart' ) );
@@ -740,6 +742,7 @@ class QUBELY_MAIN {
 			}
 			if ( has_block( 'qubely/contactform' ) || has_block( 'qubely/form' ) || $this->has_block_in_reusable( 'qubely/contactform' ) || $this->has_block_in_reusable( 'qubely/form' ) ) {
 				wp_enqueue_script( 'qubely-block-contactform' );
+
 			}
 			if ( has_block( 'qubely/imagecomparison' ) || $this->has_block_in_reusable( 'qubely/imagecomparison' ) ) {
 				wp_enqueue_script( 'qubely-block-image-comparison' );
@@ -1966,123 +1969,149 @@ class QUBELY_MAIN {
 	 * @return boolean,void     Return false if failure, echo json on success
 	 */
 
-	public function qubely_send_form_data() {
-
-		// Verify the authenticity of the request.
-		check_ajax_referer( 'qubely_nonce', 'security' );
-
-		// All good, let's proceed.
-		if ( isset( $_POST['captcha'] ) && $_POST['recaptcha'] == 'true' ) {
-			$captcha   = $_POST['captcha'];
-			$secretKey = $_POST['recaptcha-secret-key'];
-			$verify    = wp_remote_get( "https://www.google.com/recaptcha/api/siteverify?secret={$secretKey}&response={$captcha}" );
-
-			if ( ! is_array( $verify ) || ! isset( $verify['body'] ) ) {
-				wp_send_json( __( 'Cannot validate captcha', 'qubely' ), 400 );
-			}
-
-			$verified = json_decode( $verify['body'] );
-			if ( ! $verified->success ) {
-				wp_send_json( __( 'Captcha validation error', 'qubely' ), 400 );
-			}
-		}
-
-		// setting from options.
-		$qubely_options = maybe_unserialize( get_option( 'qubely_options' ) );
-		$emailFrom      = isset( $qubely_options['form_from_email'] ) ? sanitize_email( $qubely_options['form_from_email'] ) : sanitize_email( get_option( 'admin_email' ) );
-		$fromName       = isset( $qubely_options['form_from_name'] ) ? sanitize_text_field( $qubely_options['form_from_name'] ) : sanitize_text_field( get_option( 'blogname' ) );
-
-		$default_receiver = sanitize_email( get_option( 'admin_email' ) );
-
-		// Settings data
-		$fieldErrorMessage  = ( $_POST['field-error-message'] ) ? sanitize_text_field( $_POST['field-error-message'] ) : '';
-		$formSuccessMessage = ( $_POST['form-success-message'] ) ? sanitize_text_field( $_POST['form-success-message'] ) : '';
-		$formErrorMessage   = ( $_POST['form-error-message'] ) ? sanitize_text_field( $_POST['form-error-message'] ) : '';
-		$emailReceiver      = ( $_POST['email-receiver'] ) ? sanitize_email( $_POST['email-receiver'] ) : $default_receiver;
-		$emailHeaders       = ( $_POST['email-headers'] ) ? sanitize_textarea_field( $_POST['email-headers'] ) : '';
-		$emailSubject       = ( $_POST['email-subject'] ) ? sanitize_text_field( $_POST['email-subject'] ) : '';
-		$emailBody          = ( $_POST['email-body'] ) ? wp_kses_post( $_POST['email-body'] ) : '';
+		public function qubely_send_form_data() {
 		
-		$fieldNames     = array();
-		$validation     = false;
-		$formInputArray = $this->sanitize_form_array( $_POST['qubely-form-input'] );
-
-		foreach ( $formInputArray as $key => $value ) {
-			if ( preg_match( '/[*]$/', $key ) ) {
-				if ( empty( $value ) ) {
-					$validation = true;
-				}
-				$key = str_replace( '*', '', $key );
-			}
-			$fieldNames[ $key ] = $value;
-
-			// if ($key == 'email') {
-			// $emailReceiver = apply_filters( 'qubely_custom_email_receiver', $value, $emailReceiver );
-			// }
-		}
-
-		if ( $validation || ( isset( $_POST['qubely-form-has-policy'] ) && empty( $_POST['qubely-form-has-policy'] ) ) ) {
-			wp_send_json( __( $formErrorMessage, 'qubely' ), 400 );
-		}
-
-		$replyToMail = $replyToName = $cc = $bcc = '';
-
-		$emailHeaders = explode( "\n", $emailHeaders );
-		foreach ( $emailHeaders as $_header ) {
-			$_header = explode( ':', $_header );
-			if ( count( $_header ) > 0 ) {
-				if ( strtolower( $_header[0] ) == 'reply-to' ) {
-					$replyToMail = isset( $_header[1] ) ? sanitize_text_field( $_header[1] ) : '';
-				}
-				if ( strtolower( $_header[0] ) == 'reply-name' ) {
-					$replyToName = isset( $_header[1] ) ? sanitize_text_field( $_header[1] ) : '';
-				}
-				if ( strtolower( $_header[0] ) == 'cc' ) {
-					$cc = isset( $_header[1] ) ? sanitize_text_field( $_header[1] ) : '';
-				}
-				if ( strtolower( $_header[0] ) == 'bcc' ) {
-					$bcc = isset( $_header[1] ) ? sanitize_text_field( $_header[1] ) : '';
+			$url     = wp_get_referer();
+			$post_id = url_to_postid( $url ); 
+			
+			// Retrieve the post content
+			$post_content = get_post_field('post_content', $post_id);
+		
+			// Parse the content into blocks
+			$blocks = parse_blocks($post_content);
+		
+			// Check if the specific block exists
+			$block_exists = false;
+			foreach ($blocks as $block) {
+				if ($block['blockName'] === 'qubely/contactform' || 'qubely/form') {
+					$block_exists = true;
+					break;
+					
 				}
 			}
-		}
-
-		foreach ( $fieldNames as $name => $value ) {
-			$value        = is_array( $fieldNames[ $name ] ) ? implode( ', ', $fieldNames[ $name ] ) : $value;
-			$emailBody    = str_replace( '{{' . $name . '}}', sanitize_textarea_field( $value ), $emailBody );
-			$emailSubject = str_replace( '{{' . $name . '}}', sanitize_text_field( $value ), $emailSubject );
-			$replyToName  = str_replace( '{{' . $name . '}}', sanitize_text_field( $value ), $replyToName );
-			$replyToMail  = str_replace( '{{' . $name . '}}', sanitize_text_field( $value ), $replyToMail );
-			$cc           = str_replace( '{{' . $name . '}}', sanitize_text_field( $value ), $cc );
-			$bcc          = str_replace( '{{' . $name . '}}', sanitize_text_field( $value ), $bcc );
-		}
-
-		// Subject Structure
-		$siteName     = isset( $_SERVER['SERVER_NAME'] ) ? sanitize_text_field( $_SERVER['SERVER_NAME'] ) : '';
-		$emailSubject = str_replace( '{{site-name}}', $siteName, $emailSubject );
-
-		$headers[] = 'Content-Type: text/html; charset=UTF-8';
-		$headers[] = 'From: ' . $fromName . ' <' . $emailFrom . '>';
-		$headers[] = 'Reply-To: ' . $replyToName . ' <' . $replyToMail . '>';
-		$headers[] = 'Cc: ' . $cc;
-		$headers[] = 'Bcc: ' . $bcc;
-
-		// Send E-Mail Now or through error msg.
-		try {
-			$isMail = wp_mail( $emailReceiver, $emailSubject, $emailBody, $headers );
-			if ( $isMail ) {
-				$responseData['status'] = 1;
-				$responseData['msg']    = __( $formSuccessMessage, 'qubely' );
-			} else {
+			if($block_exists == false){
+				return ;
+			}
+			
+				// Verify the authenticity of the request.
+			check_ajax_referer( 'qubely_nonce', 'security');
+	
+			// All good, let's proceed.
+			if ( isset( $_POST['captcha'] ) && $_POST['recaptcha'] == 'true' ) {
+				$captcha   = $_POST['captcha'];
+				$secretKey = $_POST['recaptcha-secret-key'];
+				$verify    = wp_remote_get( "https://www.google.com/recaptcha/api/siteverify?secret={$secretKey}&response={$captcha}" );
+	
+				if ( ! is_array( $verify ) || ! isset( $verify['body'] ) ) {
+					wp_send_json( __( 'Cannot validate captcha', 'qubely' ), 400 );
+				}
+	
+				$verified = json_decode( $verify['body'] );
+				if ( ! $verified->success ) {
+					wp_send_json( __( 'Captcha validation error', 'qubely' ), 400 );
+				}
+			}
+	
+			// setting from options.
+			$qubely_options = maybe_unserialize( get_option( 'qubely_options' ) );
+			$emailFrom      = isset( $qubely_options['form_from_email'] ) ? sanitize_email( $qubely_options['form_from_email'] ) : sanitize_email( get_option( 'admin_email' ) );
+			$fromName       = isset( $qubely_options['form_from_name'] ) ? sanitize_text_field( $qubely_options['form_from_name'] ) : sanitize_text_field( get_option( 'blogname' ) );
+	
+			$default_receiver = sanitize_email( get_option( 'admin_email' ) );
+	
+			// Settings data
+			$fieldErrorMessage  = ( $_POST['field-error-message'] ) ? sanitize_text_field( $_POST['field-error-message'] ) : '';
+			$formSuccessMessage = ( $_POST['form-success-message'] ) ? sanitize_text_field( $_POST['form-success-message'] ) : '';
+			$formErrorMessage   = ( $_POST['form-error-message'] ) ? sanitize_text_field( $_POST['form-error-message'] ) : '';
+			$emailReceiver      = ( $_POST['email-receiver'] ) ? sanitize_email( $_POST['email-receiver'] ) : $default_receiver;
+			$emailHeaders       = ( $_POST['email-headers'] ) ? sanitize_textarea_field( $_POST['email-headers'] ) : '';
+			$emailSubject       = ( $_POST['email-subject'] ) ? sanitize_text_field( $_POST['email-subject'] ) : '';
+			$emailBody          = ( $_POST['email-body'] ) ? wp_kses_post( $_POST['email-body'] ) : '';
+			
+			$fieldNames     = array();
+			$validation     = false;
+			$formInputArray = $this->sanitize_form_array( $_POST['qubely-form-input'] );
+	
+			foreach ( $formInputArray as $key => $value ) {
+				if ( preg_match( '/[*]$/', $key ) ) {
+					if ( empty( $value ) ) {
+						$validation = true;
+					}
+					$key = str_replace( '*', '', $key );
+				}
+				$fieldNames[ $key ] = $value;
+	
+				// if ($key == 'email') {
+				// $emailReceiver = apply_filters( 'qubely_custom_email_receiver', $value, $emailReceiver );
+				// }
+			}
+	
+			if ( $validation || ( isset( $_POST['qubely-form-has-policy'] ) && empty( $_POST['qubely-form-has-policy'] ) ) ) {
+				wp_send_json( __( $formErrorMessage, 'qubely' ), 400 );
+			}
+	
+			$replyToMail = $replyToName = $cc = $bcc = '';
+	
+			$emailHeaders = explode( "\n", $emailHeaders );
+			foreach ( $emailHeaders as $_header ) {
+				$_header = explode( ':', $_header );
+				if ( count( $_header ) > 0 ) {
+					if ( strtolower( $_header[0] ) == 'reply-to' ) {
+						$replyToMail = isset( $_header[1] ) ? sanitize_text_field( $_header[1] ) : '';
+					}
+					if ( strtolower( $_header[0] ) == 'reply-name' ) {
+						$replyToName = isset( $_header[1] ) ? sanitize_text_field( $_header[1] ) : '';
+					}
+					if ( strtolower( $_header[0] ) == 'cc' ) {
+						$cc = isset( $_header[1] ) ? sanitize_text_field( $_header[1] ) : '';
+					}
+					if ( strtolower( $_header[0] ) == 'bcc' ) {
+						$bcc = isset( $_header[1] ) ? sanitize_text_field( $_header[1] ) : '';
+					}
+				}
+			}
+	
+			foreach ( $fieldNames as $name => $value ) {
+				$value        = is_array( $fieldNames[ $name ] ) ? implode( ', ', $fieldNames[ $name ] ) : $value;
+				$emailBody    = str_replace( '{{' . $name . '}}', sanitize_textarea_field( $value ), $emailBody );
+				$emailSubject = str_replace( '{{' . $name . '}}', sanitize_text_field( $value ), $emailSubject );
+				$replyToName  = str_replace( '{{' . $name . '}}', sanitize_text_field( $value ), $replyToName );
+				$replyToMail  = str_replace( '{{' . $name . '}}', sanitize_text_field( $value ), $replyToMail );
+				$cc           = str_replace( '{{' . $name . '}}', sanitize_text_field( $value ), $cc );
+				$bcc          = str_replace( '{{' . $name . '}}', sanitize_text_field( $value ), $bcc );
+			}
+	
+			// Subject Structure
+			$siteName     = isset( $_SERVER['SERVER_NAME'] ) ? sanitize_text_field( $_SERVER['SERVER_NAME'] ) : '';
+			$emailSubject = str_replace( '{{site-name}}', $siteName, $emailSubject );
+	
+			$headers[] = 'Content-Type: text/html; charset=UTF-8';
+			$headers[] = 'From: ' . $fromName . ' <' . $emailFrom . '>';
+			$headers[] = 'Reply-To: ' . $replyToName . ' <' . $replyToMail . '>';
+			$headers[] = 'Cc: ' . $cc;
+			$headers[] = 'Bcc: ' . $bcc;
+	
+			// Send E-Mail Now or through error msg.
+			try {
+				$isMail = wp_mail( $emailReceiver, $emailSubject, $emailBody, $headers );
+				if ( $isMail ) {
+					$responseData['status'] = 1;
+					$responseData['msg']    = __( $formSuccessMessage, 'qubely' );
+				} else {
+					$responseData['status'] = 0;
+					$responseData['msg']    = __( $formErrorMessage, 'qubely' );
+				}
+				wp_send_json_success( $responseData );
+			} catch ( \Exception $e ) {
 				$responseData['status'] = 0;
-				$responseData['msg']    = __( $formErrorMessage, 'qubely' );
+				$responseData['msg']    = $e->getMessage();
+				wp_send_json_error( $responseData );
 			}
-			wp_send_json_success( $responseData );
-		} catch ( \Exception $e ) {
-			$responseData['status'] = 0;
-			$responseData['msg']    = $e->getMessage();
-			wp_send_json_error( $responseData );
+			
+			
 		}
-	}
+	
+
 	
 	/**
 	 * Ajax add to cart button 
