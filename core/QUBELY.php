@@ -1979,11 +1979,15 @@ class QUBELY_MAIN {
 		
 			// Parse the content into blocks
 			$blocks = parse_blocks($post_content);
+	
+		
 		
 			// Check if the specific block exists
 			$block_exists = false;
 			foreach ($blocks as $block) {
+				
 				if ($block['blockName'] === 'qubely/contactform' || 'qubely/form') {
+					$get_reciveremail= $block['attrs']['emailReceiver'];
 					$block_exists = true;
 					break;
 					
@@ -2023,7 +2027,9 @@ class QUBELY_MAIN {
 			$fieldErrorMessage  = ( $_POST['field-error-message'] ) ? sanitize_text_field( $_POST['field-error-message'] ) : '';
 			$formSuccessMessage = ( $_POST['form-success-message'] ) ? sanitize_text_field( $_POST['form-success-message'] ) : '';
 			$formErrorMessage   = ( $_POST['form-error-message'] ) ? sanitize_text_field( $_POST['form-error-message'] ) : '';
-			$emailReceiver      = ( $_POST['email-receiver'] ) ? sanitize_email( $_POST['email-receiver'] ) : $default_receiver;
+
+			$emailReceiver      = isset( $get_reciveremail) ? sanitize_email( $get_reciveremail ) : $default_receiver;
+
 			$emailHeaders       = ( $_POST['email-headers'] ) ? sanitize_textarea_field( $_POST['email-headers'] ) : '';
 			$emailSubject       = ( $_POST['email-subject'] ) ? sanitize_text_field( $_POST['email-subject'] ) : '';
 			$emailBody          = ( $_POST['email-body'] ) ? wp_kses_post( $_POST['email-body'] ) : '';
