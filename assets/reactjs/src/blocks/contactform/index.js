@@ -168,7 +168,6 @@ registerBlockType("qubely/contactform", {
 									/>
 									<input type="hidden" name="recaptcha-site-key" value={reCaptchaSiteKey} />
 									<input type="hidden" name="recaptcha-secret-key" value={reCaptchaSecretKey} />
-
 									<input type="hidden" name="email-receiver" value={emailReceiver} />
 									<input type="hidden" name="email-headers" value={emailHeaders} />
 									<input type="hidden" name="email-subject" value={emailSubject} />

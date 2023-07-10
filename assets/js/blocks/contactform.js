@@ -5,7 +5,6 @@
 
  jQuery(function ($) {
     $('.qubely-block-contact-form form.qubely-form:not(.qubely-form-ready)').each(function () {
-       
         const $form = $(this);
         $form.addClass('qubely-form-ready');
         $form.find('input.qubely-form-control').on('keydown', (e) => {
