@@ -1972,6 +1972,9 @@ class QUBELY_MAIN {
 
 	public function qubely_send_form_data() {
 
+		// Verify the authenticity of the request.
+		check_ajax_referer( 'qubely_nonce', 'security' );
+
 		$url     = wp_get_referer();
 		$post_id = url_to_postid( $url );
 
@@ -1997,8 +2000,6 @@ class QUBELY_MAIN {
 			return;
 		}
 
-			// Verify the authenticity of the request.
-		check_ajax_referer( 'qubely_nonce', 'security' );
 
 		// All good, let's proceed.
 		if ( isset( $_POST['captcha'] ) && $_POST['recaptcha'] == 'true' ) {
