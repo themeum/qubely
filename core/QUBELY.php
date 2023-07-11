@@ -1987,8 +1987,8 @@ class QUBELY_MAIN {
 		// Check if the specific block exists
 		$block_exists = false;
 		foreach ( $blocks as $block ) {
-
-			if ( $block['blockName'] === 'qubely/contactform' || 'qubely/form' ) {
+			
+			if ( 'qubely/contactform' === $block['blockName'] || 'qubely/form' === $block['blockName'] ) {
 				$get_reciveremail = $block['attrs']['emailReceiver'];
 				$block_exists     = true;
 				break;
