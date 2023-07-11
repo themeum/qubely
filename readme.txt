@@ -240,7 +240,7 @@ You can report bugs on the [support forum here](https://wordpress.org/support/pl
 == Changelog ==
 
 = 1.8.7 =
-Update: Improved security issue
+Update: Improved security
 
 = 1.8.6 =
 Update: Addressed security vulnerability issue
