@@ -238,8 +238,9 @@ You can report bugs on the [support forum here](https://wordpress.org/support/pl
 
 
 == Changelog ==
+
 = 1.8.7 =
-Update: One condition updated.
+Update: Improved security issue
 
 = 1.8.6 =
 Update: Addressed security vulnerability issue
