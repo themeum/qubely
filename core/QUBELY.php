@@ -510,12 +510,12 @@ class QUBELY_MAIN {
 		);
 		wp_enqueue_script( 'qubely_local_script' );
 
-		// START_REPLACE
+		#START_REPLACE
 		wp_enqueue_style( 'qubley-animated-headline-style', QUBELY_DIR_URL . 'assets/css/qubely.animatedheadline.css', false, QUBELY_VERSION );
 		wp_enqueue_style( 'qubely-animation', QUBELY_DIR_URL . 'assets/css/animation.css', false, QUBELY_VERSION );
 		wp_enqueue_style( 'qubely-magnific-popup-style', QUBELY_DIR_URL . 'assets/css/magnific-popup.css', false, QUBELY_VERSION );
 		wp_enqueue_style( 'qubely-style-min', QUBELY_DIR_URL . 'assets/css/style.min.css', false, QUBELY_VERSION );
-		// END_REPLACE
+		#END_REPLACE
 
 		wp_enqueue_style( 'qubely-font-awesome', QUBELY_DIR_URL . 'assets/css/font-awesome.min.css', false, QUBELY_VERSION );
 
@@ -659,12 +659,12 @@ class QUBELY_MAIN {
 			 * @warning: Don't Remove `START_REPLACE` and `START_REPLACE` comments. These comments are required for gulp build
 			 */
 
-			// START_REPLACE
+			#START_REPLACE
 			wp_enqueue_style( 'qubley-animated-headline-style', QUBELY_DIR_URL . 'assets/css/qubely.animatedheadline.css', false, QUBELY_VERSION );
 			wp_enqueue_style( 'qubely-animation', QUBELY_DIR_URL . 'assets/css/animation.css', false, QUBELY_VERSION );
 			wp_enqueue_style( 'qubely-magnific-popup-style', QUBELY_DIR_URL . 'assets/css/magnific-popup.css', false, QUBELY_VERSION );
 			wp_enqueue_style( 'qubely-style-min', QUBELY_DIR_URL . 'assets/css/style.min.css', false, QUBELY_VERSION );
-			// END_REPLACE
+			#END_REPLACE
 
 			$this->qubely_load_fontawesome();
 			$this->qubely_load_googlefonts();
@@ -1522,12 +1522,12 @@ class QUBELY_MAIN {
 	public function add_static_css() {
 		// CSS
 
-		// START_REPLACE
+		#START_REPLACE
 		wp_enqueue_style( 'qubley-animated-headline-style', QUBELY_DIR_URL . 'assets/css/qubely.animatedheadline.css', false, QUBELY_VERSION );
 		wp_enqueue_style( 'qubely-animation', QUBELY_DIR_URL . 'assets/css/animation.css', false, QUBELY_VERSION );
 		wp_enqueue_style( 'qubely-magnific-popup-style', QUBELY_DIR_URL . 'assets/css/magnific-popup.css', false, QUBELY_VERSION );
 		wp_enqueue_style( 'qubely-style-min', QUBELY_DIR_URL . 'assets/css/style.min.css', false, QUBELY_VERSION );
-		// END_REPLACE
+		#END_REPLACE
 
 		$this->qubely_load_fontawesome();
 
