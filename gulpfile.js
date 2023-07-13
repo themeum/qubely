@@ -42,7 +42,6 @@ function makeBuild() {
 
 function productionMode() {
     const replacement_string = '\n\t\t\twp_enqueue_style(\'qubely-bundle\', QUBELY_DIR_URL . \'assets/css/qubely.bundle.min.css\', false, QUBELY_VERSION);\n\t\t\t';
-    console.log(replacement_string);
     return src(['./build/qubely/core/QUBELY.php'])
         .pipe(replace(/(?<=#START_REPLACE)([^]*?)(?=#END_REPLACE)/g, replacement_string))
         .pipe(replace(/qubely\.dev\.js/g, 'qubely.min.js'))
@@ -53,7 +52,7 @@ function productionMode() {
         .pipe(replace(/image-comparison\.js/g, 'image-comparison.min.js'))
         .pipe(replace(/interaction\.js/g, 'interaction.min.js'))
         .pipe(replace(/common-script\.js/g, 'common-script.min.js'))
-        .pipe(dest('./build/qubely/core'));
+        .pipe(dest('./build/qubely/core/'));
 }
 
 function gulpConcatCss() {
@@ -123,7 +122,7 @@ function removeCSSFiles() {
 function makeZip() {
     return src('./build/**/*.*')
         .pipe(zip('qubely.zip'))
-        .pipe(dest('./build/'))
+        .pipe(dest('./'))
 }
 
 exports.makeBuild = makeBuild;
@@ -136,4 +135,4 @@ exports.cleanZip = cleanZip;
 exports.removeJsFiles = removeJsFiles;
 // exports.removeCSSFiles = removeCSSFiles;
 exports.makeZip = makeZip;
-exports.default = series(cleanBuild, cleanZip, makeBuild, productionMode, gulpConcatCss, minify_css, minify_js, makeZip);
+exports.default = series(cleanBuild, cleanZip, makeBuild, productionMode, gulpConcatCss, minify_css, minify_js, removeJsFiles, makeZip, cleanBuild);
