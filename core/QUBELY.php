@@ -1965,6 +1965,28 @@ class QUBELY_MAIN {
 	}
 
 	/**
+	 * Get block by block name
+	 *
+	 * @param  array $blocks  Blocks.
+	 * @param  array $block_names Block names.
+	 * @return mixed
+	 */
+	private function qubely_get_block( $blocks, $block_names ) {
+		foreach ( $blocks as $block ) {
+			if ( in_array( $block['blockName'], $block_names, true ) ) {
+				return $block;
+			}
+			if ( isset( $block['innerBlocks'] ) ) {
+				$found_block = $this->qubely_get_block( $block['innerBlocks'], $block_names );
+				if ( $found_block ) {
+					return $found_block;
+				}
+			}
+		}
+		return false;
+	}
+
+	/**
 	 * Ajax for sending form data
 	 *
 	 * @return boolean,void     Return false if failure, echo json on success
@@ -1978,28 +2000,19 @@ class QUBELY_MAIN {
 		$url     = wp_get_referer();
 		$post_id = url_to_postid( $url );
 
-		// Retrieve the post content
+		// Retrieve the post content.
 		$post_content = get_post_field( 'post_content', $post_id );
 
-		// Parse the content into blocks
+		// Parse the content into blocks.
 		$blocks = parse_blocks( $post_content );
 
-		// Check if the specific block exists
-		$block_exists = false;
-		foreach ( $blocks as $block ) {
-			
-			if ( 'qubely/contactform' === $block['blockName'] || 'qubely/form' === $block['blockName'] ) {
-				$get_reciveremail = $block['attrs']['emailReceiver'];
-				$block_exists     = true;
-				break;
+		// Check if the specific block exists.
+		$block = $this->qubely_get_block( $blocks, array( 'qubely/contactform', 'qubely/form' ) );
 
-			}
-		}
-		if ( $block_exists == false ) {
+		if ( false === $block ) {
 			wp_send_json( __( 'Invalid request', 'qubely' ), 400 );
 			return;
 		}
-
 
 		// All good, let's proceed.
 		if ( isset( $_POST['captcha'] ) && $_POST['recaptcha'] == 'true' ) {
@@ -2023,6 +2036,7 @@ class QUBELY_MAIN {
 		$fromName       = isset( $qubely_options['form_from_name'] ) ? sanitize_text_field( $qubely_options['form_from_name'] ) : sanitize_text_field( get_option( 'blogname' ) );
 
 		$default_receiver = sanitize_email( get_option( 'admin_email' ) );
+		$get_reciveremail = $block['attrs']['emailReceiver'];
 
 		// Settings data
 		$fieldErrorMessage  = ( $_POST['field-error-message'] ) ? sanitize_text_field( $_POST['field-error-message'] ) : '';
