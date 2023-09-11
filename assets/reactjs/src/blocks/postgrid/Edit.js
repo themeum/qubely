@@ -339,9 +339,11 @@ class Edit extends Component {
 				globalCss,
 			},
 		} = this.props;
+
 		const { device } = this.state;
 		const tag = `h${level}`;
 		let pages = 0;
+		
 		if (numberofPosts && numberofPosts.length) {
 			pages = Math.ceil(numberofPosts.length / postsToShow);
 		}

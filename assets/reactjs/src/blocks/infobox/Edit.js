@@ -207,7 +207,7 @@ class Edit extends Component {
 										{ value: 4, svg: icons.infobox_4, label: __("Layout 4") },
 									]}
 								/>
-								{(layout == 1 || layout == 4) && (
+								{/* {(layout == 1 || layout == 4) && (
 									<Alignment
 										label={__("Alignment")}
 										value={alignment}
@@ -218,7 +218,17 @@ class Edit extends Component {
 										device={device}
 										onDeviceChange={(value) => this.setState({ device: value })}
 									/>
-								)}
+								)} */}
+								<Alignment
+									label={__("Alignment")}
+									value={alignment}
+									alignmentType="content"
+									onChange={(val) => setAttributes({ alignment: val })}
+									disableJustify
+									responsive
+									device={device}
+									onDeviceChange={(value) => this.setState({ device: value })}
+								/>
 							</PanelBody>
 
 							{layout != 4 && (
@@ -934,7 +944,7 @@ class Edit extends Component {
 					setAttributes
 				})}
 
-				<div className={`qubely-block-${uniqueId}${className ? ` ${className}` : ""}`}>
+				<div className={`qubely-block-${uniqueId}${className ? ` ${className}` : ""} qubely-block-info-box-${layout && layout}`}>
 					<div
 						className={`qubely-block-info-box qubely-info-box-layout-${layout}`}
 						onContextMenu={(event) => handleContextMenu(event, this.qubelyContextMenu.current)}
