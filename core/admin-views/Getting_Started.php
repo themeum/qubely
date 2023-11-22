@@ -8,11 +8,6 @@ if ( !defined( 'ABSPATH' ) ) {
 class QUBELY_Getting_Started {
 
     public $posts;
-    public $hasPro;
-
-    public function __construct() {
-        $this->hasPro = defined('QUBELY_PRO_FILE');
-    }
 
     public function mini_cards() {
 
@@ -135,12 +130,6 @@ class QUBELY_Getting_Started {
 						</div>
                     </div>
                     <div class="qubely-gs-sidebar">
-                        <?php if ( ! $this->hasPro ) {?>
-                            <div class="qubely-gs-card card-gradient">
-                                <h2><?php esc_html_e( "Enjoy the full power and flexibility of Qubely", 'qubely' ); ?></h2>
-                                <a target="_blank" href="https://www.themeum.com/product/qubely/" class="qubely-gs-button white button-block"><?php esc_html_e( 'Get Qubely Pro', 'qubely' ); ?></a>
-                            </div>
-                        <?php } ?>
                         <div class="qubely-gs-card">
                             <div class="qubely-gs-card-title">
                                 <h3><?php esc_html_e( 'Rate Your Experience with Qubely', 'qubely' ); ?></h3>
