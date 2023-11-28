@@ -80,6 +80,16 @@ class TableOfContents extends Component {
 		this.setState({ unsubscribe });
 	}
 
+	componentDidUpdate(prevProps, prevState) {
+		if (
+			JSON.stringify(prevProps.headers) !== JSON.stringify(prevState.headers)
+		) {
+			this.props.blockProp.setAttributes({
+				headerLinks: JSON.stringify(this.state.headers),
+			});
+		}
+	}
+
 	componentWillUnmount() {
 		this.state.unsubscribe();
 	}
