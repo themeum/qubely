@@ -79,7 +79,7 @@ class GlobalSettings extends Component {
 					}
 				});
 		}
-		// this.getGlobalSettings();
+		this.getGlobalSettings();
 		let hasExistingValues = true;
 		fetchFromApi().then((data) => {
 			if (data.success) {
@@ -235,46 +235,46 @@ class GlobalSettings extends Component {
 		}
 	}
 
-	// getGlobalSettings = () => {
-	//     let hasExistingValues = true;
-	//     return fetchFromApi().then(data => {
-	//         if (qubely_admin.is_core_active && this.state.savedMeta && (
-	//             this.state.savedMeta.key !== data.settings.activePreset ||
-	//             Object.keys(diff({ 'colors': data.settings.presets[data.settings.activePreset].colors }, { 'colors': this.state.savedMeta.colors })).length > 0 ||
-	//             Object.keys(diff({ 'typography': data.settings.presets[data.settings.activePreset].typography }, { 'typography': this.state.savedMeta.typography })).length > 0 ||
-	//             Object.keys(diff({ 'breakingPoints': data.settings.breakingPoints }, { 'breakingPoints': this.state.savedMeta.breakingPoints })).length > 0
-	//         )) {
-	//             console.log('preset changed');
-	//             this.setState({ isPresetChanged: true, showModal: true });
-	//         } else {
-	//             console.log('same preset');
-	//             this.setState({ isPresetChanged: false });
-	//         }
-	//         if (data.success) {
-	//             if (Object.keys(data.settings).length === 0) {
-	//                 hasExistingValues = false
-	//                 this.updateGlobalSettings();
-	//             }
-	//             if (data.settings.activePreset !== 'theme') {
-	//                 this.saveGlobalCSS();
-	//             }
-	//             this.setState({ ...data.settings });
-	//             localStorage.setItem('qubely-global-settings', JSON.stringify({
-	//                 ...DEFAULTPRESETS.presets[DEFAULTPRESETS.activePreset],
-	//                 breakingPoints: {
-	//                     ...this.state.breakingPoints,
-	//                     ...(typeof qubely_container_width !== undefined && qubely_container_width),
-	//                     ...((hasExistingValues && typeof data.settings.breakingPoints !== 'undefined') & data.settings.breakingPoints)
-	//                 },
-	//                 ...((hasExistingValues && typeof data.settings.presets !== 'undefined' && typeof data.settings.activePreset !== 'undefined') & data.settings.presets[data.settings.activePreset]),
+	getGlobalSettings = () => {
+	    let hasExistingValues = true;
+	    return fetchFromApi().then(data => {
+	        if (qubely_admin.is_core_active && this.state.savedMeta && (
+	            this.state.savedMeta.key !== data.settings.activePreset ||
+	            Object.keys(diff({ 'colors': data.settings.presets[data.settings.activePreset].colors }, { 'colors': this.state.savedMeta.colors })).length > 0 ||
+	            Object.keys(diff({ 'typography': data.settings.presets[data.settings.activePreset].typography }, { 'typography': this.state.savedMeta.typography })).length > 0 ||
+	            Object.keys(diff({ 'breakingPoints': data.settings.breakingPoints }, { 'breakingPoints': this.state.savedMeta.breakingPoints })).length > 0
+	        )) {
+	            console.log('preset changed');
+	            this.setState({ isPresetChanged: true, showModal: true });
+	        } else {
+	            console.log('same preset');
+	            this.setState({ isPresetChanged: false });
+	        }
+	        if (data.success) {
+	            if (Object.keys(data.settings).length === 0) {
+	                hasExistingValues = false
+	                this.updateGlobalSettings();
+	            }
+	            if (data.settings.activePreset !== 'theme') {
+	                this.saveGlobalCSS();
+	            }
+	            this.setState({ ...data.settings });
+	            localStorage.setItem('qubely-global-settings', JSON.stringify({
+	                ...DEFAULTPRESETS.presets[DEFAULTPRESETS.activePreset],
+	                breakingPoints: {
+	                    ...this.state.breakingPoints,
+	                    ...(typeof qubely_container_width !== undefined && qubely_container_width),
+	                    ...((hasExistingValues && typeof data.settings.breakingPoints !== 'undefined') & data.settings.breakingPoints)
+	                },
+	                ...((hasExistingValues && typeof data.settings.presets !== 'undefined' && typeof data.settings.activePreset !== 'undefined') & data.settings.presets[data.settings.activePreset]),
 
-	//             }))
-	//         } else {
-	//             this.setState({ ...DEFAULTPRESETS });
-	//             this.updateGlobalSettings()
-	//         }
-	//     });
-	// }
+	            }))
+	        } else {
+	            this.setState({ ...DEFAULTPRESETS });
+	            this.updateGlobalSettings()
+	        }
+	    });
+	}
 	restoreSavedpreset(savedMeta) {
 		const { key, name, colors, typography, breakingPoints } = savedMeta;
 
