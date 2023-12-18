@@ -238,6 +238,11 @@ You can report bugs on the [support forum here](https://wordpress.org/support/pl
 
 
 == Changelog ==
+= 1.8.9 =
+Fix: Resolved table of contents issue.
+Fix: Fixed settings color preset issue.
+Fix: Enhanced security measures.
+Update: Unlocked all premium features.
 
 = 1.8.8 =
 Fix: Resolved some CSS issues
