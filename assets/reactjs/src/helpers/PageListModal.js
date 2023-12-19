@@ -32,7 +32,7 @@ class PageListModal extends Component {
 			requestFailedMsg: "",
 			spinner: false,
 			lazyloadThrottleTimeout: 0,
-			priceFilter: "",
+			priceFilter: qubely_admin.pro_enable ? "pro" : '',
 			isOpen: false,
 			rememberChoice: false,
 		};
@@ -81,7 +81,7 @@ class PageListModal extends Component {
 				}
 			} else {
 				if (selectedCategory) {
-					pageData[selectedCategory].map((value) => {
+					pageData[selectedCategory].filter(item => priceFilter === 'pro' ? true : !item.pro).map((value) => {
 						if (itemType == "block") {
 							if (!(tempDataID.indexOf(value.ID) > -1)) {
 								currentPageData.push(value);
@@ -97,7 +97,7 @@ class PageListModal extends Component {
 				} else {
 					for (let key in pageData) {
 						Array.isArray(pageData[key]) &&
-							pageData[key].map((value) => {
+							pageData[key].filter(item => priceFilter === 'pro' ? true : !item.pro).map((value) => {
 								if (itemType == "block") {
 									if (!(tempDataID.indexOf(value.ID) > -1)) {
 										currentPageData.push(value);
@@ -118,7 +118,7 @@ class PageListModal extends Component {
 		if (this.state.layer === "multiple") {
 			if (selectedCategory) {
 				let itemCount = 0;
-				pageData[selectedCategory].map((value) => {
+				pageData[selectedCategory].filter(item => priceFilter === 'pro' ? true : !item.pro).map((value) => {
 					if (!value.parentID && !(tempDataID.indexOf(value.ID) > -1)) {
 						let found = value.category.find((item) => item.slug == selectedCategory);
 						if (found) {
@@ -130,7 +130,7 @@ class PageListModal extends Component {
 			} else {
 				for (let key in pageData) {
 					if (typeof pageData[key] === "object") {
-						pageData[key].map((value) => {
+						pageData[key].filter(item => priceFilter === 'pro' ? true : !item.pro).map((value) => {
 							if (!value.parentID && !(tempDataID.indexOf(value.ID) > -1)) {
 								tempDataID.push(value.ID);
 								currentPageData.push(value);
@@ -145,14 +145,14 @@ class PageListModal extends Component {
 			currentPageData = this.state.savedBlocks;
 		}
 
-		if (itemType != "saved_blocks") {
-			currentPageData =
-				priceFilter == "pro"
-					? currentPageData.filter((item) => item.pro == true)
-					: priceFilter == "free"
-					? currentPageData.filter((item) => item.pro == false)
-					: currentPageData;
-		}
+		// if (itemType != "saved_blocks") {
+		// 	currentPageData =
+		// 		priceFilter == "pro"
+		// 			? currentPageData.filter((item) => item.pro == true)
+		// 			: priceFilter == "free"
+		// 			? currentPageData.filter((item) => item.pro == false)
+		// 			: currentPageData;
+		// }
 
 		if (this.state.isSearchEnable) {
 			let filterData = currentPageData.filter(
@@ -160,6 +160,7 @@ class PageListModal extends Component {
 			);
 			return { pageCategories, selectedCategory, currentPageData: filterData };
 		}
+
 
 		return { pageCategories, selectedCategory, currentPageData };
 	}
@@ -293,6 +294,7 @@ class PageListModal extends Component {
 	}
 
 	getSectionsList() {
+		let { priceFilter } = this.state;
 		this.setState({ loading: true });
 		let requestFailedMsg = [];
 		let security = qubely_urls.nonce;
@@ -325,14 +327,25 @@ class PageListModal extends Component {
 									blockData[cat.slug].push(item);
 								}
 								let index = -1;
+
 								blockCategories.forEach((change, i) => {
 									if (cat.slug == change.slug) {
 										index = i;
-										blockCategories[i].count = blockCategories[i].count + 1;
+										if (priceFilter !== 'pro') {
+											if (!item.pro) {
+												blockCategories[i].count = blockCategories[i].count + 1;
+											}
+										} else {
+											blockCategories[i].count = blockCategories[i].count + 1;
+										}
 									}
 								});
 								if (index === -1) {
-									blockCategories.push({ name: cat.name, slug: cat.slug, count: 1 });
+									blockCategories.push({ 
+										name: cat.name, 
+										slug: cat.slug, 
+										count: priceFilter !== 'pro' ? cat.name === 'Content' ? 1 : 0 : 1 
+									});
 								}
 							});
 						}
@@ -383,12 +396,12 @@ class PageListModal extends Component {
 			layer: "single",
 			parent_id: "",
 			searchContext: "",
-			priceFilter: "",
+			// priceFilter: "",
 		});
 	}
 
 	_onlickLayoutsTab() {
-		let { layoutData, layoutCategoryItems } = this.state;
+		let { layoutData, layoutCategoryItems, priceFilter } = this.state;
 
 		if (!layoutData) {
 			this.setState({ loading: true });
@@ -434,7 +447,13 @@ class PageListModal extends Component {
 										if (cat.slug == change.slug) {
 											index = i;
 											if (item.parentID == 0) {
-												layoutCategories[i].count = layoutCategories[i].count + 1;
+												if (priceFilter !== 'pro') {
+													if (!item.pro) {
+														layoutCategories[i].count = layoutCategories[i].count + 1;
+													}
+												} else {
+													layoutCategories[i].count = layoutCategories[i].count + 1;
+												}
 											}
 										}
 									});
@@ -442,7 +461,7 @@ class PageListModal extends Component {
 										layoutCategories.push({
 											name: cat.name,
 											slug: cat.slug,
-											count: item.parentID == 0 ? 1 : 0,
+											count: 0,
 										});
 									}
 								});
@@ -480,7 +499,7 @@ class PageListModal extends Component {
 			layer: "multiple",
 			parent_id: "",
 			searchContext: "",
-			priceFilter: "",
+			// priceFilter: "",
 		});
 	}
 
@@ -511,7 +530,7 @@ class PageListModal extends Component {
 						itemType: "saved_blocks",
 						savedBlocks: response.data,
 						searchContext: "",
-						priceFilter: "",
+						// priceFilter: "",
 					});
 				})
 				.catch((error) => {
@@ -520,7 +539,7 @@ class PageListModal extends Component {
 						loading: false,
 						requestFailedMsg,
 						searchContext: "",
-						priceFilter: "",
+						// priceFilter: "",
 					});
 				});
 		} else {
@@ -528,7 +547,7 @@ class PageListModal extends Component {
 				layer: "block",
 				itemType: "saved_blocks",
 				searchContext: "",
-				priceFilter: "",
+				// priceFilter: "",
 			});
 		}
 	}
@@ -630,7 +649,6 @@ class PageListModal extends Component {
 			blockCategories,
 			selectedLayoutCategory,
 			itemType,
-			blockData,
 			layoutCategories,
 		} = this.state;
 		let count = 0;
@@ -666,8 +684,8 @@ class PageListModal extends Component {
 			}
 		} else {
 			if (itemType == "block") {
-				Object.keys(blockData).forEach(function (key) {
-					count = count + blockData[key].length;
+				blockCategories.forEach(function (data) {
+					count = count + data.count;
 				});
 				return count;
 			} else {
@@ -817,11 +835,7 @@ class PageListModal extends Component {
 										>
 											{data.name}
 											<span>
-												{itemType == "block"
-													? blockData[data.slug]
-														? blockData[data.slug].length
-														: 0
-													: data.count}
+												{data.count}
 											</span>
 										</li>
 									))}
@@ -855,27 +869,6 @@ class PageListModal extends Component {
 										? __("Layouts")
 										: __("Starter Packs")}
 								</h4>
-								<div className="qubely-template-filter-button-group">
-									<button
-										onClick={() => this._changePriceFilter()}
-										className={"" == this.state.priceFilter ? "active" : ""}
-									>
-										{__("All")}
-									</button>
-									<button
-										onClick={() => this._changePriceFilter("free")}
-										className={"free" == this.state.priceFilter ? "active" : ""}
-									>
-										{__("Free")}
-									</button>
-									<button
-										onClick={() => this._changePriceFilter("pro")}
-										className={"pro" == this.state.priceFilter ? "active" : ""}
-									>
-										<img src={qubely_admin.plugin + "assets/img/icon-premium.svg"} alt="" />
-										{__("Premium")}
-									</button>
-								</div>
 							</div>
 						)}
 

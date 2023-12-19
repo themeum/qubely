@@ -1556,7 +1556,7 @@ class QUBELY_MAIN {
 
 			if ( file_exists( $css_path ) ) {
 				$blockCss = file_get_contents( $css_path );
-				echo '<style type="text/css">' . sanitize_textarea_field( $blockCss ) . '</style>';
+				echo '<style type="text/css">' . wp_kses_post( sanitize_textarea_field( $blockCss ) ) . '</style>';
 			}
 			if ( file_exists( $json_path ) ) {
 				$blockJson = file_get_contents( $json_path );
@@ -1572,9 +1572,9 @@ class QUBELY_MAIN {
 
 				if ( file_exists( $css_path ) ) {
 					$blockCss = file_get_contents( $css_path );
-					echo '<style type="text/css">' . sanitize_textarea_field( $blockCss ) . '</style>';
+					echo '<style type="text/css">' . wp_kses_post( sanitize_textarea_field( $blockCss ) ) . '</style>';
 				} else {
-					echo '<style type="text/css">' . sanitize_textarea_field( get_post_meta( get_the_ID(), '_qubely_css', true ) ) . '</style>';
+					echo '<style type="text/css">' . esc_html( sanitize_text_field( get_post_meta( get_the_ID(), '_qubely_css', true ) ) ) . '</style>';
 				}
 
 				if ( ! file_exists( $json_path ) ) {
