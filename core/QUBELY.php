@@ -327,7 +327,7 @@ class QUBELY_MAIN {
 	public function gather_block_fonts( $blocks, $block_fonts ) {
 		$google_fonts = $block_fonts;
 		foreach ( $blocks as $key => $block ) {
-			if ( strpos( $block['blockName'], 'qubely' ) !== false ) {
+			if ( strpos( $block['blockName'] ?? '', 'qubely' ) !== false ) {
 				foreach ( $block['attrs'] as $key => $att ) {
 					if ( gettype( $att ) == 'array' && isset( $att['openTypography'] ) && isset( $att['family'] ) ) {
 						if ( isset( $block['attrs'][ $key ]['activeSource'] ) ) {
@@ -361,7 +361,7 @@ class QUBELY_MAIN {
 	public function has_qubely_blocks( $blocks ) {
 		$is_qubely_block = false;
 		foreach ( $blocks as $key => $block ) {
-			if ( strpos( $block['blockName'], 'qubely' ) !== false ) {
+			if ( strpos( $block['blockName'] ?? '', 'qubely' ) !== false ) {
 				$is_qubely_block = true;
 			}
 			if ( isset( $block['innerBlocks'] ) && gettype( $block['innerBlocks'] ) == 'array' && count( $block['innerBlocks'] ) > 0 ) {
