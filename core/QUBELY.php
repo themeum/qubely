@@ -327,7 +327,7 @@ class QUBELY_MAIN {
 	public function gather_block_fonts( $blocks, $block_fonts ) {
 		$google_fonts = $block_fonts;
 		foreach ( $blocks as $key => $block ) {
-			if ( strpos( $block['blockName'], 'qubely' ) !== false ) {
+			if ( strpos( $block['blockName'] ?? '', 'qubely' ) !== false ) {
 				foreach ( $block['attrs'] as $key => $att ) {
 					if ( gettype( $att ) == 'array' && isset( $att['openTypography'] ) && isset( $att['family'] ) ) {
 						if ( isset( $block['attrs'][ $key ]['activeSource'] ) ) {
@@ -361,7 +361,7 @@ class QUBELY_MAIN {
 	public function has_qubely_blocks( $blocks ) {
 		$is_qubely_block = false;
 		foreach ( $blocks as $key => $block ) {
-			if ( strpos( $block['blockName'], 'qubely' ) !== false ) {
+			if ( strpos( $block['blockName'] ?? '', 'qubely' ) !== false ) {
 				$is_qubely_block = true;
 			}
 			if ( isset( $block['innerBlocks'] ) && gettype( $block['innerBlocks'] ) == 'array' && count( $block['innerBlocks'] ) > 0 ) {
@@ -781,22 +781,22 @@ class QUBELY_MAIN {
 				$post = $wp_post->post_content;
 			}
 
-			if ( false !== strpos( $post, '<!-- wp:' . 'qubely/animatedheadline' . ' ' ) ) {
+			if ( false !== strpos( $post ?? '', '<!-- wp:' . 'qubely/animatedheadline' . ' ' ) ) {
 				wp_enqueue_script( 'qubley-animated-headline-script' );
 			}
 
-			if ( false !== strpos( $post, '<!-- wp:' . 'qubely/map' . ' ' ) ) {
+			if ( false !== strpos( $post ?? '', '<!-- wp:' . 'qubely/map' . ' ' ) ) {
 				wp_enqueue_script( 'qubely-block-map' );
 			}
 
-			if ( false !== strpos( $post, '<!-- wp:' . 'qubely/videopopup' . ' ' ) || false !== strpos( $post, '<!-- wp:' . 'qubely/gallery' . ' ' ) ) {
+			if ( false !== strpos( $post ?? '', '<!-- wp:' . 'qubely/videopopup' . ' ' ) || false !== strpos( $post ?? '', '<!-- wp:' . 'qubely/gallery' . ' ' ) ) {
 				wp_enqueue_script( 'qubely-magnific-popup-script' );
 			}
 
-			if ( false !== strpos( $post, '<!-- wp:' . 'qubely/contactform' . ' ' ) || false !== strpos( $post, '<!-- wp:' . 'qubely/form' . ' ' ) ) {
+			if ( false !== strpos( $post ?? '', '<!-- wp:' . 'qubely/contactform' . ' ' ) || false !== strpos( $post ?? '', '<!-- wp:' . 'qubely/form' . ' ' ) ) {
 				wp_enqueue_script( 'qubely-block-contactform' );
 			}
-			if ( false !== strpos( $post, '<!-- wp:' . 'qubely/imagecomparison' . ' ' ) ) {
+			if ( false !== strpos( $post ?? '', '<!-- wp:' . 'qubely/imagecomparison' . ' ' ) ) {
 				wp_enqueue_script( 'qubely-block-image-comparison' );
 			}
 
