@@ -15,7 +15,7 @@
     "merge-stream": "^2.0.0"
   },
   "scripts": {
-    "prebuild": "cd ./assets/reactjs && npm run build",
+    "prebuild": "cd ./assets/reactjs && npm run build && gulp sass",
     "build": "npm run prebuild && gulp"
   },
   "repository": {
