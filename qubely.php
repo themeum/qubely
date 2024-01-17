@@ -8,7 +8,7 @@
  * Author URI:        https://www.themeum.com/
  * Text Domain:       qubely
  * Requires at least: 5.3
- * Tested up to: 	  6.4.2
+ * Tested up to: 	  6.4
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  */
@@ -23,7 +23,7 @@ function qubely_language_load() {
 }
 
 // Define Version
-define( 'QUBELY_VERSION', '1.8.8' );
+define( 'QUBELY_VERSION', '1.8.10' );
 
 // Define License
 define( 'QUBELY_LICENSE', 'free' );

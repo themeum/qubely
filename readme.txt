@@ -3,7 +3,7 @@ Contributors: themeum
 Donate link: https://www.themeum.com
 Tags: blocks, gutenberg, gutenberg blocks, editor, block, page builder
 Requires at least: 5.3
-Tested up to: 6.4.2
+Tested up to: 6.4
 Stable tag: 1.8.10
 Requires PHP: 7.0
 License: GPL-2.0+
@@ -238,6 +238,10 @@ You can report bugs on the [support forum here](https://wordpress.org/support/pl
 
 
 == Changelog ==
+
+= 1.8.10 =
+Compatibility: PHP 8.1 & 8.2 Compatibility Added
+
 = 1.8.9 =
 Fix: Resolved table of contents issue.
 Fix: Fixed settings color preset issue.
