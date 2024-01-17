@@ -23,7 +23,6 @@ function cleanBuild() {
 }
 
 function cleanZip() {
-    console.log(versionNumber);
     return src(`./*.zip`, { read: false, allowEmpty: true })
         .pipe(clean());
 }
