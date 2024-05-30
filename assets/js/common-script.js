@@ -576,27 +576,6 @@ jQuery(function ($) {
 			qubelySettingsTabContent.find(".qubely-settings-inner").first().show();
 		}
 	}
-	// postgrid-pro loadmore
-
-	/*$('.qubely-postgrid-loadmore').on('click', function () {
-        var self = $(this);
-        var page = parseInt(self.data('page'));
-        var maxPage = parseInt(self.data('max-page'));
-        $.ajax({
-            url: qubely_urls.ajax,
-            data: {
-                action: 'post_grid_loadmore',
-                page: page
-            }
-        }).success(function (response) {
-            /!*$('.qubely-postgrid-wrapper').html(response);
-            self.data('page', page + 1);
-            if(page === maxPage) {
-                self.remove();
-            }*!/
-            console.log(response);
-        })
-    });*/
 
 	var qubelyGsPostWrap = $(".qubely-gs-card-blog-posts");
 	if (qubelyGsPostWrap.length) {
@@ -662,80 +641,6 @@ jQuery(function ($) {
 				printPostMarkup(posts);
 			}
 		}
-
-		// fetchPost();
 	}
 
-	var sectionCount = $(".qubely-gs-section-count");
-	if (sectionCount.length) {
-		var endpoint = "https://qubely.io/wp-json/wp/v2/sections";
-		var cacheTime = localStorage.getItem("__qubely_section_count_time");
-		var cachedCount = localStorage.getItem("__qubely_section_count");
-		if (!cachedCount || !parseInt(cacheTime) > Date.now()) {
-			fetch(endpoint)
-				.then((response) => {
-					var count = response.headers.get("X-WP-Total");
-					if (count) {
-						count = count + "+";
-						sectionCount.html(count);
-						localStorage.setItem("__qubely_section_count_time", Date.now() + 3600e3);
-						localStorage.setItem("__qubely_section_count", count);
-					}
-				})
-				.catch((e) => {
-					// debug
-				});
-		} else {
-			sectionCount.html(cachedCount);
-		}
-	}
-
-	var blockCount = $(".qubely-gs-block-count");
-	if (blockCount.length) {
-		var endpoint = "https://qubely.io/wp-json/wp/v2/block";
-		var cacheTime = localStorage.getItem("__qubely_block_count_time");
-		var cachedCount = localStorage.getItem("__qubely_block_count");
-		if (!cachedCount || !parseInt(cacheTime) > Date.now()) {
-			fetch(endpoint)
-				.then((response) => {
-					var count = response.headers.get("X-WP-Total");
-					if (count) {
-						count = count + "+";
-						blockCount.html(count);
-						localStorage.setItem("__qubely_block_count_time", Date.now() + 3600e3);
-						localStorage.setItem("__qubely_block_count", count);
-					}
-				})
-				.catch((e) => {
-					// debug
-				});
-		} else {
-			blockCount.html(cachedCount);
-		}
-	}
-
-	var layoutCount = $(".qubely-gs-layout-count");
-	if (layoutCount.length) {
-		var endpoint = "https://qubely.io/wp-json/restapi/v2/layouts";
-		var cacheTime = localStorage.getItem("__qubely_layout_count_time");
-		var cachedCount = localStorage.getItem("__qubely_layout_count");
-		if (!cachedCount || !parseInt(cacheTime) > Date.now()) {
-			fetch(endpoint, {
-				method: "post",
-			})
-				.then((response) => {
-					response.json().then((response) => {
-						var count = response.filter((item) => item.parentID === 0).length + "+";
-						layoutCount.html(count);
-						localStorage.setItem("__qubely_layout_count_time", Date.now() + 3600e3);
-						localStorage.setItem("__qubely_layout_count", count);
-					});
-				})
-				.catch((e) => {
-					// debug
-				});
-		} else {
-			layoutCount.html(cachedCount);
-		}
-	}
 })(jQuery);

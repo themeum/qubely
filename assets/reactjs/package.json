@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack --watch",
+    "watchCss": "gulp watch",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "NODE_ENV=production webpack --config ./webpack.production.config.js && gulp sass"
   },
@@ -64,5 +65,9 @@
       "env",
       "react"
     ]
+  },
+  "engines": {
+    "node": "<=14.17.5",
+    "npm": ">=6.14.8"
   }
 }
