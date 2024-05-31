@@ -25,7 +25,6 @@ const {
 	withCSSGenerator,
 	InspectorTabs,
 	InspectorTab,
-	InspectorSections,
 } = wp.qubelyComponents;
 import icons from "../../helpers/icons";
 

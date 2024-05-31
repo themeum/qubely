@@ -35,7 +35,6 @@ const {
 	RadioAdvanced,
 	ColorAdvanced,
 	withCSSGenerator,
-	InspectorSections,
 	Inline: { InlineToolbar },
 	gloalSettings: { animationSettings, interactionSettings, globalSettingsPanel },
 	ContextMenu: { ContextMenu, handleContextMenu },

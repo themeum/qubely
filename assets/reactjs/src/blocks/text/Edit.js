@@ -16,7 +16,6 @@ const {
 	withCSSGenerator,
 	InspectorTabs,
 	InspectorTab,
-	InspectorSections,
 } = wp.qubelyComponents;
 
 import svg from "../heading/separators";
