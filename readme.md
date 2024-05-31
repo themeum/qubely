@@ -8,7 +8,7 @@
 
 [Qubely](https://wordpress.org/plugins/qubely/) is a full-fledged Gutenberg toolkit with plenty of predefined sections and modern layout packs to create beautiful pages and posts on the Gutenberg editor. It offers a whole new experience that minimizes all limitations of the Gutenberg editor and opens unlimited possibilities to create any simple to complex content on a WordPress website. This user-friendly tool has been developed with all necessary customization features to achieve any possible layout.
 
-[![Qubely - Advanced Gutenberg Blocks](https://ps.w.org/qubely/assets/banner-1544x500.png?rev=2111259)](http://www.youtube.com/watch?v=_aRAQkHZiUQ)
+[![Qubely - Advanced Gutenberg Blocks](https://ps.w.org/qubely/assets/banner-1544x500.jpg?rev=2111259)](http://www.youtube.com/watch?v=_aRAQkHZiUQ)
 
 ## Qubely core features at a glance
 
@@ -82,7 +82,7 @@ The WordPress codex contains [instructions on how to do this here](https://codex
 ## Development
 
 - Navigate to reactjs folder `cd assets/reactjs`
-- `npm install`
+- `npm install` (node version `14.15.0` required)
 - `npm start`
 - `gulp watch` (for CSS hotloading)
 
