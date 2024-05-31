@@ -1,5 +1,5 @@
-import icons from "../../helpers/icons";
 import classnames from "classnames";
+import icons from "../../helpers/icons";
 const { __ } = wp.i18n;
 const { Fragment, Component, createRef } = wp.element;
 
@@ -133,10 +133,7 @@ class Edit extends Component {
 				</BlockControls>
 
 				<InspectorControls key="inspector">
-					<InspectorTabs>
-						<InspectorTab key="layout">
-							<InspectorSections block="button" />
-						</InspectorTab>
+					<InspectorTabs tabs={["style", "advance"]}>
 						<InspectorTab key="style">
 							<PanelBody title={__("")} opened={true}>
 								<Styles
