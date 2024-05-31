@@ -1,7 +1,7 @@
 /* eslint-disable react/react-in-jsx-scope */
-import "./style.scss";
 import Edit from "./Edit";
 import Save from "./Save";
+import "./style.scss";
 const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
 const {
@@ -51,7 +51,7 @@ registerBlockType("qubely/videopopup", {
 				openBg: 1,
 				bgimgSize: "cover",
 				bgimgPosition: "center center",
-				bgImage: { url: "https://qubely.io/wp-content/uploads/qubely-assets/demo/image8.jpg" },
+				bgImage: { url: "" },
 			},
 			style: [
 				{

@@ -1,6 +1,6 @@
-import "./style.scss";
 import Edit from "./Edit";
 import Save from "./Save";
+import "./style.scss";
 const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
 const {
@@ -25,7 +25,7 @@ registerBlockType("qubely/team", {
 	example: {
 		attributes: {
 			contentBg: "",
-			image: { url: "https://qubely.io/wp-content/uploads/qubely-assets/demo/team1.jpg" },
+			image: { url: "" },
 		},
 	},
 	attributes: {
