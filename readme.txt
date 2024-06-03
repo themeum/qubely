@@ -240,7 +240,10 @@ You can report bugs on the [support forum here](https://wordpress.org/support/pl
 == Changelog ==
 
 = 1.8.11 =
-Compatibility: Improved compatability with Qubely Pro.
+Compatibility: Improved compatibility with Qubely Pro
+Update: Enhanced overall stability
+Fix: Image carousel breaks when there is only one image
+Fix: Removed pre-made layouts and sections
 
 = 1.8.10 =
 Compatibility: PHP 8.1 & 8.2 Compatibility Added
