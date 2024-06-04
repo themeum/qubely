@@ -1,6 +1,6 @@
-import "./style.scss";
 import Edit from "./Edit";
 import Save from "./Save";
+import "./style.scss";
 const { __ } = wp.i18n;
 const { RichText } = wp.blockEditor;
 const { registerBlockType } = wp.blocks;
@@ -604,7 +604,7 @@ registerBlockType("qubely/image", {
 	},
 	example: {
 		attributes: {
-			image: { url: "https://qubely.io/wp-content/uploads/qubely-assets/demo/image8.jpg" },
+			image: { url: "" },
 			enableCaption: true,
 			imageCaption: __("Qubely is a full-fledged Gutenberg block toolkit.", "qubely"),
 		},

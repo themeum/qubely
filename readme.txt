@@ -3,8 +3,8 @@ Contributors: themeum
 Donate link: https://www.themeum.com
 Tags: blocks, gutenberg, gutenberg blocks, editor, block, page builder
 Requires at least: 5.3
-Tested up to: 6.0.1
-Stable tag: 1.8.3
+Tested up to: 6.5.3
+Stable tag: 1.8.11
 Requires PHP: 7.0
 License: GPL-2.0+
 License URI: http://www.gnu.org/licenses/gpl-2.0.txt
@@ -13,13 +13,9 @@ Readymade gutenberg blocks and sections with rich customization options. Enhance
 
 == Description ==
 
-[Qubely](https://www.themeum.com/product/qubely?utm_source=wporg&utm_medium=link&utm_campaign=orglanding&utm_term=description&utm_content=qubely) is a full-fledged Gutenberg block toolkit with plenty of custom blocks, predefined sections and starter packs to create beautiful web pages. It minimizes the limitations of the Gutenberg editor and opens unlimited possibilities for any simple to complex design on Gutenberg. Qubely is a user-friendly Gutenberg plugin with necessary customization features and advanced functionalities.
+Qubely is a full-fledged Gutenberg block toolkit with plenty of custom blocks, predefined sections and starter packs to create beautiful web pages. It minimizes the limitations of the Gutenberg editor and opens unlimited possibilities for any simple to complex design on Gutenberg. Qubely is a user-friendly Gutenberg plugin with necessary customization features and advanced functionalities.
 
-Extend the default WordPress Gutenberg editor with many [custom blocks](https://www.themeum.com/qubely/blocks/?utm_source=wporg&utm_medium=link&utm_campaign=orglanding&utm_content=customblocks) that are missing in there. Take control of your website design and apply out of the box styling options offered in Qubely. Create web pages that are stunning as well as mobile optimized.
-
-[Qubely Blocks Pro](https://www.themeum.com/product/qubely/?utm_source=wporg&utm_medium=link&utm_campaign=orglanding&utm_content=qubelyblockspro) || [Live Preview](https://www.themeum.com/qubely/starter-packs/) || [Documentation](https://docs.themeum.com/qubely/)
-
-[youtube https://www.youtube.com/watch?v=_aRAQkHZiUQ]
+Extend the default WordPress Gutenberg editor with many custom blocks that are missing in there. Take control of your website design and apply out of the box styling options offered in Qubely. Create web pages that are stunning as well as mobile optimized.
 
 ## QUBELY GUTENBERG BLOCKS CORE FEATURES AT A GLANCE
 
@@ -44,55 +40,53 @@ Want to know all the latest news and be part of the Qubely community? [Join our 
 
 Qubely adds numerous custom Gutenberg blocks to the Gutenberg block editor and takes Gutenberg editor to the next level. The available custom advanced Gutenberg blocks inside Qubely are:
 
-* [Row](https://www.themeum.com/qubely/blocks/#block-row)
-* [Button](https://www.themeum.com/qubely/blocks/#block-button)
-* [Testimonial](https://www.themeum.com/qubely/blocks/#block-testimonial)
-* [Heading](https://www.themeum.com/qubely/blocks/#block-heading)
-* [Counter](https://www.themeum.com/qubely/blocks/#block-counters)
-* [Tabs](https://www.themeum.com/qubely/blocks/#block-tabs)
-* [Accordion/Toggle](https://www.themeum.com/qubely/blocks/#block-accordion)
+* Row
+* Button
+* Testimonial
+* Heading
+* Counter
+* Tabs
+* Accordion/Toggle
 * Advanced Text
-* [Video Popup](https://www.themeum.com/qubely/blocks/#block-video-popup)
-* [Google Map](https://www.themeum.com/qubely/blocks/#block-google-map)
-* [Progress Bar](https://www.themeum.com/qubely/blocks/#block-progress-bar)
-* [Social Icons](https://www.themeum.com/qubely/blocks/#block-social-icons)
-* [Button Group](https://www.themeum.com/qubely/blocks/#block-button-group)
-* [Info Box](https://www.themeum.com/qubely/blocks/#block-info-box)
-* [Advanced List](https://www.themeum.com/qubely/blocks/#block-advanced-list)
-* [Contact Form](https://www.themeum.com/qubely/blocks/#block-contact)
-* [Icon List](https://www.themeum.com/qubely/blocks/#block-icon-list)
-* [Pricing](https://www.themeum.com/qubely/blocks/#block-pricing)
-* [Team](https://www.themeum.com/qubely/blocks/#block-team)
-* [Image](https://www.themeum.com/qubely/blocks/#block-image)
-* [Timeline](https://www.themeum.com/qubely/blocks/#block-timeline)
-* [Post Grid](https://www.themeum.com/qubely/blocks/#block-post-grid)
+* Video Popup
+* Google Map
+* Progress Bar
+* Social Icons
+* Button Group
+* Info Box
+* Advanced List
+* Contact Form
+* Icon List
+* Pricing
+* Team
+* Image
+* Timeline
+* Post Grid
 * Icon
 * Divider
 * Block Wrapper
-* [Pie Progress](https://www.themeum.com/qubely/blocks/#block-pie-progress)
+* Pie Progress
 
 More advanced Gutenberg blocks, pre-designed sections and starter packs are coming every month! [Signup on our site]() to receive updates via email.
 
-## Pro Features
+## Pro Features (Now Free)
 
 14 blocks that help you build more sophisticated designs-
 
-* [Form Builder](https://www.themeum.com/qubely/blocks/#block-form-builder)
-* [Image Gallery](https://www.themeum.com/qubely/blocks/#block-image-gallery)
-* [Image Carousel](https://www.themeum.com/qubely/blocks/#block-image-carousel)
-* [Post Carousel](https://www.themeum.com/qubely/blocks/#block-post-carousel)
-* [Advanced Post Grid](https://www.themeum.com/qubely/blocks/#block-advanced-post-grid)
-* [Pricing List](https://www.themeum.com/qubely/blocks/#block-pricing-list)
-* [Team Carousel](https://www.themeum.com/qubely/blocks/#block-team-carousel)
-* [Testimonial Carousel](https://www.themeum.com/qubely/blocks/#block-testimonial-carousel)
-* [Media Card](https://www.themeum.com/qubely/blocks/#block-media-card)
-* [Pie Progress](https://www.themeum.com/qubely/blocks/#block-pie-progress)
-* [Countdown](https://www.themeum.com/qubely/blocks/#block-countdown)
-* [Table Builder](https://www.themeum.com/qubely/blocks/#block-table-builder)
-* [Woo Products](https://www.themeum.com/qubely/blocks/#block-woo-products)
-* [Woo Carousel](https://www.themeum.com/qubely/blocks/#block-woo-carousel)
-
-⭐️ [Ready Sections](https://www.themeum.com/qubely/sections/) ⭐️ [Starter Packs](https://www.themeum.com/qubely/starter-packs/)
+* Form Builder
+* Image Gallery
+* Image Carousel
+* Post Carousel
+* Advanced Post Grid
+* Pricing List
+* Team Carousel
+* Testimonial Carousel
+* Media Card
+* Pie Progress
+* Countdown
+* Table Builder
+* Woo Products
+* Woo Carousel
 
 
  ## QUBELY GUTENBERG BLOCKS FEATURES AND FUNCTIONALITIES IN DETAILS
@@ -174,9 +168,6 @@ Create responsive designs with Qubely Gutenberg block plugin. Control the entire
 
 This Gutenberg page builder gives you full control over the typography. You can choose the font, apply font weight, font transform, set font size, line height, letter spacing in px, em, and percentage on the basis of the devices.
 
-> You may find the documentation here
-> [Documentation](https://docs.themeum.com/qubely/)
-
 
 <strong>Want To Contribute To The Plugin?</strong>
 
@@ -219,11 +210,11 @@ Yes, Qubely is built based on the Gutenberg editor. Qubely does not work with th
 
 = Where can I get support? =
 
-You can post your questions on the [support forum here](https://wordpress.org/support/plugin/qubely/) or chat with us live from [our website](https://www.themeum.com).
+You can post your questions on the [support forum here](https://wordpress.org/support/plugin/qubely/).
 
 = Where can I report a bug? =
 
-You can report bugs on the [support forum here](https://wordpress.org/support/plugin/qubely/) or send us an email using the contact form on [our website](https://www.themeum.com).
+You can report bugs on the [support forum here](https://wordpress.org/support/plugin/qubely/).
 
 
 == Screenshots ==
@@ -238,6 +229,40 @@ You can report bugs on the [support forum here](https://wordpress.org/support/pl
 
 
 == Changelog ==
+
+= 1.8.11 =
+Compatibility: Improved compatibility with Qubely Pro
+Update: Enhanced overall stability
+Fix: Image carousel breaks when there is only one image
+Fix: Removed pre-made layouts and sections
+
+= 1.8.10 =
+Compatibility: PHP 8.1 & 8.2 Compatibility Added
+
+= 1.8.9 =
+Fix: Resolved table of contents issue.
+Fix: Fixed settings color preset issue.
+Fix: Enhanced security measures.
+Update: Unlocked all premium features.
+
+= 1.8.8 =
+Fix: Resolved some CSS issues
+
+= 1.8.7 =
+Update: Improved security
+
+= 1.8.6 =
+Update: Addressed security vulnerability issue
+
+= 1.8.5 =
+New: Jetpack compatibility is introduced
+Update: All Stylesheet and Script libraries are updated to the latest version
+Update: More security improvements is introduced
+Fix: Form Builder had an issue with the Recipient Email input field
+
+= 1.8.4 =
+Update: Implemented more security update for improved security
+New: Introduced "Deprecation" in case of the "Block Recovery Issue" for Update
 
 = 1.8.3 =
 Update: Email Sending Mechanism is improved in terms of Security and Performance

@@ -16,7 +16,6 @@ const {
 	withCSSGenerator,
 	InspectorTabs,
 	InspectorTab,
-	InspectorSections,
 } = wp.qubelyComponents;
 
 import svg from "../heading/separators";
@@ -128,10 +127,7 @@ class Edit extends Component {
 		return (
 			<Fragment>
 				<InspectorControls key="inspector">
-					<InspectorTabs>
-						<InspectorTab key={"layout"}>
-							<InspectorSections block={"text"} />
-						</InspectorTab>
+					<InspectorTabs tabs={["style", "advance"]}>
 						<InspectorTab key={"style"}>
 							<PanelBody initialOpen={true}>
 								<Alignment

@@ -149,21 +149,6 @@ class Interaction extends Component {
 											alt={__("Qubely")}
 										/>
 									</div>
-									<div className="qubely-upgrade-message">
-										<span className="qubely-upgrade-message-title">{__("Upgrade to Pro")}</span>
-										<span className="qubely-upgrade-message-description">
-											{__(
-												"Get all features of post grid at your disposal by upgrading to pro version"
-											)}
-										</span>
-									</div>
-									<a
-										className="qubely-upgrade-button"
-										href={"https://www.themeum.com/product/qubely"}
-										target="_blank"
-									>
-										{__("Upgrade Now")}
-									</a>
 								</div>
 							) : (
 								<Fragment>

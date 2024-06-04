@@ -84,10 +84,10 @@ export default class Carousel extends Component {
 		Array(parseInt(cloneItems))
 			.fill(0)
 			.map((_, i) => {
-				const lastChild = cloneElement(children[children.length - 1 - i], {
+				const lastChild = cloneElement(children[Math.max(0, children.length - 1 - i)], {
 					className: `clone qubely-carousel-item`,
 				});
-				const firstChild = cloneElement(children[i], { className: `clone qubely-carousel-item` });
+				const firstChild = cloneElement(children[Math.min(i, children.length-1)], { className: `clone qubely-carousel-item` });
 				firstChilds.push(firstChild);
 				lastChilds.push(lastChild);
 			});

@@ -1,5 +1,5 @@
-import Progress from "./Progress";
 import icons from "../../helpers/icons";
+import Progress from "./Progress";
 const { Fragment, Component, createRef } = wp.element;
 const { PanelBody, Toolbar, TextControl } = wp.components;
 const { InspectorControls, BlockControls, RichText } = wp.blockEditor;
@@ -122,14 +122,6 @@ class Edit extends Component {
 			<Fragment>
 				<InspectorControls>
 					<InspectorTabs defaultTab={"style"}>
-						<InspectorTab key={"layout"}>
-							<PanelBody title={__("Design Templates")}>
-								<img
-									src={qubely_admin.plugin + "assets/img/blocks/pieprogress/template-pro-notice.jpg"}
-									alt={__("Pie Porgress Templates")}
-								/>
-							</PanelBody>
-						</InspectorTab>
 						<InspectorTab key={"style"}>
 							<PanelBody title="">
 								<Styles

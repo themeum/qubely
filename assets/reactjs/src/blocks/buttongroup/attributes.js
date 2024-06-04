@@ -19,7 +19,6 @@ const attributes = {
 			md: "10",
 		},
 		style: [
-			// { selector: '{{QUBELY}} .qubely-block-button-group {margin: -{{spacing}};} {{QUBELY}} .qubely-block-button-group.qubely-backend .block-editor-block-list__layout > div[data-type="qubely/button"]:not(:nth-last-child(2)), {{QUBELY}} .qubely-block-button-group .wp-block-qubely-button{margin: {{spacing}};}' }
 			{
 				selector:
 					'{{QUBELY}} .qubely-block-button-group {margin-right: -{{spacing}};} {{QUBELY}} .qubely-block-button-group.qubely-backend .block-editor-block-list__layout > div[data-type="qubely/button"]:not(:nth-last-child(2)), {{QUBELY}} .qubely-block-button-group .wp-block-qubely-button:not(:last-child){margin-right: {{spacing}};}',

@@ -12,7 +12,7 @@
 	"prettier.useTabs": true,
 	"prettier.trailingComma": "all",
 	"editor.codeActionsOnSave": {
-		"source.fixAll.eslint": true
+		"source.fixAll.eslint": "explicit"
 	},
 	"[php]": {
 		"editor.defaultFormatter": "bmewburn.vscode-intelephense-client"

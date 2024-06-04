@@ -31,7 +31,7 @@ registerBlockType("qubely/icon", {
 			style: [{ selector: "{{QUBELY}}" }],
 		},
 		name: { type: "string", default: "fas fa-rocket" },
-		url: { type: "object", default: {} },
+		qubelyIconUrl: { type: "object", default: {} },
 		alignment: {
 			type: "object",
 			default: { md: "center" },

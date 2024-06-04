@@ -1,5 +1,5 @@
-import icons from "../../helpers/icons";
 import classnames from "classnames";
+import icons from "../../helpers/icons";
 const { __ } = wp.i18n;
 const { Fragment, Component, createRef } = wp.element;
 
@@ -35,7 +35,6 @@ const {
 	RadioAdvanced,
 	ColorAdvanced,
 	withCSSGenerator,
-	InspectorSections,
 	Inline: { InlineToolbar },
 	gloalSettings: { animationSettings, interactionSettings, globalSettingsPanel },
 	ContextMenu: { ContextMenu, handleContextMenu },
@@ -61,7 +60,7 @@ class Edit extends Component {
 			// updateBlockAttributes,
 			// buttonGroupAttributes,
 			attributes: {
-				url,
+				qubelyButtonUrl,
 				iconName,
 				recreateStyles,
 				fillType,
@@ -133,10 +132,7 @@ class Edit extends Component {
 				</BlockControls>
 
 				<InspectorControls key="inspector">
-					<InspectorTabs>
-						<InspectorTab key="layout">
-							<InspectorSections block="button" />
-						</InspectorTab>
+					<InspectorTabs tabs={["style", "advance"]}>
 						<InspectorTab key="style">
 							<PanelBody title={__("")} opened={true}>
 								<Styles
@@ -154,8 +150,8 @@ class Edit extends Component {
 								<Separator />
 								<Url
 									label={__("Button URL")}
-									value={url}
-									onChange={(value) => setAttributes({ url: value })}
+									value={qubelyButtonUrl}
+									onChange={(value) => setAttributes({ qubelyButtonUrl: value })}
 								/>
 								{enableAlignment && (
 									<Alignment

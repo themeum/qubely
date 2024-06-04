@@ -9,7 +9,7 @@ class Save extends Component {
 		const {
 			uniqueId,
 			textField,
-			url,
+			qubelyButtonUrl:url,
 			iconName,
 			iconPosition,
 			buttonSize,

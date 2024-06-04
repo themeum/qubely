@@ -26,8 +26,6 @@ const {
 	InspectorTabs,
 	InspectorTab,
 } = wp.qubelyComponents;
-import { ModalManager } from "../../helpers/ModalManager";
-import PageListModal from "../../helpers/PageListModal";
 import icons from "../../helpers/icons";
 
 const colOption = [
@@ -110,10 +108,6 @@ class Edit extends Component {
 	removeRowBlock() {
 		const { clientId, removeBlock } = this.props;
 		removeBlock(clientId); //remove row block
-	}
-
-	importLayout() {
-		ModalManager.open(<PageListModal rowClientId={this.props.clientId} />);
 	}
 
 	getClassName = () => {
@@ -207,15 +201,6 @@ class Edit extends Component {
 									</button>
 								</Tooltip>
 							))}
-						</div>
-						<div className={`import-layout-btn-container`}>
-							<button
-								type="button"
-								className={`components-button is-button is-default is-primary is-large`}
-								onClick={() => this.importLayout()}
-							>
-								{__("Import Layout")}
-							</button>
 						</div>
 					</div>
 				</Fragment>

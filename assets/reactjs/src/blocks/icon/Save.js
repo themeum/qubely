@@ -5,7 +5,8 @@ const {
 
 class Save extends Component {
 	render() {
-		const { uniqueId, name, url, animation, interaction } = this.props.attributes;
+		const { uniqueId, name, qubelyIconUrl:url, animation, interaction } = this.props.attributes;
+
 		const interactionClass = IsInteraction(interaction) ? "qubley-block-interaction" : "";
 		return (
 			<div className={`qubely-block-${uniqueId}`} {...animationAttr(animation)}>

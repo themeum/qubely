@@ -1,6 +1,5 @@
 const PATH = "/qubely/v1/global_settings";
-import { _device, _push } from "../components/CssHelper";
-import { DEFAULTPRESETS, DEFAULTBREAKINGPOINTS } from "../plugins/global-settings/constants";
+import { DEFAULTBREAKINGPOINTS, DEFAULTPRESETS } from "../plugins/global-settings/constants";
 async function fetchFromApi() {
 	return await wp.apiFetch({ path: PATH });
 }

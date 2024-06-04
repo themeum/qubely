@@ -25,7 +25,6 @@ const {
 	withCSSGenerator,
 	InspectorTabs,
 	InspectorTab,
-	InspectorSections,
 } = wp.qubelyComponents;
 
 import icons from "../../helpers/icons";
@@ -115,10 +114,7 @@ class Edit extends Component {
 		return (
 			<Fragment>
 				<InspectorControls key="inspector">
-					<InspectorTabs>
-						<InspectorTab key={"layout"}>
-							<InspectorSections block={"videopopup"} />
-						</InspectorTab>
+					<InspectorTabs tabs={["style", "advance"]}>
 						<InspectorTab key={"style"}>
 							<PanelBody title="">
 								<Styles
