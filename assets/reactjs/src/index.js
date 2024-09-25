@@ -1,5 +1,6 @@
 const { __ } = wp.i18n;
-const { render } = wp.element;
+
+import 'babel-polyfill';
 
 import "./components/FieldRender";
 import "./components/format-library";

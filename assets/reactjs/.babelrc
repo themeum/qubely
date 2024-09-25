@@ -1,23 +1,31 @@
 {
-    "presets": [
-      [
-        "es2015"
-      ],
-      "react",
-      "stage-2"
-    ],
-    "plugins": [
-      "syntax-dynamic-import",
-      "transform-decorators-legacy",
-      "transform-object-rest-spread"
-    ],
-    "env": {
-      "test": {
-        "plugins": [
-          "transform-decorators-legacy",
-          "transform-object-rest-spread",
-          "istanbul"
-        ]
+  "presets": [
+    [
+      "es2015",
+      {
+        "modules": false
       }
+    ],
+    "react",
+    "stage-2"
+  ],
+  "plugins": [
+    "syntax-dynamic-import",
+    "transform-decorators-legacy",
+    "transform-object-rest-spread",
+    ["transform-runtime", {
+      "helpers": false,
+      "polyfill": false,
+      "regenerator": true
+    }]
+  ],
+  "env": {
+    "test": {
+      "plugins": [
+        "transform-decorators-legacy",
+        "transform-object-rest-spread",
+        "istanbul"
+      ]
     }
   }
+}
