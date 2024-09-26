@@ -1,0 +1,46 @@
+name: Build and Deploy to SVN
+on:
+  push:
+    branches:
+      - 91-error-on-wp-66-version
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14.17.5'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build Plugin
+        run: npm run build
+
+      - name: Extract version number
+        id: get_version
+        run: |
+          version=$(grep -Po 'Version:\s*\K[\d.]+' qubely.php)
+          echo "VERSION_NUMBER=$version" >> $GITHUB_ENV
+
+      # - name: WordPress Plugin Deploy
+      #   id: deploy
+      #   uses: 10up/action-wordpress-plugin-deploy@stable
+      #   with:
+      #     generate-zip: true
+      #   env:
+      #     SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
+      #     SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
+      #     BUILD_DIR: build
+
+      - name: Create GitHub release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: ${{ github.event.repository.name }}-${{ env.VERSION_NUMBER }}.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        

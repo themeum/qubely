@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="146" height="153"><g fill="none" fill-rule="evenodd"><path fill="#F2F3F7" d="M0 0h146v152.239H0z"/><path fill="#D6D9DD" d="M134.513 12.479a4 4 0 0 1 4 4v63.128a4 4 0 0 1-4 4H76.49l-4.115 5.157-4.126-5.157H11.487a4 4 0 0 1-4-4V16.479a4 4 0 0 1 4-4h123.026Z"/><g fill="#F2F3F7" transform="translate(19.966 47.419)"><rect width="106.068" height="3.744" rx="1.5"/><rect width="106.068" height="3.744" y="9.983" rx="1.5"/><rect width="76.12" height="3.744" y="19.966" rx="1.5"/></g><g fill="#F2F3F7" font-family="FontAwesome" font-size="8"><text transform="translate(19.966 24.957)">
+                            <tspan x="0" y="7.991"></tspan>
+                        </text><text transform="translate(19.966 24.957)">
+                            <tspan x="12.479" y="7.991"></tspan>
+                        </text><text transform="translate(19.966 24.957)">
+                            <tspan x="24.957" y="7.991"></tspan>
+                        </text><text transform="translate(19.966 24.957)">
+                            <tspan x="37.436" y="7.991"></tspan>
+                        </text><text transform="translate(19.966 24.957)">
+                            <tspan x="49.915" y="7.991"></tspan>
+                        </text></g><circle cx="73.624" cy="108.564" r="11.231" fill="#D6D9DD"/><rect width="32.444" height="6.239" x="57.402" y="126.034" fill="#D6D9DD" rx="3"/><rect width="49.915" height="2.496" x="48.667" y="136.017" fill="#D6D9DD" rx="1.248"/></g></svg>

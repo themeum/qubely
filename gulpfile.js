@@ -145,4 +145,4 @@ exports.cleanZip = cleanZip;
 exports.removeJsFiles = removeJsFiles;
 // exports.removeCSSFiles = removeCSSFiles;
 exports.makeZip = makeZip;
-exports.default = series(cleanBuild, cleanZip, makeBuild, productionMode, gulpConcatCss, minify_css, minify_js, removeJsFiles, makeZip, cleanBuild);
+exports.default = series(cleanBuild, cleanZip, makeBuild, productionMode, gulpConcatCss, minify_css, minify_js, removeJsFiles, makeZip);
