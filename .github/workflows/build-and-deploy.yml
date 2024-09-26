@@ -27,15 +27,16 @@ jobs:
           version=$(grep -Po 'Version:\s*\K[\d.]+' qubely.php)
           echo "VERSION_NUMBER=$version" >> $GITHUB_ENV
 
-      # - name: WordPress Plugin Deploy
-      #   id: deploy
-      #   uses: 10up/action-wordpress-plugin-deploy@stable
-      #   with:
-      #     generate-zip: true
-      #   env:
-      #     SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
-      #     SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
-      #     BUILD_DIR: build
+      - name: WordPress Plugin Deploy
+        id: deploy
+        uses: 10up/action-wordpress-plugin-deploy@stable
+        with:
+          generate-zip: true
+          dry-run: true
+        env:
+          SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
+          SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
+          BUILD_DIR: build/qubely
 
       - name: Create GitHub release
         uses: softprops/action-gh-release@v1
