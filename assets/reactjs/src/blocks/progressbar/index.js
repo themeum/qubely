@@ -1,7 +1,7 @@
 /* eslint-disable react/react-in-jsx-scope */
-import "./style.scss";
 import Edit from "./Edit";
 import Save from "./Save";
+import "./style.scss";
 const { registerBlockType } = wp.blocks;
 const { __ } = wp.i18n;
 const {
