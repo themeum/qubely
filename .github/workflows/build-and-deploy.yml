@@ -1,8 +1,8 @@
 name: Build and Deploy to SVN
 on:
   push:
-    branches:
-      - 91-error-on-wp-66-version
+    tag:
+    - "*"
 jobs:
   build:
     runs-on: ubuntu-latest
