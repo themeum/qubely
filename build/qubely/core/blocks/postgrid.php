@@ -1414,9 +1414,9 @@ function render_block_qubely_postgrid($att)
 	} else {
 		$col = "";
 	}
-	$class = 'wp-block-qubely-postgrid qubely-block-' . $uniqueId;
+	$class = 'wp-block-qubely-postgrid qubely-block-' . esc_attr($uniqueId);
 	if (isset($att['align'])) {
-		$class .= ' align' . $att['align'];
+		$class .= ' align' . esc_attr($att['align']);
 	}
 	if (isset($att['className'])) {
 		$class .= esc_attr($att['className']);
