@@ -1171,13 +1171,29 @@ class QUBELY_MAIN
 
     public function qubely_get_content($request)
     {
+
         $params = $request->get_params();
+        $post_id = sanitize_text_field( wp_unslash( $params['postId'] ?? 0 ) );
+
         try {
-            if (isset($params['postId'])) {
+            if ( $post_id ) {
+                if ( current_user_can( 'edit_post', $post_id ) ) {
+                    return [
+                        'success' => true,
+                        'data'    => get_post( $post_id )->post_content,
+                        'message' => 'Get Data Success!!',
+                    ];
+                } else {
+                    return [
+                        'success' => false,
+                        'message' => 'You are not allowed to edit this post',
+                    ];
+                }
+
+            } else {
                 return [
-                    'success' => true,
-                    'data'    => !empty($params['postId']) ? get_post($params['postId'])->post_content : '',
-                    'message' => 'Get Data Success!!',
+                    'success' => false,
+                    'message' => 'Post ID is required',
                 ];
             }
         } catch (Exception $e) {
